@@ -4,13 +4,13 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test51 / V0.066**
-- Host regression: **49 host binaries completed; 68 PASS assertions/messages emitted**
-- Targeted ASan+UBSan: **CPU weapon direct-use + mid-range weighted-use PASS**
-- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test51-V0066-source.zip`
-- Snapshot SHA256: `06f95c2faa2b1a28c6c8013df8cd361f1d1bd9912e99be63e4a6482b9b4a5ee6`
+- **Test52 / V0.067**
+- Host regression: **50 host binaries completed; all PASS**
+- Targeted ASan+UBSan: **ringside throw geometry + live object use PASS**
+- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test52-V0067-source.zip`
+- Snapshot SHA256: `2cd2bdfaf9273766fb56d6852214a9f90259ac990872681a2b88c5ec4d6911ac`
 
-### Major state reached by Test51
+### Major state reached by Test52
 
 - Arcade HUD/stamina model, CPU stamina progression and ten-stage TAG campaign are integrated.
 - Victory advances campaign; defeat/draw enters Continue; retry preserves stage/opponents; player stamina persists by wrestler identity.
@@ -18,7 +18,8 @@ Private working state for the native Sega Saturn port/reimplementation.
 - Opponent selection reproduces the ROM pool/weight structure and forces Hawk/Animal at stages 5 and 10, with a runtime guard until their graphical banks are implemented.
 - Ringside objects have original pickup/use wrestler animations and underflow-inclusive clocks: pickup 18 ticks, use 27 ticks.
 - CPU weapon seeking preserves the ROM nearest-object and `+$B0` opponent-distance gate.
-- **Test51:** decoded and implemented the second held-weapon CPU branch at `$1D032`: `|dy| < $0C`, `$68 <= |dx| < $90`, weighted selector table `$1D066 = {$32,$32}`. Result index 0 selects action `$1F`, so the demonstrated decision is exactly 50/50. Actions 30/31 share the original weapon-use descriptor.
+- Test51 decoded the `$1D032` held-weapon mid-range branch: `|dy| < $0C`, `$68 <= |dx| < $90`, weighted table `$1D066 = {$32,$32}`; demonstrated action `$1F` decision is exactly 50/50.
+- **Test52:** corrected callback `$15A20` release geometry. The object enters state 2, copies wrestler Y, receives exactly `+$60/-$60` X according to facing, and `+$40` height. Native ringside objects now retain a Z/height component. This replaces the old provisional 24-pixel release offset.
 
 ### Provisional
 
@@ -27,7 +28,7 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ### Registered but not yet exact/complete
 
-- Exact object state-2 physics, collision/damage, rendering and reavailability lifecycle.
+- Subsequent object state-2 trajectory/physics, collision/damage, rendering and reavailability lifecycle.
 - Exact arcade input mapping for human weapon use.
 - Remaining TAG double-team forms, LOD assets/behaviour, records, full Continue/Buy-In/Regain Power presentation, stage/cage work, richer Rumble eliminations, attract/presentation and audio.
 
