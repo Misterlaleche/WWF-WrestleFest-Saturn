@@ -1,0 +1,35 @@
+name: Test100 export Yaul toolchain
+on:
+  push:
+    branches: [test100-build]
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Export pinned Yaul toolchain and ISO tools
+        run: |
+          set -euxo pipefail
+          IMG='ijacquez/yaul@sha256:b6d272204767cd0a734139dd3a2ab298ef5912fb7b7224b78e6d9fac1a7825a6'
+          docker pull "$IMG"
+          docker run --name yaul-exporter "$IMG" bash -lc '
+            set -euo pipefail
+            mkdir -p /tmp/export/runtime/usr/bin /tmp/export/runtime/lib
+            tar -C /opt/tool-chains -czf /tmp/export/yaul-sh2eb-elf.tar.gz sh2eb-elf
+            cp -L /usr/bin/xorriso /tmp/export/runtime/usr/bin/xorriso
+            cp -L /usr/bin/xorrisofs /tmp/export/runtime/usr/bin/xorrisofs || true
+            ldd /usr/bin/xorriso | awk "/=> \\// {print \\$3} /^\\// {print \\$1}" | sort -u > /tmp/xorriso-libs.txt
+            while read -r f; do [ -f "$f" ] || continue; mkdir -p "/tmp/export/runtime$(dirname "$f")"; cp -L "$f" "/tmp/export/runtime$f"; done < /tmp/xorriso-libs.txt
+            tar -C /tmp/export/runtime -czf /tmp/export/xorriso-runtime.tar.gz .
+            sha256sum /tmp/export/*.tar.gz > /tmp/export/SHA256SUMS.txt
+          '
+          mkdir -p yaul-export
+          docker cp yaul-exporter:/tmp/export/. yaul-export/
+          docker rm yaul-exporter
+          ls -lh yaul-export
+          cat yaul-export/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test100-yaul-runtime
+          path: yaul-export/
+          compression-level: 0
+          retention-days: 1
