@@ -6,26 +6,26 @@ Use this private repository and the persistent ChatGPT Library as source of trut
 
 1. Read `PROJECT-STATE.md` first.
 2. Current validated canonical source snapshot:
-   - `/WWF-Saturn/WWF-Saturn-Test150-V0165-source.zip`
-   - SHA256 `34e3b712696b2bf7959bf33cc00d7c18987f3e4145bb7cd55406e8803025f4e0`
-3. Continue from **Test151 / V0.166**. Do not resume from Test144 or older snapshots.
-4. Host regression at Test150: **144/144 PASS**.
-5. Targeted ASan/UBSan for Tests148-150: **PASS**.
-6. Test147/V0.162 is the latest SH-2/Yaul compile+link PASS; Tests148-150 changed only host-side raw helper/tests/docs/Makefile label and were not target-built in that runtime.
-7. No new BIN/CUE was produced for Tests145-150.
+   - `/WWF-Saturn/WWF-Saturn-Test160-V0175-source.zip`
+   - SHA256 `4c3089d899f319c92afedd10ac9b8223656659f5269bb420801d68c8483ababb`
+3. Continue from **Test161 / V0.176**. Do not resume from Test150 or older snapshots.
+4. Complete host regression at Test160: **152/152 PASS**.
+5. Targeted ASan/UBSan for Tests151-160: **PASS**.
+6. Tests151-160 are ROM-audit/test/documentation-only; Test147/V0.162 remains the latest SH-2/Yaul compile+link PASS.
+7. No new BIN/CUE was produced for Tests145-160.
 
 ## Hardware state
 
 Test144/V0.159 remains the current pending hardware-validation image. Test100/V0.115 remains the latest image physically confirmed on NTSC-U Saturn + Terraonion MODE until the user tests Test144.
 
-## Critical new finisher evidence
+## Critical new evidence through Test160
 
-- Test145: Slaughter `$17ECE` and DiBiase `$179C0` each write exact `#$0005` to victim `+$68` before `JSR $111C8`; this is a per-pulse operand, not proven total damage/cadence.
-- Test146: the old Earthquake `$23/$15CE0` Vertical Splash candidate is contradictory because `$23->$15CE0` is independently proven STOMP. Earthquake is gated off unless HIGH_CONFIDENCE.
-- Test147: Earthquake (selection 8), prone category `$07`, fresh button1 -> exact raw action `$47`, descriptor `$14440`, callback `$14458`, first recovered pose 132. Human-readable identity remains CANDIDATE.
-- Test148: `$14458` exact raw prelude: actor `+$60 bit7` or `+$1C bit7` early-branches; otherwise clear actor `+$01`, write `+$5C=$0600`, `+$5E=$0048`, choose D0=5 only if target `+$21==$05 && +$61==$61`, else D0=2, then call `$26AE`.
-- Test149: `$26AE` proves D0 is a 4-byte table selector (`LEA $275C,A1; LSL.w #2,D0; ...`), **not a damage value**.
-- Test150: selector 2 raw pair is `{$0038,$FFF8}`; selector 5 raw pair is `{$0040,$FFFF}`. Keep them as raw effect/vector evidence until semantics are proven.
+- Earthquake selection character 8, prone category `$07`, fresh button1 resolves exact raw action `$47`, descriptor `$14440`, callback `$14458`; move identity remains CANDIDATE.
+- `$14458` uses `$26AE` trajectory helper with D0 table selectors 2/5, not damage operands.
+- `$26AE` table base is `$275C`, stride four bytes; selector 2 is `{$0038,$FFF8}`, selector 5 `{$0040,$FFFF}`.
+- `$26AE` computes raw X/Y velocities from target coordinate plus table offset, with actor `+$5C/+5E` duration divisor; raw clamps are X ±$0200 and Y ±$00C0.
+- Action `$47` contact/fallback raw-state consequences are pinned in Tests155-158; do not promote their high-level semantics without independent evidence.
+- `+$109` producer state is now proven to initialize once via `+$1C bit7`, then increment target `+$109` in lockstep with its own phase `+$25`; phase 7 reaches a terminal branch. A gameplay-semantic label for `+$109` is still intentionally unclaimed.
 
 ## Fidelity rules
 
@@ -33,9 +33,9 @@ Every Test must implement or rigorously validate a real function. Preserve evide
 
 ## Immediate continuation
 
-1. Continue Earthquake raw action `$47`/callback `$14458` until composition and actual effect consequence are closed; do not treat selector 2/5 as damage.
-2. Recover exact TAG/Royal victory, defeat and winner-clap/celebration descriptors/states/coordinates/timing.
-3. Continue stamina raw path `+$66 -> +$BD`, `+$109`, `+$20/+$60/+$61` until gameplay semantics are demonstrated before wiring stamina-tier CPU behavior.
+1. Trace the seven-phase `+$109` producer around `$20060-$20154` and its callers until its actor/target gameplay context is demonstrated; then reconcile it with the stamina bucket `+$BD` before wiring stamina-tier CPU behavior.
+2. Continue Earthquake action `$47` through contact/completion and independently identify its trademark move before promotion.
+3. Recover exact TAG/Royal victory, defeat and winner-clap/celebration descriptors/states/coordinates/timing.
 4. Complete/prove all Super Throws / Signature Finisher Moves, respecting per-record evidence flags.
 5. Revalidate useful evidence from the historical non-canonical Test140 research archive only under new future Test numbers.
 6. Continue exact TAG apron/entry/exit, Royal assets/eliminations, records, attract/promo, presentation and audio work as evidence permits.
