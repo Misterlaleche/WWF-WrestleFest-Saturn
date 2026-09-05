@@ -1,0 +1,22 @@
+name: Probe old Saturn payload
+on:
+  push:
+    branches: [test100-build]
+    paths: [.github/workflows/probe-old-saturn.yml]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect embedded Test01A project
+        run: |
+          python3 - <<'PY'
+          import urllib.request,re,base64,zipfile,io
+          u='https://raw.githubusercontent.com/Misterlaleche/jtcores/master/.github/workflows/build-wrestlefest-saturn-test01a-v2.yml'
+          s=urllib.request.urlopen(u).read().decode()
+          m=re.search(r"cat > /tmp/wrestlefest-saturn-test01a\.b64 <<'B64'\n(.*?)\n\s*B64",s,re.S)
+          if not m: raise SystemExit('payload not found')
+          raw=base64.b64decode(''.join(m.group(1).split()))
+          z=zipfile.ZipFile(io.BytesIO(raw))
+          for i in z.infolist(): print(i.filename,i.file_size)
+          PY
