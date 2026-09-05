@@ -6,31 +6,32 @@ Use this private repository and persistent ChatGPT Library as source of truth.
 
 1. Read `PROJECT-STATE.md` and `docs/HARDWARE-TEST100-FEEDBACK.md`.
 2. Current validated source snapshot:
-   - `/WWF-Saturn/WWF-Saturn-Test130-V0145-source.zip`
-   - SHA256 `ab2b4c89d8a70d7121293e7be4c2023fff6e4881c494857021786d1208132b7a`
-3. Continue from **Test131 / V0.146** only.
-4. Do not resume from older divergent snapshots. Test130 is the canonical continuation of Test119 and preserves the validated Test102→Test114→Test118→Test119 line.
+   - `/WWF-Saturn/WWF-Saturn-Test137-V0152-source.zip`
+   - SHA256 `461912913a2edbf2b4be532c8378d81f74abbe3d088ff481647fda5283b59261`
+3. Continue from **Test138 / V0.153** only.
+4. Do not resume from older divergent snapshots. Test137 is the canonical continuation of Test133 and preserves the validated Test102→Test114→Test118→Test119→Test130→Test133 line.
 5. Every Test must implement or rigorously validate a real function. Preserve ROM/manual/video evidence labels; anything unproven stays PROVISIONAL or REGISTERED BUT NOT IMPLEMENTED.
 6. Do not generate another BIN/CUE routinely. Test100 remains the latest hardware image and is confirmed working on real NTSC-U Saturn + Terraonion MODE. Build another only after a large integrated advance or a Saturn-only blocker.
 
 ## Current validated state
 
-- **Test130/V0.145**.
-- **126/126 host binaries PASS**, executed in bounded batches.
-- Tests127-130 targeted ASan/UBSan PASS.
-- SH-2 ELF compile/link with Yaul PASS; no disc image generated.
-- Royal Rumble now preserves the canonical queue/replacement/callout lifecycle while adding exact six-slot anchors, reverse free-slot scan, exact 294-tick post-elimination delay and recovered pool-selection structure.
-- A live guide-backed Body Slam elimination route exists from movable headlock at the ropes for wrestlers whose arcade repertoire contains Body Slam; Saturn rope-coordinate threshold remains provisional.
-- Difficulty DIP bits are recovered exactly. Direct ROM audit shows Difficulty is consumed for CPU stamina setup, not as a direct CPU-speed/aggression multiplier.
-- The original `$24CC` weighted selector and two 12-wrestler distance-policy tables are recovered. Do not connect them to native movement until the raw state transition and raw→Saturn distance mapping are demonstrated.
+- **Test137/V0.152**.
+- **133/133 host binaries PASS** in bounded batches.
+- Tests122-137 targeted ASan/UBSan PASS.
+- SH-2 ELF compile/link with Yaul PASS. No newer disc image was produced.
+- Test134 replaces the old provisional 20-point arcade Punch damage with the exact ROM-backed 3-point value.
+- Test135 adds the live rapid-button prompt to player-victim submissions.
+- Test136 maps visible ground-drop actions to the exact arcade descriptors for Stomp/Elbow/Knee/Fist drops.
+- Test137 adds CPU PICK UP action `$22` / descriptor `$15B6C` against prone live opponents; completion timing/state translation remains provisional.
+- Difficulty direct handling remains evidence-based: the DIP field changes CPU stamina setup, not a fabricated CPU-speed/aggression multiplier.
+- Wrestler-specific weighted AI tables and raw state-2 control-flow evidence through Test133 remain integrated but only semantically connected where proven.
+- Royal Rumble preserves six-slot lifecycle, exact 294-tick replacement wait, entrant callout and live Body Slam rope elimination route.
 
 ## Immediate continuation
 
-Test131 should prove what the Test130 weighted choice actually does: the branch around `$1F318` writes raw actor `+$20=2` when the first weighted bucket is selected. Recover the raw state-2 handler (`$1D7B6` from the CPU dispatch table) sufficiently to determine whether it corresponds to approach/run/chase or another behavior. Only then wire the per-wrestler probabilities into live Saturn AI.
+Test138 should focus on fatigue/exhaustion behavior visible in the arcade: recover the relevant animation/state evidence before mapping tired walk or stationary exhausted poses. In parallel continue exact CPU ground-choice probability and raw state-2 handler analysis so Test100 difficulty can be corrected through original decision rules rather than arbitrary cooldowns.
 
-In parallel continue auditing damage/stamina/recovery consumers to address the Test100 hardware observation that CPU feels disproportionately hard and player stamina drains too quickly. Preserve the proven Difficulty→CPU-stamina behavior and avoid arbitrary global nerfs.
-
-Other priorities: exact TAG apron placement/entry animation, missing knockdown roll/get-up frames, additional Royal eliminations and Hawk/Animal assets, TAG/Royal winner-loser staging, mode-select glow, portrait/HUD palette fidelity, records, attract/promo scenes and audio.
+Other priorities: exact TAG apron placement/entry animation, missing roll/get-up frames, additional Royal eliminations and Hawk/Animal assets, TAG/Royal winner-loser staging, mode-select glow, portrait/HUD palette fidelity, records, attract/promo scenes and audio.
 
 ## Long target
 
