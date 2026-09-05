@@ -4,17 +4,18 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test61 / V0.076**
-- Host regression: **78 PASS result lines** from the integrated host harness
-- Targeted ASan+UBSan: **new `$280DC/$28128` object-dispatch helper PASS**
-- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test61-V0076-source.zip`
-- Snapshot SHA256: `2953b7ccd38f1d84e8a3e46f94ac237a4ffa8ad8789a70f0a691a690158dc915`
+- **Test63 / V0.078**
+- Host regression: **60/60 host executables PASS, 80 PASS result lines**
+- Targeted ASan+UBSan: **new `$2851E` resolver helper PASS**
+- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test63-V0078-source.zip`
+- Snapshot SHA256: `e52ec17fc7693504f667028984d366e54149d66c0c9845a2af95283f446321d9`
+- Previous recoverable checkpoint: `/WWF-Saturn/WWF-Saturn-Test62-V0077-source.zip`, SHA256 `0dc6121b637b14848277dab06fa16f91385460958412a7dd86646670974d50ba`
 
 ### Recovery note
 
-The old persistent Test52 ZIP was incomplete and could not compile by itself. Test55 deterministically recovered that work from the intact Test51 parent. Test61 descends from that recovered line and is now the only current recoverable source of truth; do not resume from the incomplete Test52 ZIP or older checkpoints.
+The old persistent Test52 ZIP was incomplete and could not compile by itself. Test55 deterministically recovered that work from the intact Test51 parent. Test63 descends from that recovered line and is now the current source of truth.
 
-### Major state reached through Test61
+### Major state reached through Test63
 
 - Arcade HUD/stamina model, CPU stamina progression and ten-stage TAG campaign are integrated.
 - Victory advances campaign; defeat/draw enters Continue; retry preserves stage/opponents; player stamina persists by wrestler identity.
@@ -32,7 +33,9 @@ The old persistent Test52 ZIP was incomplete and could not compile by itself. Te
 - Test58 decoded state-4 handler `$FF54`: fresh state-4 entry returns to available state 3 on the 49th handler invocation.
 - Test59 corrected the state-2 model: `+$38/+$3A/+$3C` are resolver-generated contact corrections rather than demonstrated persistent launch velocities; `$FE82` probes `+$3E=$20`, retries with `-$20` after a miss, and skips XYZ integration after two misses.
 - Test60 wires the exact `$FF54` state-4 clock into the native autonomous-object runtime.
-- **Test61 decodes the bounded `$280DC -> $28128 -> $28154` dispatch used by ringside objects.** `$28128` selects by `($1C007E & 7) * 8 + (+$32 & 4)`; both `$FFD2` objects have `+$32=$0004`. For safely bounded global modes 0..6 the exact object handlers are: `0->$28288`, `1->$2818C/RTS`, `2->$2851E`, `3->RTS`, `4->RTS`, `5->$28288`, `6->$2851E`. Mode 7 remains explicitly unknown because an eighth pointer pair is not safely bounded in the ROM table.
+- Test61 decodes the bounded `$280DC -> $28128 -> $28154` dispatch used by ringside objects. For safely bounded global modes 0..6 the exact object handlers are `0->$28288`, `1->RTS`, `2->$2851E`, `3->RTS`, `4->RTS`, `5->$28288`, `6->$2851E`; mode 7 remains unknown.
+- **Test62 implements the exact `$2851E` second-column resolver** used by both `$FFD2` objects in modes 2 and 6: Y bounds `$110/$140`, Z floor `$100` plus object `+$42`, X bounds `$1C8/$470`, contact-code-4 window `$294 <= X < $38C`, and exact correction/flag ordering.
+- **Test63 audits every absolute-long reference to global `$1C007E` and proves all 13 direct immediate writes are only values 3 or 4.** These direct setup paths therefore select the no-op object route, but indirect/copied producers remain unproven and are not assumed absent.
 
 ### Provisional
 
@@ -42,7 +45,8 @@ The old persistent Test52 ZIP was incomplete and could not compile by itself. Te
 
 ### Registered but not yet exact/complete
 
-- Geometry inside resolver handlers `$28288` and `$2851E`, the producer/semantic mapping of global `$1C007E`, and resulting object damage/rendering semantics. Test61 intentionally stops at exact bounded dispatch rather than treating following opcodes as an eighth pointer pair.
+- Geometry inside resolver handler `$28288`.
+- Indirect/dataflow producers and semantic mapping of global `$1C007E`; Test63 only proves direct immediate absolute writes.
 - Exact arcade input mapping for human weapon use.
 - Remaining TAG double-team forms, LOD assets/behaviour, records, full Continue/Buy-In/Regain Power presentation, stage/cage work, richer Rumble eliminations, attract/presentation and audio.
 
@@ -50,6 +54,6 @@ The old persistent Test52 ZIP was incomplete and could not compile by itself. Te
 
 Continue concrete, non-empty checkpoints toward **Test200**. Do not claim arcade-exact behavior without ROM/manual evidence; uncertain behavior remains explicitly provisional or registered-but-not-implemented.
 
-The next priority is to decode enough of `$28288` / `$2851E` and the writes/producers of `$1C007E` to reproduce a bounded object collision path. If that cannot be established rigorously, move to another listed gameplay priority without inventing values.
+Next priority: follow dataflow around `$1C007E` enough to determine whether modes 2/6 can occur for live thrown ringside objects; in parallel decode `$28288` only where arithmetic can be reproduced exactly. If that path stops being safely bounded, move to another gameplay priority rather than inventing geometry.
 
 The next hardware BIN/CUE remains deferred until the long integration campaign is mature enough for an alpha-class Saturn build, unless a Saturn-only blocker requires one earlier.
