@@ -5,10 +5,10 @@ Use this repository and the persistent ChatGPT Library as the source of truth wh
 ## Start here
 
 1. Read `PROJECT-STATE.md` from this private repository.
-2. Use the latest validated persistent source snapshot named there. At the time this handoff was created it is:
-   - Library path: `/WWF-Saturn/WWF-Saturn-Test50-V0065-source.zip`
-   - SHA256: `bc5fcee207cdb022deb0e21c11d94fa2bafa864e9b442ac4404edbaad411205d`
-3. Materialize/extract that snapshot and continue from the next concrete test; do not rebuild from Test15/V0.025 or V0.029.
+2. Use the latest validated persistent source snapshot named there. Current validated source:
+   - Library path: `/WWF-Saturn/WWF-Saturn-Test51-V0066-source.zip`
+   - SHA256: `06f95c2faa2b1a28c6c8013df8cd361f1d1bd9912e99be63e4a6482b9b4a5ee6`
+3. Materialize/extract that snapshot and continue from the next concrete test; do not rebuild from Test15/V0.025, V0.029, or Test50.
 4. Each Test must be a real implementation or rigorous validation checkpoint; no empty version-number increments.
 5. Preserve arcade fidelity. Use the user's original ROM/research data where available. If an arcade behaviour is not demonstrated, mark it provisional or registered-but-not-implemented rather than inventing exactness.
 6. Run host regression/sanitizer tests as appropriate and persist major validated checkpoints back to Library. Keep `PROJECT-STATE.md` updated.
