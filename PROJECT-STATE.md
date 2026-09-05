@@ -4,17 +4,17 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test58 / V0.073**
-- Host regression: **76 PASS result lines** from the integrated host harness
-- Targeted ASan+UBSan: **CPU finisher routes, ringside throw geometry, available-object reset, state-2 integrator and state-4 reavailability PASS**
-- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test58-V0073-source.zip`
-- Snapshot SHA256: `3a412eed3d54009cce11c2a5bf057073e9e127462983291f12775226fc55c328`
+- **Test60 / V0.075**
+- Host regression: **78 PASS result lines** from the integrated host harness
+- Targeted ASan+UBSan: **state-2 probe orchestration and native state-4 object lifecycle PASS**
+- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test60-V0075-source.zip`
+- Snapshot SHA256: `a91ceea8c3a4a366a93a158c524345bff471f7003446cb6ee2810a3fbefdd0da`
 
 ### Recovery note
 
-The old persistent Test52 ZIP was incomplete and could not compile by itself. Test55 deterministically recovered that work from the intact Test51 parent. Test58 descends from that recovered line and is now the only current recoverable source of truth; do not resume from the incomplete Test52 ZIP.
+The old persistent Test52 ZIP was incomplete and could not compile by itself. Test55 deterministically recovered that work from the intact Test51 parent. Test60 descends from that recovered line and is now the only current recoverable source of truth; do not resume from the incomplete Test52 ZIP or older checkpoints.
 
-### Major state reached through Test58
+### Major state reached through Test60
 
 - Arcade HUD/stamina model, CPU stamina progression and ten-stage TAG campaign are integrated.
 - Victory advances campaign; defeat/draw enters Continue; retry preserves stage/opponents; player stamina persists by wrestler identity.
@@ -27,9 +27,11 @@ The old persistent Test52 ZIP was incomplete and could not compile by itself. Te
 - Test53 validates that CPU grapple rota can naturally enter mapped trademark finishers and Saturn preloads the finisher overlay for the actual pair attacker.
 - Test54 enables CPU Hogan Legdrop / Earthquake Vertical Splash against recovered prone contexts; opportunity priority remains provisional.
 - Test55 enables CPU Boss Man interception and Slaughter/DiBiase behind trademark contexts; opportunity priority remains provisional.
-- **Test56:** ROM `$FA14` reset is modeled: both autonomous ringside objects become available state `3`, unheld, with exact raw `+$0E=$0100` height. Normalized Saturn X/Y placement remains provisional.
-- **Test57:** decoded the object dispatcher at `$FDEA` and state-2 handler `$FE82`. Its exact integration tail adds `+$38/+$3A/+$3C` to object X/Y/Z (`+$06/+$0A/+$0E`); collision flag bit 4 at `+$37` advances state 2 to state 4.
-- **Test58:** decoded state-4 handler `$FF54`: first entry starts phase 1 with timer `$10`; each expiry reloads `$10` and increments the phase; phase 4 writes state `3` at `$FFC0`. From fresh state-4 entry, reavailability occurs on the 49th handler invocation.
+- Test56 models ROM `$FA14` reset: both autonomous ringside objects become available state `3`, unheld, with exact raw `+$0E=$0100`; normalized Saturn X/Y placement remains provisional.
+- Test57 decoded object dispatcher `$FDEA` and state-2 handler `$FE82`; demonstrated tail `$FEE6/$FEEE/$FEF6` applies `+$38/+$3A/+$3C` corrections to XYZ and collision flag bit 4 advances state 2 to state 4.
+- Test58 decoded state-4 handler `$FF54`: fresh state-4 entry returns to available state 3 on the 49th handler invocation.
+- **Test59 corrects the state-2 model:** `+$38/+$3A/+$3C` are not demonstrated persistent launch velocities. `$FE82` calls shared collision/boundary resolver `$280DC`, which clears those fields before each probe and writes correction deltas only on contact. `$FE82` probes with `+$3E=$20`, retries with `-$20` only after a miss, and skips XYZ integration entirely after two misses. A host helper now preserves that exact two-probe orchestration without inventing collision geometry.
+- **Test60 wires the exact `$FF54` state-4 clock into the native autonomous-object runtime.** Injected state-4 objects remain unavailable for the demonstrated duration and become state 3 on handler call 49; raw Z `$0100` and native bookkeeping are restored for reuse.
 
 ### Provisional
 
@@ -39,13 +41,14 @@ The old persistent Test52 ZIP was incomplete and could not compile by itself. Te
 
 ### Registered but not yet exact/complete
 
-- Producer of initial state-2 object velocity fields `+$38/+$3A/+$3C`; Test57 deliberately does not invent launch velocities.
-- Full collision/damage semantics around state-2 object impact and rendering details.
+- Full `$280DC` world-boundary/collision geometry for ringside objects and resulting damage/rendering semantics. The old “initial state-2 velocity producer” item is closed by Test59 because `$FE82` regenerates correction fields through `$280DC` rather than consuming demonstrated persistent launch velocities.
 - Exact arcade input mapping for human weapon use.
 - Remaining TAG double-team forms, LOD assets/behaviour, records, full Continue/Buy-In/Regain Power presentation, stage/cage work, richer Rumble eliminations, attract/presentation and audio.
 
 ## Long campaign
 
 Continue concrete, non-empty checkpoints toward **Test200**. Do not claim arcade-exact behavior without ROM/manual evidence; uncertain behavior remains explicitly provisional or registered-but-not-implemented.
+
+The next priority is either to decode enough of `$280DC` to reproduce the object boundary/collision path safely, or, if that cannot be bounded rigorously, move to another listed gameplay priority without inventing values.
 
 The next hardware BIN/CUE remains deferred until the long integration campaign is mature enough for an alpha-class Saturn build, unless a Saturn-only blocker requires one earlier.
