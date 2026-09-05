@@ -4,107 +4,63 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test144 / V0.159** is the canonical validated source checkpoint.
-- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test144-V0159-source.zip`
-- Source SHA256: `6ea546f185d71951596ca19419c7fbd50a2def0d24e0346ec91ca36350960eee`
-- Source package: 441 source/data/report files, no executable/disc image except the original research `program.bin` ROM image already used by the project.
-- Full host regression: **139/139 PASS**.
-- Tests138-144 targeted ASan/UBSan: **PASS**.
-- SH-2/Yaul compile + link: **PASS**, using the pinned project toolchain lineage from Test100.
-- Yaul ISO structural validation: **PASS** (Saturn header, USA area, V0.159/title, ISO9660, 35 CD files and exact `A.BIN`).
+- **Test150 / V0.165** is the canonical validated source checkpoint.
+- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test150-V0165-source.zip`
+- Source SHA256: `34e3b712696b2bf7959bf33cc00d7c18987f3e4145bb7cd55406e8803025f4e0`
+- Host regression at Test150: **144/144 PASS**.
+- Tests148-150 targeted ASan/UBSan: **PASS**.
+- SH-2/Yaul compile + link: **not rerun in the Test150 runtime**; Test147/V0.162 remained the latest SH-2/Yaul compile+link **PASS** before these header/test-only changes.
+- No new BIN/CUE was generated for Tests145-150.
 
-## Test144 hardware image
+## Hardware image status
 
-The user explicitly requested a BIN/CUE after the next completed Test, so Test144 has a hardware-validation image:
+Test144/V0.159 remains the current hardware-validation image and is still pending physical validation on Saturn. Test100/V0.115 remains the latest image confirmed working on NTSC-U Saturn + Terraonion MODE until the user physically tests Test144.
 
-- `/WWF-Saturn/WWF-WrestleFest-Test144-V0159-BIN-CUE.zip`
-- Package SHA256: `b61ad9a53a3d159dbac9c34e4111f60f2aa6b11af5b98706fcd9f5c83f42646e`
-- Raw BIN SHA256: `7610c9dfc015baa0573742286f2381d5b7b63bd2ccccfcb61844bd3c5199ac46`
-- CUE SHA256: `bf558f9489edcd0809da6f884beddb070b1d4896eb7de4164d65f02c3400b1cd`
-- Final disc format: single-track **MODE1/2352** BIN/CUE.
-- Sector writer verification: all 2,214 sectors regenerated and compared; payload round-trip exact.
-- Independent libcdio CUE read + bitwise EDC verification: **PASS**.
-- **Real Saturn validation: PENDING.** Test100/V0.115 remains the latest image confirmed working on NTSC-U Saturn + Terraonion MODE until the user physically tests Test144.
+## Canonical lineage
 
-## Canonical lineage and reconciled divergence
+Test102 → Test114 → Test118 → Test119 → Test130 → Test133 → Test137 → Tests138-143 reconciled WIP → Test144 → Test145 → Test146 → Test147 → Test148 → Test149 → **Test150**.
 
-The user explicitly selected the Test137/V0.152 checkpoint plus `/WWF-Saturn/WWF-Saturn-Test143-WIP-from-Test137.zip` as the continuation to reconcile. That line is now closed through Test144:
+The separate historical Test140/V0.155 line and later merged-from-Test140 Test143 WIP remain non-canonical research archives. Useful evidence may be revalidated under new future Test numbers; canonical numbering must not be overwritten.
 
-Test102 → Test114 → Test118 → Test119 → Test130 → Test133 → Test137 → Tests138-143 reconciled WIP → **Test144**.
+## Tests138-144 — preserved closure
 
-A separate Test140/V0.155 snapshot and a later Test143 merged-from-Test140 WIP were produced on a divergent numbering line. They are **non-canonical research archives**, not the active source baseline. Their useful `$23856`, `$1EE38` and low-stamina-boundary findings are not discarded; they must be revalidated and assigned new future Test numbers before integration so canonical Test138-140 meanings are not overwritten.
+- Test138 ROM-EXACT: stamina `+$66` → bucket `+$BD`: `>=128→0`, `101..127→1`, `80..100→2`, `64..79→3`, `37..63→4`, `1..36→5`, `0→8`.
+- Test139 ROM-EXACT: `$1E45C-$1E464` compares raw `+$109 == +$BD`; semantics of `+$109` remain unclaimed.
+- Test140 ROM-EXACT audit: explicit `+$109` read `$1E45C`, increment `$2006C`, compare sites around `$21282/$2128A`.
+- Test141 ROM-EXACT: `ST_RISE` uses `$181FC/$181EC` for 13+13 ticks then `$11E36` for 17 ticks.
+- Test142: TAG/Royal winner/loser ownership exact from match result; Saturn staging coordinates/speeds remain PROVISIONAL.
+- Test143: centre result plate removed so ring/post-match actors remain visible; exact arcade result typography/layout REGISTERED BUT NOT IMPLEMENTED.
+- Test144 ROM-EXACT: when `+$109 == +$BD`, recovered branch clears raw `+$20` low byte and writes raw `+$60=$004B` for `+$61==$4A/$64`, otherwise `$0056`; mismatch leaves tested outputs unchanged. This proves a stamina-derived raw-state consequence but not a fatigue/aggression/cadence interpretation.
 
-## Tests120-126 — Royal Rumble exact rules + live elimination route
+## Tests145-150 — Signature / Super Throws fidelity
 
-- Test120: exact six raw opening anchors at ROM `$10ACC`.
-- Test121: exact six-word reverse free-slot scan (`5 -> 0`) used by `$10AF0/$10B26`.
-- Test122: exact post-elimination wait at `$BB30`: `$0126` = 294 ticks.
-- Test123: `$BB80/$BC00` two-pool next-entrant structure, four random attempts then reverse fallback scan; exact RNG source/order remains isolated.
-- Test124: exact 294-tick wait and six-slot ownership integrated into the canonical replacement lifecycle while preserving the visible `NEW CHALLENGER` phase.
-- Test125: human headlock composition can move as one unit.
-- Test126: live headlock + rope + Punch Body Slam elimination for wrestlers whose arcade repertoire contains BODY SLAM; Saturn rope threshold remains provisional.
-
-## Tests127-133 — Difficulty and wrestler-specific AI audit
-
-- Test127: Difficulty originates from `$140022` bits 8-9 and becomes `$1C0066` bits 8-9 after inversion.
-- Test128: the direct Difficulty field `$0300` is consumed at `$107F8` for CPU stamina setup; no direct Difficulty-bit aggression/cadence consumer was found.
-- Test129: exact `$24CC` weighted selector recovered.
-- Test130: exact two 12-wrestler probability tables at `$1F3A6/$1F3BE`.
-- Test131: raw target-distance `+$B0 < $C8` uses table 1; `$C8..$DF` is a deadband; `>= $E0` uses table 2.
-- Test132: selected bucket-0 transition writes raw actor state `+$20=$0002` and updates recovered flag fields; far branch has additional flag changes.
-- Test133: dispatcher `$1C1F4` maps raw state 2 to `$1D7B6`; handler is target-relative. Precise semantic naming remains deliberately unclaimed where ROM evidence is incomplete.
-
-## Tests134-137 — combat feedback and visible recovery
-
-- Test134: arcade stationary Punch action `$00` callback writes exact **3-point stamina damage**.
-- Test135: player-victim submission exposes the live rapid-button prompt; fresh Punch/Kick edges feed the existing escape counter.
-- Test136: `ST_GROUND_ATTACK` renders exact catalogued ground-drop descriptors: STOMP `$23->$15CE0`, ELBOW DROP `$24->$1603A`, KNEE DROP `$25->$16116`, FIST DROP `$26->$1623C`.
-- Test137: CPU ground policy can choose arcade action `$22` PICK UP / descriptor `$15B6C`, returning a prone live opponent toward the rise path; completion timing/native state translation remains provisional.
-
-## Tests138-140 — ROM-EXACT raw stamina route
-
-- **Test138:** `$1E48C-$1E4D8` classifies actor stamina `+$66` into raw bucket `+$BD`: `>=128 -> 0`, `101..127 -> 1`, `80..100 -> 2`, `64..79 -> 3`, `37..63 -> 4`, `1..36 -> 5`, `0 -> 8`.
-- **Test139:** `$1E45C-$1E464` compares actor `+$109` for equality with `+$BD`. Exact predicate; no fatigue/aggression/cadence semantic is assigned.
-- **Test140:** bounded ROM audit pins the explicit `+$109` read at `$1E45C`, byte increment at `$2006C`, and direct compare sites around `$21282/$2128A`. Producer/consumer flow is proven; semantic name remains deliberately withheld.
-
-## Test141 — ROM-EXACT rise presentation
-
-- `ST_RISE` uses recovered role-specific descriptors `$181FC/$181EC` for the first 26 ticks (13+13), then `$11E36` for the final 17 ticks.
-
-## Tests142-143 — post-match staging and ring visibility
-
-- **Test142:** TAG/Royal winner/loser ownership comes from exact resolved match state. Saturn staging coordinates and movement speeds are **PROVISIONAL** pending recovery of the arcade routine.
-- **Test143:** the old large opaque centre result plate is removed; a shallow top banner keeps the ring/post-match actors visible. Exact arcade result typography/layout is **REGISTERED BUT NOT IMPLEMENTED**.
-- Exact victory clap, exact winner pose and exact defeated/sad pose remain **REGISTERED BUT NOT IMPLEMENTED**.
-
-## Test144 — ROM-EXACT stamina/raw-109 state consequence
-
-The recovered `$1E45C-$1E48A` branch is exposed as a raw helper. If `+$109 != +$BD`, tested outputs remain unchanged. On equality it:
-
-1. clears the low byte of raw state `+$20`;
-2. tests `+$61`;
-3. writes raw `+$60=$004B` for `+$61==$4A` or `$64`;
-4. otherwise writes raw `+$60=$0056`.
-
-This proves that the recovered stamina bucket participates in a concrete raw state transition. It still does **not** prove that `+$109`, `+$60` or `+$61` means fatigue, tired walk, aggression, cadence or any similar gameplay concept.
+- **Test145 ROM-EXACT operand:** Sgt. Slaughter callback `$17ECE` and Ted DiBiase callback `$179C0` each write `#$0005` to victim `+$68` immediately before `JSR $111C8`. This is an exact per-pulse operand, not proof of total hold damage or cadence.
+- **Test146 fidelity guard:** Earthquake's old candidate used raw action `$23` / descriptor `$15CE0`, but Test136 independently proved `$23->$15CE0` is STOMP. Gameplay readiness is therefore restricted to HIGH_CONFIDENCE records; the contradictory Earthquake candidate is gated off rather than fabricated.
+- **Test147 ROM-EXACT route:** Earthquake selection character 8, prone category `$07`, fresh physical button 1 resolves raw action `$47`, descriptor `$14440`, callback `$14458`, first recovered pose 132. Move name/complete semantics remain CANDIDATE.
+- **Test148 ROM-EXACT callback prelude:** `$14458` first tests actor `+$60 bit7` and `+$1C bit7`. If neither early branch is taken, it clears actor `+$01`, writes `+$5C=$0600`, `+$5E=$0048`, and chooses D0=5 only for target `+$21==$05 && +$61==$61`, otherwise D0=2, before `JSR $26AE`.
+- **Test149 ROM-EXACT semantic correction:** `$26AE` starts `LEA $275C,A1; LSL.w #2,D0; MOVE.w (A1,D0.w),D4; MOVE.w 2(A1,D0.w),D5`. Therefore D0 values 2/5 are **4-byte table selectors, not damage values**.
+- **Test150 ROM-EXACT selected table entries:** selector 2 resolves raw pair `{$0038,$FFF8}` and selector 5 resolves `{$0040,$FFFF}`. These remain raw effect/vector evidence; no unsupported gameplay-semantic label is assigned.
 
 ## Signature / Super Throws status
 
-The current source already contains overlay/state-machine routes for the ten trademark moves represented in `finisher_data.h`/`finisher_assets.h`. Those routes are implemented source functionality, but not every entry condition, callback, damage value or graphical variant is fully ROM-exact; their per-record evidence flags remain authoritative, and Earthquake retains candidate status where documented.
+The source contains overlay/state-machine routes for ten trademark moves represented in `finisher_data.h` / `finisher_assets.h`, but per-record evidence flags remain authoritative. Earthquake is deliberately not promoted to gameplay-ready until its action-$47 composition, callback consequence and move identity are closed without contradiction.
 
-The project requirement **All Super Throws / Signature Finisher Moves** is **REGISTERED BUT NOT FULLY IMPLEMENTED/PROVEN** as a completeness target. Future work must recover wrestler → trigger/condition → raw action/state → descriptor/composition → impact/effect before upgrading each remaining route. No finisher is to be invented from visual plausibility or memory.
+The target **All Super Throws / Signature Finisher Moves** remains **REGISTERED BUT NOT FULLY IMPLEMENTED/PROVEN**.
 
-## Preserved hardware-feedback work
+## Preserved implemented systems
 
-- Manual TAG through original two-button Kick route.
-- TAG reserve HUD/stamina, reserve visual correction, rope traversal mapping, staged four-wrestler presentation, referee tracking and visible pin count.
-- Cached character-select pages and broader CPU roster selection.
-- Knockdown rapid-button prompt and provisional rope deflection.
-- Six-position Royal opening, `1P` marker, queue/replacement lifecycle, entrant callout, human elimination and final-survivor resolution.
+- Arcade HUD/stamina model, CPU stamina progression, ten-stage TAG campaign.
+- Victory/defeat/Continue flow, identity-persistent stamina.
+- CPU/apron partner logic, Power Up, grapple rota, submissions, ground actions and exact 20-count count-out.
+- Manual TAG using the original two-button Kick route; TAG reserve HUD/stamina and staged four-wrestler presentation.
+- Ringside object pickup/use path, ROM nearest-object seeking and opponent-distance gate, exact pickup/use clocks, state-2/state-4 lifecycle evidence.
+- Royal Rumble six-slot opening, replacement lifecycle, entrant queue/callout, human elimination and final-survivor resolution.
+- Difficulty raw source and wrestler-specific weighted AI tables.
+- Visible submission/recovery prompts and exact rise descriptor sequence.
 
 ## Provisional
 
-- Native RNG/entropy where original arcade source is not yet recovered.
+- Native RNG/entropy where arcade source is not yet recovered.
 - Rumble callout artwork/layout, native entry geometry and portions of entrant ordering.
 - Raw→Saturn coordinate/scale transform, reserve visual correction and Rumble Body Slam rope threshold.
 - Referee trajectory, TAG presentation timing, rope deflection curve and dedicated rope-entry mapping.
@@ -118,18 +74,19 @@ The project requirement **All Super Throws / Signature Finisher Moves** is **REG
 - Exact TAG/Royal victory clap, winner pose, defeated/sad pose, coordinates and timing.
 - Exact arcade result typography/layout.
 - Gameplay-semantic interpretation of raw `+$109/+$60/+$61` and live CPU integration based on that interpretation.
-- Completion/proof of **All Super Throws / Signature Finisher Moves**.
+- Completion/proof of all Super Throws / Signature Finisher Moves.
 - Exact TAG apron placement/entry/exit lifecycle.
 - Remaining Royal entrant artwork/path/timing, full Hawk/Animal asset integration and additional elimination forms.
-- Mode-select glow, records, portrait/HUD palette fidelity, attract/promo scenes and audio.
+- Mode-select glow, records, attract/promo scenes and audio.
 
 ## Next priority
 
-Continue from **Test145 / V0.160**. Primary fronts:
+Continue from **Test151 / V0.166**. Primary fronts:
 
-1. Recover exact TAG/Royal victory, defeat and winner-clap descriptors/states/coordinates/timing.
-2. Continue the `+$66 -> +$BD / +$109 -> +$20,+$60` route until gameplay semantics are demonstrated, then and only then wire those semantics into live CPU behavior.
-3. Complete/prove **All Super Throws / Signature Finisher Moves** without inventing controls, damage, callbacks or compositions.
-4. Revalidate useful evidence from the non-canonical Test140 research archive under new future Test numbers before any integration.
+1. Continue Earthquake action `$47` from callback `$14458` until composition and effect consequences are proven; do not infer damage from selector values.
+2. Recover exact TAG/Royal victory, defeat and winner-clap descriptors/states/coordinates/timing.
+3. Continue the `+$66 -> +$BD / +$109 -> +$20,+$60` route until gameplay semantics are demonstrated before wiring any CPU stamina-tier behavior.
+4. Complete/prove all remaining Signature / Super Throws entry conditions, callbacks, damage/effect operands and compositions.
+5. Revalidate useful evidence from the non-canonical Test140 research archive under new future Test numbers before integration.
 
-Test144 BIN/CUE has already been generated by explicit user request. Do not treat it as hardware-confirmed until the user tests it on real Saturn.
+Continue concrete, non-empty checkpoints toward **Test200**. Do not claim arcade-exact behavior without ROM/manual evidence.
