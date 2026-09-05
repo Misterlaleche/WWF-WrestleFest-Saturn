@@ -1,0 +1,14 @@
+name: Test100 Yaul inspector
+on:
+  push:
+    branches: [test100-build]
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull pinned Yaul image and inspect
+        run: |
+          set -euxo pipefail
+          IMG='ijacquez/yaul@sha256:b6d272204767cd0a734139dd3a2ab298ef5912fb7b7224b78e6d9fac1a7825a6'
+          docker pull "$IMG"
+          docker run --rm "$IMG" bash -lc 'echo ===ENV===; env | sort; echo ===ROOT===; ls -la /; echo ===OPT===; find /opt -maxdepth 4 -type d 2>/dev/null | head -150; echo ===YAUL===; command -v sh2eb-elf-gcc || true; command -v sh-elf-gcc || true; find / -name "build.pre.mk" -o -name "sh2eb-elf-gcc" -o -name "xorriso" 2>/dev/null | head -100'
