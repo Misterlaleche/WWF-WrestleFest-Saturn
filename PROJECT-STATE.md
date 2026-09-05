@@ -1,27 +1,34 @@
 # WWF WrestleFest Saturn — private development repository
 
-Private working repository for the native Sega Saturn port/reimplementation.
+Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- Test36 / V0.051
-- Normal host regression: 56 suites PASS
-- Focused Test36 ASan/UBSan: PASS
-- Executable ROM stamina evidence audit: PASS
-- Source checkpoint persisted in ChatGPT Library: `/WWF-Saturn/WWF-Saturn-Test36-V0051-source.zip`
-- SHA256: `80fda3bcd1c47f5443a57c9ce0a4d5a4a7c0604321c8d1e550b037d4e7fccc0e`
-- Full all-suite ASan/UBSan rerun: not claimed complete in this checkpoint.
+- **Test50 / V0.065**
+- Local development commit: `a66eb61`
+- Host regression: **68 suites PASS**
+- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test50-V0065-source.zip`
+- Snapshot SHA256: `bc5fcee207cdb022deb0e21c11d94fa2bafa864e9b442ac4404edbaad411205d`
 
-Test36 adds ROM-derived CPU ringside-object seeking from program ROM `$1C228-$1C2CA` and `$1C740-$1C7E2`. The native runtime now preserves the exact opponent X-distance classes (`<0x50`, `<0xB0`, far), selects the nearer of two active object candidates by X, and diverts from the opponent only when the selected object is strictly closer in X than the opponent, matching the comparison against original actor `+$B0` at `$1C796`. Live ringside CPU movement uses that diversion target and suppresses opponent attack firing while seeking the object.
+### Major state reached by Test50
 
-Object pickup/use callbacks are deliberately not invented. They remain registered-but-not-implemented until their ROM callbacks are traced.
+- Arcade HUD/stamina model, CPU stamina progression and ten-stage TAG campaign are integrated.
+- Victory advances campaign; defeat/draw enters Continue; retry preserves stage/opponents; player stamina persists by wrestler identity.
+- CPU/apron partner logic, Power Up, grapple rota, submissions, ground actions and exact 20-count count-out are active.
+- Opponent selection reproduces the ROM pool/weight structure and forces Hawk/Animal at stages 5 and 10, with a runtime guard until their graphical banks are implemented.
+- Ringside objects now have original pickup/use wrestler animations and underflow-inclusive clocks: pickup 18 ticks, use 27 ticks.
+- CPU weapon seeking preserves the ROM nearest-object and `+$B0` opponent-distance gate. Held-object direct use now reproduces the strict `$68` horizontal / `$0C` vertical branch and actions 30/31.
 
-The prior exact raw stamina-recovery exclusion predicate remains validated: states `0B`, `0C`, linked `FF -> 0C`, and state `05` pose `4A`. Semantic mapping of every original raw state to native `fighter_state_t` remains registered-but-not-implemented where evidence is missing.
+### Registered but not yet exact/complete
 
-## Long development campaign
+- Weighted CPU weapon-use branch for `$68..$8F`.
+- Exact object state-2 physics, collision/damage, rendering and reavailability lifecycle.
+- Exact initial object-coordinate conversion into the Saturn world model.
+- Exact arcade input mapping for human weapon use.
+- Remaining TAG double-team forms, LOD assets/behaviour, records, full Continue/Buy-In/Regain Power presentation, stage/cage work, richer Rumble eliminations, attract/presentation and audio.
 
-Continue concrete, non-empty checkpoints through Test200. Priorities: finish semantic stamina recovery wiring; replace remaining provisional stamina-tier combat decisions with ROM-derived behavior; expand wrestler-specific actions/finishers; improve CPU and apron-partner AI; complete authentic TAG/double-team systems, ring-out/count-out/ringside behavior and objects, Royal Rumble eliminations, stages, records, continue/buy-in/regain-power, game over, attract/presentation and remaining arcade systems.
+## Long campaign
 
-Do not claim arcade-exact behavior without ROM/manual evidence. Mark uncertain behavior provisional or registered-but-not-implemented.
+Continue concrete, non-empty checkpoints toward **Test200**. Do not claim arcade-exact behavior without ROM/manual evidence; uncertain behavior remains explicitly provisional or registered-but-not-implemented.
 
-The next hardware BIN/CUE build remains deferred until the long integration campaign is mature enough for an alpha-class Saturn build or a Saturn-only blocker requires it.
+The next hardware BIN/CUE remains deferred until the long integration campaign is mature enough for an alpha-class Saturn build, unless a Saturn-only blocker requires one earlier.
