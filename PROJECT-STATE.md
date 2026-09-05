@@ -4,69 +4,59 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test102 / V0.117**
-- Host regression: **98/98 host binaries PASS** (split into bounded chunks to avoid runner timeout).
-- ASan/UBSan: new Test101/Test102 regressions PASS.
-- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test102-V0117-source.zip`
-- Source snapshot SHA256: `5576a4a22bb8ee957f2fa4ff80124d285f910abe0a5a6147affd55bee3ea539f`
-- Source manifest: 377 files plus `SOURCE-SHA256.txt` verification.
-- Test100 remains the latest Saturn hardware BIN/CUE and is confirmed booting/running on Sega Saturn NTSC-U + Terraonion MODE.
+- **Test114 / V0.129**
+- Host regression: **110/110 host binaries PASS** (55/55 + 55/55).
+- Tests103-114 targeted ASan/UBSan: **PASS**.
+- `main.c`, `game.c`, `session.c`, `hud.c`: SH-2 compile check **PASS** with the pinned Yaul toolchain used for Test100.
+- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test114-V0129-source.zip`
+- Snapshot SHA256: `a58835923d3ad97da97c765ac652cd2c925bebc5a8d4f0edfd58e8204d32204d`
+- Test100 remains the latest Saturn BIN/CUE and is confirmed booting/running on real NTSC-U Saturn + Terraonion MODE. No newer BIN/CUE was generated.
 
-## Tests101-102
+## Canonical lineage
 
-### Test101 / V0.116 — live Rumble stamina recovery active gate
+Test114 is rebased on the validated Test102/V0.117 line. It preserves:
+- Test101 ROM-backed Rumble active-actor stamina-recovery gate.
+- Test102 original two-button standard corner TAG with Kick (Saturn C remains optional alias).
 
-ROM `$8EE0` first executes `BTST #7,+$00(A0)` before natural stamina recovery. The native Rumble recovery loop now uses `active_mask` as the live equivalent of that active/eliminated ownership bit: eliminated actors clear the recovery accumulator and cannot regain stamina. The already recovered raw `$1D/$61` exclusions remain preserved separately; native states without a proven raw-state mapping are not fabricated. See `docs/TEST101-V0116.md`.
+Obsolete divergent Test105/Test115 snapshots created from an earlier branch were removed from Library before this checkpoint was accepted.
 
-### Test102 / V0.117 — original two-button manual TAG
+## Tests103-114 — Test100 hardware-feedback block
 
-Test100 hardware exposed that manual TAG was effectively unavailable because the native path depended on Saturn C. The arcade cabinet has only Punch/Kick; evidence documents normal corner tagging with Kick. Arcade Mode now accepts a fresh **Kick** edge at the player partner corner as the standard legal-wrestler swap. Saturn C remains an optional convenience alias, and a KO reserve cannot be tagged in. The special headlock-tag double-team is registered but not claimed implemented. Current native corner coordinate conversion remains provisional. See `docs/TEST102-V0117.md`.
+- **Test103:** TAG HUD shows active/reserve stamina for both teams; reserve portraits are no longer forced grayscale.
+- **Test104:** waiting reserve gets a render-only outward correction relative to the ropes. Gameplay coordinates remain unchanged. **PROVISIONAL** until next hardware comparison.
+- **Test105:** ring enter/exit uses the verified common locomotion descriptor instead of a static idle slide. Dedicated transition descriptor remains unrecovered, so mapping is **PROVISIONAL**.
+- **Test106:** TAG pre-match staging uses separate rear/front anchors and draw order based on the user's arcade references.
+- **Test107:** TAG presentation is structured as four individual wrestler windows plus presenter exit (4×180 + 180 ticks). Timeline is ready for future audio; exact arcade timings remain **PROVISIONAL** pending direct measurement.
+- **Test108:** referee follows live action instead of parking at centre. Exact referee pathing remains **PROVISIONAL**.
+- **Test109:** live pin count exposes visible 1/2/3 indication.
+- **Test110:** TAG CPU roster fill uses all ten selectable wrestlers instead of the previous fixed sequential choices. Entropy source remains **PROVISIONAL** pending arcade RNG recovery.
+- **Test111:** both character-select pages are preloaded; switching page no longer performs a CD read.
+- **Test112:** existing recovery-effort mechanic now exposes the rapid-button prompt after knockdown while preserving pin-escape prompt priority.
+- **Test113:** local visual rope deflection appears during rebound. Exact arcade deformation curve remains **PROVISIONAL**.
+- **Test114:** Royal opening uses six separated depth anchors and exposes a green `1P` marker for the human wrestler.
 
-## Test100 Saturn hardware baseline
+See `docs/TEST103-114-HARDWARE-FIDELITY.md` in the source checkpoint.
 
-The Test100 / V0.115 BIN/CUE built with Yaul is confirmed to boot and run on real Sega Saturn NTSC-U + Terraonion MODE. Full hardware observations remain canonical in `docs/HARDWARE-TEST100-FEEDBACK.md`.
+## Test100 hardware feedback still open
 
-## Major integrated state through Test102
-
-- Arcade HUD/stamina model, CPU stamina progression, ten-stage TAG campaign, Continue flow, persistent player stamina, CPU/apron partner logic, Power Up, grapple rota, submissions, ground actions and exact 20-count count-out are integrated to the demonstrated level.
-- Ringside pickup/use, CPU weapon seeking/use, ROM-backed release geometry, state-2 collision work and state-4 reavailability lifecycle are integrated to the demonstrated level.
-- Two-button physical action layer, contextual action matrix, running counters, behind actions, contextual pin and mapped trademark finishers are integrated; some non-grapple opportunity frequency remains provisional.
-- Raw paired-state/category evidence through Test94, live Sleeper/Restrain behavior through Test95, and first Restrain partner-assist lifecycle through Test99 remain integrated with previously documented provisional timing/damage limits.
-- Test101 closes the proven ROM active-actor exclusion in live Rumble natural stamina recovery.
-- Test102 makes standard manual TAG usable through the original two-button control model instead of requiring a Saturn-only third button.
-
-## Highest-priority confirmed gaps / defects
-
-- CPU is still disproportionately difficult and player stamina still drains too fast on Test100 hardware; exact damage/decision-frequency rules require further ROM recovery rather than arbitrary global weakening.
-- Reserve/apron placement and pin-assist entry/exit remain visually inaccurate.
-- TAG pre-match presentation timing/poses/staging, referee tracking, rope deformation, pin 1/2/3 indicator, post-match staging, mode-select glow, instant character-select page transition, TAG HUD/palettes/portrait corrections and broader opponent selection remain incomplete.
-- Ring-out/ringside gameplay remains hardware-validation pending.
-- Royal Rumble formation, player marker, richer eliminations, timed entrants, ring entry and entrant announcement remain incomplete.
-- Records and additional attract/presentation scenes including Legion of Doom material remain missing.
+- CPU difficulty/player stamina behavior still needs ROM-side scheduler/damage recovery; do not solve by arbitrary global weakening.
+- Exact reserve/apron placement and dedicated partner rope-entry/exit animation remain incomplete.
+- Royal Rumble elimination/entrant queue, announcement box and ring-entry lifecycle remain incomplete.
+- Post-match winner/loser staging, mode-select glow, records, portrait/HUD palette fidelity and additional attract/promo scenes remain incomplete.
+- Ring-out/ringside behavior still needs later hardware validation.
+- Audio remains pending; Test107 provides a structured TAG presentation timeline for eventual announcer sync.
+- Future title Start options screen remains separate until user-supplied art is ready.
 
 ## Provisional
 
-- Native deterministic RNG feed used by the Saturn CPU weapon branch; ROM-proven bounds/weighting are exact.
-- Exact initial ringside-object coordinate conversion into the Saturn world model.
-- CPU priority/frequency for non-grapple trademark opportunities.
-- Translation of some raw paired actor states into native Saturn states.
-- Restrain native timeout/release behavior where callback semantics remain incomplete.
-- Test96-99 partner-assist trajectory/timing and current 8-point assist damage.
-- Absolute Saturn placement/scale corresponding to recovered raw active/reserve coordinates.
-- Native corner-coordinate transform used by the standard TAG proximity gate.
-
-## Registered but not yet exact/complete
-
-- Exact ROM-side entry/lifecycle for all three documented TAG double-team forms, including the headlock-tag form.
-- Exact semantic/action callback mapping for all paired category `$09` actions `$15/$17`.
-- Full live mapping of raw pair fields/states.
-- Remaining LOD assets/behaviour, records, full Continue/Buy-In/Regain Power presentation, stages/cage, richer Rumble eliminations, attract/presentation and audio.
-- Remaining Test100 hardware-feedback backlog.
-
-## Recovery / lineage note
-
-Historical incomplete/obsolete snapshots remain superseded. Test100 was rebuilt from its complete persistent source. Test102 is now the canonical persistent source checkpoint and includes the updated source manifest and regression additions.
+- Native RNG/entropy where original arcade source is not yet recovered.
+- Exact raw→Saturn coordinate/scale transform, including reserve visual correction.
+- Referee tracking trajectory.
+- TAG presentation timing values.
+- Rope deflection curve.
+- Dedicated rope-entry animation mapping.
+- Earlier documented Restrain native timing/assist path/damage and other pre-Test100 provisional items remain provisional.
 
 ## Next priority
 
-Continue from **Test103 / V0.118**. Recover CPU damage/decision/stamina rules from ROM to address the Test100 difficulty complaint without inventing a rebalance, then continue core TAG active/reserve lifecycle and presentation/referee/rope/knockdown/HUD fidelity, followed by Royal Rumble progression. Preserve evidence labels and concrete non-empty checkpoints toward Test200. Do not generate another hardware BIN/CUE unless a Saturn-only blocker appears or the long integration checkpoint is reached.
+Continue from **Test115 / V0.130**. First target: Royal Rumble lifecycle — prove/refactor elimination ownership, six-active-slot behavior, replacement entrant queue, entrant announcement and ring entry from ROM/reference evidence. In parallel continue ROM recovery for CPU decision cadence and stamina/damage so the Test100 difficulty complaint is corrected without arbitrary tuning. Do not generate another BIN/CUE until a major integration checkpoint or Saturn-only blocker warrants it.
