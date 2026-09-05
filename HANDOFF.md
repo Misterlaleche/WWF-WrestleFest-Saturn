@@ -6,31 +6,21 @@ Use this repository and the persistent ChatGPT Library as the source of truth wh
 
 1. Read `PROJECT-STATE.md` from this private repository.
 2. Use the latest validated persistent source snapshot named there. Current validated source:
-   - Library path: `/WWF-Saturn/WWF-Saturn-Test82-V0097-source.zip`
-   - SHA256: `c87275dea792073d8c8228235aed2f2d611d7e84e822c3b66cfdae7e9403ee47`
-3. Materialize/extract that snapshot and continue from **Test83 / V0.098**. Do not resume from older checkpoints or the incomplete Test52 ZIP.
+   - Library path: `/WWF-Saturn/WWF-Saturn-Test85-V0100-source.zip`
+   - SHA256: `0c42b3367b612cddf9e6a67e3a68a32839a2d3838dfcf642950dd4f011c50f14`
+3. Materialize/extract that snapshot and continue from **Test86 / V0.101**. Do not resume from older checkpoints or the incomplete Test52 ZIP.
 4. Each Test must be a real implementation or rigorous validation checkpoint; no empty version-number increments.
 5. Preserve arcade fidelity. Use preserved `program.bin` and original research data. If behaviour is not demonstrated, mark it provisional or registered-but-not-implemented instead of inventing exactness.
 6. Run host regression/sanitizer tests as appropriate and persist major validated checkpoints back to Library. Keep `PROJECT-STATE.md` updated.
 
-## Recovery note
-
-Test66 fixed the persistent source manifest after earlier incomplete snapshots. Tests67-74 were reapplied on canonical Test66 after an obsolete branch was detected and removed. Test82 continues directly from Test74 and its checkpoint manifest includes the new pair-state sources.
-
 ## Immediate continuation
 
-Tests75-82 add exact raw ground/paired-state behavior:
-- prone categories `$05/$06/$07` are classified from raw actor fields and resolved through the exact 12×21×3 action matrix;
-- Sleeper `$1C` and Restrain `$1D` callback entry writes are recovered;
-- full behind category `$10` raw predicate is recovered;
-- category `$08`: existing `+$26` link + attacker raw state `$0B` + clear `+$44` bits5/6; sets target `+$44` bit6 and universally selects action `$29`;
-- category `$09`: existing link + attacker raw state `$0C` + `+$45=1`; clears attacker `+$44`, mapping P/K/P+K to `$15/$17/$15`;
-- direct raw-state `$0B` audit finds initial producer `$F726/$F72C` and action-$29 reentry `$165E4/$165EA` only;
-- action `$29` callback `$16582` exact tail is modeled: first terminal completion returns both actors to `$0B`, second leaves attacker `$0C` and target `$FF`.
+Tests83-85 correct and narrow the double-team investigation:
+- `$F560` is called in both main frame-loop branches and immediately invokes `$F574`; the raw `$0B/$0C/$29` pair state machine is globally serviced and is not a Restrain-only callback path.
+- Restrain's calls to `$10D3A` with D0 `$08/$09` are effect/entity descriptor IDs (pool `$1C1258`, table `$10DDA`, index `D0*6`), not contextual action categories. Do not reconnect them to categories `$08/$09`.
+- Restrain sets `+$33 bit6` on attacker and target. That exact bit is consumed by multiple later AI/control branches. Historical move-guide evidence says Restrain lets the tag partner enter and strike, but the exact apron-partner consumer branch remains unproven.
 
-Do **not** yet call `$F5E4->$F726` a specific double-team. Its raw pair state machine is demonstrated, but its caller/actor-role semantics still need proof.
-
-Next priority for Test83: trace `$F574..$F77E` callers and actor roles far enough to prove or reject a Restrain/double-team relationship. If that cannot be established rigorously, switch to another evidence-backed TAG/AI priority rather than inventing semantics.
+Next priority for **Test86**: identify actor roles around `+$33 bit6` consumers, especially `$1CA00/$1CBB4/$1CE06/$1E2DE`, and prove which belongs to the apron/tag-partner controller. If proven, implement the first Restrain-dependent double-team entry. If not, switch to the next documented double-team path: headlock-to-corner tag or prone-feet partner ground attack.
 
 ## Long target
 
