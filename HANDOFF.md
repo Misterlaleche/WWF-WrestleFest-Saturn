@@ -6,30 +6,31 @@ Use this repository and the persistent ChatGPT Library as the source of truth wh
 
 1. Read `PROJECT-STATE.md` from this private repository.
 2. Use the latest validated persistent source snapshot named there. Current validated source:
-   - Library path: `/WWF-Saturn/WWF-Saturn-Test74-V0089-source.zip`
-   - SHA256: `5f3b52220fb842fb23199dfb8519bd6264c72f93d4ad6bab4def9d13a195bd93`
-3. Materialize/extract that snapshot and continue from **Test75 / V0.090**. Do not resume from older checkpoints or the incomplete Test52 ZIP.
+   - Library path: `/WWF-Saturn/WWF-Saturn-Test82-V0097-source.zip`
+   - SHA256: `c87275dea792073d8c8228235aed2f2d611d7e84e822c3b66cfdae7e9403ee47`
+3. Materialize/extract that snapshot and continue from **Test83 / V0.098**. Do not resume from older checkpoints or the incomplete Test52 ZIP.
 4. Each Test must be a real implementation or rigorous validation checkpoint; no empty version-number increments.
-5. Preserve arcade fidelity. Use the preserved `program.bin` 68000 image and the user's original ROM/research data where available. If an arcade behaviour is not demonstrated, mark it provisional or registered-but-not-implemented rather than inventing exactness.
+5. Preserve arcade fidelity. Use preserved `program.bin` and original research data. If behaviour is not demonstrated, mark it provisional or registered-but-not-implemented instead of inventing exactness.
 6. Run host regression/sanitizer tests as appropriate and persist major validated checkpoints back to Library. Keep `PROJECT-STATE.md` updated.
 
 ## Recovery note
 
-Test66 is the parent of the current line and fixed the persistent checkpoint manifest after earlier incomplete snapshots. During continuation an obsolete Test58-derived branch was detected before repo state was overwritten; its conflicting Library ZIP was removed. Tests67-74 were then reapplied on top of canonical Test66 and Test74 was validated from a clean extraction of its own persistent ZIP.
+Test66 fixed the persistent source manifest after earlier incomplete snapshots. Tests67-74 were reapplied on canonical Test66 after an obsolete branch was detected and removed. Test82 continues directly from Test74 and its checkpoint manifest includes the new pair-state sources.
 
 ## Immediate continuation
 
-Tests67-74 recover and integrate the original two-button input/action layer:
-- `$64EA..$6532`: active-low byte -> four directions + two physical action buttons + fresh edges.
-- Human object pickup: either fresh physical action button can select action `$70` in the valid contact context.
-- Held-object human use: category `$11` resolves button1/button2/both to action `$1E` in all 12 tables.
-- Complete `$E4FE` contextual matrix: 756 bytes = 12 internal wrestlers × 21 categories × 3 button combinations, byte-verified.
-- Running-opponent category `$12` action resolver recovered.
-- Behind category `$10`: same orientation, `|dx|<$50`, `|dy|<$10`; button1 `$1C` Sleeper, button2 `$1D` Restrain, both `$FF`.
-- Stationary category 0: button1 `$00`, button2 `$72`, P+K `$FF`; the previous normal Saturn A+B-finisher and neutral P+K-Big-Boot shortcuts are removed.
-- Prone categories `$05/$06/$07`: button2 is always action `$48`; live ground K now enters pin and Saturn R no longer maps synthetic PIN.
+Tests75-82 add exact raw ground/paired-state behavior:
+- prone categories `$05/$06/$07` are classified from raw actor fields and resolved through the exact 12×21×3 action matrix;
+- Sleeper `$1C` and Restrain `$1D` callback entry writes are recovered;
+- full behind category `$10` raw predicate is recovered;
+- category `$08`: existing `+$26` link + attacker raw state `$0B` + clear `+$44` bits5/6; sets target `+$44` bit6 and universally selects action `$29`;
+- category `$09`: existing link + attacker raw state `$0C` + `+$45=1`; clears attacker `+$44`, mapping P/K/P+K to `$15/$17/$15`;
+- direct raw-state `$0B` audit finds initial producer `$F726/$F72C` and action-$29 reentry `$165E4/$165EA` only;
+- action `$29` callback `$16582` exact tail is modeled: first terminal completion returns both actors to `$0B`, second leaves attacker `$0C` and target `$FF`.
 
-Next priority for **Test75**: decode the exact raw predicates that distinguish categories `$05/$06/$07` (the `$E0B8/$E110` region) and implement a pure ROM-backed classifier before connecting more ground actions. Continue tracing action `$1C/$1D` callbacks for Sleeper/Restrain and the demonstrated Restrain-dependent double-team path, but do not invent lifecycle rules.
+Do **not** yet call `$F5E4->$F726` a specific double-team. Its raw pair state machine is demonstrated, but its caller/actor-role semantics still need proof.
+
+Next priority for Test83: trace `$F574..$F77E` callers and actor roles far enough to prove or reject a Restrain/double-team relationship. If that cannot be established rigorously, switch to another evidence-backed TAG/AI priority rather than inventing semantics.
 
 ## Long target
 
