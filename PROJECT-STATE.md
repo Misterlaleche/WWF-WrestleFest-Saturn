@@ -4,18 +4,17 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test137 / V0.152**
-- Full host regression: **133/133 binaries PASS**, executed in bounded batches to avoid runner timeout.
-- Tests122-137 targeted ASan/UBSan: **PASS**.
-- SH-2 ELF compile/link with Yaul: **PASS** (`wrestlefest-saturn-test137-v0152.elf`). The later ISO step was intentionally not pursued; Test100 remains the latest hardware BIN/CUE.
-- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test137-V0152-source.zip`
-- Snapshot SHA256: `461912913a2edbf2b4be532c8378d81f74abbe3d088ff481647fda5283b59261`
-- Clean extraction targeted regression: **11/11 PASS**.
-- Source package includes `arcade_ai.c/.h`; `tools/package_release.py` was corrected so future snapshots cannot omit them.
+- **Test140 / V0.155**
+- Full host regression: **136/136 binaries PASS**, rerun in bounded parallel batches.
+- Tests138-140 targeted ASan/UBSan: **PASS**.
+- Latest hardware BIN/CUE remains **Test100 / V0.115**; no new disc image was generated.
+- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test140-V0155-source.zip`
+- Snapshot SHA256: `4f30e2d92545a263f206f72564562c301b5eaebd55d4d297f84d5326ca6aa8bf`
+- Test140 package: 431 source/data/report files, CRC-checked ZIP, no executable/disc images.
 
 ## Canonical lineage
 
-Test137 continues the canonical Test102→Test114→Test118→Test119→Test130→Test133 line. Earlier divergent working snapshots remain non-canonical.
+Test140 continues the canonical Test102→Test114→Test118→Test119→Test130→Test133→Test137 line. Earlier divergent working snapshots remain non-canonical.
 
 ## Tests120-126 — Royal Rumble exact rules + live elimination route
 
@@ -39,12 +38,18 @@ Test137 continues the canonical Test102→Test114→Test118→Test119→Test130�
 
 ## Tests134-137 — combat feedback and visible recovery of arcade behavior
 
-- **Test134:** arcade stationary Punch action `$00` callback writes exact **3-point stamina damage**, replacing the old provisional 20-point native value for arcade-motion fighters. This directly addresses part of the Test100 hardware report that player stamina drained much too quickly.
-- **Test135:** player-victim submission now exposes the live rapid-button prompt; fresh Punch/Kick edges feed the existing escape counter. Exact hold-specific timing/drain remains provisional where callbacks are not yet recovered.
-- **Test136:** `ST_GROUND_ATTACK` now renders the exact catalogued ground-drop action descriptors instead of losing stamina with no visible CPU move: STOMP `$23->$15CE0`, ELBOW DROP `$24->$1603A`, KNEE DROP `$25->$16116`, FIST DROP `$26->$1623C`.
-- **Test137:** CPU ground policy can choose arcade action `$22` PICK UP / descriptor `$15B6C`, returning a prone live opponent toward the rise path instead of only repeatedly damaging/pinning. Native completion tick/state translation remains provisional pending callback audit.
+- Test134: arcade stationary Punch action `$00` callback writes exact **3-point stamina damage**, replacing the old provisional 20-point native value for arcade-motion fighters.
+- Test135: player-victim submission exposes the live rapid-button prompt; fresh Punch/Kick edges feed the existing escape counter.
+- Test136: `ST_GROUND_ATTACK` renders exact catalogued ground-drop descriptors: STOMP `$23->$15CE0`, ELBOW DROP `$24->$1603A`, KNEE DROP `$25->$16116`, FIST DROP `$26->$1623C`.
+- Test137: CPU ground policy can choose arcade action `$22` PICK UP / descriptor `$15B6C`, returning a prone live opponent toward the rise path.
 
-Two stale regression expectations were corrected during the Test137 close: the long combat simulation now accepts the newer valid fighter states through `ST_GROUND_PICKUP`, and ringside punch tests now use the recovered 3-point arcade Punch damage instead of the obsolete provisional 20-point value.
+## Tests138-140 — ROM-exact stamina-tier AI data and low-stamina boundary
+
+- **Test138:** branch `$1D870` uses wrestler-indexed pointer table `$23856`, then actor `+$70 * 2`, then weighted selector `$24CC`. All **12 × 3** rows were verified directly from ROM. First-bucket weights are exactly **50 / 30 / 10** for stamina tiers 0/1/2; every two-way row sums to 100. The surrounding branch semantic remains deliberately unnamed until fully decoded.
+- **Test139:** branch `$1EDE0` selects one of ten pointers at `$1EE38`, then actor `+$70 * 2`, then `$24CC`. All **10 × 3** rows were verified and every two-way row sums to 100. Native helpers expose the exact weights without inventing an aggression/cadence interpretation.
+- **Test140:** ROM `$906E-$9085` locks the low-stamina warning boundary: active actor required, warning only when `+$66 < $0018`; stamina **24 is not low**, 23 and below are. The following global `$1C0166` latch test confirms the alert is gated rather than emitted every frame.
+
+These checkpoints replace more guessed stamina-tier assumptions with exact ROM data while intentionally refusing to map a recovered probability table to a gameplay semantic until its surrounding handler is sufficiently decoded.
 
 ## Preserved hardware-feedback work
 
@@ -56,8 +61,9 @@ Two stale regression expectations were corrected during the Test137 close: the l
 
 ## Highest-priority open work
 
-- Continue CPU behavior recovery from ROM without inventing Difficulty speed/aggression multipliers. Exact ground-choice probabilities and remaining raw state-2 semantics are still incomplete.
-- Recover fatigue/tired-walk and stationary exhausted/stunned presentation seen in the arcade.
+- Recover the exact fatigue/tired-walk and stationary exhausted/stunned presentation. No animation descriptor will be labelled fatigue purely by visual plausibility.
+- Continue decoding the surrounding semantics of the `$23856` and `$1EE38` stamina-tier weighted branches so exact tables can replace provisional live CPU choices safely.
+- Recover exact ground-choice probabilities and remaining raw state-2 semantics.
 - Complete roll/get-up animation fidelity after knockdown and refine prompt artwork/palette/cadence.
 - Exact reserve/apron placement and dedicated partner rope-entry/exit animation.
 - Royal exact entrant artwork/path/timing, full 12-wrestler assets including Hawk/Animal, and additional elimination forms.
@@ -77,4 +83,4 @@ Two stale regression expectations were corrected during the Test137 close: the l
 
 ## Next priority
 
-Continue from **Test138 / V0.153**. First recover fatigue/exhaustion presentation and remaining ground-choice probabilities from ROM, then continue victory/defeat staging and exact TAG/apron work. Do not generate another BIN/CUE until a major integration checkpoint or Saturn-only blocker warrants it.
+Continue from **Test141 / V0.156**. First finish fatigue/exhaustion descriptor/state recovery and surrounding semantics of the two recovered stamina-tier AI tables, then continue exact ground policy, victory/defeat staging and TAG/apron work. Do not generate another BIN/CUE until a major integration checkpoint or Saturn-only blocker warrants it.
