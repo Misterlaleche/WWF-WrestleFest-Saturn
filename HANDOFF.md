@@ -4,45 +4,52 @@ Use this private repository and persistent ChatGPT Library as source of truth.
 
 ## Start here
 
-1. Read `PROJECT-STATE.md` and `docs/HARDWARE-TEST100-FEEDBACK.md`.
+1. Read `PROJECT-STATE.md`, `docs/HARDWARE-TEST100-FEEDBACK.md`, `docs/TEST138-144-CLOSURE.md` and `docs/HARDWARE-TEST144-CHECKLIST.md`.
 2. Current **validated canonical** source snapshot:
-   - `/WWF-Saturn/WWF-Saturn-Test140-V0155-source.zip`
-   - SHA256 `4f30e2d92545a263f206f72564562c301b5eaebd55d4d297f84d5326ca6aa8bf`
-3. Current **merged WIP continuation** carrying Test141-143 on top of canonical Test140:
-   - `/WWF-Saturn/WWF-Saturn-Test143-MERGED-WIP-from-Test140.zip`
-   - SHA256 `f8513c20569f909fcd2b4cc56de52d0a1709dc2554a62cc60d6afe17cc831e1f`
-   - IMPORTANT: this WIP is deliberately not canonical yet. The changed Test141/142 paths and canonical Test138-140 guards pass normal plus ASan/UBSan targeted builds, but the full host suite exceeded this runtime execution window and SH-2/Yaul is not installed here. Do not call it a Saturn build or canonical checkpoint until full host regression and SH-2 compile/link are rerun.
-4. The older `/WWF-Saturn/WWF-Saturn-Test143-WIP-from-Test137.zip` is superseded by the merged WIP above and must not be used as the base.
-5. Every Test must implement or rigorously validate a real function. Preserve ROM/manual/video evidence labels; anything unproven stays PROVISIONAL or REGISTERED BUT NOT IMPLEMENTED.
-6. Test100 remains the latest hardware BIN/CUE and is confirmed working on real NTSC-U Saturn + Terraonion MODE. Do not generate another BIN/CUE routinely.
+   - `/WWF-Saturn/WWF-Saturn-Test144-V0159-source.zip`
+   - SHA256 `6ea546f185d71951596ca19419c7fbd50a2def0d24e0346ec91ca36350960eee`
+3. Test144 hardware-validation package:
+   - `/WWF-Saturn/WWF-WrestleFest-Test144-V0159-BIN-CUE.zip`
+   - SHA256 `b61ad9a53a3d159dbac9c34e4111f60f2aa6b11af5b98706fcd9f5c83f42646e`
+   - Raw BIN SHA256 `7610c9dfc015baa0573742286f2381d5b7b63bd2ccccfcb61844bd3c5199ac46`
+   - CUE SHA256 `bf558f9489edcd0809da6f884beddb070b1d4896eb7de4164d65f02c3400b1cd`
+4. **Hardware status:** Test144 build/sector checks pass but real Saturn validation is pending. Test100/V0.115 remains the latest image confirmed on NTSC-U Saturn + Terraonion MODE until Test144 is physically tested.
+5. Continue from **Test145/V0.160**. Do not resume from older snapshots.
+6. Every Test must implement or rigorously validate a real function. Preserve evidence labels: **ROM-EXACT**, **PROVISIONAL**, **REGISTERED BUT NOT IMPLEMENTED**.
 
-## Canonical state through Test140
+## Canonical lineage decision
 
-- **Test140/V0.155** canonical.
-- Full host regression: **136/136 PASS** at validation time.
-- Tests138-140 targeted ASan/UBSan PASS.
-- Test138: exact ROM `$23856` wrestler-indexed 12x3 stamina-tier weighted rows.
-- Test139: exact ROM `$1EE38` ten-slot 10x3 stamina-tier weighted rows.
-- Test140: exact low-stamina warning boundary: active actor required and `+$66 < $0018`; stamina 24 is not low, 23 and below are.
-- Earlier Test134-137 work remains integrated: 3-point arcade Punch damage, live submission rapid-button prompt, exact visible ground-drop descriptors, CPU PICK UP action `$22/$15B6C`.
+The user explicitly selected Test137/V0.152 plus `/WWF-Saturn/WWF-Saturn-Test143-WIP-from-Test137.zip` for reconciliation. That line is now closed through Test144.
 
-## Test141-143 merged WIP
+The separate `/WWF-Saturn/WWF-Saturn-Test140-V0155-source.zip` and later merged-from-Test140 Test143 WIP are **non-canonical research archives**. Do not use them as the source baseline. Their useful `$23856`, `$1EE38` and low-stamina-boundary findings are preserved for future revalidation under new Test numbers so they do not overwrite canonical Tests138-140.
 
-- Test141: `ST_RISE` rendering uses recovered arcade descriptors `$181FC/$181EC` for the first 26 ticks by actor role, then `$11E36` for the final 17 ticks, matching the recovered 13+13+17 rise timing. Targeted normal and ASan/UBSan PASS.
-- Test142: native TAG/Rumble post-result staging is tied to resolved winner/loser ownership. Ownership is exact; Saturn coordinates/speed remain PROVISIONAL. Targeted normal and ASan/UBSan PASS.
-- Test143: result rendering keeps the ring/post-match staging visible instead of covering the centre with the old large plate. Exact arcade post-match typography/layout remains PROVISIONAL.
-- Merge rule: retain canonical Test138-140 tables/boundaries from Test140. Do not reintroduce the older WIP `arcade_ai_stamina_bucket()` branch in place of those canonical implementations unless later ROM evidence proves it belongs as a separate mechanism.
+## Tests138-144 closed state
 
-## Immediate continuation
+- **Test138 ROM-EXACT:** stamina `+$66` → bucket `+$BD`: `>=128→0`, `101..127→1`, `80..100→2`, `64..79→3`, `37..63→4`, `1..36→5`, `0→8`.
+- **Test139 ROM-EXACT:** `$1E45C-$1E464` compares raw `+$109 == +$BD`; no semantic label assigned to `+$109`.
+- **Test140 ROM-EXACT audit:** explicit `+$109` read `$1E45C`, increment `$2006C`, direct compare sites around `$21282/$2128A`; producer/consumer path proven, semantics unclaimed.
+- **Test141 ROM-EXACT:** `ST_RISE` renders `$181FC/$181EC` for 13+13 ticks then `$11E36` for 17 ticks.
+- **Test142:** TAG/Royal winner/loser ownership exact from match result; Saturn staging coordinates/speeds **PROVISIONAL**.
+- **Test143:** large centre result plate removed so the ring remains visible; exact arcade typography/layout **REGISTERED BUT NOT IMPLEMENTED**.
+- **Test144 ROM-EXACT:** on `+$109 == +$BD`, the recovered branch clears raw `+$20` low byte and writes raw `+$60=$004B` for `+$61==$4A/$64`, otherwise `$0056`; on mismatch tested outputs remain unchanged. This proves a stamina-derived raw state consequence but not a fatigue/aggression/cadence interpretation.
 
-First close the merged Test141-143 WIP: run full host regression in bounded batches, run targeted sanitizers, and perform SH-2 compile/link with Yaul. Only then update metadata/package integrity and promote Test143 to canonical.
+## Validation
 
-After that continue these research fronts:
+- Host regression: **139/139 PASS**.
+- Targeted ASan/UBSan Tests138-144: **PASS**.
+- SH-2/Yaul compile+link: **PASS**.
+- Saturn ISO structural checks: **PASS**.
+- Final MODE1/2352 BIN/CUE sector regeneration/round-trip: **PASS**.
+- Independent libcdio payload read + bitwise EDC: **PASS**.
+- Hardware Test144: **PENDING**.
 
-1. Recover exact arcade victory/defeat/winner clap or celebration descriptors, positions and timing for TAG/Rumble; keep current staging provisional until demonstrated.
-2. Continue decoding the semantic consumers of the exact `$23856` and `$1EE38` stamina-tier AI tables. Do not invent fatigue aggression/cadence behavior.
-3. Exact TAG apron placement/entry/exit animation and illegal-partner behavior.
-4. Missing roll/get-up frames, ground policy probabilities, additional Rumble eliminations, Hawk/Animal assets, records, attract/promo scenes and audio.
+## Immediate continuation from Test145
+
+1. Recover exact TAG/Royal victory, defeat and winner-clap/celebration descriptors/states/coordinates/timing. Keep Test142 staging provisional until proven.
+2. Continue the stamina/AI raw-state route until `+$109/+$60/+$61` semantics are demonstrated. Do not wire guessed tired-walk, cooldown, aggression or cadence behavior.
+3. Complete/prove **All Super Throws / Signature Finisher Moves**. The current source already has overlay/state-machine routes for ten trademark moves, but their individual entry/callback/damage/variant evidence levels remain authoritative; the completeness target is **REGISTERED BUT NOT FULLY IMPLEMENTED/PROVEN**.
+4. Revalidate useful evidence from the non-canonical Test140 research archive under new future Test numbers before integration.
+5. Continue exact TAG apron/entry/exit, missing recovery frames, Royal assets/eliminations, mode-select glow, records, attract/promo scenes and audio.
 
 ## Long target
 
