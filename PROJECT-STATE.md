@@ -13,7 +13,7 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Test100 Saturn hardware image
 
-A real Saturn build was produced with Yaul from the clean Test100 source snapshot.
+A real Saturn build was produced with Yaul from the clean Test100 source snapshot and has now been **confirmed to boot and run on real target hardware**: Sega Saturn NTSC-U + Terraonion MODE.
 
 - Yaul Docker image used to export the SDK: `ijacquez/yaul@sha256:b6d272204767cd0a734139dd3a2ab298ef5912fb7b7224b78e6d9fac1a7825a6`
 - Yaul toolchain: `sh2eb-elf-gcc 13.2.0`
@@ -27,8 +27,8 @@ A real Saturn build was produced with Yaul from the clean Test100 source snapsho
 - `tools/verify_iso.py`: PASS — Saturn IP, ISO9660, USA area, all 35 CD files byte-identical to build inputs, `A.BIN` byte-identical to the compiled SH-2 executable.
 - `tools/iso_to_bin.py`: PASS — every 2352-byte sector regenerated and compared; all ISO payload sectors round-trip byte-identically; EDC/ECC regenerated for every sector.
 - Independent `libcdio` read: PASS — CUE accepted, 2211 sectors read, payload byte-identical to ISO, EDC checked bitwise for all sectors.
-- **Hardware boot test: NOT YET PERFORMED.**
-- **Emulator boot test: NOT YET PERFORMED in this build environment.**
+- **Hardware boot test: PASS on Saturn NTSC-U + Terraonion MODE.**
+- Emulator boot test was not performed in the build environment.
 
 ### Saturn compile correction at Test100
 
@@ -43,7 +43,31 @@ The first real SH-2 compile exposed one host-only visibility defect: `main.c` re
 - Raw prone categories `$05/$06/$07`, paired categories `$08/$09`, pair-state `$0B/$0C/$29` transitions, pair-role links and active/reserve handoff evidence are recovered to the documented Test75-94 level.
 - **Test95:** live behind actions: P starts Sleeper as a linked submission; K starts Restrain as a linked hold when the recovered behind geometry/context is satisfied. Native state translation and Restrain timeout/release remain provisional where ROM semantics are not yet demonstrated.
 - **Tests96-99:** first functional Restrain partner-assist block: reserve enters, performs one assist strike, returns to reserve; KO reserve cannot assist; Sleeper does not use this offensive assist path. Historical/ROM evidence supports Restrain-dependent partner involvement; exact Saturn path timing and current assist damage remain provisional.
-- **Test100:** integrated regression checkpoint and first requested post-campaign Saturn BIN/CUE build.
+- **Test100:** integrated regression checkpoint and first requested post-campaign Saturn BIN/CUE build, now hardware-boot confirmed.
+
+## Test100 real-hardware feedback
+
+Full detailed observations are canonical in `docs/HARDWARE-TEST100-FEEDBACK.md`.
+
+Highest-priority confirmed gaps/defects:
+- CPU is disproportionately difficult and player stamina drains too fast.
+- Manual TAG/relevo is not implemented.
+- Partner waiting/apron placement is visually wrong; pin-assist entry animation/path is doubtful.
+- TAG pre-match presentation is too short; missing per-wrestler introductions/poses, announcer exit timing and correct four-wrestler staging.
+- Rope deformation on rebound is absent.
+- Ringside/ring-out behavior has not yet been hardware-verified by the user.
+- Pin 1/2/3 visual indicator is missing.
+- Post-match winner/loser automation and victory/defeat poses are missing.
+- Mode-select luminous highlight is missing.
+- TAG character-select page transition visibly loads instead of switching instantly.
+- TAG CPU opponent selection overuses Jake + Big Boss Man and does not properly exercise the full roster.
+- TAG partner HUD/stamina, UI colors and wrestler portrait palettes are incorrect/incomplete.
+- Knockdown roll/get-up animations and rapid-button recovery cue are missing.
+- Referee remains too static instead of following action.
+- Royal Rumble initial formation is wrong; 1P marker, eliminations, timed entrants, ring entry and entrant-announcement box remain incomplete/missing.
+- Records screen is missing.
+- Additional arcade attract/presentation scenes are missing, including a supplied Legion of Doom interview/promo reference.
+- A future title-screen START/options layer is planned separately; intended features include difficulty, Arcade/Saturn modes, sound options, records/settings load, OST/SFX players and legal information.
 
 ## Provisional
 
@@ -61,7 +85,7 @@ The first real SH-2 compile exposed one host-only visibility defect: `main.c` re
 - Exact semantic/action callback mapping for all paired category `$09` actions `$15/$17`.
 - Full live mapping of raw pair fields/states.
 - Remaining LOD assets/behaviour, records, full Continue/Buy-In/Regain Power presentation, stages/cage, richer Rumble eliminations, attract/presentation and audio.
-- Hardware/MODE validation of Test100 BIN/CUE and any Saturn-only rendering/input/runtime defects it reveals.
+- The hardware feedback backlog documented above.
 
 ## Recovery / lineage note
 
@@ -69,4 +93,4 @@ The historical Test52 persistent ZIP was incomplete. Test55 recovered that line 
 
 ## Next priority
 
-Continue from **Test101 / V0.116** only after preserving Test100 as the baseline. First priority is the requested hardware validation of the Test100 BIN/CUE on Saturn NTSC-U + Terraonion MODE (and optionally Mednafen/MiSTer Saturn). Any Saturn-only defects discovered there should be fixed before expanding unrelated systems. After that, continue concrete non-empty checkpoints toward Test200, prioritizing remaining exact TAG/double-team lifecycle, presentation/campaign gaps and audio without inventing arcade-exact behavior.
+Continue from **Test101 / V0.116** using the hardware feedback as the primary roadmap. First close CPU difficulty/stamina behavior and core TAG mechanics (manual tag, reserve/apron role, partner entry/exit), then address presentation/referee/rope/knockdown/HUD fidelity and Royal Rumble progression. Preserve arcade evidence and explicitly mark native approximations provisional. Continue concrete non-empty checkpoints toward Test200.
