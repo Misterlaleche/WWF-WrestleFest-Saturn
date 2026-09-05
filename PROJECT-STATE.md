@@ -4,12 +4,12 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test163 / V0.178** is the canonical validated source checkpoint.
-- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test163-V0178-source.zip`
-- Source SHA256: `593c8e255281e5f88a87700a4f420d3201537e255ca9a0ee27ca1a85309fcb42`
-- Complete host regression at Test163: **155/155 PASS**.
-- Tests161-163 targeted ASan/UBSan: **PASS**.
-- Tests161-163 are ROM-audit/test/documentation-only and do not modify runtime C/SH-2 code; **Test147 / V0.162** remains the latest SH-2/Yaul compile+link PASS.
+- **Test171 / V0.186** is the canonical validated source checkpoint.
+- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test171-V0186-source.zip`
+- Source SHA256: `0dda9d84fc51c5d71b69344502548e54aec566f0785c058f6cfd924dc80d996e`
+- Complete host regression at Test171: **163/163 PASS** (parallel execution of the same source matrix as `tools/check_host.py`).
+- Tests164-171 targeted ASan/UBSan: **PASS**.
+- Tests164-171 are ROM-audit/test/documentation-only and do not modify runtime C/SH-2 code; **Test147 / V0.162** remains the latest SH-2/Yaul compile+link PASS.
 - No new BIN/CUE was generated after Test144.
 
 ## Hardware image status
@@ -18,7 +18,7 @@ Test144/V0.159 remains the current hardware-validation image and is pending phys
 
 ## Canonical lineage
 
-Test102 → Test114 → Test118 → Test119 → Test130 → Test133 → Test137 → Tests138-143 reconciled WIP → Test144 → Test145 → Test146 → Test147 → Test148 → Test149 → Test150 → Test160 → **Test163**.
+Test102 → Test114 → Test118 → Test119 → Test130 → Test133 → Test137 → Tests138-143 reconciled WIP → Test144 → Test145 → Test146 → Test147 → Test148 → Test149 → Test150 → Test160 → Test163 → **Test171**.
 
 The separate historical Test140/V0.155 line and merged-from-Test140 Test143 WIP remain non-canonical research archives. Useful evidence may be revalidated under new future Test numbers; canonical numbering must not be overwritten.
 
@@ -51,15 +51,24 @@ The separate historical Test140/V0.155 line and merged-from-Test140 Test143 WIP 
 - **Test159 ROM-EXACT:** recovered `+$109` producer state has one-time `+$1C bit7` init: clears raw global `$1C169A/+24`, seeds `+$54=$3162`, copies linked facing, sets `+$23=$14,+$05=4`.
 - **Test160 ROM-EXACT:** producer countdown `+$23` expiry increments phase `+$25` and target `+$109` together; phase 7 exits through terminal raw-state branch at `$2012E`.
 
-The action-$47 composition/effect path is substantially constrained, but its exact trademark-move name and complete semantic interpretation remain unclaimed. `+$109` is proven to advance in lockstep with a seven-phase producer state, but no high-level gameplay label is assigned.
-
 ## Tests161-163 — parent/substate context for +$109
 
 - **Test161 ROM-EXACT:** `$1FB04-$1FB18` indexes an 11-entry pointer table at `$1FB1A` directly from actor byte `+$1D`; table entry **6** is `$20022`. Therefore the recovered `+$109` producer is raw substate handler `+$1D==6`.
-- **Test162 ROM-EXACT:** actor processing first dispatches raw `+$21` through the primary table at `$1F952`, then unconditionally calls `$1FAF0`, the secondary `+$1D` dispatcher. This establishes `+$1D` as a second-stage substate route after the primary actor state.
+- **Test162 ROM-EXACT:** actor processing first dispatches raw `+$21` through the primary table at `$1F952`, then unconditionally calls `$1FAF0`, the secondary `+$1D` dispatcher.
 - **Test163 ROM-EXACT:** before the `+$1D` dispatch, `$1FAF0` tests actor `+$20 bit7`; when set, it clears that bit and copies raw `+$20` into raw `+$1C`, then continues to the secondary dispatcher.
 
-These three Tests materially tighten the actor-state context of the stamina-linked `+$109` route. They do **not** yet justify calling it fatigue, tired walk, aggression, cooldown or any other gameplay semantic.
+## Tests164-171 — linked-actor and mode context for +$109
+
+- **Test164 ROM-EXACT:** `$20058` resolves `A1=A0+$56`, then `A2=A1+$26`; producer ticks local countdown on A0 while the incremented `+$109` belongs to second linked actor A2.
+- **Test165 ROM-EXACT:** on expiry local phase `+$25` and linked `+$109` advance together; phase parity selects a distinct branch, and local state 5 promotes to state 6 with countdown `$38`.
+- **Test166 ROM-EXACT:** phase 6 adds `$10` to countdown then splits on global mode bit `$1C0161`; the two branches are structurally distinct.
+- **Test167 ROM-EXACT:** terminal handling is mode-dependent: clear `$1C0161` writes actor `+$20=$8009` and linked `+$4A=4`; set mode bit takes the alternate helper and writes actor `+$20=$8005`.
+- **Test168 ROM-EXACT:** even producer phases increment global `$1C169A` and derive helper input from actor `+$24>>1`; `$1C169A` is independently recovered as ring-out/count storage.
+- **Test169 ROM-EXACT:** clear-`$1C0161` (TAG) phase-6 path calls `$21358` on `+$56`, increments linked `+$C4`, follows `+$26`, and sets bit4 of that actor's `+$32`.
+- **Test170 ROM-EXACT:** set-`$1C0161` (Royal Rumble) phase-6 path writes raw roles `$4000/$4001` across the recovered four-actor linked set, proving explicit role reassignment.
+- **Test171 ROM-EXACT:** Royal phase-6 cleanup clears `$1C169E`, calls `$90D6`, then returns; `$90D6` is independently recovered as the clear-stage stamina restore routine.
+
+The `+$109` route is now structurally tied to secondary actor state, a second linked actor, TAG/Royal mode branches, ring-out/count storage interaction, Royal role reassignment, and stamina-restore cleanup. This still does **not** prove that `+$109` itself means fatigue, aggression, recovery stage, cadence or another named mechanic; no live stamina-tier CPU behavior is promoted from it yet.
 
 ## Preserved implemented systems
 
@@ -95,9 +104,9 @@ These three Tests materially tighten the actor-state context of the stamina-link
 
 ## Next priority
 
-Continue from **Test164 / V0.179**. Primary fronts:
+Continue from **Test172 / V0.187**. Primary fronts:
 
-1. Continue tracing `+$1D==6/$20022`, linked actor/target ownership and terminal transitions until the gameplay context of `+$109` is demonstrated; only then reconcile it with `+$BD` for live stamina-tier CPU behavior.
+1. Continue tracing the linked actors and helper calls around `$2007A-$20154` until the gameplay meaning of `+$109` is actually demonstrated; only then reconcile it with `+$BD` for live stamina-tier CPU behavior.
 2. Continue Earthquake action `$47` through contact/completion and independently identify the trademark move before promotion to gameplay-ready.
 3. Recover exact TAG/Royal victory, defeat and winner-clap descriptors/states/coordinates/timing.
 4. Complete/prove remaining Signature / Super Throws entry conditions, callbacks, raw effect/damage operands and compositions, including LOD.
