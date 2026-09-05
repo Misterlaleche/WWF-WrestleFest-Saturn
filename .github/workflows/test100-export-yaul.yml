@@ -13,11 +13,11 @@ jobs:
           docker pull "$IMG"
           docker run --name yaul-exporter "$IMG" bash -lc '
             set -euo pipefail
-            mkdir -p /tmp/export/runtime/usr/bin /tmp/export/runtime/lib
+            mkdir -p /tmp/export/runtime/usr/bin
             tar -C /opt/tool-chains -czf /tmp/export/yaul-sh2eb-elf.tar.gz sh2eb-elf
             cp -L /usr/bin/xorriso /tmp/export/runtime/usr/bin/xorriso
             cp -L /usr/bin/xorrisofs /tmp/export/runtime/usr/bin/xorrisofs || true
-            ldd /usr/bin/xorriso | awk "/=> \\// {print \\$3} /^\\// {print \\$1}" | sort -u > /tmp/xorriso-libs.txt
+            ldd /usr/bin/xorriso | tr " " "\n" | grep "^/" | sort -u > /tmp/xorriso-libs.txt
             while read -r f; do [ -f "$f" ] || continue; mkdir -p "/tmp/export/runtime$(dirname "$f")"; cp -L "$f" "/tmp/export/runtime$f"; done < /tmp/xorriso-libs.txt
             tar -C /tmp/export/runtime -czf /tmp/export/xorriso-runtime.tar.gz .
             sha256sum /tmp/export/*.tar.gz > /tmp/export/SHA256SUMS.txt
