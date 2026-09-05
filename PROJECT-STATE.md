@@ -4,52 +4,46 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test114 / V0.129**
-- Host regression: **110/110 host binaries PASS** (55/55 + 55/55).
-- Tests103-114 targeted ASan/UBSan: **PASS**.
-- `main.c`, `game.c`, `session.c`, `hud.c`: SH-2 compile check **PASS** with the pinned Yaul toolchain used for Test100.
-- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test114-V0129-source.zip`
-- Snapshot SHA256: `a58835923d3ad97da97c765ac652cd2c925bebc5a8d4f0edfd58e8204d32204d`
+- **Test118 / V0.133**
+- Full host regression: **114/114 binaries PASS**.
+- Tests115-118 targeted ASan/UBSan: **PASS**.
+- Persistent source snapshot: `/WWF-Saturn/WWF-Saturn-Test118-V0133-source.zip`
+- Snapshot SHA256: `a3b7b197828548c51fe0beda249e603c959c949b2d6f75146fe846418c93cff3`
 - Test100 remains the latest Saturn BIN/CUE and is confirmed booting/running on real NTSC-U Saturn + Terraonion MODE. No newer BIN/CUE was generated.
 
 ## Canonical lineage
 
-Test114 is rebased on the validated Test102/V0.117 line. It preserves:
-- Test101 ROM-backed Rumble active-actor stamina-recovery gate.
-- Test102 original two-button standard corner TAG with Kick (Saturn C remains optional alias).
+Test118 continues directly from validated Test114/V0.129, itself rebased on canonical Test102/V0.117. Obsolete divergent Test105/Test115 snapshots remain invalid.
 
-Obsolete divergent Test105/Test115 snapshots created from an earlier branch were removed from Library before this checkpoint was accepted.
+## Tests115-118 — Royal Rumble lifecycle
 
-## Tests103-114 — Test100 hardware-feedback block
+- **Test115:** Rumble session now constructs a complete unique ten-wrestler entrant order with the human selection first. The post-human ordering source remains **PROVISIONAL** until arcade RNG recovery.
+- **Test116:** six live actor slots are separated from the overall entrant queue. CPU elimination clears active ownership once, increments elimination count once, consumes the next queued wrestler, exposes an announcement phase and then activates the replacement through an entry phase.
+- **Test117:** human over-rope elimination ends the Rumble immediately and never consumes a replacement entrant.
+- **Test118:** player victory resolves only after every other live actor is eliminated, no replacement is pending and the entrant queue is exhausted.
 
-- **Test103:** TAG HUD shows active/reserve stamina for both teams; reserve portraits are no longer forced grayscale.
-- **Test104:** waiting reserve gets a render-only outward correction relative to the ropes. Gameplay coordinates remain unchanged. **PROVISIONAL** until next hardware comparison.
-- **Test105:** ring enter/exit uses the verified common locomotion descriptor instead of a static idle slide. Dedicated transition descriptor remains unrecovered, so mapping is **PROVISIONAL**.
-- **Test106:** TAG pre-match staging uses separate rear/front anchors and draw order based on the user's arcade references.
-- **Test107:** TAG presentation is structured as four individual wrestler windows plus presenter exit (4×180 + 180 ticks). Timeline is ready for future audio; exact arcade timings remain **PROVISIONAL** pending direct measurement.
-- **Test108:** referee follows live action instead of parking at centre. Exact referee pathing remains **PROVISIONAL**.
-- **Test109:** live pin count exposes visible 1/2/3 indication.
-- **Test110:** TAG CPU roster fill uses all ten selectable wrestlers instead of the previous fixed sequential choices. Entropy source remains **PROVISIONAL** pending arcade RNG recovery.
-- **Test111:** both character-select pages are preloaded; switching page no longer performs a CD read.
-- **Test112:** existing recovery-effort mechanic now exposes the rapid-button prompt after knockdown while preserving pin-escape prompt priority.
-- **Test113:** local visual rope deflection appears during rebound. Exact arcade deformation curve remains **PROVISIONAL**.
-- **Test114:** Royal opening uses six separated depth anchors and exposes a green `1P` marker for the human wrestler.
+Announcement duration, entry duration, entry geometry and queue ordering entropy are **PROVISIONAL** pending direct ROM/video measurement; the native implementation does not claim these values are arcade exact.
 
-See `docs/TEST103-114-HARDWARE-FIDELITY.md` in the source checkpoint.
+See `docs/TEST115-118-RUMBLE-LIFECYCLE.md` inside the source checkpoint.
 
-## Test100 hardware feedback still open
+## Preserved state from Test103-114
+
+TAG reserve HUD/stamina, reserve render correction, rope traversal animation mapping, staged TAG presentation, referee tracking, pin indicator, full-pool CPU selection, cached selection pages, recovery prompt, rope deflection and six-position Rumble opening + 1P marker remain integrated.
+
+## Open hardware-feedback / fidelity work
 
 - CPU difficulty/player stamina behavior still needs ROM-side scheduler/damage recovery; do not solve by arbitrary global weakening.
 - Exact reserve/apron placement and dedicated partner rope-entry/exit animation remain incomplete.
-- Royal Rumble elimination/entrant queue, announcement box and ring-entry lifecycle remain incomplete.
+- Royal Rumble entrant announcement artwork/text, exact entry path/timing and ROM RNG/order remain incomplete.
 - Post-match winner/loser staging, mode-select glow, records, portrait/HUD palette fidelity and additional attract/promo scenes remain incomplete.
 - Ring-out/ringside behavior still needs later hardware validation.
-- Audio remains pending; Test107 provides a structured TAG presentation timeline for eventual announcer sync.
+- Audio remains pending.
 - Future title Start options screen remains separate until user-supplied art is ready.
 
 ## Provisional
 
-- Native RNG/entropy where original arcade source is not yet recovered.
+- Native RNG/entropy where original arcade source is not yet recovered, including Rumble entrant order.
+- Rumble announcement/entry timing and native entry geometry.
 - Exact raw→Saturn coordinate/scale transform, including reserve visual correction.
 - Referee tracking trajectory.
 - TAG presentation timing values.
@@ -59,4 +53,4 @@ See `docs/TEST103-114-HARDWARE-FIDELITY.md` in the source checkpoint.
 
 ## Next priority
 
-Continue from **Test115 / V0.130**. First target: Royal Rumble lifecycle — prove/refactor elimination ownership, six-active-slot behavior, replacement entrant queue, entrant announcement and ring entry from ROM/reference evidence. In parallel continue ROM recovery for CPU decision cadence and stamina/damage so the Test100 difficulty complaint is corrected without arbitrary tuning. Do not generate another BIN/CUE until a major integration checkpoint or Saturn-only blocker warrants it.
+Continue from **Test119 / V0.134**. First target: connect the Rumble replacement lifecycle to visible entrant announcement/presentation and refine entry ownership without breaking six-active-slot combat. In parallel continue ROM recovery for CPU decision cadence and stamina/damage so the Test100 difficulty complaint is corrected from evidence rather than arbitrary tuning. Do not generate another BIN/CUE until a major integration checkpoint or Saturn-only blocker warrants it.
