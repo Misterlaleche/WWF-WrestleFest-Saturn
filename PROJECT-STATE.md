@@ -4,112 +4,109 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test171 / V0.186** is the canonical validated source checkpoint.
-- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test171-V0186-source.zip`
-- Source SHA256: `0dda9d84fc51c5d71b69344502548e54aec566f0785c058f6cfd924dc80d996e`
-- Complete host regression at Test171: **163/163 PASS** (parallel execution of the same source matrix as `tools/check_host.py`).
-- Tests164-171 targeted ASan/UBSan: **PASS**.
-- Tests164-171 are ROM-audit/test/documentation-only and do not modify runtime C/SH-2 code; **Test147 / V0.162** remains the latest SH-2/Yaul compile+link PASS.
+- **Test200 / V0.215** is the canonical validated source checkpoint.
+- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test200-V0215-source.zip`
+- Source SHA256: `d4e55dc0ddc388b5842118ed459aa5cd35841888e219679b06cf9c530e59b9b2`
+- Complete host regression: **192/192 PASS**.
+- Targeted ASan/UBSan for Tests172-200: **29/29 PASS**.
+- Tests172-199 are ROM-audit/test/documentation-only. Test200 rigorously reconciles the existing native clear-stage stamina runtime with newly pinned ROM `$90D6` semantics; it does not add an invented gameplay semantic.
+- **Test147 / V0.162** remains the latest SH-2/Yaul compile+link PASS.
 - No new BIN/CUE was generated after Test144.
 
 ## Hardware image status
 
-Test144/V0.159 remains the current hardware-validation image and is pending physical validation on Saturn. Test100/V0.115 remains the latest image confirmed working on real NTSC-U Saturn + Terraonion MODE until Test144 is physically tested.
+Test144/V0.159 remains the current pending hardware-validation image. Test100/V0.115 remains the latest image physically confirmed working on real NTSC-U Saturn + Terraonion MODE until Test144 is physically tested.
 
-## Canonical lineage
+## Test172-180 — linked actor / TAG / Royal cleanup
 
-Test102 → Test114 → Test118 → Test119 → Test130 → Test133 → Test137 → Tests138-143 reconciled WIP → Test144 → Test145 → Test146 → Test147 → Test148 → Test149 → Test150 → Test160 → Test163 → **Test171**.
+- **Test172 ROM-EXACT:** `$21358` preserves registers then sets actor `+$B6 bit7`.
+- **Test173 ROM-EXACT:** a non-null `+$7E` link has `+$B5 bit7` cleared and `+$B6 bit7` set.
+- **Test174 ROM-EXACT:** actor `+$61==$53` follows `+$26` and sets that actor `+$B6 bit7`.
+- **Test175 ROM-EXACT:** `$206FE` begins a four-entry cleanup at `$0C0744`, zeroing four longwords per entry.
+- **Test176 ROM-EXACT:** `$20156` selects raw effect `$3109` only for global `$1C0162==4/9`, otherwise `$3105`.
+- **Test177 ROM-EXACT:** `$213A6` splits on the TAG/Royal mode bit; TAG follows `+$26` and clears linked `+$34 bit0`.
+- **Test178 ROM-EXACT:** TAG cleanup tests linked `+$33 bit1` and clears `+$56 bit6` when set.
+- **Test179 ROM-EXACT:** TAG cleanup follows `+$86`; when `+$33 bit1` is clear it clears `+$B5 bit7` and sets global `$1C1697 bit0`.
+- **Test180 ROM-EXACT:** Royal cleanup follows non-null `+$7E` and clears its `+$B5 bit7`.
 
-The separate historical Test140/V0.155 line and merged-from-Test140 Test143 WIP remain non-canonical research archives. Useful evidence may be revalidated under new future Test numbers; canonical numbering must not be overwritten.
+These facts materially tighten the linked-actor/role cleanup around the `+$109` producer. They still do **not** prove a human-readable semantic for `+$109`.
 
-## Tests138-144 — stamina/raw-state closure
+## Test181-188 — Earthquake raw action `$47`
 
-- **Test138 ROM-EXACT:** stamina `+$66` → bucket `+$BD`: `>=128→0`, `101..127→1`, `80..100→2`, `64..79→3`, `37..63→4`, `1..36→5`, `0→8`.
-- **Test139 ROM-EXACT:** `$1E45C-$1E464` compares raw `+$109 == +$BD`; semantics of `+$109` remain unclaimed.
-- **Test140 ROM-EXACT audit:** explicit `+$109` read `$1E45C`, increment `$2006C`, compare sites around `$21282/$2128A`.
-- **Test141 ROM-EXACT:** `ST_RISE` uses `$181FC/$181EC` for 13+13 ticks then `$11E36` for 17 ticks.
-- **Test142:** TAG/Royal winner/loser ownership exact from match result; Saturn staging coordinates/speeds remain **PROVISIONAL**.
-- **Test143:** centre result plate removed so ring/post-match actors remain visible; exact arcade result typography/layout **REGISTERED BUT NOT IMPLEMENTED**.
-- **Test144 ROM-EXACT:** when `+$109 == +$BD`, recovered branch clears raw `+$20` low byte and writes raw `+$60=$004B` for `+$61==$4A/$64`, otherwise `$0056`; mismatch leaves tested outputs unchanged. This proves a stamina-derived raw-state consequence but not a fatigue/aggression/cadence interpretation.
+- **Test181 ROM-EXACT:** phase 0 with zero `+$22` writes actor `+$01=2`.
+- **Test182 ROM-EXACT:** action `$47` uses dedicated phase-1 sprite offsets `$F8/$F0`, distinct from neighbouring `$F0/$28`.
+- **Test183 ROM-EXACT:** contact resolution requires actor `+$37 bit4`, sets `+$18 bit7`, then calls `$1110E/$11152`.
+- **Test184 ROM-EXACT:** contact branch A writes victim state 4, decrements `+$64` by 2, increments `+$C7`, writes `+$68=10`, emits effects `$2B/$32`.
+- **Test185 ROM-EXACT:** branch A increments victim `+$E0` only for neighbouring raw action `$46`; raw action `$47` takes `+$E2`.
+- **Test186 ROM-EXACT:** contact branch B writes victim state 5, `+$60=$77`, `+$68=10`, increments `+$C7`.
+- **Test187 ROM-EXACT:** phase `$FE` completes into actor state 7, sets `+$26 bit7`, calls `$10BD0` with `D0=$18,D1=-1,D2=0`.
+- **Test188 ROM-EXACT:** the fallback extra `$FFD0` impulse is exclusive to neighbouring raw action `$46`, not `$47`.
 
-## Tests145-160 — Signature / Super Throws fidelity and +$109 producer
+Action `$47` is now mechanically bounded much further, but its trademark move identity remains **CANDIDATE** until independently demonstrated. It is not promoted to Vertical Splash from inference.
 
-- **Test145 ROM-EXACT:** Sgt. Slaughter callback `$17ECE` and Ted DiBiase callback `$179C0` each write `#$0005` to victim `+$68` immediately before `JSR $111C8`; exact per-pulse operand only.
-- **Test146 fidelity guard:** Earthquake's old `$23/$15CE0` candidate is contradictory because `$23->$15CE0` is independently proven STOMP; candidate is gated off.
-- **Test147 ROM-EXACT route:** Earthquake selection character 8, prone category `$07`, fresh physical button 1 resolves raw action `$47`, descriptor `$14440`, callback `$14458`, first recovered pose 132. Human-readable move identity remains CANDIDATE.
-- **Test148 ROM-EXACT:** callback prelude checks actor `+$60 bit7` / `+$1C bit7`; otherwise clears `+$01`, writes `+$5C=$0600`, `+$5E=$0048`, selects D0=5 only for target `+$21==$05 && +$61==$61`, else D0=2, then calls `$26AE`.
-- **Test149 ROM-EXACT:** `$26AE` consumes D0 as a four-byte table selector, not damage.
-- **Test150 ROM-EXACT:** selector 2 resolves `{$0038,$FFF8}`, selector 5 resolves `{$0040,$FFFF}`.
-- **Test151 ROM-EXACT:** `$26AE` indexes table `$275C` by `D0<<2`; target `+$2E bit7` negates horizontal table offset D4.
-- **Test152 ROM-EXACT:** `$26AE` derives the raw trajectory divisor from unsigned actor `+$5C / +$5E`, masks to 16 bits, doubles it, and exits if zero.
-- **Test153 ROM-EXACT:** actor `+$58/+5A` are computed from `((target coordinate + table offset - actor coordinate)<<8)/divisor` for X/Y.
-- **Test154 ROM-EXACT:** raw velocity clamps are X `[-$0200,+$0200]`, Y `[-$00C0,+$00C0]`.
-- **Test155 ROM-EXACT:** action `$47` writes actor `+$2E` from the inverted sign bit of computed `+$58` immediately after `$26AE`.
-- **Test156 ROM-EXACT:** first resolved action-$47 contact branch locks actor to target Y-1, sets actor `+$60 bit7`, target `+$20=4`, decrements target `+$64` by 2, increments target `+$C7`, and writes target `+$68=10`.
-- **Test157 ROM-EXACT:** alternate resolved contact branch locks actor to target Y-1, writes actor `+$1B=$0C`, target `+$20=5,+$60=$77,+$68=10`.
-- **Test158 ROM-EXACT:** fallback writes actor `+$20=4,+$64=5,+$68=3`, triggers raw effect/sound `$32`, writes global `$1C15D2=$0F1A`, sets actor `+$26 bit7` and flips facing `+$2E bit7`.
-- **Test159 ROM-EXACT:** recovered `+$109` producer state has one-time `+$1C bit7` init: clears raw global `$1C169A/+24`, seeds `+$54=$3162`, copies linked facing, sets `+$23=$14,+$05=4`.
-- **Test160 ROM-EXACT:** producer countdown `+$23` expiry increments phase `+$25` and target `+$109` together; phase 7 exits through terminal raw-state branch at `$2012E`.
+## Test189-195 — Signature / Super Throw callback operands
 
-## Tests161-163 — parent/substate context for +$109
+- **Test189 ROM-EXACT:** Warrior Gorilla Press has two impact paths and both write victim `+$68=$16` (22).
+- **Test190 ROM-EXACT:** Jake DDT writes victim `+$64=$23`, sets bits5/3 and writes exact `+$68=$1C` (28).
+- **Test191 ROM-EXACT:** Boss Man Slam writes victim `+$64=$2A`, increments `+$C7` by 5, writes exact `+$68=$16` (22), then sets bits3/5.
+- **Test192 ROM-EXACT:** Smash Suplex writes victim `+$64=5`, exact `+$68=$12` (18), then sets `+$64 bit5` and `+$32 bit3`.
+- **Test193 ROM-EXACT:** Perfect Plex contains two exact `+$68=$16` (22) victim writes; alternate branch also writes `+$60=$5E`.
+- **Test194 ROM-EXACT:** Slaughter Cobra Clutch pulse is exact `+$68=5 -> $111C8`; alternate release writes victim `+$60=$62`, sets flags and invokes `$215B6`.
+- **Test195 ROM-EXACT:** DiBiase Million Dollar Dream pulse is exact `+$68=5 -> $111C8`; alternate release writes victim `+$60=$63`, sets flags and invokes `$215B6`.
 
-- **Test161 ROM-EXACT:** `$1FB04-$1FB18` indexes an 11-entry pointer table at `$1FB1A` directly from actor byte `+$1D`; table entry **6** is `$20022`. Therefore the recovered `+$109` producer is raw substate handler `+$1D==6`.
-- **Test162 ROM-EXACT:** actor processing first dispatches raw `+$21` through the primary table at `$1F952`, then unconditionally calls `$1FAF0`, the secondary `+$1D` dispatcher.
-- **Test163 ROM-EXACT:** before the `+$1D` dispatch, `$1FAF0` tests actor `+$20 bit7`; when set, it clears that bit and copies raw `+$20` into raw `+$1C`, then continues to the secondary dispatcher.
+Hold pulse operands remain distinct from total hold damage/cadence.
 
-## Tests164-171 — linked-actor and mode context for +$109
+## Test196-200 — exact clear-stage stamina restore
 
-- **Test164 ROM-EXACT:** `$20058` resolves `A1=A0+$56`, then `A2=A1+$26`; producer ticks local countdown on A0 while the incremented `+$109` belongs to second linked actor A2.
-- **Test165 ROM-EXACT:** on expiry local phase `+$25` and linked `+$109` advance together; phase parity selects a distinct branch, and local state 5 promotes to state 6 with countdown `$38`.
-- **Test166 ROM-EXACT:** phase 6 adds `$10` to countdown then splits on global mode bit `$1C0161`; the two branches are structurally distinct.
-- **Test167 ROM-EXACT:** terminal handling is mode-dependent: clear `$1C0161` writes actor `+$20=$8009` and linked `+$4A=4`; set mode bit takes the alternate helper and writes actor `+$20=$8005`.
-- **Test168 ROM-EXACT:** even producer phases increment global `$1C169A` and derive helper input from actor `+$24>>1`; `$1C169A` is independently recovered as ring-out/count storage.
-- **Test169 ROM-EXACT:** clear-`$1C0161` (TAG) phase-6 path calls `$21358` on `+$56`, increments linked `+$C4`, follows `+$26`, and sets bit4 of that actor's `+$32`.
-- **Test170 ROM-EXACT:** set-`$1C0161` (Royal Rumble) phase-6 path writes raw roles `$4000/$4001` across the recovered four-actor linked set, proving explicit role reassignment.
-- **Test171 ROM-EXACT:** Royal phase-6 cleanup clears `$1C169E`, calls `$90D6`, then returns; `$90D6` is independently recovered as the clear-stage stamina restore routine.
+- **Test196 ROM-EXACT:** `$90D6` iterates exactly four actor records from `$1C05B0` at stride `$10C`, skipping records with `+$FF bit0` set.
+- **Test197 ROM-EXACT:** restore amount comes from global config `$1C0066 bits $6000` through exact table `{24,32,12,0}` at `$912A`.
+- **Test198 ROM-EXACT:** the same amount is added to live stamina `+$66` and queued stamina delta `+$6A`.
+- **Test199 ROM-EXACT:** live `+$66` is clamped to actor maximum `+$72`; the separately queued `+$6A` addition is preserved.
+- **Test200 VALIDATED RUNTIME:** native TAG `game_clear_stage_restore()` is regression-validated against those exact semantics: human-role exclusion, exact table, max clamp and queued stamina/HUD delta behavior.
 
-The `+$109` route is now structurally tied to secondary actor state, a second linked actor, TAG/Royal mode branches, ring-out/count storage interaction, Royal role reassignment, and stamina-restore cleanup. This still does **not** prove that `+$109` itself means fatigue, aggression, recovery stage, cadence or another named mechanic; no live stamina-tier CPU behavior is promoted from it yet.
+## IMPLEMENTADO
 
-## Preserved implemented systems
+- Native Saturn combat/runtime architecture with VDP1/VDP2-oriented source path and validated SH-2/Yaul build lineage through Test147.
+- Arcade HUD/stamina model, exact human maxima, CPU stage/difficulty stamina progression, exact clear-stage restore table and Test200 runtime alignment.
+- Ten-stage TAG campaign, opponent selection structure, victory/defeat/Continue flow and identity-persistent player stamina.
+- CPU/apron partner logic, Power Up, grapple rota/counters, Irish whip/running paths, submissions, ground actions, rise/recovery prompts and exact 20-count count-out.
+- Manual TAG on the original two-button Kick route; reserve HUD/stamina and four-wrestler TAG presentation framework.
+- Ringside object pickup/use, nearest-object CPU seeking and opponent-distance gate, pickup/use clocks, state-2/state-4 lifecycle evidence and native object runtime.
+- Royal Rumble opening/active-slot framework, replacement lifecycle, entrant queue/callout, human elimination and final-survivor resolution.
+- Difficulty source and wrestler-specific weighted AI tables.
+- Native finisher state-machine/overlay framework for the ten selectable wrestlers, with evidence gating; high-confidence routes remain playable while unsupported identities are blocked rather than fabricated.
+- Exact callback impact operands now pinned for Warrior, Jake, Boss Man, Smash, Perfect, Slaughter and DiBiase as detailed above.
+- Exact Rumble-only stamina recovery gate/exclusions already preserved from earlier checkpoints; clear-stage `$90D6` role exclusion/table/queue semantics are now separately closed through Test200.
 
-- Arcade HUD/stamina model, CPU stamina progression, ten-stage TAG campaign.
-- Victory/defeat/Continue flow, identity-persistent stamina.
-- CPU/apron partner logic, Power Up, grapple rota, submissions, ground actions and exact 20-count count-out.
-- Manual TAG using original two-button Kick route; TAG reserve HUD/stamina and staged four-wrestler presentation.
-- Ringside object pickup/use path, ROM nearest-object seeking and opponent-distance gate, exact pickup/use clocks, state-2/state-4 lifecycle evidence.
-- Royal Rumble six-slot opening, replacement lifecycle, entrant queue/callout, human elimination and final-survivor resolution.
-- Difficulty raw source and wrestler-specific weighted AI tables.
-- Visible submission/recovery prompts and exact rise descriptor sequence.
+## REGISTRADO PERO NO IMPLEMENTADO
 
-## Provisional
+- Human-readable gameplay semantic of raw `+$109/+$60/+$61` and therefore live CPU stamina-tier behavior based on that still-unproven semantic.
+- Independent proof of Earthquake action `$47` as his trademark Vertical Splash; the route is mechanically recovered but identity remains CANDIDATE.
+- Completion/proof of every Super Throw / Signature Finisher entry condition, callback composition and total hold cadence, especially Legion of Doom's team finisher.
+- Full Hawk/Animal graphical/behavior integration.
+- Exact TAG/Royal victory clap, winner pose, defeated/sad pose, coordinates and timing.
+- Exact TAG apron placement/entry/exit lifecycle and all evidenced double-team forms.
+- Remaining Royal entrant artwork/path/timing and additional elimination forms.
+- Exact arcade result typography/layout, records presentation, mode-select glow, attract/promo scenes and full audio implementation.
+- Remaining stage/scenario/cage completeness beyond the current ring/runtime framework.
 
-- Native RNG/entropy where original arcade source is not yet recovered.
+## PROVISIONAL
+
+- Native RNG/entropy where original arcade source has not yet been recovered.
 - Rumble callout artwork/layout, native entry geometry and portions of entrant ordering.
-- Raw→Saturn coordinate/scale transform, reserve visual correction and Rumble Body Slam rope threshold.
+- Raw-to-Saturn coordinate/scale transform, reserve visual correction and Rumble Body Slam rope threshold.
 - Referee trajectory, TAG presentation timing, rope deflection curve and dedicated rope-entry mapping.
 - Ground PICK UP completion timing/native state translation.
-- Exact per-hold submission drain/escape timing.
-- Test142 post-match coordinates/speed.
-- Earlier Restrain native timing/assist path/damage and other pre-Test100 provisional items remain provisional.
+- Exact per-hold submission drain/escape timing and total hold damage cadence.
+- Post-match staging coordinates/speed.
+- Earlier Restrain native timing/assist path/damage and other pre-Test100 explicitly provisional items.
 
-## Registered but not implemented / not yet proven
+## PENDIENTE DE BUILD SATURN
 
-- Exact TAG/Royal victory clap, winner pose, defeated/sad pose, coordinates and timing.
-- Exact arcade result typography/layout.
-- Gameplay-semantic interpretation of raw `+$109/+$60/+$61` and live CPU integration based on that interpretation.
-- Completion/proof of all Super Throws / Signature Finisher Moves, including Legion of Doom's team finisher.
-- Exact TAG apron placement/entry/exit lifecycle.
-- Remaining Royal entrant artwork/path/timing, full Hawk/Animal asset integration and additional elimination forms.
-- Mode-select glow, records, attract/promo scenes and audio.
+- Test144/V0.159 is still the newest generated hardware image and awaits physical validation.
+- Test100/V0.115 remains the latest image confirmed on real NTSC-U Saturn + Terraonion MODE.
+- Tests145-200 have **not** produced a new BIN/CUE. A new Saturn integration image should be generated only after the user requests the post-Test200 hardware phase or when a Saturn-only blocker justifies it.
 
-## Next priority
+## Validation artifact
 
-Continue from **Test172 / V0.187**. Primary fronts:
-
-1. Continue tracing the linked actors and helper calls around `$2007A-$20154` until the gameplay meaning of `+$109` is actually demonstrated; only then reconcile it with `+$BD` for live stamina-tier CPU behavior.
-2. Continue Earthquake action `$47` through contact/completion and independently identify the trademark move before promotion to gameplay-ready.
-3. Recover exact TAG/Royal victory, defeat and winner-clap descriptors/states/coordinates/timing.
-4. Complete/prove remaining Signature / Super Throws entry conditions, callbacks, raw effect/damage operands and compositions, including LOD.
-5. Continue exact TAG apron/entry/exit, Royal assets/eliminations, records, attract/promo, presentation and audio work as evidence permits.
-
-Continue concrete, non-empty checkpoints toward **Test200**. Do not claim arcade-exact behavior without ROM/manual evidence.
+Detailed Tests172-200 evidence is preserved in `docs/TEST172-200-CLOSURE.md` inside the canonical Test200 source snapshot.
