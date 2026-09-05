@@ -1,8 +1,10 @@
 # Current working baseline
 
-Canonical source after Test144: `/WWF-Saturn/WWF-Saturn-Test144-V0159-source.zip` SHA256 `6ea546f185d71951596ca19419c7fbd50a2def0d24e0346ec91ca36350960eee`.
+Canonical source after Test163: `/WWF-Saturn/WWF-Saturn-Test163-V0178-source.zip` SHA256 `593c8e255281e5f88a87700a4f420d3201537e255ca9a0ee27ca1a85309fcb42`.
 
-Continue from **Test145 / V0.160**.
+Continue from **Test164 / V0.179**.
+
+Test163 validation: **155/155 host PASS**; Tests161-163 targeted ASan/UBSan PASS. Tests161-163 are ROM-audit/test/documentation-only; **Test147/V0.162 remains the latest SH-2/Yaul compile+link PASS**.
 
 Test144 hardware package: `/WWF-Saturn/WWF-WrestleFest-Test144-V0159-BIN-CUE.zip` SHA256 `b61ad9a53a3d159dbac9c34e4111f60f2aa6b11af5b98706fcd9f5c83f42646e`.
 
