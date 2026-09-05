@@ -14,6 +14,7 @@ Target hardware: Sega Saturn NTSC-U + Terraonion MODE.
 - CPU is disproportionately difficult in normal play.
 - Player stamina depletes too quickly.
 - Revisit CPU decision frequency, aggression/priority, counter windows, stamina-dependent policy, player damage/stamina drain and recovery.
+- **Recover and reproduce the rival CPU behavior per arcade difficulty level**, not merely a global easy/normal/hard multiplier. Difficulty should govern the same decision cadence, aggression, counter/reversal tendency, move selection, stamina/tier behavior and opportunity rules used by the arcade where recoverable.
 - Do not simply weaken CPU globally; aim for arcade-like behavior and recovered difficulty/stamina rules where possible.
 
 ### TAG Tournament — missing/incorrect systems
@@ -58,6 +59,7 @@ Arcade reference from user hardware/video capture:
   - winners move to the center of the ring;
   - winners perform the victory clap/celebration.
 - Test100 does not yet reproduce this sequence.
+- **Implement the corresponding victory and defeat animations/staging in both TAG Tournament and Royal Rumble**, with mode-specific winner/loser resolution matching the arcade rather than a generic shared result screen.
 
 ### Mode select presentation
 
@@ -103,6 +105,11 @@ Arcade reference from user hardware/video capture:
   - an inset/box animation announces the new entrant.
 - These are core Royal Rumble progression mechanics, not optional presentation polish.
 
+### Royal Rumble result presentation
+
+- Implement arcade-faithful **victory and defeat animations/staging for Royal Rumble** as a first-class mode requirement.
+- The winner should receive the correct post-match presentation; eliminated/defeated human state should use the arcade defeat presentation rather than falling directly to a generic flow.
+
 ## Presentation / attract scenes
 
 - User supplied an arcade reference showing a Legion of Doom interview/promo scene with interviewer; this scene is not yet present in the port.
@@ -130,8 +137,8 @@ This future options screen must not silently alter Arcade Mode behavior. Saturn-
 
 ## Recommended implementation order from Test101
 
-1. Rebalance/restore CPU difficulty and stamina behavior from arcade evidence.
-2. Implement manual TAG/relevo and correct partner active/reserve transition.
+1. Recover and reproduce **CPU behavior by arcade difficulty level** together with player/CPU stamina rules; avoid arbitrary global nerfs.
+2. Implement/complete manual TAG and correct partner active/reserve transition.
 3. Correct partner/apron visual placement and pin-assist entry/exit lifecycle.
 4. Fix TAG presentation duration, individual introductions/poses and four-wrestler staging.
 5. Implement referee tracking + pin 1/2/3 indicator.
@@ -139,6 +146,7 @@ This future options screen must not silently alter Arcade Mode behavior. Saturn-
 7. Add rope deformation/rebound animation.
 8. Fix TAG HUD/palettes/portraits and roster/opponent selection.
 9. Complete Royal Rumble formation, 1P marker, eliminations, timed entrants and entrant announcement.
-10. Add post-match victory/defeat staging, mode-select glow, instant character-select page transition, records and remaining attract/presentation scenes.
+10. Implement arcade-faithful **victory/defeat animation and post-match staging in both TAG Tournament and Royal Rumble**.
+11. Add mode-select glow, instant character-select page transition, records and remaining attract/presentation scenes.
 
 All recovered behavior must continue to distinguish ROM/manual/video-backed facts from native provisional approximations.
