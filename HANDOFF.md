@@ -6,21 +6,23 @@ Use this repository and the persistent ChatGPT Library as the source of truth wh
 
 1. Read `PROJECT-STATE.md` from this private repository.
 2. Use the latest validated persistent source snapshot named there. Current validated source:
-   - Library path: `/WWF-Saturn/WWF-Saturn-Test85-V0100-source.zip`
-   - SHA256: `0c42b3367b612cddf9e6a67e3a68a32839a2d3838dfcf642950dd4f011c50f14`
-3. Materialize/extract that snapshot and continue from **Test86 / V0.101**. Do not resume from older checkpoints or the incomplete Test52 ZIP.
+   - Library path: `/WWF-Saturn/WWF-Saturn-Test87-V0102-source.zip`
+   - SHA256: `e1f9bc4f742f3a9f6d38be131b439468bf053399104dae248c476881bf3d35c4`
+3. Materialize/extract that snapshot and continue from **Test88 / V0.103**. Do not resume from older checkpoints or the incomplete Test52 ZIP.
 4. Each Test must be a real implementation or rigorous validation checkpoint; no empty version-number increments.
 5. Preserve arcade fidelity. Use preserved `program.bin` and original research data. If behaviour is not demonstrated, mark it provisional or registered-but-not-implemented instead of inventing exactness.
 6. Run host regression/sanitizer tests as appropriate and persist major validated checkpoints back to Library. Keep `PROJECT-STATE.md` updated.
 
 ## Immediate continuation
 
-Tests83-85 correct and narrow the double-team investigation:
-- `$F560` is called in both main frame-loop branches and immediately invokes `$F574`; the raw `$0B/$0C/$29` pair state machine is globally serviced and is not a Restrain-only callback path.
-- Restrain's calls to `$10D3A` with D0 `$08/$09` are effect/entity descriptor IDs (pool `$1C1258`, table `$10DDA`, index `D0*6`), not contextual action categories. Do not reconnect them to categories `$08/$09`.
-- Restrain sets `+$33 bit6` on attacker and target. That exact bit is consumed by multiple later AI/control branches. Historical move-guide evidence says Restrain lets the tag partner enter and strike, but the exact apron-partner consumer branch remains unproven.
+Tests83-87 correct and narrow the double-team investigation:
+- `$F560` is globally serviced; the raw `$0B/$0C/$29` pair machine is not Restrain-only.
+- Restrain's D0 `$08/$09` calls to `$10D3A` are effect/entity descriptor IDs, not contextual action categories.
+- Restrain sets `+$33 bit6` on attacker and target, but apron-partner ownership remains unproven.
+- `$1E2DE/$1E30A` are generic per-action callback consumers reached from dispatcher `$1DFEA` via table `$1E018`: action `$72` uses `$1E2A8`, actions `$00/$21` use `$1E2F6`.
+- Their restrained-target distance/range gates are exact and modeled: `$72` uses `$28`; `$00/$21` use `$30`.
 
-Next priority for **Test86**: identify actor roles around `+$33 bit6` consumers, especially `$1CA00/$1CBB4/$1CE06/$1E2DE`, and prove which belongs to the apron/tag-partner controller. If proven, implement the first Restrain-dependent double-team entry. If not, switch to the next documented double-team path: headlock-to-corner tag or prone-feet partner ground attack.
+Next priority for **Test88**: narrow actor roles around `$1CA00/$1CBB4/$1CE06/$1D9BC`. If apron ownership still cannot be proven, switch to the historically documented headlock-to-corner-tag or prone-feet-partner-ground double-team path and recover the ROM-side trigger without inventing semantics.
 
 ## Long target
 
