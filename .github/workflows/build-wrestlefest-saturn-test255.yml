@@ -1,16 +1,16 @@
-name: Build WWF WrestleFest Saturn Test255
+name: Build WWF WrestleFest Saturn Test255 Hardware Stability
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - test255-attract-wip
+      - test255-lod-handoff
     paths:
       - .github/workflows/build-wrestlefest-saturn-test255.yml
+      - wip/test255/test255-hardware-loader.patch
       - campaign_presentation.c
       - campaign_presentation.h
       - tools/verify_iso.py
-      - wip/test255/**
       - build-input/WWF-Saturn-Test255-WIP9-source.zip
 
 permissions:
@@ -22,12 +22,12 @@ jobs:
     timeout-minutes: 30
     env:
       YAUL_IMAGE: ijacquez/yaul@sha256:b6d272204767cd0a734139dd3a2ab298ef5912fb7b7224b78e6d9fac1a7825a6
-      STEM: wrestlefest-saturn-test255-v0270
+      STEM: wrestlefest-saturn-test255-v0270-hwfix
     steps:
-      - name: Check out Test255 WIP branch
+      - name: Check out Test255 handoff branch
         uses: actions/checkout@v5
         with:
-          ref: test255-attract-wip
+          ref: test255-lod-handoff
 
       - name: Locate Test255 source payload
         shell: bash
@@ -38,7 +38,7 @@ jobs:
             exit 2
           }
 
-      - name: Restore Test255 source
+      - name: Restore Test255 source and apply hardware loader fix
         shell: bash
         run: |
           set -euo pipefail
@@ -49,8 +49,41 @@ jobs:
           cp campaign_presentation.c campaign_presentation.h build-test255/
           cp tools/verify_iso.py build-test255/tools/verify_iso.py
           rm -f build-test255/audio-tracks/.gitkeep
+          cd build-test255
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('main.c')
+          s=p.read_text()
+          needle='static void selection_cache_free(void){for(unsigned i=0;i<2;i++){free(selection_rle[i]);selection_rle[i]=NULL;selection_rle_size[i]=0;}}\n'
+          if needle not in s:
+              raise SystemExit('hardware fix: selection_cache_free anchor missing')
+          if 'static void match_frontend_cache_release(void)' not in s:
+              s=s.replace(needle, needle + '''static void match_frontend_cache_release(void){
+           /* Test255 hardware-stability: presentation-only caches must not survive into
+            * the combat loader. Release them before OBJ15/RING14 and Cxx allocations. */
+           selection_cache_free();
+           free(mode_rle_cache);mode_rle_cache=NULL;mode_rle_size=0;
+           free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_size=0;
+           free(title_delta);title_delta=NULL;
+          }
+          ''',1)
+          anchor='static void roster_load_ids(const unsigned *ids,unsigned count){\n'
+          if anchor not in s:
+              raise SystemExit('hardware fix: roster_load_ids anchor missing')
+          if anchor+' match_frontend_cache_release();\n' not in s:
+              s=s.replace(anchor,anchor+' match_frontend_cache_release();\n',1)
+          entry='  transfer((void *)(VDP2_CRAM_MODE_1_OFFSET(0,0,0)+1792*2),asset_entryuipal,64);\n'
+          if entry not in s:
+              raise SystemExit('hardware fix: ENTRY transfer anchor missing')
+          if entry+'  free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_size=0;\n' not in s:
+              s=s.replace(entry,entry+'  free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_size=0;\n',1)
+          s=s.replace('WWF SATURN TEST254: DATA ERROR','WWF SATURN TEST255: DATA ERROR')
+          s=s.replace('TEST254 V0.269 - START: RESUME','TEST255 V0.270 - START: RESUME')
+          p.write_text(s)
+          print('Test255 hardware loader patch applied')
+          PY
 
-      - name: Verify source payload completeness
+      - name: Verify source payload completeness and patch
         shell: bash
         run: |
           set -euo pipefail
@@ -65,7 +98,11 @@ jobs:
           missing=[f for f in m.group(1).split() if not Path(f).is_file()]
           if missing:
               raise SystemExit('Missing SH_SRCS: ' + ', '.join(missing))
-          print('All SH_SRCS present')
+          main=Path('main.c').read_text()
+          for required in ['match_frontend_cache_release();','WWF SATURN TEST255: DATA ERROR','TEST255 V0.270 - START: RESUME']:
+              if required not in main:
+                  raise SystemExit('Missing hardware-fix marker: '+required)
+          print('All SH_SRCS present; hardware-fix markers present')
           PY
           gcc -std=c11 -Wall -Wextra -I. campaign.c campaign_presentation.c arcade_stamina.c tools/test217_campaign_progress_screen.c -o /tmp/test217
           /tmp/test217
@@ -79,7 +116,7 @@ jobs:
           from pathlib import Path
           p=Path('Makefile')
           s=p.read_text()
-          s=s.replace('SH_PROGRAM:= wrestlefest-saturn-test254-v0269','SH_PROGRAM:= wrestlefest-saturn-test255-v0270')
+          s=s.replace('SH_PROGRAM:= wrestlefest-saturn-test254-v0269','SH_PROGRAM:= wrestlefest-saturn-test255-v0270-hwfix')
           s=s.replace('IP_VERSION:= V0.269','IP_VERSION:= V0.270')
           s=s.replace('IP_TITLE:= WWF WrestleFest Test254','IP_TITLE:= WWF WrestleFest Test255')
           p.write_text(s)
@@ -111,20 +148,20 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
-          cp "raw-disc/$STEM.bin" out/WWF-WrestleFest-Test255-V0270.bin
-          cp "raw-disc/$STEM.cue" out/WWF-WrestleFest-Test255-V0270.cue
+          cp "raw-disc/$STEM.bin" out/WWF-WrestleFest-Test255-V0270-HWFIX.bin
+          cp "raw-disc/$STEM.cue" out/WWF-WrestleFest-Test255-V0270-HWFIX.cue
           cp raw-disc/disc-validation.json out/disc-validation.json
           if test -f raw-disc/disc-independent-validation.json; then
             cp raw-disc/disc-independent-validation.json out/disc-independent-validation.json
           fi
-          sed -i 's/^FILE ".*" BINARY/FILE "WWF-WrestleFest-Test255-V0270.bin" BINARY/' out/WWF-WrestleFest-Test255-V0270.cue
+          sed -i 's/^FILE ".*" BINARY/FILE "WWF-WrestleFest-Test255-V0270-HWFIX.bin" BINARY/' out/WWF-WrestleFest-Test255-V0270-HWFIX.cue
           cd out
-          sha256sum WWF-WrestleFest-Test255-V0270.bin WWF-WrestleFest-Test255-V0270.cue > SHA256SUMS.txt
+          sha256sum WWF-WrestleFest-Test255-V0270-HWFIX.bin WWF-WrestleFest-Test255-V0270-HWFIX.cue > SHA256SUMS.txt
           cat SHA256SUMS.txt
 
-      - name: Upload Test255 BIN/CUE
+      - name: Upload Test255 hardware-stability BIN/CUE
         uses: actions/upload-artifact@v4
         with:
-          name: WWF-WrestleFest-Test255-V0270-BIN-CUE
+          name: WWF-WrestleFest-Test255-V0270-HWFIX-BIN-CUE
           path: out/*
           if-no-files-found: error
