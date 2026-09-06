@@ -4,151 +4,121 @@ Use this private repository plus `/WWF-Saturn/` in the persistent ChatGPT Librar
 
 ## Branch to resume from
 
-Resume from **`test255-lod-handoff`**.
-Do not resume from `main` for the current LOD work. `main` still represents the older canonical line.
-
-Current handoff parent commit before this update:
-`32bbc23a362b1f567c04337208f581890315cefc`
+Resume only from **`test255-lod-handoff`**.
+Do not resume from `main` or from any temporary LOD branch. Temporary branches are archaeology only.
 
 ## Canonical baseline vs current WIP
 
 - Canonical validated baseline remains **Test254 / V0.269**.
-- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test254-V0269-source.zip`
-- SHA256: `cb324b8c6493642854d1799597b8f4ee6b531041400b0d909a34608c17a78cb0`
-- **Test255 / V0.270 is still WIP and must not be promoted to canonical until the user validates it on real Saturn hardware.**
+- Canonical source: `/WWF-Saturn/WWF-Saturn-Test254-V0269-source.zip`
+- Canonical SHA256: `cb324b8c6493642854d1799597b8f4ee6b531041400b0d909a34608c17a78cb0`
+- **Test255 / V0.270 remains WIP until validated on real Saturn hardware.**
 
-Latest full source checkpoint to resume from:
-- **Test255 WIP16**
-- Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP16-source.zip`
-- SHA256: `dac151299786211086d10b42ba0f2df4156f2efd137792934d457c58ae9be374`
+Latest full source checkpoint:
+- **Test255 WIP18**
+- Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP18-source.zip`
+- SHA256: `fc9191006caa757d056a1511c8a8bc486ed2c440abf7a1381273dc45f958caf8`
+- WIP18 checkpoint commit: `f3a9f8709f5e063ca9461914c707390060a051d0`
 
-The current chat also has an incomplete local `wip17` working directory, but it was not yet validated/persisted as a new source checkpoint. Do not treat WIP17 as authoritative unless reconstructed from WIP16 and revalidated.
+Intermediate source checkpoint:
+- WIP17 host-only Doomsday state machine
+- Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP17-source.zip`
+- SHA256: `36b25b10cf7cadcf10e5ef7df7019d22ff28a74339974be24a8e9a8a06e5e306`
 
-## Latest generated Test255 BIN/CUE
+## Build policy
 
-A structurally valid **Test255 / V0.270** BIN/CUE was generated successfully by GitHub Actions run:
-`34048120742`
+Do **not** generate BIN/CUE unless the user explicitly requests it. When requested, the assistant must prepare source/commits, run and fix GitHub Actions, download the artifact and deliver BIN/CUE directly. Do not ask the user to operate workflows manually.
 
-Artifact name:
-`WWF-WrestleFest-Test255-V0270-BIN-CUE`
+The last generated Test255/V0.270 BIN/CUE remains the older GitHub Actions run `34048120742`; it predates WIP17/WIP18 and does not make Test255 canonical.
 
-Hashes:
-- BIN: `0d39383e2f8ca76a347888fac90b6cf0acb0d505466437fd76bc8d2349f5241d`
-- CUE: `b8f5ab9791fde0ee026b63e9e55f1005e8f675a9a15e9141f81d4e6974ad7497`
-- ZIP: `cc3f504a562bddc0aa758514d95308b20d96eefeaf76ac08ca6da1e03ff246d9`
+## Roster graphics mapping — preserve exactly
 
-The user has not yet reported the real-Saturn result, so Test255 is not canonical.
+Logical Saturn wrestler -> arcade graphics bank:
 
-## Hawk / Animal / LOD work — current exact state
+- 0 Hogan -> 0
+- 1 Warrior -> 1
+- 2 Jake -> 2
+- 3 Boss Man -> 3
+- 4 Smash -> 10
+- 5 Crush -> 11
+- 6 Slaughter -> 6
+- 7 Perfect -> 7
+- 8 Earthquake -> 8
+- 9 DiBiase -> 9
+- 10 Hawk -> 4
+- 11 Animal -> 5
 
-### Correct logical-to-arcade graphics mapping
+Do not revert to the old incorrect assumption that logical 10/11 use graphics banks 10/11.
 
-The logical Saturn roster is 0..11, but the arcade graphics banks differ for Demolition and LOD:
+## Roster/assets already closed
 
-- logical 0 Hogan -> arcade bank 0
-- logical 1 Warrior -> arcade bank 1
-- logical 2 Jake -> arcade bank 2
-- logical 3 Boss Man -> arcade bank 3
-- logical 4 Smash -> arcade graphics bank 10
-- logical 5 Crush -> arcade graphics bank 11
-- logical 6 Slaughter -> arcade bank 6
-- logical 7 Perfect -> arcade bank 7
-- logical 8 Earthquake -> arcade bank 8
-- logical 9 DiBiase -> arcade bank 9
-- logical 10 Hawk -> arcade graphics bank 4
-- logical 11 Animal -> arcade graphics bank 5
+- 12-wrestler resident runtime contract: 223 frames per `Cxx.PAK`.
+- Hawk and Animal resident banks use corrected arcade banks 4/5.
+- Smash/Crush use corrected arcade banks 10/11.
+- `ROSTER.PAL` covers all 12 logical wrestlers.
+- Hawk/Animal do not inherit Hogan's moveset fallback.
+- Hawk/Animal recovered player special stamina path is 500.
+- `Gxy` ground/PICK UP partner overlays cover all 12 logical wrestlers.
+- `Sxy` grapple-struggle partner overlays cover all 12 logical wrestlers.
+- logical IDs 10/11 use `A/B` in generated CD filenames where the hexadecimal filename scheme is used.
 
-Do not revert to the earlier incorrect WIP10 assumption that C10/C11 graphics were directly arcade banks 10/11 for Hawk/Animal.
+## Doomsday Device — ROM-EXACT trigger/state/link chain is CLOSED
 
-### Roster/assets already closed
+Do not investigate the missing activation bridge again. It is already demonstrated.
 
-- 12-luchador runtime contract is 223 resident frames per `Cxx.PAK`.
-- Hawk and Animal resident banks exist and are based on the corrected arcade banks.
-- Smash/Crush were remapped back to the correct arcade source banks.
-- `ROSTER.PAL` was expanded to 12 palettes.
-- Hawk/Animal no longer inherit Hogan's moveset fallback.
-- Hawk/Animal special stamina path is 500 in the recovered player path.
-- Partner-dependent `Gxy` ground/PICK UP overlays were expanded to all 12 logical wrestlers.
-- Partner-dependent `Sxy` grapple-struggle overlays were expanded to all 12 logical wrestlers.
-- IDs 10/11 are encoded as `A/B` in generated CD filenames.
+### Animal hold
 
-### Doomsday Device chain — ROM-EXACT evidence already closed
+- logical Animal 11 -> internal actor 5.
+- linked classifier at `$E1D4/$E232`.
+- fresh K selects raw action `$89` in the recovered linked categories.
+- descriptor `$1ABA4`, callback `$1ABC0`.
+- poses `269 -> 452 -> 453 -> 454 -> 455`.
+- finite visual duration 85 ticks.
+- victim raw state `$FF`.
+- Animal/victim reciprocal `+$26` survives the hold.
+- attacker `+$34 bit3` is set; completion writes `+$24=2`, `+$22=0`, `+$60 bit7`; event/effect `$32` is produced.
 
-Animal special hold path:
-- logical Animal 11 -> internal actor 5
-- linked-context classifier at `$E1D4/$E232`
-- K selects raw action `$89` in exact linked contexts
-- descriptor `$1ABA4`
-- callback `$1ABC0`
-- pose sequence `269 -> 452 -> 453 -> 454 -> 455`
-- finite visual duration 85 ticks
-- victim is put into raw state `$FF`
-- attacker `+$34 bit3` is set
-- completion writes `+$24=2`, `+$22=0`, `+$60 bit7`
-- event/effect `$32` is produced
-- the reciprocal grapple link `+$26` between Animal and victim survives this hold
+### Hawk selection / launch
 
-Hawk three-actor special path:
-- Hawk callback `$12C22`
-- descriptor `$12C0A`
-- Hawk special three-actor frames include poses 459/460 and then 162/163
-- victim's `+$26` is used to resolve the third actor, which is Animal during the hold
-- victim receives state 4, selector `$19`, and raw damage `$20`
-- the third actor receives state 5 / raw `$8006`
+- wrestler state 8 sets `+$32 bit1`; state 8 completes to state 9 without clearing it.
+- Hawk waits exactly 8 eligible ticks.
+- Hawk reads partner through `+$86`.
+- only partner state 5 / raw `$89` dispatches Hawk to state5/internal4 -> `$12BDA/$12C22`.
+- `$12C22` consumes `+$32 bit1`, sets the recovered special launch path through `+$34 bit3`, and uses the recovered launch vector.
 
-Collision/link producer:
-- Hawk arms collision profile `$17`
-- profile first-handler index 11
-- handler `$247EC`
-- victim is converted to type `$12`
-- `$24DEC/$24E02` create the reciprocal `+$92` relation between Hawk and victim
+### Collision / three actors
 
-Hawk launch flag:
-- wrestler state 8 sets `+$32 bit1` in all ten transition variants
-- Hawk `$12C22` consumes that exact bit with BCLR
-- if it was set, Hawk enters the ROM special launch setup using `+$34 bit3` and the recovered launch vector values
+- Hawk arms collision profile `$17` at the exact recovered threshold gate.
+- first-handler index 11 -> `$247EC`.
+- victim becomes type `$12`.
+- `$24DEC/$24E02` establish reciprocal Hawk/victim `+$92`.
+- descriptor `$12C0A` resolves the third actor through **victim `+$26`**, which yields Animal.
+- victim receives state 4, selector `$19`, raw damage `$20`.
+- Animal receives state 5 / raw `$8006`.
+- exact composition clock uses poses 459/460 then 166/378; `LODTEAM.PAK` contains the three-role compositions for the ten ordinary opponents.
 
-### Latest closure from WIP16 — this is the exact point to continue
+## WIP18 — live Saturn integration status
 
-The previously missing final selection bridge was found:
+The above state/link chain is now active in the native TAG runtime and covered by focused host tests before gameplay activation.
 
-**Hawk's AI enters `$12C22` only after an 8-tick wait and when its partner pointer `+$86` resolves a partner currently in state 5 / raw `$89`.**
+**ROM-EXACT active pieces:** raw `$89` producer mapping for Animal K, reciprocal `+$26`, state8->state9 carried flag, exact 8-tick `+$86` predicate, `$12C22` flag lifecycle/vector, profile `$17` gate, type `$12`, reciprocal `+$92`, third actor strictly from victim `+$26`, victim/Animal raw writes, raw damage `$20`, `$12C0A` composition clock and `LODTEAM.PAK` role ownership.
 
-This closes the Animal-hold -> Hawk-special producer as ROM-EXACT.
+**PROVISIONAL native boundaries:** native `PAIR_HOLD` -> exact linked-category adapter; Saturn world-coordinate/raw `+$0E` launch progression; Hawk composition anchor transform; minimum one-tick release bridge for callback-held pose 166 (`$FF00`); committed-sequence rescue/interruption policy; native apron restore after completion.
 
-In other words, the next chat should treat the trigger chain as demonstrated:
+**REGISTERED BUT NOT IMPLEMENTED:** exact `$FF00` release producer; exact launch-to-collision world integration; exact Doomsday rescue/interruption producer.
 
-`Animal linked hold raw $89` -> `partner remains linked to victim through +$26` -> `Hawk waits 8 ticks` -> `Hawk checks partner through +$86 and sees state 5/raw $89` -> `Hawk enters $12C22` -> `collision profile $17` -> `victim type $12 / reciprocal +$92` -> `three-actor descriptor $12C0A` -> `victim +$26 resolves Animal` -> `three-actor hit/damage/landing sequence`.
+Focused validation passed: Test203, 205, 206, 207, 211, 253 struggle assets, 259, 260, 267, 270, 271, 272, 273.
 
-The next engineering task is **not more ROM discovery for the missing trigger**. That bridge is now closed. The next task is to integrate this exact trigger/state sequence into the native Saturn runtime without replacing it with a simplified synthetic condition.
+Historical Test210 (`tag_crossing_exchange`) also fails on a pristine extraction of authoritative WIP16 with the same assertion. Treat it as pre-existing baseline debt, not a WIP18 regression.
 
-## Exact next tasks for the new chat
+## Exact next tasks
 
-1. Materialize/open `/WWF-Saturn/WWF-Saturn-Test255-WIP16-source.zip` from Library.
-2. Use the user's original `wwfwfest.zip` ROM set for any further byte-level proof. If it is not available in the new chat, ask the user to upload it again.
-3. Implement the live Saturn LOD sequence using the exact recovered states/links/timing:
-   - Animal hold raw `$89` state representation;
-   - preserve victim/Animal `+$26` equivalent;
-   - Hawk 8-tick AI wait;
-   - partner `+$86` equivalent check for Animal state 5/raw `$89`;
-   - enter Hawk `$12C22` equivalent;
-   - establish Hawk/victim `+$92` equivalent;
-   - load/use `LODTEAM.PAK` / exact three-actor compositions;
-   - reproduce damage, victim state, third-actor state, launch and release timings from ROM evidence.
-4. Add focused host regression tests for every transition in that chain before activating it in normal gameplay.
-5. Then continue Hawk and Animal individual move-set closure and remaining full-roster interactions.
-6. Persist the next validated source checkpoint in Library and update this handoff branch.
-7. Do **not** generate a new BIN/CUE unless explicitly requested by the user. When requested, the assistant should handle GitHub Actions and deliver the artifact directly; the user should not need to run the workflow manually.
+1. Resume from the **WIP18 Library ZIP**, not WIP16 and not a temporary branch.
+2. Continue the **individual Hawk moveset** to closure.
+3. Continue the **individual Animal moveset** to closure.
+4. Close Hawk/Animal interactions against each of the other ten wrestlers and then close the complete 12-wrestler roster.
+5. Preserve the labels **ROM-EXACT**, **PROVISIONAL**, **REGISTERED BUT NOT IMPLEMENTED** for every recovered/implemented element.
+6. Persist each important source checkpoint in both Library `/WWF-Saturn/` and this handoff branch.
+7. No BIN/CUE unless explicitly requested.
 
-## Fidelity labels — mandatory
-
-Always distinguish:
-- **ROM-EXACT** — directly demonstrated from original ROM/program/gfx/audio evidence.
-- **PROVISIONAL** — Saturn-native implementation/timing/semantics not yet proved exact.
-- **REGISTERED BUT NOT IMPLEMENTED** — recovered/identified but not yet active in runtime.
-
-Never promote a move identity, animation meaning, AI rule, timing, geometry, audio association or presentation detail from plausibility alone.
-
-## Important caution
-
-Several temporary LOD branches were created during the previous session (`test255-lod-wip16-src`, `test255-lod-runtime-wip17`, `test255-lod-wip16-work`, etc.). Ignore them as continuation targets unless explicitly needed for archaeology. **Use `test255-lod-handoff` + the Library WIP16 ZIP as the authoritative continuation point.**
+If further byte-level ROM proof is required, the source checkpoint intentionally contains no arcade ROM. Ask the user to re-upload the original `wwfwfest.zip`; never infer missing ROM facts and never store/redistribute the ROM set in GitHub.
