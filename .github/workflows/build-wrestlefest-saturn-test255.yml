@@ -9,6 +9,7 @@ on:
       - .github/workflows/build-wrestlefest-saturn-test255.yml
       - campaign_presentation.c
       - campaign_presentation.h
+      - tools/verify_iso.py
       - wip/test255/**
       - build-input/WWF-Saturn-Test255-WIP9-source.zip
 
@@ -46,6 +47,7 @@ jobs:
           unzip -q build-input/WWF-Saturn-Test255-WIP9-source.zip -d /tmp/wwf-test255
           cp -a /tmp/wwf-test255/. ./build-test255/
           cp campaign_presentation.c campaign_presentation.h build-test255/
+          cp tools/verify_iso.py build-test255/tools/verify_iso.py
           rm -f build-test255/audio-tracks/.gitkeep
 
       - name: Verify source payload completeness
