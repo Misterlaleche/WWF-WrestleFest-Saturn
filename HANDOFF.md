@@ -1,35 +1,52 @@
 # New-chat handoff — WWF WrestleFest Saturn
 
-Use this private repository and persistent ChatGPT Library as source of truth.
+Use this private repository plus `/WWF-Saturn/` in the persistent ChatGPT Library as the source of truth.
 
-## Current start point
+## Current canonical baseline
 
 1. Read `PROJECT-STATE.md` first.
-2. Current canonical validated source snapshot:
-   - `/WWF-Saturn/WWF-Saturn-Test200-V0215-source.zip`
-   - SHA256 `d4e55dc0ddc388b5842118ed459aa5cd35841888e219679b06cf9c530e59b9b2`
-3. **Test200 / V0.215 has been genuinely reached.** Do not resume from Test171 or earlier.
-4. Complete host regression: **192/192 PASS**.
-5. Targeted ASan/UBSan for Tests172-200: **29/29 PASS**.
-6. Tests172-199 are ROM-audit/test/documentation-only. Test200 validates existing native clear-stage stamina runtime against newly pinned ROM `$90D6` semantics.
-7. Test147/V0.162 remains the latest SH-2/Yaul compile+link PASS.
-8. No new BIN/CUE was generated after Test144.
+2. Current canonical validated source checkpoint:
+   - **Test254 / V0.269**
+   - Library: `/WWF-Saturn/WWF-Saturn-Test254-V0269-source.zip`
+   - SHA256: `cb324b8c6493642854d1799597b8f4ee6b531041400b0d909a34608c17a78cb0`
+3. **Do not resume from Test200, Test240, Test251, Test252 or Test253.** Test254 is the canonical baseline.
+4. Test253/V0.268 is the direct gameplay predecessor and introduced ROM-exact grapple/ring-transition work; Test254 integrates the canonical audio subsystem without replacing that gameplay baseline.
+5. Test255 / V0.270 is currently **WORK IN PROGRESS**, not yet a canonical checkpoint. Its work includes further ROM-exact animation/audio timing and attract-mode reverse engineering.
+6. No Test255 BIN/CUE exists yet. The user requested a BIN/CUE only after Test255 attract-mode work is closed and validated.
 
-## Hardware state
+## Important canonical facts after Test254
 
-Test144/V0.159 remains the current pending hardware-validation image. Test100/V0.115 remains the latest image physically confirmed on NTSC-U Saturn + Terraonion MODE until Test144 is physically tested.
+- Test252 closed the legacy Test212 fallback registry and added exact bank-15 object compositions.
+- Test253 added ROM-exact ring exit/entry compositions, ring-out chains, the raw `0x29` grapple struggle, and exact partner-dependent struggle assets.
+- Test254 integrated the canonical audio package while preserving Test253 gameplay. All `RECOVERED_ROM` audio command identities are preserved.
+- `AUDADP.PAK` remains the complete canonical audio source; the Saturn transport only preloads proven gameplay-linked samples into SCSP RAM to avoid a large persistent HWRAM cost.
+- Current Test255 WIP has additionally recovered the common animation phase engine (`+$24/+$25/+$22`), corrected exact timing for selected impacts, repaired C07/C09 to the uniform 223-frame roster-pack contract, and is reverse-engineering the original 14-state attract/demo sequence.
 
-## Critical Test200 closure
+## Attract/demo target now mandatory
 
-- Linked-actor cleanup around the `+$109` producer is substantially tightened through `$21358/$213A6`, including TAG/Royal role flags and links, but `+$109` still has no defensible human-readable gameplay semantic.
-- Earthquake raw action `$47` is now mechanically bounded through phase, contact branches, fallback and completion. Its trademark identity remains **CANDIDATE** and is not promoted by inference.
-- Exact impact/callback operands were additionally pinned for Warrior, Jake, Boss Man, Smash, Perfect, Slaughter and DiBiase.
-- `$90D6` is now closed as a four-record clear-stage stamina restore loop: skip `+$FF bit0`, exact `{24,32,12,0}` table from config bits `$6000`, add to live `+$66` and queued `+$6A`, clamp live stamina to `+$72` maximum. Test200 confirms native TAG runtime alignment.
+The original arcade attract sequence must be reproduced from ROM evidence, including:
 
-## Fidelity rules remain mandatory
+- TAG demo with WWF/WrestleFest logos and explanatory text overlay;
+- first Demolition/presenter segment with original animation and voice;
+- TAG records screen;
+- Royal Rumble demo with Royal overlay/text;
+- second Demolition/presenter segment with the opposite Demolition speaker animation;
+- Royal records screen;
+- wrestler-specific demos with animated portrait + ROM text box, where the featured wrestler is actually part of that demo match;
+- protagonist sequence recovered for states 2–13: Hogan, Warrior, Jake, Boss Man, Slaughter, Perfect, Earthquake, DiBiase, Hawk, Animal, Smash, Crush.
 
-Preserve evidence labels: **ROM-EXACT**, **PROVISIONAL**, **REGISTERED BUT NOT IMPLEMENTED**. Never promote move identity, damage totals, AI behavior, geometry, timing or presentation detail to arcade-exact from plausibility or memory.
+Do not use the old fixed Saturn attract cast or a fixed Hogan portrait.
 
-## Post-Test200 work if requested
+## Fidelity rules
 
-The final Test200 report and remaining work are in `PROJECT-STATE.md`. The next logical phase is not arbitrary Test201 numbering: either (a) generate and validate a post-Test200 Saturn integration build, or (b) continue targeted fidelity closure on the still-registered systems before a new hardware image, according to the user's next instruction.
+Always distinguish:
+
+- **ROM-EXACT** — directly demonstrated from original ROM/program/gfx/audio evidence;
+- **PROVISIONAL** — native Saturn implementation or timing/geometry not yet proven exact;
+- **REGISTERED BUT NOT IMPLEMENTED** — recovered or identified but not yet active in runtime.
+
+Never promote a move identity, animation meaning, AI rule, audio association, timing, geometry or presentation detail from plausibility alone.
+
+## Build policy
+
+After each canonical checkpoint, update this repository (`HANDOFF.md`, `PROJECT-STATE.md`, and relevant docs) immediately. The Library holds the canonical source snapshot ZIP. Generate BIN/CUE only when explicitly requested or when the current task explicitly requires it.
