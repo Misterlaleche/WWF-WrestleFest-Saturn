@@ -4,109 +4,149 @@ Private working state for the native Sega Saturn port/reimplementation.
 
 ## Current validated checkpoint
 
-- **Test200 / V0.215** is the canonical validated source checkpoint.
-- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test200-V0215-source.zip`
-- Source SHA256: `d4e55dc0ddc388b5842118ed459aa5cd35841888e219679b06cf9c530e59b9b2`
-- Complete host regression: **192/192 PASS**.
-- Targeted ASan/UBSan for Tests172-200: **29/29 PASS**.
-- Tests172-199 are ROM-audit/test/documentation-only. Test200 rigorously reconciles the existing native clear-stage stamina runtime with newly pinned ROM `$90D6` semantics; it does not add an invented gameplay semantic.
-- **Test147 / V0.162** remains the latest SH-2/Yaul compile+link PASS.
-- No new BIN/CUE was generated after Test144.
+- **Test254 / V0.269** is the canonical validated source checkpoint.
+- Canonical source snapshot: `/WWF-Saturn/WWF-Saturn-Test254-V0269-source.zip`
+- Source SHA256: `cb324b8c6493642854d1799597b8f4ee6b531041400b0d909a34608c17a78cb0`
+- Test253/V0.268 remains the direct gameplay predecessor.
+- Test254 integrates the canonical audio subsystem on top of Test253 gameplay; it does **not** replace the gameplay baseline with the older gameplay copy bundled in the audio package.
+- Test255 / V0.270 is currently **WORK IN PROGRESS** and must not yet be treated as a canonical checkpoint.
+- The user has requested a BIN/CUE after Test255 attract/demo work is finished and validated.
 
-## Hardware image status
+## Canonical lineage since Test200
 
-Test144/V0.159 remains the current pending hardware-validation image. Test100/V0.115 remains the latest image physically confirmed working on real NTSC-U Saturn + Terraonion MODE until Test144 is physically tested.
+Test200 → subsequent validated checkpoints → Test240 hardware image → Test251 → Test252 → Test253 → **Test254 canonical** → Test255 WIP.
 
-## Test172-180 — linked actor / TAG / Royal cleanup
+Important known image state:
 
-- **Test172 ROM-EXACT:** `$21358` preserves registers then sets actor `+$B6 bit7`.
-- **Test173 ROM-EXACT:** a non-null `+$7E` link has `+$B5 bit7` cleared and `+$B6 bit7` set.
-- **Test174 ROM-EXACT:** actor `+$61==$53` follows `+$26` and sets that actor `+$B6 bit7`.
-- **Test175 ROM-EXACT:** `$206FE` begins a four-entry cleanup at `$0C0744`, zeroing four longwords per entry.
-- **Test176 ROM-EXACT:** `$20156` selects raw effect `$3109` only for global `$1C0162==4/9`, otherwise `$3105`.
-- **Test177 ROM-EXACT:** `$213A6` splits on the TAG/Royal mode bit; TAG follows `+$26` and clears linked `+$34 bit0`.
-- **Test178 ROM-EXACT:** TAG cleanup tests linked `+$33 bit1` and clears `+$56 bit6` when set.
-- **Test179 ROM-EXACT:** TAG cleanup follows `+$86`; when `+$33 bit1` is clear it clears `+$B5 bit7` and sets global `$1C1697 bit0`.
-- **Test180 ROM-EXACT:** Royal cleanup follows non-null `+$7E` and clears its `+$B5 bit7`.
+- Test240 is the last BIN/CUE known to boot correctly in the recent line.
+- No Test255 BIN/CUE has been generated yet.
 
-These facts materially tighten the linked-actor/role cleanup around the `+$109` producer. They still do **not** prove a human-readable semantic for `+$109`.
+## Test251 / V0.266
 
-## Test181-188 — Earthquake raw action `$47`
+- Eight original gfx ROMs verified and full 8 MiB `gfx2` reconstructed.
+- All recoverable RISE poses resolved.
+- PICK UP pose 395 resolved.
+- 90 `Gxy.PAK` partner-dependent packs generated.
+- 873 exact partner-dependent ground/PICK UP compositions recovered.
+- Fxx finisher overlays and Gxy ground overlays separated.
+- LWRAM worst measured combination remained below 1 MiB.
 
-- **Test181 ROM-EXACT:** phase 0 with zero `+$22` writes actor `+$01=2`.
-- **Test182 ROM-EXACT:** action `$47` uses dedicated phase-1 sprite offsets `$F8/$F0`, distinct from neighbouring `$F0/$28`.
-- **Test183 ROM-EXACT:** contact resolution requires actor `+$37 bit4`, sets `+$18 bit7`, then calls `$1110E/$11152`.
-- **Test184 ROM-EXACT:** contact branch A writes victim state 4, decrements `+$64` by 2, increments `+$C7`, writes `+$68=10`, emits effects `$2B/$32`.
-- **Test185 ROM-EXACT:** branch A increments victim `+$E0` only for neighbouring raw action `$46`; raw action `$47` takes `+$E2`.
-- **Test186 ROM-EXACT:** contact branch B writes victim state 5, `+$60=$77`, `+$68=10`, increments `+$C7`.
-- **Test187 ROM-EXACT:** phase `$FE` completes into actor state 7, sets `+$26 bit7`, calls `$10BD0` with `D0=$18,D1=-1,D2=0`.
-- **Test188 ROM-EXACT:** the fallback extra `$FFD0` impulse is exclusive to neighbouring raw action `$46`, not `$47`.
+## Test252 / V0.267
 
-Action `$47` is now mechanically bounded much further, but its trademark move identity remains **CANDIDATE** until independently demonstrated. It is not promoted to Vertical Splash from inference.
+### ROM-EXACT
 
-## Test189-195 — Signature / Super Throw callback operands
+- Program palette loader proved 16 banks at base `$2F22`, stride 32 bytes.
+- Bank 15 source offset proved as `$3102`.
+- Exact bank-15 palette and 100 object compositions for poses 114–123 recovered.
+- `OBJ15.PAK` preserves original per-piece palette bank, including bank 0/15 mixtures.
+- Legacy Test212 fallback registry reduced to empty because all registered families became exact-covered.
 
-- **Test189 ROM-EXACT:** Warrior Gorilla Press has two impact paths and both write victim `+$68=$16` (22).
-- **Test190 ROM-EXACT:** Jake DDT writes victim `+$64=$23`, sets bits5/3 and writes exact `+$68=$1C` (28).
-- **Test191 ROM-EXACT:** Boss Man Slam writes victim `+$64=$2A`, increments `+$C7` by 5, writes exact `+$68=$16` (22), then sets bits3/5.
-- **Test192 ROM-EXACT:** Smash Suplex writes victim `+$64=5`, exact `+$68=$12` (18), then sets `+$64 bit5` and `+$32 bit3`.
-- **Test193 ROM-EXACT:** Perfect Plex contains two exact `+$68=$16` (22) victim writes; alternate branch also writes `+$60=$5E`.
-- **Test194 ROM-EXACT:** Slaughter Cobra Clutch pulse is exact `+$68=5 -> $111C8`; alternate release writes victim `+$60=$62`, sets flags and invokes `$215B6`.
-- **Test195 ROM-EXACT:** DiBiase Million Dollar Dream pulse is exact `+$68=5 -> $111C8`; alternate release writes victim `+$60=$63`, sets flags and invokes `$215B6`.
+### PROVISIONAL Saturn infrastructure
 
-Hold pulse operands remain distinct from total hold damage/cadence.
+- `OBJ15.PAK` kept as a persistent HWRAM pack rather than reusing the shared LWRAM overlay slot.
+- CDFS file capacity increased to avoid directory truncation.
 
-## Test196-200 — exact clear-stage stamina restore
+## Test253 / V0.268
 
-- **Test196 ROM-EXACT:** `$90D6` iterates exactly four actor records from `$1C05B0` at stride `$10C`, skipping records with `+$FF bit0` set.
-- **Test197 ROM-EXACT:** restore amount comes from global config `$1C0066 bits $6000` through exact table `{24,32,12,0}` at `$912A`.
-- **Test198 ROM-EXACT:** the same amount is added to live stamina `+$66` and queued stamina delta `+$6A`.
-- **Test199 ROM-EXACT:** live `+$66` is clamped to actor maximum `+$72`; the separately queued `+$6A` addition is preserved.
-- **Test200 VALIDATED RUNTIME:** native TAG `game_clear_stage_restore()` is regression-validated against those exact semantics: human-role exclusion, exact table, max clamp and queued stamina/HUD delta behavior.
+### ROM-EXACT
 
-## IMPLEMENTADO
+- Ring exit action `0x69`, descriptor `$199FC`, poses 32–38.
+- Front ring entry action `0x6C`, descriptor `$19C28`, poses 39–43.
+- Ring-transition compositions preserve original bank-14 rope pieces and exact bank-14 palette.
+- Victim ring-out chain recovered through state 4 / selector 14, poses 177→177→178→179, then actions `0x68→0x6A`.
+- Attacker ring-out action recovered as raw `0x06`, descriptor `$13020`, poses 175→176→0.
+- Ground roll/recovery sequences recovered from action `0x4B` using 110/111 or 112/113 then 104.
+- Grapple struggle recovered as raw `0x29`, descriptor `$1656A`, partner-dependent poses 245/246/247/466 and two-cycle ownership flow.
+- `RING14.PAK` generated for exact mixed wrestler/rope compositions.
 
-- Native Saturn combat/runtime architecture with VDP1/VDP2-oriented source path and validated SH-2/Yaul build lineage through Test147.
-- Arcade HUD/stamina model, exact human maxima, CPU stage/difficulty stamina progression, exact clear-stage restore table and Test200 runtime alignment.
-- Ten-stage TAG campaign, opponent selection structure, victory/defeat/Continue flow and identity-persistent player stamina.
-- CPU/apron partner logic, Power Up, grapple rota/counters, Irish whip/running paths, submissions, ground actions, rise/recovery prompts and exact 20-count count-out.
-- Manual TAG on the original two-button Kick route; reserve HUD/stamina and four-wrestler TAG presentation framework.
-- Ringside object pickup/use, nearest-object CPU seeking and opponent-distance gate, pickup/use clocks, state-2/state-4 lifecycle evidence and native object runtime.
-- Royal Rumble opening/active-slot framework, replacement lifecycle, entrant queue/callout, human elimination and final-survivor resolution.
-- Difficulty source and wrestler-specific weighted AI tables.
-- Native finisher state-machine/overlay framework for the ten selectable wrestlers, with evidence gating; high-confidence routes remain playable while unsupported identities are blocked rather than fabricated.
-- Exact callback impact operands now pinned for Warrior, Jake, Boss Man, Smash, Perfect, Slaughter and DiBiase as detailed above.
-- Exact Rumble-only stamina recovery gate/exclusions already preserved from earlier checkpoints; clear-stage `$90D6` role exclusion/table/queue semantics are now separately closed through Test200.
+### PROVISIONAL / pending
 
-## REGISTRADO PERO NO IMPLEMENTADO
+- Some Saturn spatial interpolation for crossing ropes and expelled-body trajectory remains native/provisional.
+- CPU arbitration/cadence for simultaneous grapple inputs is not fully proved exact.
 
-- Human-readable gameplay semantic of raw `+$109/+$60/+$61` and therefore live CPU stamina-tier behavior based on that still-unproven semantic.
-- Independent proof of Earthquake action `$47` as his trademark Vertical Splash; the route is mechanically recovered but identity remains CANDIDATE.
-- Completion/proof of every Super Throw / Signature Finisher entry condition, callback composition and total hold cadence, especially Legion of Doom's team finisher.
-- Full Hawk/Animal graphical/behavior integration.
-- Exact TAG/Royal victory clap, winner pose, defeated/sad pose, coordinates and timing.
-- Exact TAG apron placement/entry/exit lifecycle and all evidenced double-team forms.
-- Remaining Royal entrant artwork/path/timing and additional elimination forms.
-- Exact arcade result typography/layout, records presentation, mode-select glow, attract/promo scenes and full audio implementation.
-- Remaining stage/scenario/cage completeness beyond the current ring/runtime framework.
+## Test254 / V0.269 — canonical audio integration
 
-## PROVISIONAL
+### RECOVERED_ROM / ROM-EXACT associations preserved
 
-- Native RNG/entropy where original arcade source has not yet been recovered.
-- Rumble callout artwork/layout, native entry geometry and portions of entrant ordering.
-- Raw-to-Saturn coordinate/scale transform, reserve visual correction and Rumble Body Slam rope threshold.
-- Referee trajectory, TAG presentation timing, rope deflection curve and dedicated rope-entry mapping.
-- Ground PICK UP completion timing/native state translation.
-- Exact per-hold submission drain/escape timing and total hold damage cadence.
-- Post-match staging coordinates/speed.
-- Earlier Restrain native timing/assist path/damage and other pre-Test100 explicitly provisional items.
+- Canonical sound command/event layer integrated from the supplied audio package.
+- `SDRV.BIN`, complete `AUDADP.PAK`, recovered OKI decoder and music masters retained.
+- Stage music table preserved.
+- Low-stamina `<0x18` warning command `0x0B` and music restoration path preserved.
+- Ring-out count 17/18/19/20 → `0x65/0x66/0x67/0x68` preserved.
+- Proven long-impact/finisher command `0x32` associations retained only where supported by ROM evidence.
 
-## PENDIENTE DE BUILD SATURN
+### PROVISIONAL Saturn transport
 
-- Test144/V0.159 is still the newest generated hardware image and awaits physical validation.
-- Test100/V0.115 remains the latest image confirmed on real NTSC-U Saturn + Terraonion MODE.
-- Tests145-200 have **not** produced a new BIN/CUE. A new Saturn integration image should be generated only after the user requests the post-Test200 hardware phase or when a Saturn-only blocker justifies it.
+- The complete `AUDADP.PAK` remains the canonical source, but only proven gameplay-linked samples are preloaded/decoded into SCSP RAM.
+- This avoids approximately 480 KiB of persistent HWRAM use from the original integration backend.
+- Unproven gameplay→audio command associations remain registered but inactive.
 
-## Validation artifact
+## Test255 / V0.270 — WORK IN PROGRESS
 
-Detailed Tests172-200 evidence is preserved in `docs/TEST172-200-CLOSURE.md` inside the canonical Test200 source snapshot.
+Do **not** treat this section as validated/canonical until a Test255 checkpoint ZIP is produced and hashed.
+
+### ROM-EXACT evidence already recovered in WIP
+
+- Common arcade animation phase engine around `$1C0C8–$1C14E`:
+  - `+$24` = frame/phase index word;
+  - `+$25` = low byte of that index;
+  - `+$22` = phase timer;
+  - `$00FE` = finite-sequence completion marker;
+  - `FF00` = frame held for callback-controlled release.
+- Elbow Drop raw `0x24` impact/audio timing recovered at the exact ROM phase boundary rather than the old provisional tick.
+- Additional finisher impact timing work for Jake/Slaughter/Perfect is being reconciled against callback phases.
+- C07/C09 roster packs were found to have 221 frames while runtime requires 223; they were regenerated with two empty terminal frames only, preserving all existing graphics and preventing future `CHECK309`.
+
+### Attract/demo reverse engineering — mandatory Test255 target
+
+The current Saturn attract mode is explicitly provisional and must be replaced by the original arcade state machine.
+
+Recovered so far:
+
+- The arcade attract flow has **14 states**.
+- State durations recovered from ROM:
+  `848, 736, 1040, 928, 656, 928, 1200, 944, 1616, 1152, 800, 816, 832, 864` ticks.
+- States 2–13 feature the wrestlers in this recovered order:
+  **Hogan → Warrior → Jake → Boss Man → Slaughter → Perfect → Earthquake → DiBiase → Hawk → Animal → Smash → Crush**.
+- Each featured wrestler must actually be present in that state's demo roster; fixed portrait/roster mismatches are forbidden.
+- Wrestler portrait routine located around `$8CF8`; portrait animation timing and removal thresholds are being recovered.
+- ROM biography/text renderer located around `$2503C`; wrestler data such as weight/from/birthday/trademark hold are recoverable directly rather than transcribed from screenshots.
+- TAG demo overlay uses recovered text ID `$29`, graphics block `$15`, palette bank 7.
+- Royal demo overlay uses recovered text ID `$2A`, graphics block `$16`, palette bank 6.
+- Demo overlay/logos must be built from original ROM graphics/tile data, not redrawn from screenshots.
+- Demolition/presenter segments use Smash/Crush IDs 4/5 and contain recovered audio/event commands, but exact per-speaker animation/event mapping is still being resolved.
+- Records routine around `$1B4E` has been located; TAG vs Royal records variant details still need full closure.
+- Hawk/Animal attract/demo artwork must be recovered rather than skipped.
+
+### REGISTRADO PERO NO IMPLEMENTADO in Test255 WIP
+
+- Exact mapping of the two distinct Demolition speaker sequences to their frame/event/audio commands.
+- Fully separated TAG-records and Royal-records presentation data.
+- Hawk/Animal attract/demo graphical packs.
+- Complete integration of the 14-state attract machine into the Saturn runtime.
+- Any presentation audio command whose producer/meaning is not yet independently demonstrated.
+
+## Existing important gameplay issues to preserve/retest
+
+- Rope-side fix: the actual contacted rope side is now retained; needs hardware retest.
+- Presenter exit choreography is partly implemented, but the exact back-facing presenter sprite remains pending unless recovered during attract/presentation work.
+- CHECK338 previously occurred during playable attract/demo; later overlay serialization and separate object/ring packs were designed to avoid reintroducing that collision.
+
+## Fidelity labels — mandatory
+
+- **ROM-EXACT**: directly demonstrated from original ROM/program/gfx/audio evidence.
+- **PROVISIONAL**: native Saturn implementation or semantics not yet proved exact.
+- **REGISTERED BUT NOT IMPLEMENTED**: recovered/identified but not yet active in runtime.
+
+Never promote move identity, AI behavior, timing, geometry, presentation or audio meaning from plausibility alone.
+
+## Persistence policy
+
+After each canonical checkpoint:
+
+1. Save the source ZIP to `/WWF-Saturn/` in ChatGPT Library.
+2. Update `PROJECT-STATE.md` and `HANDOFF.md` in this private repository immediately.
+3. Add/update focused documentation when a major subsystem changes.
+4. Generate BIN/CUE only when explicitly requested or when the current task explicitly requires it.
+
+Historical Test200 details remain recoverable from Git history and the Test200 checkpoint; this file now tracks the current canonical line rather than duplicating all historical evidence verbatim.
