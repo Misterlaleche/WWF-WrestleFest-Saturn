@@ -1,1 +1,1 @@
-Test255 WIP8 — corrected $B0C8 speaker-only script path; mode1 $316A, mode2 $316B->$3178; exact state1/state2 Demolition->TAG/Royal records transition modeled and audited. Canonical Test254 unchanged; no BIN/CUE.
+Test255 WIP9 — ROM-exact biography portrait path recovered for all 12 wrestlers, including Hawk set $3A and Animal set $3B; ATTRPRT asset contract and ROM-audit tests added. WIP8 Demolition/records transitions retained. Canonical Test254 unchanged; no validated Test255 BIN/CUE yet.
