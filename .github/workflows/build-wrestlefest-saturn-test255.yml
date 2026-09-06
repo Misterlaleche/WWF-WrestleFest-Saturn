@@ -31,11 +31,24 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/wwf-test255
-          mkdir -p /tmp/wwf-test255
+          rm -rf /tmp/wwf-test255 build-test255
+          mkdir -p /tmp/wwf-test255 build-test255
           unzip -q build-input/WWF-Saturn-Test255-WIP9-source.zip -d /tmp/wwf-test255
-          mkdir -p build-test255
           cp -a /tmp/wwf-test255/. ./build-test255/
+          # WIP9 source snapshot inherited a packaging omission from the Test254 line:
+          # these two modules are part of the active main.c/Makefile contract but were
+          # not included in the ZIP. Restore the exact branch copies before compiling.
+          cp campaign_presentation.c campaign_presentation.h build-test255/
+
+      - name: Validate restored campaign presentation module
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd build-test255
+          gcc -std=c11 -Wall -Wextra -Werror -I. campaign.c campaign_presentation.c tools/test217_campaign_progress_screen.c -o /tmp/test217
+          /tmp/test217
+          gcc -std=c11 -Wall -Wextra -Werror -I. campaign_presentation.c tools/test218_records_screen_model.c -o /tmp/test218
+          /tmp/test218
 
       - name: Stamp Test255 identity
         shell: bash
