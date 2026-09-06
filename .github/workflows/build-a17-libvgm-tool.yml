@@ -1,0 +1,32 @@
+name: Build A17 libvgm renderer
+
+on:
+  push:
+    branches: [audio-tools-a17-temp]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build libvgm vgm2wav with Nuked OPM
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build zlib1g-dev libiconv-hook-dev || true
+          git clone --depth 1 --recursive https://github.com/ValleyBell/libvgm.git
+          cmake -S libvgm -B libvgm/build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build libvgm/build --target vgm2wav
+          find libvgm/build -type f -name vgm2wav -print
+          exe="$(find libvgm/build -type f -name vgm2wav | head -1)"
+          test -x "$exe"
+          mkdir -p out
+          cp "$exe" out/vgm2wav
+          ldd "$exe" > out/ldd.txt || true
+          "$exe" > out/usage.txt 2>&1 || true
+          sha256sum out/vgm2wav > out/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a17-libvgm-renderer-linux
+          path: out/
