@@ -1,1 +1,1 @@
-Test255 WIP6 — corrected AE20 to three simultaneous set-$2C objects; exact left/center/right scripts, speaker-side selectors, 32-frame INTER2C asset builder/palettes audited. Canonical Test254 unchanged; no BIN/CUE.
+Test255 WIP7 — exact $69C8 TAG/Royal attract records producer recovered: Demolition->records call order, 11x6 default tables, RAM selection, $0100 hold and row tilemap offsets ROM-audited. Canonical Test254 unchanged; no BIN/CUE.
