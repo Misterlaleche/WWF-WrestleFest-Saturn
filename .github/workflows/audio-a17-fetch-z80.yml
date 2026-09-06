@@ -1,0 +1,25 @@
+name: Audio A17 fetch Z80 core
+
+on:
+  push:
+    branches:
+      - tooling/audio-a17-z80-core
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch pinned public Z80 core
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          curl -L --fail --retry 3 https://raw.githubusercontent.com/superzazu/z80/master/z80.c -o out/z80.c
+          curl -L --fail --retry 3 https://raw.githubusercontent.com/superzazu/z80/master/z80.h -o out/z80.h
+          sha256sum out/z80.c out/z80.h | tee out/SHA256SUMS.txt
+          gcc -std=c11 -Wall -Wextra -Werror -c out/z80.c -o out/z80.o
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audio-a17-z80-core
+          path: out/
