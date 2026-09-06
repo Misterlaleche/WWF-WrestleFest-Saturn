@@ -1,0 +1,26 @@
+name: Build A17 Z80 tracer
+
+on:
+  push:
+    branches: [audio-tools-a17-temp]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build tracer
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 https://github.com/superzazu/z80.git /tmp/z80
+          cp /tmp/z80/z80.c /tmp/z80/z80.h tools/
+          gcc -std=c11 -O2 -Wall -Wextra -Werror tools/a17_z80_trace.c tools/z80.c -Itools -o tools/a17_z80_trace
+          mkdir -p out
+          cp tools/a17_z80_trace out/
+          sha256sum out/a17_z80_trace > out/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a17-z80-tracer-linux
+          path: out/
