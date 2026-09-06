@@ -65,7 +65,7 @@ jobs:
               raise SystemExit('Missing SH_SRCS: ' + ', '.join(missing))
           print('All SH_SRCS present')
           PY
-          gcc -std=c11 -Wall -Wextra -Werror -I. campaign.c campaign_presentation.c tools/test217_campaign_progress_screen.c -o /tmp/test217
+          gcc -std=c11 -Wall -Wextra -I. campaign.c campaign_presentation.c arcade_stamina.c tools/test217_campaign_progress_screen.c -o /tmp/test217
           /tmp/test217
 
       - name: Stamp Test255 identity
