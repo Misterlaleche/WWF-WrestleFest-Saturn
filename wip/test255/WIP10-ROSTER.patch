@@ -1,0 +1,50 @@
+--- wip9orig/roster_data.h
++++ wip10/roster_data.h
+@@
+-#define ROSTER_COUNT 10
++#define ROSTER_COUNT 12
+@@
+-static const char *roster_names[10]={"HULK HOGAN","ULTIMATE WARRIOR","JAKE ROBERTS","BIG BOSSMAN","DEMOLITION SMASH","DEMOLITION CRUSH","SGT. SLAUGHTER","MR. PERFECT","EARTHQUAKE","TED DIBIASE"};
+-static const unsigned roster_bytes[10]={160778,165334,140603,132354,148610,149055,145909,131270,163172,130688};
+-static const unsigned roster_hash[10]={409649802U,3835023899U,204389795U,3164682069U,2179086144U,1080509431U,3904185800U,1885428242U,1049298210U,3311747551U};
++static const char *roster_names[12]={"HULK HOGAN","ULTIMATE WARRIOR","JAKE ROBERTS","BIG BOSSMAN","DEMOLITION SMASH","DEMOLITION CRUSH","SGT. SLAUGHTER","MR. PERFECT","EARTHQUAKE","TED DIBIASE","HAWK","ANIMAL"};
++static const unsigned roster_bytes[12]={160778,165334,140603,132354,148610,149055,145909,131270,163172,130688,55279,48137};
++static const unsigned roster_hash[12]={409649802U,3835023899U,204389795U,3164682069U,2179086144U,1080509431U,3904185800U,1671522160U,1049298210U,749115249U,3246411099U,1832527279U};
+@@ roster_arcade_frame_character
++ case 10: switch(pose){case 104:return 215;case 110:return 216;case 111:return 217;case 112:return 218;case 113:return 219;case 266:return 221;case 267:return 222;case 395:return 220;default:break;} break;
++ case 11: switch(pose){case 104:return 215;case 110:return 216;case 111:return 217;case 112:return 218;case 113:return 219;case 266:return 221;case 267:return 222;case 395:return 220;default:break;} break;
+
+--- wip9orig/main.c
++++ wip10/main.c
+@@
+-static uint8_t *character_data[10],*overflow_character;
+-static roster_pack_t character_packs[10];
++static uint8_t *character_data[ROSTER_COUNT],*overflow_character;
++static roster_pack_t character_packs[ROSTER_COUNT];
+@@
+-  unsigned ch=order[i];if(ch>=10){check_error=338;return;}unsigned size=(roster_bytes[ch]+2047)&~2047U;char name[16];sprintf(name,"C%02u.PAK",ch);
++  unsigned ch=order[i];if(ch>=ROSTER_COUNT){check_error=338;return;}unsigned size=(roster_bytes[ch]+2047)&~2047U;char name[16];sprintf(name,"C%02u.PAK",ch);
+@@
+-static unsigned actor_count(unsigned ch,unsigned frame){if(!character_data[ch]||frame>=ROSTER_FRAMES)return 0;
++static unsigned actor_count(unsigned ch,unsigned frame){if(ch>=ROSTER_COUNT||!character_data[ch]||frame>=ROSTER_FRAMES)return 0;
+@@
+- if(!loaded_roster||!character_data[ch]){check_error=322;return;}
++ if(ch>=ROSTER_COUNT||!loaded_roster||!character_data[ch]){check_error=322;return;}
+@@
+-   if(ch<10){const char *name=roster_names[ch];
++   if(ch<ROSTER_COUNT){const char *name=roster_names[ch];
+@@
+-  if(ch<10){
++  if(ch<ROSTER_COUNT){
+@@
+-  const char *name=ch<10?roster_names[ch]:"TEAM";
++  const char *name=ch<ROSTER_COUNT?roster_names[ch]:"TEAM";
+
+Generated assets in WIP10 source snapshot:
+- cd/C10.PAK SHA256 e3e6a58ee0e7f80228f720c251ee69378ffc8c839d681f73a9bde31bb578d3c5
+- cd/C11.PAK SHA256 6b2cab47740db5ae02f53679052e365e7d557cef2050811600eec49248ffa788
+- cd/C07.PAK normalized 223-frame SHA256 b0f4825c9fa73b98e17204c3690e1e7aee7a5ce7bc5368ec7c2b41f41979056c
+- cd/C09.PAK normalized 223-frame SHA256 0c07b5a704a977c38beaaae64fa0ff721c631d5ba485c162cd339aa4024b7473
+
+Full exact source snapshot: /WWF-Saturn/WWF-Saturn-Test255-WIP10-source.zip
+SHA256 6d60cc4e2b2d0fdbaea5d1054d2f3c39434a1e64f3dcf57b8ed0446c713ea91e
