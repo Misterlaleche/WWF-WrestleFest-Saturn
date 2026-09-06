@@ -40,11 +40,9 @@ At `$AB3A..$AB47`, the selected byte is likewise ORed with `$3100` and sent thro
 
 ## Important non-claim
 
-This proves producer identities and selection mechanics. It does **not** yet prove
-which of `0x7B/0x7C/0x7D/0x73` is the spoken line heard in each of the two distinct
-Demolition interstitials. `$A654` is part of a broader presentation/game loop, so
-semantic speaker/phrase labels remain **REGISTERED BUT NOT IMPLEMENTED** until the
-state-0/state-1 interstitial producer chain is independently demonstrated.
+This proves producer identities and selection mechanics. It does **not** prove semantic
+phrase labels for `0x7B/0x7C/0x7D/0x73` beyond their producer path. Those semantics remain
+separate from the dedicated state-entry Demolition/presenter interstitial described below.
 
 ## Attract structure refinement
 
@@ -52,8 +50,8 @@ The 14-state attract controller remains:
 - states 0/1: the two special TAG/Royal attract states (no biography character);
 - states 2..13: the twelve wrestler-featured biography/demo states.
 
-Therefore the two Demolition/records sequences must be resolved inside the special
-state-0/state-1 flow rather than invented as additional attract states.
+Therefore the two Demolition/records sequences are resolved inside transitions around the
+special state-0/state-1 flow rather than invented as additional attract states.
 
 ## Royal state-1 six-actor correction
 
@@ -68,29 +66,20 @@ IDs come from `$0F76`:
 Royal roster can be represented without truncation. All other attract states retain
 four participants.
 
-## Two state-entry interstitial scripts recovered
+## Demolition/presenter interstitial object set recovered
 
-The attract setup path at `$0AC0 -> $0B1C` proves that `$AE20` is invoked with
-mode 1 while entering attract state 1 and mode 2 while entering attract state 2.
-`$AE20` builds three presentation objects (object type `$2C`) and runs mode-specific
-scripts through `$B0C8` using the pointer table at `$B19C`.
+The attract setup path at `$0AC0 -> $0B1C` calls `$AE20` while entering attract states 1 and 2. Further reverse engineering corrects the earlier WIP5 interpretation: `$AE20` creates **three simultaneous presentation objects**, all using graphics set `$2C`, and `$B19C` is a three-object script pointer table rather than a mode-to-script table.
 
-- mode 1 -> `$B1E2`: 62 phases, 707 active ticks, terminator duration `$FE`.
-  The only high-bit event marker is raw frame `$8D` at phase 3. Mode 1 initializes
-  the audio-table cursor to 2, so `$B0C8` sends exactly `$316A` via `$2052`.
-- mode 2 -> `$B25E`: 30 phases, 431 active ticks, terminator duration `$FE`.
-  The only high-bit event marker is raw frame `$83` at phase 1. Mode 2 initializes
-  the audio-table cursor to 4, so `$B0C8` sends exactly `$316B` via `$2052`.
+ROM-exact object layout and scripts:
 
-The dedicated command table at `$B14A` is `3179, 316A, 316B, 3178`.
-These data are represented by `arcade_interstitial.c/.h` and guarded byte-for-byte
-by `tools/test255_interstitial_rom.c`.
+- object 0 / left: x=`$48`, resource/palette family `$33`, script `$B1A8`, 29 phases / 353 active ticks, frames `$16..$1E`;
+- object 1 / centre: x=`$98`, resource/palette family `$32`, script `$B1E2`, 62 phases / 707 active ticks, frames `$0A..$15` plus `$1F`;
+- object 2 / right: x=`$F8`, resource/palette family `$31`, script `$B25E`, 30 phases / 431 active ticks, frames `$00..$09`.
 
-**ROM-EXACT:** invocation points, script pointers, every frame/duration pair, event
-markers, total active timing and raw sound commands.
+The `$32` family decodes visually from the original graphics ROM as the presenter; `$31` and `$33` are the two Demolition members. Mode 1 sets the audio-table cursor to 2 and sets object2 `+$1D`, proving the **right** Demolition object is the active/speaking member. Mode 2 sets the cursor to 4 and sets object0 `+$1D`, proving the **left** Demolition object is active/speaking. The dedicated sound table at `$B14A` remains `3179,316A,316B,3178`.
 
-**REGISTERED BUT NOT IMPLEMENTED:** the exact graphical identity of the two speaking
-Demolition members. Arcade captures establish that these are the two distinct
-Demolition interstitials in this sequence, but the object-type `$2C` frame graphics
-still need to be decoded so Smash/Crush is assigned from ROM graphics rather than
-from screen-position inference.
+`tools/build_interstitial2c_assets.py` now decodes the complete set `$2C` from the verified original `gfx2` ROM image and generates `INTER2C.PAK` plus three RGB555 palettes. Current exact asset census: **32 frames, 2,288 composition records, 973 unique tiles**. `tools/test255_interstitial_assets.c` validates the generated pack and palette conversion against the original program/gfx data.
+
+**ROM-EXACT:** three-object creation, set `$2C`, object positions, script pointers and phase bytes, resource/palette families, speaker-side selection for mode 1/mode 2, sound-table cursor selection, all 32 decoded composition frames and palette sources.
+
+**REGISTERED BUT NOT IMPLEMENTED:** final Saturn runtime replacement of the old provisional interstitial and a direct internal-ROM proof assigning the names Smash vs Crush to the left/right graphical families. The left/right Demolition identities themselves are graphically demonstrated.
