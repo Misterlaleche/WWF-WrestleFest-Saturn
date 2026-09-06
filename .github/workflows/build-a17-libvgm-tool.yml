@@ -9,16 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build libvgm vgm2wav with Nuked OPM
+      - name: Build libvgm vgm2wav with forced Nuked OPM
         shell: bash
         run: |
           set -euxo pipefail
           sudo apt-get update
           sudo apt-get install -y cmake ninja-build zlib1g-dev libiconv-hook-dev || true
           git clone --depth 1 --recursive https://github.com/ValleyBell/libvgm.git
+          sed -i 's@// set_core(plrEngine,DEVID_YM2612,FCC_NUKE);@set_core(plrEngine,DEVID_YM2151,FCC_NUKE);@' libvgm/vgm2wav.cpp
+          grep 'set_core(plrEngine,DEVID_YM2151,FCC_NUKE);' libvgm/vgm2wav.cpp
           cmake -S libvgm -B libvgm/build -G Ninja -DCMAKE_BUILD_TYPE=Release
           cmake --build libvgm/build --target vgm2wav
-          find libvgm/build -type f -name vgm2wav -print
           exe="$(find libvgm/build -type f -name vgm2wav | head -1)"
           test -x "$exe"
           mkdir -p out
@@ -28,5 +29,5 @@ jobs:
           sha256sum out/vgm2wav > out/SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
         with:
-          name: a17-libvgm-renderer-linux
+          name: a17-libvgm-renderer-nuked-linux
           path: out/
