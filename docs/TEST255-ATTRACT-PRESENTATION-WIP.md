@@ -54,3 +54,16 @@ The 14-state attract controller remains:
 
 Therefore the two Demolition/records sequences must be resolved inside the special
 state-0/state-1 flow rather than invented as additional attract states.
+
+## Royal state-1 six-actor correction
+
+The generic `$0F3E` table exposes the first four entries for every attract state, but
+state 1 takes a ROM-proven special branch at `$0E2C -> $0ECC`. That path sets the
+Royal mode word and starts a DBF loop with `D0=5`, creating six actor records. Their
+IDs come from `$0F76`:
+
+`03 06 07 08 09 02` = Boss Man, Slaughter, Perfect, Earthquake, DiBiase, Jake.
+
+`arcade_attract_state_desc_t` now has `participant_count` and six slots so the exact
+Royal roster can be represented without truncation. All other attract states retain
+four participants.
