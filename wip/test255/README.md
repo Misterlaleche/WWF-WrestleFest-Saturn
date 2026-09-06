@@ -1,18 +1,20 @@
-# Test255 / V0.270 WIP — attract state engine
+# Test255 / V0.270 WIP — ROM-exact attract tables
 
-This is WIP evidence/code, not a canonical checkpoint.
+Not canonical yet. Test254/V0.269 remains the validated baseline.
 
-## ROM-EXACT recovered data now executable
-- original 14-state duration table at program ROM offset `0x119A`: `848, 736, 1040, 928, 656, 928, 1200, 944, 1616, 1152, 800, 816, 832, 864`;
-- states 2–13 protagonist order: Hogan, Warrior, Jake, Boss Man, Slaughter, Perfect, Earthquake, DiBiase, Hawk, Animal, Smash, Crush;
-- overlay producer around `0x8CF8` selects TAG text ID `0x29`, graphics block `0x15`, palette bank 7 and Royal text ID `0x2A`, graphics block `0x16`, palette bank 6.
+## ROM-EXACT recovered and executable
+- 14 state durations at program ROM `$119A`.
+- Exact four-wrestler roster for every state at `$0F3E`.
+- Featured wrestler/portrait table at `$8E9A`: `FFFF, FFFF, Hogan, Warrior, Jake, Boss Man, Slaughter, Perfect, Earthquake, DiBiase, Hawk, Animal, Smash, Crush`.
+- Overlay routine around `$8CF8`: TAG text ID `$29`, gfx block `$15`, palette bank 7; Royal text ID `$2A`, gfx block `$16`, palette bank 6.
 
-Host test passes for the executable 14-state scheduler.
+The recovered state rosters are:
+0 Hogan/Warrior/Smash/Crush; 1 Boss Man/Slaughter/Perfect/Earthquake; 2 Hogan/Warrior/Slaughter/Perfect; 3 Warrior/Hogan/DiBiase/Earthquake; 4 Jake/Boss Man/Hawk/Animal; 5 Boss Man/Jake/Slaughter/DiBiase; 6 Slaughter/Perfect/Hogan/Warrior; 7 Perfect/DiBiase/Jake/Hogan; 8 Earthquake/Slaughter/Boss Man/Jake; 9 DiBiase/Earthquake/Warrior/Boss Man; 10 Hawk/Animal/Jake/Warrior; 11 Animal/Hawk/Jake/Warrior; 12 Smash/Crush/Hogan/Warrior; 13 Crush/Smash/Hogan/Warrior.
 
-## REGISTERED BUT NOT IMPLEMENTED / not yet promoted
-- exact mapping of the two Demolition speaker segments to per-speaker animation/audio events;
-- exact TAG-records vs Royal-records placement/data;
-- Hawk/Animal C10/C11 roster/attract packs;
-- final runtime integration replacing the old fixed 1800-tick demo and fixed cast.
+## Still pending
+- exact Demolition A/B speaker animation/audio mapping;
+- exact TAG-records/Royal-records sub-sequence timing and presentation;
+- Hawk/Animal Saturn packs needed before states containing IDs 10/11 can be made live safely;
+- final replacement of the old fixed 1800-tick Saturn demo path.
 
 No BIN/CUE generated.
