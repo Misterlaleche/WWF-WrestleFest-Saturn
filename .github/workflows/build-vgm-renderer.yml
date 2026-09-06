@@ -1,0 +1,43 @@
+name: Build WWF Nuked-OPM renderer
+
+on:
+  push:
+    branches: [audio-a13-scsp]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build build-essential zlib1g-dev
+      - name: Build pinned libvgm with Nuked OPM
+        run: |
+          git clone https://github.com/ValleyBell/libvgm.git
+          git -C libvgm checkout c8b998b606895990c409a512b86c5509070f9f0d
+          cmake -S libvgm -B libvgm-build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_LIBAUDIO=OFF \
+            -DBUILD_LIBEMU=ON \
+            -DBUILD_LIBPLAYER=ON \
+            -DBUILD_PLAYER=OFF \
+            -DBUILD_VGM2WAV=ON \
+            -DBUILD_TESTS=OFF \
+            -DUSE_SANITIZERS=OFF \
+            -DSNDEMU__ALL=OFF \
+            -DSNDEMU_YM2151_NUKED=ON \
+            -DSNDEMU_MSM6295_ALL=ON
+          cmake --build libvgm-build -j2
+          exe="$(find libvgm-build -type f -name vgm2wav -perm -111 | head -1)"
+          test -n "$exe"
+          cp "$exe" ./vgm2wav
+          chmod +x ./vgm2wav
+          ./vgm2wav 2>&1 | head -80 || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: libvgm-nuked-opm-renderer
+          path: vgm2wav
+          if-no-files-found: error
