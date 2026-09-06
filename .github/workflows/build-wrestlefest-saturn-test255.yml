@@ -2,6 +2,15 @@ name: Build WWF WrestleFest Saturn Test255
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - test255-attract-wip
+    paths:
+      - .github/workflows/build-wrestlefest-saturn-test255.yml
+      - campaign_presentation.c
+      - campaign_presentation.h
+      - wip/test255/**
+      - build-input/WWF-Saturn-Test255-WIP9-source.zip
 
 permissions:
   contents: read
@@ -31,10 +40,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/wwf-test255
-          mkdir -p /tmp/wwf-test255
+          rm -rf /tmp/wwf-test255 build-test255
+          mkdir -p /tmp/wwf-test255 build-test255
           unzip -q build-input/WWF-Saturn-Test255-WIP9-source.zip -d /tmp/wwf-test255
           cp -a /tmp/wwf-test255/. ./build-test255/
+          cp campaign_presentation.c campaign_presentation.h build-test255/
+
+      - name: Verify source payload completeness
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd build-test255
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          text=Path('Makefile').read_text()
+          m=re.search(r'^SH_SRCS\s*:?=\s*(.+)$', text, re.M)
+          if not m:
+              raise SystemExit('SH_SRCS not found in Makefile')
+          missing=[f for f in m.group(1).split() if not Path(f).is_file()]
+          if missing:
+              raise SystemExit('Missing SH_SRCS: ' + ', '.join(missing))
+          print('All SH_SRCS present')
+          PY
 
       - name: Stamp Test255 identity
         shell: bash
