@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - tooling/audio-a17-z80-core
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
