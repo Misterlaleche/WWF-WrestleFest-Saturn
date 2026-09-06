@@ -1,1 +1,1 @@
-Test255 WIP3: ROM-exact presentation audio producer tables implemented and audited. State-0/state-1 Demolition speaker semantics remain pending. Canonical Test254 unchanged; no BIN/CUE.
+Test255 WIP5 — two attract state-entry interstitial scripts ROM-audited: mode1 $B1E2 62 phases/707 ticks/voice $316A; mode2 $B25E 30 phases/431 ticks/voice $316B. Exact speaker identity remains pending object-type $2C graphics decode. Canonical Test254 unchanged; no BIN/CUE.

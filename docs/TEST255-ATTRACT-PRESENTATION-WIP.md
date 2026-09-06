@@ -67,3 +67,30 @@ IDs come from `$0F76`:
 `arcade_attract_state_desc_t` now has `participant_count` and six slots so the exact
 Royal roster can be represented without truncation. All other attract states retain
 four participants.
+
+## Two state-entry interstitial scripts recovered
+
+The attract setup path at `$0AC0 -> $0B1C` proves that `$AE20` is invoked with
+mode 1 while entering attract state 1 and mode 2 while entering attract state 2.
+`$AE20` builds three presentation objects (object type `$2C`) and runs mode-specific
+scripts through `$B0C8` using the pointer table at `$B19C`.
+
+- mode 1 -> `$B1E2`: 62 phases, 707 active ticks, terminator duration `$FE`.
+  The only high-bit event marker is raw frame `$8D` at phase 3. Mode 1 initializes
+  the audio-table cursor to 2, so `$B0C8` sends exactly `$316A` via `$2052`.
+- mode 2 -> `$B25E`: 30 phases, 431 active ticks, terminator duration `$FE`.
+  The only high-bit event marker is raw frame `$83` at phase 1. Mode 2 initializes
+  the audio-table cursor to 4, so `$B0C8` sends exactly `$316B` via `$2052`.
+
+The dedicated command table at `$B14A` is `3179, 316A, 316B, 3178`.
+These data are represented by `arcade_interstitial.c/.h` and guarded byte-for-byte
+by `tools/test255_interstitial_rom.c`.
+
+**ROM-EXACT:** invocation points, script pointers, every frame/duration pair, event
+markers, total active timing and raw sound commands.
+
+**REGISTERED BUT NOT IMPLEMENTED:** the exact graphical identity of the two speaking
+Demolition members. Arcade captures establish that these are the two distinct
+Demolition interstitials in this sequence, but the object-type `$2C` frame graphics
+still need to be decoded so Smash/Crush is assigned from ROM graphics rather than
+from screen-position inference.
