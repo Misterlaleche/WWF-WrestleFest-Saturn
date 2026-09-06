@@ -25,3 +25,8 @@ bool campaign_presentation_tick(campaign_presentation_t *p,unsigned intervals,bo
  p->tick=(uint16_t)(next>0xffffu?0xffffu:next);
  return p->tick>=p->duration;
 }
+
+unsigned campaign_matches_remaining(const campaign_t *c){
+ unsigned wins=c->wins;
+ return wins<10u?10u-wins:0u;
+}
