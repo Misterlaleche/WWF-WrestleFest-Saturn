@@ -1,0 +1,52 @@
+--- main.c
++++ main.c
+@@ -168,6 +168,15 @@
+  free(src);return !check_error;
+ }
+ static void selection_cache_free(void){for(unsigned i=0;i<2;i++){free(selection_rle[i]);selection_rle[i]=NULL;selection_rle_size[i]=0;}}
++static void match_frontend_cache_release(void){
++ /* Test255 hardware-stability: presentation-only caches must not survive into
++  * the combat loader. Releasing them here reduces HWRAM fragmentation before
++  * OBJ15/RING14 allocations and before Cxx roster packs are bound. */
++ selection_cache_free();
++ free(mode_rle_cache);mode_rle_cache=NULL;mode_rle_size=0;
++ free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_size=0;
++ free(title_delta);title_delta=NULL;
++}
+ static bool selection_cache_ensure(void){
+  if(selection_rle[0]&&selection_rle[1])return true;
+  if(!selection_cache_load_page(0)||!selection_cache_load_page(1)){selection_cache_free();return false;}return true;
+@@ -213,6 +222,7 @@
+  object_pack=pack;object_pack_data=dst;return true;
+ }
+ static void roster_load_ids(const unsigned *ids,unsigned count){
++ match_frontend_cache_release();
+  memset(character_data,0,sizeof(character_data));free(overflow_character);overflow_character=NULL;unsigned used=0;
+  memset(character_packs,0,sizeof(character_packs));memset(&finisher_overlay_pack,0,sizeof(finisher_overlay_pack));
+  finisher_overlay_data=NULL;finisher_overlay_character=255;finisher_overlay_partner=255;finisher_overlay_kind=0;roster_low_used=0;roster_pack_cache_reset(&roster_texture_cache);
+@@ -372,6 +382,7 @@
+   if(!entry_cache_ensure()||!intro_unpack(entry_rle_cache,entry_rle_size,bitmap,INTRO_BITMAP_BYTES))check_error=315;
+   transfer((void *)RING_ADDR,bitmap,INTRO_BITMAP_BYTES);transfer((void *)RINGPAL_ADDR,asset_entrypal,512);
+   transfer((void *)(VDP2_CRAM_MODE_1_OFFSET(0,0,0)+1792*2),asset_entryuipal,64);
++  free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_size=0;
+  }else if(session.phase==SESSION_RING||session.phase==SESSION_ANNOUNCE){
+   transfer((void *)(VDP2_CRAM_MODE_1_OFFSET(0,0,0)+1792*2),asset_logospal,480);
+   if(!loaded_roster){native_match_start(true);roster_load();}
+@@ -814,7 +825,7 @@
+ static void text_draw(void){
+  text_printf("\x1b[H\x1b[2J");
+  if(check_error){
+-  text_printf("\x1b[3;3HWWF SATURN TEST254: DATA ERROR\x1b[4;3HCHECK %lu - SEND THIS SCREEN",(unsigned long)check_error);
++  text_printf("\x1b[3;3HWWF SATURN TEST255: DATA ERROR\x1b[4;3HCHECK %lu - SEND THIS SCREEN",(unsigned long)check_error);
+   if(check_error==330||check_error==331)
+    text_printf("\x1b[6;3HEXPECT %08lX\x1b[7;3HACTUAL %08lX",(unsigned long)check_expected,(unsigned long)check_actual);
+   if(check_error>=330&&check_error<=332)
+@@ -830,7 +841,7 @@
+  if(session.phase==SESSION_ANNOUNCE){text_printf("\x1b[15;19HVS");return;}
+  if(!show_hud())return;
+  if(match_flow.phase!=FLOW_PLAY&&!intro.demo)return;
+- if(game.paused){text_printf("\x1b[28;2HPAUSED - C: %s\x1b[30;2HTEST254 V0.269 - START: RESUME",layer_view_name(layer_view));return;}
++ if(game.paused){text_printf("\x1b[28;2HPAUSED - C: %s\x1b[30;2HTEST255 V0.270 - START: RESUME",layer_view_name(layer_view));return;}
+  const char *status=game.mode==GAME_TAG?"TAG MATCH - C AT YOUR CORNER":"RUMBLE - SIX FIGHTERS";
+  if(game.fighters[0].outside)status="RINGSIDE - Z NEAR ROPES TO ENTER";
+  else if(game.fighters[0].state==ST_CORNER)status="CORNER: A DIVE / B CLIMB DOWN";
