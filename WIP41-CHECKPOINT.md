@@ -33,5 +33,6 @@ Remove two remaining native-state inventions before any live `$FF00` release bri
 Source checkpoint:
 - Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP41-source.zip`
 - SHA256: `ac0c6a669b8008b126296078c94cebfcd58879c4850f37a12ec37b95827c1474`
+- Checkpoint commit: `70dd3afcb683cf36d9db93bf4040f335b5df7b6f`
 
 No ROM image included. No BIN/CUE generated.
