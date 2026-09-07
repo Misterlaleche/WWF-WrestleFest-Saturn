@@ -34,5 +34,6 @@ Close the callback-side semantics common to every mapped prone `$FF00` gate with
 Source checkpoint:
 - Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP40-source.zip`
 - SHA256: `d1fef4dfb29a424be425d206285d668cdf0a1478dd359a4c98f568be7a04da3a`
+- Checkpoint commit: `63141f5a6ef3557bae853fa43b40000c425c3185`
 
 No ROM image included. No BIN/CUE generated.
