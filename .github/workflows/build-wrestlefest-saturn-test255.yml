@@ -7,6 +7,7 @@ on:
       - test255-lod-handoff
     paths:
       - .github/workflows/build-wrestlefest-saturn-test255.yml
+      - tools/apply_hwfix2.py
       - build-input/WWF-Saturn-Test255-WIP9-source.zip
 
 permissions:
@@ -25,7 +26,7 @@ jobs:
         with:
           ref: test255-lod-handoff
 
-      - name: Restore authoritative hardware-test source
+      - name: Restore source
         shell: bash
         run: |
           set -euo pipefail
@@ -37,145 +38,16 @@ jobs:
           cp tools/verify_iso.py build-test255/tools/verify_iso.py
           rm -f build-test255/audio-tracks/.gitkeep
 
-      - name: Apply scene-boundary fixed-storage loader
+      - name: Apply HWFIX2
         shell: bash
         run: |
           set -euo pipefail
-          cd build-test255
-          python3 - <<'PY'
-          from pathlib import Path
-          import struct
-
-          p=Path('main.c')
-          s=p.read_text()
-
-          # Front-end allocations are presentation-only and must be gone before any combat load.
-          needle='static void selection_cache_free(void){for(unsigned i=0;i<2;i++){free(selection_rle[i]);selection_rle[i]=NULL;selection_rle_size[i]=0;}}\n'
-          if needle not in s:
-              raise SystemExit('HWFIX2: selection cache anchor missing')
-          if 'static void match_frontend_cache_release(void)' not in s:
-              s=s.replace(needle,needle+'''static void match_frontend_cache_release(void){
- selection_cache_free();
- free(mode_rle_cache);mode_rle_cache=NULL;mode_rle_size=0;
- free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_size=0;
- free(title_delta);title_delta=NULL;
-}
-''',1)
-
-          # OBJ15/RING14 are persistent combat resources.  Give them deterministic BSS storage
-          # instead of asking the fragmented HWRAM heap for 106 KiB + 270 KiB after selection.
-          obj_decl='static roster_pack_t object_pack;\nstatic uint8_t *object_pack_data;\n'
-          if obj_decl not in s:
-              raise SystemExit('HWFIX2: object declaration anchor missing')
-          if 'object_pack_storage[' not in s:
-              s=s.replace(obj_decl,obj_decl+'''static uint8_t object_pack_storage[OBJECT_PACK_ALIGNED_BYTES] __attribute__((aligned(32)));
-static uint8_t ring_transition_pack_storage[RING_TRANSITION_PACK_ALIGNED_BYTES] __attribute__((aligned(32)));
-''',1)
-
-          old='''static bool ring_transition_pack_load(void){
- if(ring_transition_pack_data)return true;
- uint8_t *dst=malloc(RING_TRANSITION_PACK_ALIGNED_BYTES);if(!dst){check_error=342;return false;}
- unsigned bytes=cd_read("RING14.PAK",dst,RING_TRANSITION_PACK_ALIGNED_BYTES);
- if(bytes!=RING_TRANSITION_PACK_BYTES||hash_ram(dst,RING_TRANSITION_PACK_BYTES)!=RING_TRANSITION_PACK_HASH){free(dst);check_error=343;return false;}
- roster_pack_t pack;if(!roster_pack_open(&pack,dst,RING_TRANSITION_PACK_BYTES,RING_TRANSITION_PACK_FRAMES)){free(dst);check_error=344;return false;}
- ring_transition_pack=pack;ring_transition_pack_data=dst;return true;
-}
-'''
-          new='''static bool ring_transition_pack_load(void){
- if(ring_transition_pack_data)return true;
- uint8_t *dst=ring_transition_pack_storage;
- unsigned bytes=cd_read("RING14.PAK",dst,RING_TRANSITION_PACK_ALIGNED_BYTES);
- if(bytes!=RING_TRANSITION_PACK_BYTES||hash_ram(dst,RING_TRANSITION_PACK_BYTES)!=RING_TRANSITION_PACK_HASH){check_error=343;return false;}
- roster_pack_t pack;if(!roster_pack_open(&pack,dst,RING_TRANSITION_PACK_BYTES,RING_TRANSITION_PACK_FRAMES)){check_error=344;return false;}
- ring_transition_pack=pack;ring_transition_pack_data=dst;return true;
-}
-'''
-          if old not in s:
-              raise SystemExit('HWFIX2: ring loader anchor missing')
-          s=s.replace(old,new,1)
-
-          old='''static bool object_pack_load(void){
- if(object_pack_data)return true;
- uint8_t *dst=malloc(OBJECT_PACK_ALIGNED_BYTES);if(!dst){check_error=339;return false;}
- unsigned bytes=cd_read("OBJ15.PAK",dst,OBJECT_PACK_ALIGNED_BYTES);
- if(bytes!=OBJECT_PACK_BYTES||hash_ram(dst,OBJECT_PACK_BYTES)!=OBJECT_PACK_HASH){free(dst);check_error=340;return false;}
- roster_pack_t pack;if(!roster_pack_open(&pack,dst,OBJECT_PACK_BYTES,OBJECT_PACK_FRAMES)){free(dst);check_error=341;return false;}
- object_pack=pack;object_pack_data=dst;return true;
-}
-'''
-          new='''static bool object_pack_load(void){
- if(object_pack_data)return true;
- uint8_t *dst=object_pack_storage;
- unsigned bytes=cd_read("OBJ15.PAK",dst,OBJECT_PACK_ALIGNED_BYTES);
- if(bytes!=OBJECT_PACK_BYTES||hash_ram(dst,OBJECT_PACK_BYTES)!=OBJECT_PACK_HASH){check_error=340;return false;}
- roster_pack_t pack;if(!roster_pack_open(&pack,dst,OBJECT_PACK_BYTES,OBJECT_PACK_FRAMES)){check_error=341;return false;}
- object_pack=pack;object_pack_data=dst;return true;
-}
-'''
-          if old not in s:
-              raise SystemExit('HWFIX2: object loader anchor missing')
-          s=s.replace(old,new,1)
-
-          # Cxx packs have already passed exact byte-count + FNV validation.  Build the
-          # immutable WFC2 descriptor fields from the generated pack headers at CI time,
-          # so Saturn does not perform the second long LWRAM walk that produced CHECK 309.
-          meta=[]
-          for ch in range(12):
-              data=Path(f'cd/C{ch:02d}.PAK').read_bytes()
-              if len(data)<32: raise SystemExit(f'C{ch:02d}.PAK too small')
-              vals=struct.unpack('>8I',data[:32])
-              magic,frames,records,tiles,texoff,_unused,block_tiles,blocks=vals
-              meta.append((magic,frames,records,tiles,texoff,blocks,block_tiles))
-          cases=[]
-          for ch,(magic,frames,records,tiles,texoff,blocks,block_tiles) in enumerate(meta):
-              cases.append(f' case {ch}: *out=(roster_pack_t){{.data=data,.size=roster_bytes[{ch}],.magic={magic}U,.frames={frames}U,.records={records}U,.tiles={tiles}U,.texture_offset={texoff}U,.blocks={blocks}U,.block_tiles={block_tiles}U}}; return true;')
-          binder='''static bool roster_pack_bind_verified(roster_pack_t *out,const uint8_t *data,unsigned ch){
- if(!out||!data||ch>=ROSTER_COUNT)return false;
- switch(ch){
-'''+'\n'.join(cases)+'''\n default:return false;\n }\n}\n'''
-          anchor='static void roster_load_ids(const unsigned *ids,unsigned count){\n'
-          if anchor not in s:
-              raise SystemExit('HWFIX2: roster loader anchor missing')
-          if 'static bool roster_pack_bind_verified' not in s:
-              s=s.replace(anchor,binder+anchor,1)
-          if anchor+' match_frontend_cache_release();\n' not in s:
-              s=s.replace(anchor,anchor+' match_frontend_cache_release();\n',1)
-          oldcall='if(!roster_pack_open(&character_packs[ch],dst,roster_bytes[ch],ROSTER_FRAMES)){check_error=309;return;}'
-          newcall='if(!roster_pack_bind_verified(&character_packs[ch],dst,ch)){check_error=346;return;}'
-          if oldcall not in s:
-              raise SystemExit('HWFIX2: roster_pack_open call missing')
-          s=s.replace(oldcall,newcall,1)
-
-          # ENTRY has no reason to survive once its pixels are in VRAM.
-          entry='  transfer((void *)(VDP2_CRAM_MODE_1_OFFSET(0,0,0)+1792*2),asset_entryuipal,64);\n'
-          if entry in s and entry+'  free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_size=0;\n' not in s:
-              s=s.replace(entry,entry+'  free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_size=0;\n',1)
-
-          # Make hardware screenshots identify the actual build.
-          s=s.replace('WWF SATURN TEST254: DATA ERROR','WWF SATURN TEST255 HWFIX2: DATA ERROR')
-          s=s.replace('TEST254 V0.269 - START: RESUME','TEST255 V0.270 HWFIX2 - START: RESUME')
-          p.write_text(s)
-          print('HWFIX2 fixed-storage scene-boundary patch applied')
-          PY
-
-      - name: Verify HWFIX2 invariants
-        shell: bash
-        run: |
-          set -euo pipefail
-          cd build-test255
-          python3 - <<'PY'
-          from pathlib import Path
-          s=Path('main.c').read_text()
-          required=['match_frontend_cache_release();','object_pack_storage[','ring_transition_pack_storage[','roster_pack_bind_verified','WWF SATURN TEST255 HWFIX2: DATA ERROR']
-          for x in required:
-              if x not in s: raise SystemExit('missing HWFIX2 marker: '+x)
-          forbidden=['malloc(RING_TRANSITION_PACK_ALIGNED_BYTES)','malloc(OBJECT_PACK_ALIGNED_BYTES)','{check_error=309;return;}']
-          for x in forbidden:
-              if x in s: raise SystemExit('legacy unstable loader remains: '+x)
-          print('HWFIX2 invariants verified')
-          PY
-          gcc -std=c11 -Wall -Wextra -I. campaign.c campaign_presentation.c arcade_stamina.c tools/test217_campaign_progress_screen.c -o /tmp/test217
-          /tmp/test217
+          python3 tools/apply_hwfix2.py build-test255
+          grep -q 'object_pack_storage' build-test255/main.c
+          grep -q 'ring_transition_pack_storage' build-test255/main.c
+          grep -q 'roster_pack_bind_verified' build-test255/main.c
+          ! grep -q 'malloc(RING_TRANSITION_PACK_ALIGNED_BYTES)' build-test255/main.c
+          ! grep -q 'malloc(OBJECT_PACK_ALIGNED_BYTES)' build-test255/main.c
 
       - name: Stamp Test255 identity
         shell: bash
@@ -184,7 +56,8 @@ static uint8_t ring_transition_pack_storage[RING_TRANSITION_PACK_ALIGNED_BYTES] 
           cd build-test255
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('Makefile');s=p.read_text()
+          p=Path('Makefile')
+          s=p.read_text()
           s=s.replace('SH_PROGRAM:= wrestlefest-saturn-test254-v0269','SH_PROGRAM:= wrestlefest-saturn-test255-v0270-hwfix2')
           s=s.replace('IP_VERSION:= V0.269','IP_VERSION:= V0.270')
           s=s.replace('IP_TITLE:= WWF WrestleFest Test254','IP_TITLE:= WWF WrestleFest Test255')
