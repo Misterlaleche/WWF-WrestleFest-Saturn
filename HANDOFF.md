@@ -12,24 +12,56 @@ Do not resume from `main` or from any temporary LOD branch. Temporary branches a
 - Canonical validated baseline remains **Test254 / V0.269**.
 - Canonical source: `/WWF-Saturn/WWF-Saturn-Test254-V0269-source.zip`
 - Canonical SHA256: `cb324b8c6493642854d1799597b8f4ee6b531041400b0d909a34608c17a78cb0`
-- **Test255 / V0.270 remains WIP until validated on real Saturn hardware.**
+- **Test255 / V0.270 remains WIP.**
 
 Latest full source checkpoint:
-- **Test255 WIP18**
-- Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP18-source.zip`
-- SHA256: `fc9191006caa757d056a1511c8a8bc486ed2c440abf7a1381273dc45f958caf8`
-- WIP18 checkpoint commit: `f3a9f8709f5e063ca9461914c707390060a051d0`
 
-Intermediate source checkpoint:
-- WIP17 host-only Doomsday state machine
-- Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP17-source.zip`
-- SHA256: `36b25b10cf7cadcf10e5ef7df7019d22ff28a74339974be24a8e9a8a06e5e306`
+- **Test255 WIP20**
+- Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP20-source.zip`
+- SHA256: `5b09082b5d58707931ca8c7ca0a31ef4400485a2f6f75b547dc9626373e4bb81`
+- Read `WIP20-CHECKPOINT.md` before editing runtime code.
+- WIP20 is derived from WIP19, not from WIP9 or any HWFIX diagnostic payload.
+
+Historical source checkpoints still useful for archaeology:
+
+- WIP19: Hawk/Animal individual action registry work.
+- WIP18: live Doomsday integration.
+- WIP17: host-only Doomsday state machine.
+- WIP16: byte-level trigger closure.
 
 ## Build policy
 
 Do **not** generate BIN/CUE unless the user explicitly requests it. When requested, the assistant must prepare source/commits, run and fix GitHub Actions, download the artifact and deliver BIN/CUE directly. Do not ask the user to operate workflows manually.
 
-The last generated Test255/V0.270 BIN/CUE remains the older GitHub Actions run `34048120742`; it predates WIP17/WIP18 and does not make Test255 canonical.
+The HWFIX1..7 BIN/CUE series was diagnostic hardware work. **HWFIX7 is the hardware-validated stability behaviour**, but it is not a replacement source lineage; WIP20 folds that behaviour back into the WIP19 development source.
+
+## Hardware-stability result — CLOSED DIAGNOSIS
+
+Real NTSC-U Saturn testing established the following sequence:
+
+- CHECK309/339/342: failures around roster/object/ring full-pack loading and heap pressure.
+- CHECK347/348: large contiguous arena allocations were not viable.
+- HWFIX5 proved combat could load when resident `RING14.PAK` / `OBJ15.PAK` were removed.
+- CHECK324 then exposed exact unmapped rendering states rather than memory failures.
+- HWFIX6 added `CHAR / STATE / RAW` diagnostics.
+- `CHAR 7 / STATE 27 / RAW 206` identified `ST_GROUND_PICKUP`, raw `$CE`, descriptor `$15B6C`.
+- HWFIX7 added only bounded **PROVISIONAL** visual fallbacks for the affected state families.
+- The user then validated HWFIX7 on real Saturn as behaving normally again in TAG, Royal and demo.
+
+WIP20 therefore keeps full resident `RING14/OBJ15` disabled until the streaming replacement is hardware-validated.
+
+## WFC2 streaming groundwork — WIP20
+
+Test275 adds a no-allocation WFC2 metadata+block streaming decoder.
+
+Measured WIP19 assets:
+
+- `RING14.PAK`: 268319 bytes total; 53012 bytes metadata+directory; max stored block 3013 bytes.
+- `OBJ15.PAK`: 105279 bytes total; 32320 bytes metadata+directory; max stored block 2741 bytes.
+
+Host validation decodes every tile from both packs and compares it with the existing full-pack `roster_pack` decoder: tile-for-tile identical.
+
+**REGISTERED BUT NOT IMPLEMENTED:** Saturn CD-sector callback and gameplay activation of this streaming reader.
 
 ## Roster graphics mapping — preserve exactly
 
@@ -64,7 +96,7 @@ Do not revert to the old incorrect assumption that logical 10/11 use graphics ba
 
 ## Doomsday Device — ROM-EXACT trigger/state/link chain is CLOSED
 
-Do not investigate the missing activation bridge again. It is already demonstrated.
+Do not investigate the activation bridge again.
 
 ### Animal hold
 
@@ -88,37 +120,48 @@ Do not investigate the missing activation bridge again. It is already demonstrat
 
 ### Collision / three actors
 
-- Hawk arms collision profile `$17` at the exact recovered threshold gate.
+- Hawk arms collision profile `$17` at the recovered threshold gate.
 - first-handler index 11 -> `$247EC`.
 - victim becomes type `$12`.
 - `$24DEC/$24E02` establish reciprocal Hawk/victim `+$92`.
-- descriptor `$12C0A` resolves the third actor through **victim `+$26`**, which yields Animal.
+- descriptor `$12C0A` resolves the third actor through **victim `+$26`**, yielding Animal.
 - victim receives state 4, selector `$19`, raw damage `$20`.
 - Animal receives state 5 / raw `$8006`.
-- exact composition clock uses poses 459/460 then 166/378; `LODTEAM.PAK` contains the three-role compositions for the ten ordinary opponents.
+- exact composition clock uses poses 459/460 then 166/378.
+- `LODTEAM.PAK` contains the three-role compositions for the ten ordinary opponents.
 
-## WIP18 — live Saturn integration status
+## Doomsday live runtime status
 
-The above state/link chain is now active in the native TAG runtime and covered by focused host tests before gameplay activation.
+**ROM-EXACT:** raw `$89` producer mapping for Animal K, reciprocal `+$26`, state8->state9 carried flag, exact 8-tick `+$86` predicate, `$12C22` flag lifecycle/vector, profile `$17` gate, type `$12`, reciprocal `+$92`, third actor strictly from victim `+$26`, victim/Animal raw writes, raw damage `$20`, `$12C0A` composition clock and `LODTEAM.PAK` role ownership.
 
-**ROM-EXACT active pieces:** raw `$89` producer mapping for Animal K, reciprocal `+$26`, state8->state9 carried flag, exact 8-tick `+$86` predicate, `$12C22` flag lifecycle/vector, profile `$17` gate, type `$12`, reciprocal `+$92`, third actor strictly from victim `+$26`, victim/Animal raw writes, raw damage `$20`, `$12C0A` composition clock and `LODTEAM.PAK` role ownership.
+**PROVISIONAL:** native `PAIR_HOLD` -> exact linked-category adapter; Saturn world-coordinate/raw `+$0E` launch progression; Hawk composition anchor transform; minimum one-tick release bridge for callback-held pose 166 (`$FF00`); committed-sequence rescue/interruption policy; native apron restore after completion; HWFIX7 visual fallback while RING14/OBJ15 streaming is not active.
 
-**PROVISIONAL native boundaries:** native `PAIR_HOLD` -> exact linked-category adapter; Saturn world-coordinate/raw `+$0E` launch progression; Hawk composition anchor transform; minimum one-tick release bridge for callback-held pose 166 (`$FF00`); committed-sequence rescue/interruption policy; native apron restore after completion.
+**REGISTERED BUT NOT IMPLEMENTED:** exact `$FF00` release producer; exact launch-to-collision world integration; exact Doomsday rescue/interruption producer; Saturn runtime streaming for RING14/OBJ15.
 
-**REGISTERED BUT NOT IMPLEMENTED:** exact `$FF00` release producer; exact launch-to-collision world integration; exact Doomsday rescue/interruption producer.
+## Hawk / Animal individual work
 
-Focused validation passed: Test203, 205, 206, 207, 211, 253 struggle assets, 259, 260, 267, 270, 271, 272, 273.
+WIP19/Test274 fixed 126 exact action decisions (2 wrestlers × 21 categories × P/K/P+K) and preserves logical/internal mapping Hawk `10 -> 4`, Animal `11 -> 5`.
 
-Historical Test210 (`tag_crossing_exchange`) also fails on a pristine extraction of authoritative WIP16 with the same assertion. Treat it as pre-existing baseline debt, not a WIP18 regression.
+Exclusive move callbacks still needing ROM-backed semantic closure remain **REGISTERED BUT NOT IMPLEMENTED** where identity/lifecycle/damage has not yet been proven. Never name a move only from visual resemblance.
+
+## Validation
+
+WIP20 directed regression passed:
+
+Test203, 205, 206, 207, 211, 253 struggle assets, 259, 260, 267, 270, 271, 272, 273, 274, 275, 276.
+
+The complete host suite stops at ROM-dependent Test164 if `program.bin` is absent. Historical Test210 also fails on pristine WIP16 and is baseline debt, not a WIP20 regression.
 
 ## Exact next tasks
 
-1. Resume from the **WIP18 Library ZIP**, not WIP16 and not a temporary branch.
-2. Continue the **individual Hawk moveset** to closure.
-3. Continue the **individual Animal moveset** to closure.
-4. Close Hawk/Animal interactions against each of the other ten wrestlers and then close the complete 12-wrestler roster.
-5. Preserve the labels **ROM-EXACT**, **PROVISIONAL**, **REGISTERED BUT NOT IMPLEMENTED** for every recovered/implemented element.
-6. Persist each important source checkpoint in both Library `/WWF-Saturn/` and this handoff branch.
-7. No BIN/CUE unless explicitly requested.
+1. Resume from **WIP20**, not WIP18/WIP19 and never from WIP9/HWFIX payloads.
+2. Implement and host-test Saturn-style sector-aligned/unaligned block reads for `stream_pack`.
+3. Activate `OBJ15.PAK` streaming first while retaining HWFIX7 fallback as rollback.
+4. Activate `RING14.PAK` streaming second.
+5. Request hardware validation before removing any corresponding PROVISIONAL fallback.
+6. Then continue Hawk individual moveset, Animal individual moveset, interactions against the other ten wrestlers and full roster closure.
+7. Preserve **ROM-EXACT**, **PROVISIONAL**, **REGISTERED BUT NOT IMPLEMENTED** labels.
+8. Persist every important checkpoint in GitHub and `/WWF-Saturn/` Library.
+9. No BIN/CUE unless explicitly requested.
 
-If further byte-level ROM proof is required, the source checkpoint intentionally contains no arcade ROM. Ask the user to re-upload the original `wwfwfest.zip`; never infer missing ROM facts and never store/redistribute the ROM set in GitHub.
+If further byte-level ROM proof is required and the ROM set is not available, ask the user to re-upload `wwfwfest.zip`; never store or redistribute the ROM set in GitHub or Library.
