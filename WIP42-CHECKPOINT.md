@@ -37,5 +37,6 @@ Start replacing the legacy ground `tick==12` damage path with callback evidence,
 Source checkpoint:
 - Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP42-source.zip`
 - SHA256: `ac1ceab5e9f3a378f727f75c0ea8ea5899bd3112052de146e4962bf86b1e6bd1`
+- Checkpoint commit: `7caf39f35ecc7fb175034eb1fbd2483aa748c1f6`
 
 No ROM image included. No BIN/CUE generated.
