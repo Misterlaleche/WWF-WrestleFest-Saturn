@@ -1,4 +1,4 @@
-name: Build WWF WrestleFest Saturn Test255 Hardware Stability 2
+name: Build WWF WrestleFest Saturn Test255 Hardware Stability 3
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
       - test255-lod-handoff
     paths:
       - .github/workflows/build-wrestlefest-saturn-test255.yml
-      - tools/apply_hwfix2.py
+      - tools/apply_hwfix3.py
       - build-input/WWF-Saturn-Test255-WIP9-source.zip
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 30
     env:
       YAUL_IMAGE: ijacquez/yaul@sha256:b6d272204767cd0a734139dd3a2ab298ef5912fb7b7224b78e6d9fac1a7825a6
-      STEM: wrestlefest-saturn-test255-v0270-hwfix2
+      STEM: wrestlefest-saturn-test255-v0270-hwfix3
     steps:
       - name: Check out Test255 handoff branch
         uses: actions/checkout@v5
@@ -38,14 +38,16 @@ jobs:
           cp tools/verify_iso.py build-test255/tools/verify_iso.py
           rm -f build-test255/audio-tracks/.gitkeep
 
-      - name: Apply HWFIX2
+      - name: Apply HWFIX3
         shell: bash
         run: |
           set -euo pipefail
-          python3 tools/apply_hwfix2.py build-test255
-          grep -q 'object_pack_storage' build-test255/main.c
-          grep -q 'ring_transition_pack_storage' build-test255/main.c
+          python3 tools/apply_hwfix3.py build-test255
+          grep -q 'match_pack_arena_raw=malloc' build-test255/main.c
           grep -q 'roster_pack_bind_verified' build-test255/main.c
+          grep -q 'HWFIX3: Yaul/newlib owns its filesystem buffers first' build-test255/main.c
+          ! grep -q 'object_pack_storage\[' build-test255/main.c
+          ! grep -q 'ring_transition_pack_storage\[' build-test255/main.c
           ! grep -q 'malloc(RING_TRANSITION_PACK_ALIGNED_BYTES)' build-test255/main.c
           ! grep -q 'malloc(OBJECT_PACK_ALIGNED_BYTES)' build-test255/main.c
 
@@ -58,7 +60,7 @@ jobs:
           from pathlib import Path
           p=Path('Makefile')
           s=p.read_text()
-          s=s.replace('SH_PROGRAM:= wrestlefest-saturn-test254-v0269','SH_PROGRAM:= wrestlefest-saturn-test255-v0270-hwfix2')
+          s=s.replace('SH_PROGRAM:= wrestlefest-saturn-test254-v0269','SH_PROGRAM:= wrestlefest-saturn-test255-v0270-hwfix3')
           s=s.replace('IP_VERSION:= V0.269','IP_VERSION:= V0.270')
           s=s.replace('IP_TITLE:= WWF WrestleFest Test254','IP_TITLE:= WWF WrestleFest Test255')
           p.write_text(s)
@@ -69,7 +71,15 @@ jobs:
         run: |
           set -euo pipefail
           docker pull "$YAUL_IMAGE"
-          docker run --rm --platform linux/amd64 -v "$PWD/build-test255:/work" -w /work "$YAUL_IMAGE" /bin/bash -lc 'make clean && make'
+          docker run --rm --platform linux/amd64 -v "$PWD/build-test255:/work" -w /work "$YAUL_IMAGE" /bin/bash -lc 'make clean && make && sh2eb-elf-size build/*.elf'
+
+      - name: Guard against HWFIX2 static-BSS regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'match_pack_arena_raw' build-test255/main.c
+          ! grep -q 'static uint8_t object_pack_storage' build-test255/main.c
+          ! grep -q 'static uint8_t ring_transition_pack_storage' build-test255/main.c
 
       - name: Validate ISO and convert to raw BIN/CUE
         shell: bash
@@ -88,17 +98,17 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
-          cp "raw-disc/$STEM.bin" out/WWF-WrestleFest-Test255-V0270-HWFIX2.bin
-          cp "raw-disc/$STEM.cue" out/WWF-WrestleFest-Test255-V0270-HWFIX2.cue
+          cp "raw-disc/$STEM.bin" out/WWF-WrestleFest-Test255-V0270-HWFIX3.bin
+          cp "raw-disc/$STEM.cue" out/WWF-WrestleFest-Test255-V0270-HWFIX3.cue
           cp raw-disc/disc-validation.json out/disc-validation.json
           if test -f raw-disc/disc-independent-validation.json; then cp raw-disc/disc-independent-validation.json out/disc-independent-validation.json; fi
-          sed -i 's/^FILE ".*" BINARY/FILE "WWF-WrestleFest-Test255-V0270-HWFIX2.bin" BINARY/' out/WWF-WrestleFest-Test255-V0270-HWFIX2.cue
+          sed -i 's/^FILE ".*" BINARY/FILE "WWF-WrestleFest-Test255-V0270-HWFIX3.bin" BINARY/' out/WWF-WrestleFest-Test255-V0270-HWFIX3.cue
           cd out
-          sha256sum WWF-WrestleFest-Test255-V0270-HWFIX2.bin WWF-WrestleFest-Test255-V0270-HWFIX2.cue > SHA256SUMS.txt
+          sha256sum WWF-WrestleFest-Test255-V0270-HWFIX3.bin WWF-WrestleFest-Test255-V0270-HWFIX3.cue > SHA256SUMS.txt
 
-      - name: Upload HWFIX2 BIN/CUE
+      - name: Upload HWFIX3 BIN/CUE
         uses: actions/upload-artifact@v4
         with:
-          name: WWF-WrestleFest-Test255-V0270-HWFIX2-BIN-CUE
+          name: WWF-WrestleFest-Test255-V0270-HWFIX3-BIN-CUE
           path: out/*
           if-no-files-found: error
