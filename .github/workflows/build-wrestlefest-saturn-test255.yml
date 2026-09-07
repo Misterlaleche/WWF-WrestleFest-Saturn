@@ -1,4 +1,4 @@
-name: Build WWF WrestleFest Saturn Test255 Hardware Stability 6
+name: Build WWF WrestleFest Saturn Test255 Hardware Stability 7
 
 on:
   workflow_dispatch:
@@ -9,6 +9,7 @@ on:
       - .github/workflows/build-wrestlefest-saturn-test255.yml
       - tools/apply_hwfix5.py
       - tools/apply_hwfix6_delta.py
+      - tools/apply_hwfix7_delta.py
       - build-input/WWF-Saturn-Test255-WIP9-source.zip
 
 permissions:
@@ -20,7 +21,7 @@ jobs:
     timeout-minutes: 30
     env:
       YAUL_IMAGE: ijacquez/yaul@sha256:b6d272204767cd0a734139dd3a2ab298ef5912fb7b7224b78e6d9fac1a7825a6
-      STEM: wrestlefest-saturn-test255-v0270-hwfix6
+      STEM: wrestlefest-saturn-test255-v0270-hwfix7
     steps:
       - name: Check out Test255 handoff branch
         uses: actions/checkout@v5
@@ -39,14 +40,15 @@ jobs:
           cp tools/verify_iso.py build-test255/tools/verify_iso.py
           rm -f build-test255/audio-tracks/.gitkeep
 
-      - name: Apply HWFIX6
+      - name: Apply HWFIX7
         shell: bash
         run: |
           set -euo pipefail
           python3 tools/apply_hwfix5.py build-test255
           python3 tools/apply_hwfix6_delta.py build-test255
-          grep -q 'HWFIX5 isolation: disabled until block-streaming loader lands' build-test255/main.c
-          grep -q 'HWFIX6 DIAGNOSTIC / PROVISIONAL' build-test255/render_pose.h
+          python3 tools/apply_hwfix7_delta.py build-test255
+          grep -q 'HWFIX7 DIAGNOSTIC / PROVISIONAL' build-test255/render_pose.h
+          grep -q 'ST_GROUND_ATTACK||f->state==ST_GROUND_PICKUP' build-test255/render_pose.h
           grep -q 'check324_character' build-test255/main.c
           grep -q 'STATE %lu  RAW %lu' build-test255/main.c
           grep -q 'roster_pack_bind_verified' build-test255/main.c
@@ -63,7 +65,7 @@ jobs:
           from pathlib import Path
           p=Path('Makefile')
           s=p.read_text()
-          s=s.replace('SH_PROGRAM:= wrestlefest-saturn-test254-v0269','SH_PROGRAM:= wrestlefest-saturn-test255-v0270-hwfix6')
+          s=s.replace('SH_PROGRAM:= wrestlefest-saturn-test254-v0269','SH_PROGRAM:= wrestlefest-saturn-test255-v0270-hwfix7')
           s=s.replace('IP_VERSION:= V0.269','IP_VERSION:= V0.270')
           s=s.replace('IP_TITLE:= WWF WrestleFest Test254','IP_TITLE:= WWF WrestleFest Test255')
           p.write_text(s)
@@ -76,12 +78,13 @@ jobs:
           docker pull "$YAUL_IMAGE"
           docker run --rm --platform linux/amd64 -v "$PWD/build-test255:/work" -w /work "$YAUL_IMAGE" /bin/bash -lc 'make clean && make'
 
-      - name: Validate HWFIX6 bounded fallback
+      - name: Validate HWFIX7 bounded fallback
         shell: bash
         run: |
           set -euo pipefail
-          grep -q 'f->state==ST_OBJECT_PICKUP||f->state==ST_OBJECT_USE' build-test255/render_pose.h
-          grep -q 'f->state==ST_RING_THROW||f->state==ST_RING_EXIT||f->state==ST_RING_ENTER||f->state==ST_TOSSED' build-test255/render_pose.h
+          grep -q 'ST_GROUND_ATTACK||f->state==ST_GROUND_PICKUP' build-test255/render_pose.h
+          grep -q 'ST_OBJECT_PICKUP||f->state==ST_OBJECT_USE' build-test255/render_pose.h
+          grep -q 'ST_RING_THROW||f->state==ST_RING_EXIT||f->state==ST_RING_ENTER||f->state==ST_TOSSED' build-test255/render_pose.h
           grep -q 'return false;' build-test255/render_pose.h
           ! grep -q 'check_error=339;return false' build-test255/main.c
           ! grep -q 'check_error=342;return false' build-test255/main.c
@@ -103,17 +106,17 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
-          cp "raw-disc/$STEM.bin" out/WWF-WrestleFest-Test255-V0270-HWFIX6.bin
-          cp "raw-disc/$STEM.cue" out/WWF-WrestleFest-Test255-V0270-HWFIX6.cue
+          cp "raw-disc/$STEM.bin" out/WWF-WrestleFest-Test255-V0270-HWFIX7.bin
+          cp "raw-disc/$STEM.cue" out/WWF-WrestleFest-Test255-V0270-HWFIX7.cue
           cp raw-disc/disc-validation.json out/disc-validation.json
           if test -f raw-disc/disc-independent-validation.json; then cp raw-disc/disc-independent-validation.json out/disc-independent-validation.json; fi
-          sed -i 's/^FILE ".*" BINARY/FILE "WWF-WrestleFest-Test255-V0270-HWFIX6.bin" BINARY/' out/WWF-WrestleFest-Test255-V0270-HWFIX6.cue
+          sed -i 's/^FILE ".*" BINARY/FILE "WWF-WrestleFest-Test255-V0270-HWFIX7.bin" BINARY/' out/WWF-WrestleFest-Test255-V0270-HWFIX7.cue
           cd out
-          sha256sum WWF-WrestleFest-Test255-V0270-HWFIX6.bin WWF-WrestleFest-Test255-V0270-HWFIX6.cue > SHA256SUMS.txt
+          sha256sum WWF-WrestleFest-Test255-V0270-HWFIX7.bin WWF-WrestleFest-Test255-V0270-HWFIX7.cue > SHA256SUMS.txt
 
-      - name: Upload HWFIX6 BIN/CUE
+      - name: Upload HWFIX7 BIN/CUE
         uses: actions/upload-artifact@v4
         with:
-          name: WWF-WrestleFest-Test255-V0270-HWFIX6-BIN-CUE
+          name: WWF-WrestleFest-Test255-V0270-HWFIX7-BIN-CUE
           path: out/*
           if-no-files-found: error
