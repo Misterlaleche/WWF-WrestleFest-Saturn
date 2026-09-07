@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import struct, sys
+import re, struct, sys
 
 root=Path(sys.argv[1] if len(sys.argv)>1 else '.')
 p=root/'main.c'
@@ -66,10 +66,16 @@ new='''static bool object_pack_load(void){
 if old not in s: raise SystemExit('HWFIX2: object loader anchor missing')
 s=s.replace(old,new,1)
 
+roster_text=(root/'roster_data.h').read_text()
+m=re.search(r'#define\s+ROSTER_COUNT\s+(\d+)',roster_text)
+if not m: raise SystemExit('HWFIX2: ROSTER_COUNT not found')
+roster_count=int(m.group(1))
 meta=[]
-for ch in range(12):
-    data=(root/f'cd/C{ch:02d}.PAK').read_bytes()
-    if len(data)<32: raise SystemExit(f'C{ch:02d}.PAK too small')
+for ch in range(roster_count):
+    path=root/f'cd/C{ch:02d}.PAK'
+    if not path.exists(): raise SystemExit(f'HWFIX2: missing {path.name} for ROSTER_COUNT={roster_count}')
+    data=path.read_bytes()
+    if len(data)<32: raise SystemExit(f'{path.name} too small')
     magic,frames,records,tiles,texoff,_unused,block_tiles,blocks=struct.unpack('>8I',data[:32])
     meta.append((magic,frames,records,tiles,texoff,blocks,block_tiles))
 cases=[]
@@ -94,4 +100,4 @@ if entry in s and entry+'  free(entry_rle_cache);entry_rle_cache=NULL;entry_rle_
 s=s.replace('WWF SATURN TEST254: DATA ERROR','WWF SATURN TEST255 HWFIX2: DATA ERROR')
 s=s.replace('TEST254 V0.269 - START: RESUME','TEST255 V0.270 HWFIX2 - START: RESUME')
 p.write_text(s)
-print('HWFIX2 patch applied')
+print(f'HWFIX2 patch applied for {roster_count} roster packs')
