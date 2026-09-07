@@ -51,5 +51,6 @@ Preserve the user's explicit ground-timing observation and extend the raw-$47 ca
 ## Source checkpoint
 - Library: `/WWF-Saturn/WWF-Saturn-Test255-WIP43-source.zip`
 - SHA256: `f1a4e3d65ba3a454a1f1dc52e082e356f4654059594b68601a46ee801513b8ba`
+- Checkpoint commit: `0c35f692f5e5981dd0cfeed3d9df9d58f14767af`
 
 No BIN/CUE generated.
