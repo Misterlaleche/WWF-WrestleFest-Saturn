@@ -71,7 +71,7 @@ jobs:
         run: |
           set -euo pipefail
           docker pull "$YAUL_IMAGE"
-          docker run --rm --platform linux/amd64 -v "$PWD/build-test255:/work" -w /work "$YAUL_IMAGE" /bin/bash -lc 'make clean && make && sh2eb-elf-size build/*.elf'
+          docker run --rm --platform linux/amd64 -v "$PWD/build-test255:/work" -w /work "$YAUL_IMAGE" /bin/bash -lc 'make clean && make'
 
       - name: Guard against HWFIX2 static-BSS regression
         shell: bash
