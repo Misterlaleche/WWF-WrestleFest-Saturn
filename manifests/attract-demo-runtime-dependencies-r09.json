@@ -1,0 +1,22 @@
+{
+  "version":"R09-CANDIDATE",
+  "authority":"WP17 ATTRACT DEMO GAMEPLAY ROM-EXACT FINAL",
+  "gameplay_checkpoint_observed":"91f4c697bec0b04678cc1e811b4ee60e606d7131",
+  "gameplay_checkpoint_name":"BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13",
+  "normal_loop_rom":"0x000F8C",
+  "demo_counter_rom":"0x1C0080",
+  "counter_increment_rom":"0x0010F2",
+  "threshold_table_rom":"0x00119A",
+  "cpu_override_rom":"0x01F7F0",
+  "cpu_override_callsites":["0x01C4EE","0x01CC2C","0x01CC92","0x01F084"],
+  "shared_rng_rom":"0x000021B4",
+  "weighted_selector_rom":"0x000024CC",
+  "credited_start_abort_rom":"0x000052BE",
+  "normal_cycle_return_rom":"0x000006FC",
+  "normal_transition_vblanks":[24,33,33],
+  "synthetic_input_autoplay":"FORBIDDEN",
+  "master_owns":["state/mode/lineup/threshold contract","90-vblank normal post-demo root transition","handoff to bio/root scene orchestration"],
+  "gameplay_owns":["ordinary gameplay loop","normal CPU AI","0x1F7F0 equivalent at exact CPU sites","state5 executor","shared RNG service/order","collision/damage/animation/camera/HUD"],
+  "blocked_by_runtime_owner":["0x02088E and remaining mandatory WP28 phases","canonical shared 0x21B4 RNG service/order","exact direct-match/attract gameplay bootstrap","0x1F7F0 native insertion"],
+  "runtime_dependent":["exact action trace","successful override opportunities","max reachable actor +0x103 cursor where local 0xFF not proven"]
+}
