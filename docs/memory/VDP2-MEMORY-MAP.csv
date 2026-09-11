@@ -1,0 +1,9 @@
+owner,source_class,offset_start,offset_end,bytes,status,notes
+Renderer26,NBG0 FG CPD,0x00000,0x1FFFF,131072,SATURN_TECH_EQUIVALENCE,"1024 active 16x16 4bpp source tiles max; 128 bytes/tile"
+Renderer26,NBG1 BG CPD,0x20000,0x3FFFF,131072,SATURN_TECH_EQUIVALENCE,"1024 active 16x16 4bpp source tiles max; 128 bytes/tile"
+Renderer26,NBG2 TEXT CPD,0x40000,0x4FFFF,65536,SATURN_TECH_EQUIVALENCE,"2048 unique 8x8 4bpp text cells max; 32 bytes/tile"
+Renderer26,NBG0 FG PND,0x50000,0x50FFF,4096,SATURN_TECH_EQUIVALENCE,"2-word PND, 2x2 char, full 32x32 page"
+Renderer26,NBG1 BG PND,0x51000,0x51FFF,4096,SATURN_TECH_EQUIVALENCE,"2-word PND, 2x2 char, full 32x32 page"
+Renderer26,NBG2 TEXT PND,0x52000,0x55FFF,16384,SATURN_TECH_EQUIVALENCE,"2-word PND, 1x1 char, full 64x64 page; source uses 64x32 subset"
+Renderer26,reserved,0x56000,0x7FFFD,172030,UNASSIGNED,"not available to another owner without renderer manifest change"
+Renderer26,back color,0x7FFFE,0x7FFFF,2,SATURN_TECH_EQUIVALENCE,"matches libyaul-safe end-of-VRAM back-color placement"
