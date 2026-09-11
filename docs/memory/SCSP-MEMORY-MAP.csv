@@ -1,0 +1,8 @@
+owner,offset_start,offset_end,bytes,status,notes
+Audio24,0x00000,0x13FFF,81920,FINAL,"poneSound driver/system"
+Audio24,0x14000,0x3A7FF,165888,FINAL,"resident/common SFX"
+Audio24,0x3A800,0x587FF,122880,FINAL,"three 40 KiB dynamic SFX slots"
+Audio24,0x58800,0x5FFFF,30720,FINAL,"headroom; not consumed by music"
+Audio24,0x60000,0x67FFF,32768,HARDWARE_PASS,"music half A, slot31 PCM16BE 44.1kHz mono"
+Audio24,0x68000,0x6FFFF,32768,HARDWARE_PASS,"music half B, slot31 PCM16BE 44.1kHz mono"
+Audio24,0x70000,0x7FFFF,65536,FINAL_RESERVED,"headroom kept free"
