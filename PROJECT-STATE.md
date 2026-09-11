@@ -68,29 +68,29 @@ See:
 
 ## Canonical runtime source status
 
-The private repository still does **not** contain the current canonical gameplay runtime implementation. CLEAN-R01 FINAL workpacks define contracts and many exact behaviors but not one complete linked gameplay source tree.
-
-WIP160/175/176 must not be promoted as canonical bases.
+The private repository contains the active gameplay runtime candidate on branch `gameplay-runtime-r01`. It is not yet FINAL. WIP160/175/176 must not be promoted as canonical gameplay bases.
 
 ## Integration rule
 
 Audio transport and the 14 ready producer hooks are integration-eligible. `OWNER_SCOPE_ONLY` and unresolved rows remain fail-closed until proven.
 
-
 ## GAMEPLAY RUNTIME
 
 Status: **GAMEPLAY-R01 CANDIDATE / source integration active**.
 
-The repository now contains an identifiable gameplay runtime tree on branch `gameplay-runtime-r01`. Current checkpoint is `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13`, cumulative from frozen RUNTIME-11.
+Current checkpoint: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14`, cumulative from frozen RUNTIME-11.
 
 Build gates at this checkpoint:
-- host tests PASS;
-- SH-2 cross compile PASS (37 translation units);
+- host tests PASS (`-Wall -Wextra -Werror`);
+- SH-2 / Yaul compile PASS;
 - full Saturn ELF link PASS;
-- unresolved symbols: 0.
+- unresolved symbols: 0;
+- BIN/CUE: not generated.
 
-This does **not** mean gameplay is complete. WP28 still lacks required real-owner phases; current branch-A integration stops fail-closed at ROM `$02088E`. Direct-match actor/global bootstrap remains BLOCKED. TAG, Royal, full pin/referee, ring-out, remaining collision/release paths, final VDP2 world/ring, and hardware gameplay validation remain open/partial.
+RUNTIME-14 adds the exact WP28 `$02088E` spatial/classification owner from canonical ROM evidence. Real branch-A integration now reaches `$514E -> $8B3A -> $2088E` and stops fail-closed at `$20958`.
 
-CPU-FINAL closed paths are being integrated without synthetic RNG. State5 callback execution now exists for all 43 unique callback families where demonstrated; downstream unknown dependencies remain explicit BLOCKED exits.
+This does **not** mean gameplay is complete. Direct-match actor/global bootstrap remains BLOCKED. TAG, Royal, full pin/referee, ring-out, remaining collision/release paths, complete WP28 ownership, final VDP2 world/ring, and hardware gameplay validation remain open/partial.
+
+CPU-FINAL closed paths remain integrated without synthetic RNG. State5 callback execution exists for the demonstrated portions of all mapped callback families; unknown downstream dependencies remain explicit BLOCKED exits.
 
 WIP160/WIP175/WIP176 remain historical references only and must not replace this runtime base.
