@@ -4,7 +4,7 @@ Status: **CANDIDATE / fail-closed**.
 
 Branch: `gameplay-runtime-r01`.
 
-Current checkpoint represented by this document: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13`, cumulative from the frozen RUNTIME-11 checkpoint.
+Current checkpoint: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14`, cumulative from frozen RUNTIME-11 through RUNTIME-12/13/14.
 
 Authority order:
 
@@ -20,13 +20,13 @@ WIP160/WIP175/WIP176 are not gameplay bases.
 ## Current build gates
 
 - HOST TESTS: PASS with `-Wall -Wextra -Werror`.
-- SH-2 CROSS COMPILE: PASS, 37 translation units.
-- FULL SATURN ELF LINK: PASS against Yaul specs.
+- SH-2 / Yaul compile: PASS.
+- FULL SATURN ELF LINK: PASS.
 - UNRESOLVED SYMBOLS: 0.
 - BIN/CUE: not generated.
 - Hardware validation: not yet performed for this gameplay runtime.
 
-These build gates do not mean the gameplay runtime is complete. The Saturn entrypoint deliberately refuses to synthesize an undemonstrated direct-match bootstrap.
+These gates do not mean gameplay is complete. The Saturn entrypoint still refuses to synthesize an undemonstrated direct-match bootstrap.
 
 ## WP28 status
 
@@ -34,10 +34,13 @@ Real bindings currently exist for:
 
 - ROM `$00514E` -> input decode/latch -> `wf_phase_input_real`
 - ROM `$008B3A` -> payment/regain/refill owner -> `wf_phase_refill_8b3a`
+- ROM `$02088E` -> actor spatial/classification -> `wf_phase_spatial_2088e`
 - ROM `$01C150` -> CPU controller -> `wf_phase_cpu_real`
 - ROM `$024E58` -> pending damage/stamina tier -> `wf_phase_damage`
 
-A normal branch-A frame currently stops fail-closed at mandatory unbound ROM phase `$02088E`. Missing required phases are not treated as success.
+RUNTIME-14 closes `$02088E` directly from canonical ROM bytes, including the live active-bit7 scan, exact 18-row `$0208EC` table, unsigned WORD comparison behavior, start-row gates from `+$33.bit2` / `+$32.bit0`, and WORD write to actor `+$30`.
+
+A normal branch-A real-binding integration now advances through `$00514E -> $008B3A -> $02088E` and stops fail-closed at mandatory unbound phase `$020958`. `$020958` is not approximated from partial TAG/Royal target subroutines.
 
 ## WP01 / State5
 
@@ -49,7 +52,7 @@ CPU-FINAL is compiled into runtime code. Closed paths for states 5/6/7/8/9/A are
 
 ## Key OPEN/BLOCKED areas
 
-- complete WP28 real-owner binding;
+- complete WP28 real-owner binding beginning with `$020958`;
 - exact direct-match actor/global bootstrap;
 - remaining collision choreography and ground/release dependencies;
 - full pin/referee choreography;
