@@ -53,7 +53,7 @@ Planned independent blocks:
 - playable demo later, after non-game frontend is closed
 
 ### AUDIO
-Status: TRANSPORT HARDWARE-PASS / GAME INTEGRATION OPEN.
+Status: TRANSPORT HARDWARE-PASS / RAW RUNTIME BRIDGE READY / GAMEPLAY SOURCE INSERTION OPEN.
 
 Proven on real NTSC-U Saturn + Terraonion MODE:
 - authentic SCSP PCM playback;
@@ -66,6 +66,14 @@ Proven on real NTSC-U Saturn + Terraonion MODE:
 - CA-driven double-buffer refill;
 - long continuous TEST-05 music playback without audible skips or premature cuts.
 
+Runtime bridge now present:
+- original command-byte dispatcher;
+- raw stage music words from ROM table `0x000DEE..0x000E00`;
+- low-stamina producer anchored to ROM PC `0x0263CC -> 0x0B`;
+- ring-out raw `+$54` mapping `0x3165..0x3168 -> 0x65..0x68`;
+- proven finisher/heavy call-sites only;
+- no semantic `fighters[0]` observer imported.
+
 Exactness status:
 - A53 is a validation pack of 18 x 12-second renders, **not** the final production MUSIC.PAK;
 - A53 validation-pack SHA256:
@@ -76,20 +84,27 @@ Exactness status:
   `a7b8e4315e5f33abf54a97550fbeebfdf99c15277db6e4767f9dba39edb83951`.
 
 Still open:
+- insertion into the current canonical CLEAN-R01 gameplay source;
 - production lifetime/termination for every cue;
-- exact game-state command dispatch;
+- exact remaining game-state command producers;
 - exact `0x1F` fade lifecycle;
 - production source packaging/generation for continuous music;
-- integration into the master runtime and gameplay hardware validation.
+- final integrated gameplay hardware validation.
 
-See `docs/AUDIO-HARDWARE-VALIDATION.md`.
+See `docs/AUDIO-HARDWARE-VALIDATION.md` and `docs/RUNTIME-AUDIO-RECONCILIATION.md`.
+
+## Canonical runtime source status
+
+The private repository still does **not** contain the current canonical gameplay runtime implementation. CLEAN-R01 FINAL workpacks define contracts, scheduler order and many exact behaviors, but are not themselves one complete linked gameplay source tree.
+
+WIP160/175/176 must not be promoted as the canonical base to fill that gap.
 
 ## Integration rule
 
 Do not build gameplay on top of unresolved frontend approximations. Current user direction is to close the non-game frontend in blocks first, then integrate into a FRONTEND-MASTER build, then proceed toward gameplay.
 
-Audio transport is now integration-eligible, but the diagnostic long renders are **not** final game assets. Integrate the WP24 transport and command semantics, not TEST-05's finite diagnostic capture assumptions.
+Audio transport and raw producer hooks are integration-eligible. The diagnostic long renders are **not** final game assets.
 
 ## Never use as authority
 
-Do not treat an old WIP or visually plausible diagnostic implementation as truth when it disagrees with ROM evidence. In particular, do not reintroduce known provisional frame-video title playback, full-frame DMA roster scrolling, guessed input repeat, fake music, synthetic RNG, invented music loops, or the TEST-03 fixed-time audio refill scheduler.
+Do not treat an old WIP or visually plausible diagnostic implementation as truth when it disagrees with ROM evidence. In particular, do not reintroduce known provisional frame-video title playback, full-frame DMA roster scrolling, guessed input repeat, fake music, synthetic RNG, invented music loops, the TEST-03 fixed-time audio refill scheduler, or the historical slot-0 audio observer as ROM truth.

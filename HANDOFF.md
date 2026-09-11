@@ -1,6 +1,6 @@
 # HANDOFF
 
-Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, and `docs/AUDIO-HARDWARE-VALIDATION.md` before doing any work.
+Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, and `docs/RUNTIME-AUDIO-RECONCILIATION.md` before doing any work.
 
 ## Absolute project rule
 
@@ -30,12 +30,19 @@ Never invent missing behavior.
    - attract master controller
    - playable demo later
 
-4. Audio transport is now hardware-proven:
-   - use the WP24 slot-31 / 64 KiB ring / CA-driven transport under `src/audio/wp24/`;
-   - SFX and bank-1 presenter voices are hardware-proven;
-   - the A53 18 x 12 s pack is validation evidence only, not production music;
-   - TEST-05 long captures are diagnostics only, not loop assets;
-   - next audio work is exact runtime dispatch, cue lifetime/termination, `0x1F` fade behavior and integration into the master runtime.
+4. Audio transport is hardware-proven and the runtime-facing raw hook layer now exists:
+   - use WP24 slot-31 / 64 KiB ring / CA-driven transport under `src/audio/wp24/`;
+   - use `wf24_command_dispatch()` with original arcade command bytes;
+   - use `wf24_runtime_audio.*` for only ROM-backed producer/call-site bindings;
+   - stage music uses raw ROM words `0x3104...`;
+   - low-stamina producer is anchored to ROM PC `0x0263CC`, not a guessed fighter slot;
+   - ring-out uses raw `+$54 = 0x3165..0x3168`;
+   - only proven finisher/heavy call-sites are admitted;
+   - exact `0x1F` fade and final production cue lifetime remain open.
+
+5. The current canonical gameplay runtime source is still absent from this repository.
+   - Do not import WIP160/175/176 as the base merely to make audio hooks appear integrated.
+   - When the CLEAN-R01 runtime source is reconciled, insert audio side effects at the equivalent proven producer/callback branches without adding a scheduler phase.
 
 ## What other chats must preserve
 
@@ -47,4 +54,6 @@ Never invent missing behavior.
 - No placeholder/fake music presented as final.
 - No finite diagnostic PCM capture relabelled as an arcade loop.
 - Do not restore TEST-03's fixed-time music refill scheduler.
+- Do not restore the historical `wf_audio_observer.c` slot-0 semantic adaptation as ROM truth.
+- WIP160/175/176 are not canonical bases.
 - Real Saturn + MODE is the hardware gate for visual/audio closure.
