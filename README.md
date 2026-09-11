@@ -11,6 +11,23 @@ Private development repository for a native Sega Saturn reimplementation of Tech
 
 If a lower source conflicts with a higher one, the higher authority wins. Unknown behavior remains OPEN/BLOCKED.
 
+## FRONTEND — MODE + ROSTER
+
+Canonical combined checkpoint: **TEST03 — HARDWARE-PASS** on real Saturn NTSC-U + Terraonion MODE.
+
+Preserve in master integration:
+- blank/sync before MODE->ROSTER CRAM/VRAM reconfiguration;
+- transparent NBG0 ROSTER foreground + fixed NBG2 background;
+- resident foreground;
+- localized 96x96 wrestler-confirmation patch beginning at VBLANK-IN;
+- composition: portrait/background -> green mask -> cursor;
+- TAG/ROYAL navigation propagation;
+- proven scroll geometry/cadence.
+
+**Never replace the master/CLEAN-R01 `main.c` with the TEST03 harness.**
+
+See `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`.
+
 ## AUDIO
 
 WP24 transport is HARDWARE-PASS on real NTSC-U Saturn + Terraonion MODE.
@@ -55,6 +72,7 @@ Gameplay remains separately owned by `gameplay-runtime-r01`; do not duplicate St
 - `PROJECT-STATE.md`
 - `HANDOFF.md`
 - `docs/SATURN-PIPELINE.md`
+- `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`
 - `docs/AUDIO-HARDWARE-VALIDATION.md`
 - `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`
 - `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`
