@@ -1,0 +1,15 @@
+state_hex,threshold_updates,mode,actor_count,lineup_ids,lineup_names,bio_featured_id,override_1f7f0_table
+00,848,TAG,4,00 01 04 05,Hogan | Warrior | Smash | Crush,,state0-special-2-entry
+01,736,RUMBLE,6,03 06 07 08 09 02,Bossman | Slaughter | Perfect | Earthquake | DiBiase | Jake,,disabled-by-rumble-gate
+02,1040,TAG,4,00 01 06 07,Hogan | Warrior | Slaughter | Perfect,00,character-12-entry
+03,928,TAG,4,01 00 09 08,Warrior | Hogan | DiBiase | Earthquake,01,character-12-entry
+04,656,TAG,4,02 03 0A 0B,Jake | Bossman | Hawk | Animal,02,character-12-entry
+05,928,TAG,4,03 02 06 09,Bossman | Jake | Slaughter | DiBiase,03,character-12-entry
+06,1200,TAG,4,06 07 00 01,Slaughter | Perfect | Hogan | Warrior,06,character-12-entry
+07,944,TAG,4,07 09 02 00,Perfect | DiBiase | Jake | Hogan,07,character-12-entry
+08,1616,TAG,4,08 06 03 02,Earthquake | Slaughter | Bossman | Jake,08,character-12-entry
+09,1152,TAG,4,09 08 01 03,DiBiase | Earthquake | Warrior | Bossman,09,character-12-entry
+0A,800,TAG,4,0A 0B 02 01,Hawk | Animal | Jake | Warrior,0A,character-12-entry
+0B,816,TAG,4,0B 0A 02 01,Animal | Hawk | Jake | Warrior,0B,character-12-entry
+0C,832,TAG,4,04 05 00 01,Smash | Crush | Hogan | Warrior,04,character-12-entry
+0D,864,TAG,4,05 04 00 01,Crush | Smash | Hogan | Warrior,05,character-12-entry
