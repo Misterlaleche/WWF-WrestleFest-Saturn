@@ -25,53 +25,46 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 
 Status: **TRANSPORT HARDWARE-PASS / PRODUCER MATRIX ROM-AUDITED / OWNER MAP R01 CLOSED / GAMEPLAY SOURCE INSERTION OPEN.**
 
-### Producer matrix
-
 - 173 total ROM-verified producer rows.
-- 163 immediate producers byte-verified.
-- 10 dynamic/dataflow producer call sites verified.
-- 154 rows remain `REGISTERED_NOT_IDENTIFIED`.
-- 12 are `RECOVERED_ROM`.
-- 7 finisher rows are `RECOVERED_ROM_USAGE`.
-
-### CLEAN-R01 owner map R01
-
 - 14 rows: `INTEGRATION_READY`.
 - 4 rows: `OWNER_SCOPE_ONLY`.
 - 155 rows: `UNRESOLVED`.
-- 0 unidentified rows promoted to integration-ready.
-
-Ready ownership:
-- WP10: low-stamina + stage-music restore.
-- WP08: ring-out/final count + terminal countout branches.
-- WP01: seven recovered finisher/heavy producers; WP22/WP10 supporting.
-- WP11: stage-sensitive result selector.
-- WP24: backend for all audio rows, not event-semantic owner.
-
-Critical correction:
-- low-stamina producer = `0x009088 -> 0x0B`, JSR `0x00908C`;
+- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`.
 - `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`.
 
-Still open:
-- insert the 14 ready hooks into canonical CLEAN-R01 gameplay source;
-- prove semantics/trigger for the 4 scope-only rows;
-- classify the 155 unresolved producers;
-- exact `0x1F` fade lifecycle;
-- production lifetime/termination for all music cues;
-- integrated gameplay hardware validation.
+## INTEGRATION MASTER / WP32-WP33
 
-See:
-- `docs/AUDIO-HARDWARE-VALIDATION.md`
-- `docs/RUNTIME-AUDIO-RECONCILIATION.md`
-- `docs/AUDIO-PRODUCER-MATRIX-AUDIT.md`
-- `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`
+Branch: `integration-master-r01`.
 
-## Canonical runtime source status
+Status: **MEMORY/CDFS INTEGRATION CANDIDATE**.
 
-The private repository still does **not** contain the current canonical gameplay runtime implementation. CLEAN-R01 FINAL workpacks define contracts and many exact behaviors but not one complete linked gameplay source tree.
+Closed/defined at current authority:
+- HWRAM/LWRAM/VDP1/VDP2/CRAM/SCSP ownership boundaries;
+- LWRAM forbidden as SCU DMA endpoint;
+- CDFS sector = 2048 bytes;
+- current CDFS file-list capacity = 384;
+- WP24 full SCSP ownership including music ring `0x60000..0x6FFFF`;
+- CRAM mode 2 with four 256-entry windows from WP26 FINAL;
+- VDP2 capacity map sufficient for full active FG/BG/TEXT caches without dropping source tiles;
+- six-wrestler LWRAM demonstrated peak policy retained.
 
-WIP160/175/176 must not be promoted as canonical bases.
+Still BLOCKED/OPEN:
+- final VDP1 VRAM partition until maximum simultaneous visible command/unique-texture reachability is demonstrated;
+- exact frontend scene asset byte manifests;
+- final HWRAM free budget until the integrated ELF/map exists;
+- full Saturn link after gameplay/frontend merge;
+- real-hardware validation of the integrated transfer/loading windows.
+
+Host tests PASS and SH-2 object compile PASS for the shared memory contract. No BIN/CUE generated.
+
+## Gameplay runtime
+
+Gameplay is developed independently on branch `gameplay-runtime-r01` from the audited RUNTIME-11 checkpoint. This integration branch must not duplicate gameplay ownership.
+
+At the time this integration checkpoint was created, the GitHub gameplay branch existed but the gameplay source tree had not yet been committed there.
+
+WIP160/175/176 must not be promoted as canonical gameplay bases.
 
 ## Integration rule
 
-Audio transport and the 14 ready producer hooks are integration-eligible. `OWNER_SCOPE_ONLY` and unresolved rows remain fail-closed until proven.
+Consume gameplay by named audited checkpoint/commit. WP24 remains the sole audio backend owner. Do not merge unresolved producer semantics or provisional gameplay merely to make a full build run.
