@@ -46,8 +46,7 @@ Current frontend direction:
 - BOOT: previously validated on real Saturn;
 - MODE SELECT: still open; Royal visual effect is strong, TAG effect still needs exact closure;
 - ROSTER SELECT: hardware scroll cadence improved; background/layer composition requires revalidation together with roster + scroll;
-- rankings / attract presentation / demo: not yet integrated into the master;
-- gameplay: intentionally not advanced until the requested frontend blocks are closed.
+- rankings / attract presentation / demo: not yet integrated into the master.
 
 ## CHATGPT PROJECT-SOURCE EVIDENCE LIBRARY
 
@@ -120,6 +119,26 @@ The TEST-05 hardware audit manifest is stored under:
 
 No ROM, `AUDPCM.PAK`, `LONGMUS.PAK`, generated PCM or protected audio payload is committed to this repository.
 
+## GAMEPLAY RUNTIME — R01 CANDIDATE
+
+Canonical gameplay development exists on branch `gameplay-runtime-r01`.
+
+Current checkpoint: **BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14**, cumulative from frozen RUNTIME-11. WIP160/WIP175/WIP176 are **not** the base.
+
+Current verified build gates:
+- HOST TESTS: PASS with `-Wall -Wextra -Werror`;
+- SH-2 / Yaul compile: PASS;
+- FULL SATURN ELF LINK: PASS;
+- UNRESOLVED SYMBOLS: 0;
+- BIN/CUE: not generated;
+- gameplay hardware validation: not yet performed.
+
+RUNTIME-14 adds the exact WP28 ROM `$02088E` spatial/classification owner, including its 18-row `$0208EC` table and raw WORD/bit semantics. Real branch-A scheduling now reaches `$514E -> $8B3A -> $2088E` and stops fail-closed at mandatory unbound `$20958`.
+
+The runtime remains **CANDIDATE / fail-closed**. Direct-match actor/global bootstrap is BLOCKED rather than synthesized. Missing WP28 owners, full TAG/Royal, pin/referee, ring-out, remaining collision/release, final VDP2 world/ring, and hardware gameplay validation remain open/partial.
+
+See [docs/GAMEPLAY-RUNTIME-R01.md](docs/GAMEPLAY-RUNTIME-R01.md).
+
 ## MANDATORY CROSS-CHAT HANDOFF
 
 Before changing the port, read:
@@ -127,26 +146,6 @@ Before changing the port, read:
 - [HANDOFF.md](HANDOFF.md)
 - [docs/SATURN-PIPELINE.md](docs/SATURN-PIPELINE.md)
 - [docs/AUDIO-HARDWARE-VALIDATION.md](docs/AUDIO-HARDWARE-VALIDATION.md)
+- [docs/GAMEPLAY-RUNTIME-R01.md](docs/GAMEPLAY-RUNTIME-R01.md)
 
-These files define the current block status, graphics/input/audio pipeline rules, hardware validation gate, and integration contracts so parallel chats do not reintroduce superseded diagnostic implementations.
-
-
-## GAMEPLAY RUNTIME — R01 CANDIDATE
-
-Canonical gameplay development now exists on branch `gameplay-runtime-r01`.
-
-Current checkpoint: **BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13**, cumulative from the frozen RUNTIME-11 checkpoint. WIP160/WIP175/WIP176 are **not** the base.
-
-Current verified build gates:
-- HOST TESTS: PASS with `-Wall -Wextra -Werror`;
-- SH-2 CROSS COMPILE: PASS (37 translation units);
-- FULL SATURN ELF LINK: PASS against Yaul specs;
-- UNRESOLVED SYMBOLS: 0;
-- BIN/CUE: not generated;
-- gameplay hardware validation: not yet performed.
-
-The runtime remains **CANDIDATE / fail-closed**. A normal real-owner WP28 frame is not complete yet: branch A currently stops at mandatory unbound ROM phase `$02088E`. The direct-match actor/global bootstrap is also BLOCKED rather than synthesized.
-
-Implemented/in-progress areas include raw actor state, WP27 input, WP01 State5 executable callback families for demonstrated paths, CPU-FINAL closed paths, WP28 scheduler and partial real bindings, animation/physics, FIRST/SECOND collision substrate, victim +$64/+65 semantics, damage/stamina, partial ground/pin/ring-out/match-rule/Royal/Doomsday paths, and Saturn VDP1 integration.
-
-See [docs/GAMEPLAY-RUNTIME-R01.md](docs/GAMEPLAY-RUNTIME-R01.md).
+These files define the current block status, graphics/input/audio/gameplay pipeline rules, hardware validation gate, and integration contracts so parallel chats do not reintroduce superseded diagnostic implementations.
