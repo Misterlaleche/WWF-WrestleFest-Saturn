@@ -142,11 +142,11 @@ Still OPEN in HUD:
 Branch: `gameplay-runtime-r01`.
 
 Current named dependency observed by master:
-**BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14**
-commit `9f2ad43b843570653a7292a45ee86b7740e98fa7`.
+**BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15**
+source checkpoint `72de727a77603c0a81f552fa059c0d2072cd249b`; gameplay branch documentation HEAD `7f40fde30cb7af32cf95cd4d9469884a342da8b8`.
 
-Its host tests, SH-2 compile, full Saturn ELF link and 0 unresolved-symbol gate PASS, but RUNTIME-14 closes real WP28 phase `0x02088E` via `wf_phase_spatial_2088e()`. Branch-A now advances `0x514E -> 0x8B3A -> 0x2088E` and fails closed at the next mandatory phase `0x020958`.
-Direct gameplay/attract bootstrap, remaining WP28 owners and canonical shared `$21B4` RNG service/order remain OPEN.
+RUNTIME-15 host tests PASS, SH-2 cross-compile PASS (39 translation units), full Saturn ELF link PASS and unresolved symbols = 0. It closes the ROM-derived WP28 target/relation phase `0x020958` plus already-audited WP21 camera phases `0x026936/0x02983C`. Branch-A now reaches `0x514E -> 0x8B3A -> 0x2088E -> 0x20958 -> 0x26936 -> 0x2983C` and fails closed at the next mandatory phase `0x00F560`.
+Direct-match/attract bootstrap, remaining WP28 owners and canonical shared `$21B4` RNG service/order remain OPEN.
 
 WIP160/WIP175/WIP176 are not canonical gameplay bases.
 
