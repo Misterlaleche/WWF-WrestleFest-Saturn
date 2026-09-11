@@ -1,6 +1,6 @@
 # HANDOFF
 
-Read `README.md`, `PROJECT-STATE.md`, and `docs/SATURN-PIPELINE.md` before doing any work.
+Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, and `docs/AUDIO-HARDWARE-VALIDATION.md` before doing any work.
 
 ## Absolute project rule
 
@@ -30,7 +30,12 @@ Never invent missing behavior.
    - attract master controller
    - playable demo later
 
-4. Audio is a separate diagnostic block. Exact audio source must come from the audited YM2151 + OKIM6295 pipeline; fail closed if source assets are absent.
+4. Audio transport is now hardware-proven:
+   - use the WP24 slot-31 / 64 KiB ring / CA-driven transport under `src/audio/wp24/`;
+   - SFX and bank-1 presenter voices are hardware-proven;
+   - the A53 18 x 12 s pack is validation evidence only, not production music;
+   - TEST-05 long captures are diagnostics only, not loop assets;
+   - next audio work is exact runtime dispatch, cue lifetime/termination, `0x1F` fade behavior and integration into the master runtime.
 
 ## What other chats must preserve
 
@@ -40,4 +45,6 @@ Never invent missing behavior.
 - No guessed palette effects.
 - No guessed input repeat.
 - No placeholder/fake music presented as final.
+- No finite diagnostic PCM capture relabelled as an arcade loop.
+- Do not restore TEST-03's fixed-time music refill scheduler.
 - Real Saturn + MODE is the hardware gate for visual/audio closure.

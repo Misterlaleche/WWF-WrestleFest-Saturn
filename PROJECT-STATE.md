@@ -13,7 +13,12 @@ Real Saturn + Terraonion MODE has validated:
 - VDP2 visible output;
 - boot/frontend sequence through FBI -> legal -> Technos/Tecmo -> TITLE in prior tests;
 - credit/start handoff and mode/roster entry in earlier frontend tests;
-- roster hardware-scroll cadence in the dedicated block before the background-layer regression.
+- roster hardware-scroll cadence in the dedicated block before the background-layer regression;
+- SCSP authentic PCM playback;
+- master-volume control;
+- SFX and bank-1 voice/presenter playback;
+- WP24 slot-31 PCM16BE music streaming with 64 KiB double buffer;
+- long continuous music playback in AUDIO COMPLETE TEST 05 without skips or premature cuts.
 
 ## Current BLOCK status
 
@@ -48,16 +53,43 @@ Planned independent blocks:
 - playable demo later, after non-game frontend is closed
 
 ### AUDIO
-Status: OPEN on Saturn runtime.
-- FINAL ROM audio research exists.
-- Exact production music requires combined YM2151 + OKIM6295 rendering.
-- Current diagnostic screen can boot, but music remains intentionally locked when exact source payload is absent.
-- Audio backend/SFX path still requires hardware closure.
+Status: TRANSPORT HARDWARE-PASS / GAME INTEGRATION OPEN.
+
+Proven on real NTSC-U Saturn + Terraonion MODE:
+- authentic SCSP PCM playback;
+- master volume 0..15;
+- SFX command path;
+- bank-1 audio including presenter/ring-announcer voices;
+- 44.1 kHz mono signed PCM16 big-endian streaming;
+- physical SCSP slot 31;
+- 64 KiB ring at sound RAM `0x60000..0x6FFFF`;
+- CA-driven double-buffer refill;
+- long continuous TEST-05 music playback without audible skips or premature cuts.
+
+Exactness status:
+- A53 is a validation pack of 18 x 12-second renders, **not** the final production MUSIC.PAK;
+- A53 validation-pack SHA256:
+  `8e1c038b00f9800753d3d21eca47f2cace9a04d04c07280d7d4b9110b0fd27bf`;
+- checkpoint rendering preserves continuous YM2151+OKIM6295 state;
+- commands `01,02,04,06,07,0A,0B,0E` were extended to approximately 51.79-60.00 s for TEST-05 and their canonical first 12 seconds remain exact A53 PASS;
+- TEST-05 BIN SHA256:
+  `a7b8e4315e5f33abf54a97550fbeebfdf99c15277db6e4767f9dba39edb83951`.
+
+Still open:
+- production lifetime/termination for every cue;
+- exact game-state command dispatch;
+- exact `0x1F` fade lifecycle;
+- production source packaging/generation for continuous music;
+- integration into the master runtime and gameplay hardware validation.
+
+See `docs/AUDIO-HARDWARE-VALIDATION.md`.
 
 ## Integration rule
 
 Do not build gameplay on top of unresolved frontend approximations. Current user direction is to close the non-game frontend in blocks first, then integrate into a FRONTEND-MASTER build, then proceed toward gameplay.
 
+Audio transport is now integration-eligible, but the diagnostic long renders are **not** final game assets. Integrate the WP24 transport and command semantics, not TEST-05's finite diagnostic capture assumptions.
+
 ## Never use as authority
 
-Do not treat an old WIP or visually plausible diagnostic implementation as truth when it disagrees with ROM evidence. In particular, do not reintroduce known provisional frame-video title playback, full-frame DMA roster scrolling, guessed input repeat, fake music, or synthetic RNG.
+Do not treat an old WIP or visually plausible diagnostic implementation as truth when it disagrees with ROM evidence. In particular, do not reintroduce known provisional frame-video title playback, full-frame DMA roster scrolling, guessed input repeat, fake music, synthetic RNG, invented music loops, or the TEST-03 fixed-time audio refill scheduler.

@@ -70,38 +70,55 @@ These evidence ZIPs do not all need to be duplicated into GitHub. GitHub should 
 
 ## AUDIO — CANONICAL CURRENT STATE
 
+Detailed evidence and chronology: [docs/AUDIO-HARDWARE-VALIDATION.md](docs/AUDIO-HARDWARE-VALIDATION.md).
+
 The audited FINAL audio authority establishes:
 - arcade audio research/model: CLOSED;
-- production music result requires **combined YM2151 + OKIM6295**;
-- audited Saturn PCM transport source format: 44.1 kHz, mono, signed PCM16, **big-endian**;
-- a finite repeated PCM segment is not ROM-EXACT continuous arcade synthesis;
-- command `0x1F` is a special original fade lifecycle and must not be replaced by the old provisional scalar final-PCM gain curve.
+- production music is combined **YM2151 + OKIM6295**;
+- music commands `0x01..0x12` are the demonstrated production range;
+- `0x13..0x1E` are registered but no main-CPU producer is demonstrated;
+- `0x1F` is a special original fade lifecycle, not an ordinary music cue;
+- complete SFX/voice command range is `0x20..0x81`;
+- audited Saturn stream format is 44.1 kHz, mono, signed PCM16, **big-endian**;
+- a finite repeated PCM segment is not ROM-EXACT continuous arcade synthesis.
 
-Workpack 24 status is source/module complete but hardware-unvalidated. Its audited Saturn contract includes SCSP slot 31 and a 64 KiB double buffer at sound RAM `0x60000..0x6FFFF`.
+### Real Saturn + MODE hardware status — 2026-09-11
 
-### AUDIO TEST 01 — real Saturn observation
+**HARDWARE-PASS:**
+- SCSP / poneSound path;
+- audible authentic PCM playback;
+- master volume 0..15;
+- SFX command playback;
+- bank-1 material including ring-announcer / presenter voices;
+- WP24 music transport on physical SCSP slot 31;
+- 64 KiB music ring at sound RAM `0x60000..0x6FFFF`;
+- double-buffer refill using the SCSP current-address monitor;
+- long continuous PCM16BE playback without skips or premature cuts in AUDIO COMPLETE TEST 05.
 
-The diagnostic screen successfully boots on real Saturn, but the captured screen reports:
+**ROM-EXACT validation:**
+- the canonical A53 validation pack is **18 x 12-second validation renders**, not final production tracks;
+- A53 `MUSIC.PAK` SHA256:
+  `8e1c038b00f9800753d3d21eca47f2cace9a04d04c07280d7d4b9110b0fd27bf`;
+- the checkpoint renderer preserves YM2151 + OKI state across render segments;
+- TEST-05 long renders for commands `01,02,04,06,07,0A,0B,0E` revalidate their first 12 seconds exactly against canonical A53 hashes;
+- real Saturn playback of those long renders was reported clean, without the prior cuts or scheduler-induced skipping.
 
-```
-AUDIO BACKEND: ERROR
-LAST SFX: 0x3B
-CACHE MISSES: 0
-STATUS: MUSIC PLAY LOCKED: EXACT SOURCE ABSENT
-```
+**Still OPEN:**
+- final production lifetime/termination semantics for every music cue;
+- game-state dispatch of music/SFX/voices;
+- exact `0x1F` fade lifecycle in the integrated runtime;
+- production packaging/generation strategy for continuous music;
+- final integrated gameplay audio validation.
 
-Therefore audible Saturn playback is **not closed**.
+Do **not** relabel the A53 12-second validation pack or TEST-05 long diagnostic captures as final production loop assets.
 
-The music lock is intentional and correct: the FINAL audio handoff deliberately distributes no ROM/VGM/PCM/PAK payload. Exact music source assets must be generated locally from the user's ROM-derived sound program using the pinned exact renderer pipeline. The test must fail closed rather than playing fake synthesis, a test tone, approximate CDDA or a guessed loop.
+Reusable WP24 transport source now lives under:
+- [src/audio/wp24/](src/audio/wp24/)
 
-### Next audio task
+The TEST-05 hardware audit manifest is stored under:
+- [tests/audio/complete-test-05/](tests/audio/complete-test-05/)
 
-1. Generate at least one exact combined YM2151+OKIM6295 source asset from the ROM-derived audio program using the pinned renderer/provenance rules.
-2. Feed it through the audited SCSP slot-31 transport path.
-3. Diagnose the current SFX backend error independently.
-4. Validate PLAY / STOP / NEXT / PREV and audible output on real Saturn.
-5. Only a real-hardware PASS can close the Saturn runtime audio milestone.
-
+No ROM, `AUDPCM.PAK`, `LONGMUS.PAK`, generated PCM or protected audio payload is committed to this repository.
 
 ## MANDATORY CROSS-CHAT HANDOFF
 
@@ -109,5 +126,6 @@ Before changing the port, read:
 - [PROJECT-STATE.md](PROJECT-STATE.md)
 - [HANDOFF.md](HANDOFF.md)
 - [docs/SATURN-PIPELINE.md](docs/SATURN-PIPELINE.md)
+- [docs/AUDIO-HARDWARE-VALIDATION.md](docs/AUDIO-HARDWARE-VALIDATION.md)
 
 These files define the current block status, graphics/input/audio pipeline rules, hardware validation gate, and integration contracts so parallel chats do not reintroduce superseded diagnostic implementations.
