@@ -26,7 +26,7 @@ Never invent missing behavior.
    - finisher ready rows belong primarily to WP01 with WP22/WP10 support;
    - exact `0x1F` fade and production cue lifetimes remain open.
 
-5. Current canonical gameplay runtime source is still absent from this repository.
+5. Gameplay runtime now exists on branch `gameplay-runtime-r01`.
    - Do not import WIP160/175/176 as the base.
    - Insert audio hooks only when the canonical CLEAN-R01 equivalent state/callback exists.
    - `OWNER_SCOPE_ONLY` rows are blocked until their semantic trigger is proven.
@@ -42,15 +42,14 @@ Never invent missing behavior.
 - Do not restore historical `wf_audio_observer.c` slot-0 semantics as ROM truth.
 - Real Saturn + MODE remains the hardware gate.
 
-
 ## Gameplay handoff
 
 Gameplay owner branch: `gameplay-runtime-r01`.
 
-Continue from checkpoint `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13` and the latest commit on that branch. RUNTIME-11 is the frozen reference base; RUNTIME-12/13 extend it cumulatively.
+Continue from checkpoint `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14` and the latest commit on that branch. RUNTIME-11 remains the frozen reference base; RUNTIME-12/13/14 extend it cumulatively.
 
 Do not restart gameplay from WIP160/WIP175/WIP176.
 
-Current build gates: host PASS, SH-2 PASS (37 TUs), full Saturn ELF link PASS, unresolved symbols 0. This is still CANDIDATE: WP28 stops fail-closed at the first mandatory unbound phase `$02088E`, and direct-match bootstrap is not synthesized.
+Current gates: host PASS, SH-2/Yaul PASS, full Saturn ELF link PASS, unresolved symbols 0. This is still CANDIDATE. Real WP28 branch-A integration now reaches `$514E -> $8B3A -> $2088E` and stops fail-closed at mandatory unbound `$20958`. Direct-match bootstrap is not synthesized.
 
 Read `docs/GAMEPLAY-RUNTIME-R01.md` before changing gameplay.
