@@ -1,0 +1,12 @@
+{
+  "version":"R08-CANDIDATE",
+  "authority":"Attract-Bio ROM-EXACT FINAL AUDITED",
+  "producer":"0x008CF8",
+  "state_map":[null,null,0,1,2,3,6,7,8,9,10,11,4,5],
+  "states":{"first":"0x02","last":"0x0D"},
+  "timing":{"anim_end_tick":"0x0100","cleanup_tick":"0x0200","initial_dwell":8,"dwell_min":8,"dwell_max":23},
+  "pack":{"count":12,"bytes_each":37696,"files":"BIO00.PAK..BIO11.PAK","residency":"one active pack"},
+  "audio":"none from 0x008CF8",
+  "rng":{"arcade_service":"0x21B4","integration":"BLOCKED_BY_RUNTIME_OWNER","provisional_rng_forbidden":true},
+  "status":{"controller":"IMPLEMENTED_HOST_SH2","assets_reproduced_and_audited":"PASS","cdfs_load_binding":"OPEN","renderer_binding":"OPEN","hardware":"OPEN"}
+}
