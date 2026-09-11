@@ -6,7 +6,8 @@ Native ROM-EXACT reimplementation of WWF WrestleFest (1991) for Sega Saturn NTSC
 
 ## Hardware-proven foundation
 
-Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
+Real Saturn + Terraonion MODE has validated:
+- boot/VDP foundation;
 - authentic SCSP PCM playback;
 - master volume;
 - SFX and bank-1 presenter/ring-announcer voices;
@@ -19,12 +20,10 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 - **MODE + ROSTER TEST03: HARDWARE-PASS** on real Saturn NTSC-U + Terraonion MODE (2026-09-11).
 - Combined route validated: `MODE -> TAG/ROYAL confirm -> ROSTER -> wrestler confirm`.
 - MODE -> ROSTER yellow/orange flash: CLOSED by display blank/sync before ROSTER CRAM/VRAM reconfiguration.
-- ROSTER composition: transparent NBG0 moving foreground over fixed NBG2 background — HARDWARE-PASS.
-- Confirmation: bright green 96x96 localized patch at VBLANK-IN, cursor preserved — HARDWARE-PASS.
-- Full NBG0 confirmation rebuild is forbidden; TEST03 eliminated that regression.
-- Master import is still pending and must preserve CLEAN-R01 ownership; TEST03 `main.c` is a harness only.
-- TITLE / INTRO: owned by separate intro-presentation block; master consumes its audited checkpoint.
-- Records R06 pure ranking model: IMPLEMENTED / host+SH-2 PASS; runtime hook/renderer/Backup RAM adapter still OPEN.\n- Credits R07 controller: IMPLEMENTED / host+SH-2 PASS; renderer/audio binding/entry binding/hardware still OPEN.\n- Attract Bio R08 controller: IMPLEMENTED / host+SH-2 PASS; exact shared RNG ordering remains BLOCKED_BY_RUNTIME_OWNER.\n- Attract Demo R09 master contract: IMPLEMENTED / host+SH-2 PASS; ordinary gameplay/CPU override/shared RNG remain gameplay-owned.
+- ROSTER: transparent NBG0 moving foreground over fixed NBG2 background — HARDWARE-PASS.
+- Confirmation: bright green localized 96x96 patch at VBLANK-IN with cursor preserved — HARDWARE-PASS.
+- TEST03 `main.c` remains an isolated harness and must not replace CLEAN-R01/master `main.c`.
+- TITLE / INTRO is owned by separate `intro-presentation-r01`; master consumes only its audited checkpoint.
 
 ## AUDIO
 
@@ -33,103 +32,126 @@ Status: **RUNTIME AUDIO HANDOFF R01 ACCEPTED / TRANSPORT HARDWARE-PASS / PRODUCE
 External handoff SHA256:
 `cc1c9ed44edcde0237770521123072c3bbec6927bf37184c157e7b092858db65`.
 
-Producer ownership:
-- 173 total ROM-verified producer rows;
-- 14 `INTEGRATION_READY`;
-- 4 `OWNER_SCOPE_ONLY`;
+- 173 ROM-verified producer rows.
+- 14 `INTEGRATION_READY`.
+- 4 `OWNER_SCOPE_ONLY`.
 - 155 `UNRESOLVED`.
-
-Critical correction:
-- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`;
+- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`.
 - `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`.
-
-Rules:
 - no new WP28 audio phase;
 - no semantic observer;
-- unresolved rows stay fail-closed;
-- exact `0x1F` lifecycle OPEN;
-- final production music lifetimes/termination OPEN;
-- integrated simultaneous music/SFX/voice hardware validation OPEN.
+- exact `0x1F` lifecycle remains OPEN;
+- final cue lifetime/termination and integrated gameplay audio hardware validation remain OPEN.
 
-See `docs/AUDIO-RUNTIME-HANDOFF-R01.md`.
-
-## INTEGRATION MASTER / WP32-WP33
+## INTEGRATION MASTER
 
 Branch: `integration-master-r01`.
 
-Status: **MEMORY/CDFS R03 CANDIDATE**.
-
-Closed/defined:
-- HWRAM/LWRAM/VDP1/VDP2/CRAM/SCSP ownership boundaries;
-- LWRAM forbidden as SCU DMA endpoint;
-- CDFS sector = 2048 bytes;
-- current CDFS file-list capacity = 384;
-- WP24 full SCSP ownership;
-- CRAM mode 2 with four 256-entry windows from WP26 FINAL;
-- VDP2 fixed technical-equivalence partition;
-- six-wrestler LWRAM demonstrated peak policy;
-- runtime CDFS loader with HWRAM staging / LWRAM bulk classes;
+### R02 — CDFS runtime loader
+- HWRAM staging / LWRAM bulk classes;
 - no direct CDFS writes into VDP1/VDP2/CRAM/SCSP;
-- transaction preflight/overlap rejection/publication gate;
-- machine-readable `manifests/final-memory-manifest.r03.json`;
-- fail-closed validator `tools/validate_final_memory_manifest.py`.
+- transaction preflight / overlap rejection / scene publication gate;
+- host PASS;
+- SH-2 core + Yaul adapter compile PASS.
 
-R03 structural validation: PASS.
-R03 final-memory-fit gate: intentionally BLOCKED until:
-- final VDP1 command/texture maxima;
-- integrated ELF/link map;
-- HWRAM scene peaks;
-- final CDFS root count;
-- hardware transfer-window measurements.
+### R03 — machine-readable memory manifest
+- VDP2/CRAM/SCSP known partitions represented;
+- structural validator PASS;
+- final-fit remains BLOCKED by VDP1 maxima, final ELF/link map, HWRAM scene peaks, final CDFS root count and hardware transfer-window measurements.
 
-No BIN/CUE generated. No new hardware PASS claimed.
-
-## WP30 ownership closure
-
-WP30 FINAL identified six project ownership gaps. R04 assigns every one explicitly without claiming implementation closure:
-
-Master `integration-master-r01`:
+### R04 — WP30 orphan ownership resolution
+Master owns:
 - O30-01 Records/ranking/initials;
 - O30-02 Ending Credits;
 - O30-03 Attract/Bio root orchestration;
-- O30-06 single frontend/attract Scene Flow Master root.
+- O30-06 Scene Flow Master root.
 
-Gameplay `gameplay-runtime-r01`:
-- O30-04 full CPU AI controller remainder beyond State5;
-- O30-05 WP31 objects/effects/props actor engine.
+Gameplay owns:
+- O30-04 CPU AI controller remainder;
+- O30-05 WP31 objects/effects/props.
 
-Machine-readable authority:
-`manifests/wp30-orphan-resolution-r04.json`.
+### R05 — Scene Flow Master
+Fail-closed root router exists in `src/runtime/wf_scene_flow_master.[ch]`.
+Only proven evidence-tagged root transitions are accepted.
 
-Ownership validator/tests: PASS.
+### R06 — Records / TOP RANKING
+Pure ranking model + Saturn-specific save serializer implemented.
+Host + SH-2 PASS.
+OPEN: runtime hook, renderer, Backup RAM adapter/hardware persistence.
+
+### R07 — Ending Credits
+Nine-page + staff-scroll controller implemented.
+Host + SH-2 PASS.
+OPEN: renderer/audio binding/entry binding/hardware.
+
+### R08 — Attract Biography
+12-character BIO controller/pack contract implemented.
+Host + SH-2 PASS.
+Exact shared RNG call ordering remains `BLOCKED_BY_RUNTIME_OWNER`.
+
+### R09 — Attract Demo root contract
+14 state/mode/lineup/threshold table and exact 24+33+33 post-demo transition implemented.
+No synthetic joystick/button autoplay.
+Ordinary gameplay/CPU remains gameplay-owned.
+`$1F7F0` override and shared `$21B4` RNG remain gameplay dependencies.
+
+### R10 — Continue / Game Over
+WP14 countdown/session controller implemented:
+- exact pair order;
+- 9..0, 64 iterations per digit, 640 total;
+- live credit availability;
+- current START level;
+- final-iteration accept-before-expire ordering;
+- exact normal/Royal Game Over wait constants.
+Host + SH-2 PASS.
+
+### R11 — Operator / Credits / Payment
+WP19 core implemented:
+- operator config packing;
+- coinage conversion;
+- pulse filter;
+- payment modes 0..5;
+- affordability preview;
+- title prompt IDs;
+- demonstrated DIP consumers.
+Unknown physical semantics remain fail-closed.
+Host + SH-2 PASS.
+
+### R12 — Continue ↔ payment bridge
+R10 Continue now binds to the exact R11 WP19 payment service.
+No private Continue credit model.
+Host + SH-2 PASS.
+
+### R13 — Campaign interstitial contract
+WP13 pure post-win controller implemented:
+- B608 gate;
+- BDA6 selector;
+- exact action/card expiry semantics;
+- raw `0x312A` emission point;
+- 142 synchronized BDA6 iterations;
+- 24-VBlank fade;
+- progression increments only after both interstitial calls return;
+- no synthetic ten-match ladder.
+Host + SH-2 compile validation pending final checkpoint packaging.
 
 ## Gameplay runtime
 
-Gameplay is developed independently on branch `gameplay-runtime-r01` from the audited RUNTIME-11 lineage.\n\nCurrent named dependency observed by master: **BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13**, commit `91f4c697bec0b04678cc1e811b4ee60e606d7131`. Its host tests, SH-2 compile, full Saturn ELF link and 0-unresolved-symbol gate PASS, but normal branch-A frame still fails closed at mandatory unbound phase `0x02088E`; direct-match/attract bootstrap and canonical shared `$21B4` RNG service/order are not yet closed.
+Branch: `gameplay-runtime-r01`.
 
-Its explicit scope includes CPU FINAL remainder and WP31 object/effect/prop engine in addition to the previously assigned gameplay owners.
+Current named dependency observed by master:
+**BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13**
+commit `91f4c697bec0b04678cc1e811b4ee60e606d7131`.
 
-WIP160/175/176 must not be promoted as canonical gameplay bases.
+Its host tests, SH-2 compile, full Saturn ELF link and 0 unresolved-symbol gate PASS, but normal branch-A still fails closed at mandatory unbound phase `0x02088E`.
+Direct gameplay/attract bootstrap, remaining WP28 owners and canonical shared `$21B4` RNG service/order remain OPEN.
+
+WIP160/WIP175/WIP176 are not canonical gameplay bases.
 
 ## Integration rule
 
-Consume gameplay, frontend, intro, and audio by named audited checkpoint/contract. WP24 remains the sole audio backend owner.
+Consume gameplay, MODE+ROSTER, INTRO and audio only by named audited checkpoint/contract.
 
-MODE+ROSTER TEST03 must be transplanted behaviorally, not architecturally.
-
-Audio producer hooks are inserted only where their exact CLEAN-R01 owner/callback exists; otherwise `BLOCKED_BY_RUNTIME_OWNER`.
-
-Ownership assignment is not implementation closure. R06/R07/R08/R09 now provide integration-safe master-side controllers/contracts, but their renderer/runtime-owner/hardware gates remain explicit.
-
-## Scene Flow Master R05
-
-WP30 O30-06 now has a concrete fail-closed root router in `src/runtime/wf_scene_flow_master.[ch]`.
-
-The router accepts only proven `(from,to,evidence)` handoffs exported in `manifests/scene-flow-proven-edges-r05.csv`. Unknown or evidence-mismatched transitions are rejected without changing current state.
-
-Validation:
-- host compile/test PASS with `-Wall -Wextra -Werror`;
-- SH-2 freestanding object compile PASS;
-- full Saturn ELF link not claimed until destination scene modules are merged;
-- hardware PASS not claimed;
-- no BIN/CUE/ISO generated.
+WP24 remains the sole audio backend owner.
+MODE+ROSTER TEST03 behavior is transplanted, not its architecture.
+Unknown behavior stays OPEN/BLOCKED.
+No BIN/CUE unless explicitly requested.
