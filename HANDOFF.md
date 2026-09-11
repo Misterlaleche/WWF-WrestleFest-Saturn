@@ -1,6 +1,6 @@
 # HANDOFF
 
-Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`, `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`, and `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md` before doing any work.
+Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`, `docs/AUDIO-RUNTIME-HANDOFF-R01.md`, `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`, and `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md` before doing any work.
 
 ## Absolute project rule
 
@@ -40,6 +40,26 @@ Import rules:
 External handoff ZIP SHA256:
 `65daa21e89f505d6ff23efc80389145e5e32b4ada6bc8fb98df9f43417d1861a`.
 
+### Audio
+Canonical external handoff: `WWF-RUNTIME-AUDIO-HANDOFF-R01-COMPLETE(1).zip`.
+
+SHA256:
+`cc1c9ed44edcde0237770521123072c3bbec6927bf37184c157e7b092858db65`.
+
+Rules:
+- WP24 remains sole Saturn audio backend owner;
+- exactly 14 producer rows are currently `INTEGRATION_READY`;
+- hooks are side effects at proven CLEAN-R01 states/callbacks/branches, never a new WP28 audio phase;
+- no per-frame semantic observer;
+- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`;
+- `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`;
+- 4 `OWNER_SCOPE_ONLY` and 155 `UNRESOLVED` rows remain blocked;
+- exact `0x1F` lifecycle and final music cue lifetimes remain OPEN;
+- validation captures are not production loops;
+- if an exact runtime owner does not yet exist, use `BLOCKED_BY_RUNTIME_OWNER` rather than fabricate a hook.
+
+See `docs/AUDIO-RUNTIME-HANDOFF-R01.md`.
+
 ### Integration master
 Branch: `integration-master-r01`.
 
@@ -64,16 +84,6 @@ Current R02 candidate:
 - no new hardware PASS claimed.
 
 Do not hand-copy in-progress gameplay. Merge/consume only named audited checkpoints.
-
-## Audio safeguards
-
-- WP24 remains sole Saturn audio backend owner.
-- low-stamina producer is `0x009088`, JSR `0x00908C`, command `0x0B`.
-- `0x0263CC -> 0x0B` is `REGISTERED_NOT_IDENTIFIED`.
-- only `INTEGRATION_READY` producer rows may be wired directly.
-- no TEST-03 fixed-time audio refill;
-- no slot-0 semantic observer;
-- no finite validation capture relabelled as a production loop.
 
 ## Platform safeguards
 
