@@ -46,9 +46,9 @@ These candidates do not automatically inherit HARDWARE-PASS.
 
 Gameplay remains on `gameplay-runtime-r01`.
 Observed dependency:
-`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13` @ `91f4c697bec0b04678cc1e811b4ee60e606d7131`.
+`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14` @ `9f2ad43b843570653a7292a45ee86b7740e98fa7`.
 
-It still fails closed at WP28 phase `0x02088E`; shared `$21B4` RNG/order and attract CPU override `$1F7F0` remain gameplay-owned.
+RUNTIME-14 closes WP28 phase `0x02088E`; the next fail-closed point is `0x020958`. Shared `$21B4` RNG/order and attract CPU override `$1F7F0` remain gameplay-owned.
 
 INTRO/PRESENTATION is developed separately on `intro-presentation-r01`.
 
