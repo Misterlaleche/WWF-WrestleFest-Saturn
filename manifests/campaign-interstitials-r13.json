@@ -1,0 +1,9 @@
+{
+ "version":"R13-CANDIDATE",
+ "authority":"WP13 CAMPAIGN INTERSTITIALS ROM-EXACT FINAL",
+ "postwin_chain":["0x00B608","0x00BDA6","ADDI.B +1 0x1C0163","ADDI.B +1 0x1C0165","config skip adjustment","0x00000AC0"],
+ "b608":{"mode":"TAG_ONLY","selector_0162":4,"termination":"0x1C14F8.bit6","duration":"RUNTIME_DEPENDENT","input_skip":"ABSENT"},
+ "bda6":{"mode":"TAG_ONLY","accepted_raw":[0,1,2,5,6,7],"optional_adjust":"if 0x1C0066.bit7 then d+=1","base_frames":[4,11,18],"action_frames":[3,1,2,1,0],"action_reload":10,"impact_command":"0x312A","card_reload":8,"card_terminal_counter":16,"sync_iterations":142,"fade_vblanks":24,"input_skip":"ABSENT"},
+ "forbidden":"synthetic Test217/Test218 ten-match ladder",
+ "status":{"pure_contract":"IMPLEMENTED_HOST_SH2","b608_objects":"OPEN","renderer":"OPEN","postmatch_binding":"OPEN","hardware":"OPEN"}
+}
