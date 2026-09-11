@@ -65,3 +65,13 @@ The Saturn renderer owns:
 WP19/master exclusively owns credit value and prompt selector.
 
 The old `TITLE.ANM` remains reference/reconstruction evidence and is not the final renderer architecture.
+
+## Starfield motion correlation
+
+Outside the title objects, consecutive captured title states align at an exact horizontal displacement of 2 pixels per captured image with >99% unchanged indexed pixels in sampled sky strips. Because the title capture cadence is one image per two ROM VBlanks, this closes the visible starfield scroll step as 1 pixel per VBlank for the correlated interval. The Saturn renderer must use hardware scroll / background movement, not whole-frame video playback.
+
+## Logo onset correlation
+
+All twelve cards are complete before capture state 324. The WWF/WrestleFest logo first appears at capture state 324, exactly after the final object's remaining 42-VBlank construction window. This correlates logo publication with entry into the 1480-VBlank main title phase.
+
+The logo geometry is stable after publication while its colors change across subsequent captured states. This is implemented as a persistent logo object with palette/effect updates, not as replacement full-frame imagery. The complete long-phase palette/effect cycle remains capture-correlated until its ROM producer/table is bound; no period beyond observed evidence is invented.
