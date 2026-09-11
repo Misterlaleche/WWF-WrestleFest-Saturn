@@ -1,0 +1,41 @@
+{
+  "manifest_version": "R03-CANDIDATE",
+  "authority": ["WP32 FINAL","WP26 FINAL","WP24 FINAL","WP33 FINAL"],
+  "hwram": {"link_end": null,"static_end": null,"scene_peaks": {},"status": "OPEN_UNTIL_INTEGRATED_ELF_MAP"},
+  "vdp1": {"final_partition_status": "BLOCKED_MAX_SIMULTANEOUS","regions": []},
+  "vdp2": {"regions": [
+    {"name":"FG_CPD","owner":"Renderer26","start":"0x00000","bytes":"0x20000","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x20","source_workpack":"WP26"},
+    {"name":"BG_CPD","owner":"Renderer26","start":"0x20000","bytes":"0x20000","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x20","source_workpack":"WP26"},
+    {"name":"TEXT_CPD","owner":"Renderer26","start":"0x40000","bytes":"0x10000","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x20","source_workpack":"WP26"},
+    {"name":"FG_PND","owner":"Renderer26","start":"0x50000","bytes":"0x01000","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x1000","source_workpack":"WP26"},
+    {"name":"BG_PND","owner":"Renderer26","start":"0x51000","bytes":"0x01000","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x1000","source_workpack":"WP26"},
+    {"name":"TEXT_PND","owner":"Renderer26","start":"0x52000","bytes":"0x04000","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x1000","source_workpack":"WP26"},
+    {"name":"RESERVED_UNASSIGNED","owner":"Renderer26","start":"0x56000","bytes":"0x29FFE","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x2","source_workpack":"WP26"},
+    {"name":"BACK_COLOR","owner":"Renderer26","start":"0x7FFFE","bytes":"0x2","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x2","source_workpack":"WP26"}
+  ]},
+  "cram": {"mode": 2,"regions": [
+    {"name":"TEXT","owner":"Renderer26","start":"0x000","bytes":"0x400","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x400","source_workpack":"WP26"},
+    {"name":"SPRITES","owner":"Renderer26","start":"0x400","bytes":"0x400","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x400","source_workpack":"WP26"},
+    {"name":"FG_WORLD","owner":"Renderer26","start":"0x800","bytes":"0x400","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x400","source_workpack":"WP26"},
+    {"name":"BG_WORLD","owner":"Renderer26","start":"0xC00","bytes":"0x400","scenes":["ALL"],"lifetime":"renderer_partition","alignment":"0x400","source_workpack":"WP26"}
+  ]},
+  "scsp": {"regions": [
+    {"name":"DRIVER_SYSTEM","owner":"Audio24","start":"0x00000","bytes":"0x14000","scenes":["ALL"],"lifetime":"audio_runtime","alignment":"0x20","source_workpack":"WP24"},
+    {"name":"SFX_RESIDENT","owner":"Audio24","start":"0x14000","bytes":"0x26800","scenes":["ALL"],"lifetime":"audio_runtime","alignment":"0x20","source_workpack":"WP24"},
+    {"name":"SFX_DYNAMIC","owner":"Audio24","start":"0x3A800","bytes":"0x1E000","scenes":["ALL"],"lifetime":"audio_runtime","alignment":"0x20","source_workpack":"WP24"},
+    {"name":"HEADROOM_A","owner":"Audio24","start":"0x58800","bytes":"0x07800","scenes":["ALL"],"lifetime":"audio_runtime","alignment":"0x20","source_workpack":"WP24"},
+    {"name":"MUSIC_RING","owner":"Audio24","start":"0x60000","bytes":"0x10000","scenes":["ALL"],"lifetime":"audio_runtime","alignment":"0x8000","source_workpack":"WP24"},
+    {"name":"HEADROOM_B","owner":"Audio24","start":"0x70000","bytes":"0x10000","scenes":["ALL"],"lifetime":"audio_runtime","alignment":"0x20","source_workpack":"WP24"}
+  ]},
+  "cdfs_entries": null,
+  "cdfs_capacity": 384,
+  "dma": {"transfers": [],"indirect_tables": []},
+  "open_blockers": [
+    "VDP1_MAX_SIMULTANEOUS_VISIBLE_COMMANDS_OPEN",
+    "VDP1_MAX_UNIQUE_TEXTURE_BYTES_OPEN",
+    "FINAL_ELF_LINK_MAP_OPEN",
+    "FINAL_HWRAM_SCENE_PEAKS_OPEN",
+    "FINAL_CDFS_ROOT_COUNT_OPEN",
+    "HARDWARE_TRANSFER_WINDOW_MEASUREMENT_OPEN"
+  ]
+}
