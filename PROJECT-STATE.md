@@ -16,8 +16,13 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 
 ## Current frontend status
 
-- BLOCK-MODE-01: CANDIDATE / OPEN; TAG effect still differs.
-- BLOCK-ROSTER-01: CANDIDATE / OPEN; BGFIX requires real Saturn revalidation.
+- **MODE + ROSTER TEST03: HARDWARE-PASS** on real Saturn NTSC-U + Terraonion MODE (2026-09-11).
+- Combined route validated: `MODE -> TAG/ROYAL confirm -> ROSTER -> wrestler confirm`.
+- MODE -> ROSTER yellow/orange flash: CLOSED by display blank/sync before ROSTER CRAM/VRAM reconfiguration.
+- ROSTER composition: transparent NBG0 moving foreground over fixed NBG2 background — HARDWARE-PASS.
+- Confirmation: bright green 96x96 localized patch at VBLANK-IN, cursor preserved — HARDWARE-PASS.
+- Full NBG0 confirmation rebuild is forbidden; TEST03 eliminated that regression.
+- Master import is still pending and must preserve CLEAN-R01 ownership; TEST03 `main.c` is a harness only.
 - TITLE / INTRO: PARTIAL.
 - RANKINGS / ATTRACT: NOT INTEGRATED.
 
@@ -62,8 +67,9 @@ Validation:
 - no new hardware PASS claimed.
 
 Still BLOCKED/OPEN:
+- source-level import of MODE+ROSTER TEST03 behavior into master runtime;
 - final VDP1 VRAM partition until maximum simultaneous visible command/unique-texture reachability is demonstrated;
-- exact frontend scene asset byte manifests;
+- exact asset byte manifests for remaining scenes;
 - final HWRAM free budget until the integrated ELF/map exists;
 - full Saturn link after gameplay/frontend merge;
 - measured real-hardware loading/transfer timings.
@@ -76,4 +82,6 @@ WIP160/175/176 must not be promoted as canonical gameplay bases.
 
 ## Integration rule
 
-Consume gameplay by named audited checkpoint/commit. WP24 remains the sole audio backend owner. Do not merge unresolved producer semantics or provisional gameplay merely to make a full build run.
+Consume gameplay and frontend blocks by named audited checkpoint/commit. WP24 remains the sole audio backend owner.
+
+MODE+ROSTER TEST03 must be transplanted behaviorally, not architecturally: preserve the validated blank/sync, layer model, resident foreground and VBLANK-IN 96x96 confirmation patch, while keeping the canonical master main loop/state ownership.
