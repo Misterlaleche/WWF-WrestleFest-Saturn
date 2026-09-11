@@ -1,0 +1,8 @@
+RESOURCE,SPACE,BYTES,ALIGNMENT,LOAD,RELEASE,OWNER,NOTES
+INTRO.RLE,HWRAM linked asset,67104,linker,before main,TITLE handoff/master-defined,INTRO,Harness avoids CDFS during timed sequence
+Decode staging,HWRAM,131072,32,before each preload,after all preloads/harness lifetime,INTRO,SCU DMA source; never LWRAM endpoint
+FBI page,VDP2 VRAM bank0,131072,bank,before display,TITLE handoff/master reclaim,Renderer26,Harness-only residency
+Legal page,VDP2 VRAM bank1,131072,bank,before display,TITLE handoff/master reclaim,Renderer26,Harness-only residency
+Technos page,VDP2 VRAM bank2,131072,bank,before display,TITLE handoff/master reclaim,Renderer26,Harness-only residency
+Current palette,VDP2 CRAM mode1,512,2,scene/fade VBlank,TITLE handoff/master reclaim,Renderer26,Exact indexed fade
+CDFS runtime reads,CDFS,0,n/a,n/a,n/a,WP33,None in isolated intro timing path
