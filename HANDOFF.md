@@ -12,7 +12,7 @@ Read:
 - `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md`
 - `docs/MEMORY-MANIFEST-R03.md`
 - `docs/WP30-OWNERSHIP-RESOLUTION-R04.md`
-- `docs/SCENE-FLOW-MASTER-R05.md`
+- `docs/SCENE-FLOW-MASTER-R05.md`\n- `docs/RECORDS-R06.md`\n- `docs/CREDITS-R07.md`\n- `docs/ATTRACT-BIO-R08.md`\n- `docs/ATTRACT-DEMO-R09.md`
 
 ## Absolute project rule
 
@@ -34,7 +34,7 @@ Owner scope:
 - gameplay camera/animation integration;
 - WP31 objects/effects/props engine (WP30 O30-05).
 
-Continue from audited RUNTIME-11 lineage. Do not use WIP160/175/176 as gameplay base.
+Continue from audited RUNTIME-11 lineage. Do not use WIP160/175/176 as gameplay base.\n\nCurrent named master dependency: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13` @ `91f4c697bec0b04678cc1e811b4ee60e606d7131`. Do not silently promote it to complete gameplay: WP28 still blocks at `0x02088E`, direct attract/bootstrap is OPEN, and shared `$21B4` RNG order is not yet closed.
 
 ### MODE + ROSTER
 Canonical external checkpoint: **WF-SATURN-MODE-ROSTER-INTEGRATION-TEST03 — HARDWARE-PASS**.
@@ -75,12 +75,12 @@ Owner scope:
 - single Scene Flow Master root (O30-06);
 - source-level assembly of frontend + gameplay + audio + renderer.
 
-R03/R04/R05 gates:
+R03-R09 gates:
 - memory manifest structural validation PASS;
 - final memory fit BLOCKED until VDP1/link-map/scene peaks/CDFS root count/hardware timing close;
 - all six WP30 ownership gaps assigned;
 - ownership assignment does not mean implementation complete;
-- Scene Flow Master R05 root router exists and only accepts proven evidence-tagged edges; local scene controllers remain with their owners.
+- Scene Flow Master R05 root router exists and only accepts proven evidence-tagged edges; local scene controllers remain with their owners;\n- Records R06, Credits R07, Attract Bio R08 and Attract Demo R09 are now master-side candidates with host/SH-2 validation; none is relabelled HARDWARE-PASS;\n- attract gameplay is ordinary gameplay/CPU, never synthetic physical-input autoplay; `$1F7F0` and shared `$21B4` remain gameplay-owner dependencies.
 
 Do not hand-copy in-progress gameplay. Consume named audited checkpoints only.
 
