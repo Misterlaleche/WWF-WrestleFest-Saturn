@@ -1,0 +1,18 @@
+scene,asset_or_region,source,bytes,destination,load_moment,release_moment,lifetime,owner,status
+GLOBAL,runtime ELF/static,linked ELF,RUNTIME_DEPENDENT,HWRAM,boot,shutdown,resident,platform,REQUIRES_LINK_MAP
+GLOBAL,audio SCSP map,WP24 FINAL,524288,SCSP RAM,audio init,shutdown,resident,Audio24,CLOSED_OWNERSHIP
+GLOBAL,CRAM four windows,WP26 FINAL,4096,VDP2 CRAM,renderer init/scene palette change,shutdown,resident windows/updated content,Renderer26,CLOSED_CAPACITY
+MATCH,FG active tile cache,WP25/WP26,131072,VDP2 VRAM A0,before match visible,scene exit,scene,Renderer26,CLOSED_MAX_CAPACITY
+MATCH,BG active tile cache,WP25/WP26,131072,VDP2 VRAM A1,before match visible,scene exit,scene,Renderer26,CLOSED_MAX_CAPACITY
+MATCH,TEXT active tile cache,WP25/WP26,65536,VDP2 VRAM B0,before HUD visible,scene exit,scene,Renderer26,CLOSED_MAX_CAPACITY
+MATCH,PND maps,WP26/libyaul,24576,VDP2 VRAM,before scene visible,scene exit,scene,Renderer26,CLOSED_RESERVED_CAPACITY
+MATCH,6P fighter packed residency,WP32 FINAL,903168,LWRAM,before match actor use,scene exit,scene/gameplay,Graphics25/CDFS,CLOSED_PROVEN_WORST_CASE
+MATCH,6th fighter overflow if required,WP32 FINAL,RUNTIME_DEPENDENT,HWRAM,before match actor use,scene exit,scene/gameplay,Graphics25/CDFS,ALLOWED_BY_PROVEN_POLICY
+MATCH,VDP1 command+texture partition,WP26+runtime,RUNTIME_DEPENDENT,VDP1 VRAM,renderer init,shutdown/renderer reconfig,resident partition,Renderer26,BLOCKED_MAX_SIMULTANEOUS
+TITLE,final title assets,Presentation FINAL,RUNTIME_DEPENDENT,CDFS->CPU->VDP1/VDP2,original transition window,scene exit,scene,Frontend/Renderer26,OPEN_EXACT_ASSET_MANIFEST
+MODE_SELECT,mode assets,Presentation FINAL,RUNTIME_DEPENDENT,CDFS->CPU->VDP1/VDP2,scene enter,scene exit,scene,Frontend/Renderer26,OPEN_EXACT_ASSET_MANIFEST
+ROSTER,roster assets,current block + WP25,RUNTIME_DEPENDENT,CDFS->CPU->VDP2,scene enter,scene exit,scene,Frontend/Renderer26,OPEN_EXACT_ASSET_MANIFEST
+PREMATCH,presentation assets,Presentation FINAL,RUNTIME_DEPENDENT,CDFS->CPU->VDP1/VDP2,transition/presentation,match ready,temporary,Frontend/Renderer26,OPEN_EXACT_ASSET_MANIFEST
+ENTRANCE,entrance assets,WP12/WP25,RUNTIME_DEPENDENT,CDFS->CPU->VDP1/VDP2,prematch transition,match start,temporary,Gameplay/Renderer26,OPEN_EXACT_ASSET_MANIFEST
+RANKINGS,ranking assets,Records FINAL,RUNTIME_DEPENDENT,CDFS->CPU->VDP2,ranking enter,ranking exit,scene,Frontend/Renderer26,OPEN_EXACT_ASSET_MANIFEST
+ATTRACT,attract assets,Attract FINAL,RUNTIME_DEPENDENT,CDFS->CPU->VDP1/VDP2,attract state transition,state exit,scene,Frontend/Renderer26,OPEN_EXACT_ASSET_MANIFEST
