@@ -23,6 +23,6 @@ Build gates:
 
 Important: a normal gameplay frame is **not yet complete**. WP28 still stops fail-closed at the first mandatory unbound phase (`$2088E` on current branch-A integration test). Direct-match bootstrap also remains BLOCKED rather than invented.
 
-No BIN/CUE generated.
+Final audit gate is ELF-only and retains no Saturn BIN/CUE. An earlier link-audit invocation briefly emitted a temporary `.bin`; it was deleted immediately and is not part of this checkpoint. No CUE was produced.
 
 See `docs/RUNTIME-13-AUDIT.md`.
