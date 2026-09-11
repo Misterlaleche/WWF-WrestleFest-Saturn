@@ -1,6 +1,6 @@
 # BLOCK-GAMEPLAY-MASTER-01 — RUNTIME-13 AUDIT
 
-Status: **GAMEPLAY-R01 CANDIDATE**. Cumulative from frozen RUNTIME-11; RUNTIME-12/13 extend that tree. No BIN/CUE generated.
+Status: **GAMEPLAY-R01 CANDIDATE**. Cumulative from frozen RUNTIME-11; RUNTIME-12/13 extend that tree. The final build gate is ELF-only and retains no Saturn BIN/CUE. A prior audit invocation briefly emitted a temporary `.bin`; it was immediately deleted and is not part of this checkpoint. No CUE was produced.
 
 ## Authority
 
@@ -22,7 +22,7 @@ WIP160/175/176 are not gameplay bases.
 
 - HOST TESTS: PASS (`-Wall -Wextra -Werror`).
 - SH-2 CROSS COMPILE: PASS, 37 translation units including Saturn entrypoint.
-- FULL SATURN ELF LINK: PASS with Yaul specs; no BIN/CUE produced.
+- FULL SATURN ELF LINK: PASS with Yaul specs; final rerun produced ELF only and retained no BIN/CUE.
 - UNRESOLVED SYMBOLS: 0.
 
 The ELF link PASS does **not** mean gameplay can boot a fabricated match. It proves the cumulative source tree links against Yaul without unresolved symbols. The runtime entrypoint remains fail-closed because direct-match actor/global bootstrap is still not ROM-demonstrated in this block.
