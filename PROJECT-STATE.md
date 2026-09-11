@@ -48,91 +48,94 @@ External handoff SHA256:
 Branch: `integration-master-r01`.
 
 ### R02 — CDFS runtime loader
-- HWRAM staging / LWRAM bulk classes;
-- no direct CDFS writes into VDP1/VDP2/CRAM/SCSP;
-- transaction preflight / overlap rejection / scene publication gate;
-- host PASS;
-- SH-2 core + Yaul adapter compile PASS.
+Host PASS; SH-2 core + Yaul adapter compile PASS.
 
 ### R03 — machine-readable memory manifest
-- VDP2/CRAM/SCSP known partitions represented;
-- structural validator PASS;
-- final-fit remains BLOCKED by VDP1 maxima, final ELF/link map, HWRAM scene peaks, final CDFS root count and hardware transfer-window measurements.
+Structural validator PASS.
+Final-fit remains BLOCKED by VDP1 maxima, final ELF/link map, HWRAM scene peaks, final CDFS root count and hardware transfer-window measurements.
 
-### R04 — WP30 orphan ownership resolution
-Master owns:
-- O30-01 Records/ranking/initials;
-- O30-02 Ending Credits;
-- O30-03 Attract/Bio root orchestration;
-- O30-06 Scene Flow Master root.
-
-Gameplay owns:
-- O30-04 CPU AI controller remainder;
-- O30-05 WP31 objects/effects/props.
+### R04 — WP30 ownership resolution
+Master: Records, Credits, Attract/Bio root, Scene Flow root.
+Gameplay: CPU-controller remainder, WP31 objects/effects/props.
 
 ### R05 — Scene Flow Master
-Fail-closed root router exists in `src/runtime/wf_scene_flow_master.[ch]`.
-Only proven evidence-tagged root transitions are accepted.
+Fail-closed evidence-tagged root router implemented.
 
 ### R06 — Records / TOP RANKING
-Pure ranking model + Saturn-specific save serializer implemented.
-Host + SH-2 PASS.
-OPEN: runtime hook, renderer, Backup RAM adapter/hardware persistence.
+Pure ranking model + Saturn save serializer implemented. Host + SH-2 PASS.
+OPEN: runtime hook, renderer, Backup RAM hardware adapter.
 
 ### R07 — Ending Credits
-Nine-page + staff-scroll controller implemented.
-Host + SH-2 PASS.
-OPEN: renderer/audio binding/entry binding/hardware.
+Nine-page + staff-scroll controller implemented. Host + SH-2 PASS.
+OPEN: renderer/audio/entry binding and hardware validation.
 
 ### R08 — Attract Biography
-12-character BIO controller/pack contract implemented.
-Host + SH-2 PASS.
-Exact shared RNG call ordering remains `BLOCKED_BY_RUNTIME_OWNER`.
+12-character BIO controller/pack contract implemented. Host + SH-2 PASS.
+Exact shared RNG ordering remains `BLOCKED_BY_RUNTIME_OWNER`.
 
 ### R09 — Attract Demo root contract
-14 state/mode/lineup/threshold table and exact 24+33+33 post-demo transition implemented.
-No synthetic joystick/button autoplay.
-Ordinary gameplay/CPU remains gameplay-owned.
-`$1F7F0` override and shared `$21B4` RNG remain gameplay dependencies.
+14 state/mode/lineup/threshold table + exact 24+33+33 exit cadence implemented.
+No synthetic physical-input autoplay.
+Gameplay CPU override `$1F7F0` and shared `$21B4` RNG remain gameplay-owned.
 
 ### R10 — Continue / Game Over
-WP14 countdown/session controller implemented:
-- exact pair order;
-- 9..0, 64 iterations per digit, 640 total;
-- live credit availability;
-- current START level;
-- final-iteration accept-before-expire ordering;
-- exact normal/Royal Game Over wait constants.
-Host + SH-2 PASS.
+Exact WP14 countdown/session controller implemented. Host tests revalidated PASS.
 
 ### R11 — Operator / Credits / Payment
-WP19 core implemented:
-- operator config packing;
-- coinage conversion;
-- pulse filter;
-- payment modes 0..5;
-- affordability preview;
-- title prompt IDs;
-- demonstrated DIP consumers.
-Unknown physical semantics remain fail-closed.
-Host + SH-2 PASS.
+Exact WP19 operator/coin/payment core implemented. Host tests revalidated PASS.
 
-### R12 — Continue ↔ payment bridge
-R10 Continue now binds to the exact R11 WP19 payment service.
-No private Continue credit model.
-Host + SH-2 PASS.
+### R12 — Continue / payment bridge
+Continue uses the same exact WP19 payment service; no private credit model. Host integration test revalidated PASS.
 
-### R13 — Campaign interstitial contract
-WP13 pure post-win controller implemented:
-- B608 gate;
-- BDA6 selector;
-- exact action/card expiry semantics;
-- raw `0x312A` emission point;
+### R13 — Campaign interstitials
+WP13 post-win controller implemented:
+- B608/BDA6 gates;
+- action/card expiry;
+- raw `0x312A` event;
 - 142 synchronized BDA6 iterations;
 - 24-VBlank fade;
-- progression increments only after both interstitial calls return;
+- progression increment only after interstitial return;
 - no synthetic ten-match ladder.
-Host + SH-2 compile validation pending final checkpoint packaging.
+Host + SH-2 compile revalidated PASS.
+
+### R14 — Frontend Transition Engine
+WP15 pure transition primitives implemented:
+- exact common palette fade 7->0, 3 VBlank/level, 24 total;
+- exact 16x8 nibble fade table;
+- stripe close/open `$4BE..$4C5`;
+- exact 17/33/257 wait primitive;
+- exact 26x8 selector slide between `$0140/$0210`.
+Host + SH-2 PASS.
+No generic fade substitution for direct-clear or full-mask routes.
+
+### R15 — Instructional hand prompt
+WP16 imported only as an inert two-pose visual contract:
+- exact 80x96 geometry;
+- origin (0,120);
+- palette provenance 14;
+- exact payload hashes.
+No cadence, trigger, button semantics or audio inferred.
+Host + SH-2 PASS.
+
+### R16 — Gameplay HUD core
+WP18 pure core implemented:
+- four top-HUD anchors;
+- player-indicator tile bases;
+- raw portrait descriptors;
+- queued/accumulated/displayed stamina convergence;
+- exact six-column stamina quantization;
+- exact BCD 30:01 seed -> first visible 30:00;
+- decrement every four eligible loops;
+- 05-minute event command `0x0B`;
+- time-up clamp 00:00 and transition gate 3.
+Host + SH-2 PASS.
+
+Still OPEN in HUD:
+- exact C710 live selector integration;
+- gameplay credit numeric compositor/cache binding;
+- referee/outside count renderer binding;
+- renderer writes under exact gameplay camera/scroll;
+- no wrestler names, generic score or Royal elimination counter may be invented.
 
 ## Gameplay runtime
 
