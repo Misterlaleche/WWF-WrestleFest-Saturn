@@ -1,28 +1,31 @@
-# BLOCK-GAMEPLAY-MASTER-01 — RUNTIME-13
+# BLOCK-GAMEPLAY-MASTER-01 — RUNTIME-15
 
 Status: **GAMEPLAY-R01 CANDIDATE / cumulative / fail-closed**.
 
-Base: frozen `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-11`, extended cumulatively through RUNTIME-12 and RUNTIME-13. Do not replace with WIP160/WIP175/WIP176.
+Base: frozen `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-11`, extended cumulatively through RUNTIME-14. RUNTIME-15 does not restart from WIP160/WIP175/WIP176.
 
 Authority: `wwfwfest.zip` > audited FINAL ROM-EXACT packages > CLEAN-R01 > Saturn/Yaul > current code > historical WIPs.
 
-RUNTIME-13 materially advances:
-- executable WP01 State5 callback families instead of map-only dispatch;
-- CPU-FINAL runtime integration for closed state5/6/7/8/9/A paths;
-- exact fail-closed RNG context handling;
-- WP19 `$055A` payment + WP28 `$8B3A` refill owner;
-- real WP28 bindings now at `$514E/$8B3A/$1C150/$24E58`;
-- Yaul Saturn entrypoint which refuses synthetic direct-match bootstrap;
-- full Saturn ELF link gate with zero unresolved symbols.
+## RUNTIME-15 advance
 
-Build gates:
-- HOST TESTS: PASS
-- SH-2 CROSS COMPILE: PASS (37 translation units)
-- FULL SATURN ELF LINK: PASS
-- UNRESOLVED SYMBOLS: 0
+WP28 real-owner chain now closes:
 
-Important: a normal gameplay frame is **not yet complete**. WP28 still stops fail-closed at the first mandatory unbound phase (`$2088E` on current branch-A integration test). Direct-match bootstrap also remains BLOCKED rather than invented.
+`$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C`
 
-Final audit gate is ELF-only and retains no Saturn BIN/CUE. An earlier link-audit invocation briefly emitted a temporary `.bin`; it was deleted immediately and is not part of this checkpoint. No CUE was produced.
+and the normal branch-A integration gate moves to the next mandatory owner:
 
-See `docs/RUNTIME-13-AUDIT.md`.
+`$F560`.
+
+RUNTIME-15 adds the ROM-derived `$20958` target/relation phase, including demonstrated TAG `$20CCC`, Royal `$20E00/$20BDA/$20C88`, raw actor-pointer ownership semantics, primary/secondary target writes, and fail-closed handling for invalid inherited pointer context. It also binds the already-audited WP21 camera phases `$26936/$2983C` directly into WP28.
+
+No synthetic RNG, transition, bootstrap, audio backend, or substitute target selection was introduced.
+
+## Gates
+
+- HOST TESTS: PASS (`-Wall -Wextra -Werror`).
+- SH-2 CROSS COMPILE: PASS, 39 translation units.
+- FULL SATURN ELF LINK: PASS.
+- UNRESOLVED SYMBOLS: 0.
+- BIN/CUE: not generated.
+- Direct-match bootstrap: BLOCKED pending exact initialization authority.
+- Complete normal WP28 frame: NOT YET; next mandatory unbound owner is `$F560`.

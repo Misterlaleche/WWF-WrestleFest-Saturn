@@ -3,11 +3,11 @@ ifeq ($(strip $(YAUL_INSTALL_ROOT)),)
 endif
 include $(YAUL_INSTALL_ROOT)/share/build.pre.mk
 
-SH_PROGRAM:= gameplay-runtime-r13-link
+SH_PROGRAM:= gameplay-runtime-r15-link
 SH_BUILD_DIR:= audit/saturn-link-build
 SH_OUTPUT_DIR:= audit
 SH_SRCS:= \
- src/wf_actor.c src/wf_payment.c src/wf_state5_exec.c src/arcade_cpu_final_bridge.c \
+ src/wf_actor.c src/wf_payment.c src/wf_spatial.c src/wf_target_relation.c src/wf_state5_exec.c src/arcade_cpu_final_bridge.c \
  src/wf_cpu_runtime.c src/wf_gameplay_bindings.c src/wf_damage.c src/wf_scheduler.c \
  src/wf_core_phases.c src/wf_input.c generated/wf_action_matrix.c \
  generated/wf_animation_tables.c generated/wf_physics_tables.c \

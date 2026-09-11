@@ -25,6 +25,8 @@ typedef struct wf_globals_raw {
  uint8_t mode_0161; /* $1C0161 */
  uint16_t progression_0162; /* $1C0162: CPU progression selector used by state6/controller15 */
  uint16_t global_0166; /* $1C0166 word */
+ uint32_t global_168c; /* $1C168C exact target candidate pointer */
+ uint16_t global_1692; /* $1C1692 target metric */
  uint8_t controller_suppress;
  uint8_t global_1697; /* $1C1697, only numeric bit contract is used */
  uint8_t global_169b; /* $1C169B */
