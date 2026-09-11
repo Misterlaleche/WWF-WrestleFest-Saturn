@@ -41,3 +41,16 @@ Never invent missing behavior.
 - Do not restore TEST-03 fixed-time refill.
 - Do not restore historical `wf_audio_observer.c` slot-0 semantics as ROM truth.
 - Real Saturn + MODE remains the hardware gate.
+
+
+## Gameplay handoff
+
+Gameplay owner branch: `gameplay-runtime-r01`.
+
+Continue from checkpoint `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13` and the latest commit on that branch. RUNTIME-11 is the frozen reference base; RUNTIME-12/13 extend it cumulatively.
+
+Do not restart gameplay from WIP160/WIP175/WIP176.
+
+Current build gates: host PASS, SH-2 PASS (37 TUs), full Saturn ELF link PASS, unresolved symbols 0. This is still CANDIDATE: WP28 stops fail-closed at the first mandatory unbound phase `$02088E`, and direct-match bootstrap is not synthesized.
+
+Read `docs/GAMEPLAY-RUNTIME-R01.md` before changing gameplay.
