@@ -46,10 +46,10 @@ Never invent missing behavior.
 
 Gameplay owner branch: `gameplay-runtime-r01`.
 
-Continue from checkpoint `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14` and the latest commit on that branch. RUNTIME-11 remains the frozen reference base; RUNTIME-12/13/14 extend it cumulatively.
+Continue from checkpoint `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15`. Runtime source checkpoint commit: `72de727a77603c0a81f552fa059c0d2072cd249b`. RUNTIME-11 remains the frozen reference base; RUNTIME-12/13/14/15 extend it cumulatively.
 
 Do not restart gameplay from WIP160/WIP175/WIP176.
 
-Current gates: host PASS, SH-2/Yaul PASS, full Saturn ELF link PASS, unresolved symbols 0. This is still CANDIDATE. Real WP28 branch-A integration now reaches `$514E -> $8B3A -> $2088E` and stops fail-closed at mandatory unbound `$20958`. Direct-match bootstrap is not synthesized.
+Current gates: host PASS, SH-2/Yaul PASS (39 translation units), full Saturn ELF link PASS, unresolved symbols 0. This is still CANDIDATE. Real WP28 branch-A integration now reaches `$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C` and stops fail-closed at mandatory unbound `$F560`. Direct-match bootstrap is not synthesized.
 
 Read `docs/GAMEPLAY-RUNTIME-R01.md` before changing gameplay.
