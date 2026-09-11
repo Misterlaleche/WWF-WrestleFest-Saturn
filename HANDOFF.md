@@ -1,6 +1,6 @@
 # HANDOFF
 
-Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/RUNTIME-AUDIO-RECONCILIATION.md`, and `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md` before doing any work.
+Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/RUNTIME-AUDIO-RECONCILIATION.md`, and `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md` before doing any work.
 
 ## Absolute project rule
 
@@ -15,7 +15,7 @@ Never invent missing behavior.
 3. After import, revalidate on real Saturn both routes: `TAG -> ROSTER -> confirm` and `ROYAL -> ROSTER -> confirm`, preserving the no-flash handoff and localized green confirmation patch.
 4. Continue the next proven frontend/prematch integration boundary; do not invent the post-ROSTER transition if its owner/evidence is not yet bound.
 
-4. Audio:
+5. Audio:
    - transport is HARDWARE-PASS;
    - original command-byte dispatcher is present;
    - full producer matrix contains 173 ROM-verified rows;
