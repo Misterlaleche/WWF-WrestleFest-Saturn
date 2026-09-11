@@ -43,9 +43,9 @@ Owns:
 - WP17 ordinary attract gameplay CPU path, `$1F7F0` override and shared `$21B4` RNG/order.
 
 Current observed checkpoint:
-`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13` @ `91f4c697bec0b04678cc1e811b4ee60e606d7131`.
+`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14` @ `9f2ad43b843570653a7292a45ee86b7740e98fa7`.
 
-Do not promote it to complete gameplay: WP28 still blocks at `0x02088E`.
+Do not promote it to complete gameplay: RUNTIME-14 closes `0x02088E`, but WP28 now blocks at `0x020958`.
 
 ### MODE + ROSTER
 Canonical external checkpoint:
