@@ -19,6 +19,9 @@ Read before changing master integration:
 - `docs/OPERATOR-CREDITS-R11.md`
 - `docs/CONTINUE-PAYMENT-R12.md`
 - `docs/CAMPAIGN-INTERSTITIALS-R13.md`
+- `docs/FRONTEND-TRANSITION-R14.md`
+- `docs/HAND-PROMPT-R15.md`
+- `docs/HUD-CORE-R16.md`
 
 ## Absolute rule
 
@@ -37,7 +40,7 @@ Owns:
 - pin/referee/ring-out/TAG/Royal;
 - gameplay camera/animation;
 - WP31 objects/effects/props;
-- WP17 ordinary attract gameplay CPU path, `$1F7F0` override insertion and shared `$21B4` RNG/order.
+- WP17 ordinary attract gameplay CPU path, `$1F7F0` override and shared `$21B4` RNG/order.
 
 Current observed checkpoint:
 `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13` @ `91f4c697bec0b04678cc1e811b4ee60e606d7131`.
@@ -53,7 +56,7 @@ Preserve:
 - transparent NBG0 + fixed NBG2;
 - resident ROSTER foreground;
 - localized 96x96 confirmation patch at VBLANK-IN;
-- cursor drawn after green mask;
+- cursor after green mask;
 - exact TAG/ROYAL navigation;
 - no full NBG0 confirmation rebuild;
 - TEST03 harness must not replace master `main.c`.
@@ -75,13 +78,16 @@ Owns:
 - platform no-clobber rules;
 - final-memory manifest/validator;
 - Scene Flow Master;
-- Records / Credits / Attract root;
+- Records/Credits/Attract root;
 - Continue/Game Over;
 - WP19 operator/credit/payment;
 - WP13 campaign interstitial root contract;
+- WP15 transition primitives;
+- WP16 inert hand-prompt visual contract;
+- WP18 HUD presentation core;
 - source-level assembly of frontend + gameplay + audio + renderer.
 
-Current master checkpoint family: R02..R13 candidates.
+Current master checkpoint family: R02..R16 candidates.
 
 ## Platform safeguards
 
