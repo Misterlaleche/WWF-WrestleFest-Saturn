@@ -1,0 +1,22 @@
+{
+  "version":"R06-CANDIDATE",
+  "rom_exact":{
+    "tag_ram":"0x1C00C2..0x1C0103",
+    "royal_ram":"0x1C0104..0x1C0145",
+    "entries_per_table":11,
+    "bytes_per_entry":6,
+    "tag_defaults_rom":"0x006DB0",
+    "royal_defaults_rom":"0x006DF2",
+    "sort":"0x00683E",
+    "qualify":"0x0067B2",
+    "locate_new":"0x0068AC",
+    "screen_setup":"0x0069C8",
+    "renderer":"0x006A26",
+    "initials":"0x006B6E",
+    "glyph_renderer":"0x006CFA",
+    "reset_defaults":"0x006D82",
+    "royal_elimination_increment":"0x011284"
+  },
+  "saturn_specific":{"save_format":"WFRK v1","logical_bytes":148,"backup_filename":"WWFRECORDS"},
+  "status":{"model":"IMPLEMENTED_HOST_SH2","renderer":"OPEN","runtime_hook":"OPEN","backup_ram_adapter":"OPEN","hardware":"OPEN"}
+}
