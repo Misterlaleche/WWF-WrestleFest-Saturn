@@ -142,10 +142,10 @@ Still OPEN in HUD:
 Branch: `gameplay-runtime-r01`.
 
 Current named dependency observed by master:
-**BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13**
-commit `91f4c697bec0b04678cc1e811b4ee60e606d7131`.
+**BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14**
+commit `9f2ad43b843570653a7292a45ee86b7740e98fa7`.
 
-Its host tests, SH-2 compile, full Saturn ELF link and 0 unresolved-symbol gate PASS, but normal branch-A still fails closed at mandatory unbound phase `0x02088E`.
+Its host tests, SH-2 compile, full Saturn ELF link and 0 unresolved-symbol gate PASS, but RUNTIME-14 closes real WP28 phase `0x02088E` via `wf_phase_spatial_2088e()`. Branch-A now advances `0x514E -> 0x8B3A -> 0x2088E` and fails closed at the next mandatory phase `0x020958`.
 Direct gameplay/attract bootstrap, remaining WP28 owners and canonical shared `$21B4` RNG service/order remain OPEN.
 
 WIP160/WIP175/WIP176 are not canonical gameplay bases.
