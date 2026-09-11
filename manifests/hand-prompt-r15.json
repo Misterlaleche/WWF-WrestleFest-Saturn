@@ -1,0 +1,14 @@
+{
+  "version":"R15-CANDIDATE",
+  "authority":"WP16 INSTRUCTIONAL UI HAND/BUTTON PROMPTS ROM-EXACT FINAL",
+  "frames":[
+    {"pose":0,"label":"finger_up","width":80,"height":96,"bbox":[10,4,71,87],"origin":[0,120],"fg_palette":14,"model_palette_index":16,"idx8_sha256":"79347a87029f42dd95f2e8d5ac5b511f07b523f2da9180f4263d22aa5c5e196b"},
+    {"pose":1,"label":"finger_down","width":80,"height":96,"bbox":[10,4,71,87],"origin":[0,120],"fg_palette":14,"model_palette_index":16,"idx8_sha256":"3b931bf82a11af1f41b9dcaa679a4c9ccae02ca3ec49bcc0cc2525b9d9f9b7a4"}
+  ],
+  "timing":"OPEN",
+  "trigger":"OPEN",
+  "button_identity":"OPEN",
+  "audio":"OPEN",
+  "runtime_callsite":"FORBIDDEN_UNTIL_PROVEN",
+  "status":{"visual_contract":"IMPLEMENTED_HOST_SH2","renderer_payload":"EXTERNAL_PROTECTED","hardware":"OPEN"}
+}
