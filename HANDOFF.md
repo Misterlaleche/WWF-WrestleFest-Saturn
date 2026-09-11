@@ -1,6 +1,6 @@
 # HANDOFF
 
-Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`, `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`, and `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md` before doing any work.
+Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`, `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`, and `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md` before doing any work.
 
 ## Absolute project rule
 
@@ -22,6 +22,23 @@ Owner scope:
 - gameplay camera/animation integration.
 
 Continue from the audited RUNTIME-11 lineage. Do not use WIP160/175/176 as the gameplay base.
+
+### MODE + ROSTER
+Canonical external checkpoint: **WF-SATURN-MODE-ROSTER-INTEGRATION-TEST03 — HARDWARE-PASS**.
+
+Import rules:
+- **do not replace master `main.c` with TEST03 `REFERENCE-SOURCE/main.c`;**
+- blank/sync MODE->ROSTER before ROSTER CRAM/VRAM reconfiguration;
+- transparent NBG0 foreground + fixed NBG2 background;
+- keep ROSTER foreground resident;
+- confirmation = green mask on selected 96x96 region, then cursor;
+- begin localized patch upload at VBLANK-IN;
+- no full NBG0 clear/rebuild, CRAM rewrite, background rewrite or scroll reset on confirmation;
+- preserve TAG/ROYAL navigation and proven scroll cadence;
+- post-confirm state transition remains owned by the next proven frontend/prematch block.
+
+External handoff ZIP SHA256:
+`65daa21e89f505d6ff23efc80389145e5e32b4ada6bc8fb98df9f43417d1861a`.
 
 ### Integration master
 Branch: `integration-master-r01`.
@@ -46,7 +63,7 @@ Current R02 candidate:
 - no BIN/CUE;
 - no new hardware PASS claimed.
 
-Do not hand-copy an in-progress gameplay checkpoint into this branch. Merge/consume only a named audited gameplay commit.
+Do not hand-copy in-progress gameplay. Merge/consume only named audited checkpoints.
 
 ## Audio safeguards
 
@@ -54,7 +71,7 @@ Do not hand-copy an in-progress gameplay checkpoint into this branch. Merge/cons
 - low-stamina producer is `0x009088`, JSR `0x00908C`, command `0x0B`.
 - `0x0263CC -> 0x0B` is `REGISTERED_NOT_IDENTIFIED`.
 - only `INTEGRATION_READY` producer rows may be wired directly.
-- no TEST-03 fixed-time refill;
+- no TEST-03 fixed-time audio refill;
 - no slot-0 semantic observer;
 - no finite validation capture relabelled as a production loop.
 
