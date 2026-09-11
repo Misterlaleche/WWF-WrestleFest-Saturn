@@ -4,13 +4,13 @@
 const wf_title_card_slot_t wf_title_card_sequence[WF_TITLE_CARD_COUNT] = {
     { WF_TITLE_CARD_HOGAN,      104,  88 },
     { WF_TITLE_CARD_WARRIOR,    168,  88 },
-    { WF_TITLE_CARD_HAWK,        40,  88 },
-    { WF_TITLE_CARD_ANIMAL,     232,  88 },
+    { WF_TITLE_CARD_SLAUGHTER,   40,  88 },
+    { WF_TITLE_CARD_EARTHQUAKE, 232,  88 },
     { WF_TITLE_CARD_BOSSMAN,    104,   8 },
     { WF_TITLE_CARD_JAKE,       168, 168 },
-    { WF_TITLE_CARD_SLAUGHTER,  168,   8 },
+    { WF_TITLE_CARD_HAWK,       168,   8 },
     { WF_TITLE_CARD_DIBIASE,    104, 168 },
-    { WF_TITLE_CARD_EARTHQUAKE, 232,   8 },
+    { WF_TITLE_CARD_ANIMAL,     232,   8 },
     { WF_TITLE_CARD_SMASH,       40, 168 },
     { WF_TITLE_CARD_PERFECT,     40,   8 },
     { WF_TITLE_CARD_CRUSH,      232, 168 }
