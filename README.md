@@ -44,10 +44,14 @@ A BLOCK becomes integration-eligible only after:
 
 Current frontend direction:
 - BOOT: previously validated on real Saturn;
-- MODE SELECT: still open; Royal visual effect is strong, TAG effect still needs exact closure;
-- ROSTER SELECT: hardware scroll cadence improved; background/layer composition requires revalidation together with roster + scroll;
+- **MODE + ROSTER combined checkpoint TEST03: HARDWARE-PASS on real Saturn NTSC-U + Terraonion MODE (2026-09-11).**
+- MODE -> ROSTER handoff now blanks/synchronizes display before ROSTER CRAM/VRAM reconfiguration, eliminating the observed yellow/orange palette flash.
+- ROSTER background/layer composition is hardware-validated: transparent NBG0 moving foreground over fixed NBG2 background.
+- Wrestler confirmation is hardware-validated: cyan -> bright-green confirmation with cursor preserved and no full-screen/foreground-disappearance flash.
+- TAG / ROYAL mode choice is carried into the corresponding ROSTER navigation table in the combined executable.
+- This validates the combined isolated frontend block; the master/runtime import and its next-state handoff still require integration/revalidation without replacing CLEAN-R01 ownership.
 - rankings / attract presentation / demo: not yet integrated into the master;
-- gameplay: intentionally not advanced until the requested frontend blocks are closed.
+- gameplay continues under its separate canonical owner; do not substitute historical WIP bases.
 
 ## CHATGPT PROJECT-SOURCE EVIDENCE LIBRARY
 
