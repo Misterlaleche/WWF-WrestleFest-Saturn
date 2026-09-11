@@ -1,8 +1,8 @@
 {
   "version": "R09-CANDIDATE",
   "authority": "WP17 ATTRACT DEMO GAMEPLAY ROM-EXACT FINAL",
-  "gameplay_checkpoint_observed": "9f2ad43b843570653a7292a45ee86b7740e98fa7",
-  "gameplay_checkpoint_name": "BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14",
+  "gameplay_checkpoint_observed": "72de727a77603c0a81f552fa059c0d2072cd249b",
+  "gameplay_checkpoint_name": "BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15",
   "normal_loop_rom": "0x000F8C",
   "demo_counter_rom": "0x1C0080",
   "counter_increment_rom": "0x0010F2",
@@ -38,7 +38,7 @@
     "collision/damage/animation/camera/HUD"
   ],
   "blocked_by_runtime_owner": [
-    "0x020958 and remaining mandatory WP28 phases",
+    "0x00F560 and remaining mandatory WP28 phases",
     "canonical shared 0x21B4 RNG service/order",
     "exact direct-match/attract gameplay bootstrap",
     "0x1F7F0 native insertion"
@@ -47,5 +47,6 @@
     "exact action trace",
     "successful override opportunities",
     "max reachable actor +0x103 cursor where local 0xFF not proven"
-  ]
+  ],
+  "gameplay_checkpoint_documentation_head": "7f40fde30cb7af32cf95cd4d9469884a342da8b8"
 }
