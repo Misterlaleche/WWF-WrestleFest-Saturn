@@ -1,6 +1,6 @@
 # HANDOFF
 
-Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/RUNTIME-AUDIO-RECONCILIATION.md`, and `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md` before doing any work.
+Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`, and `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md` before doing any work.
 
 ## Absolute project rule
 
@@ -8,36 +8,56 @@ Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HAR
 
 Never invent missing behavior.
 
-## Current immediate work
+## Parallel ownership
 
-1. Revalidate BLOCK-ROSTER-01 BGFIX on real Saturn.
-2. Close BLOCK-MODE-01 TAG visual effect from indexed ROM provenance.
-3. Continue no-game frontend blocks before full gameplay integration.
+### Gameplay
+Branch: `gameplay-runtime-r01`.
 
-4. Audio:
-   - transport is HARDWARE-PASS;
-   - original command-byte dispatcher is present;
-   - full producer matrix contains 173 ROM-verified rows;
-   - owner map R01 classifies 14 rows `INTEGRATION_READY`, 4 `OWNER_SCOPE_ONLY`, 155 `UNRESOLVED`;
-   - use only the 14 ready rows for direct runtime insertion;
-   - low-stamina is producer `0x009088`, JSR `0x00908C`, command `0x0B`;
-   - `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`;
-   - ring-out/count-out ready rows belong to WP08;
-   - finisher ready rows belong primarily to WP01 with WP22/WP10 support;
-   - exact `0x1F` fade and production cue lifetimes remain open.
+Owner scope:
+- WP01 State5/action callbacks;
+- WP28 gameplay bindings;
+- CPU/AI;
+- physics/collision/damage;
+- pin/referee/ring-out/TAG/Royal;
+- gameplay camera/animation integration.
 
-5. Current canonical gameplay runtime source is still absent from this repository.
-   - Do not import WIP160/175/176 as the base.
-   - Insert audio hooks only when the canonical CLEAN-R01 equivalent state/callback exists.
-   - `OWNER_SCOPE_ONLY` rows are blocked until their semantic trigger is proven.
+Continue from the audited RUNTIME-11 lineage. Do not use WIP160/175/176 as the gameplay base.
 
-## What other chats must preserve
+### Integration master
+Branch: `integration-master-r01`.
 
-- No BIN/CUE concatenation; integrate source modules.
-- One shared Saturn platform layer.
-- No guessed timings/palette/input/audio semantics.
-- No placeholder/fake music presented as final.
-- No finite diagnostic PCM capture relabelled as an arcade loop.
-- Do not restore TEST-03 fixed-time refill.
-- Do not restore historical `wf_audio_observer.c` slot-0 semantics as ROM truth.
-- Real Saturn + MODE remains the hardware gate.
+Owner scope:
+- WP32 memory ownership/budgets;
+- WP33 CDFS/disc/loading contract;
+- shared platform no-clobber rules;
+- scene asset lifetime matrix;
+- later source-level assembly of frontend + gameplay + audio + renderer.
+
+Current memory/CDFS candidate:
+- host PASS;
+- SH-2 object compile PASS;
+- VDP2/CRAM capacity mapped;
+- VDP1 final partition BLOCKED pending runtime maxima;
+- no BIN/CUE;
+- no new hardware PASS claimed.
+
+Do not hand-copy an in-progress gameplay checkpoint into this branch. Merge/consume only a named audited gameplay commit.
+
+## Audio safeguards
+
+- WP24 remains sole Saturn audio backend owner.
+- low-stamina producer is `0x009088`, JSR `0x00908C`, command `0x0B`.
+- `0x0263CC -> 0x0B` is `REGISTERED_NOT_IDENTIFIED`.
+- only `INTEGRATION_READY` producer rows may be wired directly.
+- no TEST-03 fixed-time refill;
+- no slot-0 semantic observer;
+- no finite validation capture relabelled as a production loop.
+
+## Platform safeguards
+
+- LWRAM is never an SCU DMA endpoint.
+- VDP1/VDP2/CRAM are renderer-owned.
+- SCSP RAM is Audio24-owned.
+- loading screens are forbidden by convenience; only use one after measured hardware necessity and label it `SATURN PLATFORM ADAPTATION`.
+- no BIN/CUE concatenation.
+- real Saturn + MODE remains the hardware gate.
