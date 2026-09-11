@@ -20,7 +20,7 @@ Unknown behavior remains OPEN/BLOCKED.
 
 Branch: `integration-master-r01`.
 
-Implemented master-side candidates:
+Implemented master-side candidate family:
 - R02 CDFS runtime loader;
 - R03 final-memory manifest/validator;
 - R04 WP30 ownership resolution;
@@ -32,14 +32,20 @@ Implemented master-side candidates:
 - R10 Continue/Game Over;
 - R11 Operator/Credits/Payment;
 - R12 Continue/Payment bridge;
-- R13 Campaign Interstitials.
+- R13 Campaign Interstitials;
+- R14 Frontend Transition Engine;
+- R15 Instructional Hand Prompt visual contract;
+- R16 Gameplay HUD core.
+
+R10-R13 host validation has been rechecked; R13 also cross-compiles for SH-2.
+R14-R16 host + SH-2 compile/test gates PASS.
 
 These candidates do not automatically inherit HARDWARE-PASS.
 
 ## Current hard dependencies
 
 Gameplay remains on `gameplay-runtime-r01`.
-Observed master dependency:
+Observed dependency:
 `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13` @ `91f4c697bec0b04678cc1e811b4ee60e606d7131`.
 
 It still fails closed at WP28 phase `0x02088E`; shared `$21B4` RNG/order and attract CPU override `$1F7F0` remain gameplay-owned.
@@ -54,6 +60,8 @@ INTRO/PRESENTATION is developed separately on `intro-presentation-r01`.
 - attract demo uses ordinary gameplay/CPU, never synthetic joystick/button autoplay;
 - no WIP160/WIP175/WIP176 as canonical gameplay base;
 - no synthetic ten-match campaign ladder;
+- WP16 prompt has no timing/trigger/button semantics until proven;
+- WP18 HUD must not invent wrestler names, generic score or Royal elimination counter;
 - no BIN/CUE unless explicitly requested.
 
 ## Mandatory reading
