@@ -1,79 +1,57 @@
 # WWF WrestleFest arcade -> Sega Saturn
 
-Private development repository for a native Sega Saturn reimplementation of Technos WWF WrestleFest (1991).
+Private development repository for a native ROM-EXACT Sega Saturn reimplementation of Technos WWF WrestleFest (1991).
 
-## ABSOLUTE AUTHORITY HIERARCHY
+## Authority
 
-1. **SUPREME AUTHORITY: original arcade ROM set `wwfwfest.zip`.**
-2. **Audited FINAL ROM-EXACT research / decompilation packages.**
-3. **Saturn/Yaul technical authority.**
-4. **Current Saturn code and test builds.**
+1. original `wwfwfest.zip`;
+2. audited FINAL ROM-EXACT packages;
+3. Saturn/Yaul technical authority;
+4. current Saturn source/tests.
 
-If a lower source conflicts with a higher one, the higher authority wins. Unknown behavior remains OPEN/BLOCKED.
+Unknown behavior remains OPEN/BLOCKED.
 
-## FRONTEND — MODE + ROSTER
+## Current validated blocks
 
-Canonical combined checkpoint: **TEST03 — HARDWARE-PASS** on real Saturn NTSC-U + Terraonion MODE.
+- MODE+ROSTER TEST03: HARDWARE-PASS on Saturn NTSC-U + MODE.
+- WP24 audio transport: HARDWARE-PASS.
+- Integration memory/CDFS platform: host/SH-2 validated; no hardware-pass claim for new integration layer.
 
-Preserve in master integration:
-- blank/sync before MODE->ROSTER CRAM/VRAM reconfiguration;
-- transparent NBG0 ROSTER foreground + fixed NBG2 background;
-- resident foreground;
-- localized 96x96 wrestler-confirmation patch beginning at VBLANK-IN;
-- composition: portrait/background -> green mask -> cursor;
-- TAG/ROYAL navigation propagation;
-- proven scroll geometry/cadence.
-
-**Never replace the master/CLEAN-R01 `main.c` with the TEST03 harness.**
-
-See `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`.
-
-## AUDIO
-
-WP24 transport is HARDWARE-PASS on real NTSC-U Saturn + Terraonion MODE.
-
-Critical producer correction:
-- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`;
-- `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`.
-
-Only producer rows classified `INTEGRATION_READY` may be wired directly.
-
-## INTEGRATION MASTER R02
+## Integration master
 
 Branch: `integration-master-r01`.
 
-Master-side platform integration currently provides:
-- WP32 memory/owner contract;
-- WP33 disc/CDFS/loading policy;
-- VDP2 and CRAM capacity map;
-- SCSP ownership map;
-- fail-closed VDP1 policy;
-- `wf_saturn_platform_memory.[ch]`;
-- `wf_cdfs_runtime.[ch]`;
-- `wf_cdfs_yaul.[ch]`;
-- host tests for memory and CDFS loader;
-- scene load preflight / overlap checks / atomic publication gate.
+Current master infrastructure:
+- WP32/WP33 memory+CDFS contracts;
+- CDFS runtime loader;
+- HWRAM staging / LWRAM bulk residency guards;
+- WP26 VDP2/CRAM map;
+- WP24 SCSP map;
+- R03 machine-readable final-memory manifest + fail-closed validator;
+- R04 WP30 orphan ownership resolution.
 
-Validation:
-- host PASS with `-Wall -Wextra -Werror`;
-- SH-2 core compile PASS;
-- SH-2 Yaul adapter compile PASS;
-- no BIN/CUE generated;
-- no hardware PASS claimed for this R02 layer.
+R03 final-fit remains blocked by real unresolved inputs: VDP1 maxima, integrated ELF/link map, HWRAM scene peaks, final CDFS root count and hardware transfer timing.
 
-The loader never reads files directly into renderer/audio-owned video/sound memories. Graphics are staged in HWRAM; LWRAM remains bulk residency only and is never an SCU-DMA endpoint.
+R04 resolves project ownership:
+- master owns Records, Ending Credits, Attract/Bio root, Scene Flow Master root;
+- gameplay owns CPU-controller remainder and WP31 objects/effects/props.
 
-Final VDP1 partition remains BLOCKED until authoritative runtime evidence proves simultaneous visible command and unique texture maxima.
+## Important integration rules
 
-Gameplay remains separately owned by `gameplay-runtime-r01`; do not duplicate State5/CPU/physics/collision/pin/TAG/Royal work here.
+- never replace CLEAN-R01/master `main.c` with isolated test harnesses;
+- MODE+ROSTER behavior is transplanted from TEST03, not its architecture;
+- WP24 is the only audio backend;
+- gameplay branch remains owner of combat/CPU/objects;
+- no WIP160/175/176 as canonical gameplay base;
+- no BIN/CUE unless explicitly requested.
 
-## MANDATORY READING
+## Mandatory reading
 
 - `PROJECT-STATE.md`
 - `HANDOFF.md`
-- `docs/SATURN-PIPELINE.md`
 - `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`
-- `docs/AUDIO-HARDWARE-VALIDATION.md`
-- `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`
+- `docs/AUDIO-RUNTIME-HANDOFF-R01.md`
 - `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`
 - `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md`
+- `docs/MEMORY-MANIFEST-R03.md`
+- `docs/WP30-OWNERSHIP-RESOLUTION-R04.md`
