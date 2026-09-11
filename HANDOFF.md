@@ -12,6 +12,7 @@ Read:
 - `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md`
 - `docs/MEMORY-MANIFEST-R03.md`
 - `docs/WP30-OWNERSHIP-RESOLUTION-R04.md`
+- `docs/SCENE-FLOW-MASTER-R05.md`
 
 ## Absolute project rule
 
@@ -74,11 +75,12 @@ Owner scope:
 - single Scene Flow Master root (O30-06);
 - source-level assembly of frontend + gameplay + audio + renderer.
 
-R03/R04 gates:
+R03/R04/R05 gates:
 - memory manifest structural validation PASS;
 - final memory fit BLOCKED until VDP1/link-map/scene peaks/CDFS root count/hardware timing close;
 - all six WP30 ownership gaps assigned;
-- ownership assignment does not mean implementation complete.
+- ownership assignment does not mean implementation complete;
+- Scene Flow Master R05 root router exists and only accepts proven evidence-tagged edges; local scene controllers remain with their owners.
 
 Do not hand-copy in-progress gameplay. Consume named audited checkpoints only.
 
