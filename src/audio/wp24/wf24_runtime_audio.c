@@ -1,18 +1,27 @@
 #include "wf24_runtime_audio.h"
 
-static const uint16_t stage_words[10] = {
-    0x3104,0x310A,0x310C,0x310F,0x3106,
-    0x3104,0x310A,0x310C,0x310F,0x3106
+enum {
+    WF24_RINGOUT_PRODUCER_PC = 0x01FE44u,
+    WF24_LOW_STAMINA_PRODUCER_PC = 0x0263CCu
 };
 
-static const wf24_rom_audio_call_t finisher_calls[] = {
-    {0x0152BAu,0x32u}, /* Perfect Plex */
-    {0x016DBEu,0x32u}, /* Gorilla Press */
-    {0x01755Au,0x32u}, /* DDT */
-    {0x017874u,0x2Bu}, /* Hogan Legdrop layer 1 */
-    {0x01787Eu,0x32u}, /* Hogan Legdrop layer 2 */
-    {0x0164B8u,0x2Bu}, /* Smash Suplex layer 1 */
-    {0x0164C2u,0x32u}  /* Smash Suplex layer 2 */
+static const uint16_t stage_words[10] = {
+    0x3104, 0x310A, 0x310C, 0x310F, 0x3106,
+    0x3104, 0x310A, 0x310C, 0x310F, 0x3106
+};
+
+/*
+ * producer_pc is the address of MOVE.W #command,D0, not the following
+ * JSR $00002052. This distinction matters when reconciling SH-2 callbacks.
+ */
+static const wf24_rom_audio_producer_t finisher_producers[] = {
+    {0x0152BAu, 0x32u}, /* Perfect Plex; JSR at 0x0152BE */
+    {0x016DBEu, 0x32u}, /* Gorilla Press; JSR at 0x016DC2 */
+    {0x01755Au, 0x32u}, /* DDT; JSR at 0x01755E */
+    {0x017874u, 0x2Bu}, /* Hogan Legdrop layer 1; JSR at 0x017878 */
+    {0x01787Eu, 0x32u}, /* Hogan Legdrop layer 2; JSR at 0x017882 */
+    {0x0164B8u, 0x2Bu}, /* Smash Suplex layer 1; JSR at 0x0164BC */
+    {0x0164C2u, 0x32u}  /* Smash Suplex layer 2; JSR at 0x0164C6 */
 };
 
 uint16_t
@@ -22,25 +31,33 @@ wf24_stage_music_raw_word(unsigned stage_index)
 }
 
 bool
-wf24_ringout_raw54_command(uint16_t raw54, uint8_t *command_out)
+wf24_ringout_producer_command(uint32_t producer_pc,
+                              uint16_t raw54,
+                              uint8_t *command_out)
 {
-    if (!command_out || raw54 < 0x3165u || raw54 > 0x3168u)
+    if (!command_out || producer_pc != WF24_RINGOUT_PRODUCER_PC)
         return false;
+    if (raw54 < 0x3165u || raw54 > 0x3168u)
+        return false;
+
     *command_out = (uint8_t)(raw54 & 0x00FFu);
     return true;
 }
 
 bool
-wf24_finisher_callsite_command(uint32_t call_pc, uint8_t *command_out)
+wf24_finisher_producer_command(uint32_t producer_pc,
+                               uint8_t *command_out)
 {
     unsigned i;
 
     if (!command_out)
         return false;
 
-    for (i = 0; i < sizeof(finisher_calls) / sizeof(finisher_calls[0]); ++i) {
-        if (finisher_calls[i].call_pc == call_pc) {
-            *command_out = finisher_calls[i].command;
+    for (i = 0;
+         i < sizeof(finisher_producers) / sizeof(finisher_producers[0]);
+         ++i) {
+        if (finisher_producers[i].producer_pc == producer_pc) {
+            *command_out = finisher_producers[i].command;
             return true;
         }
     }
@@ -48,10 +65,12 @@ wf24_finisher_callsite_command(uint32_t call_pc, uint8_t *command_out)
 }
 
 bool
-wf24_low_stamina_callsite(uint32_t call_pc, uint8_t *command_out)
+wf24_low_stamina_producer_command(uint32_t producer_pc,
+                                  uint8_t *command_out)
 {
-    if (!command_out || call_pc != 0x0263CCu)
+    if (!command_out || producer_pc != WF24_LOW_STAMINA_PRODUCER_PC)
         return false;
+
     *command_out = 0x0Bu;
     return true;
 }
@@ -63,26 +82,31 @@ wf24_runtime_dispatch_stage(wf24_command_bus_t *bus, unsigned stage_index)
 
     if (!raw)
         return WF24_DISPATCH_INVALID;
+
     return wf24_command_dispatch(bus, (uint8_t)(raw & 0x00FFu));
 }
 
 wf24_dispatch_result_t
-wf24_runtime_dispatch_raw54(wf24_command_bus_t *bus, uint16_t raw54)
+wf24_runtime_dispatch_ringout(wf24_command_bus_t *bus,
+                              uint32_t producer_pc,
+                              uint16_t raw54)
 {
     uint8_t command;
 
-    if (!wf24_ringout_raw54_command(raw54, &command))
+    if (!wf24_ringout_producer_command(producer_pc, raw54, &command))
         return WF24_DISPATCH_INVALID;
+
     return wf24_command_dispatch(bus, command);
 }
 
 wf24_dispatch_result_t
-wf24_runtime_dispatch_callsite(wf24_command_bus_t *bus, uint32_t call_pc)
+wf24_runtime_dispatch_producer(wf24_command_bus_t *bus,
+                               uint32_t producer_pc)
 {
     uint8_t command;
 
-    if (wf24_low_stamina_callsite(call_pc, &command) ||
-        wf24_finisher_callsite_command(call_pc, &command))
+    if (wf24_low_stamina_producer_command(producer_pc, &command) ||
+        wf24_finisher_producer_command(producer_pc, &command))
         return wf24_command_dispatch(bus, command);
 
     return WF24_DISPATCH_INVALID;

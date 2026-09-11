@@ -2,6 +2,16 @@
 
 #include <string.h>
 
+static bool
+bus_ops_valid(const wf24_command_bus_t *bus)
+{
+    return bus &&
+           bus->ops.stop_music &&
+           bus->ops.play_music &&
+           bus->ops.special_fade_1f &&
+           bus->ops.play_sfx;
+}
+
 bool
 wf24_command_bus_init(wf24_command_bus_t *bus,
                       const wf24_command_bus_ops_t *ops)
@@ -24,7 +34,7 @@ wf24_command_dispatch(wf24_command_bus_t *bus, uint8_t command)
     wf24_route_t route;
     wf24_dispatch_result_t result;
 
-    if (!bus)
+    if (!bus_ops_valid(bus))
         return WF24_DISPATCH_BACKEND_ERROR;
 
     route = wf24_route_command(command);

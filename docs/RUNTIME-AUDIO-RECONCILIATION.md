@@ -11,14 +11,31 @@
 ## Critical finding
 
 The private GitHub repository does not yet contain the current canonical gameplay runtime.
-The only large historical runtime source available in the project sources is not accepted as a canonical base under the current project rules.
+The available CLEAN-R01 FINAL workpacks define contracts, scheduler order and many exact behaviors, but do not form one complete linked gameplay source tree.
 
 Therefore this reconciliation does not copy an obsolete game loop into `main`.
-Instead it imports the exact runtime-facing audio boundary that can be attached to the canonical CLEAN-R01 callbacks when that runtime source is reconciled.
+Instead it imports the exact runtime-facing audio boundary that can be attached to canonical CLEAN-R01 callbacks when that runtime source is reconciled.
+
+## Audit correction — producer PC versus JSR PC
+
+The first reconciliation used the term "callsite PC" for addresses such as
+`0x0152BA`. The ROM evidence shows that these are the **producer instructions**
+(`MOVE.W #command,D0`). The following `JSR $00002052` is four bytes later.
+
+The API now uses `producer_pc` explicitly.
+
+Examples:
+
+- Perfect Plex producer `0x0152BA`; JSR `0x0152BE`;
+- Gorilla Press producer `0x016DBE`; JSR `0x016DC2`;
+- DDT producer `0x01755A`; JSR `0x01755E`;
+- low-stamina producer `0x0263CC`; JSR `0x0263D0`.
+
+This prevents later SH-2 integration from treating the immediate-load address as the actual 68000 JSR address.
 
 ## Rejected adaptation
 
-The historical `wf_audio_observer.c` is not imported. It contains native integration choices such as binding low-stamina to `fighters[0]` and deriving events from semantic runtime fields. The A12 documentation explicitly says that slot-0 role binding is a Saturn integration choice, not a newly recovered arcade role rule.
+The historical `wf_audio_observer.c` is not imported. It contains native integration choices such as binding low-stamina to `fighters[0]` and deriving events from semantic runtime fields. The A12 documentation says that slot-0 role binding is a Saturn integration choice, not a newly recovered arcade role rule.
 
 The replacement keeps raw ROM producer identity.
 
@@ -30,65 +47,88 @@ ROM words at `0x000DEE..0x000E00`:
 
 `3104,310A,310C,310F,3106,3104,310A,310C,310F,3106`
 
-The low byte is dispatched as the original audio command. Invalid stage indices fail closed.
+The low byte is the recovered FM command. Invalid stage indices fail closed.
 
 ### Low-stamina producer
 
-Recovered immediate command call site:
+Recovered producer:
 
-- producer PC: `0x0263CC`
-- command: `0x0B`
+- `MOVE.W #$000B,D0` at `0x0263CC`;
+- `JSR $00002052` at `0x0263D0`;
+- command `0x0B`.
 
-The runtime layer does not infer "active human = slot 0". The owning CLEAN-R01 state must call the hook only when it reaches the equivalent recovered branch.
+A03 explicitly identifies `0x0B` as the low-stamina **FM command**, so routing it through the MUSIC path is correct.
+
+The runtime layer does not infer "active human = slot 0". The owning CLEAN-R01 state must invoke the hook only when it reaches the equivalent recovered branch/latch condition.
 
 ### Ring-out final count producer
 
-Recovered dynamic/dataflow producer at `0x01FE44` uses raw `+$54`, initialized to `0x3165` and incremented.
+Recovered dynamic/dataflow producer:
 
-Accepted raw values only:
+- send occurs at `0x01FE44`;
+- raw `+$54` is initialized to `0x3165` and incremented;
+- accepted range is exactly `0x3165..0x3168`.
 
-- `0x3165 -> 0x65`
-- `0x3166 -> 0x66`
-- `0x3167 -> 0x67`
-- `0x3168 -> 0x68`
+The API now requires **both** producer PC `0x01FE44` and a valid raw `+$54` value. A matching low byte elsewhere is not sufficient.
 
-No synthetic mapping from a generic UI count variable is required.
+### Proven finisher/heavy producers
 
-### Proven finisher/heavy call sites
+Only the ROM-supported producer associations from `finisher_audio_evidence.csv` are admitted:
 
-Only the five ROM-supported move associations from `finisher_audio_evidence.csv` are admitted:
+- Perfect Plex `0x0152BA -> 0x32`;
+- Gorilla Press `0x016DBE -> 0x32`;
+- DDT `0x01755A -> 0x32`;
+- Hogan Legdrop `0x017874 -> 0x2B`, `0x01787E -> 0x32`;
+- Smash Suplex `0x0164B8 -> 0x2B`, `0x0164C2 -> 0x32`.
 
-- Perfect Plex `0x0152BA -> 0x32`
-- Gorilla Press `0x016DBE -> 0x32`
-- DDT `0x01755A -> 0x32`
-- Hogan Legdrop `0x017874 -> 0x2B`, `0x01787E -> 0x32`
-- Smash Suplex `0x0164B8 -> 0x2B`, `0x0164C2 -> 0x32`
-
-Other occurrences of command `0x32` are not globally named or auto-bound.
+Other occurrences of `0x32` are not globally named or auto-bound.
 
 ## Scheduler placement
 
-WP28 remains unchanged. Audio hooks are side effects of already-proven producer/callback branches; they must not create a new frame phase or reorder:
-
-`input -> state/CPU -> referee -> actor callbacks -> collision (branch A) -> damage (branch A) -> object/render -> publish -> VBlank ack`.
+WP28 remains unchanged. Audio hooks are side effects of already-proven producer/callback branches; they must not create a new frame phase or reorder the frame.
 
 In particular:
 
-- finisher audio stays inside the equivalent action callback at the recovered call location;
-- low-stamina command stays at the equivalent recovered producer branch;
-- ring-out command is emitted when the recovered raw `+$54` path calls audio;
-- stage music is emitted by the matching scene/stage producer, not from a per-frame observer.
+- finisher audio stays inside the equivalent action callback;
+- low-stamina command stays at the equivalent recovered branch/latch;
+- ring-out command is emitted only from the equivalent `0x01FE44` producer;
+- stage music is emitted by the matching scene/stage producer, never by a per-frame observer.
 
 ## Validation
 
-Host tests cover all raw stage words, raw ring-out bounds, the exact low-stamina producer PC, all seven admitted finisher/heavy call sites, and rejection of nearby/unproven PCs.
+Two independent host tests are required:
 
-Compile/test:
+### Command bus
 
-`cc -std=c11 -Wall -Wextra -Werror ...`
+Covers:
+- uninitialized/null bus fail-closed;
+- STOP `0x00`;
+- MUSIC boundaries `0x01/0x12`;
+- registered-no-producer boundaries `0x13/0x1E`;
+- special fade `0x1F`;
+- SFX boundaries `0x20/0x81`;
+- invalid `0x82`;
+- backend failure propagation.
 
-Result: PASS.
+### Runtime producers
+
+Covers:
+- all ten raw stage words;
+- invalid stage index;
+- exact ring-out producer PC and both raw bounds;
+- rejection of nearby producer/raw values;
+- exact low-stamina producer PC and rejection of the following JSR PC;
+- all seven admitted finisher/heavy producers;
+- rejection of an unproven producer.
+
+Compile/test target:
+
+`cc -std=c11 -Wall -Wextra -Werror`
+
+Status after this audit correction: source/test set reviewed; integration into the canonical gameplay runtime remains open.
 
 ## Remaining integration gate
 
-Actual insertion into gameplay source remains blocked only by the absence of the current canonical CLEAN-R01 gameplay runtime source in GitHub. Do not use WIP160/175/176 as the integration base merely to fill that gap.
+Actual insertion into gameplay source remains blocked by the absence of the current canonical CLEAN-R01 gameplay runtime source in GitHub.
+
+Do not use WIP160/175/176 as the integration base merely to fill that gap.
