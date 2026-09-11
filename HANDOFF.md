@@ -10,9 +10,10 @@ Never invent missing behavior.
 
 ## Current immediate work
 
-1. Revalidate BLOCK-ROSTER-01 BGFIX on real Saturn.
-2. Close BLOCK-MODE-01 TAG visual effect from indexed ROM provenance.
-3. Continue no-game frontend blocks before full gameplay integration.
+1. Treat **MODE + ROSTER TEST03** as the canonical hardware-proven combined checkpoint for these two frontend sections.
+2. Import its proven behavior into the master/runtime without replacing the canonical CLEAN-R01 main-loop/state ownership.
+3. After import, revalidate on real Saturn both routes: `TAG -> ROSTER -> confirm` and `ROYAL -> ROSTER -> confirm`, preserving the no-flash handoff and localized green confirmation patch.
+4. Continue the next proven frontend/prematch integration boundary; do not invent the post-ROSTER transition if its owner/evidence is not yet bound.
 
 4. Audio:
    - transport is HARDWARE-PASS;
@@ -41,3 +42,7 @@ Never invent missing behavior.
 - Do not restore TEST-03 fixed-time refill.
 - Do not restore historical `wf_audio_observer.c` slot-0 semantics as ROM truth.
 - Real Saturn + MODE remains the hardware gate.
+- MODE + ROSTER TEST03 is hardware-proven; do not regress to the separate candidate harnesses or reintroduce their freeze/timeouts.
+- Do not clear/rebuild the full ROSTER NBG0 on confirmation; use the resident foreground and localized 96x96 VBLANK-IN update.
+- Preserve MODE -> ROSTER display blank/synchronization before changing ROSTER CRAM/VRAM.
+- See `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`.
