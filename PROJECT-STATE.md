@@ -78,16 +78,16 @@ Audio transport and the 14 ready producer hooks are integration-eligible. `OWNER
 
 Status: **GAMEPLAY-R01 CANDIDATE / source integration active**.
 
-Current checkpoint: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14`, cumulative from frozen RUNTIME-11.
+Current checkpoint: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15`, cumulative from frozen RUNTIME-11.
 
 Build gates at this checkpoint:
 - host tests PASS (`-Wall -Wextra -Werror`);
-- SH-2 / Yaul compile PASS;
+- SH-2 / Yaul compile PASS (39 translation units);
 - full Saturn ELF link PASS;
 - unresolved symbols: 0;
 - BIN/CUE: not generated.
 
-RUNTIME-14 adds the exact WP28 `$02088E` spatial/classification owner from canonical ROM evidence. Real branch-A integration now reaches `$514E -> $8B3A -> $2088E` and stops fail-closed at `$20958`.
+RUNTIME-15 closes the WP28 `$020958` target/relation owner from canonical ROM/CLEAN-R01 evidence and binds audited WP21 camera owners `$026936/$02983C`. Real branch-A integration now reaches `$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C` and stops fail-closed at `$F560`.
 
 This does **not** mean gameplay is complete. Direct-match actor/global bootstrap remains BLOCKED. TAG, Royal, full pin/referee, ring-out, remaining collision/release paths, complete WP28 ownership, final VDP2 world/ring, and hardware gameplay validation remain open/partial.
 
