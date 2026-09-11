@@ -28,14 +28,42 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 
 ## AUDIO
 
-Status: **TRANSPORT HARDWARE-PASS / PRODUCER MATRIX ROM-AUDITED / OWNER MAP R01 CLOSED / GAMEPLAY SOURCE INSERTION OPEN.**
+Status: **RUNTIME AUDIO HANDOFF R01 ACCEPTED / TRANSPORT HARDWARE-PASS / PRODUCER MATRIX ROM-AUDITED / OWNER MAP R01 CLOSED / SOURCE INSERTION PARTIAL-OPEN.**
 
-- 173 total ROM-verified producer rows.
-- 14 rows: `INTEGRATION_READY`.
-- 4 rows: `OWNER_SCOPE_ONLY`.
-- 155 rows: `UNRESOLVED`.
-- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`.
+External handoff SHA256:
+`cc1c9ed44edcde0237770521123072c3bbec6927bf37184c157e7b092858db65`.
+
+Package audit:
+- 24/24 internal hashes verified;
+- bridge host compile PASS;
+- no unresolved producer promoted.
+
+Producer ownership:
+- 173 total ROM-verified producer rows;
+- 14 `INTEGRATION_READY`;
+- 4 `OWNER_SCOPE_ONLY`;
+- 155 `UNRESOLVED`.
+
+Ready owners:
+- WP10: low-stamina + stage-music restore;
+- WP08: ring-out final-count + three terminal countout branches;
+- WP01: seven proven finisher/heavy producers;
+- WP11: stage-sensitive result selector;
+- WP24: backend only.
+
+Critical correction:
+- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`;
 - `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`.
+
+Rules:
+- no new WP28 audio phase;
+- no semantic observer;
+- unresolved rows stay fail-closed;
+- exact `0x1F` lifecycle OPEN;
+- final production music lifetimes/termination OPEN;
+- integrated simultaneous music/SFX/voice hardware validation OPEN.
+
+See `docs/AUDIO-RUNTIME-HANDOFF-R01.md`.
 
 ## INTEGRATION MASTER / WP32-WP33
 
@@ -68,6 +96,7 @@ Validation:
 
 Still BLOCKED/OPEN:
 - source-level import of MODE+ROSTER TEST03 behavior into master runtime;
+- integration of 14 audio hooks at exact CLEAN-R01 owners;
 - final VDP1 VRAM partition until maximum simultaneous visible command/unique-texture reachability is demonstrated;
 - exact asset byte manifests for remaining scenes;
 - final HWRAM free budget until the integrated ELF/map exists;
@@ -82,6 +111,8 @@ WIP160/175/176 must not be promoted as canonical gameplay bases.
 
 ## Integration rule
 
-Consume gameplay and frontend blocks by named audited checkpoint/commit. WP24 remains the sole audio backend owner.
+Consume gameplay, frontend, and audio by named audited checkpoint/contract. WP24 remains the sole audio backend owner.
 
-MODE+ROSTER TEST03 must be transplanted behaviorally, not architecturally: preserve the validated blank/sync, layer model, resident foreground and VBLANK-IN 96x96 confirmation patch, while keeping the canonical master main loop/state ownership.
+MODE+ROSTER TEST03 must be transplanted behaviorally, not architecturally.
+
+Audio producer hooks must be inserted only where their exact CLEAN-R01 owner/callback exists; otherwise they remain `BLOCKED_BY_RUNTIME_OWNER`.
