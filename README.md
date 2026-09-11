@@ -101,3 +101,13 @@ The music lock is intentional and correct: the FINAL audio handoff deliberately 
 3. Diagnose the current SFX backend error independently.
 4. Validate PLAY / STOP / NEXT / PREV and audible output on real Saturn.
 5. Only a real-hardware PASS can close the Saturn runtime audio milestone.
+
+
+## MANDATORY CROSS-CHAT HANDOFF
+
+Before changing the port, read:
+- [PROJECT-STATE.md](PROJECT-STATE.md)
+- [HANDOFF.md](HANDOFF.md)
+- [docs/SATURN-PIPELINE.md](docs/SATURN-PIPELINE.md)
+
+These files define the current block status, graphics/input/audio pipeline rules, hardware validation gate, and integration contracts so parallel chats do not reintroduce superseded diagnostic implementations.
