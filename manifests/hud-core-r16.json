@@ -1,0 +1,14 @@
+{
+  "version":"R16-CANDIDATE",
+  "authority":"WP18 HUD SCORE TIMER COUNTERS MESSAGES ROM-EXACT FINAL",
+  "slots":[
+    {"slot":0,"fg":"0x0104","indicator":"0x0104","portrait":"0x0204","bar_upper":"0x0310","bar_lower":"0x0410"},
+    {"slot":1,"fg":"0x0128","indicator":"0x0128","portrait":"0x0228","bar_upper":"0x0334","bar_lower":"0x0434"},
+    {"slot":2,"fg":"0x0154","indicator":"0x0154","portrait":"0x0254","bar_upper":"0x0360","bar_lower":"0x0460"},
+    {"slot":3,"fg":"0x0178","indicator":"0x0178","portrait":"0x0278","bar_upper":"0x0384","bar_lower":"0x0484"}
+  ],
+  "stamina":{"live":"+0x66","queued":"+0x6A","accumulator":"+0x6C","displayed":"+0x6E","maximum":"+0x72","max_display_step_per_update":2,"bar_columns":6,"saturates_low_byte_at":96},
+  "timer":{"rom":"0x0262D2","seed":"30:01","first_visible":"30:00","eligible_loop_divisor":4,"five_minute_command":"0x0B","timeup":"00:00","timeup_gate":3},
+  "portrait_descriptors":["0x21D0","0x31D9","0x41EB","0x51E2","0xD1F4","0x71FD","0x8206","0x920F","0xA218","0xB221","0xC22A","0xD233"],
+  "status":{"core":"IMPLEMENTED_HOST_SH2","c710_messages":"OPEN","credit_numeric":"OPEN","count_renderer":"OPEN","renderer_binding":"OPEN","hardware":"OPEN"}
+}
