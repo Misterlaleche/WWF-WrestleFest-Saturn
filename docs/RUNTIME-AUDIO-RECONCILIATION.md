@@ -53,11 +53,15 @@ The low byte is the recovered FM command. Invalid stage indices fail closed.
 
 Recovered producer:
 
-- `MOVE.W #$000B,D0` at `0x0263CC`;
-- `JSR $00002052` at `0x0263D0`;
-- command `0x0B`.
+- `MOVE.W #$310B,D0` at `0x009088`;
+- `JSR $00002052` at `0x00908C`;
+- command `0x0B`;
+- active actor `+$66 < $0018`;
+- latch `$1C0166` prevents every-frame replay.
 
-A03 explicitly identifies `0x0B` as the low-stamina **FM command**, so routing it through the MUSIC path is correct.
+A03 and `maincpu_sound_calls_complete.csv` identify this path as the recovered low-stamina warning producer.
+
+The complete manifest also contains `0x0263CC -> 0x0B`, but that producer remains `REGISTERED_NOT_IDENTIFIED`. Equal command identity is not semantic proof, so the runtime hook rejects `0x0263CC` as low-stamina.
 
 The runtime layer does not infer "active human = slot 0". The owning CLEAN-R01 state must invoke the hook only when it reaches the equivalent recovered branch/latch condition.
 
