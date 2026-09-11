@@ -27,7 +27,7 @@ Hard architecture rule:
 - Bio overlay shares that RNG stream.
 
 Observed gameplay dependency while R09 was built:
-BLOCK-GAMEPLAY-MASTER-01-RUNTIME-14 at commit 9f2ad43b843570653a7292a45ee86b7740e98fa7.
-It links cleanly and RUNTIME-14 closes mandatory WP28 phase $02088E via the ROM-derived spatial/classification owner. The next fail-closed phase is $020958; direct match/bootstrap and canonical shared RNG service remain unclosed. R09 does not merge gameplay or fabricate those gaps.
+BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15, source checkpoint 72de727a77603c0a81f552fa059c0d2072cd249b; gameplay branch documentation HEAD 7f40fde30cb7af32cf95cd4d9469884a342da8b8.
+It links cleanly. RUNTIME-15 closes mandatory WP28 target/relation phase $020958 and binds the audited WP21 camera phases $026936/$02983C. The next fail-closed phase is $00F560; direct match/bootstrap and canonical shared RNG service remain unclosed. R09 does not merge gameplay or fabricate those gaps.
 
 No BIN/CUE generated. Hardware PASS not claimed.
