@@ -8,13 +8,8 @@ Private development repository for a native Sega Saturn reimplementation of Tech
    - If code, notes, a previous build, a workpack or any other document disagrees with the original ROM, **the ROM wins**.
    - Main 68000 program authority used by the audited research: SHA1 `a726c46f350723ea73158bc78055d17d418b14e2`.
 2. **Audited FINAL ROM-EXACT research / decompilation packages stored in the ChatGPT project sources.**
-   - The umbrella archive is `zips finales.zip`.
-   - The ChatGPT project also contains specialist FINAL packages for audio, presentation/frontend, attract/bio, records/rankings, animations, CPU, victim +$65, CLEAN-R01 and Saturn technical authority.
-   - These are high-authority secondary evidence and should be reused aggressively, but they never overrule the original ROM.
 3. **Saturn/Yaul technical authority.**
-   - Determines how proven arcade behavior is transported to SH-2 / VDP1 / VDP2 / SCSP / SMPC / CDFS.
 4. **Current Saturn code and test builds.**
-   - Working code never overrules evidence.
 
 ## FAIL-CLOSED IMPLEMENTATION RULE
 
@@ -22,110 +17,55 @@ Do not invent provisional gameplay, timings, state transitions, input behavior, 
 
 If a behavior is not demonstrated, leave it OPEN / incomplete until evidence exists.
 
-Examples of forbidden shortcuts:
-- guessed timings;
-- synthetic RNG or fixed seeds;
-- modernized autorepeat/input behavior;
-- approximate collision/state behavior;
-- fake frontend transitions;
-- invented music loops;
-- placeholder music presented as exact;
-- CDDA used as a silent replacement for unresolved arcade synthesis;
-- host/emulator success presented as real Saturn validation.
-
 ## BLOCK WORKFLOW
 
-Development is split into isolated hardware-testable BLOCKs. A BLOCK may have its own BIN/CUE harness for diagnosis, but final integration is performed from source modules and shared Saturn infrastructure. **BIN/CUE images are never concatenated.**
-
-A BLOCK becomes integration-eligible only after:
-- traceability to ROM/audited evidence;
-- host/build checks where applicable;
-- real NTSC-U Saturn + MODE validation for hardware-dependent behavior.
-
-Current frontend direction:
-- BOOT: previously validated on real Saturn;
-- MODE SELECT: still open; Royal visual effect is strong, TAG effect still needs exact closure;
-- ROSTER SELECT: hardware scroll cadence improved; background/layer composition requires revalidation together with roster + scroll;
-- rankings / attract presentation / demo: not yet integrated into the master;
-- gameplay: intentionally not advanced until the requested frontend blocks are closed.
-
-## CHATGPT PROJECT-SOURCE EVIDENCE LIBRARY
-
-The working ChatGPT project contains the original ROM plus audited FINAL ZIPs. Important names include:
-- `wwfwfest.zip` — SUPREME authority;
-- `zips finales.zip` — umbrella audited collection;
-- `WWF-Saturn-Audio-FINAL-DEFINITIVE-ROM-EXACT-HANDOFF(1).zip`;
-- `WWF-Saturn-Audio-Complete-Integration(1).zip`;
-- `WWF-WrestleFest-Saturn-CPU-FINAL-ROM-EXACT-bridge-AUDITED(1).zip`;
-- `WWF-WrestleFest-Saturn-Presentation-ROM-EXACT-FINAL-AUDITED(1).zip`;
-- `WWF-WrestleFest-Saturn-Attract-Bio-ROM-EXACT-FINAL-AUDITED(1).zip`;
-- `WWF-animaciones WrestleFest-Saturn-Animation-ROM-EXACT-FINAL-package.zip`;
-- `WWF-WrestleFest-Saturn-Records-ROM-EXACT-FINAL-package(1).zip`;
-- `WWF-WrestleFest-Saturn-victim65-ROM-EXACT-FINAL-package.zip`;
-- `WF-CLEAN-R01-MASTER-WORKPACK(1).zip`;
-- `WF-CLEAN-R01-ADDON-30-34-MASTER-WORKPACK(1).zip`;
-- `SATURN-TECH-AUTHORITY-R01(1).zip`.
-
-These evidence ZIPs do not all need to be duplicated into GitHub. GitHub should store canonical state, integration code, selected source modules, tests/manifests and provenance references. If a future worker cannot access a required ChatGPT project ZIP, they must stop and request it rather than silently replacing its conclusions with assumptions.
+Development is split into isolated hardware-testable BLOCKs. Final integration is performed from source modules and shared Saturn infrastructure. **BIN/CUE images are never concatenated.**
 
 ## AUDIO — CANONICAL CURRENT STATE
 
-Detailed evidence and chronology: [docs/AUDIO-HARDWARE-VALIDATION.md](docs/AUDIO-HARDWARE-VALIDATION.md).
+Transport is HARDWARE-PASS on real NTSC-U Saturn + Terraonion MODE. The producer matrix is ROM-audited; only producer rows marked `INTEGRATION_READY` may be inserted directly into runtime code.
 
-The audited FINAL audio authority establishes:
-- arcade audio research/model: CLOSED;
-- production music is combined **YM2151 + OKIM6295**;
-- music commands `0x01..0x12` are the demonstrated production range;
-- `0x13..0x1E` are registered but no main-CPU producer is demonstrated;
-- `0x1F` is a special original fade lifecycle, not an ordinary music cue;
-- complete SFX/voice command range is `0x20..0x81`;
-- audited Saturn stream format is 44.1 kHz, mono, signed PCM16, **big-endian**;
-- a finite repeated PCM segment is not ROM-EXACT continuous arcade synthesis.
+Critical correction:
+- low-stamina producer = `0x009088 -> 0x0B`, JSR `0x00908C`;
+- `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`.
 
-### Real Saturn + MODE hardware status — 2026-09-11
+Reusable backend: `src/audio/wp24/`.
 
-**HARDWARE-PASS:**
-- SCSP / poneSound path;
-- audible authentic PCM playback;
-- master volume 0..15;
-- SFX command playback;
-- bank-1 material including ring-announcer / presenter voices;
-- WP24 music transport on physical SCSP slot 31;
-- 64 KiB music ring at sound RAM `0x60000..0x6FFFF`;
-- double-buffer refill using the SCSP current-address monitor;
-- long continuous PCM16BE playback without skips or premature cuts in AUDIO COMPLETE TEST 05.
+## INTEGRATION MASTER R01
 
-**ROM-EXACT validation:**
-- the canonical A53 validation pack is **18 x 12-second validation renders**, not final production tracks;
-- A53 `MUSIC.PAK` SHA256:
-  `8e1c038b00f9800753d3d21eca47f2cace9a04d04c07280d7d4b9110b0fd27bf`;
-- the checkpoint renderer preserves YM2151 + OKI state across render segments;
-- TEST-05 long renders for commands `01,02,04,06,07,0A,0B,0E` revalidate their first 12 seconds exactly against canonical A53 hashes;
-- real Saturn playback of those long renders was reported clean, without the prior cuts or scheduler-induced skipping.
+Branch: `integration-master-r01`.
 
-**Still OPEN:**
-- final production lifetime/termination semantics for every music cue;
-- game-state dispatch of music/SFX/voices;
-- exact `0x1F` fade lifecycle in the integrated runtime;
-- production packaging/generation strategy for continuous music;
-- final integrated gameplay audio validation.
+This branch owns the shared master-side WP32/WP33 contract while gameplay continues independently.
 
-Do **not** relabel the A53 12-second validation pack or TEST-05 long diagnostic captures as final production loop assets.
+Current additions:
+- `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`
+- `docs/INTEGRATION-MASTER-R01.md`
+- `docs/memory/*.csv`
+- `src/platform/wf_saturn_platform_memory.[ch]`
+- `tests/platform/test_wf_saturn_platform_memory.c`
 
-Reusable WP24 transport source now lives under:
-- [src/audio/wp24/](src/audio/wp24/)
+Validated locally:
+- original main 68000 SHA1 reverified;
+- host compile/test PASS with `-Wall -Wextra -Werror`;
+- SH-2 object compile PASS;
+- no BIN/CUE generated;
+- no hardware PASS claimed for this new integration contract.
 
-The TEST-05 hardware audit manifest is stored under:
-- [tests/audio/complete-test-05/](tests/audio/complete-test-05/)
+Renderer memory policy:
+- VDP2/CRAM capacity contract is closed at Saturn technical-equivalence level from WP25/WP26 FINAL;
+- final VDP1 command/texture partition remains BLOCKED pending demonstrated maximum simultaneous visible commands/unique textures;
+- LWRAM is never an SCU DMA endpoint;
+- WP24 owns all SCSP RAM;
+- visible LOADING is not default and may exist only as a measured `SATURN PLATFORM ADAPTATION`.
 
-No ROM, `AUDPCM.PAK`, `LONGMUS.PAK`, generated PCM or protected audio payload is committed to this repository.
+Gameplay remains owned by `gameplay-runtime-r01`. Do not duplicate State5/CPU/physics/collision/pin/TAG/Royal work here.
 
 ## MANDATORY CROSS-CHAT HANDOFF
 
 Before changing the port, read:
-- [PROJECT-STATE.md](PROJECT-STATE.md)
-- [HANDOFF.md](HANDOFF.md)
-- [docs/SATURN-PIPELINE.md](docs/SATURN-PIPELINE.md)
-- [docs/AUDIO-HARDWARE-VALIDATION.md](docs/AUDIO-HARDWARE-VALIDATION.md)
-
-These files define the current block status, graphics/input/audio pipeline rules, hardware validation gate, and integration contracts so parallel chats do not reintroduce superseded diagnostic implementations.
+- `PROJECT-STATE.md`
+- `HANDOFF.md`
+- `docs/SATURN-PIPELINE.md`
+- `docs/AUDIO-HARDWARE-VALIDATION.md`
+- `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`
+- `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`
