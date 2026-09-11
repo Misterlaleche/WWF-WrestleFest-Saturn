@@ -1,0 +1,8 @@
+ASSET,SOURCE,BYTES,DESTINATION,ALIGNMENT,LOAD_MOMENT,RELEASE_MOMENT,RESIDENT_TEMPORARY,OWNER,VALIDATION
+FBI_BITMAP,INTRO.RLE offset 0 packed 13001,122880,VDP2 VRAM harness bank0,32-byte staging,before display,TITLE handoff/master reclaim,TEMPORARY,INTRO->Renderer26,FNV1a fb40ae48
+FBI_PALETTE,INTRO.RLE offset 13004,512,CRAM mode1 palette0,2,during scene publish,TITLE handoff/master reclaim,TEMPORARY,INTRO->Renderer26,FNV1a 964a7820
+LEGAL_BITMAP,INTRO.RLE offset 13516 packed 14653,122880,VDP2 VRAM harness bank1,32-byte staging,before display,TITLE handoff/master reclaim,TEMPORARY,INTRO->Renderer26,FNV1a 2041d3ce
+LEGAL_PALETTE,INTRO.RLE offset 28172,512,CRAM mode1 palette0,2,during scene publish,TITLE handoff/master reclaim,TEMPORARY,INTRO->Renderer26,FNV1a 0a115abb
+TECHNOS_BITMAP,INTRO.RLE offset 28684 packed 5208,122880,VDP2 VRAM harness bank2,32-byte staging,before display,TITLE handoff/master reclaim,TEMPORARY,INTRO->Renderer26,FNV1a 50f5ef03
+TECHNOS_PALETTE,INTRO.RLE offset 33892,512,CRAM mode1 palette0,2,during scene publish,TITLE handoff/master reclaim,TEMPORARY,INTRO->Renderer26,FNV1a 41e58924
+INTRO_RLE_BLOB,ROM-derived presentation asset donor,67104,linked HWRAM asset in harness,linker,before main,master-defined,TEMPORARY,INTRO,SHA256 16452b1bfd5559ff6ea33ec265e60c794763deba61f7492de121147afcffd3dc
