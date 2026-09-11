@@ -1,0 +1,13 @@
+{
+  "version":"R14-CANDIDATE",
+  "authority":"WP15 FRONTEND TRANSITION ENGINE ROM-EXACT FINAL",
+  "main68k_sha1":"a726c46f350723ea73158bc78055d17d418b14e2",
+  "palette_fade":{"rom":"0x0264E2","levels":[7,6,5,4,3,2,1,0],"vblanks_per_level":3,"total_vblanks":24,"table":"exact 16x8 4-bit map"},
+  "stripe_close":{"rom":"0x008F50","tiles":["0x4BE","0x4BF","0x4C0","0x4C1","0x4C2","0x4C3","0x4C4","0x4C5"],"palette_bank":15,"vblanks_per_tile":3,"total_vblanks":24},
+  "stripe_open":{"rom":"0x008FD6","tiles":["0x4C5","0x4C4","0x4C3","0x4C2","0x4C1","0x4C0","0x4BF","0x4BE"],"palette_bank":15,"vblanks_per_tile":3,"total_vblanks":24,"final_clear":"0x001F9E"},
+  "instant_full_mask":{"rom":"0x001FC0","tile":"0x4C5","status":"renderer_event_only"},
+  "direct_clears":["0x001F9E","0x001FDE"],
+  "waits":{"boot":128,"select_post_setup":17,"select_to_prematch":33,"passive_ranking":257,"attract_postdemo_total":90},
+  "select_slide":{"rom":"0x00658C","left":"0x0140","right":"0x0210","step":8,"updates":26},
+  "status":{"logic":"IMPLEMENTED_HOST_SH2","renderer_bindings":"OPEN","hardware":"OPEN"}
+}
