@@ -23,8 +23,8 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 - Confirmation: bright green 96x96 localized patch at VBLANK-IN, cursor preserved — HARDWARE-PASS.
 - Full NBG0 confirmation rebuild is forbidden; TEST03 eliminated that regression.
 - Master import is still pending and must preserve CLEAN-R01 ownership; TEST03 `main.c` is a harness only.
-- TITLE / INTRO: PARTIAL.
-- RANKINGS / ATTRACT: NOT INTEGRATED.
+- TITLE / INTRO: owned by separate intro-presentation block; master consumes its audited checkpoint.
+- RANKINGS / ATTRACT: research FINAL exists; integration not yet performed.
 
 ## AUDIO
 
@@ -33,23 +33,11 @@ Status: **RUNTIME AUDIO HANDOFF R01 ACCEPTED / TRANSPORT HARDWARE-PASS / PRODUCE
 External handoff SHA256:
 `cc1c9ed44edcde0237770521123072c3bbec6927bf37184c157e7b092858db65`.
 
-Package audit:
-- 24/24 internal hashes verified;
-- bridge host compile PASS;
-- no unresolved producer promoted.
-
 Producer ownership:
 - 173 total ROM-verified producer rows;
 - 14 `INTEGRATION_READY`;
 - 4 `OWNER_SCOPE_ONLY`;
 - 155 `UNRESOLVED`.
-
-Ready owners:
-- WP10: low-stamina + stage-music restore;
-- WP08: ring-out final-count + three terminal countout branches;
-- WP01: seven proven finisher/heavy producers;
-- WP11: stage-sensitive result selector;
-- WP24: backend only.
 
 Critical correction:
 - low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`;
@@ -69,50 +57,66 @@ See `docs/AUDIO-RUNTIME-HANDOFF-R01.md`.
 
 Branch: `integration-master-r01`.
 
-Status: **MEMORY/CDFS R02 CANDIDATE**.
+Status: **MEMORY/CDFS R03 CANDIDATE**.
 
-Closed/defined at current authority:
+Closed/defined:
 - HWRAM/LWRAM/VDP1/VDP2/CRAM/SCSP ownership boundaries;
 - LWRAM forbidden as SCU DMA endpoint;
 - CDFS sector = 2048 bytes;
 - current CDFS file-list capacity = 384;
-- WP24 full SCSP ownership including music ring `0x60000..0x6FFFF`;
+- WP24 full SCSP ownership;
 - CRAM mode 2 with four 256-entry windows from WP26 FINAL;
-- VDP2 capacity map sufficient for full active FG/BG/TEXT caches without dropping source tiles;
-- six-wrestler LWRAM demonstrated peak policy retained;
-- runtime CDFS loader with exact root lookup;
-- HWRAM staging / LWRAM bulk load classes;
+- VDP2 fixed technical-equivalence partition;
+- six-wrestler LWRAM demonstrated peak policy;
+- runtime CDFS loader with HWRAM staging / LWRAM bulk classes;
 - no direct CDFS writes into VDP1/VDP2/CRAM/SCSP;
-- transaction-wide preflight and destination-overlap rejection;
-- scene publication remains false until every requested read succeeds.
+- transaction preflight/overlap rejection/publication gate;
+- machine-readable `manifests/final-memory-manifest.r03.json`;
+- fail-closed validator `tools/validate_final_memory_manifest.py`.
 
-Validation:
-- memory-contract host tests PASS;
-- CDFS-loader host tests PASS with `-Wall -Wextra -Werror`;
-- SH-2 memory/core compile PASS;
-- SH-2 Yaul adapter compile PASS;
-- no BIN/CUE generated;
-- no new hardware PASS claimed.
+R03 structural validation: PASS.
+R03 final-memory-fit gate: intentionally BLOCKED until:
+- final VDP1 command/texture maxima;
+- integrated ELF/link map;
+- HWRAM scene peaks;
+- final CDFS root count;
+- hardware transfer-window measurements.
 
-Still BLOCKED/OPEN:
-- source-level import of MODE+ROSTER TEST03 behavior into master runtime;
-- integration of 14 audio hooks at exact CLEAN-R01 owners;
-- final VDP1 VRAM partition until maximum simultaneous visible command/unique-texture reachability is demonstrated;
-- exact asset byte manifests for remaining scenes;
-- final HWRAM free budget until the integrated ELF/map exists;
-- full Saturn link after gameplay/frontend merge;
-- measured real-hardware loading/transfer timings.
+No BIN/CUE generated. No new hardware PASS claimed.
+
+## WP30 ownership closure
+
+WP30 FINAL identified six project ownership gaps. R04 assigns every one explicitly without claiming implementation closure:
+
+Master `integration-master-r01`:
+- O30-01 Records/ranking/initials;
+- O30-02 Ending Credits;
+- O30-03 Attract/Bio root orchestration;
+- O30-06 single frontend/attract Scene Flow Master root.
+
+Gameplay `gameplay-runtime-r01`:
+- O30-04 full CPU AI controller remainder beyond State5;
+- O30-05 WP31 objects/effects/props actor engine.
+
+Machine-readable authority:
+`manifests/wp30-orphan-resolution-r04.json`.
+
+Ownership validator/tests: PASS.
 
 ## Gameplay runtime
 
-Gameplay is developed independently on branch `gameplay-runtime-r01` from the audited RUNTIME-11 lineage. This integration branch must not duplicate gameplay ownership.
+Gameplay is developed independently on branch `gameplay-runtime-r01` from the audited RUNTIME-11 lineage.
+
+Its explicit scope includes CPU FINAL remainder and WP31 object/effect/prop engine in addition to the previously assigned gameplay owners.
 
 WIP160/175/176 must not be promoted as canonical gameplay bases.
 
 ## Integration rule
 
-Consume gameplay, frontend, and audio by named audited checkpoint/contract. WP24 remains the sole audio backend owner.
+Consume gameplay, frontend, intro, and audio by named audited checkpoint/contract. WP24 remains the sole audio backend owner.
 
 MODE+ROSTER TEST03 must be transplanted behaviorally, not architecturally.
 
-Audio producer hooks must be inserted only where their exact CLEAN-R01 owner/callback exists; otherwise they remain `BLOCKED_BY_RUNTIME_OWNER`.
+Audio producer hooks are inserted only where their exact CLEAN-R01 owner/callback exists; otherwise `BLOCKED_BY_RUNTIME_OWNER`.
+
+Ownership assignment is not implementation closure: Records, Credits, Attract/Bio and Scene Flow Master remain to be integrated under the master branch.
