@@ -130,6 +130,7 @@ Before changing the port, read:
 - [PROJECT-STATE.md](PROJECT-STATE.md)
 - [HANDOFF.md](HANDOFF.md)
 - [docs/SATURN-PIPELINE.md](docs/SATURN-PIPELINE.md)
+- [docs/MODE-ROSTER-HARDWARE-VALIDATION.md](docs/MODE-ROSTER-HARDWARE-VALIDATION.md)
 - [docs/AUDIO-HARDWARE-VALIDATION.md](docs/AUDIO-HARDWARE-VALIDATION.md)
 
 These files define the current block status, graphics/input/audio pipeline rules, hardware validation gate, and integration contracts so parallel chats do not reintroduce superseded diagnostic implementations.
