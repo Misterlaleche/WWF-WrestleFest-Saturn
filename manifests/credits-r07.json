@@ -1,0 +1,19 @@
+{
+  "version":"R07-CANDIDATE",
+  "authority":"Credits ROM-EXACT FINAL",
+  "entry":{"tag":"$1C0163==0x09 at $001A5E","royal":"$00114C->$02017A; $1C16C4; $001162->$001B4E"},
+  "controller":"$001B4E",
+  "fixed_pages":9,
+  "fixed_hold_vblanks":129,
+  "setup_sync_before_timer":1,
+  "staff_blocks":6,
+  "staff_updates":1281,
+  "staff_dy_16_16":"0x0000C000",
+  "skip_mask":"0x0030",
+  "entry_audio":"0x11",
+  "exit_audio":"0x1F",
+  "fade_vblanks":24,
+  "return_rom":"0x000006FC",
+  "background":{"mode":4,"camera_x":"0x0280","camera_y":"0x0300","visible_crop":"x128,y256,320x240","priority":"0x78"},
+  "status":{"controller":"IMPLEMENTED_HOST_SH2","renderer":"OPEN","audio_binding":"OPEN","entry_binding":"OPEN","hardware":"OPEN"}
+}
