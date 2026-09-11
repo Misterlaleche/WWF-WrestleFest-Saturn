@@ -2,7 +2,7 @@
 
 enum {
     WF24_RINGOUT_PRODUCER_PC = 0x01FE44u,
-    WF24_LOW_STAMINA_PRODUCER_PC = 0x0263CCu
+    WF24_LOW_STAMINA_PRODUCER_PC = 0x009088u
 };
 
 static const uint16_t stage_words[10] = {

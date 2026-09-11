@@ -72,10 +72,11 @@ int main(void)
            WF24_DISPATCH_OK);
     assert(f.sfx == 1 && f.last == 0x67);
 
-    assert(wf24_low_stamina_producer_command(0x0263CC, &c) &&
+    assert(wf24_low_stamina_producer_command(0x009088, &c) &&
            c == 0x0B);
-    assert(!wf24_low_stamina_producer_command(0x0263D0, &c));
-    assert(wf24_runtime_dispatch_producer(&bus, 0x0263CC) ==
+    assert(!wf24_low_stamina_producer_command(0x00908C, &c));
+    assert(!wf24_low_stamina_producer_command(0x0263CC, &c));
+    assert(wf24_runtime_dispatch_producer(&bus, 0x009088) ==
            WF24_DISPATCH_OK);
     assert(f.music == 2 && f.last == 0x0B);
 

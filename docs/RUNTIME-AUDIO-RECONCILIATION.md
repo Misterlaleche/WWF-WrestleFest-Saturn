@@ -29,7 +29,7 @@ Examples:
 - Perfect Plex producer `0x0152BA`; JSR `0x0152BE`;
 - Gorilla Press producer `0x016DBE`; JSR `0x016DC2`;
 - DDT producer `0x01755A`; JSR `0x01755E`;
-- low-stamina producer `0x0263CC`; JSR `0x0263D0`.
+- low-stamina producer `0x009088`; JSR `0x00908C`.
 
 This prevents later SH-2 integration from treating the immediate-load address as the actual 68000 JSR address.
 

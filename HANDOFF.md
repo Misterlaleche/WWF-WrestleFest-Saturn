@@ -35,8 +35,8 @@ Never invent missing behavior.
    - use `wf24_command_dispatch()` with original arcade command bytes;
    - use `wf24_runtime_audio.*` for only ROM-backed producer/call-site bindings;
    - stage music uses raw ROM words `0x3104...`;
-   - low-stamina producer is anchored to ROM PC `0x0263CC`, not a guessed fighter slot;
-   - ring-out uses raw `+$54 = 0x3165..0x3168`;
+   - low-stamina producer is anchored to ROM PC `0x009088` (`JSR` at `0x00908C`), not a guessed fighter slot;
+   - ring-out uses raw `+$54 = 0x3165..0x3168`;\n   - `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED` and must not be reused as low-stamina;
    - only proven finisher/heavy call-sites are admitted;
    - exact `0x1F` fade and final production cue lifetime remain open.
 

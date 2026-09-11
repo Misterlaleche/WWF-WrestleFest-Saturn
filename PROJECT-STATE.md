@@ -69,8 +69,8 @@ Proven on real NTSC-U Saturn + Terraonion MODE:
 Runtime bridge now present:
 - original command-byte dispatcher;
 - raw stage music words from ROM table `0x000DEE..0x000E00`;
-- low-stamina producer anchored to ROM PC `0x0263CC -> 0x0B`;
-- ring-out raw `+$54` mapping `0x3165..0x3168 -> 0x65..0x68`;
+- low-stamina producer anchored to `0x009088 -> 0x0B` (`JSR` at `0x00908C`);
+- ring-out raw `+$54` mapping `0x3165..0x3168 -> 0x65..0x68`;\n- `0x0263CC -> 0x0B` is explicitly retained as `REGISTERED_NOT_IDENTIFIED`, not low-stamina;
 - proven finisher/heavy call-sites only;
 - no semantic `fighters[0]` observer imported.
 
