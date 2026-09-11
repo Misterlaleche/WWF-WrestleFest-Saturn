@@ -24,7 +24,7 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 - Full NBG0 confirmation rebuild is forbidden; TEST03 eliminated that regression.
 - Master import is still pending and must preserve CLEAN-R01 ownership; TEST03 `main.c` is a harness only.
 - TITLE / INTRO: owned by separate intro-presentation block; master consumes its audited checkpoint.
-- RANKINGS / ATTRACT: research FINAL exists; integration not yet performed.
+- Records R06 pure ranking model: IMPLEMENTED / host+SH-2 PASS; runtime hook/renderer/Backup RAM adapter still OPEN.\n- Credits R07 controller: IMPLEMENTED / host+SH-2 PASS; renderer/audio binding/entry binding/hardware still OPEN.\n- Attract Bio R08 controller: IMPLEMENTED / host+SH-2 PASS; exact shared RNG ordering remains BLOCKED_BY_RUNTIME_OWNER.\n- Attract Demo R09 master contract: IMPLEMENTED / host+SH-2 PASS; ordinary gameplay/CPU override/shared RNG remain gameplay-owned.
 
 ## AUDIO
 
@@ -105,7 +105,7 @@ Ownership validator/tests: PASS.
 
 ## Gameplay runtime
 
-Gameplay is developed independently on branch `gameplay-runtime-r01` from the audited RUNTIME-11 lineage.
+Gameplay is developed independently on branch `gameplay-runtime-r01` from the audited RUNTIME-11 lineage.\n\nCurrent named dependency observed by master: **BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13**, commit `91f4c697bec0b04678cc1e811b4ee60e606d7131`. Its host tests, SH-2 compile, full Saturn ELF link and 0-unresolved-symbol gate PASS, but normal branch-A frame still fails closed at mandatory unbound phase `0x02088E`; direct-match/attract bootstrap and canonical shared `$21B4` RNG service/order are not yet closed.
 
 Its explicit scope includes CPU FINAL remainder and WP31 object/effect/prop engine in addition to the previously assigned gameplay owners.
 
@@ -119,7 +119,7 @@ MODE+ROSTER TEST03 must be transplanted behaviorally, not architecturally.
 
 Audio producer hooks are inserted only where their exact CLEAN-R01 owner/callback exists; otherwise `BLOCKED_BY_RUNTIME_OWNER`.
 
-Ownership assignment is not implementation closure: Records, Credits and Attract/Bio remain to be integrated under the master branch.
+Ownership assignment is not implementation closure. R06/R07/R08/R09 now provide integration-safe master-side controllers/contracts, but their renderer/runtime-owner/hardware gates remain explicit.
 
 ## Scene Flow Master R05
 
