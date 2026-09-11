@@ -11,49 +11,51 @@ Private development repository for a native ROM-EXACT Sega Saturn reimplementati
 
 Unknown behavior remains OPEN/BLOCKED.
 
-## Current validated blocks
+## Hardware-proven blocks
 
-- MODE+ROSTER TEST03: HARDWARE-PASS on Saturn NTSC-U + MODE.
-- WP24 audio transport: HARDWARE-PASS.
-- Integration memory/CDFS platform: host/SH-2 validated; no hardware-pass claim for new integration layer.
+- MODE+ROSTER TEST03 — HARDWARE-PASS on Saturn NTSC-U + MODE.
+- WP24 audio transport — HARDWARE-PASS.
 
 ## Integration master
 
 Branch: `integration-master-r01`.
 
-Current master infrastructure:
-- WP32/WP33 memory+CDFS contracts;
-- CDFS runtime loader;
-- HWRAM staging / LWRAM bulk residency guards;
-- WP26 VDP2/CRAM map;
-- WP24 SCSP map;
-- R03 machine-readable final-memory manifest + fail-closed validator;
-- R04 WP30 orphan ownership resolution;
-- R05 fail-closed Scene Flow Master root router;\n- R06 Records/TOP RANKING core + Saturn save serializer;\n- R07 Ending Credits controller;\n- R08 Attract Biography controller/pack contract;\n- R09 Attract Demo 14-state/threshold/90-VBlank root contract.
+Implemented master-side candidates:
+- R02 CDFS runtime loader;
+- R03 final-memory manifest/validator;
+- R04 WP30 ownership resolution;
+- R05 Scene Flow Master;
+- R06 Records/TOP RANKING;
+- R07 Ending Credits;
+- R08 Attract Biography;
+- R09 Attract Demo root contract;
+- R10 Continue/Game Over;
+- R11 Operator/Credits/Payment;
+- R12 Continue/Payment bridge;
+- R13 Campaign Interstitials.
 
-R03 final-fit remains blocked by real unresolved inputs: VDP1 maxima, integrated ELF/link map, HWRAM scene peaks, final CDFS root count and hardware transfer timing.
+These candidates do not automatically inherit HARDWARE-PASS.
 
-R04 resolves project ownership:
-- master owns Records, Ending Credits, Attract/Bio root, Scene Flow Master root;
-- gameplay owns CPU-controller remainder and WP31 objects/effects/props.
+## Current hard dependencies
+
+Gameplay remains on `gameplay-runtime-r01`.
+Observed master dependency:
+`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13` @ `91f4c697bec0b04678cc1e811b4ee60e606d7131`.
+
+It still fails closed at WP28 phase `0x02088E`; shared `$21B4` RNG/order and attract CPU override `$1F7F0` remain gameplay-owned.
+
+INTRO/PRESENTATION is developed separately on `intro-presentation-r01`.
 
 ## Important integration rules
 
-- never replace CLEAN-R01/master `main.c` with isolated test harnesses;
-- MODE+ROSTER behavior is transplanted from TEST03, not its architecture;
+- never replace CLEAN-R01/master `main.c` with an isolated harness;
+- MODE+ROSTER imports TEST03 behavior, not its architecture;
 - WP24 is the only audio backend;
-- gameplay branch remains owner of combat/CPU/objects and the WP17 `$1F7F0` CPU override/shared RNG service;
-- no WIP160/175/176 as canonical gameplay base;
-- attract demo never synthesizes joystick/button autoplay;\n- no BIN/CUE unless explicitly requested.
+- attract demo uses ordinary gameplay/CPU, never synthetic joystick/button autoplay;
+- no WIP160/WIP175/WIP176 as canonical gameplay base;
+- no synthetic ten-match campaign ladder;
+- no BIN/CUE unless explicitly requested.
 
 ## Mandatory reading
 
-- `PROJECT-STATE.md`
-- `HANDOFF.md`
-- `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`
-- `docs/AUDIO-RUNTIME-HANDOFF-R01.md`
-- `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`
-- `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md`
-- `docs/MEMORY-MANIFEST-R03.md`
-- `docs/WP30-OWNERSHIP-RESOLUTION-R04.md`
-- `docs/SCENE-FLOW-MASTER-R05.md`\n- `docs/RECORDS-R06.md`\n- `docs/CREDITS-R07.md`\n- `docs/ATTRACT-BIO-R08.md`\n- `docs/ATTRACT-DEMO-R09.md`
+See `HANDOFF.md` for the complete ordered integration reading list.
