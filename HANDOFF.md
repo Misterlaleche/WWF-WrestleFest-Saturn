@@ -1,6 +1,6 @@
 # HANDOFF
 
-Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`, and `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md` before doing any work.
+Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`, `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`, and `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md` before doing any work.
 
 ## Absolute project rule
 
@@ -30,13 +30,18 @@ Owner scope:
 - WP32 memory ownership/budgets;
 - WP33 CDFS/disc/loading contract;
 - shared platform no-clobber rules;
+- CDFS runtime loader and scene publication gate;
 - scene asset lifetime matrix;
 - later source-level assembly of frontend + gameplay + audio + renderer.
 
-Current memory/CDFS candidate:
-- host PASS;
-- SH-2 object compile PASS;
+Current R02 candidate:
+- host tests PASS;
+- SH-2 core compile PASS;
+- SH-2 Yaul adapter compile PASS;
 - VDP2/CRAM capacity mapped;
+- HWRAM/LWRAM load classes enforced;
+- overlapping load destinations rejected;
+- scenes remain unpublished after partial/failed I/O;
 - VDP1 final partition BLOCKED pending runtime maxima;
 - no BIN/CUE;
 - no new hardware PASS claimed.
@@ -56,8 +61,10 @@ Do not hand-copy an in-progress gameplay checkpoint into this branch. Merge/cons
 ## Platform safeguards
 
 - LWRAM is never an SCU DMA endpoint.
+- CDFS does not write directly into VDP1/VDP2/CRAM/SCSP.
 - VDP1/VDP2/CRAM are renderer-owned.
 - SCSP RAM is Audio24-owned.
+- a scene is visible only after its load transaction is complete.
 - loading screens are forbidden by convenience; only use one after measured hardware necessity and label it `SATURN PLATFORM ADAPTATION`.
 - no BIN/CUE concatenation.
 - real Saturn + MODE remains the hardware gate.
