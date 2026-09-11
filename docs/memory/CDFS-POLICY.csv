@@ -1,0 +1,9 @@
+item,value,status,rule
+sector_bytes,2048,WP32_WP33_FINAL,"all capacities/read buffers sector-rounded"
+file_capacity,384,CURRENT_PROVEN_CONTRACT,"fail if root entry count exceeds this until authoritative runtime changes it"
+filename_max,11,LIBYAUL_CURRENT,"ISO filename limit in supplied Yaul"
+final_data_track,MODE1/2352,WP33_FINAL,"BIN/CUE only when explicitly requested"
+iso_role,INTERMEDIATE,WP33_FINAL,"not final playable payload"
+audio_tracks,0,CURRENT_PROJECT_POLICY,"WP24 streams SCSP PCM; no CDDA substitution"
+loading_screen,NOT_DEFAULT,MASTER_POLICY,"use original transitions first; only SATURN PLATFORM ADAPTATION if measured wait requires it"
+LWRAM_SCU_DMA,FORBIDDEN,WP32_FINAL,"stage exact bytes through HWRAM or CPU-supported path"
