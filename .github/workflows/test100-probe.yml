@@ -1,9 +1,0 @@
-name: Test100 build probe
-on:
-  push:
-    branches: [test100-build]
-jobs:
-  probe:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo TEST100_ACTIONS_OK
