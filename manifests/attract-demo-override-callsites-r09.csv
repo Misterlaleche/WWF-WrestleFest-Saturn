@@ -1,0 +1,5 @@
+callsite,target,cpu_context,effect_on_success
+01C4EE,01F7F0,CPU dispatcher core,uses +$100/+101 result in selector/state-control path
+01CC2C,01F7F0,CPU dispatcher core,routes successful scripted selector into state5
+01CC92,01F7F0,CPU dispatcher core,routes successful scripted selector into state5
+01F084,01F7F0,"CPU state 0C ($1F06A), after +$BD >= $30","copies +$100 to +$60, enters state5 and executor"
