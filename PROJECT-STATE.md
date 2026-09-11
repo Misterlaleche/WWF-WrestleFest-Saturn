@@ -36,7 +36,7 @@ Status: **TRANSPORT HARDWARE-PASS / PRODUCER MATRIX ROM-AUDITED / OWNER MAP R01 
 
 Branch: `integration-master-r01`.
 
-Status: **MEMORY/CDFS INTEGRATION CANDIDATE**.
+Status: **MEMORY/CDFS R02 CANDIDATE**.
 
 Closed/defined at current authority:
 - HWRAM/LWRAM/VDP1/VDP2/CRAM/SCSP ownership boundaries;
@@ -46,22 +46,31 @@ Closed/defined at current authority:
 - WP24 full SCSP ownership including music ring `0x60000..0x6FFFF`;
 - CRAM mode 2 with four 256-entry windows from WP26 FINAL;
 - VDP2 capacity map sufficient for full active FG/BG/TEXT caches without dropping source tiles;
-- six-wrestler LWRAM demonstrated peak policy retained.
+- six-wrestler LWRAM demonstrated peak policy retained;
+- runtime CDFS loader with exact root lookup;
+- HWRAM staging / LWRAM bulk load classes;
+- no direct CDFS writes into VDP1/VDP2/CRAM/SCSP;
+- transaction-wide preflight and destination-overlap rejection;
+- scene publication remains false until every requested read succeeds.
+
+Validation:
+- memory-contract host tests PASS;
+- CDFS-loader host tests PASS with `-Wall -Wextra -Werror`;
+- SH-2 memory/core compile PASS;
+- SH-2 Yaul adapter compile PASS;
+- no BIN/CUE generated;
+- no new hardware PASS claimed.
 
 Still BLOCKED/OPEN:
 - final VDP1 VRAM partition until maximum simultaneous visible command/unique-texture reachability is demonstrated;
 - exact frontend scene asset byte manifests;
 - final HWRAM free budget until the integrated ELF/map exists;
 - full Saturn link after gameplay/frontend merge;
-- real-hardware validation of the integrated transfer/loading windows.
-
-Host tests PASS and SH-2 object compile PASS for the shared memory contract. No BIN/CUE generated.
+- measured real-hardware loading/transfer timings.
 
 ## Gameplay runtime
 
-Gameplay is developed independently on branch `gameplay-runtime-r01` from the audited RUNTIME-11 checkpoint. This integration branch must not duplicate gameplay ownership.
-
-At the time this integration checkpoint was created, the GitHub gameplay branch existed but the gameplay source tree had not yet been committed there.
+Gameplay is developed independently on branch `gameplay-runtime-r01` from the audited RUNTIME-11 lineage. This integration branch must not duplicate gameplay ownership.
 
 WIP160/175/176 must not be promoted as canonical gameplay bases.
 
