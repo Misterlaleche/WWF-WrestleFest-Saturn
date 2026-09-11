@@ -75,3 +75,22 @@ WIP160/175/176 must not be promoted as canonical bases.
 ## Integration rule
 
 Audio transport and the 14 ready producer hooks are integration-eligible. `OWNER_SCOPE_ONLY` and unresolved rows remain fail-closed until proven.
+
+
+## GAMEPLAY RUNTIME
+
+Status: **GAMEPLAY-R01 CANDIDATE / source integration active**.
+
+The repository now contains an identifiable gameplay runtime tree on branch `gameplay-runtime-r01`. Current checkpoint is `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-13`, cumulative from frozen RUNTIME-11.
+
+Build gates at this checkpoint:
+- host tests PASS;
+- SH-2 cross compile PASS (37 translation units);
+- full Saturn ELF link PASS;
+- unresolved symbols: 0.
+
+This does **not** mean gameplay is complete. WP28 still lacks required real-owner phases; current branch-A integration stops fail-closed at ROM `$02088E`. Direct-match actor/global bootstrap remains BLOCKED. TAG, Royal, full pin/referee, ring-out, remaining collision/release paths, final VDP2 world/ring, and hardware gameplay validation remain open/partial.
+
+CPU-FINAL closed paths are being integrated without synthetic RNG. State5 callback execution now exists for all 43 unique callback families where demonstrated; downstream unknown dependencies remain explicit BLOCKED exits.
+
+WIP160/WIP175/WIP176 remain historical references only and must not replace this runtime base.
