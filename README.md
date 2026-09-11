@@ -28,7 +28,8 @@ Current master infrastructure:
 - WP26 VDP2/CRAM map;
 - WP24 SCSP map;
 - R03 machine-readable final-memory manifest + fail-closed validator;
-- R04 WP30 orphan ownership resolution.
+- R04 WP30 orphan ownership resolution;
+- R05 fail-closed Scene Flow Master root router.
 
 R03 final-fit remains blocked by real unresolved inputs: VDP1 maxima, integrated ELF/link map, HWRAM scene peaks, final CDFS root count and hardware transfer timing.
 
@@ -55,3 +56,4 @@ R04 resolves project ownership:
 - `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md`
 - `docs/MEMORY-MANIFEST-R03.md`
 - `docs/WP30-OWNERSHIP-RESOLUTION-R04.md`
+- `docs/SCENE-FLOW-MASTER-R05.md`
