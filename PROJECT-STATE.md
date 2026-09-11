@@ -16,8 +16,13 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 
 ## Current frontend status
 
-- BLOCK-MODE-01: CANDIDATE / OPEN; TAG effect still differs.
-- BLOCK-ROSTER-01: CANDIDATE / OPEN; BGFIX requires real Saturn revalidation.
+- **MODE + ROSTER TEST03: HARDWARE-PASS on real Saturn NTSC-U + Terraonion MODE (2026-09-11).**
+- Combined route validated: `MODE -> TAG/ROYAL confirm -> ROSTER -> wrestler confirm`.
+- MODE -> ROSTER yellow/orange transition flash: CLOSED by display blank/sync before ROSTER CRAM/VRAM reconfiguration.
+- ROSTER transparency/background composition: HARDWARE-PASS (transparent NBG0 moving foreground + fixed NBG2 background).
+- ROSTER wrestler confirmation: HARDWARE-PASS (bright-green confirmation, cursor preserved).
+- TEST02 confirmation flash / temporary full NBG0 disappearance: CLOSED in TEST03 by resident foreground + localized 96x96 VBLANK-IN patch.
+- Master/runtime import: OPEN. Import the proven behavior/source contract; do not replace the canonical main loop with the isolated harness.
 - TITLE / INTRO: PARTIAL.
 - RANKINGS / ATTRACT: NOT INTEGRATED.
 
@@ -75,3 +80,7 @@ WIP160/175/176 must not be promoted as canonical bases.
 ## Integration rule
 
 Audio transport and the 14 ready producer hooks are integration-eligible. `OWNER_SCOPE_ONLY` and unresolved rows remain fail-closed until proven.
+
+MODE + ROSTER TEST03 is also integration-eligible as a **hardware-proven combined frontend checkpoint**. Preserve its rendering/input invariants when moving it under the canonical runtime: no BIN/CUE concatenation, no full NBG0 confirmation rebuild, display blank/sync before ROSTER CRAM/VRAM changes, and localized 96x96 confirmation update at VBLANK-IN.
+
+See `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`.
