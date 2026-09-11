@@ -119,4 +119,17 @@ MODE+ROSTER TEST03 must be transplanted behaviorally, not architecturally.
 
 Audio producer hooks are inserted only where their exact CLEAN-R01 owner/callback exists; otherwise `BLOCKED_BY_RUNTIME_OWNER`.
 
-Ownership assignment is not implementation closure: Records, Credits, Attract/Bio and Scene Flow Master remain to be integrated under the master branch.
+Ownership assignment is not implementation closure: Records, Credits and Attract/Bio remain to be integrated under the master branch.
+
+## Scene Flow Master R05
+
+WP30 O30-06 now has a concrete fail-closed root router in `src/runtime/wf_scene_flow_master.[ch]`.
+
+The router accepts only proven `(from,to,evidence)` handoffs exported in `manifests/scene-flow-proven-edges-r05.csv`. Unknown or evidence-mismatched transitions are rejected without changing current state.
+
+Validation:
+- host compile/test PASS with `-Wall -Wextra -Werror`;
+- SH-2 freestanding object compile PASS;
+- full Saturn ELF link not claimed until destination scene modules are merged;
+- hardware PASS not claimed;
+- no BIN/CUE/ISO generated.
