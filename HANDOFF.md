@@ -25,6 +25,7 @@ Read before changing master integration:
 - `docs/INTEGRATION-SELF-AUDIT-A01.md`
 - `docs/INTRO-HARDWARE-PASS-R17.md`
 - `docs/WP12-R01-REJECTION-R3.md`
+- `docs/FRONTEND-TITLE-R18.md`
 
 ## Absolute rule
 
@@ -106,7 +107,7 @@ Owns:
 - WP18 HUD presentation core;
 - source-level assembly of frontend + gameplay + audio + renderer.
 
-Current master checkpoint family: R02..R17, with R17 INTRO visual block HARDWARE-PASS.
+Current master checkpoint family: R02..R18. R17 INTRO visual block is HARDWARE-PASS; R18 binds Frontend TITLE credit/prompt presentation read-only to WP19/R11.
 
 ## Platform safeguards
 
