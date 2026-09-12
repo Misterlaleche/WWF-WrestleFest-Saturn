@@ -33,6 +33,7 @@ Read before changing master integration:
 - `docs/GAMEPLAY-RUNTIME-16-ACCEPTANCE.md`
 - `docs/WP20-R03-ACCEPTANCE.md`
 - `docs/RING-ROPES-CAMERA-R02-ACCEPTANCE.md`
+- `docs/WP02-ANIMATIONS-R04-ACCEPTANCE.md`
 
 ## Absolute rule
 
@@ -282,4 +283,34 @@ Gameplay must produce the exact state writes; Ring/Ropes advances the ROM select
 
 No equivalent global north/south deformation object is demonstrated. Do not fabricate one.
 
+Hardware validation remains pending.
+
+
+## WP02 ANIMATIONS R04
+
+Active authority:
+`WP02-ANIMATIONS-ROM-EXACT-R04-AUDITED.zip`
+
+SHA256:
+`0a89f62e3670c7acc7d44d07e779b91d64fbf5407ff90648b52e0082e06afbcc`
+
+Bundle:
+- branch `wp02-animations-rom-exact-r04-audited`
+- HEAD `5a58a537eba5cddc6fc36589f6dfd106a8e6b3d2`
+
+R04 supersedes R03.
+
+WP02 owns and closes:
+`animation request -> exact ROM descriptor/frame/HOLD/loop -> exact metasprite composition/resident presentation`.
+
+Critical invariants:
+- do not invent finite duration for FF00;
+- kind-2 loops never report finite completion;
+- raw $4D is EXACT_MATCH;
+- Warrior $0062/$0063 are exact 23-piece compositions mapped to resident frames 223/224;
+- Earthquake $47 contains no descriptor loop.
+
+Gameplay remains owner of request/re-entry/release conditions.
+WP26 remains renderer owner.
+WP25 remains palette/final RGB owner.
 Hardware validation remains pending.
