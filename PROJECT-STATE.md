@@ -459,3 +459,34 @@ Not implied:
 - hardware validation.
 
 See `docs/WP02-ANIMATIONS-R04-ACCEPTANCE.md`.
+
+
+## Gameplay RUNTIME-17 owner-closure audit — accepted as research, not source checkpoint
+
+External audit:
+`RUNTIME17-OWNER-CLOSURE-AUDIT.zip`
+
+SHA256:
+`996dd714ff3c7307ea6ed2960e36a98b0ffbecc03121c333aeb0da934cf0c447`
+
+Independent re-audit against `wwfwfest.zip` and FINAL WP28/WP09/WP02/WP22: PASS.
+
+Closed research:
+- `$01F914` fixed referee owner at `$1C11F4`;
+- `$F4C2 -> $1C03E -> $1C0C8` callback/animation ordering;
+- `$247C/$27B8` presentation queue boundary;
+- raw `$23` descriptor/callback/shake/victim anchors.
+
+Critical classification:
+- Earthquake internal `$08`, category `$07` button-1/P route -> raw `$23`;
+- raw `$23` = STOMP;
+- Earthquake Vertical Splash raw selector remains UNPROVEN;
+- old Earthquake raw `$47` semantic attribution remains rejected by WP22.
+
+This audit contains no deployable source and did not modify `gameplay-runtime-r01`.
+Current executable Gameplay authority therefore remains:
+`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16` / HEAD `1853f5564b8a00ddd5883a68169993305a40cfae`.
+
+Next source implementation must add an explicit fixed-referee owner, exact object-queue contract and real `$1C03E` raw-action layer. No no-op renderer binding is allowed.
+
+See `docs/GAMEPLAY-RUNTIME-17-OWNER-CLOSURE-AUDIT.md`.
