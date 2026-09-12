@@ -34,6 +34,22 @@ Main 68000 authority SHA1:
 Canonical INTRO assets:
 - INTRO.RLE SHA256 `16452b1bfd5559ff6ea33ec265e60c794763deba61f7492de121147afcffd3dc`
 - TITLE.ANM SHA256 `982098f0772adc3b6bdbb2e77794037e550a473cb25d55c83b4947ff48ac9c6c`
+- TITLE.ANM size = 946452 bytes
+- TITLE_COUNT = **451 stored asset frames**
+
+## Critical clarification about 451
+
+**451 is NOT the native duration of the arcade INTRO/TITLE.**
+
+451 is only the number of stored frames in the reconstructed visual asset `TITLE.ANM` used by the Saturn implementation.
+
+Therefore:
+- do not convert 451 into an arcade scene duration;
+- do not document "the arcade intro lasts 451 frames";
+- do not derive native timing from 451 alone;
+- timing authority remains the ROM-derived/source-sync cadence and the recovered event spacing.
+
+The hardware-tested block deliberately walks the 451 stored frames once because that is the recovered asset representation.
 
 ## Hardware-proven visible sequence
 
@@ -53,8 +69,10 @@ The block uses the demonstrated 57.445-Hz logical source cadence on NTSC Saturn 
 TITLE.ANM visual cadence:
 - source progression numerator: 57445;
 - stored-frame denominator: 120000;
-- equivalent to one stored frame per two source syncs;
-- 21 stored frames per title object = 42 source syncs per object.
+- equivalent to one stored asset frame per two source syncs;
+- 21 stored asset frames per title object = 42 source syncs per object.
+
+Again, the 451-frame asset count is a storage/reconstruction count, not an arcade-native duration statement.
 
 ## Saturn implementation facts
 
@@ -90,7 +108,6 @@ The visible/UI strings:
 belong to **FRONTEND**, not INTRO.
 
 Ownership split:
-
 1. WP19 / R11 owns the authoritative logical credit state and prompt selection.
 2. Frontend presentation owns drawing/updating `CREDIT:x`, `INSERT COIN`, START-related prompt presentation and the title/attract interaction.
 3. INTRO owns only its boot/title-build visual sequence and hands off to Frontend.
@@ -110,10 +127,11 @@ Do not copy the harness `main.c` into the master.
 
 ## Audit
 
-Package SHA256SUMS: PASS.
+Package SHA256: PASS.
 TITLE.ANM hash: PASS.
 INTRO.RLE hash: PASS.
 BIN/CUE hashes: PASS.
+TITLE_COUNT=451 confirmed in package source.
 Package source grep confirms no coin/credit/START/MODE logic.
 Real Saturn hardware boot/render: PASS by user test.
 
