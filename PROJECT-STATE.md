@@ -407,3 +407,55 @@ Hardware: NOT TESTED.
 No BIN/CUE.
 
 See `docs/RING-ROPES-CAMERA-R02-ACCEPTANCE.md`.
+
+
+## WP02 ANIMATIONS — R04 accepted / active authority
+
+Canonical external checkpoint:
+- ZIP `WP02-ANIMATIONS-ROM-EXACT-R04-AUDITED.zip`
+- SHA256 `0a89f62e3670c7acc7d44d07e779b91d64fbf5407ff90648b52e0082e06afbcc`
+- bundle branch `wp02-animations-rom-exact-r04-audited`
+- bundle HEAD `5a58a537eba5cddc6fc36589f6dfd106a8e6b3d2`
+
+R04 supersedes rejected-as-final R03.
+
+Independent master re-audit:
+- package manifest 104/104 PASS;
+- clean ZIP pytest 38/38 PASS;
+- bundle-tree pytest 38/38 PASS;
+- HOST strict PASS;
+- SH-2 strict PASS;
+- canonical ROM audit PASS;
+- interpreter N+1 / FF00 / kind2 PASS;
+- main/action/state4 rebuild byte-identical PASS;
+- full 12-bank metasprite rebuild byte-identical PASS;
+- resident Warrior/Hawk/Animal verifier PASS.
+
+Closed within WP02-owned scope:
+- 216 descriptor/subdescriptor records;
+- 629 frame records;
+- 399 base poses;
+- 78 FF00 entries across 73 held descriptors;
+- exact kind-2 loop semantics;
+- 399/399 pose coverage;
+- 10,204 valid compositions;
+- 425,714 piece records;
+- Warrior $0062/$0063 exact 23-piece resident frames 223/224;
+- raw $4D classification EXACT_MATCH.
+
+Earthquake raw $47 animation contract:
+`0084 x9 -> 0085 x13 -> 01C1 HOLD -> 01C2 x17`;
+there is no descriptor loop. Repeated jumps/re-entry remain external callback/request behavior.
+
+Status:
+**WP02 ANIMATIONS CLOSED within ownership.**
+
+Not implied:
+- Gameplay callback/re-entry closure;
+- TAG/Rumble state choreography;
+- renderer fallback removal;
+- palette finality;
+- camera/ring shake;
+- hardware validation.
+
+See `docs/WP02-ANIMATIONS-R04-ACCEPTANCE.md`.
