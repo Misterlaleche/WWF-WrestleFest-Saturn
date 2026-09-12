@@ -1,0 +1,73 @@
+{
+  "version": "R17-INTRO-HARDWARE-PASS",
+  "date": "2026-09-12",
+  "package": {
+    "name": "WF-SATURN-INTRO-ROMEXACT-FINAL-HWTEST(1).zip",
+    "sha256": "0fb488514ae233c429058834b8ced73c757b0224d819d6ba4dc3015042f81c98"
+  },
+  "binary": {
+    "name": "wrestlefest-saturn-intro-romexact-final.bin",
+    "sha256": "c6f0b5817969fae5ac476633a1349328ddcbf777697f8eae42d248357bccd862",
+    "hardware": "PASS_USER_CONFIRMED_REAL_SATURN_NTSC_U_MODE"
+  },
+  "cue_sha256": "64eea33a674dcdeda3ca7f838521a8734e854d8c89f561a2bdfe163674066562",
+  "main68k_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "assets": {
+    "INTRO.RLE": "16452b1bfd5559ff6ea33ec265e60c794763deba61f7492de121147afcffd3dc",
+    "TITLE.ANM": "982098f0772adc3b6bdbb2e77794037e550a473cb25d55c83b4947ff48ac9c6c"
+  },
+  "sequence": [
+    "FBI",
+    "LEGAL",
+    "TECHNOS_TECMO",
+    "BLACK_TRANSITION",
+    "STARFIELD",
+    "12_WRESTLER_BUILD",
+    "WRESTLEFEST_LOGO_COPYRIGHT",
+    "FINAL_RECOVERED_INTRO_TITLE_VISUAL"
+  ],
+  "timing": {
+    "source_hz_milli": 57445,
+    "saturn_ntsc_den": 60000,
+    "plate_hold_source_syncs": 128,
+    "common_fade_levels": 8,
+    "common_fade_syncs_per_level": 3,
+    "title_frame_den": 120000,
+    "title_object_source_syncs": 42
+  },
+  "ownership": {
+    "intro": [
+      "boot plates",
+      "starfield",
+      "12-wrestler title build",
+      "WrestleFest logo/copyright visual sequence"
+    ],
+    "frontend": [
+      "CREDIT:x rendering",
+      "INSERT COIN rendering",
+      "START prompt presentation",
+      "title/attract/mode continuation"
+    ],
+    "wp19_r11": [
+      "credit state",
+      "coin conversion",
+      "payment",
+      "prompt-selection logic"
+    ],
+    "forbidden_in_intro": [
+      "private credit counter",
+      "Coin A test input",
+      "START->MODE test shortcut",
+      "hard-coded CREDIT:0"
+    ]
+  },
+  "harness_only": [
+    "infinite final-frame hold"
+  ],
+  "master_rule": "transplant proven behavior; do not copy isolated harness main.c",
+  "status": {
+    "intro_visual": "HARDWARE_PASS",
+    "frontend_continuation": "OPEN",
+    "integrated_master_hardware": "NOT_CLAIMED"
+  }
+}
