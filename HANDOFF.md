@@ -34,6 +34,7 @@ Read before changing master integration:
 - `docs/WP20-R03-ACCEPTANCE.md`
 - `docs/RING-ROPES-CAMERA-R02-ACCEPTANCE.md`
 - `docs/WP02-ANIMATIONS-R04-ACCEPTANCE.md`
+- `docs/GAMEPLAY-RUNTIME-17-OWNER-CLOSURE-AUDIT.md`
 
 ## Absolute rule
 
@@ -314,3 +315,23 @@ Gameplay remains owner of request/re-entry/release conditions.
 WP26 remains renderer owner.
 WP25 remains palette/final RGB owner.
 Hardware validation remains pending.
+
+
+## Gameplay RUNTIME-17 owner closure
+
+Accepted as **research/ownership closure only**, not as a deployable runtime.
+
+ZIP:
+`RUNTIME17-OWNER-CLOSURE-AUDIT.zip`
+
+SHA256:
+`996dd714ff3c7307ea6ed2960e36a98b0ffbecc03121c333aeb0da934cf0c447`
+
+Proven:
+- referee is fixed actor `$1C11F4` under `$1F914`;
+- `$F4C2` action pass must preserve `$1C03E` callback + internal `$1C0C8` animation tick before `$247C/$27B8`;
+- raw `$23` is STOMP, not Vertical Splash;
+- renderer/object queue is an explicit required contract.
+
+Do not call this a RUNTIME-17 source checkpoint.
+Gameplay remains RUNTIME-16 until source integration is delivered and audited.
