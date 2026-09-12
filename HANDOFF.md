@@ -24,6 +24,7 @@ Read before changing master integration:
 - `docs/HUD-CORE-R16.md`
 - `docs/INTEGRATION-SELF-AUDIT-A01.md`
 - `docs/INTRO-HARDWARE-PASS-R17.md`
+- `docs/WP12-R01-REJECTION-R3.md`
 
 ## Absolute rule
 
@@ -126,3 +127,25 @@ Before any integrated hardware build, preserve these corrections:
 - R13 must gate progression==9 to $1B4E before interstitials; after BYTE increments config bit7 skips progression values 3/8; progression==5 requires the exact $1C0598/$1C05B0 preparation contract before $AC0.
 
 A01 verdict: PASS WITH TWO CORRECTED FINDINGS. No hardware PASS implied.
+
+
+## WP12 ENTRANCES/PREMATCH
+
+R3 authority decision:
+**R01 is REJECTED and must not be integrated.**
+
+Do not consume `entrances-prematch-r01` as a ROM-EXACT candidate even though its host/SH-2 builds pass.
+
+Current WP12 state:
+- TAG BLOCKED;
+- ROYAL BLOCKED;
+- presenter PARTIAL;
+- prematch referee MISSING;
+- gameplay handoff BLOCKED;
+- hardware NOT TESTED.
+
+R3 supersedes earlier R1/R2 audit conclusions. Next accepted work must be **WP12 R02** and must satisfy all gates in `docs/WP12-R01-REJECTION-R3.md`.
+
+The proven `$F8C` runtime boundary does not authorize a generic handoff; the exact post-A654/pre-$F8C preparation remains mandatory.
+
+No WP12 BIN/CUE yet.
