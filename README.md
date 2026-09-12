@@ -36,7 +36,8 @@ Implemented master-side candidate family:
 - R13 Campaign Interstitials;
 - R14 Frontend Transition Engine;
 - R15 historical Instructional Hand Prompt visual contract (superseded);
-- R19 WP16 R02 runtime presentation contract;
+- R19 WP16 R02 runtime presentation contract (superseded visually);
+- R20 WP16 R06 corrective ROM-exact presentation contract;
 - R16 Gameplay HUD core;
 - R17 accepted INTRO hardware-pass handoff;
 - R18 Frontend TITLE credit/prompt presentation bridge.
@@ -96,7 +97,7 @@ INTRO/PRESENTATION visual sequence is now accepted as HARDWARE-PASS. Its `TITLE.
 - attract demo uses ordinary gameplay/CPU, never synthetic joystick/button autoplay;
 - no WIP160/WIP175/WIP176 as canonical gameplay base;
 - no synthetic ten-match campaign ladder;
-- WP16 R02 closes trigger/presentation cadence and fresh-edge behavior; the pictured button is still not proven to mean specifically A, B or A+B;
+- WP16 R06 is active: trigger/presentation cadence and fresh-edge behavior remain closed, corrected bbox is [10,4,71,94], and the pictured button is still not proven to mean specifically A, B or A+B;
 - WP18 HUD must not invent wrestler names, generic score or Royal elimination counter;
 - INTRO must never own a private credit counter or hard-code `CREDIT:0`;
 - `TITLE_COUNT=451` is asset representation only, never arcade-native duration;
@@ -109,7 +110,9 @@ See `HANDOFF.md` for the complete ordered integration reading list, `docs/AUDIO-
 
 ## WP16 authority
 
-Current WP16 checkpoint: `WP16-HAND-PROMPT-R02.zip`
-SHA256 `ffa8a1104023db142ba0f379c9f79a77c393ad5e79f8769b5f7ecde0a0877642`.
+Current WP16 checkpoint: `WP16-HAND-PROMPT-R06.zip`
+SHA256 `c0d5fe5a135cb1c89e1a79023351a6e90f774bd0e2f0bf687e413eb736b1b3c8`.
 
-Integration Master independently revalidated ROM anchors, package checksums, host tests and SH-2 compilation. WP16 presentation is ROM-EXACT closed; Gameplay producer insertion and Saturn renderer/hardware validation remain separate.
+R06 supersedes R19/R02 visually after direct ROM evidence proved the final TEXT row was missing from the old derived assets. Corrected pose hashes are `352072fb...` and `36ca81e2...`, bbox is `[10,4,71,94]`, and the exact fixed TEXT transform maps to VDP2 NBG2 priority 4.
+
+Runtime semantics remain the proven fresh-edge/global-request contract. Gameplay producer insertion and real-hardware validation remain separate.
