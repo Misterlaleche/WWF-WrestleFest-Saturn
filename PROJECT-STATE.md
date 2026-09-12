@@ -28,6 +28,17 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 
 ## AUDIO
 
+### AUDIO INTEGRATION READINESS R05
+
+Checkpoint: `WWF-SATURN-AUDIO-INTEGRATION-READINESS-R05-AUDITED.zip`
+SHA256 `2f241bc267bcb7fa5c58a53e343982e648041835d5c3e746fe20d2fc4437675b`.
+
+R04 remains **AUDIO SOFTWARE CLOSED — MASTER REAUDITED**.
+Current integration classification is **AUDIO INTEGRATION PARTIAL**.
+
+R05: producer matrix 173/173 reverified; 14 INTEGRATION_READY / 6 ROM-EXACT CLOSED / 4 OWNER_SCOPE_ONLY / 149 UNRESOLVED. Added measurement-only performance instrumentation and a corrected non-overlapping SCSP layout contract. Integrated CPU/memory/full-load/hardware results remain blocked by the integrated build and real Saturn.
+
+
 Status: **AUDIO ROM-EXACT SOFTWARE CLOSED (R04 MASTER-REAUDITED) / GAMEPLAY SOURCE INSERTION OPEN / REAL-SATURN FINAL VALIDATION PENDING.**
 
 Canonical audio package:

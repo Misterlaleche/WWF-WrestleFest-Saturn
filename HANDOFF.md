@@ -16,6 +16,10 @@ Never invent missing behavior.
 4. Continue the next proven frontend/prematch integration boundary; do not invent the post-ROSTER transition if its owner/evidence is not yet bound.
 
 5. Audio:
+   - INTEGRATION READINESS R05: `WWF-SATURN-AUDIO-INTEGRATION-READINESS-R05-AUDITED.zip`, SHA256 `2f241bc267bcb7fa5c58a53e343982e648041835d5c3e746fe20d2fc4437675b`;
+   - R05 project-level status: **AUDIO INTEGRATION PARTIAL**; R04 remains **AUDIO SOFTWARE CLOSED — MASTER REAUDITED**;
+   - producer counts R05: 14 INTEGRATION_READY / 6 ROM-EXACT CLOSED / 4 OWNER_SCOPE_ONLY / 149 UNRESOLVED;
+   - do not mark HARDWARE READY/CLOSED until integrated CPU/memory/load proof and real-Saturn validation;
    - canonical package: `WWF-SATURN-AUDIO-ROM-EXACT-SOFTWARE-CLOSED-R04-MASTER-REAUDITED.zip`;
    - canonical package SHA256: `c4898b654eb105a88cc24500de96c00b68d188582aa7d7f7dbb13f1b3315ae36`;
    - the earlier R04 ZIP is superseded as an audited handoff because its SHA256 manifest had absolute paths and referenced a missing temporary file; implementation is unchanged;
