@@ -352,3 +352,58 @@ Critical:
 
 Gameplay integration remains owner-dependent and hardware is NOT TESTED.
 See `docs/WP06-TAG-EXCHANGE-VISUAL-R04-ACCEPTANCE.md`.
+
+## RING / ROPES / CAMERA — R02 accepted
+
+Canonical active side-rope checkpoint:
+- external ZIP `RING-ROPES-CAMERA-R02-ROM-PERFECT-AUDITED.zip`
+- SHA256 `20a54f5994de27d1e0114c62c9748e94d3b2a8138551eb4aaa8d687f7b19c44c`
+
+Independent master re-audit:
+- external manifest 5/5 PASS;
+- canonical ROM audit PASS;
+- quartet init bytes PASS;
+- HOST strict PASS;
+- SH-2 strict PASS;
+- WP21/WP26 cross-check PASS.
+
+The exact dynamic side ropes are the four ROM records:
+`$1C1134/$1C1164/$1C1194/$1C11C4`.
+
+Left pair:
+X=$01C0.
+
+Right pair:
+X=$0330, orientation=$8000.
+
+All use gfx set $000E, Y=$0178, Z=$0140.
+
+The consumer is selector/timer based, not a synthetic per-piece Y displacement.
+
+Closed:
+- side identity;
+- state1..4 dispatcher;
+- phase selectors/timers;
+- terminal hold;
+- static restore;
+- no cross-side aliasing.
+
+Forbidden:
+- historical synthetic rope deflection `d=6-(dx*6/64)`;
+- generic traversal clamp offsets;
+- synthetic global north/south deformation.
+
+No equivalent dynamic fixed quartet is demonstrated for north/south boundaries. Their proven crossing visuals include bank-14 material embedded in raw $69/$6C actor compositions.
+
+Gameplay/Collision remains producer owner.
+WP25 owns bank-14 pixels/palettes.
+WP26 owns Saturn rendering.
+WP21 owns camera/shake composition.
+
+Camera rule remains:
+world receives shake after base clamp; HUD/FG0 stays screen-fixed.
+
+Hardware: NOT TESTED.
+No BIN/CUE.
+
+See `docs/RING-ROPES-CAMERA-R02-ACCEPTANCE.md`.
