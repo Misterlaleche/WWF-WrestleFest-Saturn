@@ -22,6 +22,7 @@ Read before changing master integration:
 - `docs/FRONTEND-TRANSITION-R14.md`
 - `docs/HAND-PROMPT-R15.md`
 - `docs/HUD-CORE-R16.md`
+- `docs/INTEGRATION-SELF-AUDIT-A01.md`
 
 ## Absolute rule
 
@@ -99,3 +100,12 @@ Current master checkpoint family: R02..R16 candidates.
 - no invented loading screen.
 - no BIN/CUE concatenation.
 - real Saturn + MODE is the hardware gate.
+
+
+## A01 audit corrections
+
+Before any integrated hardware build, preserve these corrections:
+- R09 post-demo first 24 VBlanks invoke ROM $008F50 stripe-mask close, not $0264E2 palette fade.
+- R13 must gate progression==9 to $1B4E before interstitials; after BYTE increments config bit7 skips progression values 3/8; progression==5 requires the exact $1C0598/$1C05B0 preparation contract before $AC0.
+
+A01 verdict: PASS WITH TWO CORRECTED FINDINGS. No hardware PASS implied.
