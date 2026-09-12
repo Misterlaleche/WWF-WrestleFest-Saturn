@@ -28,7 +28,12 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 
 ## AUDIO
 
-Status: **AUDIO ROM-EXACT SOFTWARE CLOSED (R04) / GAMEPLAY SOURCE INSERTION OPEN / REAL-SATURN FINAL VALIDATION PENDING.**
+Status: **AUDIO ROM-EXACT SOFTWARE CLOSED (R04 MASTER-REAUDITED) / GAMEPLAY SOURCE INSERTION OPEN / REAL-SATURN FINAL VALIDATION PENDING.**
+
+Canonical audio package:
+- `WWF-SATURN-AUDIO-ROM-EXACT-SOFTWARE-CLOSED-R04-MASTER-REAUDITED.zip`
+- SHA256 `c4898b654eb105a88cc24500de96c00b68d188582aa7d7f7dbb13f1b3315ae36`
+- previous R04 ZIP SHA `b23f43424407c8379a45c1e6fcbb482065bf0c429856ad988ca896d2e596e5c0` is superseded due only to invalid audit-manifest packaging (absolute paths + missing `SHA256SUMS.txt.tmp` reference); implementation unchanged.
 
 ### Producer matrix
 

@@ -16,6 +16,9 @@ Never invent missing behavior.
 4. Continue the next proven frontend/prematch integration boundary; do not invent the post-ROSTER transition if its owner/evidence is not yet bound.
 
 5. Audio:
+   - canonical package: `WWF-SATURN-AUDIO-ROM-EXACT-SOFTWARE-CLOSED-R04-MASTER-REAUDITED.zip`;
+   - canonical package SHA256: `c4898b654eb105a88cc24500de96c00b68d188582aa7d7f7dbb13f1b3315ae36`;
+   - the earlier R04 ZIP is superseded as an audited handoff because its SHA256 manifest had absolute paths and referenced a missing temporary file; implementation is unchanged;
    - transport is HARDWARE-PASS;
    - original command-byte dispatcher is present;
    - full producer matrix contains 173 ROM-verified rows;

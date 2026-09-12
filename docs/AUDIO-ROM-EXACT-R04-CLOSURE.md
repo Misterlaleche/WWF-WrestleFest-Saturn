@@ -21,11 +21,23 @@ The live VM has not yet been validated for real-time CPU budget under full VDP1/
 
 Therefore do **not** mark AUDIO hardware-final until real Saturn + MODE validation passes.
 
-## R04 audited package
+## Canonical R04 package
+
+The original R04 ZIP is **superseded as an audited package** because its `SHA256SUMS.txt` used absolute paths and referenced a non-existent `SHA256SUMS.txt.tmp`. This was a packaging/audit-manifest defect only; implementation was not changed.
+
+Canonical master checkpoint:
+
+`WWF-SATURN-AUDIO-ROM-EXACT-SOFTWARE-CLOSED-R04-MASTER-REAUDITED.zip`
 
 SHA256:
 
+`c4898b654eb105a88cc24500de96c00b68d188582aa7d7f7dbb13f1b3315ae36`
+
+Superseded original package SHA256:
+
 `b23f43424407c8379a45c1e6fcbb482065bf0c429856ad988ca896d2e596e5c0`
+
+Do not use the superseded ZIP as the canonical audited handoff.
 
 ## Project-owned source SHA256
 
