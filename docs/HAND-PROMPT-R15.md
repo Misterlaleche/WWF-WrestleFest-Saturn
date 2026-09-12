@@ -1,6 +1,6 @@
 # Instructional Hand Prompt R15
 
-**SUPERSEDED as active runtime contract by WP16 R02 / master R19.**
+**HISTORICAL. Superseded first by WP16 R02/R19 and then by corrective WP16 R06/R20.**
 
 R15 remains the historical visual-only checkpoint that closed:
 - two exact visual states;
@@ -24,3 +24,10 @@ Important:
 - Gameplay/WP27 remains producer owner;
 - Saturn renderer binding and real-hardware validation remain OPEN;
 - no BIN/CUE generated.
+
+
+## R06 correction
+
+The old R15/R19 visual hashes are no longer authoritative. R06 proves from the 13-row ROM TEXT transaction that the final visible row was omitted by the old extraction.
+
+Active authority: `docs/HAND-PROMPT-R20.md`.
