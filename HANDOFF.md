@@ -22,7 +22,9 @@ Read before changing master integration:
 - `docs/FRONTEND-TRANSITION-R14.md`
 - `docs/HAND-PROMPT-R15.md` (historical)
 - `docs/HAND-PROMPT-R20.md` (active WP16 authority)
-- `docs/HUD-CORE-R16.md`
+- `docs/HUD-CORE-R16.md` (historical base; extended by WP18 R03)
+- `docs/WP18-HUD-R03-ACCEPTANCE.md`
+- `docs/WP06-TAG-EXCHANGE-VISUAL-R04-ACCEPTANCE.md`
 - `docs/INTEGRATION-SELF-AUDIT-A01.md`
 - `docs/INTRO-HARDWARE-PASS-R17.md`
 - `docs/WP12-R01-REJECTION-R3.md` (historical R01 rejection)
@@ -126,7 +128,7 @@ Owns:
 - WP13 campaign interstitial root contract;
 - WP15 transition primitives;
 - WP16 R06 hand-prompt presentation contract (ROM-EXACT closed; Gameplay producer remains external);
-- WP18 HUD presentation core;
+- WP18 HUD presentation core + active R03 renderer-facing xBGR444 contract;
 - source-level assembly of frontend + gameplay + audio + renderer.
 
 Current master checkpoint family includes R20 WP16 R06 corrective acceptance. R17 INTRO visual block is HARDWARE-PASS; R18 binds Frontend TITLE credit/prompt presentation read-only to WP19/R11; R20 is active WP16 authority.
@@ -229,3 +231,29 @@ Preserve exact SELECT outer-loop order documented in `docs/WP20-R03-ACCEPTANCE.m
 
 TEST03 renderer remains hardware-pass and is not replaced.
 New R03 logic requires integrated real-Saturn validation before HARDWARE-PASS.
+
+
+## WP18 HUD R03
+
+Active external checkpoint:
+`WP18-HUD-INTEGRATION-R03-AUDITED(1).zip`
+SHA256:
+`8c8b46fa3b1f60f8e76fab2f76e6692177f9171e93712f9a946a0b15f148f19f`
+
+R03 supersedes R01/R02.
+Preserve xBGR444 source interpretation:
+`0x00F=red, 0x0F0=green, 0xF00=blue`.
+Final target is VDP2 NBG2 / CRAM mode 2 RGB888.
+Do not reintroduce the R02 R/B swap.
+
+## WP06 TAG exchange visual R04
+
+Active external checkpoint:
+`WP06-TAG-EXCHANGE-VISUAL-R04-AUDITED(1).zip`
+SHA256:
+`bcb5c35c1d404b88b4bafc3124dd6797b62487d6edffe4ec0073c13932b7807b`
+
+Visual actions `$4C/$4D/$4E/$66` are ROM-exact closed.
+Gameplay remains owner of legal/reserve state and the exact runtime predicates for `$188BC`.
+Never restore WIP160 synthetic ST_PUNCH/18-tick slap/48-tick traversal/late swap/±16 apron correction.
+Warrior `$0062/$0063` have all 23 ROM pieces; do not patch an arm.
