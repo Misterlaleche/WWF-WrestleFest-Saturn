@@ -4,7 +4,7 @@ Status: **CANDIDATE / fail-closed**.
 
 Branch: `gameplay-runtime-r01`.
 
-Current checkpoint: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15`, cumulative from frozen RUNTIME-11 through RUNTIME-12/13/14/15.
+Current checkpoint: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16`, cumulative from frozen RUNTIME-11 through RUNTIME-12/13/14/15/16.
 
 Authority order:
 
@@ -19,8 +19,8 @@ WIP160/WIP175/WIP176 are not gameplay bases.
 
 ## Current build gates
 
-- HOST TESTS: PASS with `-Wall -Wextra -Werror`.
-- SH-2 / Yaul compile: PASS, 39 translation units.
+- HOST TESTS: PASS with `-std=c11 -Wall -Wextra -Werror -pedantic`.
+- SH-2 cross compile: PASS; full Saturn ELF link uses 41 objects.
 - FULL SATURN ELF LINK: PASS.
 - UNRESOLVED SYMBOLS: 0.
 - BIN/CUE: not generated.
@@ -38,12 +38,14 @@ Real bindings currently exist for:
 - ROM `$020958` -> target/relation pass -> `wf_phase_target_relation_20958`
 - ROM `$026936` -> gameplay camera aggregate -> `wf_phase_camera_26936`
 - ROM `$02983C` -> gameplay camera clamp -> `wf_phase_camera_2983c`
+- ROM `$00F560` -> pair/relation aggregate -> `wf_phase_pair_relation_f560`
+- ROM `$00F18A` -> actor raw-state prepass -> `wf_phase_actor_prepass_f18a`
 - ROM `$01C150` -> CPU controller -> `wf_phase_cpu_real`
 - ROM `$024E58` -> pending damage/stamina tier -> `wf_phase_damage`
 
-RUNTIME-15 closes `$020958` from canonical ROM/CLEAN-R01 evidence. The implementation preserves the distinct TAG primary/secondary target fields, Royal primary and secondary distance metrics, ownership filtering, raw arcade actor pointers, and fail-closed behavior for invalid inherited pointer context. The already-audited WP21 camera owners `$026936/$02983C` are also bound into WP28.
+RUNTIME-16 integrates the ROM-derived `$00F560` pair/relation aggregate and `$00F18A` actor raw-state prepass. RNG-dependent `$0021B4`, active transition `$00F98C`, active WP24 producer `$00A0E0`, human-controller `$00DCDE`, follow-helper `$010E86`, and state-2 helper `$01129E` paths remain explicit fail-closed dependencies.
 
-A normal branch-A real-binding integration now advances through `$00514E -> $008B3A -> $02088E -> $020958 -> $026936 -> $02983C` and stops fail-closed at mandatory unbound phase `$00F560`. No stub is used to move the blocker.
+A normal branch-A real-binding integration now advances through `$00514E -> $008B3A -> $02088E -> $020958 -> $026936 -> $02983C -> $00F560 -> $00F18A -> $01C150` and stops fail-closed at mandatory unbound phase `$01F914` (fixed referee scheduler). No stub is used to move the blocker.
 
 ## WP01 / State5
 
@@ -55,7 +57,7 @@ CPU-FINAL is compiled into runtime code. Closed paths for states 5/6/7/8/9/A are
 
 ## Key OPEN/BLOCKED areas
 
-- complete WP28 real-owner binding beginning with `$00F560`;
+- complete WP28 real-owner binding beginning with `$01F914`;
 - exact direct-match actor/global bootstrap;
 - remaining collision choreography and ground/release dependencies;
 - full pin/referee choreography;
