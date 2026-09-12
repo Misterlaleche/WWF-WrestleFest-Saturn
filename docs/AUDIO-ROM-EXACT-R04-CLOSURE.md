@@ -71,6 +71,28 @@ These third-party sources are not duplicated here. Preserve their upstream licen
 7. Keep SFX/voice semantics under the audited `0x20..0x81` model.
 8. Unidentified producers remain fail-closed.
 
+## Hardware-close gate and ownership contract
+
+R04 is accepted as:
+
+**AUDIO SOFTWARE CLOSED — MASTER REAUDITED**
+
+Before AUDIO may be declared **HARDWARE CLOSED**, all of the following must pass:
+
+- validate real-time performance of the Live Z80 + Nuked-OPM path with Gameplay + VDP1 + VDP2 running simultaneously;
+- verify CPU and memory budget in the final integrated build;
+- complete end-to-end runtime audio integration;
+- keep fail-closed every producer whose ROM mapping is not demonstrated;
+- validate the final integrated system on real Sega Saturn hardware.
+
+Ownership is strict:
+
+- WP24 / Audio owns the backend, transport, Z80/OPM VM, reproduction path and audio behavior.
+- Gameplay / Scene Flow / other owning blocks remain owners of the producers that originate events.
+- Audio must not invent producers, ownership or semantics to close gaps.
+- Any producer still classified UNRESOLVED remains UNRESOLVED until ROM evidence proves otherwise.
+- Do not declare AUDIO HARDWARE CLOSED before the integrated real-Saturn test passes.
+
 ## Audit verdict
 
 - A53 live-VM comparison: **18/18 PASS**

@@ -35,6 +35,23 @@ Canonical audio package:
 - SHA256 `c4898b654eb105a88cc24500de96c00b68d188582aa7d7f7dbb13f1b3315ae36`
 - previous R04 ZIP SHA `b23f43424407c8379a45c1e6fcbb482065bf0c429856ad988ca896d2e596e5c0` is superseded due only to invalid audit-manifest packaging (absolute paths + missing `SHA256SUMS.txt.tmp` reference); implementation unchanged.
 
+### Hardware-close gate / ownership
+
+R04 status is **AUDIO SOFTWARE CLOSED — MASTER REAUDITED**.
+
+AUDIO HARDWARE CLOSED is forbidden until:
+- Live Z80 + Nuked-OPM performance is validated with Gameplay + VDP1 + VDP2 simultaneously;
+- final integrated CPU and memory budget is verified;
+- end-to-end runtime audio integration is complete;
+- all unresolved producer mappings remain fail-closed;
+- final validation passes on real Sega Saturn hardware.
+
+Ownership:
+- WP24 / Audio owns backend, transport, Z80/OPM VM, reproduction and audio behavior.
+- Gameplay / Scene Flow / other blocks own their event producers.
+- Audio never invents producer semantics or mappings.
+- UNRESOLVED stays UNRESOLVED until ROM proof exists.
+
 ### Producer matrix
 
 - 173 total ROM-verified producer rows.

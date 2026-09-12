@@ -31,6 +31,12 @@ Never invent missing behavior.
    - R04 closes the software music path with live Z80 + pinned Nuked-OPM rendering into the existing CA-driven WP24 transport;
    - `0x1F` is sent back into the original driver VM; no PCM-domain linear fade;
    - final real-Saturn validation of live-VM CPU budget under full game load is still mandatory.
+   - R04 status: **AUDIO SOFTWARE CLOSED — MASTER REAUDITED**;
+   - AUDIO HARDWARE CLOSED is forbidden until live Z80+Nuked-OPM performance, CPU/memory budget, end-to-end runtime integration and final real-Saturn validation all pass;
+   - WP24 / Audio owns backend, transport, Z80/OPM VM, reproduction and audio behavior only;
+   - Gameplay / Scene Flow / other blocks keep ownership of event producers;
+   - Audio must not invent producers or semantic mappings;
+   - every UNRESOLVED producer remains UNRESOLVED and fail-closed until ROM evidence proves it;
 
 5. Current canonical gameplay runtime source is still absent from this repository.
    - Do not import WIP160/175/176 as the base.
