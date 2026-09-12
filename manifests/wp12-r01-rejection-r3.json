@@ -1,0 +1,46 @@
+{
+  "version": "WP12-R01-REJECTION-R3",
+  "date": "2026-09-12",
+  "authority_report": {
+    "name": "WP12-R01-AUDIT-REPORT-R3(1).txt",
+    "sha256": "fb051c4e527db74514cacf4944deef5bbd129ae6429890697f75a63a1ab31091",
+    "supersedes": [
+      "WP12 R1 audit",
+      "WP12 R2 audit"
+    ]
+  },
+  "r01": {
+    "branch": "entrances-prematch-r01",
+    "recorded_head": "820ea42af3fce45591eace60cba22a94d9ad3fba",
+    "master_integration": "REJECTED",
+    "rom_exact_candidate": false,
+    "github_zip_reproducible": false,
+    "host_compile": "PASS",
+    "sh2_compile": "PASS",
+    "hardware": "NOT_TESTED"
+  },
+  "status": {
+    "tag": "BLOCKED",
+    "royal": "BLOCKED",
+    "presenter": "PARTIAL",
+    "prematch_referee": "MISSING",
+    "gameplay_handoff": "BLOCKED"
+  },
+  "adversarial_tests": {
+    "passed": 1,
+    "failed": 14,
+    "total": 15
+  },
+  "next_checkpoint": "WP12 R02",
+  "r02_policy": {
+    "reconstruct_affected_parts_from": "wwfwfest.zip",
+    "all_r3_gates_mandatory": true,
+    "no_gameplay_wp28_changes": true,
+    "no_cpu_collision_tag_royal_gameplay_changes": true,
+    "no_audio_backend_changes": true,
+    "bin_cue": false,
+    "hardware_until_real_test": "NOT_TESTED"
+  },
+  "proven_boundary_rom": "0x00000F8C",
+  "note": "Proven boundary does not close R01 handoff; exact pre-boundary preparation remains required."
+}
