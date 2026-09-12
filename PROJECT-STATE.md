@@ -131,17 +131,21 @@ WP15 pure transition primitives implemented:
 Host + SH-2 PASS.
 No generic fade substitution for direct-clear or full-mask routes.
 
-### R19 — Instructional hand prompt / WP16 R02
-External checkpoint `WP16-HAND-PROMPT-R02.zip` accepted after independent ROM re-audit.
-- package SHA256 `ffa8a1104023db142ba0f379c9f79a77c393ad5e79f8769b5f7ecde0a0877642`;
-- visual payloads remain byte-identical to WP16 FINAL;
-- request lifecycle, fresh-edge mechanic, pose cadence and one-pass clear are ROM-proven;
-- prompt presentation is global/player-independent and mode-agnostic;
-- no WP16-specific audio event is proven;
-- pictured button is NOT proven to mean specifically A, B or A+B;
+### R20 — Instructional hand prompt / WP16 R06 corrective checkpoint
+External checkpoint `WP16-HAND-PROMPT-R06.zip` accepted after independent ROM/asset re-audit.
+- package SHA256 `c0d5fe5a135cb1c89e1a79023351a6e90f774bd0e2f0bf687e413eb736b1b3c8`;
+- R06 supersedes R19/R02 visually because direct ROM renderer evidence proves the final TEXT row was missing from the old derived payloads;
+- corrected bbox `[10,4,71,94]`;
+- corrected pose hashes:
+  - pose0 `352072fb1ab6b2be33a42b469572189b9202ed36578b14289002261d8316bf57`
+  - pose1 `36ca81e2ac88ddb113000775003e9f0db0e8f087f9b0bf75660ec73d01527a02`;
+- runtime request/fresh-edge/cadence semantics remain unchanged;
+- exact 13-row / 78-write TEXT transaction and fixed raster transform are closed;
+- Saturn-equivalent plane NBG2, priority 4;
+- pictured button remains NOT proven to mean specifically A, B or A+B;
 - Gameplay/WP27 owns producer/input/mash-counter semantics;
-- Saturn renderer binding and hardware validation remain OPEN.
-Host + SH-2 PASS. R15 visual-only contract is superseded.
+- hardware validation remains OPEN.
+Host PASS. Package SH-2 module compile PASS. R19/R02 visual payloads are superseded.
 
 ### R16 — Gameplay HUD core
 WP18 pure core implemented:
