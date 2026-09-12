@@ -1,5 +1,4 @@
 #include "wf_attract_demo_master.h"
-
 #include <string.h>
 
 static const wf_attract_demo_config_t k_configs[WF_ATTRACT_DEMO_STATE_COUNT] = {
@@ -19,52 +18,10 @@ static const wf_attract_demo_config_t k_configs[WF_ATTRACT_DEMO_STATE_COUNT] = {
     {0x0Du,864u,WF_ATTRACT_DEMO_TAG,4u,{0x05u,0x04u,0x00u,0x01u,0xFFu,0xFFu},0x05u,WF_ATTRACT_OVERRIDE_CHARACTER_12,0u}
 };
 
-static void clear_event(wf_attract_demo_event_t *event){ if(event) memset(event,0,sizeof(*event)); }
-
-const wf_attract_demo_config_t *wf_attract_demo_config(unsigned state){
-    if(state>=WF_ATTRACT_DEMO_STATE_COUNT)return 0;
-    return &k_configs[state];
-}
-
-bool wf_attract_demo_begin(wf_attract_demo_runtime_t *rt,unsigned state){
-    const wf_attract_demo_config_t *cfg;
-    if(!rt)return false;
-    cfg=wf_attract_demo_config(state);
-    if(!cfg)return false;
-    memset(rt,0,sizeof(*rt));
-    rt->config=cfg;
-    rt->phase=WF_ATTRACT_DEMO_GAMEPLAY;
-    return true;
-}
-
-void wf_attract_demo_gameplay_update(wf_attract_demo_runtime_t *rt,wf_attract_demo_event_t *event){
-    clear_event(event);
-    if(!rt||!rt->config||rt->phase!=WF_ATTRACT_DEMO_GAMEPLAY)return;
-    rt->gameplay_updates++;
-    if(rt->gameplay_updates==(uint32_t)rt->config->threshold_updates){
-        rt->phase=WF_ATTRACT_DEMO_FADE_24;
-        rt->phase_vblanks_remaining=WF_ATTRACT_DEMO_FADE_VBLANKS;
-        if(event){event->threshold_reached=true;event->begin_palette_fade=true;}
-    }
-}
-
-void wf_attract_demo_transition_vblank(wf_attract_demo_runtime_t *rt,wf_attract_demo_event_t *event){
-    clear_event(event);
-    if(!rt||!rt->config)return;
-    if(rt->phase==WF_ATTRACT_DEMO_GAMEPLAY||rt->phase==WF_ATTRACT_DEMO_HANDOFF)return;
-    if(rt->phase_vblanks_remaining>0u)--rt->phase_vblanks_remaining;
-    if(rt->phase_vblanks_remaining!=0u)return;
-    if(rt->phase==WF_ATTRACT_DEMO_FADE_24){rt->phase=WF_ATTRACT_DEMO_WAIT_33_A;rt->phase_vblanks_remaining=WF_ATTRACT_DEMO_WAIT_A_VBLANKS;return;}
-    if(rt->phase==WF_ATTRACT_DEMO_WAIT_33_A){rt->phase=WF_ATTRACT_DEMO_WAIT_33_B;rt->phase_vblanks_remaining=WF_ATTRACT_DEMO_WAIT_B_VBLANKS;return;}
-    if(rt->phase==WF_ATTRACT_DEMO_WAIT_33_B){
-        rt->phase=WF_ATTRACT_DEMO_HANDOFF;
-        if(rt->config->state<WF_ATTRACT_DEMO_STATE_LAST){
-            if(event){event->next_attract_state=true;event->next_state=(uint8_t)(rt->config->state+1u);}
-        }else if(event){event->frontend_return=true;event->frontend_return_rom=WF_ATTRACT_DEMO_FRONTEND_RETURN_ROM;}
-    }
-}
-
-bool wf_attract_demo_is_live_gameplay(const wf_attract_demo_runtime_t *rt){
-    return rt&&rt->config&&rt->phase==WF_ATTRACT_DEMO_GAMEPLAY;
-}
+static void clear_event(wf_attract_demo_event_t *event){if(event)memset(event,0,sizeof(*event));}
+const wf_attract_demo_config_t *wf_attract_demo_config(unsigned state){if(state>=WF_ATTRACT_DEMO_STATE_COUNT)return 0;return &k_configs[state];}
+bool wf_attract_demo_begin(wf_attract_demo_runtime_t *rt,unsigned state){const wf_attract_demo_config_t *cfg;if(!rt)return false;cfg=wf_attract_demo_config(state);if(!cfg)return false;memset(rt,0,sizeof(*rt));rt->config=cfg;rt->phase=WF_ATTRACT_DEMO_GAMEPLAY;return true;}
+void wf_attract_demo_gameplay_update(wf_attract_demo_runtime_t *rt,wf_attract_demo_event_t *event){clear_event(event);if(!rt||!rt->config||rt->phase!=WF_ATTRACT_DEMO_GAMEPLAY)return;rt->gameplay_updates++;if(rt->gameplay_updates==(uint32_t)rt->config->threshold_updates){rt->phase=WF_ATTRACT_DEMO_MASK_24;rt->phase_vblanks_remaining=WF_ATTRACT_DEMO_MASK_VBLANKS;if(event){event->threshold_reached=true;event->begin_stripe_mask_close=true;event->stripe_mask_close_rom=WF_ATTRACT_DEMO_MASK_CLOSE_ROM;}}}
+void wf_attract_demo_transition_vblank(wf_attract_demo_runtime_t *rt,wf_attract_demo_event_t *event){clear_event(event);if(!rt||!rt->config)return;if(rt->phase==WF_ATTRACT_DEMO_GAMEPLAY||rt->phase==WF_ATTRACT_DEMO_HANDOFF)return;if(rt->phase_vblanks_remaining>0u)--rt->phase_vblanks_remaining;if(rt->phase_vblanks_remaining!=0u)return;if(rt->phase==WF_ATTRACT_DEMO_MASK_24){rt->phase=WF_ATTRACT_DEMO_WAIT_33_A;rt->phase_vblanks_remaining=WF_ATTRACT_DEMO_WAIT_A_VBLANKS;return;}if(rt->phase==WF_ATTRACT_DEMO_WAIT_33_A){rt->phase=WF_ATTRACT_DEMO_WAIT_33_B;rt->phase_vblanks_remaining=WF_ATTRACT_DEMO_WAIT_B_VBLANKS;return;}if(rt->phase==WF_ATTRACT_DEMO_WAIT_33_B){rt->phase=WF_ATTRACT_DEMO_HANDOFF;if(rt->config->state<WF_ATTRACT_DEMO_STATE_LAST){if(event){event->next_attract_state=true;event->next_state=(uint8_t)(rt->config->state+1u);}}else if(event){event->frontend_return=true;event->frontend_return_rom=WF_ATTRACT_DEMO_FRONTEND_RETURN_ROM;}}}
+bool wf_attract_demo_is_live_gameplay(const wf_attract_demo_runtime_t *rt){return rt&&rt->config&&rt->phase==WF_ATTRACT_DEMO_GAMEPLAY;}
 bool wf_attract_demo_credited_start_is_external(void){return true;}
