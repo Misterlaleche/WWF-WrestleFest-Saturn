@@ -21,6 +21,15 @@
   "sh2": "PASS_0_UNRESOLVED",
   "hardware": "NOT_TESTED",
   "bin_cue": false,
-  "external_contracts": ["C98", "shared_21B4_RNG", "WP26_renderer", "Gameplay_after_F8C"],
-  "r01": "REJECTED_SUPERSEDED"
+  "external_contracts": [
+    "C98",
+    "shared_21B4_RNG",
+    "WP26_renderer",
+    "Gameplay_after_F8C"
+  ],
+  "r01": "REJECTED_SUPERSEDED",
+  "independent_master_rerun": {
+    "host_rom_source_ownership": "PASS",
+    "sh2_compile_relocatable": "PASS_0_UNRESOLVED"
+  }
 }
