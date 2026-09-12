@@ -1,0 +1,22 @@
+{
+  "version": "RUNTIME17-OWNER-CLOSURE-AUDIT-ACCEPTED",
+  "external_zip_sha256": "996dd714ff3c7307ea6ed2960e36a98b0ffbecc03121c333aeb0da934cf0c447",
+  "package_type": "RESEARCH_OWNER_CLOSURE_ONLY",
+  "deployable_source": false,
+  "package_branch_head": null,
+  "base_runtime": "BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16",
+  "gameplay_branch_head": "1853f5564b8a00ddd5883a68169993305a40cfae",
+  "wp28_verifier": "PASS",
+  "wp09_verifier": "PASS",
+  "wp02_verifier": "PASS",
+  "wp22_verifier": "PASS",
+  "independent_rom_anchor_audit": "PASS",
+  "owner_01f914": "ROM_EXACT_CLOSED_RESEARCH",
+  "owner_00f4c2_01c03e_01c0c8": "ROM_EXACT_CLOSED_RESEARCH",
+  "raw23": "CLOSED_CLASSIFIED_STOMP",
+  "earthquake_vertical_splash_raw_selector": "UNPROVEN",
+  "saturn_integration": "PARTIAL_BLOCKED_BY_EXPLICIT_CONTRACTS",
+  "full_normal_frame": "NOT_COMPLETE",
+  "hardware": "NOT_TESTED",
+  "bin_cue": false
+}
