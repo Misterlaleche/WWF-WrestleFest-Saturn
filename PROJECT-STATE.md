@@ -199,32 +199,38 @@ Status: **PASS WITH TWO CORRECTED FINDINGS**.
 See `docs/INTEGRATION-SELF-AUDIT-A01.md`.
 
 
-## WP12 ENTRANCES/PREMATCH — Audit R3 master decision
+## WP12 ENTRANCES/PREMATCH — R02 accepted source checkpoint
 
-**WP12 R01: REJECTED / NOT INTEGRABLE.**
+**R01 remains REJECTED / SUPERSEDED.**
 
-Authority:
-`WP12-R01-AUDIT-REPORT-R3(1).txt`
-SHA256 `fb051c4e527db74514cacf4944deef5bbd129ae6429890697f75a63a1ab31091`.
+Canonical active checkpoint:
+- branch `entrances-prematch-r02`
+- HEAD `99d316037af7508a896f0535d44dfa18775d0c47`
+- ZIP SHA256 `966ac936f2a3a71b05673675b7ef041668fd99f2cf51431ccf9290dbb146f2fa`
 
-Audit R3 supersedes R1/R2 for the R01 integration decision.
+Independent master acceptance:
+- ZIP hash PASS;
+- internal hashes 33/33 PASS;
+- Git reproducibility 1 ahead / 0 behind PASS;
+- local audited checkpoint vs GitHub 34/34 blobs PASS;
+- ROM/source-table/HOST/adversarial/ASan-UBSan/static/SH-2 PASS;
+- SH-2 unresolved symbols = 0.
 
-Current status:
-- TAG: BLOCKED
-- ROYAL: BLOCKED
-- PRESENTADORA: PARTIAL
-- ÁRBITRO PREMATCH: MISSING
-- HANDOFF A GAMEPLAY: BLOCKED
-- HOST COMPILE: PASS
-- SH-2 COMPILE: PASS
+Current WP12 status:
+- TAG: PARTIAL
+- ROYAL: PARTIAL
+- PRESENTADORA: CLOSED structural/numeric
+- ÁRBITRO PREMATCH: CLOSED structural
+- HANDOFF A GAMEPLAY: CLOSED boundary / execution BLOCKED_BY_GAMEPLAY_OWNER
 - HARDWARE: NOT TESTED
 
-The R01 branch `entrances-prematch-r01` at `820ea42af3fce45591eace60cba22a94d9ad3fba` must not be consumed by master. Delivered ZIP and recorded GitHub HEAD are not reproducible as one source state.
+Mandatory external contracts remain `$C98`, canonical shared `$21B4` RNG, WP26 renderer/camera ownership and Gameplay after `$F8C`.
 
-Next required checkpoint: **WP12 R02**, reconstructed directly from `wwfwfest.zip` for all affected semantics and satisfying every mandatory R3 gate before it can be called CANDIDATE.
+Still OPEN: literal wrestler-name/red-band/WWF-logo join beyond proven TAG `$98BA`; final runtime camera/raster transform; human semantic names not ROM-proven; actual gameplay execution beyond `$F8C`.
 
-Do not touch GAMEPLAY/WP28, CPU, collision, TAG/Royal gameplay or WP24 backend. No BIN/CUE.
-See `docs/WP12-R01-REJECTION-R3.md`.
+Exact checkpoint subtree imported at `wp12-r02/`.
+See `docs/WP12-R02-ACCEPTANCE.md`.
+Historical R01 rejection remains documented in `docs/WP12-R01-REJECTION-R3.md`.
 
 
 ### R18 — Frontend TITLE presentation bridge
