@@ -49,6 +49,16 @@ R18 host + SH-2 gates PASS and introduces no private credit model. Frontend glyp
 
 These candidates do not automatically inherit HARDWARE-PASS.
 
+## Audio authority
+
+Canonical runtime-audio handoff is now:
+**WWF-RUNTIME-AUDIO-HANDOFF-R02-REAUDITED.zip**
+
+SHA256:
+`49335637b8ba6d26b361c88e3886f620e9f52c076df3d4bfb44accf3701ccb5c`
+
+R02 supersedes R01. Producer semantics remain 173 total / 14 integration-ready / 4 owner-scope-only / 155 unresolved. R02 fixes handoff provenance/completeness and contains the full byte-identical WP24 source/test snapshot.
+
 ## WP12 ENTRANCES/PREMATCH
 
 WP12 R01 is **REJECTED / NOT INTEGRABLE** by third independent audit R3 against original ROM authority.
@@ -72,6 +82,9 @@ INTRO/PRESENTATION visual sequence is now accepted as HARDWARE-PASS. Its `TITLE.
 - never replace CLEAN-R01/master `main.c` with an isolated harness;
 - MODE+ROSTER imports TEST03 behavior, not its architecture;
 - WP24 is the only audio backend;
+- R02 runtime-audio handoff supersedes R01;
+- only the 14 R02 `INTEGRATION_READY` producers may be wired semantically;
+- `0x1F` remains fail-closed until exact lifecycle is proven;
 - attract demo uses ordinary gameplay/CPU, never synthetic joystick/button autoplay;
 - no WIP160/WIP175/WIP176 as canonical gameplay base;
 - no synthetic ten-match campaign ladder;
@@ -83,4 +96,4 @@ INTRO/PRESENTATION visual sequence is now accepted as HARDWARE-PASS. Its `TITLE.
 
 ## Mandatory reading
 
-See `HANDOFF.md` for the complete ordered integration reading list, `docs/INTEGRATION-SELF-AUDIT-A01.md` for the master self-audit, and `docs/WP12-R01-REJECTION-R3.md` for the authoritative WP12 R01 rejection/R02 gate.
+See `HANDOFF.md` for the complete ordered integration reading list, `docs/AUDIO-RUNTIME-HANDOFF-R02.md` for current audio authority, `docs/INTEGRATION-SELF-AUDIT-A01.md` for the master self-audit, and `docs/WP12-R01-REJECTION-R3.md` for the authoritative WP12 R01 rejection/R02 gate.
