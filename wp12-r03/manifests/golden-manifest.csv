@@ -1,0 +1,14 @@
+file,sha256,bytes,purpose,status
+ENTRY-WORLD-7B.png,70a23ceaa2dc122ec899a69bb1b4f8bde5ab5d31fbb71bc74aed40d154308302,13544,mode4 world composition at scene scroll / priority 7B,ROM-derived
+ROYAL-ID0-U001.png,c170badd47033b6bb09b47e0aaef0258db6f26301fdbc3149ed229c8a7c0cba0,15679,Royal representative id0 exact update1 frame,ROM-derived
+ROYAL-ID0-U160.png,bc5dcfa9115aa309004118b75a78ab9180c415ee7a2da17219398fb6eacc3847,14411,Royal representative id0 exact update160 frame,ROM-derived
+ROYAL-ID0-U320.png,bc5dcfa9115aa309004118b75a78ab9180c415ee7a2da17219398fb6eacc3847,14411,Royal representative id0 exact last nonterminal update320 frame,ROM-derived
+TAG-CLOSE-MASK-1.png,9dfa5d738aa0235d812676244af29b3c235c0e664d5b353dee5221664ff15d78,13883,TAG pair1 terminal close mask level1 over last visible update320,ROM-derived
+TAG-CLOSE-MASK-4.png,020e54abaa4939ddf9b95c87702bf576555904f9836be83fc976d2710324e811,9389,TAG pair1 terminal close mask level4 over last visible update320,ROM-derived
+TAG-CLOSE-MASK-8.png,d009a43a2db9466d8bccce231cdc68deba624c7da2ef087b68ba2ec669d3ee0b,866,full close mask / terminal handoff-visible state,ROM-derived
+TAG-PAIR01-U001.png,a3ca1ea38316a789eefa013440fe3bde4922a4123a7cacff3db6a2862d29eddf,17024,TAG source ids0/1 normalized to displayed ids1/0 exact update1,ROM-derived
+TAG-PAIR01-U160.png,9026822f38601df2c9de74a1e85f4ddc898f48674a4723d49f95f889317fa387,14780,TAG normalized pair1 exact update160,ROM-derived
+TAG-PAIR01-U320.png,9026822f38601df2c9de74a1e85f4ddc898f48674a4723d49f95f889317fa387,14780,TAG normalized pair1 exact last nonterminal update320,ROM-derived
+TAG-PAIR23-U001.png,b011958e8c6d26cb3b5b95204e3941d8dd20413dd040d43117897a4d87d47ec9,17473,TAG pair2 ids2/3 exact update1 with persistent follower phase,ROM-derived
+TAG-PAIR23-U160.png,15d8563abbfa2b9680865bfdd73e08eaa39530343d39e4f875c84f67fb350e52,15399,TAG pair2 exact update160 with persistent follower phase,ROM-derived
+TAG-PAIR23-U320.png,d8a6986966f94e9cb46cc7247a601ae9583355bd7f7bb4a52725d782d75e18a2,15228,TAG pair2 exact last nonterminal update320 with persistent follower phase,ROM-derived
