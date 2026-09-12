@@ -32,6 +32,7 @@ Read before changing master integration:
 - `docs/FRONTEND-TITLE-R18.md`
 - `docs/GAMEPLAY-RUNTIME-16-ACCEPTANCE.md`
 - `docs/WP20-R03-ACCEPTANCE.md`
+- `docs/RING-ROPES-CAMERA-R02-ACCEPTANCE.md`
 
 ## Absolute rule
 
@@ -257,3 +258,28 @@ Visual actions `$4C/$4D/$4E/$66` are ROM-exact closed.
 Gameplay remains owner of legal/reserve state and the exact runtime predicates for `$188BC`.
 Never restore WIP160 synthetic ST_PUNCH/18-tick slap/48-tick traversal/late swap/±16 apron correction.
 Warrior `$0062/$0063` have all 23 ROM pieces; do not patch an arm.
+
+
+## RING / ROPES / CAMERA R02
+
+Active side-rope authority:
+`RING-ROPES-CAMERA-R02-ROM-PERFECT-AUDITED.zip`
+
+SHA256:
+`20a54f5994de27d1e0114c62c9748e94d3b2a8138551eb4aaa8d687f7b19c44c`
+
+Integration Master carries:
+- `src/runtime/ring_rope_rom_exact.c/.h`;
+- `tests/platform/test_ring_rope_rom_exact.c`;
+- `tools/audit_ring_rope_rom.py`.
+
+Do not restore any WIP/R01 synthetic deformation formula.
+
+Exact dynamic side ropes:
+`$1C1134/$1C1164/$1C1194/$1C11C4`.
+
+Gameplay must produce the exact state writes; Ring/Ropes advances the ROM selector/timer state machine; WP26 renders the result.
+
+No equivalent global north/south deformation object is demonstrated. Do not fabricate one.
+
+Hardware validation remains pending.
