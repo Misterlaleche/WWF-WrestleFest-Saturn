@@ -40,6 +40,8 @@ Implemented master-side candidate family:
 R10-R13 host validation has been rechecked; R13 also cross-compiles for SH-2.
 R14-R16 host + SH-2 compile/test gates PASS.
 
+Self-audit A01: PASS WITH TWO CORRECTED FINDINGS. R09 transition semantics and R13 campaign control flow were corrected against original ROM authority before the integrated hardware build.
+
 These candidates do not automatically inherit HARDWARE-PASS.
 
 ## Current hard dependencies
@@ -66,4 +68,4 @@ INTRO/PRESENTATION is developed separately on `intro-presentation-r01`.
 
 ## Mandatory reading
 
-See `HANDOFF.md` for the complete ordered integration reading list.
+See `HANDOFF.md` for the complete ordered integration reading list and `docs/INTEGRATION-SELF-AUDIT-A01.md` for the current audit gate.
