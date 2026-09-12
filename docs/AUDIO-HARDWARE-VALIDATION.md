@@ -1,5 +1,19 @@
 # AUDIO HARDWARE VALIDATION — 2026-09-11
 
+## R04 superseding software-closure update — 2026-09-12
+
+The historical test chronology below remains valid, but R04 supersedes the earlier software-open items for music source generation and command `0x1F`.
+
+R04 adds:
+- live Z80 + pinned Nuked-OPM rendering for music commands `0x01..0x12`;
+- 18/18 first-12-second byte-exact matches against canonical A53;
+- an optional live renderer input to the already hardware-proven CA-driven WP24 transport;
+- original-driver handling for `0x1F`, with no PCM-domain linear fade.
+
+Software status is now **AUDIO ROM-EXACT SOFTWARE CLOSED**. The remaining mandatory gate is real-Saturn validation of live-VM CPU budget and full-load concurrency. Runtime insertion of proven producers remains owned by the canonical gameplay integration work.
+
+See `docs/AUDIO-ROM-EXACT-R04-CLOSURE.md`.
+
 ## Scope
 
 This document records what has actually been proven for WWF WrestleFest audio on a real NTSC-U Sega Saturn with Terraonion MODE.

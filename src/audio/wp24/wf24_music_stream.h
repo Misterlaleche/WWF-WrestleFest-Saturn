@@ -30,6 +30,7 @@ typedef enum {
 typedef struct {
     bool (*read_source_be)(uint32_t offset_bytes, void *dst,
                            uint32_t bytes, void *user);
+    bool (*render_live_be)(void *dst, uint32_t bytes, void *user);
     bool (*copy_half_be)(unsigned half, const void *src_be,
                          uint32_t bytes, void *user);
     bool (*slot31_prepare_serialized)(const wf24_slot31_format_t *format,
@@ -54,6 +55,7 @@ typedef struct {
     uint8_t last_active_half;
     uint8_t eof_seen;
     uint8_t eof_half;
+    uint8_t live_source;
 } wf24_music_stream_t;
 
 void wf24_stream_reset(wf24_music_stream_t *stream);
@@ -61,6 +63,7 @@ bool wf24_stream_init(wf24_music_stream_t *stream,
                       const wf24_stream_ops_t *ops);
 bool wf24_stream_start(wf24_music_stream_t *stream,
                        const wf24_music_asset_t *asset);
+bool wf24_stream_start_live(wf24_music_stream_t *stream, uint8_t command);
 bool wf24_stream_stop(wf24_music_stream_t *stream);
 bool wf24_stream_service(wf24_music_stream_t *stream, uint32_t delta_us);
 

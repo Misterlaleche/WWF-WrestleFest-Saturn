@@ -32,7 +32,7 @@ bool
 wf24_stream_init(wf24_music_stream_t *s, const wf24_stream_ops_t *ops)
 {
     if (!s || !ops ||
-        !ops->read_source_be ||
+        (!ops->read_source_be && !ops->render_live_be) ||
         !ops->copy_half_be ||
         !ops->slot31_prepare_serialized ||
         !ops->slot31_start_serialized ||
@@ -54,6 +54,20 @@ fill_half(wf24_music_stream_t *s, unsigned half)
     if (half > 1u) {
         stream_error(s, WF24_ERR_PLATFORM);
         return false;
+    }
+
+    if (s->live_source) {
+        if (!s->ops.render_live_be ||
+            !s->ops.render_live_be(s->staging, WF24_MUSIC_HALF_BYTES, s->ops.user)) {
+            stream_error(s, WF24_ERR_IO);
+            return false;
+        }
+        if (!s->ops.copy_half_be(half, s->staging, WF24_MUSIC_HALF_BYTES, s->ops.user)) {
+            stream_error(s, WF24_ERR_PLATFORM);
+            return false;
+        }
+        ++s->refills;
+        return true;
     }
 
     if (s->source_sample >= s->asset.total_samples) {
@@ -128,6 +142,7 @@ wf24_stream_stop(wf24_music_stream_t *s)
     s->state = WF24_STREAM_STOPPED;
     s->current_command = 0u;
     s->last_active_half = 2u;
+    s->live_source = 0u;
     return true;
 }
 
@@ -155,6 +170,7 @@ wf24_stream_start(wf24_music_stream_t *s,
     s->last_active_half = 2u;
     s->eof_seen = 0u;
     s->eof_half = 2u;
+    s->live_source = 0u;
     s->error = WF24_ERR_NONE;
     s->state = WF24_STREAM_PRIMING;
 
@@ -187,6 +203,26 @@ wf24_stream_start(wf24_music_stream_t *s,
 
     s->state = WF24_STREAM_PLAYING;
     return true;
+}
+
+bool
+wf24_stream_start_live(wf24_music_stream_t *s, uint8_t command)
+{
+    wf24_slot31_format_t format;
+    if (!s || command < 0x01u || command > 0x12u || !s->ops.render_live_be)
+        return false;
+    if (s->state != WF24_STREAM_STOPPED && !wf24_stream_stop(s))
+        return false;
+    memset(&s->asset, 0, sizeof(s->asset));
+    s->refills = s->source_exhaustions = s->service_gap_errors = 0u;
+    s->current_command = command; s->last_active_half = 2u;
+    s->eof_seen = 0u; s->eof_half = 2u; s->live_source = 1u;
+    s->error = WF24_ERR_NONE; s->state = WF24_STREAM_PRIMING;
+    wf24_slot31_exact_format(&format);
+    if (!s->ops.slot31_prepare_serialized(&format, s->ops.user)) { stream_error(s, WF24_ERR_PLATFORM); return false; }
+    if (!fill_half(s,0u) || !fill_half(s,1u)) return false;
+    if (!s->ops.slot31_start_serialized(s->ops.user)) { stream_error(s, WF24_ERR_PLATFORM); return false; }
+    s->state = WF24_STREAM_PLAYING; return true;
 }
 
 bool

@@ -1,6 +1,6 @@
 # HANDOFF
 
-Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/RUNTIME-AUDIO-RECONCILIATION.md`, and `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md` before doing any work.
+Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/RUNTIME-AUDIO-RECONCILIATION.md`, `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`, and `docs/AUDIO-ROM-EXACT-R04-CLOSURE.md` before doing any work.
 
 ## Absolute project rule
 
@@ -25,7 +25,9 @@ Never invent missing behavior.
    - `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`;
    - ring-out/count-out ready rows belong to WP08;
    - finisher ready rows belong primarily to WP01 with WP22/WP10 support;
-   - exact `0x1F` fade and production cue lifetimes remain open.
+   - R04 closes the software music path with live Z80 + pinned Nuked-OPM rendering into the existing CA-driven WP24 transport;
+   - `0x1F` is sent back into the original driver VM; no PCM-domain linear fade;
+   - final real-Saturn validation of live-VM CPU budget under full game load is still mandatory.
 
 5. Current canonical gameplay runtime source is still absent from this repository.
    - Do not import WIP160/175/176 as the base.

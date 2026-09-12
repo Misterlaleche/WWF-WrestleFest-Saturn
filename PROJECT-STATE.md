@@ -28,7 +28,7 @@ Real Saturn + Terraonion MODE has validated boot/VDP foundation plus:
 
 ## AUDIO
 
-Status: **TRANSPORT HARDWARE-PASS / PRODUCER MATRIX ROM-AUDITED / OWNER MAP R01 CLOSED / GAMEPLAY SOURCE INSERTION OPEN.**
+Status: **AUDIO ROM-EXACT SOFTWARE CLOSED (R04) / GAMEPLAY SOURCE INSERTION OPEN / REAL-SATURN FINAL VALIDATION PENDING.**
 
 ### Producer matrix
 
@@ -57,19 +57,24 @@ Critical correction:
 - low-stamina producer = `0x009088 -> 0x0B`, JSR `0x00908C`;
 - `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`.
 
-Still open:
-- insert the 14 ready hooks into canonical CLEAN-R01 gameplay source;
-- prove semantics/trigger for the 4 scope-only rows;
-- classify the 155 unresolved producers;
-- exact `0x1F` fade lifecycle;
-- production lifetime/termination for all music cues;
-- integrated gameplay hardware validation.
+R04 software closure:
+- live Z80 + pinned Nuked-OPM music VM for commands `0x01..0x12`;
+- 18/18 first-12-second outputs byte-exact against canonical A53 hashes;
+- optional live-source callback feeds the existing CA-driven WP24 slot31 ring;
+- `0x1F` returns to the original driver VM rather than a PCM-domain approximation;
+- no short PCM loop object is introduced.
+
+Still open outside the audio engine itself:
+- insert proven producer hooks into the canonical CLEAN-R01 gameplay source;
+- keep scope-only/unresolved producer semantics fail-closed until their owning runtime work resolves them;
+- final integrated real-Saturn validation of live VM + music + SFX + voices under full gameplay/VDP load.
 
 See:
 - `docs/AUDIO-HARDWARE-VALIDATION.md`
 - `docs/RUNTIME-AUDIO-RECONCILIATION.md`
 - `docs/AUDIO-PRODUCER-MATRIX-AUDIT.md`
 - `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md`
+- `docs/AUDIO-ROM-EXACT-R04-CLOSURE.md`
 
 ## Canonical runtime source status
 
