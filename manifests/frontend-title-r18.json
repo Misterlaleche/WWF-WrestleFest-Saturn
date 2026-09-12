@@ -1,0 +1,43 @@
+{
+  "version": "R18-CANDIDATE",
+  "owner": "INTEGRATION_MASTER_FRONTEND",
+  "authority": [
+    "wwfwfest.zip",
+    "WP19/R11",
+    "INTRO R17 hardware-pass handoff",
+    "MODE+ROSTER TEST03 hardware-pass handoff"
+  ],
+  "input": [
+    "wf_credit_state_t",
+    "operator config",
+    "title prompt counter",
+    "2P second-prompt phase"
+  ],
+  "output": [
+    "credits",
+    "partial",
+    "raw prompt id",
+    "prompt blink phase",
+    "2P prompt phase"
+  ],
+  "invariants": {
+    "credit_logic_owner": "WP19/R11",
+    "visual_owner": "FRONTEND",
+    "intro_private_credit_counter": "FORBIDDEN",
+    "hardcoded_credit_zero": "FORBIDDEN",
+    "title_anm_451_native_duration": "FALSE"
+  },
+  "validation": {
+    "host": "PASS",
+    "sh2_compile": "PASS",
+    "sh2_relocatable_link": "PASS",
+    "new_project_unresolved_symbols": 0,
+    "hardware": "NOT_TESTED"
+  },
+  "file_sha256": {
+    "src/runtime/wf_frontend_title.c": "107ee4a7188dfdb5416ecaffb02f3d2c228bffd1ec8ade9dd5895219972a11b0",
+    "src/runtime/wf_frontend_title.h": "2c198880c6120705da78ec6628047e6ffb6223a44f5ad1f1493ca4b7f5f5d714",
+    "tests/platform/test_wf_frontend_title.c": "46c2cd2bb9da207e2494d9aecee2de210b3bb51440a74e9ddc251073b12b8022"
+  },
+  "bin_cue": false
+}
