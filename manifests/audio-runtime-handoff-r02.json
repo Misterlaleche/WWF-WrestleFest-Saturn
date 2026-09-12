@@ -1,0 +1,18 @@
+{
+  "version": "R02-REAUDITED",
+  "package_name": "WWF-RUNTIME-AUDIO-HANDOFF-R02-REAUDITED.zip",
+  "package_sha256": "49335637b8ba6d26b361c88e3886f620e9f52c076df3d4bfb44accf3701ccb5c",
+  "supersedes": "R01",
+  "superseded_r01_sha256": "cc1c9ed44edcde0237770521123072c3bbec6927bf37184c157e7b092858db65",
+  "producer_rows": 173,
+  "integration_ready": 14,
+  "owner_scope_only": 4,
+  "unresolved": 155,
+  "low_stamina": "0x009088 -> 0x0B; JSR 0x00908C",
+  "0x0263cc": "REGISTERED_NOT_IDENTIFIED",
+  "git_snapshot": "3287ac70c2010b3706aaf3a76003e56f7e1fa25b",
+  "integration_master_blob_match": "12/12",
+  "wp24_transport_hardware": "PASS",
+  "integrated_hardware": "NOT_TESTED",
+  "command_0x1f": "OPEN_FAIL_CLOSED"
+}
