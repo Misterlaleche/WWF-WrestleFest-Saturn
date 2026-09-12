@@ -154,3 +154,16 @@ Current checkpoint:
 SHA256 `bcb5c35c1d404b88b4bafc3124dd6797b62487d6edffe4ec0073c13932b7807b`.
 
 R04 closes the ROM-exact visual contract for `$4C/$4D/$4E/$66`. Warrior `$0062/$0063` are complete 23-piece interaction compositions; no synthetic arm patch is allowed. Gameplay must consume the contract instead of the old WIP160 synthetic TAG path.
+
+
+## Ring / ropes authority
+
+Active side-rope checkpoint:
+**RING-ROPES-CAMERA-R02-ROM-PERFECT-AUDITED**
+
+SHA256:
+`20a54f5994de27d1e0114c62c9748e94d3b2a8138551eb4aaa8d687f7b19c44c`
+
+The four fixed side-rope records at `$1C1134/$1C1164/$1C1194/$1C11C4` use exact ROM selector/timer animation. Historical synthetic pixel-offset rope deformation is forbidden.
+
+This closes the side-rope consumer/cadence/restore contract, not the complete ring/gameplay subsystem. Gameplay producer integration and real-hardware validation remain pending.
