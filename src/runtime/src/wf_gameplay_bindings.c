@@ -4,39 +4,29 @@
 #include "wf_payment.h"
 #include "wf_spatial.h"
 #include "wf_target_relation.h"
+#include "wf_pair_relation.h"
+#include "wf_actor_prepass.h"
 
 static uint8_t edge_from_cabinet_word(uint16_t raw,uint8_t *level){
  uint8_t now=(uint8_t)(((uint16_t)(~raw)&0x0080u)>>7);
  uint8_t old=*level;
- uint8_t edge=(uint8_t)((old&now)^now); /* exact AND.B then EOR.B sequence */
+ uint8_t edge=(uint8_t)((old&now)^now);
  *level=now;
  return edge;
 }
-static void clear_refill_words(wf_actor_raw_t *a){
- for(size_t o=0xE8u;o<=0xFCu;o+=2u)wf_set_be16(a,o,0u);
-}
-static void refill_actor(wf_actor_raw_t *a){
- uint16_t m=wf_be16(a,WF_A_STAMINA_MAX);
- wf_set_be16(a,WF_A_STAMINA,m);
- wf_set_be16(a,WF_A_VISIBLE_DELTA,m);
- wf_set_be16(a,WF_A_TIER,0u);
-}
+static void clear_refill_words(wf_actor_raw_t *a){for(size_t o=0xE8u;o<=0xFCu;o+=2u)wf_set_be16(a,o,0u);}
+static void refill_actor(wf_actor_raw_t *a){uint16_t m=wf_be16(a,WF_A_STAMINA_MAX);wf_set_be16(a,WF_A_STAMINA,m);wf_set_be16(a,WF_A_VISIBLE_DELTA,m);wf_set_be16(a,WF_A_TIER,0u);}
 
 wf_status_t wf_phase_input_real(wf_runtime_t *rt,uint32_t addr,void *user){
  (void)addr;wf_gameplay_binding_context_t *c=(wf_gameplay_binding_context_t*)user;if(!rt||!c)return WF_BAD_STATE;
  for(unsigned i=0;i<WF_ACTOR_SLOTS;i++){
   wf_actor_raw_t *a=&rt->actors[i];if((wf_u8(a,WF_A_ACTIVE)&0x80u)==0u)continue;
-  /* +$8A is the ROM-owned input-source selector. Only slots for which the
-   * Saturn adapter has supplied an exact active-low sample are consumed. */
   if((c->input_valid_mask&(uint16_t)(1u<<i))==0u){c->last_blocked_phase=0x00514eu;c->last_blocked_dependency=0x00514eu;return WF_BLOCKED;}
   wf_input_decode_514e(a,c->input_hw_low[i],rt->g.pipeline_mode&1u);
  }
  return WF_OK;
 }
 
-/* Exact gameplay dependency $8B3A/$8C3E.  Payment itself is the audited
- * WP19 $055A routine, not a free-play shortcut.  Only the first four wrestler
- * records are scanned, matching D1=3 + DBF and stride $010C. */
 wf_status_t wf_phase_refill_8b3a(wf_runtime_t *rt,uint32_t addr,void *user){
  (void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;
  if(!rt||!c)return WF_BAD_STATE;
@@ -45,18 +35,10 @@ wf_status_t wf_phase_refill_8b3a(wf_runtime_t *rt,uint32_t addr,void *user){
  rt->g.cabinet_edge_15da=edge_from_cabinet_word(c->cabinet_word_140020,&rt->g.cabinet_level_15db);
  rt->g.cabinet_edge_15dc=edge_from_cabinet_word(c->cabinet_word_140022,&rt->g.cabinet_level_15dd);
  for(unsigned slot=0;slot<4u;slot++){
-  wf_actor_raw_t*a=&rt->actors[slot];
-  unsigned d1=3u-slot;
-  int gate=0;
-  if((rt->g.config_0066&0x0800u)!=0x0800u || (rt->g.mode_0161&0x01u)!=0u || (rt->g.mode_0160&0x80u)==0u){
-   gate=wf_u8(a,WF_A_INPUT_FRESH)!=0u; /* TST.B +$A2: high byte of fresh WORD */
-  }else if(d1>=2u){
-   if(wf_be32(a,WF_A_INPUT_SOURCE)==0x00140020u)gate=wf_u8(a,WF_A_INPUT_FRESH)!=0u;
-   else if(rt->g.cabinet_edge_15dc!=0u)gate=1;
-  }else{
-   if(wf_be32(a,WF_A_INPUT_SOURCE)==0x00140022u){if(rt->g.cabinet_edge_15dc!=0u)gate=1;}
-   else if(rt->g.cabinet_edge_15da!=0u)gate=1;
-  }
+  wf_actor_raw_t*a=&rt->actors[slot];unsigned d1=3u-slot;int gate=0;
+  if((rt->g.config_0066&0x0800u)!=0x0800u || (rt->g.mode_0161&0x01u)!=0u || (rt->g.mode_0160&0x80u)==0u)gate=wf_u8(a,WF_A_INPUT_FRESH)!=0u;
+  else if(d1>=2u){if(wf_be32(a,WF_A_INPUT_SOURCE)==0x00140020u)gate=wf_u8(a,WF_A_INPUT_FRESH)!=0u;else if(rt->g.cabinet_edge_15dc!=0u)gate=1;}
+  else{if(wf_be32(a,WF_A_INPUT_SOURCE)==0x00140022u){if(rt->g.cabinet_edge_15dc!=0u)gate=1;}else if(rt->g.cabinet_edge_15da!=0u)gate=1;}
   if(!gate)continue;
   if((wf_u8(a,WF_A_FLAGS32)&0x80u)!=0u)continue;
   if((wf_u8(a,WF_A_FLAGS32)&0x10u)!=0u)continue;
@@ -67,43 +49,23 @@ wf_status_t wf_phase_refill_8b3a(wf_runtime_t *rt,uint32_t addr,void *user){
   if((rt->g.mode_0161&0x01u)==0u){
    wf_actor_raw_t*p=wf_actor_from_rom_ptr(rt,wf_be32(a,WF_A_TEAM_LINK),0);
    if(!p){c->last_blocked_phase=0x008b3au;c->last_blocked_dependency=0x008c58u;return WF_BLOCKED;}
-   if((wf_u8(p,WF_A_RESULT_LO)&0x01u)==0u){
-    refill_actor(p);wf_set_be16(p,WF_A_MASH,1u);clear_refill_words(p);
-   }
+   if((wf_u8(p,WF_A_RESULT_LO)&0x01u)==0u){refill_actor(p);wf_set_be16(p,WF_A_MASH,1u);clear_refill_words(p);}
   }
-  wf_set_be16(a,WF_A_MASH,1u);
-  wf_set_be16(a,WF_A_FIELD62,0u);
-  rt->g.global_169e=0x8000u;
-  rt->g.global_0166=0u;
-  clear_refill_words(a);
-  return WF_OK;
+  wf_set_be16(a,WF_A_MASH,1u);wf_set_be16(a,WF_A_FIELD62,0u);rt->g.global_169e=0x8000u;rt->g.global_0166=0u;clear_refill_words(a);return WF_OK;
  }
  return WF_OK;
 }
 
-
-wf_status_t wf_phase_camera_26936(wf_runtime_t *rt,uint32_t addr,void *user){
- (void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!rt||!c)return WF_BAD_STATE;
- if(!c->camera_valid){c->last_blocked_phase=0x026936u;c->last_blocked_dependency=0x026936u;return WF_BLOCKED;}
- return wf_camera_track(rt,&c->camera);
-}
-wf_status_t wf_phase_camera_2983c(wf_runtime_t *rt,uint32_t addr,void *user){
- (void)rt;(void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!c)return WF_BAD_STATE;
- if(!c->camera_valid){c->last_blocked_phase=0x02983cu;c->last_blocked_dependency=0x02983cu;return WF_BLOCKED;}
- return wf_camera_clamp(&c->camera);
-}
+wf_status_t wf_phase_camera_26936(wf_runtime_t *rt,uint32_t addr,void *user){(void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!rt||!c)return WF_BAD_STATE;if(!c->camera_valid){c->last_blocked_phase=0x026936u;c->last_blocked_dependency=0x026936u;return WF_BLOCKED;}return wf_camera_track(rt,&c->camera);}
+wf_status_t wf_phase_camera_2983c(wf_runtime_t *rt,uint32_t addr,void *user){(void)rt;(void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!c)return WF_BAD_STATE;if(!c->camera_valid){c->last_blocked_phase=0x02983cu;c->last_blocked_dependency=0x02983cu;return WF_BLOCKED;}return wf_camera_clamp(&c->camera);}
 
 wf_status_t wf_phase_cpu_real(wf_runtime_t *rt,uint32_t addr,void *user){
  (void)addr;wf_gameplay_binding_context_t *c=(wf_gameplay_binding_context_t*)user;if(!rt||!c)return WF_BAD_STATE;
- for(unsigned i=0;i<WF_ACTOR_SLOTS;i++){
-  if((wf_u8(&rt->actors[i],WF_A_ACTIVE)&0x80u)==0u)continue;
-  wf_status_t s=wf_cpu_actor_step(rt,i,&c->cpu_trace[i]);
-  if(s!=WF_OK){c->last_blocked_phase=0x01c150u;c->last_blocked_dependency=c->cpu_trace[i].blocked_dependency_rom?c->cpu_trace[i].blocked_dependency_rom:c->cpu_trace[i].state5.blocked_dependency_rom;return s;}
- }
+ for(unsigned i=0;i<WF_ACTOR_SLOTS;i++){if((wf_u8(&rt->actors[i],WF_A_ACTIVE)&0x80u)==0u)continue;wf_status_t s=wf_cpu_actor_step(rt,i,&c->cpu_trace[i]);if(s!=WF_OK){c->last_blocked_phase=0x01c150u;c->last_blocked_dependency=c->cpu_trace[i].blocked_dependency_rom?c->cpu_trace[i].blocked_dependency_rom:c->cpu_trace[i].state5.blocked_dependency_rom;return s;}}
  return WF_OK;
 }
 size_t wf_gameplay_bindings_build(wf_gameplay_binding_context_t *ctx,wf_phase_binding_t *out,size_t cap){
- if(!ctx||!out||cap<8u) return 0u;
+ if(!ctx||!out||cap<10u) return 0u;
  memset(ctx,0,sizeof(*ctx));
  out[0]=(wf_phase_binding_t){0x00514eu,wf_phase_input_real,ctx};
  out[1]=(wf_phase_binding_t){0x008b3au,wf_phase_refill_8b3a,ctx};
@@ -111,7 +73,9 @@ size_t wf_gameplay_bindings_build(wf_gameplay_binding_context_t *ctx,wf_phase_bi
  out[3]=(wf_phase_binding_t){0x020958u,wf_phase_target_relation_20958,ctx};
  out[4]=(wf_phase_binding_t){0x026936u,wf_phase_camera_26936,ctx};
  out[5]=(wf_phase_binding_t){0x02983cu,wf_phase_camera_2983c,ctx};
- out[6]=(wf_phase_binding_t){0x01c150u,wf_phase_cpu_real,ctx};
- out[7]=(wf_phase_binding_t){0x024e58u,wf_phase_damage,ctx};
- return 8u;
+ out[6]=(wf_phase_binding_t){0x00f560u,wf_phase_pair_relation_f560,ctx};
+ out[7]=(wf_phase_binding_t){0x00f18au,wf_phase_actor_prepass_f18a,ctx};
+ out[8]=(wf_phase_binding_t){0x01c150u,wf_phase_cpu_real,ctx};
+ out[9]=(wf_phase_binding_t){0x024e58u,wf_phase_damage,ctx};
+ return 10u;
 }

@@ -1,31 +1,16 @@
-# BLOCK-GAMEPLAY-MASTER-01 — RUNTIME-15
+# BLOCK-GAMEPLAY-MASTER-01 — RUNTIME-16
 
 Status: **GAMEPLAY-R01 CANDIDATE / cumulative / fail-closed**.
 
-Base: frozen `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-11`, extended cumulatively through RUNTIME-14. RUNTIME-15 does not restart from WIP160/WIP175/WIP176.
+Base: frozen RUNTIME-11, extended cumulatively through RUNTIME-16. WIP160/WIP175/WIP176 are not gameplay bases.
 
-Authority: `wwfwfest.zip` > audited FINAL ROM-EXACT packages > CLEAN-R01 > Saturn/Yaul > current code > historical WIPs.
+Authority: `wwfwfest.zip` > audited FINAL ROM-EXACT packages > CLEAN-R01 > Saturn/Yaul > current implementation.
 
-## RUNTIME-15 advance
+WP28 real binding now reaches:
+`$00514E -> $008B3A -> $02088E -> $020958 -> $026936 -> $02983C -> $00F560 -> $00F18A -> $01C150 -> $01F914 BLOCKED`.
 
-WP28 real-owner chain now closes:
+RUNTIME-16 integrates `$00F560` and `$00F18A` without stubs. The RNG branch remains fail-closed at `$21B4` until exact live register context is proved.
 
-`$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C`
+Gates: ROM audit PASS; host PASS; SH-2 PASS; full Saturn ELF link PASS; unresolved symbols 0; no disc BIN/CUE generated.
 
-and the normal branch-A integration gate moves to the next mandatory owner:
-
-`$F560`.
-
-RUNTIME-15 adds the ROM-derived `$20958` target/relation phase, including demonstrated TAG `$20CCC`, Royal `$20E00/$20BDA/$20C88`, raw actor-pointer ownership semantics, primary/secondary target writes, and fail-closed handling for invalid inherited pointer context. It also binds the already-audited WP21 camera phases `$26936/$2983C` directly into WP28.
-
-No synthetic RNG, transition, bootstrap, audio backend, or substitute target selection was introduced.
-
-## Gates
-
-- HOST TESTS: PASS (`-Wall -Wextra -Werror`).
-- SH-2 CROSS COMPILE: PASS, 39 translation units.
-- FULL SATURN ELF LINK: PASS.
-- UNRESOLVED SYMBOLS: 0.
-- BIN/CUE: not generated.
-- Direct-match bootstrap: BLOCKED pending exact initialization authority.
-- Complete normal WP28 frame: NOT YET; next mandatory unbound owner is `$F560`.
+Next mandatory owner: `$01F914` fixed referee scheduler. Full normal frame is not yet complete. Direct-match and attract gameplay bootstrap remain BLOCKED. WP12 was not touched.

@@ -11,33 +11,36 @@ typedef wf_status_t (*wf_phase_fn)(wf_runtime_t *rt, uint32_t rom_addr, void *us
 typedef struct wf_phase_binding { uint32_t rom_addr; wf_phase_fn fn; void *user; } wf_phase_binding_t;
 
 typedef struct wf_globals_raw {
- /* Direct arcade globals retained by numeric address role where gameplay consumes them. */
- uint8_t credit_cycle_units_004b; /* $1C004B */
- uint8_t credit_remainder_004e;   /* $1C004E */
- uint8_t credit_count_004f;       /* $1C004F */
- uint16_t config_0066;            /* $1C0066/$0067 */
- uint8_t frame_handshake[2]; /* $1C006E/$6F equivalent */
- uint8_t gameplay_vblank_enable; /* $1C0076 */
- uint16_t credited_route; /* $1C007C */
- uint32_t frame_counter; /* $1C0080 */
- uint8_t pipeline_mode; /* $1C0083; bit0 selects A/B */
- uint8_t mode_0160; /* $1C0160 */
- uint8_t mode_0161; /* $1C0161 */
- uint16_t progression_0162; /* $1C0162: CPU progression selector used by state6/controller15 */
- uint16_t global_0166; /* $1C0166 word */
- uint32_t global_168c; /* $1C168C exact target candidate pointer */
- uint16_t global_1692; /* $1C1692 target metric */
+ uint8_t credit_cycle_units_004b;
+ uint8_t credit_remainder_004e;
+ uint8_t credit_count_004f;
+ uint16_t config_0066;
+ uint8_t frame_handshake[2];
+ uint8_t gameplay_vblank_enable;
+ uint16_t credited_route;
+ uint32_t frame_counter;
+ uint8_t pipeline_mode;
+ uint8_t mode_0160;
+ uint8_t mode_0161;
+ uint16_t progression_0162;
+ uint16_t global_0166;
+ uint32_t global_168c;
+ uint16_t global_1692;
  uint8_t controller_suppress;
- uint8_t global_1697; /* $1C1697, only numeric bit contract is used */
- uint8_t global_169b; /* $1C169B */
- uint16_t global_169e; /* $1C169E */
- uint16_t global_16c4; /* $1C16C4 */
- uint8_t cabinet_edge_15da;  /* $1C15DA */
- uint8_t cabinet_level_15db; /* $1C15DB */
- uint8_t cabinet_edge_15dc;  /* $1C15DC */
- uint8_t cabinet_level_15dd; /* $1C15DD */
- uint32_t rng_state;  /* arcade $1C005C equivalent: value must be externally sourced */
- uint32_t rng_d2, rng_d3, rng_d4, rng_d5, rng_d6, rng_d7; /* caller register context for $21B4 */
+ uint8_t global_1697;
+ uint8_t global_169b;
+ uint16_t global_169e;
+ uint16_t global_16c4;
+ uint8_t global_1678;
+ uint8_t global_15d3;
+ uint8_t global_15d5;
+ uint8_t global_00a3;
+ uint8_t cabinet_edge_15da;
+ uint8_t cabinet_level_15db;
+ uint8_t cabinet_edge_15dc;
+ uint8_t cabinet_level_15dd;
+ uint32_t rng_state;
+ uint32_t rng_d2, rng_d3, rng_d4, rng_d5, rng_d6, rng_d7;
  uint8_t rng_state_valid;
  uint8_t rng_register_context_valid;
 } wf_globals_raw_t;
