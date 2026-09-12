@@ -78,16 +78,15 @@ Audio transport and the 14 ready producer hooks are integration-eligible. `OWNER
 
 Status: **GAMEPLAY-R01 CANDIDATE / source integration active**.
 
-Current checkpoint: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15`, cumulative from frozen RUNTIME-11.
+Current checkpoint: `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16`, cumulative from frozen RUNTIME-11.
 
 Build gates at this checkpoint:
-- host tests PASS (`-Wall -Wextra -Werror`);
-- SH-2 / Yaul compile PASS (39 translation units);
-- full Saturn ELF link PASS;
+- host tests PASS (`-std=c11 -Wall -Wextra -Werror -pedantic`);
+- SH-2 cross compile PASS; full Saturn ELF link PASS (41 objects);
 - unresolved symbols: 0;
 - BIN/CUE: not generated.
 
-RUNTIME-15 closes the WP28 `$020958` target/relation owner from canonical ROM/CLEAN-R01 evidence and binds audited WP21 camera owners `$026936/$02983C`. Real branch-A integration now reaches `$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C` and stops fail-closed at `$F560`.
+RUNTIME-16 integrates ROM-derived WP28 owners `$00F560` and `$00F18A`. Real branch-A integration now reaches `$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C -> $F560 -> $F18A -> $1C150` and stops fail-closed at `$1F914`, the fixed referee scheduler. Shared RNG `$21B4` remains blocked until its exact live 68000 register context is proved.
 
 This does **not** mean gameplay is complete. Direct-match actor/global bootstrap remains BLOCKED. TAG, Royal, full pin/referee, ring-out, remaining collision/release paths, complete WP28 ownership, final VDP2 world/ring, and hardware gameplay validation remain open/partial.
 
