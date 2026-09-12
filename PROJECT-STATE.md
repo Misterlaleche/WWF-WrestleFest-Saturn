@@ -23,7 +23,16 @@ Real Saturn + Terraonion MODE has validated:
 - ROSTER: transparent NBG0 moving foreground over fixed NBG2 background — HARDWARE-PASS.
 - Confirmation: bright green localized 96x96 patch at VBLANK-IN with cursor preserved — HARDWARE-PASS.
 - TEST03 `main.c` remains an isolated harness and must not replace CLEAN-R01/master `main.c`.
-- TITLE / INTRO is owned by separate `intro-presentation-r01`; master consumes only its audited checkpoint.
+- **INTRO ROM-EXACT FINAL: HARDWARE-PASS** on real Saturn NTSC-U + MODE from package `WF-SATURN-INTRO-ROMEXACT-FINAL-HWTEST(1).zip`.
+- INTRO package SHA256: `0fb488514ae233c429058834b8ced73c757b0224d819d6ba4dc3015042f81c98`.
+- TITLE.ANM contains **451 stored asset frames; 451 is NOT the native arcade intro duration**.
+- INTRO owns only boot/title-build visuals. `CREDIT:x`, `INSERT COIN`, START prompt and title/attract/mode continuation are **FRONTEND-owned**; authoritative credit state/prompt selection remains WP19/R11.
+- The hardware-test harness infinite final-frame hold is inspection-only and must not enter the master.
+
+### R17 — INTRO Hardware-Pass handoff
+Accepted and audited in `docs/INTRO-HARDWARE-PASS-R17.md`.
+The exact package/BIN hashes are frozen in `manifests/intro-hardware-pass-r17.json`.
+Master will transplant proven behavior, not the isolated harness `main.c`.
 
 ## AUDIO
 
