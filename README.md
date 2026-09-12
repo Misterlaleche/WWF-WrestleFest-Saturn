@@ -116,3 +116,16 @@ SHA256 `c0d5fe5a135cb1c89e1a79023351a6e90f774bd0e2f0bf687e413eb736b1b3c8`.
 R06 supersedes R19/R02 visually after direct ROM evidence proved the final TEXT row was missing from the old derived assets. Corrected pose hashes are `352072fb...` and `36ca81e2...`, bbox is `[10,4,71,94]`, and the exact fixed TEXT transform maps to VDP2 NBG2 priority 4.
 
 Runtime semantics remain the proven fresh-edge/global-request contract. Gameplay producer insertion and real-hardware validation remain separate.
+
+
+## WP20 authority
+
+Current WP20 source authority:
+**WP20-SELECT-JOININ-R03-AUDITED**
+
+SHA256:
+`c83e4f8ef0697c7b2e42f143bf35c458e42413b4f53656940afe5f0534235c09`
+
+R03 closes the previously open timeout/AUTO/terminal64 policy, late joins, selector IDs 8/9 and simultaneous occupancy arbitration, and corrects R02 control-flow defects. Selector slots 8/9 resolve through `$64CC` to internal `0A/0B` = Demolition Smash/Crush.
+
+The source contract is ROM-EXACT closed with no known structural WP20 OPEN, but newly corrected R03 logic is not yet hardware-pass. TEST03 visual behavior remains the hardware-proven renderer contract.
