@@ -1,0 +1,19 @@
+{
+  "version": "WP06-TAG-EXCHANGE-VISUAL-R04-ACCEPTED",
+  "external_zip_sha256": "bcb5c35c1d404b88b4bafc3124dd6797b62487d6edffe4ec0073c13932b7807b",
+  "embedded_branch": "wp06-tag-exchange-visual-r04-audited",
+  "embedded_head": "6cb8de6721b9fff01ecb013ebc37287934bd7286",
+  "source_evidence_hashes": "11/11_PASS",
+  "preview_hashes": "4/4_PASS",
+  "rom_program_identity": "PASS",
+  "host": "PASS",
+  "sh2_compile": "PASS",
+  "rom_anchors": "PASS",
+  "wp25_metasprite": "PASS",
+  "preview_repro": "PASS",
+  "visual_contract": "ROM_EXACT_CLOSED",
+  "gameplay_integration": "PENDING_OWNER_CONSUMPTION",
+  "hardware": "NOT_TESTED",
+  "bin_cue": false,
+  "supersedes": ["WP06-TAG-EXCHANGE-VISUAL-R02","WP06-TAG-EXCHANGE-VISUAL-R03"]
+}
