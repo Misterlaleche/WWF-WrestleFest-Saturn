@@ -1,0 +1,20 @@
+{
+  "version": "R20-WP16-R06",
+  "external_zip_sha256": "c0d5fe5a135cb1c89e1a79023351a6e90f774bd0e2f0bf687e413eb736b1b3c8",
+  "bundle_head": "4bee20470f2a5f7ab4a5c72412503705636082da",
+  "package_hashes": "40/40_PASS",
+  "rom_audit": "PASS",
+  "asset_rebuild": "PASS",
+  "host": "PASS",
+  "gameplay_fixture": "PASS",
+  "presentation": "ROM_EXACT_CLOSED",
+  "pose0_sha256": "352072fb1ab6b2be33a42b469572189b9202ed36578b14289002261d8316bf57",
+  "pose1_sha256": "36ca81e2ac88ddb113000775003e9f0db0e8f087f9b0bf75660ec73d01527a02",
+  "bbox": [10,4,71,94],
+  "writes_per_pass": 78,
+  "saturn_nbg": 2,
+  "saturn_priority": 4,
+  "hardware": "NOT_TESTED",
+  "bin_cue": false,
+  "supersedes": "R19-WP16-R02"
+}
