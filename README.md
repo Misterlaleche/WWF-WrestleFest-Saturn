@@ -35,7 +35,8 @@ Implemented master-side candidate family:
 - R12 Continue/Payment bridge;
 - R13 Campaign Interstitials;
 - R14 Frontend Transition Engine;
-- R15 Instructional Hand Prompt visual contract;
+- R15 historical Instructional Hand Prompt visual contract (superseded);
+- R19 WP16 R02 runtime presentation contract;
 - R16 Gameplay HUD core;
 - R17 accepted INTRO hardware-pass handoff;
 - R18 Frontend TITLE credit/prompt presentation bridge.
@@ -88,7 +89,7 @@ INTRO/PRESENTATION visual sequence is now accepted as HARDWARE-PASS. Its `TITLE.
 - attract demo uses ordinary gameplay/CPU, never synthetic joystick/button autoplay;
 - no WIP160/WIP175/WIP176 as canonical gameplay base;
 - no synthetic ten-match campaign ladder;
-- WP16 prompt has no timing/trigger/button semantics until proven;
+- WP16 R02 closes trigger/presentation cadence and fresh-edge behavior; the pictured button is still not proven to mean specifically A, B or A+B;
 - WP18 HUD must not invent wrestler names, generic score or Royal elimination counter;
 - INTRO must never own a private credit counter or hard-code `CREDIT:0`;
 - `TITLE_COUNT=451` is asset representation only, never arcade-native duration;
@@ -97,3 +98,11 @@ INTRO/PRESENTATION visual sequence is now accepted as HARDWARE-PASS. Its `TITLE.
 ## Mandatory reading
 
 See `HANDOFF.md` for the complete ordered integration reading list, `docs/AUDIO-RUNTIME-HANDOFF-R02.md` for current audio authority, `docs/INTEGRATION-SELF-AUDIT-A01.md` for the master self-audit, and `docs/WP12-R01-REJECTION-R3.md` for the authoritative WP12 R01 rejection/R02 gate.
+
+
+## WP16 authority
+
+Current WP16 checkpoint: `WP16-HAND-PROMPT-R02.zip`
+SHA256 `ffa8a1104023db142ba0f379c9f79a77c393ad5e79f8769b5f7ecde0a0877642`.
+
+Integration Master independently revalidated ROM anchors, package checksums, host tests and SH-2 compilation. WP16 presentation is ROM-EXACT closed; Gameplay producer insertion and Saturn renderer/hardware validation remain separate.
