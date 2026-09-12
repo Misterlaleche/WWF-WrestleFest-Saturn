@@ -1,0 +1,18 @@
+{
+  "version": "WP18-HUD-INTEGRATION-R03-ACCEPTED",
+  "external_zip_sha256": "8c8b46fa3b1f60f8e76fab2f76e6692177f9171e93712f9a946a0b15f148f19f",
+  "bundle_head": "6dfd3db09f7b45fc8b2011ec6f557aa2ab6aabcd",
+  "package_hashes": "51/51_PASS",
+  "host_hud": "PASS",
+  "host_timer": "PASS",
+  "sh2_compile": "PASS",
+  "rom_palette_audit": "PASS",
+  "rom_portrait_audit": "PASS",
+  "preview_repro": "PASS",
+  "source_palette_format": "xBGR444_0x0BGR",
+  "target_color": "VDP2_CRAM_MODE2_RGB888",
+  "target_plane": "NBG2",
+  "hardware": "NOT_TESTED",
+  "bin_cue": false,
+  "supersedes": ["WP18-HUD-R01","WP18-HUD-R02"]
+}
