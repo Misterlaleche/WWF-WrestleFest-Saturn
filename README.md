@@ -62,11 +62,18 @@ R02 supersedes R01. Producer semantics remain 173 total / 14 integration-ready /
 
 ## WP12 ENTRANCES/PREMATCH
 
-WP12 R01 is **REJECTED / NOT INTEGRABLE** by third independent audit R3 against original ROM authority.
+Canonical active source checkpoint is now **WP12 R02 FINAL AUDITED**:
+- branch `entrances-prematch-r02`
+- HEAD `99d316037af7508a896f0535d44dfa18775d0c47`
+- ZIP SHA256 `966ac936f2a3a71b05673675b7ef041668fd99f2cf51431ccf9290dbb146f2fa`
 
-Correct state: TAG BLOCKED, ROYAL BLOCKED, presenter PARTIAL, prematch referee MISSING, gameplay handoff BLOCKED. Host and SH-2 compilation PASS do not make the implementation ROM-EXACT.
+R01 remains rejected/superseded.
 
-Next checkpoint must be WP12 R02 rebuilt from `wwfwfest.zip` and satisfying all R3 gates. See `docs/WP12-R01-REJECTION-R3.md`.
+R02 passes ROM/source-table/HOST/adversarial/sanitizer/static-analysis/SH-2 gates with zero SH-2 unresolved symbols and is imported byte-exact under `wp12-r02/`.
+
+WP12 remains deliberately PARTIAL: TAG and Royal are partial; presenter/referee structural contracts are closed; the exact handoff boundary reaches `$F8C` but execution thereafter remains Gameplay-owned. The literal wrestler-name/red-band/WWF-logo join and final runtime camera/raster transform remain OPEN.
+
+See `docs/WP12-R02-ACCEPTANCE.md`.
 
 ## Current hard dependencies
 
