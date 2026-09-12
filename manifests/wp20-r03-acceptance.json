@@ -1,0 +1,24 @@
+{
+  "version": "WP20-R03-ACCEPTED",
+  "zip_sha256": "c83e4f8ef0697c7b2e42f143bf35c458e42413b4f53656940afe5f0534235c09",
+  "bundle_branch": "wp20-select-joinin-r03",
+  "bundle_head": "f814acaee8f7ebb9fbac153f2299314a0f0f9702",
+  "bundle_verify": "PASS_COMPLETE_HISTORY",
+  "package_hashes": "37/37_PASS",
+  "host": "PASS",
+  "rom_verifier": "PASS",
+  "sh2_compile": "PASS",
+  "sh2_relocatable": "PASS_LIBGCC_HELPER_ONLY",
+  "known_structural_open": 0,
+  "closed_original_open": [
+    "timeout1024_auto_terminal64",
+    "late_join_p1_p4_and_0800_p2_routes",
+    "selector_8_9_identity_smash_crush",
+    "simultaneous_occupancy_arbitration"
+  ],
+  "handoff": "0x00000AC0",
+  "next_owner": "WP12",
+  "hardware_new_logic": "NOT_TESTED",
+  "bin_cue": false,
+  "supersedes": ["WP20-R01","WP20-R02"]
+}
