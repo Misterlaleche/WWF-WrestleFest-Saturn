@@ -210,3 +210,28 @@ Next required checkpoint: **WP12 R02**, reconstructed directly from `wwfwfest.zi
 
 Do not touch GAMEPLAY/WP28, CPU, collision, TAG/Royal gameplay or WP24 backend. No BIN/CUE.
 See `docs/WP12-R01-REJECTION-R3.md`.
+
+
+### R18 — Frontend TITLE presentation bridge
+
+Implemented master-side source contract binding TITLE credit/prompt presentation to authoritative WP19/R11 state.
+
+Closed in R18:
+- Frontend receives live `credits` and `partial` from `wf_credit_state_t`;
+- exact WP19 prompt ID is used via `wf_title_prompt_id()`;
+- exact WP19 title blink phase is used via `wf_title_prompt_blink_phase()`;
+- bridge is read-only and cannot mutate credit state;
+- INTRO private credit counter / hard-coded CREDIT:0 remain forbidden.
+
+Validation:
+- host `-Wall -Wextra -Werror -pedantic`: PASS;
+- SH-2 `-Wall -Wextra -Werror`: PASS;
+- relocatable SH-2 link with WP19: PASS;
+- no new project-owner unresolved symbols.
+
+Still OPEN:
+- exact frontend glyph/coordinate/palette renderer binding for CREDIT/INSERT COIN;
+- integrated Saturn hardware validation;
+- exact title continuation into attract/mode assembly.
+
+See `docs/FRONTEND-TITLE-R18.md`.
