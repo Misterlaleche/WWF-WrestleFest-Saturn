@@ -167,3 +167,20 @@ SHA256:
 The four fixed side-rope records at `$1C1134/$1C1164/$1C1194/$1C11C4` use exact ROM selector/timer animation. Historical synthetic pixel-offset rope deformation is forbidden.
 
 This closes the side-rope consumer/cadence/restore contract, not the complete ring/gameplay subsystem. Gameplay producer integration and real-hardware validation remain pending.
+
+
+## WP02 animation authority
+
+Current checkpoint:
+**WP02-ANIMATIONS-ROM-EXACT-R04-AUDITED**
+
+SHA256:
+`0a89f62e3670c7acc7d44d07e779b91d64fbf5407ff90648b52e0082e06afbcc`
+
+Bundle HEAD:
+`5a58a537eba5cddc6fc36589f6dfd106a8e6b3d2`
+
+R04 supersedes R03 and closes the WP02-owned animation interface:
+216 descriptors, 629 frame records, exact FF00 holds/kind-2 loops, 399/399 poses and 425,714 metasprite pieces.
+
+This is not a claim that external Gameplay callbacks, renderer fallbacks, palettes, camera effects or real-hardware end-to-end behavior are closed.
