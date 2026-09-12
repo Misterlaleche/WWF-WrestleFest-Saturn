@@ -27,6 +27,8 @@ Base:
 - Git branch topology: 1 commit ahead of main, 0 behind.
 - Local audited tree vs GitHub checkpoint blobs: 34/34 byte-identical Git blobs.
 - Direct ROM audit log: PASS.
+- Independent master HOST/adversarial + ROM/source-table/ownership rerun against `/mnt/data/wwfwfest.zip`: PASS.
+- Independent master SH-2 compile + relocatable link rerun with GCC 13.2.0 toolchain: PASS / 0 unresolved.
 - Source-table audit: PASS.
 - HOST/adversarial: PASS.
 - ASan/UBSan: PASS.
