@@ -260,3 +260,35 @@ Still OPEN:
 - exact title continuation into attract/mode assembly.
 
 See `docs/FRONTEND-TITLE-R18.md`.
+
+
+## WP20 CHARACTER SELECT / JOIN-IN — R03 accepted
+
+Canonical active checkpoint:
+- external ZIP `WP20-SELECT-JOININ-R03-AUDITED.zip`
+- SHA256 `c83e4f8ef0697c7b2e42f143bf35c458e42413b4f53656940afe5f0534235c09`
+- bundle branch `wp20-select-joinin-r03`
+- bundle HEAD `f814acaee8f7ebb9fbac153f2299314a0f0f9702`
+
+Independent master acceptance:
+- internal hashes 37/37 PASS;
+- HOST PASS;
+- ROM verifier PASS;
+- SH-2 compile PASS;
+- source contract closes all four prior structural OPEN items;
+- WP22 identity cross-check closes selector 8/9 as Smash/Crush;
+- exact handoff boundary reaches `$00000AC0`.
+
+WP20 source contract status: **ROM-EXACT CLOSED / NO KNOWN STRUCTURAL OPEN**.
+
+Still external:
+- shared RNG `$21B4`;
+- WP19 credits;
+- WP27 input normalization/fresh edges;
+- WP15/TEST03 renderer/transition/`$21E6`;
+- WP12 after `$AC0`.
+
+TEST03 visual behavior remains hardware-pass and must not be rewritten.
+R03 new logic itself is **NOT HARDWARE-PASS** until integrated and tested on real Saturn.
+
+See `docs/WP20-R03-ACCEPTANCE.md`.
