@@ -23,6 +23,7 @@ Read before changing master integration:
 - `docs/HAND-PROMPT-R15.md`
 - `docs/HUD-CORE-R16.md`
 - `docs/INTEGRATION-SELF-AUDIT-A01.md`
+- `docs/INTRO-HARDWARE-PASS-R17.md`
 
 ## Absolute rule
 
@@ -47,6 +48,22 @@ Current observed checkpoint:
 `BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15` — source checkpoint `72de727a77603c0a81f552fa059c0d2072cd249b`; gameplay branch documentation HEAD `7f40fde30cb7af32cf95cd4d9469884a342da8b8`.
 
 Do not promote it to complete gameplay: RUNTIME-15 closes `0x020958` and binds WP21 camera phases `0x026936/0x02983C`, but WP28 now blocks at `0x00F560`.
+
+### INTRO / PRESENTATION
+Canonical external checkpoint:
+**WF-SATURN-INTRO-ROMEXACT-FINAL-HWTEST — HARDWARE-PASS** on real Saturn NTSC-U + MODE.
+
+Package SHA256:
+`0fb488514ae233c429058834b8ced73c757b0224d819d6ba4dc3015042f81c98`.
+
+Critical integration invariants:
+- TITLE.ANM `TITLE_COUNT=451` means 451 **stored asset frames**, not arcade-native total duration;
+- do not derive native scene duration from 451;
+- INTRO contains no credit/coin/START/MODE logic;
+- `CREDIT:x`, `INSERT COIN` and START prompt presentation belong to FRONTEND;
+- logical credit/prompt state belongs to WP19/R11;
+- do not import the inspection-only final-frame infinite hold;
+- do not replace master `main.c` with the hardware-test harness.
 
 ### MODE + ROSTER
 Canonical external checkpoint:
@@ -88,7 +105,7 @@ Owns:
 - WP18 HUD presentation core;
 - source-level assembly of frontend + gameplay + audio + renderer.
 
-Current master checkpoint family: R02..R16 candidates.
+Current master checkpoint family: R02..R17, with R17 INTRO visual block HARDWARE-PASS.
 
 ## Platform safeguards
 
