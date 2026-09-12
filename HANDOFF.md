@@ -20,7 +20,8 @@ Read before changing master integration:
 - `docs/CONTINUE-PAYMENT-R12.md`
 - `docs/CAMPAIGN-INTERSTITIALS-R13.md`
 - `docs/FRONTEND-TRANSITION-R14.md`
-- `docs/HAND-PROMPT-R15.md` (historical; superseded by WP16 R02 / master R19)
+- `docs/HAND-PROMPT-R15.md` (historical)
+- `docs/HAND-PROMPT-R20.md` (active WP16 authority)
 - `docs/HUD-CORE-R16.md`
 - `docs/INTEGRATION-SELF-AUDIT-A01.md`
 - `docs/INTRO-HARDWARE-PASS-R17.md`
@@ -114,11 +115,11 @@ Owns:
 - WP19 operator/credit/payment;
 - WP13 campaign interstitial root contract;
 - WP15 transition primitives;
-- WP16 R02 hand-prompt presentation contract (ROM-EXACT closed; Gameplay producer remains external);
+- WP16 R06 hand-prompt presentation contract (ROM-EXACT closed; Gameplay producer remains external);
 - WP18 HUD presentation core;
 - source-level assembly of frontend + gameplay + audio + renderer.
 
-Current master checkpoint family includes R19 WP16 R02 acceptance. R17 INTRO visual block is HARDWARE-PASS; R18 binds Frontend TITLE credit/prompt presentation read-only to WP19/R11; R19 closes WP16 presentation logic.
+Current master checkpoint family includes R20 WP16 R06 corrective acceptance. R17 INTRO visual block is HARDWARE-PASS; R18 binds Frontend TITLE credit/prompt presentation read-only to WP19/R11; R20 is active WP16 authority.
 
 ## Platform safeguards
 
@@ -172,14 +173,22 @@ Do not invent the still-open wrestler-name/red-band/WWF-logo semantic join or fi
 No WP12 BIN/CUE yet.
 
 
-## WP16 hand prompt R02
+## WP16 hand prompt R06
 
-Canonical external checkpoint: `WP16-HAND-PROMPT-R02.zip`
-SHA256: `ffa8a1104023db142ba0f379c9f79a77c393ad5e79f8769b5f7ecde0a0877642`
+Canonical external checkpoint: `WP16-HAND-PROMPT-R06.zip`
+SHA256: `c0d5fe5a135cb1c89e1a79023351a6e90f774bd0e2f0bf687e413eb736b1b3c8`
+Bundle HEAD: `4bee20470f2a5f7ab4a5c72412503705636082da`
+
+R06 supersedes R19/R02 visual payloads because the ROM renderer proves the final TEXT row. Active geometry:
+- canvas 80x96;
+- origin (0,120);
+- bbox [10,4,71,94];
+- 13 rows / 78 writes;
+- VDP2 NBG2 priority 4.
 
 Integration rule:
-- Gameplay/WP27 produces the request and fresh-edge counter behavior;
-- WP16 consumes the global request and outputs the exact presentation lifecycle;
-- do not label the displayed button as A, B or A+B;
+- Gameplay/WP27 produces request and fresh-edge/mash-counter behavior;
+- WP16 consumes global shared flags and produces exact DRAW/CLEAR/NONE lifecycle;
+- do not label displayed button as A, B or A+B;
 - no WP16 audio backend or gameplay logic;
-- renderer binding/hardware validation still OPEN.
+- production renderer hookup/hardware validation still OPEN.
