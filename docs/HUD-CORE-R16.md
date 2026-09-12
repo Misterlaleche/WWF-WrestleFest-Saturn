@@ -1,6 +1,10 @@
-# Gameplay HUD Core R16
+# Gameplay HUD Core R16 — HISTORICAL BASE
 
 Authority: WP18 HUD/SCORE/TIMER/COUNTERS/MESSAGES ROM-EXACT FINAL.
+
+**Active renderer-facing authority is now WP18 HUD Integration R03.**
+See `docs/WP18-HUD-R03-ACCEPTANCE.md`.
+R03 supersedes the earlier visual/palette assumptions and closes the xBGR444 component-order defect.
 
 Implemented pure master-side model:
 - exact four top-HUD FG0 anchors;
@@ -35,3 +39,8 @@ Remaining R16 integration:
 - real hardware validation.
 
 Host + SH-2 compile PASS. No BIN/CUE.
+
+
+## R03 supersession note
+
+The R16 pure timing/stamina core remains useful, but its integration status is no longer the active HUD checkpoint. R03 adds exact portrait tile/palette decode, selector-5 suppression, count layouts, VDP2 NBG2 / CRAM mode 2 ownership and the mandatory xBGR444 -> RGB888 conversion.
