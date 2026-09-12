@@ -75,6 +75,7 @@ Exact shared RNG ordering remains `BLOCKED_BY_RUNTIME_OWNER`.
 
 ### R09 — Attract Demo root contract
 14 state/mode/lineup/threshold table + exact 24+33+33 exit cadence implemented.
+A01 correction: the first 24-VBlank stage is ROM JSR $008F50 stripe-mask close, not generic palette fade.
 No synthetic physical-input autoplay.
 Gameplay CPU override `$1F7F0` and shared `$21B4` RNG remain gameplay-owned.
 
@@ -88,7 +89,8 @@ Exact WP19 operator/coin/payment core implemented. Host tests revalidated PASS.
 Continue uses the same exact WP19 payment service; no private credit model. Host integration test revalidated PASS.
 
 ### R13 — Campaign interstitials
-WP13 post-win controller implemented:
+WP13 post-win controller implemented.
+A01 correction closes the ROM-demonstrated pre-interstitial progression==9 final branch to $1B4E, the config-bit7 extra progression increment at post-increment values 3/8, and the progression==5 table-preparation owner contract.
 - B608/BDA6 gates;
 - action/card expiry;
 - raw `0x312A` event;
@@ -158,3 +160,16 @@ WP24 remains the sole audio backend owner.
 MODE+ROSTER TEST03 behavior is transplanted, not its architecture.
 Unknown behavior stays OPEN/BLOCKED.
 No BIN/CUE unless explicitly requested.
+
+
+## Integration Self-Audit A01
+
+Status: **PASS WITH TWO CORRECTED FINDINGS**.
+
+- R09 incorrect palette-fade event label corrected to exact ROM $008F50 stripe-mask close; 24+33+33 timing unchanged.
+- R13 incomplete campaign control path corrected: progression==9 final gate, bit7 progression skip at 3/8, and progression==5 preparation wait.
+- host/authority test matrix PASS;
+- unified SH-2 relocatable audit PASS with zero duplicate globals;
+- no integrated hardware PASS claimed.
+
+See `docs/INTEGRATION-SELF-AUDIT-A01.md`.
