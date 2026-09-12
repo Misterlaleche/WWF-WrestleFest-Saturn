@@ -147,25 +147,27 @@ External checkpoint `WP16-HAND-PROMPT-R06.zip` accepted after independent ROM/as
 - hardware validation remains OPEN.
 Host PASS. Package SH-2 module compile PASS. R19/R02 visual payloads are superseded.
 
-### R16 — Gameplay HUD core
-WP18 pure core implemented:
-- four top-HUD anchors;
-- player-indicator tile bases;
-- raw portrait descriptors;
-- queued/accumulated/displayed stamina convergence;
-- exact six-column stamina quantization;
-- exact BCD 30:01 seed -> first visible 30:00;
-- decrement every four eligible loops;
-- 05-minute event command `0x0B`;
-- time-up clamp 00:00 and transition gate 3.
-Host + SH-2 PASS.
+### WP18 HUD Integration R03 — active HUD authority
+External checkpoint `WP18-HUD-INTEGRATION-R03-AUDITED(1).zip` accepted after independent ROM/build re-audit.
+- ZIP SHA256 `8c8b46fa3b1f60f8e76fab2f76e6692177f9171e93712f9a946a0b15f148f19f`;
+- bundle HEAD `6dfd3db09f7b45fc8b2011ec6f557aa2ab6aabcd`;
+- package hashes 51/51 PASS;
+- HOST HUD + timer PASS;
+- SH-2 PASS;
+- ROM portrait/palette audits PASS;
+- exact preview reproduction PASS.
 
-Still OPEN in HUD:
-- exact C710 live selector integration;
-- gameplay credit numeric compositor/cache binding;
-- referee/outside count renderer binding;
-- renderer writes under exact gameplay camera/scroll;
-- no wrestler names, generic score or Royal elimination counter may be invented.
+R03 closes the R02 red/blue inversion: arcade source words are **xBGR444 (0x0BGR)** and final Saturn representation is VDP2 CRAM mode 2 RGB888.
+Integration Master now carries the exact portrait decode, selector-5 suppression, stamina/timer/count cells and xBGR444 conversion in `wf_hud_core.*`.
+
+Still fail-closed/outside scope:
+- wrestler-name labels;
+- generic score;
+- Royal elimination counter without proved consumer;
+- final external renderer hookup where still pending;
+- real hardware validation.
+
+Historical R16 pure HUD core is extended/superseded by this R03 renderer-facing contract.
 
 ## Gameplay runtime
 
@@ -319,3 +321,34 @@ TEST03 visual behavior remains hardware-pass and must not be rewritten.
 R03 new logic itself is **NOT HARDWARE-PASS** until integrated and tested on real Saturn.
 
 See `docs/WP20-R03-ACCEPTANCE.md`.
+
+
+## WP06 TAG EXCHANGE VISUAL — R04 accepted
+
+Canonical active visual checkpoint:
+- ZIP `WP06-TAG-EXCHANGE-VISUAL-R04-AUDITED(1).zip`
+- SHA256 `bcb5c35c1d404b88b4bafc3124dd6797b62487d6edffe4ec0073c13932b7807b`
+- embedded HEAD `6cb8de6721b9fff01ecb013ebc37287934bd7286`
+
+Independent master audit:
+- source/evidence hashes 11/11 PASS;
+- preview hashes 4/4 PASS;
+- canonical ROM identity PASS;
+- HOST PASS;
+- SH-2 PASS;
+- ROM anchors PASS;
+- WP25 metasprite audit PASS;
+- preview regeneration PASS.
+
+Visual contract for `$4C/$4D/$4E/$66`: **ROM-EXACT CLOSED**.
+
+Critical:
+- legal-role handoff owner is `$188BC`;
+- `$4D` has a real callback-controlled HOLD; never replace by a guessed timeout;
+- Warrior `$0062/$0063` are complete ROM interaction compositions with 23 pieces each;
+- no synthetic arm patch;
+- no global reverse-painter rule;
+- the historical WIP160 ST_PUNCH/18-tick slap/48-tick crossing/late swap/±16 apron correction path is non-ROM-exact and must not be promoted.
+
+Gameplay integration remains owner-dependent and hardware is NOT TESTED.
+See `docs/WP06-TAG-EXCHANGE-VISUAL-R04-ACCEPTANCE.md`.
