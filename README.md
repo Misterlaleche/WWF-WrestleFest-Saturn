@@ -38,7 +38,8 @@ Implemented master-side candidate family:
 - R15 historical Instructional Hand Prompt visual contract (superseded);
 - R19 WP16 R02 runtime presentation contract (superseded visually);
 - R20 WP16 R06 corrective ROM-exact presentation contract;
-- R16 Gameplay HUD core;
+- R16 historical Gameplay HUD core;
+- WP18 HUD Integration R03 active renderer-facing HUD authority;
 - R17 accepted INTRO hardware-pass handoff;
 - R18 Frontend TITLE credit/prompt presentation bridge.
 
@@ -79,10 +80,17 @@ See `docs/WP12-R02-ACCEPTANCE.md`.
 ## Current hard dependencies
 
 Gameplay remains on `gameplay-runtime-r01`.
-Observed dependency:
-`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15` — source `72de727a77603c0a81f552fa059c0d2072cd249b`, gameplay branch documentation HEAD `7f40fde30cb7af32cf95cd4d9469884a342da8b8`.
 
-RUNTIME-15 closes WP28 `0x020958` and binds the audited WP21 camera phases `0x026936/0x02983C`; the next fail-closed point is `0x00F560`. Shared `$21B4` RNG/order and attract CPU override `$1F7F0` remain gameplay-owned.
+Current accepted dependency:
+`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16`
+
+Source integration commit:
+`8589e9ef796c2ed6ed00fb9a9f07c8eda3c96f24`
+
+Gameplay branch HEAD:
+`1853f5564b8a00ddd5883a68169993305a40cfae`
+
+RUNTIME-16 advances through `0x00F560 -> 0x00F18A -> 0x01C150` and fail-closes at `0x01F914` fixed referee scheduler. Full normal frame remains incomplete. Shared RNG/order and unresolved helper/bootstrap paths remain Gameplay-owned.
 
 INTRO/PRESENTATION visual sequence is now accepted as HARDWARE-PASS. Its `TITLE.ANM` has 451 stored asset frames; this is not a claim that the native arcade sequence lasts 451 frames. Frontend still owns CREDIT/INSERT COIN/START presentation and the continuation into attract/mode.
 
@@ -129,3 +137,20 @@ SHA256:
 R03 closes the previously open timeout/AUTO/terminal64 policy, late joins, selector IDs 8/9 and simultaneous occupancy arbitration, and corrects R02 control-flow defects. Selector slots 8/9 resolve through `$64CC` to internal `0A/0B` = Demolition Smash/Crush.
 
 The source contract is ROM-EXACT closed with no known structural WP20 OPEN, but newly corrected R03 logic is not yet hardware-pass. TEST03 visual behavior remains the hardware-proven renderer contract.
+
+
+## WP18 HUD authority
+
+Current checkpoint:
+`WP18-HUD-INTEGRATION-R03-AUDITED(1).zip`
+SHA256 `8c8b46fa3b1f60f8e76fab2f76e6692177f9171e93712f9a946a0b15f148f19f`.
+
+R03 supersedes R01/R02 and fixes the confirmed red/blue inversion by treating arcade colors as xBGR444 (`0x0BGR`) before VDP2 CRAM mode 2 RGB888 conversion.
+
+## WP06 TAG exchange visual authority
+
+Current checkpoint:
+`WP06-TAG-EXCHANGE-VISUAL-R04-AUDITED(1).zip`
+SHA256 `bcb5c35c1d404b88b4bafc3124dd6797b62487d6edffe4ec0073c13932b7807b`.
+
+R04 closes the ROM-exact visual contract for `$4C/$4D/$4E/$66`. Warrior `$0062/$0063` are complete 23-piece interaction compositions; no synthetic arm patch is allowed. Gameplay must consume the contract instead of the old WIP160 synthetic TAG path.
