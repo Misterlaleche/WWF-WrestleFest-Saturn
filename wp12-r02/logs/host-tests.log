@@ -1,0 +1,4 @@
+WP12 R02 host/adversarial tests: PASS
+WP12 R02 direct ROM audit: PASS
+WP12 R02 source-table vs ROM audit: PASS
+WP12 R02 ownership/static audit: PASS

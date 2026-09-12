@@ -1,0 +1,14 @@
+order,stage,owner,status
+1,$BD2 clear $1C0166,WP12,CLOSED
+2,$8EB6 raw $3100 then $3120,WP12->WP24 hook,CLOSED
+3,optional $AE20 D0=0 then $264E2 for global163 4/9,Presentation dependency,CLOSED STRUCTURAL
+4,$7B70,external common presentation,CLOSED STRUCTURAL
+5,$C08-$C60 TAG/cabinet inline block,WP12,CLOSED
+6,$C98 common setup,Integration Master external contract,REQUIRED
+7,$A654 one-time referee X gate / $98BA / $3132,WP12,CLOSED
+8,TAG controller + wrestler local programs + render/sync,WP12 + renderer/RNG contracts,CLOSED STRUCTURAL
+9,post-render action-mask $0030 terminal test,WP12,CLOSED
+10,$A778 teardown,WP12,CLOSED STRUCTURAL
+11,post-A654 $2A06 + $DEE audio,WP12 hooks,CLOSED
+12,$8AE6,external common presentation,CLOSED STRUCTURAL
+13,$F8C handoff,Gameplay owner,BOUNDARY CLOSED

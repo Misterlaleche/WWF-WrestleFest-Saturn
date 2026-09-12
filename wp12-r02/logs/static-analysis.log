@@ -1,0 +1,4 @@
+GCC -fanalyzer:
+PASS
+Clang -Weverything (except unsafe-buffer heuristic) + static analyzer:
+PASS

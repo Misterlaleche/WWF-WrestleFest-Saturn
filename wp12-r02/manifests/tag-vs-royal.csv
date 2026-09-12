@@ -1,0 +1,11 @@
+property,TAG,ROYAL
+controller,$1C14CE 24-state controller,skipped
+$98BA,yes,no
+opening actors,4 logical participants with primary/fallback selection,6 canonical opening anchors
+wrestler local state0,draw rewrite + counters reset,64-update counter + draw rewrite
+terminal,controller state reaches >=$18,actor callback writes controller state $18
+referee,present and rendered,present and rendered
+normal actor traversal,9 records,9 records
+input skip,after render/sync,after render/sync
+teardown,common $A778,common $A778
+handoff,$F8C,$F8C
