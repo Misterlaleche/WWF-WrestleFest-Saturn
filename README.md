@@ -37,12 +37,15 @@ Implemented master-side candidate family:
 - R14 Frontend Transition Engine;
 - R15 Instructional Hand Prompt visual contract;
 - R16 Gameplay HUD core;
-- R17 accepted INTRO hardware-pass handoff.
+- R17 accepted INTRO hardware-pass handoff;
+- R18 Frontend TITLE credit/prompt presentation bridge.
 
 R10-R13 host validation has been rechecked; R13 also cross-compiles for SH-2.
 R14-R16 host + SH-2 compile/test gates PASS.
 
 Self-audit A01: PASS WITH TWO CORRECTED FINDINGS. R09 transition semantics and R13 campaign control flow were corrected against original ROM authority before the integrated hardware build.
+
+R18 host + SH-2 gates PASS and introduces no private credit model. Frontend glyph/coordinate renderer binding and integrated hardware validation remain open.
 
 These candidates do not automatically inherit HARDWARE-PASS.
 
