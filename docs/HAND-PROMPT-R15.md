@@ -1,26 +1,26 @@
 # Instructional Hand Prompt R15
 
-Authority: WP16 INSTRUCTIONAL UI HAND/BUTTON PROMPTS ROM-EXACT FINAL.
+**SUPERSEDED as active runtime contract by WP16 R02 / master R19.**
 
-Imported as an **inert renderer-side visual contract only**.
-
-Closed:
+R15 remains the historical visual-only checkpoint that closed:
 - two exact visual states;
 - 80x96 composition;
-- captured screen origin (0,120);
-- capture foreground palette provenance 14;
-- model palette index 16;
-- exact non-zero bbox [10,4,71,87];
-- exact idx8 SHA256 for both frames.
+- recovered crop origin (0,120);
+- palette provenance;
+- bbox [10,4,71,87];
+- exact idx8 payload hashes.
 
-Protected visual payloads are not committed; only metadata/hashes are stored.
+WP16 R02 subsequently closed the ROM-proven request lifecycle, fresh-edge input contract, pose cadence, one-pass clear and source TEXT-map presentation contract.
 
-Strict fail-closed rule:
-- no gameplay trigger is wired;
-- no timing/cadence is assigned;
-- no button identity is assigned;
-- no Punch/Kick/P+K/mash/submission meaning is inferred;
-- no audio is attached;
-- no WIP160 tick/6 or pair_tick/8 constants are imported.
+Active manifest:
+`manifests/hand-prompt-r19.json`
 
-Host + SH-2 compile PASS. No BIN/CUE. Hardware PASS not claimed.
+External R02 package SHA256:
+`ffa8a1104023db142ba0f379c9f79a77c393ad5e79f8769b5f7ecde0a0877642`
+
+Important:
+- the repeated-fresh-edge mechanic is proven;
+- the pictured round button is still not proven to mean specifically A, B or A+B;
+- Gameplay/WP27 remains producer owner;
+- Saturn renderer binding and real-hardware validation remain OPEN;
+- no BIN/CUE generated.
