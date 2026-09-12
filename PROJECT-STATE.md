@@ -171,12 +171,39 @@ Still OPEN in HUD:
 
 Branch: `gameplay-runtime-r01`.
 
-Current named dependency observed by master:
-**BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15**
-source checkpoint `72de727a77603c0a81f552fa059c0d2072cd249b`; gameplay branch documentation HEAD `7f40fde30cb7af32cf95cd4d9469884a342da8b8`.
+Current accepted dependency:
+**BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16**
 
-RUNTIME-15 host tests PASS, SH-2 cross-compile PASS (39 translation units), full Saturn ELF link PASS and unresolved symbols = 0. It closes the ROM-derived WP28 target/relation phase `0x020958` plus already-audited WP21 camera phases `0x026936/0x02983C`. Branch-A now reaches `0x514E -> 0x8B3A -> 0x2088E -> 0x20958 -> 0x26936 -> 0x2983C` and fails closed at the next mandatory phase `0x00F560`.
-Direct-match/attract bootstrap, remaining WP28 owners and canonical shared `$21B4` RNG service/order remain OPEN.
+- external ZIP SHA256 `0d8ddac0cd849b3c65a7c354aa6bab7606316b883e412380fc5b8fa3bce57ea9`;
+- source integration commit `8589e9ef796c2ed6ed00fb9a9f07c8eda3c96f24`;
+- gameplay branch HEAD `1853f5564b8a00ddd5883a68169993305a40cfae`;
+- package hashes 278/278 PASS;
+- canonical ROM audit PASS;
+- independent strict HOST rerun PASS;
+- SH-2 cross-compile PASS;
+- full Saturn ELF link PASS;
+- unresolved symbols = 0.
+
+WP28 normal-frame chain now reaches:
+
+`$00514E -> $008B3A -> $02088E -> $020958 -> $026936 -> $02983C -> $00F560 -> $00F18A -> $01C150 -> $01F914 BLOCKED`
+
+RUNTIME-16 binds real ROM-derived owners `$00F560` and `$00F18A`.
+
+Next mandatory owner:
+**`$01F914` fixed referee scheduler**.
+
+Still fail-closed:
+- shared RNG `$21B4` path requiring exact inherited register context;
+- active `$F98C` scene route;
+- active `$A0E0` audio producer route;
+- `$DCDE` human-controller path;
+- `$10E86` movement/follow helper;
+- `$1129E` state-2 random/helper path;
+- direct-match and attract bootstraps.
+
+Full normal frame: NOT COMPLETE.
+Hardware: NOT TESTED.
 
 WIP160/WIP175/WIP176 are not canonical gameplay bases.
 
