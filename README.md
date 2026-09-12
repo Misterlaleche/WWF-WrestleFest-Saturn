@@ -46,6 +46,14 @@ Self-audit A01: PASS WITH TWO CORRECTED FINDINGS. R09 transition semantics and R
 
 These candidates do not automatically inherit HARDWARE-PASS.
 
+## WP12 ENTRANCES/PREMATCH
+
+WP12 R01 is **REJECTED / NOT INTEGRABLE** by third independent audit R3 against original ROM authority.
+
+Correct state: TAG BLOCKED, ROYAL BLOCKED, presenter PARTIAL, prematch referee MISSING, gameplay handoff BLOCKED. Host and SH-2 compilation PASS do not make the implementation ROM-EXACT.
+
+Next checkpoint must be WP12 R02 rebuilt from `wwfwfest.zip` and satisfying all R3 gates. See `docs/WP12-R01-REJECTION-R3.md`.
+
 ## Current hard dependencies
 
 Gameplay remains on `gameplay-runtime-r01`.
@@ -72,4 +80,4 @@ INTRO/PRESENTATION visual sequence is now accepted as HARDWARE-PASS. Its `TITLE.
 
 ## Mandatory reading
 
-See `HANDOFF.md` for the complete ordered integration reading list and `docs/INTEGRATION-SELF-AUDIT-A01.md` for the current audit gate.
+See `HANDOFF.md` for the complete ordered integration reading list, `docs/INTEGRATION-SELF-AUDIT-A01.md` for the master self-audit, and `docs/WP12-R01-REJECTION-R3.md` for the authoritative WP12 R01 rejection/R02 gate.
