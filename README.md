@@ -123,17 +123,17 @@ No ROM, `AUDPCM.PAK`, `LONGMUS.PAK`, generated PCM or protected audio payload is
 
 Canonical gameplay development exists on branch `gameplay-runtime-r01`.
 
-Current checkpoint: **BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15**, cumulative from frozen RUNTIME-11. WIP160/WIP175/WIP176 are **not** the base.
+Current checkpoint: **BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16**, cumulative from frozen RUNTIME-11. WIP160/WIP175/WIP176 are **not** the base.
 
 Current verified build gates:
-- HOST TESTS: PASS with `-Wall -Wextra -Werror`;
-- SH-2 / Yaul compile: PASS (39 translation units);
+- HOST TESTS: PASS with `-std=c11 -Wall -Wextra -Werror -pedantic`;
+- SH-2 cross compile: PASS;
 - FULL SATURN ELF LINK: PASS;
 - UNRESOLVED SYMBOLS: 0;
 - BIN/CUE: not generated;
 - gameplay hardware validation: not yet performed.
 
-RUNTIME-15 adds the ROM-derived WP28 `$020958` target/relation owner, including demonstrated TAG `$20CCC/$20B44`, Royal `$20E00/$20BDA/$20C88`, raw actor-pointer ownership semantics and distinct primary/secondary target fields. Audited camera owners `$026936/$02983C` are now bound as well. Real branch-A scheduling reaches `$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C` and stops fail-closed at mandatory unbound `$F560`.
+RUNTIME-16 integrates the ROM-derived WP28 `$00F560` pair/relation aggregate and `$00F18A` actor raw-state prepass. Real branch-A scheduling now reaches `$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C -> $F560 -> $F18A -> $1C150` and stops fail-closed at mandatory unbound `$1F914` fixed referee update. RNG-dependent `$21B4` remains blocked until exact live 68000 register context is demonstrated.
 
 The runtime remains **CANDIDATE / fail-closed**. Direct-match actor/global bootstrap is BLOCKED rather than synthesized. Missing WP28 owners, full TAG/Royal, pin/referee, ring-out, remaining collision/release, final VDP2 world/ring, and hardware gameplay validation remain open/partial.
 
