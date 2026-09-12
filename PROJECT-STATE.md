@@ -131,14 +131,17 @@ WP15 pure transition primitives implemented:
 Host + SH-2 PASS.
 No generic fade substitution for direct-clear or full-mask routes.
 
-### R15 — Instructional hand prompt
-WP16 imported only as an inert two-pose visual contract:
-- exact 80x96 geometry;
-- origin (0,120);
-- palette provenance 14;
-- exact payload hashes.
-No cadence, trigger, button semantics or audio inferred.
-Host + SH-2 PASS.
+### R19 — Instructional hand prompt / WP16 R02
+External checkpoint `WP16-HAND-PROMPT-R02.zip` accepted after independent ROM re-audit.
+- package SHA256 `ffa8a1104023db142ba0f379c9f79a77c393ad5e79f8769b5f7ecde0a0877642`;
+- visual payloads remain byte-identical to WP16 FINAL;
+- request lifecycle, fresh-edge mechanic, pose cadence and one-pass clear are ROM-proven;
+- prompt presentation is global/player-independent and mode-agnostic;
+- no WP16-specific audio event is proven;
+- pictured button is NOT proven to mean specifically A, B or A+B;
+- Gameplay/WP27 owns producer/input/mash-counter semantics;
+- Saturn renderer binding and hardware validation remain OPEN.
+Host + SH-2 PASS. R15 visual-only contract is superseded.
 
 ### R16 — Gameplay HUD core
 WP18 pure core implemented:
