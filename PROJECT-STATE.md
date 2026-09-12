@@ -36,21 +36,33 @@ Master will transplant proven behavior, not the isolated harness `main.c`.
 
 ## AUDIO
 
-Status: **RUNTIME AUDIO HANDOFF R01 ACCEPTED / TRANSPORT HARDWARE-PASS / PRODUCER MATRIX ROM-AUDITED / OWNER MAP R01 CLOSED / SOURCE INSERTION PARTIAL-OPEN.**
+Status: **RUNTIME AUDIO HANDOFF R02 RE-AUDITED ACCEPTED / TRANSPORT HARDWARE-PASS / PRODUCER MATRIX ROM-AUDITED / OWNER MAP R01 CLOSED / SOURCE INSERTION PARTIAL-OPEN.**
 
-External handoff SHA256:
-`cc1c9ed44edcde0237770521123072c3bbec6927bf37184c157e7b092858db65`.
+Canonical external handoff:
+`WWF-RUNTIME-AUDIO-HANDOFF-R02-REAUDITED.zip`
 
-- 173 ROM-verified producer rows.
-- 14 `INTEGRATION_READY`.
-- 4 `OWNER_SCOPE_ONLY`.
-- 155 `UNRESOLVED`.
-- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`.
-- `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`.
+SHA256:
+`49335637b8ba6d26b361c88e3886f620e9f52c076df3d4bfb44accf3701ccb5c`
+
+R02 **supersedes R01**. R01 SHA256 `cc1c9ed44edcde0237770521123072c3bbec6927bf37184c157e7b092858db65` is historical only.
+
+R02 re-audit result:
+- top-level package SHA256 manifest: 31/31 PASS;
+- all nested ZIPs: PASS;
+- complete WP24 source/test snapshot included;
+- 12/12 WP24 source/test Git blobs are already byte-identical in `integration-master-r01`; no source overwrite required;
+- 173 ROM-verified producer rows;
+- 14 `INTEGRATION_READY`;
+- 4 `OWNER_SCOPE_ONLY`;
+- 155 `UNRESOLVED`;
+- low-stamina = `0x009088 -> 0x0B`, JSR `0x00908C`;
+- `0x0263CC -> 0x0B` remains `REGISTERED_NOT_IDENTIFIED`;
 - no new WP28 audio phase;
 - no semantic observer;
-- exact `0x1F` lifecycle remains OPEN;
+- exact `0x1F` lifecycle remains OPEN and must fail closed;
 - final cue lifetime/termination and integrated gameplay audio hardware validation remain OPEN.
+
+See `docs/AUDIO-RUNTIME-HANDOFF-R02.md`.
 
 ## INTEGRATION MASTER
 
