@@ -1,0 +1,27 @@
+{
+  "version": "BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16",
+  "external_zip_sha256": "0d8ddac0cd849b3c65a7c354aa6bab7606316b883e412380fc5b8fa3bce57ea9",
+  "branch": "gameplay-runtime-r01",
+  "branch_head": "1853f5564b8a00ddd5883a68169993305a40cfae",
+  "source_integration_commit": "8589e9ef796c2ed6ed00fb9a9f07c8eda3c96f24",
+  "package_hashes": "278/278_PASS",
+  "canonical_main_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "rom_audit": "PASS",
+  "host_strict_rerun": "PASS",
+  "sh2_compile": "PASS_36_TRANSLATION_UNITS",
+  "full_saturn_elf_link": "PASS_41_OBJECTS",
+  "unresolved_symbols": 0,
+  "elf_sha256": "bf33e0eac805fa345dd55f46a1cb2a976fad73bb85ca2a41a57f04998e176d02",
+  "wp28_chain": [
+    "0x00514E","0x008B3A","0x02088E","0x020958","0x026936",
+    "0x02983C","0x00F560","0x00F18A","0x01C150","0x01F914_BLOCKED"
+  ],
+  "new_bound_owners": ["0x00F560","0x00F18A"],
+  "next_mandatory_owner": "0x01F914",
+  "normal_frame_complete": false,
+  "direct_match_bootstrap": "BLOCKED",
+  "attract_bootstrap": "BLOCKED",
+  "hardware": "NOT_TESTED",
+  "bin_cue": false,
+  "verdict": "ACCEPTED_CURRENT_GAMEPLAY_CHECKPOINT"
+}
