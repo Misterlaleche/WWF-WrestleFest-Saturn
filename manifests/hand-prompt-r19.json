@@ -1,0 +1,15 @@
+{
+  "version": "R19-WP16-R02",
+  "external_zip_sha256": "ffa8a1104023db142ba0f379c9f79a77c393ad5e79f8769b5f7ecde0a0877642",
+  "bundle_head": "89c7dad56c869a728ade0f66ea6fead96dfd7c37",
+  "rom_audit": "PASS",
+  "host": "PASS",
+  "sh2": "PASS",
+  "presentation": "ROM_EXACT_CLOSED",
+  "gameplay_producer": "GAMEPLAY_OWNED_PENDING",
+  "renderer": "OPEN",
+  "hardware": "NOT_TESTED",
+  "bin_cue": false,
+  "button_identity": "NOT_PROVEN_A_B_OR_A_PLUS_B",
+  "supersedes": "R15"
+}
