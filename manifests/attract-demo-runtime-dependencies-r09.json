@@ -1,7 +1,8 @@
 {
-  "version": "R09-CANDIDATE",
-  "authority": "WP17 ATTRACT DEMO GAMEPLAY ROM-EXACT FINAL",
+  "version": "R09-CANDIDATE-A01-CORRECTED",
+  "authority": "original ROM > WP17 ATTRACT DEMO FINAL > WP15 FRONTEND TRANSITION FINAL",
   "gameplay_checkpoint_observed": "72de727a77603c0a81f552fa059c0d2072cd249b",
+  "gameplay_checkpoint_documentation_head": "7f40fde30cb7af32cf95cd4d9469884a342da8b8",
   "gameplay_checkpoint_name": "BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15",
   "normal_loop_rom": "0x000F8C",
   "demo_counter_rom": "0x1C0080",
@@ -23,6 +24,15 @@
     33,
     33
   ],
+  "normal_transition_first_stage": {
+    "callsite_rom": "0x001120",
+    "target_rom": "0x00008F50",
+    "mechanism": "STRIPE_MASK_CLOSE",
+    "tiles": "0x04BE..0x04C5",
+    "vblanks_per_step": 3,
+    "total_vblanks": 24,
+    "reconciliation": "original ROM + WP15 supersede older palette-fade prose label"
+  },
   "synthetic_input_autoplay": "FORBIDDEN",
   "master_owns": [
     "state/mode/lineup/threshold contract",
@@ -48,5 +58,5 @@
     "successful override opportunities",
     "max reachable actor +0x103 cursor where local 0xFF not proven"
   ],
-  "gameplay_checkpoint_documentation_head": "7f40fde30cb7af32cf95cd4d9469884a342da8b8"
+  "audit_status": "A01_CORRECTED"
 }
