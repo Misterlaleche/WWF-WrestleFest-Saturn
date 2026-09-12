@@ -18,8 +18,12 @@
 #define WF_HAND_PROMPT_TEXT_BASE 0x000C0000u
 #define WF_HAND_PROMPT_TEXT_START 0x000C1008u
 #define WF_HAND_PROMPT_TEXT_PALETTE 14u
+#define WF_HAND_PROMPT_TEXT_COLUMNS 64u
+#define WF_HAND_PROMPT_CELL_PIXELS 8u
+#define WF_HAND_PROMPT_RASTER_Y_BIAS (-8)
 #define WF_HAND_PROMPT_ROW_COUNT 13u
 #define WF_HAND_PROMPT_WRITE_COUNT 78u
+#define WF_HAND_PROMPT_SATURN_NBG 2u
 #define WF_HAND_PROMPT_SATURN_EQUIV_PRIORITY 4u
 
 typedef enum wf_hand_prompt_pose {
@@ -46,7 +50,6 @@ typedef enum wf_hand_prompt_pass_kind {
 typedef struct wf_hand_prompt_state {
     uint16_t cadence_counter;
     uint16_t pose_word;
-    uint8_t previous_flags;
 } wf_hand_prompt_state_t;
 
 typedef struct wf_hand_prompt_tile_write {
@@ -54,11 +57,15 @@ typedef struct wf_hand_prompt_tile_write {
     uint16_t tile_code;
     uint8_t palette;
     bool clear;
+    int16_t raster_x;
+    int16_t raster_y;
 } wf_hand_prompt_tile_write_t;
 
 typedef struct wf_hand_prompt_output {
     wf_hand_prompt_pass_kind_t kind;
     wf_hand_prompt_pose_t pose;
+    uint8_t saturn_nbg;
+    uint8_t saturn_priority;
     uint16_t write_count;
     wf_hand_prompt_tile_write_t writes[WF_HAND_PROMPT_WRITE_COUNT];
 } wf_hand_prompt_output_t;
@@ -66,8 +73,10 @@ typedef struct wf_hand_prompt_output {
 extern const wf_hand_prompt_frame_meta_t wf_hand_prompt_frames[WF_HAND_PROMPT_POSES];
 
 void wf_hand_prompt_reset(wf_hand_prompt_state_t *state);
+void wf_hand_prompt_text_address_to_raster(uint32_t address, int16_t *x, int16_t *y);
 bool wf_hand_prompt_step(wf_hand_prompt_state_t *state,
-                         uint8_t gameplay_current_flags,
+                         uint8_t *shared_current_flags,
+                         uint8_t *shared_previous_flags,
                          wf_hand_prompt_output_t *out);
 
 #endif
