@@ -28,6 +28,7 @@ Read before changing master integration:
 - `docs/WP12-R01-REJECTION-R3.md` (historical R01 rejection)
 - `docs/WP12-R02-ACCEPTANCE.md`
 - `docs/FRONTEND-TITLE-R18.md`
+- `docs/WP20-R03-ACCEPTANCE.md`
 
 ## Absolute rule
 
@@ -192,3 +193,30 @@ Integration rule:
 - do not label displayed button as A, B or A+B;
 - no WP16 audio backend or gameplay logic;
 - production renderer hookup/hardware validation still OPEN.
+
+
+## WP20 CHARACTER SELECT / JOIN-IN
+
+Canonical active checkpoint:
+`WP20-SELECT-JOININ-R03-AUDITED.zip`
+
+SHA256:
+`c83e4f8ef0697c7b2e42f143bf35c458e42413b4f53656940afe5f0534235c09`
+
+External bundle HEAD:
+`f814acaee8f7ebb9fbac153f2299314a0f0f9702`
+
+R03 supersedes R01/R02 and closes:
+- timeout1024 -> AUTO -> terminal64;
+- late joins;
+- selector 8/9 identity;
+- simultaneous occupancy arbitration;
+- exact page ordering;
+- linked TAG selector behavior;
+- post-confirm 76 phase;
+- final teardown/handoff `$AC0`.
+
+Preserve exact SELECT outer-loop order documented in `docs/WP20-R03-ACCEPTANCE.md`.
+
+TEST03 renderer remains hardware-pass and is not replaced.
+New R03 logic requires integrated real-Saturn validation before HARDWARE-PASS.
