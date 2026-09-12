@@ -8,12 +8,13 @@
 #define WF_ATTRACT_DEMO_MAX_ACTORS 6u
 #define WF_ATTRACT_DEMO_STATE_LAST 0x0Du
 #define WF_ATTRACT_DEMO_NO_BIO 0xFFu
-#define WF_ATTRACT_DEMO_FADE_VBLANKS 24u
+#define WF_ATTRACT_DEMO_MASK_VBLANKS 24u
 #define WF_ATTRACT_DEMO_WAIT_A_VBLANKS 33u
 #define WF_ATTRACT_DEMO_WAIT_B_VBLANKS 33u
 #define WF_ATTRACT_DEMO_TRANSITION_VBLANKS 90u
 #define WF_ATTRACT_DEMO_FRONTEND_RETURN_ROM 0x000006FCu
 #define WF_ATTRACT_DEMO_CREDITED_START_ROM 0x000052BEu
+#define WF_ATTRACT_DEMO_MASK_CLOSE_ROM 0x00008F50u
 
 #define WF_ATTRACT_SETUP_SPECIAL_01_02 0x01u
 #define WF_ATTRACT_SETUP_PREHOOK_8490 0x02u
@@ -42,7 +43,7 @@ typedef struct wf_attract_demo_config {
 
 typedef enum wf_attract_demo_phase {
     WF_ATTRACT_DEMO_GAMEPLAY = 0,
-    WF_ATTRACT_DEMO_FADE_24,
+    WF_ATTRACT_DEMO_MASK_24,
     WF_ATTRACT_DEMO_WAIT_33_A,
     WF_ATTRACT_DEMO_WAIT_33_B,
     WF_ATTRACT_DEMO_HANDOFF
@@ -57,7 +58,8 @@ typedef struct wf_attract_demo_runtime {
 
 typedef struct wf_attract_demo_event {
     bool threshold_reached;
-    bool begin_palette_fade;
+    bool begin_stripe_mask_close;
+    uint32_t stripe_mask_close_rom;
     bool next_attract_state;
     uint8_t next_state;
     bool frontend_return;
