@@ -1,5 +1,5 @@
 {
-  "version": "R17-INTRO-HARDWARE-PASS",
+  "version": "R17-INTRO-HARDWARE-PASS-A01",
   "date": "2026-09-12",
   "package": {
     "name": "WF-SATURN-INTRO-ROMEXACT-FINAL-HWTEST(1).zip",
@@ -13,8 +13,16 @@
   "cue_sha256": "64eea33a674dcdeda3ca7f838521a8734e854d8c89f561a2bdfe163674066562",
   "main68k_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
   "assets": {
-    "INTRO.RLE": "16452b1bfd5559ff6ea33ec265e60c794763deba61f7492de121147afcffd3dc",
-    "TITLE.ANM": "982098f0772adc3b6bdbb2e77794037e550a473cb25d55c83b4947ff48ac9c6c"
+    "INTRO.RLE": {
+      "sha256": "16452b1bfd5559ff6ea33ec265e60c794763deba61f7492de121147afcffd3dc",
+      "bytes": 67104
+    },
+    "TITLE.ANM": {
+      "sha256": "982098f0772adc3b6bdbb2e77794037e550a473cb25d55c83b4947ff48ac9c6c",
+      "bytes": 946452,
+      "stored_asset_frames": 451,
+      "critical_note": "451 is the TITLE.ANM stored-frame count, NOT the native arcade intro duration"
+    }
   },
   "sequence": [
     "FBI",
@@ -33,7 +41,9 @@
     "common_fade_levels": 8,
     "common_fade_syncs_per_level": 3,
     "title_frame_den": 120000,
-    "title_object_source_syncs": 42
+    "title_object_stored_frames": 21,
+    "title_object_source_syncs": 42,
+    "forbidden_inference": "do not derive arcade-native total duration from TITLE_COUNT=451"
   },
   "ownership": {
     "intro": [
