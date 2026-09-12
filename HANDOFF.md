@@ -20,7 +20,7 @@ Read before changing master integration:
 - `docs/CONTINUE-PAYMENT-R12.md`
 - `docs/CAMPAIGN-INTERSTITIALS-R13.md`
 - `docs/FRONTEND-TRANSITION-R14.md`
-- `docs/HAND-PROMPT-R15.md`
+- `docs/HAND-PROMPT-R15.md` (historical; superseded by WP16 R02 / master R19)
 - `docs/HUD-CORE-R16.md`
 - `docs/INTEGRATION-SELF-AUDIT-A01.md`
 - `docs/INTRO-HARDWARE-PASS-R17.md`
@@ -113,11 +113,11 @@ Owns:
 - WP19 operator/credit/payment;
 - WP13 campaign interstitial root contract;
 - WP15 transition primitives;
-- WP16 inert hand-prompt visual contract;
+- WP16 R02 hand-prompt presentation contract (ROM-EXACT closed; Gameplay producer remains external);
 - WP18 HUD presentation core;
 - source-level assembly of frontend + gameplay + audio + renderer.
 
-Current master checkpoint family: R02..R18. R17 INTRO visual block is HARDWARE-PASS; R18 binds Frontend TITLE credit/prompt presentation read-only to WP19/R11.
+Current master checkpoint family includes R19 WP16 R02 acceptance. R17 INTRO visual block is HARDWARE-PASS; R18 binds Frontend TITLE credit/prompt presentation read-only to WP19/R11; R19 closes WP16 presentation logic.
 
 ## Platform safeguards
 
@@ -160,3 +160,16 @@ R3 supersedes earlier R1/R2 audit conclusions. Next accepted work must be **WP12
 The proven `$F8C` runtime boundary does not authorize a generic handoff; the exact post-A654/pre-$F8C preparation remains mandatory.
 
 No WP12 BIN/CUE yet.
+
+
+## WP16 hand prompt R02
+
+Canonical external checkpoint: `WP16-HAND-PROMPT-R02.zip`
+SHA256: `ffa8a1104023db142ba0f379c9f79a77c393ad5e79f8769b5f7ecde0a0877642`
+
+Integration rule:
+- Gameplay/WP27 produces the request and fresh-edge counter behavior;
+- WP16 consumes the global request and outputs the exact presentation lifecycle;
+- do not label the displayed button as A, B or A+B;
+- no WP16 audio backend or gameplay logic;
+- renderer binding/hardware validation still OPEN.
