@@ -182,3 +182,31 @@ Status: **PASS WITH TWO CORRECTED FINDINGS**.
 - no integrated hardware PASS claimed.
 
 See `docs/INTEGRATION-SELF-AUDIT-A01.md`.
+
+
+## WP12 ENTRANCES/PREMATCH — Audit R3 master decision
+
+**WP12 R01: REJECTED / NOT INTEGRABLE.**
+
+Authority:
+`WP12-R01-AUDIT-REPORT-R3(1).txt`
+SHA256 `fb051c4e527db74514cacf4944deef5bbd129ae6429890697f75a63a1ab31091`.
+
+Audit R3 supersedes R1/R2 for the R01 integration decision.
+
+Current status:
+- TAG: BLOCKED
+- ROYAL: BLOCKED
+- PRESENTADORA: PARTIAL
+- ÁRBITRO PREMATCH: MISSING
+- HANDOFF A GAMEPLAY: BLOCKED
+- HOST COMPILE: PASS
+- SH-2 COMPILE: PASS
+- HARDWARE: NOT TESTED
+
+The R01 branch `entrances-prematch-r01` at `820ea42af3fce45591eace60cba22a94d9ad3fba` must not be consumed by master. Delivered ZIP and recorded GitHub HEAD are not reproducible as one source state.
+
+Next required checkpoint: **WP12 R02**, reconstructed directly from `wwfwfest.zip` for all affected semantics and satisfying every mandatory R3 gate before it can be called CANDIDATE.
+
+Do not touch GAMEPLAY/WP28, CPU, collision, TAG/Royal gameplay or WP24 backend. No BIN/CUE.
+See `docs/WP12-R01-REJECTION-R3.md`.
