@@ -1,0 +1,11 @@
+order,stage,owner,status
+1,$BD2 pre-route and optional interstitial,WP12,CLOSED STRUCTURAL
+2,$7B70 then Royal skips TAG $C08 writes where mode gate branches,WP12,CLOSED
+3,$C98 / $1086C six canonical Royal setup,Integration Master + validated handoff,REQUIRED
+4,$A654 skips $98BA and TAG controller,WP12,CLOSED
+5,nine-record $ACB6 traversal,WP12,CLOSED
+6,state0 +$22 hold and +$04 rewrite,WP12,CLOSED
+7,terminal actor writes state18/$312F but traversal continues,WP12,CLOSED
+8,referee render + sync + post-render skip/terminal test,WP12,CLOSED
+9,common teardown/post route/$8AE6,WP12 hooks,CLOSED STRUCTURAL
+10,$F8C handoff,Gameplay owner,BOUNDARY CLOSED

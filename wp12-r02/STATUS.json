@@ -1,0 +1,22 @@
+{
+  "checkpoint": "WP12 ENTRANCES/PREMATCH R02",
+  "overall": "PARTIAL",
+  "tag": "PARTIAL",
+  "royal": "PARTIAL",
+  "presenter": "CLOSED_STRUCTURAL_NUMERIC_SEMANTIC_NAMES_OPEN",
+  "prematch_referee": "CLOSED_STRUCTURAL",
+  "names_bands_wwf_logo": "OPEN",
+  "gameplay_handoff_boundary": "CLOSED_BOUNDARY_BLOCKED_BY_GAMEPLAY_OWNER",
+  "host_tests": "PASS",
+  "asan_ubsan": "PASS",
+  "rom_audit": "PASS",
+  "sh2_compile": "PASS",
+  "sh2_unresolved_symbols": 0,
+  "full_saturn_elf": "NOT_APPLICABLE",
+  "bin_cue": "NO",
+  "hardware": "NOT_TESTED",
+  "main_c_replaced": false,
+  "audio_backend_implemented": false,
+  "source_table_rom_audit": "PASS",
+  "static_analysis": "PASS"
+}
