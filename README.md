@@ -184,3 +184,10 @@ R04 supersedes R03 and closes the WP02-owned animation interface:
 216 descriptors, 629 frame records, exact FF00 holds/kind-2 loops, 399/399 poses and 425,714 metasprite pieces.
 
 This is not a claim that external Gameplay callbacks, renderer fallbacks, palettes, camera effects or real-hardware end-to-end behavior are closed.
+
+
+## Gameplay owner-closure audit
+
+`RUNTIME17-OWNER-CLOSURE-AUDIT.zip` (SHA256 `996dd714ff3c7307ea6ed2960e36a98b0ffbecc03121c333aeb0da934cf0c447`) is accepted as a ROM-verified research closure for `$1F914` and `$F4C2/$1C03E/$1C0C8`.
+
+It is **not** a deployable RUNTIME-17 checkpoint. The active Gameplay source remains RUNTIME-16 until the fixed referee, object-queue contract and raw-action dispatcher are integrated.
