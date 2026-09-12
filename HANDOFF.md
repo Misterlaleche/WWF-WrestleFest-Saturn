@@ -5,7 +5,7 @@ Read before changing master integration:
 - `PROJECT-STATE.md`
 - `docs/SATURN-PIPELINE.md`
 - `docs/MODE-ROSTER-HARDWARE-VALIDATION.md`
-- `docs/AUDIO-RUNTIME-HANDOFF-R01.md`
+- `docs/AUDIO-RUNTIME-HANDOFF-R02.md`
 - `docs/SATURN-MEMORY-CDFS-INTEGRATION-R01.md`
 - `docs/cdfs/CDFS-RUNTIME-LOADER-R02.md`
 - `docs/MEMORY-MANIFEST-R03.md`
@@ -85,12 +85,22 @@ External SHA256:
 `65daa21e89f505d6ff23efc80389145e5e32b4ada6bc8fb98df9f43417d1861a`.
 
 ### Audio
-Canonical external handoff SHA256:
-`cc1c9ed44edcde0237770521123072c3bbec6927bf37184c157e7b092858db65`.
+Canonical external handoff:
+**WWF-RUNTIME-AUDIO-HANDOFF-R02-REAUDITED.zip**
+
+SHA256:
+`49335637b8ba6d26b361c88e3886f620e9f52c076df3d4bfb44accf3701ccb5c`.
+
+R02 supersedes R01. Do not use the old R01 package as current authority.
 
 WP24 remains sole backend owner.
 Only 14 `INTEGRATION_READY` rows may be wired directly.
+Four rows remain `OWNER_SCOPE_ONLY`; 155 remain `UNRESOLVED`.
 No semantic observer or audio scheduler phase.
+`0x1F` remains OPEN/fail-closed.
+The 12 WP24 source/test blobs in R02 already byte-match Integration Master.
+
+See `docs/AUDIO-RUNTIME-HANDOFF-R02.md`.
 
 ### Integration master — `integration-master-r01`
 Owns:
