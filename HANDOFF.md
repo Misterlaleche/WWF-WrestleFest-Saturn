@@ -28,6 +28,7 @@ Read before changing master integration:
 - `docs/WP12-R01-REJECTION-R3.md` (historical R01 rejection)
 - `docs/WP12-R02-ACCEPTANCE.md`
 - `docs/FRONTEND-TITLE-R18.md`
+- `docs/GAMEPLAY-RUNTIME-16-ACCEPTANCE.md`
 - `docs/WP20-R03-ACCEPTANCE.md`
 
 ## Absolute rule
@@ -49,10 +50,18 @@ Owns:
 - WP31 objects/effects/props;
 - WP17 ordinary attract gameplay CPU path, `$1F7F0` override and shared `$21B4` RNG/order.
 
-Current observed checkpoint:
-`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-15` — source checkpoint `72de727a77603c0a81f552fa059c0d2072cd249b`; gameplay branch documentation HEAD `7f40fde30cb7af32cf95cd4d9469884a342da8b8`.
+Current accepted checkpoint:
+`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16`
 
-Do not promote it to complete gameplay: RUNTIME-15 closes `0x020958` and binds WP21 camera phases `0x026936/0x02983C`, but WP28 now blocks at `0x00F560`.
+Source integration commit:
+`8589e9ef796c2ed6ed00fb9a9f07c8eda3c96f24`
+
+Gameplay branch HEAD:
+`1853f5564b8a00ddd5883a68169993305a40cfae`
+
+RUNTIME-16 binds `0x00F560` and `0x00F18A`, then reaches `0x01C150` and blocks at the next mandatory owner `0x01F914` fixed referee scheduler.
+
+Do not promote it to complete gameplay: the full normal frame is still incomplete and multiple exact downstream helpers remain fail-closed.
 
 ### INTRO / PRESENTATION
 Canonical external checkpoint:
