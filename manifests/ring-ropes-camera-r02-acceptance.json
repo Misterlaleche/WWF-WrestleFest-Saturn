@@ -1,0 +1,20 @@
+{
+  "version": "RING-ROPES-CAMERA-R02-MASTER-ACCEPTED",
+  "external_zip_sha256": "20a54f5994de27d1e0114c62c9748e94d3b2a8138551eb4aaa8d687f7b19c44c",
+  "external_branch_reproducible": false,
+  "external_manifest": "5/5_PASS",
+  "canonical_main_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "rom_audit": "PASS",
+  "host_strict": "PASS",
+  "sh2_strict": "PASS",
+  "wp21_crosscheck": "PASS",
+  "wp26_crosscheck": "PASS",
+  "side_rope_records": ["0x1C1134","0x1C1164","0x1C1194","0x1C11C4"],
+  "side_rope_contract": "ROM_EXACT_CLOSED",
+  "north_south_global_deformation": "NOT_DEMONSTRATED",
+  "gameplay_producers": "EXTERNAL_OWNER",
+  "renderer_hookup": "PENDING",
+  "hardware": "NOT_TESTED",
+  "bin_cue": false,
+  "supersedes": "synthetic_R01_WIP_rope_deflection"
+}
