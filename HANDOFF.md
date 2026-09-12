@@ -24,7 +24,8 @@ Read before changing master integration:
 - `docs/HUD-CORE-R16.md`
 - `docs/INTEGRATION-SELF-AUDIT-A01.md`
 - `docs/INTRO-HARDWARE-PASS-R17.md`
-- `docs/WP12-R01-REJECTION-R3.md`
+- `docs/WP12-R01-REJECTION-R3.md` (historical R01 rejection)
+- `docs/WP12-R02-ACCEPTANCE.md`
 - `docs/FRONTEND-TITLE-R18.md`
 
 ## Absolute rule
@@ -142,22 +143,31 @@ A01 verdict: PASS WITH TWO CORRECTED FINDINGS. No hardware PASS implied.
 
 ## WP12 ENTRANCES/PREMATCH
 
-R3 authority decision:
-**R01 is REJECTED and must not be integrated.**
+Canonical active checkpoint:
+**WP12 R02 — FINAL AUDITED SOURCE CHECKPOINT**.
 
-Do not consume `entrances-prematch-r01` as a ROM-EXACT candidate even though its host/SH-2 builds pass.
+- branch: `entrances-prematch-r02`
+- HEAD: `99d316037af7508a896f0535d44dfa18775d0c47`
+- ZIP SHA256: `966ac936f2a3a71b05673675b7ef041668fd99f2cf51431ccf9290dbb146f2fa`
+- exact checkpoint subtree in master: `wp12-r02/`
 
-Current WP12 state:
-- TAG BLOCKED;
-- ROYAL BLOCKED;
-- presenter PARTIAL;
-- prematch referee MISSING;
-- gameplay handoff BLOCKED;
+R01 remains rejected/superseded.
+
+R02 state:
+- TAG PARTIAL;
+- ROYAL PARTIAL;
+- presenter CLOSED structural/numeric;
+- prematch referee CLOSED structural;
+- gameplay handoff boundary CLOSED at `$F8C`, execution external;
 - hardware NOT TESTED.
 
-R3 supersedes earlier R1/R2 audit conclusions. Next accepted work must be **WP12 R02** and must satisfy all gates in `docs/WP12-R01-REJECTION-R3.md`.
+Do not bypass external contracts:
+- canonical `$C98` setup;
+- shared `$21B4` RNG;
+- WP26/canonical renderer machine-coordinate transform;
+- Gameplay ownership after `$F8C`.
 
-The proven `$F8C` runtime boundary does not authorize a generic handoff; the exact post-A654/pre-$F8C preparation remains mandatory.
+Do not invent the still-open wrestler-name/red-band/WWF-logo semantic join or final camera/raster transform.
 
 No WP12 BIN/CUE yet.
 
