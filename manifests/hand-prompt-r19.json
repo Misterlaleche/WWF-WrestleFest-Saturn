@@ -11,5 +11,8 @@
   "hardware": "NOT_TESTED",
   "bin_cue": false,
   "button_identity": "NOT_PROVEN_A_B_OR_A_PLUS_B",
-  "supersedes": "R15"
+  "supersedes": "R15",
+  "superseded_by": "R20-WP16-R06",
+  "supersession_reason": "R06 proves the final ROM-rendered TEXT row omitted by the old derived visual payloads; runtime semantics unchanged.",
+  "old_visual_hashes_status": "SUPERSEDED_BY_DIRECT_ROM_CONTRADICTION"
 }
