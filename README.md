@@ -15,6 +15,7 @@ Unknown behavior remains OPEN/BLOCKED.
 
 - MODE+ROSTER TEST03 — HARDWARE-PASS on Saturn NTSC-U + MODE.
 - WP24 audio transport — HARDWARE-PASS.
+- INTRO ROM-EXACT FINAL — HARDWARE-PASS on Saturn NTSC-U + MODE; package SHA256 `0fb488514ae233c429058834b8ced73c757b0224d819d6ba4dc3015042f81c98`.
 
 ## Integration master
 
@@ -35,7 +36,8 @@ Implemented master-side candidate family:
 - R13 Campaign Interstitials;
 - R14 Frontend Transition Engine;
 - R15 Instructional Hand Prompt visual contract;
-- R16 Gameplay HUD core.
+- R16 Gameplay HUD core;
+- R17 accepted INTRO hardware-pass handoff.
 
 R10-R13 host validation has been rechecked; R13 also cross-compiles for SH-2.
 R14-R16 host + SH-2 compile/test gates PASS.
@@ -52,7 +54,7 @@ Observed dependency:
 
 RUNTIME-15 closes WP28 `0x020958` and binds the audited WP21 camera phases `0x026936/0x02983C`; the next fail-closed point is `0x00F560`. Shared `$21B4` RNG/order and attract CPU override `$1F7F0` remain gameplay-owned.
 
-INTRO/PRESENTATION is developed separately on `intro-presentation-r01`.
+INTRO/PRESENTATION visual sequence is now accepted as HARDWARE-PASS. Its `TITLE.ANM` has 451 stored asset frames; this is not a claim that the native arcade sequence lasts 451 frames. Frontend still owns CREDIT/INSERT COIN/START presentation and the continuation into attract/mode.
 
 ## Important integration rules
 
@@ -64,6 +66,8 @@ INTRO/PRESENTATION is developed separately on `intro-presentation-r01`.
 - no synthetic ten-match campaign ladder;
 - WP16 prompt has no timing/trigger/button semantics until proven;
 - WP18 HUD must not invent wrestler names, generic score or Royal elimination counter;
+- INTRO must never own a private credit counter or hard-code `CREDIT:0`;
+- `TITLE_COUNT=451` is asset representation only, never arcade-native duration;
 - no BIN/CUE unless explicitly requested.
 
 ## Mandatory reading
