@@ -1,0 +1,11 @@
+{
+  "checkpoint": "WP12-ENTRANCES-PREMATCH-R04-AUDITED",
+  "base_head": "3869249903f5acf4b15c87671f94fa83bec902df",
+  "overall_wp12": "PARTIAL",
+  "r03_visual_artifacts": "SUPERSEDED_INVALID_Y_SPACE",
+  "actor_source_transform_247c": "CLOSED",
+  "piece_pipeline_d1fc": "CLOSED",
+  "sprite_raster_decode_wp26": "CLOSED_CORRECTED_R04",
+  "hardware": "NOT_TESTED",
+  "bin_cue": "NO"
+}

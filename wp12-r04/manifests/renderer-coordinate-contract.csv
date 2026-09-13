@@ -1,0 +1,5 @@
+stage,owner,rule,status
+actor_x,$247C,worldX-scrollX+signed8(+19) with facing sign,CLOSED
+actor_y_source,$247C,worldY+Z-scrollY+signed8(+1B); not raster Y,CLOSED
+piece_build,$D1FC,+0010/+0090 base; piece clipping; source-space command rebias,CLOSED
+sprite_y_decode,WP26,rasterY=((256-rawY)&01FF)-16,CLOSED
