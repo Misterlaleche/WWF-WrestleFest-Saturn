@@ -1,5 +1,7 @@
 # RUNTIME-17 STAGING — CONTINUATION-2
 
+> **SOURCE MIRROR NOTE:** this branch currently records the accepted staging state and provenance. Its inherited GitHub source tree is not claimed to contain every post-`$7A00` Continuation-2 edit yet. The exact active post-`$7A00` worktree must be imported from Gameplay's final staging checkpoint before this branch is used as a build authority. Do not reconstruct those edits from this document.
+
 Status: **ADVANCED / PARTIAL CONSOLIDATION**
 Classification: **NOT CANONICAL / NOT RUNTIME-18 / NOT HARDWARE PASS**
 
