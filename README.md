@@ -123,6 +123,8 @@ No ROM, `AUDPCM.PAK`, `LONGMUS.PAK`, generated PCM or protected audio payload is
 
 Current staging branch: `gameplay-runtime17-staging`.
 
+**Important:** this branch currently mirrors the accepted RUNTIME-17 staging state/provenance. The inherited GitHub source tree is not yet asserted to contain every post-`$7A00` Continuation-2 edit. Import Gameplay's final staging checkpoint before treating this branch as build authority.
+
 Classification: **RUNTIME-17 STAGING ADVANCED / PARTIAL CONSOLIDATION**.
 
 This branch is explicitly:
