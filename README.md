@@ -119,25 +119,41 @@ The TEST-05 hardware audit manifest is stored under:
 
 No ROM, `AUDPCM.PAK`, `LONGMUS.PAK`, generated PCM or protected audio payload is committed to this repository.
 
-## GAMEPLAY RUNTIME — R01 CANDIDATE
+## GAMEPLAY RUNTIME — RUNTIME-17 STAGING
 
-Canonical gameplay development exists on branch `gameplay-runtime-r01`.
+Current staging branch: `gameplay-runtime17-staging`.
 
-Current checkpoint: **BLOCK-GAMEPLAY-MASTER-01-RUNTIME-16**, cumulative from frozen RUNTIME-11. WIP160/WIP175/WIP176 are **not** the base.
+Classification: **RUNTIME-17 STAGING ADVANCED / PARTIAL CONSOLIDATION**.
 
-Current verified build gates:
-- HOST TESTS: PASS with `-std=c11 -Wall -Wextra -Werror -pedantic`;
-- SH-2 cross compile: PASS;
-- FULL SATURN ELF LINK: PASS;
-- UNRESOLVED SYMBOLS: 0;
-- BIN/CUE: not generated;
-- gameplay hardware validation: not yet performed.
+This branch is explicitly:
+- **NOT CANONICAL**;
+- **NOT RUNTIME-18**;
+- **NOT HARDWARE PASS**.
 
-RUNTIME-16 integrates the ROM-derived WP28 `$00F560` pair/relation aggregate and `$00F18A` actor raw-state prepass. Real branch-A scheduling now reaches `$514E -> $8B3A -> $2088E -> $20958 -> $26936 -> $2983C -> $F560 -> $F18A -> $1C150` and stops fail-closed at mandatory unbound `$1F914` fixed referee update. RNG-dependent `$21B4` remains blocked until exact live 68000 register context is demonstrated.
+Active implementation base:
 
-The runtime remains **CANDIDATE / fail-closed**. Direct-match actor/global bootstrap is BLOCKED rather than synthesized. Missing WP28 owners, full TAG/Royal, pin/referee, ring-out, remaining collision/release, final VDP2 world/ring, and hardware gameplay validation remain open/partial.
+`BLOCK-GAMEPLAY-MASTER-01-RUNTIME-17-7A00-OWNER-INTEGRATED-AUDIT-PASS`
 
-See [docs/GAMEPLAY-RUNTIME-R01.md](docs/GAMEPLAY-RUNTIME-R01.md).
+SHA256:
+
+`ebcd26f52a5fa5c4aa5d0f0b71dea8b667c9e5cc5a9e02b8dcd0d037739ab555`
+
+The current scheduler/frame chain is structurally known through the post-`$7A00` owners, branch A/B final-frame paths, `$298EC`, VBlank/ACK, post-ACK `$2017A`, `$F9A` and mandatory inter-frame RNG call `$FA0/$21B4`.
+
+Recent staging gates include GCC strict, Clang strict, ASan/UBSan, GCC `-fanalyzer`, WP35/WP36 regressions, SH-2 strict, full Saturn ELF link and unresolved symbols = 0. These must all be rerun on the final consolidated tree before promotion.
+
+Remaining promotion blockers are narrow and explicit:
+1. final `$8ECC` regressions + ROM audit;
+2. final `$8CF8` join revalidation;
+3. physical consolidation of all post-`$7A00` owners in one tree;
+4. `wf_runtime_frame()` end-to-end;
+5. final D0..D7 branch A/B composition;
+6. clean rerun of all gates and independent review.
+
+Detailed current state:
+[docs/RUNTIME17-STAGING-CONTINUATION-2.md](docs/RUNTIME17-STAGING-CONTINUATION-2.md).
+
+Supreme authority remains `wwfwfest.zip`; WIP160/Test255 remain historical only.
 
 ## MANDATORY CROSS-CHAT HANDOFF
 
