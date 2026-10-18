@@ -1,0 +1,5 @@
+selector_index_from_1C0066_bits_6000,rom_addr,stamina_add,hud_queue_add
+0,$00912A,24,24
+1,$00912C,32,32
+2,$00912E,12,12
+3,$009130,0,0

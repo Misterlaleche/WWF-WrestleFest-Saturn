@@ -1,0 +1,42 @@
+RUNTIME17 $2017A native owner recovery
+Authority: main68k.bin SHA1 a726c46f350723ea73158bc78055d17d418b14e2.
+Direct evidence: postack-2017a-disassembly.txt, Capstone 5.0.9 MC68000 big endian.
+Audit script checks complete byte spans $2017A-$202B9, $206FE-$20739,
+$114C-$1177, plus the canonical ROM SHA1. It is an identity/signature check,
+not an independent emulator comparison.
+
+Confirmed instruction semantics:
+- Entry word/bit tests return without touching D0-D7.
+- Existing bit0 path MOVEQ D0/D3, descending word status scan, DBRA low word.
+- Reserve path MOVEQ D1=3 / D3=0, MOVE.B D1,D3 then ASL.W; early return.
+- Actor scan MOVEQ D2=8,D3=D4=D0=D6=0, preserves incoming D5 until candidate.
+- Active/flags32/role are BYTE tests at offsets $00/$32/$56.
+- Index writes target raw $0156 table, including aliases $015E/$0160/$0162/
+  $0164/$0166. Mode bytes $0160/$0161 correctly receive $30/$01.
+- Counters ADDQ.W/DBRA update low words; D7 untouched throughout.
+- Single-candidate completion calls external clear, writes referee $1214,
+  winner pointer $0092, actor state/AE, then scans slots 4..7 for activation.
+- $206FE saves D0/A0, uses D0 internally, touches no other D register.
+  All shadow D registers are preserved around the platform callback.
+  Platform remains responsible for zeroing 4 x 16 bytes at $C0744+n*$100;
+  missing/failing callback returns blocked. No fabricated renderer transfer.
+- Scheduler dispatches slot35 owner and retains scene gates $1B4E/$1AFC.
+
+Tests:
+- Initial test failed on absent $2017A binding (postack-red.log).
+- Focused tests cover entry, both scans, none/multiple/CPU candidate routes,
+  single winner, no activation slot, alias writes, D preservation and missing
+  callback failure boundary.
+- Royal integration test starts at VBlank wait, covers ACK and $10F2 once,
+  native binding, next-frame $FA0 RNG, and scene gate blocking. It does not
+  claim a complete playable Royal match or framebuffer/hardware parity.
+
+Remaining boundaries: $206FE requires real platform callback; $1B4E and $1AFC
+scene owners intentionally remain blocked. No RUNTIME18 or hardware claim.
+
+Callback retry contract: pre-callback raw status aliases and bit2 are committed
+at their ROM positions. On WF_BLOCKED, winner/referee writes have not occurred.
+A retry rescans the same state and reissues the transfer. The callback must not
+partially mutate gameplay state on failure; this owner preserves D0-D7 around
+both success and failure. Tests explicitly exercise failed callback then retry,
+high-byte preservation of $16C4 and non-Royal entry preserving all D registers.

@@ -1,0 +1,5 @@
+source_class,saturn_unit,cell_or_command,priority_control,transparency,scroll,notes
+FG_WORLD,VDP2 NBG0,2x2 8x8 chars per source 16x16 tile,vdp2_scrn_priority_set,mode-dependent opaque/pen0 transparent,mode-dependent source pair,1:1 pixels
+BG_WORLD,VDP2 NBG1,2x2 8x8 chars per source 16x16 tile,vdp2_scrn_priority_set,mode-dependent opaque/pen0 transparent,mode-dependent source pair,1:1 pixels
+TEXT,VDP2 NBG2,8x8 chars,vdp2_scrn_priority_set,pen0 transparent,fixed no scroll,always top among known modes
+SPRITES,VDP1,one 16x16 normal sprite per chain cell,vdp2_sprite_priority_set class0,pen0 transparent,n/a,source record order controls sprite-vs-sprite overlap

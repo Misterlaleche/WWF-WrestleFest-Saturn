@@ -1,0 +1,13 @@
+{
+  "set": "0x03",
+  "pose": "0x0178",
+  "partner_set": "0x01",
+  "piece_count": 86,
+  "unique_tiles": 66,
+  "palette_resources": [
+    "0x01",
+    "0x03"
+  ],
+  "binary_sha256": "dcc895077ce4cc0424c0f01d3e5f96c893ec1d7d6f9c43507a5df4773a42aecd",
+  "source": "authority/wp25-metasprite-expanded-pieces.csv; pinned against WP35+WP36 handoff regression count only"
+}

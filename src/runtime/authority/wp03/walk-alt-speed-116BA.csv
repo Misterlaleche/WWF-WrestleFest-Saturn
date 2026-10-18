@@ -1,0 +1,13 @@
+index_dec,index_hex,rom_address,raw_byte,value_dec,role
+0,0x00,0x116BA,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+1,0x01,0x116BB,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+2,0x02,0x116BC,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+3,0x03,0x116BD,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+4,0x04,0x116BE,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+5,0x05,0x116BF,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+6,0x06,0x116C0,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+7,0x07,0x116C1,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+8,0x08,0x116C2,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+9,0x09,0x116C3,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+10,0x0A,0x116C4,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set
+11,0x0B,0x116C5,0x0C,12,state0 alternate magnitude byte when +$32.bit3 set

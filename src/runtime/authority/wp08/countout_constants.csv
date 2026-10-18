@@ -1,0 +1,6 @@
+item,address,value,status
+referee outside-count action,0x1FD5E,,PROVEN
+counter storage,0x1C169A/0x1C169B,,PROVEN
+local period compare,0x1FDF8,0x0050 (80 updates),PROVEN
+terminal count compare,0x1FE08,0x14 (20),PROVEN
+sound command base on init,0x1FD72,0x3165,PROVEN

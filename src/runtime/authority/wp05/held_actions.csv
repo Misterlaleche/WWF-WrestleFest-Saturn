@@ -1,0 +1,11 @@
+raw_action,descriptor,callback,first_hold_frame,hold_count,terminal_phase,terminal_main_state,classification
+0B,13A1E,13A2E,0,1,FE,7,PROVEN
+0E,13D26,13D46,3,3,branch-dependent,branch-dependent,PROVEN
+10,141D8,141EC,1,1,FE,7,PROVEN
+13,149E2,149F2,1,1,FE,7,PROVEN
+14,14B48,14B64,3,1,FE,7,PROVEN
+23,15CE0,15D08,0,1,FE,5,PROVEN
+26,1623C,16258,3,1,FE,7,PROVEN-direct-ROM-audit
+35,175A8,175C4,3,1,FE,5,PROVEN
+46,14424,14458,3,1,FE,7,PROVEN
+47,14440,14458,2,1,FE,7,PROVEN

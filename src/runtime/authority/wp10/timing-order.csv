@@ -1,0 +1,7 @@
+order,address,routine,scope_effect
+1,$000FB4,$008B3A,cabinet input/credit-gated full refill check before actor callbacks
+2,$000FE8,$00F4C2,actor callback/state dispatch
+3,$000FEE,$024062,collision processing
+4,$000FF4,$024E58,"pending damage application, saturation, tier recompute, HUD damage queue"
+5,$00102C,$009052,low-stamina warning check (<24)
+6,$001036,$008ECC,Royal natural +1 recovery after damage/warning; no tier recompute

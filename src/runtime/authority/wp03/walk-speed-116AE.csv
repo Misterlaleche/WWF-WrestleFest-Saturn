@@ -1,0 +1,13 @@
+index_dec,index_hex,rom_address,raw_byte,value_dec,role
+0,0x00,0x116AE,0x1B,27,state0 primary magnitude byte by actor character index +$02
+1,0x01,0x116AF,0x1D,29,state0 primary magnitude byte by actor character index +$02
+2,0x02,0x116B0,0x1C,28,state0 primary magnitude byte by actor character index +$02
+3,0x03,0x116B1,0x19,25,state0 primary magnitude byte by actor character index +$02
+4,0x04,0x116B2,0x1E,30,state0 primary magnitude byte by actor character index +$02
+5,0x05,0x116B3,0x1B,27,state0 primary magnitude byte by actor character index +$02
+6,0x06,0x116B4,0x18,24,state0 primary magnitude byte by actor character index +$02
+7,0x07,0x116B5,0x1E,30,state0 primary magnitude byte by actor character index +$02
+8,0x08,0x116B6,0x16,22,state0 primary magnitude byte by actor character index +$02
+9,0x09,0x116B7,0x1B,27,state0 primary magnitude byte by actor character index +$02
+10,0x0A,0x116B8,0x1C,28,state0 primary magnitude byte by actor character index +$02
+11,0x0B,0x116B9,0x1B,27,state0 primary magnitude byte by actor character index +$02

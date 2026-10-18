@@ -1,0 +1,9 @@
+handler,condition,correction,flags/contact,status
+0x2851E,Y<0x110,dy=0x110-Y,bit3/contact1,"PROVEN primitive; live wrestler applicability not universally proven"
+0x2851E,Y>0x140,dy=0x140-Y,bit2/contact1 or contact4 for 0x294<=X<0x38C,"PROVEN primitive; applicability conditional"
+0x2851E,Z<0x100,dz=(0x100-Z)+bias,bit4,"PROVEN primitive"
+0x2851E,X<0x1C8,dx=0x1C8-X,bit1/contact3,"PROVEN primitive"
+0x2851E,X>0x470,dx=0x470-X,bit0/contact3,"PROVEN primitive"
+0x28288,Z<0x100,dz=(0x100-Z)+bias,bit4,"PROVEN primitive"
+0x28288,left,sloped bound=((Y<<8)+0x28000) DIVS 0x02E0,bit1/contact3,"PROVEN primitive"
+0x28288,right,sloped bound=-(((Y<<8)-0xBA000) DIVS 0x02E0),bit0/contact3,"PROVEN primitive"

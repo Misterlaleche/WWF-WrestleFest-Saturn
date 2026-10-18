@@ -1,0 +1,13 @@
+offset,width,role,exact_contract
++$66,WORD,live stamina,Unsigned live stamina; central pending-damage path saturates at zero.
++$68,WORD,pending damage,"Pending damage amount. Central processor defers it unchanged while +$FE WORD is nonzero; otherwise subtracts, queues negative HUD delta, then clears."
++$6A,WORD signed,HUD delta queue,Signed queue folded into +$6C. Damage processor overwrites it with -pending; recovery/refill paths may write/add positive values.
++$6C,WORD signed,HUD delta accumulator,HUD smoothing accumulator; consumed toward zero.
++$6E,WORD,displayed stamina,"HUD-displayed stamina, clamped by $76F8 to [0,+$72]."
++$70,WORD,stamina tier,"0/1/2 classifier output; low byte +$71 is used by byte consumers. If max +$72==0, $24EC2 returns without changing it."
++$71,BYTE,low byte of +$70,Big-endian low byte; +$71==$02 means tier 2 / critical tier.
++$72,WORD,maximum stamina,"Maximum/reference stamina for classifier, recovery and clamps."
++$AA,WORD,context timer/recovery/struggle state,Written by $10C60 and consumed by $10D04; high/low-byte semantics matter.
++$AB,BYTE,low byte of +$AA,Table write target in $10C60 D0=2..8 before masking/decrementing +$AA.
++$106,WORD,Royal natural-recovery accumulator,Incremented only on eligible Royal frames; excluded frames pause it; at 128 it clears and live/+6A gain 1.
++$BD,BYTE,context-dependent CPU scratch/state,Stamina bucket in $1E48C context only; reused as counters/state storage elsewhere. Do not globalize as stamina bucket.

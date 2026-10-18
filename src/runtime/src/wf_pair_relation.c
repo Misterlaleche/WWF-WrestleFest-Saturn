@@ -1,6 +1,8 @@
 #include "wf_pair_relation.h"
 #include "wf_gameplay_bindings.h"
 #include "arcade_cpu_final_bridge.h"
+#include "wf_r17_m68k_shadow.h"
+#include "wf_r17_dependencies.h"
 
 static int bit(const wf_actor_raw_t*a,size_t o,unsigned b){return (wf_u8(a,o)&(uint8_t)(1u<<b))!=0u;}
 static void setbit(wf_actor_raw_t*a,size_t o,unsigned b){wf_set_u8(a,o,(uint8_t)(wf_u8(a,o)|(uint8_t)(1u<<b)));}
@@ -52,10 +54,19 @@ static wf_status_t relation_f5e4(wf_runtime_t*rt,wf_actor_raw_t*a,wf_actor_raw_t
  else if(wf_u8(a,WF_A_STATE+1u)==4u&&wf_u8(a,WF_A_STATE4_LO)==1u)decision=-1;
  else if(wf_u8(b,WF_A_STATE+1u)==4u&&wf_u8(b,WF_A_STATE4_LO)==1u)decision=1;
  else if(!bit(a,WF_A_ROLE,7)&&bit(b,WF_A_ROLE,7)){
-  unsigned idx=wf_be16(a,WF_A_PAIR_CYCLE);if(idx>=4u)return block(c,0x00f6e8u);
-  if((rt->g.mode_0161&1u)!=0u){(void)f8d0[idx];}
-  else {if(rt->g.progression_0162>=11u)return block(c,0x00f878u);(void)f878[rt->g.progression_0162][idx];}
-  return block(c,0x000021b4u);
+  unsigned idx=wf_be16(a,WF_A_PAIR_CYCLE);uint16_t base,sample,d2;uint32_t out;
+  if(idx>=4u)return block(c,0x00f6e8u);
+  if(!rt->g.rng_state_valid||!rt->m68k_regs.valid)return block(c,0x000021b4u);
+  if((rt->g.mode_0161&1u)!=0u)base=f8d0[idx];
+  else {if(rt->g.progression_0162>=11u)return block(c,0x00f878u);base=f878[rt->g.progression_0162][idx];}
+  /* $F6D?-$F6F2: D2.W is table-derived and keeps its high WORD. R03 closes D4 as locally rebuilt. */
+  wf_r17_m68k_move_w(&rt->m68k_regs,2u,base);
+  wf_r17_m68k_clr_l(&rt->m68k_regs,4u);
+  if((rt->g.mode_0161&1u)==0u)wf_r17_m68k_move_w(&rt->m68k_regs,4u,(uint16_t)(rt->g.progression_0162<<3));
+  out=wf_r17_rng21b4_live(&rt->g.rng_state,rt->g.frame_counter,&rt->m68k_regs);
+  sample=(uint16_t)(out&0x000fu);wf_r17_m68k_move_w(&rt->m68k_regs,0u,sample);
+  d2=(uint16_t)((uint16_t)rt->m68k_regs.d[2]+sample);wf_r17_m68k_move_w(&rt->m68k_regs,2u,d2);
+  decision=d2>=0x14u?1:(d2<0x0fu?-1:0);
  }else{
   uint8_t d4=(uint8_t)((rt->g.pipeline_mode>>1)&7u);decision=d4>=5u?1:(d4<2u?-1:0);
  }
@@ -84,7 +95,7 @@ static wf_status_t timed_flags_fd00(wf_runtime_t*rt,wf_gameplay_binding_context_
   wf_actor_raw_t*a=&rt->actors[i];
   if(bit(a,WF_A_FLAGS33,5)){
    uint16_t t=wf_be16(a,WF_A_C8);if(t!=0u){t=(uint16_t)(t-1u);wf_set_be16(a,WF_A_C8,t);if(t!=0u)continue;}
-   wf_set_be16(a,WF_A_C8,0u);wf_set_be16(a,WF_A_C6,0u);clrbit(a,WF_A_FLAGS33,5);
+   wf_set_be16(a,WF_A_C8,0u);wf_set_be16(a,WF_A_C6,0u);clrbit(a,WF_A_FLAGS33,5); /* $8962 is ROM RTS. */
    continue;
   }
   uint8_t id=wf_u8(a,WF_A_INTERNAL_ID);if(id>=12u)return block(c,0x00fdb4u);
@@ -104,8 +115,8 @@ static wf_status_t timed_flags_fd00(wf_runtime_t*rt,wf_gameplay_binding_context_
 wf_status_t wf_phase_pair_relation_f560(wf_runtime_t*rt,uint32_t addr,void*user){
  (void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!rt)return WF_BAD_STATE;
  wf_status_t s=pair_scan_f574(rt,c);if(s!=WF_OK)return s;
- if((rt->g.global_1678&0x80u)!=0u)return block(c,0x00f98cu);
+ s=wf_r17_f98c(rt,c);if(s!=WF_OK)return s;
  s=timed_flags_fd00(rt,c);if(s!=WF_OK)return s;
- if(rt->g.global_15d5!=0u||rt->g.global_15d3!=0u)return block(c,0x0000a0e0u);
+ s=wf_r17_a0e0(rt,c);if(s!=WF_OK)return s;
  return WF_OK;
 }

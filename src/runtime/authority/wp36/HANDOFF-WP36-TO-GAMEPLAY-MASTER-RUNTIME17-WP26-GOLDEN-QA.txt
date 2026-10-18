@@ -1,0 +1,360 @@
+HANDOFF OBLIGATORIO — WP36 CHARACTER SPRITE COMPLETENESS
+WWF WrestleFest arcade → Sega Saturn NTSC-U
+PARA CHAT MAESTRO / RUNTIME-17 / WP26 / GOLDEN QA
+
+AUTORIDAD NUEVA A CONSUMIR
+
+Usa como nueva autoridad cerrada:
+
+WP36-CHARACTER-SPRITE-COMPLETENESS-ROM-EXACT-AUDITED.zip
+
+SHA-256:
+cd9731cefe74aa1c6ca13c7d7cc181d5cf9864677116746321cf29d944899a80
+
+Material de validación visual adicional:
+
+WP36-PREVIEWS-ALL-CHARACTERS-REFEREE-PRESENTER-ROM-EXACT.zip
+
+SHA-256:
+c28370fd2a82f59d4221d2d877802f7c2f94d1268652a93623f968d47b1e83d7
+
+
+CLASIFICACIÓN ACEPTADA
+
+WP36 ROM-side:
+ROM-EXACT CLOSED
+
+WP36 active Saturn implementation crosscheck:
+OPEN
+
+Final integrated VDP1 scene capacity:
+BLOCKED BY WP26
+
+Global actor/world/raster positioning:
+OWNED BY WP35/WP26
+
+NO declarar todavía:
+- SATURN PIXEL-PERFECT
+- ALL CHARACTER GRAPHICS CLOSED
+- HARDWARE PASS
+
+
+QUÉ CIERRA WP36
+
+WP36 es desde ahora la autoridad para la COMPOSICIÓN INTERNA de los metasprites de personajes.
+
+Cierra, dentro de su ownership:
+
+- character → gfx set;
+- descriptor/pose → composición;
+- piece/source-cell count exacto;
+- piece IDs/source payloads;
+- offsets locales X/Y;
+- dimensiones;
+- paleta/recurso de paleta;
+- orden interno;
+- X/Y flip;
+- mirror/facing dentro del contrato local;
+- bbox derivado de piezas;
+- held/victim metasprites;
+- piezas compartidas/reutilizadas;
+- piezas USED / SHARED / ORPHAN / UNUSED según el inventario;
+- correspondencia ROM de todos los gfx sets jugables;
+- casos de alto piece-count;
+- regresiones conocidas de Ultimate Warrior.
+
+Cobertura cerrada documentada:
+
+- 12 wrestler gfx sets;
+- 4.536 valid wrestler pose records;
+- 14.480 partner-expanded compositions;
+- 496.876 expanded source cells;
+- 65.536 sprite tile assets;
+- 256 palette resources;
+- 78 held $FF00 frames / 73 descriptors.
+
+IMPORTANTE:
+La composición se demuestra por datos ROM, no por similitud visual.
+
+
+CASO DE REGRESIÓN OBLIGATORIO
+
+Ultimate Warrior:
+
+pose 0x0062
+record 0x402E0
+23 pieces
+bbox -34,-98,64,112
+palette 01
+
+pose 0x0063
+record 0x402E6
+23 pieces
+bbox -34,-98,64,112
+palette 01
+
+Ambos deben quedar fijados como regresiones permanentes.
+No existe parche visual ni “replacement arm” aceptable.
+La ROM exige las 23 piezas.
+
+
+LÍMITE ROM QUE WP26 DEBE RESPETAR
+
+Máximo demostrado para una sola composición:
+
+86 source cells
+
+Caso:
+
+gfx set 03
+BIG BOSSMAN
+pose 0x0178
+partner gfx set 01
+
+WP26 NO puede:
+
+- truncar cadenas;
+- bajar piece count;
+- omitir una pieza para hacer caber el frame;
+- sustituir piezas;
+- precombinar el metasprite de forma aproximada;
+- descartar cada N piezas;
+- alterar el orden ROM.
+
+Si el renderer actual no soporta la composición completa:
+clasificar BLOCKED BY WP26 y ampliar capacidad.
+
+
+NO REABRIR
+
+No reabras la investigación ROM-side de WP36 salvo contradicción demostrable contra wwfwfest.zip.
+
+No uses WIP160/Test255 como autoridad canónica.
+
+WIP160/Test255 aparece en WP36 únicamente como HISTORICAL DIAGNOSTIC EVIDENCE.
+
+Dos discrepancias históricas reproducidas son útiles como regresión, pero NO deben atribuirse automáticamente al runtime actual:
+
+1.
+Demolition Smash / logical source gfx 0A
+pose 0x005B
+ROM = 20 cells
+historical resident frame 189 = empty
+
+2.
+Hawk / source gfx 04
+pose 0x0068
+ROM = 23 source cells
+historical pack = 21
+causa histórica observada:
+2 source cells completamente transparentes fueron omitidas
+
+Estas dos incidencias deben comprobarse de nuevo contra el runtime CANÓNICO ACTUAL.
+
+
+SIGUIENTE TAREA OBLIGATORIA DEL CHAT MAESTRO
+
+Integrar WP36 contra el runtime canónico actual, empezando por RUNTIME-17 o por el candidato posterior que sea la autoridad activa.
+
+Objetivo:
+
+ROM expected composition
+vs
+Saturn emitted composition
+
+para TODO frame alcanzable.
+
+
+PROCEDIMIENTO DE CROSSCHECK
+
+Para cada actor/frame alcanzable del runtime:
+
+1. Resolver:
+   logical wrestler
+   gfx_set
+   pose/frame
+   partner_set cuando proceda.
+
+2. Buscar exactamente la composición correspondiente en:
+   WP36-METASPRITE-FRAME-INVENTORY.csv
+
+3. Comparar ANTES del culling de pantalla permitido:
+
+   ROM source-cell count
+   vs
+   Saturn emitted source-cell count
+
+4. Comparar pieza por pieza y EN ORDEN:
+
+   - source tile/payload;
+   - local X;
+   - local Y;
+   - palette;
+   - X flip;
+   - Y flip;
+   - order.
+
+5. Clasificar cada frame como:
+
+   EXACT
+   MISSING PIECE
+   EXTRA PIECE
+   WRONG PIECE
+   WRONG GFX SET
+   WRONG OFFSET
+   WRONG PALETTE
+   WRONG FLIP
+   WRONG ORDER
+   OPEN
+
+6. No aceptar “se ve igual” como demostración.
+
+7. El culling legal de una pieza completamente fuera de pantalla puede ocurrir en la fase final de renderer, pero NO puede confundirse con truncación de la composición fuente.
+
+8. Si la discrepancia nace antes de VDP1 command generation:
+   corregir integración/descriptor/metasprite mapping.
+
+9. Si la composición fuente es correcta pero VDP1 pierde piezas:
+   handoff a WP26.
+
+10. Si todas las piezas son correctas pero el actor está globalmente desplazado:
+    handoff a WP35/WP26.
+    NO corregir los offsets locales de WP36.
+
+
+PRIORIDAD DE TESTS
+
+Auditar primero:
+
+1. Ultimate Warrior 0x0062 / 0x0063 — 23 cells.
+2. Big Bossman 0x0178 + partner 01 — 86 cells.
+3. restantes frames de alto piece-count.
+4. held/victim — los 73 descriptors.
+5. offsets negativos.
+6. mirror/facing.
+7. partner-expanded compositions.
+8. frames con piezas fuera del bbox aparente.
+9. Demolition Smash 0x005B.
+10. Hawk 0x0068.
+
+
+CONTRATO CON OTROS WORKPACKS
+
+WP02:
+decide secuencia/descriptor/frame y ownership de animación/held-victim.
+
+WP36:
+decide QUÉ PIEZAS exactas forman ese frame.
+
+WP35:
+decide origen/pivot/posición global del actor.
+
+WP26:
+decide command generation, clipping y ejecución VDP1/VDP2.
+
+Gameplay / RUNTIME:
+debe seleccionar el actor/frame correcto y entregar la composición completa al renderer.
+
+Golden QA:
+debe validar el resultado final contra el contrato, nunca reconstruir assets desde capturas.
+
+
+ÁRBITRO Y PRESENTADORA
+
+Existe además el paquete:
+
+WP36-PREVIEWS-ALL-CHARACTERS-REFEREE-PRESENTER-ROM-EXACT.zip
+
+Incluye material ROM-derived limpio/técnico de:
+
+- los 12 luchadores;
+- árbitro;
+- presentadora.
+
+Este material es QA visual auxiliar.
+
+NO convierte automáticamente a WP36 en owner de la lógica del árbitro o de la presentadora.
+
+Usarlo para apoyar:
+
+- WP09 / PIN-REFEREE;
+- WP12 / ENTRANCES-PREMATCH;
+- WP25/WP26;
+- Golden QA.
+
+La prueba primaria sigue siendo la composición ROM/inventarios, no la captura.
+
+
+CRITERIO DE PROMOCIÓN
+
+WP36 podrá pasar de:
+
+ROM-side character sprite completeness CLOSED
++
+active Saturn crosscheck OPEN
+
+a:
+
+ALL CHARACTER GRAPHICS CLOSED
+
+SOLAMENTE cuando:
+
+- todo frame alcanzable esté mapeado;
+- cada count coincida;
+- cada piece/source cell coincida;
+- offsets coincidan;
+- paletas coincidan;
+- flip/mirror coincidan;
+- orden coincida;
+- no exista truncación silenciosa;
+- WP26 soporte la capacidad real;
+- Golden QA no encuentre contradicciones;
+- cualquier discrepancia quede corregida y retesteada.
+
+Si queda un frame sin demostrar:
+NO promover.
+
+FAIL-CLOSED.
+
+
+ORDEN RECOMENDADO DE INTEGRACIÓN
+
+1. Consumir WP36 como autoridad ROM-side.
+2. Cruzar RUNTIME-17/candidato actual contra WP36.
+3. Emitir matriz completa ROM vs Saturn.
+4. Corregir mappings/descriptor parsing en Runtime si corresponde.
+5. Enviar límites/truncaciones reales a WP26.
+6. Repetir crosscheck.
+7. Ejecutar Golden QA.
+8. Solo entonces considerar ALL CHARACTER GRAPHICS CLOSED.
+
+
+RESULTADO QUE ESPERO DEL CHAT MAESTRO
+
+No quiero otro paquete research-only.
+
+Quiero que WP36 sea CONSUMIDO por la implementación activa.
+
+El siguiente entregable debe demostrar, para cada frame alcanzable:
+
+ROM expected pieces
+=
+Saturn emitted pieces
+
+con igualdad exacta de:
+
+count
+IDs/source payload
+local X/Y
+palette
+flip
+order
+
+y una lista explícita de cualquier excepción restante.
+
+Nada inventado.
+Nada redibujado.
+Nada recolocado.
+Nada aproximado.
+
+wwfwfest.zip sigue siendo la autoridad suprema.

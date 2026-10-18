@@ -1,0 +1,14 @@
+item,rom_address,value_or_rule,status
+entry_callback,0x20022,action state 6,PROVEN
+init_display_accumulator,0x2002C,$1C169A=0,PROVEN
+init_audio_command,0x20036,+$54=$3162,PROVEN
+init_timer,0x2004C,+$23=20,PROVEN
+entry_phase,+$25,inherited; not reset by $20022,PROVEN
+phase_expiry,,+$25++ and linked-chain actor +$109++,PROVEN
+count_event,,only on even +$25; $1C169A++; call $2067C; emit +$54 then +$54++,PROVEN
+phase_pose_timer,,selector5=>56 and selector6=>32 alternation per canonical referee package,PROVEN
+phase6_extension,,+$23 += 16,PROVEN
+terminal_phase,,+$25==7,PROVEN
+cancel_gate,0x1F9D8,if +$25<6 and linked +$35.bit0==0 then clear display and referee state5,PROVEN
+lock_boundary,,+$25>=6 bypasses this cancellation test,PROVEN
+absolute_1_2_3_from_pin_onset,,not statically universal because +$25 is inherited,NOT_PROVABLE

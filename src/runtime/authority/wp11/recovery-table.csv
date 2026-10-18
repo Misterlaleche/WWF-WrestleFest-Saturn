@@ -1,0 +1,5 @@
+index,rom_address,word_value,decimal,selector
+0,$00912A,$0018,24,"($1C0066 & $6000) shifted to table index"
+1,$00912C,$0020,32,"same"
+2,$00912E,$000C,12,"same"
+3,$009130,$0000,0,"same"

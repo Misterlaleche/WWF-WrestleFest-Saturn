@@ -1,0 +1,5 @@
+difficulty_bits_0300_index,project_label_from_FINAL,rom_addr,signed_adjust
+0,Normal,$01085C,0
+1,Easy,$01085E,-15
+2,Hard,$010860,15
+3,Hardest,$010862,30

@@ -1,0 +1,10 @@
+field,width,address_or_offset,proven_role,writer_examples,consumer_examples
+mode,bit,$1C0161.bit0,"0 TAG / 1 Royal",setup code,"$00114C,$020184,ranking/credits"
+actor_result,word,+$A0,"TAG/post-result marker word; high $40 winner-side, high $80 loser/no-winner in closed routes","$1AD50..$1AE1A,$26410","$001178,$001186,$19BA"
+actor_role,word,+$FE,"transient result/choreography role","$1FE76..$1FF1C,$200FC..$2011A","$11598-family/$204xx result choreography"
+royal_win_latch,byte,$1C16C4,"winner presentation completed","$01AFCA","$00115C"
+royal_terminal_state,byte,$1C16C5,"survivor/cleanup terminal bits","$0201B4,$020244,$020254","$001166,$020190"
+royal_elims,word,+$C4,"credited Royal eliminations","$0200E8 and $011284","Records $67B2 path"
+tag_progress_gate,byte,$1C0163,"TAG campaign progress gate used for Credits/advance","$001A76,$001AA4","$001A5E,$001AAC"
+tag_ranking_metric,byte,$1C0164,"TAG ranking stored progress metric",external_to_this_terminal_step,"Records $67B2"
+progress_companion,byte,$1C0165,"incremented with successful TAG advance","$001A7E",other campaign consumers

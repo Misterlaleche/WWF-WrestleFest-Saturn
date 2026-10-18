@@ -1,0 +1,4 @@
+mode,dispatcher_branch,effect,fields
+0,$222A,no common integration,none
+1,$222C,angle/magnitude XY integration via $22C0,"+$2D angle low byte, +$2B magnitude low byte -> LONG X/Y deltas"
+2,$2252,direct XYZ integration and vertical decrement,+$58/+5A/+5C signed 8.8 -> LONG XYZ; +$5C -= +$5E

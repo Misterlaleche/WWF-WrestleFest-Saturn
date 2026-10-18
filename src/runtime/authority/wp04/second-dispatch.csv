@@ -1,0 +1,14 @@
+selector,table_address,callback,summary
+00,0243D4,024852,no explicit subtype; relation flags/target +$44 clear; normalize current receiver subtype
+01,0243D8,024868,paired choreography or receiver state4 subtype02 depending orientation/incoming +$64 and +$52
+02,0243DC,024924,orientation-equality path: linked actor state0; receiver state4 subtype0B
+03,0243E0,024984,paired choreography or receiver state4 subtype02 depending orientation/incoming +$64 and +$52
+04,0243E4,024A38,orientation-equality path: linked actor state4 subtype01; receiver 02 then normalization -> 0B
+05,0243E8,024A90,no receiver subtype; linked +$76 cleanup path
+06,0243EC,024AA8,incoming receiver word 0000/000A: receiver 02 + normalization; linked actor state7
+07,0243F0,024B20,incoming receiver word 0000/000A: receiver 02 + normalization; linked actor state0; source pair mask forced FFFF
+08,0243F4,024BA4,requires receiver low subtype12; reasserts WORD 0012
+09,0243F8,024BC2,incoming receiver word 0000/000A: receiver 02+normalization; linked actor WORD 0009
+0A,0243FC,024C42,incoming receiver word 0000/000A: receiver 02+normalization; linked actor WORD 000B
+0B,024400,024CCA,incoming receiver word 0000/000A: receiver 02+normalization; linked actor state7
+0C,024404,024D5E,requires receiver low subtype0A; receiver WORD 0002 + normalization

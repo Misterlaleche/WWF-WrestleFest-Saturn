@@ -1,0 +1,20 @@
+order,address,actor,operation,status
+1,0x1ABC0,Animal,raw $89 hold preserves reciprocal victim +$26,PROVEN
+2,state8 terminal,Hawk,set +$32 bit1 then enter state9,PROVEN
+3,0x1EEA0,Hawk,increment +$BD and require >=8,PROVEN
+4,0x1EEA0,Hawk,require +$86 partner +$21=5 and +$61=$89,PROVEN
+5,0x1EEC2,Hawk,write +$20=5 +$60=4,PROVEN
+6,0x12614[4],Hawk,dispatch descriptor $12BDA callback $12C22,PROVEN
+7,0x12C40,Hawk,consume +$32 bit1; special branch requires prior set,PROVEN
+8,0x12C62,Hawk,set +$34 bit3 and launch raw fields,PROVEN
+9,0x12C9C,Hawk,phase<2 and +$0E threshold arms +$4C=$17,PROVEN
+10,0x247EC,Victim,FIRST handler writes state4 +$64=$0012 if target gate succeeds,PROVEN
+11,0x24DEC/0x24E02,Hawk+Victim,produce reciprocal +$92,PROVEN
+12,0x12CD8,Hawk,validate victim +$65=$12 and reciprocal +$92,PROVEN
+13,0x12D4A,Hawk,require linked bit7 phase1 +$22=0 team bit3,PROVEN
+14,0x12DB2,Victim,load third actor A3 from victim +$26,PROVEN
+15,0x12DC2,Animal,write state5 +$60=$8006,PROVEN
+16,0x12DDE,Victim,write state4 +$64=$0019 +$68=$0020,PROVEN
+17,0x12EEA,Hawk,select team descriptor $12C0A when linked/team flags active,PROVEN
+18,0x12E3A,Hawk,phase2 pose166 branch,PROVEN
+19,0x12E48,Hawk,release/contact body only when +$37.bit4 set,PROVEN

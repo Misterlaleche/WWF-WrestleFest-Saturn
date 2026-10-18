@@ -1,0 +1,30 @@
+{
+  "combat_pose_index_be.bin": {
+    "bytes": 40680,
+    "sha256": "cb5fc4285b0fd97caebd383e80e2ab2c1c1b71a671fa046c9308351c2a3180c3"
+  },
+  "combat_pose_pieces_be.bin": {
+    "bytes": 802390,
+    "sha256": "38df145dc0f486726d1c368f3849a70c84bbe14742fbdf991a88b0dfdb0811d9"
+  },
+  "format": "ROM-derived normal/unpaired combat metasprite pack for internal IDs 0..11",
+  "graphics_set_per_internal_id": [
+    0,
+    1,
+    2,
+    3,
+    10,
+    11,
+    6,
+    7,
+    8,
+    9,
+    4,
+    5
+  ],
+  "index_entry_bytes": 6,
+  "paired_pose_policy": "not included in runtime pack; authority CSV retained; fail closed when partner_set required",
+  "piece_count": 80239,
+  "piece_entry_bytes": 10,
+  "pose_count_per_set": 565
+}

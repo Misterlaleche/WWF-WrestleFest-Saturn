@@ -17,7 +17,7 @@ main(void)
 {
     static wf_runtime_t runtime;
     static wf_gameplay_binding_context_t binding_ctx;
-    static wf_phase_binding_t bindings[8];
+    static wf_phase_binding_t bindings[40];
 
     memset(&runtime, 0, sizeof(runtime));
     const size_t binding_count =
@@ -27,7 +27,9 @@ main(void)
     if (binding_count == 0u) {
         return (int)WF_BAD_STATE;
     }
+    wf_runtime_init(&runtime, bindings, binding_count);
 
-    /* No ROM-demonstrated direct-match bootstrap is installed yet. */
+    /* SceneFlow/Prematch supplies the CLOSED handoff.  Standalone link harness
+       has no such external state and therefore remains fail-closed. */
     return (int)WF_BLOCKED;
 }

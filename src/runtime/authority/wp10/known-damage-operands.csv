@@ -1,0 +1,12 @@
+rom_address,raw_or_named_context,pending_damage,evidence_status
+$012966,raw action $00 stationary Punch valid-hit path,3,PROVEN by ROM + WIP control-flow mapping
+$012DEC,LOD Doomsday Device shared callback,32,PROVEN by ROM + canonical WIP mapping
+$0152B4/$0152EE,Perfect Plex,22,PROVEN by ROM + canonical WIP mapping
+$017864,Hogan Legdrop,18,PROVEN by ROM + canonical WIP mapping
+$0164F2,Smash Suplex,18,PROVEN by ROM + canonical WIP mapping
+$016D72/$016DB8,Warrior Gorilla Press family paths,22,PROVEN by ROM + canonical WIP mapping
+$01710C,Boss Man Slam,22,PROVEN by ROM + canonical WIP mapping
+$017554,Jake DDT,28,PROVEN by ROM + canonical WIP mapping
+$0179C0,DiBiase Million Dollar Dream pulse site,5,PROVEN operand; total/cadence NOT inferred
+$017ECE,Slaughter Cobra Clutch pulse site,5,PROVEN operand; total/cadence NOT inferred
+$018604/$018710,Demolition/Crush finisher-family paths,24,PROVEN by ROM + WIP family mapping

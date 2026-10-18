@@ -1,0 +1,5 @@
+descriptor,callback,phase,pose,duration_raw,duration_ticks,hold_release
+0x12C0A,0x12C22,0,459,0x0004,4,finite
+0x12C0A,0x12C22,1,460,0x0008,8,finite
+0x12C0A,0x12C22,2,166,0xFF00,,current-turn +$37.bit4 contact
+0x12C0A,0x12C22,3,378,0x0020,32,finite after callback release

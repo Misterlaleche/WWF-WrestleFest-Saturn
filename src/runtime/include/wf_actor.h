@@ -15,12 +15,13 @@ static inline void wf_set_be16(wf_actor_raw_t *a,size_t o,uint16_t v){ a->b[o]=(
 static inline uint32_t wf_be32(const wf_actor_raw_t *a,size_t o){ return ((uint32_t)a->b[o]<<24)|((uint32_t)a->b[o+1]<<16)|((uint32_t)a->b[o+2]<<8)|a->b[o+3]; }
 static inline void wf_set_be32(wf_actor_raw_t *a,size_t o,uint32_t v){ a->b[o]=(uint8_t)(v>>24);a->b[o+1]=(uint8_t)(v>>16);a->b[o+2]=(uint8_t)(v>>8);a->b[o+3]=(uint8_t)v; }
 
+/* ROM field offsets retained verbatim. */
 enum {
  WF_A_ACTIVE=0x00, WF_A_MOTION_MODE=0x01, WF_A_CHARACTER=0x02, WF_A_MIRROR=0x04, WF_A_RENDER_LIST=0x12, WF_A_SCREEN_X=0x14, WF_A_SCREEN_Y=0x16, WF_A_X_CORR8=0x19, WF_A_Y_CORR8=0x1B, WF_A_X=0x06, WF_A_Y=0x0A, WF_A_Z=0x0E,
  WF_A_LATCHED=0x1C, WF_A_PRIOR=0x1E, WF_A_STATE=0x20, WF_A_ANIM_COUNTER=0x22, WF_A_ANIM_INDEX=0x24, WF_A_ACTION_PHASE=0x25,
  WF_A_LINK=0x26, WF_A_MAGNITUDE=0x2A, WF_A_ANGLE_WORD=0x2C, WF_A_ANGLE=0x2D, WF_A_FACING=0x2E,
- WF_A_SPATIAL_CLASS=0x30, WF_A_FLAGS32=0x32, WF_A_FLAGS33=0x33, WF_A_FLAGS34=0x34, WF_A_PINFLAGS=0x35, WF_A_CONTACT=0x36, WF_A_CORR_X=0x38,
- WF_A_CORR_Y=0x3A, WF_A_CORR_Z=0x3C, WF_A_TIMER44=0x44, WF_A_TIMER46=0x46,
+ WF_A_FIELD18=0x18, WF_A_FIELD1A=0x1A, WF_A_SPATIAL_CLASS=0x30, WF_A_FLAGS32=0x32, WF_A_FLAGS33=0x33, WF_A_FLAGS34=0x34, WF_A_PINFLAGS=0x35, WF_A_CONTACT=0x36, WF_A_CORR_X=0x38,
+ WF_A_CORR_Y=0x3A, WF_A_CORR_Z=0x3C, WF_A_FIELD3E=0x3E, WF_A_FIELD40=0x40, WF_A_FIELD42=0x42, WF_A_TIMER44=0x44, WF_A_TIMER46=0x46,
  WF_A_PAIR_CYCLE=0x48, WF_A_CAMERA_CLASS=0x4B, WF_A_PROFILE=0x4C, WF_A_TIMER52=0x52, WF_A_ROLE=0x56, WF_A_VX=0x58, WF_A_VY=0x5A, WF_A_VZ=0x5C, WF_A_VZ_DEC=0x5E,
  WF_A_SELECTOR=0x60, WF_A_SELECTOR_LO=0x61, WF_A_FIELD62=0x62, WF_A_STATE4=0x64, WF_A_STATE4_LO=0x65,
  WF_A_STAMINA=0x66, WF_A_PENDING_DAMAGE=0x68, WF_A_VISIBLE_DELTA=0x6A,
@@ -38,6 +39,7 @@ enum {
 static inline uint8_t wf_main_state(const wf_actor_raw_t *a){ return (uint8_t)(wf_be16(a,WF_A_STATE)&0x7Fu); }
 static inline uint8_t wf_state4_subtype(const wf_actor_raw_t *a){ return wf_u8(a,WF_A_STATE4_LO); }
 static inline uint8_t wf_state4_flags(const wf_actor_raw_t *a){ return wf_u8(a,WF_A_STATE4); }
+/* Exact write-width helpers. */
 static inline void wf_state4_write_low(wf_actor_raw_t *a,uint8_t low){ wf_set_u8(a,WF_A_STATE4_LO,low); }
 static inline void wf_state4_write_word(wf_actor_raw_t *a,uint16_t word){ wf_set_be16(a,WF_A_STATE4,word); }
 

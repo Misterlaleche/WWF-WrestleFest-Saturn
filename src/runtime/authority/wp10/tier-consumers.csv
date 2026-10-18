@@ -1,0 +1,37 @@
+rom_address,width,actor,operation,classification
+$00E05E,WORD,A1,read/index,input/action selection region
+$00E158,WORD,A1,read/index,input/action selection region
+$00E20A,WORD,A1,read/index,input/action selection region
+$00E322,WORD,A1,read/index,input/action selection region
+$010CA4,WORD,A0,ADD to table index,timer $10C60 D0=2..8
+$010F74,$71 BYTE,A0,compare ==2,timer +$9A choice
+$010F84,$71 BYTE,A0,compare ==1,timer +$9A choice
+$0112E6,WORD,A0,table index,action/selection region
+$011388,WORD,A0,table index,action/selection region
+$01B208,$71 BYTE,A0,compare ==2,state4 subtype $05 critical latch
+$01BB92,$71 BYTE,A0,tier consumer,state4 callback region
+$01BDB8,$71 BYTE,A0,compare ==2,state4 subtype $21 -> $09 else $08
+$01C82C,WORD,actor,tier read,CPU region
+$01D88C,WORD,actor,tier read,CPU region
+$01D8E2,WORD,actor,tier read,CPU region
+$01DB74,WORD,actor,tier read,CPU region
+$01DBFA,WORD,actor,tier read,CPU region
+$01DDB6,WORD,actor,tier read,CPU region
+$01DEC4,WORD,actor,tier read,CPU region
+$01E8BC,WORD,actor,tier read,CPU region
+$01E944,WORD,actor,tier read,CPU region
+$01EDF6,WORD,actor,tier-indexed raw weights,CPU state6
+$01F0F8,WORD,actor,tier read,CPU region
+$01F1C6,WORD,actor,tier read,CPU region
+$01F20A,WORD,actor,tier read,CPU region
+$01F55C,WORD,actor,tier read,CPU region
+$01F638,WORD,actor,tier read,CPU region
+$020FB4,WORD,actor,tier read,CPU region
+$0210BC,WORD,actor,tier read,CPU region
+$0211A6,WORD,actor,tier read,CPU region
+$021212,WORD,actor,tier read,CPU region
+$021480,WORD,actor,tier read,CPU region
+$021546,WORD,actor,tier read,CPU region
+$02167C,WORD,actor,tier read,CPU region
+$0217C2,WORD,actor,tier read,CPU region
+$024E44,WORD,A1,compare ==2,successful collision tail sets +$64.bit7

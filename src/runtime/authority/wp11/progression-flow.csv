@@ -1,0 +1,9 @@
+order,address,condition_or_action,effect,classification
+1,$001A5E,"$1C0163 == 9","enter shared Credits $1B4E",PROVEN
+2,$001A6A,"else","JSR $B608",PROVEN
+3,$001A70,"","JSR $BDA6",PROVEN
+4,$001A76,"","$1C0163 += 1",PROVEN
+5,$001A7E,"","$1C0165 += 1",PROVEN
+6,$001A86,"$1C0066.bit7 == 1 and new $1C0163 in {3,8}","$1C0163 += 1 again",PROVEN
+7,$001AAC,"resulting $1C0163 == 5","clear $1C0598 list to $FFFF and snapshot active wrestler IDs",PROVEN
+8,$001AF0,"normal advance","JMP $0AC0 next pre-match",PROVEN

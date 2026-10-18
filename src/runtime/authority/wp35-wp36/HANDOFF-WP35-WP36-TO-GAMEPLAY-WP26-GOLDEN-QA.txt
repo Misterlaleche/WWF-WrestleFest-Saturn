@@ -1,0 +1,579 @@
+HANDOFF OBLIGATORIO — WP35 + WP36
+WWF WrestleFest arcade → Sega Saturn NTSC-U
+PARA GAMEPLAY / RUNTIME-17 / WP26 / GOLDEN QA / CHAT MAESTRO
+
+OBJETIVO
+
+Consumir conjuntamente dos autoridades ya aceptadas por auditoría maestra:
+
+WP35 = posicionamiento global / contrato espacial.
+WP36 = composición interna completa de metasprites.
+
+NO tratarlas como investigaciones aisladas.
+La implementación activa debe respetar ambas simultáneamente.
+
+============================================================
+AUTORIDADES NUEVAS
+============================================================
+
+WP35:
+
+`WP35-SPRITE-ACTOR-POSITIONING-ROM-EXACT-R05-AUDITED-STRUCTURAL.zip`
+
+SHA-256:
+`6cd5009bcb85c0479388f8518ff2b65d96e031b2bca7025610d5149057fb6be2`
+
+Clasificación:
+`WP35 R05 STRUCTURAL CLOSED / HARDWARE VALIDATION REQUIRED`
+
+Preview técnica aceptada:
+
+`WP35-POSITIONING-PREVIEW-ROM-EXACT-AUDITED.zip`
+
+SHA-256:
+`b8d5600e2658ac128ddb02190305f35128e749eaf52db20308fc240aceaded8c`
+
+WP36:
+
+`WP36-CHARACTER-SPRITE-COMPLETENESS-ROM-EXACT-AUDITED.zip`
+
+SHA-256:
+`cd9731cefe74aa1c6ca13c7d7cc181d5cf9864677116746321cf29d944899a80`
+
+Clasificación:
+`WP36 ROM CHARACTER SPRITE COMPLETENESS — CLOSED`
+
+Material visual auxiliar WP36:
+
+`WP36-PREVIEWS-ALL-CHARACTERS-REFEREE-PRESENTER-ROM-EXACT.zip`
+
+SHA-256:
+`c28370fd2a82f59d4221d2d877802f7c2f94d1268652a93623f968d47b1e83d7`
+
+wwfwfest.zip sigue siendo la autoridad suprema.
+
+============================================================
+QUÉ CIERRA WP35
+============================================================
+
+WP35 es la autoridad para el contrato espacial:
+
+WORLD / LOGICAL POSITION
+→ projected actor anchor
+→ `$247C`
+→ `$27B8`
+→ sort / queue
+→ `$D1FC`
+→ sprite record arcade
+→ WP26 buffered-sprite decode
+→ raster final
+
+Cierra dentro de su ownership:
+
+- world X/Y/Z con semántica signed correcta;
+- actor/projected anchor;
+- `$247C`;
+- `$27B8`;
+- six-class pointer queue;
+- signed-Y stable sort;
+- orientation/facing direct-writer inventory;
+- `$D1FC` mirror/clipping;
+- NEG.B `$80 -> -128`;
+- camera/clamp;
+- shake temporal/layer contract;
+- referee positioning;
+- wrestler positioning;
+- side-rope positioning;
+- outside-ring spatial primitives;
+- prematch shared transform;
+- separación HUD/world;
+- separación actor/render/raster;
+- WP26 buffered-sprite→raster split.
+
+IMPORTANTE:
+
+`+$14/+16` NO son raster final.
+
+Son anchors intermedios/proyectados.
+
+Para Y final, usar el decode cerrado:
+
+`raster_y = ((256 - raw_y) & 0x01FF) - 16`
+
+No reintroducir la interpretación incorrecta de R03/WP12 antigua.
+
+============================================================
+QUÉ CIERRA WP36
+============================================================
+
+WP36 es la autoridad para la COMPOSICIÓN INTERNA de personajes.
+
+Cierra:
+
+- character → gfx set;
+- descriptor / pose → composición;
+- piece/source-cell count exacto;
+- piece IDs / source payload;
+- offsets locales X/Y;
+- dimensiones;
+- palette/resource;
+- orden interno;
+- X/Y flip;
+- mirror/facing local;
+- bbox derivado;
+- held/victim metasprites;
+- piezas shared/reused;
+- USED / SHARED / ORPHAN / UNUSED;
+- casos de alto piece-count;
+- regresiones conocidas.
+
+Cobertura ROM-side cerrada:
+
+- 12 wrestler gfx sets;
+- 4,536 valid wrestler pose records;
+- 14,480 partner-expanded compositions;
+- 496,876 expanded source cells;
+- 65,536 sprite tile assets;
+- 256 palette resources;
+- 78 held `$FF00` frames / 73 descriptors.
+
+============================================================
+CONTRATO CONJUNTO WP35 + WP36
+============================================================
+
+La cadena correcta debe ser:
+
+Gameplay / RUNTIME:
+selecciona actor correcto
+→ selecciona logical wrestler
+→ gfx set correcto
+→ pose/frame correcto
+→ partner set cuando corresponda
+
+WP36:
+determina exactamente QUÉ PIEZAS forman el frame
+→ count
+→ IDs/source payload
+→ local X/Y
+→ palette
+→ flip
+→ order
+
+WP35:
+determina DÓNDE se coloca el actor completo
+→ world X/Y/Z
+→ projected anchor
+→ facing/orientation
+→ `$247C`
+→ `$27B8`
+→ signed-Y sort
+→ camera/clamp
+→ shake
+→ clipping contract
+
+WP26:
+emite la composición completa a VDP1/VDP2
+→ no pierde piezas
+→ aplica clipping legal
+→ respeta orden
+→ produce raster final correcto
+
+Golden QA:
+verifica el resultado final
+→ no reconstruye
+→ no corrige
+→ no inventa
+
+============================================================
+REGLA PRINCIPAL
+============================================================
+
+NO corregir un fallo de una capa tocando otra.
+
+Ejemplos:
+
+Si faltan piezas:
+→ WP36/WP26/runtime composition path.
+
+Si el frame completo está desplazado:
+→ WP35/WP26.
+
+Si el frame/pose elegido es incorrecto:
+→ Gameplay/WP02.
+
+Si la composición fuente es correcta pero VDP1 pierde piezas:
+→ WP26.
+
+Si el actor está bien compuesto pero mal colocado:
+→ NO tocar offsets locales de WP36.
+
+Si un frame “se ve bien” pero count/order/palette/flip no coinciden:
+→ NO aceptar.
+
+============================================================
+GAMEPLAY / RUNTIME-17 — OBLIGACIONES
+============================================================
+
+Gameplay debe consumir WP35 y WP36.
+
+Debe demostrar:
+
+1. actor correcto;
+2. logical wrestler correcto;
+3. gfx set correcto;
+4. pose/frame correcto;
+5. partner set correcto cuando aplique;
+6. composición completa entregada al renderer;
+7. world X/Y/Z correctas;
+8. facing/orientation correctos;
+9. `$247C` respetado;
+10. `$27B8` respetado;
+11. signed-Y correcto;
+12. orden temporal correcto;
+13. ninguna pieza se pierde antes de WP26.
+
+RUNTIME-17 no puede declarar cerrada la ruta visual de actor si solo demuestra estado lógico.
+
+Debe poder cruzarse:
+
+ROM expected composition
+vs
+Runtime emitted composition
+
+antes del culling final permitido.
+
+============================================================
+WP26 — OBLIGACIONES
+============================================================
+
+WP26 debe consumir:
+
+WP36:
+composición interna completa.
+
+WP35:
+posición global y pipeline a raster.
+
+Debe demostrar:
+
+- no truncation;
+- no silent drop;
+- no piece-count reduction;
+- no replacement pieces;
+- no approximate precombination;
+- no discarded every-N pieces;
+- no order mutation;
+- no palette mutation;
+- no flip mutation;
+- no local-offset mutation;
+- legal clipping únicamente en la fase correcta;
+- final screen/raster coordinates correctas.
+
+LÍMITE OBLIGATORIO:
+
+Máximo demostrado para una composición individual:
+
+86 source cells
+
+Caso:
+gfx set 03
+BIG BOSSMAN
+pose `0x0178`
+partner gfx set 01
+
+WP26 debe soportarlo completo.
+
+Si no:
+`BLOCKED BY WP26`
+
+No reducir la composición para hacerla caber.
+
+============================================================
+CASOS DE REGRESIÓN OBLIGATORIOS
+============================================================
+
+1. Ultimate Warrior:
+
+pose `0x0062`
+record `0x402E0`
+23 pieces
+bbox `-34,-98,64,112`
+palette 01
+
+pose `0x0063`
+record `0x402E6`
+23 pieces
+bbox `-34,-98,64,112`
+palette 01
+
+Las 23 piezas son obligatorias.
+
+No existe parche visual aceptable.
+
+2. Big Bossman:
+
+gfx set 03
+pose `0x0178`
+partner 01
+86 source cells
+
+3. Demolition Smash:
+
+logical source gfx 0A
+pose `0x005B`
+
+Comprobar contra runtime actual.
+No heredar automáticamente el fallo histórico de Test255/WIP160.
+
+4. Hawk:
+
+source gfx 04
+pose `0x0068`
+ROM = 23 source cells
+
+Comprobar que las 2 source cells transparentes NO se pierden prematuramente por parser/truncation.
+
+5. signed-Y:
+
+`$FF00` vs `$0100`
+
+Mantener semántica signed exacta.
+
+6. facing/orientation:
+
+misma logical anchor
+→ left/right orientation
+→ sin desplazamiento artificial.
+
+7. pose change:
+
+logical actor anchor constante
+→ cambio de metasprite
+→ sin salto artificial.
+
+8. clipping:
+
+piece present in source composition
+→ legal final clipping if offscreen
+→ NO confundir con missing piece.
+
+============================================================
+WP35 CORRECCIONES QUE NO DEBEN REABRIRSE
+============================================================
+
+No volver a tratar:
+
+`+$14/+16`
+
+como coordenadas raster finales.
+
+No reabrir sin contradicción ROM:
+
+- `$247C`;
+- `$27B8`;
+- signed-Y stable sort;
+- D1FC mirror/clipping;
+- camera/clamp;
+- shake temporal/layer contract.
+
+No sustituir machine actor anchor por una etiqueta humana tipo “feet” si no está demostrada.
+
+============================================================
+WP36 CORRECCIONES QUE NO DEBEN REABRIRSE
+============================================================
+
+No reabrir ROM-side composition salvo contradicción demostrable contra `wwfwfest.zip`.
+
+No usar WIP160/Test255 como autoridad canónica.
+
+No inventar piezas para completar visualmente un personaje.
+
+No eliminar piezas transparentes solo porque no aporten pixels visibles si siguen formando parte de la composición fuente ROM.
+
+============================================================
+CROSSCHECK OBLIGATORIO
+============================================================
+
+Para cada frame alcanzable del runtime activo:
+
+1. resolver:
+   - actor;
+   - logical wrestler;
+   - gfx set;
+   - pose/frame;
+   - partner set.
+
+2. obtener WP36 expected composition.
+
+3. comparar ANTES del culling final:
+   - count;
+   - piece IDs/source payload;
+   - local X;
+   - local Y;
+   - palette;
+   - X flip;
+   - Y flip;
+   - order.
+
+4. aplicar WP35:
+   - world position;
+   - projected anchor;
+   - facing/orientation;
+   - `$247C`;
+   - `$27B8`;
+   - sort;
+   - camera;
+   - shake;
+   - clipping contract.
+
+5. comparar salida WP26:
+   - VDP1 command count;
+   - piece survival;
+   - final raster X/Y;
+   - clipping;
+   - order.
+
+6. clasificar:
+
+`EXACT`
+`MISSING PIECE`
+`EXTRA PIECE`
+`WRONG PIECE`
+`WRONG GFX SET`
+`WRONG OFFSET`
+`WRONG PALETTE`
+`WRONG FLIP`
+`WRONG ORDER`
+`WRONG GLOBAL POSITION`
+`WRONG CAMERA TRANSFORM`
+`WRONG CLIPPING`
+`OPEN`
+
+============================================================
+GOLDEN QA
+============================================================
+
+Golden QA debe fijar regresiones para:
+
+- Warrior 0x0062;
+- Warrior 0x0063;
+- Big Bossman 86-cell case;
+- high piece-count frames;
+- held/victim;
+- negative offsets;
+- facing/mirror;
+- signed-Y crossing;
+- camera clamp;
+- shake;
+- referee;
+- side ropes;
+- partial offscreen;
+- full offscreen;
+- pose changes;
+- global actor positioning;
+- source composition vs rendered composition.
+
+No aceptar:
+“visualmente parece igual”.
+
+La prueba debe ser trazable a datos ROM.
+
+============================================================
+OWNERSHIP
+============================================================
+
+WP02:
+secuencia / descriptor / animation / held-victim selection.
+
+WP36:
+composición interna exacta.
+
+WP35:
+posición/origen/pipeline espacial global.
+
+Gameplay:
+estado del actor + selección correcta de frame/composición.
+
+WP26:
+renderer final + VDP1/VDP2 + clipping + raster.
+
+Golden QA:
+validación final.
+
+Chat maestro:
+auditoría y promoción.
+
+============================================================
+CRITERIO DE PROMOCIÓN
+============================================================
+
+NO declarar:
+
+`ALL CHARACTER GRAPHICS CLOSED`
+`SATURN_PIXEL_PERFECT`
+`HARDWARE PASS`
+
+hasta que:
+
+- todos los frames alcanzables estén mapeados;
+- expected count = emitted count;
+- todas las piezas coincidan;
+- local X/Y coincidan;
+- palettes coincidan;
+- flips coincidan;
+- order coincida;
+- no haya truncación silenciosa;
+- WP26 soporte la capacidad completa;
+- WP35 global position sea correcta;
+- raster final sea correcto;
+- Golden QA no encuentre contradicciones;
+- hardware real valide la integración correspondiente.
+
+============================================================
+SIGUIENTE ENTREGABLE ESPERADO
+============================================================
+
+No quiero otro paquete research-only.
+
+Quiero consumo real de WP35 + WP36 en la implementación activa.
+
+El entregable debe demostrar, para todo frame alcanzable:
+
+ROM actor/frame selection
++
+ROM expected metasprite composition
++
+ROM exact global positioning
+=
+Saturn emitted composition
++
+Saturn final raster placement
+
+con igualdad exacta donde el contrato esté cerrado.
+
+Debe incluir:
+
+- matriz ROM vs Runtime vs WP26;
+- lista de discrepancias;
+- owner de cada discrepancia;
+- tests reproducibles;
+- HOST strict PASS;
+- SH-2 strict PASS;
+- full ELF cuando corresponda;
+- unresolved = 0 cuando corresponda;
+- regressions PASS;
+- SHA256SUMS portable.
+
+FAIL-CLOSED.
+
+Si algo no puede demostrarse:
+`OPEN`
+o
+`BLOCKED BY OWNER`.
+
+Nada inventado.
+Nada redibujado.
+Nada recolocado.
+Nada aproximado.
+
+`wwfwfest.zip` sigue siendo la autoridad suprema.

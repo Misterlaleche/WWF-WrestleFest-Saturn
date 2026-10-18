@@ -1,0 +1,8 @@
+action,selectors,timing,status
+00,0-3,8-tick with 4-frame cycle,ROM-EXACT
+01/02/04,0-3,8-tick with 4-frame cycle,ROM-EXACT
+03,9-12,base 8 with extra hold on 12,ROM-EXACT
+06,4 then 5/6,20 then alternating 32/56; +16 after phase6,ROM-EXACT
+07,7/8,10/8-or-16 branch timing,ROM-EXACT
+08,13/14 or 7/8,10/8 branch timing,ROM-EXACT
+09,15/16/17,8 then 18,ROM-EXACT

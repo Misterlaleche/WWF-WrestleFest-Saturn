@@ -1,0 +1,62 @@
+RUNTIME17 remaining native gameplay boundary: $18C4 -> $9132
+
+No implementation or fallback added. Existing callback fail-closed remains.
+Direct canonical ROM SHA1: a726c46f350723ea73158bc78055d17d418b14e2.
+Disassembly evidence: royal-9132-boundary-disassembly.txt (Capstone 5.0.9,
+MC68000 big endian). Ranges below are half-open and hashes bind exact bytes.
+  $009132..$009398: SHA256 62c0f5c9a3e22b34a7d9cdc634d14d54bf755fab0f341dd23cfce8ca46c2a07f
+  $009398..$0094CA: SHA256 7d4857bf11dc5c3faff5a7d54802880bc8733a3d2de30451c223a14a9ceede5c
+  $0094CA..$00970C: SHA256 8f57fb5e00c4b0c74ca44e0dc6fce1316e01ea4444d181f45eceaaf82a1182e1
+  $00970C..$00972C: SHA256 a61ba60b7fca0da989ddc49902b91eea51f76a03a1ac366c337cf778952b4ac9
+  $00972C..$00989A: SHA256 eba3659f0d72ea48805e726cdb696689ba3766cb846c7e203da3f5728f8f51c5
+
+Reachable contract, directly observed:
+1. $9132 saves D0-D7/A0-A6, sets $167B.bit1, calls $9658 to draw FG0.
+2. Counts active actors without +$32.bit4; >=6 sets $15CE=$8000.
+3. Clears/rebuilds tables at $1576 and $15A0, resets $15B4. Appends numeric
+   actor IDs plus $8004/$8005. Builds a selection list and 3x3 tile blocks at
+   $C1B30 using ROM table $9714; full-pool branch uses actors 4..8 instead.
+4. $930C uses paid slots $1586 and selection words $1598; $9578 checks claimed
+   choices. $15D0 gets $0140. This is persistent selector state, not a no-op.
+5. $96C6 reads four raw input WORDs $140020 + 2*i, computes button edges into
+   $15BE using prior levels $15C6. $94CA additionally reads directional bits,
+   repeats via $15B6, and advances/wraps selection while avoiding used entries.
+6. $9398 decrements timer, consumes confirmation and either creates an actor
+   or, when full, enters $972C. New actor path calls $1079E, $782C and $7506.
+7. $972C copies/clears a complete $10C-byte actor, repairs slot ownership,
+   input pointer and other actor fields; calls $1079E/$782C/$7720/$75EE,
+   then repairs reciprocal links through actor +$26 and +$9C pointers.
+8. $95AE draws selection cursors into FG0. $96A0 clears the selection display.
+9. $9392 restores all caller D/A registers before RTS.
+
+Missing runtime model/integration required for COMPLETE owner:
+- Contiguous raw state $1C1576..$1C15D1, including roster, paid slots,
+  selections, available-ID list, count, repeat counters, button edges/prior
+  levels, full-pool marker and shared timeout. Existing royal_slots_1586[10]
+  covers $1586..$1599, so selection $1598 already aliases its final word.
+  Independent new arrays without alias handling would be wrong. Roster writes
+  begin at $1576 and can cross into $1586; preserve raw writes and bounds.
+- Four hardware input words at their ROM sampling boundaries, including the
+  previous-level/edge state and exact directional repeat rules.
+- Actual FG0 transport for $9658/$96A0/$95AE and both character-icon branches;
+  cannot certify completion by suppressing those transfers.
+- Native, independently checked contracts for child entries $1079E/$782C/
+  $7506/$7720/$75EE, plus complete actor migration path $972C.
+  The bounded source search found no native owner with those entry names.
+- A transactional bridge appropriate to $18C4's rollback behavior on blocked
+  external calls, and preservation of the MOVEM caller register contract.
+
+WP07 FINAL authority checked read-only:
+sources/zips finales.zip ->
+WF-Saturn-07-ROYAL-RUMBLE-ENGINE-ROM-EXACT-FINAL-package.zip.
+The archive contains documentation, CSV/JSON tables and verify_royal_rom.py,
+not a native C implementation. royal-routines.csv lists $BB30/$BB80/$BC00,
+$10ACC/$10AF0/$10B26/$2017A(partial)/$20E00/$21358/$11284/$24CC.
+It does not enumerate $9132, its selection helpers, or their native contracts.
+This is a scope gap in that authority, not evidence that $9132 can be skipped.
+
+Conclusion: the ROM provides discoverable code, but the full reachable owner
+is larger than the missing callback signature suggests and cannot be merged
+as a proven complete owner under the new-files-only bounded task. Keep it
+fail-closed and report RUNTIME17 not canonically closed. This audit neither
+changes existing gameplay nor claims Saturn runtime/framebuffer equivalence.

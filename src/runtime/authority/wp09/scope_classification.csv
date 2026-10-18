@@ -1,0 +1,17 @@
+subject,status
+prone physical button2 -> raw $48 for categories $05/$06/$07 all 12 internal wrestlers,PROVEN
+raw $48 callback asserts wrestler +$35.bit0,PROVEN
+referee target scan consumes wrestler +$35.bit0 and links wrestler via +$56,PROVEN
+referee approach/position/count action,PROVEN
+count phase/timers/even-phase event/audio program,PROVEN
+pre-lock cancellation when +$35.bit0 clears,PROVEN
+count terminal/result branch TAG vs Royal,PROVEN_STRUCTURAL
+universal absolute 1/2/3 timeline from first pin frame,NOT_PROVABLE
+number 1/2/3 exact tile/metasprite/position join,NOT_PROVABLE
+dedicated rope-break rule,NOT_PROVABLE
+exact human kickout input producer,NOT_PROVABLE
+exact CPU kickout/escape policy,NOT_PROVABLE
+partner/opponent interruption producer mapping,NOT_PROVABLE
+submission identity/lifecycle from raw $15 or ground-input bridge,NOT_PROVABLE
+submission stamina drain cadence/mash threshold from WIP160,REJECTED_PROVISIONAL
++$AA/$10D04 labelled kickout,REJECTED_UNPROVEN

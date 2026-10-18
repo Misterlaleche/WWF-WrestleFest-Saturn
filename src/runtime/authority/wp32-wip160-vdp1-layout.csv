@@ -1,0 +1,10 @@
+name,offset_start,offset_end,bytes,authority
+libyaul_reserved_cmdt,0x00000,0x0001F,32,libyaul partitioner
+cmdt_1024,0x00020,0x0801F,32768,WIP160 exact source baseline
+texture_static,0x08020,0x4081F,231424,WIP160 exact source baseline
+texture_prompt,0x40820,0x4097F,352,WIP160 exact source baseline
+texture_ui,0x40980,0x430FF,10112,WIP160 exact source baseline
+texture_hud,0x43100,0x458FF,10240,WIP160 exact source baseline
+texture_entry,0x45900,0x4B57F,23680,WIP160 exact source baseline
+texture_dynamic,0x4B580,0x5B57F,65536,WIP160 exact source baseline
+unassigned_by_WIP160,0x5B580,0x7FFFF,150144,derived exact remainder; NOT assigned by contract

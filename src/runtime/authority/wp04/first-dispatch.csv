@@ -1,0 +1,16 @@
+selector,table_address,callback,summary
+00,024398,02484C,carry clear always; no explicit receiver subtype write
+01,02439C,024408,carry set iff actor high byte +$4C bit6; success writes state4 subtype 00/02 then optional normalization
+02,0243A0,024468,carry set iff actor high byte +$4C != 0; success writes receiver subtype 02
+03,0243A4,0244E0,"carry clear only if actor high byte +$4C==0, +$33.bit4=1, source/target +$2E bytes differ; writes 0E"
+04,0243A8,02452A,carry set iff actor high byte +$4C != 0; success writes 10 or 0B
+05,0243AC,0245F0,carry set iff actor high byte +$4C != 0; success writes 02/03 then normalization
+06,0243B0,024640,carry clear always; writes 03/04 then normalization
+07,0243B4,02468A,carry set iff actor high byte +$4C != 0; writes 1D/14 then normalization
+08,0243B8,0246EA,carry clear always; writes 0A/02 then optional normalization
+09,0243BC,024732,carry set iff actor high byte +$4C != 0; writes 11 then normalization
+0A,0243C0,024784,"carry gate: actor high byte +$4C==0, +$33.bit4=1, iterator D1 != WORD +$2E; writes 1F or 28"
+0B,0243C4,0247EC,carry set iff actor high byte +$4C bit7; success writes 12 then optional normalization
+0C,0243C8,0245BC,wrapper to F5 body with side effect; same carry rule/effects as F5
+0D,0243CC,0245D6,wrapper to F5 body with side effect; same carry rule/effects as F5
+0E,0243D0,024784,same routine as FA

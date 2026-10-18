@@ -1,0 +1,110 @@
+{
+  "derived_assets": {
+    "background_16x16_4bpp.pak": {
+      "bytes": 524288,
+      "sha256": "8cbb7db31960b7b5543a4ff5c411ae3ab88239e99850b3746a38144515c56bbb"
+    },
+    "sprite_palette_resources_saturn_bgr555.bin": {
+      "bytes": 8192,
+      "sha256": "cd869c9f5b5aa911ab5a801f0f6be8b2cb73b2541341fb27635151cc531ae43f"
+    },
+    "sprites_16x16_4bpp.pak": {
+      "bytes": 8388608,
+      "sha256": "130ac19d5ab3646f2d51c9d2ce52cd42f53f60b125fd18d674ee8de722c55d31"
+    },
+    "text_8x8_4bpp.pak": {
+      "bytes": 131072,
+      "sha256": "a3045c6193d23c334c6af592cc1dfee029dc12eec810d3e2ce353df69580391a"
+    }
+  },
+  "graphics": {
+    "background": {
+      "blank_tiles": 142,
+      "manifest_sha256": "bd0cb47837e225662443f4164e3bb909ccd73e9d09f708f387c2a88411ccfdba",
+      "tiles": 4096,
+      "unique_pixel_tiles": 3753
+    },
+    "sprite": {
+      "blank_tiles": 1980,
+      "manifest_sha256": "c7211bed07acc3e2115fdb63e3821216488d8c2b83398fd4cc7454e9faaa8589",
+      "tiles": 65536,
+      "unique_pixel_tiles": 60590
+    },
+    "text": {
+      "blank_tiles": 191,
+      "manifest_sha256": "09d498e765b7e5757257971b976a529f64502ba7438d95067c71fac6e6b52c9c",
+      "tiles": 4096,
+      "unique_pixel_tiles": 3463
+    }
+  },
+  "main_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "main_sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306",
+  "metasprites": {
+    "active_sets": 74,
+    "expanded_piece_variants": 508472,
+    "missing_fffe": 2234,
+    "pieces_sha256": "5b573e7cb2d2dfc8d549d1859f364f2f924634fe401af5dff8b86c57c0b12047",
+    "poses_sha256": "b5a4caebe44c68be6e0e9a428709aeda139b2723c856dd36e4654adcb5412e02",
+    "record_kinds": {
+      "0": 354,
+      "1": 2125,
+      "2": 904,
+      "3": 1557
+    },
+    "set_slots": 82,
+    "sets_sha256": "01459afc3007104253af34a9e7ed3f3b783ada80d0600d02fa6b360846c2f813",
+    "terminator_ffff": 74,
+    "valid_records": 4940
+  },
+  "palettes": {
+    "background_bg_ptr_table": "0x002AB4",
+    "background_destinations": [
+      "0x00188000",
+      "0x00186000"
+    ],
+    "background_fg_ptr_table": "0x002A98",
+    "background_palette_modes": 7,
+    "destination": "0x00182000",
+    "dynamic_slots": 16,
+    "resource_cache": "0x001C1610",
+    "slot_busy_table": "0x001C1600",
+    "sprite_loader_entry": "0x002AEA",
+    "sprite_resource_table": "0x002F22",
+    "sprite_resources": 256,
+    "text_config_table": "0x002B82",
+    "text_configs": 4,
+    "text_destination": "0x00180000"
+  },
+  "text": {
+    "events_sha256": "e1ebd4b4765dc2e5af4689af7e26b52118ef9edd5f84cbad24d9b7cac72624e0",
+    "groups": 103,
+    "groups_sha256": "66e17d5ed498fa8880b592ee310845f747a48014449623783b97ffde6d24be3e",
+    "pointer_table": "0x025204",
+    "referenced_font_tiles": 207,
+    "types": {
+      "0": 33,
+      "1": 48,
+      "2": 22
+    }
+  },
+  "world_maps": {
+    "bg_page_geometry": "20x16 tiles / 0x280 bytes",
+    "bg_root_table": "0x0270BC",
+    "fg_page_geometry": "20x16 tiles / 0x500 bytes",
+    "fg_root_table": "0x02709C",
+    "page_grid": "8x8 pointers per root",
+    "page_occurrences": 1024,
+    "priority_table": "0x026E9E",
+    "tiles_manifest_sha256": "7085dc95292a5e5a0f45832fd8f201c602f5b07a4564e79e8e3d42049aa09bf2",
+    "unique_pages": 41,
+    "world_modes": 8
+  },
+  "runtime10_palette_correction": {
+    "status": "WP26 supersedes BGR555 as Saturn renderer target",
+    "source_asset": "sprite_palette_resources_xbgr444_be.bin",
+    "bytes": 8192,
+    "sha256": "42f6607b76afeafc08ed512bca0352a291c1c3fe75575d8698d59c61fd6023e4",
+    "source": "WP25 effective_rgb444 values; 256 resources x 16 colors x BE16",
+    "saturn_target": "WP26 CRAM mode 2 RGB888; convert at backend"
+  }
+}

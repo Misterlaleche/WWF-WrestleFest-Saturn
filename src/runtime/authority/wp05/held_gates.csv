@@ -1,0 +1,13 @@
+raw_action,hold_phase,gate_address,probe42_literal,probe_write,contact_source,release_classification
+0B,0,13AA8,0,no,+37.bit4,clear_and_advance
+0E,0,13DF8,0,no,+37.bit4,helper-dependent
+0E,1,13EF2,0,no,+37.bit4,clear_and_advance
+0E,2,13FF2,-24,yes,+37.bit4,state_transition_branch
+10,0,142D8,-32,yes,+37.bit4,helper-dependent
+13,0,14A72,0,no,+37.bit4,set_finite_0018_on_proven_helper_path
+14,0,14C1A,32,yes,+37.bit4,clear_and_advance
+23,0,15DFE,0,no,+37.bit4,clear_and_advance
+26,0,162D6,0,no,+37.bit4,clear_and_advance
+35,0,1780A,32,yes,+37.bit4,helper-dependent
+46,0,144F0,0,no,+37.bit4,helper-dependent
+47,0,144F0,0,no,+37.bit4,helper-dependent

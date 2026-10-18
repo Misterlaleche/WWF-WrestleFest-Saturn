@@ -1,0 +1,13 @@
+index_dec,index_hex,rom_address,raw_byte,value_dec,role
+0,0x00,0x11D4A,0x2F,47,main-state2 magnitude byte by actor character index +$02
+1,0x01,0x11D4B,0x35,53,main-state2 magnitude byte by actor character index +$02
+2,0x02,0x11D4C,0x31,49,main-state2 magnitude byte by actor character index +$02
+3,0x03,0x11D4D,0x2D,45,main-state2 magnitude byte by actor character index +$02
+4,0x04,0x11D4E,0x38,56,main-state2 magnitude byte by actor character index +$02
+5,0x05,0x11D4F,0x30,48,main-state2 magnitude byte by actor character index +$02
+6,0x06,0x11D50,0x2C,44,main-state2 magnitude byte by actor character index +$02
+7,0x07,0x11D51,0x38,56,main-state2 magnitude byte by actor character index +$02
+8,0x08,0x11D52,0x28,40,main-state2 magnitude byte by actor character index +$02
+9,0x09,0x11D53,0x2F,47,main-state2 magnitude byte by actor character index +$02
+10,0x0A,0x11D54,0x30,48,main-state2 magnitude byte by actor character index +$02
+11,0x0B,0x11D55,0x2F,47,main-state2 magnitude byte by actor character index +$02

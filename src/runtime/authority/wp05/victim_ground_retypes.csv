@@ -1,0 +1,12 @@
+producer_or_consumer,raw_action,input_main_state,input_low65,output_word_or_low,width,address,notes
+linked_retype,0A,4,08,06,BYTE,13796,preserves high64
+linked_retype,0A,4,09,07,BYTE,13796,preserves high64
+linked_retype,0B,4,08,06,BYTE,13ADE,preserves high64
+linked_retype,0B,4,09,07,BYTE,13ADE,preserves high64
+linked_retype,10,4,08,06,BYTE,14320,preserves high64
+linked_retype,10,4,09,07,BYTE,14320,preserves high64
+state4_return,,4,06,08,BYTE,1B288,when +25==FE
+state4_return,,4,07,09,BYTE,1B288,when +25==FE
+initial_producer,23,,,$0007,WORD,15F70,branch-specific
+initial_producer,23,,,$0009,WORD,1601A,branch-specific
+initial_producer,26,,,$0005,WORD,1630C,high byte reset to 00

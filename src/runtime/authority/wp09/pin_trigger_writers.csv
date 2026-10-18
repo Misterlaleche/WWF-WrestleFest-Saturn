@@ -1,0 +1,8 @@
+rom_address,operation,field,nearest_raw_action,status,notes
+0x133A2,BSET #0,+$35(A0),wrestler +$35.bit0,0x48,PROVEN,raw48 callback asserts referee-count trigger
+0x13506,BSET #0,+$35(A0),wrestler +$35.bit0,0x49,PROVEN,internal paired/continuation action; raw49 is not selected by 12x21x3 contextual matrix
+0x13586,BCLR #0,+$35(A0),wrestler +$35.bit0,0x49,PROVEN,clears count trigger on one raw49 branch
+0x152F4,BSET #0,+$35(A0),wrestler +$35.bit0,0x1A,PROVEN,writer exists; no pin semantic assigned solely from this write
+0x15330,BCLR #0,+$35(A0),wrestler +$35.bit0,0x1A,PROVEN,clear exists; no kickout semantic assigned solely from this write
+0x15F2E,BSET #0,+$35(A0),wrestler +$35.bit0,0x23,PROVEN,writer exists; no pin semantic assigned solely from this write
+0x16020,BCLR #0,+$35(A0),wrestler +$35.bit0,0x23,PROVEN,clear exists; no kickout semantic assigned solely from this write
