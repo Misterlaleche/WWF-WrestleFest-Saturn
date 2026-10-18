@@ -16,13 +16,13 @@ Rama local: `recovery/runtime17-20261018`. El commit de entrega consta en el man
 - Implementado $2017A desde desensamblado de ROM: scans, escrituras solapadas, D0–D7, actor seleccionado, activación y gates post-ACK. $206FE conserva su frontera externa de transferencia de vídeo y sus registros; falla si falta el callback.
 - Corregidas omisiones demostradas de shadow de registros en $10120, $10E6A y $F4C2. Conservadas anchuras WORD y mitades altas; añadidas regresiones.
 - Auditoría $262D2 acepta ruta ROM por argumento, eliminando la dependencia fija de /mnt/data.
-- Añadida reproducción portable HOST y SH-2.
+- Añadida reproducción portable HOST y SH-2. Corregido el orden de configuración Yaul para que el mapa se genere en audit/saturn-link-build sin depender de una carpeta creada por HOST.
 
 ## Evidencia de esta ejecución
 
 43/43 tests con Apple Clang 17 strict; 43/43 con ASan/UBSan; 43/43 con GCC Linux 16.2 strict. GCC -fanalyzer sobre todas las fuentes src/generated sin diagnósticos. Catorce auditorías de firmas/spans ROM pasan, incluida SHA1 canónica `a726c46f350723ea73158bc78055d17d418b14e2`.
 
-Compilación limpia y enlace completo con SH-2 GCC 13.2.0: `nm -u` vacío. ELF observado SHA256 `eb9a57dcc39d6e60efb33e0b40620bbffab8d00fbbfb9f87845560b2d9861abe`. El linker mantiene avisos RWX de los scripts Yaul suministrados. Es un harness de enlace, no un ejecutable de combate. Estos resultados prueban las comprobaciones ejecutadas, no equivalencia total con el arcade.
+Compilación limpia y enlace completo con SH-2 GCC 13.2.0: `nm -u` vacío. ELF observado SHA256 `fabedfe7d63e7a0afba98043b47b414104679b482318be8e8dce3fa270a54865`. El linker mantiene avisos RWX de los scripts Yaul suministrados. Es un harness de enlace, no un ejecutable de combate. Estos resultados prueban las comprobaciones ejecutadas, no equivalencia total con el arcade.
 
 ## Bloqueos que impiden declarar RUNTIME-17 cerrado
 

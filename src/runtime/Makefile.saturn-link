@@ -1,11 +1,13 @@
 ifeq ($(strip $(YAUL_INSTALL_ROOT)),)
   $(error Undefined YAUL_INSTALL_ROOT)
 endif
-include $(YAUL_INSTALL_ROOT)/share/build.pre.mk
-
 SH_PROGRAM:= gameplay-runtime-r17-link
 SH_BUILD_DIR:= audit/saturn-link-build
 SH_OUTPUT_DIR:= audit
+
+# build.pre.mk expands the map filename immediately from these settings.
+include $(YAUL_INSTALL_ROOT)/share/build.pre.mk
+
 SH_SRCS:= \
  src/wf_actor.c src/wf_payment.c src/wf_spatial.c src/wf_target_relation.c src/wf_pair_relation.c src/wf_actor_prepass.c src/wf_state5_exec.c src/arcade_cpu_final_bridge.c \
  src/wf_cpu_runtime.c src/wf_gameplay_bindings.c src/wf_damage.c src/wf_scheduler.c \
