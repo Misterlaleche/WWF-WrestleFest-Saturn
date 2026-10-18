@@ -3,8 +3,10 @@
 #include "wf_input.h"
 static void t_remap_accum(void){
  wf_actor_raw_t a={{0}};
+ wf_set_be16(&a,WF_A_INPUT_DERIVED,0xabcd);
  /* active-low: press B1 only => hardware low has bit4 cleared, all other bits high. */
  wf_input_decode_514e(&a,0xEF,1);
+ assert(wf_be16(&a,WF_A_INPUT_DERIVED)==0u); /* ROM $5188 ANDI.W #$F */
  assert(wf_be16(&a,WF_A_INPUT_ACC)==0x0001);
  assert(wf_be16(&a,WF_A_INPUT_FRESH)==0x0001);
  assert(wf_be16(&a,WF_A_INPUT_HELD)==0x0001);

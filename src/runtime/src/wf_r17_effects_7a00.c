@@ -84,6 +84,8 @@ wf_status_t wf_r17_effects_7a00(wf_runtime_t*rt,wf_r17_render_ctx_t*render,wf_r1
   wf_actor_raw_t*a=effect(rt,i);uint8_t active=wf_u8(a,WF_A_ACTIVE);uint16_t delay;uint32_t rv;
   wf_set_u8(a,WF_A_ACTIVE,(uint8_t)(active|0x80u));
   if((active&0x80u)==0u){s=rng21b4(rt,t,&rv);if(s!=WF_OK)goto rollback;delay=(uint16_t)(low16(rv)&0x007fu);wf_r17_m68k_move_w(&rt->m68k_regs,0,delay);wf_set_be16(a,WF_A_ANIM_INDEX,delay);wf_set_be16(a,WF_A_LATCHED,0u);}
+  /* $7A28..$7A30 dispatch index is a WORD write, after delay storage. */
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)((wf_be16(a,WF_A_LATCHED)&1u)<<2));
   if((wf_be16(a,WF_A_LATCHED)&1u)==0u)s=state0(a);else s=state1(rt,a,render,t);
   if(s!=WF_OK)goto rollback;
   if(t)t->processed_objects=(uint8_t)(i+1u);

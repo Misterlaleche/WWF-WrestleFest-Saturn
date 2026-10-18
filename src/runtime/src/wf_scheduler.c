@@ -72,6 +72,10 @@ wf_status_t wf_runtime_frame(wf_runtime_t *rt){
   if(!rt->vblank_ack || (rt->g.frame_handshake[1]&0x02u)==0u)return WF_BLOCKED;
   /* $10F2 ADDQ.L #1,$1C0080 executes exactly once after ACK. */
   rt->g.frame_counter+=1u;
+  /* $0082/$0083 are the low WORD of the same LONG, not independent RAM.
+   * External bootstrap must seed these legacy aliases coherently too. */
+  rt->g.global_0082=(uint8_t)(rt->g.frame_counter>>8);
+  rt->g.pipeline_mode=(uint8_t)rt->g.frame_counter;
   rt->frame_stage=2u;
  }
  if(rt->frame_stage==2u){

@@ -96,7 +96,11 @@ static wf_status_t raw7c(wf_runtime_t *rt,wf_actor_raw_t *a,const desc_t **dp,wf
     if(!bit(a,O_LATCH,7)){
         wf_set_u8(a,O_MOTION,0u);wf_set_u8(t,O_MOTION,0u);chgbit(a,O_FACING,7);wf_set_be16(t,O_STATE,0x00FFu);wf_set_be16(t,O_VISUAL,0xFFFFu);
     }else if(low(a,O_FRAME)==0xFEu){
-        wf_set_be16(a,O_STATE,5u);wf_set_be16(a,O_SELECTOR,0x0017u);wf_set_be16(t,O_STATE,0x00FFu);chgbit(a,O_FACING,7);helper_10bd0(a,0x0020,0,0);
+        wf_set_be16(a,O_STATE,5u);wf_set_be16(a,O_SELECTOR,0x0017u);wf_set_be16(t,O_STATE,0x00FFu);chgbit(a,O_FACING,7);
+        /* $1A5E8/$1A5EA CLR.W; dispatcher saves D0 only, so these survive. */
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);
+        wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
+        helper_10bd0(a,0x0020,0,0);
     }
     *dp=&D_1A594;return WF_OK;
 }

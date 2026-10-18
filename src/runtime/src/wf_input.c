@@ -12,8 +12,7 @@ static uint16_t remap_controls(uint8_t active){
 void wf_input_decode_514e(wf_actor_raw_t *a,uint8_t hardware_low,uint8_t pipeline_bit0){
  uint8_t active=(uint8_t)~hardware_low;
  /* Direction is current held physical nibble and lives in low byte of +A8/+A9. */
- uint16_t a8=wf_be16(a,WF_A_INPUT_DERIVED);
- a8=(uint16_t)((a8&0xFF00u)|(active&0x0Fu));
+ uint16_t a8=(uint16_t)(active&0x0Fu); /* $5188 ANDI.W #$F clears upper byte. */
  wf_set_be16(a,WF_A_INPUT_DERIVED,a8);
  uint16_t newly=remap_controls(active);
  uint16_t effective;

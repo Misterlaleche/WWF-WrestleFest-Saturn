@@ -1,0 +1,69 @@
+ROYAL $9132 native closure — canonical SHA1 a726c46f350723ea73158bc78055d17d418b14e2
+
+Implementation
+src/runtime/src/wf_r17_participant_native.c contains static native C for 22
+bounded ROM routines: $7506/$75EE/$7680/$76AA/$76E8/$7720/$776C/$77D8/
+$782C/$1079E/$9132/$9398/$94CA/$9556/$956C/$9578/$95AE/$961C/$9658/
+$96A0/$96C6/$972C. Each source comment identifies its original instruction.
+All calls are direct C calls; branches are compiled C control flow. There is
+no opcode fetch, opcode decoder, CPU dispatch, emulator or gameplay callback
+in the production implementation. Explicit width helpers preserve D upper
+words and byte semantics. MOVEM uses bounded per-function native save arrays.
+The reachable instruction set consumes only CCR N/Z/C; no signed-overflow
+branch or ADDX/SUBX consumes unrepresented V/X. BSET/BTST on D registers uses
+32-bit modulo bit numbers despite Capstone's .b spelling.
+
+The generated source/table audit is reproducible from the SHA1-pinned ROM:
+  python3 src/runtime/tools/generate_participant_native.py main68k.bin
+Requires Capstone 5.0.9. Default is read-only; --write explicitly regenerates.
+participant-native-rom-audit.txt contains every code/data span SHA256.
+
+Shared storage and transport
+The raw bus routes $1586..$1599 to the existing royal_slots_1586 words and
+$15CE/$15CF to global_15ce, not to duplicate state. Remaining $1576..$15D1
+bytes use royal_selector_1576. Nine actors retain complete $10C-byte records.
+The full-pool $972C path copies/clears the original actor, repairs slots,
+input source, stamina/HUD, flags and reciprocal +$26/+$9C pointers natively.
+
+Actual hardware WORD reads remain input_word callbacks at their ROM sampling
+sites; all FG0 writes are staged in original order and committed in one
+transport transaction. No gameplay helper is delegated. The wrapper supports
+either fg0_batch or commit_batch, rolls back all runtime state on a failed
+read/commit, and explicitly restores caller D shadow even if transport
+callbacks clobber it. Malformed unmapped addresses return WF_BAD_STATE.
+The shared write staging also supports TAG palette transport $180000..$180FFF;
+TAG separates these writes into the atomic mixed-channel commit.
+
+Static non-reentrant workspace avoids the Saturn entry stack: machine write
+capacity 4096 records, wrapper runtime snapshot static. Native function save
+arrays have 32 words, with the largest actual MOVEM 15 words. The observed
+maximum across Royal captures is 1970 writes (four simultaneous confirmations).
+The reserve exceeds the conservative reachable upper bound: base selector
+302, four confirmations each at most 18 icon + 4*(24 empty stamina +24 filled
+stamina +18 icon +24 names) +189 clear =567, four cursors48: total2618.
+
+Independent direct-ROM evidence
+verify_royal_rom.py uses test-only machine68k 0.4.1 (Musashi MC68000), with the
+original ROM unchanged. It does not substitute game functions or instructions.
+45 fixtures compare the full 8KB work RAM, full16KB FG0, caller D0-D7/A0-A6 and
+EVERY ordered FG0 write (address, width, value). All22 native routines are
+reached. Cases include all four paid slots, four simultaneous confirmations,
+left/right/neutral repeat boundaries and wrapping, timeout, full pool migration,
+reciprocal links and 16 deterministic register/actor-data seeds.
+royal-9132-native-oracle.txt records passing cases and write counts.
+
+Native transaction tests test_royal_9132.c also verify aliasing, actor creation,
+stamina/visible stamina, occupancy, input failure rollback, commit failure
+rollback, commit-only transport and hostile transport D-clobber restoration.
+Strict host compilation used -std=c99 -Wall -Wextra -Werror.
+
+Reproduce (from repository root; choose Python with machine68k installed):
+  cc -std=c99 -Wall -Wextra -Werror -Isrc/runtime/include \
+    src/runtime/tests/royal_rom_probe.c src/runtime/src/wf_r17_participant_helpers.c \
+    src/runtime/src/wf_r17_participant_native.c src/runtime/src/wf_r17_royal_9132.c \
+    -o /tmp/royal_rom_probe
+  python3 src/runtime/tools/verify_royal_rom.py main68k.bin /tmp/royal_rom_probe
+
+This certifies these native gameplay/state/register/raw-transfer contracts.
+It does not by itself claim Saturn physical framebuffer, sound, or full-frame
+pixel-perfect hardware equivalence; those remain platform integration evidence.

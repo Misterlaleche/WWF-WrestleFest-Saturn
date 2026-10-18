@@ -1,6 +1,6 @@
 CC ?= cc
 CFLAGS ?= -std=c11 -Wall -Wextra -Werror -O2 -Iinclude
-CORE=src/wf_r17_postack_2017a.c src/wf_actor.c src/wf_payment.c src/wf_spatial.c src/wf_target_relation.c src/wf_pair_relation.c src/wf_actor_prepass.c src/wf_state5_exec.c src/arcade_cpu_final_bridge.c src/wf_cpu_runtime.c src/wf_gameplay_bindings.c src/wf_damage.c src/wf_scheduler.c src/wf_core_phases.c src/wf_input.c generated/wf_action_matrix.c generated/wf_animation_tables.c generated/wf_physics_tables.c generated/wf_state5_tables.c generated/wf_collision_tables.c src/wf_collision.c src/wf_collision_runtime.c src/wf_collision_dispatch.c src/wf_victim65.c src/wf_ground.c src/wf_pin.c src/wf_ringout.c src/wf_match_rules.c src/wf_royal.c src/wf_doomsday.c src/wf_animation.c src/wf_physics.c src/wf_camera.c src/wf_visual.c src/wf_graphics.c src/wf_vdp1_plan.c src/wf_combat_frame.c src/wf_saturn_render_bridge.c src/wf_saturn_memory.c src/wf_saturn_yaul_backend.c src/wf_saturn_combat_present.c src/wf_r17_m68k_shadow.c src/wf_r17_bootstrap.c src/wf_r17_rng1129e.c src/wf_r17_human_ddc8.c src/wf_r17_human_raw23.c src/wf_r17_raw23.c src/wf_r17_actions_r11.c src/wf_r17_dispatch_1c03e.c src/wf_r17_resolver_280dc.c src/wf_r17_collision_24062.c src/wf_r17_ringside_fdee.c src/wf_r17_fixed_four_10120.c src/wf_r17_transient_reset_10e6a.c src/wf_r17_effects_7a00.c src/wf_r17_render_contract.c src/wf_r17_referee.c src/wf_r17_scheduler_owners.c src/wf_r17_follow_10e86.c src/wf_r17_dependencies.c src/wf_r17_integration.c src/wf_r17_post7a00.c
+CORE=src/wf_r17_postack_2017a.c src/wf_actor.c src/wf_payment.c src/wf_spatial.c src/wf_target_relation.c src/wf_pair_relation.c src/wf_actor_prepass.c src/wf_state5_exec.c src/arcade_cpu_final_bridge.c src/wf_cpu_runtime.c src/wf_gameplay_bindings.c src/wf_damage.c src/wf_scheduler.c src/wf_core_phases.c src/wf_input.c generated/wf_action_matrix.c generated/wf_animation_tables.c generated/wf_physics_tables.c generated/wf_state5_tables.c generated/wf_collision_tables.c src/wf_collision.c src/wf_collision_runtime.c src/wf_collision_dispatch.c src/wf_victim65.c src/wf_ground.c src/wf_pin.c src/wf_ringout.c src/wf_match_rules.c src/wf_royal.c src/wf_doomsday.c src/wf_animation.c src/wf_physics.c src/wf_camera.c src/wf_visual.c src/wf_graphics.c src/wf_vdp1_plan.c src/wf_combat_frame.c src/wf_saturn_render_bridge.c src/wf_saturn_memory.c src/wf_saturn_yaul_backend.c src/wf_saturn_combat_present.c src/wf_r17_m68k_shadow.c src/wf_r17_bootstrap.c src/wf_r17_rng1129e.c src/wf_r17_human_ddc8.c src/wf_r17_human_raw23.c src/wf_r17_raw23.c src/wf_r17_actions_r11.c src/wf_r17_dispatch_1c03e.c src/wf_r17_resolver_280dc.c src/wf_r17_collision_24062.c src/wf_r17_ringside_fdee.c src/wf_r17_fixed_four_10120.c src/wf_r17_transient_reset_10e6a.c src/wf_r17_effects_7a00.c src/wf_r17_render_contract.c src/wf_r17_referee.c src/wf_r17_scheduler_owners.c src/wf_r17_follow_10e86.c src/wf_r17_dependencies.c src/wf_r17_integration.c src/wf_r17_post7a00.c src/wf_r17_participant_helpers.c src/wf_r17_participant_native.c src/wf_r17_royal_9132.c src/wf_r17_tag_6e34.c
 .PHONY: test clean
 test: build/test_core build/test_input build/test_animation_physics build/test_state5 build/test_collision_victim build/test_visual_camera build/test_graphics_pack build/test_runtime06 build/test_runtime07 test-runtime08 test-runtime09 test-runtime09-assets test-saturn-render-bridge test-runtime10 test-runtime11 test-runtime12 test-runtime13 test-runtime14 test-runtime15 test-runtime16 test-runtime17 test-runtime17-referee test-runtime17-f4c2 test-runtime17-collision test-runtime17-fdee test-wp35-wp36 test-runtime17-10120 test-runtime17-10e6a test-runtime17-7a00
 	./build/test_core
@@ -281,3 +281,36 @@ build/test_runtime17_royal_postack_e2e: $(CORE) tests/test_runtime17_royal_posta
 test-runtime17-royal-postack-e2e: build/test_runtime17_royal_postack_e2e
 	./build/test_runtime17_royal_postack_e2e
 test: test-runtime17-royal-postack-e2e
+
+build/test_tag_6e34: $(CORE) tests/test_tag_6e34.c
+	mkdir -p build
+	$(CC) $(CFLAGS) $(CORE) tests/test_tag_6e34.c -o $@
+
+build/test_royal_9132: $(CORE) tests/test_royal_9132.c
+	mkdir -p build
+	$(CC) $(CFLAGS) $(CORE) tests/test_royal_9132.c -o $@
+
+build/test_runtime17_participant_bindings: $(CORE) tests/test_runtime17_participant_bindings.c
+	mkdir -p build
+	$(CC) $(CFLAGS) $(CORE) tests/test_runtime17_participant_bindings.c -o $@
+
+.PHONY: test-participant-owners
+test: test-participant-owners
+test-participant-owners: build/test_tag_6e34 build/test_royal_9132 build/test_runtime17_participant_bindings
+	./build/test_tag_6e34
+	./build/test_royal_9132
+	./build/test_runtime17_participant_bindings
+
+
+build/test_runtime17_render_shadow: $(CORE) tests/test_runtime17_render_shadow.c | build
+	$(CC) $(CFLAGS) $(CORE) tests/test_runtime17_render_shadow.c -o $@
+
+test-render-shadow: build/test_runtime17_render_shadow
+	./build/test_runtime17_render_shadow
+test: test-render-shadow
+
+build/test_runtime17_active_rom: $(CORE) tests/test_runtime17_active_rom.c | build
+	$(CC) $(CFLAGS) $(CORE) tests/test_runtime17_active_rom.c -o $@
+test-active-rom: build/test_runtime17_active_rom
+	./build/test_runtime17_active_rom
+test: test-active-rom

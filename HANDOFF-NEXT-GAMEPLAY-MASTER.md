@@ -1,9 +1,7 @@
-# Continuación desde este checkpoint
+# Relevo del checkpoint RUNTIME-17 R02
 
-No repetir inventario ni reconstruir desde $7A00. Usar el código src/runtime incluido y la rama de recuperación. Leer CURRENT-STATE-LATEST.md y validation/README.md; comprobar SHA256SUMS del paquete y el patch contra b85df2d.
+Usar este árbol consolidado; no reiniciar la búsqueda de $2017A/$6E34/$9132 ni volver a importarlo desde una base anterior. Los tres owners están implementados y comprobados. Leer CURRENT-STATE-LATEST.md y validation/README.md, verificar SHA256SUMS y restaurar la historia Git incluida si se necesita.
 
-Los bloqueos $2017A y compilación SH-2 están resueltos. No volver a declararlos ausentes. Las correcciones de $10120/$10E6A/$F4C2 también están integradas y probadas.
+El cierre documentado es el de los pendientes solicitados de RUNTIME-17. Se ha comparado un frame activo completo y su ACK, con alcance explícito. No convertir esa evidencia en una afirmación de ROM-EXACT universal, framebuffer exacto o hardware PASS.
 
-Siguiente trabajo concreto: implementar los joins nativos $6E34/$9132 y sus estados/hijos desde ROM y autoridades, sin reemplazar por los dobles de los tests. Consultar royal-9132-boundary.txt antes de diseñar el estado faltante. Después auditar composición completa D1–D7 de los hijos del dispatcher y construir un test de frame activo con valores esperados ROM, conservando el RNG persistente. Los callbacks de presentación y los de gameplay son fronteras distintas.
-
-Reejecutar 43 tests y los nuevos que se añadan con Clang, GCC, ASan/UBSan, analyzer, auditorías ROM y full ELF. Hacer revisión independiente y extracción limpia. Solo entonces valorar cierre canónico de RUNTIME-17. RUNTIME-18 será integración de combate/render real; el destino de pruebas es emulador y Saturn con CD-R, no asumir MODE ni hardware PASS.
+No continuar automáticamente a RUNTIME-18. Cuando el usuario lo autorice, la siguiente integración deberá producir un combate auténtico visible en Saturn, con arranque directo al ring si es necesario, sin priorizar frontend ni audio. Los destinos de validación son emulador Saturn y Saturn real con CD-R. El ELF incluido ahora es solo un harness de enlace y no debe grabarse como juego.

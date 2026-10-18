@@ -1,36 +1,32 @@
-# RUNTIME-17 — checkpoint consolidado de recuperación, 2026-10-18
+# RUNTIME-17 — checkpoint verificado R02, 18 de octubre de 2026
 
-**CONSOLIDADO Y PROBADO EN HOST/SH-2. CIERRE CANÓNICO PENDIENTE. NO RUNTIME-18. NO HARDWARE PASS.**
+Cerrados los pendientes de este checkpoint: owners nativos $2017A, $6E34 y $9132, integración $18C4, composición de registros de un frame activo y compilación/enlace SH-2. No se ha iniciado RUNTIME-18. Este cierre no declara equivalencia ROM-EXACT universal ni aptitud para hardware.
 
-## Procedencia
+## Procedencia y cambios
 
-Base GitHub: `gameplay-runtime17-staging`, commit `b85df2d23e4c64ecf24b5d2d41c4dc7b9000189e`, árbol `01b72cee6491312f3a55fd64efa1f49539863408`. Se recuperaron y verificaron todos sus blobs y el objeto commit exacto mediante el conector. El repositorio local es shallow en ese commit. No se ha modificado ni publicado ninguna rama remota.
+Base GitHub exacta b85df2d23e4c64ecf24b5d2d41c4dc7b9000189e; recuperación anterior a35ffa429037986f55f09254106e0400c04427fe. Rama local recovery/runtime17-participants-20261018. El commit final consta en CHECKPOINT.txt del paquete. No hay cambios publicados en GitHub. Se conserva la historia recuperada con su límite shallow.
 
-Implementación acumulativa: Continuation-4 → Continuation-3 → `RUNTIME17-CONTINUATION-2-LIVE-WORKTREE-WIP.zip`, SHA256 `df130112b94d746ebc796bebf9159b23670ec73268ed6ab5698c8264dba69d6e`. El checkpoint $7A00 del relevo coincide con SHA256 `ebcd26f52a5fa5c4aa5d0f0b71dea8b667c9e5cc5a9e02b8dcd0d037739ab555`. No se tomó gameplay de WIP160/Test255.
+La ROM autoridad mantiene SHA1 a726c46f350723ea73158bc78055d17d418b14e2. TAG $6E34 y Royal $9132 se implementan en C nativo; los 22 helpers compartidos tienen generación reproducible y auditoría de fuente contra la ROM. No se enlaza un emulador con el runtime. Los emuladores MC68000 se usan exclusivamente como oráculos HOST independientes.
 
-Rama local: `recovery/runtime17-20261018`. El commit de entrega consta en el manifiesto externo del paquete.
+$18C4 usa los owners nativos por defecto, lee entradas actuales y detiene el recorrido después del primer pago. Las operaciones de vídeo se preparan antes del commit; un fallo conserva el estado de gameplay. Los callbacks de transporte no sustituyen decisiones de gameplay. Se corrigieron omisiones de anchura y preservación de registros en input, cámara, iteradores, árbitro, raw $7C, $F560 y $7A00. El ACK sincroniza los alias del contador de frames y el selector A/B.
 
-## Cambios efectivos
+## Evidencia y alcance
 
-- Importado el árbol acumulativo real con owners post-$7A00 y ramas A/B, ausentes del espejo GitHub anterior.
-- Implementado $2017A desde desensamblado de ROM: scans, escrituras solapadas, D0–D7, actor seleccionado, activación y gates post-ACK. $206FE conserva su frontera externa de transferencia de vídeo y sus registros; falla si falta el callback.
-- Corregidas omisiones demostradas de shadow de registros en $10120, $10E6A y $F4C2. Conservadas anchuras WORD y mitades altas; añadidas regresiones.
-- Auditoría $262D2 acepta ruta ROM por argumento, eliminando la dependencia fija de /mnt/data.
-- Añadida reproducción portable HOST y SH-2. Corregido el orden de configuración Yaul para que el mapa se genere en audit/saturn-link-build sin depender de una carpeta creada por HOST.
+- 48 tests HOST con Clang, 48 con ASan/UBSan y 48 con GCC Linux; análisis GCC -fanalyzer de las fuentes.
+- TAG: 28 casos contra ROM original, RAM/actores, D0–D7, FG0/paletas y orden de transferencias por canal.
+- Royal: 45 casos contra ROM original en Musashi, los 22 helpers alcanzados, RAM/FG0, D0–D7/A0–A6 y orden de escrituras.
+- Frame activo: ejecución real de $F9A a $10E8; D0–D7 y RNG coinciden en los 29 puntos de salida y tras ACK. Actor visible con acción $7C, movimiento $0200→$01E0, árbitro, objetos fijos y TAG nativo. Se verifica el selector de la siguiente rama B, no un segundo frame completo.
+- Contrato de registros del render $D1FC: 144 comparaciones ROM para records simples/compactados sin enlaces y 18 rechazos de casos fuera de ese contrato. El adaptador del test lee records reales; no reemplaza registros por tuples esperados. No es un renderizador Saturn completo.
+- Cuatro regresiones ROM adicionales verifican midpoint del árbitro y pago/refill, incluidos éxito y fallo.
+- 14 auditorías estáticas de ROM y reproducción byte a byte de la fuente generada.
+- Enlace limpio SH-2 GCC 13.2.0 con cero símbolos sin resolver. El SDK conserva avisos de segmentos RWX. El ELF es un harness de enlace, no un combate arrancable.
 
-## Evidencia de esta ejecución
+Los resultados completos y hashes están en evidence/ y SHA256SUMS del paquete. validation/README.md permite repetir las pruebas con la ROM y el SDK originales.
 
-43/43 tests con Apple Clang 17 strict; 43/43 con ASan/UBSan; 43/43 con GCC Linux 16.2 strict. GCC -fanalyzer sobre todas las fuentes src/generated sin diagnósticos. Catorce auditorías de firmas/spans ROM pasan, incluida SHA1 canónica `a726c46f350723ea73158bc78055d17d418b14e2`.
+## Lo que no acredita este cierre
 
-Compilación limpia y enlace completo con SH-2 GCC 13.2.0: `nm -u` vacío. ELF observado SHA256 `fabedfe7d63e7a0afba98043b47b414104679b482318be8e8dce3fa270a54865`. El linker mantiene avisos RWX de los scripts Yaul suministrados. Es un harness de enlace, no un ejecutable de combate. Estos resultados prueban las comprobaciones ejecutadas, no equivalencia total con el arcade.
+No se han probado igualdad de framebuffer, todos los records de sprites, todas las acciones/ramas de gameplay, timing, ni un combate completo en Saturn. Los cambios de escena y otras dependencias externas conservan su bloqueo explícito cuando falta una implementación; no se sustituyen por éxito provisional. Los dobles de callbacks que quedan en tests históricos solo prueban contratos aislados.
 
-## Bloqueos que impiden declarar RUNTIME-17 cerrado
+No hay BIN/CUE ni disco jugable. Pruebas de emulador Saturn y Saturn real con CD-R: NO EJECUTADAS. No usar el harness como imagen para grabar. RUNTIME-18 permanece sin comenzar hasta una nueva instrucción.
 
-1. `$18C4` delega gameplay TAG `$6E34` y Royal `$9132`; no hay implementación nativa recuperada. El test A sustituye TAG por un callback de prueba exitoso. No se ha añadido sustituto a producción.
-2. `$9132` alcanza selección Royal, estado persistente adicional, inputs, FG0 y helpers `$1079E/$782C/$7506/$7720/$75EE`; no puede cerrarse como una pequeña inicialización. La evidencia directa y los hashes de spans están en docs/recovery-evidence/royal-9132-boundary.txt.
-3. Falta la prueba completa de composición D1–D7 de todos los hijos del dispatcher y un oracle ROM del tuple de registros/RNG de un frame activo completo. Los tests A/B comprueban recorridos con acciones restringidas.
-4. Rutas de cambio de escena después del ACK permanecen explícitamente bloqueadas. Antes del ACK, WF_BLOCKED por dependencia no es una espera reanudable: no repetir frame como si fuera VBlank.
-
-El entry Saturn conserva el harness de enlace. Emulador, imagen BIN/CUE y Saturn real con CD-R: NOT RUN. No se entrega disco jugable ni se promueve a RUNTIME-18.
-
-La documentación histórica conservada en docs/recovery-evidence describe su momento original; este estado y los logs de recuperación prevalecen al interpretar qué se probó ahora.
+La documentación histórica describe estados anteriores. Este archivo y la evidencia R02 prevalecen para el checkpoint actual.

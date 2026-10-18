@@ -14,6 +14,7 @@
 #include "wf_r17_transient_reset_10e6a.h"
 #include "wf_r17_effects_7a00.h"
 #include "wf_r17_post7a00.h"
+#include "wf_r17_participant_io.h"
 
 typedef wf_status_t (*wf_r17_platform_transition_fn)(wf_runtime_t *rt,uint8_t royal_path,void *user);
 typedef wf_status_t (*wf_r17_audio_command_fn)(wf_runtime_t *rt,uint16_t raw_command,void *user);
@@ -60,6 +61,8 @@ typedef struct wf_gameplay_binding_context {
  wf_r17_render_2836_batch_fn post7_render_2836_batch;
  wf_r17_tag_6e34_fn post7_tag_6e34;
  wf_r17_royal_9132_fn post7_royal_9132;
+ wf_r17_participant_input_fn participant_input_word;
+ wf_r17_participant_commit_fn participant_commit_batch;
  void *r17_owner_user;
  uint32_t last_blocked_phase;
  uint32_t last_blocked_dependency;

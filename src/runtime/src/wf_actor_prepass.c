@@ -84,7 +84,9 @@ static wf_status_t dispatch_state(wf_runtime_t*rt,wf_actor_raw_t*a,wf_gameplay_b
 }
 wf_status_t wf_phase_actor_prepass_f18a(wf_runtime_t*rt,uint32_t addr,void*user){
  (void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!rt)return WF_BAD_STATE;
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,0u);
  for(unsigned i=0;i<WF_ACTOR_SLOTS;i++){
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)(i+1u));
   wf_actor_raw_t*a=&rt->actors[i];if(!bit(a,WF_A_ACTIVE,7))continue;if(bit(a,WF_A_ROLE,6)||bit(a,WF_A_ROLE,7))continue;
   if(bit(a,WF_A_FLAGS33,1)&&!bit(a,WF_A_FLAGS34,2)){
    wf_r17_human_raw23_ctx_t hc;wf_r17_human_raw23_trace_t ht;wf_status_t hs;
@@ -95,6 +97,7 @@ wf_status_t wf_phase_actor_prepass_f18a(wf_runtime_t*rt,uint32_t addr,void*user)
   }
   wf_set_be16(a,WF_A_CPU_B4,0u);wf_set_be16(a,WF_A_CPU_B6,0u);
   if(wf_u8(a,WF_A_STATE+1u)==0xffu)continue;
+  wf_r17_m68k_move_w(&rt->m68k_regs,1u,(uint16_t)(wf_u8(a,WF_A_STATE+1u)*4u));
   wf_status_t s=dispatch_state(rt,a,c);if(s!=WF_OK)return s;
  }
  return WF_OK;

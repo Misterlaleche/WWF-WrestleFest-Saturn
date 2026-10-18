@@ -69,6 +69,7 @@ int main(void){
     wf_runtime_vblank_ack(&rt);
     assert(wf_runtime_frame(&rt)==WF_OK);
     assert(rt.g.frame_counter==1u);
+    assert(rt.g.pipeline_mode==1u&&rt.g.global_0082==0u); /* same ROM LONG */
     assert(rt.frame_stage==0u&&rt.frame_ready==0u);
     assert(rt.g.rng_state==rng_after_frame0); /* post-ACK itself must not call RNG */
 

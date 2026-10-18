@@ -69,3 +69,31 @@ size_t wf_r17_emit_actor_order_2836(wf_r17_render_queue_t *q,wf_actor_raw_t **ou
     }
     return used;
 }
+
+/* ROM $D216 clears D7. $D2AE and $D802 balance their $A-byte frame.
+ * For packed unchained records $D8EA sets D6=$1C1610, unchanged by
+ * either clipping branch. For plain records $D312/$D330/$D34C leave
+ * 5/4/0 according to the LAST piece's unsigned X/Y clipping tests.
+ * This is a register contract, not a substitute for the WP26 sprite sink. */
+wf_status_t wf_r17_render_record_shadow(wf_runtime_t *rt,const wf_actor_raw_t *a,const uint8_t *record,size_t bytes){
+    uint16_t header;unsigned count;uint32_t d6;
+    if(!rt||!a||!record||!rt->m68k_regs.valid)return WF_BAD_STATE;
+    if(bytes<2u)return WF_BLOCKED;
+    header=(uint16_t)(((uint16_t)record[0]<<8)|record[1]);count=header&255u;
+    /* Linked prefix/suffix and kind2/3 require their own record traversal. */
+    if((header&0x8300u)||!count)return WF_BLOCKED;
+    if(header&0x4000u){if(bytes<4u)return WF_BLOCKED;d6=0x001c1610u;}
+    else{
+        uint16_t x,y;int16_t dx;
+        const uint8_t *last;
+        if(bytes<2u+6u*count)return WF_BLOCKED;
+        last=record+2u+6u*(count-1u);dx=(int8_t)last[0];
+        /* NEG.B followed by EXT.W: -128 wraps back to -128. */
+        if(wf_be16(a,WF_A_MIRROR)&0x8000u)dx=(int8_t)(uint8_t)(0u-last[0]);
+        x=(uint16_t)(wf_be16(a,WF_A_SCREEN_X)+0x10u+(uint16_t)dx);
+        y=(uint16_t)(wf_be16(a,WF_A_SCREEN_Y)+0x90u+(uint16_t)(int16_t)(int8_t)last[1]);
+        d6=x>0x015fu?5u:y>0x0187u?4u:0u;
+    }
+    rt->m68k_regs.d[6]=d6;rt->m68k_regs.d[7]=0u;
+    return WF_OK;
+}

@@ -1,3 +1,5 @@
+> RUNTIME-17 R02 (2026-10-18): see CURRENT-STATE-LATEST.md for this checkpoint and its tested scope. Historical hardware results below belong to earlier separate builds; they do not certify this gameplay checkpoint.
+
 # HANDOFF
 
 Read `README.md`, `PROJECT-STATE.md`, `docs/SATURN-PIPELINE.md`, `docs/AUDIO-HARDWARE-VALIDATION.md`, `docs/RUNTIME-AUDIO-RECONCILIATION.md`, and `docs/AUDIO-PRODUCER-CLEANR01-OWNER-MAP.md` before doing any work.

@@ -23,6 +23,7 @@ typedef wf_status_t (*wf_r17_render_2836_batch_fn)(wf_runtime_t *rt,wf_actor_raw
  * when they return non-WF_OK they must not leave externally committed state. */
 typedef wf_status_t (*wf_r17_tag_6e34_fn)(wf_runtime_t *rt,void *user);
 typedef wf_status_t (*wf_r17_royal_9132_fn)(wf_runtime_t *rt,wf_actor_raw_t *target,uint16_t paid_index,void *user);
+struct wf_r17_participant_io;
 typedef struct wf_r17_post7_ctx {
     wf_r17_post7_audio_fn audio_2052;
     wf_r17_fg0_batch_fn fg0_batch;
@@ -39,6 +40,7 @@ typedef struct wf_r17_post7_ctx {
     wf_r17_render_2836_batch_fn render_2836_batch;
     wf_r17_tag_6e34_fn tag_6e34;
     wf_r17_royal_9132_fn royal_9132;
+    struct wf_r17_participant_io *participants;
     wf_r17_render_ctx_t *render;
     void *user;
     uint32_t blocked_dependency_rom;

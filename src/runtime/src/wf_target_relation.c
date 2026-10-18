@@ -136,8 +136,9 @@ primary_a4: wf_set_be32(src,WF_A_TARGET,p4);wf_set_be32(src,WF_A_TARGET2,p3);ret
 
 wf_status_t wf_phase_target_relation_20958(wf_runtime_t *rt,uint32_t addr,void *user){
  (void)addr;(void)user;if(!rt)return WF_BAD_STATE;
+ wf_r17_m68k_moveq(&rt->m68k_regs,6u,3);wf_r17_m68k_moveq(&rt->m68k_regs,5u,0);
  /* First ROM loop is exactly four wrestler records. */
- for(unsigned slot=0;slot<4u;slot++){
+ for(unsigned slot=0;slot<4u;slot++,wf_r17_m68k_move_b(&rt->m68k_regs,5u,(uint8_t)slot),wf_r17_m68k_move_w(&rt->m68k_regs,6u,(uint16_t)(3u-slot))){
   wf_actor_raw_t *a=&rt->actors[slot];
   if(!bit(a,WF_A_ACTIVE,7)||bit(a,WF_A_ROLE,6)||bit(a,WF_A_ROLE,7)||bit(a,WF_A_FLAGS34,6)||bit(a,WF_A_FLAGS34,7))continue;
   uint8_t st=wf_u8(a,WF_A_STATE+1);if(st!=0u&&st!=1u&&st!=9u)continue;
@@ -153,15 +154,16 @@ wf_status_t wf_phase_target_relation_20958(wf_runtime_t *rt,uint32_t addr,void *
    if(!bit(l,WF_A_SELECTOR,5)){if(!ptr(rt,q))return WF_BLOCKED;wf_set_be32(a,WF_A_TARGET,q);}else wf_set_be32(a,WF_A_TARGET,rt->g.global_168c);
   }
  }
+ wf_r17_m68k_moveq(&rt->m68k_regs,6u,8);
  if((rt->g.mode_0161&1u)==0u){
-  for(unsigned slot=0;slot<WF_ACTOR_SLOTS;slot++){
+  for(unsigned slot=0;slot<WF_ACTOR_SLOTS;slot++,wf_r17_m68k_move_w(&rt->m68k_regs,6u,(uint16_t)(8u-slot))){
    wf_actor_raw_t*a=&rt->actors[slot];if(!bit(a,WF_A_ACTIVE,7))continue;
-   uint8_t roles=(uint8_t)(wf_u8(a,WF_A_ROLE)&0xc0u);if(roles==0u||bit(a,WF_A_CPU_B5,7)||bit(a,WF_A_FLAGS34,4)||!bit(a,WF_A_STATE,7))continue;
+   uint8_t roles=(uint8_t)(wf_u8(a,WF_A_ROLE)&0xc0u);wf_r17_m68k_moveq(&rt->m68k_regs,0u,0);wf_r17_m68k_move_b(&rt->m68k_regs,0u,roles);if(roles==0u||bit(a,WF_A_CPU_B5,7)||bit(a,WF_A_FLAGS34,4)||!bit(a,WF_A_STATE,7))continue;
    uint8_t st=wf_u8(a,WF_A_STATE+1);if(st==0u){if(!bit(a,WF_A_CPU_B5,3)){wf_status_t s=tag_role_target_20b44(rt,slot);if(s!=WF_OK)return s;}}
    else if(st==1u&&wf_u8(a,WF_A_CPU_SUBSTATE)==0u){wf_status_t s=tag_role_target_20b44(rt,slot);if(s!=WF_OK)return s;}
   }
  }else{
-  for(unsigned slot=0;slot<WF_ACTOR_SLOTS;slot++){
+  for(unsigned slot=0;slot<WF_ACTOR_SLOTS;slot++,wf_r17_m68k_move_w(&rt->m68k_regs,6u,(uint16_t)(8u-slot))){
    wf_actor_raw_t*a=&rt->actors[slot];if(!bit(a,WF_A_ACTIVE,7)||!bit(a,WF_A_ROLE,7)||bit(a,WF_A_FLAGS34,4))continue;
    uint8_t st=wf_u8(a,WF_A_STATE+1);int run=0;
    if(st==0u){if(!bit(a,WF_A_CPU_B5,3))run=1;}

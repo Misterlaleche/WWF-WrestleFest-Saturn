@@ -1,3 +1,5 @@
+> RUNTIME-17 R02 (2026-10-18): see CURRENT-STATE-LATEST.md for this checkpoint and its tested scope. Historical hardware results below belong to earlier separate builds; they do not certify this gameplay checkpoint.
+
 # WWF WrestleFest arcade -> Sega Saturn
 
 Private development repository for a native Sega Saturn reimplementation of Technos WWF WrestleFest (1991).

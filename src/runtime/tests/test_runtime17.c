@@ -66,7 +66,9 @@ static void test_f98c_a0e0(void){
 static void test_f560_rng(void){
  wf_runtime_t rt;wf_gameplay_binding_context_t c;memset(&rt,0,sizeof(rt));memset(&c,0,sizeof(c));wf_runtime_init(&rt,0,0);rt.g.rng_state_valid=1u;rt.g.rng_state=0x10203040u;rt.g.credited_route=1u;rt.g.progression_0162=0u;
  active(&rt.actors[0]);active(&rt.actors[1]);wf_set_be16(&rt.actors[0],WF_A_STATE,0x8000u);wf_set_be16(&rt.actors[1],WF_A_STATE,0x8000u);wf_set_u8(&rt.actors[1],WF_A_ROLE,0x80u);wf_set_u8(&rt.actors[0],WF_A_FACING,0u);wf_set_u8(&rt.actors[1],WF_A_FACING,0x80u);wf_set_be32(&rt.actors[0],WF_A_TARGET,wf_actor_rom_base(1));wf_set_be32(&rt.actors[1],WF_A_TARGET,wf_actor_rom_base(0));wf_set_be16(&rt.actors[0],WF_A_X,0x200u);wf_set_be16(&rt.actors[1],WF_A_X,0x220u);wf_set_be16(&rt.actors[0],WF_A_Y,0x100u);wf_set_be16(&rt.actors[1],WF_A_Y,0x108u);
- assert(wf_phase_pair_relation_f560(&rt,0xf560u,&c)==WF_OK);assert(rt.g.rng_state!=0x10203040u);assert((rt.m68k_regs.d[0]&0xffff0000u)==(rt.g.rng_state&0xffff0000u));assert((rt.m68k_regs.d[0]&0xffffu)==(rt.g.rng_state&0x000fu));
+ assert(wf_phase_pair_relation_f560(&rt,0xf560u,&c)==WF_OK);assert(rt.g.rng_state!=0x10203040u);assert(rt.m68k_regs.d[0]==9u); /* $F5E4 restores D0; $250E finishes at slot 9. */
+ assert(rt.g.rng_state==0xc1020305u); /* direct unmodified ROM oracle */
+ assert(rt.m68k_regs.d[1]==0u&&rt.m68k_regs.d[2]==0x113u&&rt.m68k_regs.d[3]==8u&&rt.m68k_regs.d[4]==0xffffu);
  puts("PASS R17 F6F2 shared RNG shadow");
 }
 static void test_signed_y(void){

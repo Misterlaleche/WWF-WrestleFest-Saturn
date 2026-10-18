@@ -45,4 +45,7 @@ wf_status_t wf_r17_queue_27b8(wf_r17_render_ctx_t *ctx, wf_actor_raw_t *a);
 size_t wf_r17_emit_actor_order_2836(wf_r17_render_queue_t *q, wf_actor_raw_t **out, size_t out_cap);
 wf_status_t wf_r17_referee_1f914(wf_runtime_t *rt, wf_actor_raw_t *referee, wf_r17_render_ctx_t *render, const wf_r17_referee_hooks_t *hooks, uint8_t mode_0161);
 wf_status_t wf_r17_wrestlers_f4c2(wf_runtime_t *rt, wf_r17_render_ctx_t *render, const wf_r17_f4c2_hooks_t *hooks);
+/* Register-only WP26 boundary for admitted, unchained raw records.
+ * Does not emit sprites. Unsupported composition kinds block without mutation. */
+wf_status_t wf_r17_render_record_shadow(wf_runtime_t *,const wf_actor_raw_t *,const uint8_t *,size_t);
 #endif

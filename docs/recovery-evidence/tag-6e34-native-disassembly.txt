@@ -1,0 +1,370 @@
+Canonical ROM SHA1 a726c46f350723ea73158bc78055d17d418b14e2; direct disassembly; tables separately extracted.
+006e34: tst.w      $1c007c.l
+006e3a: beq.w      $6f0c
+006e3e: move.w     $1c0066.l, d0
+006e44: andi.w     #$800, d0
+006e48: cmpi.w     #$800, d0
+006e4c: beq.w      $70cc
+006e50: moveq      #$3, d4
+006e52: lea.l      $1c05b0.l, a0
+006e58: lea.l      $140020.l, a1
+006e5e: btst.b     #$7, $1(a1)
+006e64: bne.w      $6efc
+006e68: btst.b     #$7, $0(a0)
+006e6e: beq.w      $6f0e
+006e72: tst.w      $fe(a0)
+006e76: bne.w      $6efc
+006e7a: tst.b      $a0(a0)
+006e7e: bne.w      $6efc
+006e82: btst.b     #$0, $a1(a0)
+006e88: bne.b      $6efc
+006e8a: moveq      #$5, d0
+006e8c: jsr        $55a.l
+006e92: bcc.b      $6efc
+006e94: bset.b     #$0, $a1(a0)
+006e9a: btst.b     #$0, $33(a0)
+006ea0: beq.b      $6ec0
+006ea2: bset.b     #$1, $33(a0)
+006ea8: movea.l    $86(a0), a2
+006eac: move.l     a1, $8a(a2)
+006eb0: bset.b     #$1, $33(a2)
+006eb6: bclr.b     #$6, $56(a2)
+006ebc: movea.l    a2, a0
+006ebe: bra.b      $6ee2
+006ec0: btst.b     #$1, $33(a0)
+006ec6: beq.b      $6ed2
+006ec8: movea.l    $86(a0), a2
+006ecc: bset.b     #$1, $33(a2)
+006ed2: move.l     a1, $8a(a0)
+006ed6: bset.b     #$1, $33(a0)
+006edc: bclr.b     #$6, $56(a0)
+006ee2: move.b     #$1, $a6(a0)
+006ee8: jsr        $1079e.l
+006eee: move.w     $66(a0), $6e(a0)
+006ef4: bset.b     #$4, $35(a0)
+006efa: rts        
+006efc: adda.l     #$10c, a0
+006f02: adda.l     #$2, a1
+006f08: dbra       d4, $6e5e
+006f0c: rts        
+006f0e: lea.l      $1c09e0.l, a3
+006f14: tst.w      $fe(a3)
+006f18: bne.b      $6efc
+006f1a: tst.b      $a0(a3)
+006f1e: bne.b      $6efc
+006f20: cmpi.b     #$4, $57(a3)
+006f26: beq.b      $6efc
+006f28: moveq      #$5, d0
+006f2a: jsr        $55a.l
+006f30: bcc.b      $6efc
+006f32: lea.l      $1c09e0.l, a3
+006f38: lea.l      $1c0aec.l, a4
+006f3e: btst.b     #$0, $33(a3)
+006f44: bne.b      $6f48
+006f46: exg.l      a3, a4
+006f48: cmpi.b     #$2, d4
+006f4c: beq.b      $6f5e
+006f4e: bcc.b      $6f66
+006f50: cmpi.b     #$1, d4
+006f54: beq.b      $6f6e
+006f56: lea.l      $1c07c8.l, a2
+006f5c: bra.b      $6f74
+006f5e: lea.l      $1c05b0.l, a2
+006f64: bra.b      $6f74
+006f66: lea.l      $1c06bc.l, a2
+006f6c: bra.b      $6f74
+006f6e: lea.l      $1c08d4.l, a2
+006f74: movea.l    a0, a5
+006f76: movea.l    a2, a6
+006f78: move.l     a3, d5
+006f7a: move.l     a4, d6
+006f7c: move.l     #$86, d1
+006f82: subq.l     #$1, d1
+006f84: move.w     (a3), (a5)+
+006f86: move.w     (a4), (a6)+
+006f88: move.w     #$0, (a3)+
+006f8c: move.w     #$0, (a4)+
+006f90: dbra       d1, $6f84
+006f94: movea.l    d5, a3
+006f96: movea.l    d6, a4
+006f98: clr.b      $56(a0)
+006f9c: bset.b     #$1, $33(a0)
+006fa2: move.l     a1, $8a(a0)
+006fa6: move.w     #$4000, $aa(a0)
+006fac: move.b     #$1, $a6(a0)
+006fb2: bset.b     #$0, $a1(a0)
+006fb8: move.l     a2, $86(a0)
+006fbc: tst.l      $26(a0)
+006fc0: beq.b      $6fdc
+006fc2: movea.l    $26(a0), a5
+006fc6: cmpa.l     $26(a5), a3
+006fca: bne.b      $6fd2
+006fcc: move.l     a0, $26(a5)
+006fd0: bra.b      $6fdc
+006fd2: cmpa.l     $9c(a5), a3
+006fd6: bne.b      $6fdc
+006fd8: move.l     a0, $9c(a5)
+006fdc: tst.l      $9c(a0)
+006fe0: beq.b      $6ffc
+006fe2: movea.l    $9c(a0), a5
+006fe6: cmpa.l     $26(a5), a3
+006fea: bne.b      $6ff2
+006fec: move.l     a0, $26(a5)
+006ff0: bra.b      $6ffc
+006ff2: cmpa.l     $9c(a5), a3
+006ff6: bne.b      $6ffc
+006ff8: move.l     a0, $9c(a5)
+006ffc: bset.b     #$4, $35(a0)
+007002: jsr        $1079e.l
+007008: jsr        $782c.l
+00700e: jsr        $c1ea.l
+007014: move.w     $66(a0), $6e(a0)
+00701a: movem.l    a0-a2, -(a7)
+00701e: jsr        $7720.l
+007024: jsr        $75ee.l
+00702a: movem.l    (a7)+, a0-a2
+00702e: clr.b      $56(a2)
+007032: ori.b      #$40, $56(a2)
+007038: move.w     #$4000, $aa(a2)
+00703e: move.l     a1, $8a(a2)
+007042: move.l     a0, $86(a2)
+007046: tst.l      $26(a2)
+00704a: beq.b      $7068
+00704c: movea.l    $26(a2), a5
+007050: cmpa.l     $26(a5), a4
+007054: bne.b      $705c
+007056: move.l     a2, $26(a5)
+00705a: bra.b      $7068
+00705c: cmpa.l     $9c(a5), a4
+007060: bne.b      $7068
+007062: move.l     a2, $9c(a5)
+007066: bra.b      $7088
+007068: tst.l      $9c(a2)
+00706c: beq.b      $7088
+00706e: movea.l    $9c(a2), a5
+007072: cmpa.l     $26(a5), a4
+007076: bne.b      $707e
+007078: move.l     a2, $26(a5)
+00707c: bra.b      $7088
+00707e: cmpa.l     $9c(a5), a4
+007082: bne.b      $7088
+007084: move.l     a2, $9c(a5)
+007088: cmpa.l     $1c1684.l, a4
+00708e: bne.b      $7098
+007090: move.l     a2, $1c1684.l
+007096: bra.b      $709e
+007098: move.l     a2, $1c1688.l
+00709e: movea.l    a2, a0
+0070a0: bset.b     #$4, $35(a0)
+0070a6: jsr        $1079e.l
+0070ac: jsr        $782c.l
+0070b2: jsr        $c1ea.l
+0070b8: move.w     $66(a0), $6e(a0)
+0070be: jsr        $7720.l
+0070c4: jsr        $75ee.l
+0070ca: rts        
+0070cc: btst.b     #$6, $1c0160.l
+0070d4: bne.w      $71c0
+0070d8: btst.b     #$7, $1c0160.l
+0070e0: bne.w      $71c0
+0070e4: btst.b     #$5, $1c1690.l
+0070ec: bne.w      $71c2
+0070f0: clr.w      d0
+0070f2: jsr        $250e.l
+0070f8: bcs.w      $71c0
+0070fc: tst.w      $fe(a0)
+007100: bne.w      $71c0
+007104: move.l     #$140020, $1c0156.l
+00710e: btst.b     #$7, $1c05b0.l
+007116: beq.b      $7122
+007118: move.l     #$140022, $1c0156.l
+007122: movea.l    $1c0156.l, a2
+007128: move.w     $0(a2), d0
+00712c: andi.w     #$80, d0
+007130: bne.w      $71c0
+007134: moveq      #$5, d0
+007136: jsr        $55a.l
+00713c: bcc.w      $71c0
+007140: cmpi.b     #$4, $1c0163.l
+007148: beq.b      $7156
+00714a: cmpi.b     #$9, $1c0163.l
+007152: beq.b      $7156
+007154: bra.b      $71a0
+007156: lea.l      $1c09e0.l, a3
+00715c: tst.w      $fe(a3)
+007160: bne.b      $71a0
+007162: tst.b      $a0(a3)
+007166: bne.b      $71a0
+007168: movea.l    $1c0156.l, a1
+00716e: bset.b     #$7, $1c0160.l
+007176: bclr.b     #$6, $1c0160.l
+00717e: clr.w      $1c1690.l
+007184: lea.l      $1c06bc.l, a0
+00718a: btst.b     #$7, $1c05b0.l
+007192: bne.w      $6e94
+007196: lea.l      $1c08d4.l, a0
+00719c: bra.w      $6e94
+0071a0: bset.b     #$5, $1c1690.l
+0071a8: moveq      #$0, d0
+0071aa: jsr        $51d2.l
+0071b0: moveq      #$1, d0
+0071b2: jsr        $51d2.l
+0071b8: bset.b     #$6, $1c1691.l
+0071c0: rts        
+0071c2: btst.b     #$6, $1c1690.l
+0071ca: bne.b      $71c0
+0071cc: addq.w     #$1, $1c1698.l
+0071d2: cmpi.w     #$200, $1c1698.l
+0071da: bcc.w      $725c
+0071de: bsr.w      $7304
+0071e2: tst.b      $1c15e1.l
+0071e8: bne.w      $725c
+0071ec: moveq      #$0, d0
+0071ee: move.b     $1c15e3.l, d0
+0071f4: btst.b     #$6, $1c1691.l
+0071fc: beq.b      $724e
+0071fe: lea.l      $54f8.l, a3
+007204: tst.b      (a3, d0.w)
+007208: bne.b      $722c
+00720a: moveq      #$2, d0
+00720c: jsr        $527e.l
+007212: moveq      #$1, d0
+007214: jsr        $51d2.l
+00721a: bset.b     #$6, $1c1691.l
+007222: bclr.b     #$7, $1c1691.l
+00722a: rts        
+00722c: moveq      #$1, d0
+00722e: jsr        $527e.l
+007234: moveq      #$2, d0
+007236: jsr        $51d2.l
+00723c: bset.b     #$7, $1c1691.l
+007244: bclr.b     #$6, $1c1691.l
+00724c: rts        
+00724e: lea.l      $5503.l, a3
+007254: tst.b      (a3, d0.w)
+007258: bne.b      $720a
+00725a: bra.b      $722c
+00725c: clr.w      $1c1698.l
+007262: lea.l      $1c09e0.l, a3
+007268: tst.w      $fe(a3)
+00726c: bne.w      $71ec
+007270: tst.b      $a0(a3)
+007274: bne.w      $71ec
+007278: moveq      #$0, d0
+00727a: jsr        $527e.l
+007280: moveq      #$1, d0
+007282: jsr        $527e.l
+007288: moveq      #$2, d0
+00728a: jsr        $527e.l
+007290: movea.l    $1c0156.l, a1
+007296: btst.b     #$6, $1c1691.l
+00729e: beq.b      $72d2
+0072a0: moveq      #$3, d4
+0072a2: lea.l      $1c05b0.l, a0
+0072a8: btst.b     #$7, $0(a0)
+0072ae: beq.b      $72b8
+0072b0: lea.l      $1c07c8.l, a0
+0072b6: moveq      #$1, d4
+0072b8: bset.b     #$6, $1c0160.l
+0072c0: bclr.b     #$7, $1c0160.l
+0072c8: clr.w      $1c1690.l
+0072ce: bra.w      $6f32
+0072d2: bset.b     #$7, $1c0160.l
+0072da: bclr.b     #$6, $1c0160.l
+0072e2: clr.w      $1c1690.l
+0072e8: lea.l      $1c06bc.l, a0
+0072ee: btst.b     #$7, $1c05b0.l
+0072f6: bne.w      $6e94
+0072fa: lea.l      $1c08d4.l, a0
+007300: bra.w      $6e94
+007304: movea.l    $1c0156.l, a3
+00730a: move.w     $0(a3), d3
+00730e: not.w      d3
+007310: andi.w     #$ff, d3
+007314: move.b     d3, $1c15e3.l
+00731a: andi.b     #$f, $1c15e3.l
+007322: move.b     $1c15e2.l, d4
+007328: cmp.b      $1c15e3.l, d4
+00732e: bne.b      $7338
+007330: clr.b      $1c15e3.l
+007336: bra.b      $7342
+007338: move.b     $1c15e3.l, $1c15e2.l
+007342: lsr.b      #$4, d3
+007344: andi.b     #$3, d3
+007348: and.b      d3, $1c15e0.l
+00734e: eor.b      d3, $1c15e0.l
+007354: move.b     $1c15e0.l, $1c15e1.l
+00735e: move.b     d3, $1c15e0.l
+007364: rts        
+0051d2: movem.l    d0-d2/a0-a1, -(a7)
+0051d6: lea.l      $5224.l, a0
+0051dc: lsl.w      #$2, d0
+0051de: movea.l    (a0, d0.w), a0
+0051e2: move.w     $0(a0), d0
+0051e6: cmpi.w     #$fff, d0
+0051ea: beq.b      $521e
+0051ec: movea.l    #$c1770, a1
+0051f2: andi.l     #$ffff, d0
+0051f8: adda.l     d0, a1
+0051fa: move.w     $2(a0), d0
+0051fe: move.w     $4(a0), d1
+005202: move.l     #$1e, d2
+005208: swap       d0
+00520a: or.l       d0, d2
+00520c: swap       d0
+00520e: move.l     d2, (a1)+
+005210: addq.l     #$1, d0
+005212: dbra       d1, $5202
+005216: adda.l     #$6, a0
+00521c: bra.b      $51e2
+00521e: movem.l    (a7)+, d0-d2/a0-a1
+005222: rts        
+00527e: movem.l    d0-d2/a0-a1, -(a7)
+005282: lea.l      $5224.l, a0
+005288: lsl.w      #$2, d0
+00528a: movea.l    (a0, d0.w), a0
+00528e: move.w     $0(a0), d0
+005292: cmpi.w     #$fff, d0
+005296: beq.b      $52b8
+005298: movea.l    #$c1770, a1
+00529e: andi.l     #$ffff, d0
+0052a4: adda.l     d0, a1
+0052a6: move.w     $4(a0), d1
+0052aa: clr.l      (a1)+
+0052ac: dbra       d1, $52aa
+0052b0: adda.l     #$6, a0
+0052b6: bra.b      $528e
+0052b8: movem.l    (a7)+, d0-d2/a0-a1
+0052bc: rts        
+00c1ea: tst.w      $1c007c.l
+00c1f0: beq.b      $c238
+00c1f2: btst.b     #$0, $1c0161.l
+00c1fa: bne.b      $c238
+00c1fc: movem.l    d1-d3/a1-a3, -(a7)
+00c200: lea.l      $1c05b0.l, a1
+00c206: moveq      #$3, d1
+00c208: btst.b     #$7, $0(a1)
+00c20e: beq.b      $c22a
+00c210: move.w     $56(a1), d2
+00c214: lea.l      $c264.l, a2
+00c21a: btst.b     #$0, $33(a1)
+00c220: bne.b      $c228
+00c222: lea.l      $c294.l, a2
+00c228: bsr.b      $c23a
+00c22a: adda.l     #$10c, a1
+00c230: dbra       d1, $c208
+00c234: movem.l    (a7)+, d1-d3/a1-a3
+00c238: rts        
+00c23a: andi.l     #$f, d2
+00c240: movea.l    #$180100, a3
+00c246: move.l     d2, d3
+00c248: asl.w      #$7, d3
+00c24a: adda.l     d3, a3
+00c24c: asl.w      #$2, d2
+00c24e: movea.l    (a2, d2.w), a2
+00c252: moveq      #$f, d2
+00c254: move.w     d2, d3
+00c256: asl.w      #$1, d3
+00c258: move.w     (a2, d3.w), (a3, d3.w)
+00c25e: dbra       d2, $c254
+00c262: rts        

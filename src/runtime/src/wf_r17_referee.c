@@ -50,11 +50,16 @@ void wf_r17_raw48_pin_trigger_133a2(wf_actor_raw_t*w){if(w)setbit(w,WF_A_PINFLAG
 /* $204FA.  The ROM stores the matching actor pointers at referee +$4C/+50. */
 static wf_status_t gather_204fa(wf_runtime_t*rt,wf_actor_raw_t*r,wf_actor_raw_t**a2,wf_actor_raw_t**a3,wf_r17_referee_ctx_t*c){
  unsigned i,n=0;uint32_t p[2]={0,0};
+ wf_r17_m68k_moveq(&rt->m68k_regs,0u,8);
+ wf_r17_m68k_moveq(&rt->m68k_regs,1u,0);
  for(i=0;i<WF_ACTOR_SLOTS;i++){
   wf_actor_raw_t*a=&rt->actors[i];if(!bit(a,WF_A_ACTIVE,7)||!bit(a,WF_A_FLAGS33,0))continue;
-  if(n<2u){p[n]=wf_actor_rom_base(i);}
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,0xffffu); /* $20520 DBRA terminal count. */
+ if(n<2u){p[n]=wf_actor_rom_base(i);}
   n++;
+  wf_r17_m68k_move_l(&rt->m68k_regs,1u,(uint32_t)n*4u);
  }
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,0xffffu); /* $20520 DBRA terminal count. */
  if(n<2u)return block(c,0x000204FAu);
  wf_set_be32(r,0x4Cu,p[0]);wf_set_be32(r,0x50u,p[1]);*a2=aptr(rt,p[0]);*a3=aptr(rt,p[1]);
  return (*a2&&*a3)?WF_OK:block(c,0x000204FAu);
@@ -67,6 +72,9 @@ static wf_status_t target_204b2(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_
   uint16_t x3=wf_be16(a3,WF_A_X),y3=wf_be16(a3,WF_A_Y);
   x=(uint16_t)(((uint32_t)x+(uint32_t)x3)>>1);y=(uint16_t)(((uint32_t)y+(uint32_t)y3)>>1);
  }
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,x);
+ wf_r17_m68k_move_w(&rt->m68k_regs,2u,y);
+ if(!bit(a2,WF_A_FLAGS33,6))wf_r17_m68k_move_w(&rt->m68k_regs,1u,wf_be16(a2,WF_A_Y)<wf_be16(a3,WF_A_Y)?wf_be16(a2,WF_A_Y):wf_be16(a3,WF_A_Y));
  wf_set_be16(r,R_TARGET_X,x);wf_set_be16(r,0x1Eu,y);return WF_OK;
 }
 /* $2052E exact threshold flag writer. */
@@ -78,13 +86,14 @@ static void target_flags_2052e(wf_actor_raw_t*r){
 
 wf_status_t wf_r17_ref_acquire_20556(wf_runtime_t*rt,wf_actor_raw_t*r,int*found){
  unsigned i;if(!rt||!r||!found)return WF_BAD_STATE;*found=0;
- if(rt->g.credited_route==0u)return WF_OK;
- for(i=0;i<WF_ACTOR_SLOTS;i++){
+ if(rt->g.credited_route==0u){wf_r17_m68k_moveq(&rt->m68k_regs,5u,1);return WF_OK;}
+ wf_r17_m68k_moveq(&rt->m68k_regs,4u,8);
+ for(i=0;i<WF_ACTOR_SLOTS;i++,wf_r17_m68k_move_w(&rt->m68k_regs,4u,(uint16_t)(8u-i))){
   wf_actor_raw_t*a=&rt->actors[i];if(!bit(a,WF_A_ACTIVE,7))continue;
-  if(bit(a,WF_A_PINFLAGS,0)){wf_set_be16(r,R_STATE,0x8001u);wf_set_be32(r,R_LINK,wf_actor_rom_base(i));*found=1;return WF_OK;}
-  if(bit(a,WF_A_PINFLAGS,1)&&bit(a,WF_A_FLAGS33,0)){wf_set_be16(r,R_STATE,0x8004u);wf_set_be32(r,R_LINK,wf_actor_rom_base(i));*found=1;return WF_OK;}
+  if(bit(a,WF_A_PINFLAGS,0)){wf_set_be16(r,R_STATE,0x8001u);wf_set_be32(r,R_LINK,wf_actor_rom_base(i));*found=1;wf_r17_m68k_moveq(&rt->m68k_regs,5u,0);return WF_OK;}
+  if(bit(a,WF_A_PINFLAGS,1)&&bit(a,WF_A_FLAGS33,0)){wf_set_be16(r,R_STATE,0x8004u);wf_set_be32(r,R_LINK,wf_actor_rom_base(i));*found=1;wf_r17_m68k_moveq(&rt->m68k_regs,5u,0);return WF_OK;}
  }
- return WF_OK;
+ wf_r17_m68k_moveq(&rt->m68k_regs,5u,1);return WF_OK;
 }
 
 static wf_status_t primary5(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t*c){
@@ -137,12 +146,15 @@ static wf_status_t primary_dispatch(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_refe
 }
 
 /* $205AC.  This is kept byte/word shaped, including the exact 32-byte angle table. */
-static void direction_205ac(wf_actor_raw_t*r){
+static void direction_205ac(wf_runtime_t*rt,wf_actor_raw_t*r){
  static const uint8_t t[32]={0xC0,0x80,0x40,0x80,0x40,0x80,0x40,0x80,0x40,0x00,0xC0,0x00,0x40,0x00,0x40,0x00,0x40,0x80,0xC0,0x80,0x40,0x80,0xC0,0x80,0xC0,0x00,0x40,0x00,0xC0,0x00,0x40,0x00};
- uint16_t idx=(uint16_t)(wf_be16(r,R_FLAGS34)&0x001Eu),tx=wf_be16(r,R_TARGET_X),x=wf_be16(r,R_X),dx=(uint16_t)(tx-x),m;
- if(tx<x)dx=(uint16_t)(0u-dx);
- if(dx<8u){m=(uint16_t)(idx&0x000Au);if(m!=0u&&m!=0x000Au){wf_set_be16(r,R_SPEED,0u);return;}}
- if(tx<x){idx=(uint16_t)(idx|0x0010u);setbit(r,R_FACING,7);}else clrbit(r,R_FACING,7);
+ uint16_t idx=(uint16_t)((wf_be16(r,R_FLAGS34)&0x001Eu)>>1),tx=wf_be16(r,R_TARGET_X),x=wf_be16(r,R_X),dx=(uint16_t)(tx-x),m;
+ wf_r17_m68k_moveq(&rt->m68k_regs,0u,0);wf_r17_m68k_move_w(&rt->m68k_regs,0u,idx);
+ wf_r17_m68k_move_w(&rt->m68k_regs,1u,dx);
+ if(dx<8u){m=(uint16_t)(idx&0x000Au);wf_r17_m68k_move_w(&rt->m68k_regs,1u,m);if(m!=0u&&m!=0x000Au){wf_set_be16(r,R_SPEED,0u);return;}}
+ wf_r17_m68k_move_w(&rt->m68k_regs,1u,tx);
+ if(tx<x){idx=(uint16_t)(idx|0x0010u);setbit(r,R_FACING,7);}
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,idx);
  wf_set_u8(r,R_ANGLE+1u,t[idx]);wf_set_u8(r,R_SPEED+1u,0x16u);
 }
 static void add_corr_xy(wf_actor_raw_t*r){wf_set_be16(r,R_X,(uint16_t)(wf_be16(r,R_X)+wf_be16(r,R_CORR_X)));wf_set_be16(r,R_Y,(uint16_t)(wf_be16(r,R_Y)+wf_be16(r,R_CORR_Y)));}
@@ -151,7 +163,7 @@ static void walk_cycle8(wf_actor_raw_t*r){if(byte_dec(r,R_TICK+1u)!=0u)return;wf
 static wf_status_t action0(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t*c){
  wf_status_t s;if((rt->g.mode_0161&1u)!=0u){if(entry_latch(r)){wf_set_u8(r,R_TICK+1u,8u);wf_set_u8(r,R_VISUAL,wf_u8(r,R_FACING));wf_set_u8(r,WF_A_MOTION_MODE,1u);}return WF_OK;}
  if(entry_latch(r)){wf_set_u8(r,R_TICK+1u,8u);wf_set_u8(r,R_PHASE+1u,4u);wf_set_u8(r,R_VISUAL+1u,0u);wf_set_u8(r,R_VISUAL,wf_u8(r,R_FACING));wf_set_u8(r,WF_A_MOTION_MODE,1u);}
- direction_205ac(r);if(wf_u8(r,R_SPEED+1u)==0u)return WF_OK;wf_physics_integrate_common(r);wf_set_be16(r,R_CONTACT,0u);
+ direction_205ac(rt,r);if(wf_u8(r,R_SPEED+1u)==0u)return WF_OK;wf_physics_integrate_common(r);wf_set_be16(r,R_CONTACT,0u);
  if(!c||!c->resolver_280dc)return block(c,0x000280DCu);
  s=c->resolver_280dc(rt,r,c->user);if(s!=WF_OK)return s;
  if(wf_u8(r,R_CONTACT)!=0u){add_corr_xy(r);wf_set_u8(r,R_PIN,(uint8_t)(wf_u8(r,R_PIN)&0xF9u));if(bit(r,R_CONTACT+1u,0))wf_set_u8(r,R_PIN,(uint8_t)(wf_u8(r,R_PIN)|6u));else if(bit(r,R_CONTACT+1u,1))wf_set_u8(r,R_PIN,(uint8_t)(wf_u8(r,R_PIN)|2u));else if(bit(r,R_CONTACT+1u,3))wf_set_u8(r,R_PIN,(uint8_t)(wf_u8(r,R_PIN)|4u));}
@@ -228,8 +240,10 @@ static wf_status_t action_dispatch(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_refer
 
 wf_status_t wf_r17_referee_logic_1f914(wf_runtime_t*rt,wf_actor_raw_t*r,void*user){
  wf_r17_referee_ctx_t*c=(wf_r17_referee_ctx_t*)user;wf_status_t s;if(!rt||!r||!c)return WF_BAD_STATE;c->blocked_dependency_rom=0u;
+ wf_r17_m68k_move_l(&rt->m68k_regs,0u,(uint32_t)wf_u8(r,R_STATE+1u)*4u);
  s=primary_dispatch(rt,r,c);if(s!=WF_OK)return s;
  if(bit(r,R_STATE,7)){clrbit(r,R_STATE,7);wf_set_be16(r,R_LATCH,wf_be16(r,R_STATE));}
+ wf_r17_m68k_move_l(&rt->m68k_regs,0u,(uint32_t)wf_u8(r,R_LATCH+1u)*4u);
  return action_dispatch(rt,r,c);
 }
 

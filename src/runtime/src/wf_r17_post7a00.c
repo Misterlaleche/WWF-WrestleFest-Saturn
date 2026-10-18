@@ -1,5 +1,7 @@
 #include "wf_r17_post7a00.h"
 #include "wf_payment.h"
+#include "wf_r17_tag_6e34.h"
+#include "wf_r17_royal_9132.h"
 #include <string.h>
 
 
@@ -1394,8 +1396,8 @@ wf_status_t wf_r17_owner_298ec(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx){
 rollback:rt->g=gsnap;rt->m68k_regs=rsnap;return WF_BLOCKED;
 }
 
-/* ROM $18C4. This owner is branch-A only. It does not absorb WP06/WP07: the
- * exact tail/child calls $6E34/$9132 remain external joins. */
+/* ROM $18C4. Native participant owners supply the TAG tail and Royal child.
+ * Explicit callback overrides remain available for isolated contract tests. */
 wf_status_t wf_r17_owner_18c4(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx,const uint8_t input_hw_low[WF_ACTOR_SLOTS],uint16_t input_valid_mask){
     wf_r17_m68k_shadow_t regs_snap;
     uint8_t credit_count_snap,credit_rem_snap;
@@ -1411,8 +1413,13 @@ wf_status_t wf_r17_owner_18c4(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx,const uin
 
     /* $18CE BTST #0,$1C0161 / BEQ.W $6E34. This is a tail branch. */
     if((rt->g.mode_0161&0x01u)==0u){
-        if(!ctx->tag_6e34){ctx->blocked_dependency_rom=0x00006e34u;return WF_BLOCKED;}
-        return ctx->tag_6e34(rt,ctx->user);
+        if(ctx->tag_6e34)return ctx->tag_6e34(rt,ctx->user);
+        if(ctx->participants){
+            wf_status_t s=wf_r17_owner_6e34(rt,ctx->participants);
+            ctx->blocked_dependency_rom=ctx->participants->blocked_dependency_rom;
+            return s;
+        }
+        ctx->blocked_dependency_rom=0x00006e34u;return WF_BLOCKED;
     }
 
     /* $18DA TST.B $1C16C5 / BNE $19B8. */
@@ -1437,18 +1444,42 @@ wf_status_t wf_r17_owner_18c4(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx,const uin
         wf_r17_m68k_move_l(&rt->m68k_regs,3u,0u);
         for(i=0u;i<4u;i++){
             wf_actor_raw_t *a=&rt->actors[i];
-            /* $1914 BTST #7,+0(A2), then table[index] must be zero. */
-            if(!actor_active(a) && rt->g.royal_slots_1586[i]==0u){
-                if((input_valid_mask&(uint16_t)(1u<<i))==0u){ctx->blocked_dependency_rom=0x00140020u+(uint32_t)i*2u;goto rollback;}
-                /* $192E BTST #7,+1(A0): set means skip payment. */
-                if((input_hw_low[i]&0x80u)==0u){
-                    /* $1936 MOVEQ #5,D0; JSR $055A; BCC means failure. */
-                    wf_r17_m68k_move_l(&rt->m68k_regs,0u,5u);
-                    if(wf_payment_consume_055a(rt,5u))rt->g.royal_slots_1586[i]=0x8000u;
+            /* $1914 active actors skip both the table and hardware reads. */
+            if(!actor_active(a)){
+                wf_r17_m68k_move_w(&rt->m68k_regs,1u,(uint16_t)rt->m68k_regs.d[4]);
+                wf_r17_m68k_move_w(&rt->m68k_regs,1u,(uint16_t)((uint16_t)rt->m68k_regs.d[1]<<1));
+                wf_r17_m68k_move_w(&rt->m68k_regs,1u,rt->g.royal_slots_1586[i]);
+                if((uint16_t)rt->m68k_regs.d[1]==0u){
+                    uint16_t raw;
+                    uint32_t address=0x00140020u+(uint32_t)i*2u;
+                    if(ctx->participants){
+                        wf_status_t input_status;
+                        wf_r17_m68k_shadow_t input_regs=rt->m68k_regs;
+                        if(!ctx->participants->input_word){ctx->blocked_dependency_rom=address;goto rollback;}
+                        input_status=ctx->participants->input_word(rt,address,&raw,ctx->participants->user);
+                        rt->m68k_regs=input_regs;
+                        if(input_status!=WF_OK){ctx->blocked_dependency_rom=address;goto rollback;}
+                    }else{
+                        /* Explicit legacy-owner fixtures may supply a sampled input image. */
+                        if(!input_hw_low||(input_valid_mask&(uint16_t)(1u<<i))==0u){ctx->blocked_dependency_rom=address;goto rollback;}
+                        raw=input_hw_low[i];
+                    }
+                    if((raw&0x80u)==0u){
+                        int paid;
+                        wf_r17_m68k_move_l(&rt->m68k_regs,0u,5u);
+                        paid=wf_payment_consume_055a(rt,5u);
+                        wf_r17_m68k_move_w(&rt->m68k_regs,0u,2u); /* $0588 */
+                        if(paid){
+                            wf_r17_m68k_move_w(&rt->m68k_regs,1u,(uint16_t)rt->m68k_regs.d[4]);
+                            wf_r17_m68k_move_w(&rt->m68k_regs,1u,(uint16_t)((uint16_t)rt->m68k_regs.d[1]<<1));
+                            rt->g.royal_slots_1586[i]=0x8000u;
+                            break; /* $1950 BRA $196A: exactly one successful payment per call. */
+                        }
+                    }
                 }
             }
-            /* $195E ADDQ.W #1,D3; $1960 ADDI.W #1,D4. */
-            wf_r17_m68k_move_w(&rt->m68k_regs,3u,(uint16_t)((uint16_t)rt->m68k_regs.d[3]+1u));
+            /* $195E ADDQ.B #1,D3; $1960 ADDI.W #1,D4. */
+            wf_r17_m68k_move_b(&rt->m68k_regs,3u,(uint8_t)((uint8_t)rt->m68k_regs.d[3]+1u));
             wf_r17_m68k_move_w(&rt->m68k_regs,4u,(uint16_t)((uint16_t)rt->m68k_regs.d[4]+1u));
         }
     }
@@ -1476,8 +1507,14 @@ wf_status_t wf_r17_owner_18c4(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx,const uin
                 rt->g.global_15ce=0x8000u;
                 target=&rt->fixed_object0;
             }
-            if(!ctx->royal_9132){ctx->blocked_dependency_rom=0x00009132u;goto rollback;}
-            if(ctx->royal_9132(rt,target,paid,ctx->user)!=WF_OK){ctx->blocked_dependency_rom=0x00009132u;goto rollback;}
+            if(ctx->royal_9132){
+                if(ctx->royal_9132(rt,target,paid,ctx->user)!=WF_OK){ctx->blocked_dependency_rom=0x00009132u;goto rollback;}
+            }else if(ctx->participants){
+                if(wf_r17_owner_9132(rt,target,paid,ctx->participants)!=WF_OK){
+                    ctx->blocked_dependency_rom=ctx->participants->blocked_dependency_rom;
+                    goto rollback;
+                }
+            }else{ctx->blocked_dependency_rom=0x00009132u;goto rollback;}
             return WF_OK;
         }
         if((uint16_t)rt->m68k_regs.d[0]==0u){wf_r17_m68k_move_w(&rt->m68k_regs,0u,0xffffu);break;}

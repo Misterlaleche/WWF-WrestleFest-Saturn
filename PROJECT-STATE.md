@@ -1,3 +1,5 @@
+> RUNTIME-17 R02 (2026-10-18): see CURRENT-STATE-LATEST.md for this checkpoint and its tested scope. Historical hardware results below belong to earlier separate builds; they do not certify this gameplay checkpoint.
+
 # PROJECT STATE
 
 ## Current development policy

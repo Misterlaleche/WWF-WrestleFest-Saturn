@@ -35,6 +35,8 @@ typedef struct wf_globals_raw {
  uint32_t global_1688; /* $1C1688 referee actor pointer */
  uint32_t global_168c; /* $1C168C exact target candidate pointer */
  uint16_t global_1692; /* $1C1692 target metric */
+ uint16_t global_1690; /* $1C1690/$1691 TAG participant owner */
+ uint16_t global_1698; /* $1C1698 TAG delayed-selection timer */
  uint16_t global_1694; /* $1C1694 Royal replacement counter */
  uint8_t controller_suppress;
  uint8_t global_1697; /* $1C1697, only numeric bit contract is used */
@@ -102,6 +104,11 @@ typedef struct wf_globals_raw {
  uint8_t cabinet_level_15dd; /* $1C15DD */
  uint8_t global_16e6; /* $1C16E6, $8710 helper $8856 probe */
  uint16_t royal_slots_1586[10]; /* $1C1586, 10-word Royal scheduler table */
+ /* Selector bytes whose addresses are not already represented above.
+  * Accessors must redirect $1586..$1599 and $15CE..$15CF to their named
+  * fields; these overlapping bytes are not a second authoritative copy. */
+ uint8_t royal_selector_1576[0x5c]; /* $1C1576..$1C15D1 */
+ uint8_t cabinet_tag_15e0[4]; /* $1C15E0..$1C15E3 */
  uint32_t rng_state;  /* arcade $1C005C equivalent: value must be externally sourced */
  uint32_t rng_d2, rng_d3, rng_d4, rng_d5, rng_d6, rng_d7; /* caller register context for $21B4 */
  uint8_t rng_state_valid;

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "wf_r17_post7a00.h"
+#include "wf_r17_participant_io.h"
 
 typedef struct sink {
     wf_r17_fg0_write_t fg[64]; size_t nfg;
@@ -48,6 +49,29 @@ static void test_2836(void){
 }
 
 
+static unsigned participant_reads;
+static wf_status_t participant_sample(wf_runtime_t*r,uint32_t addr,uint16_t*value,void*u){
+ (void)u;assert(addr==0x140020u);participant_reads++;*value=0xff7fu;
+ /* A transport must not become an accidental register owner. */
+ r->m68k_regs.d[6]=0xbad0bad0u;return WF_OK;
+}
+static void test_18c4_first_payment(void){
+ wf_runtime_t r;wf_r17_post7_ctx_t c;sink_t s;wf_r17_render_ctx_t rc;wf_r17_render_queue_t q;wf_r17_participant_io_t io;
+ uint8_t stale[WF_ACTOR_SLOTS];memset(stale,0xff,sizeof stale);
+ init(&r,&c,&s,&rc,&q);r.g.credited_route=1;r.g.mode_0161=1;r.g.config_0066=4;r.g.credit_count_004f=4;
+ memset(stale,0,sizeof stale);
+ assert(wf_r17_owner_18c4(&r,&c,stale,15)==WF_OK);
+ assert(r.g.credit_count_004f==3&&s.paid9132==0);
+ assert(r.g.royal_slots_1586[0]==0x8000&&r.g.royal_slots_1586[1]==0);
+ assert(r.m68k_regs.d[3]==0&&(uint16_t)r.m68k_regs.d[4]==0);
+ init(&r,&c,&s,&rc,&q);r.g.credited_route=1;r.g.mode_0161=1;r.g.config_0066=4;r.g.credit_count_004f=4;
+ memset(&io,0,sizeof io);io.input_word=participant_sample;c.participants=&io;memset(stale,0xff,sizeof stale);participant_reads=0;r.m68k_regs.d[6]=0x12345678;
+ assert(wf_r17_owner_18c4(&r,&c,stale,0)==WF_OK);
+ assert(participant_reads==1&&r.g.credit_count_004f==3&&s.paid9132==0&&r.m68k_regs.d[6]==0x12345678);
+ io.input_word=NULL;r.g.royal_slots_1586[0]=0;assert(wf_r17_owner_18c4(&r,&c,stale,15)==WF_BLOCKED);
+ assert(c.blocked_dependency_rom==0x140020&&r.g.credit_count_004f==3);
+ puts("PASS $18C4 first-success scan and current hardware input");
+}
 static void test_18c4(void){
     wf_runtime_t r;wf_r17_post7_ctx_t c;sink_t s;wf_r17_render_ctx_t rc;wf_r17_render_queue_t q;uint8_t in[WF_ACTOR_SLOTS];
     init(&r,&c,&s,&rc,&q);memset(in,0,sizeof(in));
@@ -86,4 +110,4 @@ static void test_298ec(void){
     puts("PASS $298EC");
 }
 
-int main(void){test_88a2();test_8710();test_bb14_fallback_lowest_free();test_7366();test_8cf8_early();test_2836();test_18c4();test_298ec();puts("PASS post-$7A00 new owners");return 0;}
+int main(void){test_88a2();test_8710();test_bb14_fallback_lowest_free();test_7366();test_8cf8_early();test_2836();test_18c4();test_18c4_first_payment();test_298ec();puts("PASS post-$7A00 new owners");return 0;}
