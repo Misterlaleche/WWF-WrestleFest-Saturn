@@ -37,9 +37,15 @@ static void f4c2_sync_raw23_out(wf_runtime_t *rt,wf_gameplay_binding_context_t*c
 static wf_status_t f4c2_dispatch_hook(wf_runtime_t *rt,wf_actor_raw_t *a,void *user){
  wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;wf_status_t s;
  if(!rt||!a||!c)return WF_BAD_STATE;
+ wf_r17_render_ctx_t action_render={0};
+ action_render.scroll_a_x=(uint16_t)c->camera.scroll0_x;action_render.scroll_a_y=(uint16_t)c->camera.scroll0_y;
+ action_render.queue=&c->render_queue;action_render.visibility_2188=wf_r17_visibility_2188_exact;
+ c->f4c2_actions.render=&action_render;
  c->f4c2_active_rt=rt;f4c2_sync_raw23_in(rt,c);
  c->f4c2_actions.raw23_ctx=&c->f4c2_raw23_ctx;c->f4c2_actions.fixed_object0=&rt->fixed_object0;c->f4c2_actions.fixed_object1=&rt->fixed_object1;c->f4c2_dispatch.actions=&c->f4c2_actions;
- s=wf_r17_dispatch_1c03e_bounded(rt,a,&c->f4c2_dispatch);f4c2_sync_raw23_out(rt,c);c->f4c2_active_rt=0;
+ c->f4c2_actions.video_batch=c->post7_video_batch;c->f4c2_actions.video_user=c->r17_owner_user;
+ int raw23=wf_u8(a,WF_A_LATCHED+1u)==5u&&wf_u8(a,WF_A_SELECTOR_LO)==0x23u;
+ s=wf_r17_dispatch_1c03e_bounded(rt,a,&c->f4c2_dispatch);if(raw23)f4c2_sync_raw23_out(rt,c);c->f4c2_active_rt=0;
  if(s==WF_OK&&c->f4c2_dispatch.extra_render_actor){
   wf_r17_render_ctx_t render={0};
   render.scroll_a_x=(uint16_t)c->camera.scroll0_x;

@@ -17,6 +17,17 @@ static void message(wf_participant_machine_t*m,unsigned k,int erase){
 static void palettes(wf_participant_machine_t*m){unsigned i,j;if(!m->rt->g.credited_route||(m->rt->g.mode_0161&1))return;
  for(i=0;i<4;i++){wf_actor_raw_t*a=&m->rt->actors[i];unsigned c=wf_be16(a,0x56)&15u;if(!(a->b[0]&128))continue;if(c>=12){m->status=WF_BAD_STATE;return;}for(j=16;j-->0;)wf_participant_write(m,0x180100u+c*128+2*j,tag_palettes[c+((a->b[0x33]&1)?0:12)][j],2);}
 }
+wf_status_t wf_r17_tag_palettes_c1ea(wf_runtime_t *rt,wf_r17_fg0_batch_fn batch,void *user){
+ wf_r17_fg0_write_t writes[64];size_t n=0;
+ if(!rt->g.credited_route||(rt->g.mode_0161&1u))return WF_OK;
+ for(unsigned i=0;i<4u;i++){
+  wf_actor_raw_t*a=&rt->actors[i];if(!(wf_u8(a,0u)&128u))continue;
+  unsigned c=wf_be16(a,0x56u)&15u;if(c>=12u)return WF_BAD_STATE;
+  for(unsigned j=16;j-->0;)writes[n++]=(wf_r17_fg0_write_t){0x180100u+c*128u+j*2u,tag_palettes[c+((wf_u8(a,0x33u)&1u)?0u:12u)][j],2u};
+ }
+ if(!n)return WF_OK;
+ return batch?batch(rt,writes,n,user):WF_BLOCKED;
+}
 static void refill(wf_participant_machine_t*m){
  W(0xa1,R(0xa1,1)|1,1);
  if(R(0x33,1)&1){W(0x33,R(0x33,1)|2,1);m->a[2]=R(0x86,4);wf_participant_write(m,m->a[2]+0x8a,m->a[1],4);wf_participant_write(m,m->a[2]+0x33,wf_participant_read(m,m->a[2]+0x33,1)|2,1);wf_participant_write(m,m->a[2]+0x56,wf_participant_read(m,m->a[2]+0x56,1)&~64u,1);m->a[0]=m->a[2];}

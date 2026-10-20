@@ -1,6 +1,30 @@
 # Runtime18 disc build
 
-## Latest checkpoint: hardware scrolling and resident sprites
+## Checkpoint actual: decisiones CPU, acciones y DMA
+
+La referencia actual es [RUNTIME18-CPU-CHECKPOINT.md](RUNTIME18-CPU-CHECKPOINT.md).
+Los límites antiguos `$1F7F0/$1C3FC` y los posteriores `$153BC/$1B1D0` ya se
+superan. Las pruebas de integración pasan 540 frames sin entrada y 490 con
+RIGHT/A; los siguientes bloqueos son `$1BCAA` (frame 545) y `$1CBF8` (493).
+No se ha completado un combate ni probado Saturn físico.
+
+El BIN/CUE arranca directamente al ring sin menús ni audio. El backend agrupa
+la transferencia de sprites en una DMA, conserva pen15, sincroniza VDP1/VDP2
+conjuntamente y usa SH-2 `-O2`. Mednafen consume 3,23 VBlanks/frame en el tramo
+31–120, frente a 4,21 en `e1113d3`: 23,2 % menos tiempo en ese tramo.
+
+Construcción: `DOCKER=/path/to/docker sh validation/build-runtime18.sh /path/to/sh2eb-elf`.
+Genera `validation/results/runtime18/wrestlefest-runtime18.bin` y `.cue`.
+Conservar ambos juntos y abrir/grabar el CUE (una pista MODE1/2352).
+Los assets previos requeridos se enumeran más abajo; HOTSPR.BIN se regenera.
+El verificador comprueba todos los sectores, EDC/ECC, IP, ISO9660 y payloads
+contra fuente, incluido A.BIN contra el binario enlazado. Esta validación
+estructural no certifica la ejecución en consola.
+
+Los apartados siguientes se conservan como historial; sus límites y cifras
+anteriores no describen el checkpoint actual.
+
+## Histórico: hardware scrolling y sprites residentes (`e1113d3`)
 
 The ring retains a 512x256 bitmap per layer and uses VDP2 scroll registers.
 The CPU updates exposed strips and changed overlay cells. Host tests compare
@@ -51,7 +75,7 @@ structure check, not evidence of gameplay or hardware execution.
 The reference archive is `sources/zips finales.zip`, nested
 `zips finales/WF-CLEAN-R01-33-SATURN-BOOT-CDFS-BUILD-DISC-LAYOUT-FINAL.zip`.
 
-## Direct-combat checkpoint (2026-10-20)
+## Histórico: primer checkpoint de combate directo (2026-10-20)
 
 This checkpoint boots straight into the ring, without menus or audio. The
 Saturn path reads the original arcade program and sprite pack from CDFS,
@@ -91,7 +115,7 @@ It describes one MODE1/2352 data track with no audio tracks. The file
 `validation/results/runtime18/disc-validation.json` records sector-level and
 CDFS-payload checks plus exact hashes of the generated pair.
 
-## CD and ring performance checkpoint (2026-10-20)
+## Histórico: optimización de CD y ring (2026-10-20)
 
 The Saturn build now reads 16 aligned sectors per CD command for large file
 transfers, keeps eight eight-sector CDFS windows, and preloads the exact

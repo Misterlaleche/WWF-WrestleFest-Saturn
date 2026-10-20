@@ -1,6 +1,7 @@
 #include <string.h>
 #include "wf_state5_exec.h"
 #include "wf_state5.h"
+#include "wf_cpu_runtime.h"
 
 #define BIT(n) ((uint8_t)(1u<<(n)))
 
@@ -68,7 +69,7 @@ static wf_status_t state0_profile(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t 
   if(id!=7u){wf_set_u8(a,WF_A_CPU_BD,(uint8_t)(wf_u8(a,WF_A_CPU_BD)-8u));if(id==8u)wf_set_u8(a,WF_A_CPU_BD,(uint8_t)(wf_u8(a,WF_A_CPU_BD)-8u));}
  }
  state0_profile_prefix(a,wf_be16(a,WF_A_CPU_BC));
- return blocked(tr,0x001C5B6u);
+ return wf_cpu_continue_1c5b6(rt,slot,tr);
 }
 static wf_status_t target_flag_transition(wf_runtime_t *rt,wf_actor_raw_t *a,uint8_t sel,wf_state5_trace_t *tr){
  if(bset(a,WF_A_CPU_B5,4)) return WF_OK;
@@ -152,8 +153,16 @@ static wf_status_t distance_or_link(wf_runtime_t *rt,unsigned slot,wf_actor_raw_
  }
  return WF_OK;
 }
-static wf_status_t controller15(wf_actor_raw_t *a,wf_state5_trace_t *tr){
- if(!bset(a,WF_A_SELECTOR,6)){wf_set_be16(a,WF_A_CPU_BC,0x0010u);wf_set_be16(a,WF_A_TIMER46,0u);}uint16_t v=(uint16_t)(wf_be16(a,WF_A_CPU_BC)-1u);wf_set_be16(a,WF_A_CPU_BC,v);if(v)return WF_OK;return blocked(tr,0x001E854u);
+static wf_status_t controller15(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t *a,wf_state5_trace_t *tr){
+ if(!bset(a,WF_A_SELECTOR,6)){wf_set_be16(a,WF_A_CPU_BC,0x0010u);wf_set_be16(a,WF_A_TIMER46,0u);}
+ uint16_t v=(uint16_t)(wf_be16(a,WF_A_CPU_BC)-1u);wf_set_be16(a,WF_A_CPU_BC,v);if(v)return WF_OK;
+ /* $1E854-$1E99E: normal TAG route, first sequence bank. */
+ if(rt->g.mode_0161&1u)return blocked(tr,0x1e96eu);
+ if(rt->g.mode_0161&2u)return blocked(tr,0x1e9a6u);
+ if(rt->g.credited_route&0x8000u)return blocked(tr,0x1e878u);
+ if(rt->g.global_0166&255u)return blocked(tr,0x1e9a6u);
+ bclr(a,WF_A_CPU_B5,4);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x16u);
+ return wf_state5_execute(rt,slot,tr);
 }
 static int within8(uint16_t a,uint16_t b){uint16_t d=(uint16_t)(a-b);if(a<b)d=(uint16_t)(0u-d);return d<8u;}
 static wf_status_t controller16(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a,wf_state5_trace_t *tr){
@@ -175,7 +184,22 @@ static wf_status_t controller16(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a
   if(!btest(a,WF_A_CPU_B5,4)){if(btest(a,WF_A_FLAGS33,7)){wf_set_be16(a,WF_A_CPU_BE,0x02f8u);wf_set_be16(a,WF_A_CPU_C0,0x0128u);}else{wf_set_be16(a,WF_A_CPU_BE,0x0210u);wf_set_be16(a,WF_A_CPU_C0,0x0190u);}}
   else {if(btest(a,WF_A_FLAGS33,7)){wf_set_be16(a,WF_A_CPU_BE,0x02d0u);wf_set_be16(a,WF_A_CPU_C0,0x0178u);}else{wf_set_be16(a,WF_A_CPU_BE,0x0200u);wf_set_be16(a,WF_A_CPU_C0,0x0130u);}}
  }
- if(!within8(wf_be16(a,WF_A_X),wf_be16(a,WF_A_CPU_BE))||!within8(wf_be16(a,WF_A_Y),wf_be16(a,WF_A_CPU_C0))){uint16_t v=(uint16_t)(wf_be16(a,WF_A_CPU_BC)-1u);wf_set_be16(a,WF_A_CPU_BC,v);return blocked(tr,0x001F15Cu);}
+ /* $1F15C calls $20C8: signed deltas, byte saturation, quadrant ratio. */
+ if(!within8(wf_be16(a,WF_A_X),wf_be16(a,WF_A_CPU_BE))||!within8(wf_be16(a,WF_A_Y),wf_be16(a,WF_A_CPU_C0))){
+  uint16_t dx=(uint16_t)(wf_be16(a,WF_A_CPU_BE)-wf_be16(a,WF_A_X));
+  uint16_t dy=(uint16_t)(wf_be16(a,WF_A_CPU_C0)-wf_be16(a,WF_A_Y));
+  unsigned quadrant=0;
+  if(dx&0x8000u){quadrant|=1u;dx=(uint16_t)(0u-dx);}
+  if(dy&0x8000u){quadrant|=2u;dy=(uint16_t)(0u-dy);}
+  if(dx>255u)dx=255u;if(dy>255u)dy=255u;
+  unsigned sum=(unsigned)dx+dy,component=(quadrant==0u||quadrant==3u)?dx:dy;
+  static const uint8_t base[4]={0u,192u,64u,128u}; /* ROM $2184 */
+  wf_set_u8(a,WF_A_ANGLE,(uint8_t)(base[quadrant]+component*64u/(sum?sum:1u)));
+  wf_r17_m68k_moveq(&rt->m68k_regs,0,1);
+  uint16_t v=(uint16_t)(wf_be16(a,WF_A_CPU_BC)-1u);wf_set_be16(a,WF_A_CPU_BC,v);
+  return v?WF_OK:blocked(tr,0x1e9a6u);
+ }
+ wf_r17_m68k_moveq(&rt->m68k_regs,0,0);
  wf_set_be16(a,WF_A_STATE,5u);
  if(!btest(a,WF_A_CPU_B5,4)){
   unsigned ps;wf_actor_raw_t*p=team(rt,a,&ps);if(btest(a,WF_A_FLAGS33,0)&&p&&btest(p,WF_A_FLAGS32,0)){wf_set_be16(a,WF_A_SELECTOR,0x0066u);return WF_OK;}return blocked(tr,0x001E9A6u);
@@ -242,7 +266,7 @@ static wf_status_t execute_callback(wf_runtime_t *rt,unsigned slot,wf_actor_raw_
   case 0x01e6e2u:return reciprocal_link(rt,slot,a,tr);
   case 0x01e6feu:case 0x01e70eu:case 0x01e73eu:case 0x01e74eu:return state0_profile(rt,slot,a,sel,tr);
   case 0x01e792u:return distance_or_link(rt,slot,a,sel,tr);
-  case 0x01e83au:return controller15(a,tr);
+  case 0x01e83au:return controller15(rt,slot,a,tr);
   case 0x01ea2eu:return controller16(rt,slot,a,tr);
   case 0x01eb62u:return controller3e(rt,a,tr);
   case 0x01ebceu:return controller3d(rt,a,tr);
@@ -258,6 +282,8 @@ wf_status_t wf_state5_execute(wf_runtime_t *rt,unsigned slot,wf_state5_trace_t *
  uint8_t sel=wf_u8(a,WF_A_SELECTOR_LO);
  const wf_state5_map_t *m=wf_state5_lookup(sel);
  if(!m) return WF_BAD_STATE;
+ /* $1DFE8-$1DFFC leaves the callback address, with bit 31 cleared, in D0. */
+ wf_r17_m68k_move_l(&rt->m68k_regs,0u,m->callback_rom);
  if(tr){tr->selector=sel;tr->callback_rom=m->callback_rom;tr->forced=m->forced_bit31;}
  int call=m->forced_bit31||wf_u8(a,WF_A_STATE+1u)!=5u||!btest(a,WF_A_STATE,7);
  if(!call) return WF_OK;

@@ -81,6 +81,7 @@ typedef struct wf_globals_raw {
  uint16_t global_17fa; /* $1C17FA */
  uint16_t global_17fe; /* $1C17FE */
  uint16_t global_1800; /* $1C1800 */
+ uint16_t global_1802; /* $1C1802 impact shake countdown */
  uint16_t global_1150; /* $1C1150 */
  uint16_t global_1180; /* $1C1180 */
  uint16_t global_11b0; /* $1C11B0 */

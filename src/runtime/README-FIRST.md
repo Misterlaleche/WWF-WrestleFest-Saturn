@@ -1,3 +1,5 @@
+> Current work is RUNTIME-18. See ../../CURRENT-STATE-LATEST.md and ../../validation/RUNTIME18-CPU-CHECKPOINT.md. The RUNTIME-16 text below is retained history, not the current checkpoint status.
+
 # BLOCK-GAMEPLAY-MASTER-01 — RUNTIME-16
 
 Status: **GAMEPLAY-R01 CANDIDATE / cumulative / fail-closed**.

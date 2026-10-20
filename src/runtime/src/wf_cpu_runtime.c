@@ -1,11 +1,14 @@
 #include <string.h>
 #include "wf_cpu_runtime.h"
 #include "arcade_cpu_final_bridge.h"
+#include "../generated/wf_cpu_decision_data.h"
 static wf_status_t block(wf_cpu_trace_t*t,uint32_t pc){if(t)t->blocked_dependency_rom=pc;return WF_BLOCKED;}
 static wf_actor_raw_t *ptr(wf_runtime_t*rt,const wf_actor_raw_t*a,size_t off){return wf_actor_from_rom_ptr(rt,wf_be32(a,off),0);}
 /* Direct-ROM $1C2CC fast routes reached by the fresh TAG participants. Other
  * branches remain explicit dependencies instead of guessing AI behavior. */
-static wf_status_t state0(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+static wf_status_t state0_tail(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
+static wf_status_t choose_1dea6(wf_runtime_t*,unsigned,wf_actor_raw_t*,uint32_t,unsigned,wf_cpu_trace_t*);
+static wf_status_t state0(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
  if(!(wf_u8(a,WF_A_STATE)&0x80u))return WF_OK;
  wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x00010be8u);
  uint8_t f33=wf_u8(a,WF_A_FLAGS33),tf33=wf_u8(t,WF_A_FLAGS33);
@@ -28,12 +31,13 @@ static wf_status_t state0(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
  if((f33&1u)&&(wf_u8(t,WF_A_FLAGS32)&1u)){
   rt->g.global_1697|=1u;return WF_OK;
  }
+ if(b5&8u)return state0_tail(rt,slot,a,tr);
  if(f34&2u){
   if(f33&1u)return block(tr,0x0001c5fau);
   wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,4u);return WF_OK;
  }
  if((f33&1u)&&!(wf_u8(t,WF_A_FLAGS32)&1u)&&!(wf_u8(a,WF_A_ROLE)&0x40u)&&
-    !(f33&4u)&&!(b5&0x40u)&&!(wf_u8(a,WF_A_FLAGS34)&0x80u)){
+    !(f33&4u)&&!(b5&0x40u)){
   /* $1F3D6, $1C7E2 and $1C880: no tagged/ringside branch in stage zero. */
   if(wf_u8(a,WF_A_STATE+1u)==4u&&wf_u8(a,WF_A_STATE4_LO)==1u)return block(tr,0x0001f422u);
   wf_actor_raw_t*partner=ptr(rt,a,WF_A_TEAM_LINK);if(!partner)return block(tr,0x0001f43eu);
@@ -45,7 +49,7 @@ static wf_status_t state0(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
    wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)&~1u));
   rt->g.global_1697|=1u;wf_set_be16(a,WF_A_SELECTOR,0u);wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,0u);return WF_OK;
  }
- return block(tr,0x0001c3fcu);
+ return state0_tail(rt,slot,a,tr);
 }
 /* $219B4 -> per-character table -> tier-zero lane. Each terminal table has
  * two selector bytes {00,FF}; these three weight pairs are the adjacent
@@ -77,11 +81,12 @@ static int state1_weighted_24cc(wf_runtime_t*rt,const uint8_t *weights,size_t co
  wf_r17_m68k_move_l(&rt->m68k_regs,2u,d2);
  unsigned total=0,choice=0;
  for(;choice<count;choice++){
-  total+=weights[choice];
+  total=(total+weights[choice])&255u;
   if(total>=sample)break;
  }
  if(choice==count)return -1;
- wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)choice);
+ /* ANDI.L #$FF at $24D6 clears the upper word before MOVE.W D1,D0. */
+ wf_r17_m68k_move_l(&rt->m68k_regs,0u,(uint32_t)choice);
  return (int)choice;
 }
 /* Live stage-zero route through $1C93E/$1CA82/$1DE66. Other jump-table
@@ -128,7 +133,38 @@ static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
   return WF_OK;
  }
  wf_r17_m68k_moveq(&rt->m68k_regs,2u,0);
- if(ts!=0u&&ts!=1u)return block(tr,0x0001cb42u);
+ if(ts==5u){
+  /* $1CB42-$1CBEA: react to the target's current action. */
+  uint8_t selector=wf_u8(t,WF_A_SELECTOR_LO);
+  if(wf_u8(t,WF_A_FLAGS33)&16u){
+   wf_r17_m68k_move_b(&rt->m68k_regs,0u,wf_u8(a,WF_A_FACING));
+   if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))return WF_OK;
+   if(selector==5u||selector==0x2au||selector==0x2du||selector==0x20u||selector==0x41u)
+    return choose_1dea6(rt,slot,a,0x2307cu,0u,tr);
+   wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x75u);return WF_OK;
+  }
+  if(selector==0x4cu)return block(tr,0x1ccb4u);
+  if((wf_u8(t,WF_A_FLAGS33)&64u)&&(rt->g.mode_0161&1u)){
+   wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|128u));
+   wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)|1u));wf_set_be16(a,WF_A_STATE,0u);return WF_OK;
+  }
+  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~16u));
+  wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0u);
+  return wf_state5_execute(rt,slot,tr?&tr->state5:NULL);
+ }
+ if(ts!=0u&&ts!=1u){
+  if(ts==4u||ts==7u)return block(tr,ts==4u?0x1cbf8u:0x1de66u);
+  /* $1CCD0: running/other target states use the same pursuit choices. */
+  if(wf_u8(t,WF_A_FLAGS33)&16u){
+   wf_r17_m68k_move_b(&rt->m68k_regs,0u,wf_u8(a,WF_A_FACING));
+   if(wf_u8(a,WF_A_FACING)!=wf_u8(t,WF_A_FACING))
+    return choose_1dea6(rt,slot,a,0x2307cu,0u,tr);
+   if(wf_u8(a,WF_A_FLAGS34)&2u)return block(tr,0x1c5fau);
+   wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_CPU_B5)&1u)?0x40u:0xc0u);return WF_OK;
+  }
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|64u));
+  wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3du);return WF_OK;
+ }
  if(!(wf_u8(a,WF_A_FLAGS33)&1u)&&(wf_u8(t,WF_A_FLAGS32)&1u)){
   wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(wf_u8(a,WF_A_FLAGS34)|2u));
   wf_set_be16(a,WF_A_STATE,0u);
@@ -349,12 +385,158 @@ static wf_status_t state11(wf_runtime_t*rt,wf_actor_raw_t*a,
 }
 /* $1F06A: the just-transferred hold waits 48 CPU turns before considering
  * the $1F7F0 target arbitration. */
-static wf_status_t state12(wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+/* Data-only ROM windows; no instruction interpretation is linked. */
+static const uint8_t *cpu_data(uint32_t at,size_t n){
+#define SPAN(base) if(at>=0x##base##u&&at-0x##base##u<=sizeof cpu_data_##base&&n<=sizeof cpu_data_##base-(at-0x##base##u))return cpu_data_##base+(at-0x##base##u)
+ SPAN(1f150);SPAN(1f866);SPAN(219b4);
+#undef SPAN
+ return NULL;
+}
+static int cpu_pointer(uint32_t at,uint32_t*out){
+ const uint8_t*p=cpu_data(at,4);if(!p)return 0;
+ *out=((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|(p[2]<<8)|p[3];return 1;
+}
+/* $1F7F0 returns carry separately; WF_BLOCKED only denotes inaccessible data. */
+static wf_status_t arbitrate_1f7f0(wf_runtime_t*rt,wf_actor_raw_t*a,int*carry,wf_cpu_trace_t*tr){
+ *carry=1;
+ if(rt->g.credited_route||(rt->g.mode_0161&1u))return WF_OK;
+ wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x1f802u);
+ uint16_t health=wf_be16(t,WF_A_STAMINA);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,health);
+ if(health>=wf_be16(a,WF_A_STAMINA))return WF_OK;
+ unsigned id=wf_u8(a,WF_A_INTERNAL_ID);uint32_t table;
+ wf_r17_m68k_moveq(&rt->m68k_regs,0,0);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(id*4u));
+ if(!cpu_pointer(((rt->g.global_0166&255u)?0x1f87au:0x1f866u)+id*4u,&table))return block(tr,0x1f82cu);
+ uint8_t index=wf_u8(a,0x103u);wf_r17_m68k_move_b(&rt->m68k_regs,0,index);
+ const uint8_t*p=cpu_data(table+(uint16_t)rt->m68k_regs.d[0],1);
+ if(!p)return block(tr,0x1f834u);
+ if(*p==255u)return WF_OK;
+ wf_set_u8(a,0x101u,(uint8_t)(*p&127u));
+ if(*p&128u)wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(wf_u8(a,WF_A_FLAGS34)|16u));
+ wf_set_u8(a,0x103u,(uint8_t)(index+1u));*carry=0;return WF_OK;
+}
+static wf_status_t state12(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
  uint8_t bd=wf_u8(a,WF_A_CPU_BD);
  if(bd<0x30u){wf_set_u8(a,WF_A_CPU_BD,(uint8_t)(bd+1u));return WF_OK;}
  wf_set_be16(a,WF_A_CPU_B6,0u);
  wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)&~2u));
- return block(tr,0x0001f7f0u);
+ wf_r17_m68k_moveq(&rt->m68k_regs,2,1);
+ int carry;wf_status_t status=arbitrate_1f7f0(rt,a,&carry,tr);if(status!=WF_OK)return status;
+ if(!carry)wf_set_be16(a,WF_A_SELECTOR,wf_be16(a,0x100u));
+ else{
+  uint8_t id=wf_u8(a,WF_A_INTERNAL_ID);
+  if(wf_u8(a,WF_A_CPU_B5)&128u){
+   const uint8_t*p=cpu_data(0x1f150u+id,1);if(!p)return block(tr,0x1f0a0u);
+   wf_r17_m68k_moveq(&rt->m68k_regs,0,0);wf_r17_m68k_move_b(&rt->m68k_regs,0,id);
+   wf_set_u8(a,WF_A_SELECTOR_LO,*p);
+  }else{
+   uint32_t table;unsigned face=(wf_u8(a,WF_A_FACING)&128u)?4u:0u;
+   unsigned spatial=wf_u8(a,0x31u),lane=spatial<3u?0u:spatial>=9u?8u:4u;
+   if(id>=12u||!cpu_pointer(0x219b4u+id*4u,&table)||!cpu_pointer(table+4u,&table)||!cpu_pointer(table+face,&table)||!cpu_pointer(table+lane,&table))return block(tr,0x1f0eau);
+   const uint8_t*count=cpu_data(table,1);if(!count||!*count)return block(tr,0x1f0eeu);
+   wf_actor_raw_t*linked=ptr(rt,a,WF_A_LINK);if(!linked)return block(tr,0x1f0f4u);
+   uint16_t tier=rt->g.global_16a0<0x10u?2u:wf_be16(linked,WF_A_TIER);
+   wf_r17_m68k_moveq(&rt->m68k_regs,0,0);wf_r17_m68k_moveq(&rt->m68k_regs,1,0);wf_r17_m68k_moveq(&rt->m68k_regs,2,(int8_t)lane);
+   wf_r17_m68k_move_w(&rt->m68k_regs,0,tier);wf_r17_m68k_move_b(&rt->m68k_regs,1,*count);
+   uint16_t offset=0;
+   if(tier&255u){unsigned shift=(tier>>1)&63u;offset=shift>=16u?0u:(uint16_t)((unsigned)*count<<shift);wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(tier>>1));wf_r17_m68k_move_w(&rt->m68k_regs,1,offset);}
+   const uint8_t*weights=cpu_data(table+1u+*count+offset,*count),*selectors=cpu_data(table+1u,*count);
+   if(!weights||!selectors)return block(tr,0x1f116u);
+   int choice=state1_weighted_24cc(rt,weights,*count);if(choice<0)return block(tr,0x24ccu);
+   wf_set_be16(a,WF_A_SELECTOR,selectors[choice]);
+  }
+ }
+ wf_set_be16(a,WF_A_STATE,5u);wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)|16u));
+ wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|2u));
+ wf_set_be16(a,WF_A_TIMER44,0u);wf_set_be16(a,WF_A_TIMER46,0u);
+ return wf_state5_execute(rt,slot,tr?&tr->state5:0);
+}
+static wf_status_t choose_1dea6(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,uint32_t base,unsigned lane,wf_cpu_trace_t*tr){
+ unsigned id=wf_u8(a,WF_A_INTERNAL_ID);uint32_t table;
+ if(id>=12u||!cpu_pointer(base+id*4u,&table)||!cpu_pointer(table+lane*4u,&table))return block(tr,0x1deb6u);
+ const uint8_t*n=cpu_data(table,1);wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);
+ if(!n||!*n||!t)return block(tr,0x1dec0u);
+ uint16_t tier=rt->g.global_16a0<0x10u?2u:wf_be16(t,WF_A_TIER),offset=0;
+ wf_r17_m68k_moveq(&rt->m68k_regs,0,0);wf_r17_m68k_moveq(&rt->m68k_regs,1,0);
+ wf_r17_m68k_move_w(&rt->m68k_regs,2,(uint16_t)(lane*4u));
+ wf_r17_m68k_move_b(&rt->m68k_regs,1,*n);wf_r17_m68k_move_w(&rt->m68k_regs,0,tier);
+ if(tier&255u){unsigned shift=(tier>>1)&63u;offset=shift>=16u?0u:(uint16_t)((unsigned)*n<<shift);wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(tier>>1));wf_r17_m68k_move_w(&rt->m68k_regs,1,offset);}
+ const uint8_t*w=cpu_data(table+1u+*n+offset,*n),*choices=cpu_data(table+1u,*n);
+ if(!w||!choices)return block(tr,0x1dee2u);
+ int index=state1_weighted_24cc(rt,w,*n);if(index<0)return block(tr,0x24ccu);
+ uint8_t sel=choices[index];wf_set_u8(a,WF_A_SELECTOR_LO,sel);
+ if(sel==255u){wf_set_be16(a,WF_A_STATE,1);wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)|2u));wf_set_be16(a,WF_A_AE,0);wf_set_be16(a,WF_A_SELECTOR,0);return WF_OK;}
+ if(sel==253u){wf_set_be16(a,WF_A_SELECTOR,0);return WF_OK;}
+ if(sel==254u){
+  unsigned x=wf_be16(t,WF_A_X);
+  if((wf_u8(t,WF_A_FACING)&128u)?x<0x270u:x>=0x2a0u){wf_set_be16(a,WF_A_STATE,5);wf_set_be16(a,WF_A_SELECTOR,0x3e);wf_r17_m68k_moveq(&rt->m68k_regs,0,1);return wf_state5_execute(rt,slot,tr?&tr->state5:NULL);}
+  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~32u));wf_set_be16(a,WF_A_STATE,1);wf_set_be16(a,WF_A_AE,5);wf_r17_m68k_moveq(&rt->m68k_regs,0,0);return WF_OK;
+ }
+ if(sel==0x3eu)return block(tr,0x1df7eu);
+ wf_set_u8(a,WF_A_SELECTOR,0);wf_set_be16(a,WF_A_STATE,5);
+ wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~16u));wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~64u));
+ return wf_state5_execute(rt,slot,tr?&tr->state5:NULL);
+}
+static wf_status_t state0_tail(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+ wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x1c404u);
+ if(wf_u8(a,WF_A_CPU_B9)&1u){
+  if(wf_u8(t,WF_A_FLAGS33)&64u){wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|128u));return WF_OK;}
+  wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)&~1u));
+ }
+ if(wf_u8(t,WF_A_FLAGS34)&16u){wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|128u));return WF_OK;}
+ if(!(wf_u8(a,WF_A_CPU_B5)&8u))return block(tr,0x1c5ecu);
+ if(!(wf_u8(t,WF_A_FLAGS33)&16u))return block(tr,0x1c458u);
+ if(rt->g.credited_route&&!(wf_u8(a,WF_A_FLAGS33)&4u)&&!(wf_u8(a,WF_A_CPU_B7)&4u)){
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|4u));
+  unsigned spatial=wf_u8(a,0x31u);
+  if((spatial<3u&&(wf_u8(a,WF_A_FACING)&128u))||(spatial>=9u&&!(wf_u8(a,WF_A_FACING)&128u))){
+   static const uint8_t weights[2]={20u,80u}; /* ROM $1F3BE */
+   int choice=state1_weighted_24cc(rt,weights,2u);if(choice<0)return block(tr,0x24ccu);
+   if(!choice){
+    wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~8u));wf_set_be16(a,WF_A_STATE,2u);
+    wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_FACING)&128u)?0x40u:0xc0u);
+    wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)|4u));
+    wf_set_u8(a,WF_A_ANGLE,(uint8_t)(wf_u8(a,WF_A_ANGLE)^128u));wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^128u));
+    wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));return WF_OK;
+   }
+  }
+ }
+ if(!(wf_u8(a,WF_A_CPU_B7)&8u)){
+  int carry;wf_status_t st=arbitrate_1f7f0(rt,a,&carry,tr);if(st!=WF_OK)return st;
+  if(!carry)return block(tr,0x1c4f4u);
+  wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(a,WF_A_FACING));
+  if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))return WF_OK;
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|8u));
+  unsigned distance=wf_be16(a,WF_A_CPU_DISTANCE),lane=distance<0x68u?0u:distance<0xb0u?1u:2u;
+  wf_r17_m68k_moveq(&rt->m68k_regs,2,(int8_t)lane);
+  if(!lane)wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~8u));
+  else wf_set_u8(a,WF_A_FLAGS33,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&~16u));
+  st=choose_1dea6(rt,slot,a,0x2307cu,lane,tr);if(st!=WF_OK)return st;
+  if(lane){
+   wf_set_u8(a,WF_A_SELECTOR,0);wf_set_be16(a,WF_A_STATE,0);
+   if(wf_u8(a,WF_A_FLAGS33)&16u){wf_set_be16(a,WF_A_STATE,2);wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_FACING)&128u)?0x40u:0xc0u);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));return WF_OK;}
+  }
+ }
+ wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(a,WF_A_FACING));
+ if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))return WF_OK;
+ uint16_t distance=wf_be16(a,WF_A_CPU_DISTANCE);wf_r17_m68k_move_w(&rt->m68k_regs,0,distance);
+ if(distance>=wf_be16(a,WF_A_CPU_BC))return WF_OK;
+ wf_set_u8(a,WF_A_CPU_B5,(uint8_t)((wf_u8(a,WF_A_CPU_B5)&~8u)|16u));wf_set_u8(a,WF_A_SELECTOR,0);wf_set_be16(a,WF_A_STATE,5);
+ return wf_state5_execute(rt,slot,tr?&tr->state5:NULL);
+}
+wf_status_t wf_cpu_continue_1c5b6(wf_runtime_t*rt,unsigned slot,wf_state5_trace_t*tr){
+ if(!rt||slot>=WF_ACTOR_SLOTS)return WF_BAD_STATE;
+ wf_actor_raw_t*a=&rt->actors[slot],*t=ptr(rt,a,WF_A_TARGET);
+ if(!t){if(tr)tr->blocked_dependency_rom=0x1c5b6u;return WF_BLOCKED;}
+ wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(a,WF_A_FACING));
+ if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))return WF_OK;
+ uint16_t distance=wf_be16(a,WF_A_CPU_DISTANCE);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,distance);
+ if(distance>=wf_be16(a,WF_A_CPU_BC))return WF_OK;
+ wf_set_u8(a,WF_A_CPU_B5,(uint8_t)((wf_u8(a,WF_A_CPU_B5)&~8u)|16u));
+ wf_set_u8(a,WF_A_SELECTOR,0);wf_set_be16(a,WF_A_STATE,5);
+ return wf_state5_execute(rt,slot,tr);
 }
 wf_status_t wf_cpu_actor_step(wf_runtime_t *rt,unsigned slot,wf_cpu_trace_t *tr){
  if(tr) memset(tr,0,sizeof(*tr));
@@ -364,6 +546,6 @@ wf_status_t wf_cpu_actor_step(wf_runtime_t *rt,unsigned slot,wf_cpu_trace_t *tr)
  uint32_t h=arcade_cpu_main_handler(st);
  if(tr){tr->state=st;tr->handler_rom=h;}
  if(!h) return WF_BAD_STATE;
- switch(st){case 0u:return state0(rt,a,tr);case 1u:return state1(rt,slot,a,tr);
- case 5u:return wf_state5_execute(rt,slot,tr?&tr->state5:0);case 6u:return state6(rt,slot,tr);case 7u:return WF_OK;case 8u:wf_set_u8(a,WF_A_CPU_BD,0u);return WF_OK;case 9u:return state9(rt,slot,tr);case 0x0au:return WF_OK;case 11u:return state11(rt,a,tr);case 12u:return state12(a,tr);default:return block(tr,h);}
+ switch(st){case 0u:return state0(rt,slot,a,tr);case 1u:return state1(rt,slot,a,tr);
+ case 5u:return wf_state5_execute(rt,slot,tr?&tr->state5:0);case 6u:return state6(rt,slot,tr);case 7u:return WF_OK;case 8u:wf_set_u8(a,WF_A_CPU_BD,0u);return WF_OK;case 9u:return state9(rt,slot,tr);case 0x0au:return WF_OK;case 11u:return state11(rt,a,tr);case 12u:return state12(rt,slot,a,tr);default:return block(tr,h);}
 }

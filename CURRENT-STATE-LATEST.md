@@ -1,17 +1,25 @@
-# RUNTIME-18 — scroll y precarga, 20 de octubre de 2026
+# RUNTIME-18 — decisiones CPU y presentación, 20 de octubre de 2026
 
-RUNTIME-18 está autorizado e iniciado en `runtime18/direct-combat`. El disco
-arranca directamente al ring sin menús ni audio. Este checkpoint añade scroll
-VDP2 con actualización parcial y precarga exacta de 1.204 tiles. En Mednafen,
-frames 31–120 bajan de 6,86 a 4,21 VBlanks por frame. Sigue siendo lento.
+Los bloqueos observados en $1F7F0 y $1C3FC se superan con código nativo
+contrastado con la ROM original. El oráculo nuevo compara 888 casos, incluidos
+actores, D0–D7, RNG, carry de arbitraje, paletas, efectos y colas cuando procede.
+Se han incorporado continuaciones de agarre, cuerdas, relevo, salto y recoil.
 
-Las pruebas, reproducción y límites están en `validation/RUNTIME18-DISC.md`.
-Los bloqueos CPU $1F7F0 (frame HOST 255) y $1C3FC (361 con entrada) permanecen.
-No se ha completado un combate ni probado Saturn real. No es ROM-EXACT.
-Los BIN/CUE regenerables están en `validation/results/runtime18/`.
+Las secuencias HOST pasan 540 frames sin entrada y 490 con RIGHT/A.
+NO se ha completado un combate. Sin entrada, la siguiente dependencia está
+en frame 545: $1BCAA. Con RIGHT/A, frame 493: decisión CPU $1CBF8.
+No se han sustituido estas dependencias por éxito ni animación provisional.
 
-Siguiente prioridad: medir CPU/presentación restante y cerrar esas ramas con
-evidencia directa de la ROM. El frontend continúa fuera de prioridad.
+La presentación agrupa tiles en una DMA desde HWRAM, conserva el color 15,
+sincroniza VDP1/VDP2 conjuntamente y compila SH-2 con -O2. En Mednafen,
+frames 31–120 sin entrada bajan de 4,21 a 3,23 VBlanks/frame: 23,2 % menos
+tiempo. Es una medición de ese tramo, no FPS garantizados para toda la partida.
+
+Reproducción y alcance: `validation/RUNTIME18-CPU-CHECKPOINT.md` y
+`validation/RUNTIME18-DISC.md`. BIN/CUE: `validation/results/runtime18/`.
+No hay prueba de Saturn real ni declaración ROM-EXACT. El frontend sigue fuera
+de este trabajo. El siguiente cierre requiere $1BCAA/$1CBF8 y todas las
+continuaciones que se alcancen hasta observar un final de combate auténtico.
 
 ## Registro histórico de RUNTIME-17
 

@@ -271,7 +271,10 @@ int main(void)
             if (wf_r18_world_commit(&rt, &world) != WF_OK)
                 fail(0x2946u, 0);
             palette_and_ring();
+            /* Queue both processors before waiting for their shared VBlank. */
+            vdp1_sync();
             vdp2_sync();
+            vdp1_sync_wait();
             vdp2_sync_wait();
             while (video_clock == previous) {}
             previous = video_clock;

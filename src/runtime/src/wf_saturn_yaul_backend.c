@@ -12,6 +12,9 @@ static wf_status_t begin_frame(void *ctx,unsigned nt,unsigned np,unsigned nc){
     if(!b||b->active)return WF_BAD_STATE;
     if(nt>WF_VDP1_STREAM_TILES_MAX||np>WF_SATURN_CRAM_SPRITE_BANKS||nc>WF_VDP1_COMMANDS_MAX)return WF_BLOCKED;
     if(nt>WF_SATURN_VDP1_STREAM_TILE_CAPACITY||nc+4u+1u>WF_SATURN_VDP1_CMD_COUNT)return WF_BLOCKED;
+#ifdef WF_PLATFORM_SATURN
+    if(nt&&(!b->hwr_stage||b->hwr_stage_bytes<(size_t)nt*WF_VDP1_TILE_BYTES_16X16_4BPP))return WF_BLOCKED;
+#endif
     b->expected_tiles=nt;b->expected_palettes=np;b->expected_cmds=nc;
     b->emitted_tiles=b->emitted_palettes=b->emitted_cmds=0;b->active=1;
 #ifdef WF_PLATFORM_SATURN
@@ -27,14 +30,13 @@ static wf_status_t begin_frame(void *ctx,unsigned nt,unsigned np,unsigned nc){
 static wf_status_t upload_tile(void *ctx,uint16_t slot,const uint8_t*src,size_t bytes){
     wf_saturn_yaul_backend_t*b=(wf_saturn_yaul_backend_t*)ctx;uint32_t off;
     if(!b||!b->active||!src||bytes!=WF_VDP1_TILE_BYTES_16X16_4BPP)return WF_BAD_STATE;
+    if(slot!=b->emitted_tiles||b->emitted_tiles>=b->expected_tiles)return WF_BAD_STATE;
     if(wf_saturn_stream_tile_offset(slot,&off)!=WF_OK)return WF_BLOCKED;
 #ifdef WF_PLATFORM_SATURN
     (void)off;
-    /* WP32 forbids SCU-DMA from LWRAM. The final Saturn harness provides HWRAM staging. */
-    if(!b->hwr_stage||b->hwr_stage_bytes<bytes)return WF_BLOCKED;
-    memcpy(b->hwr_stage,src,bytes);
-    scu_dma_transfer(0,(void*)VDP1_VRAM(off),b->hwr_stage,bytes);
-    scu_dma_transfer_wait(0);
+    /* Stage the complete contiguous stream in HWRAM: SCU-DMA cannot read
+     * LWRAM. No VRAM transfer occurs until the frame is complete. */
+    memcpy(b->hwr_stage+(size_t)slot*bytes,src,bytes);
 #else
     (void)off;(void)bytes;
 #endif
@@ -66,7 +68,8 @@ static wf_status_t emit_sprite(void *ctx,const wf_vdp1_sprite_cmd_t*c){
     if(g_cmd_index>=WF_VDP1_COMMANDS_MAX+3u)return WF_BLOCKED;
     vdp1_cmdt_t*cmd=&g_cmdts[g_cmd_index++];memset(cmd,0,sizeof(*cmd));
     vdp1_cmdt_normal_sprite_set(cmd);
-    vdp1_cmdt_draw_mode_t dm={.raw=0};dm.color_mode=VDP1_CMDT_CM_CB_16;dm.cc_mode=VDP1_CMDT_CC_REPLACE;dm.trans_pixel_disable=0;dm.end_code_disable=0;
+    /* Arcade pen F is a color, not VDP1's end-of-line marker. */
+    vdp1_cmdt_draw_mode_t dm={.raw=0};dm.color_mode=VDP1_CMDT_CM_CB_16;dm.cc_mode=VDP1_CMDT_CC_REPLACE;dm.trans_pixel_disable=0;dm.end_code_disable=1;
     vdp1_cmdt_draw_mode_set(cmd,dm);
     vdp1_cmdt_char_base_set(cmd,VDP1_VRAM(off));
     vdp1_cmdt_char_size_set(cmd,16,16);
@@ -85,9 +88,15 @@ static wf_status_t end_frame(void *ctx){
     if(b->emitted_tiles!=b->expected_tiles||b->emitted_palettes!=b->expected_palettes||b->emitted_cmds!=b->expected_cmds){b->active=0;return WF_BAD_STATE;}
 #ifdef WF_PLATFORM_SATURN
     if(g_cmd_index>=WF_VDP1_COMMANDS_MAX+4u){b->active=0;return WF_BLOCKED;}
+    if(b->expected_tiles){
+        scu_dma_transfer(0,(void*)VDP1_VRAM(WF_SATURN_VDP1_DYNAMIC_OFFSET),
+                         b->hwr_stage,(size_t)b->expected_tiles*WF_VDP1_TILE_BYTES_16X16_4BPP);
+        scu_dma_transfer_wait(0);
+    }
     memset(&g_cmdts[g_cmd_index],0,sizeof(g_cmdts[g_cmd_index]));vdp1_cmdt_end_set(&g_cmdts[g_cmd_index]);g_cmd_index++;
     vdp1_cmdt_list_t list;vdp1_cmdt_list_init(&list,g_cmdts);list.count=(uint16_t)g_cmd_index;
-    vdp1_sync_cmdt_list_put(&list,0);vdp1_sync_put_wait();vdp1_sync_render();vdp1_sync();vdp1_sync_wait();
+    vdp1_sync_cmdt_list_put(&list,0);vdp1_sync_put_wait();vdp1_sync_render();
+    if(!b->defer_sync){vdp1_sync();vdp1_sync_wait();}
 #endif
     b->active=0;return WF_OK;
 }

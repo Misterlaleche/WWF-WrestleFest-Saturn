@@ -12,10 +12,10 @@ static uint8_t hot_header[4096];
 static size_t hot_count;
 static wf_r18_sprite_record_t records[512];static wf_vdp1_frame_plan_t plan;
 static wf_actor_raw_t *composed[WF_ACTOR_SLOTS];static size_t composed_count;
-static uint8_t dma_stage[128] __attribute__((aligned(32)));
+static uint8_t dma_stage[WF_VDP1_STREAM_TILES_MAX*WF_VDP1_TILE_BYTES_16X16_4BPP] __attribute__((aligned(32)));
 static wf_saturn_yaul_backend_t backend;
 static unsigned busy;
-void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>128)rom_slots=128;if(tile_slots>6144)tile_slots=6144;hot_count=0;for(unsigned i=0;i<128;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);}
+void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>128)rom_slots=128;if(tile_slots>6144)tile_slots=6144;hot_count=0;for(unsigned i=0;i<128;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);backend.defer_sync=1;}
 wf_status_t wf_r18_rom_preload(void){
  if(!read_file||!rom_data||rom_capacity<524288u)return WF_BLOCKED;
  if(read_file("ROM68K.BIN",0,rom_data,524288u))return WF_BLOCKED;

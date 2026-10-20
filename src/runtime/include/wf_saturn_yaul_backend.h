@@ -11,6 +11,7 @@ typedef struct wf_saturn_yaul_backend {
     unsigned expected_tiles, expected_palettes, expected_cmds;
     unsigned emitted_tiles, emitted_palettes, emitted_cmds;
     uint8_t active;
+    uint8_t defer_sync; /* caller commits VDP1 and VDP2 together before the next frame */
 } wf_saturn_yaul_backend_t;
 
 void wf_saturn_yaul_backend_init(wf_saturn_yaul_backend_t *b, void *hwr_stage, size_t hwr_stage_bytes);

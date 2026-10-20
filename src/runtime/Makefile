@@ -322,8 +322,8 @@ build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c
 	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
 .PHONY: test-runtime18-direct
 test-runtime18-direct: build/direct_combat_probe audit/runtime18-cd/HOTSPR.BIN
-	WF_PROBE_FRAMES=200 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
-	WF_PROBE_FRAMES=300 WF_PROBE_ATTACK=1 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	WF_PROBE_FRAMES=540 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	WF_PROBE_FRAMES=490 WF_PROBE_ATTACK=1 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
 
 build/test_runtime18_cdfs_window: src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c tests/r18/cd-block.h | build
 	$(CC) $(CFLAGS) -Itests/r18 src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c -o $@
@@ -357,3 +357,15 @@ build/test_runtime18_ring_scroll_cache: src/wf_r18_ring.c tests/r18/test_ring_sc
 .PHONY: test-runtime18-ring-scroll-cache
 test-runtime18-ring-scroll-cache: build/test_runtime18_ring_scroll_cache
 	./build/test_runtime18_ring_scroll_cache audit/runtime18-cd/R18RING.BIN
+
+build/test_r18_yaul_dma: tests/r18/test_yaul_dma.c tests/r18/mock-yaul/yaul.h src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c
+	mkdir -p build
+	$(CC) $(CFLAGS) -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c tests/r18/test_yaul_dma.c -o $@
+test-runtime18-yaul-dma: build/test_r18_yaul_dma
+	./build/test_r18_yaul_dma
+
+ROM_PYTHON ?= python3
+.PHONY: test-runtime18-cpu-rom test-runtime18-yaul-dma
+test-runtime18-cpu-rom:
+	$(ROM_PYTHON) tools/generate_cpu_decision_data.py audit/runtime18-cd/ROM68K.BIN --check
+	$(ROM_PYTHON) tools/verify_cpu_decisions_rom.py audit/runtime18-cd/ROM68K.BIN

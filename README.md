@@ -1,4 +1,4 @@
-> RUNTIME-17 R02 (2026-10-18): see CURRENT-STATE-LATEST.md for this checkpoint and its tested scope. Historical hardware results below belong to earlier separate builds; they do not certify this gameplay checkpoint.
+> RUNTIME-18 (2026-10-20): direct ring boot, ROM-backed CPU progress and measured presentation improvements. See CURRENT-STATE-LATEST.md and validation/RUNTIME18-CPU-CHECKPOINT.md. Partial combat only; no physical Saturn or ROM-EXACT certification.
 
 # WWF WrestleFest arcade -> Sega Saturn
 
