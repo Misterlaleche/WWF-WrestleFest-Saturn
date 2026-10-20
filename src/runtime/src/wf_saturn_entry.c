@@ -13,7 +13,7 @@
  * ranges occupy LWRAM only, with no overlap and no dynamic allocation. */
 #define RING_BLOB ((void *)0x00201000u)
 #define ROM_CACHE ((void *)0x00220000u)
-#define TILE_CACHE ((void *)0x00240000u)
+#define TILE_CACHE ((void *)0x002a0000u)
 #define BOOT_RNG ((volatile uint32_t *)0x0020005cu)
 static volatile uint32_t video_clock;
 static volatile uint32_t fatal_owner, fatal_dependency, fatal_frame;
@@ -200,8 +200,9 @@ int main(void)
     if (wf_saturn_yaul_video_init() != WF_OK ||
         wf_r18_ring_bind(RING_BLOB, 114918u) != 0)
         fail(0x18cd04u, 0);
-    wf_r18_present_init(wf_r18_file_read, ROM_CACHE, 128u*1024u,
-                         TILE_CACHE, 768u*1024u);
+    wf_r18_present_init(wf_r18_file_read, ROM_CACHE, 512u*1024u,
+                         TILE_CACHE, 384u*1024u);
+    if (wf_r18_rom_preload() != WF_OK) fail(0x18cd06u, 0);
     for (unsigned i = 0; i < 8u; ++i)
         vdp2_sprite_priority_set(i, 4);
     video.read_rom = wf_r18_rom_read;

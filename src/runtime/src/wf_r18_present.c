@@ -2,17 +2,35 @@
 #include "wf_renderer_contract.h"
 #include <string.h>
 static wf_r18_file_read_fn read_file;
-static uint8_t *rom_data,*tile_data;static size_t rom_slots,tile_slots;
-static uint32_t rom_tags[128];static uint16_t tile_tags[6144];static uint8_t tile_valid[6144];
+static uint8_t *rom_data,*tile_data;static size_t rom_slots,tile_slots,rom_capacity;
+static int rom_preloaded;
+static uint16_t rom_page[128],rom_slot[512];static uint32_t rom_age[128],rom_clock;
+static uint16_t tile_tags[6144];static uint8_t tile_valid[6144];
 static wf_r18_sprite_record_t records[512];static wf_vdp1_frame_plan_t plan;
 static wf_actor_raw_t *composed[WF_ACTOR_SLOTS];static size_t composed_count;
 static uint8_t dma_stage[128] __attribute__((aligned(32)));
 static wf_saturn_yaul_backend_t backend;
 static unsigned busy;
-void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>128)rom_slots=128;if(tile_slots>6144)tile_slots=6144;for(unsigned i=0;i<128;i++)rom_tags[i]=0xffffffffu;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);}
+void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>128)rom_slots=128;if(tile_slots>6144)tile_slots=6144;for(unsigned i=0;i<128;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);}
+wf_status_t wf_r18_rom_preload(void){
+ if(!read_file||!rom_data||rom_capacity<524288u)return WF_BLOCKED;
+ if(read_file("ROM68K.BIN",0,rom_data,524288u))return WF_BLOCKED;
+ rom_preloaded=1;return WF_OK;
+}
 wf_status_t wf_r18_rom_read(void*u,uint32_t a,void*dest,size_t n){uint8_t*out=dest;(void)u;if(!read_file||!rom_slots||a>0x80000u||n>0x80000u-a)return WF_BLOCKED;
- while(n){uint32_t page=a/1024;size_t slot=page%rom_slots,off=a%1024,take=1024-off;if(take>n)take=n;
- if(rom_tags[slot]!=page){if(read_file("ROM68K.BIN",page*1024,rom_data+slot*1024,1024))return WF_BLOCKED;rom_tags[slot]=page;}
+ if(rom_preloaded){memcpy(out,rom_data+a,n);return WF_OK;}
+ while(n){uint32_t page=a/1024;size_t slot=rom_slot[page],off=a%1024,take=1024-off;if(take>n)take=n;
+ if(slot==0xffffu){
+  slot=0;
+  for(size_t i=0;i<rom_slots;i++)
+   if(rom_page[i]==0xffffu){slot=i;break;}
+   else if(rom_age[i]<rom_age[slot])slot=i;
+  if(rom_page[slot]!=0xffffu)rom_slot[rom_page[slot]]=0xffffu;
+  rom_page[slot]=0xffffu;
+  if(read_file("ROM68K.BIN",page*1024,rom_data+slot*1024,1024))return WF_BLOCKED;
+  rom_page[slot]=(uint16_t)page;rom_slot[page]=(uint16_t)slot;
+ }
+ rom_age[slot]=++rom_clock;
  memcpy(out,rom_data+slot*1024+off,take);out+=take;a+=(uint32_t)take;n-=take;}
  return WF_OK;}
 static wf_status_t get_tile(uint16_t tile,const uint8_t **out){size_t slot;if(!tile_slots)return WF_BLOCKED;slot=tile%tile_slots;if(!tile_valid[slot]||tile_tags[slot]!=tile){if(read_file("SPRITES.PAK",(uint32_t)tile*128,tile_data+slot*128,128))return WF_BLOCKED;tile_tags[slot]=tile;tile_valid[slot]=1;}*out=tile_data+slot*128;return WF_OK;}

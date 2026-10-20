@@ -4,10 +4,18 @@
 
 #define SECTOR_BYTES 2048u
 #define ROOT_CAPACITY 64u
+#define WINDOW_SECTORS 8u
+#define WINDOW_COUNT 8u
 typedef struct { char name[13]; uint32_t lba, size; } root_file_t;
+typedef struct {
+    uint32_t data[WINDOW_SECTORS * SECTOR_BYTES / sizeof(uint32_t)];
+    uint32_t first_lba, sectors, last_used;
+} sector_window_t;
 /* Static BSS is linked into high work RAM; never use caller stack or VDP RAM. */
 static root_file_t files[ROOT_CAPACITY];
 static uint32_t cache[SECTOR_BYTES / sizeof(uint32_t)];
+static sector_window_t windows[WINDOW_COUNT] __attribute__((aligned(32)));
+static uint32_t window_clock;
 static uint32_t cached_lba, volume_sectors, file_count;
 static int cache_valid, ready;
 static uint32_t le32(const uint8_t *p) {
@@ -20,6 +28,33 @@ static int fetch(uint32_t lba) {
     if (lba > UINT32_MAX - 150u) return -1;
     if (cache_valid && cached_lba == lba) return 0;
     cache_valid = 0;
+    if (ready) {
+        unsigned slot = 0u;
+        for (unsigned i=0; i<WINDOW_COUNT; ++i) {
+            if (windows[i].sectors && lba >= windows[i].first_lba &&
+                lba-windows[i].first_lba < windows[i].sectors) {
+                slot=i;
+                goto window_hit;
+            }
+        }
+        if (lba >= volume_sectors) return -1;
+        for (unsigned i=0; i<WINDOW_COUNT; ++i)
+            if (!windows[i].sectors || windows[i].last_used < windows[slot].last_used)
+                slot=i;
+        uint32_t first = lba;
+        uint32_t count = volume_sectors-first;
+        if (count > WINDOW_SECTORS) count=WINDOW_SECTORS;
+        if (cd_block_sectors_read(LBA2FAD(first), windows[slot].data,
+                                  count*SECTOR_BYTES) != 0) return -1;
+        windows[slot].first_lba=first;
+        windows[slot].sectors=count;
+window_hit:
+        windows[slot].last_used=++window_clock;
+        memcpy(cache,(const uint8_t *)windows[slot].data+
+                     (lba-windows[slot].first_lba)*SECTOR_BYTES,SECTOR_BYTES);
+        cached_lba=lba; cache_valid=1;
+        return 0;
+    }
     if (cd_block_sector_read(LBA2FAD(lba), cache) != 0) return -1;
     cached_lba = lba; cache_valid = 1;
     return 0;
@@ -31,7 +66,11 @@ static int extent_ok(uint32_t lba, uint32_t size) {
 int wf_r18_cdfs_init(void) {
     const uint8_t *p = (const uint8_t *)cache;
     uint32_t root_lba, root_size, pos;
-    ready = 0; cache_valid = 0; file_count = 0;
+    ready = 0; cache_valid = 0; file_count = 0; window_clock=0;
+    for (unsigned i=0; i<WINDOW_COUNT; ++i) {
+        windows[i].sectors=0;
+        windows[i].last_used=0;
+    }
     if (fetch(16u) != 0) return -1;
     if (p[0] != 1u || memcmp(p+1,"CD001",5) != 0 || p[6] != 1u ||
         p[128] != 0u || p[129] != 8u || p[130] != 8u || p[131] != 0u) return -1;
@@ -88,6 +127,15 @@ int wf_r18_file_read(const char *name, uint32_t offset, void *dst, size_t bytes)
     while (bytes) {
         uint32_t within=offset%SECTOR_BYTES;
         size_t take=SECTOR_BYTES-within;
+        if (!within && bytes>=16u*SECTOR_BYTES &&
+            ((uintptr_t)out&31u)==0u) {
+            if (cd_block_sectors_read(LBA2FAD(file->lba+offset/SECTOR_BYTES),
+                                      out,16u*SECTOR_BYTES)!=0) return -1;
+            out+=16u*SECTOR_BYTES;
+            offset+=16u*SECTOR_BYTES;
+            bytes-=16u*SECTOR_BYTES;
+            continue;
+        }
         if (take>bytes) take=bytes;
         if (fetch(file->lba+offset/SECTOR_BYTES)!=0) return -1;
         memcpy(out,(const uint8_t *)cache+within,take);

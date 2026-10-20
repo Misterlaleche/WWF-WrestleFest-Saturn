@@ -324,3 +324,21 @@ build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c
 test-runtime18-direct: build/direct_combat_probe
 	WF_PROBE_FRAMES=200 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN
 	WF_PROBE_FRAMES=300 WF_PROBE_ATTACK=1 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN
+
+build/test_runtime18_cdfs_window: src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c tests/r18/cd-block.h | build
+	$(CC) $(CFLAGS) -Itests/r18 src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c -o $@
+.PHONY: test-runtime18-cdfs
+test-runtime18-cdfs: build/test_runtime18_cdfs_window
+	./build/test_runtime18_cdfs_window audit/runtime18-disc/wrestlefest-runtime18.iso audit/runtime18-cd/SPRITES.PAK
+
+build/test_runtime18_rom_cache: $(CORE) $(R18_HOST) tests/r18/test_rom_cache.c | build
+	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r18/test_rom_cache.c -o $@
+.PHONY: test-runtime18-rom-cache
+test-runtime18-rom-cache: build/test_runtime18_rom_cache
+	./build/test_runtime18_rom_cache
+
+build/test_runtime18_ring_scanline: src/wf_r18_ring.c tests/r18/test_ring_scanline.c | build
+	$(CC) $(CFLAGS) src/wf_r18_ring.c tests/r18/test_ring_scanline.c -o $@
+.PHONY: test-runtime18-ring-scanline
+test-runtime18-ring-scanline: build/test_runtime18_ring_scanline
+	./build/test_runtime18_ring_scanline audit/runtime18-cd/R18RING.BIN

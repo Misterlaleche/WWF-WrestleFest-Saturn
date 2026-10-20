@@ -59,3 +59,32 @@ Keep the generated `.bin` and `.cue` together and launch or burn the `.cue`.
 It describes one MODE1/2352 data track with no audio tracks. The file
 `validation/results/runtime18/disc-validation.json` records sector-level and
 CDFS-payload checks plus exact hashes of the generated pair.
+
+## CD and ring performance checkpoint (2026-10-20)
+
+The Saturn build now reads 16 aligned sectors per CD command for large file
+transfers, keeps eight eight-sector CDFS windows, and preloads the exact
+512 KiB arcade program into low work RAM. The remaining 384 KiB low-RAM tile
+cache retains sprite bytes on demand. A fully associative fallback ROM cache
+also preserves hot pages for host and non-preloaded callers. The ring renderer
+decodes each 16-pixel tile run once per scanline, rather than doing a page,
+overlay, and tile lookup for every pixel. Host checks compare the optimized
+scanlines with the original ROM-derived pixel lookup, including wrapping,
+flips, transparency, and an overlay tile.
+
+Temporary diagnostic builds measured the first 30 game frames in Mednafen:
+2,980 Saturn VBlanks at the previous checkpoint and 655 with these changes.
+The corresponding CD command count fell from 348 to 43. At frame 120 the
+optimized diagnostic build had consumed 1,272 VBlanks, so frames 31–120 still
+averaged 6.86 display refreshes per game frame. These are measurements inside
+Mednafen, including startup in the first-30 count; they do not establish
+hardware speed or a fluid frame rate. The diagnostic overlays and forced
+30/120-frame stops were removed from the delivered BIN/CUE.
+
+Reproduce the new checks with `make -C src/runtime test-runtime18-cdfs
+test-runtime18-rom-cache test-runtime18-ring-scanline`; run the existing
+`test-runtime18-direct` target for the no-input and controlled-input combat
+sequences. The game still has the CPU-owned fail-closed boundaries described
+above. Native VDP2 tilemap scrolling and sprite-data scheduling remain the
+principal integration work for a fluid match. The BIN/CUE is for emulator and
+CD-R testing, not ROM-EXACT or hardware-certified.

@@ -54,6 +54,38 @@ int wf_r18_ring_pixel(unsigned layer,int wx,int wy,uint8_t *index){
  uint8_t v=g[tiles+tile*128+y*8+x/2];v=(x&1)?v&15:v>>4;
  *index=(uint8_t)(((attr&15)<<4)|v);return 0;
 }
+int wf_r18_ring_scanline(unsigned layer,int wx,int wy,unsigned transparent,uint8_t out[320]){
+ if(!g||!out||layer>1)return -1;
+ wx%=2560;wy%=2048;if(wx<0)wx+=2560;if(wy<0)wy+=2048;
+ unsigned ty=(unsigned)wy>>4;
+ unsigned row=(unsigned)wy&15u;
+ unsigned screen=0;
+ while(screen<320u){
+  unsigned tx=(unsigned)wx>>4;
+  unsigned po=u32(g+32+((ty/16u)*8u+tx/20u+layer*64u)*4u);
+  const uint8_t *cell=g+po+((ty%16u)*20u+tx%20u)*4u;
+  unsigned attr=u16(cell),tile=u16(cell+2);
+  unsigned physical=(ty&31u)*32u+(tx&31u);
+  if(overlay_valid[layer][physical]){
+   attr=overlay[layer][physical][0];tile=overlay[layer][physical][1];
+  }
+  unsigned local=(unsigned)wx&15u;
+  unsigned run=16u-local;
+  if(run>320u-screen)run=320u-screen;
+  unsigned sample_row=(attr&128u)?15u-row:row;
+  const uint8_t *pixels=g+tiles+tile*128u+sample_row*8u;
+  unsigned bank=(attr&15u)<<4;
+  for(unsigned i=0;i<run;i++){
+   unsigned px=local+i;
+   if(attr&64u)px=15u-px;
+   uint8_t packed=pixels[px>>1];
+   unsigned nibble=(px&1u)?packed&15u:packed>>4;
+   out[screen+i]=(uint8_t)((transparent&&!nibble)?0u:bank|nibble);
+  }
+  screen+=run;wx+=(int)run;if(wx>=2560)wx-=2560;
+ }
+ return 0;
+}
 int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t pri){
  if(!g||(pri!=0x78&&pri!=0x7b&&pri!=0x7c))return -1;
  if(last[0]==sx0&&last[1]==sy0&&last[2]==sx1&&last[3]==sy1&&last[4]==pri)return 0;
@@ -61,15 +93,17 @@ int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t p
  vdp2_scrn_priority_set(VDP2_SCRN_NBG0,pri==0x78?2:1);
  vdp2_scrn_priority_set(VDP2_SCRN_NBG1,pri==0x78?1:pri==0x7b?2:3);
  vdp2_scrn_display_set(pri==0x78?(VDP2_SCRN_DISPTP_NBG0|VDP2_SCRN_DISP_NBG1):(VDP2_SCRN_DISP_NBG0|VDP2_SCRN_DISPTP_NBG1));
+ uint8_t line[320];
  for(unsigned layer=0;layer<2;layer++){
   int first=(pri==0x78)?layer==0:layer==1;
   int sx=first?sx0:sx1,sy=first?sy0:sy1;
   int transparent=(pri==0x78)?layer==0:layer==1;
   volatile uint16_t *vram=(volatile uint16_t *)VDP2_VRAM_ADDR(layer?2:0,0);
-  for(unsigned y=0;y<240;y++)for(unsigned x=0;x<320;x+=2){
-   uint8_t a,b;wf_r18_ring_pixel(layer,sx+(int)x,2048-sy+(int)y,&a);wf_r18_ring_pixel(layer,sx+(int)x+1,2048-sy+(int)y,&b);
-   if(transparent){if(!(a&15))a=0;if(!(b&15))b=0;}
-   vram[y*256+x/2]=(uint16_t)((a<<8)|b);
+  for(unsigned y=0;y<240;y++){
+   if(wf_r18_ring_scanline(layer,sx,2048-sy+(int)y,
+                           (unsigned)transparent,line)!=0)return -1;
+   for(unsigned x=0;x<320;x+=2)
+    vram[y*256+x/2]=(uint16_t)((line[x]<<8)|line[x+1]);
   }
  }
 #endif
