@@ -8,6 +8,10 @@ PYTHON=${PYTHON:-python3}
 IMAGE=ijacquez/yaul@sha256:b6d272204767cd0a734139dd3a2ab298ef5912fb7b7224b78e6d9fac1a7825a6
 RESULTS="$ROOT/validation/results/runtime18"
 mkdir -p "$RESULTS"
+"$PYTHON" "$ROOT/src/runtime/tools/build_r18_hot_sprites.py" \
+  "$ROOT/src/runtime/validation/runtime18-hot-tiles.txt" \
+  "$ROOT/src/runtime/audit/runtime18-cd/SPRITES.PAK" \
+  "$ROOT/src/runtime/audit/runtime18-cd/HOTSPR.BIN"
 "$DOCKER" run --rm --entrypoint /bin/bash -v "$ROOT:/workspace" -v "$SDK:/sdk:ro" -w /workspace/src/runtime -e YAUL_INSTALL_ROOT=/sdk -e YAUL_ARCH_SH_PREFIX=sh2eb-elf -e YAUL_ARCH_M68K_PREFIX=m68keb-elf -e YAUL_OPTION_MALLOC_IMPL=tlsf -e SILENT=1 -e NOCOLOR=1 -e MAKE_ISO_XORRISOFS=/usr/bin/xorrisofs "$IMAGE" -c '
 set -euo pipefail
 export PATH=/sdk/bin:$PATH

@@ -6,12 +6,16 @@ static uint8_t *rom_data,*tile_data;static size_t rom_slots,tile_slots,rom_capac
 static int rom_preloaded;
 static uint16_t rom_page[128],rom_slot[512];static uint32_t rom_age[128],rom_clock;
 static uint16_t tile_tags[6144];static uint8_t tile_valid[6144];
+/* Sector-aligned header stores sorted tile IDs; pixel payload resides in the
+ * first tile-cache slots. The remaining slots retain exact on-demand fallback. */
+static uint8_t hot_header[4096];
+static size_t hot_count;
 static wf_r18_sprite_record_t records[512];static wf_vdp1_frame_plan_t plan;
 static wf_actor_raw_t *composed[WF_ACTOR_SLOTS];static size_t composed_count;
 static uint8_t dma_stage[128] __attribute__((aligned(32)));
 static wf_saturn_yaul_backend_t backend;
 static unsigned busy;
-void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>128)rom_slots=128;if(tile_slots>6144)tile_slots=6144;for(unsigned i=0;i<128;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);}
+void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>128)rom_slots=128;if(tile_slots>6144)tile_slots=6144;hot_count=0;for(unsigned i=0;i<128;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);}
 wf_status_t wf_r18_rom_preload(void){
  if(!read_file||!rom_data||rom_capacity<524288u)return WF_BLOCKED;
  if(read_file("ROM68K.BIN",0,rom_data,524288u))return WF_BLOCKED;
@@ -33,7 +37,47 @@ wf_status_t wf_r18_rom_read(void*u,uint32_t a,void*dest,size_t n){uint8_t*out=de
  rom_age[slot]=++rom_clock;
  memcpy(out,rom_data+slot*1024+off,take);out+=take;a+=(uint32_t)take;n-=take;}
  return WF_OK;}
-static wf_status_t get_tile(uint16_t tile,const uint8_t **out){size_t slot;if(!tile_slots)return WF_BLOCKED;slot=tile%tile_slots;if(!tile_valid[slot]||tile_tags[slot]!=tile){if(read_file("SPRITES.PAK",(uint32_t)tile*128,tile_data+slot*128,128))return WF_BLOCKED;tile_tags[slot]=tile;tile_valid[slot]=1;}*out=tile_data+slot*128;return WF_OK;}
+static uint16_t hot_id(size_t index){
+ const uint8_t *p=hot_header+8u+index*2u;
+ return (uint16_t)((p[0]<<8)|p[1]);
+}
+wf_status_t wf_r18_hot_sprites_load(void){
+ size_t count;
+ if(!read_file||!tile_data||tile_slots<2u||
+    read_file("HOTSPR.BIN",0,hot_header,sizeof hot_header))return WF_BLOCKED;
+ if(memcmp(hot_header,"R18H",4)||hot_header[6]!=0u||hot_header[7]!=128u)
+  return WF_BLOCKED;
+ count=(size_t)((hot_header[4]<<8)|hot_header[5]);
+ if(!count||count>(sizeof hot_header-8u)/2u||count>=tile_slots)
+  return WF_BLOCKED;
+ for(size_t i=1;i<count;i++)if(hot_id(i)<=hot_id(i-1u))
+  return WF_BLOCKED;
+ if(read_file("HOTSPR.BIN",sizeof hot_header,tile_data,count*128u))
+  return WF_BLOCKED;
+ memset(tile_valid,0,sizeof tile_valid);
+ hot_count=count;
+ return WF_OK;
+}
+size_t wf_r18_hot_sprites_bytes(void){
+ return hot_count?sizeof hot_header+hot_count*128u:0u;
+}
+wf_status_t wf_r18_tile_read(uint16_t tile,const uint8_t **out){
+ size_t lo=0,hi=hot_count,slot,cold;
+ if(!out||!tile_data||!read_file||!tile_slots)return WF_BLOCKED;
+ while(lo<hi){size_t mid=lo+(hi-lo)/2u;
+  if(hot_id(mid)<tile)lo=mid+1u;else hi=mid;}
+ if(lo<hot_count&&hot_id(lo)==tile){*out=tile_data+lo*128u;return WF_OK;}
+ cold=tile_slots-hot_count;
+ if(!cold)return WF_BLOCKED;
+ slot=hot_count+(size_t)tile%cold;
+ if(!tile_valid[slot]||tile_tags[slot]!=tile){
+  if(read_file("SPRITES.PAK",(uint32_t)tile*128u,tile_data+slot*128u,128u))
+   return WF_BLOCKED;
+  tile_tags[slot]=tile;tile_valid[slot]=1u;
+ }
+ *out=tile_data+slot*128u;
+ return WF_OK;
+}
 static uint16_t be16(const uint8_t*p){return (uint16_t)((p[0]<<8)|p[1]);}
 static wf_actor_raw_t *actor_link(wf_runtime_t*r,uint32_t address){return wf_actor_from_rom_ptr(r,address,NULL);}
 static int add_cmd(uint16_t tile,int x,int y,unsigned fx,unsigned fy,unsigned palette){unsigned slot;
@@ -50,7 +94,7 @@ wf_status_t wf_r18_present_batch(wf_runtime_t*r,wf_actor_raw_t*const*actors,size
  for(size_t i=0;i<parser.count;i++){const uint8_t*b=records[i].bytes;unsigned attr=be16(b+2);if(!(attr&1))continue;unsigned chain=(attr>>5)&7,fx=(attr>>4)&1,fy=(attr>>3)&1,palette=b[9]&15;unsigned tile=wf_sprite_number_align((unsigned)b[5]|((unsigned)b[7]<<8),chain);int x=wf_sprite_x_decode((unsigned)b[11]|((attr&4)<<6)),y=wf_sprite_y_decode((unsigned)b[1]|((attr&2)<<7));
  for(unsigned j=0;j<=chain;j++){int yy=fy?y-(int)chain*16+(int)j*16:y-(int)j*16;if(!add_cmd((uint16_t)(tile+j),x,yy,fx,fy,palette)){status=WF_BLOCKED;goto done;}}}
  status=ops->begin_frame(&backend,plan.tile_count,16,plan.cmd_count);if(status!=WF_OK)goto done;
- for(unsigned i=0;i<plan.tile_count;i++){const uint8_t*p;status=get_tile(plan.tile_upload[i].source_tile,&p);if(status==WF_OK)status=ops->upload_tile_16x16_4bpp(&backend,(uint16_t)i,p,128);if(status!=WF_OK)goto abort;}
+ for(unsigned i=0;i<plan.tile_count;i++){const uint8_t*p;status=wf_r18_tile_read(plan.tile_upload[i].source_tile,&p);if(status==WF_OK)status=ops->upload_tile_16x16_4bpp(&backend,(uint16_t)i,p,128);if(status!=WF_OK)goto abort;}
  for(unsigned i=0;i<16;i++){status=ops->upload_palette_xbgr444_16(&backend,(uint8_t)i,v->palettes+0x2000+i*128,32);if(status!=WF_OK)goto abort;}
  for(unsigned i=0;i<plan.cmd_count;i++){status=ops->emit_sprite_16x16(&backend,&plan.cmd[i]);if(status!=WF_OK)goto abort;}
  status=ops->end_frame(&backend);if(status!=WF_OK)goto done;

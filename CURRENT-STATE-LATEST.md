@@ -1,3 +1,22 @@
+# RUNTIME-18 — scroll y precarga, 20 de octubre de 2026
+
+RUNTIME-18 está autorizado e iniciado en `runtime18/direct-combat`. El disco
+arranca directamente al ring sin menús ni audio. Este checkpoint añade scroll
+VDP2 con actualización parcial y precarga exacta de 1.204 tiles. En Mednafen,
+frames 31–120 bajan de 6,86 a 4,21 VBlanks por frame. Sigue siendo lento.
+
+Las pruebas, reproducción y límites están en `validation/RUNTIME18-DISC.md`.
+Los bloqueos CPU $1F7F0 (frame HOST 255) y $1C3FC (361 con entrada) permanecen.
+No se ha completado un combate ni probado Saturn real. No es ROM-EXACT.
+Los BIN/CUE regenerables están en `validation/results/runtime18/`.
+
+Siguiente prioridad: medir CPU/presentación restante y cerrar esas ramas con
+evidencia directa de la ROM. El frontend continúa fuera de prioridad.
+
+## Registro histórico de RUNTIME-17
+
+El texto siguiente describe exclusivamente el cierre RUNTIME-17.
+
 # RUNTIME-17 — checkpoint verificado R02, 18 de octubre de 2026
 
 Cerrados los pendientes de este checkpoint: owners nativos $2017A, $6E34 y $9132, integración $18C4, composición de registros de un frame activo y compilación/enlace SH-2. No se ha iniciado RUNTIME-18. Este cierre no declara equivalencia ROM-EXACT universal ni aptitud para hardware.

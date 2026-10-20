@@ -203,6 +203,9 @@ int main(void)
     wf_r18_present_init(wf_r18_file_read, ROM_CACHE, 512u*1024u,
                          TILE_CACHE, 384u*1024u);
     if (wf_r18_rom_preload() != WF_OK) fail(0x18cd06u, 0);
+    if (wf_r18_file_size("HOTSPR.BIN", &size) != 0 ||
+        wf_r18_hot_sprites_load() != WF_OK ||
+        size != wf_r18_hot_sprites_bytes()) fail(0x18cd07u, size);
     for (unsigned i = 0; i < 8u; ++i)
         vdp2_sprite_priority_set(i, 4);
     video.read_rom = wf_r18_rom_read;

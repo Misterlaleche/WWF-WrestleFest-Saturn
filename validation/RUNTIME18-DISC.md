@@ -1,5 +1,36 @@
 # Runtime18 disc build
 
+## Latest checkpoint: hardware scrolling and resident sprites
+
+The ring retains a 512x256 bitmap per layer and uses VDP2 scroll registers.
+The CPU updates exposed strips and changed overlay cells. Host tests compare
+the visible pixels with the ROM-derived lookup across wrapping, negative
+positions, transparency and overlay writes/restores.
+
+The build automatically generates HOTSPR.BIN from the checked SPRITES.PAK
+SHA-256 and `src/runtime/validation/runtime18-hot-tiles.txt`. Its 1,204 sorted
+tile IDs were observed in no-input frames 0–253 and controlled frames 0–359.
+The 4,096-byte header contains big-endian IDs; each following 128-byte tile is
+copied unchanged. Output size: 158,208 bytes; SHA-256:
+`a82837ce3408690ec1e0c66f93659d5413234f9fc2b6880377568e708e2445a6`.
+Startup reserves 154,112 bytes of the existing 384 KiB tile cache for these
+tiles. All other IDs retain exact on-demand access to SPRITES.PAK.
+
+The HOST combat probe now uses the Saturn cache capacity and preload path.
+The new test compares every hot tile with the original pack, checks zero
+pack reads for resident tiles and cold-cache behavior, and rejects malformed
+headers, duplicate IDs, invalid counts and failed payload reads.
+Run `make -C src/runtime test-runtime18-hot-sprites
+test-runtime18-ring-scroll-cache` alongside the existing checks.
+
+A temporary Mednafen diagnostic build measured VBlank 558 at frame 30 and
+937 at frame 120. The first figure includes startup. Frames 31–120 average
+4.21 VBlanks/frame, versus 6.86 at the previous checkpoint: about 39% less
+time. Hardware scrolling alone measured 6.57. Diagnostic stops were removed
+before the final build. These are emulator measurements of one no-input
+sequence, not physical Saturn results. The CPU fail-closed boundaries below
+remain open; no complete match or ROM-EXACT claim is made.
+
 Run `DOCKER=/path/to/docker validation/build-runtime18.sh /path/to/sh2eb-elf`.
 The script uses the pinned Yaul Docker image, the supplied SDK read-only, and host
 Python 3. Outputs are under `validation/results/runtime18/`. The build emits a

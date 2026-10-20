@@ -321,9 +321,9 @@ build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c
 	mkdir -p build
 	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
 .PHONY: test-runtime18-direct
-test-runtime18-direct: build/direct_combat_probe
-	WF_PROBE_FRAMES=200 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN
-	WF_PROBE_FRAMES=300 WF_PROBE_ATTACK=1 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN
+test-runtime18-direct: build/direct_combat_probe audit/runtime18-cd/HOTSPR.BIN
+	WF_PROBE_FRAMES=200 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	WF_PROBE_FRAMES=300 WF_PROBE_ATTACK=1 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
 
 build/test_runtime18_cdfs_window: src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c tests/r18/cd-block.h | build
 	$(CC) $(CFLAGS) -Itests/r18 src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c -o $@
@@ -337,8 +337,23 @@ build/test_runtime18_rom_cache: $(CORE) $(R18_HOST) tests/r18/test_rom_cache.c |
 test-runtime18-rom-cache: build/test_runtime18_rom_cache
 	./build/test_runtime18_rom_cache
 
+audit/runtime18-cd/HOTSPR.BIN: tools/build_r18_hot_sprites.py validation/runtime18-hot-tiles.txt audit/runtime18-cd/SPRITES.PAK
+	python3 tools/build_r18_hot_sprites.py validation/runtime18-hot-tiles.txt audit/runtime18-cd/SPRITES.PAK $@
+
+build/test_runtime18_hot_sprites: $(CORE) $(R18_HOST) tests/r18/test_hot_sprites.c | build
+	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r18/test_hot_sprites.c -o $@
+.PHONY: test-runtime18-hot-sprites
+test-runtime18-hot-sprites: build/test_runtime18_hot_sprites audit/runtime18-cd/HOTSPR.BIN
+	./build/test_runtime18_hot_sprites audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/HOTSPR.BIN
+
 build/test_runtime18_ring_scanline: src/wf_r18_ring.c tests/r18/test_ring_scanline.c | build
 	$(CC) $(CFLAGS) src/wf_r18_ring.c tests/r18/test_ring_scanline.c -o $@
 .PHONY: test-runtime18-ring-scanline
 test-runtime18-ring-scanline: build/test_runtime18_ring_scanline
 	./build/test_runtime18_ring_scanline audit/runtime18-cd/R18RING.BIN
+
+build/test_runtime18_ring_scroll_cache: src/wf_r18_ring.c tests/r18/test_ring_scroll_cache.c | build
+	$(CC) $(CFLAGS) src/wf_r18_ring.c tests/r18/test_ring_scroll_cache.c -o $@
+.PHONY: test-runtime18-ring-scroll-cache
+test-runtime18-ring-scroll-cache: build/test_runtime18_ring_scroll_cache
+	./build/test_runtime18_ring_scroll_cache audit/runtime18-cd/R18RING.BIN
