@@ -1,4 +1,5 @@
 #include "wf_r18_ring.h"
+#include "wf_saturn_memory.h"
 #include <string.h>
 #ifdef __sh__
 #include <yaul.h>
@@ -26,7 +27,7 @@ int wf_r18_ring_bind(const void *blob,size_t n){
  for(unsigned i=0;i<5;i++)last[i]=0x10000;
 #ifdef __sh__
  for(unsigned layer=0;layer<2;layer++){
-  vdp2_scrn_bitmap_format_t f={.scroll_screen=layer?VDP2_SCRN_NBG1:VDP2_SCRN_NBG0,.ccc=VDP2_SCRN_CCC_PALETTE_256,.bitmap_size=VDP2_SCRN_BITMAP_SIZE_512X256,.palette_base=VDP2_CRAM_MODE_2_OFFSET(2+layer,0,0),.bitmap_base=VDP2_VRAM_ADDR(layer,0)};
+  vdp2_scrn_bitmap_format_t f={.scroll_screen=layer?VDP2_SCRN_NBG1:VDP2_SCRN_NBG0,.ccc=VDP2_SCRN_CCC_PALETTE_256,.bitmap_size=VDP2_SCRN_BITMAP_SIZE_512X256,.palette_base=VDP2_CRAM_MODE_2_OFFSET((layer?WF_SATURN_CRAM_BG_FIRST:WF_SATURN_CRAM_FG_FIRST)/256u,0,0),.bitmap_base=VDP2_VRAM_ADDR(layer?2:0,0)};
   vdp2_scrn_bitmap_format_set(&f);
   vdp2_scrn_scroll_x_set(f.scroll_screen,0);vdp2_scrn_scroll_y_set(f.scroll_screen,0);
   volatile uint32_t *cram=(volatile uint32_t *)f.palette_base;
@@ -34,7 +35,7 @@ int wf_r18_ring_bind(const void *blob,size_t n){
  }
  vdp2_cram_mode_set(2);
  vdp2_vram_cycp_t *cy=vdp2_vram_cycp_get();
- cy->pt[0].raw=0x44eeeeee;cy->pt[1].raw=0x55eeeeee;vdp2_vram_cycp_set(cy);
+ cy->pt[0].raw=0x4444eeee;cy->pt[2].raw=0x5555eeee;vdp2_vram_cycp_set(cy);
 #endif
  return 0;
 }
@@ -64,7 +65,7 @@ int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t p
   int first=(pri==0x78)?layer==0:layer==1;
   int sx=first?sx0:sx1,sy=first?sy0:sy1;
   int transparent=(pri==0x78)?layer==0:layer==1;
-  volatile uint16_t *vram=(volatile uint16_t *)VDP2_VRAM_ADDR(layer,0);
+  volatile uint16_t *vram=(volatile uint16_t *)VDP2_VRAM_ADDR(layer?2:0,0);
   for(unsigned y=0;y<240;y++)for(unsigned x=0;x<320;x+=2){
    uint8_t a,b;wf_r18_ring_pixel(layer,sx+(int)x,2048-sy+(int)y,&a);wf_r18_ring_pixel(layer,sx+(int)x+1,2048-sy+(int)y,&b);
    if(transparent){if(!(a&15))a=0;if(!(b&15))b=0;}
@@ -85,7 +86,7 @@ void wf_r18_ring_tile_restore(unsigned layer,unsigned cell){if(layer<2&&cell<102
 int wf_r18_ring_palette_set(unsigned layer,const uint8_t *strided,size_t n){
  if(layer>1||!strided||n<0x800)return -1;
 #ifdef __sh__
- volatile uint32_t *cram=(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(2+layer,0,0);
+ volatile uint32_t *cram=(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET((layer?WF_SATURN_CRAM_BG_FIRST:WF_SATURN_CRAM_FG_FIRST)/256u,0,0);
  for(unsigned bank=0;bank<16;bank++)for(unsigned pen=0;pen<16;pen++){
   uint16_t v=u16(strided+bank*128+pen*2);unsigned r=(v&15)*17,green=((v>>4)&15)*17,b=((v>>8)&15)*17;
   cram[bank*16+pen]=(b<<16)|(green<<8)|r;

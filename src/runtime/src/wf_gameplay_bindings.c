@@ -40,7 +40,18 @@ static wf_status_t f4c2_dispatch_hook(wf_runtime_t *rt,wf_actor_raw_t *a,void *u
  c->f4c2_active_rt=rt;f4c2_sync_raw23_in(rt,c);
  c->f4c2_actions.raw23_ctx=&c->f4c2_raw23_ctx;c->f4c2_actions.fixed_object0=&rt->fixed_object0;c->f4c2_actions.fixed_object1=&rt->fixed_object1;c->f4c2_dispatch.actions=&c->f4c2_actions;
  s=wf_r17_dispatch_1c03e_bounded(rt,a,&c->f4c2_dispatch);f4c2_sync_raw23_out(rt,c);c->f4c2_active_rt=0;
- if(s!=WF_OK){c->last_blocked_dependency=c->f4c2_dispatch.blocked_dependency_rom?c->f4c2_dispatch.blocked_dependency_rom:0x0001c03eu;}
+ if(s==WF_OK&&c->f4c2_dispatch.extra_render_actor){
+  wf_r17_render_ctx_t render={0};
+  render.scroll_a_x=(uint16_t)c->camera.scroll0_x;
+  render.scroll_a_y=(uint16_t)c->camera.scroll0_y;
+  render.queue=&c->render_queue;
+  render.visibility_2188=wf_r17_visibility_2188_exact;
+  s=wf_r17_world_to_screen_247c(c->f4c2_dispatch.extra_render_actor,
+                                 render.scroll_a_x,render.scroll_a_y);
+  if(s==WF_OK)s=wf_r17_queue_27b8(&render,c->f4c2_dispatch.extra_render_actor);
+  if(s!=WF_OK)c->last_blocked_dependency=0x00012592u;
+ }
+ if(s!=WF_OK&&c->last_blocked_dependency==0u){c->last_blocked_dependency=c->f4c2_dispatch.blocked_dependency_rom?c->f4c2_dispatch.blocked_dependency_rom:0x0001c03eu;}
  return s;
 }
 static wf_status_t f4c2_postqueue_2208(wf_runtime_t *rt,wf_actor_raw_t *a,void *user){
@@ -315,7 +326,14 @@ wf_status_t wf_phase_cpu_real(wf_runtime_t *rt,uint32_t addr,void *user){
  if((rt->g.global_16c4&1u)!=0u)return WF_OK;
  wf_r17_m68k_moveq(&rt->m68k_regs,6u,8);
  for(unsigned i=0;i<WF_ACTOR_SLOTS;i++,wf_r17_m68k_move_w(&rt->m68k_regs,6u,(uint16_t)(8u-i))){
-  if((wf_u8(&rt->actors[i],WF_A_ACTIVE)&0x80u)==0u)continue;
+  wf_actor_raw_t*a=&rt->actors[i];
+  if((wf_u8(a,WF_A_ACTIVE)&0x80u)==0u)continue;
+  /* $1C16E-$1C19A dispatches only CPU/partner roles. A selected human
+   * with +$56.bit6/bit7 clear never enters the CPU state table. */
+  uint8_t role=wf_u8(a,WF_A_ROLE);
+  if(!(role&0x40u)&&(!(role&0x80u)||(wf_u8(a,WF_A_FLAGS32)&0x80u)))continue;
+  if(wf_u8(a,WF_A_STATE+1u)==0xffu||wf_be16(a,WF_A_LOCKOUT)!=0u||
+     (wf_u8(a,WF_A_FLAGS32)&0x10u))continue;
   wf_status_t s=wf_cpu_actor_step(rt,i,&c->cpu_trace[i]);
   if(s!=WF_OK){c->last_blocked_phase=0x01c150u;c->last_blocked_dependency=c->cpu_trace[i].blocked_dependency_rom?c->cpu_trace[i].blocked_dependency_rom:c->cpu_trace[i].state5.blocked_dependency_rom;return s;}
  }

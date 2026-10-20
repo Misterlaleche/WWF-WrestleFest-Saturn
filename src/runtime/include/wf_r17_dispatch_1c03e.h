@@ -6,6 +6,7 @@
 typedef struct wf_r17_dispatch_1c03e_ctx {
     wf_r17_actions_r11_bridge_t *actions;
     uint32_t blocked_dependency_rom;
+    wf_actor_raw_t *extra_render_actor; /* $1258C/$12592 linked draw */
 } wf_r17_dispatch_1c03e_ctx_t;
 
 /* Bounded exact $1C03E owner.  Closed R11 action families execute; state-4

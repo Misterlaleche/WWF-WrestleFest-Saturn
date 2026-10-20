@@ -16,11 +16,12 @@
 #define WF_SATURN_VDP1_STREAM_TILE_BYTES     128u
 #define WF_SATURN_VDP1_STREAM_TILE_CAPACITY  (WF_SATURN_VDP1_DYNAMIC_BYTES / WF_SATURN_VDP1_STREAM_TILE_BYTES)
 
-/* WP26 authoritative CRAM mode-2 logical palette windows (entry indices). */
+/* R18 direct-ring CRAM mode-2 palette windows (entry indices). The arcade
+ * foreground and text share the 256-color NBG0 bitmap window. */
 #define WF_SATURN_CRAM_MODE                  2u
 #define WF_SATURN_CRAM_TEXT_FIRST            0x000u
 #define WF_SATURN_CRAM_SPRITE_FIRST          0x100u
-#define WF_SATURN_CRAM_FG_FIRST              0x200u
+#define WF_SATURN_CRAM_FG_FIRST              0x000u
 #define WF_SATURN_CRAM_BG_FIRST              0x300u
 #define WF_SATURN_CRAM_WINDOW_ENTRIES        0x100u
 #define WF_SATURN_CRAM_BANK_COLORS           16u

@@ -4,6 +4,9 @@
 #include "wf_gameplay_bindings.h"
 #include "wf_r17_resolver_280dc.h"
 #include "wf_physics.h"
+#include "wf_r17_dispatch_1c03e.h"
+#include "wf_r17_actions_r11.h"
+#include "wf_cpu_runtime.h"
 
 static void active(wf_actor_raw_t *a){memset(a,0,sizeof(*a));wf_set_u8(a,WF_A_ACTIVE,0x80u);}
 static void base_probe(wf_runtime_t *rt,wf_actor_raw_t *a,uint8_t mode,uint8_t side,uint16_t x,uint16_t y,uint16_t z){
@@ -61,4 +64,183 @@ static void test_f4c2_shadow(void){
  assert(rt.m68k_regs.d[0]==0x12340009u&&rt.m68k_regs.d[1]==0x98760040u);
  puts("PASS $F4C2 iterator and correction D-register composition");
 }
-int main(void){test_f4c2_shadow();test_280dc_early_and_dispatch();test_280dc_routes();test_2208_mode2_exact_dead_clamp();test_f4c2_bounded_dispatch_and_queue();test_scheduler_advances_to_collision();puts("PASS test_runtime17_f4c2");return 0;}
+static void test_11b5a_contact_transition(void){
+ wf_runtime_t rt;wf_actor_raw_t *a=&rt.actors[0];wf_r17_dispatch_1c03e_ctx_t ctx={0};
+ memset(&rt,0,sizeof(rt));active(a);wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,4u);wf_set_u8(a,WF_A_LATCHED,0x80u);wf_set_u8(a,WF_A_LATCHED+1u,1u);
+ wf_set_u8(a,WF_A_FLAGS33,0x80u);wf_set_u8(a,WF_A_CONTACT+1u,1u);
+ assert(wf_r17_dispatch_1c03e_bounded(&rt,a,&ctx)==WF_OK);
+ assert(wf_be16(a,WF_A_STATE)==5u&&wf_be16(a,WF_A_SELECTOR)==0x4fu);
+}
+static void test_18b0e_action_4f(void){
+ wf_runtime_t rt;wf_actor_raw_t *a=&rt.actors[0];wf_r17_actions_r11_bridge_t bridge={0};
+ memset(&rt,0,sizeof(rt));active(a);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x4fu);wf_set_u8(a,WF_A_LATCHED+1u,5u);wf_set_u8(a,WF_A_FLAGS33,0x80u);
+ assert(wf_r17_dispatch_1c03e_r11(&rt,0u,&bridge)==WF_OK);
+ assert(bridge.trace[0].callback_rom==0x18b0eu&&bridge.trace[0].descriptor_rom==0x18afeu);
+ assert(wf_u8(a,WF_A_MOTION_MODE)==0u&&wf_be16(a,WF_A_RENDER_LIST)==2u);
+ assert(wf_be16(a,WF_A_FACING)==0x8000u&&wf_be16(a,WF_A_ANIM_COUNTER)==16u);
+ wf_set_be16(a,WF_A_ANIM_INDEX,0x00feu);wf_set_u8(a,WF_A_FLAGS33,0x80u);wf_set_be16(a,WF_A_X,0x0200u);
+ assert(wf_r17_dispatch_1c03e_r11(&rt,0u,&bridge)==WF_OK);
+ assert(wf_be16(a,WF_A_STATE)==1u&&wf_be16(a,WF_A_AE)==1u);
+ assert(wf_be16(a,WF_A_X)==0x0238u&&wf_be16(a,WF_A_RENDER_LIST)==4u);
+}
+static void test_1cad6_latched_target_idle(void){
+ wf_runtime_t rt;wf_cpu_trace_t trace;wf_actor_raw_t *a=&rt.actors[0],*t=&rt.actors[1];
+ memset(&rt,0,sizeof(rt));active(a);active(t);
+ wf_set_be16(a,WF_A_STATE,1u);wf_set_be32(a,WF_A_TARGET,wf_actor_rom_base(1u));
+ wf_set_be16(a,WF_A_X,0x0200u);wf_set_be16(t,WF_A_X,0x0240u);
+ wf_set_u8(a,WF_A_CPU_B9,2u);
+ assert(wf_cpu_actor_step(&rt,0u,&trace)==WF_OK);
+ assert(wf_u8(a,WF_A_ANGLE)==0xc0u&&wf_be16(a,WF_A_STATE)==1u);
+}
+static void test_1d398_uninitialized_state_returns(void){
+ wf_runtime_t rt;wf_cpu_trace_t trace;memset(&rt,0,sizeof(rt));
+ wf_actor_raw_t *a=&rt.actors[0];active(a);wf_set_be16(a,WF_A_STATE,1u);wf_set_u8(a,WF_A_CPU_SUBSTATE,1u);
+ assert(wf_cpu_actor_step(&rt,0u,&trace)==WF_OK);
+ assert(wf_be16(a,WF_A_STATE)==1u&&trace.handler_rom==0x1c8f4u);
+}
+static void test_1d3a2_partner_pursuit_far_target(void){
+ wf_runtime_t rt;wf_cpu_trace_t trace;memset(&rt,0,sizeof(rt));
+ wf_actor_raw_t *a=&rt.actors[5],*partner=&rt.actors[4],*target=&rt.actors[0];
+ active(a);active(partner);active(target);rt.g.credited_route=1u;
+ wf_set_be16(a,WF_A_STATE,0x8001u);wf_set_u8(a,WF_A_CPU_SUBSTATE,1u);
+ wf_set_be32(a,WF_A_TEAM_LINK,wf_actor_rom_base(4u));
+ wf_set_be32(partner,WF_A_TARGET,wf_actor_rom_base(0u));
+ wf_set_be16(a,WF_A_X,826u);wf_set_be16(a,WF_A_Y,352u);
+ wf_set_be16(partner,WF_A_X,658u);wf_set_be16(partner,WF_A_Y,341u);
+ wf_set_be16(target,WF_A_X,400u);wf_set_be16(target,WF_A_Y,341u);
+ wf_set_u8(a,WF_A_FLAGS33,0x80u);wf_set_u8(a,WF_A_CPU_B7,2u);
+ assert(wf_cpu_actor_step(&rt,5u,&trace)==WF_OK);
+ assert(wf_u8(a,WF_A_ANGLE)==0x78u);
+ assert((wf_u8(a,WF_A_CPU_B7)&2u)==0u&&wf_be16(a,WF_A_STATE)==0x8001u);
+ wf_set_be16(partner,WF_A_Y,349u);wf_set_u8(a,WF_A_CPU_B7,2u);
+ assert(wf_cpu_actor_step(&rt,5u,&trace)==WF_OK);
+ assert(wf_u8(a,WF_A_ANGLE)==0u);
+ assert((wf_u8(a,WF_A_CPU_B7)&2u)==0u);
+}
+static void test_11796_state_one_recovery(void){
+ wf_runtime_t rt;wf_actor_raw_t *a=&rt.actors[0];wf_r17_dispatch_1c03e_ctx_t ctx={0};
+ memset(&rt,0,sizeof(rt));active(a);wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,1u);
+ wf_set_u8(a,WF_A_LATCHED+1u,1u);wf_set_u8(a,WF_A_FLAGS33,0x80u);
+ wf_set_be16(a,WF_A_Y,0x0150u);wf_set_be16(a,WF_A_CHARACTER,3u);
+ assert(wf_r17_dispatch_1c03e_bounded(&rt,a,&ctx)==WF_OK);
+ assert(wf_be16(a,WF_A_X)==0x033eu&&wf_be16(a,WF_A_RENDER_LIST)==4u);
+ assert(wf_be16(a,WF_A_MAGNITUDE)==16u&&wf_be16(a,0x44u)==148u);
+ assert(wf_be16(a,WF_A_ANIM_COUNTER)==10u&&wf_be16(a,WF_A_MIRROR)==1u);
+ assert((wf_u8(a,WF_A_LATCHED)&0x80u)!=0u);
+ wf_set_be16(a,0x44u,1u);wf_set_be16(a,0x66u,30u);wf_set_be16(a,0x72u,40u);
+ assert(wf_r17_dispatch_1c03e_bounded(&rt,a,&ctx)==WF_OK);
+ assert(wf_be16(a,0x44u)==148u&&wf_be16(a,0x66u)==31u);
+ assert(wf_be16(a,0x6au)==1u&&wf_be16(a,WF_A_ANIM_COUNTER)==9u);
+ assert(wf_be16(a,WF_A_STATE)==1u);
+}
+static void test_1c150_skips_human_actor(void){
+ wf_runtime_t rt;wf_gameplay_binding_context_t c;memset(&rt,0,sizeof(rt));memset(&c,0,sizeof(c));
+ active(&rt.actors[0]);wf_set_be16(&rt.actors[0],WF_A_STATE,1u);
+ wf_set_be16(&rt.actors[0],WF_A_ROLE,0u);
+ assert(wf_phase_cpu_real(&rt,0x1c150u,&c)==WF_OK);
+ assert(c.cpu_trace[0].handler_rom==0u);
+}
+static void test_124fa_linked_hold_initial(void){
+ wf_runtime_t rt;wf_actor_raw_t *a=&rt.actors[0],*linked=&rt.actors[4];
+ wf_r17_dispatch_1c03e_ctx_t ctx={0};memset(&rt,0,sizeof(rt));
+ active(a);active(linked);wf_set_be16(a,WF_A_STATE,0x800cu);
+ wf_set_u8(a,WF_A_LATCHED+1u,12u);wf_set_be32(a,WF_A_LINK,wf_actor_rom_base(4u));
+ wf_set_be16(a,WF_A_X,0x026du);wf_set_be16(a,WF_A_Y,0x0152u);
+ wf_set_be16(a,WF_A_Z,0x0140u);wf_set_be16(a,WF_A_RENDER_LIST,0u);
+ wf_set_u8(a,WF_A_FLAGS33,0x03u);wf_set_u8(linked,WF_A_FLAGS33,0x81u);
+ assert(wf_r17_dispatch_1c03e_bounded(&rt,a,&ctx)==WF_OK);
+ assert((wf_u8(a,WF_A_FLAGS33)&0x40u)!=0u);
+ assert((wf_u8(linked,WF_A_FLAGS33)&0x40u)!=0u);
+ assert(wf_be16(a,WF_A_TIMER46)==0xdfu);
+ assert(wf_be16(a,WF_A_ANIM_COUNTER)==16u);
+ assert(wf_be16(a,WF_A_MIRROR)==0x39u);
+ assert((wf_u8(a,WF_A_LATCHED)&0x80u)!=0u);
+}
+static void test_14cf4_hold_action_initial(void){
+ wf_runtime_t rt;wf_r17_actions_r11_bridge_t bridge={0};
+ wf_actor_raw_t *a=&rt.actors[0],*linked=&rt.actors[4];memset(&rt,0,sizeof(rt));
+ active(a);active(linked);wf_set_be16(a,WF_A_STATE,5u);
+ wf_set_be16(a,WF_A_SELECTOR,0x15u);wf_set_u8(a,WF_A_LATCHED+1u,5u);
+ wf_set_be32(a,WF_A_LINK,wf_actor_rom_base(4u));wf_set_be16(a,WF_A_TIMER44,1u);
+ wf_set_be16(linked,WF_A_STATE,0xffu);
+ assert(wf_r17_dispatch_1c03e_r11(&rt,0u,&bridge)==WF_OK);
+ assert(bridge.trace[0].callback_rom==0x14cf4u&&bridge.trace[0].descriptor_rom==0x14ce0u);
+ assert(wf_be16(linked,WF_A_STATE)==5u&&wf_be16(linked,WF_A_SELECTOR)==0x7bu);
+ assert(wf_be16(a,WF_A_ANIM_INDEX)==1u&&wf_be16(a,WF_A_ANIM_COUNTER)==14u);
+ assert(wf_be16(a,WF_A_MIRROR)==0xf9u);
+}
+static void test_1a538_held_opponent(void){
+ wf_runtime_t rt;wf_r17_actions_r11_bridge_t bridge={0};
+ wf_actor_raw_t *a=&rt.actors[4],*linked=&rt.actors[0];memset(&rt,0,sizeof(rt));
+ active(a);active(linked);wf_set_be16(a,WF_A_STATE,5u);
+ wf_set_be16(a,WF_A_SELECTOR,0x7bu);wf_set_u8(a,WF_A_LATCHED+1u,5u);
+ wf_set_be32(a,WF_A_LINK,wf_actor_rom_base(0u));wf_set_be16(a,WF_A_PRIOR,0xffu);
+ assert(wf_r17_dispatch_1c03e_r11(&rt,4u,&bridge)==WF_OK);
+ assert(bridge.trace[4].callback_rom==0x1a538u&&bridge.trace[4].descriptor_rom==0x1a532u);
+ assert(wf_be16(a,WF_A_MIRROR)==0xffffu&&wf_be16(a,WF_A_TIMER44)==128u);
+ assert((wf_u8(a,WF_A_LATCHED)&0x80u)!=0u);
+ assert(wf_r17_dispatch_1c03e_r11(&rt,4u,&bridge)==WF_OK);
+ assert(wf_be16(a,WF_A_TIMER44)==127u);
+}
+static void test_68k_24bit_actor_pointer(void){
+ wf_runtime_t rt;unsigned slot=99u;memset(&rt,0,sizeof(rt));
+ assert(wf_actor_from_rom_ptr(&rt,0x801c09e0u,&slot)==&rt.actors[4]);
+ assert(slot==4u);
+}
+static void test_14e40_linked_throw(void){
+ wf_runtime_t rt;wf_r17_actions_r11_bridge_t bridge={0};
+ wf_actor_raw_t *a=&rt.actors[4],*victim=&rt.actors[0];memset(&rt,0,sizeof(rt));
+ active(a);active(victim);wf_set_be16(a,WF_A_STATE,5u);
+ wf_set_be16(a,WF_A_SELECTOR,0x17u);wf_set_u8(a,WF_A_LATCHED+1u,5u);
+ wf_set_be32(a,WF_A_LINK,wf_actor_rom_base(0u));
+ wf_set_be32(victim,WF_A_LINK,wf_actor_rom_base(4u));
+ wf_set_be16(a,WF_A_X,620u);wf_set_be16(a,WF_A_Y,338u);wf_set_be16(a,WF_A_Z,0x140u);
+ assert(wf_r17_dispatch_1c03e_r11(&rt,4u,&bridge)==WF_OK);
+ assert(bridge.trace[4].callback_rom==0x14e40u&&bridge.trace[4].descriptor_rom==0x14e2cu);
+ assert(wf_be16(victim,WF_A_STATE)==0xffu&&wf_be16(victim,WF_A_X)==620u);
+ assert(wf_be16(a,WF_A_ANIM_COUNTER)==8u&&wf_be16(a,WF_A_MIRROR)==0xfeu);
+ wf_set_be16(a,WF_A_ANIM_INDEX,1u);wf_set_be16(a,WF_A_ANIM_COUNTER,0u);
+ assert(wf_r17_dispatch_1c03e_r11(&rt,4u,&bridge)==WF_OK);
+ assert(wf_be16(victim,WF_A_STATE)==2u&&wf_be16(victim,WF_A_TIMER44)==2u);
+ assert((wf_u8(victim,WF_A_FLAGS34)&0x40u)!=0u);
+ assert(wf_be32(victim,WF_A_LINK)==(wf_actor_rom_base(4u)|0x80000000u));
+ assert(wf_be16(victim,WF_A_X)==700u&&wf_be16(victim,WF_A_Y)==336u);
+}
+static void test_11c82_thrown_initial(void){
+ wf_runtime_t rt;wf_r17_dispatch_1c03e_ctx_t ctx={0};
+ wf_actor_raw_t *a=&rt.actors[0];memset(&rt,0,sizeof(rt));active(a);
+ wf_set_be16(a,WF_A_STATE,0xc002u);wf_set_be16(a,WF_A_LATCHED,0x4002u);
+ wf_set_be16(a,WF_A_CHARACTER,0u);wf_set_be16(a,WF_A_X,700u);
+ assert(wf_r17_dispatch_1c03e_bounded(&rt,a,&ctx)==WF_OK);
+ assert(wf_u8(a,WF_A_MOTION_MODE)==1u&&wf_u8(a,WF_A_FLAGS33)==0x10u);
+ assert(wf_be16(a,WF_A_MAGNITUDE)==0x2fu&&wf_be16(a,WF_A_PROFILE)==3u);
+ assert(wf_be16(a,WF_A_ANIM_COUNTER)==6u&&wf_be16(a,WF_A_MIRROR)==9u);
+ assert((wf_u8(a,WF_A_LATCHED)&0x80u)!=0u);
+}
+static void test_12566_hold_expiry_handoff(void){
+ wf_runtime_t rt;wf_r17_dispatch_1c03e_ctx_t ctx={0};
+ wf_actor_raw_t *a=&rt.actors[0],*linked=&rt.actors[4];memset(&rt,0,sizeof(rt));
+ active(a);active(linked);wf_set_be16(a,WF_A_STATE,0x800cu);
+ wf_set_be16(a,WF_A_LATCHED,0x800cu);wf_set_be32(a,WF_A_LINK,wf_actor_rom_base(4u));
+ wf_set_be16(a,WF_A_TIMER46,1u);wf_set_be16(a,WF_A_ANIM_COUNTER,2u);
+ wf_set_be16(linked,WF_A_STATE,0xffu);wf_set_u8(linked,WF_A_FACING,0x80u);
+ assert(wf_r17_dispatch_1c03e_bounded(&rt,a,&ctx)==WF_OK);
+ assert(wf_be16(a,WF_A_STATE)==0xffu&&wf_be16(a,WF_A_MIRROR)==0xffffu);
+ assert(wf_be16(linked,WF_A_STATE)==12u&&wf_be16(linked,WF_A_MIRROR)==0x8039u);
+ assert(ctx.extra_render_actor==linked);
+}
+static void test_1f06a_wait_and_1c2cc_post_throw(void){
+ wf_runtime_t rt;wf_cpu_trace_t trace;memset(&rt,0,sizeof(rt));
+ wf_actor_raw_t *a=&rt.actors[4],*target=&rt.actors[0];active(a);active(target);
+ wf_set_be16(a,WF_A_STATE,12u);wf_set_u8(a,WF_A_CPU_BD,0u);
+ assert(wf_cpu_actor_step(&rt,4u,&trace)==WF_OK);
+ assert(trace.handler_rom==0x1f06au&&wf_u8(a,WF_A_CPU_BD)==1u);
+ wf_set_be16(a,WF_A_STATE,0x8000u);
+ wf_set_be32(a,WF_A_TARGET,wf_actor_rom_base(0u));
+ wf_set_u8(a,WF_A_CPU_B5,8u);wf_set_u8(a,WF_A_FLAGS33,0x81u);
+ wf_set_u8(a,WF_A_FLAGS34,0x80u);
+ wf_set_u8(target,WF_A_FLAGS32,1u);
+ assert(wf_cpu_actor_step(&rt,4u,&trace)==WF_OK);
+ assert(trace.handler_rom==0x1c2ccu&&trace.blocked_dependency_rom==0u);
+}
+int main(void){test_f4c2_shadow();test_280dc_early_and_dispatch();test_280dc_routes();test_2208_mode2_exact_dead_clamp();test_f4c2_bounded_dispatch_and_queue();test_scheduler_advances_to_collision();test_11b5a_contact_transition();test_18b0e_action_4f();test_1cad6_latched_target_idle();test_1d398_uninitialized_state_returns();test_1d3a2_partner_pursuit_far_target();test_1c150_skips_human_actor();test_11796_state_one_recovery();test_124fa_linked_hold_initial();test_14cf4_hold_action_initial();test_1a538_held_opponent();test_68k_24bit_actor_pointer();test_14e40_linked_throw();test_11c82_thrown_initial();test_12566_hold_expiry_handoff();test_1f06a_wait_and_1c2cc_post_throw();puts("PASS test_runtime17_f4c2");return 0;}

@@ -17,7 +17,7 @@ wf_status_t wf_r18_rom_read(void*u,uint32_t a,void*dest,size_t n){uint8_t*out=de
  return WF_OK;}
 static wf_status_t get_tile(uint16_t tile,const uint8_t **out){size_t slot;if(!tile_slots)return WF_BLOCKED;slot=tile%tile_slots;if(!tile_valid[slot]||tile_tags[slot]!=tile){if(read_file("SPRITES.PAK",(uint32_t)tile*128,tile_data+slot*128,128))return WF_BLOCKED;tile_tags[slot]=tile;tile_valid[slot]=1;}*out=tile_data+slot*128;return WF_OK;}
 static uint16_t be16(const uint8_t*p){return (uint16_t)((p[0]<<8)|p[1]);}
-static wf_actor_raw_t *actor_link(wf_runtime_t*r,uint32_t address){for(unsigned i=0;i<WF_ACTOR_SLOTS;i++)if(address==wf_actor_rom_base(i))return &r->actors[i];return NULL;}
+static wf_actor_raw_t *actor_link(wf_runtime_t*r,uint32_t address){return wf_actor_from_rom_ptr(r,address,NULL);}
 static int add_cmd(uint16_t tile,int x,int y,unsigned fx,unsigned fy,unsigned palette){unsigned slot;
  if(x>=320||x+16<=0||y>=240||y+16<=0)return 1;
  if(plan.cmd_count==WF_VDP1_COMMANDS_MAX)return 0;

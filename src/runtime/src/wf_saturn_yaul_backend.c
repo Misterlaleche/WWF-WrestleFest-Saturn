@@ -18,12 +18,8 @@ static wf_status_t begin_frame(void *ctx,unsigned nt,unsigned np,unsigned nc){
     memset(g_cmdts,0,sizeof(g_cmdts));g_cmd_index=0;
     vdp1_cmdt_system_clip_coord_set(&g_cmdts[g_cmd_index]);vdp1_cmdt_vtx_system_clip_coord_set(&g_cmdts[g_cmd_index++],INT16_VEC2(319,239));
     vdp1_cmdt_local_coord_set(&g_cmdts[g_cmd_index]);vdp1_cmdt_vtx_local_coord_set(&g_cmdts[g_cmd_index++],INT16_VEC2(0,0));
-    {
-        vdp1_cmdt_t *cmd=&g_cmdts[g_cmd_index++];
-        const vdp1_cmdt_draw_mode_t dm={.pre_clipping_disable=true,.trans_pixel_disable=true,.end_code_disable=true};
-        const int16_vec2_t pts[4]={INT16_VEC2(0,0),INT16_VEC2(319,0),INT16_VEC2(319,239),INT16_VEC2(0,239)};
-        vdp1_cmdt_polygon_set(cmd);vdp1_cmdt_draw_mode_set(cmd,dm);cmd->cmd_colr=0;vdp1_cmdt_vtx_set(cmd,pts);
-    }
+    /* VDP1's transparent erase exposes the lower-priority VDP2 ring.
+     * An opaque clearing polygon would cover both bitmap layers. */
 #endif
     return WF_OK;
 }
@@ -119,8 +115,8 @@ wf_status_t wf_saturn_yaul_video_init(void){
 #ifdef WF_PLATFORM_SATURN
     vdp2_cram_mode_set(WF_SATURN_CRAM_MODE);
     vdp1_vram_partitions_set(WF_SATURN_VDP1_CMD_COUNT,0x53560u,0,0);
-    vdp1_env_t env;vdp1_env_default_init(&env);env.bpp=VDP1_ENV_BPP_16;env.color_mode=VDP1_ENV_COLOR_MODE_PALETTE;env.sprite_type=0;env.erase_color=RGB1555(0,0,0,0);env.erase_points[0]=(int16_vec2_t){.x=0,.y=0};env.erase_points[1]=(int16_vec2_t){.x=0,.y=0};vdp1_env_set(&env);
-    vdp1_sync_interval_set(-1);vdp1_sync_mode_set(VDP1_SYNC_MODE_CHANGE_ONLY);
+    vdp1_env_t env;vdp1_env_default_init(&env);env.bpp=VDP1_ENV_BPP_16;env.color_mode=VDP1_ENV_COLOR_MODE_PALETTE;env.sprite_type=0;env.erase_color=RGB1555(0,0,0,0);env.erase_points[0]=(int16_vec2_t){.x=0,.y=0};env.erase_points[1]=(int16_vec2_t){.x=319,.y=239};vdp1_env_set(&env);
+    vdp1_sync_interval_set(0);vdp1_sync_mode_set(VDP1_SYNC_MODE_ERASE_CHANGE);
     vdp2_sprite_priority_set(0,3);
 #endif
     return WF_OK;

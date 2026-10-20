@@ -314,3 +314,13 @@ build/test_runtime17_active_rom: $(CORE) tests/test_runtime17_active_rom.c | bui
 test-active-rom: build/test_runtime17_active_rom
 	./build/test_runtime17_active_rom
 test: test-active-rom
+
+# Direct-boot integration probe; the ROM and graphics remain local audit assets.
+R18_HOST=src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_world.c src/wf_r18_ring.c
+build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c
+	mkdir -p build
+	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
+.PHONY: test-runtime18-direct
+test-runtime18-direct: build/direct_combat_probe
+	WF_PROBE_FRAMES=200 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN
+	WF_PROBE_FRAMES=300 WF_PROBE_ATTACK=1 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN
