@@ -41,6 +41,64 @@ static wf_status_t main_zero_114b2(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_dis
     if((wf_u8(a,WF_A_REL_FLAGS)&0x80u)||(wf_u8(a,0xfeu)&0x80u))return blocked(ctx,0x0001156au);
     return WF_OK;
 }
+/* ROM $11652 -> $11ABA (AE=4), $1174C, $11710, then kind-2 $1C0C8.
+ * This bounded route is used by the freshly selected reserve wrestler. */
+static wf_status_t main_one_11652(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_dispatch_1c03e_ctx_t *ctx){
+    static const uint8_t magnitude[12]={0x1b,0x1d,0x1c,0x19,0x1e,0x1b,0x18,0x1e,0x16,0x1b,0x1c,0x1b};
+    uint8_t high=wf_u8(a,WF_A_LATCHED),flags=wf_u8(a,WF_A_FLAGS34);
+    uint16_t sub=(uint16_t)(wf_be16(a,WF_A_AE)&0x3fu);
+    if((sub!=0u&&sub!=4u)||wf_u8(a,WF_A_REL_FLAGS)&0x80u||wf_be16(a,WF_A_CHARACTER)>=12u)return blocked(ctx,0x00011652u);
+    if(high&0x80u){
+        if(sub==4u&&(flags&1u))return blocked(ctx,0x00011b26u);
+        if(sub==4u&&((wf_u8(a,WF_A_FLAGS33)&0x80u)?(wf_u8(a,WF_A_CONTACT+1u)&1u):(wf_u8(a,WF_A_CONTACT+1u)&2u)))return blocked(ctx,0x00011b5au);
+        if(wf_be16(a,0xfeu)==0u&&wf_be32(a,WF_A_LINK)!=0u){
+            wf_actor_raw_t *p=wf_actor_from_rom_ptr(rt,wf_be32(a,WF_A_LINK),0);
+            if(!p)return blocked(ctx,0x000115deu);
+            if(wf_be32(p,WF_A_LINK)!=wf_actor_rom_base((unsigned)(a-rt->actors))){wf_set_be32(a,WF_A_LINK,0u);wf_set_be32(a,WF_A_SECONDARY_LINK,0u);}
+        }
+        if(sub==0u){
+            wf_r17_m68k_move_w(&rt->m68k_regs,0u,wf_be16(a,WF_A_CHARACTER));
+            wf_set_be16(a,WF_A_MAGNITUDE,magnitude[wf_be16(a,WF_A_CHARACTER)]);
+            wf_set_be16(a,WF_A_PROFILE,1u);
+            wf_set_be16(a,WF_A_MIRROR,wf_be16(a,WF_A_FACING));
+            if(wf_be16(a,0xfeu))return blocked(ctx,0x00011702u);
+        }else wf_set_be16(a,WF_A_MIRROR,wf_be16(a,WF_A_FACING));
+        uint16_t count=wf_be16(a,WF_A_ANIM_COUNTER);
+        if(count!=0xff00u){
+            count=(uint16_t)(count-1u);wf_set_be16(a,WF_A_ANIM_COUNTER,count);
+            if(count==0xffffu){unsigned idx=(wf_be16(a,WF_A_ANIM_INDEX)+1u)&0xffffu;if(idx>=4u)idx=0;
+                wf_set_be16(a,WF_A_ANIM_INDEX,(uint16_t)idx);wf_set_be16(a,WF_A_ANIM_COUNTER,10u);
+                wf_set_be16(a,WF_A_MIRROR,(uint16_t)((idx+1u)^wf_be16(a,WF_A_FACING)));
+            }
+        }
+        return WF_OK;
+    }
+    if(sub==0u){
+        if(wf_be16(a,0xfeu)!=0u)return blocked(ctx,0x00011702u);
+        wf_set_u8(a,WF_A_MOTION_MODE,1u);
+        wf_set_u8(a,WF_A_FLAGS33,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&~0x40u));
+        wf_r17_m68k_move_w(&rt->m68k_regs,0u,wf_be16(a,WF_A_CHARACTER));
+        wf_set_be16(a,WF_A_MAGNITUDE,magnitude[wf_be16(a,WF_A_CHARACTER)]);
+        wf_set_be16(a,WF_A_PROFILE,1u);
+        wf_set_be16(a,WF_A_ANIM_INDEX,0u);wf_set_be16(a,WF_A_ANIM_COUNTER,10u);
+        wf_set_be16(a,WF_A_MIRROR,(uint16_t)(1u^wf_be16(a,WF_A_FACING)));
+        wf_set_u8(a,WF_A_LATCHED,(uint8_t)(high|0x80u));return WF_OK;
+    }
+    if(flags&0xc0u)return blocked(ctx,0x00011abau);
+    if(!(rt->g.credited_route&0x8000u))wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)&~8u));
+    wf_set_be16(a,WF_A_FIELD18,0u);wf_set_be16(a,WF_A_FIELD1A,0u);
+    wf_set_u8(a,WF_A_MOTION_MODE,1u);wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(flags&~0xd0u));
+    wf_set_be16(a,WF_A_MAGNITUDE,magnitude[wf_be16(a,WF_A_CHARACTER)]);
+    uint8_t d0=(uint8_t)((wf_u8(a,WF_A_FLAGS33)&0x80u)^0x80u);d0=(uint8_t)(d0+0x40u);
+    wf_r17_m68k_move_b(&rt->m68k_regs,0u,d0);
+    wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&0x80u));
+    wf_set_be16(a,WF_A_ANGLE_WORD,d0);
+    wf_set_be16(a,WF_A_PROFILE,1u);
+    wf_set_be16(a,WF_A_ANIM_INDEX,0u);wf_set_be16(a,WF_A_ANIM_COUNTER,10u);
+    wf_set_be16(a,WF_A_MIRROR,(uint16_t)(1u^wf_be16(a,WF_A_FACING)));
+    wf_set_u8(a,WF_A_LATCHED,(uint8_t)(high|0x80u));
+    return WF_OK;
+}
 
 wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_dispatch_1c03e_ctx_t *ctx){
     uint8_t domain,state,id;uint16_t di;const wf_anim_desc_t *d;wf_status_t s;ptrdiff_t slot;
@@ -73,6 +131,10 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
     di=wf_anim_main_dispatch[id];if(di>=wf_anim_desc_count)return blocked(ctx,0x00011478u);d=&wf_anim_descs[di];
     if(id==0u&&d->callback_rom==0x000114b2u){
         s=main_zero_114b2(rt,a,ctx);if(s!=WF_OK)return s;
+        exact_tail_1c0b4(a);return WF_OK;
+    }
+    if(id==1u&&d->callback_rom==0x00011652u){
+        s=main_one_11652(rt,a,ctx);if(s!=WF_OK)return s;
         exact_tail_1c0b4(a);return WF_OK;
     }
     return blocked(ctx,d->callback_rom);
