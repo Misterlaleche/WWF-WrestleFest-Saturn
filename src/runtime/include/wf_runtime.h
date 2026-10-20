@@ -19,6 +19,8 @@ typedef struct wf_globals_raw {
  uint16_t config_0066;            /* $1C0066/$0067 */
  uint8_t frame_handshake[2]; /* $1C006E/$6F equivalent */
  uint8_t gameplay_vblank_enable; /* $1C0076 */
+ uint8_t global_0063; /* $1C0063 BCD credit display byte */
+ uint16_t global_0072; /* $1C0072 credit display cache, initialized by $8AE6 */
  uint16_t credited_route; /* $1C007C */
  uint32_t global_0092; /* $1C0092 selected Royal actor pointer */
  uint16_t global_015e, global_0164; /* raw status-table aliases */
@@ -88,6 +90,7 @@ typedef struct wf_globals_raw {
  uint8_t transfer_queue_1808[16]; /* $1C1808-$1C1817 */
  uint16_t transfer_count_1828; /* $1C1828 */
  uint16_t global_15f4; /* $1C15F4 */
+ uint16_t global_15fc; /* $1C15FC scene palette selector */
  uint16_t global_15f8; /* $1C15F8 */
  uint8_t global_15d2; /* high byte WORD $1C15D2 */
  uint8_t global_15d3; /* low byte WORD $1C15D2 */
@@ -139,7 +142,7 @@ struct wf_runtime {
  size_t trace_count;
  uint8_t frame_ready;
  uint8_t vblank_ack;
- uint8_t frame_stage; /* 0=$F9A/header, 1=wait VBlank ACK, 2=post-ACK */
+ uint8_t frame_stage; /* 0=$F9A, 1=wait ACK, 2=post-ACK, 3=direct boot at $FA4 */
 };
 
 void wf_runtime_init(wf_runtime_t *rt, wf_phase_binding_t *bindings, size_t binding_count);

@@ -87,10 +87,14 @@ wf_status_t wf_runtime_frame(wf_runtime_t *rt){
 
  /* $F9A CLR.W $1C006E. This does not alter D0..D7. */
  rt->trace_count=0u;rt->frame_ready=0u;rt->vblank_ack=0u;
- rt->g.frame_handshake[0]=0u;rt->g.frame_handshake[1]=0u;
- /* $FA0 BSR $21B4 is mandatory before branch selection. */
- if(!rt->g.rng_state_valid)return WF_BLOCKED;
- wf_r17_rng21b4_live(&rt->g.rng_state,rt->g.frame_counter,&rt->m68k_regs);
+ if(rt->frame_stage==3u){
+  /* The direct boot owner has already executed $F9A..$FA0. */
+  rt->frame_stage=0u;
+ }else{
+  rt->g.frame_handshake[0]=0u;rt->g.frame_handshake[1]=0u;
+  if(!rt->g.rng_state_valid)return WF_BLOCKED;
+  wf_r17_rng21b4_live(&rt->g.rng_state,rt->g.frame_counter,&rt->m68k_regs);
+ }
 
  if((rt->g.pipeline_mode&1u)==0u){p=branch_a;n=sizeof(branch_a)/sizeof(branch_a[0]);}
  else {p=branch_b;n=sizeof(branch_b)/sizeof(branch_b[0]);}
