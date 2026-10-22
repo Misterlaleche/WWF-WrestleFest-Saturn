@@ -16,3 +16,17 @@ wf_actor_raw_t *wf_actor_from_rom_ptr(wf_runtime_t *rt,uint32_t ptr,unsigned *sl
 const wf_actor_raw_t *wf_actor_from_rom_ptr_const(const wf_runtime_t *rt,uint32_t ptr,unsigned *slot_out){
  return wf_actor_from_rom_ptr((wf_runtime_t*)rt,ptr,slot_out);
 }
+
+/* $115D2 uses the 68000's 24-bit bus. A tagged null link reads the
+ * canonical ROM reset-vector bytes $26..$29 = FFFFFFFF, never an actor. */
+wf_status_t wf_actor_unlink_115d2(wf_runtime_t *rt,wf_actor_raw_t *a){
+ if(!rt||!a)return WF_BAD_STATE;
+ uint32_t link=wf_be32(a,WF_A_LINK);if(wf_be16(a,0xfeu)||!link)return WF_OK;
+ wf_actor_raw_t *other=wf_actor_from_rom_ptr(rt,link,NULL);
+ uint32_t back;
+ if(other)back=wf_be32(other,WF_A_LINK);
+ else if(!(link&0x00ffffffu))back=0xffffffffu;
+ else return WF_BLOCKED;
+ if(back!=wf_actor_rom_base((unsigned)(a-rt->actors))){wf_set_be32(a,WF_A_LINK,0u);wf_set_be32(a,WF_A_SECONDARY_LINK,0u);}
+ return WF_OK;
+}

@@ -1,25 +1,31 @@
-# RUNTIME-18 — decisiones CPU y presentación, 20 de octubre de 2026
+# RUNTIME-18 — checkpoint de combate directo, 23 de octubre de 2026
 
-Los bloqueos observados en $1F7F0 y $1C3FC se superan con código nativo
-contrastado con la ROM original. El oráculo nuevo compara 888 casos, incluidos
-actores, D0–D7, RNG, carry de arbitraje, paletas, efectos y colas cuando procede.
-Se han incorporado continuaciones de agarre, cuerdas, relevo, salto y recoil.
+`$1D206` y la acción `$71` están implementadas y contrastadas ejecutando la ROM
+original: 1.024 y 1.152 casos respectivamente. Las continuaciones alcanzadas de
+CPU, interrupciones, relevo, víctimas, árbitro y final por tiempo también tienen
+pruebas independientes contra esa ROM. No se ha vuelto al frontend.
 
-Las secuencias HOST pasan 540 frames sin entrada y 490 con RIGHT/A.
-NO se ha completado un combate. Sin entrada, la siguiente dependencia está
-en frame 545: $1BCAA. Con RIGHT/A, frame 493: decisión CPU $1CBF8.
-No se han sustituido estas dependencias por éxito ni animación provisional.
+La partida de prueba completa llega al final real `$11B6` en el frame **14.409**,
+con resultado `$8001` tras agotarse el tiempo. Se ha observado en HOST, con
+ASan/UBSan detenidos ante errores, y en el ejecutable SH-2 dentro de Mednafen.
+La secuencia usa semilla cero, RIGHT en frames 60–179 y A en 180–183. No se
+modifican stamina, decisiones CPU, actores ni resultado para conseguir el final.
+El disco normal conserva el control del jugador; el replay automático es un
+binario de validación separado, con un informe de color al terminar.
 
-La presentación agrupa tiles en una DMA desde HWRAM, conserva el color 15,
-sincroniza VDP1/VDP2 conjuntamente y compila SH-2 con -O2. En Mednafen,
-frames 31–120 sin entrada bajan de 4,21 a 3,23 VBlanks/frame: 23,2 % menos
-tiempo. Es una medición de ese tramo, no FPS garantizados para toda la partida.
+La precarga fija **2.944 tiles** exactos y conserva 128 huecos para sprites
+adicionales en la caché de 384 KiB. La partida HOST completa no requiere ninguna
+lectura de SPRITES.PAK después de la precarga. El árbitro usa las cinco
+asignaciones de paleta originales. Esto no acredita igualdad de framebuffer,
+fluidez arcade ni todas las secuencias de combate.
 
-Reproducción y alcance: `validation/RUNTIME18-CPU-CHECKPOINT.md` y
-`validation/RUNTIME18-DISC.md`. BIN/CUE: `validation/results/runtime18/`.
-No hay prueba de Saturn real ni declaración ROM-EXACT. El frontend sigue fuera
-de este trabajo. El siguiente cierre requiere $1BCAA/$1CBF8 y todas las
-continuaciones que se alcancen hasta observar un final de combate auténtico.
+El alcance y la frontera de la secuencia sin entrada constan en
+[validation/RUNTIME18-CPU-CHECKPOINT.md](validation/RUNTIME18-CPU-CHECKPOINT.md).
+Reproducción y discos: [validation/RUNTIME18-DISC.md](validation/RUNTIME18-DISC.md).
+La fuente y los resultados quedan identificados por commit y hashes en el paquete.
+**Saturn físico con CD-R: no probado. No se declara ROM-EXACT ni aptitud para
+hardware.** El texto TIME UP aún no se publica en pantalla y la transición
+posterior al combate conserva el último frame, sin menús.
 
 ## Registro histórico de RUNTIME-17
 
@@ -56,4 +62,4 @@ No se han probado igualdad de framebuffer, todos los records de sprites, todas l
 
 No hay BIN/CUE ni disco jugable. Pruebas de emulador Saturn y Saturn real con CD-R: NO EJECUTADAS. No usar el harness como imagen para grabar. RUNTIME-18 permanece sin comenzar hasta una nueva instrucción.
 
-La documentación histórica describe estados anteriores. Este archivo y la evidencia R02 prevalecen para el checkpoint actual.
+La documentación histórica describe estados anteriores. R02 documenta el cierre RUNTIME-17; para el estado actual prevalece la cabecera RUNTIME-18 de este archivo.

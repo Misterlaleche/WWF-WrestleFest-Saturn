@@ -2,11 +2,11 @@
 #include <string.h>
 static uint8_t *mapped(wf_r18_video_t*v,uint32_t a,unsigned n){
  if(!n||n>4)return NULL;
- if(a>=0xc0000&&a<=0xc4000-n)return v->fg0+a-0xc0000;
- if(a>=0x80000&&a<=0x84000-n)return v->background+a-0x80000;
- if(a>=0x188000&&a<=0x188800-n)return v->fg_palette+a-0x188000;
- if(a>=0x186000&&a<=0x186800-n)return v->bg_palette+a-0x186000;
- if(a>=0x180000&&a<=0x184000-n)return v->palettes+a-0x180000;
+ if(a>=0xc0000&&a<=0xc4000-n)return v->fg0+(a-0xc0000);
+ if(a>=0x80000&&a<=0x84000-n)return v->background+(a-0x80000);
+ if(a>=0x188000&&a<=0x188800-n)return v->fg_palette+(a-0x188000);
+ if(a>=0x186000&&a<=0x186800-n)return v->bg_palette+(a-0x186000);
+ if(a>=0x180000&&a<=0x184000-n)return v->palettes+(a-0x180000);
  v->failed_address=a;return NULL;
 }
 static int valid(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){for(size_t i=0;i<n;i++)if(!mapped(v,w[i].addr,w[i].width))return 0;return 1;}

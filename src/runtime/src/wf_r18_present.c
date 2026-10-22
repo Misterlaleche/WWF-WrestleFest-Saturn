@@ -8,7 +8,7 @@ static uint16_t rom_page[128],rom_slot[512];static uint32_t rom_age[128],rom_clo
 static uint16_t tile_tags[6144];static uint8_t tile_valid[6144];
 /* Sector-aligned header stores sorted tile IDs; pixel payload resides in the
  * first tile-cache slots. The remaining slots retain exact on-demand fallback. */
-static uint8_t hot_header[4096];
+static uint8_t hot_header[8192];
 static size_t hot_count;
 static wf_r18_sprite_record_t records[512];static wf_vdp1_frame_plan_t plan;
 static wf_actor_raw_t *composed[WF_ACTOR_SLOTS];static size_t composed_count;
@@ -42,24 +42,30 @@ static uint16_t hot_id(size_t index){
  return (uint16_t)((p[0]<<8)|p[1]);
 }
 wf_status_t wf_r18_hot_sprites_load(void){
- size_t count;
+ size_t count,header_bytes;
+ hot_count=0;
+ memset(tile_valid,0,sizeof tile_valid);
  if(!read_file||!tile_data||tile_slots<2u||
-    read_file("HOTSPR.BIN",0,hot_header,sizeof hot_header))return WF_BLOCKED;
+    read_file("HOTSPR.BIN",0,hot_header,4096u))return WF_BLOCKED;
  if(memcmp(hot_header,"R18H",4)||hot_header[6]!=0u||hot_header[7]!=128u)
   return WF_BLOCKED;
  count=(size_t)((hot_header[4]<<8)|hot_header[5]);
  if(!count||count>(sizeof hot_header-8u)/2u||count>=tile_slots)
   return WF_BLOCKED;
+ /* Keep existing packs byte-compatible. Larger ID tables occupy four CD
+  * sectors instead of two; the count unambiguously selects the payload. */
+ header_bytes=count>2044u?8192u:4096u;
+ if(header_bytes>4096u&&read_file("HOTSPR.BIN",4096u,hot_header+4096u,4096u))
+  return WF_BLOCKED;
  for(size_t i=1;i<count;i++)if(hot_id(i)<=hot_id(i-1u))
   return WF_BLOCKED;
- if(read_file("HOTSPR.BIN",sizeof hot_header,tile_data,count*128u))
+ if(read_file("HOTSPR.BIN",(uint32_t)header_bytes,tile_data,count*128u))
   return WF_BLOCKED;
- memset(tile_valid,0,sizeof tile_valid);
  hot_count=count;
  return WF_OK;
 }
 size_t wf_r18_hot_sprites_bytes(void){
- return hot_count?sizeof hot_header+hot_count*128u:0u;
+ return hot_count?(hot_count>2044u?8192u:4096u)+hot_count*128u:0u;
 }
 wf_status_t wf_r18_tile_read(uint16_t tile,const uint8_t **out){
  size_t lo=0,hi=hot_count,slot,cold;

@@ -510,6 +510,7 @@ wf_status_t wf_r17_owner_262d2(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx){
     size_t nvideo=0u;
     int render=0;
     int audio05=0;
+    uint8_t a0_snap[WF_ACTOR_SLOTS];uint16_t fe_snap[WF_ACTOR_SLOTS];
     wf_r17_m68k_shadow_t regs_snap;
     wf_globals_raw_t g_snap;
     unsigned i;
@@ -534,6 +535,7 @@ wf_status_t wf_r17_owner_262d2(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx){
 
     regs_snap=rt->m68k_regs;
     g_snap=rt->g;
+    for(i=0u;i<WF_ACTOR_SLOTS;i++){a0_snap[i]=wf_u8(&rt->actors[i],0xa0u);fe_snap[i]=wf_be16(&rt->actors[i],0xfeu);}
 
     /* $262F2 BSET #6,$1C169E. Initialize only on the first eligible call. */
     if((rt->g.global_169e&0x4000u)==0u){
@@ -608,16 +610,26 @@ wf_status_t wf_r17_owner_262d2(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx){
             nmin=bcd_dec1(min,&bmin);
             wf_r17_m68k_move_b(&rt->m68k_regs,1u,nmin);
             if(bmin){
-                /* $263D8+ owns complete time-up consequences; not joined yet. */
-                rt->m68k_regs=regs_snap;
-                rt->g=g_snap;
-                ctx->blocked_dependency_rom=0x0002503cu;
-                return WF_BLOCKED;
-            }
-            rt->g.global_16a0=(uint16_t)((rt->g.global_16a0&0xff00u)|nmin);
-            if(nmin==0x05u){
-                rt->g.global_169e|=0x2000u;
-                audio05=1;
+                /* $263D8-$2641E: TIME UP precedes the exact hardware wait;
+                 * the result flags are written only after all 65 Vblanks. */
+                if(!ctx->raw_2503c){ctx->blocked_dependency_rom=0x2503cu;goto rollback;}
+                if(!ctx->wait_21e6){ctx->blocked_dependency_rom=0x21e6u;goto rollback;}
+                if(!ctx->fg0_batch){ctx->blocked_dependency_rom=0xc1d04u;goto rollback;}
+                rt->g.global_169e|=0x1000u;rt->g.global_16a0=0u;rt->g.global_16a2=0u;
+                wf_r17_m68k_move_w(&rt->m68k_regs,0u,19u);
+                wf_r17_m68k_shadow_t rs=rt->m68k_regs;wf_status_t status=ctx->raw_2503c(rt,19u,ctx->user);rt->m68k_regs=rs;
+                if(status!=WF_OK){ctx->blocked_dependency_rom=0x2503cu;goto rollback;}
+                rt->g.global_16c4=(uint16_t)((rt->g.global_16c4&0xff00u)|3u);
+                wf_r17_m68k_move_w(&rt->m68k_regs,0u,64u);rs=rt->m68k_regs;status=ctx->wait_21e6(rt,64u,ctx->user);rt->m68k_regs=rs;
+                if(status!=WF_OK){ctx->blocked_dependency_rom=0x21e6u;goto rollback;}
+                wf_r17_m68k_move_w(&rt->m68k_regs,0u,0u);
+                for(i=0u;i<WF_ACTOR_SLOTS;i++){
+                    wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)(i+1u));
+                    if(actor_active(&rt->actors[i])){wf_set_u8(&rt->actors[i],0xa0u,0x80u);wf_set_be16(&rt->actors[i],0xfeu,0x8005u);}
+                }
+            }else{
+                rt->g.global_16a0=(uint16_t)((rt->g.global_16a0&0xff00u)|nmin);
+                if(nmin==0x05u){rt->g.global_169e|=0x2000u;audio05=1;}
             }
         }
     }
@@ -660,6 +672,7 @@ internal_block:
 rollback:
     rt->m68k_regs=regs_snap;
     rt->g=g_snap;
+    for(i=0u;i<WF_ACTOR_SLOTS;i++){wf_set_u8(&rt->actors[i],0xa0u,a0_snap[i]);wf_set_be16(&rt->actors[i],0xfeu,fe_snap[i]);}
     return WF_BLOCKED;
 }
 

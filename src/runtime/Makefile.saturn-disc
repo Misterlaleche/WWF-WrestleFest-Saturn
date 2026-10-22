@@ -25,7 +25,10 @@ SH_SRCS:= \
  src/wf_r17_actions_r11.c src/wf_r17_dispatch_1c03e.c src/wf_r17_resolver_280dc.c src/wf_r17_collision_24062.c src/wf_r17_ringside_fdee.c src/wf_r17_fixed_four_10120.c src/wf_r17_transient_reset_10e6a.c src/wf_r17_effects_7a00.c src/wf_r17_render_contract.c src/wf_r17_referee.c src/wf_r17_scheduler_owners.c \
  src/wf_r17_follow_10e86.c src/wf_r17_dependencies.c src/wf_r17_integration.c src/wf_r17_post7a00.c src/wf_r17_postack_2017a.c
 SH_SRCS+= src/wf_r17_participant_helpers.c src/wf_r17_participant_native.c src/wf_r17_royal_9132.c src/wf_r17_tag_6e34.c
-SH_SRCS+= src/wf_r18_bootstrap.c src/wf_r18_cdfs.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_ring.c src/wf_r18_video.c src/wf_r18_world.c
+SH_SRCS+= src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_bootstrap.c src/wf_r18_cdfs.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_ring.c src/wf_r18_video.c src/wf_r18_world.c
+ifneq ($(R18_REPLAY_TEST),)
+SH_CFLAGS+= -DWF_R18_REPLAY_TEST=1
+endif
 SH_CFLAGS+= -O2 -Iinclude -Wall -Wextra -Werror -DWF_PLATFORM_SATURN=1
 SH_DEFSYMS+= -Wl,--defsym=___master_stack=0x06004000 -Wl,--defsym=___slave_stack=0x06001E00
 

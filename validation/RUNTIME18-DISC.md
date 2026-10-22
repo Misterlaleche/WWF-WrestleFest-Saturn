@@ -1,28 +1,46 @@
-# Runtime18 disc build
+# RUNTIME-18 — disco de combate directo, 2026-10-23
 
-## Checkpoint actual: decisiones CPU, acciones y DMA
+Estado y pruebas: [RUNTIME18-CPU-CHECKPOINT.md](RUNTIME18-CPU-CHECKPOINT.md).
+La partida controlada alcanza el final original por tiempo en frame14.409 en
+HOST y en un replay SH-2 en Mednafen. No se acredita Saturn físico ni ROM-EXACT.
+El árbitro utiliza las paletas originales contrastadas. Hay 2.944 tiles residentes
+y 128 huecos adicionales; la partida HOST completa no lee sprites del CD tras
+la precarga. No se ha publicado todavía el texto TIME UP en VDP.
 
-La referencia actual es [RUNTIME18-CPU-CHECKPOINT.md](RUNTIME18-CPU-CHECKPOINT.md).
-Los límites antiguos `$1F7F0/$1C3FC` y los posteriores `$153BC/$1B1D0` ya se
-superan. Las pruebas de integración pasan 540 frames sin entrada y 490 con
-RIGHT/A; los siguientes bloqueos son `$1BCAA` (frame 545) y `$1CBF8` (493).
-No se ha completado un combate ni probado Saturn físico.
+El disco normal arranca directamente en el ring, sin menús ni audio, acepta
+el mando y conserva la escena al terminar. Construcción:
 
-El BIN/CUE arranca directamente al ring sin menús ni audio. El backend agrupa
-la transferencia de sprites en una DMA, conserva pen15, sincroniza VDP1/VDP2
-conjuntamente y usa SH-2 `-O2`. Mednafen consume 3,23 VBlanks/frame en el tramo
-31–120, frente a 4,21 en `e1113d3`: 23,2 % menos tiempo en ese tramo.
+```sh
+DOCKER=/path/to/docker sh validation/build-runtime18.sh /path/to/sh2eb-elf
+```
 
-Construcción: `DOCKER=/path/to/docker sh validation/build-runtime18.sh /path/to/sh2eb-elf`.
-Genera `validation/results/runtime18/wrestlefest-runtime18.bin` y `.cue`.
-Conservar ambos juntos y abrir/grabar el CUE (una pista MODE1/2352).
-Los assets previos requeridos se enumeran más abajo; HOTSPR.BIN se regenera.
-El verificador comprueba todos los sectores, EDC/ECC, IP, ISO9660 y payloads
-contra fuente, incluido A.BIN contra el binario enlazado. Esta validación
-estructural no certifica la ejecución en consola.
+Salida: `validation/results/runtime18/wrestlefest-runtime18.bin` y `.cue`.
+Mantener ambos juntos y abrir/grabar el **CUE**: una pista MODE1/2352, sin audio.
+El constructor regenera HOTSPR.BIN, enlaza SH-2 y comprueba todos los sectores,
+EDC/ECC, IP, ISO9660 y los payloads, incluido A.BIN. El detalle de hashes está
+en disc-validation.json. Esto no certifica funcionamiento en consola.
 
-Los apartados siguientes se conservan como historial; sus límites y cifras
-anteriores no describen el checkpoint actual.
+Existe un disco independiente de validación automática:
+
+```sh
+R18_REPLAY_TEST=1 DOCKER=/path/to/docker \
+  sh validation/build-runtime18.sh /path/to/sh2eb-elf
+```
+
+Salida en `validation/results/runtime18/replay/`. Sólo este modo fija semilla
+cero y reproduce RIGHT60–179/A180–183; sólo tras el resultado real muestra un
+informe verde con el frame codificado. No debe confundirse con la presentación
+normal del juego. La evidencia incluye su A.BIN/mapa y un observador de WRAM
+sin escrituras, que identifica el ejecutable mediante 4.096 bytes de instrucciones.
+Cada build debe conservar su propio mapa y A.BIN para usar ese observador.
+
+Assets necesarios en `src/runtime/audit/runtime18-cd/`: ROM68K.BIN, SPRITES.PAK
+y R18RING.BIN (hashes más abajo). HOTSPR.BIN se regenera con el listado canónico.
+El paquete incluye fuente, los cuatro assets, ambos discos y evidencia. El SDK
+Yaul, Docker y BIOS se suministran externamente; los timestamps ISO pueden variar.
+
+Los apartados siguientes son historial y sus límites anteriores no describen
+el checkpoint actual.
 
 ## Histórico: hardware scrolling y sprites residentes (`e1113d3`)
 

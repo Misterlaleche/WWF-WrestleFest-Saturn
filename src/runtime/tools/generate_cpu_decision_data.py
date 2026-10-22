@@ -4,7 +4,7 @@ import hashlib,sys
 from pathlib import Path
 rom=Path(sys.argv[1]).read_bytes()
 assert hashlib.sha1(rom).hexdigest()=="a726c46f350723ea73158bc78055d17d418b14e2"
-spans=[(0x1f150,0x1f15c),(0x1f866,0x1f916),(0x219b4,0x24000)]
+spans=[(0x1f150,0x1f15c),(0x1f866,0x1f916),(0x219b4,0x24062)]
 lines=['/* Generated from canonical ROM; regenerate with tools/generate_cpu_decision_data.py. */']
 for start,end in spans:
  lines.append('static const uint8_t cpu_data_%x[]={\n'%start)

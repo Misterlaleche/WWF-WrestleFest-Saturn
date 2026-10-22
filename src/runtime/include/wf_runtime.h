@@ -56,6 +56,7 @@ typedef struct wf_globals_raw {
  uint16_t global_16ce; /* $1C16CE: low byte $16CF rotating slot cache */
  uint16_t global_15ce; /* $1C15CE Royal reserve/full marker used by $18C4 */
  uint8_t global_1678; /* $1C1678 transition owner flags */
+ uint8_t global_1679; /* $1C1679 transition facing, low byte of the $1678 word */
  uint8_t global_167a; /* $1C167A raw message/status producer state */
  uint8_t global_167b; /* $1C167B previous/cache state */
  uint32_t global_1670; /* $1C1670 */
@@ -112,6 +113,7 @@ typedef struct wf_globals_raw {
   * Accessors must redirect $1586..$1599 and $15CE..$15CF to their named
   * fields; these overlapping bytes are not a second authoritative copy. */
  uint8_t royal_selector_1576[0x5c]; /* $1C1576..$1C15D1 */
+ uint8_t direction_scratch_15e4[8]; /* $1C15E4..$1C15EB, direction $20C8 scratch */
  uint8_t cabinet_tag_15e0[4]; /* $1C15E0..$1C15E3 */
  uint32_t rng_state;  /* arcade $1C005C equivalent: value must be externally sourced */
  uint32_t rng_d2, rng_d3, rng_d4, rng_d5, rng_d6, rng_d7; /* caller register context for $21B4 */
@@ -151,6 +153,7 @@ wf_status_t wf_runtime_frame(wf_runtime_t *rt);
 void wf_runtime_vblank_ack(wf_runtime_t *rt);
 wf_status_t wf_dispatch_phase(wf_runtime_t *rt,uint32_t addr);
 void wf_for_each_active(wf_runtime_t *rt, void (*fn)(wf_runtime_t*,unsigned,wf_actor_raw_t*,void*), void *user);
+wf_status_t wf_actor_unlink_115d2(wf_runtime_t *,wf_actor_raw_t *);
 wf_actor_raw_t *wf_actor_from_rom_ptr(wf_runtime_t *rt,uint32_t ptr,unsigned *slot_out);
 const wf_actor_raw_t *wf_actor_from_rom_ptr_const(const wf_runtime_t *rt,uint32_t ptr,unsigned *slot_out);
 void wf_apply_pending_damage_and_tier(wf_actor_raw_t *a);

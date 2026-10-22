@@ -37,7 +37,8 @@ static uint32_t actor_ptr(const wf_runtime_t*rt,const wf_actor_raw_t*a){ptrdiff_
 static wf_status_t linked(wf_runtime_t*rt,wf_actor_raw_t*r,wf_actor_raw_t**out,wf_r17_referee_ctx_t*c,uint32_t pc){wf_actor_raw_t*a=aptr(rt,wf_be32(r,R_LINK));if(!a)return block(c,pc);*out=a;return WF_OK;}
 static int entry_latch(wf_actor_raw_t*r){int was=bit(r,R_LATCH,7);setbit(r,R_LATCH,7);return !was;}
 static void set_global_169a(wf_runtime_t*rt,uint16_t v){rt->g.global_169a=v;rt->g.global_169b=(uint8_t)v;}
-static void inc_global_169a(wf_runtime_t*rt){set_global_169a(rt,(uint16_t)(rt->g.global_169a+1u));}
+/* $20082 is ADDQ.B at $1C169A: the high byte of the word, not $169B. */
+static void inc_global_169a(wf_runtime_t*rt){set_global_169a(rt,(uint16_t)(rt->g.global_169a+0x100u));}
 
 void wf_r17_referee_init_10718(wf_runtime_t *rt){
  wf_actor_raw_t*r;if(!rt)return;r=&rt->referee;
@@ -199,7 +200,17 @@ static wf_status_t count6(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t*
  if(byte_dec(r,R_TICK+1u)!=0u)return WF_OK;
  byte_inc(r,R_PHASE+1u);byte_inc(a2,WF_A_PROGRESS109);
  if(wf_u8(r,R_PHASE+1u)==7u){if((rt->g.mode_0161&1u)==0u){wf_set_be16(r,R_STATE,0x8009u);if(!c||!c->clear_206fe)return block(c,0x000206FEu);s=c->clear_206fe(rt,c->user);if(s!=WF_OK)return s;wf_set_be16(a1,0x4Au,4u);return WF_OK;}if(!c||!c->clear_206fe)return block(c,0x000206FEu);s=c->clear_206fe(rt,c->user);if(s!=WF_OK)return s;wf_set_be16(r,R_STATE,0x8005u);return WF_OK;}
- if((wf_u8(r,R_PHASE+1u)&1u)==0u){inc_global_169a(rt);if(!c||!c->display_2067c)return block(c,0x0002067Cu);s=c->display_2067c(rt,c->user);if(s!=WF_OK)return s;s=emit_audio(rt,r,c);if(s!=WF_OK)return s;wf_set_be16(r,R_SOUND,(uint16_t)(wf_be16(r,R_SOUND)+1u));}
+ if((wf_u8(r,R_PHASE+1u)&1u)==0u){
+  inc_global_169a(rt);
+  /* $20088 MOVEQ #0; MOVE.W +$24; LSR.W #1 before $2067C. */
+  wf_r17_m68k_move_l(&rt->m68k_regs,0u,(uint32_t)(wf_be16(r,R_PHASE)>>1));
+  if(!c||!c->display_2067c)return block(c,0x0002067Cu);
+  s=c->display_2067c(rt,c->user);if(s!=WF_OK)return s;
+  /* Both output owners preserve D0; the caller selects the sound at $20094. */
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,wf_be16(r,R_SOUND));
+  s=emit_audio(rt,r,c);if(s!=WF_OK)return s;
+  wf_set_be16(r,R_SOUND,(uint16_t)(wf_be16(r,R_SOUND)+1u));
+ }
  if(wf_u8(r,R_VISUAL+1u)==5u){wf_set_u8(r,R_TICK+1u,56u);wf_set_u8(r,R_VISUAL+1u,6u);}else{wf_set_u8(r,R_TICK+1u,32u);wf_set_u8(r,R_VISUAL+1u,5u);}
  if(wf_u8(r,R_PHASE+1u)==6u){wf_set_u8(r,R_TICK+1u,(uint8_t)(wf_u8(r,R_TICK+1u)+16u));if((rt->g.mode_0161&1u)!=0u){if(!c||!c->royal_phase6_21358)return block(c,0x00021358u);s=c->royal_phase6_21358(rt,a1,c->user);if(s!=WF_OK)return s;wf_set_be16(a1,WF_A_CREDIT,(uint16_t)(wf_be16(a1,WF_A_CREDIT)+1u));a1=aptr(rt,wf_be32(a1,WF_A_LINK));if(!a1)return block(c,0x000200ECu);setbit(a1,WF_A_FLAGS32,4);return WF_OK;}
   wf_set_be16(a1,WF_A_LOCKOUT,0x4000u);a2=aptr(rt,wf_be32(a1,WF_A_TEAM_LINK));if(!a2)return block(c,0x00020102u);wf_set_be16(a2,WF_A_LOCKOUT,0x4000u);a1=aptr(rt,wf_be32(a1,WF_A_LINK));if(!a1)return block(c,0x0002010Cu);wf_set_be16(a1,WF_A_LOCKOUT,0x4001u);a2=aptr(rt,wf_be32(a1,WF_A_TEAM_LINK));if(!a2)return block(c,0x00020116u);wf_set_be16(a2,WF_A_LOCKOUT,0x4001u);rt->g.global_169e=0u;if(!c||!c->tag_phase6_90d6)return block(c,0x000090D6u);return c->tag_phase6_90d6(rt,c->user);}

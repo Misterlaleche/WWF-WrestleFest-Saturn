@@ -316,14 +316,26 @@ test-active-rom: build/test_runtime17_active_rom
 test: test-active-rom
 
 # Direct-boot integration probe; the ROM and graphics remain local audit assets.
-R18_HOST=src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_world.c src/wf_r18_ring.c
+R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_world.c src/wf_r18_ring.c
 build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c
 	mkdir -p build
 	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
-.PHONY: test-runtime18-direct
+.PHONY: test-runtime18-direct test-runtime18-complete-match test-runtime18-complete-match-asan
 test-runtime18-direct: build/direct_combat_probe audit/runtime18-cd/HOTSPR.BIN
-	WF_PROBE_FRAMES=540 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	WF_PROBE_FRAMES=2000 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
 	WF_PROBE_FRAMES=490 WF_PROBE_ATTACK=1 ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+
+# Success requires the actual $11B6 result boundary, not merely a frame count.
+test-runtime18-complete-match: build/direct_combat_probe audit/runtime18-cd/HOTSPR.BIN
+	WF_PROBE_FRAMES=20000 WF_PROBE_ATTACK=1 WF_PROBE_REQUIRE_COMPLETE=1 WF_PROBE_SPRITE_TRACE=build/runtime18-match-cold-reads.csv ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	test "$$(wc -l < build/runtime18-match-cold-reads.csv)" -eq 1
+	@echo 'PASS complete replay: zero cold sprite reads'
+
+build/direct_combat_probe_asan: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c
+	mkdir -p build
+	$(CC) -std=c11 -Wall -Wextra -Werror -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -Iinclude $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
+test-runtime18-complete-match-asan: build/direct_combat_probe_asan audit/runtime18-cd/HOTSPR.BIN
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 WF_PROBE_FRAMES=20000 WF_PROBE_ATTACK=1 WF_PROBE_REQUIRE_COMPLETE=1 ./build/direct_combat_probe_asan audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
 
 build/test_runtime18_cdfs_window: src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c tests/r18/cd-block.h | build
 	$(CC) $(CFLAGS) -Itests/r18 src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c -o $@
@@ -369,3 +381,92 @@ ROM_PYTHON ?= python3
 test-runtime18-cpu-rom:
 	$(ROM_PYTHON) tools/generate_cpu_decision_data.py audit/runtime18-cd/ROM68K.BIN --check
 	$(ROM_PYTHON) tools/verify_cpu_decisions_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-victim-rom test-runtime18-referee-rom test-runtime18-result-rom test-runtime18-knockdown-rom
+test-runtime18-victim-rom:
+	$(ROM_PYTHON) tools/verify_victim_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-referee-rom:
+	$(ROM_PYTHON) tests/r18/verify_referee_palette_rom.py
+	$(ROM_PYTHON) tests/r18/verify_referee_dependencies_rom.py
+test-runtime18-result-rom:
+	$(ROM_PYTHON) tools/verify_match_result_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-knockdown-rom:
+	$(ROM_PYTHON) tools/verify_cpu_knockdown_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-pin-rom test-runtime18-count-rom
+test-runtime18-pin-rom:
+	$(ROM_PYTHON) tools/verify_pin_actions_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-count-rom:
+	$(ROM_PYTHON) tests/r18/verify_referee_count_chain_rom.py
+
+.PHONY: test-runtime18-movement-rom
+test-runtime18-movement-rom:
+	$(ROM_PYTHON) tools/verify_movement_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-pin-escape-rom
+test-runtime18-pin-escape-rom:
+	$(ROM_PYTHON) tests/r18/verify_pin_escape_rom.py
+
+.PHONY: test-runtime18-tag-entry-rom test-runtime18-victim-boundaries-rom test-runtime18-throw-victim-rom
+test-runtime18-tag-entry-rom:
+	$(ROM_PYTHON) tools/verify_tag_entry_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-victim-boundaries-rom:
+	$(ROM_PYTHON) tests/r18/verify_victim_boundaries_rom.py
+test-runtime18-throw-victim-rom:
+	$(ROM_PYTHON) tools/verify_throw_victim_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-cpu-state4-rom test-runtime18-hot-boundaries
+test-runtime18-cpu-state4-rom:
+	$(ROM_PYTHON) tools/verify_cpu_state4_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-hot-boundaries:
+	$(ROM_PYTHON) tests/r18/verify_hot_sprite_boundaries.py
+
+.PHONY: test-runtime18-ring-exit-rom test-runtime18-throw-actions-rom
+test-runtime18-ring-exit-rom:
+	$(ROM_PYTHON) tools/verify_ring_exit_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-throw-actions-rom:
+	$(ROM_PYTHON) tools/verify_throw_actions_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-cpu-tag-rom test-runtime18-cpu-corner-rom test-runtime18-raw71-rom test-runtime18-raw4c-rom
+test-runtime18-cpu-tag-rom:
+	$(ROM_PYTHON) tools/verify_cpu_tag_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-cpu-corner-rom:
+	$(ROM_PYTHON) tools/verify_cpu_corner_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-raw71-rom:
+	$(ROM_PYTHON) tools/verify_raw71_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-raw4c-rom:
+	$(ROM_PYTHON) tools/verify_raw4c_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-timeup-rom
+test-runtime18-timeup-rom:
+	$(ROM_PYTHON) tools/verify_timeup_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-tag-finish-rom
+test-runtime18-tag-finish-rom:
+	$(ROM_PYTHON) tools/verify_tag_finish_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-rom-validation
+test-runtime18-rom-validation: test-runtime18-cpu-rom test-runtime18-victim-rom \
+ test-runtime18-referee-rom test-runtime18-result-rom test-runtime18-knockdown-rom \
+ test-runtime18-pin-rom test-runtime18-count-rom test-runtime18-movement-rom \
+ test-runtime18-pin-escape-rom test-runtime18-tag-entry-rom \
+ test-runtime18-victim-boundaries-rom test-runtime18-throw-victim-rom \
+ test-runtime18-cpu-state4-rom test-runtime18-hot-boundaries \
+ test-runtime18-ring-exit-rom test-runtime18-throw-actions-rom \
+ test-runtime18-cpu-tag-rom test-runtime18-cpu-corner-rom test-runtime18-raw71-rom \
+ test-runtime18-raw4c-rom test-runtime18-timeup-rom test-runtime18-tag-finish-rom \
+ test-runtime18-cpu-defender-rom test-runtime18-cpu-assist-rom test-runtime18-raw0a-rom test-runtime18-raw10-rom
+
+.PHONY: test-runtime18-cpu-defender-rom test-runtime18-cpu-assist-rom
+test-runtime18-cpu-defender-rom:
+	$(ROM_PYTHON) tools/verify_cpu_defender_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-cpu-assist-rom:
+	$(ROM_PYTHON) tools/verify_cpu_assist_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-raw0a-rom
+test-runtime18-raw0a-rom:
+	$(ROM_PYTHON) tools/verify_raw0a_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-raw10-rom
+test-runtime18-raw10-rom:
+	$(ROM_PYTHON) tools/verify_raw10_rom.py audit/runtime18-cd/ROM68K.BIN

@@ -7,8 +7,10 @@ from pathlib import Path
 
 PACK_SHA256 = "130ac19d5ab3646f2d51c9d2ce52cd42f53f60b125fd18d674ee8de722c55d31"
 HEADER_BYTES = 4096
+EXTENDED_HEADER_BYTES = 8192
 TILE_BYTES = 128
-MAX_IDS = (HEADER_BYTES - 8) // 2
+LEGACY_MAX_IDS = (HEADER_BYTES - 8) // 2
+MAX_IDS = (EXTENDED_HEADER_BYTES - 8) // 2
 
 
 def main() -> None:
@@ -28,7 +30,8 @@ def main() -> None:
             tile < 0 or tile >= 65536 for tile in ids):
         raise SystemExit("Hot sprite IDs must be sorted, unique and in range")
 
-    header = bytearray(HEADER_BYTES)
+    header = bytearray(HEADER_BYTES if len(ids) <= LEGACY_MAX_IDS
+                       else EXTENDED_HEADER_BYTES)
     header[:4] = b"R18H"
     header[4:6] = len(ids).to_bytes(2, "big")
     header[6:8] = TILE_BYTES.to_bytes(2, "big")

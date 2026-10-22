@@ -3,6 +3,8 @@
 #include <string.h>
 #include "wf_gameplay_bindings.h"
 #include "wf_r18_bootstrap.h"
+#include "wf_r18_referee.h"
+#include "wf_r18_match_result.h"
 #include "wf_r18_cdfs.h"
 #include "wf_r18_present.h"
 #include "wf_r18_ring.h"
@@ -17,6 +19,7 @@
 #define BOOT_RNG ((volatile uint32_t *)0x0020005cu)
 static volatile uint32_t video_clock;
 static volatile uint32_t fatal_owner, fatal_dependency, fatal_frame;
+static volatile uint32_t finished_frame, finished_result;
 static wf_runtime_t rt;
 static wf_gameplay_binding_context_t gameplay;
 static wf_phase_binding_t bindings[48];
@@ -150,6 +153,15 @@ static wf_status_t silent_audio(wf_runtime_t *r, uint16_t command, void *user)
     (void)r; (void)command; (void)user;
     return WF_OK;
 }
+/* $21E6 DBRA D0 waits for D0.W+1 complete vertical-blank edges. */
+static wf_status_t wait_21e6(wf_runtime_t *r,uint16_t raw,void *user)
+{
+    (void)r; (void)user;
+    uint32_t start=video_clock;
+    while ((uint32_t)(video_clock-start)<(uint32_t)raw+1u)
+        smpc_peripheral_process();
+    return WF_OK;
+}
 static wf_status_t render(wf_runtime_t *r, wf_actor_raw_t *const *actors,
                            size_t count, void *user)
 {
@@ -228,6 +240,9 @@ int main(void)
     launch.partner = 1;
     launch.cabinet_config = 0x300u;
     launch.rng_state = *BOOT_RNG;
+#ifdef WF_R18_REPLAY_TEST
+    launch.rng_state = 0u; /* Validation fixture: same reset seed as the HOST replay. */
+#endif
     wf_r17_m68k_software_reset(&launch.registers);
     status = wf_r18_direct_boot(&rt, &boot, &launch);
     if (status != WF_OK) fail(boot.blocked_pc, video.failed_address);
@@ -244,8 +259,15 @@ int main(void)
     gameplay.input_valid_mask = 0x1ffu;
     memset(gameplay.input_hw_low, 0xff, sizeof gameplay.input_hw_low);
     gameplay.audio_command = silent_audio;
+    gameplay.referee_direction_20c8=wf_r18_referee_direction_20c8;
+    gameplay.referee_display_2067c=wf_r18_referee_display_2067c;
+    gameplay.referee_clear_206fe=wf_r18_referee_clear_206fe;
+    gameplay.referee_tag_phase6_90d6=wf_r18_tag_bonus_90d6;
+    gameplay.referee_result_20156=wf_r18_result_sound_20156;
+
     gameplay.participant_input_word = input_word;
     gameplay.participant_commit_batch = wf_r18_video_commit;
+    gameplay.post7_wait_21e6 = wait_21e6;
     gameplay.post7_fg0_batch = wf_r18_video_batch;
     gameplay.post7_video_batch = wf_r18_video_batch;
     gameplay.post7_resource_2aea = wf_r18_palette_2aea;
@@ -266,6 +288,11 @@ int main(void)
         smpc_peripheral_process();
         smpc_peripheral_digital_port(1, &pad);
         gameplay.input_hw_low[0] = controls();
+#ifdef WF_R18_REPLAY_TEST
+        /* Validation input only. No actor, CPU, stamina or result is changed. */
+        gameplay.input_hw_low[0] = rt.g.frame_counter >= 60u && rt.g.frame_counter < 180u ?
+            0xfeu : rt.g.frame_counter >= 180u && rt.g.frame_counter < 184u ? 0xefu : 0xffu;
+#endif
         status = wf_runtime_frame(&rt);
         if (status == WF_BLOCKED && rt.frame_ready) {
             if (wf_r18_world_commit(&rt, &world) != WF_OK)
@@ -282,6 +309,24 @@ int main(void)
             status = wf_runtime_frame(&rt);
         }
         *BOOT_RNG = rt.g.rng_state;
+        /* $11B6 begins the post-match scene. Direct-ring mode retains the
+         * final rendered frame only after the ROM result flags exist. */
+        if (status == WF_BLOCKED && wf_r18_tag_match_complete(&rt)) {
+            finished_frame = rt.g.frame_counter;
+            finished_result = wf_be16(&rt.actors[0], WF_A_RESULT);
+#ifdef WF_R18_REPLAY_TEST
+            /* Test-disc terminal report, only after the real $11B6 condition.
+             * Green plus the frame RGB bytes makes completion externally visible. */
+            marker(0,31,0);
+            *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,1) = 0x0000ff00u;
+            *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,2) =
+                ((finished_frame & 255u) << 16) | (finished_frame & 0xff00u) |
+                ((finished_frame >> 16) & 255u);
+            memset((void *)(VDP2_VRAM_ADDR(0,0)+512u*120u),2,512u*120u);
+            vdp2_sync();vdp2_sync_wait();
+#endif
+            for (;;) smpc_peripheral_process();
+        }
         if (status != WF_OK)
             fail(gameplay.last_blocked_phase ?
                  gameplay.last_blocked_phase : boot.blocked_pc,

@@ -65,7 +65,17 @@ wf_status_t wf_r18_tag_setup_1086c(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
  dw(r,0,2);for(unsigned i=1;i<6;i+=2){if(active(&r->actors[i]))bit(&r->actors[i],0x34,1,1);dw(r,0,d(r,0)-1);}
  if(active(&r->actors[0])){bit(&r->actors[4],0x33,7,1);bit(&r->actors[5],0x33,7,1);}
  dw(r,0,2);for(unsigned i=0;i<6;i+=2){wf_actor_raw_t*a=&r->actors[i],*p=&r->actors[i+1];if(active(a)){bit(a,0x33,0,1);if(!(wf_u8(a,0x56)&128)){bit(a,0x33,1,1);bit(a,0x56,6,0);}bit(p,0x56,6,1);if(!(wf_u8(p,0x56)&128)){if(!(wf_u8(a,0xa1)&1))bit(p,0x33,1,0);else if(wf_u8(p,0xa1)&1){bit(p,0x56,6,0);bit(p,0x33,1,1);}}}dw(r,0,d(r,0)-1);}
- wf_r17_referee_init_10718(r);for(unsigned i=0;i<4;i++)r->m68k_regs.d[i]=saved[i];c->replay_008c=0;return WF_OK;
+ wf_r17_referee_init_10718(r);
+ /* $1073C..$10772 also allocate these resources, in this order. The R17
+  * actor-only initializer has no video callback; retain those effects here
+  * before $D1FC resolves resource 12 through the live palette map. */
+ {static const uint16_t ids[]={12,7,14,29,1};
+  for(unsigned i=0;i<sizeof ids/sizeof ids[0];i++){
+   dw(r,0,ids[i]);st=c->palette_2aea(r,ids[i],c->user);
+   if(st!=WF_OK){c->blocked_pc=0x2aea;return st;}
+  }
+ }
+ for(unsigned i=0;i<4;i++)r->m68k_regs.d[i]=saved[i];c->replay_008c=0;return WF_OK;
 }
 
 #include "wf_r17_participant_helpers.h"

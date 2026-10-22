@@ -23,7 +23,7 @@ int main(void){
  /* Reciprocal link is first-entry only and uses exact actor ROM pointers. */
  prep5(&rt.actors[0],0x0cu);prep5(&rt.actors[1],2u);bind_target(&rt,0,1);
  assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be32(&rt.actors[0],WF_A_LINK)==wf_actor_rom_base(1));assert(wf_be32(&rt.actors[1],WF_A_LINK)==wf_actor_rom_base(0));
- /* Selector 01 exact state0 prefix is applied, then the unintegrated $1C5B6 tail fails closed. */
+ /* Selector 01 applies its state0 prefix; a missing target still fails closed at $1C5B6. */
  prep5(&rt.actors[0],0x01u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED);assert(tr.blocked_dependency_rom==0x001c5b6u);assert(wf_be16(&rt.actors[0],WF_A_STATE)==0u);assert(wf_be16(&rt.actors[0],WF_A_CPU_BC)==0x0080u);
  /* Selector 79 cannot invent inherited D0 for $10C60. */
  prep5(&rt.actors[0],0x79u);wf_set_u8(&rt.actors[0],WF_A_CPU_B5,0x80u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED);assert(tr.blocked_dependency_rom==0x0010c60u);
@@ -31,14 +31,15 @@ int main(void){
  memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x09u);prep5(&rt.actors[1],2u);bind_target(&rt,0,1);wf_set_u8(&rt.actors[0],WF_A_CPU_B5,0x10u);
  assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be32(&rt.actors[1],WF_A_TARGET)==wf_actor_rom_base(0));assert(wf_be32(&rt.actors[0],WF_A_LINK)==wf_actor_rom_base(1));assert(wf_be32(&rt.actors[1],WF_A_LINK)==wf_actor_rom_base(0));
  /* $1E5AE clear-path picks $1F51E only for target X [0200,02FF], otherwise $1F45A. */
- memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x09u);bind_target(&rt,0,1);wf_set_be16(&rt.actors[1],WF_A_X,0x0250u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED&&tr.blocked_dependency_rom==0x001f51eu);
- memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x09u);bind_target(&rt,0,1);wf_set_be16(&rt.actors[1],WF_A_X,0x0310u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED&&tr.blocked_dependency_rom==0x001f45au);
- /* $1E5F6 exact facing/X gates: accepted boundary writes WORD $000A then reaches $1F45A. */
+ memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x09u);bind_target(&rt,0,1);wf_set_be16(&rt.actors[1],WF_A_X,0x0250u);assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_CPU_BE)==0x0248u);assert(wf_be16(&rt.actors[0],WF_A_CPU_C0)==0u);assert(wf_be16(&rt.actors[0],WF_A_STATE)==0u);assert(wf_be16(&rt.actors[0],WF_A_AE)==10u);
+ memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x09u);bind_target(&rt,0,1);wf_set_be16(&rt.actors[1],WF_A_X,0x0310u);assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_CPU_BE)==0x0340u);assert(wf_be16(&rt.actors[0],WF_A_CPU_C0)==0xffe8u);assert(wf_be16(&rt.actors[0],WF_A_STATE)==0u);
+ /* $1E5F6 exact facing/X gates select the demonstrated target offsets.
+  * All these idle targets then reset state at $1D702, retaining AE=10. */
  memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x08u);bind_target(&rt,0,1);wf_set_u8(&rt.actors[1],WF_A_FACING,0x80u);wf_set_be16(&rt.actors[1],WF_A_X,0x025fu);wf_set_u8(&rt.actors[0],WF_A_SELECTOR,0xa5u);
- assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED&&tr.blocked_dependency_rom==0x001f45au);assert(wf_be16(&rt.actors[0],WF_A_SELECTOR)==0x000au);
- memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x08u);bind_target(&rt,0,1);wf_set_u8(&rt.actors[1],WF_A_FACING,0x80u);wf_set_be16(&rt.actors[1],WF_A_X,0x0260u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED&&tr.blocked_dependency_rom==0x001f4ceu);
+ assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_SELECTOR)==0x000au);assert(wf_be16(&rt.actors[0],WF_A_CPU_BE)==0x022fu);assert(wf_be16(&rt.actors[0],WF_A_CPU_C0)==0xffe8u);assert(wf_be16(&rt.actors[0],WF_A_STATE)==0u);
+ memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x08u);bind_target(&rt,0,1);wf_set_u8(&rt.actors[1],WF_A_FACING,0x80u);wf_set_be16(&rt.actors[1],WF_A_X,0x0260u);assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_CPU_BE)==0x0200u);assert(wf_be16(&rt.actors[0],WF_A_CPU_C0)==0xffe8u);assert(wf_be16(&rt.actors[0],WF_A_STATE)==0u);
  /* $1E62C uses the distinct 0250/02A0 thresholds only when $1C007C != 0. */
- memset(&rt,0,sizeof(rt));rt.g.credited_route=1u;prep5(&rt.actors[0],0x10u);bind_target(&rt,0,1);wf_set_u8(&rt.actors[1],WF_A_FACING,0u);wf_set_be16(&rt.actors[1],WF_A_X,0x02a0u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED&&tr.blocked_dependency_rom==0x001f45au);assert(wf_be16(&rt.actors[0],WF_A_SELECTOR)==0x000au);
+ memset(&rt,0,sizeof(rt));rt.g.credited_route=1u;prep5(&rt.actors[0],0x10u);bind_target(&rt,0,1);wf_set_u8(&rt.actors[1],WF_A_FACING,0u);wf_set_be16(&rt.actors[1],WF_A_X,0x02a0u);assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_SELECTOR)==0x000au);assert(wf_be16(&rt.actors[0],WF_A_CPU_BE)==0x02d0u);assert(wf_be16(&rt.actors[0],WF_A_CPU_C0)==0xffe8u);assert(wf_be16(&rt.actors[0],WF_A_STATE)==0u);
  /* CPU FINAL bridge is compiled in, exact tables visible, no synthetic seed policy added. */
  assert(arcade_cpu_main_handler(5u)==0x0001dfe2u);assert(arcade_cpu_state1_handler(10u)==0x0001d5a2u);assert(arcade_cpu_executor_entry(0x15u).force_call);
  /* CPU state 8 exact callback is CLR.B +BD; state 7 and A are RTS. */

@@ -245,6 +245,7 @@ static void post7_build_ctx(wf_gameplay_binding_context_t *c,wf_r17_post7_ctx_t 
  p->resource_2aea=c->post7_resource_2aea;
  p->resource_2b58=c->post7_resource_2b58;
  p->raw_2503c=c->post7_raw_2503c;
+ p->wait_21e6=c->post7_wait_21e6;
  p->raw_9aca=c->post7_raw_9aca;
  p->fg0_peek_long=c->post7_fg0_peek_long;
  p->branchb_288f0=c->branchb_288f0;

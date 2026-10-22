@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-"""Compile each CORE source once and run every test target in the shipped Makefile."""
+"""Compile CORE once and run its root-level regression tests.
+
+RUNTIME-18 transport tests need extra sources/assets; run their Make targets.
+"""
 import argparse, concurrent.futures, hashlib, json, pathlib, re, subprocess, sys
 p=argparse.ArgumentParser();p.add_argument('runtime',type=pathlib.Path);p.add_argument('--cc',default='clang');p.add_argument('--sanitize',action='store_true');p.add_argument('--out',required=True,type=pathlib.Path);a=p.parse_args()
 r=a.runtime.resolve();out=a.out.resolve();out.mkdir(parents=True,exist_ok=True)
 m=(r/'Makefile').read_text();core=re.search(r'^CORE=(.*)$',m,re.M).group(1).split();tests=re.findall(r'^build/(test_[\w]+):',m,re.M)
+tests=[t for t in tests if (r/'tests'/(t+'.c')).is_file()]
 flags=['-std=c11','-Wall','-Wextra','-Werror','-Iinclude', '-O1' if a.sanitize else '-O2']
 if a.sanitize:flags+=['-g','-fsanitize=address,undefined','-fno-omit-frame-pointer']
 def command(cmd,name):

@@ -26,6 +26,10 @@ typedef struct wf_r17_actions_r11_bridge {
     wf_r17_raw23_trace_t raw23_trace[WF_ACTOR_SLOTS];
 } wf_r17_actions_r11_bridge_t;
 
+/* Complete ROM $114B2, shared by main idle and raw $3D. */
+wf_status_t wf_r17_action_idle_114b2(wf_runtime_t *, wf_actor_raw_t *,
+                                    wf_r17_actions_r11_trace_t *);
+
 /* Bounded ROM-backed $1C03E action implementation. Unimplemented selectors
  * retain the explicit $12614 dependency; no fallback animation is supplied. */
 wf_status_t wf_r17_dispatch_1c03e_r11(wf_runtime_t *rt,

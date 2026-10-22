@@ -54,6 +54,7 @@ typedef struct wf_gameplay_binding_context {
  wf_r17_raw_word_fn post7_resource_2aea;
  wf_r17_raw_word_fn post7_resource_2b58;
  wf_r17_raw_word_fn post7_raw_2503c;
+ wf_r17_raw_word_fn post7_wait_21e6;
  wf_r17_raw_9aca_fn post7_raw_9aca;
  wf_r17_fg0_peek_long_fn post7_fg0_peek_long;
  wf_r17_branchb_288f0_fn branchb_288f0;

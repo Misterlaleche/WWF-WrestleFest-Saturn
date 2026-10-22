@@ -32,6 +32,8 @@ typedef struct wf_r17_post7_ctx {
     wf_r17_raw_word_fn resource_2aea;
     wf_r17_raw_word_fn resource_2b58;
     wf_r17_raw_word_fn raw_2503c;
+    /* $21E6: wait for raw_value+1 complete Vblank rise/fall pairs. */
+    wf_r17_raw_word_fn wait_21e6;
     wf_r17_raw_9aca_fn raw_9aca;
     /* Exact $CB42 TST.L reader; required only on routes that inspect existing FG0. */
     wf_r17_fg0_peek_long_fn fg0_peek_long;
@@ -82,7 +84,7 @@ wf_status_t wf_r17_owner_18c4(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx,const uin
 /* ROM $298EC: final counted raw video transfer owner. */
 wf_status_t wf_r17_owner_298ec(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx);
 
-/* ROM $262D2: combat BCD timer + raw FG0 producer. Time-up remains fail-closed. */
+/* ROM $262D2: combat BCD timer + raw FG0 producer. Time-up requires text and an exact Vblank wait callback. */
 wf_status_t wf_r17_owner_262d2(wf_runtime_t *rt,wf_r17_post7_ctx_t *ctx);
 
 /* ROM $899C: raw FG0 producer; atomic batch boundary owned by WP18. */

@@ -4,10 +4,12 @@
 #include <string.h>
 #include "wf_r18_present.h"
 
-static uint8_t rom[524288], tile_cache[384u*1024u];
+static uint8_t rom[524288], tile_cache[6144u*128u];
 static FILE *pack, *hot;
 static unsigned sprite_reads;
 static unsigned corrupt;
+static unsigned initial_reads, extension_reads;
+static uint32_t payload_offset;
 
 static int read_file(const char *name, uint32_t offset, void *dst, size_t bytes)
 {
@@ -15,6 +17,11 @@ static int read_file(const char *name, uint32_t offset, void *dst, size_t bytes)
     if (!strcmp(name, "SPRITES.PAK")) { file=pack; ++sprite_reads; }
     else if (!strcmp(name, "HOTSPR.BIN")) file=hot;
     else return -1;
+    if (file==hot && !corrupt) {
+        if (!offset) { if(bytes!=4096u) return -1; ++initial_reads; }
+        else if (offset==4096u && bytes==4096u) ++extension_reads;
+        else payload_offset=offset;
+    }
     if (fseek(file, (long)offset, SEEK_SET) != 0 ||
         fread(dst, 1, bytes, file) != bytes) return -1;
     if (file==hot && !offset) {
@@ -29,16 +36,24 @@ static int read_file(const char *name, uint32_t offset, void *dst, size_t bytes)
 
 int main(int argc, char **argv)
 {
-    uint8_t header[4096], expected[128];
+    uint8_t header[8192], expected[128];
+    size_t header_bytes;
     const uint8_t *got;
     unsigned count;
     if (argc != 3 || !(pack=fopen(argv[1], "rb")) ||
         !(hot=fopen(argv[2], "rb"))) return 2;
-    if (fread(header, 1, sizeof header, hot) != sizeof header) return 2;
+    if (fread(header, 1, 4096u, hot) != 4096u) return 2;
     count=(unsigned)header[4]<<8 | header[5];
+    header_bytes=count>2044u?8192u:4096u;
+    if (header_bytes==8192u && fread(header+4096u,1,4096u,hot)!=4096u) return 2;
     wf_r18_present_init(read_file, rom, sizeof rom, tile_cache, sizeof tile_cache);
     if (wf_r18_hot_sprites_load() != WF_OK || count == 0) {
         fputs("Hot sprite pack failed to load\n",stderr); return 1;
+    }
+    if (initial_reads!=1u || extension_reads!=(count>2044u) ||
+        payload_offset!=header_bytes ||
+        wf_r18_hot_sprites_bytes()!=header_bytes+count*128u) {
+        fputs("Header/payload offset or reported size differs\n",stderr); return 1;
     }
     for (unsigned i=0; i<count; ++i) {
         unsigned tile=(unsigned)header[8+i*2]<<8 | header[9+i*2];
@@ -65,6 +80,22 @@ int main(int argc, char **argv)
             fprintf(stderr,"Malformed hot pack %u accepted\n",corrupt);
             return 1;
         }
+    }
+    corrupt=0u;
+    for (unsigned slots=count-1u;slots<=count;++slots) {
+        wf_r18_present_init(read_file,rom,sizeof rom,tile_cache,slots*128u);
+        if (wf_r18_hot_sprites_load()!=WF_BLOCKED || wf_r18_hot_sprites_bytes()!=0u) {
+            fputs("Insufficient tile buffer accepted\n",stderr); return 1;
+        }
+    }
+    wf_r18_present_init(read_file,rom,sizeof rom,tile_cache,(count+1u)*128u);
+    if (wf_r18_hot_sprites_load()!=WF_OK) {
+        fputs("Hot tiles plus one fallback slot rejected\n",stderr); return 1;
+    }
+    /* A failed reload must not expose the old ID table with partial pixels. */
+    corrupt=5u;
+    if (wf_r18_hot_sprites_load()!=WF_BLOCKED || wf_r18_hot_sprites_bytes()!=0u) {
+        fputs("Failed reload retained an active hot table\n",stderr); return 1;
     }
     puts("PASS RUNTIME-18 hot sprites: exact bytes, zero hot CD reads, cold fallback, malformed rejection");
     return 0;
