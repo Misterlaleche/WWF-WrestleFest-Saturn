@@ -58,17 +58,6 @@ static wf_status_t state0(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_
  }
  return state0_tail(rt,slot,a,tr);
 }
-/* $219B4 -> per-character table -> tier-zero lane. Each terminal table has
- * two selector bytes {00,FF}; these three weight pairs are the adjacent
- * two-byte rows selected by $1DED6..$1DEE0. */
-static const uint8_t state1_219b4[12][3][2]={
- {{35,65},{30,70},{25,75}},{{40,60},{35,65},{30,70}},
- {{35,65},{25,75},{10,90}},{{35,65},{30,70},{25,75}},
- {{30,70},{25,75},{20,80}},{{30,70},{25,75},{20,80}},
- {{35,65},{30,70},{25,75}},{{30,70},{25,75},{20,80}},
- {{35,65},{30,70},{25,75}},{{30,70},{25,75},{20,80}},
- {{35,65},{30,70},{25,75}},{{35,65},{30,70},{25,75}}
-};
 /* $24CC calls $21B4 with D1=3,2,1,0, keeping D1/D2 from its caller.
  * The caller's live D registers are required by the ROM RNG. */
 static int state1_weighted_24cc(wf_runtime_t*rt,const uint8_t *weights,size_t count){
@@ -96,6 +85,64 @@ static int state1_weighted_24cc(wf_runtime_t*rt,const uint8_t *weights,size_t co
  wf_r17_m68k_move_l(&rt->m68k_regs,0u,(uint32_t)choice);
  return (int)choice;
 }
+/* $1D7A0, used before the original state2 movement owner. */
+static void run_angle_1d7a0(wf_actor_raw_t*a){wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_FACING)&128u)?0x40u:0xc0u);}
+/* $1CE38: the aligned, nonzero-distance-class continuation of state1. */
+static wf_status_t aligned_1ce38(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_actor_raw_t*t,wf_cpu_trace_t*tr){
+ uint8_t f34=wf_u8(a,WF_A_FLAGS34);unsigned distance=wf_be16(a,WF_A_CPU_DISTANCE);uint8_t ts=wf_main_state(t);
+ if(f34&4u){
+  wf_actor_raw_t*p=ptr(rt,a,WF_A_TEAM_LINK);if(!p)return block(tr,0x1cfc4u);uint16_t x=wf_be16(p,WF_A_X),ax=wf_be16(a,WF_A_X),dx=(uint16_t)(x-ax);if(x<ax)dx=(uint16_t)(0u-dx);wf_r17_m68k_move_w(&rt->m68k_regs,0,dx);
+  if(dx>=160u){wf_set_be16(a,WF_A_STATE,2u);run_angle_1d7a0(a);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));return WF_OK;}
+  wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(f34&~4u));if(wf_u8(a,WF_A_FLAGS33)&2u){wf_set_u8(a,WF_A_ROLE,(uint8_t)(wf_u8(a,WF_A_ROLE)&~64u));if(!(wf_u8(p,WF_A_FLAGS33)&2u))wf_set_u8(a,0x35u,(uint8_t)(wf_u8(a,0x35u)|8u));wf_set_be16(a,WF_A_STATE,0u);return WF_OK;}
+  goto horizontal;
+ }
+ if(wf_u8(a,WF_A_REL_FLAGS)&128u)return block(tr,0x1d032u);
+ if(wf_u8(a,WF_A_CPU_B4)!=1u){
+  if(wf_u8(t,WF_A_FLAGS33)&16u){
+   wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(a,WF_A_FACING));if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))goto parallel;
+   if(rt->g.global_007e!=1u&&!(wf_u8(a,WF_A_FLAGS33)&4u)){
+    static const uint8_t chance[2]={70u,30u};int n=state1_weighted_24cc(rt,chance,2u);if(n<0)return block(tr,0x24ccu);
+    if(n){wf_set_be16(a,WF_A_STATE,2u);run_angle_1d7a0(a);wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)|4u));wf_set_u8(a,WF_A_ANGLE,(uint8_t)(wf_u8(a,WF_A_ANGLE)^128u));wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^128u));wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));return WF_OK;}
+   }
+   goto attack;
+  }
+  if(ts==4u&&wf_u8(t,WF_A_STATE4_LO)==1u){
+   wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(a,WF_A_FACING));if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))goto parallel;
+   wf_r17_m68k_moveq(&rt->m68k_regs,2,6);return decision_1de66(rt,slot,a,6u,tr);
+  }
+  if(!(wf_u8(t,WF_A_FLAGS32)&1u)){
+   /* $1F310 returns Z only after it has already changed state to2. */
+   static const uint8_t forward[12][2]={{8,92},{14,86},{5,95},{7,93},{16,84},{10,90},{3,97},{12,88},{7,93},{8,92},{10,90},{12,88}};
+   static const uint8_t retreat[12][2]={{20,80},{30,70},{15,85},{20,80},{35,65},{25,75},{10,90},{25,75},{12,88},{18,82},{25,75},{22,78}};
+   unsigned id=wf_u8(a,WF_A_INTERNAL_ID);wf_r17_m68k_moveq(&rt->m68k_regs,0,0);wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(id*2u));int try_roll=0,back=distance>=224u;unsigned mask=back?4u:2u;
+   if(back){if(!(wf_u8(a,WF_A_FLAGS33)&4u)&&!(wf_u8(a,WF_A_CPU_B6)&mask))try_roll=1;}
+   else if(distance<200u&&!(wf_u8(a,WF_A_CPU_B6)&mask))try_roll=1;
+   if(back&&!(wf_u8(a,WF_A_FLAGS33)&4u))wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|mask));
+   if(!back&&distance<200u)wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|mask));
+   if(try_roll){if(id>=12u)return block(tr,0x1f338u);int n=state1_weighted_24cc(rt,back?retreat[id]:forward[id],2u);if(n<0)return block(tr,0x24ccu);if(!n){wf_set_be16(a,WF_A_STATE,2u);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));run_angle_1d7a0(a);if(back){wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)|4u));wf_set_u8(a,WF_A_ANGLE,(uint8_t)(wf_u8(a,WF_A_ANGLE)^128u));wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^128u));}wf_r17_m68k_moveq(&rt->m68k_regs,0,0);return WF_OK;}}
+   wf_r17_m68k_moveq(&rt->m68k_regs,0,1);
+  }
+ }
+ if(!(wf_u8(t,WF_A_FLAGS33)&16u))goto parallel;
+ wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(a,WF_A_FACING));if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))goto parallel;
+attack:
+ if(distance<104u){
+  wf_r17_m68k_moveq(&rt->m68k_regs,2,0);unsigned s=wf_u8(t,WF_A_SELECTOR_LO);
+  if(ts!=5u||s==5u||s==0x2au||s==0x2du||s==0x20u||s==0x41u)return choose_1dea6(rt,slot,a,0x2307cu,0u,tr);
+  goto guard;
+ }
+ if(distance<176u){wf_r17_m68k_moveq(&rt->m68k_regs,2,0);unsigned s=wf_u8(t,WF_A_SELECTOR_LO);if(ts==5u){if(s==0x2du||s==0x20u||s==0x41u)return decision_1de66(rt,slot,a,0u,tr);goto guard;}}
+ wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3cu);return WF_OK;
+guard:
+ wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x75u);return WF_OK;
+parallel:
+ if(wf_u8(a,WF_A_FLAGS34)&2u){
+  if(!(wf_u8(a,WF_A_FLAGS33)&1u)){wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,4u);return WF_OK;}
+  wf_actor_raw_t*p=ptr(rt,a,WF_A_TEAM_LINK);if(!p)return block(tr,0x1c608u);wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(wf_u8(a,WF_A_FLAGS34)&~2u));wf_set_u8(p,WF_A_FLAGS34,(uint8_t)(wf_u8(p,WF_A_FLAGS34)|2u));if(wf_u8(a,WF_A_FLAGS33)&128u)rt->g.global_1684=wf_be32(a,WF_A_TEAM_LINK);else rt->g.global_1688=wf_be32(a,WF_A_TEAM_LINK);
+ }
+horizontal:
+ wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_CPU_B5)&1u)?0x40u:0xc0u);return WF_OK;
+}
 /* Live stage-zero route through $1C93E/$1CA82/$1DE66. Other jump-table
  * branches remain explicit ROM dependencies. */
 static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
@@ -115,8 +162,19 @@ static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
  if(wf_u8(t,WF_A_FLAGS33)&4u)return block(tr,0x0001c9b2u);
  wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)&~0x20u));
  if(wf_u8(t,WF_A_FLAGS32)&2u)return block(tr,0x0001ccf0u);
- if(wf_u8(a,WF_A_CPU_B4))return block(tr,0x0001cd5cu);
- if(wf_be16(a,WF_A_CPU_DISTANCE_Y)>=12u)return block(tr,0x0001cdd0u);
+ if(wf_u8(a,WF_A_CPU_B4)||wf_be16(a,WF_A_CPU_DISTANCE_Y)>=12u){
+  /* $1CD5C/$1CDD0: approach an opponent in a different lane. */
+  if(wf_be16(a,WF_A_CPU_DISTANCE_Y)<12u)return aligned_1ce38(rt,slot,a,t,tr);
+  if(!wf_u8(a,WF_A_CPU_B4)||wf_u8(a,WF_A_CPU_B4)==1u){
+   if(ts==5u&&wf_u8(t,WF_A_SELECTOR_LO)==0x4cu){wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|64u));wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3du);return WF_OK;}
+   if((rt->g.mode_0161&1u)&&!(wf_u8(a,WF_A_CPU_B5)&128u)&&(wf_u8(t,WF_A_FLAGS33)&64u)){wf_set_be16(a,WF_A_STATE,0u);wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|128u));wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)|1u));return WF_OK;}
+  }
+  uint8_t flags=wf_u8(a,WF_A_CPU_B5),angle;
+  if(wf_u8(t,WF_A_FLAGS33)&16u)angle=flags&1u?0x40u:0xc0u;
+  else if(wf_be16(a,WF_A_CPU_DISTANCE)<12u)angle=flags&2u?0u:0x80u;
+  else angle=flags&2u?(flags&1u?0x20u:0xe0u):(flags&1u?0x60u:0xa0u);
+  wf_set_u8(a,WF_A_ANGLE,angle);return WF_OK;
+ }
  uint8_t f34=wf_u8(a,WF_A_FLAGS34);
  wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(f34&~4u));
  if((f34&4u)&&(wf_u8(a,WF_A_FLAGS33)&2u))
@@ -173,40 +231,9 @@ static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|64u));
   wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3du);return WF_OK;
  }
- if(!(wf_u8(a,WF_A_FLAGS33)&1u)&&(wf_u8(t,WF_A_FLAGS32)&1u)){
-  wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(wf_u8(a,WF_A_FLAGS34)|2u));
-  wf_set_be16(a,WF_A_STATE,0u);
-  return WF_OK;
- }
- if(rt->g.credited_route==0u){
-  wf_set_be16(a,WF_A_STATE,1u);
-  wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)|2u));
-  wf_set_be16(a,WF_A_AE,0u);wf_set_be16(a,WF_A_SELECTOR,0u);
-  return WF_OK;
- }
- uint8_t id=wf_u8(a,WF_A_INTERNAL_ID);
- uint16_t tier=rt->g.global_16a0<0x10u?2u:wf_be16(t,WF_A_TIER);
- if(id>=12u||tier>4u||tier&1u)return block(tr,0x0001dea0u);
- wf_r17_m68k_moveq(&rt->m68k_regs,0u,0);
- wf_r17_m68k_moveq(&rt->m68k_regs,1u,0);
- wf_r17_m68k_move_b(&rt->m68k_regs,0u,id);
- wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)(id<<2));
- wf_r17_m68k_move_b(&rt->m68k_regs,1u,2u);
- int choice=state1_weighted_24cc(rt,state1_219b4[id][tier>>1],2u);
- if(choice<0)return block(tr,0x000024ccu);
- wf_set_u8(a,WF_A_SELECTOR_LO,choice?0xffu:0u);
- if(choice){
-  wf_set_be16(a,WF_A_STATE,1u);
-  wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)|2u));
-  wf_set_be16(a,WF_A_AE,0u);wf_set_be16(a,WF_A_SELECTOR,0u);
-  return WF_OK;
- }
- wf_set_u8(a,WF_A_SELECTOR,0u);
- wf_set_be16(a,WF_A_STATE,5u);
- wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~0x10u));
- wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~0x40u));
- wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)&~2u));
- return wf_state5_execute(rt,slot,tr?&tr->state5:0);
+ /* $1CB30 branches to the shared $1DE66 owner. Its ASL row offset
+  * accepts tier1 and uses the exact ROM data, rather than a tier/2 table. */
+ return decision_1de66(rt,slot,a,0u,tr);
 }
 /* ROM $1D398/$1D3A2: the active partner tracks the partner's Y and may
  * transfer pursuit to that partner's target when their positions converge. */

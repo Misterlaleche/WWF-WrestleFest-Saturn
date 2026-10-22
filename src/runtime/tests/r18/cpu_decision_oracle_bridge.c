@@ -11,9 +11,10 @@ int wf_cpu_oracle(uint8_t *mem,uint32_t *regs,unsigned slot){
  uint8_t*g=mem+0x1c0000;
  memcpy(rt.actors,g+0x5b0,sizeof rt.actors);memcpy(rt.g.direction_scratch_15e4,g+0x15e4,8);
  rt.g.global_1670=b32(g+0x1670);rt.g.global_167a=g[0x167a];
- rt.g.global_007e=b16(g+0x7e);rt.g.global_1802=b16(g+0x1802);
+ rt.g.global_007e=b16(g+0x7e);rt.g.global_1800=b16(g+0x1800);rt.g.global_1802=b16(g+0x1802);
  rt.g.credited_route=b16(g+0x7c);rt.g.mode_0161=g[0x161];rt.g.global_0166=b16(g+0x166);
  rt.g.global_16a0=b16(g+0x16a0);rt.g.progression_0162=b16(g+0x162);
+ rt.g.global_1684=b32(g+0x1684);rt.g.global_1688=b32(g+0x1688);
  rt.g.frame_counter=b32(g+0x80);rt.g.rng_state=b32(g+0x5c);rt.g.rng_state_valid=1;
  memcpy(rt.m68k_regs.d,regs,32);rt.m68k_regs.valid=1;
  wf_status_t status;
@@ -46,8 +47,10 @@ int wf_cpu_oracle(uint8_t *mem,uint32_t *regs,unsigned slot){
  else status=wf_cpu_actor_step(&rt,slot,&tr);
  memcpy(g+0x15e4,rt.g.direction_scratch_15e4,8);memcpy(g+0x5b0,rt.actors,sizeof rt.actors);memcpy(regs,rt.m68k_regs.d,32);
  for(unsigned i=0;i<4;i++)g[0x1670+i]=(uint8_t)(rt.g.global_1670>>(24u-i*8u));g[0x167a]=rt.g.global_167a;
+ g[0x1800]=(uint8_t)(rt.g.global_1800>>8);g[0x1801]=(uint8_t)rt.g.global_1800;
  g[0x1802]=(uint8_t)(rt.g.global_1802>>8);g[0x1803]=(uint8_t)rt.g.global_1802;
  g[0x1697]=rt.g.global_1697;g[0x15d2]=rt.g.global_15d2;g[0x15d3]=rt.g.global_15d3;
+ for(unsigned i=0;i<4;i++){g[0x1684+i]=(uint8_t)(rt.g.global_1684>>(24u-i*8u));g[0x1688+i]=(uint8_t)(rt.g.global_1688>>(24u-i*8u));}
  for(unsigned i=0;i<4;i++)g[0x5c+i]=(uint8_t)(rt.g.rng_state>>(24u-i*8u));
  return status?-(int)(tr.blocked_dependency_rom?tr.blocked_dependency_rom:tr.state5.blocked_dependency_rom):0;
 }

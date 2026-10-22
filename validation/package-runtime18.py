@@ -11,6 +11,8 @@ import zipfile
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('output', type=Path)
 p.add_argument('--arcade-zip', type=Path, required=True)
+p.add_argument('--replay-dir', choices=('replay', 'replay-noinput'), default='replay')
+p.add_argument('--checkpoint-dir', choices=('checkpoint', 'checkpoint-noinput'), default='checkpoint')
 a = p.parse_args()
 root = Path(__file__).resolve().parents[1]
 def git(*args):
@@ -35,11 +37,11 @@ for name in ('wrestlefest-runtime18.bin', 'wrestlefest-runtime18.cue',
              'build.log', 'unresolved.txt', 'disc-validation.json', 'conversion.json',
              'A.BIN', 'wrestlefest-runtime18.elf', 'wrestlefest-runtime18.map'):
     files['evidence/disc/' + name] = (results / name).read_bytes()
-for folder in ('checkpoint', 'replay'):
+for folder in (a.checkpoint_dir, a.replay_dir):
     for path in sorted((results / folder).rglob('*')):
         if path.is_file():
             files['evidence/' + folder + '/' + path.relative_to(results / folder).as_posix()] = path.read_bytes()
-for folder in ('rom', 'core-sanitizers'):
+for folder in ('rom', 'core-sanitizers', 'core-host'):
     for path in sorted((results / folder).iterdir()):
         if path.suffix in ('.json', '.log'):
             files['evidence/' + folder + '/' + path.name] = path.read_bytes()
@@ -48,10 +50,11 @@ files['CHECKPOINT.txt'] = (
     f'Commit: {revision}\n'
     'Source: source/ (committed tree plus canonical local assets).\n'
     'Playable disc: evidence/disc/wrestlefest-runtime18.cue (keep BIN beside it).\n'
-    'Validation replay: evidence/replay/; test-only deterministic pad input.\n'
+    f'Validation replay: evidence/{a.replay_dir}/; test-only deterministic input/seed.\n'
     'Read source/CURRENT-STATE-LATEST.md and source/validation/RUNTIME18-CPU-CHECKPOINT.md.\n'
     'No physical Saturn validation or universal ROM-EXACT claim.\n'
     'HOST: make -C source/src/runtime test-runtime18-complete-match\n'
+    'No-input HOST: make -C source/src/runtime test-runtime18-noinput-complete-match\n'
     'Build: cd source; DOCKER=/path/to/docker sh validation/build-runtime18.sh /path/to/sh2eb-elf\n'
     'ROM tests: validation/requirements-rom.txt; original ZIP in reference/wwfwfest.zip.\n'
     'SDK, BIOS and Docker are external dependencies. ISO timestamps may vary on rebuild.\n'

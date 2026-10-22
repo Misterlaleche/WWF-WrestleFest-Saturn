@@ -20,6 +20,7 @@
 static volatile uint32_t video_clock;
 static volatile uint32_t fatal_owner, fatal_dependency, fatal_frame;
 static volatile uint32_t finished_frame, finished_result;
+static volatile uint32_t finished_count, finished_timer;
 static wf_runtime_t rt;
 static wf_gameplay_binding_context_t gameplay;
 static wf_phase_binding_t bindings[48];
@@ -290,8 +291,12 @@ int main(void)
         gameplay.input_hw_low[0] = controls();
 #ifdef WF_R18_REPLAY_TEST
         /* Validation input only. No actor, CPU, stamina or result is changed. */
+#ifdef WF_R18_REPLAY_NOINPUT
+        gameplay.input_hw_low[0] = 0xffu;
+#else
         gameplay.input_hw_low[0] = rt.g.frame_counter >= 60u && rt.g.frame_counter < 180u ?
             0xfeu : rt.g.frame_counter >= 180u && rt.g.frame_counter < 184u ? 0xefu : 0xffu;
+#endif
 #endif
         status = wf_runtime_frame(&rt);
         if (status == WF_BLOCKED && rt.frame_ready) {
@@ -314,6 +319,8 @@ int main(void)
         if (status == WF_BLOCKED && wf_r18_tag_match_complete(&rt)) {
             finished_frame = rt.g.frame_counter;
             finished_result = wf_be16(&rt.actors[0], WF_A_RESULT);
+            finished_count = rt.g.global_169a;
+            finished_timer = rt.g.global_16a0;
 #ifdef WF_R18_REPLAY_TEST
             /* Test-disc terminal report, only after the real $11B6 condition.
              * Green plus the frame RGB bytes makes completion externally visible. */

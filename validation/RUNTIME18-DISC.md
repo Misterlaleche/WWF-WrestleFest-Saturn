@@ -1,46 +1,39 @@
-# RUNTIME-18 — disco de combate directo, 2026-10-23
+# RUNTIME-18 — disco desde3435a09, 2026-10-23
 
-Estado y pruebas: [RUNTIME18-CPU-CHECKPOINT.md](RUNTIME18-CPU-CHECKPOINT.md).
-La partida controlada alcanza el final original por tiempo en frame14.409 en
-HOST y en un replay SH-2 en Mednafen. No se acredita Saturn físico ni ROM-EXACT.
-El árbitro utiliza las paletas originales contrastadas. Hay 2.944 tiles residentes
-y 128 huecos adicionales; la partida HOST completa no lee sprites del CD tras
-la precarga. No se ha publicado todavía el texto TIME UP en VDP.
+La partida sin entrada completa en HOST el combate por inmovilización en
+frame 4.391, con cuenta de tres y reloj 0021. El replay SH-2 final reproduce
+ese resultado completo en Mednafen. El estado canónico y las pruebas se describen en
+[RUNTIME18-CPU-CHECKPOINT.md](RUNTIME18-CPU-CHECKPOINT.md).
+No se ha vuelto al frontend y no se declara ROM-EXACT ni Saturn físico probado.
 
-El disco normal arranca directamente en el ring, sin menús ni audio, acepta
-el mando y conserva la escena al terminar. Construcción:
+El disco normal arranca directamente en el ring, sin menús ni audio, lee el
+mando y conserva la escena al terminar. Para reconstruir:
 
 ```sh
 DOCKER=/path/to/docker sh validation/build-runtime18.sh /path/to/sh2eb-elf
 ```
 
 Salida: `validation/results/runtime18/wrestlefest-runtime18.bin` y `.cue`.
-Mantener ambos juntos y abrir/grabar el **CUE**: una pista MODE1/2352, sin audio.
-El constructor regenera HOTSPR.BIN, enlaza SH-2 y comprueba todos los sectores,
-EDC/ECC, IP, ISO9660 y los payloads, incluido A.BIN. El detalle de hashes está
-en disc-validation.json. Esto no certifica funcionamiento en consola.
+Mantener ambos juntos y abrir/grabar el **CUE**, una pista MODE1/2352 sin audio.
+La validación estructural verifica todos los sectores, EDC/ECC, IP, ISO9660 y
+payloads, incluido A.BIN. Esto es distinto de probar su ejecución.
 
-Existe un disco independiente de validación automática:
+Para el disco separado de validación sin entrada:
 
 ```sh
-R18_REPLAY_TEST=1 DOCKER=/path/to/docker \
+R18_REPLAY_TEST=noinput DOCKER=/path/to/docker \
   sh validation/build-runtime18.sh /path/to/sh2eb-elf
 ```
 
-Salida en `validation/results/runtime18/replay/`. Sólo este modo fija semilla
-cero y reproduce RIGHT60–179/A180–183; sólo tras el resultado real muestra un
-informe verde con el frame codificado. No debe confundirse con la presentación
-normal del juego. La evidencia incluye su A.BIN/mapa y un observador de WRAM
-sin escrituras, que identifica el ejecutable mediante 4.096 bytes de instrucciones.
-Cada build debe conservar su propio mapa y A.BIN para usar ese observador.
+Salida en `validation/results/runtime18/replay-noinput/`. Este modo fija sólo
+la semilla cero y las entradasFF. Tras el final real añade un informe verde y
+el frame codificado. `R18_REPLAY_TEST=1` conserva el replay controlado anterior,
+con RIGHT60–179 y A180–183, en `replay/`. El disco normal no compila esos modos.
 
-Assets necesarios en `src/runtime/audit/runtime18-cd/`: ROM68K.BIN, SPRITES.PAK
-y R18RING.BIN (hashes más abajo). HOTSPR.BIN se regenera con el listado canónico.
-El paquete incluye fuente, los cuatro assets, ambos discos y evidencia. El SDK
-Yaul, Docker y BIOS se suministran externamente; los timestamps ISO pueden variar.
-
-Los apartados siguientes son historial y sus límites anteriores no describen
-el checkpoint actual.
+La caché fija2.944 tiles; la nueva secuencia sin entrada requiere lecturas de
+sprites adicionales. No se presenta como fluidez arcade o precarga universal.
+El final mantiene el ring y no incluye la escena posterior; TIME UP todavía
+no se publica en VDP. Prueba de Saturn real con CD-R pendiente.
 
 ## Histórico: hardware scrolling y sprites residentes (`e1113d3`)
 

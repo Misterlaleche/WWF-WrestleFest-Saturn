@@ -7,7 +7,11 @@ DOCKER=${DOCKER:-docker}
 PYTHON=${PYTHON:-python3}
 IMAGE=ijacquez/yaul@sha256:b6d272204767cd0a734139dd3a2ab298ef5912fb7b7224b78e6d9fac1a7825a6
 RESULTS="$ROOT/validation/results/runtime18"
-if [ -n "${R18_REPLAY_TEST:-}" ]; then RESULTS="$RESULTS/replay"; fi
+case "${R18_REPLAY_TEST:-}" in
+  noinput) RESULTS="$RESULTS/replay-noinput" ;;
+  '') ;;
+  *) RESULTS="$RESULTS/replay" ;;
+esac
 mkdir -p "$RESULTS"
 "$PYTHON" "$ROOT/src/runtime/tools/build_r18_hot_sprites.py" \
   "$ROOT/src/runtime/validation/runtime18-hot-tiles.txt" \
@@ -26,6 +30,9 @@ test ! -s audit/runtime18-build/unresolved.txt
 sha256sum "$elf" audit/runtime18-build/IP.BIN
 ' > "$RESULTS/build.log" 2>&1 || { cat "$RESULTS/build.log"; exit 1; }
 cp "$ROOT/src/runtime/audit/runtime18-build/unresolved.txt" "$RESULTS/unresolved.txt"
+cp "$ROOT/src/runtime/audit/runtime18-cd/A.BIN" "$RESULTS/A.BIN"
+cp "$ROOT/src/runtime/audit/runtime18-build/wrestlefest-runtime18.elf" "$RESULTS/wrestlefest-runtime18.elf"
+cp "$ROOT/src/runtime/audit/runtime18-build/wrestlefest-runtime18.map" "$RESULTS/wrestlefest-runtime18.map"
 cat "$RESULTS/build.log"
 ISO="$ROOT/src/runtime/audit/runtime18-disc/wrestlefest-runtime18.iso"
 # Replace only the generated pair, retaining other validation evidence.

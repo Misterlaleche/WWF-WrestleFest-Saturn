@@ -612,7 +612,8 @@ static wf_status_t pin_helpers(wf_runtime_t *rt,wf_actor_raw_t*a,int defender,wf
         if(!defender&&!bit(a,0x56u,7u))return WF_OK;
         wf_actor_raw_t *candidate=pin_candidate(rt,a);if(!candidate)return WF_OK;
         if(!rt->g.rng_state_valid||!rt->m68k_regs.valid)return block(tr,0x24ccu);
-        if(pin_random(rt,defender?32u:70u)){pin_clear(candidate,0xb5u,0x80u);setbit(candidate,0xb6u,7u);}
+        /* $21838 starts with $28,$3C; $2172A with $46,$1E. */
+        if(pin_random(rt,defender?40u:70u)){pin_clear(candidate,0xb5u,0x80u);setbit(candidate,0xb6u,7u);}
         else{wf_set_be32(candidate,0x7eu,wf_be32(a,O_LINK));wf_set_be32(a,0x7eu,ACTOR_BASE+(uint32_t)(candidate-rt->actors)*ACTOR_STRIDE);}return WF_OK;
     }
     if(!bit(a,0x33u,0u)||(!defender&&bit(a,0x32u,0u)))return WF_OK;
@@ -1074,13 +1075,30 @@ static wf_status_t raw61(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r1
 }
 static wf_status_t tag_cleanup_213a6(wf_runtime_t*rt,wf_actor_raw_t*a,wf_actor_raw_t*t,wf_r17_actions_r11_trace_t*tr){
     if(rt->g.mode_0161&1u){uint32_t ptr=wf_be32(a,0x7eu);if(ptr){wf_actor_raw_t*c=actor_from_ptr(rt,ptr);if(!c)return block(tr,0x21414u);pin_clear(c,0xb5u,0x80u);}return WF_OK;}
-    pin_clear(t,0x34u,1u);if(bit(t,0x33u,1u))pin_clear(t,0x56u,0x40u);wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(t,0x86u));if(!p)return block(tr,0x213ceu);if(!bit(p,0x33u,1u)){pin_clear(p,0xb5u,0x80u);rt->g.global_1697|=1u;}
-    p=actor_from_ptr(rt,wf_be32(a,0x86u));if(!p)return block(tr,0x213e8u);pin_clear(p,0x34u,4u);if(bit(p,0x33u,1u))pin_clear(p,0x56u,0x40u);else pin_clear(p,0xb5u,0x80u);return WF_OK;
+    if(t){
+        pin_clear(t,0x34u,1u);if(bit(t,0x33u,1u))pin_clear(t,0x56u,0x40u);wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(t,0x86u));if(!p)return block(tr,0x213ceu);if(!bit(p,0x33u,1u)){pin_clear(p,0xb5u,0x80u);rt->g.global_1697|=1u;}
+    }else{
+        if(wf_be32(a,O_LINK)&0x00ffffffu)return block(tr,0x213b6u);
+        /* $213B6 re-reads the tagged link, not dispatcher A2=$7F000.
+         * Physical ROM $33/$86 are FF/FFFFFFFF; the next +$33 wraps
+         * to ROM $32=FF. All target writes hit ROM and bit1 stays set. */
+    }
+    wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(a,0x86u));if(!p)return block(tr,0x213e8u);pin_clear(p,0x34u,4u);if(bit(p,0x33u,1u))pin_clear(p,0x56u,0x40u);else pin_clear(p,0xb5u,0x80u);return WF_OK;
 }
 static wf_status_t raw59(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
-    *dp=&D_19264;wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));if(!t)return block(tr,0x19274u);
-    if(!bit(a,O_LATCH,7u)){wf_set_be16(t,O_STATE,0xffu);pin_clear(a,0x35u,4u);pin_clear(t,0x35u,2u);return WF_OK;}
-    if(!low(a,O_FRAME)&&!wf_be16(a,O_TIMER)){wf_set_be16(t,O_STATE,4u);wf_set_be16(t,0x64u,2u);wf_set_be16(t,0x68u,3u);chgbit(t,O_FACING,7u);setbit(a,O_LINK,7u);pin_clear(a,0x33u,0x40u);pin_clear(t,0x33u,0x40u);wf_r17_m68k_move_w(&rt->m68k_regs,0u,41u);wf_status_t st=tag_cleanup_213a6(rt,a,t,tr);if(st!=WF_OK)return st;}
+    *dp=&D_19264;uint32_t link=wf_be32(a,O_LINK);wf_actor_raw_t*t=actor_from_ptr(rt,link);
+    /* $19274 only dereferences A2 during init or frame0/timer0. After
+     * release the renderer can clear +$26 while the final pose still runs.
+     * Null A2=$7F000 and tagged physical zero both address read-only ROM. */
+    if(!bit(a,O_LATCH,7u)){
+        if(!t&&(link&0x00ffffffu))return block(tr,0x1927cu);
+        if(t){wf_set_be16(t,O_STATE,0xffu);pin_clear(t,0x35u,2u);}pin_clear(a,0x35u,4u);return WF_OK;
+    }
+    if(!low(a,O_FRAME)&&!wf_be16(a,O_TIMER)){
+        if(!t&&(link&0x00ffffffu))return block(tr,0x1929cu);
+        if(t){wf_set_be16(t,O_STATE,4u);wf_set_be16(t,0x64u,2u);wf_set_be16(t,0x68u,3u);chgbit(t,O_FACING,7u);pin_clear(t,0x33u,0x40u);}
+        setbit(a,O_LINK,7u);pin_clear(a,0x33u,0x40u);wf_r17_m68k_move_w(&rt->m68k_regs,0u,41u);wf_status_t st=tag_cleanup_213a6(rt,a,t,tr);if(st!=WF_OK)return st;
+    }
     if(low(a,O_FRAME)==0xfeu){wf_set_be16(a,O_STATE,7u);wf_set_be16(a,O_VISUAL,0x68u);wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));}return WF_OK;
 }
 
@@ -1166,6 +1184,152 @@ static wf_status_t raw10(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r1
  if(low(a,O_FRAME)==0xfeu){setbit(a,0x18u,7u);wf_set_be16(a,O_STATE,7u);wf_set_be16(a,O_VISUAL,0x68u);wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));wf_r17_m68k_move_w(&rt->m68k_regs,0u,24u);wf_r17_m68k_move_w(&rt->m68k_regs,1u,0xffffu);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);helper_10bd0(a,24,-1,0);setbit(a,O_LINK,7u);}return WF_OK;
 }
 
+static const desc_t D_13D26={0x13d26u,1u,6u,{8u,16u,16u,0xff00u,0xff00u,0xff00u},{0x84u,0x85u,0xeau,0xebu,0xebu,0xecu}};
+static const desc_t D_11C62_R11={0x11c62u,2u,6u,{6u,6u,6u,6u,6u,6u},{9u,10u,11u,12u,13u,14u}};
+static const desc_t D_11DD0_R11={0x11dd0u,1u,2u,{8u,12u},{0x69u,0x69u}};
+/* $13D46 shares its first three phase addresses with raw23. The selected
+ * descriptor is A1 on return, including the original descriptor at an edge. */
+static wf_status_t raw0e(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+ *dp=&D_13D26;if(rt->g.mode_0161&2u)wf_set_be16(a,0x44u,3u);
+ unsigned phase=wf_be16(a,0x44u)&3u;wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));
+ if(phase==0u){
+  if(!bit(a,O_LATCH,7u)){
+   static const uint8_t speed[12]={47u,53u,49u,45u,56u,48u,44u,56u,40u,47u,48u,47u};
+   /* The sixth $176BA entry is literally the following $0828 opcode. */
+   static const uint16_t mash[6]={54u,30u,22u,16u,10u,0x828u};unsigned id=wf_be16(a,2u);if(id>=12u)return block(tr,0x11d4au);if(!t)return block(tr,0x1761eu);
+   wf_set_u8(a,O_MOTION,1u);wf_set_be16(a,0x2au,speed[id]);wf_set_be16(t,0x9au,0x200u);unsigned n=wf_be16(t,0xdcu);if(n>5u)n=5u;
+   uint16_t hp=wf_be16(t,0x66u),v=mash[n];wf_r17_m68k_move_w(&rt->m68k_regs,1u,hp);v=v<hp?1u:(uint16_t)(v-hp);wf_set_be16(t,0xaau,v);
+   pin_clear(a,O_FACING,0x80u);wf_set_be16(a,0x2cu,0xc0u);if(wf_be16(a,O_X)<0x270u){setbit(a,O_FACING,7u);wf_set_be16(a,0x2cu,0x40u);}
+  }else{
+   wf_set_be16(a,O_PROFILE,0u);
+   if((bit(a,O_FACING,7u)&&bit(a,0x37u,0u))||(!bit(a,O_FACING,7u)&&bit(a,0x37u,1u))){
+    uint8_t c=wf_u8(a,0x36u);if(!(rt->g.mode_0161&2u)&&(c==1u||c==5u)){
+     if(bit(a,0x37u,1u)){if(!(rt->g.global_1150&255u)){rt->g.global_1150=1u;rt->g.global_1180=1u;}}
+     else if(bit(a,0x37u,0u)&&!(rt->g.global_11b0&255u)){rt->g.global_11b0=1u;rt->g.global_11e0=1u;}
+    }else if(c==3u){wf_set_be16(a,O_STATE,4u);wf_set_be16(a,0x64u,0x17u);}
+    wf_set_be16(a,O_STATE,5u);wf_set_be16(a,0x44u,(uint16_t)(wf_be16(a,0x44u)+1u));return WF_OK;
+   }
+  }
+  *dp=&D_11C62_R11;return WF_OK; /* $1112E emits sound only. */
+ }
+ if(phase==1u){
+  if(!bit(a,O_LATCH,7u)){chgbit(a,O_FACING,7u);chgbit(a,0x2du,7u);wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,0x2au,12u);}
+  else{if(low(a,O_FRAME)==1u)wf_set_u8(a,O_MOTION,1u);if(low(a,O_FRAME)==0xfeu){wf_set_be16(a,O_STATE,5u);wf_set_be16(a,0x44u,(uint16_t)(wf_be16(a,0x44u)+1u));}}
+  *dp=&D_11DD0_R11;return WF_OK;
+ }
+ if(phase==2u){
+  if(!bit(a,O_LATCH,7u)){
+   static const uint8_t speed[12]={47u,53u,49u,45u,56u,48u,44u,56u,40u,47u,48u,47u};unsigned id=wf_be16(a,2u);if(id>=12u)return block(tr,0x11d4au);if(!t)return block(tr,0x1772eu);
+   wf_set_u8(a,O_MOTION,1u);wf_set_be16(a,0x2au,speed[id]);wf_set_be16(a,0xbeu,(uint16_t)(wf_be16(t,O_X)+(bit(t,O_FACING,7u)?-56:56)+(bit(a,O_FACING,7u)?-96:96)));
+  }else{uint16_t x=wf_be16(a,0xbeu);if((!bit(a,O_FACING,7u)&&x>=wf_be16(a,O_X))||(bit(a,O_FACING,7u)&&x<wf_be16(a,O_X))){wf_set_be16(a,O_STATE,5u);wf_set_be16(a,0x44u,(uint16_t)(wf_be16(a,0x44u)+1u));}}
+  *dp=&D_11C62_R11;return WF_OK;
+ }
+ if(!bit(a,O_LATCH,7u)){
+  if(!t)return block(tr,0x26aeu);wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,0x5cu,0x600u);wf_set_be16(a,0x5eu,0x48u);wf_status_t st=wf_r17_trajectory_26ae(a,t,2u);if(st!=WF_OK)return block(tr,0x26aeu);wf_set_be16(a,O_FACING,(wf_be16(a,0x58u)&0x8000u)^0x8000u);return WF_OK;
+ }
+ if(low(a,O_FRAME)==1u&&!wf_be16(a,O_TIMER))wf_set_u8(a,O_B1B,32u);
+ if(!bit(a,O_SELECTOR,7u)){
+  if(!wf_be16(a,O_FRAME)&&!wf_be16(a,O_TIMER)){wf_set_u8(a,O_MOTION,2u);return WF_OK;}
+  if(low(a,O_FRAME)==3u){
+   setbit(a,O_SELECTOR,4u);if(bit(a,0x37u,4u)){
+    if(!t)return block(tr,0x11152u);setbit(a,0x18u,7u);wf_set_u8(a,O_MOTION,0u);
+    if(!wf_r17_helper_11152_carry(a,t)||wf_r17_helper_11412_carry(rt,a)){
+     wf_set_be16(a,O_STATE,4u);if(low(t,O_STATE)==5u&&low(t,O_SELECTOR)==0x54u){wf_set_be16(a,0x64u,30u);return WF_OK;}
+     wf_set_be16(a,0x64u,5u);wf_set_be16(a,O_VISUAL,0x1fu);wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));chgbit(a,O_FACING,7u);wf_set_be16(a,0x68u,3u);setbit(a,O_LINK,7u);wf_set_be16(t,0x9au,0u);wf_set_be16(t,0xaau,0u);return WF_OK;
+    }
+    wf_set_be16(a,O_TIMER,0u);setbit(a,0x33u,6u);setbit(t,0x33u,6u);rt->g.global_1800=14u;wf_set_be16(t,O_STATE,5u);wf_set_be16(t,O_SELECTOR,0x51u);wf_set_be16(t,0x68u,17u);pin_clear(a,O_SELECTOR,0x10u);wf_set_be16(t,0xdau,(uint16_t)(wf_be16(t,0xdau)+1u));wf_set_u8(t,0xc7u,(uint8_t)(wf_u8(t,0xc7u)+5u));rt->g.global_15d2=wf_u8(a,3u);rt->g.global_15d3=32u;
+    /* $258E[3] preserves all live registers and applies own facing to VX. */
+    wf_set_be16(a,0x58u,0u);wf_set_be16(a,0x5au,0u);wf_set_be16(a,0x5cu,0x300u);wf_set_be16(a,0x5eu,0x38u);wf_set_u8(a,O_MOTION,2u);wf_set_be16(a,O_X,(uint16_t)(wf_be16(t,O_X)+(bit(t,O_FACING,7u)?-48:48)));wf_set_be16(a,O_Y,(uint16_t)(wf_be16(t,O_Y)-1u));
+    if(rt->g.credited_route&&!bit(a,0x33u,2u)&&bit(a,0x33u,0u)&&bit(t,0x33u,0u)){setbit(a,0x35u,0u);setbit(a,O_SELECTOR,7u);/* $216E8 does nothing for selector0E outside TAG. */if(!(rt->g.mode_0161&1u))return pin_helpers(rt,a,0,tr);}
+    return WF_OK;
+   }
+  }
+ }
+ if(low(a,O_FRAME)!=0xfeu&&bit(a,0x37u,4u)){wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,O_TIMER,0u);rt->g.global_1800=14u;if(!bit(a,O_SELECTOR,7u))wf_set_be16(a,O_STATE,7u);}return WF_OK;
+}
+
+static const desc_t D_18BF4={0x18bf4u,1u,2u,{0xff00u,2u},{0x15u,0x1du}};
+static const desc_t D_18C04={0x18c04u,1u,2u,{0xff00u,2u},{0x17u,0x1eu}};
+static const desc_t D_18C14={0x18c14u,1u,2u,{0xff00u,2u},{0x16u,0x13u}};
+/* $18C24, splash victim. Its terminal TAG handoff uses the existing exact
+ * $21732/$215B6 partner owners; A1 remains the original descriptor at FE. */
+static wf_status_t raw51(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+ *dp=&D_18BF4;wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));
+ if(!bit(a,O_LATCH,7u)){
+  uint16_t hp=wf_be16(a,0x66u),delay=(uint16_t)(42u-hp);if((int16_t)delay<0)delay=1u;wf_set_be16(a,0xaau,hp?delay:0x100u);
+  wf_set_be16(a,0x58u,0u);wf_set_be16(a,0x5au,0u);wf_set_be16(a,0x5cu,0x300u);wf_set_be16(a,0x5eu,0x38u);wf_set_u8(a,O_MOTION,2u);
+ }else{
+  if(!low(a,O_FRAME)&&bit(a,0x37u,4u)){wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,O_TIMER,0u);}
+  if(low(a,O_FRAME)==0xfeu){
+   if(!t)return block(tr,0x18c78u);
+   if(rt->g.credited_route&&bit(a,0x33u,0u)&&bit(t,0x33u,0u)&&!bit(a,0x33u,2u)){
+    wf_set_be16(a,O_STATE,0x8005u);wf_set_be16(a,O_LATCH,0x8005u);wf_set_be16(a,O_SELECTOR,0xc04au);wf_status_t st=pin_helpers(rt,a,1,tr);if(st!=WF_OK)return st;
+    if(low(t,O_SELECTOR)!=0x0eu){wf_set_be16(t,O_STATE,0x8005u);wf_set_be16(t,O_LATCH,0x8005u);wf_set_be16(t,O_SELECTOR,0xc048u);return pin_helpers(rt,t,0,tr);}return WF_OK;
+   }
+   wf_set_be16(a,O_STATE,4u);wf_set_be16(a,0x64u,wf_be16(a,0x64u)&255u);wf_set_be16(a,0x9au,0u);
+   wf_set_be16(a,0x9au,bit(a,0x56u,7u)&&(bit(a,0x33u,5u)||bit(a,0x33u,2u))?48u:low(a,0x70u)==2u?224u:low(a,0x70u)==1u?128u:48u);
+   wf_set_be16(t,O_STATE,7u);setbit(a,O_LINK,7u);return WF_OK;
+  }
+ }
+ if(!t)return block(tr,0x18ceau);*dp=low(t,O_SELECTOR)==0x0eu?&D_18C14:low(a,0x64u)==8u?&D_18BF4:&D_18C04;return WF_OK;
+}
+
+static const desc_t D_17266={0x17266u,1u,5u,{20u,12u,8u,0xff00u,24u},{0x131u,0x132u,0x133u,0x134u,0x135u}};
+static const desc_t D_1A940={0x1a940u,2u,2u,{24u,16u},{0x131u,0x132u}};
+/* $1108C preserves D0/D1 around its live $21B4 call. */
+static wf_status_t landing_1108c(wf_runtime_t*rt,wf_actor_raw_t*a,wf_r17_actions_r11_trace_t*tr){
+ if(!rt->g.credited_route||bit(a,0x33u,1u))return WF_OK;
+ static const uint16_t chance[12]={136u,128u,68u,64u,120u,120u,80u,128u,128u,133u,128u,64u};unsigned id=wf_be16(a,2u);
+ if(id>=12u)return block(tr,0x110b6u);if(!rt->g.rng_state_valid||!rt->m68k_regs.valid)return block(tr,0x21b4u);
+ uint32_t d0=rt->m68k_regs.d[0],d1=rt->m68k_regs.d[1];uint16_t sample=(uint16_t)(wf_r17_rng21b4_live(&rt->g.rng_state,rt->g.frame_counter,&rt->m68k_regs)&255u);
+ if(sample<chance[id])setbit(a,0x34u,4u);rt->m68k_regs.d[0]=d0;rt->m68k_regs.d[1]=d1;return WF_OK;
+}
+/* $17282, linked slam. $1110E/$2052 are the explicit silent sound device. */
+static wf_status_t raw33(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+ *dp=&D_17266;wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));
+ if(!bit(a,O_LATCH,7u)){
+  if(!t)return block(tr,0x1728eu);wf_set_u8(a,O_MOTION,0u);wf_set_be16(t,O_STATE,0xffu);wf_set_u8(a,0x19u,64u);wf_set_u8(a,0x1bu,64u);
+  wf_r17_m68k_move_w(&rt->m68k_regs,1u,1u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,wf_be16(a,0xf6u));wf_set_be16(a,0xf6u,(uint16_t)(wf_be16(a,0xf6u)+1u));
+  if(!rt->g.rng_state_valid||!rt->m68k_regs.valid)return block(tr,0x1129eu);
+  wf_r17_1129e_trace_t rr;int carry=0;wf_status_t st=wf_r17_1129e_live(rt,(unsigned)(a-rt->actors),rt->g.mode_0161,rt->g.progression_0162,&rt->g.rng_state,rt->g.frame_counter,&rt->m68k_regs,&rr,&carry);if(st!=WF_OK)return block(tr,rr.blocked_dependency_rom);
+  if(!carry){wf_set_be16(a,O_STATE,5u);wf_set_be16(a,O_SELECTOR,0x84u);return WF_OK;}
+  interrupt_position(rt,a,t,256,0,16);rt->g.global_15d2=wf_u8(a,3u);rt->g.global_15d3=7u;return WF_OK;
+ }
+ if(!low(a,O_FRAME)&&!wf_be16(a,O_TIMER))wf_set_u8(a,0x19u,0x4cu);
+ if(low(a,O_FRAME)==2u&&!wf_be16(a,O_TIMER)){
+  /* $258E[22] =0100,0300,0048, with facing applied to VX. */
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,22u);wf_set_be16(a,0x58u,bit(a,O_FACING,7u)?0xff00u:0x100u);wf_set_be16(a,0x5au,0u);wf_set_be16(a,0x5cu,0x300u);wf_set_be16(a,0x5eu,0x48u);wf_set_u8(a,O_MOTION,2u);
+ }
+ if(low(a,O_FRAME)==3u&&!(rt->g.mode_0161&2u)){
+  wf_set_be16(a,0x3eu,128u);wf_status_t st=wf_r17_resolver_280dc(rt,a);if(st!=WF_OK)return block(tr,0x280dcu);wf_set_be16(a,0x3eu,0u);
+  uint8_t contact=(uint8_t)(wf_u8(a,0x37u)&3u);wf_r17_m68k_move_b(&rt->m68k_regs,0u,contact);
+  if(contact){int tagged=bit(a,O_SELECTOR,7u);setbit(a,O_SELECTOR,7u);if(!tagged){
+   if(!t)return block(tr,0x17364u);wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)(0x135u|wf_be16(a,O_FACING)));wf_set_be16(a,O_VISUAL,(uint16_t)(0x135u|wf_be16(a,O_FACING)));wf_set_be16(a,O_FRAME,3u);wf_set_be16(a,O_TIMER,0xff00u);
+   wf_set_be16(t,O_STATE,4u);wf_set_be16(t,0x64u,0x2025u);setbit(t,0x32u,3u);wf_set_be16(t,0x44u,0u);wf_set_be16(t,0x68u,18u);chgbit(t,O_FACING,7u);interrupt_position(rt,a,t,128,1,64);
+   if(bit(a,0x37u,1u)){rt->g.global_1150=1u;rt->g.global_1180=1u;}else if(bit(a,0x37u,0u)){rt->g.global_11b0=1u;rt->g.global_11e0=1u;}
+   pin_clear(a,0x33u,0x40u);pin_clear(t,0x33u,0x40u);
+  }}
+ }
+ if(low(a,O_FRAME)==3u&&bit(a,0x37u,4u)){
+  wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,O_TIMER,0u);
+  if(!(rt->g.mode_0161&1u)){if(!t)return block(tr,0x110eeu);wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(t,0x86u));if(!p)return block(tr,0x110eeu);if(low(p,O_STATE)==1u&&low(p,0xaeu)==1u)setbit(p,0x34u,5u);}
+  wf_status_t st=landing_1108c(rt,a,tr);if(st!=WF_OK)return st;wf_r17_m68k_move_w(&rt->m68k_regs,0u,50u);rt->g.global_1800=14u;
+  if(!bit(a,O_SELECTOR,7u)){
+   if(!t)return block(tr,0x173f2u);wf_set_be16(t,O_STATE,4u);wf_set_be16(t,0x64u,0x2005u);setbit(t,0x32u,3u);wf_set_u8(t,0xc7u,(uint8_t)(wf_u8(t,0xc7u)+5u));wf_set_be16(t,0x68u,18u);interrupt_position(rt,a,t,176,0,16);pin_clear(a,0x33u,0x40u);pin_clear(t,0x33u,0x40u);wf_set_be16(a,O_VISUAL,0x1fu);wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));
+  }
+ }
+ if(low(a,O_FRAME)==0xfeu){
+  setbit(a,0x18u,7u);wf_set_be16(a,O_STATE,7u);wf_set_be16(a,O_VISUAL,0x22u);wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));wf_r17_m68k_move_w(&rt->m68k_regs,0u,32u);wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);helper_10bd0(a,32,0,0);setbit(a,O_LINK,7u);wf_set_be16(a,O_VISUAL,0x68u);wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));
+ }return WF_OK;
+}
+/* $1A950: the reversal chosen by $172B4 after $1129E. */
+static wf_status_t raw84(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+ *dp=&D_1A940;if(!bit(a,O_LATCH,7u))wf_set_be16(a,0x44u,80u);uint16_t timer=(uint16_t)(wf_be16(a,0x44u)-1u);wf_set_be16(a,0x44u,timer);if(timer)return WF_OK;
+ wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));if(!t)return block(tr,0x1a984u);rt->g.global_15d2=15u;rt->g.global_15d3=26u;setbit(a,0x18u,7u);wf_set_be16(a,O_STATE,4u);wf_set_be16(a,0x64u,14u);wf_set_be16(a,0x68u,8u);wf_set_be16(t,O_STATE,5u);wf_set_be16(t,O_SELECTOR,0xc006u);wf_set_be16(a,O_VISUAL,0x2bu);wf_set_be16(a,O_Z,(uint16_t)(wf_be16(a,O_Z)+72u));wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));wf_set_be16(t,O_VISUAL,0x60u);wf_set_u8(t,O_VISUAL,wf_u8(t,O_FACING));
+ /* $1A9AE stores A2 itself, preserving its tagged high byte. */
+ wf_set_be32(a,0x92u,wf_be32(a,O_LINK));wf_set_be32(t,0x92u,wf_actor_rom_base((unsigned)(a-rt->actors)));setbit(a,0x33u,6u);setbit(t,0x33u,6u);wf_set_be16(a,0x18u,0u);wf_set_be16(t,0x18u,0u);wf_set_be16(a,0x1au,0u);wf_set_be16(t,0x1au,0u);return WF_OK;
+}
+
 wf_status_t wf_r17_dispatch_1c03e_r11(wf_runtime_t *rt,unsigned slot,wf_r17_actions_r11_bridge_t *b){
     wf_actor_raw_t *a;wf_r17_actions_r11_trace_t *tr;const desc_t *d=0;uint16_t sel;wf_status_t s;
     if(!rt||!b||slot>=WF_ACTOR_SLOTS)return WF_BAD_STATE;
@@ -1181,6 +1345,10 @@ wf_status_t wf_r17_dispatch_1c03e_r11(wf_runtime_t *rt,unsigned slot,wf_r17_acti
         tr->callback_rom=b->raw23_trace[slot].callback_rom;tr->descriptor_rom=b->raw23_trace[slot].descriptor_rom;tr->tick_descriptor_rom=b->raw23_trace[slot].tick_descriptor_rom;tr->blocked_dependency_rom=b->raw23_trace[slot].blocked_dependency_rom;return s;
     }
     switch(sel){
+        case 0x0eu:tr->callback_rom=0x13d46u;tr->descriptor_rom=0x13d26u;s=raw0e(rt,a,&d,tr);break;
+        case 0x51u:tr->callback_rom=0x18c24u;tr->descriptor_rom=0x18bf4u;s=raw51(rt,a,&d,tr);break;
+        case 0x33u:tr->callback_rom=0x17282u;tr->descriptor_rom=0x17266u;s=raw33(rt,a,&d,tr);break;
+        case 0x84u:tr->callback_rom=0x1a950u;tr->descriptor_rom=0x1a940u;s=raw84(rt,a,&d,tr);break;
         case 0x26u:tr->callback_rom=0x16258u;tr->descriptor_rom=0x1623cu;s=raw26(rt,a,&d,tr);break;
         case 0x85u:tr->callback_rom=0x1a9e4u;tr->descriptor_rom=0x1a9d4u;s=raw85(rt,a,&d,tr);break;
         case 0x69u:tr->callback_rom=0x19a20u;tr->descriptor_rom=0x199fcu;s=raw69(rt,a,b,&d,tr);break;

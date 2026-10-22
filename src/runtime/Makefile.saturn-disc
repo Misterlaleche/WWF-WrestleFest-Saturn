@@ -29,6 +29,9 @@ SH_SRCS+= src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_bootstrap.c 
 ifneq ($(R18_REPLAY_TEST),)
 SH_CFLAGS+= -DWF_R18_REPLAY_TEST=1
 endif
+ifeq ($(R18_REPLAY_TEST),noinput)
+SH_CFLAGS+= -DWF_R18_REPLAY_NOINPUT=1
+endif
 SH_CFLAGS+= -O2 -Iinclude -Wall -Wextra -Werror -DWF_PLATFORM_SATURN=1
 SH_DEFSYMS+= -Wl,--defsym=___master_stack=0x06004000 -Wl,--defsym=___slave_stack=0x06001E00
 

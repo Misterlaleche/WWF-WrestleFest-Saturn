@@ -470,3 +470,32 @@ test-runtime18-raw0a-rom:
 .PHONY: test-runtime18-raw10-rom
 test-runtime18-raw10-rom:
 	$(ROM_PYTHON) tools/verify_raw10_rom.py audit/runtime18-cd/ROM68K.BIN
+
+.PHONY: test-runtime18-raw59-rom test-runtime18-cpu-tiers-rom test-runtime18-noinput-complete-match test-runtime18-noinput-complete-match-asan
+test-runtime18-raw59-rom:
+	$(ROM_PYTHON) tools/verify_raw59_links_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-cpu-tiers-rom:
+	$(ROM_PYTHON) tools/verify_cpu_tiers_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-rom-validation: test-runtime18-raw59-rom test-runtime18-cpu-tiers-rom
+
+test-runtime18-noinput-complete-match: build/direct_combat_probe audit/runtime18-cd/HOTSPR.BIN
+	env -u WF_PROBE_ATTACK WF_PROBE_FRAMES=20000 WF_PROBE_REQUIRE_COMPLETE=1 WF_PROBE_SPRITE_TRACE=build/runtime18-noinput-cold-reads.csv ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+
+test-runtime18-noinput-complete-match-asan: build/direct_combat_probe_asan audit/runtime18-cd/HOTSPR.BIN
+	env -u WF_PROBE_ATTACK ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 WF_PROBE_FRAMES=20000 WF_PROBE_REQUIRE_COMPLETE=1 ./build/direct_combat_probe_asan audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+
+.PHONY: test-runtime18-raw33-rom test-runtime18-raw0e-rom test-runtime18-raw51-rom test-runtime18-cpu-approach-rom
+test-runtime18-raw33-rom:
+	$(ROM_PYTHON) tools/verify_raw33_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-raw0e-rom:
+	$(ROM_PYTHON) tools/verify_raw0e_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-raw51-rom:
+	$(ROM_PYTHON) tools/verify_raw51_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-cpu-approach-rom:
+	$(ROM_PYTHON) tools/verify_cpu_approach_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-rom-validation: test-runtime18-raw33-rom test-runtime18-raw0e-rom test-runtime18-raw51-rom test-runtime18-cpu-approach-rom
+
+.PHONY: test-runtime18-cpu-aligned-rom
+test-runtime18-cpu-aligned-rom:
+	$(ROM_PYTHON) tools/verify_cpu_aligned_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-rom-validation: test-runtime18-cpu-aligned-rom

@@ -1,31 +1,34 @@
-# RUNTIME-18 — checkpoint de combate directo, 23 de octubre de 2026
+# RUNTIME-18 — combate sin entrada, 23 de octubre de 2026
 
-`$1D206` y la acción `$71` están implementadas y contrastadas ejecutando la ROM
-original: 1.024 y 1.152 casos respectivamente. Las continuaciones alcanzadas de
-CPU, interrupciones, relevo, víctimas, árbitro y final por tiempo también tienen
-pruebas independientes contra esa ROM. No se ha vuelto al frontend.
+Continuación de `3435a09`, sin frontend ni código provisional. El bloqueo
+`$19274` de la acción `$59` está resuelto: se conserva la diferencia entre un
+link no usado, null literal y dirección física cero, conforme a la ROM.
+También se han cerrado las dependencias que la secuencia abre después.
 
-La partida de prueba completa llega al final real `$11B6` en el frame **14.409**,
-con resultado `$8001` tras agotarse el tiempo. Se ha observado en HOST, con
-ASan/UBSan detenidos ante errores, y en el ejecutable SH-2 dentro de Mednafen.
-La secuencia usa semilla cero, RIGHT en frames 60–179 y A en 180–183. No se
-modifican stamina, decisiones CPU, actores ni resultado para conseguir el final.
-El disco normal conserva el control del jugador; el replay automático es un
-binario de validación separado, con un informe de color al terminar.
+La partida **sin ninguna entrada**, semilla cero, alcanza `$11B6` en el frame
+**4.391** en HOST. El árbitro cuenta uno, dos y tres en los frames 3.989,
+4.077 y 4.165. Resultados: `8001,8000,4000,4000`; el reloj conserva `0021`.
+El jugador pierde por inmovilización, sin agotar el tiempo. No se fuerzan
+actores, stamina, elecciones CPU, cuenta ni resultado. Las dos partidas
+completas pasan ASan/UBSan; las 48 regresiones de núcleo también.
 
-La precarga fija **2.944 tiles** exactos y conserva 128 huecos para sprites
-adicionales en la caché de 384 KiB. La partida HOST completa no requiere ninguna
-lectura de SPRITES.PAK después de la precarga. El árbitro usa las cinco
-asignaciones de paleta originales. Esto no acredita igualdad de framebuffer,
-fluidez arcade ni todas las secuencias de combate.
+El disco de validación SH-2 sin entrada también termina en Mednafen, con
+frame 4.391, cuenta 0300, resultado 8001 y reloj 0021. La
+validación de consola física con CD-R sigue pendiente. Se entrega por separado
+el disco normal con mando y el replay con semilla cero/entradas desactivadas.
+Al terminar se conserva el ring; el replay añade un informe de color.
 
-El alcance y la frontera de la secuencia sin entrada constan en
-[validation/RUNTIME18-CPU-CHECKPOINT.md](validation/RUNTIME18-CPU-CHECKPOINT.md).
-Reproducción y discos: [validation/RUNTIME18-DISC.md](validation/RUNTIME18-DISC.md).
-La fuente y los resultados quedan identificados por commit y hashes en el paquete.
-**Saturn físico con CD-R: no probado. No se declara ROM-EXACT ni aptitud para
-hardware.** El texto TIME UP aún no se publica en pantalla y la transición
-posterior al combate conserva el último frame, sin menús.
+La precarga mantiene 2.944 tiles originales y 128 huecos adicionales en
+384 KiB. La partida controlada de 14.409 frames conserva su prueba de cero
+lecturas de sprites tras la precarga; la nueva partida sin entrada necesita
+11.984 lecturas de 983 tiles adicionales. Esa diferencia limita la fluidez y
+no queda presentada como precarga universal ni velocidad arcade.
+
+Evidencia y reproducción:
+[validation/RUNTIME18-CPU-CHECKPOINT.md](validation/RUNTIME18-CPU-CHECKPOINT.md),
+[validation/RUNTIME18-DISC.md](validation/RUNTIME18-DISC.md).
+**Sin declaración ROM-EXACT, igualdad de framebuffer ni aptitud acreditada
+para hardware.** El texto TIME UP aún no se publica en VDP.
 
 ## Registro histórico de RUNTIME-17
 

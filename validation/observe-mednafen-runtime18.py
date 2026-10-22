@@ -21,7 +21,7 @@ mapping = a.linker_map.read_text()
 signature = bytearray(program[:4096])
 signature[0::2], signature[1::2] = program[1:4096:2], program[:4096:2]
 names = ('rt', 'video_clock', 'fatal_owner', 'fatal_dependency',
-         'fatal_frame', 'finished_frame', 'finished_result')
+         'fatal_frame', 'finished_frame', 'finished_result', 'finished_count', 'finished_timer')
 symbols = {}
 for name in names:
     match = re.search(r'\.bss\.' + name + r'\s+0x([0-9a-f]+)\s', mapping)
