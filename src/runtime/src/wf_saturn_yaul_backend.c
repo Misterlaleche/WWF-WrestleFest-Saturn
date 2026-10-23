@@ -17,6 +17,7 @@ static wf_status_t begin_frame(void *ctx,unsigned nt,unsigned np,unsigned nc){
 #endif
     b->expected_tiles=nt;b->expected_palettes=np;b->expected_cmds=nc;
     b->emitted_tiles=b->emitted_palettes=b->emitted_cmds=0;b->active=1;
+    memset(b->dirty,0,sizeof b->dirty);b->palette_mask=0;
 #ifdef WF_PLATFORM_SATURN
     memset(g_cmdts,0,sizeof(g_cmdts));g_cmd_index=0;
     vdp1_cmdt_system_clip_coord_set(&g_cmdts[g_cmd_index]);vdp1_cmdt_vtx_system_clip_coord_set(&g_cmdts[g_cmd_index++],INT16_VEC2(319,239));
@@ -36,26 +37,37 @@ static wf_status_t upload_tile(void *ctx,uint16_t slot,const uint8_t*src,size_t 
     (void)off;
     /* Stage the complete contiguous stream in HWRAM: SCU-DMA cannot read
      * LWRAM. No VRAM transfer occurs until the frame is complete. */
-    memcpy(b->hwr_stage+(size_t)slot*bytes,src,bytes);
+    unsigned mask=1u<<(slot&7u);uint8_t *dst=b->hwr_stage+(size_t)slot*bytes;
+    if((b->resident[slot>>3]&mask)&&!memcmp(dst,src,bytes))++b->texture_reused;
+    else {
+        memcpy(dst,src,bytes);b->dirty[slot>>3]|=(uint8_t)mask;
+        /* Staging no longer describes VRAM until end_frame commits it. */
+        b->resident[slot>>3]&=(uint8_t)~mask;
+    }
 #else
     (void)off;(void)bytes;
 #endif
+    b->rom_identity[slot>>3]&=(uint8_t)~(1u<<(slot&7u));
     b->emitted_tiles++;return WF_OK;
+}
+
+wf_status_t wf_saturn_yaul_upload_rom_tile(wf_saturn_yaul_backend_t*b,uint16_t slot,uint16_t source,wf_status_t (*read_tile)(uint16_t,const uint8_t**)){
+ if(!b||!b->active||!read_tile||slot!=b->emitted_tiles||slot>=b->expected_tiles)return WF_BAD_STATE;
+ unsigned mask=1u<<(slot&7u);
+ if((b->resident[slot>>3]&mask)&&(b->rom_identity[slot>>3]&mask)&&b->rom_source[slot]==source){
+  ++b->emitted_tiles;++b->texture_reused;return WF_OK;
+ }
+ const uint8_t *p;wf_status_t s=read_tile(source,&p);if(s!=WF_OK)return s;
+ s=upload_tile(b,slot,p,128);
+ if(s==WF_OK){b->rom_source[slot]=source;b->rom_identity[slot>>3]|=(uint8_t)mask;}
+ return s;
 }
 
 static wf_status_t upload_palette(void *ctx,uint8_t bank,const uint8_t*src,size_t bytes){
     wf_saturn_yaul_backend_t*b=(wf_saturn_yaul_backend_t*)ctx;
     if(!b||!b->active||!src||bytes!=WF_VDP1_PALETTE_BYTES||bank>=WF_SATURN_CRAM_SPRITE_BANKS)return WF_BAD_STATE;
-#ifdef WF_PLATFORM_SATURN
-    for(unsigned i=0;i<16u;i++){
-        uint16_t v=(uint16_t)(((uint16_t)src[i*2u]<<8)|src[i*2u+1u]);
-        uint16_t entry; if(wf_saturn_sprite_cram_entry(bank,(uint8_t)i,&entry)!=WF_OK)return WF_BLOCKED;
-        volatile uint32_t *dst=(volatile uint32_t*)VDP2_CRAM_MODE_2_OFFSET(0,entry>>4,entry&15u);
-        *dst=wf_saturn_xbgr444_to_rgb888_raw(v);
-    }
-#else
-    (void)src;
-#endif
+    if(b->emitted_palettes>=b->expected_palettes||(b->palette_mask&(1u<<bank)))return WF_BAD_STATE;
+    memcpy(b->palette_stage[bank],src,32);b->palette_mask|=(uint16_t)(1u<<bank);
     b->emitted_palettes++;return WF_OK;
 }
 
@@ -88,11 +100,18 @@ static wf_status_t end_frame(void *ctx){
     if(b->emitted_tiles!=b->expected_tiles||b->emitted_palettes!=b->expected_palettes||b->emitted_cmds!=b->expected_cmds){b->active=0;return WF_BAD_STATE;}
 #ifdef WF_PLATFORM_SATURN
     if(g_cmd_index>=WF_VDP1_COMMANDS_MAX+4u){b->active=0;return WF_BLOCKED;}
-    if(b->expected_tiles){
-        scu_dma_transfer(0,(void*)VDP1_VRAM(WF_SATURN_VDP1_DYNAMIC_OFFSET),
-                         b->hwr_stage,(size_t)b->expected_tiles*WF_VDP1_TILE_BYTES_16X16_4BPP);
-        scu_dma_transfer_wait(0);
+    /* Each DMA contains only a consecutive run whose resident bytes changed. */
+    for(unsigned slot=0;slot<b->expected_tiles;){
+        if(!(b->dirty[slot>>3]&(1u<<(slot&7u)))){++slot;continue;}
+        unsigned first=slot++;
+        while(slot<b->expected_tiles&&(b->dirty[slot>>3]&(1u<<(slot&7u))))++slot;
+        size_t bytes=(size_t)(slot-first)*128u;
+        scu_dma_transfer(0,(void*)VDP1_VRAM(WF_SATURN_VDP1_DYNAMIC_OFFSET+first*128u),b->hwr_stage+first*128u,bytes);
+        scu_dma_transfer_wait(0);b->texture_bytes+=(uint32_t)bytes;++b->texture_transfers;
+        for(unsigned i=first;i<slot;i++)b->resident[i>>3]|=(uint8_t)(1u<<(i&7u));
     }
+    for(unsigned bank=0;bank<16;bank++)if(b->palette_mask&(1u<<bank))
+        wf_saturn_cram_write_bank((uint16_t)(WF_SATURN_CRAM_SPRITE_FIRST+bank*16u),b->palette_stage[bank]);
     memset(&g_cmdts[g_cmd_index],0,sizeof(g_cmdts[g_cmd_index]));vdp1_cmdt_end_set(&g_cmdts[g_cmd_index]);g_cmd_index++;
     vdp1_cmdt_list_t list;vdp1_cmdt_list_init(&list,g_cmdts);list.count=(uint16_t)g_cmd_index;
     vdp1_sync_cmdt_list_put(&list,0);vdp1_sync_put_wait();vdp1_sync_render();
@@ -122,6 +141,7 @@ wf_status_t wf_saturn_yaul_present_plan(wf_saturn_yaul_backend_t*b,const wf_vdp1
 wf_status_t wf_saturn_yaul_video_init(void){
     if(wf_saturn_memory_contract_validate()!=WF_OK)return WF_BAD_STATE;
 #ifdef WF_PLATFORM_SATURN
+    wf_saturn_cram_reset();
     vdp2_cram_mode_set(WF_SATURN_CRAM_MODE);
     vdp1_vram_partitions_set(WF_SATURN_VDP1_CMD_COUNT,0x53560u,0,0);
     vdp1_env_t env;vdp1_env_default_init(&env);env.bpp=VDP1_ENV_BPP_16;env.color_mode=VDP1_ENV_COLOR_MODE_PALETTE;env.sprite_type=0;env.erase_color=RGB1555(0,0,0,0);env.erase_points[0]=(int16_vec2_t){.x=0,.y=0};env.erase_points[1]=(int16_vec2_t){.x=319,.y=239};vdp1_env_set(&env);

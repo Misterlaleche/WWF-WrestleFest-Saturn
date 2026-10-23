@@ -10,7 +10,19 @@ static uint8_t *mapped(wf_r18_video_t*v,uint32_t a,unsigned n){
  v->failed_address=a;return NULL;
 }
 static int valid(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){for(size_t i=0;i<n;i++)if(!mapped(v,w[i].addr,w[i].width))return 0;return 1;}
-static void apply(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){for(size_t i=0;i<n;i++){uint8_t*p=mapped(v,w[i].addr,w[i].width);for(unsigned k=0;k<w[i].width;k++)p[k]=(uint8_t)(w[i].value>>(8*(w[i].width-1-k)));}}
+static void apply(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){
+ for(size_t i=0;i<n;i++){
+  uint8_t*p=mapped(v,w[i].addr,w[i].width);
+  for(unsigned k=0;k<w[i].width;k++){
+   uint8_t value=(uint8_t)(w[i].value>>(8*(w[i].width-1-k)));
+   if(p[k]==value)continue;p[k]=value;
+   uint32_t a=w[i].addr+k;
+   if(a>=0xc0000u&&a<0xc2000u&&(a&1u)){
+    unsigned cell=(a-0xc0000u)>>2;v->hud_dirty[cell>>3]|=(uint8_t)(1u<<(cell&7u));
+   }
+  }
+ }
+}
 wf_status_t wf_r18_video_commit(wf_runtime_t*r,const wf_r17_fg0_write_t*a,size_t na,const wf_r17_fg0_write_t*b,size_t nb,void*u){wf_r18_video_t*v=u;(void)r;if(!v||(!a&&na)||(!b&&nb))return WF_BAD_STATE;if(!valid(v,a,na)||!valid(v,b,nb))return WF_BLOCKED;apply(v,a,na);apply(v,b,nb);return WF_OK;}
 wf_status_t wf_r18_video_batch(wf_runtime_t*r,const wf_r17_fg0_write_t*w,size_t n,void*u){return wf_r18_video_commit(r,w,n,NULL,0,u);}
 wf_status_t wf_r18_video_peek(wf_runtime_t*r,uint32_t a,uint32_t*out,void*u){wf_r18_video_t*v=u;uint8_t*p;(void)r;if(!v||!out)return WF_BAD_STATE;p=mapped(v,a,4);if(!p)return WF_BLOCKED;*out=((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|((uint32_t)p[2]<<8)|p[3];return WF_OK;}

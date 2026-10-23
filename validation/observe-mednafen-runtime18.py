@@ -16,6 +16,7 @@ p.add_argument('pid', type=int)
 p.add_argument('binary', type=Path)
 p.add_argument('linker_map', type=Path)
 p.add_argument('--layout', type=Path, help='SH-2 .rodata from runtime18-observer-layout.c')
+p.add_argument('--graphics-layout', type=Path, help='SH-2 .rodata from runtime18-graphics-layout.c')
 p.add_argument('--profile', action='store_true', help='Read test-only profile_entry.c counters')
 a = p.parse_args()
 program = a.binary.read_bytes()
@@ -27,6 +28,8 @@ names = ('rt', 'video_clock', 'fatal_owner', 'fatal_dependency',
 symbols = {}
 if a.layout:
     names += ('gameplay',)
+if a.graphics_layout:
+    names += ('backend', 'display', 'video', 'wf_saturn_cram_writes')
 if a.profile:
     names += ('profile_frames', 'profile_vblanks', 'profile_totals', 'profile_calls')
 for name in names:
@@ -55,7 +58,7 @@ with open(f'/proc/{a.pid}/mem', 'rb', buffering=0) as mem:
                 mem.seek(base + addr - 0x06000000)
                 raw = mem.read(4)
                 return int.from_bytes(raw[1::-1] + raw[3:1:-1], 'big')
-            values = {name: read32(addr) for name, addr in symbols.items() if name not in ('rt', 'gameplay')}
+            values = {name: read32(addr) for name, addr in symbols.items() if name not in ('rt', 'gameplay', 'backend', 'display', 'video')}
             # g is the first field; frame_counter is at +24 on SH-2.
             values['frame'] = read32(symbols['rt'] + 24)
             if a.profile:
@@ -72,6 +75,18 @@ with open(f'/proc/{a.pid}/mem', 'rb', buffering=0) as mem:
                 values['camera_adapter'] = [read16(symbols['gameplay'] + x) for x in offsets[5:9]]
                 mem.seek(base + ((symbols['rt'] + offsets[9]) ^ 1) - 0x06000000)
                 values['frame_ready'] = mem.read(1)[0]
+            if a.graphics_layout:
+                import struct
+                offsets = struct.unpack('>12I', a.graphics_layout.read_bytes())
+                def read16g(addr):
+                    mem.seek(base + addr - 0x06000000)
+                    return int.from_bytes(mem.read(2), 'little')
+                values['texture_bytes'] = read32(symbols['backend'] + offsets[0])
+                values['texture_DMA_runs'] = read32(symbols['backend'] + offsets[1])
+                values['texture_tiles_reused'] = read32(symbols['backend'] + offsets[2])
+                values['display_scroll_registers'] = [read16g(symbols['display'] + offsets[3] + i*2) for i in range(4)]
+                values['shake_countdowns'] = [read16g(symbols['rt'] + o) for o in offsets[4:6]]
+                values['camera_RAM'] = [read16g(symbols['rt'] + o) for o in offsets[6:10]]
             if values['video_clock'] and values['frame'] <= values['video_clock']:
                 candidates.append(values)
             at = data.find(signature, at + 2)

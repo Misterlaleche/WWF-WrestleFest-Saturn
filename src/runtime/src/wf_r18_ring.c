@@ -41,18 +41,21 @@ int wf_r18_ring_bind(const void *blob,size_t n){
  vdp2_cram_mode_set(2);
  for(unsigned layer=0;layer<2;layer++){
   vdp2_scrn_cell_format_t f={.scroll_screen=layer?VDP2_SCRN_NBG1:VDP2_SCRN_NBG0,.ccc=VDP2_SCRN_CCC_PALETTE_16,.char_size=VDP2_SCRN_CHAR_SIZE_2X2,.pnd_size=1,.aux_mode=VDP2_SCRN_AUX_MODE_0,.plane_size=VDP2_SCRN_PLANE_SIZE_1X1,.palette_base=VDP2_CRAM_MODE_2_OFFSET((layer?WF_SATURN_CRAM_BG_FIRST:WF_SATURN_CRAM_FG_FIRST)/256u,0,0),.cpd_base=VDP2_VRAM_ADDR(layer?2:0,0)};
-  vdp2_vram_t names=VDP2_VRAM_ADDR(layer?3:1,0);
+  vdp2_vram_t names=VDP2_VRAM_ADDR(1,layer?WF_SATURN_VDP2_BG_NAMES:WF_SATURN_VDP2_FG_NAMES);
   vdp2_scrn_normal_map_t map={.plane_a=names,.plane_b=names,.plane_c=names,.plane_d=names};
   vdp2_scrn_cell_format_set(&f,&map);
   if(wf_r18_ring_characters((volatile uint8_t *)f.cpd_base,0x20000u))return -1;
   vdp2_scrn_scroll_x_set(f.scroll_screen,0);vdp2_scrn_scroll_y_set(f.scroll_screen,0);
-  volatile uint32_t *cram=(volatile uint32_t *)f.palette_base;
-  for(unsigned color=0;color<256;color++){uint16_t v=u16(g+palettes+layer*512+color*2);unsigned r=(v&15)*17,green=((v>>4)&15)*17,b=((v>>8)&15)*17;cram[color]=(b<<16)|(green<<8)|r;}
+  for(unsigned color=0;color<256;color++)wf_saturn_cram_write((uint16_t)((layer?WF_SATURN_CRAM_BG_FIRST:WF_SATURN_CRAM_FG_FIRST)+color),u16(g+palettes+layer*512+color*2));
  }
  vdp2_vram_cycp_t *cy=vdp2_vram_cycp_get();
- for(unsigned bank=0;bank<4;bank++)cy->pt[bank].raw=0xeeeeeeeeu;
- cy->pt[0].t4=VDP2_VRAM_CYCP_CHPNDR_NBG0;cy->pt[1].t0=VDP2_VRAM_CYCP_PNDR_NBG0;
- cy->pt[2].t4=VDP2_VRAM_CYCP_CHPNDR_NBG1;cy->pt[3].t0=VDP2_VRAM_CYCP_PNDR_NBG1;
+ /* Manual3.3: one name read per layer; 16 colors require one character
+  * access at a permitted later timing. Paired CPU access T7 follows idle T6. */
+ for(unsigned bank=0;bank<4;bank++){cy->pt[bank].raw=0xffffffffu;cy->pt[bank].t7=0xe;}
+ cy->pt[1].t0=VDP2_VRAM_CYCP_PNDR_NBG0;cy->pt[1].t1=VDP2_VRAM_CYCP_PNDR_NBG1;
+ cy->pt[1].t2=VDP2_VRAM_CYCP_PNDR_NBG2;
+ cy->pt[0].t4=VDP2_VRAM_CYCP_CHPNDR_NBG0;cy->pt[2].t5=VDP2_VRAM_CYCP_CHPNDR_NBG1;
+ cy->pt[3].t3=VDP2_VRAM_CYCP_CHPNDR_NBG2;
  vdp2_vram_cycp_set(cy);
 #endif
  return 0;
@@ -239,13 +242,13 @@ int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t p
  /* ROM $26E9E selects the board mode. In7C the BG-world ropes are
   * above sprites, including the sprite-built side ropes/posts (WP26). */
  for(unsigned i=0;i<8u;i++)vdp2_sprite_priority_set(i,pri==0x7c?2:3);
- vdp2_scrn_display_set(pri==0x78?(VDP2_SCRN_DISPTP_NBG0|VDP2_SCRN_DISP_NBG1):(VDP2_SCRN_DISP_NBG0|VDP2_SCRN_DISPTP_NBG1));
+ vdp2_scrn_display_set(VDP2_SCRN_DISPTP_NBG2|(pri==0x78?(VDP2_SCRN_DISPTP_NBG0|VDP2_SCRN_DISP_NBG1):(VDP2_SCRN_DISP_NBG0|VDP2_SCRN_DISPTP_NBG1)));
  for(unsigned layer=0;layer<2;layer++){
   int first=(pri==0x78)?layer==0:layer==1;
   int sx=first?sx0:sx1,sy=first?sy0:sy1;
   int wy=2048-sy;
   vdp2_scrn_t screen=layer?VDP2_SCRN_NBG1:VDP2_SCRN_NBG0;
-  volatile uint16_t *vram=(volatile uint16_t *)VDP2_VRAM_ADDR(layer?3:1,0);
+  volatile uint16_t *vram=(volatile uint16_t *)VDP2_VRAM_ADDR(1,layer?WF_SATURN_VDP2_BG_NAMES:WF_SATURN_VDP2_FG_NAMES);
   if(wf_r18_ring_cells_update(layer,sx,wy,vram,NULL)!=0)
    return -1;
   vdp2_scrn_scroll_x_set(screen,fix16_int32_from((uint32_t)sx&511u));
@@ -281,11 +284,7 @@ void wf_r18_ring_tile_restore(unsigned layer,unsigned cell){
 int wf_r18_ring_palette_set(unsigned layer,const uint8_t *strided,size_t n){
  if(layer>1||!strided||n<0x800)return -1;
 #ifdef __sh__
- volatile uint32_t *cram=(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET((layer?WF_SATURN_CRAM_BG_FIRST:WF_SATURN_CRAM_FG_FIRST)/256u,0,0);
- for(unsigned bank=0;bank<16;bank++)for(unsigned pen=0;pen<16;pen++){
-  uint16_t v=u16(strided+bank*128+pen*2);unsigned r=(v&15)*17,green=((v>>4)&15)*17,b=((v>>8)&15)*17;
-  cram[bank*16+pen]=(b<<16)|(green<<8)|r;
- }
+ for(unsigned bank=0;bank<16;bank++)wf_saturn_cram_write_bank((uint16_t)((layer?WF_SATURN_CRAM_BG_FIRST:WF_SATURN_CRAM_FG_FIRST)+bank*16u),strided+bank*128u);
 #endif
  return 0;
 }

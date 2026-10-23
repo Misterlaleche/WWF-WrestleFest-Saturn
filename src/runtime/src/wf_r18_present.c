@@ -115,7 +115,10 @@ wf_status_t wf_r18_present_batch(wf_runtime_t*r,wf_actor_raw_t*const*actors,size
  for(size_t i=0;i<parser.count;i++){const uint8_t*b=records[i].bytes;unsigned attr=be16(b+2);if(!(attr&1))continue;unsigned chain=(attr>>5)&7,fx=(attr>>4)&1,fy=(attr>>3)&1,palette=b[9]&15;unsigned tile=wf_sprite_number_align((unsigned)b[5]|((unsigned)b[7]<<8),chain);int x=wf_sprite_x_decode((unsigned)b[11]|((attr&4)<<6)),y=wf_sprite_y_decode((unsigned)b[1]|((attr&2)<<7));
  for(unsigned j=0;j<=chain;j++){int yy=fy?y-(int)chain*16+(int)j*16:y-(int)j*16;if(!add_cmd((uint16_t)(tile+j),x,yy,fx,fy,palette)){status=WF_BLOCKED;goto done;}}}
  status=ops->begin_frame(&backend,plan.tile_count,16,plan.cmd_count);if(status!=WF_OK)goto done;
- for(unsigned i=0;i<plan.tile_count;i++){const uint8_t*p;status=wf_r18_tile_read(plan.tile_upload[i].source_tile,&p);if(status==WF_OK)status=ops->upload_tile_16x16_4bpp(&backend,(uint16_t)i,p,128);if(status!=WF_OK)goto abort;}
+ for(unsigned i=0;i<plan.tile_count;i++){
+  status=wf_saturn_yaul_upload_rom_tile(&backend,(uint16_t)i,plan.tile_upload[i].source_tile,wf_r18_tile_read);
+  if(status!=WF_OK)goto abort;
+ }
  for(unsigned i=0;i<16;i++){status=ops->upload_palette_xbgr444_16(&backend,(uint8_t)i,v->palettes+0x2000+i*128,32);if(status!=WF_OK)goto abort;}
  for(unsigned i=0;i<plan.cmd_count;i++){status=ops->emit_sprite_16x16(&backend,&plan.cmd[i]);if(status!=WF_OK)goto abort;}
  status=ops->end_frame(&backend);if(status!=WF_OK)goto done;

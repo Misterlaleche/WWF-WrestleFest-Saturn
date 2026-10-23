@@ -10,6 +10,9 @@
 #include "wf_r18_present.h"
 #include "wf_r18_rom_hot_pages.h"
 #include "wf_r18_ring.h"
+#include "wf_r18_display.h"
+#include "wf_r18_hud.h"
+static wf_r18_display_t display;
 static unsigned char rom[0x100000],ring_blob[114918];static unsigned char rom_cache[256*1024],tile_cache[640*1024];static FILE*sprites,*hot_sprites;static size_t romsize;
 static unsigned play_started,play_sprite_reads,play_rom_reads;
 static FILE *sprite_trace,*rom_trace;static uint8_t seen_rom_pages[512];
@@ -47,10 +50,11 @@ unsigned frame_limit=limit_text?(unsigned)strtoul(limit_text,NULL,10):1000u;
 int attack=getenv("WF_PROBE_ATTACK")!=NULL;
 printf("INPUT replay=%s reset-seed=0\n",attack?"RIGHT60-179/A180-183":"none (all ports FF)");
 uint16_t observed_count=0u;
+if(wf_r18_display_init(&display,&rt,readrom,NULL)!=WF_OK)return 2;
 play_started=1;
 for(unsigned frame=0;frame<frame_limit;frame++){
 gc.input_hw_low[0]=(attack&&frame>=60u&&frame<180u)?0xfeu:(attack&&frame>=180u&&frame<184u)?0xefu:0xffu;
-st=wf_runtime_frame(&rt);if(st==WF_BLOCKED&&rt.frame_ready){st=wf_r18_world_commit(&rt,&world);if(st==WF_OK){wf_runtime_vblank_ack(&rt);st=wf_runtime_frame(&rt);}}if(st==WF_BLOCKED&&wf_r18_tag_match_complete(&rt)){
+st=wf_runtime_frame(&rt);if(st==WF_BLOCKED&&rt.frame_ready){st=wf_r18_display_irq(&rt,&display);if(st==WF_OK)st=wf_r18_world_commit(&rt,&world);if(st==WF_OK)st=wf_r18_hud_irq(&rt,&video);if(st==WF_OK){wf_runtime_vblank_ack(&rt);st=wf_runtime_frame(&rt);}}if(st==WF_BLOCKED&&wf_r18_tag_match_complete(&rt)){
 printf("MATCH COMPLETE frame=%u ROM endpoint=0011B6 result=%04x,%04x,%04x,%04x referee=%04x/%04x\n",rt.g.frame_counter,wf_be16(&rt.actors[0],WF_A_RESULT),wf_be16(&rt.actors[1],WF_A_RESULT),wf_be16(&rt.actors[4],WF_A_RESULT),wf_be16(&rt.actors[5],WF_A_RESULT),wf_be16(&rt.referee,WF_A_STATE),wf_be16(&rt.referee,WF_A_ANIM_INDEX));
 printf("FINISH count169A=%04x timer16A0=%04x\n",rt.g.global_169a,rt.g.global_16a0);
 printf("HARDWARE WAIT vblanks=%u\n",host_wait_vblanks);printf("PLAY CD reads ROM=%u SPRITES=%u\n",play_rom_reads,play_sprite_reads);if(getenv("WF_PROBE_REQUIRE_RESIDENT")&&(play_rom_reads||play_sprite_reads)){fputs("Resident playback caused CD reads\n",stderr);return 1;}return 0;

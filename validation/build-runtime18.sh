@@ -1,6 +1,7 @@
 #!/bin/sh
 # SDK boot/IP -> ISO -> WP33 exact raw MODE1 BIN/CUE. No audio tracks.
 set -eu
+export PYTHONDONTWRITEBYTECODE=1
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 SDK=$(CDPATH= cd -- "${1:?Pass extracted sh2eb-elf SDK directory}" && pwd)
 DOCKER=${DOCKER:-docker}
@@ -19,6 +20,13 @@ if [ "${R18_PROFILE_TEST:-}" = 1 ]; then
   R18_REPLAY_TEST=1
 fi
 mkdir -p "$RESULTS"
+"$PYTHON" - "$ROOT/src/runtime/audit/runtime18-cd/FONT8.BIN" <<'PYFONT'
+import hashlib,sys
+from pathlib import Path
+p=Path(sys.argv[1])
+if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest()!='a3045c6193d23c334c6af592cc1dfee029dc12eec810d3e2ce353df69580391a':
+    raise SystemExit('Missing/invalid canonical FONT8.BIN: generate with src/runtime/tools/build_r18_font.py wwfwfest.zip OUTPUT')
+PYFONT
 "$PYTHON" "$ROOT/src/runtime/tools/build_r18_hot_sprites.py" \
   "$ROOT/src/runtime/validation/runtime18-hot-tiles.txt" \
   "$ROOT/src/runtime/audit/runtime18-cd/SPRITES.PAK" \

@@ -11,6 +11,7 @@
 #include "wf_r18_metasprite.h"
 
 unsigned mock_sync_calls;
+unsigned mock_sprite_priorities[8],mock_screen_priorities[3];
 uint8_t mock_vram[0x80000];
 uint32_t mock_cram[1024];
 static uint8_t rom[0x80000], cache[0x80000], tiles[128*128];

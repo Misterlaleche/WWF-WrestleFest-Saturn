@@ -9,6 +9,7 @@ typedef struct wf_r18_video {
  /* $188000 FG, $186000 BG: sixteen banks, 128-byte arcade stride. */
  uint8_t fg_palette[0x800],bg_palette[0x800];
  uint8_t palette_map[256],palette_used[16];
+ uint8_t hud_dirty[256]; /* 2048 FG0 cells; sprite buffer starts at C2000. */
  uint32_t failed_address;
 } wf_r18_video_t;
 wf_status_t wf_r18_video_batch(wf_runtime_t*,const wf_r17_fg0_write_t*,size_t,void*);

@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 /* ROM-derived mode/palette are encoded in blob; borrowed for lifetime.
- * VDP2 NBG0/NBG1: characters in banks0/2, pattern names in banks1/3.
+ * VDP2 NBG0/NBG1: characters in banks0/2, pattern names in bank1 (0x0000/0x2000).
  * Caller owns vblank/commit synchronization; priority follows the ROM mode.
  */
 int wf_r18_ring_bind(const void *blob, size_t bytes);

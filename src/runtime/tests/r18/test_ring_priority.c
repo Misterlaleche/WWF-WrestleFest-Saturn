@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <yaul.h>
 #include "wf_r18_ring.h"
+#include "wf_saturn_memory.h"
 uint8_t mock_vdp2_vram[0x80000];uint32_t mock_cram[1024];
-unsigned mock_sprite_priorities[8],mock_screen_priorities[2],mock_display;
+unsigned mock_sprite_priorities[8],mock_screen_priorities[3],mock_display;
 static uint8_t blob[114918];
 /* Independent board-order fixture (WP26 and MAME):7C FG,sprites,BG;
  *7B FG,BG,sprites;78 BG,FG,sprites. Test actual hardware configuration
@@ -18,6 +19,12 @@ static unsigned visible(unsigned fg,unsigned bg,unsigned sprite,unsigned klass){
 }
 int main(int argc,char**argv){
  assert(argc==2);FILE*f=fopen(argv[1],"rb");assert(f&&fread(blob,1,sizeof blob,f)==sizeof blob);fclose(f);assert(!wf_r18_ring_bind(blob,sizeof blob));
+ uint8_t palette[0x800]={0};palette[3]=15;
+ wf_saturn_cram_reset();assert(!wf_r18_ring_palette_set(0,palette,sizeof palette));
+ assert(mock_cram[1]==255u&&wf_saturn_cram_writes==256);
+ assert(!wf_r18_ring_palette_set(0,palette,sizeof palette));assert(wf_saturn_cram_writes==256);
+ palette[3]=14;assert(!wf_r18_ring_palette_set(0,palette,sizeof palette));
+ assert(mock_cram[1]==238u&&wf_saturn_cram_writes==257);
  const unsigned modes[]={0x7c,0x7b,0x78};
  for(unsigned m=0;m<3;m++){
   for(unsigned k=0;k<8;k++)mock_sprite_priorities[k]=4; /* actual old entry */

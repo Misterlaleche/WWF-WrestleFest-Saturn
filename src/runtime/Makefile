@@ -316,7 +316,7 @@ test-active-rom: build/test_runtime17_active_rom
 test: test-active-rom
 
 # Direct-boot integration probe; the ROM and graphics remain local audit assets.
-R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_world.c src/wf_r18_ring.c
+R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_ring.c
 build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c include/wf_r18_rom_hot_pages.h
 	mkdir -p build
 	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
@@ -505,8 +505,8 @@ test-runtime18-camera-rom:
 	$(ROM_PYTHON) tools/verify_camera_sync_rom.py audit/runtime18-cd/ROM68K.BIN
 test-runtime18-rom-validation: test-runtime18-camera-rom
 
-build/test_runtime18_ring_priority: src/wf_r18_ring.c tests/r18/test_ring_priority.c tests/r18/mock-yaul/yaul.h | build
-	$(CC) $(CFLAGS) -D__sh__ -Itests/r18/mock-yaul src/wf_r18_ring.c tests/r18/test_ring_priority.c -o $@
+build/test_runtime18_ring_priority: src/wf_r18_ring.c src/wf_saturn_memory.c tests/r18/test_ring_priority.c tests/r18/mock-yaul/yaul.h | build
+	$(CC) $(CFLAGS) -D__sh__ -Itests/r18/mock-yaul src/wf_r18_ring.c src/wf_saturn_memory.c tests/r18/test_ring_priority.c -o $@
 .PHONY: test-runtime18-ring-priority
 test-runtime18-ring-priority: build/test_runtime18_ring_priority
 	./build/test_runtime18_ring_priority audit/runtime18-cd/R18RING.BIN
@@ -532,5 +532,26 @@ test-runtime18-ring-native-asan: | build
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_ring_cells_asan audit/runtime18-cd/R18RING.BIN
 	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_ring.c tests/r18/test_ring_ids.c -o build/test_runtime18_ring_ids_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_ring_ids_asan audit/runtime18-cd/R18RING.BIN
-	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -D__sh__ -Itests/r18/mock-yaul src/wf_r18_ring.c tests/r18/test_ring_priority.c -o build/test_runtime18_ring_priority_asan
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -D__sh__ -Itests/r18/mock-yaul src/wf_r18_ring.c src/wf_saturn_memory.c tests/r18/test_ring_priority.c -o build/test_runtime18_ring_priority_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_ring_priority_asan audit/runtime18-cd/R18RING.BIN
+
+.PHONY: test-runtime18-display-rom
+test-runtime18-display-rom:
+	$(ROM_PYTHON) tests/r18/verify_display_rom.py
+
+build/test_runtime18_hud: src/wf_r18_hud.c src/wf_r18_video.c src/wf_saturn_memory.c tests/r18/test_hud.c | build
+	$(CC) $(CFLAGS) src/wf_r18_hud.c src/wf_r18_video.c src/wf_saturn_memory.c tests/r18/test_hud.c -o $@
+test-runtime18-hud: build/test_runtime18_hud
+	./build/test_runtime18_hud
+
+build/test_runtime18_hud_yaul: src/wf_r18_hud.c src/wf_r18_video.c src/wf_saturn_memory.c tests/r18/test_hud_yaul.c tests/r18/mock-yaul/yaul.h | build
+	$(CC) $(CFLAGS) -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul src/wf_r18_hud.c src/wf_r18_video.c src/wf_saturn_memory.c tests/r18/test_hud_yaul.c -o $@
+test-runtime18-hud-yaul: build/test_runtime18_hud_yaul
+	./build/test_runtime18_hud_yaul audit/runtime18-cd/FONT8.BIN
+
+.PHONY: test-runtime18-display-asan test-runtime18-hud test-runtime18-hud-yaul
+test-runtime18-display-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_hud.c src/wf_r18_video.c src/wf_saturn_memory.c tests/r18/test_hud.c -o build/test_runtime18_hud_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_hud_asan
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c tests/r18/test_yaul_dma.c -o build/test_runtime18_dma_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_dma_asan

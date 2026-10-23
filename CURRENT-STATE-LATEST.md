@@ -1,29 +1,21 @@
-# RUNTIME-18 — capas del ring y fluidez, 23 de octubre de 2026
+# RUNTIME-18 — residencia gráfica, shake y HUD, 23 de octubre de 2026
 
-Continuación de `a680f7a`. Se corrige el orden de cuerdas laterales/frontales
-según7C de la ROM y se transporta el ring mediante celdas VDP2 nativas.
-La misma secuencia SH-2 en Mednafen pasa de4,12 a **1,77 VBlanks/frame**:
-unas2,33 veces más rápida, conservando los píxeles de la referencia corregida.
+Continuación de `c569d20`. Se conservan las texturas VDP1 idénticas entre
+frames y se actualizan sólo los colores CRAM modificados. Las identidades
+se refieren a tiles ROM inmutables; no se confía en punteros del caché.
 
-La precarga reúne3993 tiles y171 páginas originales; ambas partidas completas
-HOST/ASan terminan sin lecturas CD tras el arranque. Sus finales siguen siendo
-4391 y14409. El replay final en Mednafen termina4391 con cuenta0300, reloj0021
-y sin bloqueos; el disco normal se comprueba arrancado y en movimiento.
+Se integran los owners originales de shake `$27012/$27066`, la salida de
+scroll `$26E1A` y el parpadeo de reloj `$264AA`, con oráculos directos ROM.
+El HUD consume FG0 mediante caracteres NBG2 y la fuente original completa.
+No hay reconstrucción bitmap de la partida ni lectura CD por frame.
 
-Se entrega BIN/CUE normal con mando y replay separado. Arranque directo,
-sin menús ni audio. El sonido probado en Saturn anteriormente pertenece a
-componentes anteriores. No se alteran decisiones, reloj ni resultado del juego.
+Los combates HOST y ASan siguen terminando en4391/14409. La medida de cierre,
+los hashes del disco exacto y la reconstrucción del paquete se documentan en
+[validation/RUNTIME18-RESIDENCY-HUD-CHECKPOINT.md](validation/RUNTIME18-RESIDENCY-HUD-CHECKPOINT.md).
 
-Evidencia, medidas, hashes, límites y reproducción:
-[validation/RUNTIME18-LAYERS-PERF-CHECKPOINT.md](validation/RUNTIME18-LAYERS-PERF-CHECKPOINT.md).
-La corrección de cámara del checkpoint anterior se conserva y su oráculo
-2304 casos vuelve a pasar. CORE48+48, world400, transporte y combates completos
-pasan; el checkpoint exportado se reconstruye y verifica por bytes.
-
-**Sin declaración ROM-EXACT, velocidad arcade ni prueba de este disco en
-Saturn físico.** El siguiente ensayo del usuario es con emulador y CD-R real.
-Los IDs precargados no cubren universalmente otras entradas: éstas conservan
-lecturas bajo demanda. Menús, audio e introducciones quedan para después.
+Arranque directo con mando, sin menús ni audio. No se declara60fps,
+ROM-EXACT universal, pixel perfect completo ni validación de este disco en
+Saturn físico; la prueba con CD-R corresponde todavía al usuario.
 
 ## Registro histórico de RUNTIME-17
 

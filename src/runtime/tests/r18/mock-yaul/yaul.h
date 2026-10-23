@@ -41,19 +41,19 @@ static inline void vdp1_env_default_init(vdp1_env_t*e){(void)e;}
 static inline void vdp1_env_set(vdp1_env_t*e){(void)e;}
 static inline void vdp1_sync_interval_set(unsigned x){(void)x;}
 static inline void vdp1_sync_mode_set(unsigned x){(void)x;}
-extern unsigned mock_sprite_priorities[8],mock_screen_priorities[2];
+extern unsigned mock_sprite_priorities[8],mock_screen_priorities[3];
 static inline void vdp2_sprite_priority_set(unsigned a,unsigned b){mock_sprite_priorities[a]=b;}
 typedef unsigned vdp2_scrn_t;
-enum {VDP2_SCRN_NBG0=0,VDP2_SCRN_NBG1=1,VDP2_SCRN_CCC_PALETTE_256=1,
+enum {VDP2_SCRN_NBG0=0,VDP2_SCRN_NBG1=1,VDP2_SCRN_NBG2=2,VDP2_SCRN_CCC_PALETTE_256=1,
  VDP2_SCRN_BITMAP_SIZE_512X256=0,VDP2_SCRN_DISP_NBG0=0x101,VDP2_SCRN_DISP_NBG1=0x202,
- VDP2_SCRN_DISPTP_NBG0=1,VDP2_SCRN_DISPTP_NBG1=2};
+ VDP2_SCRN_DISPTP_NBG0=1,VDP2_SCRN_DISPTP_NBG1=2,VDP2_SCRN_DISPTP_NBG2=4};
 typedef struct {unsigned scroll_screen,ccc,bitmap_size;void *palette_base,*bitmap_base;} vdp2_scrn_bitmap_format_t;
 typedef struct {union {uint32_t raw;struct {unsigned t0:4,t1:4,t2:4,t3:4,t4:4,t5:4,t6:4,t7:4;};} pt[4];} vdp2_vram_cycp_t;
 typedef void *vdp2_vram_t;
 typedef struct {unsigned scroll_screen,ccc,char_size,pnd_size,aux_mode,plane_size;void *palette_base,*cpd_base;} vdp2_scrn_cell_format_t;
 typedef struct {void *plane_a,*plane_b,*plane_c,*plane_d;} vdp2_scrn_normal_map_t;
-enum {VDP2_SCRN_CCC_PALETTE_16=0,VDP2_SCRN_CHAR_SIZE_2X2=1,VDP2_SCRN_AUX_MODE_0=0,VDP2_SCRN_PLANE_SIZE_1X1=1,
- VDP2_VRAM_CYCP_PNDR_NBG0=0,VDP2_VRAM_CYCP_PNDR_NBG1=1,VDP2_VRAM_CYCP_CHPNDR_NBG0=4,VDP2_VRAM_CYCP_CHPNDR_NBG1=5};
+enum {VDP2_SCRN_CCC_PALETTE_16=0,VDP2_SCRN_CHAR_SIZE_1X1=0,VDP2_SCRN_CHAR_SIZE_2X2=1,VDP2_SCRN_AUX_MODE_1=1,VDP2_SCRN_AUX_MODE_0=0,VDP2_SCRN_PLANE_SIZE_1X1=1,
+ VDP2_VRAM_CYCP_PNDR_NBG0=0,VDP2_VRAM_CYCP_PNDR_NBG1=1,VDP2_VRAM_CYCP_PNDR_NBG2=2,VDP2_VRAM_CYCP_CHPNDR_NBG2=6,VDP2_VRAM_CYCP_CHPNDR_NBG0=4,VDP2_VRAM_CYCP_CHPNDR_NBG1=5};
 static inline void vdp2_scrn_cell_format_set(const vdp2_scrn_cell_format_t*f,const vdp2_scrn_normal_map_t*m){(void)f;(void)m;}
 extern uint8_t mock_vdp2_vram[0x80000];extern unsigned mock_display;
 #define VDP2_VRAM_ADDR(bank,off) (mock_vdp2_vram+(bank)*0x20000u+(off))

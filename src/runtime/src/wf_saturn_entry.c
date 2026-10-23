@@ -10,6 +10,8 @@
 #include "wf_r18_rom_hot_pages.h"
 #include "wf_r18_ring.h"
 #include "wf_r18_video.h"
+#include "wf_r18_display.h"
+#include "wf_r18_hud.h"
 #include "wf_r18_world.h"
 
 /* The IP loader places the executable in HWRAM. These three borrowed cache
@@ -26,6 +28,7 @@ static wf_runtime_t rt;
 static wf_gameplay_binding_context_t gameplay;
 static wf_phase_binding_t bindings[48];
 static wf_r18_video_t video;
+static wf_r18_display_t display;
 static wf_r18_world_ctx_t world;
 static wf_r18_bootstrap_context_t boot;
 static smpc_peripheral_digital_t pad;
@@ -68,7 +71,7 @@ void user_init(void)
     vdp2_tvmd_display_clear();
     vdp2_tvmd_display_res_set(VDP2_TVMD_INTERLACE_NONE,
         VDP2_TVMD_HORZ_NORMAL_A, VDP2_TVMD_VERT_240);
-    vdp2_scrn_back_color_set(VDP2_VRAM_ADDR(3, 0x1fffe),
+    vdp2_scrn_back_color_set(VDP2_VRAM_ADDR(1, WF_SATURN_VDP2_BACK_COLOR),
         RGB1555(1, 0, 0, 0));
     (void)main();
 }
@@ -185,13 +188,14 @@ static uint8_t controls(void)
 }
 static void palette_and_ring(void)
 {
+    if(wf_r18_hud_commit(&video)!=WF_OK)fail(0x0c0000u,0);
     if (wf_r18_ring_palette_set(0, video.fg_palette,
                                  sizeof video.fg_palette) != 0 ||
         wf_r18_ring_palette_set(1, video.bg_palette,
                                  sizeof video.bg_palette) != 0 ||
-        wf_r18_ring_update((int16_t)rt.g.global_17e6,
-            (int16_t)rt.g.global_17ee, (int16_t)rt.g.global_17ea,
-            (int16_t)rt.g.global_17f2_word,
+        wf_r18_ring_update((int16_t)display.scroll[0],
+            (int16_t)(2048u-display.scroll[1]), (int16_t)display.scroll[2],
+            (int16_t)(2048u-display.scroll[3]),
             boot.priority_140010) != 0)
         fail(0x26e66u, video.failed_address);
 }
@@ -214,6 +218,8 @@ int main(void)
     if (wf_saturn_yaul_video_init() != WF_OK ||
         wf_r18_ring_bind(RING_BLOB, 114918u) != 0)
         fail(0x18cd04u, 0);
+    if(wf_r18_file_size("FONT8.BIN",&size)!=0||size!=WF_SATURN_FONT_BYTES||
+       wf_r18_hud_bind(&video,wf_r18_file_read)!=WF_OK)fail(0x18cd08u,size);
     wf_r18_present_init(wf_r18_file_read, ROM_CACHE, 256u*1024u,
                          TILE_CACHE, 640u*1024u);
     if (wf_r18_rom_pages_preload(wf_r18_rom_hot_pages,sizeof wf_r18_rom_hot_pages/sizeof wf_r18_rom_hot_pages[0]) != WF_OK) fail(0x18cd06u, 0);
@@ -279,6 +285,7 @@ int main(void)
     gameplay.branchb_288f0 = world_288f0;
     gameplay.branchb_26b68 = world_26b68;
     gameplay.r17_owner_user = &video;
+    if(wf_r18_display_init(&display,&rt,wf_r18_rom_read,NULL)!=WF_OK)fail(0x27048u,0);
     palette_and_ring();
     vdp2_sync();
     vdp2_sync_wait();
@@ -299,8 +306,10 @@ int main(void)
 #endif
         status = wf_runtime_frame(&rt);
         if (status == WF_BLOCKED && rt.frame_ready) {
+            if(wf_r18_display_irq(&rt,&display)!=WF_OK)fail(0x27012u,0);
             if (wf_r18_world_commit(&rt, &world) != WF_OK)
                 fail(0x2946u, 0);
+            if(wf_r18_hud_irq(&rt,&video)!=WF_OK)fail(0x264aau,0);
             palette_and_ring();
             /* Queue both processors before waiting for their shared VBlank. */
             vdp1_sync();

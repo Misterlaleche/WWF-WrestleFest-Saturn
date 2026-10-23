@@ -12,7 +12,7 @@ p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('output', type=Path)
 p.add_argument('--arcade-zip', type=Path, required=True)
 p.add_argument('--replay-dir', choices=('replay', 'replay-noinput'), default='replay')
-p.add_argument('--checkpoint-dir', choices=('checkpoint', 'checkpoint-noinput', 'checkpoint-camera', 'checkpoint-layers-perf'), default='checkpoint')
+p.add_argument('--checkpoint-dir', choices=('checkpoint', 'checkpoint-noinput', 'checkpoint-camera', 'checkpoint-layers-perf', 'checkpoint-residency-hud'), default='checkpoint')
 a = p.parse_args()
 root = Path(__file__).resolve().parents[1]
 def git(*args):
@@ -28,7 +28,7 @@ with tarfile.open(fileobj=io.BytesIO(git('archive', '--format=tar', revision))) 
             files['source/' + entry.name] = archive.extractfile(entry).read()
             if entry.mode & 0o111:
                 executables.add('source/' + entry.name)
-for name in ('ROM68K.BIN', 'SPRITES.PAK', 'R18RING.BIN', 'HOTSPR.BIN'):
+for name in ('ROM68K.BIN', 'SPRITES.PAK', 'R18RING.BIN', 'HOTSPR.BIN', 'FONT8.BIN'):
     path = root / 'src/runtime/audit/runtime18-cd' / name
     files['source/src/runtime/audit/runtime18-cd/' + name] = path.read_bytes()
 files['reference/wwfwfest.zip'] = a.arcade_zip.read_bytes()
@@ -53,7 +53,7 @@ files['CHECKPOINT.txt'] = (
     f'Validation replay: evidence/{a.replay_dir}/; test-only deterministic input/seed.\n'
     'Read source/CURRENT-STATE-LATEST.md and source/validation/RUNTIME18-CPU-CHECKPOINT.md.\n'
     'Camera synchronization: source/validation/RUNTIME18-CAMERA-CHECKPOINT.md.\n'
-    'Current layers/performance: source/validation/RUNTIME18-LAYERS-PERF-CHECKPOINT.md.\n'
+    'Current display/residency/HUD: source/validation/RUNTIME18-RESIDENCY-HUD-CHECKPOINT.md.\n'
     'No physical Saturn validation or universal ROM-EXACT claim.\n'
     'HOST: make -C source/src/runtime test-runtime18-complete-match\n'
     'No-input HOST: make -C source/src/runtime test-runtime18-noinput-complete-match\n'
