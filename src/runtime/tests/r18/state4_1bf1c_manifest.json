@@ -1,0 +1,16 @@
+{
+  "source_commit": "f88acad plus prior ROM-exact owner chain and extracted CPU1F084",
+  "source_snapshot": "validation/results/runtime18/action3f-5f/after1e9a6-controlled/snapshot-00896.bin",
+  "sha256": "819f42abffc8f1d3cfd88a20ceb2af7d41331a3885811568654b9e8cea0a94d6",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 2823,
+  "slot": 1,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 896,
+  "recorded_blocked_status": 1,
+  "state4_subtype_word": "0x2025",
+  "state4_subtype_low_byte": "0x25",
+  "derived": false,
+  "comparison": "Natural unmodified pre-dispatch RAM and D0-D7, native bounded dispatcher versus unchanged ROM; all RAM and FG RAM and D0-D7 compared."
+}

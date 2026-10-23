@@ -36,6 +36,12 @@ if [ "${R18_PROFILE_DETAIL:-}" = 1 ]; then
   test "${R18_PROFILE_TEST:-}" = 1 || { echo 'Detailed profiling requires R18_PROFILE_TEST=1' >&2; exit 1; }
   R18_PRESENT=tests/r18/profile_present.c
 fi
+if [ "${R18_CAPTURE_RESULT:-}" = 1 ]; then
+  test -z "${R18_CAPTURE_STOP:-}" && test "${R18_PROFILE_TEST:-}" != 1 || { echo 'Result capture cannot be combined with a frame stop or profiler' >&2; exit 1; }
+  R18_REPLAY_TEST=${R18_REPLAY_TEST:-noinput}
+  RESULTS="$ROOT/validation/results/runtime18/capture-result-$R18_REPLAY_TEST"
+  R18_ENTRY=tests/r18/result_capture_entry.c
+fi
 mkdir -p "$RESULTS"
 "$PYTHON" - "$ROOT/src/runtime/audit/runtime18-cd/FONT8.BIN" <<'PYFONT'
 import hashlib,sys
@@ -44,6 +50,13 @@ p=Path(sys.argv[1])
 if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest()!='a3045c6193d23c334c6af592cc1dfee029dc12eec810d3e2ce353df69580391a':
     raise SystemExit('Missing/invalid canonical FONT8.BIN: generate with src/runtime/tools/build_r18_font.py wwfwfest.zip OUTPUT')
 PYFONT
+"$PYTHON" - "$ROOT/src/runtime/audit/runtime18-cd/R18MAP2.BIN" <<'PYRINGSIDE'
+import hashlib,sys
+from pathlib import Path
+p=Path(sys.argv[1])
+if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest()!='979b622c418307f90b1ce98524db7bade230adf399bd13e6fc3fe4adc699acf0':
+    raise SystemExit('Missing/invalid R18MAP2.BIN: generate build_r18_graphics.py --mode 2 --palette-mode 2; copy only generated R18RING.BIN as R18MAP2.BIN')
+PYRINGSIDE
 "$PYTHON" "$ROOT/src/runtime/tools/build_r18_hot_sprites.py" \
   "$ROOT/src/runtime/validation/runtime18-hot-tiles.txt" \
   "$ROOT/src/runtime/audit/runtime18-cd/SPRITES.PAK" \

@@ -177,30 +177,39 @@ static wf_status_t distance_or_link(wf_runtime_t *rt,unsigned slot,wf_actor_raw_
  }
  return WF_OK;
 }
+/* $1E9A6: the special no-credit character restarts controller16;
+ * every other route enters the shared $1F084 decision with bank9. */
+static wf_status_t hold_tail_1e9a6(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_state5_trace_t*tr){
+ if(!rt->g.credited_route&&wf_u8(a,WF_A_INTERNAL_ID)==7u){
+  bclr(a,WF_A_CPU_B5,4);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x16u);
+  return wf_state5_execute(rt,slot,tr);
+ }
+ return wf_cpu_decide_1f084(rt,slot,9u,tr);
+}
 static wf_status_t controller15(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t *a,wf_state5_trace_t *tr){
  if(!bset(a,WF_A_SELECTOR,6)){wf_set_be16(a,WF_A_CPU_BC,0x0010u);wf_set_be16(a,WF_A_TIMER46,0u);}
  uint16_t v=(uint16_t)(wf_be16(a,WF_A_CPU_BC)-1u);wf_set_be16(a,WF_A_CPU_BC,v);if(v)return WF_OK;
  /* $1E854-$1E99E: normal TAG route, first sequence bank. */
  if(rt->g.mode_0161&1u)return blocked(tr,0x1e96eu);
- if(rt->g.mode_0161&2u)return blocked(tr,0x1e9a6u);
+ if(rt->g.mode_0161&2u)return hold_tail_1e9a6(rt,slot,a,tr);
  if(rt->g.credited_route&0x8000u)return blocked(tr,0x1e878u);
- if(rt->g.global_0166&255u)return blocked(tr,0x1e9a6u);
+ if(rt->g.global_0166&255u)return hold_tail_1e9a6(rt,slot,a,tr);
  bclr(a,WF_A_CPU_B5,4);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x16u);
  return wf_state5_execute(rt,slot,tr);
 }
 static wf_status_t controller16(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a,wf_state5_trace_t *tr){
- (void)slot;
  /* $1EB48 special path is fully numeric: when $1C007C==0 and internal ID 7,
   * first entry writes angle byte $40, then waits for X >= $0308 before
-  * entering the decision tail at $1E9CC.  The tail itself remains fail-closed. */
+  * entering the shared decision tail at $1E9CC. */
  if(rt->g.credited_route==0u && wf_u8(a,WF_A_INTERNAL_ID)==7u){
   if(!bset(a,WF_A_SELECTOR,6)) wf_set_u8(a,WF_A_ANGLE,0x40u);
   if(wf_be16(a,WF_A_X)<0x0308u) return WF_OK;
-  return blocked(tr,0x001E9CCu);
+  return wf_cpu_decide_1f084(rt,slot,9u,tr);
  }
  if(btest(a,WF_A_CPU_B6,3)){
-  if(!btest(a,WF_A_SELECTOR,6)){(void)bset(a,WF_A_SELECTOR,6);wf_set_u8(a,WF_A_ANGLE,0u);wf_set_be16(a,WF_A_CPU_C0,(uint16_t)(wf_be16(a,WF_A_Y)+0x0030u));return WF_OK;}
-  if(wf_be16(a,WF_A_Y)>wf_be16(a,WF_A_CPU_C0)){bclr(a,WF_A_CPU_B6,3);return blocked(tr,0x001E9A6u);}return WF_OK;
+  if(!btest(a,WF_A_SELECTOR,6)){(void)bset(a,WF_A_SELECTOR,6);wf_set_u8(a,WF_A_ANGLE,0u);wf_set_be16(a,WF_A_CPU_C0,(uint16_t)(wf_be16(a,WF_A_Y)+0x0030u));}
+  uint16_t goal=wf_be16(a,WF_A_CPU_C0);wf_r17_m68k_move_w(&rt->m68k_regs,0u,goal);
+  if(wf_be16(a,WF_A_Y)>goal){bclr(a,WF_A_CPU_B6,3);return hold_tail_1e9a6(rt,slot,a,tr);}return WF_OK;
  }
  if(!bset(a,WF_A_SELECTOR,6)){
   wf_set_be16(a,WF_A_CPU_BC,0x0080u);
@@ -210,11 +219,11 @@ static wf_status_t controller16(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a
  /* Reuse $1F15C/$20C8, including the original shared $15E4 scratch. */
  if(!wf_cpu_arrived_1f15c(rt,a)){
   uint16_t v=(uint16_t)(wf_be16(a,WF_A_CPU_BC)-1u);wf_set_be16(a,WF_A_CPU_BC,v);
-  return v?WF_OK:blocked(tr,0x1e9a6u);
+  return v?WF_OK:hold_tail_1e9a6(rt,slot,a,tr);
  }
  wf_set_be16(a,WF_A_STATE,5u);
  if(!btest(a,WF_A_CPU_B5,4)){
-  unsigned ps;wf_actor_raw_t*p=team(rt,a,&ps);if(btest(a,WF_A_FLAGS33,0)&&p&&btest(p,WF_A_FLAGS32,0)){wf_set_be16(a,WF_A_SELECTOR,0x0066u);return WF_OK;}return blocked(tr,0x001E9A6u);
+  unsigned ps;wf_actor_raw_t*p=team(rt,a,&ps);if(btest(a,WF_A_FLAGS33,0)&&p&&btest(p,WF_A_FLAGS32,0)){wf_set_be16(a,WF_A_SELECTOR,0x0066u);return WF_OK;}return hold_tail_1e9a6(rt,slot,a,tr);
  }
  unsigned ps;wf_actor_raw_t*p=team(rt,a,&ps);if(!p)return blocked(tr,0x001EAEEu);
  if(btest(a,WF_A_FLAGS33,7)){wf_set_be16(a,WF_A_X,0x02d0u);wf_set_be16(a,WF_A_Y,0x0178u);}else{wf_set_be16(a,WF_A_X,0x0200u);wf_set_be16(a,WF_A_Y,0x0130u);}
@@ -245,6 +254,8 @@ static wf_status_t controller3d(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a
    else {wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,0x0008u);return WF_OK;}
   }
  }
+ /* $1EC80 sends a defending owner directly to the existing state0 tail. */
+ if(btest(a,WF_A_CPU_B5,7)){wf_set_be16(a,WF_A_STATE,0u);rt->g.global_1697|=1u;return WF_OK;}
  if(!btest(a,WF_A_CPU_B7,6)){
   if(!btest(a,WF_A_CPU_B5,4))return approach(rt,slot,a,tr,0x1f4ceu);
   if(wf_main_state(t)==4u&&(wf_state4_subtype(t)==8u||wf_state4_subtype(t)==9u))return WF_OK;

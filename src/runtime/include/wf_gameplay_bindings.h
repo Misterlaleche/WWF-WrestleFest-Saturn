@@ -32,6 +32,7 @@ typedef struct wf_gameplay_binding_context {
  wf_r17_platform_transition_fn transition_barrier; /* native sync/transfer sequence */
  wf_r17_audio_command_fn audio_command; /* WP24 transport owner */
  wf_r17_ref_display_fn referee_display_2067c; /* exact event boundary; renderer join remains external */
+ wf_r17_ref_word_fn referee_number_2067c; /* RINGSIDE count uses WORD $169A directly. */
  wf_r17_ref_simple_fn referee_clear_206fe;
  wf_r17_ref_actor_fn referee_direction_20c8;
  wf_r17_ref_actor_fn referee_resolver_280dc;

@@ -1,0 +1,10 @@
+{
+  "snapshot_source": "validation/results/runtime18/action3f-5f/after-referee-noinput/snapshot-00460.bin",
+  "fixture_sha256": "f4a3b1fba4894b0b1afb801dd33bb6066f9ce755d277ace882eda48c5d82c09a",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "owner": "19C48",
+  "descriptor": "19C28",
+  "frame": 1344,
+  "slot": 5,
+  "kind": "dispatch"
+}

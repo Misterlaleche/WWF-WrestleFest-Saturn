@@ -1,0 +1,24 @@
+{
+  "base_commit": "f88acadb8c3c95a3e4a1fe10eaf6e3e3960dbf1a",
+  "snapshot_source": "validation/results/runtime18/action3f-5f/after-cpu9b2-noinput/snapshot-00409.bin",
+  "snapshot_sha256": "ca92311b8f27bd8f3b77c651e7c7e49eeeaa7208b36e3bf5b2ddbf6e1ac04c17",
+  "snapshot_header": [
+    1329,
+    5,
+    0,
+    115404,
+    409,
+    1
+  ],
+  "header_fields": [
+    "frame",
+    "slot",
+    "kind",
+    "owner_pc",
+    "sequence",
+    "native_status"
+  ],
+  "format": "six LE uint32, eight LE D registers, 0x2000 BE RAM, eight LE D registers, 0x2000 BE RAM",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "purpose": "Unmodified natural no-input frame1329 slot5 CPU state0 waiting on B6.bit4. Derived tests cover the complete state0 prefix, mode0..3 branches, preserved flags/registers and repeated owner calls."
+}

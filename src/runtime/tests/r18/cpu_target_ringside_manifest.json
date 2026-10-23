@@ -1,0 +1,24 @@
+{
+  "base_commit": "f88acadb8c3c95a3e4a1fe10eaf6e3e3960dbf1a",
+  "snapshot_source": "validation/results/runtime18/action3f-5f/after-cpu458-noinput/snapshot-00407.bin",
+  "snapshot_sha256": "15a7563ffb2e8d73ad0e95a65628e4135e7097d220020978f573ca33159384d9",
+  "snapshot_header": [
+    1328,
+    5,
+    0,
+    116980,
+    407,
+    1
+  ],
+  "header_fields": [
+    "frame",
+    "slot",
+    "kind",
+    "owner_pc",
+    "sequence",
+    "native_status"
+  ],
+  "format": "six LE uint32, eight LE D registers, 0x2000 BE RAM, eight LE D registers, 0x2000 BE RAM",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "purpose": "Unmodified natural no-input frame1328 slot5 at CPU state1 target-ringside branch $1C9B2. Derived fixtures cover all four FLAGS33.bit0 combinations, both weighted outcomes, partner retargets, new-target pose offsets, preserved flags, RNG and D0-D7."
+}

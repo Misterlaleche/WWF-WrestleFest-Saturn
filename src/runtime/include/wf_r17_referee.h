@@ -7,6 +7,7 @@ typedef wf_status_t (*wf_r17_ref_display_fn)(wf_runtime_t *rt,void *user);
 typedef wf_status_t (*wf_r17_ref_simple_fn)(wf_runtime_t *rt,void *user);
 typedef wf_status_t (*wf_r17_ref_actor_fn)(wf_runtime_t *rt,wf_actor_raw_t *actor,void *user);
 typedef wf_status_t (*wf_r17_ref_audio_fn)(wf_runtime_t *rt,uint16_t command,void *user);
+typedef wf_status_t (*wf_r17_ref_word_fn)(wf_runtime_t *rt,uint16_t value,void *user);
 
 typedef struct wf_r17_referee_ctx {
  wf_r17_ref_display_fn display_2067c;
@@ -17,6 +18,8 @@ typedef struct wf_r17_referee_ctx {
  wf_r17_ref_simple_fn tag_phase6_90d6;
  wf_r17_ref_simple_fn result_20156;
  wf_r17_ref_audio_fn audio_2052;
+ wf_r17_ref_word_fn number_2067c;
+ wf_r17_ref_word_fn text_2503c;
  void *user;
  uint32_t blocked_dependency_rom;
 } wf_r17_referee_ctx_t;

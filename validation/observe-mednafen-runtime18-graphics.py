@@ -69,6 +69,25 @@ with open(f'/proc/{pid}/mem','rb',buffering=0) as mem:
    if actual_names==wanted_names:vdp2_matches.append(hex(candidate))
    at=data.find(wanted_font,at+2)
  assert vdp2_matches,'No complete native font+FG0 map match in actual VDP2 VRAM'
+ # Verify both actual character banks after a scene reload, not only the
+ # borrowed CD buffer. Saturn 2x2 characters store four 8x8 quadrants.
+ ring_matches=[]
+ for name in ('R18RING.BIN','R18MAP2.BIN'):
+  asset=(Path('/repo/src/runtime/audit/runtime18-cd')/name).read_bytes()
+  tiles=int.from_bytes(asset[10:12],'big');offset=int.from_bytes(asset[16:20],'big')
+  characters=bytearray(tiles*128)
+  for t in range(tiles):
+   for q in range(4):
+    for y in range(8):
+     at=offset+t*128+((q//2)*8+y)*8+(q%2)*4
+     characters[t*128+q*32+y*4:t*128+q*32+y*4+4]=asset[at:at+4]
+  wanted=unswap(characters)
+  for candidate in vdp2_matches:
+   base=int(candidate,16)
+   if get(base,len(wanted))==wanted and get(base+0x40000,len(wanted))==wanted:
+    ring_matches.append({'scene_asset':name,'VDP2_VRAM_host_base':candidate,'bytes_equal_per_character_bank':len(wanted),'character_tiles':tiles,'characters_sha256':hashlib.sha256(characters).hexdigest()})
+ assert ring_matches,'No scene character payload in both real VDP2 banks0/2'
+ state['ring_character_banks_matches']=ring_matches
  state.update({'VDP2_VRAM_layout_matches':vdp2_matches,'HUD_font_bytes_equal':len(font),'HUD_map_bytes_equal':len(wanted_names),'HUD_font_sha256':hashlib.sha256(font).hexdigest(),'HUD_nonzero_cells':sum(v!=0 for v in names),'HUD_map_sha256':hashlib.sha256(wanted_names).hexdigest()})
  state.update({'VDP1_commands_sha256':hashlib.sha256(payload).hexdigest(),'VDP1_textures_sha256':hashlib.sha256(stage).hexdigest(),'VDP1_command_count':count,'normal_sprite_commands':len(sprites),'unique_texture_tiles':len({(c['texture_byte_offset']-0x4b580)//128 for c in sprites}),'texture_slot_span':tile_count,'submitted_sprite_rows':sum(c['size']&255 for c in sprites),'uncropped_rows_for_submitted_sprites':16*len(sprites),'VDP1_VRAM_layout_matches':matches,'command_examples':commands[:5]+commands[-1:],'scope':'Read-only exact SH-2 build in Mednafen; command bytes and corresponding DMA texture window match a live VRAM image. No physical Saturn or arcade-framebuffer claim.'})
  print(json.dumps(state,indent=2))

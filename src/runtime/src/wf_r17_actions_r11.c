@@ -515,7 +515,8 @@ static wf_status_t raw66(wf_runtime_t *rt,wf_actor_raw_t *a,
 }
 
 /* $10D3A uses eleven of the twelve compact records, then queues the
- * temporary sprite immediately. IDs 13/14 and 19/20 use ROM rows $10E28/$10E2E/$10E4C/$10E52. */
+ * temporary sprite immediately. IDs 13/14/18/19/20 use ROM rows
+ * $10E28/$10E2E/$10E46/$10E4C/$10E52. */
 static wf_status_t entry_effect(wf_runtime_t *rt,wf_actor_raw_t *a,unsigned id,
                                wf_r17_actions_r11_bridge_t *b,wf_r17_actions_r11_trace_t *tr){
     unsigned i;for(i=0;i<11u;i++)if(!(rt->transient_1258[i][0]&128u))break;
@@ -528,7 +529,7 @@ static wf_status_t entry_effect(wf_runtime_t *rt,wf_actor_raw_t *a,unsigned id,
     memcpy(v->b,(const uint8_t*)rt->transient_1258+i*0x2au,0x30u);
     wf_set_be16(v,0,0x8000u);wf_set_be16(v,O_RENDER_LIST,0u);
     wf_set_be16(v,WF_A_CHARACTER,wf_be16(a,WF_A_CHARACTER));
-    uint16_t pose;switch(id){case 13u:pose=0x57u;break;case 14u:pose=0x58u;break;case 19u:pose=0x64u;break;case 20u:pose=0x65u;break;default:return block(tr,0x10d64u);}
+    uint16_t pose;switch(id){case 13u:pose=0x57u;break;case 14u:pose=0x58u;break;case 18u:pose=0x6du;break;case 19u:pose=0x64u;break;case 20u:pose=0x65u;break;default:return block(tr,0x10d64u);}
     wf_set_be16(v,O_VISUAL,(uint16_t)(pose|wf_be16(a,O_FACING)));
     int16_t offset=(int8_t)wf_u8(a,0x19u);
     if(bit(a,O_FACING,7u))offset=(int16_t)-offset;
@@ -540,6 +541,26 @@ static wf_status_t entry_effect(wf_runtime_t *rt,wf_actor_raw_t *a,unsigned id,
     if(st==WF_OK)st=wf_r17_queue_27b8(b->render,v);
     if(st!=WF_OK)return block(tr,0x27b8u);
     memcpy(rt->transient_1258[i],v->b,0x2au);
+    return WF_OK;
+}
+static const desc_t D_1835E={0x1835eu,1u,2u,{0xff00u,12u},{0x6cu,0x6cu}};
+/* $1836E: rope rebound. The latched owner emits ROM effect row 18 before
+ * advancing its signed movement countdown and the common animation tick. */
+static wf_status_t raw3f(wf_runtime_t*rt,wf_actor_raw_t*a,wf_r17_actions_r11_bridge_t*b,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+    *dp=&D_1835E;
+    if(!bit(a,O_LATCH,7u)){
+        wf_set_u8(a,O_MOTION,1u);wf_set_be16(a,0x2au,18u);wf_set_be16(a,O_RENDER_LIST,2u);wf_set_u8(a,0x19u,24u);
+        wf_set_u8(a,WF_A_FLAGS33,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&~BIT8(4)));
+        if(wf_be16(a,O_X)<0x280u)rt->g.global_1150=3u;else rt->g.global_11b0=3u;
+        return WF_OK;
+    }
+    wf_r17_m68k_move_w(&rt->m68k_regs,0u,18u);
+    wf_status_t status=entry_effect(rt,a,18u,b,tr);if(status!=WF_OK)return status;
+    if(!low(a,O_FRAME)){
+        uint16_t speed=(uint16_t)(wf_be16(a,0x2au)-1u);wf_set_be16(a,0x2au,speed);
+        if(speed&0x8000u){wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,0x2au,0u);wf_set_be16(a,O_TIMER,0u);}
+    }
+    if(low(a,O_FRAME)==0xfeu){wf_set_be16(a,O_STATE,0u);wf_set_be16(a,O_RENDER_LIST,0u);setbit(a,O_FLAGS18,7u);}
     return WF_OK;
 }
 static wf_status_t raw4d(wf_runtime_t *rt,wf_actor_raw_t *a,
@@ -1508,6 +1529,207 @@ static wf_status_t raw84(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r1
  wf_set_be32(a,0x92u,wf_be32(a,O_LINK));wf_set_be32(t,0x92u,wf_actor_rom_base((unsigned)(a-rt->actors)));setbit(a,0x33u,6u);setbit(t,0x33u,6u);wf_set_be16(a,0x18u,0u);wf_set_be16(t,0x18u,0u);wf_set_be16(a,0x1au,0u);wf_set_be16(t,0x1au,0u);return WF_OK;
 }
 
+static const desc_t D_19530={0x19530u,0u,0u,{0u},{0u}};
+
+/* $21732 as reached by selector $5F. Unlike pin_helpers(defender=1),
+ * CPU partners use the literal $217F8 table {62,93,125}. Royal $5F
+ * never reaches the $4A-only random decision at $21812. */
+static wf_status_t raw5f_prepare_21732(wf_runtime_t*rt,wf_actor_raw_t*a,wf_r17_actions_r11_trace_t*tr){
+    if(!rt->g.credited_route)return WF_OK;
+    if(rt->g.mode_0161&1u){
+        wf_actor_raw_t*c=pin_candidate(rt,a);
+        if(c){wf_set_be32(c,0x7eu,wf_be32(a,O_LINK));wf_set_be32(a,0x7eu,wf_actor_rom_base((unsigned)(c-rt->actors)));}
+        return WF_OK;
+    }
+    if(!bit(a,0x33u,0u))return WF_OK;
+    wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(a,0x86u));if(!p)return block(tr,0x21756u);
+    setbit(p,0x34u,0u);pin_clear(p,0x34u,2u);
+    if(!bit(p,0x32u,0u)){
+        rt->g.global_1682=0xfau;
+        if(!bit(p,0x33u,1u)&&!bit(p,0x74u,7u)){
+            setbit(p,0xb5u,7u);wf_set_be32(p,0x7eu,wf_be32(a,O_LINK));wf_set_be32(a,0x7eu,wf_be32(a,0x86u));
+        }
+        return WF_OK;
+    }
+    unsigned tier=wf_be16(p,0x70u);if(tier>=3u)return block(tr,0x217c8u);
+    static const uint16_t timer[3]={62u,93u,125u};wf_set_be16(p,0xe6u,timer[tier]);
+    setbit(p,0x34u,2u);
+    if(bit(p,0x33u,1u))wf_set_be32(p,0x7au,wf_be32(a,O_LINK));
+    else{setbit(p,0xb5u,7u);wf_set_be32(p,0x7eu,wf_be32(a,O_LINK));}
+    return WF_OK;
+}
+/* $19536: persistent invisible hold victim; its kind-zero descriptor
+ * intentionally performs no animation tick or transition of its own. */
+static wf_status_t raw5f(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+    *dp=&D_19530;int latched=bit(a,O_LATCH,7u);setbit(a,O_LATCH,7u);
+    if(!latched){
+        wf_set_be16(a,0x52u,0u);wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,O_VISUAL,0xffffu);wf_set_be16(a,O_TIMER,0xff00u);
+        wf_status_t st=raw5f_prepare_21732(rt,a,tr);if(st!=WF_OK)return st;
+        unsigned tier=wf_be16(a,0x70u);if(tier>=3u)return block(tr,0x10ca8u);
+        static const uint16_t recovery[3]={9u,12u,15u};wf_set_be16(a,0xaau,recovery[tier]);return WF_OK;
+    }
+    /* $11432: caller D0 is restored by $1C03E, all D1-D7 survive. */
+    if(!(rt->g.mode_0161&1u)&&!bit(a,0x56u,7u)){
+        wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(a,0x86u));if(!p)return block(tr,0x11448u);
+        if(wf_u8(p,0x34u)&0xc0u){pin_clear(p,0x34u,0xc0u);p=actor_from_ptr(rt,wf_be32(p,0x7au));if(!p)return block(tr,0x11462u);pin_clear(p,0x34u,0xc0u);}
+    }
+    /* $10D04. The $5E-only zero-health exception is unreachable for $5F. */
+    if(!(wf_u8(a,0x56u)&0xc0u)){
+        rt->g.global_167a|=0x80u;
+        if(wf_be16(a,0xaau)!=0x4000u&&wf_u8(a,0xa3u)){
+            uint16_t timer=(uint16_t)(wf_be16(a,0xaau)-1u);wf_set_be16(a,0xaau,timer?timer:0x4000u);
+        }
+    }
+    return WF_OK;
+}
+
+static const desc_t D_12AE6={0x12ae6u,1u,4u,{8u,8u,8u,8u},{0x1aau,0x1abu,0x8100u,0u}};
+static const desc_t D_12AFE={0x12afeu,1u,4u,{8u,8u,8u,8u},{0x9du,0x9eu,0x8100u,0u}};
+/* $12B16: counter the reciprocal $11 relationship, then release its
+ * dispatcher-linked actor. $10B9A uses the owner's facing and coordinates. */
+static wf_status_t raw03(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+    if(!bit(a,O_LATCH,7u)){
+        wf_set_u8(a,O_MOTION,0u);wf_set_be32(a,0x92u,0u);
+        *dp=&D_12AE6;return WF_OK; /* $12B26 skips alternate selection. */
+    }else{
+        if(!bit(a,O_SELECTOR,7u)){
+            wf_set_be16(a,O_PROFILE,3u);
+            if(wf_be16(a,O_FRAME)<2u){
+                wf_set_be16(a,O_PROFILE,0x12u);
+                uint32_t related=wf_be32(a,0x92u);wf_actor_raw_t*t=actor_from_ptr(rt,related);
+                if(related&&!t&&(related&0x00ffffffu))return block(tr,0x12b52u);
+                /* Tagged physical zero reads ROM $65=0, so cannot match $11. */
+                if(t&&low(t,0x64u)==0x11u&&wf_be32(t,0x92u)==wf_actor_rom_base((unsigned)(a-rt->actors))){
+                    setbit(a,O_SELECTOR,7u);wf_set_be16(a,O_LATCH,5u);wf_set_be32(a,O_LINK,related);goto descriptor;
+                }
+            }
+        }
+        if(bit(a,O_SELECTOR,7u)&&low(a,O_FRAME)==1u&&!wf_be16(a,O_TIMER)){
+            uint32_t link=wf_be32(a,O_LINK);wf_actor_raw_t*t=actor_from_ptr(rt,link);
+            if(!t&&(link&0x00ffffffu))return block(tr,0x12b8cu);
+            if(t){
+                wf_set_be16(t,O_STATE,4u);wf_set_u8(t,0x65u,0x19u);wf_set_be16(t,O_VISUAL,0xb3u);wf_set_u8(t,O_VISUAL,wf_u8(a,O_FACING));
+                interrupt_position(rt,a,t,-16,-1,40);
+            }else{
+                /* Literal null and tagged physical zero address ROM only.
+                 * $10B9A's D1/D2 writes still survive the dispatcher. */
+                wf_r17_m68k_move_w(&rt->m68k_regs,1u,0xffffu);wf_r17_m68k_move_w(&rt->m68k_regs,2u,40u);
+            }
+        }
+        if(low(a,O_FRAME)==0xfeu){wf_set_be16(a,O_STATE,0u);setbit(a,O_LINK,7u);}
+    }
+descriptor:
+    *dp=bit(a,O_SELECTOR,7u)?&D_12AFE:&D_12AE6;return WF_OK;
+}
+
+static const desc_t D_14EF0={0x14ef0u,1u,4u,{12u,8u,8u,12u},{0x101u,0x102u,0x103u,0x104u}};
+/* $14F08: linked throw; all animation ticks retain descriptor $14EF0. */
+static wf_status_t raw18(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+    *dp=&D_14EF0;uint32_t link=wf_be32(a,O_LINK);wf_actor_raw_t*t=actor_from_ptr(rt,link);
+    if(!bit(a,O_LATCH,7u)){
+        if(!t&&(link&0x00ffffffu))return block(tr,0x14f14u);
+        wf_set_u8(a,O_MOTION,0u);if(t)wf_set_be16(t,O_STATE,0xffu);
+        rt->g.global_15d2=wf_u8(a,3u);rt->g.global_15d3=2u;wf_set_u8(a,0x19u,16u);
+    }else if(low(a,O_FRAME)==2u&&!wf_be16(a,O_TIMER)){
+        if(!t&&(link&0x00ffffffu))return block(tr,0x14f42u);
+        if(t){
+            wf_set_be16(t,O_STATE,4u);wf_set_be16(t,0x64u,0x22u);wf_set_u8(t,0xc7u,(uint8_t)(wf_u8(t,0xc7u)+1u));wf_set_be16(t,0x68u,12u);
+            wf_set_u8(t,O_FACING,wf_u8(a,O_FACING));chgbit(t,O_FACING,7u);
+        }
+        pin_clear(a,0x33u,0x40u);if(t)pin_clear(t,0x33u,0x40u);
+        if(t)interrupt_position(rt,a,t,80,1,80);
+        else{wf_r17_m68k_move_w(&rt->m68k_regs,1u,1u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,80u);}
+    }else if(low(a,O_FRAME)==0xfeu){
+        setbit(a,O_FLAGS18,7u);wf_set_be16(a,O_STATE,0u);chgbit(a,O_FACING,7u);wf_set_be16(a,O_VISUAL,wf_be16(a,O_FACING));setbit(a,O_LINK,7u);
+    }
+    return WF_OK;
+}
+
+static const desc_t D_19C28={0x19c28u,1u,6u,{12u,12u,12u,12u,0xff00u,16u},{0x27u,0x28u,0x29u,0x2au,0x2bu,0x2au}};
+/* $19C48: climb back through the ropes, then release the RINGSIDE owner. */
+static wf_status_t raw6c(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp){
+ *dp=&D_19C28;
+ if(!bit(a,O_LATCH,7u)){
+  wf_set_u8(a,O_MOTION,0u);setbit(a,0x33u,2u);wf_set_be16(a,O_RENDER_LIST,0u);wf_set_be16(a,O_Y,0x152u);wf_set_u8(a,O_B1B,5u);return WF_OK;
+ }
+ if(low(a,O_FRAME)==2u&&!wf_be16(a,O_TIMER)){wf_set_be16(a,O_Y,0x158u);return WF_OK;}
+ if(low(a,O_FRAME)==3u&&!wf_be16(a,O_TIMER)){
+  wf_set_u8(a,O_MOTION,2u);wf_set_be16(a,O_Y,0x140u);setbit(a,O_FLAGS18,7u);
+  /* $258E[15] at $2624 preserves D0-D1 and initializes the full WORDs. */
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,15u);wf_set_be16(a,0x58u,0u);wf_set_be16(a,0x5au,0u);wf_set_be16(a,0x5cu,0x100u);wf_set_be16(a,0x5eu,0x38u);
+ }
+ if(low(a,O_FRAME)==4u&&bit(a,0x37u,4u)){wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,O_TIMER,0u);wf_set_be16(a,O_Z,0x100u);return WF_OK;}
+ if(low(a,O_FRAME)==0xfeu){setbit(a,O_FLAGS18,7u);wf_set_be16(a,O_STATE,0u);wf_set_be16(a,0xaeu,0u);wf_set_be16(a,O_VISUAL,wf_be16(a,O_FACING));}
+ return WF_OK;
+}
+
+static const desc_t D_17AFE={0x17afeu,1u,3u,{6u,6u,6u},{0x6au,0x6bu,0x6au}};
+/* $17B12: movement direction is selected by raw camera scroll $17EE. */
+static wf_status_t raw38(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp){
+    *dp=&D_17AFE;
+    if(!bit(a,O_LATCH,7u)){
+        wf_set_u8(a,O_MOTION,1u);wf_set_be16(a,0x2cu,0x80u);wf_set_be16(a,0x2au,24u);
+        if(rt->g.global_17ee<0x240u)chgbit(a,0x2du,7u);
+    }else if(low(a,O_FRAME)==0xfeu){
+        wf_set_be16(a,O_STATE,7u);wf_set_be16(a,0x64u,0u);setbit(a,O_LINK,7u);wf_set_be32(a,0x9cu,0u);
+    }
+    return WF_OK;
+}
+
+static const desc_t D_16C5E={0x16c5eu,1u,6u,{6u,10u,8u,24u,16u,56u},{0x107u,0x108u,0x110u,0x20eu,0x20fu,0u}};
+static const desc_t D_16C7E={0x16c7eu,1u,6u,{6u,5u,24u,16u,6u,18u},{0x107u,0x108u,0x110u,0x20eu,0x10au,0x10bu}};
+static const desc_t D_1A7A4={0x1a7a4u,2u,2u,{28u,12u},{0x107u,0x108u}};
+/* $10B62 preserves caller registers and the original contact WORD. */
+static wf_status_t throw2f_offset(wf_runtime_t*rt,wf_actor_raw_t*a,uint16_t clearance,wf_r17_actions_r11_trace_t*tr){
+    uint16_t contact=wf_be16(a,WF_A_CONTACT);wf_set_be16(a,WF_A_FIELD3E,clearance);
+    wf_status_t status=wf_r17_resolver_280dc(rt,a);if(status!=WF_OK)return block(tr,0x10b62u);
+    if(wf_be16(a,WF_A_CONTACT)&3u)wf_set_be16(a,WF_A_VX,0u);
+    wf_set_be16(a,WF_A_CONTACT,contact);wf_set_be16(a,O_X,(uint16_t)(wf_be16(a,O_X)+wf_be16(a,WF_A_CORR_X)));wf_set_be16(a,WF_A_FIELD3E,0u);return WF_OK;
+}
+/* $16C9E, linked throw and its original character-specific animation. */
+static wf_status_t raw2f(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+    *dp=&D_16C5E;wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));
+    if(!bit(a,O_LATCH,7u)){
+        if(!t)return block(tr,0x16caau);wf_set_u8(a,O_MOTION,0u);wf_set_be16(t,O_STATE,0xffu);
+        wf_r17_m68k_move_w(&rt->m68k_regs,0u,48u);wf_status_t status=throw2f_offset(rt,a,48u,tr);if(status!=WF_OK)return status;
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,1u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,wf_be16(a,0xf0u));wf_set_be16(a,0xf0u,(uint16_t)(wf_be16(a,0xf0u)+1u));
+        if(!rt->g.rng_state_valid||!rt->m68k_regs.valid)return block(tr,0x1129eu);
+        wf_r17_1129e_trace_t rr;int carry=0;status=wf_r17_1129e_live(rt,(unsigned)(a-rt->actors),rt->g.mode_0161,rt->g.progression_0162,&rt->g.rng_state,rt->g.frame_counter,&rt->m68k_regs,&rr,&carry);if(status!=WF_OK)return block(tr,rr.blocked_dependency_rom);
+        if(!carry){wf_set_be16(a,O_STATE,5u);wf_set_be16(a,O_SELECTOR,0x81u);return WF_OK;}
+        rt->g.global_15d2=wf_u8(a,3u);rt->g.global_15d3=38u;wf_set_be16(a,0x44u,2u);
+        wf_r17_m68k_move_w(&rt->m68k_regs,0u,64u);status=throw2f_offset(rt,a,64u,tr);if(status!=WF_OK)return status;goto descriptor;
+    }
+    if(low(a,O_FRAME)==1u&&!wf_be16(a,O_TIMER))wf_set_u8(a,O_B1B,48u);
+    if(low(a,O_FRAME)==3u&&!wf_be16(a,O_TIMER)){
+        uint16_t count=(uint16_t)(wf_be16(a,0x44u)-1u);wf_set_be16(a,0x44u,count);
+        if(count){wf_set_be16(a,O_FRAME,1u);wf_set_be16(a,O_TIMER,0u);goto descriptor;}
+        if(!t)return block(tr,0x16d54u);
+        if(wf_u8(a,3u)!=5u){
+            pin_clear(a,0x33u,0x40u);pin_clear(t,0x33u,0x40u);
+            if(!(rt->g.mode_0161&1u)){wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(t,0x86u));if(!p)return block(tr,0x110eeu);if(low(p,O_STATE)==1u&&low(p,0xaeu)==1u)setbit(p,0x34u,5u);}
+            wf_set_be16(t,O_STATE,4u);wf_set_be16(t,0x64u,0x26u);chgbit(t,O_FACING,7u);setbit(t,0x64u,5u);setbit(t,0x32u,3u);wf_set_be16(t,0x68u,22u);wf_set_u8(t,0xc7u,(uint8_t)(wf_u8(t,0xc7u)+5u));interrupt_position(rt,a,t,32,1,80);
+        }else{
+            setbit(a,O_FLAGS18,7u);wf_set_be16(t,O_STATE,4u);wf_set_be16(t,0x64u,0x16u);setbit(t,0x64u,5u);setbit(t,0x32u,3u);wf_set_u8(t,0xc7u,(uint8_t)(wf_u8(t,0xc7u)+1u));wf_set_be16(t,O_Y,(uint16_t)(wf_be16(t,O_Y)-1u));wf_set_be16(t,0x68u,22u);
+            wf_r17_m68k_move_w(&rt->m68k_regs,0u,50u);wf_status_t status=landing_1108c(rt,a,tr);if(status!=WF_OK)return status;chgbit(t,O_FACING,7u);interrupt_position(rt,a,t,-16,0,64);
+        }
+    }
+    if(low(a,O_FRAME)==4u&&!wf_be16(a,O_TIMER)){
+        setbit(a,O_FLAGS18,7u);wf_r17_m68k_move_w(&rt->m68k_regs,0u,32u);wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);helper_10bd0(a,32,0,0);
+    }
+    if(low(a,O_FRAME)==0xfeu){wf_set_be16(a,O_STATE,0u);setbit(a,O_LINK,7u);return WF_OK;}
+descriptor:
+    if(wf_u8(a,3u)!=1u)*dp=&D_16C7E;return WF_OK;
+}
+/* $1A7B4: raw81 reversal returns the original linked pair to raw7B/raw15. */
+static wf_status_t raw81(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r17_actions_r11_trace_t*tr){
+    *dp=&D_1A7A4;if(!bit(a,O_LATCH,7u))wf_set_be16(a,0x44u,80u);
+    uint16_t timer=(uint16_t)(wf_be16(a,0x44u)-1u);wf_set_be16(a,0x44u,timer);if(timer)return WF_OK;
+    uint32_t link=wf_be32(a,O_LINK);wf_actor_raw_t*t=actor_from_ptr(rt,link);if(!t&&(link&0x00ffffffu))return block(tr,0x1a7e2u);
+    rt->g.global_15d2=15u;rt->g.global_15d3=26u;wf_set_be16(a,O_STATE,5u);wf_set_be16(a,O_SELECTOR,0xc07bu);wf_set_be16(a,0x44u,1u);
+    if(t){wf_set_be16(t,O_STATE,5u);wf_set_be16(t,O_SELECTOR,0x15u);wf_set_be16(t,O_FACING,wf_be16(a,O_FACING));chgbit(t,O_FACING,7u);wf_set_be16(t,0x44u,0u);wf_set_be16(t,O_VISUAL,0x39u);wf_set_u8(t,O_VISUAL,wf_u8(t,O_FACING));}
+    wf_set_be16(a,O_VISUAL,0xffffu);wf_set_be16(a,O_FLAGS18,0u);if(t)wf_set_be16(t,O_FLAGS18,0u);wf_set_be16(a,0x1au,0u);if(t)wf_set_be16(t,0x1au,0u);return WF_OK;
+}
+
 wf_status_t wf_r17_dispatch_1c03e_r11(wf_runtime_t *rt,unsigned slot,wf_r17_actions_r11_bridge_t *b){
     wf_actor_raw_t *a;wf_r17_actions_r11_trace_t *tr;const desc_t *d=0;uint16_t sel;wf_status_t s;
     if(!rt||!b||slot>=WF_ACTOR_SLOTS)return WF_BAD_STATE;
@@ -1523,7 +1745,15 @@ wf_status_t wf_r17_dispatch_1c03e_r11(wf_runtime_t *rt,unsigned slot,wf_r17_acti
         tr->callback_rom=b->raw23_trace[slot].callback_rom;tr->descriptor_rom=b->raw23_trace[slot].descriptor_rom;tr->tick_descriptor_rom=b->raw23_trace[slot].tick_descriptor_rom;tr->blocked_dependency_rom=b->raw23_trace[slot].blocked_dependency_rom;return s;
     }
     switch(sel){
+        case 0x2fu:tr->callback_rom=0x16c9eu;tr->descriptor_rom=0x16c5eu;s=raw2f(rt,a,&d,tr);break;
+        case 0x81u:tr->callback_rom=0x1a7b4u;tr->descriptor_rom=0x1a7a4u;s=raw81(rt,a,&d,tr);break;
+        case 0x38u:tr->callback_rom=0x17b12u;tr->descriptor_rom=0x17afeu;s=raw38(rt,a,&d);break;
+        case 0x6cu:tr->callback_rom=0x19c48u;tr->descriptor_rom=0x19c28u;s=raw6c(rt,a,&d);break;
+        case 0x18u:tr->callback_rom=0x14f08u;tr->descriptor_rom=0x14ef0u;s=raw18(rt,a,&d,tr);break;
+        case 0x03u:tr->callback_rom=0x12b16u;tr->descriptor_rom=0x12ae6u;s=raw03(rt,a,&d,tr);break;
+        case 0x5fu:tr->callback_rom=0x19536u;tr->descriptor_rom=0x19530u;s=raw5f(rt,a,&d,tr);break;
         case 0x22u:tr->callback_rom=0x15b8cu;tr->descriptor_rom=0x15b6cu;s=raw22(rt,a,b,&d,tr);break;
+        case 0x3fu:tr->callback_rom=0x1836eu;tr->descriptor_rom=0x1835eu;s=raw3f(rt,a,b,&d,tr);break;
         case 0x0eu:tr->callback_rom=0x13d46u;tr->descriptor_rom=0x13d26u;s=raw0e(rt,a,&d,tr);break;
         case 0x51u:tr->callback_rom=0x18c24u;tr->descriptor_rom=0x18bf4u;s=raw51(rt,a,&d,tr);break;
         case 0x33u:tr->callback_rom=0x17282u;tr->descriptor_rom=0x17266u;s=raw33(rt,a,&d,tr);break;

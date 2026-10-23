@@ -22,10 +22,11 @@ int main(void){
  /* Seed 45 on same exact context selects index1: clear BC and B7.bit1, no synthetic choice. */
  memset(&rt,0,sizeof(rt));prep_state(&rt.actors[0],6u);rt.g.credited_route=1u;rt.g.progression_0162=0u;rt.g.rng_state=45u;rt.g.rng_state_valid=1u;rt.g.rng_register_context_valid=1u;wf_set_u8(&rt.actors[0],WF_A_TIMER44+1u,1u);wf_set_be16(&rt.actors[0],WF_A_CPU_BC,0x1234u);wf_set_u8(&rt.actors[0],WF_A_CPU_B7,0x02u);
  assert(wf_cpu_actor_step(&rt,0,&tr)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_CPU_BC)==0u);assert((wf_u8(&rt.actors[0],WF_A_CPU_B7)&0x02u)==0u);
- /* WP01 $1EB48 special controller16 path: angle $40 then wait until X >= $0308; no invented decision tail. */
+ /* WP01 $1EB48: wait for X >= $0308, then enter the real bank9 tail.
+  * This incomplete unit context has no target, so arbitration fails closed. */
  memset(&rt,0,sizeof(rt));prep_state(&rt.actors[0],5u);wf_set_be16(&rt.actors[0],WF_A_SELECTOR,0x0016u);wf_set_u8(&rt.actors[0],WF_A_INTERNAL_ID,7u);wf_set_be16(&rt.actors[0],WF_A_X,0x0307u);
  assert(wf_state5_execute(&rt,0,&tr.state5)==WF_OK);assert(wf_u8(&rt.actors[0],WF_A_ANGLE)==0x40u);assert((wf_u8(&rt.actors[0],WF_A_SELECTOR)&0x40u)!=0u);
- wf_set_be16(&rt.actors[0],WF_A_X,0x0308u);assert(wf_state5_execute(&rt,0,&tr.state5)==WF_BLOCKED);assert(tr.state5.blocked_dependency_rom==0x001e9ccu);
+ wf_set_be16(&rt.actors[0],WF_A_X,0x0308u);assert(wf_state5_execute(&rt,0,&tr.state5)==WF_BLOCKED);assert(tr.state5.blocked_dependency_rom==0x001f802u);assert(rt.m68k_regs.d[2]==9u);
  /* Collision SECOND S5 $24A90 exact non-subtype side effects. */
  wf_actor_raw_t s,d,l;memset(&s,0,sizeof(s));memset(&d,0,sizeof(d));memset(&l,0,sizeof(l));wf_set_be16(&d,WF_A_REL_FLAGS,0x55aau);wf_set_be32(&d,WF_A_REL_LINK,0x12345678u);wf_set_be16(&d,WF_A_TIMER44,0x9999u);wf_set_be16(&l,WF_A_LATCHED,0x7777u);wf_state4_write_word(&d,0x8009u);
  wf_collision_pair_ctx_t c={&s,&d,&l,0,0,0};assert(wf_collision_second_apply(0x05u,&c)==WF_COLL_ACCEPT);assert(wf_be16(&d,WF_A_REL_FLAGS)==0u);assert(wf_be32(&d,WF_A_REL_LINK)==0u);assert(wf_be16(&d,WF_A_TIMER44)==0u);assert(wf_be16(&l,WF_A_LATCHED)==2u);assert(wf_be16(&d,WF_A_STATE4)==0x8009u);

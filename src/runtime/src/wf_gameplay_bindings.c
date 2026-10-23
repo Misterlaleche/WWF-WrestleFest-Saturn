@@ -187,6 +187,7 @@ wf_status_t wf_phase_referee_1f914(wf_runtime_t *rt,uint32_t addr,void *user){
  wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;wf_r17_referee_ctx_t rc;wf_r17_referee_hooks_t h;wf_r17_render_ctx_t render;wf_status_t s;(void)addr;
  if(!rt||!c||!c->camera_valid)return WF_BLOCKED;
  memset(&rc,0,sizeof(rc));rc.display_2067c=c->referee_display_2067c;rc.clear_206fe=c->referee_clear_206fe;rc.direction_20c8=c->referee_direction_20c8;rc.resolver_280dc=c->referee_resolver_280dc?c->referee_resolver_280dc:wf_r17_resolver_280dc_hook;rc.royal_phase6_21358=c->referee_royal_phase6_21358;rc.tag_phase6_90d6=c->referee_tag_phase6_90d6;rc.result_20156=c->referee_result_20156;rc.audio_2052=(wf_r17_ref_audio_fn)c->audio_command;rc.user=c->r17_owner_user;
+ rc.number_2067c=c->referee_number_2067c;rc.text_2503c=c->post7_raw_2503c;
  render.scroll_a_x=(uint16_t)c->camera.scroll0_x;render.scroll_a_y=(uint16_t)c->camera.scroll0_y;render.queue=&c->render_queue;render.visibility_2188=wf_r17_visibility_2188_exact;render.visibility_user=0;
  h.owner_1f914_logic=wf_r17_referee_logic_1f914;h.royal_f8e4=0;h.user=&rc;
  s=h.owner_1f914_logic(rt,&rt->referee,h.user);if(s==WF_OK)s=wf_r17_world_to_screen_247c(&rt->referee,render.scroll_a_x,render.scroll_a_y);if(s==WF_OK)s=wf_r17_queue_27b8(&render,&rt->referee);

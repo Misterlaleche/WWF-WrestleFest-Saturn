@@ -1,4 +1,25 @@
-# Estado actual: movimiento CPU y llave $22, 23 de octubre de 2026
+# Estado actual: primer combate completo desde f88acad, 23 de octubre de 2026
+
+Raw3F y raw5F implementados con ROM directa, junto a los owners necesarios
+para continuar la ruta natural: CPU, recepciones, ringside, árbitro y cuenta.
+El combate sin entrada termina en HOST y Mednafen en el frame3008, por cuenta
+fuera de20, seguido de la presentación original RING OUT / GAME OVER.
+
+Precarga consolidada:4883 tiles y206 páginas. La partida natural registra
+cero lecturas de ROM/sprites en gameplay, normal y con ASan/UBSan. La carga
+CD de escena2 es independiente. Suite general:36 ejecutables, exit0.
+SH-2 enlaza; Mednafen comprueba comandos/texturas VDP1, HUD y escena2 VDP2.
+La entrega contiene vídeo65,3s, capturas y prueba reproducible; sin BIN/CUE.
+
+Límite relevante: la ruta con mando llega3373 y aún bloquea en raw1C.
+No se declara todo gameplay cerrado, ROM-EXACT universal ni Saturn físico.
+Promedio observado:3008 frames/3464 VBlanks, ≈52,1fps a60Hz nominales,
+incluyendo cambio de escena y esperas; no60fps sostenidos. Sin frontend/audio.
+
+Informe y reproducción:
+[validation/RUNTIME18-ACTIONS3F5F-COMBAT-CHECKPOINT.md](validation/RUNTIME18-ACTIONS3F5F-COMBAT-CHECKPOINT.md).
+
+## Checkpoint anterior: movimiento CPU y llave $22
 
 Sobre `a4be15f`: implementados `$1D7B6/$1DA66` y acción`$22`, con2263 y1946
 comparaciones ROM respectivamente. Se consolida la precarga4513 tiles y176

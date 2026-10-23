@@ -14,6 +14,7 @@
 #include "wf_r18_display.h"
 #include "wf_r18_hud.h"
 #include "wf_r18_world.h"
+#include "wf_r18_transition.h"
 
 /* The IP loader places the executable in HWRAM. Borrowed CPU-owned LWRAM
  * caches and video-write staging have disjoint ranges and no allocation. */
@@ -34,6 +35,7 @@ static wf_r18_video_t video;
 static wf_r18_display_t display;
 static wf_r18_world_ctx_t world;
 static wf_r18_bootstrap_context_t boot;
+static wf_r18_transition_context_t transition;
 static smpc_peripheral_digital_t pad;
 int main(void);
 static void marker(unsigned r, unsigned g, unsigned b)
@@ -280,6 +282,7 @@ int main(void)
     gameplay.audio_command = silent_audio;
     gameplay.referee_direction_20c8=wf_r18_referee_direction_20c8;
     gameplay.referee_display_2067c=wf_r18_referee_display_2067c;
+    gameplay.referee_number_2067c=wf_r18_referee_number_2067c;
     gameplay.referee_clear_206fe=wf_r18_referee_clear_206fe;
     gameplay.referee_tag_phase6_90d6=wf_r18_tag_bonus_90d6;
     gameplay.referee_result_20156=wf_r18_result_sound_20156;
@@ -299,6 +302,16 @@ int main(void)
     gameplay.branchb_26b68 = world_26b68;
     gameplay.r17_owner_user = &video;
     if(wf_r18_display_init(&display,&rt,wf_r18_rom_read,NULL)!=WF_OK)fail(0x27048u,0);
+    transition=(wf_r18_transition_context_t){
+        .video=&video,.world=&world,.display=&display,
+        .render_queue=&gameplay.render_queue,.camera=&gameplay.camera,
+        .scene_blob=RING_BLOB,.scene_capacity=0x1f000u,
+        .file_size=wf_r18_file_size,.file_read=wf_r18_file_read,
+        .priority_140010=&boot.priority_140010
+    };
+    wf_r18_transition_bind(&transition);
+    gameplay.transition_reset=wf_r18_transition_reset;
+    gameplay.transition_barrier=wf_r18_transition_barrier;
     palette_and_ring();
     vdp2_sync();
     vdp2_sync_wait();
@@ -350,7 +363,7 @@ int main(void)
             if(status!=WF_OK)fail(0x11ceu,video.failed_address);
             finished_presentation_vblanks=video_clock-presentation_start;
             finished_presentation=1u;
-#ifdef WF_R18_REPLAY_TEST
+#if defined(WF_R18_REPLAY_TEST) && !defined(WF_R18_CAPTURE_RESULT)
             /* Test-disc terminal report, only after the real $11B6 condition.
              * Green plus the frame RGB bytes makes completion externally visible. */
             marker(0,31,0);
@@ -364,9 +377,9 @@ int main(void)
             for (;;) smpc_peripheral_process();
         }
         if (status != WF_OK)
-            fail(gameplay.last_blocked_phase ?
+            fail(transition.blocked_pc ? 0xf560u : gameplay.last_blocked_phase ?
                  gameplay.last_blocked_phase : boot.blocked_pc,
-                 gameplay.last_blocked_dependency ?
+                 transition.blocked_pc ? transition.blocked_pc : gameplay.last_blocked_dependency ?
                  gameplay.last_blocked_dependency : video.failed_address);
     }
 }

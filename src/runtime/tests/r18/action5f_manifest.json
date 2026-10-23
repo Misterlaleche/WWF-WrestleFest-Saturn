@@ -1,0 +1,16 @@
+{
+  "source_commit": "f88acad",
+  "source_snapshot": "validation/results/runtime18/action3f-5f/baseline-controlled/snapshot-00189.bin",
+  "sha256": "e16f799c22fe8fb381126786e74416b5f96a79bb9988d27183b2383e8481936b",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 560,
+  "slot": 0,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 189,
+  "recorded_blocked_status": 1,
+  "selector": "0x005f",
+  "derived": false,
+  "comparison": "Unmodified natural pre-dispatch RAM and D0-D7; real bounded C dispatcher versus unchanged arcade ROM, comparing all RAM, foreground RAM and D0-D7.",
+  "capture_note": "All-actor host trace with real config0066 and referee data, captured before raw5F production implementation."
+}

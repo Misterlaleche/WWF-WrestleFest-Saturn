@@ -1,5 +1,24 @@
 #include "wf_r17_dependencies.h"
 #include "wf_gameplay_bindings.h"
+#include <string.h>
+
+wf_status_t wf_r17_transition_reset_ram(wf_runtime_t*rt){
+ if(!rt)return WF_BAD_STATE;
+ /* $1F6C: [16D2,19AE). These fields are scattered in the C model;
+  * address caches and animation queues are owned by the platform world. */
+ rt->g.global_16d2=rt->g.global_16d4=0u;rt->g.global_16e6=0u;
+ rt->g.global_17d6=rt->g.global_17d8=rt->g.global_17da=rt->g.global_17dc=0u;
+ rt->g.global_17de=rt->g.global_17e0=rt->g.global_17e2=rt->g.global_17e4=0u;
+ rt->g.global_17e6=rt->g.global_17ea=rt->g.global_17ee=rt->g.global_17f2_word=0u;
+ rt->g.global_17f6=rt->g.global_17fa=rt->g.global_17fe=0u;
+ rt->g.global_1800=rt->g.global_1802=rt->g.global_1804=rt->g.global_1806=0u;
+ memset(rt->g.transfer_queue_1808,0,sizeof rt->g.transfer_queue_1808);rt->g.transfer_count_1828=0u;
+ memset(rt->branchb_list_182a,0,sizeof rt->branchb_list_182a);
+ memset(rt->branchb_prev_185a,0,sizeof rt->branchb_prev_185a);
+ memset(rt->branchb_objs_188a,0,sizeof rt->branchb_objs_188a);
+ /* $1FDE clears the external [19B2,1CD2) area and ends its DBRA at FFFF. */
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,0xffffu);return WF_OK;
+}
 
 static int bit(const wf_actor_raw_t*a,size_t o,unsigned b){return (wf_u8(a,o)&(uint8_t)(1u<<b))!=0u;}
 static void setbit(wf_actor_raw_t*a,size_t o,unsigned b){wf_set_u8(a,o,(uint8_t)(wf_u8(a,o)|(uint8_t)(1u<<b)));}
@@ -23,36 +42,41 @@ wf_status_t wf_r17_f98c(wf_runtime_t*rt,wf_gameplay_binding_context_t*c){
  rt->g.global_1670=0u;rt->g.global_1674=0u;rt->g.gameplay_vblank_enable=(uint8_t)(rt->g.gameplay_vblank_enable&0x7fu);
  if(!c||!c->transition_reset)return block(c,0x00001f6cu);
  s=c->transition_reset(rt,(uint8_t)royal,c->r17_owner_user);if(s!=WF_OK)return s;
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,rt->g.progression_0162);
  if(!royal){
   rt->g.global_007f=t_clear[rt->g.progression_0162];rt->g.mode_0161=(uint8_t)(rt->g.mode_0161|2u);
+  rt->g.global_007e=(uint16_t)((rt->g.global_007e&0xff00u)|rt->g.global_007f);
   wf_set_be16(&rt->fixed_object0,0x0eu,0x0100u);wf_set_be16(&rt->fixed_object0,0x1cu,3u);
   wf_set_be16(&rt->fixed_object1,0x0eu,0x0100u);wf_set_be16(&rt->fixed_object1,0x1cu,3u);
   for(i=0;i<WF_ACTOR_SLOTS;i++){
    wf_actor_raw_t*a=&rt->actors[i];if(!bit(a,0x00u,7))continue;clear_common(a);
    if(bit(a,0x33u,2)&&wf_u8(a,0x61u)==0x6au){
-    rt->g.global_1806=0x0200u;rt->g.global_1804=bit(a,0x2eu,7)?0x0350u:0x0190u;
+    rt->g.global_1806=0x0200u;rt->g.global_1804=(rt->g.global_1679&0x80u)?0x0350u:0x0190u;
     wf_set_be16(a,0x20u,5u);wf_set_be16(a,0x60u,0x006au);setbit(a,0x32u,5);wf_set_be16(a,0x68u,8u);
    }else if(!bit(a,0x33u,0)){
     mask_flags32(a);clrbit(a,0xc6u,6);setbit(a,0x33u,2);setbit(a,0x32u,5);wf_set_be16(a,0x20u,5u);wf_set_be16(a,0x60u,0x006bu);wf_set_be16(a,0x0au,0x0164u);wf_set_be16(a,0x0eu,0x0100u);
     if(!bit(a,0x33u,7)){wf_set_be16(a,0x06u,0x0200u);setbit(a,0x2eu,7);}else{wf_set_be16(a,0x06u,0x0428u);clrbit(a,0x2eu,7);}
-   }else{mask_flags32(a);wf_set_be16(a,0x20u,0u);wf_set_be16(a,0x0au,0x0160u);wf_set_be16(a,0x06u,bit(a,0x2eu,7)?0x03a0u:0x02a0u);}
+   }else{mask_flags32(a);wf_set_be16(a,0x20u,0u);wf_set_be16(a,0x0au,0x0160u);wf_set_be16(a,0x06u,(rt->g.global_1679&0x80u)?0x03a0u:0x02a0u);}
   }
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,9u); /* $250E exhausts all nine actor slots. */
   if(!c->transition_barrier)return block(c,0x00026e66u);
   s=c->transition_barrier(rt,0u,c->r17_owner_user);if(s!=WF_OK)return s;
   rt->g.global_15f4=rt->g.global_007e;rt->g.global_15f8=rt->g.global_007e;
   wf_set_be16(&rt->referee,0x06u,0x0340u);wf_set_be16(&rt->referee,0x0au,0x0160u);wf_set_be16(&rt->referee,0x20u,0x8003u);
-  rt->g.gameplay_vblank_enable=(uint8_t)(rt->g.gameplay_vblank_enable|0x80u);rt->g.global_1678=0u;return emit_audio(rt,c,0x0080u);
+  rt->g.gameplay_vblank_enable=(uint8_t)(rt->g.gameplay_vblank_enable|0x80u);rt->g.global_1678=rt->g.global_1679=0u;wf_r17_m68k_move_w(&rt->m68k_regs,0u,0x80u);return emit_audio(rt,c,0x0080u);
  }
- rt->g.global_007f=t_set[rt->g.progression_0162];rt->g.mode_0161=(uint8_t)(rt->g.mode_0161&0xfdu);rt->g.global_1678=0u;rt->g.global_1804=0x01e0u;rt->g.global_1806=0x0230u;
+ rt->g.global_007f=t_set[rt->g.progression_0162];rt->g.global_007e=(uint16_t)((rt->g.global_007e&0xff00u)|rt->g.global_007f);rt->g.mode_0161=(uint8_t)(rt->g.mode_0161&0xfdu);rt->g.global_1678=rt->g.global_1679=0u;rt->g.global_1804=0x01e0u;rt->g.global_1806=0x0230u;
  for(i=0;i<WF_ACTOR_SLOTS;i++){
   wf_actor_raw_t*a=&rt->actors[i];if(!bit(a,0x00u,7))continue;clear_common(a);mask_flags32(a);clrbit(a,0xc6u,6);
   if(bit(a,0x33u,0)){wf_set_be16(a,0x20u,0u);wf_set_be16(a,0xaeu,0u);wf_set_be16(a,0x0au,0x0150u);wf_set_be16(a,0x0eu,0x0140u);wf_set_be16(a,0x06u,bit(a,0x33u,7)?0x02c0u:0x0240u);}
   else{wf_set_be16(a,0x20u,1u);wf_set_be16(a,0xaeu,1u);wf_set_be16(a,0x0au,0x0160u);wf_set_be16(a,0x0eu,0x0140u);}
  }
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,9u);
  if(!c||!c->transition_barrier)return block(c,0x00026e66u);
  s=c->transition_barrier(rt,1u,c->r17_owner_user);if(s!=WF_OK)return s;
+ rt->g.global_15f4=rt->g.global_007e;rt->g.global_15f8=rt->g.global_007e;
  wf_set_be16(&rt->referee,0x06u,0x0280u);wf_set_be16(&rt->referee,0x0au,0x0198u);wf_set_be16(&rt->referee,0x20u,0x8000u);wf_set_be16(&rt->referee,0x34u,0u);wf_set_be16(&rt->referee,0x12u,0u);
- s=emit_audio(rt,c,0x0020u);if(s!=WF_OK)return s;rt->g.global_15d4=0u;rt->g.global_15d5=0u;rt->g.gameplay_vblank_enable=(uint8_t)(rt->g.gameplay_vblank_enable|0x80u);return WF_OK;
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,0x20u);s=emit_audio(rt,c,0x0020u);if(s!=WF_OK)return s;rt->g.global_15d4=0u;rt->g.global_15d5=0u;rt->g.gameplay_vblank_enable=(uint8_t)(rt->g.gameplay_vblank_enable|0x80u);return WF_OK;
 }
 
 typedef struct {uint16_t cmd,dur;} pair_t;

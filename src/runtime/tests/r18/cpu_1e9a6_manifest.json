@@ -1,0 +1,15 @@
+{
+  "source_commit": "f88acad plus prior ROM-exact owner chain and CPU MODE2",
+  "source_snapshot": "validation/results/runtime18/action3f-5f/after38-controlled/snapshot-00709.bin",
+  "sha256": "eab2635cd887511f56dbc539b0549c63edd41cafd26133bdf2c152e55f8bdfd4",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 2143,
+  "slot": 4,
+  "kind": 0,
+  "pc": "0x1dfe2",
+  "sequence": 709,
+  "recorded_blocked_status": 1,
+  "selector": "0x4016",
+  "derived": false,
+  "comparison": "Natural unmodified pre-CPU RAM and D0-D7, native actor CPU dispatcher versus unchanged ROM; all RAM and FG RAM and D0-D7, including RNG and shared direction scratch, compared."
+}

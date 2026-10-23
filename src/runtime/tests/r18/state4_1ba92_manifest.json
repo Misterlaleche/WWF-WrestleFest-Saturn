@@ -1,0 +1,15 @@
+{
+  "source_commit": "f88acad plus ROM-exact raw3F/5F/main3/raw03",
+  "source_snapshot": "validation/results/runtime18/action3f-5f/after-ca2e-noinput/snapshot-00529.bin",
+  "sha256": "d0eb0f7568fc3c4acd6f6acafda46017f8c41926b064c99848bf50cd85ec0346",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 1556,
+  "slot": 0,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 529,
+  "recorded_blocked_status": 1,
+  "main_state4_subtype": "0x0017",
+  "derived": false,
+  "comparison": "Literal natural RINGSIDE pre-dispatch; complete original ROM1C03E versus bounded C dispatcher: whole work RAM, FG RAM and D0-D7."
+}

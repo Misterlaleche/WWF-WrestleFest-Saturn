@@ -1,0 +1,24 @@
+{
+  "base_commit": "f88acadb8c3c95a3e4a1fe10eaf6e3e3960dbf1a",
+  "snapshot_source": "validation/results/runtime18/action3f-5f/after-cpuring-noinput/snapshot-00478.bin",
+  "snapshot_sha256": "81e6f480814bb49af3b8b7ed100e48613228754e4665aad7cfe1542cfd0b8834",
+  "snapshot_header": [
+    1381,
+    1,
+    0,
+    116980,
+    478,
+    1
+  ],
+  "header_fields": [
+    "frame",
+    "slot",
+    "kind",
+    "owner_pc",
+    "sequence",
+    "native_status"
+  ],
+  "format": "six LE uint32, eight LE D registers, 0x2000 BE RAM, eight LE D registers, 0x2000 BE RAM",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "purpose": "Natural noinput1381 slot1 CPU1C8F4 outside branch1CA2E; derived both-outside continuation, own-participant climb and partner-only retarget without extra helpers."
+}

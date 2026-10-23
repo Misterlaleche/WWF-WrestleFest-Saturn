@@ -484,6 +484,16 @@ static wf_status_t tick_descriptor(wf_actor_raw_t *a,const wf_anim_desc_t *d){
     wf_set_be16(a,WF_A_MIRROR,(uint16_t)(entry->pose_raw^wf_be16(a,WF_A_FACING)));
     wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|128u));return WF_OK;
 }
+/* $1B706/$1B700, state4 subtypes $10/$11/$12: hide for 32 owner calls.
+ * Kind-zero animation leaves the callback's $FF00 counter unchanged. */
+static void state4_1b706(wf_actor_raw_t *a){
+    wf_set_be16(a,WF_A_MIRROR,0xffffu);wf_set_be16(a,WF_A_ANIM_COUNTER,0xff00u);
+    int latched=(wf_u8(a,WF_A_LATCHED)&128u)!=0u;
+    wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|128u));
+    if(!latched)wf_set_be16(a,WF_A_TIMER44,32u);
+    uint16_t timer=(uint16_t)(wf_be16(a,WF_A_TIMER44)-1u);wf_set_be16(a,WF_A_TIMER44,timer);
+    if(!timer)wf_set_be16(a,WF_A_STATE,0u);
+}
 /* $1BCAA/$1BC9E: victim of the linked jumping attack. */
 static wf_status_t state4_1bcaa(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_dispatch_1c03e_ctx_t *ctx){
     if(!(wf_u8(a,WF_A_LATCHED)&128u)||low(a,WF_A_ANIM_INDEX)==0xfeu){
@@ -540,13 +550,138 @@ static wf_status_t push_clearance_10b62(wf_runtime_t *rt,wf_actor_raw_t *a,uint1
     wf_set_be16(a,WF_A_CONTACT,contact);wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+wf_be16(a,WF_A_CORR_X)));
     wf_set_be16(a,WF_A_FIELD3E,0u);return WF_OK;
 }
-/* $10FC6: rope animation / ring-edge reaction. D0 is saved by $1C03E. */
-static void edge_reaction_10fc6(wf_runtime_t *rt,wf_actor_raw_t *a){
+/* $10FC6: rope animation / ring-edge reaction; return its carry result.
+ * D0 is saved by $1C03E. Existing victim callers consume only RAM effects. */
+static int edge_reaction_10fc6(wf_runtime_t *rt,wf_actor_raw_t *a){
     uint8_t contact=wf_u8(a,WF_A_CONTACT),bits=wf_u8(a,WF_A_CONTACT+1u);
     if(!(rt->g.mode_0161&2u)&&(contact==1u||contact==5u)){
-        if(bits&2u){if(!(rt->g.global_1150&255u)){rt->g.global_1150=1u;rt->g.global_1180=1u;}}
-        else if(bits&1u){if(!(rt->g.global_11b0&255u)){rt->g.global_11b0=1u;rt->g.global_11e0=1u;}}
+        if(bits&2u){if(!(rt->g.global_1150&255u)){rt->g.global_1150=1u;rt->g.global_1180=1u;}return 1;}
+        if(bits&1u){if(!(rt->g.global_11b0&255u)){rt->g.global_11b0=1u;rt->g.global_11e0=1u;}return 1;}
     }else if(contact==3u){wf_set_be16(a,WF_A_STATE,4u);wf_set_be16(a,WF_A_STATE4,0x17u);}
+    return 0;
+}
+/* $11D8E/$11D82: slow a released runner, or rebound when $10FC6
+ * reports rope contact. The dispatcher still ticks the original descriptor. */
+static void main_three_11d8e(wf_runtime_t *rt,wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        wf_set_u8(a,WF_A_FLAGS33,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&~0x10u));
+        return;
+    }
+    wf_set_be16(a,WF_A_PROFILE,1u);
+    if(edge_reaction_10fc6(rt,a)){wf_set_be16(a,WF_A_STATE,6u);return;}
+    uint16_t speed=(uint16_t)(wf_be16(a,WF_A_MAGNITUDE)-5u);
+    wf_set_be16(a,WF_A_MAGNITUDE,speed);
+    if(speed&0x8000u){
+        wf_set_be16(a,WF_A_STATE,0u);wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,WF_A_MAGNITUDE,0u);
+    }
+}
+/* $1BA92/$1BA82, subtype $17: edge recoil, shake and landing. The
+ * $2052/$1110E calls preserve every live D register and emit only sound. */
+static void state4_1ba92(wf_runtime_t *rt,wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        wf_set_u8(a,WF_A_FLAGS33,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&~16u));
+        /* $258E row13 at $2618; facing applies only to the VX WORD. */
+        wf_set_be16(a,WF_A_VX,(wf_u8(a,WF_A_FACING)&128u)?0xffc0u:0x40u);
+        wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0x100u);wf_set_be16(a,WF_A_VZ_DEC,0x38u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+        rt->g.global_1802=14u;
+    }else if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+        wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,5u);
+        wf_set_be16(a,WF_A_MIRROR,0x1fu);wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+    }
+}
+/* $1BB4C/$1BB40, subtype $19: horizontal recoil and landing. */
+static void state4_1bb4c(wf_runtime_t *rt,wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        uint16_t vx=(wf_u8(a,WF_A_FLAGS34)&8u)?0x500u:0x300u;
+        wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(wf_u8(a,WF_A_FLAGS34)&~8u));
+        if(wf_u8(a,WF_A_FACING)&128u)vx=(uint16_t)(0u-vx);
+        /* $258E rows $13/$24 at $263C/$26A2 preserve all live registers. */
+        wf_set_be16(a,WF_A_VX,vx);wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0u);wf_set_be16(a,WF_A_VZ_DEC,0x58u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+    }else{
+        edge_reaction_10fc6(rt,a);
+        if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+            /* $1110E emits only the explicit $2052 sound device command. */
+            wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,5u);
+            wf_set_be16(a,WF_A_MIRROR,low(a,WF_A_TIER)==2u?0x1fu:0x14u);
+            wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+            uint16_t dx=(wf_u8(a,WF_A_FACING)&128u)?64u:0xffc0u;
+            wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+dx));
+            wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
+        }
+    }
+}
+/* $1BDE8/$1BDD8, subtype $22: descending throw victim and landing. */
+static void state4_1bde8(wf_runtime_t *rt,wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E row $18 at $265A; $10F9C uses D0.W=$30. */
+        wf_set_be16(a,WF_A_VX,(wf_u8(a,WF_A_FACING)&128u)?0x180u:0xfe80u);
+        wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0xff00u);wf_set_be16(a,WF_A_VZ_DEC,0x58u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+        uint16_t y=wf_be16(a,WF_A_Y),d1=(uint16_t)(y+32u);
+        if(d1>=0x198u)wf_set_be16(a,WF_A_VY,0xffd0u);
+        else{d1=(uint16_t)(y-32u);if(d1<0x118u)wf_set_be16(a,WF_A_VY,48u);}
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,d1);
+    }else{
+        if(!low(a,WF_A_ANIM_INDEX)&&!wf_be16(a,WF_A_ANIM_COUNTER))wf_set_be16(a,WF_A_Z,(uint16_t)(wf_be16(a,WF_A_Z)-16u));
+        edge_reaction_10fc6(rt,a);
+        if(low(a,WF_A_ANIM_INDEX)==1u){
+            wf_set_be16(a,WF_A_FIELD42,0xffe0u);
+            if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+                /* $1110E emits only the explicit $2052 sound device command. */
+                wf_set_be16(a,WF_A_FIELD42,0u);wf_set_be16(a,WF_A_STATE,4u);wf_set_be16(a,WF_A_STATE4,5u);
+                wf_set_be16(a,WF_A_MIRROR,0x1fu);wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+                uint16_t dx=(wf_u8(a,WF_A_FACING)&128u)?56u:0xffc8u;
+                wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+dx));
+                wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
+            }
+        }
+    }
+}
+/* $1BF1C/$1BF08: subtype LOW25 keeps its high flags until landing. */
+static void state4_1bf1c(wf_runtime_t *rt,wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E row $25 at $26A8, followed by optional WORD44 reversal. */
+        uint16_t vx=(wf_u8(a,WF_A_FACING)&128u)?0x140u:0xfec0u;
+        if(wf_be16(a,WF_A_TIMER44))vx=(uint16_t)(0u-vx);
+        wf_set_be16(a,WF_A_VX,vx);wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0x200u);wf_set_be16(a,WF_A_VZ_DEC,0x40u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+        wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^128u));
+        uint16_t y=wf_be16(a,WF_A_Y),d1=(uint16_t)(y+32u);
+        if(d1>=0x198u)wf_set_be16(a,WF_A_VY,0xffd0u);
+        else{d1=(uint16_t)(y-32u);if(d1<0x118u)wf_set_be16(a,WF_A_VY,48u);}
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,d1);
+    }else{
+        edge_reaction_10fc6(rt,a);
+        if(low(a,WF_A_ANIM_INDEX)==2u){
+            wf_set_be16(a,WF_A_FIELD42,0xfff0u);
+            if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+                /* $1110E emits sound only. Landing keeps the low pose BYTE. */
+                wf_set_be16(a,WF_A_FIELD42,0u);wf_set_be16(a,WF_A_STATE,4u);wf_set_be16(a,WF_A_STATE4,5u);
+                wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+                uint16_t dx=(wf_u8(a,WF_A_FACING)&128u)?56u:0xffc8u;
+                wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+dx));
+                wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
+            }
+        }
+    }
+}
+/* $1BFA6/$1BF96, subtype LOW26: rearward fall and its first-pose
+ * offset. Only the low animation-index BYTE selects $10BD0. */
+static void state4_1bfa6(wf_runtime_t *rt,wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E[3], then the callback's distinct VY WORD overwrite. */
+        wf_set_be16(a,WF_A_VX,0u);wf_set_be16(a,WF_A_VY,0x80u);wf_set_be16(a,WF_A_VZ,0x300u);wf_set_be16(a,WF_A_VZ_DEC,0x38u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+    }else{
+        if(!low(a,WF_A_ANIM_INDEX)&&!wf_be16(a,WF_A_ANIM_COUNTER)){
+            wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^128u));
+            /* $10BD0 applies the new facing to -56; Y remains unchanged. */
+            uint16_t dx=(wf_u8(a,WF_A_FACING)&128u)?56u:0xffc8u;
+            wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+dx));wf_set_be16(a,WF_A_Z,(uint16_t)(wf_be16(a,WF_A_Z)-16u));
+            wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0xfff0u);
+        }
+        if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+            /* $1110E writes only the silent sound device. */
+            wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,5u);
+        }
+    }
 }
 /* $1B8CA: victim of raw $24. Edge classification uses the linked attacker's
  * facing; the velocity preset uses the victim's own facing. */
@@ -651,6 +786,31 @@ static void recovery_input_10d04(wf_runtime_t *rt,wf_actor_raw_t *a){
             uint16_t timer=(uint16_t)(wf_be16(a,0xaau)-1u);wf_set_be16(a,0xaau,timer?timer:0x4000u);
         }
     }
+}
+/* $1B288: descriptors $1B268/$1B278 (subtypes 6/7). Ground contact
+ * releases the indefinite first pose; the original descriptor still ticks. */
+static wf_status_t state4_1b288(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_dispatch_1c03e_ctx_t *ctx){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E row $15: $0000,$0300,$0068, before $10B62. */
+        wf_set_be16(a,WF_A_VX,0u);wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0x300u);wf_set_be16(a,WF_A_VZ_DEC,0x68u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+        wf_status_t status=push_clearance_10b62(rt,a,80u,ctx);if(status!=WF_OK)return status;
+        /* $10C60 selector1 leaves a positive existing recovery WORD alone. */
+        uint16_t recovery=wf_be16(a,0xaau);
+        if(!recovery||(recovery&0x8000u)){
+            uint16_t unit=(uint16_t)(wf_be16(a,WF_A_STAMINA_MAX)>>2),sum=unit;unsigned level=3u;
+            while(sum<wf_be16(a,WF_A_STAMINA)&&level){sum=(uint16_t)(sum+unit);--level;}
+            static const uint8_t delay[4]={1u,3u,7u,21u};wf_set_be16(a,0xaau,delay[level]);
+        }
+        return WF_OK;
+    }
+    recovery_input_10d04(rt,a);
+    if(!wf_be16(a,WF_A_ANIM_INDEX)&&(wf_u8(a,WF_A_CONTACT+1u)&16u)){
+        /* $1110E emits only the silent sound device's landing command. */
+        wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,WF_A_ANIM_COUNTER,0u);return WF_OK;
+    }
+    wf_status_t status=unlink_115d2(rt,a,ctx);if(status!=WF_OK)return status;
+    if(low(a,WF_A_ANIM_INDEX)==0xfeu){wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,low(a,WF_A_STATE4)==6u?8u:9u);}
+    return WF_OK;
 }
 /* $1B318: grounded recovery, followed by the standing-up state 7. */
 static wf_status_t state4_1b318(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_dispatch_1c03e_ctx_t *ctx){
@@ -874,6 +1034,10 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
             s=tick_descriptor(a,d);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;
         }
         if(d->callback_rom==0x1b134u){s=state4_1b134(rt,a,d);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;}
+        if(d->callback_rom==0x1b288u){
+            s=state4_1b288(rt,a,ctx);if(s!=WF_OK)return s;
+            s=tick_descriptor(a,d);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;
+        }
         if(d->callback_rom==0x1b318u){
             s=state4_1b318(rt,a,ctx);if(s!=WF_OK)return s;
             s=tick_descriptor(a,d);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;
@@ -887,6 +1051,30 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
         }
         if(d->callback_rom==0x1b478u){
             s=state4_1b478(rt,a,ctx);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1b706u){
+            state4_1b706(a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1ba92u){
+            state4_1ba92(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1bb4cu){
+            state4_1bb4c(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1bde8u){
+            state4_1bde8(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1bf1cu){
+            state4_1bf1c(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1bfa6u){
+            state4_1bfa6(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
         }
         /* The two demonstrated callback-RTS entries are subtypes $1F/$28. */
         if(d->callback_rom!=0x00012612u)return blocked(ctx,d->callback_rom);
@@ -905,6 +1093,10 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
     }
     if(id==2u&&d->callback_rom==0x00011c82u){
         s=main_two_11c82(rt,a,ctx);if(s!=WF_OK)return s;
+        exact_tail_1c0b4(a);return WF_OK;
+    }
+    if(id==3u&&d->callback_rom==0x11d8eu){
+        main_three_11d8e(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
         exact_tail_1c0b4(a);return WF_OK;
     }
     if(id==6u&&d->callback_rom==0x00011de0u){

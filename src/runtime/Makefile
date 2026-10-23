@@ -316,7 +316,7 @@ test-active-rom: build/test_runtime17_active_rom
 test: test-active-rom
 
 # Direct-boot integration probe; the ROM and graphics remain local audit assets.
-R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_result_screen.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_ring.c
+R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_result_screen.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_ring.c src/wf_r18_transition.c
 build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c include/wf_r18_rom_hot_pages.h
 	mkdir -p build
 	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
@@ -647,3 +647,10 @@ test-runtime18-cpu-state2-rom:
 test-runtime18-action22-rom:
 	$(ROM_PYTHON) tests/r18/action22_verify_rom.py
 .PHONY: test-runtime18-cpu-state2-rom test-runtime18-action22-rom
+
+# f88acad continuation: native owners and the real ringside scene transport.
+R18_CONTINUATION_ORACLES=action3f action5f main3 cpu_state0_continue cpu_target_ringside cpu_state0_wait action03 state4_1b706 state4_1bb4c action18 state4_1bde8 action6c action38 cpu_state0_ringside cpu_1e9a6 cpu_state1_outside state4_1bf1c state4_1ba92 state4_1b288 state4_1bfa6 action2f f98c_transition transition_r18 referee_ringside
+test-runtime18-continuation-rom:
+	@set -e; for owner in $(R18_CONTINUATION_ORACLES); do $(ROM_PYTHON) tests/r18/$${owner}_verify_rom.py; done
+test-runtime18-rom-validation: test-runtime18-cpu-state2-rom test-runtime18-action22-rom test-runtime18-continuation-rom
+.PHONY: test-runtime18-continuation-rom
