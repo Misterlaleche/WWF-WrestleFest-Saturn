@@ -31,7 +31,8 @@ static wf_status_t state0(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_
  wf_set_be16(a,WF_A_FLAGS32,(uint16_t)(wf_be16(a,WF_A_FLAGS32)&0xfba7u));
  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(b5&0xcbu));
  wf_set_be16(a,WF_A_CPU_B6,(uint16_t)(wf_be16(a,WF_A_CPU_B6)&0xf1fdu));
- wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(b7&~0x20u));
+ /* $1C2FA follows the WORD mask at $1C2F4; do not restore its cleared bit1. */
+ wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~0x20u));
  if((f33&1u)&&!(tf33&1u)&&!(wf_u8(t,WF_A_FLAGS32)&1u)){
   rt->g.global_1697|=1u;return WF_OK;
  }
@@ -240,13 +241,20 @@ static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
 static wf_status_t state1_sub1(wf_runtime_t*rt,unsigned slot,
                                wf_actor_raw_t*a,wf_cpu_trace_t*tr){
  if(!(wf_u8(a,WF_A_STATE)&0x80u))return WF_OK;
+ /* $1D3A2..$1D3DE leave these BYTE writes and the absolute WORD delta live
+  * for the next actor/weighted decision, even when no action is selected. */
+ wf_r17_m68k_move_b(&rt->m68k_regs,1u,8u);
+ wf_r17_m68k_move_b(&rt->m68k_regs,2u,0x88u);
  wf_actor_raw_t*partner=ptr(rt,a,WF_A_TEAM_LINK);
  if(!partner)return block(tr,0x0001d3aau);
  uint16_t ay=wf_be16(a,WF_A_Y),py=wf_be16(partner,WF_A_Y);
  uint16_t dy=ay>py?(uint16_t)(ay-py):(uint16_t)(py-ay);
+ wf_r17_m68k_moveq(&rt->m68k_regs,0u,0);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,dy);
  uint8_t side=(uint8_t)(wf_u8(a,WF_A_FLAGS33)&0x80u);
+ if(side){if(ay>py)wf_r17_m68k_move_b(&rt->m68k_regs,2u,0x78u);else wf_r17_m68k_move_b(&rt->m68k_regs,1u,0xf8u);}
  wf_set_u8(a,WF_A_ANGLE,ay>py?(side?0x78u:0x88u):(side?0xf8u:8u));
- if(dy<8u){
+ if((uint8_t)dy<8u){
   wf_set_u8(a,WF_A_ANGLE,0u);
   if(!(wf_u8(a,WF_A_FLAGS34)&1u)){
    uint32_t link=wf_be32(partner,WF_A_LINK);
@@ -257,6 +265,7 @@ static wf_status_t state1_sub1(wf_runtime_t*rt,unsigned slot,
    if(linked&&wf_main_state(linked)==5u&&wf_u8(linked,WF_A_SELECTOR_LO)==0x53u){
     uint16_t ax=wf_be16(a,WF_A_X),lx=wf_be16(linked,WF_A_X);
     uint16_t linked_dx=ax>lx?(uint16_t)(ax-lx):(uint16_t)(lx-ax);
+    wf_r17_m68k_move_w(&rt->m68k_regs,0u,linked_dx);
     if(linked_dx<0x40u){
      wf_set_be16(a,WF_A_STATE,5u);
      wf_set_be16(a,WF_A_SELECTOR,0x39u);
@@ -275,8 +284,14 @@ static wf_status_t state1_sub1(wf_runtime_t*rt,unsigned slot,
                    wf_u8(target,WF_A_STATE4_LO)==10u)))return WF_OK;
  uint16_t ty=wf_be16(target,WF_A_Y),tx=wf_be16(target,WF_A_X),ax=wf_be16(a,WF_A_X);
  uint16_t yd=ay>ty?(uint16_t)(ay-ty):(uint16_t)(ty-ay);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,yd);
+ if(yd>=0x10u){
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));
+  return WF_OK;
+ }
  uint16_t xd=ax>tx?(uint16_t)(ax-tx):(uint16_t)(tx-ax);
- if(yd>=0x10u||xd>=0x40u){
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,xd);
+ if(xd>=0x40u){
   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));
   return WF_OK;
  }
@@ -775,17 +790,8 @@ wf_status_t wf_cpu_pursuit_1d5a2(wf_runtime_t*rt,unsigned slot,wf_state5_trace_t
    }
   }
  }
- /* $1F15C preserves D1-D7; $20C8 emits the quadrant angle. */
- uint16_t ax=wf_be16(a,WF_A_X),ay=wf_be16(a,WF_A_Y),px=wf_be16(a,WF_A_CPU_BE),py=wf_be16(a,WF_A_CPU_C0);
- unsigned dx=ax>=px?ax-px:px-ax,dy=ay>=py?ay-py:py-ay;
- if(dx>=8u||dy>=8u){
-  uint16_t sx=(uint16_t)(px-ax),sy=(uint16_t)(py-ay);unsigned quadrant=0;
-  if(sx&0x8000u){quadrant|=1u;sx=(uint16_t)-sx;}if(sy&0x8000u){quadrant|=2u;sy=(uint16_t)-sy;}
-  if(sx>255u)sx=255u;if(sy>255u)sy=255u;
-  static const uint8_t base[4]={0,192,64,128};unsigned sum=sx+sy,component=(quadrant==0u||quadrant==3u)?sx:sy;
-  wf_set_u8(a,WF_A_ANGLE,(uint8_t)(base[quadrant]+component*64u/(sum?sum:1u)));wf_r17_m68k_moveq(&rt->m68k_regs,0,1);return WF_OK;
- }
- wf_r17_m68k_moveq(&rt->m68k_regs,0,0);
+ /* $1F15C/$20C8 also writes the shared $15E4 direction scratch. */
+ if(!cpu_arrived_1f15c(rt,a))return WF_OK;
 arrived:
  wf_set_be16(a,WF_A_STATE,5);wf_set_u8(a,WF_A_CPU_B5,(uint8_t)((wf_u8(a,WF_A_CPU_B5)|16u)&~32u));wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~32u));wf_set_u8(a,WF_A_SELECTOR,0);return wf_state5_execute(rt,slot,tr);
 }
@@ -840,6 +846,18 @@ static void defender_relation_1c228(wf_runtime_t*rt,wf_actor_raw_t*a,const wf_ac
  uint16_t y=wf_be16(a,WF_A_Y);if(wf_main_state(t)==5u&&wf_u8(t,WF_A_SELECTOR_LO)==0x22u)y=(uint16_t)(y+8u);
  uint16_t ty=wf_be16(t,WF_A_Y),dy=(uint16_t)(y-ty);if(y<ty){dy=(uint16_t)(0u-dy);wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)|2u));}
  wf_r17_m68k_move_w(&rt->m68k_regs,1,dy);wf_set_be16(a,WF_A_CPU_DISTANCE_Y,dy);wf_set_u8(a,WF_A_CPU_B4,dx<80u?0u:dx<176u?1u:2u);
+}
+wf_status_t wf_cpu_relation_1c228(wf_runtime_t*rt,unsigned slot){
+ if(!rt||slot>=WF_ACTOR_SLOTS)return WF_BAD_STATE;
+ wf_actor_raw_t*a=&rt->actors[slot];uint32_t address=wf_be32(a,WF_A_TARGET)&0x00ffffffu;
+ const wf_actor_raw_t*t=wf_actor_from_rom_ptr_const(rt,address,0);
+ if(!t){
+  /* The first real phase has null targets. $1C228 reads the canonical ROM
+   * reset-vector bytes: X=$0654, Y=$FFFF, state low=$FF (no pose offset). */
+  static const wf_actor_raw_t rom_zero={.b={[6]=0x06,[7]=0x54,[10]=0xff,[11]=0xff,[0x21]=0xff}};
+  if(address)return WF_BLOCKED;t=&rom_zero;
+ }
+ defender_relation_1c228(rt,a,t);return WF_OK;
 }
 static wf_status_t defender_fallback_1c880(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
  wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x1c880u);

@@ -28,10 +28,11 @@ static void test_positive_and_fg0(void){
     assert(s.w[1].addr==0x000c0107u&&s.w[1].value==0x1bu);
     assert(s.w[6].addr==0x000c0311u&&s.w[6].value==0x33u);
     assert(s.w[7].addr==0x000c0313u&&s.w[7].value==0x1bu);
-    assert(s.w[30].addr==0x000c0329u&&s.w[30].value==0xdfu);
-    assert(s.w[31].addr==0x000c032bu&&s.w[31].value==0x1au);
-    assert(s.w[32].addr==0x000c0429u&&s.w[32].value==0xeau);
-    assert(s.w[33].addr==0x000c042bu&&s.w[33].value==0x1au);
+    /* $7624/$7628 reload the bar origin after clearing its six cells. */
+    assert(s.w[30].addr==0x000c0311u&&s.w[30].value==0xdfu);
+    assert(s.w[31].addr==0x000c0313u&&s.w[31].value==0x1au);
+    assert(s.w[32].addr==0x000c0411u&&s.w[32].value==0xeau);
+    assert(s.w[33].addr==0x000c0413u&&s.w[33].value==0x1au);
     assert(r.m68k_regs.d[0]==4u);assert(r.m68k_regs.d[1]==6u);assert(r.m68k_regs.d[2]==6u);assert(r.m68k_regs.d[3]==1u);assert(r.m68k_regs.d[4]==d4);assert(r.m68k_regs.d[5]==d5&&r.m68k_regs.d[6]==d6&&r.m68k_regs.d[7]==d7);
     puts("PASS $7548 positive smoothing + exact FG0 bytes + register shadow");
 }

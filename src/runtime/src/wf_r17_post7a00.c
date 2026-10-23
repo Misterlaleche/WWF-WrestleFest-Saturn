@@ -174,6 +174,9 @@ static int branchb_emit_75ee_actor(wf_runtime_t *rt,wf_actor_raw_t *a,unsigned s
     q=(uint16_t)(visible/16u);r=(uint16_t)(visible%16u);
     rt->m68k_regs.d[1]=((uint32_t)r<<16)|q; /* DIVU result before ANDI. */
     rt->m68k_regs.d[2]=rt->m68k_regs.d[1]; /* MOVE.L D1,D2. */
+    /* $7624 BSR $7680; $7628 ADDA.L #$20C,A1: clearing advanced A1
+     * past all six cells. The fill restarts at the same bar origin. */
+    dst=branchb_fg0_base(slot)+0x20cu;
     rt->m68k_regs.d[3]=1u;                 /* MOVEQ #1,D3. */
     rt->m68k_regs.d[1]=(uint32_t)q;        /* ANDI.L #$FFFF,D1. */
     if(q!=0u){

@@ -1,4 +1,20 @@
-# RUNTIME-18 — sprites nativos y escrituras del ring, 23 de octubre de 2026
+# Investigación actual: HUD, aliados y stamina, 23 de octubre de 2026
+
+Sobre `95328a2`: corregido el origen de relleno de las barras, preservando
+ambos retratos; comprobado en capturas reales de Mednafen. Se corrigen
+también mantenimiento de daño/tier, distancias CPU que no se refrescaban,
+registros de seguimiento y poses retenidas. La distancia falsa cero podía
+provocar puñetazos lejanos; el caso ROM654 ahora pasa a movimiento.
+
+La partida corregida aún está incompleta: sin entrada bloquea en669
+`$1D7B6`, y la secuencia controlada en460 `$12614`. Los finales4391/14409
+del checkpoint anterior no se atribuyen al nuevo árbol. No se ocultan esos
+bloqueos. Entrega de esta investigación: capturas, sin otro paquete BIN/CUE.
+
+Informe y reproducción:
+[validation/RUNTIME18-HUD-ALLIES-INVESTIGATION.md](validation/RUNTIME18-HUD-ALLIES-INVESTIGATION.md).
+
+## Checkpoint anterior: sprites nativos y escrituras del ring
 
 Continúa desde `64d93b1`: caché de 32 cuerpos, comandos VDP1 sin clears
 redundantes, recorte de filas transparentes y máscaras rápidas para SH-2.

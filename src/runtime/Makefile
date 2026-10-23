@@ -629,3 +629,14 @@ test-runtime18-sprite-crop-asan: | build
 	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_sprite_crop.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c -o build/test_runtime18_sprite_crop_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_sprite_crop_asan audit/runtime18-cd/HOTSPR.BIN
 .PHONY: test-runtime18-sprite-crop test-runtime18-sprite-crop-asan
+
+# Original stamina updates must preserve neighboring portraits in live FG0.
+R18_HUD_SEPARATION=$(CORE) src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_ring.c tests/r18/test_hud_stamina_separation.c
+build/test_runtime18_hud_stamina_separation: $(R18_HUD_SEPARATION) | build
+	$(CC) $(CFLAGS) $(R18_HUD_SEPARATION) -o $@
+test-runtime18-hud-stamina-separation: build/test_runtime18_hud_stamina_separation
+	./build/test_runtime18_hud_stamina_separation
+test-runtime18-hud-stamina-separation-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer $(R18_HUD_SEPARATION) -o build/test_runtime18_hud_stamina_separation_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_hud_stamina_separation_asan
+.PHONY: test-runtime18-hud-stamina-separation test-runtime18-hud-stamina-separation-asan

@@ -355,7 +355,17 @@ wf_status_t wf_phase_cpu_real(wf_runtime_t *rt,uint32_t addr,void *user){
   if(!(role&0x40u)&&(!(role&0x80u)||(wf_u8(a,WF_A_FLAGS32)&0x80u)))continue;
   if(wf_u8(a,WF_A_STATE+1u)==0xffu||wf_be16(a,WF_A_LOCKOUT)!=0u||
      (wf_u8(a,WF_A_FLAGS32)&0x10u))continue;
-  wf_status_t s=wf_cpu_actor_step(rt,i,&c->cpu_trace[i]);
+  /* $1C19C refreshes this actor's target relation immediately before its
+   * decision; a relation computed for another phase/actor is not reusable. */
+  wf_status_t s=wf_cpu_relation_1c228(rt,i);
+  if(s!=WF_OK){c->last_blocked_phase=0x01c150u;c->last_blocked_dependency=0x01c228u;return s;}
+  if(!rt->g.credited_route){
+   wf_set_be16(a,0xd2u,3u);wf_set_be16(a,0xd4u,2u);wf_set_be16(a,0xd6u,3u);
+   wf_set_be16(a,0xd8u,2u);wf_set_be16(a,0xdau,3u);wf_set_be16(a,0xdeu,3u);wf_set_be16(a,0xe4u,4u);
+  }
+  /* $1C1D2..$1C1DA leave the WORD table index live in D0. */
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)((wf_be16(a,WF_A_STATE)&0xffu)<<2));
+  s=wf_cpu_actor_step(rt,i,&c->cpu_trace[i]);
   if(s!=WF_OK){c->last_blocked_phase=0x01c150u;c->last_blocked_dependency=c->cpu_trace[i].blocked_dependency_rom?c->cpu_trace[i].blocked_dependency_rom:c->cpu_trace[i].state5.blocked_dependency_rom;return s;}
  }
  return WF_OK;

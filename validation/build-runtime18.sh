@@ -15,6 +15,15 @@ case "${R18_REPLAY_TEST:-}" in
 esac
 R18_ENTRY=src/wf_saturn_entry.c
 R18_PRESENT=src/wf_r18_present.c
+if [ -n "${R18_CAPTURE_STOP:-}" ]; then
+  case "$R18_CAPTURE_STOP" in *[!0-9]*) echo 'Capture stop must be a positive frame' >&2; exit 1;; esac
+  test "$R18_CAPTURE_STOP" -gt 0 || { echo 'Capture stop must be a positive frame' >&2; exit 1; }
+  test "${R18_PROFILE_TEST:-}" != 1 || { echo 'Capture and profile are separate test entries' >&2; exit 1; }
+  RESULTS="$ROOT/validation/results/runtime18/capture-noinput-$R18_CAPTURE_STOP"
+  R18_ENTRY=tests/r18/hud_capture_entry.c
+  R18_REPLAY_TEST=noinput
+  R18_PROFILE_STOP="$R18_CAPTURE_STOP"
+fi
 if [ "${R18_PROFILE_TEST:-}" = 1 ]; then
   RESULTS="$ROOT/validation/results/runtime18/profile-controlled"
   if [ -n "${R18_PROFILE_START:-}" ] && [ -n "${R18_PROFILE_STOP:-}" ]; then

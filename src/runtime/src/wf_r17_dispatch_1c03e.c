@@ -151,6 +151,35 @@ static wf_status_t hold_offset_10b62(wf_runtime_t *rt,wf_actor_raw_t *a,
     wf_set_be16(a,WF_A_FIELD3E,0u);
     return WF_OK;
 }
+/* $1C0C8 with the one-entry $125C0 descriptor. Its pose still XORs facing. */
+static void held_tick_125c0(wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&0x80u)){
+        wf_set_be16(a,WF_A_ANIM_INDEX,0u);
+        wf_set_be16(a,WF_A_ANIM_COUNTER,0xff00u);
+        wf_set_be16(a,WF_A_MIRROR,(uint16_t)(0xffffu^wf_be16(a,WF_A_FACING)));
+        wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|0x80u));
+    }else if(wf_be16(a,WF_A_ANIM_COUNTER)!=0xff00u){
+        uint16_t timer=wf_be16(a,WF_A_ANIM_COUNTER);
+        wf_set_be16(a,WF_A_ANIM_COUNTER,(uint16_t)(timer-1u));
+        if(!timer){wf_set_be16(a,WF_A_ANIM_INDEX,0xfeu);wf_set_be16(a,WF_A_ANIM_COUNTER,0u);}
+    }
+}
+/* $125CC is selected directly by latched low state FF, before $1C082. */
+static wf_status_t held_pose_125cc(wf_runtime_t *rt,wf_actor_raw_t *a,
+                                    wf_r17_dispatch_1c03e_ctx_t *ctx){
+    wf_actor_raw_t *linked=wf_actor_from_rom_ptr(rt,wf_be32(a,WF_A_LINK),0);
+    if(!linked)return blocked(ctx,0x000125d6u);
+    uint32_t back=wf_be32(linked,WF_A_LINK)&0x00ffffffu;
+    wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,WF_A_MIRROR,0xffffu);
+    wf_r17_m68k_move_l(&rt->m68k_regs,1u,back);
+    if(back!=wf_actor_rom_base((unsigned)(a-rt->actors))){
+        wf_set_be16(a,WF_A_STATE,0u);wf_set_be32(a,WF_A_LINK,0u);wf_set_be32(a,WF_A_SECONDARY_LINK,0u);
+        wf_set_be16(a,WF_A_FLAGS32,(uint16_t)(wf_be16(a,WF_A_FLAGS32)&0x0087u));
+        wf_set_be16(a,WF_A_FLAGS34,(uint16_t)(wf_be16(a,WF_A_FLAGS34)&0x0300u));
+        wf_set_be16(a,WF_A_CPU_B4,0u);wf_set_be16(a,WF_A_CPU_B6,0u);
+    }
+    held_tick_125c0(a);return WF_OK;
+}
 /* $12474 with the kind-2 $12450 descriptor: linked hold, four 16-tick
  * poses $39,$3A,$39,$3B; $125C0 is the held-pose descriptor. */
 static wf_status_t main_eleven_12474(wf_runtime_t *rt,wf_actor_raw_t *a,
@@ -169,24 +198,9 @@ static wf_status_t main_eleven_12474(wf_runtime_t *rt,wf_actor_raw_t *a,
         wf_set_be16(a,WF_A_STATE,5u);
         wf_set_be16(a,WF_A_SELECTOR,0x50u);
     }else if(wf_u8(a,WF_A_TIMER44)&0x80u){
-        /* $125CC compares the linked actor's return link on the 24-bit bus. */
-        wf_set_u8(a,WF_A_MOTION_MODE,0u);
+        /* $124B6 selects the held descriptor for the animation tail only. */
         wf_set_be16(a,WF_A_MIRROR,0xffffu);
-        if((wf_be32(linked,WF_A_LINK)&0x00ffffffu)!=
-           wf_actor_rom_base((unsigned)(a-rt->actors))){
-            wf_set_be16(a,WF_A_STATE,0u);
-            wf_set_be32(a,WF_A_LINK,0u);
-            wf_set_be32(a,WF_A_SECONDARY_LINK,0u);
-            wf_set_be16(a,WF_A_FLAGS32,(uint16_t)(wf_be16(a,WF_A_FLAGS32)&0x0087u));
-            wf_set_be16(a,WF_A_FLAGS34,(uint16_t)(wf_be16(a,WF_A_FLAGS34)&0x0300u));
-            wf_set_be16(a,WF_A_CPU_B4,0u);
-            wf_set_be16(a,WF_A_CPU_B6,0u);
-        }
-        if(!(wf_u8(a,WF_A_LATCHED)&0x80u)){
-            wf_set_be16(a,WF_A_ANIM_INDEX,0u);
-            wf_set_be16(a,WF_A_ANIM_COUNTER,0xff00u);
-            wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|0x80u));
-        }
+        held_tick_125c0(a);
         return WF_OK;
     }else if(alternate&&wf_u8(a,WF_A_ACTION_PHASE)==0xfeu){
         wf_set_u8(a,WF_A_TIMER44,(uint8_t)(wf_u8(a,WF_A_TIMER44)&~0x20u));
@@ -827,7 +841,8 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
     if(!rt||!a||!ctx)return WF_BAD_STATE;
     ctx->blocked_dependency_rom=0u;ctx->extra_render_actor=NULL;
     domain=low(a,WF_A_LATCHED);state=low(a,WF_A_STATE);
-    /* $1C084: current low state $FF exits before callback, tick and +18/+1A tail. */
+    /* $1C07A jumps past $1C082 when latched low state is FF. */
+    if(domain==0xffu){s=held_pose_125cc(rt,a,ctx);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;}
     if(state==0xffu)return WF_OK;
     if(domain==5u){
         if(!ctx->actions)return blocked(ctx,0x00012614u);
@@ -878,7 +893,6 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
         /* $1C0C8 sees a kind-0 descriptor here and performs no animation mutation. */
         exact_tail_1c0b4(a);return WF_OK;
     }
-    if(domain==0xffu)return blocked(ctx,0x000125c0u);
     id=domain;if(id>=13u)return blocked(ctx,0x00011478u);
     di=wf_anim_main_dispatch[id];if(di>=wf_anim_desc_count)return blocked(ctx,0x00011478u);d=&wf_anim_descs[di];
     if(id==0u&&d->callback_rom==0x000114b2u){
