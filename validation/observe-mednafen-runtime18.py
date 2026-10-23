@@ -27,6 +27,10 @@ signature[0::2], signature[1::2] = program[1:4096:2], program[:4096:2]
 names = ('rt', 'video_clock', 'fatal_owner', 'fatal_dependency',
          'fatal_frame', 'finished_frame', 'finished_result', 'finished_count', 'finished_timer')
 symbols = {}
+# Older checkpoint executables do not yet present the in-ring result text.
+for optional in ('finished_presentation','finished_vblanks','finished_presentation_vblanks'):
+    if re.search(r'\.bss\.'+optional+r'\s+0x', mapping):
+        names += (optional,)
 if a.layout:
     names += ('gameplay',)
 if a.graphics_layout:

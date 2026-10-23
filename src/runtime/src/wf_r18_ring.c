@@ -211,15 +211,20 @@ int wf_r18_ring_cells_update(unsigned layer,int wx,int wy,volatile uint16_t *map
   memset(cell_x[layer],0xff,sizeof cell_x[layer]);memset(cell_y[layer],0xff,sizeof cell_y[layer]);cell_generation[layer]=ring_generation;
  }
  wx%=2560;wy%=2048;if(wx<0)wx+=2560;if(wy<0)wy+=2048;
- uint8_t changed_x[32]={0},changed_y[32]={0};
+ uint8_t changed_x[32]={0},changed_y[32]={0};unsigned changed=0;
  for(unsigned i=0;i<=((unsigned)(wx&15)+319u)/16u;i++){
   unsigned tile=((unsigned)wx/16u+i)%160u,slot=tile&31u;
-  if(cell_x[layer][slot]!=tile){cell_x[layer][slot]=(uint16_t)tile;changed_x[slot]=1;}
+  if(cell_x[layer][slot]!=tile){cell_x[layer][slot]=(uint16_t)tile;changed_x[slot]=1;changed=1;}
  }
  for(unsigned i=0;i<=((unsigned)(wy&15)+239u)/16u;i++){
   unsigned tile=((unsigned)wy/16u+i)%128u,slot=tile&31u;
-  if(cell_y[layer][slot]!=tile){cell_y[layer][slot]=(uint16_t)tile;changed_y[slot]=1;}
+  if(cell_y[layer][slot]!=tile){cell_y[layer][slot]=(uint16_t)tile;changed_y[slot]=1;changed=1;}
  }
+ /* Pixel scrolling is done by VDP2. If the resident tile coordinates and
+  * overlays did not change, all1024 pattern names are already correct.
+  * Keep updating the scroll registers in ring_update, without rescanning
+  * the cached row/column cross-product on every one-pixel camera step. */
+ if(!changed&&!dirty_count[layer]){if(writes)*writes=0;return 0;}
  size_t count=0;ring_sample_t sample={0};
  /* Keep the cached X/Y cross-product coherent, including offscreen cells.
   * A returning row must never reuse an old column's pattern name. */

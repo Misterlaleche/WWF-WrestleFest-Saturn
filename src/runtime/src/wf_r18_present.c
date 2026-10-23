@@ -5,6 +5,13 @@ static wf_r18_file_read_fn read_file;
 static uint8_t *rom_data,*tile_data;static size_t rom_slots,tile_slots,rom_capacity;
 static int rom_preloaded;
 static uint16_t rom_page[256],rom_slot[512];static uint32_t rom_age[256],rom_clock;
+/* Immutable metadata is repeatedly read as bytes/words/longs. Keep small
+ * lines in HWRAM instead of revisiting the slow LWRAM page for every field.
+ * Lines never cross a1KB source page, so a fill cannot add a CD page read. */
+static uint8_t rom_words[64][32] __attribute__((aligned(32)));
+static uint32_t rom_word_tag[64];
+static wf_r18_metasprite_cache_t metasprite_cache;
+static void rom_caches_reset(void){memset(rom_word_tag,255,sizeof rom_word_tag);wf_r18_metasprite_cache_reset(&metasprite_cache);}
 static uint16_t tile_tags[6144];static uint8_t tile_valid[6144];
 /* Sector-aligned header stores sorted tile IDs; pixel payload resides in the
  * first tile-cache slots. The remaining slots retain exact on-demand fallback. */
@@ -18,13 +25,15 @@ static unsigned busy;
 /* Half-full at the maximum256 unique tiles. The index changes lookup cost,
  * not first-use order: slots remain exactly those of the arcade draw stream. */
 static uint16_t plan_tile_index[512];
-void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>256)rom_slots=256;if(tile_slots>6144)tile_slots=6144;hot_count=0;for(unsigned i=0;i<256;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);backend.defer_sync=1;}
+void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>256)rom_slots=256;if(tile_slots>6144)tile_slots=6144;hot_count=0;for(unsigned i=0;i<256;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;rom_caches_reset();memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);backend.defer_sync=1;}
 wf_status_t wf_r18_rom_preload(void){
+ rom_caches_reset();
  if(!read_file||!rom_data||rom_capacity<524288u)return WF_BLOCKED;
  if(read_file("ROM68K.BIN",0,rom_data,524288u))return WF_BLOCKED;
  rom_preloaded=1;return WF_OK;
 }
 wf_status_t wf_r18_rom_pages_preload(const uint16_t *pages,size_t count){
+ rom_caches_reset();
  if(!read_file||!rom_data||!pages||!count||count>rom_slots)return WF_BLOCKED;
  for(size_t i=0;i<count;i++)if(pages[i]>=512u||(i&&pages[i-1]>=pages[i]))return WF_BLOCKED;
  rom_preloaded=0;
@@ -39,7 +48,7 @@ wf_status_t wf_r18_rom_pages_preload(const uint16_t *pages,size_t count){
  }
  return WF_OK;
 }
-wf_status_t wf_r18_rom_read(void*u,uint32_t a,void*dest,size_t n){uint8_t*out=dest;(void)u;if(!read_file||!rom_slots||a>0x80000u||n>0x80000u-a)return WF_BLOCKED;
+static wf_status_t rom_read_bytes(uint32_t a,void*dest,size_t n){uint8_t*out=dest;if(!read_file||!rom_slots||a>0x80000u||n>0x80000u-a)return WF_BLOCKED;
  if(rom_preloaded){memcpy(out,rom_data+a,n);return WF_OK;}
  while(n){uint32_t page=a/1024;size_t slot=rom_slot[page],off=a%1024,take=1024-off;if(take>n)take=n;
  if(slot==0xffffu){
@@ -55,6 +64,23 @@ wf_status_t wf_r18_rom_read(void*u,uint32_t a,void*dest,size_t n){uint8_t*out=de
  rom_age[slot]=++rom_clock;
  memcpy(out,rom_data+slot*1024+off,take);out+=take;a+=(uint32_t)take;n-=take;}
  return WF_OK;}
+wf_status_t wf_r18_rom_read(void*u,uint32_t a,void*dest,size_t n){
+ (void)u;
+ if(!read_file||!rom_slots||a>0x80000u||n>0x80000u-a)return WF_BLOCKED;
+ if(n&&n<=4u&&(a&31u)+n<=32u){
+  uint32_t line=a>>5;unsigned slot=line&63u;
+  if(rom_word_tag[slot]!=line){
+   rom_word_tag[slot]=0xffffffffu;
+   wf_status_t s=rom_read_bytes(a&~31u,rom_words[slot],32u);
+   if(s!=WF_OK)return s;
+   rom_word_tag[slot]=line;
+  }
+  const uint8_t *p=rom_words[slot]+(a&31u);uint8_t *out=dest;
+  for(size_t i=0;i<n;i++)out[i]=p[i];
+  return WF_OK;
+ }
+ return rom_read_bytes(a,dest,n);
+}
 static uint16_t hot_id(size_t index){
  const uint8_t *p=hot_header+8u+index*2u;
  return (uint16_t)((p[0]<<8)|p[1]);
@@ -119,7 +145,7 @@ static int add_cmd(uint16_t tile,int x,int y,unsigned fx,unsigned fy,unsigned pa
 found:;
  wf_vdp1_sprite_cmd_t*c=&plan.cmd[plan.cmd_count++];memset(c,0,sizeof *c);c->x=(int16_t)x;c->y=(int16_t)y;c->stream_tile=(uint16_t)slot;c->cram_slot=(uint8_t)palette;c->flip_x=(uint8_t)fx;c->flip_y=(uint8_t)fy;return 1;}
 wf_status_t wf_r18_present_batch(wf_runtime_t*r,wf_actor_raw_t*const*actors,size_t n,void*u){wf_r18_video_t*v=u;wf_r18_metasprite_ctx_t parser;wf_status_t status=WF_OK;const wf_saturn_render_ops_t*ops=wf_saturn_yaul_render_ops();
- if(!r||!v||(!actors&&n)||busy)return WF_BAD_STATE;busy=1;memset(&parser,0,sizeof parser);parser.read_rom=wf_r18_rom_read;parser.palette_map=v->palette_map;parser.records=records;parser.capacity=512;parser.d6=r->m68k_regs.d[6];parser.d7=r->m68k_regs.d[7];
+ if(!r||!v||(!actors&&n)||busy)return WF_BAD_STATE;busy=1;memset(&parser,0,sizeof parser);parser.read_rom=wf_r18_rom_read;parser.palette_map=v->palette_map;parser.records=records;parser.capacity=512;parser.cache=&metasprite_cache;parser.d6=r->m68k_regs.d[6];parser.d7=r->m68k_regs.d[7];
  composed_count=0;
  for(size_t i=0;i<n;i++){wf_actor_raw_t*a=actors[i];wf_actor_raw_t*partner;if(wf_u8(a,0x21)==255||(wf_be16(a,4)&0x7fff)==0x7fff)continue;partner=actor_link(r,wf_be32(a,0x26));status=wf_r18_metasprite_emit(&parser,wf_be16(a,2),wf_be16(a,4),wf_be16(a,0x14),wf_be16(a,0x16),partner?wf_be16(partner,2):0xffff);if(status!=WF_OK)goto done;if(composed_count<WF_ACTOR_SLOTS)composed[composed_count++]=a;}
  /* Only the counted prefixes are consumed. Every emitted command/tile is
@@ -129,14 +155,17 @@ wf_status_t wf_r18_present_batch(wf_runtime_t*r,wf_actor_raw_t*const*actors,size
  memset(plan_tile_index,0,sizeof plan_tile_index);
  for(size_t i=0;i<parser.count;i++){const uint8_t*b=records[i].bytes;unsigned attr=be16(b+2);if(!(attr&1))continue;unsigned chain=(attr>>5)&7,fx=(attr>>4)&1,fy=(attr>>3)&1,palette=b[9]&15;unsigned tile=wf_sprite_number_align((unsigned)b[5]|((unsigned)b[7]<<8),chain);int x=wf_sprite_x_decode((unsigned)b[11]|((attr&4)<<6)),y=wf_sprite_y_decode((unsigned)b[1]|((attr&2)<<7));
  for(unsigned j=0;j<=chain;j++){int yy=fy?y-(int)chain*16+(int)j*16:y-(int)j*16;if(!add_cmd((uint16_t)(tile+j),x,yy,fx,fy,palette)){status=WF_BLOCKED;goto done;}}}
- status=ops->begin_frame(&backend,plan.tile_count,16,plan.cmd_count);if(status!=WF_OK)goto done;
+ uint16_t palette_mask=wf_r18_video_palette_pending(v,WF_R18_PALETTE_SPRITES);
+ unsigned palette_count=0;for(unsigned i=0;i<16;i++)palette_count+=(palette_mask>>i)&1u;
+ status=ops->begin_frame(&backend,plan.tile_count,palette_count,plan.cmd_count);if(status!=WF_OK)goto done;
  for(unsigned i=0;i<plan.tile_count;i++){
   status=wf_saturn_yaul_upload_rom_tile(&backend,(uint16_t)i,plan.tile_upload[i].source_tile,wf_r18_tile_read);
   if(status!=WF_OK)goto abort;
  }
- for(unsigned i=0;i<16;i++){status=ops->upload_palette_xbgr444_16(&backend,(uint8_t)i,v->palettes+0x2000+i*128,32);if(status!=WF_OK)goto abort;}
+ for(unsigned i=0;i<16;i++)if(palette_mask&(1u<<i)){status=ops->upload_palette_xbgr444_16(&backend,(uint8_t)i,v->palettes+0x2000+i*128,32);if(status!=WF_OK)goto abort;}
  for(unsigned i=0;i<plan.cmd_count;i++){status=ops->emit_sprite_16x16(&backend,&plan.cmd[i]);if(status!=WF_OK)goto abort;}
  status=ops->end_frame(&backend);if(status!=WF_OK)goto done;
+ wf_r18_video_palette_ack(v,WF_R18_PALETTE_SPRITES,palette_mask);
  /* $293E consumes a resolved link after rendering its composition. */
  for(size_t i=0;i<composed_count;i++)if((wf_u8(composed[i],0x26)&128)&&!wf_be16(composed[i],0xfe))wf_set_be32(composed[i],0x26,0);
  r->m68k_regs.d[6]=parser.d6;r->m68k_regs.d[7]=parser.d7;goto done;

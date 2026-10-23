@@ -316,7 +316,7 @@ test-active-rom: build/test_runtime17_active_rom
 test: test-active-rom
 
 # Direct-boot integration probe; the ROM and graphics remain local audit assets.
-R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_ring.c
+R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_result_screen.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_ring.c
 build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c include/wf_r18_rom_hot_pages.h
 	mkdir -p build
 	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
@@ -564,3 +564,46 @@ test-runtime18-command-work: build/test_runtime18_command_work
 .PHONY: test-runtime18-command-work test-runtime18-plan-equivalence
 test-runtime18-plan-equivalence:
 	$(ROM_PYTHON) tests/r18/verify_plan_equivalence.py
+
+R18_READ_WORK_DEPS=src/wf_r18_metasprite.c src/wf_actor.c src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c
+build/test_runtime18_rom_read_work: tests/r18/test_rom_read_work.c src/wf_r18_present.c $(R18_READ_WORK_DEPS) | build
+	$(CC) $(CFLAGS) tests/r18/test_rom_read_work.c $(R18_READ_WORK_DEPS) -o $@
+test-runtime18-rom-read-work: build/test_runtime18_rom_read_work
+	./build/test_runtime18_rom_read_work
+test-runtime18-rom-read-work-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer tests/r18/test_rom_read_work.c $(R18_READ_WORK_DEPS) -o build/test_runtime18_rom_read_work_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_rom_read_work_asan
+test-runtime18-result-screen-rom:
+	$(ROM_PYTHON) tests/r18/verify_result_screen_rom.py
+test-runtime18-result-screen-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_result_screen.c src/wf_r18_video.c src/wf_r17_m68k_shadow.c tests/r18/test_result_screen.c -o build/test_runtime18_result_screen_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_result_screen_asan audit/runtime18-cd/ROM68K.BIN
+.PHONY: test-runtime18-rom-read-work test-runtime18-rom-read-work-asan test-runtime18-result-screen-rom test-runtime18-result-screen-asan
+
+build/test_runtime18_metasprite_cache: src/wf_r18_metasprite.c include/wf_r18_metasprite.h tests/r18/test_metasprite_cache.c | build
+	$(CC) $(CFLAGS) src/wf_r18_metasprite.c tests/r18/test_metasprite_cache.c -o $@
+test-runtime18-metasprite-cache: build/test_runtime18_metasprite_cache
+	./build/test_runtime18_metasprite_cache
+test-runtime18-metasprite-cache-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_metasprite.c tests/r18/test_metasprite_cache.c -o build/test_runtime18_metasprite_cache_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_metasprite_cache_asan
+.PHONY: test-runtime18-metasprite-cache test-runtime18-metasprite-cache-asan
+
+R18_PRESENT_PALETTE_DEPS=src/wf_r18_video.c $(R18_READ_WORK_DEPS)
+build/test_runtime18_present_palette_work: tests/r18/test_present_palette_work.c src/wf_r18_present.c $(R18_PRESENT_PALETTE_DEPS) | build
+	$(CC) $(CFLAGS) -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_present_palette_work.c $(R18_PRESENT_PALETTE_DEPS) -o $@
+test-runtime18-present-palette-work: build/test_runtime18_present_palette_work
+	./build/test_runtime18_present_palette_work
+test-runtime18-present-palette-work-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_present_palette_work.c $(R18_PRESENT_PALETTE_DEPS) -o build/test_runtime18_present_palette_work_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_present_palette_work_asan
+.PHONY: test-runtime18-present-palette-work test-runtime18-present-palette-work-asan
+
+build/test_runtime18_palette_work: tests/r18/test_palette_work.c src/wf_r18_hud.c src/wf_r18_video.c src/wf_saturn_memory.c | build
+	$(CC) $(CFLAGS) -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_palette_work.c src/wf_r18_video.c src/wf_r18_hud.c -o $@
+test-runtime18-palette-work: build/test_runtime18_palette_work
+	./build/test_runtime18_palette_work
+test-runtime18-palette-work-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_palette_work.c src/wf_r18_video.c src/wf_r18_hud.c -o build/test_runtime18_palette_work_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_palette_work_asan
+.PHONY: test-runtime18-palette-work test-runtime18-palette-work-asan

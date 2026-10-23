@@ -5,6 +5,7 @@
 #include "wf_r18_bootstrap.h"
 #include "wf_r18_referee.h"
 #include "wf_r18_match_result.h"
+#include "wf_r18_result_screen.h"
 #include "wf_r18_cdfs.h"
 #include "wf_r18_present.h"
 #include "wf_r18_rom_hot_pages.h"
@@ -24,6 +25,8 @@ static volatile uint32_t video_clock;
 static volatile uint32_t fatal_owner, fatal_dependency, fatal_frame;
 static volatile uint32_t finished_frame, finished_result;
 static volatile uint32_t finished_count, finished_timer;
+static volatile uint32_t finished_presentation;
+static volatile uint32_t finished_vblanks,finished_presentation_vblanks;
 static wf_runtime_t rt;
 static wf_gameplay_binding_context_t gameplay;
 static wf_phase_binding_t bindings[48];
@@ -167,6 +170,17 @@ static wf_status_t wait_21e6(wf_runtime_t *r,uint16_t raw,void *user)
         smpc_peripheral_process();
     return WF_OK;
 }
+static wf_status_t result_wait(wf_runtime_t *r,uint16_t periods,void *user)
+{
+    if(!periods)return WF_BAD_STATE;
+    return wait_21e6(r,(uint16_t)(periods-1u),user);
+}
+static wf_status_t result_commit(void *user)
+{
+    /* The character map and CRAM are direct stores. No extra sync wait:
+     * the original33/33/65-period waits own the terminal presentation. */
+    return wf_r18_hud_commit(user);
+}
 static wf_status_t render(wf_runtime_t *r, wf_actor_raw_t *const *actors,
                            size_t count, void *user)
 {
@@ -189,10 +203,8 @@ static uint8_t controls(void)
 static void palette_and_ring(void)
 {
     if(wf_r18_hud_commit(&video)!=WF_OK)fail(0x0c0000u,0);
-    if (wf_r18_ring_palette_set(0, video.fg_palette,
-                                 sizeof video.fg_palette) != 0 ||
-        wf_r18_ring_palette_set(1, video.bg_palette,
-                                 sizeof video.bg_palette) != 0 ||
+    if (wf_r18_palettes_commit(&video,WF_R18_PALETTE_FG) != WF_OK ||
+        wf_r18_palettes_commit(&video,WF_R18_PALETTE_BG) != WF_OK ||
         wf_r18_ring_update((int16_t)display.scroll[0],
             (int16_t)(2048u-display.scroll[1]), (int16_t)display.scroll[2],
             (int16_t)(2048u-display.scroll[3]),
@@ -202,7 +214,7 @@ static void palette_and_ring(void)
 
 int main(void)
 {
-    uint32_t size, previous;
+    uint32_t size, previous, gameplay_start;
     wf_r18_launch_config_t launch;
     wf_status_t status;
     size_t count;
@@ -291,6 +303,7 @@ int main(void)
     vdp2_sync_wait();
     vdp2_tvmd_display_set();
     previous = video_clock;
+    gameplay_start = video_clock;
     for (;;) {
         smpc_peripheral_process();
         smpc_peripheral_digital_port(1, &pad);
@@ -323,12 +336,19 @@ int main(void)
         }
         *BOOT_RNG = rt.g.rng_state;
         /* $11B6 begins the post-match scene. Direct-ring mode retains the
-         * final rendered frame only after the ROM result flags exist. */
+         * ring and executes its original result-text segment, then stops
+         * before the scene transition at $122C. */
         if (status == WF_BLOCKED && wf_r18_tag_match_complete(&rt)) {
             finished_frame = rt.g.frame_counter;
             finished_result = wf_be16(&rt.actors[0], WF_A_RESULT);
             finished_count = rt.g.global_169a;
             finished_timer = rt.g.global_16a0;
+            finished_vblanks=video_clock-gameplay_start;
+            uint32_t presentation_start=video_clock;
+            status=wf_r18_result_in_ring(&rt,&video,result_wait,result_commit,&video);
+            if(status!=WF_OK)fail(0x11ceu,video.failed_address);
+            finished_presentation_vblanks=video_clock-presentation_start;
+            finished_presentation=1u;
 #ifdef WF_R18_REPLAY_TEST
             /* Test-disc terminal report, only after the real $11B6 condition.
              * Green plus the frame RGB bytes makes completion externally visible. */

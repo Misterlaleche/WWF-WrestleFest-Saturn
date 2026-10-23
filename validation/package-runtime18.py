@@ -12,7 +12,7 @@ p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('output', type=Path)
 p.add_argument('--arcade-zip', type=Path, required=True)
 p.add_argument('--replay-dir', choices=('replay', 'replay-noinput'), default='replay')
-p.add_argument('--checkpoint-dir', choices=('checkpoint', 'checkpoint-noinput', 'checkpoint-camera', 'checkpoint-layers-perf', 'checkpoint-residency-hud', 'checkpoint-frame-budget'), default='checkpoint')
+p.add_argument('--checkpoint-dir', choices=('checkpoint', 'checkpoint-noinput', 'checkpoint-camera', 'checkpoint-layers-perf', 'checkpoint-residency-hud', 'checkpoint-frame-budget', 'checkpoint-render-core'), default='checkpoint')
 a = p.parse_args()
 root = Path(__file__).resolve().parents[1]
 def git(*args):
@@ -54,6 +54,7 @@ files['CHECKPOINT.txt'] = (
     'Read source/CURRENT-STATE-LATEST.md and source/validation/RUNTIME18-CPU-CHECKPOINT.md.\n'
     'Camera synchronization: source/validation/RUNTIME18-CAMERA-CHECKPOINT.md.\n'
     'Current frame budget: source/validation/RUNTIME18-FRAME-BUDGET-CHECKPOINT.md.\n'
+    'Render work and original in-ring result: source/validation/RUNTIME18-RENDER-CORE-CHECKPOINT.md.\n'
     'No physical Saturn validation or universal ROM-EXACT claim.\n'
     'HOST: make -C source/src/runtime test-runtime18-complete-match\n'
     'No-input HOST: make -C source/src/runtime test-runtime18-noinput-complete-match\n'

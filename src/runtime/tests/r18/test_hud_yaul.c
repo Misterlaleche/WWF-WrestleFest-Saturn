@@ -21,9 +21,8 @@ int main(int argc,char**argv){
  /* Full boot upload changes only font bank and the HUD map window. */
  wf_saturn_cram_reset();assert(wf_r18_hud_commit(&video)==WF_OK);
  assert(wf_saturn_cram_writes==256&&mock_screen_priorities[2]==4);
- video.palettes[3]=15;
- wf_r17_fg0_write_t w[]={{0xc0001,0x34,1},{0xc0003,0x12,1}};
- assert(wf_r18_video_batch(NULL,w,2,&video)==WF_OK);
+ wf_r17_fg0_write_t w[]={{0x180003,15,1},{0xc0001,0x34,1},{0xc0003,0x12,1}};
+ assert(wf_r18_video_batch(NULL,w,3,&video)==WF_OK);
  assert(wf_r18_hud_commit(&video)==WF_OK&&wf_saturn_cram_writes==257);
  volatile uint16_t *map=(volatile uint16_t*)(mock_vdp2_vram+0x24000);
  assert(map[0]==0x1234&&map[2048]==0x1234&&mock_cram[513]==255);

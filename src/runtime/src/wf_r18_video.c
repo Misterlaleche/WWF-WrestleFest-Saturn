@@ -10,6 +10,18 @@ static uint8_t *mapped(wf_r18_video_t*v,uint32_t a,unsigned n){
  v->failed_address=a;return NULL;
 }
 static int valid(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){for(size_t i=0;i<n;i++)if(!mapped(v,w[i].addr,w[i].width))return 0;return 1;}
+static void palette_changed(wf_r18_video_t *v,uint32_t address){
+ if((address&127u)>=32u)return;
+ unsigned role;
+ switch(address&0xfffff800u){
+ case 0x180000u:role=WF_R18_PALETTE_TEXT;break;
+ case 0x182000u:role=WF_R18_PALETTE_SPRITES;break;
+ case 0x188000u:role=WF_R18_PALETTE_FG;break;
+ case 0x186000u:role=WF_R18_PALETTE_BG;break;
+ default:return;
+ }
+ v->palette_dirty[role]|=(uint16_t)(1u<<((address>>7)&15u));
+}
 static void apply(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){
  for(size_t i=0;i<n;i++){
   uint8_t*p=mapped(v,w[i].addr,w[i].width);
@@ -17,6 +29,7 @@ static void apply(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){
    uint8_t value=(uint8_t)(w[i].value>>(8*(w[i].width-1-k)));
    if(p[k]==value)continue;p[k]=value;
    uint32_t a=w[i].addr+k;
+   palette_changed(v,a);
    if(a>=0xc0000u&&a<0xc2000u&&(a&1u)){
     unsigned cell=(a-0xc0000u)>>2;v->hud_dirty[cell>>3]|=(uint8_t)(1u<<(cell&7u));
    }
@@ -29,7 +42,7 @@ wf_status_t wf_r18_video_peek(wf_runtime_t*r,uint32_t a,uint32_t*out,void*u){wf_
 static wf_status_t rd(wf_r18_video_t*v,uint32_t a,unsigned n,uint32_t*out){uint8_t b[4];if(!v||!v->read_rom||v->read_rom(v->read_user,a,b,n)!=WF_OK){if(v)v->failed_address=a;return WF_BLOCKED;}*out=0;for(unsigned i=0;i<n;i++)*out=(*out<<8)|b[i];return WF_OK;}
 wf_status_t wf_r18_palette_2aea(wf_runtime_t*r,uint16_t id,void*u){wf_r18_video_t*v=u;uint8_t bytes[32];unsigned bank;(void)r;if(!v||id>255)return WF_BAD_STATE;if(v->palette_map[id]&128)return WF_OK;for(bank=0;bank<16&&v->palette_used[bank];bank++){}if(bank==16)return WF_OK; /* ROM $2B12 returns without allocation. */
  if(!v->read_rom||v->read_rom(v->read_user,0x2f22u+id*32u,bytes,32)!=WF_OK)return WF_BLOCKED;
- bytes[0]=bytes[1]=0;memcpy(v->palettes+0x2000+bank*128,bytes,32);v->palette_used[bank]=255;v->palette_map[id]=(uint8_t)(128|bank);return WF_OK;}
+ bytes[0]=bytes[1]=0;memcpy(v->palettes+0x2000+bank*128,bytes,32);v->palette_dirty[WF_R18_PALETTE_SPRITES]|=(uint16_t)(1u<<bank);v->palette_used[bank]=255;v->palette_map[id]=(uint8_t)(128|bank);return WF_OK;}
 wf_status_t wf_r18_palette_2b58(wf_runtime_t*r,uint16_t id,void*u){wf_r18_video_t*v=u;(void)r;if(!v||id>255)return WF_BAD_STATE;if(v->palette_map[id]){v->palette_used[v->palette_map[id]&15]=0;v->palette_map[id]=0;}return WF_OK;}
 /* All text owners preserve caller D registers in ROM. Stage transfers before commit. */
 static wf_r17_fg0_write_t stage[4096];static size_t used;static unsigned busy;

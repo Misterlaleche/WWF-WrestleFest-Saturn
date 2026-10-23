@@ -10,6 +10,7 @@
 #include "wf_r18_present.h"
 #include "wf_r18_cdfs.h"
 #include "wf_r18_ring.h"
+#include "wf_r18_hud.h"
 volatile uint32_t profile_totals[24],profile_calls[24];
 volatile uint32_t profile_frames,profile_vblanks,profile_start_vblank;
 #ifndef WF_R18_PROFILE_START
@@ -23,7 +24,7 @@ static wf_status_t profile_frame(wf_runtime_t *);
 static wf_status_t profile_present(wf_runtime_t *,wf_actor_raw_t *const *,size_t,void *);
 static wf_status_t profile_world(wf_runtime_t *,wf_r18_world_ctx_t *);
 static int profile_ring(int16_t,int16_t,int16_t,int16_t,uint8_t);
-static int profile_palette(unsigned,const uint8_t *,size_t);
+static wf_status_t profile_palette(wf_r18_video_t *,unsigned);
 static int profile_file(const char *,uint32_t,void *,size_t);
 static wf_status_t profile_boot(wf_runtime_t *,wf_r18_bootstrap_context_t *,const wf_r18_launch_config_t *);
 static void profile_vdp1wait(void),profile_vdp2wait(void);
@@ -31,7 +32,7 @@ static void profile_vdp1wait(void),profile_vdp2wait(void);
 #define wf_r18_present_batch profile_present
 #define wf_r18_world_commit profile_world
 #define wf_r18_ring_update profile_ring
-#define wf_r18_ring_palette_set profile_palette
+#define wf_r18_palettes_commit profile_palette
 #define wf_r18_file_read profile_file
 #define wf_r18_direct_boot profile_boot
 #define vdp1_sync_wait profile_vdp1wait
@@ -41,7 +42,7 @@ static void profile_vdp1wait(void),profile_vdp2wait(void);
 #undef wf_r18_present_batch
 #undef wf_r18_world_commit
 #undef wf_r18_ring_update
-#undef wf_r18_ring_palette_set
+#undef wf_r18_palettes_commit
 #undef wf_r18_file_read
 #undef wf_r18_direct_boot
 #undef vdp1_sync_wait
@@ -59,7 +60,7 @@ static wf_status_t profile_frame(wf_runtime_t*r){
 static wf_status_t profile_present(wf_runtime_t*r,wf_actor_raw_t *const*a,size_t n,void*u){uint16_t t=cpu_frt_count_get();wf_status_t s=wf_r18_present_batch(r,a,n,u);record(1,t);return s;}
 static wf_status_t profile_world(wf_runtime_t*r,wf_r18_world_ctx_t*c){uint16_t t=cpu_frt_count_get();wf_status_t s=wf_r18_world_commit(r,c);record(2,t);return s;}
 static int profile_ring(int16_t a,int16_t b,int16_t c,int16_t d,uint8_t p){uint16_t t=cpu_frt_count_get();int s=wf_r18_ring_update(a,b,c,d,p);record(3,t);return s;}
-static int profile_palette(unsigned l,const uint8_t*p,size_t n){uint16_t t=cpu_frt_count_get();int s=wf_r18_ring_palette_set(l,p,n);record(4,t);return s;}
+static wf_status_t profile_palette(wf_r18_video_t *v,unsigned role){uint16_t t=cpu_frt_count_get();wf_status_t s=wf_r18_palettes_commit(v,role);record(4,t);return s;}
 static int profile_file(const char*n,uint32_t off,void*p,size_t bytes){uint16_t t=cpu_frt_count_get();int s=wf_r18_file_read(n,off,p,bytes);record(!strcmp(n,"SPRITES.PAK")?7:8,t);return s;}
 static void profile_vdp1wait(void){uint16_t t=cpu_frt_count_get();vdp1_sync_wait();record(5,t);}
 static void profile_vdp2wait(void){uint16_t t=cpu_frt_count_get();vdp2_sync_wait();record(6,t);}

@@ -4,7 +4,7 @@
 #ifdef WF_PLATFORM_SATURN
 #include <yaul.h>
 #endif
-void wf_r18_hud_reset(wf_r18_video_t*v){if(v)memset(v->hud_dirty,255,sizeof v->hud_dirty);}
+void wf_r18_hud_reset(wf_r18_video_t*v){if(v){memset(v->hud_dirty,255,sizeof v->hud_dirty);memset(v->palette_committed,0,sizeof v->palette_committed);}}
 wf_status_t wf_r18_hud_map_update(wf_r18_video_t*v,volatile uint16_t*map,size_t*writes){
  if(!v||!map)return WF_BAD_STATE;
  size_t n=0;
@@ -41,10 +41,29 @@ wf_status_t wf_r18_hud_bind(wf_r18_video_t*v,wf_r18_hud_file_fn read_file){
 #endif
  wf_r18_hud_reset(v);return WF_OK;
 }
-wf_status_t wf_r18_hud_commit(wf_r18_video_t*v){
- if(!v)return WF_BAD_STATE;
+wf_status_t wf_r18_palettes_commit(wf_r18_video_t *v,unsigned role){
+ if(!v||role>WF_R18_PALETTE_BG)return WF_BAD_STATE;
 #ifdef WF_PLATFORM_SATURN
- for(unsigned bank=0;bank<16;bank++)wf_saturn_cram_write_bank((uint16_t)(WF_SATURN_CRAM_TEXT_FIRST+bank*16u),v->palettes+bank*128u);
+ const uint8_t *colors;uint16_t first;
+ switch(role){
+ case WF_R18_PALETTE_TEXT:colors=v->palettes;first=WF_SATURN_CRAM_TEXT_FIRST;break;
+ case WF_R18_PALETTE_SPRITES:colors=v->palettes+0x2000u;first=WF_SATURN_CRAM_SPRITE_FIRST;break;
+ case WF_R18_PALETTE_FG:colors=v->fg_palette;first=WF_SATURN_CRAM_FG_FIRST;break;
+ default:colors=v->bg_palette;first=WF_SATURN_CRAM_BG_FIRST;break;
+ }
+ uint16_t pending=wf_r18_video_palette_pending(v,(wf_r18_palette_role_t)role);
+ for(unsigned bank=0;bank<16;bank++)if(pending&(1u<<bank)){
+  wf_status_t status=wf_saturn_cram_write_bank((uint16_t)(first+bank*16u),colors+bank*128u);
+  if(status!=WF_OK)return status;
+  wf_r18_video_palette_ack(v,(wf_r18_palette_role_t)role,(uint16_t)(1u<<bank));
+ }
+#endif
+ return WF_OK;
+}
+wf_status_t wf_r18_hud_commit(wf_r18_video_t*v){
+ wf_status_t status=wf_r18_palettes_commit(v,WF_R18_PALETTE_TEXT);
+ if(status!=WF_OK)return status;
+#ifdef WF_PLATFORM_SATURN
  return wf_r18_hud_map_update(v,(volatile uint16_t*)VDP2_VRAM_ADDR(1,WF_SATURN_VDP2_HUD_NAMES),NULL);
 #else
  return WF_OK;

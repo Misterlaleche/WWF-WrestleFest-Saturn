@@ -5,6 +5,7 @@
 #include "wf_r18_bootstrap.h"
 #include "wf_r18_referee.h"
 #include "wf_r18_match_result.h"
+#include "wf_r18_result_screen.h"
 #include "wf_r18_video.h"
 #include "wf_r18_world.h"
 #include "wf_r18_present.h"
@@ -30,6 +31,8 @@ static wf_status_t audio(wf_runtime_t*r,uint16_t cmd,void*u){(void)r;(void)cmd;(
 static int file_read(const char*name,uint32_t off,void*dst,size_t n){if(strcmp(name,"ROM68K.BIN")==0){if(play_started)play_rom_reads++;if(off+n>romsize)return -1;trace_rom(off,n);memcpy(dst,rom+off,n);return 0;}FILE*f=!strcmp(name,"SPRITES.PAK")?sprites:!strcmp(name,"HOTSPR.BIN")?hot_sprites:NULL;if(!f||fseek(f,off,SEEK_SET))return -1;if(fread(dst,1,n,f)!=n)return -1;if(play_started&&f==sprites)play_sprite_reads++;if(sprite_trace&&f==sprites)fprintf(sprite_trace,"%u,%u,%zu\n",rt.g.frame_counter,off/128u,n);return 0;}
 static uint32_t host_wait_vblanks;
 static wf_status_t wait_21e6(wf_runtime_t*r,uint16_t raw,void*u){(void)r;(void)u;host_wait_vblanks+=(uint32_t)raw+1u;return WF_OK;} /* Host transport counts hardware edges; gameplay does not advance during $21E6. */
+static wf_status_t result_wait(wf_runtime_t*r,uint16_t count,void*u){if(!count)return WF_BAD_STATE;return wait_21e6(r,(uint16_t)(count-1u),u);}
+static wf_status_t result_commit(void*u){return wf_r18_hud_commit(u);}
 static wf_status_t render(wf_runtime_t*r,wf_actor_raw_t *const*a,size_t n,void*u){(void)u;
 if((uint16_t)gc.camera.scroll0_x!=r->g.global_17e6||(uint16_t)gc.camera.scroll1_x!=r->g.global_17ea||(uint16_t)gc.camera.scroll0_y!=r->g.global_17ee||(uint16_t)gc.camera.scroll1_y!=r->g.global_17f2_word){fprintf(stderr,"Camera/ring desynchronization at frame %u\n",r->g.frame_counter);return WF_BAD_STATE;}
 if(r->g.frame_counter==30u||r->g.frame_counter==120u||r->g.frame_counter==600u||r->g.frame_counter%1000u==0u)printf("CAMERA frame=%u sprites=%u,%u/%u,%u ring=%u,%u/%u,%u\n",r->g.frame_counter,(uint16_t)gc.camera.scroll0_x,(uint16_t)gc.camera.scroll0_y,(uint16_t)gc.camera.scroll1_x,(uint16_t)gc.camera.scroll1_y,r->g.global_17e6,r->g.global_17ee,r->g.global_17ea,r->g.global_17f2_word);
@@ -55,6 +58,9 @@ play_started=1;
 for(unsigned frame=0;frame<frame_limit;frame++){
 gc.input_hw_low[0]=(attack&&frame>=60u&&frame<180u)?0xfeu:(attack&&frame>=180u&&frame<184u)?0xefu:0xffu;
 st=wf_runtime_frame(&rt);if(st==WF_BLOCKED&&rt.frame_ready){st=wf_r18_display_irq(&rt,&display);if(st==WF_OK)st=wf_r18_world_commit(&rt,&world);if(st==WF_OK)st=wf_r18_hud_irq(&rt,&video);if(st==WF_OK){wf_runtime_vblank_ack(&rt);st=wf_runtime_frame(&rt);}}if(st==WF_BLOCKED&&wf_r18_tag_match_complete(&rt)){
+uint32_t before_wait=host_wait_vblanks;
+if(wf_r18_result_in_ring(&rt,&video,result_wait,result_commit,&video)!=WF_OK||host_wait_vblanks-before_wait!=131u){fputs("In-ring result presentation failed\n",stderr);return 1;}
+printf("RESULT SCREEN original11CE-122B wait=%u VBlanks\n",host_wait_vblanks-before_wait);
 printf("MATCH COMPLETE frame=%u ROM endpoint=0011B6 result=%04x,%04x,%04x,%04x referee=%04x/%04x\n",rt.g.frame_counter,wf_be16(&rt.actors[0],WF_A_RESULT),wf_be16(&rt.actors[1],WF_A_RESULT),wf_be16(&rt.actors[4],WF_A_RESULT),wf_be16(&rt.actors[5],WF_A_RESULT),wf_be16(&rt.referee,WF_A_STATE),wf_be16(&rt.referee,WF_A_ANIM_INDEX));
 printf("FINISH count169A=%04x timer16A0=%04x\n",rt.g.global_169a,rt.g.global_16a0);
 printf("HARDWARE WAIT vblanks=%u\n",host_wait_vblanks);printf("PLAY CD reads ROM=%u SPRITES=%u\n",play_rom_reads,play_sprite_reads);if(getenv("WF_PROBE_REQUIRE_RESIDENT")&&(play_rom_reads||play_sprite_reads)){fputs("Resident playback caused CD reads\n",stderr);return 1;}return 0;

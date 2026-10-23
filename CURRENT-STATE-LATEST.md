@@ -1,19 +1,20 @@
-# RUNTIME-18 — presupuesto de frame, 23 de octubre de2026
+# RUNTIME-18 — trabajo gráfico y resultado dentro del ring, 23 de octubre de 2026
 
-Continuación de5ab045c. El siguiente cuello medido era la construcción de
-la lista VDP1: deduplicación lineal y borrados de memoria no enviada.
-El índice preserva los slots y orden originales; sólo se inicializan los
-prefijos usados. No cambia el núcleo jugable ni el ritmo lógico.
+Continuación de `f61dc98`. Elimina lecturas y descompresiones repetidas de
+metasprites, recorridos de mapas VDP2 sin cambios y comprobaciones de paletas
+que no han recibido escrituras. Se conservan decisiones, registros y gráficos.
 
-Mednafen, secuencia30–120: **111VBlanks/90frames** frente131;15,3%menos.
-Secuencia900–1080:203/180. Todavía no60fps sostenidos. Frame120 conserva todos
-los píxeles y hashes activosVDP1/HUD;1540fixtures comparan el planificador
-contra5ab. CORE48+48ASan y ambos combates4391/14409 pasan sinCDenpartida.
+Mednafen: **99 VBlanks/90 frames** frente a 111; tramo avanzado **198/180**
+frente a 203. Muestras de VRAM/cámara iguales y 786432 píxeles del frame 120
+idénticos. No son 60 FPS sostenidos. Partida normal completa: **4391 frames,
+4919 VBlanks**, sin fatal; ahora muestra el resultado original dentro del ring
+con las 131 esperas VBlank de `$11CE..$122B`. No entra al frontend.
 
-Informe, evidencia, límites y reproducción:
-[validation/RUNTIME18-FRAME-BUDGET-CHECKPOINT.md](validation/RUNTIME18-FRAME-BUDGET-CHECKPOINT.md).
-Arranque directo con mando, sinfrontend/audio. No se declaraROM-EXACT universal
-ni prueba física de este disco; Saturn/CD-R sigue pendiente del usuario.
+Suite general, CORE 48+48 ASan, oráculos ROM y ambos combates HOST/ASan pasan.
+Informe, reproducción, hashes y límites:
+[validation/RUNTIME18-RENDER-CORE-CHECKPOINT.md](validation/RUNTIME18-RENDER-CORE-CHECKPOINT.md).
+Sin audio; Saturn físico/CD-R queda pendiente del usuario. No se declara
+ROM-EXACT ni pixel-perfect universal a partir de estas pruebas.
 
 ## Registro histórico de RUNTIME-17
 

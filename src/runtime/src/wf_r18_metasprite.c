@@ -16,7 +16,7 @@ static uint32_t entry(parser_t *p,unsigned set,unsigned pose,uint32_t *base){
 }
 /* Decode just the leaf's own body, as D43A/D540 do; no recursive rows.
  * The caller supplies clipping/shadow behavior for the actual routine. */
-static int body(parser_t *p,uint32_t a,uint16_t h,uint8_t rows[255][6],uint32_t *end,int skip_prefix){
+static int decode_body(parser_t *p,uint32_t a,uint16_t h,uint8_t rows[255][6],uint32_t *end,int skip_prefix){
  unsigned n=h&255;uint32_t q=a+2;
  if(skip_prefix&&(h&512)){
   uint8_t desc[4];if(!get(p,q,desc,4))return 0;q+=4;
@@ -34,6 +34,29 @@ static int body(parser_t *p,uint32_t a,uint16_t h,uint8_t rows[255][6],uint32_t 
   for(unsigned i=0;i<n;i++)rows[i][col]=values[i];
  }
  *end=q;return p->status==WF_OK;
+}
+void wf_r18_metasprite_cache_reset(wf_r18_metasprite_cache_t *cache){
+ if(cache)memset(cache,0,sizeof *cache);
+}
+static int body(parser_t *p,uint32_t a,uint16_t h,uint8_t rows[255][6],uint32_t *end,int skip_prefix){
+ wf_r18_metasprite_cache_t *cache=p->c->cache;unsigned n=h&255u;
+ if(p->status!=WF_OK)return 0;
+ if(cache&&n<=WF_R18_METASPRITE_CACHE_ROWS){
+  for(unsigned i=0;i<WF_R18_METASPRITE_CACHE_ENTRIES;i++){
+   const wf_r18_metasprite_cache_entry_t *entry=&cache->entries[i];
+   if(entry->valid&&entry->address==a&&entry->header==h&&entry->skip_prefix==(unsigned)skip_prefix){
+    memcpy(rows,entry->rows,n*6u);*end=entry->end;return 1;
+   }
+  }
+ }
+ if(!decode_body(p,a,h,rows,end,skip_prefix))return 0;
+ if(cache&&n<=WF_R18_METASPRITE_CACHE_ROWS&&p->status==WF_OK){
+  wf_r18_metasprite_cache_entry_t *entry=&cache->entries[cache->next];
+  entry->address=a;entry->header=h;entry->skip_prefix=(uint8_t)skip_prefix;entry->end=*end;
+  memcpy(entry->rows,rows,n*6u);entry->valid=1;
+  cache->next=(uint8_t)((cache->next+1u)%WF_R18_METASPRITE_CACHE_ENTRIES);
+ }
+ return 1;
 }
 static void emit_row(parser_t *p,const uint8_t r[6],uint8_t dx,uint8_t dy,uint8_t paloff,int plain){
  uint8_t bx=(uint8_t)(r[0]+p->dx+dx),by=(uint8_t)(r[1]+p->dy+dy);
