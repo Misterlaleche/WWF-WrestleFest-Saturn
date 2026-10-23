@@ -17,9 +17,9 @@ root=Path(__file__).resolve().parents[1]
 assets=root/'src/runtime/audit/runtime18-cd'
 ring=(assets/'R18RING.BIN').read_bytes();rom=(assets/'ROM68K.BIN').read_bytes()
 hot=(assets/'HOTSPR.BIN').read_bytes();count=int.from_bytes(hot[4:6],'big')
-header=8192 if count>2044 else 4096;tiles=hot[header:]
+header=16384 if count>4092 else 8192 if count>2044 else 4096;tiles=hot[header:]
 pages=[int(x) for x in re.findall(r'\b\d+\b',(root/'src/runtime/include/wf_r18_rom_hot_pages.h').read_text().split('{',1)[1].split('}',1)[0])]
-assert len(pages)==172 and len(tiles)==count*128
+assert 0<len(pages)<=256 and len(tiles)==count*128
 rom_cache=b''.join(rom[page*1024:(page+1)*1024] for page in pages)
 def swapped(b):
     out=bytearray(b);out[0::2],out[1::2]=b[1::2],b[0::2];return bytes(out)
@@ -48,7 +48,7 @@ with open(f'/proc/{pid}/mem','rb',buffering=0) as mem:
                 assert entry['width'] in (1,2,4),'No completed real video staging write'
                 matches.append({'host_base':hex(base),'video_staging_first_write':entry})
             at=data.find(wanted,at+2)
-assert matches,'No intact ring+172program pages+3993hot tiles in the same LWRAM image'
+assert matches,f'No intact ring+{len(pages)} program pages+{count} hot tiles in the same LWRAM image'
 state['LWRAM']={'matches':matches,'ring_bytes_equal':len(ring),'ROM_pages_equal':len(pages),
                 'ROM_bytes_equal':len(rom_cache),'hot_sprite_bytes_equal':len(tiles),
                 'video_staging_range':['0x00254000','0x00260000'],

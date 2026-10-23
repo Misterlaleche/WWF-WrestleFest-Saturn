@@ -263,7 +263,7 @@ static void corpus(wf_saturn_yaul_backend_t *b,const char *path)
     assert(file && fread(header,1,sizeof header,file)==sizeof header && !memcmp(header,"R18H",4));
     unsigned count=(unsigned)header[4]*256u+header[5];
     assert(count>0u && header[6]==0u && header[7]==128u);
-    assert(fseek(file,count>2044u?8192L:4096L,SEEK_SET)==0);
+    assert(fseek(file,count>4092u?16384L:count>2044u?8192L:4096L,SEEK_SET)==0);
     uint64_t before=hardware_rows,full_before=full_rows;
     for(unsigned i=0;i<count;++i){
         assert(fread(tile,1,sizeof tile,file)==sizeof tile);

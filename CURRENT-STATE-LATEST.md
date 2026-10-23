@@ -1,4 +1,20 @@
-# Investigación actual: HUD, aliados y stamina, 23 de octubre de 2026
+# Estado actual: movimiento CPU y llave $22, 23 de octubre de 2026
+
+Sobre `a4be15f`: implementados `$1D7B6/$1DA66` y acción`$22`, con2263 y1946
+comparaciones ROM respectivamente. Se consolida la precarga4513 tiles y176
+páginas; cero lecturas CD en los recorridos HOST probados703/560 frames.
+Mednafen verifica movimiento del aliado en700 y llave`4022` en550, comandos
+VDP1 y HUD VDP2 reales. Se entrega vídeo y capturas, sin otro paquete BIN/CUE.
+
+La partida sigue incompleta: los nuevos primeros bloqueos son acción`$3F`
+en703 sin entrada y`$5F` en560 con control. Perfil450→550:100 frames/111
+VBlanks, aproximadamente54fps en ese tramo; no60fps sostenidos, ROM-EXACT
+universal ni validación Saturn físico. No se retoma el frontend.
+
+Informe y reproducción:
+[validation/RUNTIME18-MOVEMENT-ACTION22-CHECKPOINT.md](validation/RUNTIME18-MOVEMENT-ACTION22-CHECKPOINT.md).
+
+## Investigación anterior: HUD, aliados y stamina
 
 Sobre `95328a2`: corregido el origen de relleno de las barras, preservando
 ambos retratos; comprobado en capturas reales de Mednafen. Se corrigen

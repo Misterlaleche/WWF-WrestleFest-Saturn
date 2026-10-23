@@ -318,7 +318,7 @@ static wf_status_t state1_sub1(wf_runtime_t*rt,unsigned slot,
  return wf_state5_execute(rt,slot,tr?&tr->state5:0);
 }
 /* $1F15C/$20C8, preserving the original work-RAM scratch layout. */
-static int cpu_arrived_1f15c(wf_runtime_t*rt,wf_actor_raw_t*a){
+int wf_cpu_arrived_1f15c(wf_runtime_t*rt,wf_actor_raw_t*a){
  uint16_t x=wf_be16(a,6),y=wf_be16(a,10),tx=wf_be16(a,0xbe),ty=wf_be16(a,0xc0);
  uint16_t ax=(uint16_t)(x-tx),ay=(uint16_t)(y-ty);if(x<tx)ax=(uint16_t)-ax;if(y<ty)ay=(uint16_t)-ay;
  if(ax<8u&&ay<8u){wf_r17_m68k_moveq(&rt->m68k_regs,0,0);return 1;}
@@ -366,7 +366,7 @@ static wf_status_t state1_tag_1d206(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t
    }
   }else if(wf_u8(t,WF_A_FLAGS33)&16u){wf_set_be16(a,WF_A_STATE,5);wf_set_be16(a,WF_A_SELECTOR,0x3c);return WF_OK;}
  }
- if(cpu_arrived_1f15c(rt,a)){
+ if(wf_cpu_arrived_1f15c(rt,a)){
   p=ptr(rt,a,WF_A_TEAM_LINK);if(!p)return block(tr,0x1d2feu);
   wf_set_u8(a,WF_A_MOTION_MODE,0);wf_set_u8(a,0x23,0x60);
   if(wf_u8(p,WF_A_AE)&128u){wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~64u));wf_set_be16(a,WF_A_STATE,5);wf_set_be16(a,WF_A_SELECTOR,0x4c);}
@@ -385,7 +385,7 @@ static wf_status_t state1_corner_1d31e(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_t
  wf_r17_m68k_moveq(&rt->m68k_regs,0,0);wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)corner);
  wf_r17_m68k_move_l(&rt->m68k_regs,1,rt->g.global_1670);
  if((rt->g.global_1670&(1u<<(corner&31u)))||wf_u8(t,WF_A_STATE+1u)!=4u){wf_set_be16(a,WF_A_STATE,0);return WF_OK;}
- if(!cpu_arrived_1f15c(rt,a))return WF_OK;
+ if(!wf_cpu_arrived_1f15c(rt,a))return WF_OK;
  wf_r17_m68k_moveq(&rt->m68k_regs,0,0);wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)corner);
  if(!wf_be16(a,0xacu))wf_set_be16(a,0xacu,0x8004u);
  rt->g.global_1670|=1u<<(corner&7u);wf_r17_m68k_move_l(&rt->m68k_regs,1,rt->g.global_1670);
@@ -791,7 +791,7 @@ wf_status_t wf_cpu_pursuit_1d5a2(wf_runtime_t*rt,unsigned slot,wf_state5_trace_t
   }
  }
  /* $1F15C/$20C8 also writes the shared $15E4 direction scratch. */
- if(!cpu_arrived_1f15c(rt,a))return WF_OK;
+ if(!wf_cpu_arrived_1f15c(rt,a))return WF_OK;
 arrived:
  wf_set_be16(a,WF_A_STATE,5);wf_set_u8(a,WF_A_CPU_B5,(uint8_t)((wf_u8(a,WF_A_CPU_B5)|16u)&~32u));wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~32u));wf_set_u8(a,WF_A_SELECTOR,0);return wf_state5_execute(rt,slot,tr);
 }
@@ -990,6 +990,116 @@ wf_status_t wf_cpu_continue_1c5b6(wf_runtime_t*rt,unsigned slot,wf_state5_trace_
  wf_set_u8(a,WF_A_SELECTOR,0);wf_set_be16(a,WF_A_STATE,5);
  return wf_state5_execute(rt,slot,tr);
 }
+/* $1D8C2: character -> clamped progression -> tier, keeping the original
+ * BYTE comparison and WORD shifts live in D0 for the $24CC RNG caller. */
+static wf_status_t state2_weighted_1d8c2(wf_runtime_t*rt,wf_actor_raw_t*a,
+                                      uint32_t base,int*choice,wf_cpu_trace_t*tr){
+ unsigned id=wf_u8(a,WF_A_INTERNAL_ID);uint32_t table;
+ wf_r17_m68k_moveq(&rt->m68k_regs,0,0);wf_r17_m68k_move_b(&rt->m68k_regs,0,(uint8_t)id);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(id*4u));
+ if(id>=12u||!cpu_pointer(base+(uint16_t)rt->m68k_regs.d[0],&table))return block(tr,0x1d8cau);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,rt->g.progression_0162);
+ if((uint8_t)rt->m68k_regs.d[0]>=6u)wf_r17_m68k_moveq(&rt->m68k_regs,0,5);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(rt->m68k_regs.d[0]*4u));
+ if(!cpu_pointer(table+(uint16_t)rt->m68k_regs.d[0],&table))return block(tr,0x1d8deu);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,wf_be16(a,WF_A_TIER));
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(rt->m68k_regs.d[0]*2u));
+ const uint8_t*w=cpu_data(table+rt->m68k_regs.d[0],1u);if(!w)return block(tr,0x1d8e8u);
+ *choice=state1_weighted_24cc(rt,w,state4_weight_count(w));return *choice<0?block(tr,0x24ccu):WF_OK;
+}
+/* $1D7B6 owns running reactions, braking thresholds and the TAG rescue scan.
+ * State 3 at $1DA66 is its short deceleration continuation. */
+static wf_status_t state2(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+ if(!(wf_u8(a,WF_A_STATE)&128u))return WF_OK;
+ unsigned wait=wf_u8(a,WF_A_TIMER44+1u);
+ if(wait){
+  if(wait==2u){
+   if((rt->g.mode_0161&2u)&&wf_be16(a,WF_A_CPU_DISTANCE)>=192u)goto brake;
+   wf_set_be16(a,WF_A_CPU_BC,0u);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~1u));return WF_OK;
+  }
+  if(!rt->g.credited_route&&!(rt->g.mode_0161&1u))return WF_OK;
+  wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x1d804u);
+  wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(t,WF_A_FACING));
+  if(wf_u8(t,WF_A_FACING)==wf_u8(a,WF_A_FACING)){
+   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));goto threshold;
+  }
+  if(wf_be16(a,WF_A_CPU_DISTANCE_Y)>=10u||wf_be16(a,WF_A_CPU_DISTANCE)>=160u)goto threshold;
+  uint8_t old=wf_u8(a,WF_A_CPU_B7);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(old|2u));if(old&2u)goto threshold;
+  wf_set_be16(a,WF_A_CPU_BC,0u);int choice;wf_status_t status;
+  if((wf_u8(t,WF_A_FLAGS33)&16u)||(wf_main_state(t)==5u&&wf_u8(t,WF_A_SELECTOR_LO)==3u)){
+   status=state2_weighted_1d8c2(rt,a,0x23b26u,&choice,tr);if(status!=WF_OK)return status;
+   if(choice)goto threshold;
+   wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)|4u));
+   wf_set_be16(a,WF_A_SELECTOR,0x75u);wf_set_be16(a,WF_A_CPU_BC,80u);goto threshold;
+  }
+  if(rt->g.mode_0161&1u){
+   unsigned id=wf_u8(a,WF_A_INTERNAL_ID);uint32_t table;
+   wf_r17_m68k_moveq(&rt->m68k_regs,0,0);wf_r17_m68k_move_b(&rt->m68k_regs,0,(uint8_t)id);
+   wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(id*4u));
+   if(id>=12u||!cpu_pointer(0x23856u+(uint16_t)rt->m68k_regs.d[0],&table))return block(tr,0x1d888u);
+   wf_r17_m68k_move_w(&rt->m68k_regs,0,wf_be16(a,WF_A_TIER));
+   wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(rt->m68k_regs.d[0]*2u));
+   const uint8_t*w=cpu_data(table+rt->m68k_regs.d[0],1u);if(!w)return block(tr,0x1d892u);
+   choice=state1_weighted_24cc(rt,w,state4_weight_count(w));if(choice<0)return block(tr,0x24ccu);
+  }else{status=state2_weighted_1d8c2(rt,a,0x238ceu,&choice,tr);if(status!=WF_OK)return status;}
+  if(choice)return WF_OK;
+  wf_set_be16(a,WF_A_SELECTOR,0x72u);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|1u));wf_set_be16(a,WF_A_CPU_BC,72u);
+threshold:
+  if(!wf_be16(a,WF_A_CPU_BC))return WF_OK;
+  wf_r17_m68k_move_w(&rt->m68k_regs,0,wf_be16(a,WF_A_CPU_BC));
+  if(wf_be16(a,WF_A_CPU_BC)<wf_be16(a,WF_A_CPU_DISTANCE))return WF_OK;
+  if(wf_u8(a,WF_A_CPU_B7)&1u)goto brake;
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));wf_set_be16(a,WF_A_STATE,5u);return WF_OK;
+ }
+ wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x1d92au);
+ if(wf_u8(a,WF_A_FLAGS34)&4u){
+  wf_r17_m68k_moveq(&rt->m68k_regs,0,8);
+  for(unsigned i=0;i<WF_ACTOR_SLOTS;i++){
+   wf_actor_raw_t*c=&rt->actors[i];
+   if((wf_u8(c,WF_A_ACTIVE)&128u)&&(wf_u8(c,0x35u)&3u)){
+    uint16_t cx=wf_be16(c,WF_A_X),ax=wf_be16(a,WF_A_X),dx=(uint16_t)(cx-ax);if(cx<ax)dx=(uint16_t)(0u-dx);
+    wf_r17_m68k_move_w(&rt->m68k_regs,0,dx);if(dx>=128u)return WF_OK;break;
+   }
+   wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(rt->m68k_regs.d[0]-1u));
+  }
+  wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(wf_u8(a,WF_A_FLAGS34)&~4u));
+  if(wf_u8(a,WF_A_FLAGS33)&2u){
+   wf_set_u8(a,WF_A_ROLE,(uint8_t)(wf_u8(a,WF_A_ROLE)&~64u));
+   wf_actor_raw_t*p=ptr(rt,a,WF_A_TEAM_LINK);if(!p)return block(tr,0x1da52u);
+   if(!(wf_u8(p,WF_A_FLAGS33)&2u))wf_set_u8(a,0x35u,(uint8_t)(wf_u8(a,0x35u)|8u));
+  }
+  goto brake;
+ }
+ if(wf_u8(a,WF_A_FLAGS32)&4u)return WF_OK;
+ if(wf_u8(t,WF_A_FLAGS32)&1u)goto request;
+ if(wf_be16(a,WF_A_CPU_DISTANCE_Y)>=8u)goto brake;
+ uint8_t old=wf_u8(a,WF_A_CPU_B7);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(old|2u));
+ if(!(old&2u)&&!(wf_u8(a,WF_A_CPU_B5)&8u)){
+  wf_r17_m68k_moveq(&rt->m68k_regs,2,8);
+  wf_status_t status=decision_1de66(rt,slot,a,8u,tr);if(status!=WF_OK)return status;
+  wf_set_be16(a,WF_A_STATE,0x8002u);
+ }
+ if(wf_main_state(t)==4u){
+  unsigned sub=wf_u8(t,WF_A_STATE4_LO);
+  if(sub!=1u&&sub!=0u&&sub!=10u&&!(wf_u8(t,WF_A_CPU_B5)&128u))goto request;
+ }
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,wf_be16(a,WF_A_CPU_DISTANCE));
+ if(wf_be16(a,WF_A_CPU_DISTANCE)<wf_be16(a,WF_A_CPU_BC)){
+  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~8u));wf_set_be16(a,WF_A_STATE,5u);wf_set_u8(a,WF_A_SELECTOR,0u);
+  return wf_state5_execute(rt,slot,tr?&tr->state5:NULL);
+ }
+ if((wf_u8(t,WF_A_FLAGS33)&64u)||(wf_u8(t,WF_A_FLAGS32)&2u))goto brake;
+ if(wf_main_state(t)==5u){unsigned sel=wf_u8(t,WF_A_SELECTOR_LO);if(sel==0x48u||sel==0x1au||sel==0x23u)goto brake;}
+ return WF_OK;
+request:
+ rt->g.global_1697=1u;
+brake:
+ wf_set_be16(a,WF_A_STATE,3u);return WF_OK;
+}
+static wf_status_t state3_1da66(wf_actor_raw_t*a){
+ if((wf_u8(a,WF_A_STATE)&128u)&&(wf_u8(a,WF_A_CPU_B7)&1u))wf_set_be16(a,WF_A_MAGNITUDE,(uint16_t)(wf_be16(a,WF_A_MAGNITUDE)-2u));
+ return WF_OK;
+}
 wf_status_t wf_cpu_actor_step(wf_runtime_t *rt,unsigned slot,wf_cpu_trace_t *tr){
  if(tr) memset(tr,0,sizeof(*tr));
  if(!rt||slot>=WF_ACTOR_SLOTS) return WF_BAD_STATE;
@@ -999,5 +1109,6 @@ wf_status_t wf_cpu_actor_step(wf_runtime_t *rt,unsigned slot,wf_cpu_trace_t *tr)
  if(tr){tr->state=st;tr->handler_rom=h;}
  if(!h) return WF_BAD_STATE;
  switch(st){case 0u:return state0(rt,slot,a,tr);case 1u:return state1(rt,slot,a,tr);
+ case 2u:return state2(rt,slot,a,tr);case 3u:return state3_1da66(a);
  case 4u:return state4(rt,slot,a,tr);case 5u:return wf_state5_execute(rt,slot,tr?&tr->state5:0);case 6u:return state6(rt,slot,tr);case 7u:return WF_OK;case 8u:wf_set_u8(a,WF_A_CPU_BD,0u);return WF_OK;case 9u:return state9(rt,slot,tr);case 0x0au:return WF_OK;case 11u:return state11(rt,a,tr);case 12u:return state12(rt,slot,a,tr);default:return block(tr,h);}
 }

@@ -37,7 +37,7 @@ with open(f'/proc/{sys.argv[1]}/mem', 'rb', buffering=0) as memory:
 
     state['rng'] = int.from_bytes(read(rt + layout[2], 4), 'big')
     state['D0_D7'] = list(struct.unpack('>8I', read(rt + layout[3], 32)))
-    match = re.search(r'\.bss\.gameplay\s+0x([0-9a-f]+)\s', ns['mapping'])
+    match = re.search(r'\.bss\.gameplay(?:\.lto_priv\.\d+)?\s+0x([0-9a-f]+)\s', ns['mapping'])
     assert match
     state['input_hw_low'] = list(read(int(match[1], 16) + layout[4], 10)[:9])
     state['actors'] = []

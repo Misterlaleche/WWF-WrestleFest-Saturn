@@ -15,7 +15,7 @@ static void rom_caches_reset(void){memset(rom_word_tag,255,sizeof rom_word_tag);
 static uint16_t tile_tags[6144];static uint8_t tile_valid[6144];
 /* Sector-aligned header stores sorted tile IDs; pixel payload resides in the
  * first tile-cache slots. The remaining slots retain exact on-demand fallback. */
-static uint8_t hot_header[8192];
+static uint8_t hot_header[16384];
 static size_t hot_count;
 static wf_r18_sprite_record_t records[512];static wf_vdp1_frame_plan_t plan;
 static wf_actor_raw_t *composed[WF_ACTOR_SLOTS];static size_t composed_count;
@@ -96,10 +96,10 @@ wf_status_t wf_r18_hot_sprites_load(void){
  count=(size_t)((hot_header[4]<<8)|hot_header[5]);
  if(!count||count>(sizeof hot_header-8u)/2u||count>=tile_slots)
   return WF_BLOCKED;
- /* Keep existing packs byte-compatible. Larger ID tables occupy four CD
-  * sectors instead of two; the count unambiguously selects the payload. */
- header_bytes=count>2044u?8192u:4096u;
- if(header_bytes>4096u&&read_file("HOTSPR.BIN",4096u,hot_header+4096u,4096u))
+ /* Preserve the two- and four-sector packs. New movement/submission tiles
+  * need eight sectors of IDs; the count unambiguously selects the payload. */
+ header_bytes=count>4092u?16384u:count>2044u?8192u:4096u;
+ if(header_bytes>4096u&&read_file("HOTSPR.BIN",4096u,hot_header+4096u,header_bytes-4096u))
   return WF_BLOCKED;
  for(size_t i=1;i<count;i++)if(hot_id(i)<=hot_id(i-1u))
   return WF_BLOCKED;
@@ -109,7 +109,7 @@ wf_status_t wf_r18_hot_sprites_load(void){
  return WF_OK;
 }
 size_t wf_r18_hot_sprites_bytes(void){
- return hot_count?(hot_count>2044u?8192u:4096u)+hot_count*128u:0u;
+ return hot_count?(hot_count>4092u?16384u:hot_count>2044u?8192u:4096u)+hot_count*128u:0u;
 }
 wf_status_t wf_r18_tile_read(uint16_t tile,const uint8_t **out){
  size_t lo=0,hi=hot_count,slot,cold;

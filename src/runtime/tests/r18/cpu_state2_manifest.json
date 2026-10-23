@@ -1,0 +1,25 @@
+{
+  "base_commit": "a4be15fb09e1e5fe2f83a4410eca4d0bce39162a",
+  "snapshot_source": "validation/results/runtime18/hud-allies-investigation/allies/final-phase-noinput/snapshot-00131.bin",
+  "snapshot_sha256": "e2db1e8beccb89e6dc47fddd05dcc53da45b00eb951b5bb81c6e64684727f001",
+  "snapshot_header": [
+    669,
+    1,
+    0,
+    120758,
+    131,
+    1
+  ],
+  "header_fields": [
+    "frame",
+    "slot",
+    "kind",
+    "owner_pc",
+    "sequence",
+    "native_status"
+  ],
+  "format": "six LE uint32, eight LE D registers, 0x2000 BE RAM, eight LE D registers, 0x2000 BE RAM",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "rom_sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306",
+  "purpose": "Unmodified real no-input frame669 slot1 at the first missing CPU state2 owner. Derived boundaries are explicitly separate test fixtures."
+}

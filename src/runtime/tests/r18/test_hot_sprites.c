@@ -19,7 +19,7 @@ static int read_file(const char *name, uint32_t offset, void *dst, size_t bytes)
     else return -1;
     if (file==hot && !corrupt) {
         if (!offset) { if(bytes!=4096u) return -1; ++initial_reads; }
-        else if (offset==4096u && bytes==4096u) ++extension_reads;
+        else if (offset==4096u && (bytes==4096u || bytes==12288u)) ++extension_reads;
         else payload_offset=offset;
     }
     if (fseek(file, (long)offset, SEEK_SET) != 0 ||
@@ -36,7 +36,7 @@ static int read_file(const char *name, uint32_t offset, void *dst, size_t bytes)
 
 int main(int argc, char **argv)
 {
-    uint8_t header[8192], expected[128];
+    uint8_t header[16384], expected[128];
     size_t header_bytes;
     const uint8_t *got;
     unsigned count;
@@ -44,8 +44,8 @@ int main(int argc, char **argv)
         !(hot=fopen(argv[2], "rb"))) return 2;
     if (fread(header, 1, 4096u, hot) != 4096u) return 2;
     count=(unsigned)header[4]<<8 | header[5];
-    header_bytes=count>2044u?8192u:4096u;
-    if (header_bytes==8192u && fread(header+4096u,1,4096u,hot)!=4096u) return 2;
+    header_bytes=count>4092u?16384u:count>2044u?8192u:4096u;
+    if (header_bytes>4096u && fread(header+4096u,1,header_bytes-4096u,hot)!=header_bytes-4096u) return 2;
     wf_r18_present_init(read_file, rom, sizeof rom, tile_cache, sizeof tile_cache);
     if (wf_r18_hot_sprites_load() != WF_OK || count == 0) {
         fputs("Hot sprite pack failed to load\n",stderr); return 1;

@@ -29,7 +29,7 @@ names = ('rt', 'video_clock', 'fatal_owner', 'fatal_dependency',
 symbols = {}
 # Older checkpoint executables do not yet present the in-ring result text.
 for optional in ('finished_presentation','finished_vblanks','finished_presentation_vblanks'):
-    if re.search(r'\.bss\.'+optional+r'\s+0x', mapping):
+    if re.search(r'\.bss\.'+optional+r'(?:\.lto_priv\.\d+)?\s+0x', mapping):
         names += (optional,)
 if a.layout:
     names += ('gameplay',)
@@ -38,7 +38,7 @@ if a.graphics_layout:
 if a.profile:
     names += ('profile_frames', 'profile_vblanks', 'profile_totals', 'profile_calls')
 for name in names:
-    match = re.search(r'\.bss\.' + name + r'\s+0x([0-9a-f]+)\s', mapping)
+    match = re.search(r'\.bss\.' + name + r'(?:\.lto_priv\.\d+)?\s+0x([0-9a-f]+)\s', mapping)
     if not match:
         raise SystemExit('Missing exact-build symbol: ' + name)
     symbols[name] = int(match[1], 16)

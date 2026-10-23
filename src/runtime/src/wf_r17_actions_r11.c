@@ -1148,6 +1148,184 @@ static wf_status_t raw77(wf_runtime_t*rt,wf_actor_raw_t*a,const desc_t**dp,wf_r1
  else if(low(a,O_FRAME)==0xfeu){wf_set_be16(a,O_STATE,5u);wf_set_be16(a,O_SELECTOR,0x8061u);wf_set_be16(t,O_STATE,5u);wf_set_be16(t,O_SELECTOR,0x8037u);}return WF_OK;
 }
 
+static const desc_t D_15B6C={0x15b6cu,1u,6u,
+    {16u,16u,10u,10u,8u,32u},{0x18bu,0xceu,0xcfu,0xd0u,0xd1u,0xd2u}};
+/* $2503C raw $26 -> $259A0, type-2 text "GIVE UP" at FG $0E30.
+ * $2513A..$25188 update only the odd tile/attribute bytes for glyphs,
+ * while the space clears four complete LONGs. Preserve that write order. */
+static wf_status_t action22_message_2503c(wf_runtime_t*rt,
+                                          wf_r17_actions_r11_bridge_t*b,
+                                          wf_r17_actions_r11_trace_t*tr){
+    static const char text[]="GIVE UP";
+    wf_r17_fg0_write_t writes[52];size_t count=0u;
+    for(unsigned i=0u;i<7u;i++){
+        uint32_t at=0xc0e30u+8u*i;
+        if(text[i]==' '){
+            writes[count++]=(wf_r17_fg0_write_t){at,0u,4u};
+            writes[count++]=(wf_r17_fg0_write_t){at+4u,0u,4u};
+            writes[count++]=(wf_r17_fg0_write_t){at+0x100u,0u,4u};
+            writes[count++]=(wf_r17_fg0_write_t){at+0x104u,0u,4u};
+        }else{
+            uint16_t tile=(uint16_t)(((unsigned)text[i]-0x10u)*4u+0x94u);
+            for(unsigned column=0u;column<2u;column++)for(unsigned row=0u;row<2u;row++){
+                uint32_t cell=at+4u*column+0x100u*row;
+                uint16_t value=(uint16_t)(tile+2u*column+row);
+                writes[count++]=(wf_r17_fg0_write_t){cell+1u,value&255u,1u};
+                writes[count++]=(wf_r17_fg0_write_t){cell+3u,value>>8,1u};
+            }
+        }
+    }
+    if(!b->video_batch)return block(tr,0x2503cu);
+    wf_status_t status=b->video_batch(rt,writes,count,b->video_user);
+    return status==WF_OK?status:block(tr,0x2503cu);
+}
+/* Only the $22 path of $21358: its low selector cannot be $53. */
+static wf_status_t action22_cleanup_21358(wf_runtime_t*rt,wf_actor_raw_t*a,
+                                         wf_r17_actions_r11_trace_t*tr){
+    setbit(a,0xb6u,7u);
+    if(wf_be32(a,0x7eu)){
+        wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(a,0x7eu));
+        if(!p)return block(tr,0x21368u);
+        pin_clear(p,0xb5u,0x80u);setbit(p,0xb6u,7u);
+    }
+    return WF_OK;
+}
+static wf_status_t action22_result_111c8(wf_runtime_t*rt,wf_actor_raw_t*a,
+                                        wf_actor_raw_t*t,
+                                        wf_r17_actions_r11_bridge_t*b,
+                                        int*carry,wf_r17_actions_r11_trace_t*tr){
+    static const uint16_t bonus[4]={24u,32u,12u,0u};
+    *carry=0;
+    if(!rt->g.credited_route||bit(a,0x33u,2u)||!bit(a,0x33u,0u)||
+       !bit(t,0x33u,0u)||wf_be16(t,0x66u))return WF_OK;
+    int previous=bit(a,O_SELECTOR,3u);setbit(a,O_SELECTOR,3u);
+    if(!previous)return WF_OK;
+    if(!(rt->g.mode_0161&1u)){
+        wf_set_be16(&rt->referee,O_STATE,0x8009u);rt->g.global_169e=0u;
+        wf_set_be16(a,0xfeu,0x8000u);
+        wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(a,0x86u));
+        if(!p)return block(tr,0x1123cu);
+        wf_set_be16(p,0xfeu,0x8000u);wf_set_be16(t,0xfeu,0x8001u);
+        p=actor_from_ptr(rt,wf_be32(t,0x86u));if(!p)return block(tr,0x1124cu);
+        wf_set_be16(p,0xfeu,0x8001u);
+        /* $90D6 preserves all registers. ADD.W wraps before the clamp. */
+        uint16_t amount=bonus[(rt->g.config_0066>>13)&3u];
+        for(unsigned i=0u;i<4u;i++){
+            wf_actor_raw_t*c=&rt->actors[i];if(bit(c,0xffu,0u))continue;
+            uint16_t health=(uint16_t)(wf_be16(c,0x66u)+amount);
+            wf_set_be16(c,0x66u,health);
+            wf_set_be16(c,0x6au,(uint16_t)(wf_be16(c,0x6au)+amount));
+            if(health>=wf_be16(c,0x72u))wf_set_be16(c,0x66u,wf_be16(c,0x72u));
+        }
+        rt->g.global_169e=0u;wf_set_be16(a,0x4au,4u);
+        if(!bit(a,0x56u,7u)){
+            rt->g.global_15d2=15u;rt->g.global_15d3=42u;
+            wf_status_t status=action22_message_2503c(rt,b,tr);
+            if(status!=WF_OK)return status;
+            *carry=1;return WF_OK;
+        }
+    }
+    wf_set_be16(a,0xc4u,(uint16_t)(wf_be16(a,0xc4u)+1u));
+    wf_status_t status=action22_cleanup_21358(rt,a,tr);
+    if(status==WF_OK)*carry=1;
+    return status;
+}
+/* $215B6 as reached by raw $22. Royal immediately returns because its
+ * selector test requires $48; TAG uses the $2172C partner delay table. */
+static wf_status_t action22_partner_215b6(wf_runtime_t*rt,wf_actor_raw_t*a,
+                                         wf_r17_actions_r11_trace_t*tr){
+    static const uint16_t delay[3]={93u,125u,187u};
+    if(!rt->g.credited_route||(rt->g.mode_0161&1u)||
+       bit(a,0x32u,0u)||!bit(a,0x33u,0u))return WF_OK;
+    wf_actor_raw_t*p=actor_from_ptr(rt,wf_be32(a,0x86u));
+    if(!p)return block(tr,0x215e2u);
+    int cpu=bit(p,0x32u,0u);
+    if(cpu){
+        wf_set_be16(p,0xe6u,1u);
+        unsigned tier=wf_be16(p,0x70u);
+        if(tier>=3u)return block(tr,0x2172cu);
+        wf_set_be16(p,0xe6u,delay[tier]);
+    }
+    setbit(p,0x34u,0u);pin_clear(p,0x34u,2u);
+    if(!cpu)rt->g.global_1682=0xfau;
+    if(bit(p,0x33u,1u)){
+        if(cpu){
+            wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));
+            if(!t)return block(tr,0x216b8u);
+            wf_set_be32(p,0x7au,wf_be32(t,0x86u));setbit(p,0x34u,2u);
+        }
+        return WF_OK;
+    }
+    if(bit(a,0x33u,1u)){
+        if(cpu){
+            wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));
+            if(!t)return block(tr,0x216a4u);
+            wf_set_be32(p,0x7au,wf_be32(t,0x86u));setbit(p,0x34u,2u);
+        }else pin_clear(p,0x56u,0x40u);
+        pin_clear(a,0x33u,2u);setbit(p,0x33u,1u);setbit(p,0x35u,3u);
+        return WF_OK;
+    }
+    if(!cpu&&bit(p,0x74u,7u))return WF_OK;
+    if(cpu)setbit(p,0x34u,2u);
+    setbit(p,0xb5u,7u);
+    wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));
+    if(!t)return block(tr,0x216d8u);
+    wf_set_be32(p,0x7eu,wf_be32(t,0x86u));
+    if(!cpu)wf_set_be32(a,0x7eu,wf_be32(a,0x86u));
+    return WF_OK;
+}
+/* $15B8C: linked submission, with $111C8 qualification at completion. */
+static wf_status_t raw22(wf_runtime_t*rt,wf_actor_raw_t*a,wf_r17_actions_r11_bridge_t*b,const desc_t**dp,
+                         wf_r17_actions_r11_trace_t*tr){
+    *dp=&D_15B6C;
+    wf_actor_raw_t*t=actor_from_ptr(rt,wf_be32(a,O_LINK));
+    if(!bit(a,O_LATCH,7u)){
+        if(!t)return block(tr,0x15b98u);
+        wf_set_u8(a,O_MOTION,0u);
+        wf_set_be16(a,O_X,wf_be16(t,O_X));wf_set_be16(a,O_Y,wf_be16(t,O_Y));
+        wf_set_u8(a,O_FACING,wf_u8(t,O_FACING));return WF_OK;
+    }
+    if(!low(a,O_FRAME)&&!wf_be16(a,O_TIMER)){
+        if(!t)return block(tr,0x15bbau);
+        if(low(t,O_STATE)==4u&&low(t,0x64u)==8u&&
+           !wf_r17_helper_11412_carry(rt,a)){
+            setbit(a,0x33u,6u);setbit(t,0x33u,6u);
+            setbit(a,0x35u,1u);setbit(t,0x35u,2u);
+            wf_set_be16(t,O_STATE,0xffu);
+            rt->g.global_15d2=wf_u8(a,3u);rt->g.global_15d3=10u;
+        }else{
+            wf_set_be16(a,O_STATE,0u);wf_set_be16(a,O_VISUAL,wf_be16(a,O_FACING));
+            setbit(a,O_LINK,7u);wf_set_be16(a,O_TIMER,1u);
+        }
+        return WF_OK;
+    }
+    wf_set_be16(a,O_PROFILE,bit(a,O_SELECTOR,7u)?0x8014u:0u);
+    if(low(a,O_FRAME)!=0xfeu)return WF_OK;
+    if(!t)return block(tr,0x15c4eu);
+    if(bit(a,0xfeu,7u))goto release;
+    wf_set_be16(a,O_FRAME,3u);wf_set_be16(a,O_TIMER,0u);
+    wf_set_be16(t,0x68u,3u);
+    int carry=0;wf_status_t status=action22_result_111c8(rt,a,t,b,&carry,tr);
+    if(status!=WF_OK)return status;
+    if(carry){
+        if(rt->g.mode_0161&1u){
+            rt->g.global_15d2=wf_u8(t,3u);rt->g.global_15d3=41u;
+            setbit(t,0x32u,4u);setbit(a,O_LINK,7u);
+            wf_set_be16(a,O_VISUAL,0x68u);wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));
+        }
+release:
+        wf_set_be16(a,O_STATE,7u);wf_set_be16(t,O_STATE,4u);
+        wf_set_be16(t,0x64u,wf_be16(t,0x64u)&0xffu);
+        pin_clear(a,0x35u,2u);pin_clear(t,0x35u,4u);
+        pin_clear(a,0x33u,0x40u);pin_clear(t,0x33u,0x40u);
+        return WF_OK;
+    }
+    int already=bit(a,O_SELECTOR,7u);setbit(a,O_SELECTOR,7u);
+    if(already)return WF_OK;
+    wf_set_be16(t,O_STATE,5u);wf_set_be16(t,O_SELECTOR,0x5fu);
+    return action22_partner_215b6(rt,a,tr);
+}
+
 static const desc_t D_141D8={0x141d8u,1u,3u,{20u,0xff00u,8u},{0xefu,0xf0u,0xf0u}};
 /* $11192 uses the same $E958 selector-A box as $11152, against raw61. */
 static int jump_hit_11192(const wf_actor_raw_t*a,const wf_actor_raw_t*t){
@@ -1345,6 +1523,7 @@ wf_status_t wf_r17_dispatch_1c03e_r11(wf_runtime_t *rt,unsigned slot,wf_r17_acti
         tr->callback_rom=b->raw23_trace[slot].callback_rom;tr->descriptor_rom=b->raw23_trace[slot].descriptor_rom;tr->tick_descriptor_rom=b->raw23_trace[slot].tick_descriptor_rom;tr->blocked_dependency_rom=b->raw23_trace[slot].blocked_dependency_rom;return s;
     }
     switch(sel){
+        case 0x22u:tr->callback_rom=0x15b8cu;tr->descriptor_rom=0x15b6cu;s=raw22(rt,a,b,&d,tr);break;
         case 0x0eu:tr->callback_rom=0x13d46u;tr->descriptor_rom=0x13d26u;s=raw0e(rt,a,&d,tr);break;
         case 0x51u:tr->callback_rom=0x18c24u;tr->descriptor_rom=0x18bf4u;s=raw51(rt,a,&d,tr);break;
         case 0x33u:tr->callback_rom=0x17282u;tr->descriptor_rom=0x17266u;s=raw33(rt,a,&d,tr);break;

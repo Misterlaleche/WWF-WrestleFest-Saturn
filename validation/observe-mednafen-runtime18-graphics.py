@@ -8,7 +8,7 @@ ns={'__name__':'__main__'};stdout=io.StringIO()
 with contextlib.redirect_stdout(stdout):exec(compile(source,str(observer),'exec'),ns)
 state=json.loads(stdout.getvalue());host=state.pop('_host_ram_base');program=ns['program'];mapping=ns['mapping'];pid=int(sys.argv[1])
 def symbol(n):
- m=re.search(r'\.bss\.'+n+r'\s+0x([0-9a-f]+)\s',mapping);assert m,n;return int(m[1],16)
+ m=re.search(r'\.bss\.'+n+r'(?:\.lto_priv\.\d+)?\s+0x([0-9a-f]+)\s',mapping);assert m,n;return int(m[1],16)
 def hostaddr(a):return host+a-0x06000000
 def u32(b):return int.from_bytes(b[1::-1]+b[3:1:-1],'big')
 with open(f'/proc/{pid}/mem','rb',buffering=0) as mem:

@@ -1,0 +1,14 @@
+{
+  "source_commit": "a4be15f",
+  "source_snapshot": "../../validation/results/runtime18/hud-allies-investigation/allies/final-phase-controlled/snapshot-00096.bin",
+  "sha256": "c48e5b4c476ce7d21c644d09bae6fad7cf7cf27a0e07126a2803da5306426624",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 460,
+  "slot": 5,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 96,
+  "recorded_blocked_status": 1,
+  "selector": "0x4022",
+  "comparison": "Unmodified pre-dispatch RAM and D0-D7, native bounded dispatcher versus unchanged arcade ROM; output RAM/FG/D0-D7 compared."
+}

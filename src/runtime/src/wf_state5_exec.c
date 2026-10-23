@@ -188,7 +188,6 @@ static wf_status_t controller15(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t *a,
  bclr(a,WF_A_CPU_B5,4);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x16u);
  return wf_state5_execute(rt,slot,tr);
 }
-static int within8(uint16_t a,uint16_t b){uint16_t d=(uint16_t)(a-b);if(a<b)d=(uint16_t)(0u-d);return d<8u;}
 static wf_status_t controller16(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a,wf_state5_trace_t *tr){
  (void)slot;
  /* $1EB48 special path is fully numeric: when $1C007C==0 and internal ID 7,
@@ -208,22 +207,11 @@ static wf_status_t controller16(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a
   if(!btest(a,WF_A_CPU_B5,4)){if(btest(a,WF_A_FLAGS33,7)){wf_set_be16(a,WF_A_CPU_BE,0x02f8u);wf_set_be16(a,WF_A_CPU_C0,0x0128u);}else{wf_set_be16(a,WF_A_CPU_BE,0x0210u);wf_set_be16(a,WF_A_CPU_C0,0x0190u);}}
   else {if(btest(a,WF_A_FLAGS33,7)){wf_set_be16(a,WF_A_CPU_BE,0x02d0u);wf_set_be16(a,WF_A_CPU_C0,0x0178u);}else{wf_set_be16(a,WF_A_CPU_BE,0x0200u);wf_set_be16(a,WF_A_CPU_C0,0x0130u);}}
  }
- /* $1F15C calls $20C8: signed deltas, byte saturation, quadrant ratio. */
- if(!within8(wf_be16(a,WF_A_X),wf_be16(a,WF_A_CPU_BE))||!within8(wf_be16(a,WF_A_Y),wf_be16(a,WF_A_CPU_C0))){
-  uint16_t dx=(uint16_t)(wf_be16(a,WF_A_CPU_BE)-wf_be16(a,WF_A_X));
-  uint16_t dy=(uint16_t)(wf_be16(a,WF_A_CPU_C0)-wf_be16(a,WF_A_Y));
-  unsigned quadrant=0;
-  if(dx&0x8000u){quadrant|=1u;dx=(uint16_t)(0u-dx);}
-  if(dy&0x8000u){quadrant|=2u;dy=(uint16_t)(0u-dy);}
-  if(dx>255u)dx=255u;if(dy>255u)dy=255u;
-  unsigned sum=(unsigned)dx+dy,component=(quadrant==0u||quadrant==3u)?dx:dy;
-  static const uint8_t base[4]={0u,192u,64u,128u}; /* ROM $2184 */
-  wf_set_u8(a,WF_A_ANGLE,(uint8_t)(base[quadrant]+component*64u/(sum?sum:1u)));
-  wf_r17_m68k_moveq(&rt->m68k_regs,0,1);
+ /* Reuse $1F15C/$20C8, including the original shared $15E4 scratch. */
+ if(!wf_cpu_arrived_1f15c(rt,a)){
   uint16_t v=(uint16_t)(wf_be16(a,WF_A_CPU_BC)-1u);wf_set_be16(a,WF_A_CPU_BC,v);
   return v?WF_OK:blocked(tr,0x1e9a6u);
  }
- wf_r17_m68k_moveq(&rt->m68k_regs,0,0);
  wf_set_be16(a,WF_A_STATE,5u);
  if(!btest(a,WF_A_CPU_B5,4)){
   unsigned ps;wf_actor_raw_t*p=team(rt,a,&ps);if(btest(a,WF_A_FLAGS33,0)&&p&&btest(p,WF_A_FLAGS32,0)){wf_set_be16(a,WF_A_SELECTOR,0x0066u);return WF_OK;}return blocked(tr,0x001E9A6u);

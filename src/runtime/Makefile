@@ -640,3 +640,10 @@ test-runtime18-hud-stamina-separation-asan: | build
 	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer $(R18_HUD_SEPARATION) -o build/test_runtime18_hud_stamina_separation_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_hud_stamina_separation_asan
 .PHONY: test-runtime18-hud-stamina-separation test-runtime18-hud-stamina-separation-asan
+
+# Differential checks against the unmodified arcade ROM, including real inputs.
+test-runtime18-cpu-state2-rom:
+	$(ROM_PYTHON) tests/r18/cpu_state2_verify_rom.py
+test-runtime18-action22-rom:
+	$(ROM_PYTHON) tests/r18/action22_verify_rom.py
+.PHONY: test-runtime18-cpu-state2-rom test-runtime18-action22-rom
