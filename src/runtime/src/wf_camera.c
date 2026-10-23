@@ -48,15 +48,13 @@ wf_status_t wf_camera_track(wf_runtime_t *rt,wf_camera_state_t *c){
 wf_status_t wf_camera_clamp(wf_camera_state_t *c){
     static const uint16_t rows[7][4]={{0x140,0x200,0x280,0x2C0},{0x140,0x200,0x280,0x2C0},{0x140,0x200,0x3C0,0x200},{0x140,0x200,0x780,0x700},{0x140,0x200,0x780,0x700},{0x140,0x200,0x280,0x2C0},{0x140,0x200,0x3C0,0x200}};
     if(c->scene_index>=7u) return WF_BLOCKED;
-    int16_t xmin=(int16_t)rows[c->scene_index][0],ymin=(int16_t)rows[c->scene_index][1],xmax=(int16_t)rows[c->scene_index][2],ymax=(int16_t)rows[c->scene_index][3];
-    if(c->scroll0_x<xmin) c->scroll0_x=xmin;
-    if(c->scroll0_x>xmax) c->scroll0_x=xmax;
-    if(c->scroll0_y<ymin) c->scroll0_y=ymin;
-    if(c->scroll0_y>ymax) c->scroll0_y=ymax;
-    if(c->scroll1_x<xmin) c->scroll1_x=xmin;
-    if(c->scroll1_x>xmax) c->scroll1_x=xmax;
-    if(c->scroll1_y<ymin) c->scroll1_y=ymin;
-    if(c->scroll1_y>ymax) c->scroll1_y=ymax;
+    uint16_t xmin=rows[c->scene_index][0],ymin=rows[c->scene_index][1],xmax=rows[c->scene_index][2],ymax=rows[c->scene_index][3];
+    /* $2983C uses unsigned BCC/BCS on channel A. Only a clamp writes
+     * both channels; an in-range A leaves B untouched, even at its edge. */
+    if((uint16_t)c->scroll0_x<xmin)c->scroll0_x=c->scroll1_x=(int16_t)xmin;
+    else if((uint16_t)c->scroll0_x>=xmax)c->scroll0_x=c->scroll1_x=(int16_t)xmax;
+    if((uint16_t)c->scroll0_y<ymin)c->scroll0_y=c->scroll1_y=(int16_t)ymin;
+    else if((uint16_t)c->scroll0_y>=ymax)c->scroll0_y=c->scroll1_y=(int16_t)ymax;
     return WF_OK;
 }
 

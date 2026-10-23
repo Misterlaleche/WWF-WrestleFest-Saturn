@@ -499,3 +499,8 @@ test-runtime18-rom-validation: test-runtime18-raw33-rom test-runtime18-raw0e-rom
 test-runtime18-cpu-aligned-rom:
 	$(ROM_PYTHON) tools/verify_cpu_aligned_rom.py audit/runtime18-cd/ROM68K.BIN
 test-runtime18-rom-validation: test-runtime18-cpu-aligned-rom
+
+.PHONY: test-runtime18-camera-rom
+test-runtime18-camera-rom:
+	$(ROM_PYTHON) tools/verify_camera_sync_rom.py audit/runtime18-cd/ROM68K.BIN
+test-runtime18-rom-validation: test-runtime18-camera-rom

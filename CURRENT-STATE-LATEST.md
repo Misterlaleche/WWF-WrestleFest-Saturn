@@ -1,34 +1,31 @@
-# RUNTIME-18 — combate sin entrada, 23 de octubre de 2026
+# RUNTIME-18 — cámara, ring y sprites sincronizados, 23 de octubre de 2026
 
-Continuación de `3435a09`, sin frontend ni código provisional. El bloqueo
-`$19274` de la acción `$59` está resuelto: se conserva la diferencia entre un
-link no usado, null literal y dirección física cero, conforme a la ROM.
-También se han cerrado las dependencias que la secuencia abre después.
+Continuación de `426ed17`. Las fases de cámara publican ahora los cuatro
+scrolls originales que también consumen el ring y el streaming. Se elimina
+la divergencia entre una cámara de sprites móvil y un ring inmóvil. Los límites
+unsigned y la escritura conjunta de ambos canales siguen `$2983C` de la ROM.
 
-La partida **sin ninguna entrada**, semilla cero, alcanza `$11B6` en el frame
-**4.391** en HOST. El árbitro cuenta uno, dos y tres en los frames 3.989,
-4.077 y 4.165. Resultados: `8001,8000,4000,4000`; el reloj conserva `0021`.
-El jugador pierde por inmovilización, sin agotar el tiempo. No se fuerzan
-actores, stamina, elecciones CPU, cuenta ni resultado. Las dos partidas
-completas pasan ASan/UBSan; las 48 regresiones de núcleo también.
+El nuevo oráculo compara **2.304 casos** directamente con la ROM intacta,
+incluidos D0–D7. Las partidas completas conservan sus finales4391 sin entrada
+y14409 con entrada programada; se comprueba la coherencia de cámara en cada
+presentación. Pasan las48 regresiones HOST y sus48 versiones ASan/UBSan.
 
-El disco de validación SH-2 sin entrada también termina en Mednafen, con
-frame 4.391, cuenta 0300, resultado 8001 y reloj 0021. La
-validación de consola física con CD-R sigue pendiente. Se entrega por separado
-el disco normal con mando y el replay con semilla cero/entradas desactivadas.
-Al terminar se conserva el ring; el replay añade un informe de color.
+El nuevo replay SH-2 completa el combate en **Mednafen** en frame4391,
+cuenta0300, resultado8001 y reloj0021, sin bloqueos. También se inspecciona
+el disco normal en movimiento: ring, postes y luchadores comparten el
+scroll actualizado. Se entrega BIN/CUE normal con mando y replay separado.
+Arranque directo, sin menús ni audio; el sonido ya probado en Saturn pertenece
+a sus componentes anteriores, fuera de este ejecutable.
 
-La precarga mantiene 2.944 tiles originales y 128 huecos adicionales en
-384 KiB. La partida controlada de 14.409 frames conserva su prueba de cero
-lecturas de sprites tras la precarga; la nueva partida sin entrada necesita
-11.984 lecturas de 983 tiles adicionales. Esa diferencia limita la fluidez y
-no queda presentada como precarga universal ni velocidad arcade.
+La precarga mantiene2944 tiles más128 huecos en384KiB. La partida controlada
+conserva cero lecturas frías; la secuencia sin entrada mantiene11984 lecturas
+de983 tiles adicionales. No se presenta esta corrección como velocidad arcade.
 
-Evidencia y reproducción:
-[validation/RUNTIME18-CPU-CHECKPOINT.md](validation/RUNTIME18-CPU-CHECKPOINT.md),
+Evidencia, hashes y reproducción:
+[validation/RUNTIME18-CAMERA-CHECKPOINT.md](validation/RUNTIME18-CAMERA-CHECKPOINT.md),
 [validation/RUNTIME18-DISC.md](validation/RUNTIME18-DISC.md).
-**Sin declaración ROM-EXACT, igualdad de framebuffer ni aptitud acreditada
-para hardware.** El texto TIME UP aún no se publica en VDP.
+**Sin declaración ROM-EXACT ni prueba de este nuevo disco en Saturn físico.**
+El siguiente ensayo es en emulador del usuario y Saturn con CD-R.
 
 ## Registro histórico de RUNTIME-17
 

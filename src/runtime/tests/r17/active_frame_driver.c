@@ -60,6 +60,10 @@ int main(int argc,char **argv){
     c.cabinet_word_140020=0xffffu;
     c.cabinet_word_140022=0xffffu;
     c.camera_valid=1u;
+    /* Same canonical RAM as the independent ROM fixture. Camera phases
+     * import these words; the standalone adapter is not their owner. */
+    rt.g.global_17e6=rt.g.global_17ea=0x0140;
+    rt.g.global_17ee=rt.g.global_17f2_word=0x0200;
     c.camera.scene_index=0u;
     c.camera.scroll0_x=0x0140;
     c.camera.scroll1_x=0x0140;

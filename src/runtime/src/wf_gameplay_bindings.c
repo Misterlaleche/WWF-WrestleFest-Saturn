@@ -155,17 +155,31 @@ wf_status_t wf_phase_refill_8b3a(wf_runtime_t *rt,uint32_t addr,void *user){
 }
 
 
+/* $26936/$2983C operate on the same four RAM WORDs later consumed by
+ * $26A42 (map streaming), $247C (sprites) and $26E1A (video scrolls).
+ * camera is an adapter for the standalone camera API, never a second owner. */
+static void camera_import(const wf_runtime_t *rt,wf_camera_state_t *c){
+ c->scroll0_x=(int16_t)rt->g.global_17e6;c->scroll1_x=(int16_t)rt->g.global_17ea;
+ c->scroll0_y=(int16_t)rt->g.global_17ee;c->scroll1_y=(int16_t)rt->g.global_17f2_word;
+ c->target_x=(int16_t)rt->g.global_1804;c->target_y=(int16_t)rt->g.global_1806;c->scene_index=rt->g.global_007e;
+}
+static void camera_publish(wf_runtime_t *rt,const wf_camera_state_t *c){
+ rt->g.global_17e6=(uint16_t)c->scroll0_x;rt->g.global_17ea=(uint16_t)c->scroll1_x;
+ rt->g.global_17ee=(uint16_t)c->scroll0_y;rt->g.global_17f2_word=(uint16_t)c->scroll1_y;
+}
 wf_status_t wf_phase_camera_26936(wf_runtime_t *rt,uint32_t addr,void *user){
  (void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!rt||!c)return WF_BAD_STATE;
  if(!c->camera_valid){c->last_blocked_phase=0x026936u;c->last_blocked_dependency=0x026936u;return WF_BLOCKED;}
- return wf_camera_track(rt,&c->camera);
+ camera_import(rt,&c->camera);
+ wf_status_t s=wf_camera_track(rt,&c->camera);if(s==WF_OK)camera_publish(rt,&c->camera);return s;
 }
 wf_status_t wf_phase_camera_2983c(wf_runtime_t *rt,uint32_t addr,void *user){
- (void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!c)return WF_BAD_STATE;
+ (void)addr;wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;if(!rt||!c)return WF_BAD_STATE;
  if(!c->camera_valid){c->last_blocked_phase=0x02983cu;c->last_blocked_dependency=0x02983cu;return WF_BLOCKED;}
+ camera_import(rt,&c->camera);
  wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)(c->camera.scene_index<<3));
  wf_r17_m68k_move_w(&rt->m68k_regs,1u,(uint16_t)c->camera.scroll0_y);
- return wf_camera_clamp(&c->camera);
+ wf_status_t s=wf_camera_clamp(&c->camera);if(s==WF_OK)camera_publish(rt,&c->camera);return s;
 }
 
 

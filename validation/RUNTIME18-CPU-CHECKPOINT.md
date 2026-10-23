@@ -1,3 +1,12 @@
+# Estado actual: cámara sincronizada desde426ed17
+
+El checkpoint nuevo corrige cámara/ring/sprites y conserva los finales completos
+4391/14409. Ver [RUNTIME18-CAMERA-CHECKPOINT.md](RUNTIME18-CAMERA-CHECKPOINT.md)
+para los discos actuales, hashes, 2304 casos ROM adicionales y pruebas Mednafen.
+Los hashes de la sección histórica siguiente corresponden a426ed17.
+
+## Histórico426ed17 — cierre de combate sin entrada
+
 # RUNTIME-18 — combate sin entrada desde3435a09
 
 Checkpoint local de 23 de octubre de 2026, rama `runtime18/direct-combat`.
