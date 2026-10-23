@@ -555,3 +555,12 @@ test-runtime18-display-asan: | build
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_hud_asan
 	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c tests/r18/test_yaul_dma.c -o build/test_runtime18_dma_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_dma_asan
+
+build/test_runtime18_command_work: tests/r18/test_command_work.c src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c | build
+	$(CC) $(CFLAGS) -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_command_work.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c -o $@
+test-runtime18-command-work: build/test_runtime18_command_work
+	./build/test_runtime18_command_work
+
+.PHONY: test-runtime18-command-work test-runtime18-plan-equivalence
+test-runtime18-plan-equivalence:
+	$(ROM_PYTHON) tests/r18/verify_plan_equivalence.py

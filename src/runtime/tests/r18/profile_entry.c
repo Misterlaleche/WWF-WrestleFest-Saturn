@@ -10,8 +10,14 @@
 #include "wf_r18_present.h"
 #include "wf_r18_cdfs.h"
 #include "wf_r18_ring.h"
-volatile uint32_t profile_totals[16],profile_calls[16];
+volatile uint32_t profile_totals[24],profile_calls[24];
 volatile uint32_t profile_frames,profile_vblanks,profile_start_vblank;
+#ifndef WF_R18_PROFILE_START
+#define WF_R18_PROFILE_START 30u
+#endif
+#ifndef WF_R18_PROFILE_STOP
+#define WF_R18_PROFILE_STOP 120u
+#endif
 static unsigned measure;
 static wf_status_t profile_frame(wf_runtime_t *);
 static wf_status_t profile_present(wf_runtime_t *,wf_actor_raw_t *const *,size_t,void *);
@@ -44,10 +50,10 @@ void wf_r18_profile_stage(unsigned i,uint16_t start,uint32_t units){if(measure){
 static void record(unsigned i,uint16_t start){wf_r18_profile_stage(i,start,1);}
 static wf_status_t profile_boot(wf_runtime_t*r,wf_r18_bootstrap_context_t*c,const wf_r18_launch_config_t*l){wf_status_t s=wf_r18_direct_boot(r,c,l);cpu_frt_init(CPU_FRT_CLOCK_DIV_128);return s;}
 static wf_status_t profile_frame(wf_runtime_t*r){
- if(!measure&&r->g.frame_counter==30){measure=1;profile_start_vblank=video_clock;}
+ if(!measure&&r->g.frame_counter==WF_R18_PROFILE_START){measure=1;profile_start_vblank=video_clock;}
  uint16_t start=cpu_frt_count_get();uint32_t frame=r->g.frame_counter;wf_status_t s=wf_runtime_frame(r);record(0,start);
  if(measure&&r->g.frame_counter>frame){profile_frames++;profile_vblanks=video_clock-profile_start_vblank;}
- if(r->g.frame_counter==120){measure=0;for(;;)smpc_peripheral_process();}
+ if(r->g.frame_counter==WF_R18_PROFILE_STOP){measure=0;for(;;)smpc_peripheral_process();}
  return s;
 }
 static wf_status_t profile_present(wf_runtime_t*r,wf_actor_raw_t *const*a,size_t n,void*u){uint16_t t=cpu_frt_count_get();wf_status_t s=wf_r18_present_batch(r,a,n,u);record(1,t);return s;}

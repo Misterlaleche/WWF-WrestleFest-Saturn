@@ -69,6 +69,6 @@ with open(f'/proc/{pid}/mem','rb',buffering=0) as mem:
    if actual_names==wanted_names:vdp2_matches.append(hex(candidate))
    at=data.find(wanted_font,at+2)
  assert vdp2_matches,'No complete native font+FG0 map match in actual VDP2 VRAM'
- state.update({'VDP2_VRAM_layout_matches':vdp2_matches,'HUD_font_bytes_equal':len(font),'HUD_map_bytes_equal':len(wanted_names),'HUD_font_sha256':hashlib.sha256(font).hexdigest(),'HUD_nonzero_cells':sum(v!=0 for v in names)})
- state.update({'VDP1_command_count':count,'normal_sprite_commands':len(sprites),'unique_texture_tiles':tile_count,'VDP1_VRAM_layout_matches':matches,'command_examples':commands[:5]+commands[-1:],'scope':'Read-only exact SH-2 build in Mednafen; command bytes and corresponding DMA texture window match a live VRAM image. No physical Saturn or arcade-framebuffer claim.'})
+ state.update({'VDP2_VRAM_layout_matches':vdp2_matches,'HUD_font_bytes_equal':len(font),'HUD_map_bytes_equal':len(wanted_names),'HUD_font_sha256':hashlib.sha256(font).hexdigest(),'HUD_nonzero_cells':sum(v!=0 for v in names),'HUD_map_sha256':hashlib.sha256(wanted_names).hexdigest()})
+ state.update({'VDP1_commands_sha256':hashlib.sha256(payload).hexdigest(),'VDP1_textures_sha256':hashlib.sha256(stage).hexdigest(),'VDP1_command_count':count,'normal_sprite_commands':len(sprites),'unique_texture_tiles':tile_count,'VDP1_VRAM_layout_matches':matches,'command_examples':commands[:5]+commands[-1:],'scope':'Read-only exact SH-2 build in Mednafen; command bytes and corresponding DMA texture window match a live VRAM image. No physical Saturn or arcade-framebuffer claim.'})
  print(json.dumps(state,indent=2))

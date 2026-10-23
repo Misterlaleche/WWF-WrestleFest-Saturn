@@ -15,6 +15,9 @@ static wf_actor_raw_t *composed[WF_ACTOR_SLOTS];static size_t composed_count;
 static uint8_t dma_stage[WF_VDP1_STREAM_TILES_MAX*WF_VDP1_TILE_BYTES_16X16_4BPP] __attribute__((aligned(32)));
 static wf_saturn_yaul_backend_t backend;
 static unsigned busy;
+/* Half-full at the maximum256 unique tiles. The index changes lookup cost,
+ * not first-use order: slots remain exactly those of the arcade draw stream. */
+static uint16_t plan_tile_index[512];
 void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>256)rom_slots=256;if(tile_slots>6144)tile_slots=6144;hot_count=0;for(unsigned i=0;i<256;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);backend.defer_sync=1;}
 wf_status_t wf_r18_rom_preload(void){
  if(!read_file||!rom_data||rom_capacity<524288u)return WF_BLOCKED;
@@ -104,14 +107,26 @@ static wf_actor_raw_t *actor_link(wf_runtime_t*r,uint32_t address){return wf_act
 static int add_cmd(uint16_t tile,int x,int y,unsigned fx,unsigned fy,unsigned palette){unsigned slot;
  if(x>=320||x+16<=0||y>=240||y+16<=0)return 1;
  if(plan.cmd_count==WF_VDP1_COMMANDS_MAX)return 0;
- for(slot=0;slot<plan.tile_count;slot++)if(plan.tile_upload[slot].source_tile==tile)break;
- if(slot==plan.tile_count){if(slot==WF_VDP1_STREAM_TILES_MAX)return 0;plan.tile_upload[slot].source_tile=tile;plan.tile_upload[slot].stream_slot=(uint16_t)slot;plan.tile_count++;}
+ unsigned hash=((uint32_t)tile*0x9e3779b1u)>>23;
+ while(plan_tile_index[hash]){
+  slot=(unsigned)plan_tile_index[hash]-1u;
+  if(plan.tile_upload[slot].source_tile==tile)goto found;
+  hash=(hash+1u)&511u;
+ }
+ slot=plan.tile_count;if(slot==WF_VDP1_STREAM_TILES_MAX)return 0;
+ plan.tile_upload[slot]=(wf_vdp1_tile_upload_t){.source_tile=tile,.stream_slot=(uint16_t)slot};
+ plan_tile_index[hash]=(uint16_t)(slot+1u);plan.tile_count++;
+found:;
  wf_vdp1_sprite_cmd_t*c=&plan.cmd[plan.cmd_count++];memset(c,0,sizeof *c);c->x=(int16_t)x;c->y=(int16_t)y;c->stream_tile=(uint16_t)slot;c->cram_slot=(uint8_t)palette;c->flip_x=(uint8_t)fx;c->flip_y=(uint8_t)fy;return 1;}
 wf_status_t wf_r18_present_batch(wf_runtime_t*r,wf_actor_raw_t*const*actors,size_t n,void*u){wf_r18_video_t*v=u;wf_r18_metasprite_ctx_t parser;wf_status_t status=WF_OK;const wf_saturn_render_ops_t*ops=wf_saturn_yaul_render_ops();
  if(!r||!v||(!actors&&n)||busy)return WF_BAD_STATE;busy=1;memset(&parser,0,sizeof parser);parser.read_rom=wf_r18_rom_read;parser.palette_map=v->palette_map;parser.records=records;parser.capacity=512;parser.d6=r->m68k_regs.d[6];parser.d7=r->m68k_regs.d[7];
  composed_count=0;
  for(size_t i=0;i<n;i++){wf_actor_raw_t*a=actors[i];wf_actor_raw_t*partner;if(wf_u8(a,0x21)==255||(wf_be16(a,4)&0x7fff)==0x7fff)continue;partner=actor_link(r,wf_be32(a,0x26));status=wf_r18_metasprite_emit(&parser,wf_be16(a,2),wf_be16(a,4),wf_be16(a,0x14),wf_be16(a,0x16),partner?wf_be16(partner,2):0xffff);if(status!=WF_OK)goto done;if(composed_count<WF_ACTOR_SLOTS)composed[composed_count++]=a;}
- memset(&plan,0,sizeof plan);
+ /* Only the counted prefixes are consumed. Every emitted command/tile is
+  * fully initialized below; stale tail entries are never submitted. */
+ plan.tile_count=plan.palette_count=plan.cmd_count=0;
+ plan.tile_upload_bytes=plan.palette_upload_bytes=0;
+ memset(plan_tile_index,0,sizeof plan_tile_index);
  for(size_t i=0;i<parser.count;i++){const uint8_t*b=records[i].bytes;unsigned attr=be16(b+2);if(!(attr&1))continue;unsigned chain=(attr>>5)&7,fx=(attr>>4)&1,fy=(attr>>3)&1,palette=b[9]&15;unsigned tile=wf_sprite_number_align((unsigned)b[5]|((unsigned)b[7]<<8),chain);int x=wf_sprite_x_decode((unsigned)b[11]|((attr&4)<<6)),y=wf_sprite_y_decode((unsigned)b[1]|((attr&2)<<7));
  for(unsigned j=0;j<=chain;j++){int yy=fy?y-(int)chain*16+(int)j*16:y-(int)j*16;if(!add_cmd((uint16_t)(tile+j),x,yy,fx,fy,palette)){status=WF_BLOCKED;goto done;}}}
  status=ops->begin_frame(&backend,plan.tile_count,16,plan.cmd_count);if(status!=WF_OK)goto done;

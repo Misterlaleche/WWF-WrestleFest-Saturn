@@ -17,6 +17,7 @@ p.add_argument('binary', type=Path)
 p.add_argument('linker_map', type=Path)
 p.add_argument('--layout', type=Path, help='SH-2 .rodata from runtime18-observer-layout.c')
 p.add_argument('--graphics-layout', type=Path, help='SH-2 .rodata from runtime18-graphics-layout.c')
+p.add_argument('--profile-stages',type=int,default=16)
 p.add_argument('--profile', action='store_true', help='Read test-only profile_entry.c counters')
 a = p.parse_args()
 program = a.binary.read_bytes()
@@ -63,7 +64,7 @@ with open(f'/proc/{a.pid}/mem', 'rb', buffering=0) as mem:
             values['frame'] = read32(symbols['rt'] + 24)
             if a.profile:
                 for name in ('profile_totals', 'profile_calls'):
-                    values[name] = [read32(symbols[name] + i * 4) for i in range(16)]
+                    values[name] = [read32(symbols[name] + i * 4) for i in range(a.profile_stages)]
             if a.layout:
                 import struct
                 offsets = struct.unpack('>10I', a.layout.read_bytes())

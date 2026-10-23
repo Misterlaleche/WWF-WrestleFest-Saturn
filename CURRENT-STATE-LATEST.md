@@ -1,21 +1,19 @@
-# RUNTIME-18 — residencia gráfica, shake y HUD, 23 de octubre de 2026
+# RUNTIME-18 — presupuesto de frame, 23 de octubre de2026
 
-Continuación de `c569d20`. Se conservan las texturas VDP1 idénticas entre
-frames y se actualizan sólo los colores CRAM modificados. Las identidades
-se refieren a tiles ROM inmutables; no se confía en punteros del caché.
+Continuación de5ab045c. El siguiente cuello medido era la construcción de
+la lista VDP1: deduplicación lineal y borrados de memoria no enviada.
+El índice preserva los slots y orden originales; sólo se inicializan los
+prefijos usados. No cambia el núcleo jugable ni el ritmo lógico.
 
-Se integran los owners originales de shake `$27012/$27066`, la salida de
-scroll `$26E1A` y el parpadeo de reloj `$264AA`, con oráculos directos ROM.
-El HUD consume FG0 mediante caracteres NBG2 y la fuente original completa.
-No hay reconstrucción bitmap de la partida ni lectura CD por frame.
+Mednafen, secuencia30–120: **111VBlanks/90frames** frente131;15,3%menos.
+Secuencia900–1080:203/180. Todavía no60fps sostenidos. Frame120 conserva todos
+los píxeles y hashes activosVDP1/HUD;1540fixtures comparan el planificador
+contra5ab. CORE48+48ASan y ambos combates4391/14409 pasan sinCDenpartida.
 
-Los combates HOST y ASan siguen terminando en4391/14409. La medida de cierre,
-los hashes del disco exacto y la reconstrucción del paquete se documentan en
-[validation/RUNTIME18-RESIDENCY-HUD-CHECKPOINT.md](validation/RUNTIME18-RESIDENCY-HUD-CHECKPOINT.md).
-
-Arranque directo con mando, sin menús ni audio. No se declara60fps,
-ROM-EXACT universal, pixel perfect completo ni validación de este disco en
-Saturn físico; la prueba con CD-R corresponde todavía al usuario.
+Informe, evidencia, límites y reproducción:
+[validation/RUNTIME18-FRAME-BUDGET-CHECKPOINT.md](validation/RUNTIME18-FRAME-BUDGET-CHECKPOINT.md).
+Arranque directo con mando, sinfrontend/audio. No se declaraROM-EXACT universal
+ni prueba física de este disco; Saturn/CD-R sigue pendiente del usuario.
 
 ## Registro histórico de RUNTIME-17
 

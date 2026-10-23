@@ -19,7 +19,9 @@ static wf_status_t begin_frame(void *ctx,unsigned nt,unsigned np,unsigned nc){
     b->emitted_tiles=b->emitted_palettes=b->emitted_cmds=0;b->active=1;
     memset(b->dirty,0,sizeof b->dirty);b->palette_mask=0;
 #ifdef WF_PLATFORM_SATURN
-    memset(g_cmdts,0,sizeof(g_cmdts));g_cmd_index=0;
+    /* Initialize the two control commands only. Each sprite and END is
+     * fully initialized when emitted; the unused tail is never submitted. */
+    memset(g_cmdts,0,2u*sizeof(g_cmdts[0]));g_cmd_index=0;
     vdp1_cmdt_system_clip_coord_set(&g_cmdts[g_cmd_index]);vdp1_cmdt_vtx_system_clip_coord_set(&g_cmdts[g_cmd_index++],INT16_VEC2(319,239));
     vdp1_cmdt_local_coord_set(&g_cmdts[g_cmd_index]);vdp1_cmdt_vtx_local_coord_set(&g_cmdts[g_cmd_index++],INT16_VEC2(0,0));
     /* VDP1's transparent erase exposes the lower-priority VDP2 ring.
@@ -128,8 +130,7 @@ static void abort_frame(void *ctx){
     b->expected_tiles=b->expected_palettes=b->expected_cmds=0;
     b->emitted_tiles=b->emitted_palettes=b->emitted_cmds=0;
 #ifdef WF_PLATFORM_SATURN
-    g_cmd_index=0;
-    memset(g_cmdts,0,sizeof(g_cmdts));
+    g_cmd_index=0; /* No command list is submitted by an aborted frame. */
 #endif
 }
 
