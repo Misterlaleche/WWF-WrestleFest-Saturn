@@ -15,6 +15,8 @@ static int last[5];
 static int16_t surface_x[2][512],surface_y[2][256];
 static uint32_t surface_generation[2],ring_generation=1u;
 static uint8_t surface_transparent[2];
+static uint16_t cell_x[2][32],cell_y[2][32];
+static uint32_t cell_generation[2];
 static uint16_t u16(const uint8_t *p){return (uint16_t)((p[0]<<8)|p[1]);}
 static uint32_t u32(const uint8_t *p){return ((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|(p[2]<<8)|p[3];}
 int wf_r18_ring_bind(const void *blob,size_t n){
@@ -22,27 +24,36 @@ int wf_r18_ring_bind(const void *blob,size_t n){
  g=0;
  if(!p||n<544||memcmp(p,"R18R",4)||u16(p+4)!=2||u32(p+12)!=32||u32(p+24)!=160||u32(p+28)!=128)return -1;
  uint32_t t=u32(p+16),c=u32(p+20);uint16_t count=u16(p+10);
- if(t<544||c<t||(size_t)t+count*130u!=c||(size_t)c+1024!=n)return -1;
+ if(t<544||c<t||count>1024u||(size_t)t+count*130u!=c||(size_t)c+1024!=n)return -1;
  for(unsigned page=0;page<128;page++){
   uint32_t off=u32(p+32+page*4);
   if(off<544||(size_t)off+1280>t)return -1;
   for(unsigned i=0;i<320;i++)if(u16(p+off+i*4+2)>=count)return -1;
  }
+ const uint8_t *ids=p+t+count*128u;
+ for(unsigned i=1;i<count;i++)if(u16(ids+(i-1u)*2u)>=u16(ids+i*2u))return -1;
  g=p;tiles=t;palettes=c;tiles_n=count;memset(overlay_valid,0,sizeof overlay_valid);
  memset(overlay_dirty,0,sizeof overlay_dirty);dirty_count[0]=dirty_count[1]=0;
  ++ring_generation;surface_generation[0]=0;surface_generation[1]=0;
+ cell_generation[0]=0;cell_generation[1]=0;
  for(unsigned i=0;i<5;i++)last[i]=0x10000;
 #ifdef __sh__
+ vdp2_cram_mode_set(2);
  for(unsigned layer=0;layer<2;layer++){
-  vdp2_scrn_bitmap_format_t f={.scroll_screen=layer?VDP2_SCRN_NBG1:VDP2_SCRN_NBG0,.ccc=VDP2_SCRN_CCC_PALETTE_256,.bitmap_size=VDP2_SCRN_BITMAP_SIZE_512X256,.palette_base=VDP2_CRAM_MODE_2_OFFSET((layer?WF_SATURN_CRAM_BG_FIRST:WF_SATURN_CRAM_FG_FIRST)/256u,0,0),.bitmap_base=VDP2_VRAM_ADDR(layer?2:0,0)};
-  vdp2_scrn_bitmap_format_set(&f);
+  vdp2_scrn_cell_format_t f={.scroll_screen=layer?VDP2_SCRN_NBG1:VDP2_SCRN_NBG0,.ccc=VDP2_SCRN_CCC_PALETTE_16,.char_size=VDP2_SCRN_CHAR_SIZE_2X2,.pnd_size=1,.aux_mode=VDP2_SCRN_AUX_MODE_0,.plane_size=VDP2_SCRN_PLANE_SIZE_1X1,.palette_base=VDP2_CRAM_MODE_2_OFFSET((layer?WF_SATURN_CRAM_BG_FIRST:WF_SATURN_CRAM_FG_FIRST)/256u,0,0),.cpd_base=VDP2_VRAM_ADDR(layer?2:0,0)};
+  vdp2_vram_t names=VDP2_VRAM_ADDR(layer?3:1,0);
+  vdp2_scrn_normal_map_t map={.plane_a=names,.plane_b=names,.plane_c=names,.plane_d=names};
+  vdp2_scrn_cell_format_set(&f,&map);
+  if(wf_r18_ring_characters((volatile uint8_t *)f.cpd_base,0x20000u))return -1;
   vdp2_scrn_scroll_x_set(f.scroll_screen,0);vdp2_scrn_scroll_y_set(f.scroll_screen,0);
   volatile uint32_t *cram=(volatile uint32_t *)f.palette_base;
   for(unsigned color=0;color<256;color++){uint16_t v=u16(g+palettes+layer*512+color*2);unsigned r=(v&15)*17,green=((v>>4)&15)*17,b=((v>>8)&15)*17;cram[color]=(b<<16)|(green<<8)|r;}
  }
- vdp2_cram_mode_set(2);
  vdp2_vram_cycp_t *cy=vdp2_vram_cycp_get();
- cy->pt[0].raw=0x4444eeee;cy->pt[2].raw=0x5555eeee;vdp2_vram_cycp_set(cy);
+ for(unsigned bank=0;bank<4;bank++)cy->pt[bank].raw=0xeeeeeeeeu;
+ cy->pt[0].t4=VDP2_VRAM_CYCP_CHPNDR_NBG0;cy->pt[1].t0=VDP2_VRAM_CYCP_PNDR_NBG0;
+ cy->pt[2].t4=VDP2_VRAM_CYCP_CHPNDR_NBG1;cy->pt[3].t0=VDP2_VRAM_CYCP_PNDR_NBG1;
+ vdp2_vram_cycp_set(cy);
 #endif
  return 0;
 }
@@ -93,6 +104,26 @@ int wf_r18_ring_scanline(unsigned layer,int wx,int wy,unsigned transparent,uint8
  }
  return 0;
 }
+/* Surface coordinates are already wrapped. Reuse a decoded map cell while
+ * sampling its column/dirty block; do not repeat page divisions and LWRAM
+ * map reads for every one of its 256 pixels. The public pixel lookup remains
+ * an independent slow path for reference comparisons. */
+typedef struct ring_sample {unsigned tx,ty,attr,tile;int valid;} ring_sample_t;
+static uint8_t surface_pixel(unsigned layer,unsigned wx,unsigned wy,ring_sample_t*c){
+ unsigned tx=wx>>4,ty=wy>>4;
+ if(!c->valid||c->tx!=tx||c->ty!=ty){
+  unsigned po=u32(g+32+(layer*64u+(ty/16u)*8u+tx/20u)*4u);
+  const uint8_t *cell=g+po+((ty%16u)*20u+tx%20u)*4u;
+  c->attr=u16(cell);c->tile=u16(cell+2);
+  unsigned physical=(ty&31u)*32u+(tx&31u);
+  if(overlay_valid[layer][physical]){c->attr=overlay[layer][physical][0];c->tile=overlay[layer][physical][1];}
+  c->tx=tx;c->ty=ty;c->valid=1;
+ }
+ unsigned x=wx&15u,y=wy&15u;
+ if(c->attr&64u)x=15u-x;if(c->attr&128u)y=15u-y;
+ uint8_t packed=g[tiles+c->tile*128u+y*8u+x/2u];
+ return (uint8_t)(((c->attr&15u)<<4)|((x&1u)?packed&15u:packed>>4));
+}
 int wf_r18_ring_surface_update(unsigned layer,int wx,int wy,unsigned transparent,
                                volatile uint8_t *bitmap,size_t *writes){
  if(!g||!bitmap||layer>1u)return -1;
@@ -117,14 +148,14 @@ int wf_r18_ring_surface_update(unsigned layer,int wx,int wy,unsigned transparent
   if(surface_y[layer][slot]!=world){surface_y[layer][slot]=(int16_t)world;dirty_y[slot]=1;}
  }
  size_t count=0;
- for(unsigned x=0;x<512u;x++)if(dirty_x[x])
+ for(unsigned x=0;x<512u;x++)if(dirty_x[x]){
+  ring_sample_t sample={0};
   for(unsigned y=0;y<256u;y++)if(surface_y[layer][y]>=0&&!dirty_y[y]){
-   uint8_t pixel;
-   if(wf_r18_ring_pixel(layer,surface_x[layer][x],surface_y[layer][y],
-                        &pixel)!=0)return -1;
+   uint8_t pixel=surface_pixel(layer,(unsigned)surface_x[layer][x],(unsigned)surface_y[layer][y],&sample);
    bitmap[y*512u+x]=(uint8_t)((transparent&&!(pixel&15u))?0u:pixel);
    ++count;
   }
+ }
  uint8_t line[320];
  for(unsigned y=0;y<256u;y++)if(dirty_y[y]){
   if(wf_r18_ring_scanline(layer,wx,surface_y[layer][y],transparent,line)!=0)
@@ -134,10 +165,9 @@ int wf_r18_ring_surface_update(unsigned layer,int wx,int wy,unsigned transparent
    bitmap[y*512u+slot]=line[x];
    ++count;
   }
+  ring_sample_t sample={0};
   for(unsigned x=0;x<512u;x++)if(surface_x[layer][x]>=0&&!visible_x[x]){
-   uint8_t pixel;
-   if(wf_r18_ring_pixel(layer,surface_x[layer][x],surface_y[layer][y],
-                        &pixel)!=0)return -1;
+   uint8_t pixel=surface_pixel(layer,(unsigned)surface_x[layer][x],(unsigned)surface_y[layer][y],&sample);
    bitmap[y*512u+x]=(uint8_t)((transparent&&!(pixel&15u))?0u:pixel);
    ++count;
   }
@@ -145,6 +175,7 @@ int wf_r18_ring_surface_update(unsigned layer,int wx,int wy,unsigned transparent
  for(unsigned i=0;i<dirty_count[layer];i++){
   unsigned cell=dirty_cells[layer][i];
   unsigned cx=cell&31u,cy=cell>>5;
+  ring_sample_t sample={0};
   for(unsigned py=0;py<16u;py++){
    unsigned y=(cy*16u+py)&255u;
    int world_y=surface_y[layer][y];
@@ -153,8 +184,7 @@ int wf_r18_ring_surface_update(unsigned layer,int wx,int wy,unsigned transparent
     unsigned x=cx*16u+px;
     int world_x=surface_x[layer][x];
     if(world_x<0||((unsigned)world_x>>4&31u)!=cx)continue;
-    uint8_t pixel;
-    if(wf_r18_ring_pixel(layer,world_x,world_y,&pixel)!=0)return -1;
+    uint8_t pixel=surface_pixel(layer,(unsigned)world_x,(unsigned)world_y,&sample);
     bitmap[y*512u+x]=(uint8_t)((transparent&&!(pixel&15u))?0u:pixel);
     ++count;
    }
@@ -165,24 +195,61 @@ int wf_r18_ring_surface_update(unsigned layer,int wx,int wy,unsigned transparent
  if(writes)*writes=count;
  return 0;
 }
+int wf_r18_ring_characters(volatile uint8_t *dest,size_t capacity){
+ if(!g||!dest||capacity<(size_t)tiles_n*128u)return -1;
+ for(unsigned t=0;t<tiles_n;t++)for(unsigned q=0;q<4;q++)
+  for(unsigned y=0;y<8;y++)for(unsigned x=0;x<4;x++)
+   dest[t*128u+q*32u+y*4u+x]=g[tiles+t*128u+((q/2u)*8u+y)*8u+(q%2u)*4u+x];
+ return 0;
+}
+int wf_r18_ring_cells_update(unsigned layer,int wx,int wy,volatile uint16_t *map,size_t *writes){
+ if(!g||layer>1||!map)return -1;
+ if(cell_generation[layer]!=ring_generation){
+  memset(cell_x[layer],0xff,sizeof cell_x[layer]);memset(cell_y[layer],0xff,sizeof cell_y[layer]);cell_generation[layer]=ring_generation;
+ }
+ wx%=2560;wy%=2048;if(wx<0)wx+=2560;if(wy<0)wy+=2048;
+ uint8_t changed_x[32]={0},changed_y[32]={0};
+ for(unsigned i=0;i<=((unsigned)(wx&15)+319u)/16u;i++){
+  unsigned tile=((unsigned)wx/16u+i)%160u,slot=tile&31u;
+  if(cell_x[layer][slot]!=tile){cell_x[layer][slot]=(uint16_t)tile;changed_x[slot]=1;}
+ }
+ for(unsigned i=0;i<=((unsigned)(wy&15)+239u)/16u;i++){
+  unsigned tile=((unsigned)wy/16u+i)%128u,slot=tile&31u;
+  if(cell_y[layer][slot]!=tile){cell_y[layer][slot]=(uint16_t)tile;changed_y[slot]=1;}
+ }
+ size_t count=0;ring_sample_t sample={0};
+ /* Keep the cached X/Y cross-product coherent, including offscreen cells.
+  * A returning row must never reuse an old column's pattern name. */
+ for(unsigned y=0;y<32;y++)if(cell_y[layer][y]!=0xffffu)
+  for(unsigned x=0;x<32;x++)if(cell_x[layer][x]!=0xffffu){
+   unsigned cell=y*32u+x;
+   if(!changed_x[x]&&!changed_y[y]&&!overlay_dirty[layer][cell])continue;
+   (void)surface_pixel(layer,(unsigned)cell_x[layer][x]*16u,(unsigned)cell_y[layer][y]*16u,&sample);
+   map[cell]=(uint16_t)(((sample.attr&15u)<<12)|((sample.attr&0xc0u)<<4)|sample.tile);count++;
+  }
+ for(unsigned i=0;i<dirty_count[layer];i++)overlay_dirty[layer][dirty_cells[layer][i]]=0;
+ dirty_count[layer]=0;if(writes)*writes=count;return 0;
+}
 int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t pri){
  if(!g||(pri!=0x78&&pri!=0x7b&&pri!=0x7c))return -1;
  if(last[0]==sx0&&last[1]==sy0&&last[2]==sx1&&last[3]==sy1&&last[4]==pri)return 0;
 #ifdef __sh__
  vdp2_scrn_priority_set(VDP2_SCRN_NBG0,pri==0x78?2:1);
  vdp2_scrn_priority_set(VDP2_SCRN_NBG1,pri==0x78?1:pri==0x7b?2:3);
+ /* ROM $26E9E selects the board mode. In7C the BG-world ropes are
+  * above sprites, including the sprite-built side ropes/posts (WP26). */
+ for(unsigned i=0;i<8u;i++)vdp2_sprite_priority_set(i,pri==0x7c?2:3);
  vdp2_scrn_display_set(pri==0x78?(VDP2_SCRN_DISPTP_NBG0|VDP2_SCRN_DISP_NBG1):(VDP2_SCRN_DISP_NBG0|VDP2_SCRN_DISPTP_NBG1));
  for(unsigned layer=0;layer<2;layer++){
   int first=(pri==0x78)?layer==0:layer==1;
   int sx=first?sx0:sx1,sy=first?sy0:sy1;
-  int transparent=(pri==0x78)?layer==0:layer==1;
   int wy=2048-sy;
   vdp2_scrn_t screen=layer?VDP2_SCRN_NBG1:VDP2_SCRN_NBG0;
-  volatile uint8_t *vram=(volatile uint8_t *)VDP2_VRAM_ADDR(layer?2:0,0);
-  if(wf_r18_ring_surface_update(layer,sx,wy,(unsigned)transparent,vram,NULL)!=0)
+  volatile uint16_t *vram=(volatile uint16_t *)VDP2_VRAM_ADDR(layer?3:1,0);
+  if(wf_r18_ring_cells_update(layer,sx,wy,vram,NULL)!=0)
    return -1;
   vdp2_scrn_scroll_x_set(screen,fix16_int32_from((uint32_t)sx&511u));
-  vdp2_scrn_scroll_y_set(screen,fix16_int32_from((uint32_t)wy&255u));
+  vdp2_scrn_scroll_y_set(screen,fix16_int32_from((uint32_t)wy&511u));
  }
 #endif
  last[0]=sx0;last[1]=sy0;last[2]=sx1;last[3]=sy1;last[4]=pri;return 0;
@@ -197,8 +264,10 @@ static void mark_overlay_dirty(unsigned layer,unsigned cell){
 }
 int wf_r18_ring_tile_write(unsigned layer,unsigned cell,uint16_t attr,uint16_t source_tile){
  if(!g||layer>1||cell>=1024)return -1;
- unsigned tile;for(tile=0;tile<tiles_n;tile++)if(u16(g+tiles+tiles_n*128+tile*2)==source_tile)break;
- if(tile==tiles_n)return -1;
+ /* The pack's strictly sorted source-ID table is validated at bind. */
+ const uint8_t *ids=g+tiles+tiles_n*128u;unsigned lo=0,hi=tiles_n;
+ while(lo<hi){unsigned mid=lo+(hi-lo)/2u;if(u16(ids+mid*2u)<source_tile)lo=mid+1u;else hi=mid;}
+ unsigned tile=lo;if(tile==tiles_n||u16(ids+tile*2u)!=source_tile)return -1;
  if(!overlay_valid[layer][cell]||overlay[layer][cell][0]!=attr||
     overlay[layer][cell][1]!=tile)mark_overlay_dirty(layer,cell);
  overlay[layer][cell][0]=attr;overlay[layer][cell][1]=(uint16_t)tile;

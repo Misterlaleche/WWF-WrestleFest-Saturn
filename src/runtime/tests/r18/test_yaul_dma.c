@@ -4,6 +4,7 @@
 #include <yaul.h>
 #include "wf_saturn_yaul_backend.h"
 unsigned mock_sync_calls;
+unsigned mock_sprite_priorities[8],mock_screen_priorities[2];
 uint8_t mock_vram[0x80000];uint32_t mock_cram[1024];
 static unsigned transfers,waits,submitted;static uint8_t stage[32768] __aligned(32),pixels[32768];
 void scu_dma_transfer(unsigned channel,void*dest,const void*src,size_t n){assert(channel==0);assert((const uint8_t*)src>=stage&&(const uint8_t*)src+n<=stage+sizeof stage);memcpy(dest,src,n);transfers++;}

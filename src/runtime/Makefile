@@ -317,7 +317,7 @@ test: test-active-rom
 
 # Direct-boot integration probe; the ROM and graphics remain local audit assets.
 R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_world.c src/wf_r18_ring.c
-build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c
+build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c include/wf_r18_rom_hot_pages.h
 	mkdir -p build
 	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
 .PHONY: test-runtime18-direct test-runtime18-complete-match test-runtime18-complete-match-asan
@@ -327,15 +327,15 @@ test-runtime18-direct: build/direct_combat_probe audit/runtime18-cd/HOTSPR.BIN
 
 # Success requires the actual $11B6 result boundary, not merely a frame count.
 test-runtime18-complete-match: build/direct_combat_probe audit/runtime18-cd/HOTSPR.BIN
-	WF_PROBE_FRAMES=20000 WF_PROBE_ATTACK=1 WF_PROBE_REQUIRE_COMPLETE=1 WF_PROBE_SPRITE_TRACE=build/runtime18-match-cold-reads.csv ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	WF_PROBE_FRAMES=20000 WF_PROBE_ATTACK=1 WF_PROBE_REQUIRE_COMPLETE=1 WF_PROBE_REQUIRE_RESIDENT=1 WF_PROBE_SPRITE_TRACE=build/runtime18-match-cold-reads.csv ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
 	test "$$(wc -l < build/runtime18-match-cold-reads.csv)" -eq 1
 	@echo 'PASS complete replay: zero cold sprite reads'
 
-build/direct_combat_probe_asan: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c
+build/direct_combat_probe_asan: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c include/wf_r18_rom_hot_pages.h
 	mkdir -p build
 	$(CC) -std=c11 -Wall -Wextra -Werror -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -Iinclude $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
 test-runtime18-complete-match-asan: build/direct_combat_probe_asan audit/runtime18-cd/HOTSPR.BIN
-	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 WF_PROBE_FRAMES=20000 WF_PROBE_ATTACK=1 WF_PROBE_REQUIRE_COMPLETE=1 ./build/direct_combat_probe_asan audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 WF_PROBE_FRAMES=20000 WF_PROBE_ATTACK=1 WF_PROBE_REQUIRE_COMPLETE=1 WF_PROBE_REQUIRE_RESIDENT=1 ./build/direct_combat_probe_asan audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
 
 build/test_runtime18_cdfs_window: src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c tests/r18/cd-block.h | build
 	$(CC) $(CFLAGS) -Itests/r18 src/wf_r18_cdfs.c tests/r18/test_cdfs_window.c -o $@
@@ -479,10 +479,10 @@ test-runtime18-cpu-tiers-rom:
 test-runtime18-rom-validation: test-runtime18-raw59-rom test-runtime18-cpu-tiers-rom
 
 test-runtime18-noinput-complete-match: build/direct_combat_probe audit/runtime18-cd/HOTSPR.BIN
-	env -u WF_PROBE_ATTACK WF_PROBE_FRAMES=20000 WF_PROBE_REQUIRE_COMPLETE=1 WF_PROBE_SPRITE_TRACE=build/runtime18-noinput-cold-reads.csv ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	env -u WF_PROBE_ATTACK WF_PROBE_FRAMES=20000 WF_PROBE_REQUIRE_COMPLETE=1 WF_PROBE_REQUIRE_RESIDENT=1 WF_PROBE_SPRITE_TRACE=build/runtime18-noinput-cold-reads.csv ./build/direct_combat_probe audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
 
 test-runtime18-noinput-complete-match-asan: build/direct_combat_probe_asan audit/runtime18-cd/HOTSPR.BIN
-	env -u WF_PROBE_ATTACK ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 WF_PROBE_FRAMES=20000 WF_PROBE_REQUIRE_COMPLETE=1 ./build/direct_combat_probe_asan audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
+	env -u WF_PROBE_ATTACK ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 WF_PROBE_FRAMES=20000 WF_PROBE_REQUIRE_COMPLETE=1 WF_PROBE_REQUIRE_RESIDENT=1 ./build/direct_combat_probe_asan audit/runtime18-cd/ROM68K.BIN audit/runtime18-cd/SPRITES.PAK audit/runtime18-cd/R18RING.BIN audit/runtime18-cd/HOTSPR.BIN
 
 .PHONY: test-runtime18-raw33-rom test-runtime18-raw0e-rom test-runtime18-raw51-rom test-runtime18-cpu-approach-rom
 test-runtime18-raw33-rom:
@@ -504,3 +504,30 @@ test-runtime18-rom-validation: test-runtime18-cpu-aligned-rom
 test-runtime18-camera-rom:
 	$(ROM_PYTHON) tools/verify_camera_sync_rom.py audit/runtime18-cd/ROM68K.BIN
 test-runtime18-rom-validation: test-runtime18-camera-rom
+
+build/test_runtime18_ring_priority: src/wf_r18_ring.c tests/r18/test_ring_priority.c tests/r18/mock-yaul/yaul.h | build
+	$(CC) $(CFLAGS) -D__sh__ -Itests/r18/mock-yaul src/wf_r18_ring.c tests/r18/test_ring_priority.c -o $@
+.PHONY: test-runtime18-ring-priority
+test-runtime18-ring-priority: build/test_runtime18_ring_priority
+	./build/test_runtime18_ring_priority audit/runtime18-cd/R18RING.BIN
+
+build/test_runtime18_ring_ids: src/wf_r18_ring.c tests/r18/test_ring_ids.c | build
+	$(CC) $(CFLAGS) src/wf_r18_ring.c tests/r18/test_ring_ids.c -o $@
+.PHONY: test-runtime18-ring-ids
+test-runtime18-ring-ids: build/test_runtime18_ring_ids
+	./build/test_runtime18_ring_ids audit/runtime18-cd/R18RING.BIN
+
+build/test_runtime18_ring_cells: src/wf_r18_ring.c tests/r18/test_ring_cells.c | build
+	$(CC) $(CFLAGS) src/wf_r18_ring.c tests/r18/test_ring_cells.c -o $@
+.PHONY: test-runtime18-ring-cells
+test-runtime18-ring-cells: build/test_runtime18_ring_cells
+	./build/test_runtime18_ring_cells audit/runtime18-cd/R18RING.BIN
+
+.PHONY: test-runtime18-ring-native-asan
+test-runtime18-ring-native-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_ring.c tests/r18/test_ring_cells.c -o build/test_runtime18_ring_cells_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_ring_cells_asan audit/runtime18-cd/R18RING.BIN
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_ring.c tests/r18/test_ring_ids.c -o build/test_runtime18_ring_ids_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_ring_ids_asan audit/runtime18-cd/R18RING.BIN
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -D__sh__ -Itests/r18/mock-yaul src/wf_r18_ring.c tests/r18/test_ring_priority.c -o build/test_runtime18_ring_priority_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_ring_priority_asan audit/runtime18-cd/R18RING.BIN

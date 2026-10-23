@@ -62,6 +62,23 @@ int main(int argc,char **argv)
         check(0,0,0,1u,&writes) != 0 || !writes || writes>256u) return 1;
     wf_r18_ring_tile_restore(0,0);
     if (check(0,0,0,1u,&writes) != 0 || !writes || writes>256u) return 1;
+    /* Exercise partial old/new cells, both flip bits and restored map cells
+     * across large scroll jumps. The scalar lookup is the independent path. */
+    uint32_t seed=0x26e66u;
+    for(unsigned layer=0;layer<2u;layer++)for(unsigned transparent=0;transparent<2u;transparent++)
+        for(unsigned frame=0;frame<64u;frame++){
+            seed=seed*1664525u+1013904223u;
+            int x=(int)(seed%3000u)-200;
+            seed=seed*1664525u+1013904223u;
+            int y=(int)(seed%2500u)-200;
+            unsigned cell=(((unsigned)y>>4)&31u)*32u+(((unsigned)x>>4)&31u);
+            unsigned id=(frame*37u)%n;
+            unsigned source=((unsigned)ring[t+n*128u+id*2u]<<8)|ring[t+n*128u+id*2u+1u];
+            unsigned attr=(frame&15u)|((frame&3u)<<6);
+            if(wf_r18_ring_tile_write(layer,cell,(uint16_t)attr,(uint16_t)source)||check(layer,x,y,transparent,&writes))return 1;
+            wf_r18_ring_tile_restore(layer,cell);
+            if(check(layer,x,y,transparent,&writes))return 1;
+        }
     puts("PASS RUNTIME-18 hardware-scroll surface matches ROM pixels");
     return 0;
 }

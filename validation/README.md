@@ -1,7 +1,7 @@
 # Reproducción del checkpoint actual RUNTIME-18
 
-Ver [RUNTIME18-CAMERA-CHECKPOINT.md](RUNTIME18-CAMERA-CHECKPOINT.md) para la
-corrección y los discos actuales, [RUNTIME18-CPU-CHECKPOINT.md](RUNTIME18-CPU-CHECKPOINT.md) para los
+Ver [RUNTIME18-LAYERS-PERF-CHECKPOINT.md](RUNTIME18-LAYERS-PERF-CHECKPOINT.md) para las
+capas, fluidez y discos actuales, [RUNTIME18-CPU-CHECKPOINT.md](RUNTIME18-CPU-CHECKPOINT.md) para los
 oráculos, la partida completa, sanitizadores y precarga, y
 [RUNTIME18-DISC.md](RUNTIME18-DISC.md) para BIN/CUE y el replay SH-2.
 Los comandos siguientes conservan la regresión CORE histórica y su harness

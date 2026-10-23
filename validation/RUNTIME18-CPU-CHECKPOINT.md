@@ -1,9 +1,9 @@
-# Estado actual: cámara sincronizada desde426ed17
+# Estado actual: capas y fluidez desde a680f7a
 
-El checkpoint nuevo corrige cámara/ring/sprites y conserva los finales completos
-4391/14409. Ver [RUNTIME18-CAMERA-CHECKPOINT.md](RUNTIME18-CAMERA-CHECKPOINT.md)
-para los discos actuales, hashes, 2304 casos ROM adicionales y pruebas Mednafen.
-Los hashes de la sección histórica siguiente corresponden a426ed17.
+Ver [RUNTIME18-LAYERS-PERF-CHECKPOINT.md](RUNTIME18-LAYERS-PERF-CHECKPOINT.md)
+para el disco actual, medidas, precarga3993tiles/171páginas y pruebas frescas.
+Se conservan los finales4391/14409 y la cámara canónica. El replay final
+Mednafen llega4391 sin bloqueos. Los hashes siguientes son históricos.
 
 ## Histórico426ed17 — cierre de combate sin entrada
 

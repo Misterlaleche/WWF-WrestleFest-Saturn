@@ -4,7 +4,7 @@
 static wf_r18_file_read_fn read_file;
 static uint8_t *rom_data,*tile_data;static size_t rom_slots,tile_slots,rom_capacity;
 static int rom_preloaded;
-static uint16_t rom_page[128],rom_slot[512];static uint32_t rom_age[128],rom_clock;
+static uint16_t rom_page[256],rom_slot[512];static uint32_t rom_age[256],rom_clock;
 static uint16_t tile_tags[6144];static uint8_t tile_valid[6144];
 /* Sector-aligned header stores sorted tile IDs; pixel payload resides in the
  * first tile-cache slots. The remaining slots retain exact on-demand fallback. */
@@ -15,11 +15,26 @@ static wf_actor_raw_t *composed[WF_ACTOR_SLOTS];static size_t composed_count;
 static uint8_t dma_stage[WF_VDP1_STREAM_TILES_MAX*WF_VDP1_TILE_BYTES_16X16_4BPP] __attribute__((aligned(32)));
 static wf_saturn_yaul_backend_t backend;
 static unsigned busy;
-void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>128)rom_slots=128;if(tile_slots>6144)tile_slots=6144;hot_count=0;for(unsigned i=0;i<128;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);backend.defer_sync=1;}
+void wf_r18_present_init(wf_r18_file_read_fn fn,void *rc,size_t rn,void *tc,size_t tn){read_file=fn;rom_data=rc;rom_capacity=rn;rom_preloaded=0;tile_data=tc;rom_slots=rn/1024;tile_slots=tn/128;if(rom_slots>256)rom_slots=256;if(tile_slots>6144)tile_slots=6144;hot_count=0;for(unsigned i=0;i<256;i++)rom_page[i]=0xffffu;for(unsigned i=0;i<512;i++)rom_slot[i]=0xffffu;memset(rom_age,0,sizeof rom_age);rom_clock=0;memset(tile_valid,0,sizeof tile_valid);wf_saturn_yaul_backend_init(&backend,dma_stage,sizeof dma_stage);backend.defer_sync=1;}
 wf_status_t wf_r18_rom_preload(void){
  if(!read_file||!rom_data||rom_capacity<524288u)return WF_BLOCKED;
  if(read_file("ROM68K.BIN",0,rom_data,524288u))return WF_BLOCKED;
  rom_preloaded=1;return WF_OK;
+}
+wf_status_t wf_r18_rom_pages_preload(const uint16_t *pages,size_t count){
+ if(!read_file||!rom_data||!pages||!count||count>rom_slots)return WF_BLOCKED;
+ for(size_t i=0;i<count;i++)if(pages[i]>=512u||(i&&pages[i-1]>=pages[i]))return WF_BLOCKED;
+ rom_preloaded=0;
+ for(unsigned i=0;i<256u;i++)rom_page[i]=0xffffu;
+ for(unsigned i=0;i<512u;i++)rom_slot[i]=0xffffu;
+ memset(rom_age,0,sizeof rom_age);rom_clock=0;
+ for(size_t first=0;first<count;){
+  size_t end=first+1u;while(end<count&&pages[end]==pages[end-1u]+1u)end++;
+  if(read_file("ROM68K.BIN",(uint32_t)pages[first]*1024u,rom_data+first*1024u,(end-first)*1024u))return WF_BLOCKED;
+  for(size_t i=first;i<end;i++){rom_page[i]=pages[i];rom_slot[pages[i]]=(uint16_t)i;rom_age[i]=++rom_clock;}
+  first=end;
+ }
+ return WF_OK;
 }
 wf_status_t wf_r18_rom_read(void*u,uint32_t a,void*dest,size_t n){uint8_t*out=dest;(void)u;if(!read_file||!rom_slots||a>0x80000u||n>0x80000u-a)return WF_BLOCKED;
  if(rom_preloaded){memcpy(out,rom_data+a,n);return WF_OK;}

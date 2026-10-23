@@ -7,6 +7,7 @@
 #include "wf_r18_match_result.h"
 #include "wf_r18_cdfs.h"
 #include "wf_r18_present.h"
+#include "wf_r18_rom_hot_pages.h"
 #include "wf_r18_ring.h"
 #include "wf_r18_video.h"
 #include "wf_r18_world.h"
@@ -15,7 +16,7 @@
  * ranges occupy LWRAM only, with no overlap and no dynamic allocation. */
 #define RING_BLOB ((void *)0x00201000u)
 #define ROM_CACHE ((void *)0x00220000u)
-#define TILE_CACHE ((void *)0x002a0000u)
+#define TILE_CACHE ((void *)0x00260000u)
 #define BOOT_RNG ((volatile uint32_t *)0x0020005cu)
 static volatile uint32_t video_clock;
 static volatile uint32_t fatal_owner, fatal_dependency, fatal_frame;
@@ -213,14 +214,12 @@ int main(void)
     if (wf_saturn_yaul_video_init() != WF_OK ||
         wf_r18_ring_bind(RING_BLOB, 114918u) != 0)
         fail(0x18cd04u, 0);
-    wf_r18_present_init(wf_r18_file_read, ROM_CACHE, 512u*1024u,
-                         TILE_CACHE, 384u*1024u);
-    if (wf_r18_rom_preload() != WF_OK) fail(0x18cd06u, 0);
+    wf_r18_present_init(wf_r18_file_read, ROM_CACHE, 256u*1024u,
+                         TILE_CACHE, 640u*1024u);
+    if (wf_r18_rom_pages_preload(wf_r18_rom_hot_pages,sizeof wf_r18_rom_hot_pages/sizeof wf_r18_rom_hot_pages[0]) != WF_OK) fail(0x18cd06u, 0);
     if (wf_r18_file_size("HOTSPR.BIN", &size) != 0 ||
         wf_r18_hot_sprites_load() != WF_OK ||
         size != wf_r18_hot_sprites_bytes()) fail(0x18cd07u, size);
-    for (unsigned i = 0; i < 8u; ++i)
-        vdp2_sprite_priority_set(i, 4);
     video.read_rom = wf_r18_rom_read;
     video.read_ram = read_ram;
     world.read_rom = wf_r18_rom_read;

@@ -7,6 +7,7 @@ typedef int (*wf_r18_file_read_fn)(const char *,uint32_t,void *,size_t);
 /* Buffers are borrowed; Saturn caller assigns nonoverlapping LWRAM regions. */
 void wf_r18_present_init(wf_r18_file_read_fn,void *rom_cache,size_t rom_bytes,void *tile_cache,size_t tile_bytes);
 wf_status_t wf_r18_rom_preload(void);
+wf_status_t wf_r18_rom_pages_preload(const uint16_t *pages,size_t count);
 wf_status_t wf_r18_rom_read(void*,uint32_t,void*,size_t);
 wf_status_t wf_r18_hot_sprites_load(void);
 size_t wf_r18_hot_sprites_bytes(void);

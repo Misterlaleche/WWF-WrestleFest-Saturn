@@ -1,10 +1,11 @@
-# RUNTIME-18 — disco con cámara sincronizada desde426ed17
+# RUNTIME-18 — disco con capas y transporte VDP2 corregidos
 
-El disco actual comparte los scrolls originales entre cámara, ring y sprites.
-Se comprueba en Mednafen el desplazamiento y el final4391 sin entrada.
-Los hashes del nuevo BIN y ejecutables, pruebas y alcance están en
-[RUNTIME18-CAMERA-CHECKPOINT.md](RUNTIME18-CAMERA-CHECKPOINT.md).
-Mantener BIN y CUE juntos y usar el CUE para cargar o grabar.
+El disco actual continúa `a680f7a`: mantiene la cámara sincronizada, corrige
+prioridades del ring y reduce la secuencia medida de4,12 a1,77 VBlanks/frame.
+Precarga3993 tiles y171 páginas ROM. El replay final termina4391 en Mednafen.
+Pruebas, hashes actuales y reproducción en
+[RUNTIME18-LAYERS-PERF-CHECKPOINT.md](RUNTIME18-LAYERS-PERF-CHECKPOINT.md).
+Abrir/grabar el CUE y mantener el BIN al lado. Saturn físico pendiente.
 
 ## Instrucciones de construcción y antecedentes
 

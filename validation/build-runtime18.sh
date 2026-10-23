@@ -12,12 +12,18 @@ case "${R18_REPLAY_TEST:-}" in
   '') ;;
   *) RESULTS="$RESULTS/replay" ;;
 esac
+R18_ENTRY=src/wf_saturn_entry.c
+if [ "${R18_PROFILE_TEST:-}" = 1 ]; then
+  RESULTS="$ROOT/validation/results/runtime18/profile-controlled"
+  R18_ENTRY=tests/r18/profile_entry.c
+  R18_REPLAY_TEST=1
+fi
 mkdir -p "$RESULTS"
 "$PYTHON" "$ROOT/src/runtime/tools/build_r18_hot_sprites.py" \
   "$ROOT/src/runtime/validation/runtime18-hot-tiles.txt" \
   "$ROOT/src/runtime/audit/runtime18-cd/SPRITES.PAK" \
   "$ROOT/src/runtime/audit/runtime18-cd/HOTSPR.BIN"
-"$DOCKER" run --rm --entrypoint /bin/bash -v "$ROOT:/workspace" -v "$SDK:/sdk:ro" -w /workspace/src/runtime -e YAUL_INSTALL_ROOT=/sdk -e YAUL_ARCH_SH_PREFIX=sh2eb-elf -e YAUL_ARCH_M68K_PREFIX=m68keb-elf -e YAUL_OPTION_MALLOC_IMPL=tlsf -e R18_REPLAY_TEST="${R18_REPLAY_TEST:-}" -e SILENT=1 -e NOCOLOR=1 -e MAKE_ISO_XORRISOFS=/usr/bin/xorrisofs "$IMAGE" -c '
+"$DOCKER" run --rm --entrypoint /bin/bash -v "$ROOT:/workspace" -v "$SDK:/sdk:ro" -w /workspace/src/runtime -e YAUL_INSTALL_ROOT=/sdk -e YAUL_ARCH_SH_PREFIX=sh2eb-elf -e YAUL_ARCH_M68K_PREFIX=m68keb-elf -e YAUL_OPTION_MALLOC_IMPL=tlsf -e R18_REPLAY_TEST="${R18_REPLAY_TEST:-}" -e R18_ENTRY="$R18_ENTRY" -e SILENT=1 -e NOCOLOR=1 -e MAKE_ISO_XORRISOFS=/usr/bin/xorrisofs "$IMAGE" -c '
 set -euo pipefail
 export PATH=/sdk/bin:$PATH
 /sdk/bin/sh2eb-elf-gcc --version

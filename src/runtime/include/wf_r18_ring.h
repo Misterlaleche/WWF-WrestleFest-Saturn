@@ -3,15 +3,19 @@
 #include <stddef.h>
 #include <stdint.h>
 /* ROM-derived mode/palette are encoded in blob; borrowed for lifetime.
- * VDP2 NBG0/NBG1, VRAM A0/A1 (128KiB each); CRAM entries 512..1023.
- * Caller owns vblank/commit synchronization and sprite priority class 0.
+ * VDP2 NBG0/NBG1: characters in banks0/2, pattern names in banks1/3.
+ * Caller owns vblank/commit synchronization; priority follows the ROM mode.
  */
 int wf_r18_ring_bind(const void *blob, size_t bytes);
 int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t priority);
 /* Host-verifiable exact world lookup; layer0 FG/layer1 BG. */
 int wf_r18_ring_pixel(unsigned layer,int wx,int wy,uint8_t *index);
 int wf_r18_ring_scanline(unsigned layer,int wx,int wy,unsigned transparent,uint8_t out[320]);
-/* 512x256 VDP2 bitmap cache; returns pixels rewritten in writes. */
+/* Native16x16 characters, one-word pattern names (palette/flip/tile).
+ * Upload characters once; update only map cells affected by scroll/animation. */
+int wf_r18_ring_characters(volatile uint8_t *characters,size_t capacity);
+int wf_r18_ring_cells_update(unsigned layer,int wx,int wy,volatile uint16_t *map,size_t *writes);
+/* Scalar/bitmap reference path for HOST pixel comparisons. */
 int wf_r18_ring_surface_update(unsigned layer,int wx,int wy,unsigned transparent,
                                volatile uint8_t *bitmap,size_t *writes);
 int wf_r18_ring_tile_write(unsigned layer,unsigned physical_cell,uint16_t attr,uint16_t source_tile);

@@ -1,31 +1,29 @@
-# RUNTIME-18 — cámara, ring y sprites sincronizados, 23 de octubre de 2026
+# RUNTIME-18 — capas del ring y fluidez, 23 de octubre de 2026
 
-Continuación de `426ed17`. Las fases de cámara publican ahora los cuatro
-scrolls originales que también consumen el ring y el streaming. Se elimina
-la divergencia entre una cámara de sprites móvil y un ring inmóvil. Los límites
-unsigned y la escritura conjunta de ambos canales siguen `$2983C` de la ROM.
+Continuación de `a680f7a`. Se corrige el orden de cuerdas laterales/frontales
+según7C de la ROM y se transporta el ring mediante celdas VDP2 nativas.
+La misma secuencia SH-2 en Mednafen pasa de4,12 a **1,77 VBlanks/frame**:
+unas2,33 veces más rápida, conservando los píxeles de la referencia corregida.
 
-El nuevo oráculo compara **2.304 casos** directamente con la ROM intacta,
-incluidos D0–D7. Las partidas completas conservan sus finales4391 sin entrada
-y14409 con entrada programada; se comprueba la coherencia de cámara en cada
-presentación. Pasan las48 regresiones HOST y sus48 versiones ASan/UBSan.
+La precarga reúne3993 tiles y171 páginas originales; ambas partidas completas
+HOST/ASan terminan sin lecturas CD tras el arranque. Sus finales siguen siendo
+4391 y14409. El replay final en Mednafen termina4391 con cuenta0300, reloj0021
+y sin bloqueos; el disco normal se comprueba arrancado y en movimiento.
 
-El nuevo replay SH-2 completa el combate en **Mednafen** en frame4391,
-cuenta0300, resultado8001 y reloj0021, sin bloqueos. También se inspecciona
-el disco normal en movimiento: ring, postes y luchadores comparten el
-scroll actualizado. Se entrega BIN/CUE normal con mando y replay separado.
-Arranque directo, sin menús ni audio; el sonido ya probado en Saturn pertenece
-a sus componentes anteriores, fuera de este ejecutable.
+Se entrega BIN/CUE normal con mando y replay separado. Arranque directo,
+sin menús ni audio. El sonido probado en Saturn anteriormente pertenece a
+componentes anteriores. No se alteran decisiones, reloj ni resultado del juego.
 
-La precarga mantiene2944 tiles más128 huecos en384KiB. La partida controlada
-conserva cero lecturas frías; la secuencia sin entrada mantiene11984 lecturas
-de983 tiles adicionales. No se presenta esta corrección como velocidad arcade.
+Evidencia, medidas, hashes, límites y reproducción:
+[validation/RUNTIME18-LAYERS-PERF-CHECKPOINT.md](validation/RUNTIME18-LAYERS-PERF-CHECKPOINT.md).
+La corrección de cámara del checkpoint anterior se conserva y su oráculo
+2304 casos vuelve a pasar. CORE48+48, world400, transporte y combates completos
+pasan; el checkpoint exportado se reconstruye y verifica por bytes.
 
-Evidencia, hashes y reproducción:
-[validation/RUNTIME18-CAMERA-CHECKPOINT.md](validation/RUNTIME18-CAMERA-CHECKPOINT.md),
-[validation/RUNTIME18-DISC.md](validation/RUNTIME18-DISC.md).
-**Sin declaración ROM-EXACT ni prueba de este nuevo disco en Saturn físico.**
-El siguiente ensayo es en emulador del usuario y Saturn con CD-R.
+**Sin declaración ROM-EXACT, velocidad arcade ni prueba de este disco en
+Saturn físico.** El siguiente ensayo del usuario es con emulador y CD-R real.
+Los IDs precargados no cubren universalmente otras entradas: éstas conservan
+lecturas bajo demanda. Menús, audio e introducciones quedan para después.
 
 ## Registro histórico de RUNTIME-17
 

@@ -16,6 +16,7 @@ p.add_argument('pid', type=int)
 p.add_argument('binary', type=Path)
 p.add_argument('linker_map', type=Path)
 p.add_argument('--layout', type=Path, help='SH-2 .rodata from runtime18-observer-layout.c')
+p.add_argument('--profile', action='store_true', help='Read test-only profile_entry.c counters')
 a = p.parse_args()
 program = a.binary.read_bytes()
 mapping = a.linker_map.read_text()
@@ -26,6 +27,8 @@ names = ('rt', 'video_clock', 'fatal_owner', 'fatal_dependency',
 symbols = {}
 if a.layout:
     names += ('gameplay',)
+if a.profile:
+    names += ('profile_frames', 'profile_vblanks', 'profile_totals', 'profile_calls')
 for name in names:
     match = re.search(r'\.bss\.' + name + r'\s+0x([0-9a-f]+)\s', mapping)
     if not match:
@@ -55,6 +58,9 @@ with open(f'/proc/{a.pid}/mem', 'rb', buffering=0) as mem:
             values = {name: read32(addr) for name, addr in symbols.items() if name not in ('rt', 'gameplay')}
             # g is the first field; frame_counter is at +24 on SH-2.
             values['frame'] = read32(symbols['rt'] + 24)
+            if a.profile:
+                for name in ('profile_totals', 'profile_calls'):
+                    values[name] = [read32(symbols[name] + i * 4) for i in range(16)]
             if a.layout:
                 import struct
                 offsets = struct.unpack('>10I', a.layout.read_bytes())
