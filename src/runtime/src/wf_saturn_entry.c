@@ -15,11 +15,11 @@
 #include "wf_r18_hud.h"
 #include "wf_r18_world.h"
 
-/* The IP loader places the executable in HWRAM. These three borrowed cache
- * ranges occupy LWRAM only, with no overlap and no dynamic allocation. */
+/* The IP loader places the executable in HWRAM. Borrowed CPU-owned LWRAM
+ * caches and video-write staging have disjoint ranges and no allocation. */
 #define RING_BLOB ((void *)0x00201000u)
-#define ROM_CACHE ((void *)0x00220000u)
-#define TILE_CACHE ((void *)0x00260000u)
+#define ROM_CACHE ((void *)WF_SATURN_LWRAM_ROM_CACHE)
+#define TILE_CACHE ((void *)WF_SATURN_LWRAM_TILE_CACHE)
 #define BOOT_RNG ((volatile uint32_t *)0x0020005cu)
 static volatile uint32_t video_clock;
 static volatile uint32_t fatal_owner, fatal_dependency, fatal_frame;
@@ -232,8 +232,8 @@ int main(void)
         fail(0x18cd04u, 0);
     if(wf_r18_file_size("FONT8.BIN",&size)!=0||size!=WF_SATURN_FONT_BYTES||
        wf_r18_hud_bind(&video,wf_r18_file_read)!=WF_OK)fail(0x18cd08u,size);
-    wf_r18_present_init(wf_r18_file_read, ROM_CACHE, 256u*1024u,
-                         TILE_CACHE, 640u*1024u);
+    wf_r18_present_init(wf_r18_file_read, ROM_CACHE, WF_SATURN_LWRAM_ROM_BYTES,
+                         TILE_CACHE, WF_SATURN_LWRAM_TILE_BYTES);
     if (wf_r18_rom_pages_preload(wf_r18_rom_hot_pages,sizeof wf_r18_rom_hot_pages/sizeof wf_r18_rom_hot_pages[0]) != WF_OK) fail(0x18cd06u, 0);
     if (wf_r18_file_size("HOTSPR.BIN", &size) != 0 ||
         wf_r18_hot_sprites_load() != WF_OK ||
@@ -264,6 +264,7 @@ int main(void)
     wf_r17_m68k_software_reset(&launch.registers);
     status = wf_r18_direct_boot(&rt, &boot, &launch);
     if (status != WF_OK) fail(boot.blocked_pc, video.failed_address);
+    wf_r18_video_ring_bind(&video);
 
     gameplay.cabinet_words_valid = 1;
     gameplay.cabinet_word_140020 = 0xffffu;

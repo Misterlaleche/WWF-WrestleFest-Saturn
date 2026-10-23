@@ -1,5 +1,6 @@
 #include "wf_r18_ring.h"
 #include "wf_saturn_memory.h"
+#include "wf_r18_video.h"
 #include <string.h>
 #ifdef __sh__
 #include <yaul.h>
@@ -270,17 +271,46 @@ static void mark_overlay_dirty(unsigned layer,unsigned cell){
  }
  last[4]=0x10000;
 }
-int wf_r18_ring_tile_write(unsigned layer,unsigned cell,uint16_t attr,uint16_t source_tile){
- if(!g||layer>1||cell>=1024)return -1;
+static int source_tile_index(uint16_t source_tile,unsigned *tile){
+ if(!g)return -1;
  /* The pack's strictly sorted source-ID table is validated at bind. */
  const uint8_t *ids=g+tiles+tiles_n*128u;unsigned lo=0,hi=tiles_n;
  while(lo<hi){unsigned mid=lo+(hi-lo)/2u;if(u16(ids+mid*2u)<source_tile)lo=mid+1u;else hi=mid;}
- unsigned tile=lo;if(tile==tiles_n||u16(ids+tile*2u)!=source_tile)return -1;
+ if(lo==tiles_n||u16(ids+lo*2u)!=source_tile)return -1;
+ *tile=lo;return 0;
+}
+int wf_r18_ring_tile_write(unsigned layer,unsigned cell,uint16_t attr,uint16_t source_tile){
+ unsigned tile;if(layer>1||cell>=1024||source_tile_index(source_tile,&tile))return -1;
  if(!overlay_valid[layer][cell]||overlay[layer][cell][0]!=attr||
     overlay[layer][cell][1]!=tile)mark_overlay_dirty(layer,cell);
  overlay[layer][cell][0]=attr;overlay[layer][cell][1]=(uint16_t)tile;
  overlay_valid[layer][cell]=1;return 0;
 }
+static int video_cell(unsigned layer,unsigned cell,uint8_t *bytes,wf_r18_background_op_t op){
+ if(!g||layer>1||cell>=1024||!bytes)return -1;
+ if(op==WF_R18_BACKGROUND_READ){
+  unsigned attr,tile;
+  if(overlay_valid[layer][cell]){attr=overlay[layer][cell][0];tile=overlay[layer][cell][1];}
+  else{
+   unsigned x=cell&31u,y=cell>>5;
+   /* An untouched physical cell has no decoded resident coordinate yet;
+    * keep its board shadow until the camera first loads that coordinate. */
+   if(cell_generation[layer]!=ring_generation||cell_x[layer][x]==0xffffu||cell_y[layer][y]==0xffffu)return 0;
+   ring_sample_t sample={0};
+   (void)surface_pixel(layer,cell_x[layer][x]*16u,cell_y[layer][y]*16u,&sample);
+   attr=sample.attr;tile=sample.tile;
+  }
+  uint16_t source=u16(g+tiles+tiles_n*128u+tile*2u);
+  if(layer){uint16_t word=(uint16_t)((attr<<12)|source);bytes[0]=(uint8_t)(word>>8);bytes[1]=(uint8_t)word;}
+  else{bytes[0]=(uint8_t)(attr>>8);bytes[1]=(uint8_t)attr;bytes[2]=(uint8_t)(source>>8);bytes[3]=(uint8_t)source;}
+  return 0;
+ }
+ uint16_t attr=u16(bytes),source;unsigned tile;
+ if(layer){source=attr&4095u;attr>>=12;}else source=u16(bytes+2)&8191u;
+ if(op==WF_R18_BACKGROUND_VALIDATE)return source_tile_index(source,&tile);
+ return op==WF_R18_BACKGROUND_WRITE?wf_r18_ring_tile_write(layer,cell,attr,source):-1;
+}
+void wf_r18_video_ring_bind(wf_r18_video_t *video){if(video)video->ring_cell=video_cell;}
 void wf_r18_ring_tile_restore(unsigned layer,unsigned cell){
  if(layer<2&&cell<1024&&overlay_valid[layer][cell]){
   overlay_valid[layer][cell]=0;mark_overlay_dirty(layer,cell);

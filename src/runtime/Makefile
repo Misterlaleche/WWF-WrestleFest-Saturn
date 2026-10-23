@@ -556,7 +556,7 @@ test-runtime18-display-asan: | build
 	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c tests/r18/test_yaul_dma.c -o build/test_runtime18_dma_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_dma_asan
 
-build/test_runtime18_command_work: tests/r18/test_command_work.c src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c | build
+build/test_runtime18_command_work: tests/r18/mock-yaul/yaul.h tests/r18/test_command_work.c src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c | build
 	$(CC) $(CFLAGS) -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_command_work.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c -o $@
 test-runtime18-command-work: build/test_runtime18_command_work
 	./build/test_runtime18_command_work
@@ -607,3 +607,25 @@ test-runtime18-palette-work-asan: | build
 	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_palette_work.c src/wf_r18_video.c src/wf_r18_hud.c -o build/test_runtime18_palette_work_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_palette_work_asan
 .PHONY: test-runtime18-palette-work test-runtime18-palette-work-asan
+
+# Direct board background writes must reach resident native VDP2 cells.
+build/test_runtime18_background_ring: src/wf_r18_video.c src/wf_r18_ring.c tests/r18/test_background_ring.c include/wf_r18_video.h | build
+	$(CC) $(CFLAGS) src/wf_r18_video.c src/wf_r18_ring.c tests/r18/test_background_ring.c -o $@
+test-runtime18-background-ring: build/test_runtime18_background_ring
+	./build/test_runtime18_background_ring audit/runtime18-cd/R18RING.BIN
+test-runtime18-background-ring-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_video.c src/wf_r18_ring.c tests/r18/test_background_ring.c -o build/test_runtime18_background_ring_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_background_ring_asan audit/runtime18-cd/R18RING.BIN
+test-runtime18-background-rom:
+	$(ROM_PYTHON) tests/r18/verify_background_rom.py
+.PHONY: test-runtime18-background-ring test-runtime18-background-ring-asan test-runtime18-background-rom
+
+# Native VDP1 transparent-row elimination; independent complete-tile raster.
+build/test_runtime18_sprite_crop: tests/r18/test_sprite_crop.c tests/r18/mock-yaul/yaul.h src/wf_saturn_yaul_backend.c include/wf_saturn_yaul_backend.h | build
+	$(CC) $(CFLAGS) -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_sprite_crop.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c -o $@
+test-runtime18-sprite-crop: build/test_runtime18_sprite_crop
+	./build/test_runtime18_sprite_crop audit/runtime18-cd/HOTSPR.BIN
+test-runtime18-sprite-crop-asan: | build
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -DWF_PLATFORM_SATURN -Itests/r18/mock-yaul tests/r18/test_sprite_crop.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c -o build/test_runtime18_sprite_crop_asan
+	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_sprite_crop_asan audit/runtime18-cd/HOTSPR.BIN
+.PHONY: test-runtime18-sprite-crop test-runtime18-sprite-crop-asan

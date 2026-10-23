@@ -1,10 +1,30 @@
 #include <string.h>
 #include "wf_saturn_yaul_backend.h"
 
+/* SH-2 has no variable barrel shift. These byte-sized masks avoid a
+ * software shift call at each tile/residency/dirty test in the hot path. */
+static unsigned byte_mask(unsigned bit){
+    static const uint8_t masks[8]={1,2,4,8,16,32,64,128};
+    return masks[bit&7u];
+}
+
 #ifdef WF_PLATFORM_SATURN
 #include <yaul.h>
 static vdp1_cmdt_t g_cmdts[WF_VDP1_COMMANDS_MAX+4u] __aligned(32);
 static unsigned g_cmd_index;
+
+static unsigned row_nonzero(const uint8_t *row){
+    /* Freestanding SH-2 builds keep memcpy as an out-of-line call. Eight
+     * byte reads also accept unaligned caller-owned staging buffers. */
+    return (unsigned)row[0]|row[1]|row[2]|row[3]|row[4]|row[5]|row[6]|row[7];
+}
+
+static void cache_crop(wf_saturn_yaul_backend_t *b,unsigned slot,const uint8_t *tile){
+    unsigned top=0,bottom=16;
+    while(top<16u&&!row_nonzero(tile+top*8u))++top;
+    while(bottom>top&&!row_nonzero(tile+(bottom-1u)*8u))--bottom;
+    b->crop_top[slot]=(uint8_t)top;b->crop_height[slot]=(uint8_t)(bottom-top);
+}
 #endif
 
 static wf_status_t begin_frame(void *ctx,unsigned nt,unsigned np,unsigned nc){
@@ -17,6 +37,8 @@ static wf_status_t begin_frame(void *ctx,unsigned nt,unsigned np,unsigned nc){
 #endif
     b->expected_tiles=nt;b->expected_palettes=np;b->expected_cmds=nc;
     b->emitted_tiles=b->emitted_palettes=b->emitted_cmds=0;b->active=1;
+    /* Clearing dirty also invalidates crop bounds for uncommitted staging
+     * left by an aborted/incomplete frame: those slots are not resident. */
     memset(b->dirty,0,sizeof b->dirty);b->palette_mask=0;
 #ifdef WF_PLATFORM_SATURN
     /* Initialize the two control commands only. Each sprite and END is
@@ -39,23 +61,25 @@ static wf_status_t upload_tile(void *ctx,uint16_t slot,const uint8_t*src,size_t 
     (void)off;
     /* Stage the complete contiguous stream in HWRAM: SCU-DMA cannot read
      * LWRAM. No VRAM transfer occurs until the frame is complete. */
-    unsigned mask=1u<<(slot&7u);uint8_t *dst=b->hwr_stage+(size_t)slot*bytes;
+    unsigned mask=byte_mask(slot);uint8_t *dst=b->hwr_stage+(size_t)slot*bytes;
     if((b->resident[slot>>3]&mask)&&!memcmp(dst,src,bytes))++b->texture_reused;
     else {
         memcpy(dst,src,bytes);b->dirty[slot>>3]|=(uint8_t)mask;
+        /* Read HWRAM once on a changed upload; cache hits never scan LWRAM. */
+        cache_crop(b,slot,dst);
         /* Staging no longer describes VRAM until end_frame commits it. */
         b->resident[slot>>3]&=(uint8_t)~mask;
     }
 #else
     (void)off;(void)bytes;
 #endif
-    b->rom_identity[slot>>3]&=(uint8_t)~(1u<<(slot&7u));
+    b->rom_identity[slot>>3]&=(uint8_t)~(byte_mask(slot));
     b->emitted_tiles++;return WF_OK;
 }
 
 wf_status_t wf_saturn_yaul_upload_rom_tile(wf_saturn_yaul_backend_t*b,uint16_t slot,uint16_t source,wf_status_t (*read_tile)(uint16_t,const uint8_t**)){
  if(!b||!b->active||!read_tile||slot!=b->emitted_tiles||slot>=b->expected_tiles)return WF_BAD_STATE;
- unsigned mask=1u<<(slot&7u);
+ unsigned mask=byte_mask(slot);
  if((b->resident[slot>>3]&mask)&&(b->rom_identity[slot>>3]&mask)&&b->rom_source[slot]==source){
   ++b->emitted_tiles;++b->texture_reused;return WF_OK;
  }
@@ -79,17 +103,33 @@ static wf_status_t emit_sprite(void *ctx,const wf_vdp1_sprite_cmd_t*c){
     if(c->cram_slot>=WF_SATURN_CRAM_SPRITE_BANKS)return WF_BLOCKED;
     if(wf_saturn_stream_tile_offset(c->stream_tile,&off)!=WF_OK)return WF_BLOCKED;
 #ifdef WF_PLATFORM_SATURN
+    unsigned top=0,height=16;
+    /* VRAM accepts512 slots, while staging and these bounds own256. Slots
+     * without valid staged/resident bytes retain the complete16-row sprite. */
+    if(c->stream_tile<WF_VDP1_STREAM_TILES_MAX){
+        unsigned slot=c->stream_tile,mask=byte_mask(slot);
+        if((b->resident[slot>>3]|b->dirty[slot>>3])&mask){
+            top=b->crop_top[slot];height=b->crop_height[slot];
+        }
+    }
+    /* Pen0 remains transparent. An empty source has no hardware work, but
+     * it still fulfils one requested command in the submission contract. */
+    if(!height){++b->emitted_cmds;return WF_OK;}
     if(g_cmd_index>=WF_VDP1_COMMANDS_MAX+3u)return WF_BLOCKED;
-    vdp1_cmdt_t*cmd=&g_cmdts[g_cmd_index++];memset(cmd,0,sizeof(*cmd));
-    vdp1_cmdt_normal_sprite_set(cmd);
-    /* Arcade pen F is a color, not VDP1's end-of-line marker. */
-    vdp1_cmdt_draw_mode_t dm={.raw=0};dm.color_mode=VDP1_CMDT_CM_CB_16;dm.cc_mode=VDP1_CMDT_CC_REPLACE;dm.trans_pixel_disable=0;dm.end_code_disable=1;
-    vdp1_cmdt_draw_mode_set(cmd,dm);
-    vdp1_cmdt_char_base_set(cmd,VDP1_VRAM(off));
-    vdp1_cmdt_char_size_set(cmd,16,16);
-    vdp1_cmdt_char_flip_t f=VDP1_CMDT_CHAR_FLIP_NONE;if(c->flip_x)f=(vdp1_cmdt_char_flip_t)(f|VDP1_CMDT_CHAR_FLIP_H);if(c->flip_y)f=(vdp1_cmdt_char_flip_t)(f|VDP1_CMDT_CHAR_FLIP_V);vdp1_cmdt_char_flip_set(cmd,f);
-    vdp1_cmdt_color_bank_t cb={.raw=(uint16_t)((WF_SATURN_CRAM_SPRITE_FIRST+(unsigned)c->cram_slot*16u)&0xFFF0u)};vdp1_cmdt_color_mode0_set(cmd,cb);
-    int16_vec2_t pos={.x=c->x,.y=c->y};vdp1_cmdt_vtx_zoom_point_set(cmd,pos);
+    vdp1_cmdt_t *cmd=&g_cmdts[g_cmd_index++];
+    /* Write every hardware word once. A sprite is normal16x1..16,
+     * CB16/replace with transparent pen0 and end-code disabled (penF is
+     * a real arcade color). No full clear followed by rewriting fields. */
+    cmd->cmd_ctrl=(uint16_t)((c->flip_x?0x10u:0u)|(c->flip_y?0x20u:0u));
+    cmd->cmd_link=0;
+    cmd->cmd_pmod=0x0080u;
+    cmd->cmd_colr=(uint16_t)(WF_SATURN_CRAM_SPRITE_FIRST+(unsigned)c->cram_slot*16u);
+    cmd->cmd_srca=(uint16_t)((off>>3)+top);
+    cmd->cmd_size=(uint16_t)(0x0200u|height);
+    cmd->cmd_xa=c->x;cmd->cmd_ya=(int16_t)(c->y+(c->flip_y?16u-top-height:top));
+    cmd->cmd_xb=cmd->cmd_yb=cmd->cmd_xc=cmd->cmd_yc=0;
+    cmd->cmd_xd=cmd->cmd_yd=0;
+    cmd->cmd_grda=cmd->reserved=0;
 #else
     (void)off;
 #endif
@@ -104,13 +144,13 @@ static wf_status_t end_frame(void *ctx){
     if(g_cmd_index>=WF_VDP1_COMMANDS_MAX+4u){b->active=0;return WF_BLOCKED;}
     /* Each DMA contains only a consecutive run whose resident bytes changed. */
     for(unsigned slot=0;slot<b->expected_tiles;){
-        if(!(b->dirty[slot>>3]&(1u<<(slot&7u)))){++slot;continue;}
+        if(!(b->dirty[slot>>3]&(byte_mask(slot)))){++slot;continue;}
         unsigned first=slot++;
-        while(slot<b->expected_tiles&&(b->dirty[slot>>3]&(1u<<(slot&7u))))++slot;
+        while(slot<b->expected_tiles&&(b->dirty[slot>>3]&(byte_mask(slot))))++slot;
         size_t bytes=(size_t)(slot-first)*128u;
         scu_dma_transfer(0,(void*)VDP1_VRAM(WF_SATURN_VDP1_DYNAMIC_OFFSET+first*128u),b->hwr_stage+first*128u,bytes);
         scu_dma_transfer_wait(0);b->texture_bytes+=(uint32_t)bytes;++b->texture_transfers;
-        for(unsigned i=first;i<slot;i++)b->resident[i>>3]|=(uint8_t)(1u<<(i&7u));
+        for(unsigned i=first;i<slot;i++)b->resident[i>>3]|=(uint8_t)(byte_mask(i));
     }
     for(unsigned bank=0;bank<16;bank++)if(b->palette_mask&(1u<<bank))
         wf_saturn_cram_write_bank((uint16_t)(WF_SATURN_CRAM_SPRITE_FIRST+bank*16u),b->palette_stage[bank]);

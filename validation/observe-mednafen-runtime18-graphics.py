@@ -22,7 +22,7 @@ with open(f'/proc/{pid}/mem','rb',buffering=0) as mem:
  assert commands[0]['control']&15==9 and commands[1]['control']&15==10
  assert commands[-1]['control']&0x8000
  sprites=commands[2:-1]
- assert all((c['control']&15)==0 and c['size']==0x210 and c['draw_mode']&0x80 for c in sprites)
+ assert all((c['control']&15)==0 and c['size']>>8==2 and 1<=c['size']&255<=16 and c['draw_mode']&0x80 for c in sprites)
  assert all(0x4b580<=c['texture_byte_offset']<0x5b580 for c in sprites)
  tile_count=(max(c['texture_byte_offset'] for c in sprites)-0x4b580)//128+1
  stage=get(hostaddr(symbol('dma_stage')),tile_count*128)
@@ -70,5 +70,5 @@ with open(f'/proc/{pid}/mem','rb',buffering=0) as mem:
    at=data.find(wanted_font,at+2)
  assert vdp2_matches,'No complete native font+FG0 map match in actual VDP2 VRAM'
  state.update({'VDP2_VRAM_layout_matches':vdp2_matches,'HUD_font_bytes_equal':len(font),'HUD_map_bytes_equal':len(wanted_names),'HUD_font_sha256':hashlib.sha256(font).hexdigest(),'HUD_nonzero_cells':sum(v!=0 for v in names),'HUD_map_sha256':hashlib.sha256(wanted_names).hexdigest()})
- state.update({'VDP1_commands_sha256':hashlib.sha256(payload).hexdigest(),'VDP1_textures_sha256':hashlib.sha256(stage).hexdigest(),'VDP1_command_count':count,'normal_sprite_commands':len(sprites),'unique_texture_tiles':tile_count,'VDP1_VRAM_layout_matches':matches,'command_examples':commands[:5]+commands[-1:],'scope':'Read-only exact SH-2 build in Mednafen; command bytes and corresponding DMA texture window match a live VRAM image. No physical Saturn or arcade-framebuffer claim.'})
+ state.update({'VDP1_commands_sha256':hashlib.sha256(payload).hexdigest(),'VDP1_textures_sha256':hashlib.sha256(stage).hexdigest(),'VDP1_command_count':count,'normal_sprite_commands':len(sprites),'unique_texture_tiles':len({(c['texture_byte_offset']-0x4b580)//128 for c in sprites}),'texture_slot_span':tile_count,'submitted_sprite_rows':sum(c['size']&255 for c in sprites),'uncropped_rows_for_submitted_sprites':16*len(sprites),'VDP1_VRAM_layout_matches':matches,'command_examples':commands[:5]+commands[-1:],'scope':'Read-only exact SH-2 build in Mednafen; command bytes and corresponding DMA texture window match a live VRAM image. No physical Saturn or arcade-framebuffer claim.'})
  print(json.dumps(state,indent=2))

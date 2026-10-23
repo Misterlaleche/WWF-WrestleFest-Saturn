@@ -3,7 +3,7 @@
 #include "wf_runtime.h"
 typedef wf_status_t (*wf_r18_read_rom_fn)(void *,uint32_t,void *,size_t);
 typedef struct wf_r18_sprite_record { uint8_t bytes[16]; } wf_r18_sprite_record_t;
-#define WF_R18_METASPRITE_CACHE_ENTRIES 8u
+#define WF_R18_METASPRITE_CACHE_ENTRIES 32u
 #define WF_R18_METASPRITE_CACHE_ROWS 32u
 typedef struct wf_r18_metasprite_cache_entry {
  uint32_t address,end;

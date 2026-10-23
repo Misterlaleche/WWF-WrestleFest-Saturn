@@ -1,20 +1,22 @@
-# RUNTIME-18 — trabajo gráfico y resultado dentro del ring, 23 de octubre de 2026
+# RUNTIME-18 — sprites nativos y escrituras del ring, 23 de octubre de 2026
 
-Continuación de `f61dc98`. Elimina lecturas y descompresiones repetidas de
-metasprites, recorridos de mapas VDP2 sin cambios y comprobaciones de paletas
-que no han recibido escrituras. Se conservan decisiones, registros y gráficos.
+Continúa desde `64d93b1`: caché de 32 cuerpos, comandos VDP1 sin clears
+redundantes, recorte de filas transparentes y máscaras rápidas para SH-2.
+El frame 120 conserva sus píxeles y reduce 1840 → 1474 filas VDP1.
+CPU −6,9 %; la cadencia inicial solo mejora 99 → 98 VBlanks/90 frames.
+El tramo avanzado conserva 198/180. Partida completa: 4887 VBlanks frente
+a 4919, con 4391 frames. No son 60 FPS sostenidos.
 
-Mednafen: **99 VBlanks/90 frames** frente a 111; tramo avanzado **198/180**
-frente a 203. Muestras de VRAM/cámara iguales y 786432 píxeles del frame 120
-idénticos. No son 60 FPS sostenidos. Partida normal completa: **4391 frames,
-4919 VBlanks**, sin fatal; ahora muestra el resultado original dentro del ring
-con las 131 esperas VBlank de `$11CE..$122B`. No entra al frontend.
+Se conecta el parche original `$298EC` a VDP2 con 96 casos ROM. La apertura
+de cuerdas todavía no se ha activado jugando en Mednafen; la comparación
+se identifica como software. Se libera HWRAM manteniendo 4096 escrituras
+en una zona separada de LWRAM.
 
-Suite general, CORE 48+48 ASan, oráculos ROM y ambos combates HOST/ASan pasan.
-Informe, reproducción, hashes y límites:
-[validation/RUNTIME18-RENDER-CORE-CHECKPOINT.md](validation/RUNTIME18-RENDER-CORE-CHECKPOINT.md).
-Sin audio; Saturn físico/CD-R queda pendiente del usuario. No se declara
-ROM-EXACT ni pixel-perfect universal a partir de estas pruebas.
+Informe, límites, reproducción y evidencia:
+[validation/RUNTIME18-SPRITE-WORK-CHECKPOINT.md](validation/RUNTIME18-SPRITE-WORK-CHECKPOINT.md).
+El checkpoint incluye BIN/CUE directo, sin frontend ni audio. Saturn físico
+con CD-R queda pendiente. Persisten rutas de acciones bloqueadas; no se
+sustituyeron por éxito provisional.
 
 ## Registro histórico de RUNTIME-17
 

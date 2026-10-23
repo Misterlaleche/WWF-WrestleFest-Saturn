@@ -7,13 +7,14 @@
 #define __aligned(n) __attribute__((aligned(n)))
 typedef struct { int16_t x,y; } int16_vec2_t;
 #define INT16_VEC2(x,y) ((int16_vec2_t){x,y})
-typedef struct { unsigned raw,color_mode,cc_mode,trans_pixel_disable,end_code_disable; } vdp1_cmdt_draw_mode_t;
+typedef union { uint16_t raw; struct { unsigned cc_mode:3,color_mode:3,trans_pixel_disable:1,end_code_disable:1,mesh:1,user_clip:2,pre_clip:1,hss:1,pad:2,msb:1; }; } vdp1_cmdt_draw_mode_t;
 typedef struct { uint16_t raw; } vdp1_cmdt_color_bank_t;
 typedef unsigned vdp1_cmdt_char_flip_t;
-typedef struct { unsigned kind; vdp1_cmdt_draw_mode_t mode; } vdp1_cmdt_t;
+typedef struct { uint16_t cmd_ctrl,cmd_link,cmd_pmod,cmd_colr,cmd_srca,cmd_size; int16_t cmd_xa,cmd_ya,cmd_xb,cmd_yb,cmd_xc,cmd_yc,cmd_xd,cmd_yd; uint16_t cmd_grda,reserved; } vdp1_cmdt_t;
+_Static_assert(sizeof(vdp1_cmdt_t)==32,"VDP1 command ABI");
 typedef struct { vdp1_cmdt_t *cmdts; uint16_t count; } vdp1_cmdt_list_t;
 typedef struct { unsigned bpp,color_mode,sprite_type,erase_color; int16_vec2_t erase_points[2]; } vdp1_env_t;
-enum { VDP1_CMDT_CM_CB_16, VDP1_CMDT_CC_REPLACE, VDP1_CMDT_CHAR_FLIP_NONE, VDP1_CMDT_CHAR_FLIP_H, VDP1_CMDT_CHAR_FLIP_V, VDP1_ENV_BPP_16, VDP1_ENV_COLOR_MODE_PALETTE, VDP1_SYNC_MODE_ERASE_CHANGE };
+enum { VDP1_CMDT_CM_CB_16=0, VDP1_CMDT_CC_REPLACE=0, VDP1_CMDT_CHAR_FLIP_NONE=0, VDP1_CMDT_CHAR_FLIP_H=16, VDP1_CMDT_CHAR_FLIP_V=32, VDP1_ENV_BPP_16, VDP1_ENV_COLOR_MODE_PALETTE, VDP1_SYNC_MODE_ERASE_CHANGE };
 extern uint8_t mock_vram[0x80000];extern uint32_t mock_cram[1024];
 #define VDP1_VRAM(off) (mock_vram+(off))
 #define VDP2_CRAM_MODE_2_OFFSET(a,b,c) (&mock_cram[(a)*256+(b)*16+(c)])
@@ -21,19 +22,18 @@ extern uint8_t mock_vram[0x80000];extern uint32_t mock_cram[1024];
 void scu_dma_transfer(unsigned,void*,const void*,size_t);
 void scu_dma_transfer_wait(unsigned);
 void vdp1_sync_cmdt_list_put(vdp1_cmdt_list_t*,unsigned);
-static inline void vdp1_cmdt_system_clip_coord_set(vdp1_cmdt_t*c){c->kind=1;}
-static inline void vdp1_cmdt_local_coord_set(vdp1_cmdt_t*c){c->kind=2;}
-static inline void vdp1_cmdt_normal_sprite_set(vdp1_cmdt_t*c){c->kind=3;}
-static inline void vdp1_cmdt_end_set(vdp1_cmdt_t*c){c->kind=4;}
-#define POS_STUB(name) static inline void name(vdp1_cmdt_t*c,int16_vec2_t v){(void)c;(void)v;}
-POS_STUB(vdp1_cmdt_vtx_system_clip_coord_set)
-POS_STUB(vdp1_cmdt_vtx_local_coord_set)
-POS_STUB(vdp1_cmdt_vtx_zoom_point_set)
-static inline void vdp1_cmdt_draw_mode_set(vdp1_cmdt_t*c,vdp1_cmdt_draw_mode_t d){c->mode=d;}
-static inline void vdp1_cmdt_char_base_set(vdp1_cmdt_t*c,const void*p){(void)c;(void)p;}
-static inline void vdp1_cmdt_char_size_set(vdp1_cmdt_t*c,unsigned x,unsigned y){(void)c;(void)x;(void)y;}
-static inline void vdp1_cmdt_char_flip_set(vdp1_cmdt_t*c,unsigned f){(void)c;(void)f;}
-static inline void vdp1_cmdt_color_mode0_set(vdp1_cmdt_t*c,vdp1_cmdt_color_bank_t f){(void)c;(void)f;}
+static inline void vdp1_cmdt_system_clip_coord_set(vdp1_cmdt_t*c){c->cmd_ctrl=9;}
+static inline void vdp1_cmdt_local_coord_set(vdp1_cmdt_t*c){c->cmd_ctrl=10;}
+static inline void vdp1_cmdt_normal_sprite_set(vdp1_cmdt_t*c){c->cmd_ctrl=0;}
+static inline void vdp1_cmdt_end_set(vdp1_cmdt_t*c){c->cmd_ctrl=32768;}
+static inline void vdp1_cmdt_vtx_system_clip_coord_set(vdp1_cmdt_t*c,int16_vec2_t v){c->cmd_xc=v.x;c->cmd_yc=v.y;}
+static inline void vdp1_cmdt_vtx_local_coord_set(vdp1_cmdt_t*c,int16_vec2_t v){c->cmd_xa=v.x;c->cmd_ya=v.y;}
+static inline void vdp1_cmdt_vtx_zoom_point_set(vdp1_cmdt_t*c,int16_vec2_t v){c->cmd_xa=v.x;c->cmd_ya=v.y;}
+static inline void vdp1_cmdt_draw_mode_set(vdp1_cmdt_t*c,vdp1_cmdt_draw_mode_t d){c->cmd_pmod=d.raw;}
+static inline void vdp1_cmdt_char_base_set(vdp1_cmdt_t*c,const void*p){c->cmd_srca=(uint16_t)(((uintptr_t)p-(uintptr_t)mock_vram)>>3);}
+static inline void vdp1_cmdt_char_size_set(vdp1_cmdt_t*c,unsigned x,unsigned y){c->cmd_size=(uint16_t)((x>>3)<<8|y);}
+static inline void vdp1_cmdt_char_flip_set(vdp1_cmdt_t*c,unsigned f){c->cmd_ctrl=(uint16_t)((c->cmd_ctrl&~0x30u)|f);}
+static inline void vdp1_cmdt_color_mode0_set(vdp1_cmdt_t*c,vdp1_cmdt_color_bank_t f){c->cmd_colr=f.raw&0xfff0u;c->cmd_pmod&=0xffc7u;}
 static inline void vdp1_cmdt_list_init(vdp1_cmdt_list_t*l,vdp1_cmdt_t*c){l->cmdts=c;}
 static inline void vdp2_cram_mode_set(unsigned x){(void)x;}
 static inline void vdp1_vram_partitions_set(unsigned a,unsigned b,unsigned c,unsigned d){(void)a;(void)b;(void)c;(void)d;}

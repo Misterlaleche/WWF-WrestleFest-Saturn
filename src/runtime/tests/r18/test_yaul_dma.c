@@ -9,7 +9,7 @@ uint8_t mock_vram[0x80000];uint32_t mock_cram[1024];
 static unsigned transfers,waits,submitted;static size_t transferred;static uint8_t stage[32768] __aligned(32),pixels[32768];
 void scu_dma_transfer(unsigned channel,void*dest,const void*src,size_t n){assert(channel==0);assert((const uint8_t*)src>=stage&&(const uint8_t*)src+n<=stage+sizeof stage);memcpy(dest,src,n);transfers++;transferred+=n;}
 void scu_dma_transfer_wait(unsigned c){assert(c==0);waits++;}
-void vdp1_sync_cmdt_list_put(vdp1_cmdt_list_t*l,unsigned offset){assert(offset==0);for(unsigned i=0;i<l->count;i++)if(l->cmdts[i].kind==3){assert(l->cmdts[i].mode.end_code_disable==1);assert(l->cmdts[i].mode.trans_pixel_disable==0);}submitted++;}
+void vdp1_sync_cmdt_list_put(vdp1_cmdt_list_t*l,unsigned offset){assert(offset==0);for(unsigned i=0;i<l->count;i++)if((l->cmdts[i].cmd_ctrl&0x800fu)==0){assert((l->cmdts[i].cmd_pmod&0x80u)!=0);assert((l->cmdts[i].cmd_pmod&0x40u)==0);}submitted++;}
 static unsigned rom_reads;
 static wf_status_t rom_tile(uint16_t tile,const uint8_t**out){assert(tile<256);++rom_reads;*out=pixels+(unsigned)tile*128u;return WF_OK;}
 int main(void){wf_saturn_yaul_backend_t b;const wf_saturn_render_ops_t*ops=wf_saturn_yaul_render_ops();

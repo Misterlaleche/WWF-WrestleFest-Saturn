@@ -7,7 +7,7 @@
 
 typedef struct source {
     uint8_t rom[ROM_SIZE];
-    unsigned reads;
+    unsigned reads,body_reads;
     uint32_t fail_at;
 } source_t;
 static source_t source;
@@ -18,6 +18,7 @@ static void put16(uint32_t at,uint16_t value){source.rom[at]=(uint8_t)(value>>8)
 static void put32(uint32_t at,uint32_t value){put16(at,(uint16_t)(value>>16));put16(at+2,(uint16_t)value);}
 static wf_status_t read_rom(void *user,uint32_t at,void *out,size_t length){
     source_t *s=user;s->reads++;
+    if(length==12u)s->body_reads++; /* The cyclic fixtures have two raw rows. */
     if(at==s->fail_at||at>ROM_SIZE||length>ROM_SIZE-at)return WF_BLOCKED;
     memcpy(out,s->rom+at,length);return WF_OK;
 }
@@ -91,7 +92,7 @@ int main(void){
     CHECK(wf_r18_metasprite_emit(&c,0,1,150,100,1)==WF_OK);warm=source.reads;
     printf("Repeated packed body: cold=%u reads, warm=%u reads\n",cold,warm);fflush(stdout);
     CHECK(warm<cold);
-    CHECK(sizeof cache<=2048u);
+    CHECK(sizeof cache<=7u*1024u);
     /* Palette, clipping, mirror, coordinates, D6/D7, references, partner
      * selection and composition order are recomputed on every cache hit. */
     for(unsigned index=0;index<9;index++){
@@ -122,21 +123,49 @@ int main(void){
     source.rom[0x40204u]=77u;wf_r18_metasprite_cache_reset(&cache);
     CHECK(!compare(1,0,150,100,1,100));CHECK(!compare(1,1,0,0,1,101));
     wf_r18_metasprite_cache_reset(NULL);
-    /* Distinct addresses with identical headers must not alias. */
-    for(unsigned i=0;i<9;i++){
+    /* Sixteen changing actors/compositions must stay warm across draw rounds.
+     * Each hit still needs five metadata reads, but no raw-body read. */
+    for(unsigned i=0;i<33;i++){
         uint32_t at=0x4a000u+i*0x100u;pose(10u+i,at);put16(at,2u);rows(at+2u,2u,40u+i);
     }
     wf_r18_metasprite_cache_reset(&cache);
-    for(unsigned i=0;i<9;i++)CHECK(!compare(10u+i,0,150,100,1,i));
+    c=context(cached_records);c.cache=&cache;
+    for(unsigned i=0;i<16;i++){
+        c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)(10u+i),150,100,1)==WF_OK);
+    }
+    source.reads=source.body_reads=0;
+    for(unsigned round=0;round<3;round++)for(unsigned i=0;i<16;i++){
+        c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)(10u+i),150,100,1)==WF_OK);
+    }
+    printf("Cyclic sixteen-body cache: warm=%u metadata reads, %u body reads\n",source.reads,source.body_reads);
+    CHECK(source.body_reads==0u&&source.reads==3u*16u*5u);
+    /* The complete working set remains resident; insertion 33 evicts only
+     * the oldest FIFO entry. Equal headers at different addresses cannot alias. */
+    wf_r18_metasprite_cache_reset(&cache);c=context(cached_records);c.cache=&cache;
+    for(unsigned i=0;i<32;i++){
+        c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)(10u+i),150,100,1)==WF_OK);
+    }
+    source.reads=source.body_reads=0;
+    for(unsigned i=0;i<32;i++){
+        c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)(10u+i),150,100,1)==WF_OK);
+    }
+    CHECK(source.body_reads==0u&&source.reads==32u*5u);
+    for(unsigned i=0;i<32;i++)CHECK(!compare(10u+i,0,150,100,1,i));
+    c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,42,150,100,1)==WF_OK);
+    source.reads=source.body_reads=0;c.count=0;
+    CHECK(wf_r18_metasprite_emit(&c,0,11,150,100,1)==WF_OK);
+    CHECK(source.body_reads==0u&&source.reads==5u); /* Second entry is still warm. */
     c=context(cached_records);c.cache=&cache;source.reads=0;
+    source.body_reads=0;
     CHECK(wf_r18_metasprite_emit(&c,0,10,150,100,1)==WF_OK);cold=source.reads;
+    CHECK(source.body_reads==1u);
     c.count=0;source.reads=0;CHECK(wf_r18_metasprite_emit(&c,0,10,150,100,1)==WF_OK);
-    CHECK(source.reads<cold); /* ninth insertion evicted the first FIFO entry */
+    CHECK(source.reads<cold); /* Insertion 33 evicted the first FIFO entry. */
     /* The header is part of the key, even at the same address. */
     wf_r18_metasprite_cache_reset(&cache);cache.entries[0].valid=1;
     cache.entries[0].address=0x40100u;cache.entries[0].header=5u;cache.entries[0].skip_prefix=1u;
     memset(cache.entries[0].rows,0xff,sizeof cache.entries[0].rows);
     CHECK(!compare(0,0,150,100,1,7));
-    puts("PASS metasprite cache: <=2KiB, transforms, palettes, references, FIFO, >32, failure and reset");
+    puts("PASS metasprite cache: <=7KiB, cyclic sixteen bodies, transforms, palettes, references, FIFO eviction33, >32 rows, failure and reset");
     return 0;
 }

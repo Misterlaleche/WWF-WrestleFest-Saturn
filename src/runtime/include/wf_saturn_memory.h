@@ -4,6 +4,15 @@
 #include <stdint.h>
 #include "wf_runtime.h"
 
+/* Borrowed LWRAM ranges; only CPU-owned data lives here. SCU-DMA staging
+ * remains in HWRAM. The 208KB ROM cache holds172 hot pages plus36 spare. */
+#define WF_SATURN_LWRAM_ROM_CACHE          0x00220000u
+#define WF_SATURN_LWRAM_ROM_BYTES          0x00034000u
+#define WF_SATURN_LWRAM_VIDEO_WRITES       0x00254000u
+#define WF_SATURN_LWRAM_VIDEO_WRITE_BYTES  0x0000c000u
+#define WF_SATURN_LWRAM_TILE_CACHE         0x00260000u
+#define WF_SATURN_LWRAM_TILE_BYTES         0x000a0000u
+
 /* WP32 baseline ownership. Offsets are relative to VDP1 VRAM. */
 #define WF_SATURN_VDP1_VRAM_BYTES            0x80000u
 #define WF_SATURN_VDP1_CMD_RESERVED_BYTES    0x00020u

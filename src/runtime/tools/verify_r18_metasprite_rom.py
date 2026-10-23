@@ -12,7 +12,7 @@ p=argparse.ArgumentParser();p.add_argument('--rom',type=Path,required=True);p.ad
 CB=ctypes.CFUNCTYPE(ctypes.c_int,ctypes.c_void_p,ctypes.c_uint32,ctypes.c_void_p,ctypes.c_size_t)
 class Record(ctypes.Structure):_fields_=[('bytes',ctypes.c_uint8*16)]
 class CacheEntry(ctypes.Structure):_fields_=[('address',ctypes.c_uint32),('end',ctypes.c_uint32),('header',ctypes.c_uint16),('skip_prefix',ctypes.c_uint8),('valid',ctypes.c_uint8),('rows',(ctypes.c_uint8*6)*32)]
-class Cache(ctypes.Structure):_fields_=[('entries',CacheEntry*8),('next',ctypes.c_uint8)]
+class Cache(ctypes.Structure):_fields_=[('entries',CacheEntry*32),('next',ctypes.c_uint8)]
 class Ctx(ctypes.Structure):_fields_=[('read',CB),('user',ctypes.c_void_p),('palette',ctypes.POINTER(ctypes.c_uint8)),('records',ctypes.POINTER(Record)),('capacity',ctypes.c_size_t),('count',ctypes.c_size_t),('d6',ctypes.c_uint32),('d7',ctypes.c_uint32),('cache',ctypes.POINTER(Cache))]
 source=ctypes.create_string_buffer(rom.p)
 read_count=0
@@ -38,7 +38,7 @@ counts={};blocked=[];cold_reads=warm_reads=0
 with tempfile.TemporaryDirectory() as tmp:
  lib=Path(tmp)/'meta.so';subprocess.run(['cc','-shared','-fPIC','-std=c11','-Wall','-Wextra','-Werror','-I'+str(root/'include'),str(root/'src/wf_r18_metasprite.c'),'-o',str(lib)],check=True);native=ctypes.CDLL(str(lib));native.wf_r18_metasprite_emit.argtypes=[ctypes.POINTER(Ctx)]+[ctypes.c_uint16]*5
  native.wf_r18_metasprite_cache_reset.argtypes=[ctypes.POINTER(Cache)];native.wf_r18_metasprite_cache_reset.restype=None
- assert ctypes.sizeof(Cache)<=2048
+ assert ctypes.sizeof(Cache)<=7*1024
  for i,(s,pose,h) in enumerate(selected):
   partner=rng.randrange(12);mirror=i%2;x,y=rng.choice([(150,100),(0,0),(1000,100),(100,1000),(65535,65535),(rng.randrange(65536),rng.randrange(65536))]);seed=rng.getrandbits(32)
   palette=bytes(rng.randrange(16) for _ in range(256));pal=(ctypes.c_uint8*256).from_buffer_copy(palette);records=(Record*1024)();ctx=Ctx(read,None,pal,records,1024,0,seed,(seed+1)&0xffffffff,None)

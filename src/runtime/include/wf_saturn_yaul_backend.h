@@ -19,6 +19,10 @@ typedef struct wf_saturn_yaul_backend {
     uint32_t texture_bytes, texture_transfers, texture_reused;
     uint8_t active;
     uint8_t defer_sync; /* caller commits VDP1 and VDP2 together before the next frame */
+    /* Bounds describe staged bytes only while the slot is resident or dirty.
+     * A zero height consumes the logical request without a hardware sprite. */
+    uint8_t crop_top[WF_VDP1_STREAM_TILES_MAX];
+    uint8_t crop_height[WF_VDP1_STREAM_TILES_MAX];
 } wf_saturn_yaul_backend_t;
 
 /* Source IDs refer to immutable decoded ROM tiles for this backend lifetime.

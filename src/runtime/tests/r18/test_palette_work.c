@@ -43,7 +43,8 @@ static int check_tracking(void){
     CHECK(WF_R18_PALETTE_TEXT==0&&WF_R18_PALETTE_SPRITES==1&&WF_R18_PALETTE_FG==2&&WF_R18_PALETTE_BG==3);
     CHECK(offsetof(wf_r18_video_t,palette_dirty)==offsetof(wf_r18_video_t,failed_address)+4u);
     CHECK(offsetof(wf_r18_video_t,palette_committed)==offsetof(wf_r18_video_t,palette_dirty)+8u);
-    CHECK(sizeof tracking==(sizeof(void*)==8u?53824u:53808u)); /* previous ABI +16 bytes */
+    CHECK(offsetof(wf_r18_video_t,ring_cell)==(sizeof(void*)==8u?53824u:53808u));
+    CHECK(sizeof tracking==(sizeof(void*)==8u?53832u:53812u)); /* palette masks + one live-ring callback pointer */
     for(unsigned role=0;role<4;role++){
         CHECK(wf_r18_video_palette_pending(&tracking,(wf_r18_palette_role_t)role)==0xffffu);
         wf_r18_video_palette_ack(&tracking,(wf_r18_palette_role_t)role,0x5555u);

@@ -3,6 +3,10 @@
 #include "wf_r17_post7a00.h"
 typedef wf_status_t (*wf_r18_rom_read_fn)(void *,uint32_t,void *,size_t);
 typedef wf_status_t (*wf_r18_ram_read_fn)(wf_runtime_t *,uint32_t,uint16_t *,void *);
+typedef enum wf_r18_background_op {
+ WF_R18_BACKGROUND_READ,WF_R18_BACKGROUND_VALIDATE,WF_R18_BACKGROUND_WRITE
+} wf_r18_background_op_t;
+typedef int (*wf_r18_background_cell_fn)(unsigned,unsigned,uint8_t *,wf_r18_background_op_t);
 typedef enum wf_r18_palette_role {
  WF_R18_PALETTE_TEXT=0,WF_R18_PALETTE_SPRITES=1,
  WF_R18_PALETTE_FG=2,WF_R18_PALETTE_BG=3
@@ -16,7 +20,13 @@ typedef struct wf_r18_video {
  uint8_t hud_dirty[256]; /* 2048 FG0 cells; sprite buffer starts at C2000. */
  uint32_t failed_address;
  uint16_t palette_dirty[4],palette_committed[4];
+ wf_r18_background_cell_fn ring_cell;
 } wf_r18_video_t;
+/* Enable live board-VRAM writes only after direct_boot built the ring. The
+ * cleared bootstrap shadow is not a replacement for the ROM-derived map.
+ * The ring supplies resident cells for partial writes and validates complete
+ * batches before either the shadow or visible overlays are changed. */
+void wf_r18_video_ring_bind(wf_r18_video_t *);
 /* Internal helpers require a non-NULL video and a valid palette role.
  * Uncommitted banks are pending even when their initial source is all zero.
  * Acknowledge only banks whose physical upload completed successfully. */

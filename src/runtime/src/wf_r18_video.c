@@ -1,4 +1,5 @@
 #include "wf_r18_video.h"
+#include "wf_saturn_memory.h"
 #include <string.h>
 static uint8_t *mapped(wf_r18_video_t*v,uint32_t a,unsigned n){
  if(!n||n>4)return NULL;
@@ -9,7 +10,46 @@ static uint8_t *mapped(wf_r18_video_t*v,uint32_t a,unsigned n){
  if(a>=0x180000&&a<=0x184000-n)return v->palettes+(a-0x180000);
  v->failed_address=a;return NULL;
 }
-static int valid(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){for(size_t i=0;i<n;i++)if(!mapped(v,w[i].addr,w[i].width))return 0;return 1;}
+static int valid(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n,int *background){
+ for(size_t i=0;i<n;i++){
+  if(!mapped(v,w[i].addr,w[i].width))return 0;
+  if(w[i].addr<0x82800u&&w[i].addr+w[i].width>0x80000u)*background=1;
+ }
+ return 1;
+}
+static int background_cell(uint32_t at,unsigned *layer,unsigned *cell,uint32_t *base,unsigned *width){
+ if(at>=0x80000u&&at<0x81000u){*layer=0;*width=4;*base=at&~3u;*cell=(*base-0x80000u)/4u;return 1;}
+ if(at>=0x82000u&&at<0x82800u){*layer=1;*width=2;*base=at&~1u;*cell=(*base-0x82000u)/2u;return 1;}
+ return 0;
+}
+static void merge_cell(uint8_t *bytes,uint32_t base,unsigned width,const wf_r17_fg0_write_t *w,size_t n){
+ for(size_t i=0;i<n;i++){
+  if(w[i].addr>=base+width||w[i].addr+w[i].width<=base)continue;
+  for(unsigned k=0;k<w[i].width;k++){
+   uint32_t at=w[i].addr+k;
+   if(at>=base&&at<base+width)bytes[at-base]=(uint8_t)(w[i].value>>(8u*(w[i].width-1u-k)));
+  }
+ }
+}
+static int ring_cells(wf_r18_video_t *v,const wf_r17_fg0_write_t *which,size_t count,
+                      const wf_r17_fg0_write_t *a,size_t na,const wf_r17_fg0_write_t *b,size_t nb,
+                      wf_r18_background_op_t op){
+ if(!v->ring_cell)return 1;
+ for(size_t i=0;i<count;i++){
+  if(which[i].addr>=0x82800u||which[i].addr+which[i].width<=0x80000u)continue;
+  uint32_t previous=0;
+  for(unsigned k=0;k<which[i].width;k++){
+   unsigned layer,cell,width;uint32_t base;uint8_t bytes[4];
+   if(!background_cell(which[i].addr+k,&layer,&cell,&base,&width)||base==previous)continue;
+   previous=base;memcpy(bytes,v->background+(base-0x80000u),width);
+   if(v->ring_cell(layer,cell,bytes,WF_R18_BACKGROUND_READ)){v->failed_address=base;return 0;}
+   merge_cell(bytes,base,width,a,na);merge_cell(bytes,base,width,b,nb);
+   if(v->ring_cell(layer,cell,bytes,op)){v->failed_address=base;return 0;}
+   if(op==WF_R18_BACKGROUND_WRITE)memcpy(v->background+(base-0x80000u),bytes,width);
+  }
+ }
+ return 1;
+}
 static void palette_changed(wf_r18_video_t *v,uint32_t address){
  if((address&127u)>=32u)return;
  unsigned role;
@@ -36,7 +76,16 @@ static void apply(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){
   }
  }
 }
-wf_status_t wf_r18_video_commit(wf_runtime_t*r,const wf_r17_fg0_write_t*a,size_t na,const wf_r17_fg0_write_t*b,size_t nb,void*u){wf_r18_video_t*v=u;(void)r;if(!v||(!a&&na)||(!b&&nb))return WF_BAD_STATE;if(!valid(v,a,na)||!valid(v,b,nb))return WF_BLOCKED;apply(v,a,na);apply(v,b,nb);return WF_OK;}
+wf_status_t wf_r18_video_commit(wf_runtime_t*r,const wf_r17_fg0_write_t*a,size_t na,const wf_r17_fg0_write_t*b,size_t nb,void*u){
+ wf_r18_video_t*v=u;int background=0;(void)r;if(!v||(!a&&na)||(!b&&nb))return WF_BAD_STATE;
+ if(!valid(v,a,na,&background)||!valid(v,b,nb,&background))return WF_BLOCKED;
+ if(background&&(!ring_cells(v,a,na,a,na,b,nb,WF_R18_BACKGROUND_VALIDATE)||!ring_cells(v,b,nb,a,na,b,nb,WF_R18_BACKGROUND_VALIDATE)))return WF_BLOCKED;
+ apply(v,a,na);apply(v,b,nb);
+ /* The bound ring's immutable tile table was validated above. These stores
+  * run in the original owner order, before IRQ map/animation transport. */
+ if(background&&(!ring_cells(v,a,na,a,na,b,nb,WF_R18_BACKGROUND_WRITE)||!ring_cells(v,b,nb,a,na,b,nb,WF_R18_BACKGROUND_WRITE)))return WF_BLOCKED;
+ return WF_OK;
+}
 wf_status_t wf_r18_video_batch(wf_runtime_t*r,const wf_r17_fg0_write_t*w,size_t n,void*u){return wf_r18_video_commit(r,w,n,NULL,0,u);}
 wf_status_t wf_r18_video_peek(wf_runtime_t*r,uint32_t a,uint32_t*out,void*u){wf_r18_video_t*v=u;uint8_t*p;(void)r;if(!v||!out)return WF_BAD_STATE;p=mapped(v,a,4);if(!p)return WF_BLOCKED;*out=((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|((uint32_t)p[2]<<8)|p[3];return WF_OK;}
 static wf_status_t rd(wf_r18_video_t*v,uint32_t a,unsigned n,uint32_t*out){uint8_t b[4];if(!v||!v->read_rom||v->read_rom(v->read_user,a,b,n)!=WF_OK){if(v)v->failed_address=a;return WF_BLOCKED;}*out=0;for(unsigned i=0;i<n;i++)*out=(*out<<8)|b[i];return WF_OK;}
@@ -45,7 +94,13 @@ wf_status_t wf_r18_palette_2aea(wf_runtime_t*r,uint16_t id,void*u){wf_r18_video_
  bytes[0]=bytes[1]=0;memcpy(v->palettes+0x2000+bank*128,bytes,32);v->palette_dirty[WF_R18_PALETTE_SPRITES]|=(uint16_t)(1u<<bank);v->palette_used[bank]=255;v->palette_map[id]=(uint8_t)(128|bank);return WF_OK;}
 wf_status_t wf_r18_palette_2b58(wf_runtime_t*r,uint16_t id,void*u){wf_r18_video_t*v=u;(void)r;if(!v||id>255)return WF_BAD_STATE;if(v->palette_map[id]){v->palette_used[v->palette_map[id]&15]=0;v->palette_map[id]=0;}return WF_OK;}
 /* All text owners preserve caller D registers in ROM. Stage transfers before commit. */
-static wf_r17_fg0_write_t stage[4096];static size_t used;static unsigned busy;
+#if defined(WF_PLATFORM_SATURN) && defined(__sh__)
+_Static_assert(sizeof(wf_r17_fg0_write_t)*4096u==WF_SATURN_LWRAM_VIDEO_WRITE_BYTES,"video staging range");
+static wf_r17_fg0_write_t *const stage=(wf_r17_fg0_write_t *)WF_SATURN_LWRAM_VIDEO_WRITES;
+#else
+static wf_r17_fg0_write_t stage[4096];
+#endif
+static size_t used;static unsigned busy;
 static int put(uint32_t a,uint32_t val,unsigned width){if(used==4096)return 0;stage[used++]=(wf_r17_fg0_write_t){a,val,(uint8_t)width};return 1;}
 static int glyph(uint32_t a,uint16_t value){return put(a+1,value&255,1)&&put(a+3,value>>8,1);}
 #define READ(A,N,V) do {if(rd(v,(A),(N),&(V))!=WF_OK)goto fail;}while(0)
