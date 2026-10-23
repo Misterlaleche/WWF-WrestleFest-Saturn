@@ -96,6 +96,9 @@ del número de página: una mutación del offset original hace fallar el test.
   ya usado por cámara; los400 fixtures y las comparaciones se mantienen.
 - Revisión fresca sin hallazgos críticos/importantes. La debilidad menor
   del fixture ROM se corrigió y se comprobó con mutación y ejecución correcta.
+- La prueba de exportación descubrió que faltaba la regla para crear `build/`
+  en los tests R18. La compilación paralela desde una carpeta vacía falló antes
+  de añadirla; después completa4391 y pasa los tests de celdas y caché ROM.
 - Enlace SH-2 limpio de símbolos pendientes; validación de sectores, EDC/ECC,
   IP, ISO9660 y payloads para los discos normal y sin entrada.
 

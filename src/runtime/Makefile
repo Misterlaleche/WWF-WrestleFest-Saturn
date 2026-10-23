@@ -524,6 +524,9 @@ test-runtime18-ring-cells: build/test_runtime18_ring_cells
 	./build/test_runtime18_ring_cells audit/runtime18-cd/R18RING.BIN
 
 .PHONY: test-runtime18-ring-native-asan
+build:
+	mkdir -p $@
+
 test-runtime18-ring-native-asan: | build
 	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_ring.c tests/r18/test_ring_cells.c -o build/test_runtime18_ring_cells_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_ring_cells_asan audit/runtime18-cd/R18RING.BIN
