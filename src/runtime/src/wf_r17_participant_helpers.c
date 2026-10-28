@@ -1,6 +1,16 @@
 #include "wf_r17_participant_helpers.h"
 #include <string.h>
 #include "wf_r17_participant_tables.inc"
+static wf_participant_workspace_t participant_workspace;
+static unsigned participant_workspace_owner;
+wf_status_t wf_participant_workspace_acquire(unsigned owner,wf_participant_workspace_t **out){
+ if(!out||(owner!=WF_PARTICIPANT_TAG&&owner!=WF_PARTICIPANT_ROYAL)||participant_workspace_owner)return WF_BAD_STATE;
+ participant_workspace_owner=owner;*out=&participant_workspace;return WF_OK;
+}
+wf_status_t wf_participant_workspace_release(unsigned owner,wf_participant_workspace_t *workspace){
+ if(workspace!=&participant_workspace||!participant_workspace_owner||participant_workspace_owner!=owner)return WF_BAD_STATE;
+ participant_workspace_owner=0u;return WF_OK;
+}
 void wf_participant_init(wf_participant_machine_t*m,wf_runtime_t*rt,wf_participant_read16_fn read16,void*user){
  memset(m,0,sizeof(*m));m->rt=rt;m->read16=read16;m->user=user;m->status=WF_OK;
  if(rt)memcpy(m->d,rt->m68k_regs.d,sizeof(m->d));else m->status=WF_BAD_STATE;

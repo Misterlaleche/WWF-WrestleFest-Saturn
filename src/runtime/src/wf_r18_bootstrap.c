@@ -1,5 +1,11 @@
 #include "wf_r18_bootstrap.h"
 #include "wf_r17_referee.h"
+#include "wf_r17_participant_helpers.h"
+/* Both bootstrap routes use this staging machine only for a completed
+ * participant transaction. Release it before direct_boot calls finalize;
+ * callback re-entry is rejected before it can reset or overwrite state. */
+static wf_participant_machine_t m;
+static uint8_t participant_busy;
 static void dw(wf_runtime_t*r,unsigned n,uint16_t v){wf_r17_m68k_move_w(&r->m68k_regs,n,v);}
 static uint16_t d(wf_runtime_t*r,unsigned n){return (uint16_t)r->m68k_regs.d[n];}
 static void bit(wf_actor_raw_t*a,unsigned p,unsigned b,int set){wf_set_u8(a,p,(uint8_t)(set?(wf_u8(a,p)|(1u<<b)):(wf_u8(a,p)&~(1u<<b))));}
@@ -10,7 +16,8 @@ static uint16_t draw(wf_runtime_t*r,unsigned table){
  uint32_t save1=r->m68k_regs.d[1],save2=r->m68k_regs.d[2];
  wf_r17_m68k_moveq(&r->m68k_regs,1,3);
  for(;;){wf_r17_rng21b4_live(&r->g.rng_state,r->g.frame_counter,&r->m68k_regs);r->m68k_regs.d[0]&=255u;dw(r,0,d(r,0)>>1);if(d(r,0)<100)break;dw(r,1,d(r,1)-1);if(d(r,1)==65535){dw(r,0,50);break;}}
- if(!d(r,0))dw(r,0,1);dw(r,1,0);dw(r,2,0);
+ if(!d(r,0))dw(r,0,1);
+ dw(r,1,0);dw(r,2,0);
  while(1){wf_r17_m68k_move_b(&r->m68k_regs,2,(uint8_t)(r->m68k_regs.d[2]+weights[table][d(r,1)]));if(d(r,2)>=d(r,0))break;dw(r,1,d(r,1)+1);}
  dw(r,0,d(r,1));r->m68k_regs.d[1]=save1;r->m68k_regs.d[2]=save2;return d(r,0);
 }
@@ -26,7 +33,8 @@ static void health(wf_runtime_t*r,unsigned slot){
 wf_status_t wf_r18_tag_setup_1086c(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
  static const uint16_t xy[4][2]={{0x240,0x150},{0x220,0x160},{0x2c0,0x150},{0x2e0,0x160}};
  uint32_t saved[4];unsigned roster_n=0;wf_status_t st;
- if(!r||!c)return WF_BAD_STATE;c->blocked_pc=0;
+ if(!r||!c)return WF_BAD_STATE;
+ c->blocked_pc=0;
  if(!r->m68k_regs.valid||!r->g.rng_state_valid){c->blocked_pc=0x21b4;return WF_BLOCKED;}
  if(r->g.mode_0161&1||r->g.progression_0162>=10)return WF_BAD_STATE;
  if(!c->palette_2aea){c->blocked_pc=0x2aea;return WF_BLOCKED;}
@@ -53,7 +61,8 @@ wf_status_t wf_r18_tag_setup_1086c(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
    wf_actor_raw_t*a=&r->actors[i];wf_set_be16(a,0x32,0);wf_set_u8(a,0x56,i==4?0x80:0xc0);r->m68k_regs.d[1]=wf_actor_rom_base(i==4?5:4);wf_set_be32(a,0x86,r->m68k_regs.d[1]);dw(r,0,wf_be16(a,2));
    st=c->palette_2aea(r,d(r,0),c->user);if(st!=WF_OK){c->blocked_pc=0x2aea;return st;}
    /* A0 remains history base $1C0598 here; +$57 reads $1C05EF. */
-   if(wf_u8(&r->actors[0],0x3f)>=6)bit(&r->actors[0],0x3e,5,1);dw(r,7,d(r,7)-1);
+   if(wf_u8(&r->actors[0],0x3f)>=6)bit(&r->actors[0],0x3e,5,1);
+   dw(r,7,d(r,7)-1);
   }
  }
  dw(r,7,3);
@@ -75,13 +84,15 @@ wf_status_t wf_r18_tag_setup_1086c(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
    if(st!=WF_OK){c->blocked_pc=0x2aea;return st;}
   }
  }
- for(unsigned i=0;i<4;i++)r->m68k_regs.d[i]=saved[i];c->replay_008c=0;return WF_OK;
+ for(unsigned i=0;i<4;i++)r->m68k_regs.d[i]=saved[i];
+ c->replay_008c=0;return WF_OK;
 }
 
 #include "wf_r17_participant_helpers.h"
 #include <string.h>
 #include "wf_r18_bootstrap_palettes.inc"
-static wf_status_t credit(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
+wf_status_t wf_r18_credit_1e92(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
+ if(!r||!c||!c->text_owner||!c->fg0_batch)return WF_BAD_STATE;
  uint32_t saved=r->m68k_regs.d[0];wf_status_t st;
  dw(r,0,r->g.global_0072);
  if((int16_t)d(r,0)>=0&&d(r,0)==((r->g.credit_remainder_004e<<8)|r->g.credit_count_004f)){r->m68k_regs.d[0]=saved;return WF_OK;}
@@ -105,26 +116,25 @@ static wf_status_t hud(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
  return c->video_batch(r,writes,n,c->user);
 }
 wf_status_t wf_r18_live_finalize_8ae6(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
- static wf_participant_machine_t m;
  static uint8_t busy;
  wf_status_t st;
  if(!r||!c)return WF_BAD_STATE;
- if(busy)return WF_BLOCKED;
+ if(busy||participant_busy)return WF_BLOCKED;
  c->blocked_pc=0;
  if(!c->text_owner){c->blocked_pc=0x2503c;return WF_BLOCKED;}
  if(!c->video_batch){c->blocked_pc=0xc1ea;return WF_BLOCKED;}
  if(!c->fg0_batch){c->blocked_pc=0x7506;return WF_BLOCKED;}
  r->g.global_0072=0xffff;
- st=credit(r,c);if(st!=WF_OK){c->blocked_pc=0x1e92;return st;}
+ st=wf_r18_credit_1e92(r,c);if(st!=WF_OK){c->blocked_pc=0x1e92;return st;}
  dw(r,0,3);
  for(unsigned i=0;i<4;i++){
   if(active(&r->actors[i])&&!(wf_u8(&r->actors[i],0x56)&128)){
-   uint32_t saved=r->m68k_regs.d[0];busy=1;
+   uint32_t saved=r->m68k_regs.d[0];busy=1;participant_busy=1;
    wf_participant_init(&m,r,0,0);m.a[0]=wf_actor_rom_base(i);
    wf_participant_782c(&m);wf_participant_7506(&m);
-   if(m.status!=WF_OK){c->blocked_pc=m.failed_address;busy=0;return m.status;}
-   st=c->fg0_batch(r,m.writes,m.write_count,c->user);if(st!=WF_OK){c->blocked_pc=0x7506;busy=0;return st;}
-   memcpy(r->m68k_regs.d,m.d,sizeof m.d);r->m68k_regs.d[0]=saved;busy=0;
+   if(m.status!=WF_OK){c->blocked_pc=m.failed_address;busy=0;participant_busy=0;return m.status;}
+   st=c->fg0_batch(r,m.writes,m.write_count,c->user);if(st!=WF_OK){c->blocked_pc=0x7506;busy=0;participant_busy=0;return st;}
+   memcpy(r->m68k_regs.d,m.d,sizeof m.d);r->m68k_regs.d[0]=saved;busy=0;participant_busy=0;
   }
   dw(r,0,d(r,0)-1);
  }
@@ -168,9 +178,10 @@ static wf_status_t fixed_init(wf_runtime_t*r,wf_r18_bootstrap_context_t*c){
  dw(r,0,15);wf_status_t st=c->palette_2aea(r,15,c->user);if(st!=WF_OK)return st;wf_r17_fixed_four_init_1004c(r);return WF_OK;
 }
 wf_status_t wf_r18_direct_boot(wf_runtime_t*r,wf_r18_bootstrap_context_t*c,const wf_r18_launch_config_t*cfg){
- static wf_participant_machine_t m;static uint8_t busy;wf_status_t st;wf_phase_binding_t*b;size_t n;
+ static uint8_t busy;wf_status_t st;wf_phase_binding_t*b;size_t n;
  if(!r||!c||!cfg||cfg->human>=12||cfg->partner>=12||cfg->human==cfg->partner||!cfg->registers.valid)return WF_BAD_STATE;
- if(busy)return WF_BLOCKED;c->blocked_pc=0;
+ if(busy||participant_busy)return WF_BLOCKED;
+ c->blocked_pc=0;
  if(!c->video_batch||!c->fg0_batch||!c->palette_2aea||!c->palette_reset||!c->palette_release_2b58||!c->map_26e66||!c->text_owner){c->blocked_pc=0xc98;return WF_BLOCKED;}
  busy=1;b=r->bindings;n=r->binding_count;wf_runtime_init(r,b,n);r->m68k_regs=cfg->registers;r->g.rng_state=cfg->rng_state;r->g.rng_state_valid=1;r->g.config_0066=cfg->cabinet_config;r->g.credited_route=1;
  memset(c->history_0598,0xff,sizeof c->history_0598);memset(c->roster_0380,0,sizeof c->roster_0380);c->history_0598[10]=c->history_0598[11]=0;c->history_0598[0]=cfg->human;c->history_0598[1]=cfg->partner;c->replay_008c=0;
@@ -190,11 +201,11 @@ wf_status_t wf_r18_direct_boot(wf_runtime_t*r,wf_r18_bootstrap_context_t*c,const
  /* Visible $A654 is omitted by direct-launch policy; execute common $A778 teardown. */
  dw(r,0,0x1f);st=c->palette_release_2b58(r,0x1f,c->user);if(st!=WF_OK){c->blocked_pc=0x2b58;goto done;}
  for(uint32_t address=0xc0100;address<0xc1e00;address+=256){st=fill(r,c,address,160,0);if(st!=WF_OK){c->blocked_pc=0x9a42;goto done;}}dw(r,1,0xffff);
- wf_participant_init(&m,r,0,0);wf_participant_7506(&m);if(m.status!=WF_OK){c->blocked_pc=m.failed_address;st=m.status;goto done;}st=c->fg0_batch(r,m.writes,m.write_count,c->user);if(st!=WF_OK){c->blocked_pc=0x7506;goto done;}memcpy(r->m68k_regs.d,m.d,sizeof m.d);
+ participant_busy=1;wf_participant_init(&m,r,0,0);wf_participant_7506(&m);if(m.status!=WF_OK){c->blocked_pc=m.failed_address;st=m.status;goto done;}st=c->fg0_batch(r,m.writes,m.write_count,c->user);if(st!=WF_OK){c->blocked_pc=0x7506;goto done;}memcpy(r->m68k_regs.d,m.d,sizeof m.d);participant_busy=0;
  wf_set_be16(&r->compact_14ce[0],0,0);r->g.global_15fc=1;st=scene_palette(r,c,1);if(st!=WF_OK){c->blocked_pc=0x2a06;goto done;}
  /* Silent audio sink: $8EB6 then $2052 retain D0=312F and other registers. */
  dw(r,0,0x312f);
  st=wf_r18_live_finalize_8ae6(r,c);if(st!=WF_OK)goto done;
  st=wf_r17_runtime_enter_f8c(r,0);if(st!=WF_OK)c->blocked_pc=0xf8c;else r->frame_stage=3u;
-done:busy=0;return st;
+done:busy=0;participant_busy=0;return st;
 }

@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "iso_sha256": "f251d4268322d3ce6a4dfefe23da9084db6542602523c7e02bd7b071c6a6c05a",
+  "bin_sha256": "a38f62e63e665f69f472e2060ddea4986efdc7d61bc6085d6bf8ac798a17c5d4",
+  "cue_sha256": "331eb9fe748cb398415cb21f64397fbe39e8caba991408b17b8304cea1d24c14",
+  "sectors": 9276,
+  "cdfs_root_files": 19,
+  "all_sector_edc_ecc_exact": true,
+  "all_cdfs_payloads_exact": true,
+  "a_bin_equals_linked_binary": true,
+  "manifest": [
+    {
+      "name": "A.BIN",
+      "lba": 33,
+      "bytes": 998388,
+      "sha256": "2f90e7853b11552a7109206dbdad890895e6bb9b2be2ae2f9b6cd05b0b9785d0"
+    },
+    {
+      "name": "ABS.TXT",
+      "lba": 521,
+      "bytes": 62,
+      "sha256": "f8ed99759f85661006454d52e59ccc2c1b2d880da8fa13f06179e2758dae3c1b"
+    },
+    {
+      "name": "BIB.TXT",
+      "lba": 522,
+      "bytes": 49,
+      "sha256": "10147c83e3ec8ce264b07113121fc36a6bab3adcd79d043ce319102f3ccb02d2"
+    },
+    {
+      "name": "CPY.TXT",
+      "lba": 523,
+      "bytes": 57,
+      "sha256": "1c9f9136f407e464163b605b3159043c5be6507f047f2d0a1b11e3aabd12024a"
+    },
+    {
+      "name": "FONT8.BIN",
+      "lba": 524,
+      "bytes": 131072,
+      "sha256": "a3045c6193d23c334c6af592cc1dfee029dc12eec810d3e2ce353df69580391a"
+    },
+    {
+      "name": "FRONTSPR.BIN",
+      "lba": 588,
+      "bytes": 573264,
+      "sha256": "54f76cda1abfa985dd018b1c476c38ad0f02c762cbce0724fbe19e1783e15e4f"
+    },
+    {
+      "name": "HOTSPR.BIN",
+      "lba": 868,
+      "bytes": 769024,
+      "sha256": "ee7fbbb45ccc70ba0fa31045b168f47daed73be09fdb8973a43dadd17b3247e6"
+    },
+    {
+      "name": "POSTSPR.BIN",
+      "lba": 1244,
+      "bytes": 508424,
+      "sha256": "d06616b3706cf15dd8f6626d7d99d2ccfaeda0ba8331d77d184796f1bd57c9d9"
+    },
+    {
+      "name": "R18MAP1.BIN",
+      "lba": 1493,
+      "bytes": 127138,
+      "sha256": "75f0e4bb5cc7b90974e4276a274b62144488997c5b4f6f6819070d1bec213359"
+    },
+    {
+      "name": "R18MAP2.BIN",
+      "lba": 1556,
+      "bytes": 95978,
+      "sha256": "979b622c418307f90b1ce98524db7bade230adf399bd13e6fc3fe4adc699acf0"
+    },
+    {
+      "name": "R18MAP4.BIN",
+      "lba": 1603,
+      "bytes": 129998,
+      "sha256": "402cd878b92e3373a2a1a14608a4d833d4a359282c39b875d0901c4f41746f91"
+    },
+    {
+      "name": "R18MAP5.BIN",
+      "lba": 1667,
+      "bytes": 115568,
+      "sha256": "40cccfee8e2cc1509234b023f06754eefe9ba8c71725b7a145cdc050847e8c86"
+    },
+    {
+      "name": "R18MENU.BIN",
+      "lba": 1724,
+      "bytes": 124938,
+      "sha256": "3d45bca1bd3115ca657d1ccf1a344eb4b0ee5c7c09b9129d9f122c8fd9779ad4"
+    },
+    {
+      "name": "R18POSE.BIN",
+      "lba": 1786,
+      "bytes": 5171504,
+      "sha256": "0207657317a4eb5426978670f7a703e95c32bfc264d3d1a5d19a6938ed610d19"
+    },
+    {
+      "name": "R18POSE.IDX",
+      "lba": 4312,
+      "bytes": 58648,
+      "sha256": "008f56cfa1bfcefeaf622c2f73461c6c9bc9dc64c062ca2b068578110d337ed8"
+    },
+    {
+      "name": "R18RING.BIN",
+      "lba": 4341,
+      "bytes": 114918,
+      "sha256": "774fbc5d9d0b404d1b3fdd825581efb5de892ab15504ecb257190dfa6b30191c"
+    },
+    {
+      "name": "ROM68K.BIN",
+      "lba": 4398,
+      "bytes": 524288,
+      "sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306"
+    },
+    {
+      "name": "ROYSPR.BIN",
+      "lba": 4654,
+      "bytes": 769012,
+      "sha256": "a408fb7ecc1ddd2902b02128cf704a4d6121c231a8fc868d0f1a4a0c730700d7"
+    },
+    {
+      "name": "SPRITES.PAK",
+      "lba": 5030,
+      "bytes": 8388608,
+      "sha256": "130ac19d5ab3646f2d51c9d2ce52cd42f53f60b125fd18d674ee8de722c55d31"
+    }
+  ],
+  "hardware_test": false,
+  "emulator_test": false
+}

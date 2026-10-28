@@ -1,0 +1,67 @@
+{
+  "count": 7611,
+  "passed": 7611,
+  "natural_continuations": 37,
+  "mode": "native versus unchanged ROM",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "79ac65851776a5be5113949d5ba5b164afae415df4fa2464f88fb700c57a1e0e",
+  "compared_memory": [
+    "$1C0000..$1C1FFF",
+    "$0C0000..$0C3FFF"
+  ],
+  "compared_registers": "D0-D7",
+  "compared_tick_descriptor": "ROM A1 at $1C0C8",
+  "required_branch_sites": [
+    "0x1a28e",
+    "0x1a296",
+    "0x1a29e",
+    "0x1a2a2",
+    "0x1a2ae",
+    "0x1a2b2",
+    "0x1a2c2",
+    "0x1a2c8",
+    "0x1a2d0",
+    "0x1a2d8",
+    "0x1a2de",
+    "0x1a2e6",
+    "0x1a2f2",
+    "0x1a2fa",
+    "0x1a306",
+    "0x1c0c8",
+    "0x1c0dc",
+    "0x1c0fa",
+    "0x1c10a",
+    "0x1c0ba"
+  ],
+  "covered_branch_sites": [
+    "0x1a28e",
+    "0x1a296",
+    "0x1a29e",
+    "0x1a2a2",
+    "0x1a2ae",
+    "0x1a2b2",
+    "0x1a2c2",
+    "0x1a2c8",
+    "0x1a2d0",
+    "0x1a2d8",
+    "0x1a2de",
+    "0x1a2e6",
+    "0x1a2f2",
+    "0x1a2fa",
+    "0x1a306",
+    "0x1c0c8",
+    "0x1c0dc",
+    "0x1c0fa",
+    "0x1c10a",
+    "0x1c0ba"
+  ],
+  "intercepted_rom_owners": [
+    "$2052 sound output only"
+  ],
+  "limitations": [
+    "Selector $79 only; characters0..11; no gameplay link dereferenced",
+    "No Saturn hardware timing or audible sound validation"
+  ],
+  "action_source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+  "verifier_sha256": "845b7a0130456e54479f8baad59c26a6f2c810f0d5d1c6e0a471946e87c9c052"
+}

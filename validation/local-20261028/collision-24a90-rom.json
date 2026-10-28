@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "cases": 30,
+  "invalid_relation_guards": 1,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_sha256": "4fa17378aa94b248c4c4e5f8278629bb9424ad4dbbdcb4cd302ee96e269304a4",
+  "limits": [
+    "Controlled HOST-snapshot variants, not proof of this Saturn physical incident."
+  ]
+}

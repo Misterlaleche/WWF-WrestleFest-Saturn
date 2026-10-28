@@ -1,0 +1,36 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "9f08f35922d7daf71f5dec0927351b60380289f43007e99564d6d2b38b797925",
+  "snapshot_bytes": 16472,
+  "header": [
+    3747,
+    5,
+    1,
+    114750,
+    1114,
+    1
+  ],
+  "source": "validation\\local-20261024\\tag-winner-pressure-after1d032\\snapshot-01114.bin",
+  "source_report_sha256": "a9efbf526b874072ea1c46f990cc3e158de53f8df54081706899fd54af0ddf8b",
+  "source_manifest_sha256": "1b37c946fd010bb1a1dbd56d35a14f4cd69ab11fb80b492f6a0929713254a233",
+  "provenance": "Manual frontend TAG0/7 -> paidF8C -> HOST pressure validation pad policy. First raw1F guard frame3747 actor5/id3 HP0 mode02. No actor/HP/RNG/result rewriting. Snapshot24metadata+32preD+8192preRAM+32postD+8192postRAM; only preRAM used, remaining original RAM zero.",
+  "limits": [
+    "HOST trajectory, not physical/nativeSH2 timing proof",
+    "No later full-match or winner claim"
+  ],
+  "alias1e": {
+    "snapshot_sha256": "580872468310081e78854354e93a585a6664ffa047d70510ecdc41e29d5fc103",
+    "header": [
+      4189,
+      1,
+      1,
+      114750,
+      1268,
+      1
+    ],
+    "source": "validation\\local-20261024\\tag-winner-pressure-after1f\\snapshot-01268.bin",
+    "source_report_sha256": "2d4dc68146ec9912dd2ee3ae8fbdfbaff9640e0da4c5426bacfedcacf2614b60",
+    "source_manifest_sha256": "f9260151bd4cccede23be05f301328a7a3b11568d8a7ab86ac7a66c70f2aeea5",
+    "provenance": "Same manual frontend/pressure trajectory after raw1F. Natural raw1E frame4189 actor1/id7. Only preRAM8KB projected, no health/RNG/result edits."
+  }
+}

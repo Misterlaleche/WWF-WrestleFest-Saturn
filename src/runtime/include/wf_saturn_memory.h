@@ -5,13 +5,29 @@
 #include "wf_runtime.h"
 
 /* Borrowed LWRAM ranges; only CPU-owned data lives here. SCU-DMA staging
- * remains in HWRAM. The 208KB ROM cache holds172 hot pages plus36 spare. */
-#define WF_SATURN_LWRAM_ROM_CACHE          0x00220000u
-#define WF_SATURN_LWRAM_ROM_BYTES          0x00034000u
-#define WF_SATURN_LWRAM_VIDEO_WRITES       0x00254000u
+ * remains in HWRAM. All original TAG tournament ring packs fit the128KB
+ * scene range; the209-page program cache retains all208 measured hot pages. */
+#define WF_SATURN_LWRAM_SCENE              0x00201000u
+#define WF_SATURN_LWRAM_SCENE_BYTES        0x00020000u
+#define WF_SATURN_LWRAM_ROM_CACHE          0x00221000u
+#define WF_SATURN_LWRAM_ROM_BYTES          0x00034400u
+#define WF_SATURN_LWRAM_VIDEO_WRITES       0x00255400u
 #define WF_SATURN_LWRAM_VIDEO_WRITE_BYTES  0x0000c000u
-#define WF_SATURN_LWRAM_TILE_CACHE         0x00260000u
-#define WF_SATURN_LWRAM_TILE_BYTES         0x000a0000u
+#define WF_SATURN_LWRAM_TILE_CACHE         0x00261400u
+#define WF_SATURN_LWRAM_TILE_BYTES         0x0009ec00u
+/* Before F8C the combat tile cache is leased to frontend maps and tiles.
+ * The16KB original RAM image stays at the top. Release all three leases
+ * and reinitialize the full combat cache before loading HOTSPR.BIN. */
+#define WF_SATURN_LWRAM_FRONT_SCENE        WF_SATURN_LWRAM_TILE_CACHE
+#define WF_SATURN_LWRAM_FRONT_SCENE_BYTES  0x00020000u
+#define WF_SATURN_LWRAM_FRONT_TILES        0x00281400u
+#define WF_SATURN_LWRAM_FRONT_TILE_BYTES   0x0007ac00u
+#define WF_SATURN_LWRAM_FRONT_RAM          0x002fc000u
+#define WF_SATURN_LWRAM_FRONT_RAM_BYTES    0x00004000u
+/* Keep more dictionary indices in HWRAM so frequently observed TAG tiles
+ * fit beside the resident dictionary. Leave at least96 cold LWRAM slots;
+ * the traced match used at most68 cold IDs in one frame before expansion. */
+#define WF_SATURN_HWRAM_HOT_INDEX_BYTES    0x0001c000u
 
 /* WP32 baseline ownership. Offsets are relative to VDP1 VRAM. */
 #define WF_SATURN_VDP1_VRAM_BYTES            0x80000u
@@ -22,6 +38,9 @@
 #define WF_SATURN_VDP1_DYNAMIC_OFFSET        0x4B580u
 #define WF_SATURN_VDP1_DYNAMIC_BYTES         0x10000u
 #define WF_SATURN_VDP1_DYNAMIC_END           (WF_SATURN_VDP1_DYNAMIC_OFFSET + WF_SATURN_VDP1_DYNAMIC_BYTES)
+/* The auxiliary sound sequencer runs from the unused VRAM tail. */
+#define WF_SATURN_VDP1_MUSIC_OFFSET          0x5c000u
+#define WF_SATURN_VDP1_MUSIC_END             0x80000u
 #define WF_SATURN_VDP1_STREAM_TILE_BYTES     128u
 #define WF_SATURN_VDP1_STREAM_TILE_CAPACITY  (WF_SATURN_VDP1_DYNAMIC_BYTES / WF_SATURN_VDP1_STREAM_TILE_BYTES)
 

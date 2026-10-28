@@ -15,6 +15,7 @@ import random
 import re
 import struct
 import subprocess
+import sys
 import tempfile
 import machine68k as mus
 
@@ -167,3 +168,7 @@ with tempfile.TemporaryDirectory(prefix='wf-action2f-') as temp:
         args.report.parent.mkdir(parents=True,exist_ok=True)
         args.report.write_text(json.dumps(report,indent=2)+'\n')
     print(f'{"ROM ONLY" if args.rom_only else "PASS"} {count} action2f unmodified-ROM fixtures; {len(required)} required branch sites')
+    if not args.rom_only and sys.platform == 'win32':
+        # Windows keeps a loaded DLL locked until FreeLibrary, including when
+        # the TemporaryDirectory context is about to remove the build output.
+        assert ctypes.windll.kernel32.FreeLibrary(ctypes.c_void_p(native._handle))

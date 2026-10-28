@@ -1,0 +1,24 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "dd09a68550bf60c56e268aafca1d85f1d32a1e52c4575a582e2a5739595e19e3",
+  "header": [
+    1407,
+    1,
+    1,
+    114750,
+    387,
+    1
+  ],
+  "source": "validation\\local-20261024\\tag-winner-rush-paired\\snapshot-00387.bin",
+  "source_report_sha256": "369613e8762c5a5dbd8e9d73f2d4c20363c0caae3383fe6f314b9257aacc1481",
+  "source_manifest_sha256": "e5a28794bdd6ebae4291828c8938609e0e6881e2bced2ea6ca12f8ef6779ed63",
+  "trace_sha256": "b711058b54d7fd033c1f3f829833d90c544d9e1d182d6f654a06a525eebc00ba",
+  "host_log_sha256": "b31f88a36989a00815c5cd51691c2e02c3e5fee7451a5d20fc58a3edd5aac7d9",
+  "provenance": "Natural cold frontend TAG picks0/7 CPU6/3 -> HOST paired rush, frame1407 slot1 raw45, without reseed, actor/register/result forcing. Snapshot projects nine actors, live D8 and represented globals; unrepresented arcade RAM is zero. This is a HOST tape, not a native Saturn capture.",
+  "table_alias": {
+    "selector": 69,
+    "descriptor": "0x128de",
+    "callback": "0x128fa",
+    "same_as_raw": "0x01"
+  }
+}

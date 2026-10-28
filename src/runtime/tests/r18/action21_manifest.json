@@ -1,0 +1,10 @@
+{
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/ring-entry-pad/run/snapshot-00655.bin",
+  "sha256": "877a4bc4d940ef9d488d7c51eab29fc31f6b74f5ce127741a24915f028dbf7b6",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "header": [1921, 0, 1, 114750, 655, 1],
+  "selector": "0x0021",
+  "derived": false,
+  "input_schedule": "prefix RIGHT60..179,A180..183; DOWN1000..1049; four-frame A pulses every60frames1200..2160",
+  "comparison": "Untouched natural human actor0 raw21 from return-to-ring control path. Native bounded dispatcher versus intact ROM; full RAM, FG and D0-D7 compared."
+}

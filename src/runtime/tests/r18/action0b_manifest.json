@@ -1,0 +1,54 @@
+{
+  "sha256": "a75628814f0d4f7053f3b71b976f322677be77d0332af7e258acea1c9d190494",
+  "header": [
+    8798,
+    4,
+    1,
+    114750,
+    0,
+    1
+  ],
+  "snapshot_bytes": 16440,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source": "validation\\local-20261024\\hardware-input\\beetle-full-flow-stage9-human-tag",
+  "report_sha256": "65cbebc30d96199cbb06705f0d8008d341c5ec52869699c44537cefb40376464",
+  "workram_sha256": "9eeee4830307177ec34be5d8a747f4a6b70a2f10f8303791cbfa08d2127c3ff9",
+  "program_sha256": "9fe17c00838e6515a677d108128fda5afe05fd2f8cc7728116c3256d270e6ed2",
+  "bin_sha256": "224cc5c3c3a741374230845ac8ca62554c910d42f53a301dc833ffeece295d7d",
+  "core_sha256": "88b459ccb216746ced3b0e09c6598725ccfd6e91df9f43a078309975edf685d5",
+  "core_version": "v1.32.1",
+  "elf_sha256": "e4e27267f676ac96628d06f7bab708adcd8ab2fc99f9fb6cdeee05b486fd6138",
+  "elf_runtime_address": 101610712,
+  "elf_runtime_bytes": 7648,
+  "runtime_wram_offset": 1995992,
+  "layout_offsets": [
+    384,
+    268,
+    352,
+    24,
+    31,
+    4,
+    12,
+    210,
+    211,
+    7340
+  ],
+  "frozen_runtime_header_sha256": "ce8a8f23d74e8fca00dfb064347a1bf84c42d3915eaf82a61b7c1192f6233c8e",
+  "reference_sh2_layout_sha256": "d9621df05c4b322a5e74db7921f3178153eb2753d92514d92bea502d47050a7e",
+  "matched_actors": 9,
+  "D0-D7": [
+    5,
+    8,
+    335,
+    572,
+    65535,
+    2,
+    65535,
+    0
+  ],
+  "limits": [
+    "Read-only Beetle observation, no emulator RAM writes or input/seed forcing",
+    "Typed native model projected to all9actors and supported globals; other arcade RAM explicitly zero",
+    "No A registers available or fabricated; not physical Saturn or complete original arcade RAM"
+  ]
+}

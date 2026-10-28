@@ -15,6 +15,18 @@ typedef struct wf_participant_machine {
  wf_r17_fg0_write_t writes[WF_PARTICIPANT_WRITES];
  size_t write_count;
 } wf_participant_machine_t;
+/* One serialized game-owner workspace, retained through synchronous output
+ * callbacks and rollback. A busy acquire returns BAD_STATE without writing
+ * the output pointer or reinitializing either record. Only the successful
+ * owner may release it; TAG and Royal may not nest in either direction. */
+#define WF_PARTICIPANT_LEASE_API 1
+enum { WF_PARTICIPANT_TAG=0x6e34u, WF_PARTICIPANT_ROYAL=0x9132u };
+typedef struct wf_participant_workspace {
+ wf_participant_machine_t machine;
+ wf_runtime_t snapshot;
+} wf_participant_workspace_t;
+wf_status_t wf_participant_workspace_acquire(unsigned,wf_participant_workspace_t **);
+wf_status_t wf_participant_workspace_release(unsigned,wf_participant_workspace_t *);
 void wf_participant_init(wf_participant_machine_t *,wf_runtime_t *,wf_participant_read16_fn,void *);
 uint32_t wf_participant_read(wf_participant_machine_t *,uint32_t,unsigned);
 void wf_participant_write(wf_participant_machine_t *,uint32_t,uint32_t,unsigned);

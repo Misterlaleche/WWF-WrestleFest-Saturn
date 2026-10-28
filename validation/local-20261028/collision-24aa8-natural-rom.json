@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "frame": 1550,
+  "source_slot": 8,
+  "target_slot": 0,
+  "source_profile": 7,
+  "target_profile": 20,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "actor_snapshot_sha256": "c812ef9deef267a1bf75efffd4998a22019698e0ffca5ef4db6761f71325d026",
+  "globals_snapshot_sha256": "ebb7f3e38c77d4daf3638d1946c5f4da3bdeb062e4fe54c168191bc81088f2e3",
+  "source_sha256": "7e31a81af56c8987f3f3cf6f03f6d9f1e401c2c79c11baa3015d6800600892e2",
+  "path": "0x24ab8",
+  "limits": [
+    "Natural occurrence in instrumented HOST Royal rush; not Saturn emulator or hardware.",
+    "ROM compare is isolated pair from a projected 8 KiB RAM snapshot, not full match comparison."
+  ]
+}

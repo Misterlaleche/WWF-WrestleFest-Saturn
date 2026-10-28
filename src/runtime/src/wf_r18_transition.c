@@ -5,6 +5,9 @@
 #include "wf_r18_ring.h"
 #include "wf_r18_hud.h"
 #include <string.h>
+#ifdef __sh__
+#include <yaul.h>
+#endif
 static wf_r18_transition_context_t *bound;
 static uint16_t be16(const uint8_t*p){return (uint16_t)((p[0]<<8)|p[1]);}
 static uint32_t be32(const uint8_t*p){return ((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|((uint32_t)p[2]<<8)|p[3];}
@@ -32,7 +35,7 @@ wf_status_t wf_r18_transition_reset(wf_runtime_t*r,uint8_t royal,void*v){
  return WF_OK;
 }
 static wf_status_t load_scene(wf_runtime_t*r){
- const char*name=r->g.global_007e==0?"R18RING.BIN":r->g.global_007e==2?"R18MAP2.BIN":NULL;
+ const char*name=r->g.global_007e==0?"R18RING.BIN":r->g.global_007e==1?"R18MAP1.BIN":r->g.global_007e==2?"R18MAP2.BIN":r->g.global_007e==5?"R18MAP5.BIN":NULL;
  uint32_t bytes=0;
  if(!name||!bound->scene_blob||!bound->file_size||!bound->file_read||bound->file_size(name,&bytes)||bytes<544u||bytes>bound->scene_capacity)return block(0x26e66);
  /* Never leave an old scene callable while CD reads replace its storage. */
@@ -105,7 +108,16 @@ static wf_status_t palettes_c1ea(wf_runtime_t*r){
  return WF_OK;
 }
 wf_status_t wf_r18_transition_barrier(wf_runtime_t*r,uint8_t royal,void*v){
- if(!r)return WF_BAD_STATE;if(!valid(v))return WF_BLOCKED;bound->blocked_pc=0;
+ if(!r)return WF_BAD_STATE;
+ if(!valid(v))return WF_BLOCKED;
+ bound->blocked_pc=0;
+#ifdef __sh__
+ /* The CD scene pack and character tiles replace the currently scanned
+  * picture. Keep TVMD blank until the next frame has submitted its new
+  * sprites and both processors have completed their sync. */
+ vdp1_sync_wait();vdp2_sync_wait();vdp2_tvmd_display_clear();
+ bound->unblank_pending=1;
+#endif
  wf_status_t s=load_scene(r);if(s!=WF_OK)return s;
  s=map_26e66(r);if(s!=WF_OK)return s;r->g.global_15f4=r->g.global_15f8=r->g.global_007e;
  s=palettes_2a06(r);if(s!=WF_OK)return s;s=palettes_c1ea(r);if(s!=WF_OK)return s;

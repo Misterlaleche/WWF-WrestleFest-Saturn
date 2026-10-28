@@ -50,4 +50,9 @@ typedef struct wf_vdp1_assets {
 void wf_vdp1_plan_reset(wf_vdp1_frame_plan_t *p);
 wf_status_t wf_vdp1_plan_build(const wf_draw_list_t *draw,const wf_vdp1_assets_t *assets,wf_vdp1_frame_plan_t *out);
 wf_status_t wf_vdp1_plan_validate(const wf_vdp1_frame_plan_t *p,const wf_vdp1_assets_t *assets);
+/* Keep unchanged source tiles in their resident VRAM slots while preserving
+ * every command's tile identity and draw order. resident_bits is a packed
+ * bitset; only slots below the current dense tile count can be retained. */
+wf_status_t wf_vdp1_plan_retain_tile_slots(wf_vdp1_frame_plan_t *p,
+    const uint16_t *resident_tiles,const uint8_t *resident_bits,unsigned resident_count);
 #endif

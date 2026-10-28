@@ -1,0 +1,171 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "state": 1,
+      "input": 0,
+      "angle": 0
+    },
+    {
+      "state": 1,
+      "input": 1,
+      "angle": 64
+    },
+    {
+      "state": 1,
+      "input": 2,
+      "angle": 192
+    },
+    {
+      "state": 1,
+      "input": 3,
+      "angle": 0
+    },
+    {
+      "state": 1,
+      "input": 4,
+      "angle": 0
+    },
+    {
+      "state": 1,
+      "input": 5,
+      "angle": 32
+    },
+    {
+      "state": 1,
+      "input": 6,
+      "angle": 224
+    },
+    {
+      "state": 1,
+      "input": 7,
+      "angle": 0
+    },
+    {
+      "state": 1,
+      "input": 8,
+      "angle": 128
+    },
+    {
+      "state": 1,
+      "input": 9,
+      "angle": 96
+    },
+    {
+      "state": 1,
+      "input": 10,
+      "angle": 160
+    },
+    {
+      "state": 1,
+      "input": 11,
+      "angle": 0
+    },
+    {
+      "state": 1,
+      "input": 12,
+      "angle": 0
+    },
+    {
+      "state": 1,
+      "input": 13,
+      "angle": 0
+    },
+    {
+      "state": 1,
+      "input": 14,
+      "angle": 0
+    },
+    {
+      "state": 1,
+      "input": 15,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 0,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 1,
+      "angle": 64
+    },
+    {
+      "state": 5,
+      "input": 2,
+      "angle": 192
+    },
+    {
+      "state": 5,
+      "input": 3,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 4,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 5,
+      "angle": 32
+    },
+    {
+      "state": 5,
+      "input": 6,
+      "angle": 224
+    },
+    {
+      "state": 5,
+      "input": 7,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 8,
+      "angle": 128
+    },
+    {
+      "state": 5,
+      "input": 9,
+      "angle": 96
+    },
+    {
+      "state": 5,
+      "input": 10,
+      "angle": 160
+    },
+    {
+      "state": 5,
+      "input": 11,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 12,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 13,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 14,
+      "angle": 0
+    },
+    {
+      "state": 5,
+      "input": 15,
+      "angle": 0
+    }
+  ],
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "capture_sha256": "653a94ee87830ee099a488576ac83b8f4eee85cf16d51a7120d7619f9e053306",
+  "source_sha256": "7c911b0fc5ab7f816dbf5452467ce9fb1079b40019be2c30abccd53311902812",
+  "limits": [
+    "Controlled input/active states derived from HOST capture; not a full frame or Saturn hardware test."
+  ]
+}

@@ -1,0 +1,18 @@
+# Collision second12 /24D5E with its first2/first8 producers
+
+Natural nativeF8C Royal→HOST basic frame2398 reaches source5/ID2 row3 and target8/ID8 row4. The usual phase diagnostic reports24468; the test-only wrapper identifies first2/24468 ACCEPT followed by second12/24D5E BLOCKED. The failed pair is rolled back, so blocked actor/global/D dumps preserve its literal input. `collision_24d5e_capture_host.py` reproduces the snapshot with all9 actors and liveD8; supported globals are projected and other arcade RAM is explicitly zero. Snapshot SHA256:b304751fd1788c2806ffa8983784e873a1e1a7389dd347a8baf461f5d39de705.
+
+24D5E compares only subtype BYTE+$65 with0A. Inequality returns without effects at24D78. Equality writes STATE.W4, SUBTYPE.W2 and calls24D7A. Production now accepts the inequality no-op. The equality branch already called native normalization and was correct: its baseline control passed before any production change. The recorded `collision-24d5e-equal-baseline-green.log` is a passing baseline, not a RED.
+
+Testing the entire original2435A pair exposed two earlier producer defects, corrected as dependencies of this same matrix:
+
+- First2/24468 rejects a nonzero profile high BYTE. Otherwise it tests the receiver's original state BYTE. State2 writes attacker state4/subtype2/timer9A80; other states write attacker state4/subtype18. Both paths write receiver state4/subtype2/timer9A80, normalize the receiver and tag the attacker's link. These attacker/link/timer effects were absent in native code.
+- First8/246EA profile-high.bit7 jumps2472C, skipping both normalization24D7A and pending+1_24DDC. Native pending+1 is now within that conditional. The bit-clear branches, including flags33.bit4 and timer52>=3, are retained.
+
+RED evidence is `validation/local-20261024/collision-24d5e-red.log` (natural BLOCKED/ROM ACCEPT), `collision-24468-red.log` (natural producer effects), and `collision-246ea-profile80-red.log` (pending3/ROM2). Disassembly is `collision-24d5e-rom-disassembly.txt`.
+
+GREEN `collision-24d5e-green.json/log`:11795 calls plus6 unrelated pending-branch guard controls. All RAM8KiB/FG16KiB/D0-D7/RNG and dispatch carry/result match intact ROM, with no intercepts. Of these calls,400 directly execute24D7A to prove subtype23/24/25/FE/FF boundaries and facing-bit behavior. The remaining matrix includes the natural pair; all256 incoming subtype BYTEs with raw high WORD bits; first2 state BYTE2/8002/other and profile rejection; first8 profile bit7/flags/timer paths; equal0A with source/self/peer/tagged/invalid unused links; and independent low-facing WORD bytes. Source/include/generated are frozen before compiling; C source hashes are recorded. Production dispatcher SHA256:091cd810e064130bfc51214f983220c4689d98e90d4893b6511838fb4f5f810e.
+
+Neighboring regressions pass with that same production source:24924/24408,4167;24984,1881+6. Reports are `collision-24924-after24d5e-regression.json` and `collision-24984-after24d5e-regression.json`. All6 second3 unequal-facing low-timer guards remain BLOCKED with RAM unchanged.24D5E,24468 and246EA themselves have no remaining native guard inside their literal branches.
+
+Current combined-source6000-frame requests from exact nativeF8C imports reach Royal3209/raw25 actor8/ID8 and TAG2083/raw6E actor0/ID7. Evidence is `full-flow-combat-native-f8c-{royal,tag}-after24d5e-basic`. These are retained guards, not completed routes. Independent concurrent ports also contribute to current progress. Full phase24062 live-register behavior, CCR/A context, unrepresented RAM, physical timing and identical HOST/SH2 trajectories remain outside this proof. Root independent review requested; production collision source stable.

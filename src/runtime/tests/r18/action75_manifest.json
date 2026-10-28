@@ -1,0 +1,15 @@
+{
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/late-pad/run/snapshot-00756.bin",
+  "sha256": "2831fc870b465ea67feba401516a595520fe82b47905c7150e27adb3eebb8607",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 2028,
+  "slot": 4,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 756,
+  "recorded_blocked_status": 1,
+  "selector": "0x0075",
+  "derived": false,
+  "input_schedule": "60 FE;180 EF;184 FF;1000 FE;1020 FF;1100 FD;1120 FF;1250 EF;1254 FF",
+  "comparison": "Untouched late-control natural pre-dispatch RAM and D0-D7 versus unchanged ROM. Full RAM, FG RAM and D0-D7 are compared."
+}

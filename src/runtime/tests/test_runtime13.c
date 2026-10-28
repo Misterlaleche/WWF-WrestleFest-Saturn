@@ -29,7 +29,7 @@ int main(void){
  wf_set_be16(&rt.actors[0],WF_A_X,0x0308u);assert(wf_state5_execute(&rt,0,&tr.state5)==WF_BLOCKED);assert(tr.state5.blocked_dependency_rom==0x001f802u);assert(rt.m68k_regs.d[2]==9u);
  /* Collision SECOND S5 $24A90 exact non-subtype side effects. */
  wf_actor_raw_t s,d,l;memset(&s,0,sizeof(s));memset(&d,0,sizeof(d));memset(&l,0,sizeof(l));wf_set_be16(&d,WF_A_REL_FLAGS,0x55aau);wf_set_be32(&d,WF_A_REL_LINK,0x12345678u);wf_set_be16(&d,WF_A_TIMER44,0x9999u);wf_set_be16(&l,WF_A_LATCHED,0x7777u);wf_state4_write_word(&d,0x8009u);
- wf_collision_pair_ctx_t c={&s,&d,&l,0,0,0};assert(wf_collision_second_apply(0x05u,&c)==WF_COLL_ACCEPT);assert(wf_be16(&d,WF_A_REL_FLAGS)==0u);assert(wf_be32(&d,WF_A_REL_LINK)==0u);assert(wf_be16(&d,WF_A_TIMER44)==0u);assert(wf_be16(&l,WF_A_LATCHED)==2u);assert(wf_be16(&d,WF_A_STATE4)==0x8009u);
+ wf_collision_pair_ctx_t c={&s,&d,&l,0,0,0,NULL};assert(wf_collision_second_apply(0x05u,&c)==WF_COLL_ACCEPT);assert(wf_be16(&d,WF_A_REL_FLAGS)==0u);assert(wf_be32(&d,WF_A_REL_LINK)==0u);assert(wf_be16(&d,WF_A_TIMER44)==0u);assert(wf_be16(&l,WF_A_LATCHED)==2u);assert(wf_be16(&d,WF_A_STATE4)==0x8009u);
 
  /* WP19 direct gameplay dependency $055A: mode2 fixed-unit and whole-credit branches. */
  memset(&rt,0,sizeof(rt));rt.g.credit_cycle_units_004b=3u;rt.g.credit_count_004f=1u;assert(wf_payment_consume_055a(&rt,2u)==1);assert(rt.g.credit_count_004f==0u&&rt.g.credit_remainder_004e==2u);

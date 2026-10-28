@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "draws": 10787,
+  "blocked_poses": 0,
+  "baseline_rom_read_calls": 246647,
+  "cached_rom_read_calls": 46697,
+  "saved_rom_read_calls": 199950,
+  "body_cache_hits": 16977,
+  "body_cache_misses": 18561,
+  "cache_bytes": 6820,
+  "pose_cache_entries": 16,
+  "production_cache_entries": 32,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "metasprite_source_sha256": "55e005b3924b7453f68b97b930c6b28704c70bd3cb67fbb2f7f354daefd8a2ae",
+  "trace_sha256": "244716f3686fde35178c72d6f9ebc24bf3434e2aaec7e4664516e775cde98fb2",
+  "snapshot_sha256": "502840379c63858b6d7792b1a5d5ab7e9779a19791033a263c7ada9b7d37608c",
+  "verifier_sha256": "d16710ba8d37cfd53f356c714e31cc94fbfd739b449ac6e651ab7298188a7f03",
+  "limits": [
+    "HOST observed dispatch pose order; central coordinates supplied",
+    "Pre-dispatch partner link may differ from the presentation-time link",
+    "ROM metadata callback calls, not CD reads, SH-2 cycles or Saturn FPS"
+  ]
+}

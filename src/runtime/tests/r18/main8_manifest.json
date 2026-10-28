@@ -1,0 +1,19 @@
+{
+  "frame": 2659,
+  "slot": 5,
+  "mode": 0,
+  "source": "validation/local-20261023/beetle-block-snapshot/workram-at-block.bin",
+  "source_sha256": "ed6fbc10674c76272e9337ccf4b4921ce03f089a79403ea6aa50b2223378bcaf",
+  "limitations": "Observed C-model actor bytes, mode and RNG; unrepresented arcade RAM is zero, not an arcade-board dump",
+  "sha256": "d1669182203c2f03daeb42f785d765faf7bb2011c2ba6cc6a7b4d74add6dc858",
+  "regs": [
+    6,
+    1836732,
+    4294902549,
+    289,
+    65535,
+    4,
+    65535,
+    0
+  ]
+}

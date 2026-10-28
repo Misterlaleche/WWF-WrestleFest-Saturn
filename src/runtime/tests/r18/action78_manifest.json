@@ -1,0 +1,31 @@
+{
+  "source_commit": "805be2a plus ROM-exact owner chain through1BE7C/CPU1D6E4",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "kind": 1,
+  "pc": "0x1c03e",
+  "recorded_blocked_status": 1,
+  "selector": "0x0078",
+  "snapshots": [
+    {
+      "fixture": "action78_snapshot_main.bin",
+      "source_snapshot": "validation/results/runtime18/action1c-controlled/after1be7c/snapshot-01458.bin",
+      "sha256": "17aabf24aa033299d43554e1adf88955fd2bb377145deb811600164a8432758b",
+      "frame": 5369,
+      "slot": 1,
+      "sequence": 1458,
+      "health": 0,
+      "derived": false
+    },
+    {
+      "fixture": "action78_snapshot_latepad.bin",
+      "source_snapshot": "validation/results/runtime18/action1c-controlled/after1d6e4/snapshot-01578.bin",
+      "sha256": "22e4c5e3d8eff7bd0a70e9d85337ab6bbc426a68eb9149133e18debed3438101",
+      "frame": 5797,
+      "slot": 1,
+      "sequence": 1578,
+      "health": 0,
+      "derived": false
+    }
+  ],
+  "comparison": "Two natural untouched RAM/D0-D7 streams; native bounded dispatcher versus unchanged ROM; full RAM, FG RAM and D0-D7 including RNG invariant."
+}

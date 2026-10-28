@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "cases": 1024,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "retained_guards": 1,
+  "source_sha256": "739c1fc5cf0e6a44119eaef1fdf5a8070475046f5ba1eeac8f8ddfcab8703a81",
+  "limits": [
+    "Controlled equal-facing states derived from HOST; no full-match or Saturn hardware claim.",
+    "Only valid controlled participant links were used; arbitrary malformed graphs remain guarded."
+  ]
+}

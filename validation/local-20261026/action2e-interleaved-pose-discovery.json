@@ -1,0 +1,386 @@
+{
+  "status": "PASS",
+  "route": "2e",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "17565269c81c684a787199f49c990724ce5c2b65d19bb20ae8658f8f64d66c04",
+  "source_character": 1,
+  "cases": [
+    {
+      "character": 0,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 1,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 2,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 3,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 4,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 5,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 6,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 7,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 8,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 9,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 10,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 11,
+      "steps": 34,
+      "phase_history": [
+        [
+          0,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          46
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "00B6"
+      ],
+      "terminal_state": 0
+    }
+  ],
+  "total_steps": 408,
+  "visual_character_pose_pairs": 24,
+  "graphic_covered_visual_pairs": null,
+  "graphic_target_visual_pairs": null,
+  "visual_character_pose_pair_list": [
+    {
+      "character": 0,
+      "pose": "0000"
+    },
+    {
+      "character": 0,
+      "pose": "00B6"
+    },
+    {
+      "character": 1,
+      "pose": "0000"
+    },
+    {
+      "character": 1,
+      "pose": "00B6"
+    },
+    {
+      "character": 2,
+      "pose": "0000"
+    },
+    {
+      "character": 2,
+      "pose": "00B6"
+    },
+    {
+      "character": 3,
+      "pose": "0000"
+    },
+    {
+      "character": 3,
+      "pose": "00B6"
+    },
+    {
+      "character": 4,
+      "pose": "0000"
+    },
+    {
+      "character": 4,
+      "pose": "00B6"
+    },
+    {
+      "character": 5,
+      "pose": "0000"
+    },
+    {
+      "character": 5,
+      "pose": "00B6"
+    },
+    {
+      "character": 6,
+      "pose": "0000"
+    },
+    {
+      "character": 6,
+      "pose": "00B6"
+    },
+    {
+      "character": 7,
+      "pose": "0000"
+    },
+    {
+      "character": 7,
+      "pose": "00B6"
+    },
+    {
+      "character": 8,
+      "pose": "0000"
+    },
+    {
+      "character": 8,
+      "pose": "00B6"
+    },
+    {
+      "character": 9,
+      "pose": "0000"
+    },
+    {
+      "character": 9,
+      "pose": "00B6"
+    },
+    {
+      "character": 10,
+      "pose": "0000"
+    },
+    {
+      "character": 10,
+      "pose": "00B6"
+    },
+    {
+      "character": 11,
+      "pose": "0000"
+    },
+    {
+      "character": 11,
+      "pose": "00B6"
+    }
+  ],
+  "graphic_action_report_sha256": null,
+  "graphic_royal_report_sha256": null,
+  "verifier_sha256": "e55bea0e134f557c957a4ccdfb326b9cf6fce1b1ee4a652439fa854561276059",
+  "action_source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+  "resolver_source_sha256": "db875a89c715c582fb06e32eced7baf810c66661a0be9efebb3ea3b40136e700",
+  "bridges_sha256": {
+    "action2e_oracle_bridge.c": "0ad6ccea5e2e76f7c830ff37edf31ae5882cbf87f6364359150007efb06190b5",
+    "action_reversal_family_oracle_bridge.c": "5be1cd86603aa2a51670a80462a1789c3bc601ce6fa89057de0ff7e696e9f1fc"
+  },
+  "compared": [
+    "RAM16KB",
+    "FG16KB",
+    "D0-D7",
+    "action descriptor after each action tick"
+  ],
+  "limits": [
+    "Character IDs other than the captured ID are controlled variants of one natural HOST snapshot.",
+    "Other actors and the full frame scheduler do not run.",
+    "Only $2052 audio output is intercepted in the ROM.",
+    "No Saturn timing or audible sound claim.",
+    "Visual pose pairs are discovered from the ROM continuation, not graphics-verified in this run.",
+    "Only characters 1, 5 and 9 appear for $2E in the generated choice matrix; nine pose pairs of artificial non-matrix variants are absent in the ROM. Dynamic reachability remains to be checked."
+  ]
+}

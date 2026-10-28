@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "returncode": 0,
+  "first_block": null,
+  "frames_requested": 14000,
+  "profile": "grapple",
+  "royal": false,
+  "command": [
+    "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\collision-24aa8-tag\\full_flow_combat_probe.exe",
+    "audit/runtime18-cd/ROM68K.BIN",
+    "audit/runtime18-cd/SPRITES.PAK",
+    "audit/runtime18-cd/R18RING.BIN",
+    "audit/runtime18-cd/HOTSPR.BIN",
+    "14000",
+    "grapple",
+    "0",
+    "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\collision-24aa8-tag"
+  ],
+  "binary_sha256": "686ad0957402fea560da8580a49a526f36bd470916823aee11acd9177eb6a66b",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "captured_native_handoff": null,
+  "pre_f4c2_snapshot_sha256": null,
+  "limits": [
+    "HOST device tape; no physical Saturn timing claim",
+    "Audio is an explicit silent output device",
+    "Frontend RAM dump stops being live after typed runtime handoff",
+    "runtime.bin is the compiler-specific typed HOST structure, not arcade RAM",
+    "allies snapshots project documented gameplay fields into RAM8KB; remaining bytes zero"
+  ]
+}

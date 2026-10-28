@@ -1,0 +1,44 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_sha256": "d39aca290608636f564c39fe068d093c60bd1d43cc2786316a3a183f0c5e6ca3",
+  "raw_ram": "1C0000..1C3FFF, 16 KiB",
+  "owners": [
+    "1086C TAG through 106DE; Royal delegates the independent raw Royal module",
+    "D1C raw scratch preservation and full 1F38 clear",
+    "FFD2 two fixed objects",
+    "1004A four compact objects",
+    "C98..D10 controller with synchronous external effects"
+  ],
+  "green": {
+    "TAG": 2181,
+    "common_and_join": 473
+  },
+  "evidence": [
+    "match-setup-red.log",
+    "match-setup-green.json",
+    "match-join-red.log",
+    "match-join-green.json",
+    "match_setup_verify_rom-independent-extra.json",
+    "match_join_verify_rom-independent-extra.json"
+  ],
+  "compared": [
+    "All 16 KiB RAM including history, occupancy and padding",
+    "D0-D7/A0-A6/RNG",
+    "BG 64 KiB, FG 16 KiB, palette 36 KiB and board regions for join",
+    "External owner entry contexts, order and region digests"
+  ],
+  "external_owners": [
+    "2AEA",
+    "2988",
+    "1FC0",
+    "1F6C",
+    "26E66",
+    "2A06",
+    "1F9E"
+  ],
+  "limits": [
+    "External owners execute intact ROM in the oracle; native backend composition is separate",
+    "Unknown table indices and topologies retain guards",
+    "CCR/A7 outside ABI; no hardware or global ROM equivalence"
+  ]
+}

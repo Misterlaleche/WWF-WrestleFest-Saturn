@@ -1,0 +1,2460 @@
+{
+  "status": "PASS",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "table_sha256": "374e1e632b6be1ac36412feafe97ca33bb4a15f799810a6a305fd582efdd7f12",
+  "descriptor_count": 180,
+  "entry_count": 519,
+  "action_dispatch_count": 143,
+  "state4_dispatch_count": 43,
+  "main_dispatch_count": 13,
+  "callback_owned_descriptor_count": 20,
+  "callback_owned_action_selectors": [
+    "3C",
+    "3D",
+    "3E",
+    "50",
+    "5D",
+    "5E",
+    "5F",
+    "60",
+    "61",
+    "62",
+    "63",
+    "6B",
+    "6E",
+    "6F",
+    "7B",
+    "88",
+    "8C",
+    "8E"
+  ],
+  "action_selectors": [
+    {
+      "id": "00",
+      "descriptor_rom": "012850",
+      "callback_rom": "012888",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0000",
+        "0092",
+        "0093",
+        "0094",
+        "0093"
+      ],
+      "durations_raw": [
+        "000A",
+        "0006",
+        "0004",
+        "000A",
+        "0002"
+      ]
+    },
+    {
+      "id": "01",
+      "descriptor_rom": "0128DE",
+      "callback_rom": "0128FA",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0085",
+        "00AB",
+        "00AC",
+        "017A",
+        "017A"
+      ],
+      "durations_raw": [
+        "0004",
+        "0008",
+        "FF00",
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "02",
+      "descriptor_rom": "0129F0",
+      "callback_rom": "012A08",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "0142",
+        "0143",
+        "00AC",
+        "017A"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "FF00",
+        "0008"
+      ]
+    },
+    {
+      "id": "03",
+      "descriptor_rom": "012AE6",
+      "callback_rom": "012B16",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "01AA",
+        "01AB",
+        "8100",
+        "0000"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0008",
+        "0008"
+      ]
+    },
+    {
+      "id": "04",
+      "descriptor_rom": "012BDA",
+      "callback_rom": "012C22",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "00A4",
+        "00A5",
+        "00A6",
+        "017A"
+      ],
+      "durations_raw": [
+        "0008",
+        "0010",
+        "FF00",
+        "0020"
+      ]
+    },
+    {
+      "id": "05",
+      "descriptor_rom": "012F08",
+      "callback_rom": "012F40",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "0096",
+        "0097",
+        "0098",
+        "0099",
+        "009A",
+        "009B"
+      ],
+      "durations_raw": [
+        "0006",
+        "0006",
+        "0006",
+        "0006",
+        "0004",
+        "000C"
+      ]
+    },
+    {
+      "id": "06",
+      "descriptor_rom": "013020",
+      "callback_rom": "013034",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "00AF",
+        "00B0",
+        "0000"
+      ],
+      "durations_raw": [
+        "0020",
+        "0018",
+        "0020"
+      ]
+    },
+    {
+      "id": "07",
+      "descriptor_rom": "0130E6",
+      "callback_rom": "013116",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "00BF",
+        "00C0",
+        "00C1",
+        "00C0"
+      ],
+      "durations_raw": [
+        "0004",
+        "0008",
+        "0014",
+        "0004"
+      ]
+    },
+    {
+      "id": "08",
+      "descriptor_rom": "01316C",
+      "callback_rom": "013180",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "00CB",
+        "00CC",
+        "00CD"
+      ],
+      "durations_raw": [
+        "0006",
+        "000C",
+        "0008"
+      ]
+    },
+    {
+      "id": "09",
+      "descriptor_rom": "0135C8",
+      "callback_rom": "0135EC",
+      "kind": 1,
+      "frame_count": 7,
+      "poses_raw": [
+        "018B",
+        "00D8",
+        "00D9",
+        "00DA",
+        "00DB",
+        "00DC",
+        "00DD"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010",
+        "000C",
+        "0016",
+        "000A",
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "0A",
+      "descriptor_rom": "013734",
+      "callback_rom": "013744",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "00E4",
+        "00E5"
+      ],
+      "durations_raw": [
+        "0014",
+        "0010"
+      ]
+    },
+    {
+      "id": "0B",
+      "descriptor_rom": "013A1E",
+      "callback_rom": "013A2E",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "00F1",
+        "00F2"
+      ],
+      "durations_raw": [
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "0C",
+      "descriptor_rom": "013B98",
+      "callback_rom": "013BC8",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "01C1",
+        "01C2"
+      ],
+      "durations_raw": [
+        "0008",
+        "0010",
+        "0018",
+        "FF00"
+      ]
+    },
+    {
+      "id": "0D",
+      "descriptor_rom": "0153A0",
+      "callback_rom": "0153BC",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "015D",
+        "015E",
+        "015E"
+      ],
+      "durations_raw": [
+        "0008",
+        "0010",
+        "0018",
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "0E",
+      "descriptor_rom": "013D26",
+      "callback_rom": "013D46",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "00EA",
+        "00EB",
+        "00EB",
+        "00EC"
+      ],
+      "durations_raw": [
+        "0008",
+        "0010",
+        "0010",
+        "FF00",
+        "FF00",
+        "FF00"
+      ]
+    },
+    {
+      "id": "0F",
+      "descriptor_rom": "013F78",
+      "callback_rom": "013F90",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "01A6",
+        "01A7"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "0014",
+        "FF00"
+      ]
+    },
+    {
+      "id": "10",
+      "descriptor_rom": "0141D8",
+      "callback_rom": "0141EC",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "00EF",
+        "00F0",
+        "00F0"
+      ],
+      "durations_raw": [
+        "0014",
+        "FF00",
+        "0008"
+      ]
+    },
+    {
+      "id": "11",
+      "descriptor_rom": "014658",
+      "callback_rom": "014670",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "00EF",
+        "00F0"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0028",
+        "FF00"
+      ]
+    },
+    {
+      "id": "12",
+      "descriptor_rom": "0147E6",
+      "callback_rom": "014826",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "008B",
+        "008C",
+        "008E",
+        "008F",
+        "015F",
+        "01B1"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "000C",
+        "000C",
+        "0020",
+        "FF00"
+      ]
+    },
+    {
+      "id": "13",
+      "descriptor_rom": "0149E2",
+      "callback_rom": "0149F2",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "00ED",
+        "00EE"
+      ],
+      "durations_raw": [
+        "0020",
+        "FF00"
+      ]
+    },
+    {
+      "id": "14",
+      "descriptor_rom": "014B48",
+      "callback_rom": "014B64",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "0191",
+        "0192",
+        "0192"
+      ],
+      "durations_raw": [
+        "0008",
+        "0010",
+        "0008",
+        "FF00",
+        "0008"
+      ]
+    },
+    {
+      "id": "15",
+      "descriptor_rom": "014CE0",
+      "callback_rom": "014CF4",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "00F8",
+        "00F9",
+        "00FA"
+      ],
+      "durations_raw": [
+        "000A",
+        "000E",
+        "0010"
+      ]
+    },
+    {
+      "id": "16",
+      "descriptor_rom": "014D8A",
+      "callback_rom": "014DA2",
+      "kind": 2,
+      "frame_count": 4,
+      "poses_raw": [
+        "0043",
+        "0044",
+        "0045",
+        "0046"
+      ],
+      "durations_raw": [
+        "000A",
+        "000A",
+        "000A",
+        "000A"
+      ]
+    },
+    {
+      "id": "17",
+      "descriptor_rom": "014E2C",
+      "callback_rom": "014E40",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "00FE",
+        "00FF",
+        "0100"
+      ],
+      "durations_raw": [
+        "0008",
+        "000A",
+        "0010"
+      ]
+    },
+    {
+      "id": "18",
+      "descriptor_rom": "014EF0",
+      "callback_rom": "014F08",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "0101",
+        "0102",
+        "0103",
+        "0104"
+      ],
+      "durations_raw": [
+        "000C",
+        "0008",
+        "0008",
+        "000C"
+      ]
+    },
+    {
+      "id": "19",
+      "descriptor_rom": "014FB6",
+      "callback_rom": "015006",
+      "kind": 1,
+      "frame_count": 8,
+      "poses_raw": [
+        "01F7",
+        "01F8",
+        "01F9",
+        "01FA",
+        "01FB",
+        "01FC",
+        "01FD",
+        "006A"
+      ],
+      "durations_raw": [
+        "000C",
+        "0008",
+        "0004",
+        "000A",
+        "FF00",
+        "000C",
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "1A",
+      "descriptor_rom": "01520C",
+      "callback_rom": "015228",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0144",
+        "0145",
+        "0146",
+        "0147",
+        "0148"
+      ],
+      "durations_raw": [
+        "000C",
+        "0008",
+        "000A",
+        "000A",
+        "000C"
+      ]
+    },
+    {
+      "id": "1B",
+      "descriptor_rom": "015384",
+      "callback_rom": "0153BC",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "015B",
+        "015C",
+        "015C"
+      ],
+      "durations_raw": [
+        "0008",
+        "0018",
+        "0018",
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "1C",
+      "descriptor_rom": "015668",
+      "callback_rom": "01567C",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0161",
+        "0162",
+        "0163"
+      ],
+      "durations_raw": [
+        "000C",
+        "0016",
+        "0016"
+      ]
+    },
+    {
+      "id": "1D",
+      "descriptor_rom": "01585C",
+      "callback_rom": "015870",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0161",
+        "016C",
+        "016D"
+      ],
+      "durations_raw": [
+        "000C",
+        "0016",
+        "0016"
+      ]
+    },
+    {
+      "id": "1E",
+      "descriptor_rom": "0159F8",
+      "callback_rom": "015A20",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0074",
+        "0075",
+        "0076"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0008"
+      ]
+    },
+    {
+      "id": "1F",
+      "descriptor_rom": "0159F8",
+      "callback_rom": "015A20",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0074",
+        "0075",
+        "0076"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0008"
+      ]
+    },
+    {
+      "id": "20",
+      "descriptor_rom": "016A06",
+      "callback_rom": "016A16",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "00AD",
+        "00AE"
+      ],
+      "durations_raw": [
+        "0006",
+        "0004"
+      ]
+    },
+    {
+      "id": "21",
+      "descriptor_rom": "015B24",
+      "callback_rom": "015B34",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "00B4",
+        "00B5"
+      ],
+      "durations_raw": [
+        "000E",
+        "0018"
+      ]
+    },
+    {
+      "id": "22",
+      "descriptor_rom": "015B6C",
+      "callback_rom": "015B8C",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "018B",
+        "00CE",
+        "00CF",
+        "00D0",
+        "00D1",
+        "00D2"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010",
+        "000A",
+        "000A",
+        "0008",
+        "0020"
+      ]
+    },
+    {
+      "id": "23",
+      "descriptor_rom": "015CE0",
+      "callback_rom": "015D08",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "01D6",
+        "01D7"
+      ],
+      "durations_raw": [
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "24",
+      "descriptor_rom": "01603A",
+      "callback_rom": "016056",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0107",
+        "0108",
+        "0109",
+        "010A",
+        "010B"
+      ],
+      "durations_raw": [
+        "0006",
+        "000A",
+        "0010",
+        "0006",
+        "0012"
+      ]
+    },
+    {
+      "id": "25",
+      "descriptor_rom": "016116",
+      "callback_rom": "01612E",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "00F8",
+        "0124",
+        "0125",
+        "0126"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "0010",
+        "0018"
+      ]
+    },
+    {
+      "id": "26",
+      "descriptor_rom": "01623C",
+      "callback_rom": "016258",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0204",
+        "0205",
+        "0206",
+        "0207",
+        "0208"
+      ],
+      "durations_raw": [
+        "0014",
+        "0008",
+        "0010",
+        "FF00",
+        "0020"
+      ]
+    },
+    {
+      "id": "27",
+      "descriptor_rom": "016388",
+      "callback_rom": "01639C",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "00BD",
+        "00BE",
+        "0000"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "0020"
+      ]
+    },
+    {
+      "id": "28",
+      "descriptor_rom": "01641E",
+      "callback_rom": "016436",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "014E",
+        "014F",
+        "0150",
+        "0151"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010",
+        "FF00",
+        "0020"
+      ]
+    },
+    {
+      "id": "29",
+      "descriptor_rom": "01656A",
+      "callback_rom": "016582",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "00F5",
+        "00F6",
+        "00F7",
+        "01D2"
+      ],
+      "durations_raw": [
+        "0014",
+        "0008",
+        "000E",
+        "000E"
+      ]
+    },
+    {
+      "id": "2A",
+      "descriptor_rom": "016614",
+      "callback_rom": "01662C",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "00A7",
+        "00A8",
+        "00A9",
+        "00AA"
+      ],
+      "durations_raw": [
+        "0004",
+        "0006",
+        "0004",
+        "FF00"
+      ]
+    },
+    {
+      "id": "2B",
+      "descriptor_rom": "01667A",
+      "callback_rom": "01669A",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "011B",
+        "011C",
+        "011D",
+        "011E",
+        "011F",
+        "0120"
+      ],
+      "durations_raw": [
+        "0010",
+        "0008",
+        "000A",
+        "000A",
+        "FF00",
+        "001C"
+      ]
+    },
+    {
+      "id": "2C",
+      "descriptor_rom": "0168D8",
+      "callback_rom": "0168F8",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "0107",
+        "0108",
+        "0114",
+        "0115",
+        "0116",
+        "0117"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "000C",
+        "0014",
+        "000C",
+        "0010"
+      ]
+    },
+    {
+      "id": "2D",
+      "descriptor_rom": "0169FA",
+      "callback_rom": "016A16",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "0095"
+      ],
+      "durations_raw": [
+        "000A"
+      ]
+    },
+    {
+      "id": "2E",
+      "descriptor_rom": "016A56",
+      "callback_rom": "016A7A",
+      "kind": 1,
+      "frame_count": 7,
+      "poses_raw": [
+        "00B6",
+        "00B7",
+        "00B8",
+        "00B9",
+        "00BA",
+        "00BB",
+        "00BC"
+      ],
+      "durations_raw": [
+        "0020",
+        "0002",
+        "0008",
+        "0009",
+        "0006",
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "2F",
+      "descriptor_rom": "016C5E",
+      "callback_rom": "016C9E",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "0107",
+        "0108",
+        "0110",
+        "020E",
+        "020F",
+        "0000"
+      ],
+      "durations_raw": [
+        "0006",
+        "000A",
+        "0008",
+        "0018",
+        "0010",
+        "0038"
+      ]
+    },
+    {
+      "id": "30",
+      "descriptor_rom": "016E28",
+      "callback_rom": "016E48",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "010D",
+        "010E",
+        "010F",
+        "01F0",
+        "01F1",
+        "01F2"
+      ],
+      "durations_raw": [
+        "0010",
+        "0008",
+        "0006",
+        "0012",
+        "0016",
+        "000E"
+      ]
+    },
+    {
+      "id": "31",
+      "descriptor_rom": "016FD8",
+      "callback_rom": "017000",
+      "kind": 1,
+      "frame_count": 8,
+      "poses_raw": [
+        "00C2",
+        "00C3",
+        "00C4",
+        "00C5",
+        "00C6",
+        "00C7",
+        "00C8",
+        "00C9"
+      ],
+      "durations_raw": [
+        "0020",
+        "0004",
+        "0004",
+        "0004",
+        "0004",
+        "FF00",
+        "0008",
+        "001C"
+      ]
+    },
+    {
+      "id": "32",
+      "descriptor_rom": "01716C",
+      "callback_rom": "017194",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0159",
+        "015A",
+        "004D"
+      ],
+      "durations_raw": [
+        "0018",
+        "0008",
+        "0014"
+      ]
+    },
+    {
+      "id": "33",
+      "descriptor_rom": "017266",
+      "callback_rom": "017282",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0131",
+        "0132",
+        "0133",
+        "0134",
+        "0135"
+      ],
+      "durations_raw": [
+        "0014",
+        "000C",
+        "0008",
+        "FF00",
+        "0018"
+      ]
+    },
+    {
+      "id": "34",
+      "descriptor_rom": "01747E",
+      "callback_rom": "0174AA",
+      "kind": 1,
+      "frame_count": 9,
+      "poses_raw": [
+        "0090",
+        "0091",
+        "0138",
+        "0139",
+        "013A",
+        "013B",
+        "013C",
+        "013D",
+        "0068"
+      ],
+      "durations_raw": [
+        "0008",
+        "0009",
+        "000A",
+        "0008",
+        "0008",
+        "FF00",
+        "0010",
+        "0010",
+        "0028"
+      ]
+    },
+    {
+      "id": "35",
+      "descriptor_rom": "0175A8",
+      "callback_rom": "0175C4",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "00E6",
+        "00E7",
+        "00E8"
+      ],
+      "durations_raw": [
+        "0008",
+        "0014",
+        "0010",
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "36",
+      "descriptor_rom": "017912",
+      "callback_rom": "01792A",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "00F8",
+        "012B",
+        "012C",
+        "012D"
+      ],
+      "durations_raw": [
+        "0008",
+        "0010",
+        "0014",
+        "0014"
+      ]
+    },
+    {
+      "id": "37",
+      "descriptor_rom": "017A40",
+      "callback_rom": "017A58",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "018B",
+        "018C",
+        "018D",
+        "01CF"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0008",
+        "0008"
+      ]
+    },
+    {
+      "id": "38",
+      "descriptor_rom": "017AFE",
+      "callback_rom": "017B12",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "006A",
+        "006B",
+        "006A"
+      ],
+      "durations_raw": [
+        "0006",
+        "0006",
+        "0006"
+      ]
+    },
+    {
+      "id": "39",
+      "descriptor_rom": "017B5C",
+      "callback_rom": "017B70",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "01E2",
+        "01E3",
+        "01E4"
+      ],
+      "durations_raw": [
+        "0006",
+        "0004",
+        "000A"
+      ]
+    },
+    {
+      "id": "3A",
+      "descriptor_rom": "017BF8",
+      "callback_rom": "017C18",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "0107",
+        "0108",
+        "0197",
+        "0198",
+        "0199",
+        "0222"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0008",
+        "0010",
+        "000C",
+        "0010"
+      ]
+    },
+    {
+      "id": "3B",
+      "descriptor_rom": "017CF6",
+      "callback_rom": "017D12",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "019B",
+        "019C",
+        "019D",
+        "019E",
+        "019F"
+      ],
+      "durations_raw": [
+        "0008",
+        "000C",
+        "0020",
+        "0018",
+        "0018"
+      ]
+    },
+    {
+      "id": "3C",
+      "descriptor_rom": "018022",
+      "callback_rom": "018028",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "3D",
+      "descriptor_rom": "0114AC",
+      "callback_rom": "0114B2",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "3E",
+      "descriptor_rom": "018314",
+      "callback_rom": "01831A",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "3F",
+      "descriptor_rom": "01835E",
+      "callback_rom": "01836E",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "006C",
+        "006C"
+      ],
+      "durations_raw": [
+        "FF00",
+        "000C"
+      ]
+    },
+    {
+      "id": "40",
+      "descriptor_rom": "0183EC",
+      "callback_rom": "018404",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "01AF",
+        "0084"
+      ],
+      "durations_raw": [
+        "0004",
+        "0004",
+        "FF00",
+        "0008"
+      ]
+    },
+    {
+      "id": "41",
+      "descriptor_rom": "01848C",
+      "callback_rom": "018498",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "01A4"
+      ],
+      "durations_raw": [
+        "000E"
+      ]
+    },
+    {
+      "id": "42",
+      "descriptor_rom": "017180",
+      "callback_rom": "017194",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0157",
+        "0158",
+        "0158"
+      ],
+      "durations_raw": [
+        "0008",
+        "000C",
+        "0004"
+      ]
+    },
+    {
+      "id": "43",
+      "descriptor_rom": "018518",
+      "callback_rom": "01853C",
+      "kind": 1,
+      "frame_count": 7,
+      "poses_raw": [
+        "01B2",
+        "01B3",
+        "01B4",
+        "01B5",
+        "01B6",
+        "01B7",
+        "01B8"
+      ],
+      "durations_raw": [
+        "000E",
+        "0008",
+        "0010",
+        "000E",
+        "0006",
+        "FF00",
+        "0014"
+      ]
+    },
+    {
+      "id": "44",
+      "descriptor_rom": "01863C",
+      "callback_rom": "018668",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "01BA",
+        "01BB",
+        "01BC",
+        "01BD",
+        "01BE",
+        "01BF"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010",
+        "000A",
+        "000A",
+        "000A",
+        "0018"
+      ]
+    },
+    {
+      "id": "45",
+      "descriptor_rom": "0128DE",
+      "callback_rom": "0128FA",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0085",
+        "00AB",
+        "00AC",
+        "017A",
+        "017A"
+      ],
+      "durations_raw": [
+        "0004",
+        "0008",
+        "FF00",
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "46",
+      "descriptor_rom": "014424",
+      "callback_rom": "014458",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "01B0",
+        "01B1",
+        "01B1"
+      ],
+      "durations_raw": [
+        "0008",
+        "000C",
+        "0010",
+        "FF00",
+        "0008"
+      ]
+    },
+    {
+      "id": "47",
+      "descriptor_rom": "014440",
+      "callback_rom": "014458",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "01C1",
+        "01C2"
+      ],
+      "durations_raw": [
+        "0008",
+        "000C",
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "48",
+      "descriptor_rom": "0132D8",
+      "callback_rom": "0132F4",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "001A",
+        "001B",
+        "001C"
+      ],
+      "durations_raw": [
+        "0006",
+        "0006",
+        "0006",
+        "0006",
+        "0006"
+      ]
+    },
+    {
+      "id": "49",
+      "descriptor_rom": "013434",
+      "callback_rom": "013444",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "01E9",
+        "01EA"
+      ],
+      "durations_raw": [
+        "0010",
+        "FF00"
+      ]
+    },
+    {
+      "id": "4A",
+      "descriptor_rom": "0180AC",
+      "callback_rom": "0180C4",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "001D"
+      ],
+      "durations_raw": [
+        "FF00"
+      ]
+    },
+    {
+      "id": "4B",
+      "descriptor_rom": "0181EC",
+      "callback_rom": "01820C",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "006E",
+        "006F"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "4C",
+      "descriptor_rom": "018772",
+      "callback_rom": "01878A",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "0060",
+        "0061",
+        "0066",
+        "0067"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "4D",
+      "descriptor_rom": "01892C",
+      "callback_rom": "018948",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "0062",
+        "0063",
+        "0000",
+        "0066",
+        "0067"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "FF00",
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "4E",
+      "descriptor_rom": "018A90",
+      "callback_rom": "018AA0",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0066",
+        "0067"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "4F",
+      "descriptor_rom": "018AFE",
+      "callback_rom": "018B0E",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0066",
+        "0067"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "50",
+      "descriptor_rom": "018B8E",
+      "callback_rom": "018B94",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "51",
+      "descriptor_rom": "018BF4",
+      "callback_rom": "018C24",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0015",
+        "001D"
+      ],
+      "durations_raw": [
+        "FF00",
+        "0002"
+      ]
+    },
+    {
+      "id": "52",
+      "descriptor_rom": "018D12",
+      "callback_rom": "018D2E",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0168",
+        "0169"
+      ],
+      "durations_raw": [
+        "0016",
+        "0016"
+      ]
+    },
+    {
+      "id": "53",
+      "descriptor_rom": "018E3C",
+      "callback_rom": "018E64",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0170",
+        "0171"
+      ],
+      "durations_raw": [
+        "0016",
+        "0016"
+      ]
+    },
+    {
+      "id": "54",
+      "descriptor_rom": "018F62",
+      "callback_rom": "018F82",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "01C0",
+        "01C0"
+      ],
+      "durations_raw": [
+        "FF00",
+        "0020"
+      ]
+    },
+    {
+      "id": "55",
+      "descriptor_rom": "018FEE",
+      "callback_rom": "019002",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "017E",
+        "017F",
+        "0180"
+      ],
+      "durations_raw": [
+        "0014",
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "56",
+      "descriptor_rom": "019076",
+      "callback_rom": "019086",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0174",
+        "0175"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008"
+      ]
+    },
+    {
+      "id": "57",
+      "descriptor_rom": "01913E",
+      "callback_rom": "01914E",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0186",
+        "0187"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "58",
+      "descriptor_rom": "0191B4",
+      "callback_rom": "0191C8",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0181",
+        "0182",
+        "0183"
+      ],
+      "durations_raw": [
+        "0018",
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "59",
+      "descriptor_rom": "019264",
+      "callback_rom": "019274",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "018E",
+        "018F"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "5A",
+      "descriptor_rom": "0192F2",
+      "callback_rom": "019302",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "01A8",
+        "01A9"
+      ],
+      "durations_raw": [
+        "0010",
+        "000C"
+      ]
+    },
+    {
+      "id": "5B",
+      "descriptor_rom": "01939A",
+      "callback_rom": "0193AA",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0176",
+        "0177"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "5C",
+      "descriptor_rom": "019436",
+      "callback_rom": "01944A",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0178",
+        "0179",
+        "017A"
+      ],
+      "durations_raw": [
+        "0010",
+        "0008",
+        "0008"
+      ]
+    },
+    {
+      "id": "5D",
+      "descriptor_rom": "019530",
+      "callback_rom": "019536",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "5E",
+      "descriptor_rom": "019530",
+      "callback_rom": "019536",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "5F",
+      "descriptor_rom": "019530",
+      "callback_rom": "019536",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "60",
+      "descriptor_rom": "019530",
+      "callback_rom": "019536",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "61",
+      "descriptor_rom": "0194CA",
+      "callback_rom": "0194D0",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "62",
+      "descriptor_rom": "019530",
+      "callback_rom": "019536",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "63",
+      "descriptor_rom": "019530",
+      "callback_rom": "019536",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "64",
+      "descriptor_rom": "019608",
+      "callback_rom": "019618",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0016",
+        "0013"
+      ],
+      "durations_raw": [
+        "0008",
+        "FF00"
+      ]
+    },
+    {
+      "id": "65",
+      "descriptor_rom": "019664",
+      "callback_rom": "019670",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "0219"
+      ],
+      "durations_raw": [
+        "0008"
+      ]
+    },
+    {
+      "id": "66",
+      "descriptor_rom": "01969E",
+      "callback_rom": "0196AE",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "004B",
+        "004C"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "67",
+      "descriptor_rom": "019776",
+      "callback_rom": "01978A",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "01D9",
+        "01DA",
+        "01DB"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010",
+        "0008"
+      ]
+    },
+    {
+      "id": "68",
+      "descriptor_rom": "01981E",
+      "callback_rom": "019832",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0016",
+        "0013",
+        "0068"
+      ],
+      "durations_raw": [
+        "FF00",
+        "0040",
+        "0010"
+      ]
+    },
+    {
+      "id": "69",
+      "descriptor_rom": "0199FC",
+      "callback_rom": "019A20",
+      "kind": 1,
+      "frame_count": 7,
+      "poses_raw": [
+        "0020",
+        "0021",
+        "0022",
+        "0023",
+        "0024",
+        "0025",
+        "0026"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "000C",
+        "000C",
+        "000C",
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "6A",
+      "descriptor_rom": "019B3C",
+      "callback_rom": "019B50",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0013",
+        "0068",
+        "0000"
+      ],
+      "durations_raw": [
+        "0040",
+        "0010",
+        "0008"
+      ]
+    },
+    {
+      "id": "6B",
+      "descriptor_rom": "019BBA",
+      "callback_rom": "019BC0",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "6C",
+      "descriptor_rom": "019C28",
+      "callback_rom": "019C48",
+      "kind": 1,
+      "frame_count": 6,
+      "poses_raw": [
+        "0027",
+        "0028",
+        "0029",
+        "002A",
+        "002B",
+        "002A"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "000C",
+        "000C",
+        "FF00",
+        "0010"
+      ]
+    },
+    {
+      "id": "6D",
+      "descriptor_rom": "019CF2",
+      "callback_rom": "019D06",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0163",
+        "0163",
+        "0010"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "6E",
+      "descriptor_rom": "019D7C",
+      "callback_rom": "019D82",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "6F",
+      "descriptor_rom": "019E0E",
+      "callback_rom": "019E14",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "70",
+      "descriptor_rom": "019E80",
+      "callback_rom": "019EA0",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0072",
+        "0073"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008"
+      ]
+    },
+    {
+      "id": "71",
+      "descriptor_rom": "019F0E",
+      "callback_rom": "019F1E",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0055",
+        "0056"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "72",
+      "descriptor_rom": "019FC6",
+      "callback_rom": "019FDA",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0000",
+        "01CD",
+        "01CE"
+      ],
+      "durations_raw": [
+        "000A",
+        "000A",
+        "000A"
+      ]
+    },
+    {
+      "id": "73",
+      "descriptor_rom": "01A014",
+      "callback_rom": "01A020",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "0050"
+      ],
+      "durations_raw": [
+        "000C"
+      ]
+    },
+    {
+      "id": "74",
+      "descriptor_rom": "01A050",
+      "callback_rom": "01A05C",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "0052"
+      ],
+      "durations_raw": [
+        "000C"
+      ]
+    },
+    {
+      "id": "75",
+      "descriptor_rom": "01A08C",
+      "callback_rom": "01A0AC",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "0068"
+      ],
+      "durations_raw": [
+        "0028"
+      ]
+    },
+    {
+      "id": "76",
+      "descriptor_rom": "01A0FE",
+      "callback_rom": "01A10E",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "016C",
+        "000F"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010"
+      ]
+    },
+    {
+      "id": "77",
+      "descriptor_rom": "01A148",
+      "callback_rom": "01A154",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "01DF"
+      ],
+      "durations_raw": [
+        "0018"
+      ]
+    },
+    {
+      "id": "78",
+      "descriptor_rom": "01A186",
+      "callback_rom": "01A192",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "01D8"
+      ],
+      "durations_raw": [
+        "0010"
+      ]
+    },
+    {
+      "id": "79",
+      "descriptor_rom": "01A1BE",
+      "callback_rom": "01A28E",
+      "kind": 1,
+      "frame_count": 8,
+      "poses_raw": [
+        "0059",
+        "005A",
+        "005B",
+        "0059",
+        "005A",
+        "005B",
+        "005C",
+        "005D"
+      ],
+      "durations_raw": [
+        "0006",
+        "0006",
+        "0006",
+        "0006",
+        "0006",
+        "0006",
+        "0010",
+        "0030"
+      ]
+    },
+    {
+      "id": "7A",
+      "descriptor_rom": "01A348",
+      "callback_rom": "01A364",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "002B"
+      ],
+      "durations_raw": [
+        "FF00"
+      ]
+    },
+    {
+      "id": "7B",
+      "descriptor_rom": "01A532",
+      "callback_rom": "01A538",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "7C",
+      "descriptor_rom": "01A594",
+      "callback_rom": "01A5A0",
+      "kind": 1,
+      "frame_count": 1,
+      "poses_raw": [
+        "0221"
+      ],
+      "durations_raw": [
+        "0008"
+      ]
+    },
+    {
+      "id": "7D",
+      "descriptor_rom": "01A5F4",
+      "callback_rom": "01A604",
+      "kind": 2,
+      "frame_count": 2,
+      "poses_raw": [
+        "014E",
+        "014F"
+      ],
+      "durations_raw": [
+        "001C",
+        "000C"
+      ]
+    },
+    {
+      "id": "7E",
+      "descriptor_rom": "01A674",
+      "callback_rom": "01A688",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "010D",
+        "010E",
+        "010F"
+      ],
+      "durations_raw": [
+        "0010",
+        "001C",
+        "000C"
+      ]
+    },
+    {
+      "id": "7F",
+      "descriptor_rom": "01A704",
+      "callback_rom": "01A718",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "011B",
+        "011C",
+        "011D"
+      ],
+      "durations_raw": [
+        "0014",
+        "001C",
+        "000C"
+      ]
+    },
+    {
+      "id": "80",
+      "descriptor_rom": "01A794",
+      "callback_rom": "01A7B4",
+      "kind": 2,
+      "frame_count": 2,
+      "poses_raw": [
+        "01B2",
+        "01B3"
+      ],
+      "durations_raw": [
+        "001C",
+        "000C"
+      ]
+    },
+    {
+      "id": "81",
+      "descriptor_rom": "01A7A4",
+      "callback_rom": "01A7B4",
+      "kind": 2,
+      "frame_count": 2,
+      "poses_raw": [
+        "0107",
+        "0108"
+      ],
+      "durations_raw": [
+        "001C",
+        "000C"
+      ]
+    },
+    {
+      "id": "82",
+      "descriptor_rom": "01A822",
+      "callback_rom": "01A832",
+      "kind": 2,
+      "frame_count": 2,
+      "poses_raw": [
+        "01BA",
+        "01BB"
+      ],
+      "durations_raw": [
+        "001C",
+        "000C"
+      ]
+    },
+    {
+      "id": "83",
+      "descriptor_rom": "01A8A6",
+      "callback_rom": "01A8B6",
+      "kind": 2,
+      "frame_count": 2,
+      "poses_raw": [
+        "01F7",
+        "01F8"
+      ],
+      "durations_raw": [
+        "0018",
+        "0010"
+      ]
+    },
+    {
+      "id": "84",
+      "descriptor_rom": "01A940",
+      "callback_rom": "01A950",
+      "kind": 2,
+      "frame_count": 2,
+      "poses_raw": [
+        "0131",
+        "0132"
+      ],
+      "durations_raw": [
+        "0018",
+        "0010"
+      ]
+    },
+    {
+      "id": "85",
+      "descriptor_rom": "01A9D4",
+      "callback_rom": "01A9E4",
+      "kind": 2,
+      "frame_count": 2,
+      "poses_raw": [
+        "0204",
+        "0205"
+      ],
+      "durations_raw": [
+        "0018",
+        "0010"
+      ]
+    },
+    {
+      "id": "86",
+      "descriptor_rom": "01AA76",
+      "callback_rom": "01AA9A",
+      "kind": 2,
+      "frame_count": 3,
+      "poses_raw": [
+        "0090",
+        "0091",
+        "0138"
+      ],
+      "durations_raw": [
+        "0010",
+        "000A",
+        "000A"
+      ]
+    },
+    {
+      "id": "87",
+      "descriptor_rom": "01AA8A",
+      "callback_rom": "01AA9A",
+      "kind": 2,
+      "frame_count": 2,
+      "poses_raw": [
+        "0144",
+        "0145"
+      ],
+      "durations_raw": [
+        "0012",
+        "000A"
+      ]
+    },
+    {
+      "id": "88",
+      "descriptor_rom": "01AB32",
+      "callback_rom": "01AB38",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "89",
+      "descriptor_rom": "01ABA4",
+      "callback_rom": "01ABC0",
+      "kind": 1,
+      "frame_count": 5,
+      "poses_raw": [
+        "010D",
+        "01C4",
+        "01C5",
+        "01C6",
+        "01C7"
+      ],
+      "durations_raw": [
+        "0018",
+        "0010",
+        "0010",
+        "000C",
+        "000C"
+      ]
+    },
+    {
+      "id": "8A",
+      "descriptor_rom": "01AC62",
+      "callback_rom": "01AC72",
+      "kind": 1,
+      "frame_count": 2,
+      "poses_raw": [
+        "0127",
+        "0000"
+      ],
+      "durations_raw": [
+        "0020",
+        "0030"
+      ]
+    },
+    {
+      "id": "8B",
+      "descriptor_rom": "01AD10",
+      "callback_rom": "01AD24",
+      "kind": 1,
+      "frame_count": 3,
+      "poses_raw": [
+        "0216",
+        "0217",
+        "0216"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0008"
+      ]
+    },
+    {
+      "id": "8C",
+      "descriptor_rom": "01AD76",
+      "callback_rom": "01AD7C",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    },
+    {
+      "id": "8D",
+      "descriptor_rom": "017F9A",
+      "callback_rom": "017FB2",
+      "kind": 1,
+      "frame_count": 4,
+      "poses_raw": [
+        "00B2",
+        "00B3",
+        "001F",
+        "0012"
+      ],
+      "durations_raw": [
+        "0006",
+        "FF00",
+        "FF00",
+        "FF00"
+      ]
+    },
+    {
+      "id": "8E",
+      "descriptor_rom": "01AE28",
+      "callback_rom": "01AE2E",
+      "kind": 0,
+      "frame_count": 0,
+      "poses_raw": [],
+      "durations_raw": []
+    }
+  ],
+  "short_records": [],
+  "compared": [
+    "ROM callback/kind for every generated descriptor, count for frame-based descriptors",
+    "ROM duration and pose for every stored animation entry",
+    "all 13 main, 143 action, and 43 state-4 dispatch pointers"
+  ],
+  "limits": [
+    "This audits data tables, not reachable callback branches or on-screen sprites.",
+    "Callback-owned descriptors contain executable code after kind, not a frame count."
+  ]
+}

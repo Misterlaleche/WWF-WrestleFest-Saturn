@@ -17,26 +17,26 @@ def directory_files(data):
         assert lba==int.from_bytes(r[6:10],'big');assert sz==int.from_bytes(r[14:18],'big');assert name not in files;assert lba*2048+sz<=len(data)
         files[name]={'lba':lba,'size':sz,'data':data[lba*2048:lba*2048+sz]}
     return files
-def verify(root,iso,binary,cue):
-    root=Path(root);iso=Path(iso);binary=Path(binary);cue=Path(cue);mk=(root/'Makefile.saturn-disc').read_text();data=iso.read_bytes();raw=binary.read_bytes();ct=cue.read_text()
+def verify(root,iso,binary,cue,build_dir='audit/runtime18-build'):
+    root=Path(root);iso=Path(iso);binary=Path(binary);cue=Path(cue);build_dir=Path(build_dir);mk=(root/'Makefile.saturn-disc').read_text();data=iso.read_bytes();raw=binary.read_bytes();ct=cue.read_text()
     assert len(data)%2048==0 and data[:16]==b'SEGA SEGASATURN '
-    ip=(root/'audit/runtime18-build/IP.BIN').read_bytes()
+    ip=(root/build_dir/'IP.BIN').read_bytes()
     assert data[:len(ip)] == ip, 'ISO boot area differs from SDK IP.BIN'
-    assert data[0xf0:0xf4] == bytes.fromhex('06004000')
-    assert data[0xe4:0xe8] == bytes.fromhex('06004000')
-    assert data[0xec:0xf0] == bytes.fromhex('06001e00')
+    assert data[0xf0:0xf4] == int(setting(mk,'IP_1ST_READ_ADDR'),0).to_bytes(4,'big')
+    assert data[0xe4:0xe8] == int(setting(mk,'IP_MASTER_STACK_ADDR'),0).to_bytes(4,'big')
+    assert data[0xec:0xf0] == int(setting(mk,'IP_SLAVE_STACK_ADDR'),0).to_bytes(4,'big')
     assert setting(mk,'IP_VERSION').encode() in data[:256];assert setting(mk,'IP_TITLE').encode() in data[:256];assert b'U' in data[0x40:0x50]
     assert data[16*2048+1:16*2048+6]==b'CD001'
     assert ct==f'FILE "{binary.name}" BINARY\n  TRACK 01 MODE1/2352\n    INDEX 01 00:00:00\n'
     assert len(raw)==len(data)//2048*2352
     for lba in range(len(data)//2048):
         expected=sector(data[lba*2048:(lba+1)*2048],lba);actual=raw[lba*2352:(lba+1)*2352];assert actual==expected,f'raw sector mismatch {lba}'
-    files=directory_files(data);expected={p.name:p for p in (root/'audit/runtime18-cd').iterdir() if p.is_file() and p.name!='A.BIN'};expected['A.BIN']=root/'audit/runtime18-build'/(setting(mk,'SH_PROGRAM')+'.bin')
+    files=directory_files(data);expected={p.name:p for p in (root/'audit/runtime18-cd').iterdir() if p.is_file() and p.name!='A.BIN'};expected['A.BIN']=root/build_dir/(setting(mk,'SH_PROGRAM')+'.bin')
     assert set(files)==set(expected),f'CDFS root mismatch missing={set(expected)-set(files)} extra={set(files)-set(expected)}'
     manifest=[]
     for name,p in sorted(expected.items()):
         b=p.read_bytes();assert files[name]['data']==b,f'CDFS payload mismatch {name}';manifest.append({'name':name,'lba':files[name]['lba'],'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
     return {'status':'PASS','iso_sha256':hashlib.sha256(data).hexdigest(),'bin_sha256':hashlib.sha256(raw).hexdigest(),'cue_sha256':hashlib.sha256(ct.encode()).hexdigest(),'sectors':len(data)//2048,'cdfs_root_files':len(files),'all_sector_edc_ecc_exact':True,'all_cdfs_payloads_exact':True,'a_bin_equals_linked_binary':True,'manifest':manifest,'hardware_test':False,'emulator_test':False}
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--root',required=True,type=Path);p.add_argument('--iso',required=True,type=Path);p.add_argument('--bin',required=True,type=Path);p.add_argument('--cue',required=True,type=Path);p.add_argument('--json',type=Path);a=p.parse_args();r=verify(a.root,a.iso,a.bin,a.cue);txt=json.dumps(r,indent=2);print(txt);a.json and a.json.write_text(txt+'\n')
+    p=argparse.ArgumentParser();p.add_argument('--root',required=True,type=Path);p.add_argument('--iso',required=True,type=Path);p.add_argument('--bin',required=True,type=Path);p.add_argument('--cue',required=True,type=Path);p.add_argument('--build-dir',default='audit/runtime18-build');p.add_argument('--json',type=Path);a=p.parse_args();r=verify(a.root,a.iso,a.bin,a.cue,a.build_dir);txt=json.dumps(r,indent=2);print(txt);a.json and a.json.write_text(txt+'\n')
 if __name__=='__main__':main()

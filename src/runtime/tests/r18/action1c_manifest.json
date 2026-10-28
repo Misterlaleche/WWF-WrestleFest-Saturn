@@ -1,0 +1,15 @@
+{
+  "source_commit": "805be2a",
+  "source_snapshot": "validation/results/runtime18/action3f-5f/after1bfa6-controlled/snapshot-01030.bin",
+  "sha256": "2c8cdd97ef20a92f4d5728a4d9f5a1a77b6db5f9d967246ed2c56b83129da909",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 3373,
+  "slot": 1,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 1030,
+  "recorded_blocked_status": 1,
+  "selector": "0x401c",
+  "derived": false,
+  "comparison": "Natural untouched pre-dispatch RAM and D0-D7; bounded native dispatcher versus unchanged ROM. All RAM and FG RAM and D0-D7, including RNG state, compared."
+}

@@ -1,0 +1,35 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "c2df5d3e74790433d33e9a2a6ef2b0057c187f4365782807004ce7db6f5e4528",
+  "header": [
+    558,
+    4,
+    1,
+    114750,
+    180,
+    1
+  ],
+  "source": "validation\\local-20261024\\post-tag-natural-host\\snapshot-00180.bin",
+  "source_report_sha256": "444e91fa2439673a848fbce5dde12930ccff8ddd96386c817c9bf0bb8303ea15",
+  "source_manifest_sha256": "331c99e2b0bf189dd93199de8f298223a6cd32e214572dfb725910225c700e2a",
+  "captured_native_handoff": {
+    "valid": true,
+    "ram_sha256": "021427ca5c071a5222af2e5346e11530952b0865701d8b167cee6f29c970d64f",
+    "dregs_sha256": "28ee05ee5669d95406fd7e41c2daaec348657f2fa3c73da50a736ddc5db813d2",
+    "rng": 2598034456,
+    "compared": [
+      "frame0",
+      "RNG",
+      "all9actors"
+    ],
+    "stage": 4,
+    "method": "Read-only borrowed LWRAM after F8C; raw bytes retained, no state forcing"
+  },
+  "provenance": "Exact nativeF8C TAG capture imported into HOST, no reseed; current alias10120 fix reaches558 slot4 raw2C. Literal pre-dispatch snapshot copies9 actors/liveD8/supported globals; unrepresented arcadeRAMzero. Later HOST/SH2 trajectories are not claimed identical.",
+  "green_cases": 4641,
+  "guard_controls": 14,
+  "raw2c_owner_sha256": "6e2439d9872fe644c9626c668870d63dbc03d9bd9aa7e9c0c89c419784bcbdc6",
+  "verified_actions_sha256": "3e233fce21a118861951f4954cf27ae33169373c2cf46836dc47cd74380c4d7c",
+  "green_report": "validation/local-20261024/action2c-final.json",
+  "rom_intercepts": []
+}

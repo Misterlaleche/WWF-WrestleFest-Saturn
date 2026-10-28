@@ -1,0 +1,17 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/afterb7-active/snapshot-01062.bin",
+  "sha256": "5638056746d6dcf6ad8746dd73abdcd31b518a5595efec3d0bc17c5f355c9761",
+  "header": [
+    3050,
+    4,
+    0,
+    116980,
+    1062,
+    1
+  ],
+  "derived": false,
+  "blocked_dependency": "0x1d078",
+  "owner": "CPUstate1/AE low5 -> $1D078, includes full $1C5FA request and $10BE8 facing helper",
+  "comparison": "Unchanged actual in-ring active fight at frame3050 slot4; remaining cases are explicitly derived boundaries."
+}

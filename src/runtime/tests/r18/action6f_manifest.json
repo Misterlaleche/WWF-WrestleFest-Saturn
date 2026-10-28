@@ -1,0 +1,13 @@
+{
+  "sha256": "0bd88829b03dbd921aa605d5025a1f19cde5b2015252c79a54fa83e4de19764c",
+  "header": [
+    2083,
+    4,
+    1,
+    114750,
+    658,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\full-flow-combat-native-f8c-tag-after6e-basic\\snapshot-00658.bin",
+  "note": "NaturalHOST nativeF8C TAGbasic2083 actor4/id9 raw6F after original36 result and6E callback; RAM16KiB projection, no physical timing proof."
+}

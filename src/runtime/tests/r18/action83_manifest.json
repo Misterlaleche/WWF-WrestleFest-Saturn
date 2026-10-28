@@ -1,0 +1,21 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "49453f136b72cb742e0f0d2c875b88cb4f08a9f49ae741144cba14cf1c859bfc",
+  "snapshot_bytes": 16472,
+  "header": [
+    3434,
+    0,
+    1,
+    114750,
+    1012,
+    1
+  ],
+  "source": "validation\\local-20261024\\tag-winner-pressure-after47\\snapshot-01012.bin",
+  "source_report_sha256": "c43a143c58d225f4d1853babca3f984d93fec747cbb05c0fb3b76f8ac9bafa59",
+  "source_manifest_sha256": "e99f6cf275480cc5699632f2cfd6ca5f2c8f2822bc53837395169088de0399c2",
+  "provenance": "Manual frontend TAG0/7 -> paidF8C -> HOST pressure validation pad policy. First raw83 guard frame3434 actor0/id0. No actor/HP/RNG/result rewriting. Snapshot24metadata+32preD+8192preRAM+32postD+8192postRAM; only preRAM used, remaining original RAM zero.",
+  "limits": [
+    "HOST trajectory, not physical/nativeSH2 timing proof",
+    "No later full-match or winner claim"
+  ]
+}

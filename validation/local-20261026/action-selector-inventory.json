@@ -1,0 +1,2464 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "rom_selector_table": "0x12614",
+  "selector_ids": 143,
+  "family_script_ids": 72,
+  "named_script_ids": 78,
+  "script_union_ids": 143,
+  "verified_current_sequence_reports": 77,
+  "verified_ring_scene_sequence_reports": 93,
+  "verified_action00_resolver_matrix_cases": 96384,
+  "verified_action00_alternate_natural_steps": 396,
+  "verified_action07_natural_continuation_steps": 460,
+  "verified_action07_royal_natural_steps": 38,
+  "verified_action79_interleaved_cases": 12,
+  "verified_action79_interleaved_steps": 822,
+  "verified_action1e_1f_interleaved_cases": 24,
+  "verified_action1e_1f_interleaved_steps": 696,
+  "verified_action2f_interleaved_cases": 12,
+  "verified_action2f_interleaved_steps": 1537,
+  "verified_action2f_matrix_graphic_pairs": 14,
+  "verified_action2e_interleaved_cases": 12,
+  "verified_action2e_interleaved_steps": 408,
+  "verified_action2e_matrix_graphic_pairs": 6,
+  "verified_action2d_interleaved_cases": 12,
+  "verified_action2d_interleaved_steps": 276,
+  "verified_action2d_matrix_graphic_pairs": 10,
+  "action2d_normal_selection_sources_report": "validation/local-20261026/action2d-selection-sources.json",
+  "action2e_normal_selection_sources_report": "validation/local-20261026/action2e-selection-sources.json",
+  "action2f_normal_selection_sources_report": "validation/local-20261026/action2f-selection-sources.json",
+  "characters": [
+    {
+      "id": 0,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 1,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 2,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 3,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 4,
+      "selectors_in_generated_choice_matrix": 26
+    },
+    {
+      "id": 5,
+      "selectors_in_generated_choice_matrix": 26
+    },
+    {
+      "id": 6,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 7,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 8,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 9,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 10,
+      "selectors_in_generated_choice_matrix": 25
+    },
+    {
+      "id": 11,
+      "selectors_in_generated_choice_matrix": 25
+    }
+  ],
+  "selectors": [
+    {
+      "id": "00",
+      "descriptor_rom": "012850",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action00-alternate.json",
+        "validation/local-20261026/action-interleaved/action00-apron-left.json",
+        "validation/local-20261026/action-interleaved/action00-apron-right.json",
+        "validation/local-20261026/action-interleaved/action00-base.json",
+        "validation/local-20261026/action-interleaved/action00-left-high.json",
+        "validation/local-20261026/action-interleaved/action00-left.json",
+        "validation/local-20261026/action-interleaved/action00-outer-left.json",
+        "validation/local-20261026/action-interleaved/action00-outer-right.json",
+        "validation/local-20261026/action-interleaved/action00-right-high.json",
+        "validation/local-20261026/action-interleaved/action00-right.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [
+        "validation/local-20261028/revalidate-24aa8/action00-alternate.json"
+      ],
+      "additional_differential_matrix_reports": [
+        "validation/local-20261028/revalidate-24aa8/action00-matrix.json"
+      ],
+      "whole_phase_sequence_reports": [
+        "validation/local-20261028/revalidate-24aa8/f4c2-sequence-39.json",
+        "validation/local-20261028/revalidate-24aa8/f4c2-alternate-sequence-33.json"
+      ]
+    },
+    {
+      "id": "01",
+      "descriptor_rom": "0128DE",
+      "characters_in_generated_choice_matrix": [
+        4,
+        7,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action01_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "02",
+      "descriptor_rom": "0129F0",
+      "characters_in_generated_choice_matrix": [
+        4,
+        7
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action02_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "03",
+      "descriptor_rom": "012AE6",
+      "characters_in_generated_choice_matrix": [
+        2,
+        9,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action03_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "04",
+      "descriptor_rom": "012BDA",
+      "characters_in_generated_choice_matrix": [
+        1,
+        4
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action04_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "05",
+      "descriptor_rom": "012F08",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action05_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "06",
+      "descriptor_rom": "013020",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "07",
+      "descriptor_rom": "0130E6",
+      "characters_in_generated_choice_matrix": [
+        7,
+        8
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action07_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [
+        "validation/local-20261028/revalidate-24aa8/action07-natural.json",
+        "validation/local-20261028/revalidate-24aa8/action07-royal.json"
+      ],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "08",
+      "descriptor_rom": "01316C",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "09",
+      "descriptor_rom": "0135C8",
+      "characters_in_generated_choice_matrix": [
+        2,
+        7,
+        9
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action09_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "0A",
+      "descriptor_rom": "013734",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "0B",
+      "descriptor_rom": "013A1E",
+      "characters_in_generated_choice_matrix": [
+        2,
+        6
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action0b_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "0C",
+      "descriptor_rom": "013B98",
+      "characters_in_generated_choice_matrix": [
+        1,
+        2,
+        4,
+        5,
+        7
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action0c-counter-return.json",
+        "validation/local-20261026/action-interleaved/action0c-counter61.json",
+        "validation/local-20261026/action-interleaved/action0c-ground8.json",
+        "validation/local-20261026/action-interleaved/action0c-ground9.json",
+        "validation/local-20261026/action-interleaved/action0c-miss.json",
+        "validation/local-20261026/action-interleaved/action0c-victim-ground8.json",
+        "validation/local-20261026/action-interleaved/action0c-victim-ground9.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "0D",
+      "descriptor_rom": "0153A0",
+      "characters_in_generated_choice_matrix": [
+        2,
+        3,
+        8,
+        9
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action0d-miss.json",
+        "validation/local-20261026/action-interleaved/action0d-route0.json",
+        "validation/local-20261026/action-interleaved/action0d-route1.json",
+        "validation/local-20261026/action-interleaved/action0d-route2.json",
+        "validation/local-20261026/action-interleaved/action0d-victim-route0.json",
+        "validation/local-20261026/action-interleaved/action0d-victim-route1.json",
+        "validation/local-20261026/action-interleaved/action0d-victim-route2.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "0E",
+      "descriptor_rom": "013D26",
+      "characters_in_generated_choice_matrix": [
+        1,
+        3
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action0e-hit.json",
+        "validation/local-20261026/action-interleaved/action0e-miss.json",
+        "validation/local-20261026/action-interleaved/action0e-special54.json",
+        "validation/local-20261026/action-interleaved/action0e-victim-hit.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "0F",
+      "descriptor_rom": "013F78",
+      "characters_in_generated_choice_matrix": [
+        0,
+        3,
+        6,
+        8,
+        10
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action0f_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "10",
+      "descriptor_rom": "0141D8",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        8,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action10-counter-return.json",
+        "validation/local-20261026/action-interleaved/action10-counter61.json",
+        "validation/local-20261026/action-interleaved/action10-ground8.json",
+        "validation/local-20261026/action-interleaved/action10-ground9.json",
+        "validation/local-20261026/action-interleaved/action10-miss.json",
+        "validation/local-20261026/action-interleaved/action10-victim-ground8.json",
+        "validation/local-20261026/action-interleaved/action10-victim-ground9.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "11",
+      "descriptor_rom": "014658",
+      "characters_in_generated_choice_matrix": [
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action11-active-contact.json",
+        "validation/local-20261026/action-interleaved/action11-downed-recovery.json",
+        "validation/local-20261026/action-interleaved/action11-victim-recovery.json",
+        "validation/local-20261026/action-interleaved/action11.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "12",
+      "descriptor_rom": "0147E6",
+      "characters_in_generated_choice_matrix": [
+        9
+      ],
+      "family_differential_script": true,
+      "named_differential_script": "src/runtime/tests/r18/action12_verify_rom.py",
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action12-active-recovery.json",
+        "validation/local-20261026/action-interleaved/action12-active.json",
+        "validation/local-20261026/action-interleaved/action12-downed-recovery.json",
+        "validation/local-20261026/action-interleaved/action12-fall.json",
+        "validation/local-20261026/action-interleaved/action12-impact.json",
+        "validation/local-20261026/action-interleaved/action12-victim-recovery.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "13",
+      "descriptor_rom": "0149E2",
+      "characters_in_generated_choice_matrix": [
+        9
+      ],
+      "family_differential_script": true,
+      "named_differential_script": "src/runtime/tests/r18/action13_verify_rom.py",
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action13-fall.json",
+        "validation/local-20261026/action-interleaved/action13-impact.json",
+        "validation/local-20261026/action-interleaved/action13-recovery.json",
+        "validation/local-20261026/action-interleaved/action13-victim-recovery.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "14",
+      "descriptor_rom": "014B48",
+      "characters_in_generated_choice_matrix": [
+        4
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action14-active-miss.json",
+        "validation/local-20261026/action-interleaved/action14-downed-recovery.json",
+        "validation/local-20261026/action-interleaved/action14-victim-recovery.json",
+        "validation/local-20261026/action-interleaved/action14.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "15",
+      "descriptor_rom": "014CE0",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "16",
+      "descriptor_rom": "014D8A",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "17",
+      "descriptor_rom": "014E2C",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "18",
+      "descriptor_rom": "014EF0",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        7
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action18_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "19",
+      "descriptor_rom": "014FB6",
+      "characters_in_generated_choice_matrix": [
+        0,
+        9,
+        10
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action19_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "1A",
+      "descriptor_rom": "01520C",
+      "characters_in_generated_choice_matrix": [
+        7
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action1a_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "1B",
+      "descriptor_rom": "015384",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        7,
+        10,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action1b_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "1C",
+      "descriptor_rom": "015668",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action1c_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "1D",
+      "descriptor_rom": "01585C",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action1d_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "1E",
+      "descriptor_rom": "0159F8",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [
+        "validation/local-20261026/action1e-interleaved-all-characters.json"
+      ],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "1F",
+      "descriptor_rom": "0159F8",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action1f_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [
+        "validation/local-20261026/action1f-interleaved-all-characters.json"
+      ],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "20",
+      "descriptor_rom": "016A06",
+      "characters_in_generated_choice_matrix": [
+        3,
+        8
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action20_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "21",
+      "descriptor_rom": "015B24",
+      "characters_in_generated_choice_matrix": [
+        0,
+        8
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action21_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "22",
+      "descriptor_rom": "015B6C",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action22_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "23",
+      "descriptor_rom": "015CE0",
+      "characters_in_generated_choice_matrix": [
+        8
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "24",
+      "descriptor_rom": "01603A",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "25",
+      "descriptor_rom": "016116",
+      "characters_in_generated_choice_matrix": [
+        5,
+        8
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action25_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "26",
+      "descriptor_rom": "01623C",
+      "characters_in_generated_choice_matrix": [
+        1,
+        3,
+        5,
+        9
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "27",
+      "descriptor_rom": "016388",
+      "characters_in_generated_choice_matrix": [
+        6,
+        10
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action27_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "28",
+      "descriptor_rom": "01641E",
+      "characters_in_generated_choice_matrix": [
+        4,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action28_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "29",
+      "descriptor_rom": "01656A",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "2A",
+      "descriptor_rom": "016614",
+      "characters_in_generated_choice_matrix": [
+        2,
+        9
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action2a_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "2B",
+      "descriptor_rom": "01667A",
+      "characters_in_generated_choice_matrix": [
+        4,
+        7
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action2b_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "2C",
+      "descriptor_rom": "0168D8",
+      "characters_in_generated_choice_matrix": [
+        4,
+        9,
+        10
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action2c_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "2D",
+      "descriptor_rom": "0169FA",
+      "characters_in_generated_choice_matrix": [
+        0,
+        5,
+        6,
+        10,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action2d_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [
+        "validation/local-20261026/action2d-interleaved-all-characters.json"
+      ],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "2E",
+      "descriptor_rom": "016A56",
+      "characters_in_generated_choice_matrix": [
+        1,
+        5,
+        9
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action2e_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [
+        "validation/local-20261026/action2e-interleaved-all-characters.json"
+      ],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "2F",
+      "descriptor_rom": "016C5E",
+      "characters_in_generated_choice_matrix": [
+        1,
+        5
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action2f_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [
+        "validation/local-20261026/action2f-interleaved-all-characters.json"
+      ],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "30",
+      "descriptor_rom": "016E28",
+      "characters_in_generated_choice_matrix": [
+        0,
+        5,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action30_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "31",
+      "descriptor_rom": "016FD8",
+      "characters_in_generated_choice_matrix": [
+        3
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action31_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "32",
+      "descriptor_rom": "01716C",
+      "characters_in_generated_choice_matrix": [
+        3,
+        6
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action32_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "33",
+      "descriptor_rom": "017266",
+      "characters_in_generated_choice_matrix": [
+        2,
+        3
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "34",
+      "descriptor_rom": "01747E",
+      "characters_in_generated_choice_matrix": [
+        2
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action34_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "35",
+      "descriptor_rom": "0175A8",
+      "characters_in_generated_choice_matrix": [
+        0
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action35-active-mode0.json",
+        "validation/local-20261026/action-interleaved/action35-active-mode1.json",
+        "validation/local-20261026/action-interleaved/action35-active-mode2.json",
+        "validation/local-20261026/action-interleaved/action35-active-mode3.json",
+        "validation/local-20261026/action-interleaved/action35-mode0.json",
+        "validation/local-20261026/action-interleaved/action35-mode1.json",
+        "validation/local-20261026/action-interleaved/action35-mode2.json",
+        "validation/local-20261026/action-interleaved/action35-mode3.json",
+        "validation/local-20261026/action-interleaved/action35-rope-mode2.json",
+        "validation/local-20261026/action-interleaved/action35-rope-mode3.json",
+        "validation/local-20261026/action-interleaved/action35-victim-mode0.json",
+        "validation/local-20261026/action-interleaved/action35-victim-mode1.json",
+        "validation/local-20261026/action-interleaved/action35-victim-mode2.json",
+        "validation/local-20261026/action-interleaved/action35-victim-mode3.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "36",
+      "descriptor_rom": "017912",
+      "characters_in_generated_choice_matrix": [
+        9
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action36_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "37",
+      "descriptor_rom": "017A40",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "38",
+      "descriptor_rom": "017AFE",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action38_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "39",
+      "descriptor_rom": "017B5C",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action39_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "3A",
+      "descriptor_rom": "017BF8",
+      "characters_in_generated_choice_matrix": [
+        6
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action3a_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "3B",
+      "descriptor_rom": "017CF6",
+      "characters_in_generated_choice_matrix": [
+        6
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action3b_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "3C",
+      "descriptor_rom": "018022",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action3c_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "3D",
+      "descriptor_rom": "0114AC",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "3E",
+      "descriptor_rom": "018314",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action3e_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "3F",
+      "descriptor_rom": "01835E",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action3f_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "40",
+      "descriptor_rom": "0183EC",
+      "characters_in_generated_choice_matrix": [
+        2
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action40_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "41",
+      "descriptor_rom": "01848C",
+      "characters_in_generated_choice_matrix": [
+        3,
+        9
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action41_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "42",
+      "descriptor_rom": "017180",
+      "characters_in_generated_choice_matrix": [
+        8
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action42_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "43",
+      "descriptor_rom": "018518",
+      "characters_in_generated_choice_matrix": [
+        8,
+        10
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action43_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "44",
+      "descriptor_rom": "01863C",
+      "characters_in_generated_choice_matrix": [
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action44-miss-index1.json",
+        "validation/local-20261026/action-interleaved/action44-miss-index2.json",
+        "validation/local-20261026/action-interleaved/action44-miss-index3.json",
+        "validation/local-20261026/action-interleaved/action44-miss.json",
+        "validation/local-20261026/action-interleaved/action44-success-index1.json",
+        "validation/local-20261026/action-interleaved/action44-success-index2.json",
+        "validation/local-20261026/action-interleaved/action44-success-index3.json",
+        "validation/local-20261026/action-interleaved/action44-success-index4.json",
+        "validation/local-20261026/action-interleaved/action44-success.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "45",
+      "descriptor_rom": "0128DE",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action45_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "46",
+      "descriptor_rom": "014424",
+      "characters_in_generated_choice_matrix": [
+        4,
+        5,
+        7,
+        9
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action46_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "47",
+      "descriptor_rom": "014440",
+      "characters_in_generated_choice_matrix": [
+        7,
+        10,
+        11
+      ],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action47_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "48",
+      "descriptor_rom": "0132D8",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "49",
+      "descriptor_rom": "013434",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action49_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "4A",
+      "descriptor_rom": "0180AC",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "4B",
+      "descriptor_rom": "0181EC",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "4C",
+      "descriptor_rom": "018772",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "4D",
+      "descriptor_rom": "01892C",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "4E",
+      "descriptor_rom": "018A90",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "4F",
+      "descriptor_rom": "018AFE",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "50",
+      "descriptor_rom": "018B8E",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action50_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "51",
+      "descriptor_rom": "018BF4",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "52",
+      "descriptor_rom": "018D12",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action52_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "53",
+      "descriptor_rom": "018E3C",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action53_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "54",
+      "descriptor_rom": "018F62",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action54_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "55",
+      "descriptor_rom": "018FEE",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "56",
+      "descriptor_rom": "019076",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "57",
+      "descriptor_rom": "01913E",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "58",
+      "descriptor_rom": "0191B4",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action58_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "59",
+      "descriptor_rom": "019264",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "5A",
+      "descriptor_rom": "0192F2",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "5B",
+      "descriptor_rom": "01939A",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "5C",
+      "descriptor_rom": "019436",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action5c_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "5D",
+      "descriptor_rom": "019530",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action5d_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "5E",
+      "descriptor_rom": "019530",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "5F",
+      "descriptor_rom": "019530",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action5f_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "60",
+      "descriptor_rom": "019530",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action60_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "61",
+      "descriptor_rom": "0194CA",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "62",
+      "descriptor_rom": "019530",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action62_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "63",
+      "descriptor_rom": "019530",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action63_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "64",
+      "descriptor_rom": "019608",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action64_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "65",
+      "descriptor_rom": "019664",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "66",
+      "descriptor_rom": "01969E",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "67",
+      "descriptor_rom": "019776",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action67_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "68",
+      "descriptor_rom": "01981E",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": "src/runtime/tests/r18/action68_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character11.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character11.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character11.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character11.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69.json",
+        "validation/local-20261026/action68-interleaved-natural-803.json",
+        "validation/local-20261026/action68-interleaved-natural-960-through69.json",
+        "validation/local-20261026/action68-interleaved-natural-960.json"
+      ],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "69",
+      "descriptor_rom": "0199FC",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69-character11.json",
+        "validation/local-20261026/action68-interleaved-natural-803-through69.json",
+        "validation/local-20261026/action68-interleaved-natural-803.json",
+        "validation/local-20261026/action68-interleaved-natural-960-through69.json",
+        "validation/local-20261026/action68-interleaved-natural-960.json"
+      ],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "6A",
+      "descriptor_rom": "019B3C",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-character11.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character11.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character00.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character01.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character02.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character03.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character04.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character05.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character06.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character07.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character08.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character09.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character10.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character11.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4.json"
+      ],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "6B",
+      "descriptor_rom": "019BBA",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": "src/runtime/tests/r18/action6b_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-rescue-through6b-outside-scene-character11.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character00.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character01.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character02.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character03.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character04.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character05.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character06.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character07.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character08.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character09.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character10.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4-character11.json",
+        "validation/local-20261026/action6a-interleaved-postscene-803-slot4.json",
+        "validation/local-20261026/action6b-interleaved-natural-1343-slot1.json",
+        "validation/local-20261026/action6b-interleaved-natural-1343-slot4.json",
+        "validation/local-20261026/action6b-interleaved-natural-1436-slot0.json"
+      ],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "6C",
+      "descriptor_rom": "019C28",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action6c_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "6D",
+      "descriptor_rom": "019CF2",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action6d_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "6E",
+      "descriptor_rom": "019D7C",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action6e_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "6F",
+      "descriptor_rom": "019E0E",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action6f_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "70",
+      "descriptor_rom": "019E80",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "71",
+      "descriptor_rom": "019F0E",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "72",
+      "descriptor_rom": "019FC6",
+      "characters_in_generated_choice_matrix": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "73",
+      "descriptor_rom": "01A014",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "74",
+      "descriptor_rom": "01A050",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "75",
+      "descriptor_rom": "01A08C",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action75_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "76",
+      "descriptor_rom": "01A0FE",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "77",
+      "descriptor_rom": "01A148",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "78",
+      "descriptor_rom": "01A186",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": "src/runtime/tests/r18/action78_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "79",
+      "descriptor_rom": "01A1BE",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action79_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [
+        "validation/local-20261026/action79-interleaved-all-characters.json"
+      ],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "7A",
+      "descriptor_rom": "01A348",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action7a_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character00.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character01.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character02.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character03.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character04.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character05.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character06.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character07.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character08.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character09.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character10.json",
+        "validation/local-20261026/action68-interleaved-natural-803-royal-character11.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character00-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character00.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character01-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character01.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character02-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character02.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character03-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character03.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character04-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character04.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character05-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character05.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character06-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character06.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character07-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character07.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character08-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character08.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character09-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character09.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character10-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character10.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character11-palalloc.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0-character11.json",
+        "validation/local-20261026/action7a-interleaved-natural-2276-slot0.json"
+      ],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "7B",
+      "descriptor_rom": "01A532",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "7C",
+      "descriptor_rom": "01A594",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "7D",
+      "descriptor_rom": "01A5F4",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "7E",
+      "descriptor_rom": "01A674",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "7F",
+      "descriptor_rom": "01A704",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": "src/runtime/tests/r18/action7f_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "80",
+      "descriptor_rom": "01A794",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "81",
+      "descriptor_rom": "01A7A4",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "82",
+      "descriptor_rom": "01A822",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "83",
+      "descriptor_rom": "01A8A6",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action83_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "84",
+      "descriptor_rom": "01A940",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "85",
+      "descriptor_rom": "01A9D4",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "86",
+      "descriptor_rom": "01AA76",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "87",
+      "descriptor_rom": "01AA8A",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": "src/runtime/tests/r18/action87_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "88",
+      "descriptor_rom": "01AB32",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "89",
+      "descriptor_rom": "01ABA4",
+      "characters_in_generated_choice_matrix": [
+        5
+      ],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "8A",
+      "descriptor_rom": "01AC62",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action8a_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "8B",
+      "descriptor_rom": "01AD10",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "8C",
+      "descriptor_rom": "01AD76",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "8D",
+      "descriptor_rom": "017F9A",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": false,
+      "named_differential_script": "src/runtime/tests/r18/action8d_verify_rom.py",
+      "new_interleaved_sequence_reports": [],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    },
+    {
+      "id": "8E",
+      "descriptor_rom": "01AE28",
+      "characters_in_generated_choice_matrix": [],
+      "family_differential_script": true,
+      "named_differential_script": null,
+      "new_interleaved_sequence_reports": [
+        "validation/local-20261026/action-interleaved/action8e.json"
+      ],
+      "ring_scene_interleaved_reports": [],
+      "other_interleaved_sequence_reports": [],
+      "additional_differential_matrix_reports": [],
+      "whole_phase_sequence_reports": []
+    }
+  ],
+  "limits": [
+    "A test script being present does not establish that every internal branch passed.",
+    "The generated choice matrix does not list selectors reached dynamically by other routines.",
+    "The action and ring/scene report counts measure evidence files, not the percentage of certified selectors.",
+    "The ring/scene reports include controlled character and scene variants; they are not all natural captures.",
+    "$2F has two character IDs in the generated choice matrix (1 and 5); its other ten tested IDs are controlled variants, and dynamic reachability remains unproven.",
+    "$2E has three character IDs in the generated choice matrix (1, 5 and 9); its other nine tested IDs are controlled variants, and dynamic reachability remains unproven.",
+    "$2D has five character IDs in the generated choice matrix (0, 5, 6, 10 and 11); its other seven tested IDs are controlled variants, and dynamic reachability remains unproven.",
+    "Historical action-only reports retain their original action source hash; byte comparison verifies the sole later change is an unused public collision wrapper.",
+    "Older sequence reports still need review.",
+    "Animation images, full match flow, and physical Saturn timing are outside this inventory."
+  ]
+}

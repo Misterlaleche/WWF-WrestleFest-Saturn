@@ -1,0 +1,336 @@
+{
+  "status": "PASS",
+  "cases": 12,
+  "steps_per_case": 653,
+  "idle_descriptor": null,
+  "idle_edge": null,
+  "interleaved_physics": false,
+  "interleaved_resolver": true,
+  "raw35_mode": null,
+  "raw35_target_x": null,
+  "raw35_active": null,
+  "raw44_index": null,
+  "raw44_force_fail": null,
+  "raw44_force_success": null,
+  "raw13_downed": null,
+  "raw12_downed": null,
+  "raw12_active": null,
+  "running_contact": null,
+  "jump_contact": null,
+  "jump10_contact": null,
+  "jump_attack": null,
+  "follow_impact": null,
+  "linked_downed": null,
+  "linked_active": null,
+  "victim_follow": null,
+  "total_steps": 7836,
+  "total_victim_steps": null,
+  "sequence_phases": [],
+  "sequence_outcomes": [
+    {
+      "character": 0,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 1,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 2,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 3,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 4,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 5,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 6,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 7,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 8,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 9,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 10,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    },
+    {
+      "character": 11,
+      "steps": 653,
+      "phase_history": [
+        [
+          1,
+          0
+        ],
+        [
+          70,
+          1
+        ],
+        [
+          140,
+          2
+        ],
+        [
+          141,
+          3
+        ]
+      ],
+      "next_selector": 121,
+      "end_flag": 256
+    }
+  ],
+  "raw35_rom_pcs": null,
+  "raw35_success_characters": null,
+  "selectors": [
+    "0x8e"
+  ],
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "bridge_sha256": "5be1cd86603aa2a51670a80462a1789c3bc601ce6fa89057de0ff7e696e9f1fc",
+  "test_sha256": "6723ca3e8054e675c87ca072581163c6ea5c921c33ac783939f5b49a3d274a0e",
+  "compared": [
+    "RAM16KB and D0-D7 after every action and resolver tick",
+    "foreground video, palette and action descriptor after every action tick"
+  ],
+  "limits": [
+    "One constructed Royal interlude per character, not a complete Royal match",
+    "Visual tiles and animation artwork are not compared here",
+    "Only the state latch, arena resolver and action owners are interleaved"
+  ]
+}

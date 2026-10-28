@@ -3,6 +3,7 @@
 #include "wf_state5.h"
 #include "wf_cpu_runtime.h"
 #include "wf_r17_resolver_280dc.h"
+#include "wf_r17_candidate_2187e.h"
 extern wf_status_t wf_cpu_pursuit_1d5a2(wf_runtime_t*,unsigned,wf_state5_trace_t*);
 
 #define BIT(n) ((uint8_t)(1u<<(n)))
@@ -22,10 +23,41 @@ static wf_actor_raw_t *target(wf_runtime_t *rt,wf_actor_raw_t *a,unsigned *slot)
 static wf_actor_raw_t *team(wf_runtime_t *rt,wf_actor_raw_t *a,unsigned *slot){return wf_actor_from_rom_ptr(rt,wf_be32(a,WF_A_TEAM_LINK),slot);}
 static uint32_t selfptr(unsigned slot){return wf_actor_rom_base(slot);}
 
+wf_status_t wf_r17_candidate_2187e(wf_runtime_t*rt,unsigned slot,uint32_t*candidate,int*found,uint32_t*dependency){
+ if(!rt||slot>=WF_ACTOR_SLOTS||!candidate||!found)return WF_BAD_STATE;
+ if(dependency)*dependency=0u;
+ *candidate=0x1c0f1cu;*found=0;
+ wf_actor_raw_t*a=&rt->actors[slot];uint32_t own=selfptr(slot),link=wf_be32(a,WF_A_LINK);
+ rt->g.global_1692=0x400u;
+ for(unsigned i=4u;i<9u;i++){
+  wf_actor_raw_t*c=&rt->actors[i];uint32_t cp=selfptr(i);
+  /* CMPA compares the full raw LONG; dereference bus masking is separate. */
+  if(cp==own||cp==link||!btest(c,0u,7u)||btest(c,WF_A_CPU_B5,3u)||btest(c,WF_A_CPU_B5,7u)||btest(c,WF_A_FLAGS32,4u))continue;
+  wf_actor_raw_t*base=a;
+  if(wf_u8(a,WF_A_SELECTOR_LO)==0x48u){
+   base=wf_actor_from_rom_ptr(rt,link,NULL);
+   if(!base){if(dependency)*dependency=0x218ceu;return WF_BLOCKED;}
+   if(btest(base,WF_A_ROLE,5u)==btest(c,WF_A_ROLE,5u))continue;
+  }else if(btest(a,WF_A_ROLE,5u)!=btest(c,WF_A_ROLE,5u))continue;
+  uint16_t x=wf_be16(base,WF_A_X),cx=wf_be16(c,WF_A_X),y=wf_be16(base,WF_A_Y),cy=wf_be16(c,WF_A_Y);
+  uint16_t dx=x>=cx?(uint16_t)(x-cx):(uint16_t)(cx-x),dy=y>=cy?(uint16_t)(y-cy):(uint16_t)(cy-y);
+  uint16_t distance=(uint16_t)(dx+dy);
+  if(distance>=rt->g.global_1692)continue;
+  rt->g.global_1692=distance;rt->g.global_168c=cp;
+ }
+ if(rt->g.global_1692!=0x400u){
+  *candidate=rt->g.global_168c;*found=1;
+  wf_actor_raw_t*c=wf_actor_from_rom_ptr(rt,*candidate,NULL);
+  (void)bset(c,WF_A_CPU_B5,7u);bclr(c,WF_A_CPU_B6,7u);
+ }
+ return WF_OK;
+}
+
 static wf_status_t reciprocal_link(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a,wf_state5_trace_t *tr){
  if(bset(a,WF_A_SELECTOR,6)) return WF_OK;
- unsigned ts=0; wf_actor_raw_t *t=target(rt,a,&ts); if(!t) return blocked(tr,0x001E6EAu);
- uint32_t tp=selfptr(ts); wf_set_be32(a,WF_A_LINK,tp);
+ wf_actor_raw_t *t=target(rt,a,0); if(!t) return blocked(tr,0x001E6EAu);
+ /* $1E6EE copies A1 itself, including any tagged high BYTE. */
+ wf_set_be32(a,WF_A_LINK,wf_be32(a,WF_A_TARGET));
  if(wf_be32(t,WF_A_LINK)==0u) wf_set_be32(t,WF_A_LINK,selfptr(slot));
  return WF_OK;
 }
@@ -50,6 +82,11 @@ static wf_status_t approach(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_st
  }
  wf_set_be16(a,WF_A_CPU_BE,x);wf_set_be16(a,WF_A_CPU_C0,y);wf_set_be16(a,WF_A_STATE,1);wf_set_be16(a,WF_A_AE,10);bclr(a,WF_A_CPU_B5,5);
  return wf_cpu_pursuit_1d5a2(rt,slot,tr);
+}
+/* $1D6E4 enters the same full $1F45A owner used by state5 callbacks. */
+wf_status_t wf_state5_approach_1f45a(wf_runtime_t*rt,unsigned slot,wf_state5_trace_t*tr){
+ if(!rt||slot>=WF_ACTOR_SLOTS)return WF_BAD_STATE;
+ return approach(rt,slot,&rt->actors[slot],tr,0x1f45au);
 }
 static wf_status_t cb_1e5ae(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a,wf_state5_trace_t *tr){
  if(!btest(a,WF_A_CPU_B5,4)){
@@ -167,13 +204,21 @@ static wf_status_t cb_link49(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a,wf
 static wf_status_t distance_or_link(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a,uint8_t sel,wf_state5_trace_t *tr){
  int old=bset(a,WF_A_CPU_B5,4);
  if(!old && wf_be16(a,WF_A_CPU_DISTANCE)>=0x0028u){wf_set_be16(a,WF_A_CPU_BC,0x0028u);wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,0x000au);(void)bset(a,WF_A_CPU_B5,5);return wf_cpu_pursuit_1d5a2(rt,slot,tr);}
- unsigned ts;wf_actor_raw_t*t=target(rt,a,&ts);if(!t)return blocked(tr,0x001E7BEu);
  if(bset(a,WF_A_SELECTOR,6))return WF_OK;
+ uint32_t target_ptr=wf_be32(a,WF_A_TARGET);
+ wf_actor_raw_t*t=target(rt,a,NULL);if(!t)return blocked(tr,0x001E7BEu);
  if((sel==0x30u||sel==0x2bu)&&wf_main_state(t)==4u&&wf_state4_subtype(t)==1u)wf_set_u8(a,WF_A_TIMER46,(uint8_t)(wf_u8(a,WF_A_TIMER46)+1u));
- wf_set_be32(a,WF_A_LINK,selfptr(ts));if(wf_be32(t,WF_A_LINK)==0u)wf_set_be32(t,WF_A_LINK,selfptr(slot));
+ wf_set_be32(a,WF_A_LINK,target_ptr);
+ if(wf_be32(t,WF_A_LINK))return WF_OK;
+ wf_set_be32(t,WF_A_LINK,selfptr(slot));
  if(sel==0x1du){
   if((rt->g.mode_0161&1u)==0u){if(btest(t,WF_A_FLAGS33,0))return WF_OK;wf_set_u8(a,WF_A_SELECTOR_LO,0x1cu);return WF_OK;}
-  return blocked(tr,0x0002187Eu);
+  uint32_t candidate,dependency=0;int found;
+  wf_status_t st=wf_r17_candidate_2187e(rt,slot,&candidate,&found,&dependency);
+  if(st!=WF_OK)return blocked(tr,dependency);
+  if(found){wf_actor_raw_t*c=wf_actor_from_rom_ptr(rt,candidate,NULL);wf_set_be32(c,WF_A_RESERVE,wf_be32(a,WF_A_LINK));wf_set_be32(a,WF_A_RESERVE,candidate);}
+  else wf_set_u8(a,WF_A_SELECTOR_LO,0x1cu);
+  return WF_OK;
  }
  return WF_OK;
 }
@@ -186,13 +231,85 @@ static wf_status_t hold_tail_1e9a6(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*
  }
  return wf_cpu_decide_1f084(rt,slot,9u,tr);
 }
+/* $24CC with a proven two-byte distribution. D1/D2 are MOVEM-preserved;
+ * each rejected sample consumes the original live-register $21B4 call. */
+static int controller15_weighted(wf_runtime_t*rt,const uint8_t weights[2]){
+ uint32_t d1=rt->m68k_regs.d[1],d2=rt->m68k_regs.d[2];
+ uint16_t sample=50u;unsigned accepted=0;
+ if(!rt->m68k_regs.valid||!rt->g.rng_state_valid)return -1;
+ for(int attempt=3;attempt>=0;attempt--){
+  wf_r17_m68k_moveq(&rt->m68k_regs,1u,(int8_t)attempt);
+  uint32_t value=wf_r17_rng21b4_live(&rt->g.rng_state,rt->g.frame_counter,&rt->m68k_regs);
+  sample=(uint16_t)((value&255u)>>1);
+  if(sample<100u){accepted=1;break;}
+ }
+ if(!accepted)sample=50u;
+ if(!sample)sample=1u;
+ wf_r17_m68k_move_l(&rt->m68k_regs,1u,d1);wf_r17_m68k_move_l(&rt->m68k_regs,2u,d2);
+ unsigned choice=weights[0]>=sample?0u:1u;
+ if(choice&&(unsigned)(uint8_t)(weights[0]+weights[1])<sample)return -1;
+ wf_r17_m68k_move_l(&rt->m68k_regs,0u,choice);return (int)choice;
+}
+static wf_status_t controller15_credited(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_state5_trace_t*tr){
+ /* Exact ROM tables $1E9D6/$1E9FA, progression offsets $1EA1E and
+  * special character5 distributions $1EA28. */
+ static const uint8_t first[36]={15,85,10,90,5,95,20,80,15,85,10,90,25,75,20,80,15,85,25,75,20,80,15,85,25,75,25,75,20,80,30,70,25,75,25,75};
+ static const uint8_t second[36]={5,95,15,85,20,80,15,85,20,80,30,70,20,80,25,75,35,65,20,80,25,75,35,65,25,75,35,65,40,60,20,80,30,70,35,65};
+ static const uint8_t offsets[10]={0,6,12,18,24,30,30,30,30,30};
+ static const uint8_t special[6]={0,100,20,80,100,0};
+ wf_actor_raw_t*p=team(rt,a,0);if(!p)return blocked(tr,0x1e878u);
+ if(!btest(p,WF_A_FLAGS32,0)||btest(p,WF_A_FLAGS34,0))return hold_tail_1e9a6(rt,slot,a,tr);
+ if(wf_u8(a,WF_A_INTERNAL_ID)==5u){
+  uint16_t base=btest(a,WF_A_FLAGS33,7)?0x2d0u:0x200u,x=wf_be16(a,WF_A_X);
+  uint16_t distance=(uint16_t)(base-x);if(base<x)distance=(uint16_t)(0u-distance);
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,distance);
+  if(distance<0x94u){
+   wf_actor_raw_t*l=wf_actor_from_rom_ptr(rt,wf_be32(a,WF_A_LINK),0);
+   if(!l)return blocked(tr,0x1e8bcu);
+   wf_r17_m68k_moveq(&rt->m68k_regs,0u,0);
+   uint16_t tier=wf_be16(l,WF_A_TIER);if(rt->g.global_16a0<0x10u)tier=2u;
+   wf_r17_m68k_move_w(&rt->m68k_regs,0u,tier);
+   unsigned at=(uint16_t)(tier<<1);wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)at);
+   if(at>sizeof special-2u)return blocked(tr,0x1e8d8u);
+   int selected=controller15_weighted(rt,special+at);if(selected<0)return blocked(tr,0x24ccu);
+   if(!selected){
+    (void)bset(a,WF_A_CPU_B5,4);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x16u);
+    return wf_state5_execute(rt,slot,tr);
+   }
+  }
+ }
+ unsigned position=wf_u8(a,0x31u),side=btest(a,WF_A_FLAGS33,7);
+ const uint8_t*weights=side?((position==9u||position<7u)?second:first):((position==2u||position>=5u)?second:first);
+ uint16_t progression=rt->g.progression_0162;
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,progression);wf_r17_m68k_moveq(&rt->m68k_regs,1u,0);
+ if(progression>=sizeof offsets)return blocked(tr,0x1e93eu);
+ wf_r17_m68k_move_b(&rt->m68k_regs,1u,offsets[progression]);
+ uint8_t tier_offset=(uint8_t)(wf_u8(a,WF_A_TIER_LO)<<1);
+ wf_r17_m68k_move_b(&rt->m68k_regs,1u,wf_u8(a,WF_A_TIER_LO));
+ wf_r17_m68k_move_b(&rt->m68k_regs,1u,tier_offset);
+ unsigned at=(unsigned)offsets[progression]+tier_offset;
+ if(at>sizeof first-2u)return blocked(tr,0x1e94cu);
+ int selected=controller15_weighted(rt,weights+at);if(selected<0)return blocked(tr,0x24ccu);
+ if(selected)return hold_tail_1e9a6(rt,slot,a,tr);
+ bclr(a,WF_A_CPU_B5,4);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x16u);
+ return wf_state5_execute(rt,slot,tr);
+}
 static wf_status_t controller15(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t *a,wf_state5_trace_t *tr){
  if(!bset(a,WF_A_SELECTOR,6)){wf_set_be16(a,WF_A_CPU_BC,0x0010u);wf_set_be16(a,WF_A_TIMER46,0u);}
  uint16_t v=(uint16_t)(wf_be16(a,WF_A_CPU_BC)-1u);wf_set_be16(a,WF_A_CPU_BC,v);if(v)return WF_OK;
  /* $1E854-$1E99E: normal TAG route, first sequence bank. */
- if(rt->g.mode_0161&1u)return blocked(tr,0x1e96eu);
+ if(rt->g.mode_0161&1u){
+  /* $1E96E: Royal low-Y actors sample literal $1E9D4={60,40}.
+   * The zero choice sets B6.bit3 before the original controller16 reentry. */
+  static const uint8_t weights[2]={60u,40u};
+  if(wf_be16(a,WF_A_Y)>=0x150u)return hold_tail_1e9a6(rt,slot,a,tr);
+  int selected=controller15_weighted(rt,weights);if(selected<0)return blocked(tr,0x24ccu);
+  if(selected)return hold_tail_1e9a6(rt,slot,a,tr);
+  (void)bset(a,WF_A_CPU_B6,3u);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x16u);
+  return wf_state5_execute(rt,slot,tr);
+ }
  if(rt->g.mode_0161&2u)return hold_tail_1e9a6(rt,slot,a,tr);
- if(rt->g.credited_route&0x8000u)return blocked(tr,0x1e878u);
+ if(rt->g.credited_route&0x8000u)return controller15_credited(rt,slot,a,tr);
  if(rt->g.global_0166&255u)return hold_tail_1e9a6(rt,slot,a,tr);
  bclr(a,WF_A_CPU_B5,4);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x16u);
  return wf_state5_execute(rt,slot,tr);
@@ -246,7 +363,10 @@ static wf_status_t controller3d(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a
  }
  wf_actor_raw_t *t=target(rt,a,0);if(!t)return blocked(tr,0x001EC24u);
  if(btest(t,WF_A_FLAGS32,4)){wf_set_be16(a,WF_A_STATE,0u);rt->g.global_1697|=1u;return WF_OK;}
- if(btest(a,WF_A_FLAGS34,1))return blocked(tr,0x001C5FAu);
+ if(btest(a,WF_A_FLAGS34,1)){
+  int carry=0;wf_status_t status=wf_cpu_tag_request_1c5fa(rt,slot,&carry,tr);
+  if(status!=WF_OK||!carry)return status;
+ }
  if(btest(a,WF_A_CPU_B5,6)){
   wf_actor_raw_t *p=team(rt,a,0);
   if(p && !btest(p,WF_A_FLAGS34,0) && btest(p,WF_A_FLAGS32,0)){
@@ -271,13 +391,35 @@ static wf_status_t controller3d(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a
  wf_set_be16(a,WF_A_STATE,0u);rt->g.global_1697|=1u;return WF_OK;
 }
 
+/* Forced raw79 callback. $1DFE2 supplies D0=$1E27A, so $10C60
+ * indexes $10CEA with signed WORD $A76B+tier and reads $B455..$B457.
+ * These are original ROM bytes, not the usual small-argument recovery row. */
+static wf_status_t cb_1e27a(wf_runtime_t*rt,wf_actor_raw_t*a,wf_state5_trace_t*tr){
+ if(!btest(a,WF_A_CPU_B5,7u))return WF_OK;
+ bclr(a,WF_A_FLAGS34,4u);wf_set_be16(a,WF_A_STATE,0u);
+ wf_actor_raw_t*t=target(rt,a,NULL);if(!t)return blocked(tr,0x1e292u);
+ wf_set_be16(t,0xaau,0u);
+ unsigned tier=wf_be16(t,WF_A_TIER);
+ if(tier>=3u){
+  /* Preserve the in-callee MULU/ADD.W prefix at the first unowned read. */
+  wf_r17_m68k_move_l(&rt->m68k_regs,0u,0x20000u|(uint16_t)(0xa76bu+tier));
+  return blocked(tr,0x10ca8u);
+ }
+ static const uint8_t recovery_b455[3]={0x00u,0x60u,0x04u};
+ wf_set_be16(t,0xaau,(uint16_t)((uint16_t)recovery_b455[tier]-1u));
+ wf_set_be16(t,0x9au,0u);
+ if(btest(t,0x56u,7u)&&(btest(t,WF_A_FLAGS33,5u)||btest(t,WF_A_FLAGS33,2u)))wf_set_be16(t,0x9au,0x30u);
+ else wf_set_be16(t,0x9au,tier==2u?0xe0u:tier==1u?0x80u:0x30u);
+ return WF_OK;
+}
+
 static wf_status_t execute_callback(wf_runtime_t *rt,unsigned slot,wf_actor_raw_t *a,uint8_t sel,uint32_t cb,wf_state5_trace_t *tr){
  switch(cb){
   case 0x01e254u:return WF_OK;
   case 0x01e256u:(void)bset(a,WF_A_CPU_B7,7);return WF_OK;
   case 0x01e25eu:{int old=bset(a,WF_A_SELECTOR,6);if(!old&&wf_u8(a,WF_A_TIMER44+1u)!=0u)wf_set_u8(a,WF_A_TIMER44+1u,1u);return WF_OK;}
   case 0x01e274u:wf_set_be16(a,0x108u,0u);return WF_OK;
-  case 0x01e27au:if(!btest(a,WF_A_CPU_B5,7))return WF_OK;return blocked(tr,0x0010C60u);
+  case 0x01e27au:return cb_1e27a(rt,a,tr);
   case 0x01e2a8u:case 0x01e2f6u:return target_flag_transition(rt,a,sel,tr);
   case 0x01e334u:case 0x01e34eu:case 0x01e368u:case 0x01e382u:case 0x01e39cu:case 0x01e3b2u:case 0x01e3c8u:case 0x01e3deu:return sustained(a,sel,tr);
   case 0x01e42au:return cb_1e42a(rt,a,tr);

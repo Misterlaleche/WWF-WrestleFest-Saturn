@@ -1,0 +1,35 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "b304751fd1788c2806ffa8983784e873a1e1a7389dd347a8baf461f5d39de705",
+  "header": [
+    2398,
+    5,
+    8,
+    150878,
+    3,
+    4
+  ],
+  "header_fields": [
+    "frame",
+    "source_slot",
+    "target_slot",
+    "second_callback",
+    "retained_source_row",
+    "target_row"
+  ],
+  "source_report_sha256": "52a4c7e547566476eeaf56335a4d5ae62254f3cedc22c5f78b8e750aacd532a7",
+  "actors_sha256": "29ddca681e73dd079994d37812a1536c6ce3f8ac0d31fad07c7d125dcb21819f",
+  "globals_sha256": "6b0252e0d42ea460e691705ab7493a42372f394111ed1cbcc6cb00368dd2e550",
+  "dregs_sha256": "4e8d7e05bcaef8b466112e6628d225ae16fef14f3f515361f286f5c50d29bd22",
+  "provenance": "Natural nativeF8C Royal import -> HOSTbasic2398; production failed pair restores src/dst/linked before returningBLOCKED. Diagnostic wrapper independently identifies src5/ID2 row3 -> dst8/ID8 row4, first2ACCEPT then second12BLOCKED on BYTEfacing00/80. All9 actor records and liveD8 copied literally; supported globals projected, other arcadeRAMzero. No seed/actor/frame/register forcing.",
+  "green_cases": 11795,
+  "retained_guard_controls": 6,
+  "verified_dispatch_sha256": "091cd810e064130bfc51214f983220c4689d98e90d4893b6511838fb4f5f810e",
+  "green_report": "validation/local-20261024/collision-24d5e-green.json",
+  "rom_intercepts": [],
+  "additional_proved_owners": [
+    "first2/24468",
+    "first8/246EA",
+    "direct norm24D7A boundaries"
+  ]
+}

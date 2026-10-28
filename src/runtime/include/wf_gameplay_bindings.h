@@ -20,6 +20,8 @@ typedef wf_status_t (*wf_r17_platform_transition_fn)(wf_runtime_t *rt,uint8_t ro
 typedef wf_status_t (*wf_r17_audio_command_fn)(wf_runtime_t *rt,uint16_t raw_command,void *user);
 
 typedef struct wf_gameplay_binding_context {
+ /* Retained sample/legacy18C4 ABI. $514E never indexes this by actor:
+  * it requires participant_input_word at the actor's live +8A source. */
  uint8_t input_hw_low[WF_ACTOR_SLOTS];
  uint16_t input_valid_mask;
  uint16_t cabinet_word_140020;
@@ -63,11 +65,14 @@ typedef struct wf_gameplay_binding_context {
  wf_r17_render_2836_batch_fn post7_render_2836_batch;
  wf_r17_tag_6e34_fn post7_tag_6e34;
  wf_r17_royal_9132_fn post7_royal_9132;
+ /* Raw physical WORD reader. $514E requires it lazily at live +8A after
+  * ACTIVE/ROLE.bit7; $18C4 retains its original indexed cabinet-port reads. */
  wf_r17_participant_input_fn participant_input_word;
  wf_r17_participant_commit_fn participant_commit_batch;
  void *r17_owner_user;
  uint32_t last_blocked_phase;
  uint32_t last_blocked_dependency;
+ uint8_t last_blocked_slot; /* F4C2 callback owner, including main-state faults. */
 } wf_gameplay_binding_context_t;
 
 wf_status_t wf_phase_postack_2017a(wf_runtime_t*,uint32_t,void*);

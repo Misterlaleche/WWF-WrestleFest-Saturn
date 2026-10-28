@@ -13,7 +13,7 @@ static wf_status_t video(wf_runtime_t *rt,const wf_r17_fg0_write_t *writes,size_
 
 /* Host adapter only: enter the production bounded dispatcher and expose all
  * RAM/register effects required by the unchanged $16C9E arcade owner. */
-int wf_action2f_oracle(uint8_t *mem,uint32_t *regs,unsigned slot){
+int wf_action2f_oracle_with_descriptor(uint8_t *mem,uint32_t *regs,unsigned slot,uint32_t *descriptor){
     wf_runtime_t rt={0};
     wf_r17_actions_r11_bridge_t actions={0};
     wf_r17_dispatch_1c03e_ctx_t dispatch={0};
@@ -33,5 +33,9 @@ int wf_action2f_oracle(uint8_t *mem,uint32_t *regs,unsigned slot){
     memcpy(regs,rt.m68k_regs.d,sizeof rt.m68k_regs.d);
     g[0x15d2]=rt.g.global_15d2;g[0x15d3]=rt.g.global_15d3;
     w32(g+0x5c,rt.g.rng_state);
+    if(descriptor)*descriptor=actions.trace[slot].tick_descriptor_rom;
     return status?-(int)dispatch.blocked_dependency_rom:0;
+}
+int wf_action2f_oracle(uint8_t *mem,uint32_t *regs,unsigned slot){
+    return wf_action2f_oracle_with_descriptor(mem,regs,slot,0);
 }

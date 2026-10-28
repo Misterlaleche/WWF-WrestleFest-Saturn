@@ -1,0 +1,17 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/after50-active/snapshot-01058.bin",
+  "sha256": "8484fc78eba9eb04515838e0574dabc191fa70e2d994818b6faa4508cee769f1",
+  "header": [
+    3049,
+    4,
+    0,
+    115404,
+    1058,
+    1
+  ],
+  "derived": false,
+  "blocked_dependency": "0x1c2cc",
+  "branch": "B7.bit7 -> $1C390 -> $24CC and complete $1DF1E/$1DF7E",
+  "comparison": "Unchanged natural active ring-entry fight CPU snapshot; other fixtures are explicit derived boundaries."
+}

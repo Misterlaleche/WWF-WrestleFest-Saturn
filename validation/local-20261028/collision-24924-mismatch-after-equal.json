@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "cases": 4167,
+  "groups": {
+    "natural970-pair": 1,
+    "full-pair-first1-second2": 3888,
+    "callback-via-noop-first": 270,
+    "retained-source-row": 8
+  },
+  "source_sha256": "b36774c39e2013574815d8ed41af4f24defc1810c802a660916f41c6897ed4cb",
+  "snapshot_sha256": "54253600b27059b2249bcef9a9e89fca4c3b4b0c2a3a46024a032c6a69bc0365",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "compared": [
+    "RAM8KiB",
+    "FG16KiB",
+    "D0-D7",
+    "RNG",
+    "dispatch carry/result"
+  ],
+  "intercepts": [],
+  "limits": [
+    "Full2435A pair dispatch and complete24924 mismatch branch; equal-facing branch unchanged and outside this proof",
+    "Fixture is exact retained natural HOST970 failed pair from nativeF8C import; original phase24062 and HOST/SH2 trajectories not claimed globally identical",
+    "Unused links are not dereferenced by the mismatch branch",
+    "CCR after dispatch and A context outside C API; dispatch carry is compared"
+  ]
+}

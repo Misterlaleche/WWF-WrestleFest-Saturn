@@ -1,0 +1,15 @@
+{
+  "source_commit": "805be2a plus ROM-exact1C/52/58/6D/09/5D/67",
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/after67/snapshot-01383.bin",
+  "sha256": "826f5cf8c20a8f046c99baf1212267abe07b5d26fe5d7f978b9957f9405704e3",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 5015,
+  "slot": 4,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 1383,
+  "recorded_blocked_status": 1,
+  "selector": "0x0034",
+  "derived": false,
+  "comparison": "Natural untouched RAM and D0-D7; native bounded dispatcher versus unchanged ROM; full RAM, FG RAM and D0-D7 including RNG."
+}

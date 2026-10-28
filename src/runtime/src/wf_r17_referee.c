@@ -1,6 +1,8 @@
 #include <stddef.h>
 #include <stdint.h>
+#include <string.h>
 #include "wf_r17_referee.h"
+#include "wf_r17_actions_r11.h"
 #include "wf_r17_contract.h"
 #include "wf_physics.h"
 
@@ -100,7 +102,8 @@ wf_status_t wf_r17_ref_acquire_20556(wf_runtime_t*rt,wf_actor_raw_t*r,int*found)
 static wf_status_t primary5(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t*c){
  wf_status_t s;int f;if((rt->g.mode_0161&1u)==0u){s=target_204b2(rt,r,c);if(s!=WF_OK)return s;}else{wf_set_be16(r,R_TARGET_X,0x0268u);wf_set_be16(r,0x1Eu,0x0158u);}
  target_flags_2052e(r);
- if(wf_be32(r,R_LINK)!=0u){wf_actor_raw_t*a=aptr(rt,wf_be32(r,R_LINK));if(!a)return block(c,0x0001F9C8u);if(wf_be16(a,WF_A_LOCKOUT)==0u)return WF_OK;}
+ /* $1F9D0 BNE returns only while the previous actor has result lockout. */
+ if(wf_be32(r,R_LINK)!=0u){wf_actor_raw_t*a=aptr(rt,wf_be32(r,R_LINK));if(!a)return block(c,0x0001F9C8u);if(wf_be16(a,WF_A_LOCKOUT)!=0u)return WF_OK;}
  return wf_r17_ref_acquire_20556(rt,r,&f);
 }
 static wf_status_t cancel_1f9e0(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t*c){
@@ -216,7 +219,8 @@ static wf_status_t action3(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t
  wf_set_be16(r,R_PHASE,0u);set_global_169a(rt,(uint16_t)(rt->g.global_169a+1u));
  if(rt->g.global_169b==20u){s=gather_204fa(rt,r,&a2,&a3,c);if(s!=WF_OK)return s;if(!bit(a2,WF_A_FLAGS33,2)&&!bit(a3,WF_A_FLAGS33,2))return WF_OK;}
  wf_r17_m68k_move_l(&rt->m68k_regs,0u,rt->g.global_169a);
- if(!c||!c->number_2067c)return block(c,0x0002067cu);s=c->number_2067c(rt,rt->g.global_169a,c->user);if(s!=WF_OK)return s;
+ if(!c||!c->number_2067c)return block(c,0x0002067cu);
+ s=c->number_2067c(rt,rt->g.global_169a,c->user);if(s!=WF_OK)return s;
  if(rt->g.global_169b<17u)return WF_OK;
  wf_r17_m68k_move_w(&rt->m68k_regs,0u,wf_be16(r,R_SOUND));s=emit_audio(rt,r,c);if(s!=WF_OK)return s;wf_set_be16(r,R_SOUND,(uint16_t)(wf_be16(r,R_SOUND)+1u));
  if(rt->g.global_169b!=20u)return WF_OK;
@@ -224,22 +228,49 @@ static wf_status_t action3(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t
  if(bit(a2,WF_A_FLAGS33,2)&&bit(a3,WF_A_FLAGS33,2)){
   s=ringside_team_result(rt,a2,0x8005u,&p2,c);if(s!=WF_OK)return s;s=ringside_team_result(rt,a3,0x8005u,&p3,c);if(s!=WF_OK)return s;
   /* $1FE96 emits audio before clearing the clock flag and drawing text. */
-  if(!c->audio_2052)return block(c,0x2052u);wf_r17_m68k_move_w(&rt->m68k_regs,0u,0x3108u);s=c->audio_2052(rt,0x3108u,c->user);if(s!=WF_OK)return s;rt->g.global_169e=0u;
-  if(!c->text_2503c)return block(c,0x2503cu);wf_r17_m68k_move_w(&rt->m68k_regs,0u,0x52u);return c->text_2503c(rt,0x52u,c->user);
+  if(!c->audio_2052)return block(c,0x2052u);
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,0x3108u);s=c->audio_2052(rt,0x3108u,c->user);if(s!=WF_OK)return s;rt->g.global_169e=0u;
+  if(!c->text_2503c)return block(c,0x2503cu);
+  wf_r17_m68k_move_w(&rt->m68k_regs,0u,0x52u);return c->text_2503c(rt,0x52u,c->user);
  }
  wf_actor_raw_t*winner=bit(a2,WF_A_FLAGS33,2)?a3:a2,*loser=winner==a2?a3:a2;
  s=ringside_team_result(rt,winner,0x8002u,&p2,c);if(s!=WF_OK)return s;s=ringside_team_result(rt,loser,0x8003u,&p3,c);if(s!=WF_OK)return s;
- if(!c->tag_phase6_90d6)return block(c,0x90d6u);s=c->tag_phase6_90d6(rt,c->user);if(s!=WF_OK)return s;rt->g.global_169e=0u;
+ if(!c->tag_phase6_90d6)return block(c,0x90d6u);
+ s=c->tag_phase6_90d6(rt,c->user);if(s!=WF_OK)return s;rt->g.global_169e=0u;
  if(!bit(p3,WF_A_ROLE,7))return ringside_text52(rt,c);
- if(!c->result_20156)return block(c,0x20156u);return c->result_20156(rt,c->user);
+ if(!c->result_20156)return block(c,0x20156u);
+ return c->result_20156(rt,c->user);
+}
+/* $200E2 calls $21358 with A0=$1C11F4 (referee), not the wrestler in A1.
+ * Only $64 bytes belong to the referee; +$7E and +$B6 alias the effect pool.
+ * Build that original contiguous view only when a Royal count completes. */
+static wf_status_t royal_count_cleanup(wf_runtime_t *rt,wf_actor_raw_t *r,
+                                       wf_r17_referee_ctx_t *c){
+ wf_actor_raw_t view;uint32_t dependency=0u;
+ memcpy(view.b,r->b,0x64u);
+ memcpy(view.b+0x64u,rt->transient_1258,sizeof view.b-0x64u);
+ wf_status_t status=wf_r17_action_cleanup_21358(rt,&view,&dependency);
+ memcpy(r->b,view.b,0x64u);
+ memcpy(rt->transient_1258,view.b+0x64u,sizeof view.b-0x64u);
+ if(status!=WF_OK&&c)c->blocked_dependency_rom=dependency;
+ return status;
 }
 static wf_status_t count6(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t*c){
  wf_actor_raw_t*a1,*a2;wf_status_t s;if(entry_latch(r)){
   set_global_169a(rt,0u);wf_set_be16(r,R_PHASE,0u);wf_set_be16(r,R_SOUND,0x3162u);s=linked(rt,r,&a1,c,0x0002003Cu);if(s!=WF_OK)return s;wf_set_u8(r,R_FACING,wf_u8(a1,WF_A_FACING));wf_set_u8(r,R_VISUAL,wf_u8(r,R_FACING));wf_set_u8(r,R_TICK+1u,20u);wf_set_u8(r,R_VISUAL+1u,4u);
  }
- s=linked(rt,r,&a1,c,0x00020058u);if(s!=WF_OK)return s;a2=aptr(rt,wf_be32(a1,WF_A_LINK));if(!a2)return block(c,0x0002005Cu);
+ s=linked(rt,r,&a1,c,0x00020058u);if(s!=WF_OK)return s;
+ uint32_t victim=wf_be32(a1,WF_A_LINK);
  if(byte_dec(r,R_TICK+1u)!=0u)return WF_OK;
- byte_inc(r,R_PHASE+1u);byte_inc(a2,WF_A_PROGRESS109);
+ byte_inc(r,R_PHASE+1u);
+ /* $2005C only loads A2; it is first accessed after the timer at $2006C.
+  * A completed Royal pin can release +$26 before this final count tick.
+  * ADDQ.B then addresses read-only program ROM ($109 for a null link).
+  * Its write is ignored on the arcade bus; other invalid writes still block. */
+ a2=aptr(rt,victim);
+ if(a2)byte_inc(a2,WF_A_PROGRESS109);
+ else if(((victim+WF_A_PROGRESS109)&0x00ffffffu)>=0x80000u)
+  return block(c,0x0002006Cu);
  if(wf_u8(r,R_PHASE+1u)==7u){if((rt->g.mode_0161&1u)==0u){wf_set_be16(r,R_STATE,0x8009u);if(!c||!c->clear_206fe)return block(c,0x000206FEu);s=c->clear_206fe(rt,c->user);if(s!=WF_OK)return s;wf_set_be16(a1,0x4Au,4u);return WF_OK;}if(!c||!c->clear_206fe)return block(c,0x000206FEu);s=c->clear_206fe(rt,c->user);if(s!=WF_OK)return s;wf_set_be16(r,R_STATE,0x8005u);return WF_OK;}
  if((wf_u8(r,R_PHASE+1u)&1u)==0u){
   inc_global_169a(rt);
@@ -253,7 +284,7 @@ static wf_status_t count6(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t*
   wf_set_be16(r,R_SOUND,(uint16_t)(wf_be16(r,R_SOUND)+1u));
  }
  if(wf_u8(r,R_VISUAL+1u)==5u){wf_set_u8(r,R_TICK+1u,56u);wf_set_u8(r,R_VISUAL+1u,6u);}else{wf_set_u8(r,R_TICK+1u,32u);wf_set_u8(r,R_VISUAL+1u,5u);}
- if(wf_u8(r,R_PHASE+1u)==6u){wf_set_u8(r,R_TICK+1u,(uint8_t)(wf_u8(r,R_TICK+1u)+16u));if((rt->g.mode_0161&1u)!=0u){if(!c||!c->royal_phase6_21358)return block(c,0x00021358u);s=c->royal_phase6_21358(rt,a1,c->user);if(s!=WF_OK)return s;wf_set_be16(a1,WF_A_CREDIT,(uint16_t)(wf_be16(a1,WF_A_CREDIT)+1u));a1=aptr(rt,wf_be32(a1,WF_A_LINK));if(!a1)return block(c,0x000200ECu);setbit(a1,WF_A_FLAGS32,4);return WF_OK;}
+ if(wf_u8(r,R_PHASE+1u)==6u){wf_set_u8(r,R_TICK+1u,(uint8_t)(wf_u8(r,R_TICK+1u)+16u));if((rt->g.mode_0161&1u)!=0u){s=(c&&c->royal_phase6_21358)?c->royal_phase6_21358(rt,r,c->user):royal_count_cleanup(rt,r,c);if(s!=WF_OK)return s;wf_set_be16(a1,WF_A_CREDIT,(uint16_t)(wf_be16(a1,WF_A_CREDIT)+1u));a1=aptr(rt,wf_be32(a1,WF_A_LINK));if(!a1)return block(c,0x000200ECu);setbit(a1,WF_A_FLAGS32,4);return WF_OK;}
   wf_set_be16(a1,WF_A_LOCKOUT,0x4000u);a2=aptr(rt,wf_be32(a1,WF_A_TEAM_LINK));if(!a2)return block(c,0x00020102u);wf_set_be16(a2,WF_A_LOCKOUT,0x4000u);a1=aptr(rt,wf_be32(a1,WF_A_LINK));if(!a1)return block(c,0x0002010Cu);wf_set_be16(a1,WF_A_LOCKOUT,0x4001u);a2=aptr(rt,wf_be32(a1,WF_A_TEAM_LINK));if(!a2)return block(c,0x00020116u);wf_set_be16(a2,WF_A_LOCKOUT,0x4001u);rt->g.global_169e=0u;if(!c||!c->tag_phase6_90d6)return block(c,0x000090D6u);return c->tag_phase6_90d6(rt,c->user);}
  return WF_OK;
 }
@@ -277,7 +308,21 @@ static wf_status_t action8(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t
  if(byte_dec(r,R_TICK+1u)!=0u)return WF_OK;
  s=linked(rt,r,&a,c,0x0002039Au);if(s!=WF_OK)return s;if(bit(a,WF_A_FLAGS32,0)){if(wf_u8(r,R_VISUAL+1u)==8u){wf_set_u8(r,R_TICK+1u,8u);wf_set_u8(r,R_VISUAL+1u,7u);}else{wf_set_u8(r,R_TICK+1u,10u);wf_set_u8(r,R_VISUAL+1u,8u);}}else{if(wf_u8(r,R_VISUAL+1u)==13u){wf_set_u8(r,R_TICK+1u,8u);wf_set_u8(r,R_VISUAL+1u,14u);}else{wf_set_u8(r,R_TICK+1u,10u);wf_set_u8(r,R_VISUAL+1u,13u);}}return WF_OK;
 }
-static wf_status_t result_chain_lock(wf_runtime_t*rt,wf_actor_raw_t*a,wf_r17_referee_ctx_t*c){wf_actor_raw_t*t,*p;if(!a)return block(c,0x00020472u);setbit(a,WF_A_LOCKOUT,7);t=aptr(rt,wf_be32(a,WF_A_TEAM_LINK));if(!t)return block(c,0x00020478u);setbit(t,WF_A_LOCKOUT,7);p=aptr(rt,wf_be32(a,WF_A_LINK));if(!p)return block(c,0x00020482u);setbit(p,WF_A_LOCKOUT,7);t=aptr(rt,wf_be32(p,WF_A_TEAM_LINK));if(!t)return block(c,0x0002048Cu);setbit(t,WF_A_LOCKOUT,7);return WF_OK;}
+static wf_status_t result_chain_lock(wf_runtime_t*rt,wf_actor_raw_t*a,wf_r17_referee_ctx_t*c){
+ wf_actor_raw_t*t,*p;
+ if(!a)return block(c,0x00020472u);
+ setbit(a,WF_A_LOCKOUT,7);
+ t=aptr(rt,wf_be32(a,WF_A_TEAM_LINK));
+ if(!t)return block(c,0x00020478u);
+ setbit(t,WF_A_LOCKOUT,7);
+ p=aptr(rt,wf_be32(a,WF_A_LINK));
+ if(!p)return block(c,0x00020482u);
+ setbit(p,WF_A_LOCKOUT,7);
+ t=aptr(rt,wf_be32(p,WF_A_TEAM_LINK));
+ if(!t)return block(c,0x0002048Cu);
+ setbit(t,WF_A_LOCKOUT,7);
+ return WF_OK;
+}
 static wf_status_t action9(wf_runtime_t*rt,wf_actor_raw_t*r,wf_r17_referee_ctx_t*c){
  wf_actor_raw_t*a;wf_status_t s;if(entry_latch(r)){wf_set_u8(r,R_TICK+1u,8u);wf_set_u8(r,R_VISUAL+1u,15u);}if(byte_dec(r,R_TICK+1u)!=0u)return WF_OK;
  if(wf_u8(r,R_VISUAL+1u)==16u){if(!c||!c->result_20156)return block(c,0x00020156u);s=c->result_20156(rt,c->user);if(s!=WF_OK)return s;if((rt->g.mode_0161&1u)==0u){s=linked(rt,r,&a,c,0x0002041Cu);if(s!=WF_OK)return s;if(!bit(a,WF_A_ROLE,7)){rt->g.global_15d2=0x0Fu;rt->g.global_15d3=0x2Au;}else{rt->g.global_15d4=rt->g.global_15d5=0u;rt->g.global_15d2=0x0Fu;rt->g.global_15d3=0x2Cu;}}}

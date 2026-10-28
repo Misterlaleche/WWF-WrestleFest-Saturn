@@ -36,5 +36,13 @@ int main(int argc,char**argv){
   assert(visible(1,1,0,0)==(m==2?10u:11u));
   assert(visible(0,0,0,0)==(m==2?11u:10u)); /* opaque base includes pen0 */
  }
+ mock_display=0;
+ for(unsigned k=0;k<8;k++)mock_sprite_priorities[k]=0;
+ assert(!wf_r18_ring_update_deferred(496,560,480,560,0x7cu));
+ assert(mock_display==0);
+ for(unsigned k=0;k<8;k++)assert(mock_sprite_priorities[k]==0);
+ assert(!wf_r18_ring_update(496,560,480,560,0x7cu));
+ assert(mock_display!=0);
+ for(unsigned k=0;k<8;k++)assert(mock_sprite_priorities[k]==2);
  puts("PASS Saturn ring priority: foreground rope occludes wrestlers/side ropes in7C;7B/78 preserve their board order,8sprite classes and pen0");return 0;
 }

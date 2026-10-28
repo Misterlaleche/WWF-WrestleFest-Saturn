@@ -99,7 +99,7 @@ static wf_status_t upload_palette(void *ctx,uint8_t bank,const uint8_t*src,size_
 
 static wf_status_t emit_sprite(void *ctx,const wf_vdp1_sprite_cmd_t*c){
     wf_saturn_yaul_backend_t*b=(wf_saturn_yaul_backend_t*)ctx;uint32_t off;
-    if(!b||!b->active||!c)return WF_BAD_STATE;
+    if(!b||!b->active||!c||c->stream_tile>=b->expected_tiles)return WF_BAD_STATE;
     if(c->cram_slot>=WF_SATURN_CRAM_SPRITE_BANKS)return WF_BLOCKED;
     if(wf_saturn_stream_tile_offset(c->stream_tile,&off)!=WF_OK)return WF_BLOCKED;
 #ifdef WF_PLATFORM_SATURN

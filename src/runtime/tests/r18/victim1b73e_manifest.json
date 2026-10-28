@@ -1,0 +1,13 @@
+{
+  "sha256": "5be751d7bcf071efe2518d855b6937375cb853b01e041db79f6960217e781718",
+  "header": [
+    385,
+    0,
+    1,
+    114750,
+    243,
+    1
+  ],
+  "source": "runtime18/validation/local-20261024/full-flow-combat-royal-raw30/snapshot-00243.bin",
+  "note": "NaturalHOST manual Royal full frontend/paid flow frame385 actor0 subtype13. Projected RAM8KiB; not physical Saturn RAM."
+}

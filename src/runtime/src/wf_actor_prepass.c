@@ -3,6 +3,7 @@
 #include "wf_r17_human_raw23.h"
 #include "wf_r17_follow_10e86.h"
 #include "wf_r17_rng1129e.h"
+#include "wf_input.h"
 
 static int bit(const wf_actor_raw_t*a,size_t o,unsigned b){return (wf_u8(a,o)&(uint8_t)(1u<<b))!=0u;}
 static void setbit(wf_actor_raw_t*a,size_t o,unsigned b){wf_set_u8(a,o,(uint8_t)(wf_u8(a,o)|(uint8_t)(1u<<b)));}
@@ -29,11 +30,17 @@ static wf_status_t state0(wf_runtime_t*rt,wf_actor_raw_t*a,wf_gameplay_binding_c
  }
  return facing_10be8(rt,a,c);
 }
-static const uint16_t dir_f2d6[16]={0x0000,0x0040,0x00c0,0x0000,0x0020,0x00e0,0x0000,0x0000,0x0080,0x0060,0x00a0,0x0000,0x0000,0x0000,0x0000,0x0000};
+/* Both $F292 and $F484 index the same original direction table. Keep the
+ * live WORD shift in D1 as well as the resulting angle. */
+static wf_status_t direction_f2d6(wf_runtime_t*rt,wf_actor_raw_t*a,wf_gameplay_binding_context_t*c){
+ uint16_t idx=wf_be16(a,WF_A_INPUT_DERIVED);if(idx>=16u)return block(c,0x00f2d6u);
+ wf_r17_m68k_move_w(&rt->m68k_regs,1u,(uint16_t)(idx*2u));
+ wf_set_be16(a,WF_A_ANGLE_WORD,wf_input_direction_state1((uint8_t)idx));return WF_OK;
+}
 static wf_status_t state1_0(wf_runtime_t*rt,wf_actor_raw_t*a,wf_gameplay_binding_context_t*c){
  if(bit(a,WF_A_FLAGS34,1)){if(!bit(a,WF_A_FLAGS33,0)){wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,4u);}else clrbit(a,WF_A_FLAGS34,1);return WF_OK;}
- uint16_t idx=wf_be16(a,WF_A_INPUT_DERIVED);if(idx>=16u)return block(c,0x00f2d6u);wf_set_be16(a,WF_A_ANGLE_WORD,dir_f2d6[idx]);
- wf_status_t s=facing_10be8(rt,a,c);if(s!=WF_OK)return s;
+ wf_status_t s=direction_f2d6(rt,a,c);if(s!=WF_OK)return s;
+ s=facing_10be8(rt,a,c);if(s!=WF_OK)return s;
  s=wf_r17_follow_10e86(rt,a,rt->g.mode_0161);if(s!=WF_OK)return block(c,0x00010e86u);
  return WF_OK;
 }
@@ -52,12 +59,17 @@ static wf_status_t state2(wf_runtime_t*rt,wf_actor_raw_t*a,wf_gameplay_binding_c
  if((old&0x40u)==0u){
   if(wf_u8(a,WF_A_LATCHED+1u)==6u||wf_be16(a,WF_A_TIMER44)!=0u)return WF_OK;
   uint16_t oldf=wf_be16(a,WF_A_FACING);uint16_t d=(uint16_t)(wf_be16(a,WF_A_INPUT_DERIVED)&3u);
+  wf_r17_m68k_move_w(&rt->m68k_regs,2u,oldf);wf_r17_m68k_move_w(&rt->m68k_regs,1u,d);
   if(d!=0u){if(d==1u){wf_set_be16(a,WF_A_ANGLE_WORD,0x0040u);setbit(a,WF_A_FACING,7);}else{wf_set_be16(a,WF_A_ANGLE_WORD,0x00c0u);clrbit(a,WF_A_FACING,7);}if(oldf!=wf_be16(a,WF_A_FACING))setbit(a,WF_A_FLAGS32,2);}
-  else {uint8_t v=(uint8_t)(wf_u8(a,WF_A_FACING)&0x80u);v^=0x80u;v=(uint8_t)(v+0x40u);wf_set_u8(a,WF_A_ANGLE,v);}return WF_OK;
+  else {uint8_t v=(uint8_t)(wf_u8(a,WF_A_FACING)&0x80u);v^=0x80u;v=(uint8_t)(v+0x40u);wf_r17_m68k_move_b(&rt->m68k_regs,1u,v);wf_set_u8(a,WF_A_ANGLE,v);}return WF_OK;
  }
  if(bit(a,WF_A_FLAGS34,1)&&wf_be16(a,WF_A_TIMER44)==0u){wf_set_be16(a,WF_A_STATE,3u);return WF_OK;}
- if((rt->g.global_00a3&3u)!=0u&&(rt->g.mode_0161&1u)!=0u&&wf_u8(a,WF_A_TIMER44+1u)==1u){
+ /* $F3DE uses absolute-short $00A3, in program ROM, not $1C00A3 in RAM.
+  * The verified arcade ROM byte at $00A3 is $FF; ANDI.B #3 leaves $03. */
+ wf_r17_m68k_move_b(&rt->m68k_regs,1u,3u);
+ if((rt->g.mode_0161&1u)!=0u&&wf_u8(a,WF_A_TIMER44+1u)==1u){
   wf_actor_raw_t*t=target(rt,a);if(!t)return block(c,0x00f3fau);uint16_t dx=wf_be16(a,WF_A_X)>=wf_be16(t,WF_A_X)?(uint16_t)(wf_be16(a,WF_A_X)-wf_be16(t,WF_A_X)):(uint16_t)(wf_be16(t,WF_A_X)-wf_be16(a,WF_A_X));
+  wf_r17_m68k_move_w(&rt->m68k_regs,1u,dx);
   if(dx<0x60u){
    uint8_t o=wf_u8(a,WF_A_TIMER46);setbit(a,WF_A_TIMER46,0);
    if((o&1u)==0u){
@@ -77,7 +89,7 @@ static wf_status_t state2(wf_runtime_t*rt,wf_actor_raw_t*a,wf_gameplay_binding_c
 }
 static wf_status_t state5(wf_runtime_t*rt,wf_actor_raw_t*a,wf_gameplay_binding_context_t*c){
  uint8_t s=wf_u8(a,WF_A_SELECTOR_LO);if(s==0x3cu||s==0x3du||s==0x3eu){wf_set_be16(a,WF_A_STATE,0u);return WF_OK;}
- if(s==0x16u){uint16_t i=wf_be16(a,WF_A_INPUT_DERIVED);wf_status_t rs;if(i>=16u)return block(c,0x00f2d6u);wf_set_be16(a,WF_A_ANGLE_WORD,dir_f2d6[i]);rs=wf_r17_follow_10e86(rt,a,rt->g.mode_0161);return rs==WF_OK?WF_OK:block(c,0x00010e86u);}return WF_OK;
+ if(s==0x16u){wf_status_t rs=direction_f2d6(rt,a,c);if(rs!=WF_OK)return rs;rs=wf_r17_follow_10e86(rt,a,rt->g.mode_0161);return rs==WF_OK?WF_OK:block(c,0x00010e86u);}return WF_OK;
 }
 static wf_status_t dispatch_state(wf_runtime_t*rt,wf_actor_raw_t*a,wf_gameplay_binding_context_t*c){
  uint8_t st=wf_u8(a,WF_A_STATE+1u);switch(st){case 0:return state0(rt,a,c);case 1:return state1(rt,a,c);case 2:return state2(rt,a,c);case 3:case 4:return WF_OK;case 5:return state5(rt,a,c);case 6:case 7:case 8:return WF_OK;case 9:if(bit(a,WF_A_INPUT_DERIVED+1u,3))wf_set_be16(a,WF_A_STATE,0x000au);return WF_OK;case 10:case 11:case 12:return WF_OK;default:return block(c,0x00f1e4u);}

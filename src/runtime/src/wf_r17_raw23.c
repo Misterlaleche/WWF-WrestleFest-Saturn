@@ -175,21 +175,24 @@ static wf_status_t phase0(wf_actor_raw_t *a,wf_actor_raw_t *t,wf_r17_raw23_ctx_t
     }else if(low(a,O_FRAME)==0xFEu){wf_set_be16(a,O_STATE,5u);wf_set_be16(a,O_SUBSTATE,(uint16_t)(wf_be16(a,O_SUBSTATE)+1u));if((ctx->mode_0161&0x02u)!=0u)wf_set_be16(a,O_SUBSTATE,8u);}
     *dp=&D_1A24A;return WF_OK;
 }
-static wf_status_t phase1_4(wf_actor_raw_t *a,wf_actor_raw_t *t,wf_r17_raw23_ctx_t *ctx,const desc_t **dp,wf_r17_raw23_trace_t *tr){
+static wf_status_t phase1_4(wf_runtime_t *rt,wf_actor_raw_t *a,wf_actor_raw_t *t,wf_r17_raw23_ctx_t *ctx,const desc_t **dp,wf_r17_raw23_trace_t *tr){
     uint16_t idx;wf_status_t s;(void)dp;
     if(!bit(a,O_LATCH,7)){
         uint8_t x=(uint8_t)(wf_u8(a,O_FACING)^wf_u8(t,O_FACING));uint8_t sub=low(a,O_SUBSTATE);
+        rt->m68k_regs.d[1]=(rt->m68k_regs.d[1]&0xFFFFFF00u)|x;
         idx=(uint16_t)(x?5u+sub:10u-sub);wf_set_be16(a,O_VZ,0x0500u);wf_set_be16(a,O_VZDEC,0x0048u);s=wf_r17_trajectory_26ae(a,t,idx);if(s!=WF_OK)return s;wf_set_u8(a,O_MOTION,2u);return WF_OK;
     }
     if(bit(a,O_CONTACT37,4)){s=helper_1110e(a,ctx,tr);if(s!=WF_OK)return s;wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,O_TIMER,0u);ctx->shake_1800=0x000Eu;}
     if(low(a,O_FRAME)==0xFEu){wf_set_be16(a,O_STATE,5u);if(wf_u8(a,O_CONTACT)!=1u)wf_set_be16(a,O_SUBSTATE,(uint16_t)(wf_be16(a,O_SUBSTATE)+1u));else wf_set_be16(a,O_SUBSTATE,5u);}
     return WF_OK;
 }
-static wf_status_t phase5(wf_actor_raw_t *a,wf_actor_raw_t *t,wf_r17_raw23_ctx_t *ctx,const desc_t **dp,wf_r17_raw23_trace_t *tr){
+static wf_status_t phase5(wf_runtime_t *rt,wf_actor_raw_t *a,wf_actor_raw_t *t,wf_r17_raw23_ctx_t *ctx,const desc_t **dp,wf_r17_raw23_trace_t *tr){
     uint16_t d,tid;
     if(!bit(a,O_LATCH,7)){
         wf_set_u8(a,O_MOTION,1u);tid=wf_be16(a,O_CHAR);if(tid>=12u)return block(tr,0x00011D4Au);wf_set_be16(a,O_MAG,0u);wf_set_u8(a,O_MAG+1u,SPEED_11D4A[tid]);wf_set_be16(t,O_ANGLE_TARGET,0x0200u);
-        d=wf_be16(t,O_DC);if(d>=5u)d=5u;d=TAB_176BA[d];if(d<wf_be16(t,O_STAMINA))d=1u;else d=(uint16_t)(d-wf_be16(t,O_STAMINA));if(low(a,O_SELECTOR)==0x23u)d=(uint16_t)(d+6u);wf_set_be16(t,O_MASH,d);
+        d=wf_be16(t,O_DC);if(d>=5u)d=5u;d=TAB_176BA[d];
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,wf_be16(t,O_STAMINA));
+        if(d<wf_be16(t,O_STAMINA))d=1u;else d=(uint16_t)(d-wf_be16(t,O_STAMINA));if(low(a,O_SELECTOR)==0x23u)d=(uint16_t)(d+6u);wf_set_be16(t,O_MASH,d);
         clrbit(a,O_FACING,7);wf_set_be16(a,O_ANGLE,0x00C0u);if(wf_be16(a,O_X)<0x0270u){setbit(a,O_FACING,7);wf_set_be16(a,O_ANGLE,0x0040u);}*dp=&D_11C62;return WF_OK;
     }
     wf_set_be16(a,O_PROFILE,0u);
@@ -213,7 +216,10 @@ static wf_status_t phase8(wf_runtime_t *rt,wf_actor_raw_t *a,wf_actor_raw_t *t,w
     if(bit(a,O_SELECTOR,7)){
         if(bit(t,O_FLAGS32,4)){ctx->global_15d2=wf_u8(t,O_CHAR_LO);ctx->global_15d3=0x29u;}
         else if(!bit(a,O_FE,7))return WF_OK;
-        wf_set_be16(a,O_STATE,7u);wf_set_be16(t,O_STATE,4u);wf_set_be16(t,O_STATE4,0x0009u);clrbit(a,O_PINFLAGS,0);helper_10bd0(a,(int16_t)0xFFD0,0,0);*dp=&D_15CF0;return WF_OK;
+        wf_set_be16(a,O_STATE,7u);wf_set_be16(t,O_STATE,4u);wf_set_be16(t,O_STATE4,0x0009u);clrbit(a,O_PINFLAGS,0);
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);
+        wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
+        helper_10bd0(a,(int16_t)0xFFD0,0,0);*dp=&D_15CF0;return WF_OK;
     }
     if(!bit(a,O_LATCH,7)){wf_set_u8(a,O_MOTION,0u);wf_set_be16(a,O_VZ,0x0600u);wf_set_be16(a,O_VZDEC,0x0048u);s=wf_r17_trajectory_26ae(a,t,2u);if(s!=WF_OK)return s;*dp=&D_15CF0;return WF_OK;}
     if(wf_be16(a,O_FRAME)==0u&&wf_be16(a,O_TIMER)==0u){wf_set_u8(a,O_MOTION,2u);*dp=&D_15CF0;return WF_OK;}
@@ -229,6 +235,8 @@ static wf_status_t phase8(wf_runtime_t *rt,wf_actor_raw_t *a,wf_actor_raw_t *t,w
     wf_set_u8(a,O_MOTION,0u);ctx->global_15d2=wf_u8(a,O_CHAR_LO);ctx->global_15d3=0x25u;ctx->shake_1800=0x000Eu;clrbit(a,O_SELECTOR,4);wf_set_be16(t,O_MASH,0u);wf_set_be16(t,O_ANGLE_TARGET,0u);wf_set_be16(t,O_DE,(uint16_t)(wf_be16(t,O_DE)+1u));
     if(bit(a,O_FLAGS33,0)&&bit(t,O_FLAGS33,0)&&!bit(a,O_FLAGS33,2)){
         wf_set_be16(a,O_PROFILE,0x801Du);setbit(a,O_SELECTOR,7);setbit(a,O_PINFLAGS,0);wf_set_be16(t,O_STATE,5u);wf_set_be16(t,O_SELECTOR,0x0064u);wf_set_be16(t,O_DAMAGE,0x0014u);
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,0xFFFFu);
+        wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
         helper_10b9a(rt,t,0x0030,(int16_t)-1,0);if(!ctx->special_215b6)return block(tr,0x000215B6u);s=ctx->special_215b6(rt,a,ctx->user);if(s!=WF_OK)return s;*dp=&D_15CF0;return WF_OK;
     }
     wf_set_be16(a,O_TIMER,0x0014u);wf_set_be16(t,O_STATE,4u);wf_set_be16(t,O_STATE4,0x0007u);
@@ -238,6 +246,8 @@ static wf_status_t phase8(wf_runtime_t *rt,wf_actor_raw_t *a,wf_actor_raw_t *t,w
 impact_failure:
     wf_set_be16(a,O_STATE,4u);wf_set_be16(a,O_STATE4,0x0005u);chgbit(a,O_FACING,7);
     setbit(a,O_LINK,7);wf_set_be16(t,O_DAMAGE,0x0003u);
+    wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);
+    wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
     s=emit(ctx,0x0032u,tr,0x00002052u);if(s!=WF_OK)return s;
     wf_set_be16(t,O_ANGLE_TARGET,0u);wf_set_be16(t,O_MASH,0u);
     wf_set_be16(a,O_VISUAL,0x001Fu);wf_set_u8(a,O_VISUAL,wf_u8(a,O_FACING));
@@ -246,7 +256,7 @@ impact_failure:
 
 static wf_status_t raw23_callback(wf_runtime_t *rt,wf_actor_raw_t *a,wf_actor_raw_t *t,wf_r17_raw23_ctx_t *ctx,const desc_t **dp,wf_r17_raw23_trace_t *tr){
     uint8_t sub=(uint8_t)(wf_be16(a,O_SUBSTATE)&0x0Fu);if(tr)tr->substate=sub;
-    switch(sub){case 0:return phase0(a,t,ctx,dp,tr);case 1:case 2:case 3:case 4:return phase1_4(a,t,ctx,dp,tr);case 5:return phase5(a,t,ctx,dp,tr);case 6:return phase6(a,dp);case 7:return phase7(a,t,ctx,dp,tr);case 8:return phase8(rt,a,t,ctx,dp,tr);default:return block(tr,0x00015D08u);}
+    switch(sub){case 0:return phase0(a,t,ctx,dp,tr);case 1:case 2:case 3:case 4:return phase1_4(rt,a,t,ctx,dp,tr);case 5:return phase5(rt,a,t,ctx,dp,tr);case 6:return phase6(a,dp);case 7:return phase7(a,t,ctx,dp,tr);case 8:return phase8(rt,a,t,ctx,dp,tr);default:return block(tr,0x00015D08u);}
 }
 
 wf_status_t wf_r17_dispatch_1c03e_raw23(wf_runtime_t *rt,unsigned slot,wf_r17_raw23_ctx_t *ctx,wf_r17_raw23_trace_t *tr){

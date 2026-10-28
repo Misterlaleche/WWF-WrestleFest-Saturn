@@ -144,9 +144,9 @@ build/test_wp35_wp36: $(CORE) tests/test_wp35_wp36.c
 test-wp35-wp36: build/test_wp35_wp36
 	./build/test_wp35_wp36
 
-build/test_runtime17_f4c2: $(CORE) tests/test_runtime17_f4c2.c
+build/test_runtime17_f4c2: $(CORE) src/wf_r18_prematch.c tests/test_runtime17_f4c2.c
 	mkdir -p build
-	$(CC) $(CFLAGS) $(CORE) tests/test_runtime17_f4c2.c -o $@
+	$(CC) $(CFLAGS) $(CORE) src/wf_r18_prematch.c tests/test_runtime17_f4c2.c -o $@
 
 test-runtime17-f4c2: build/test_runtime17_f4c2
 	./build/test_runtime17_f4c2
@@ -316,7 +316,7 @@ test-active-rom: build/test_runtime17_active_rom
 test: test-active-rom
 
 # Direct-boot integration probe; the ROM and graphics remain local audit assets.
-R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_result_screen.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_ring.c src/wf_r18_transition.c
+R18_HOST=src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_result_screen.c src/wf_r18_bootstrap.c src/wf_r18_metasprite.c src/wf_r18_present.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_ring.c src/wf_r18_transition.c src/wf_r18_frontend_input.c src/wf_r18_frontend_palette.c src/wf_r18_frontend_fade.c src/wf_r18_frontend_effect.c src/wf_r18_mode_select.c src/wf_r18_title_palette.c src/wf_r18_frontend_boot.c src/wf_r18_title.c src/wf_r18_roster_select.c src/wf_r18_prematch.c src/wf_r18_frontend_io.c src/wf_r18_frontend_map.c src/wf_r18_frontend_render.c src/wf_r18_frontend_leaf.c src/wf_r18_royal_setup.c src/wf_r18_frontend_driver.c src/wf_r18_frontend_reset.c src/wf_r18_frontend_coin.c src/wf_r18_frontend_irq.c src/wf_r18_frontend_mode_plate.c src/wf_r18_frontend_board.c src/wf_r18_match_setup.c src/wf_r18_match_flow.c src/wf_r18_match_hud.c src/wf_r18_match_flash.c src/wf_r18_match_aux.c src/wf_r18_match_driver.c src/wf_r18_match_support.c src/wf_r18_card_scene.c src/wf_r18_runtime_handoff.c src/wf_r18_frontend_world.c src/wf_r18_attract_setup.c src/wf_r18_post_tag.c src/wf_r18_ranking.c src/wf_r18_ranking_glyph.c src/wf_r18_records_aux.c
 build/direct_combat_probe: $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c include/wf_r18_rom_hot_pages.h
 	mkdir -p build
 	$(CC) $(CFLAGS) $(CORE) $(R18_HOST) tests/r17/direct_combat_probe.c -o $@
@@ -565,6 +565,12 @@ test-runtime18-command-work: build/test_runtime18_command_work
 test-runtime18-plan-equivalence:
 	$(ROM_PYTHON) tests/r18/verify_plan_equivalence.py
 
+build/test_runtime18_vdp1_retain_work: tests/r18/test_vdp1_retain_work.c src/wf_vdp1_plan.c | build
+	$(CC) $(CFLAGS) -UNDEBUG tests/r18/test_vdp1_retain_work.c -o $@
+test-runtime18-vdp1-retain-work: build/test_runtime18_vdp1_retain_work
+	./build/test_runtime18_vdp1_retain_work
+.PHONY: test-runtime18-vdp1-retain-work
+
 R18_READ_WORK_DEPS=src/wf_r18_metasprite.c src/wf_actor.c src/wf_saturn_yaul_backend.c src/wf_saturn_memory.c src/wf_saturn_render_bridge.c src/wf_vdp1_plan.c
 build/test_runtime18_rom_read_work: tests/r18/test_rom_read_work.c src/wf_r18_present.c $(R18_READ_WORK_DEPS) | build
 	$(CC) $(CFLAGS) tests/r18/test_rom_read_work.c $(R18_READ_WORK_DEPS) -o $@
@@ -576,7 +582,7 @@ test-runtime18-rom-read-work-asan: | build
 test-runtime18-result-screen-rom:
 	$(ROM_PYTHON) tests/r18/verify_result_screen_rom.py
 test-runtime18-result-screen-asan: | build
-	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_result_screen.c src/wf_r18_video.c src/wf_r17_m68k_shadow.c tests/r18/test_result_screen.c -o build/test_runtime18_result_screen_asan
+	$(CC) $(CFLAGS) -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/wf_r18_result_screen.c src/wf_r18_frontend_palette.c src/wf_r18_video.c src/wf_r17_m68k_shadow.c tests/r18/test_result_screen.c -o build/test_runtime18_result_screen_asan
 	ASAN_OPTIONS=halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./build/test_runtime18_result_screen_asan audit/runtime18-cd/ROM68K.BIN
 .PHONY: test-runtime18-rom-read-work test-runtime18-rom-read-work-asan test-runtime18-result-screen-rom test-runtime18-result-screen-asan
 
@@ -654,3 +660,91 @@ test-runtime18-continuation-rom:
 	@set -e; for owner in $(R18_CONTINUATION_ORACLES); do $(ROM_PYTHON) tests/r18/$${owner}_verify_rom.py; done
 test-runtime18-rom-validation: test-runtime18-cpu-state2-rom test-runtime18-action22-rom test-runtime18-continuation-rom
 .PHONY: test-runtime18-continuation-rom
+
+# 805be2a controlled continuation: linked hold and its real receiver.
+R18_CONTROLLED_CONTINUATION_ORACLES=action1c action52 action58 action6d action09 action5d action67 action75 action34 state4_1be7c cpu_1d6e4 action78 cpu_state0_flag34 action79 action21 action49 action42
+test-runtime18-controlled-continuation-rom:
+	@set -e; for owner in $(R18_CONTROLLED_CONTINUATION_ORACLES); do $(ROM_PYTHON) tests/r18/$${owner}_verify_rom.py; done
+test-runtime18-rom-validation: test-runtime18-controlled-continuation-rom
+.PHONY: test-runtime18-controlled-continuation-rom
+
+test-runtime18-saturn-pad-level:
+	$(ROM_PYTHON) tests/r18/verify_saturn_pad_level.py
+
+test-runtime18-hot-dictionary:
+	$(ROM_PYTHON) tests/r18/verify_hot_sprite_dictionary.py validation/runtime18-hot-tiles.txt
+.PHONY: test-runtime18-saturn-pad-level test-runtime18-hot-dictionary
+
+R18_CONTROLLED_CONTINUATION_ORACLES+=action05
+test-runtime18-action05-rom:
+	$(ROM_PYTHON) tests/r18/action05_verify_rom.py
+.PHONY: test-runtime18-action05-rom
+
+R18_CONTROLLED_CONTINUATION_ORACLES+=action50
+test-runtime18-action50-rom:
+	$(ROM_PYTHON) tests/r18/action50_verify_rom.py
+.PHONY: test-runtime18-action50-rom
+
+R18_CONTROLLED_CONTINUATION_ORACLES+=action2e
+test-runtime18-action2e-rom:
+	$(ROM_PYTHON) tests/r18/action2e_verify_rom.py
+.PHONY: test-runtime18-action2e-rom
+
+R18_CONTROLLED_CONTINUATION_ORACLES+=cpu_state0_b7
+R18_CONTROLLED_CONTINUATION_ORACLES+=cpu_1d078 cpu_1d106 cpu_1d16a
+R18_CONTROLLED_CONTINUATION_ORACLES+=main8
+R18_CONTROLLED_CONTINUATION_ORACLES+=action0f
+R18_CONTROLLED_CONTINUATION_ORACLES+=cpu_state0_b7_entry
+R18_CONTROLLED_CONTINUATION_ORACLES+=action40
+R18_CONTROLLED_CONTINUATION_ORACLES+=cpu_controller3d_tag
+R18_CONTROLLED_CONTINUATION_ORACLES+=victim1b684 action31 action32
+R18_CONTROLLED_CONTINUATION_ORACLES+=cpu_controller15 cpu_controller15_royal cpu_state0_royal cpu_state1_royal royal_target
+R18_CONTROLLED_CONTINUATION_ORACLES+=action02 action07 action27 action30 action41 action2d action1d action53 action39 action3a
+R18_CONTROLLED_CONTINUATION_ORACLES+=state4_1bb08 state4_1b7a2 state4_1bc36 victim1b73e
+R18_CONTROLLED_CONTINUATION_ORACLES+=cpu_pursuit_tag state4_1b85e
+R18_CONTROLLED_CONTINUATION_ORACLES+=action1a action19 action2a action3c action43 action46 action5c action01
+R18_CONTROLLED_CONTINUATION_ORACLES+=royal_candidate state4_1bd6c victim1c004
+
+R18_FRONTEND_ROM_ORACLES=frontend_input frontend_palette frontend_fade frontend_effect mode_select title_palette
+R18_FRONTEND_ROM_ORACLES+=frontend_boot title roster_select_init roster_select roster_select_live prematch prematch_scene royal_setup match_setup match_flow frontend_io frontend_map frontend_render frontend_board frontend_irq frontend_irq_outer frontend_coin frontend_reset frontend_mode_plate match_hud match_flash match_support runtime_handoff card_scene frontend_world match_aux
+test-runtime18-frontend-rom:
+	$(foreach owner,$(R18_FRONTEND_ROM_ORACLES),$(ROM_PYTHON) tests/r18/$(owner)_verify_rom.py &&) true
+.PHONY: test-runtime18-frontend-rom
+test-runtime18-cpu-state0-b7-rom:
+	$(ROM_PYTHON) tests/r18/cpu_state0_b7_verify_rom.py
+.PHONY: test-runtime18-cpu-state0-b7-rom
+
+test-runtime18-frontend-host:
+	$(ROM_PYTHON) tests/r18/frontend_driver_verify_host.py
+	$(ROM_PYTHON) tests/r18/match_driver_verify_host.py
+	$(ROM_PYTHON) tests/r18/frontend_render_verify_rom.py --native-leaf
+	$(ROM_PYTHON) tests/r18/frontend_resume_boot_verify_host.py
+.PHONY: test-runtime18-frontend-host
+R18_FRONTEND_ROM_ORACLES+=attract_setup
+
+R18_CONTROLLED_CONTINUATION_ORACLES+=action2b victim1bed8 action7a action12 action28 action36 collision_24924 collision_24984 royal_result
+
+R18_CONTROLLED_CONTINUATION_ORACLES+=action63 action6e action6f action25 collision_24d5e action60 action8a action04 action47 action2c action83
+R18_CONTROLLED_CONTINUATION_ORACLES+=action13 action1b action1f action45
+R18_CONTROLLED_CONTINUATION_ORACLES+=action3b action3e cpu_1d032 cpu_1d6ee
+R18_CONTROLLED_CONTINUATION_ORACLES+=action7f action87 action8d cpu_1d3f4 action0b action20 action54 action62 victim1bd0e
+R18_FRONTEND_ROM_ORACLES+=post_tag
+R18_FRONTEND_ROM_ORACLES+=ae20_program0
+R18_FRONTEND_ROM_ORACLES+=ranking ranking_glyph records_aux
+
+test-runtime18-ranking-matrix-rom:
+	$(ROM_PYTHON) tests/r18/ranking_matrix_verify_rom.py
+test-runtime18-frontend-rom: test-runtime18-ranking-matrix-rom
+.PHONY: test-runtime18-ranking-matrix-rom
+
+test-runtime18-match-post-dispatch:
+	$(ROM_PYTHON) tests/r18/match_post_dispatch_verify_host.py
+.PHONY: test-runtime18-match-post-dispatch
+
+test-runtime18-input-source-rom: | build
+	$(ROM_PYTHON) tests/r18/input_source_verify_rom.py "$$(mktemp -d build/input-source.XXXXXX)"
+test-runtime18-combat-input-word:
+	$(ROM_PYTHON) tests/r18/combat_input_word_verify_host.py
+test-runtime18-human-ec34-rom:
+	$(ROM_PYTHON) tests/r18/human_ec34_verify_rom.py
+.PHONY: test-runtime18-input-source-rom test-runtime18-combat-input-word test-runtime18-human-ec34-rom

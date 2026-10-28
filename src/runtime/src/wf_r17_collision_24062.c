@@ -3,6 +3,7 @@
 #include "wf_collision.h"
 #include "wf_collision_runtime.h"
 #include "wf_collision_dispatch.h"
+volatile uint32_t wf_collision_blocked_probe[12];
 
 static uint16_t abs16_delta(uint16_t a,uint16_t b){
  uint16_t d=(uint16_t)(a-b); if((d&0x8000u)!=0u)d=(uint16_t)(0u-d); return d;
@@ -64,11 +65,24 @@ wf_status_t wf_r17_collision_24062(wf_runtime_t *rt,wf_r17_collision_24062_trace
    int fp=fine_pass(src,sp,dst,tp);if(fp<0){trace->blocked_dependency_rom=0x0241e8u;return WF_BLOCKED;}if(!fp)continue;
    trace->source_pairs_tested++;
    wf_actor_raw_t*linked=wf_actor_from_rom_ptr(rt,wf_be32(dst,WF_A_LINK),0);
-   wf_collision_pair_ctx_t pc={src,dst,linked,(uint16_t)(ts+1u),sid,tid};
+   wf_collision_pair_ctx_t pc={src,dst,linked,(uint16_t)(ts+1u),sid,tid,rt};
    wf_actor_raw_t src_before=*src,dst_before=*dst,linked_before;int have_linked=linked!=0;if(have_linked)linked_before=*linked;
    wf_coll_result_t cr=wf_collision_profile_pair_apply_rows(sid,tid,&pc);
    if(cr==WF_COLL_REJECT)continue;
-   if(cr==WF_COLL_BLOCKED){*src=src_before;*dst=dst_before;if(have_linked)*linked=linked_before;trace->blocked_dependency_rom=blocked_callback(sid,tid);return WF_BLOCKED;}
+   if(cr==WF_COLL_BLOCKED){
+    wf_collision_blocked_probe[0]=ss;wf_collision_blocked_probe[1]=ts;
+    wf_collision_blocked_probe[2]=sid;wf_collision_blocked_probe[3]=tid;
+    wf_collision_blocked_probe[4]=wf_collision_profiles[sid].first_selector;
+    wf_collision_blocked_probe[5]=wf_collision_profiles[tid].second_selector;
+    wf_collision_blocked_probe[6]=wf_be16(src,WF_A_PROFILE);
+    wf_collision_blocked_probe[7]=wf_be16(dst,WF_A_PROFILE);
+    wf_collision_blocked_probe[8]=wf_be32(dst,wf_collision_profiles[tid].second_selector==5u?WF_A_REL_LINK:WF_A_LINK);
+    wf_collision_blocked_probe[9]=wf_be16(dst,WF_A_STATE4);
+    wf_collision_blocked_probe[10]=wf_be16(dst,WF_A_TIMER52);
+    wf_collision_blocked_probe[11]=((uint32_t)wf_u8(src,WF_A_FACING)<<24)|((uint32_t)wf_u8(dst,WF_A_FACING)<<16)|wf_u8(dst,WF_A_FLAGS33);
+    *src=src_before;*dst=dst_before;if(have_linked)*linked=linked_before;
+    trace->blocked_dependency_rom=blocked_callback(sid,tid);return WF_BLOCKED;
+   }
    wf_collision_success_tail(src,ss,dst,ts);trace->accepted_pairs++;
   }
  }

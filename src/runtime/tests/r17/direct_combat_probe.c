@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 #include "wf_gameplay_bindings.h"
 #include "wf_r18_bootstrap.h"
 #include "wf_r18_referee.h"
@@ -16,9 +17,63 @@
 #include "wf_r18_transition.h"
 static wf_r18_display_t display;
 static wf_r18_transition_context_t transition;
-static unsigned char rom[0x100000],ring_blob[0x1f000];static unsigned char rom_cache[WF_SATURN_LWRAM_ROM_BYTES],tile_cache[WF_SATURN_LWRAM_TILE_BYTES];static FILE*sprites,*hot_sprites;static size_t romsize;
+static unsigned char rom[0x100000],ring_blob[WF_SATURN_LWRAM_SCENE_BYTES];static unsigned char rom_cache[WF_SATURN_LWRAM_ROM_BYTES],tile_cache[WF_SATURN_LWRAM_TILE_BYTES];static FILE*sprites,*hot_sprites;static size_t romsize;
 static unsigned play_started,play_sprite_reads,play_rom_reads;
 static FILE *sprite_trace,*rom_trace;static uint8_t seen_rom_pages[512];
+static uint32_t tile_use_count[65536];static const char *tile_use_path;
+static void tile_use_dump(void){
+ if(!tile_use_path)return;
+ FILE *out=fopen(tile_use_path,"w");if(!out)return;
+ fputs("tile,frames\n",out);
+ for(unsigned i=0;i<65536u;i++)if(tile_use_count[i])fprintf(out,"%u,%u\n",i,tile_use_count[i]);
+ fclose(out);
+}
+static void tile_use_record(void){
+ if(!tile_use_path){tile_use_path=getenv("WF_PROBE_TILE_USE_TRACE");if(tile_use_path)atexit(tile_use_dump);}
+ if(!tile_use_path)return;
+ uint16_t tiles[WF_VDP1_STREAM_TILES_MAX];
+ size_t count=wf_r18_present_frame_tiles(tiles,WF_VDP1_STREAM_TILES_MAX);
+ for(size_t i=0;i<count;i++)tile_use_count[tiles[i]]++;
+}
+/* HOST-only device fixture: decimal frame,active-low-mask rows, no header.
+ * Values are immutable after parsing; an event holds until the next row. */
+typedef struct pad_change {uint32_t frame;uint8_t mask;} pad_change_t;
+static pad_change_t *pad_changes;static size_t pad_count,pad_next;
+static uint8_t pad_held=0xffu;
+static int load_pad_schedule(const char *path){
+ FILE *file=fopen(path,"r");char line[96];size_t line_number=0,capacity=0;
+ if(!file){fputs("Cannot read pad schedule\n",stderr);return -1;}
+ while(fgets(line,sizeof line,file)){
+  char *end,*mask_text;unsigned long frame,mask;line_number++;
+  if(line[0]<'0'||line[0]>'9')goto invalid;
+  errno=0;frame=strtoul(line,&end,10);
+  if(errno||frame>UINT32_MAX||*end!=',')goto invalid;
+  mask_text=end+1;if(*mask_text<'0'||*mask_text>'9')goto invalid;
+  errno=0;mask=strtoul(mask_text,&end,10);
+  if(errno||mask>255u)goto invalid;
+  if(*end=='\r')end++;
+  if(*end=='\n')end++;
+  if(*end||(pad_count&&frame<=pad_changes[pad_count-1u].frame))goto invalid;
+  if(pad_count==capacity){
+   if(capacity>SIZE_MAX/2u/sizeof *pad_changes)goto invalid;
+   size_t next=capacity?capacity*2u:256u;
+   pad_change_t *grown=realloc(pad_changes,next*sizeof *pad_changes);
+   if(!grown)goto invalid;
+   pad_changes=grown;capacity=next;
+  }
+  pad_changes[pad_count++]=(pad_change_t){(uint32_t)frame,(uint8_t)mask};
+ }
+ if(ferror(file)||!pad_count)goto invalid;
+ fclose(file);return 0;
+invalid:
+ fprintf(stderr,"Invalid pad schedule at line %zu\n",line_number);
+ fclose(file);free(pad_changes);pad_changes=NULL;pad_count=0;return -1;
+}
+static uint8_t scheduled_pad(uint32_t frame){
+ while(pad_next<pad_count&&pad_changes[pad_next].frame<=frame)
+  pad_held=pad_changes[pad_next++].mask;
+ return pad_held;
+}
 static void trace_rom(uint32_t off,size_t n){if(rom_trace&&n)for(unsigned page=off/1024;page<=(off+n-1)/1024&&page<512;page++)if(!seen_rom_pages[page]){seen_rom_pages[page]=1;fprintf(rom_trace,"%u\n",page);}}
 static wf_r18_world_ctx_t world;static wf_runtime_t rt;static wf_gameplay_binding_context_t gc;static wf_r18_video_t video;static wf_r18_bootstrap_context_t boot;static wf_phase_binding_t binds[48];
 static wf_status_t readrom(void*u,uint32_t a,void*out,size_t n){(void)u;if(a+n>romsize)return WF_BLOCKED;trace_rom(a,n);return wf_r18_rom_read(u,a,out,n);}
@@ -40,9 +95,9 @@ static wf_status_t result_commit(void*u){return wf_r18_hud_commit(u);}
 static wf_status_t render(wf_runtime_t*r,wf_actor_raw_t *const*a,size_t n,void*u){(void)u;
 if((uint16_t)gc.camera.scroll0_x!=r->g.global_17e6||(uint16_t)gc.camera.scroll1_x!=r->g.global_17ea||(uint16_t)gc.camera.scroll0_y!=r->g.global_17ee||(uint16_t)gc.camera.scroll1_y!=r->g.global_17f2_word){fprintf(stderr,"Camera/ring desynchronization at frame %u\n",r->g.frame_counter);return WF_BAD_STATE;}
 if(r->g.frame_counter==30u||r->g.frame_counter==120u||r->g.frame_counter==600u||r->g.frame_counter%1000u==0u)printf("CAMERA frame=%u sprites=%u,%u/%u,%u ring=%u,%u/%u,%u\n",r->g.frame_counter,(uint16_t)gc.camera.scroll0_x,(uint16_t)gc.camera.scroll0_y,(uint16_t)gc.camera.scroll1_x,(uint16_t)gc.camera.scroll1_y,r->g.global_17e6,r->g.global_17ee,r->g.global_17ea,r->g.global_17f2_word);
-wf_status_t s=wf_r18_present_batch(r,a,n,&video);if(r->g.frame_counter%1000u==0u||r->g.frame_counter==30u||r->g.frame_counter==60u||r->g.frame_counter==120u||r->g.frame_counter==300u||r->g.frame_counter==600u||r->g.frame_counter==900u)printf("RENDER frame=%u actors=%zu cmds=%u status=%u p0=%u,%u p1=%u,%u p4=%u,%u p5=%u,%u hp=%u,%u,%u,%u state=%04x,%04x,%04x,%04x\n",r->g.frame_counter,n,wf_r18_present_commands(),s,wf_be16(&r->actors[0],WF_A_X),wf_be16(&r->actors[0],WF_A_Y),wf_be16(&r->actors[1],WF_A_X),wf_be16(&r->actors[1],WF_A_Y),wf_be16(&r->actors[4],WF_A_X),wf_be16(&r->actors[4],WF_A_Y),wf_be16(&r->actors[5],WF_A_X),wf_be16(&r->actors[5],WF_A_Y),wf_be16(&r->actors[0],WF_A_STAMINA),wf_be16(&r->actors[1],WF_A_STAMINA),wf_be16(&r->actors[4],WF_A_STAMINA),wf_be16(&r->actors[5],WF_A_STAMINA),wf_be16(&r->actors[0],WF_A_STATE),wf_be16(&r->actors[1],WF_A_STATE),wf_be16(&r->actors[4],WF_A_STATE),wf_be16(&r->actors[5],WF_A_STATE));return s;}
-int main(int argc,char**argv){if(argc<5)return 2;const char *rom_path=getenv("WF_PROBE_ROM_TRACE");if(rom_path){rom_trace=fopen(rom_path,"w");if(!rom_trace)return 2;setvbuf(rom_trace,NULL,_IOLBF,0);}const char *trace_path=getenv("WF_PROBE_SPRITE_TRACE");if(trace_path){sprite_trace=fopen(trace_path,"w");if(!sprite_trace)return 2;setvbuf(sprite_trace,NULL,_IOLBF,0);fputs("frame,tile,bytes\n",sprite_trace);}sprites=fopen(argv[2],"rb");hot_sprites=fopen(argv[4],"rb");if(!sprites||!hot_sprites)return 2;FILE*rf=fopen(argv[3],"rb");if(!rf||fread(ring_blob,1,114918u,rf)!=114918u||wf_r18_ring_bind(ring_blob,114918u)!=0)return 2;fclose(rf);wf_r18_present_init(file_read,rom_cache,sizeof rom_cache,tile_cache,sizeof tile_cache);if(wf_r18_hot_sprites_load()!=WF_OK)return 2;FILE*f=fopen(argv[1],"rb");if(!f)return 2;romsize=fread(rom,1,sizeof rom,f);fclose(f);if(wf_r18_rom_pages_preload(wf_r18_rom_hot_pages,sizeof wf_r18_rom_hot_pages/sizeof wf_r18_rom_hot_pages[0])!=WF_OK)return 2;size_t n=wf_gameplay_bindings_build(&gc,binds,48);wf_runtime_init(&rt,binds,n);video.read_rom=readrom;video.read_ram=readram;boot.palette_2aea=wf_r18_palette_2aea;boot.palette_release_2b58=wf_r18_palette_2b58;boot.palette_reset=resetpal;boot.map_26e66=map;boot.video_batch=wf_r18_video_batch;boot.fg0_batch=wf_r18_video_batch;boot.text_owner=text;boot.user=&video;
-wf_r18_launch_config_t config={0,1,0x300,0,{0}};wf_r17_m68k_software_reset(&config.registers);wf_status_t st=wf_r18_direct_boot(&rt,&boot,&config);printf("BOOT %u PC %x VIDEO %x\n",st,boot.blocked_pc,video.failed_address);if(st!=WF_OK)return 1;
+wf_status_t s=wf_r18_present_batch(r,a,n,&video);if(s==WF_OK)tile_use_record();if(r->g.frame_counter%1000u==0u||r->g.frame_counter==30u||r->g.frame_counter==60u||r->g.frame_counter==120u||r->g.frame_counter==300u||r->g.frame_counter==600u||r->g.frame_counter==900u)printf("RENDER frame=%u actors=%zu cmds=%u status=%u p0=%u,%u p1=%u,%u p4=%u,%u p5=%u,%u hp=%u,%u,%u,%u state=%04x,%04x,%04x,%04x\n",r->g.frame_counter,n,wf_r18_present_commands(),s,wf_be16(&r->actors[0],WF_A_X),wf_be16(&r->actors[0],WF_A_Y),wf_be16(&r->actors[1],WF_A_X),wf_be16(&r->actors[1],WF_A_Y),wf_be16(&r->actors[4],WF_A_X),wf_be16(&r->actors[4],WF_A_Y),wf_be16(&r->actors[5],WF_A_X),wf_be16(&r->actors[5],WF_A_Y),wf_be16(&r->actors[0],WF_A_STAMINA),wf_be16(&r->actors[1],WF_A_STAMINA),wf_be16(&r->actors[4],WF_A_STAMINA),wf_be16(&r->actors[5],WF_A_STAMINA),wf_be16(&r->actors[0],WF_A_STATE),wf_be16(&r->actors[1],WF_A_STATE),wf_be16(&r->actors[4],WF_A_STATE),wf_be16(&r->actors[5],WF_A_STATE));return s;}
+int main(int argc,char**argv){if(argc<5)return 2;const char *pad_schedule_path=getenv("WF_PROBE_PAD_SCHEDULE");if(pad_schedule_path&&load_pad_schedule(pad_schedule_path))return 2;const char *rom_path=getenv("WF_PROBE_ROM_TRACE");if(rom_path){rom_trace=fopen(rom_path,"w");if(!rom_trace)return 2;setvbuf(rom_trace,NULL,_IOLBF,0);}const char *trace_path=getenv("WF_PROBE_SPRITE_TRACE");if(trace_path){sprite_trace=fopen(trace_path,"w");if(!sprite_trace)return 2;setvbuf(sprite_trace,NULL,_IOLBF,0);fputs("frame,tile,bytes\n",sprite_trace);}sprites=fopen(argv[2],"rb");hot_sprites=fopen(argv[4],"rb");if(!sprites||!hot_sprites)return 2;FILE*rf=fopen(argv[3],"rb");if(!rf||fread(ring_blob,1,114918u,rf)!=114918u||wf_r18_ring_bind(ring_blob,114918u)!=0)return 2;fclose(rf);wf_r18_present_init(file_read,rom_cache,sizeof rom_cache,tile_cache,sizeof tile_cache);if(wf_r18_hot_sprites_load()!=WF_OK)return 2;FILE*f=fopen(argv[1],"rb");if(!f)return 2;romsize=fread(rom,1,sizeof rom,f);fclose(f);if(wf_r18_rom_pages_preload(wf_r18_rom_hot_pages,sizeof wf_r18_rom_hot_pages/sizeof wf_r18_rom_hot_pages[0])!=WF_OK)return 2;if(wf_r18_rom_extra_pages_preload(wf_r18_rom_tag_extra_pages,sizeof wf_r18_rom_tag_extra_pages/sizeof wf_r18_rom_tag_extra_pages[0])!=WF_OK)return 2;size_t n=wf_gameplay_bindings_build(&gc,binds,48);wf_runtime_init(&rt,binds,n);video.read_rom=readrom;video.read_ram=readram;boot.palette_2aea=wf_r18_palette_2aea;boot.palette_release_2b58=wf_r18_palette_2b58;boot.palette_reset=resetpal;boot.map_26e66=map;boot.video_batch=wf_r18_video_batch;boot.fg0_batch=wf_r18_video_batch;boot.text_owner=text;boot.user=&video;
+wf_r18_launch_config_t config={.human=0,.partner=1,.cabinet_config=0x300,.rng_state=0};wf_r17_m68k_software_reset(&config.registers);wf_status_t st=wf_r18_direct_boot(&rt,&boot,&config);printf("BOOT %u PC %x VIDEO %x\n",st,boot.blocked_pc,video.failed_address);if(st!=WF_OK)return 1;
 wf_r18_video_ring_bind(&video);
 size_t fg_n=0,bg_n=0;for(size_t i=0;i<sizeof video.fg_palette;i++)fg_n+=video.fg_palette[i]!=0;for(size_t i=0;i<sizeof video.bg_palette;i++)bg_n+=video.bg_palette[i]!=0;printf("BOOT palettes fg=%zu bg=%zu\n",fg_n,bg_n);
 for(unsigned layer=0;layer<2;layer++){unsigned nonzero=0,visible=0,unique[256]={0};int sx=layer?rt.g.global_17ea:rt.g.global_17e6,sy=layer?rt.g.global_17f2_word:rt.g.global_17ee;uint8_t *pal=layer?video.bg_palette:video.fg_palette;for(unsigned y=0;y<240;y++)for(unsigned x=0;x<320;x++){uint8_t v=0;wf_r18_ring_pixel(layer,sx+(int)x,2048-sy+(int)y,&v);nonzero+=v!=0;unique[v]++;unsigned off=(v>>4)*128+(v&15)*2;visible+=(pal[off]|pal[off+1])!=0;}unsigned colors=0;for(unsigned i=0;i<256;i++)colors+=unique[i]!=0;printf("ring layer=%u scroll=%d,%d nonzero=%u visible=%u colors=%u\n",layer,sx,sy,nonzero,visible,colors);}
@@ -56,8 +111,9 @@ gc.referee_result_20156=wf_r18_result_sound_20156;
 gc.post7_wait_21e6=wait_21e6;gc.participant_input_word=input;gc.participant_commit_batch=wf_r18_video_commit;gc.post7_fg0_batch=gc.post7_video_batch=wf_r18_video_batch;gc.post7_resource_2aea=wf_r18_palette_2aea;gc.post7_resource_2b58=wf_r18_palette_2b58;gc.post7_raw_2503c=wf_r18_text_2503c;gc.post7_raw_9aca=wf_r18_strip_9aca;gc.post7_fg0_peek_long=wf_r18_video_peek;gc.post7_render_2836_batch=render;world.read_rom=readrom;gc.branchb_288f0=world288;gc.branchb_26b68=world26;gc.r17_owner_user=&video;
 const char *limit_text=getenv("WF_PROBE_FRAMES");
 unsigned frame_limit=limit_text?(unsigned)strtoul(limit_text,NULL,10):1000u;
-int attack=getenv("WF_PROBE_ATTACK")!=NULL;
-printf("INPUT replay=%s reset-seed=0\n",attack?"RIGHT60-179/A180-183":"none (all ports FF)");
+int attack=!pad_schedule_path&&getenv("WF_PROBE_ATTACK")!=NULL;
+if(pad_schedule_path)printf("INPUT schedule=%s initial=FF reset-seed=0\n",pad_schedule_path);
+else printf("INPUT replay=%s reset-seed=0\n",attack?"RIGHT60-179/A180-183":"none (all ports FF)");
 uint16_t observed_count=0u;
 if(wf_r18_display_init(&display,&rt,readrom,NULL)!=WF_OK)return 2;
 transition=(wf_r18_transition_context_t){.video=&video,.world=&world,.display=&display,.render_queue=&gc.render_queue,.camera=&gc.camera,.scene_blob=ring_blob,.scene_capacity=sizeof ring_blob,.file_size=scene_file_size,.file_read=scene_file_read,.priority_140010=&boot.priority_140010};
@@ -65,7 +121,7 @@ wf_r18_transition_bind(&transition);gc.transition_reset=wf_r18_transition_reset;
 
 play_started=1;
 for(unsigned frame=0;frame<frame_limit;frame++){
-gc.input_hw_low[0]=(attack&&frame>=60u&&frame<180u)?0xfeu:(attack&&frame>=180u&&frame<184u)?0xefu:0xffu;
+gc.input_hw_low[0]=pad_schedule_path?scheduled_pad(frame):(attack&&frame>=60u&&frame<180u)?0xfeu:(attack&&frame>=180u&&frame<184u)?0xefu:0xffu;
 st=wf_runtime_frame(&rt);if(st==WF_BLOCKED&&rt.frame_ready){st=wf_r18_display_irq(&rt,&display);if(st==WF_OK)st=wf_r18_world_commit(&rt,&world);if(st==WF_OK)st=wf_r18_hud_irq(&rt,&video);if(st==WF_OK){wf_runtime_vblank_ack(&rt);st=wf_runtime_frame(&rt);}}if(st==WF_BLOCKED&&wf_r18_tag_match_complete(&rt)){
 uint32_t before_wait=host_wait_vblanks;
 if(wf_r18_result_in_ring(&rt,&video,result_wait,result_commit,&video)!=WF_OK||host_wait_vblanks-before_wait!=131u){fputs("In-ring result presentation failed\n",stderr);return 1;}

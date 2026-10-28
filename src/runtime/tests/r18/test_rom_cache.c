@@ -61,6 +61,18 @@ int main(void)
     }
     static const uint16_t bad[][2]={{2,1},{1,1},{511,512}};
     for(unsigned i=0;i<3;i++)if(wf_r18_rom_pages_preload(bad[i],2)!=WF_BLOCKED||reads!=initial)return 1;
+    /* Selected extra pages remain resident even when the LWRAM page cache
+     * visits other pages and would otherwise evict an old hot entry. */
+    static const uint16_t extra[]={1,2,3,63,130,131,318,353,361,368,373,395,411,511};
+    /* Seven are already in LWRAM and must copy without disc I/O. */
+    if(wf_r18_rom_extra_pages_preload(extra,14)!=WF_OK||reads!=initial+7u)return 1;
+    initial=reads;
+    for(unsigned repeat=0;repeat<3;repeat++)for(unsigned i=0;i<14;i++){
+        uint8_t got[17];uint32_t address=(uint32_t)extra[i]*1024u+1004u;
+        if(wf_r18_rom_read(NULL,address,got,sizeof got)!=WF_OK||
+           memcmp(got,rom+address,sizeof got)||reads!=initial)return 1;
+    }
+    if(wf_r18_rom_extra_pages_preload(extra,15)!=WF_BLOCKED||reads!=initial)return 1;
     uint8_t got[5];if(wf_r18_rom_read(NULL,4096u,got,sizeof got)!=WF_OK||memcmp(got,rom+4096u,sizeof got)||reads!=initial+1u)return 1;
     puts("PASS RUNTIME-18 ROM pages: collisions, full/sparse preload, batched exact bytes, invalid IDs and real fallback");
     return 0;

@@ -1,0 +1,19 @@
+{
+  "header": [
+    4551,
+    1,
+    0,
+    122850,
+    1389,
+    1
+  ],
+  "snapshot_sha256": "46546a0a7fa5f4e69568bd9ad29fcfcc7ed5b31db9b2ef0340a71cbc26943d92",
+  "snapshot_bytes": 16472,
+  "source": "runtime18\\validation\\local-20261024\\tag-current-basic-after13-45\\snapshot-01389.bin",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "owner": "1DFE2[79] forced8001E27A -> original10C60/10F56",
+  "limits": [
+    "Natural HOST basic4551; no forced result/health/seed or physical timing equivalence",
+    "Runtime snapshot projects supported arcade RAM fields; remaining bytes explicitly zero"
+  ]
+}

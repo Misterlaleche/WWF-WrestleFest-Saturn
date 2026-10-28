@@ -14,6 +14,7 @@ static int bit(const wf_actor_raw_t *a,size_t o,unsigned b){ return (wf_u8(a,o)&
 
 static wf_actor_raw_t *actor_from_ptr(wf_runtime_t *rt,uint32_t p){
     uint32_t d;unsigned s;
+    p&=0x00ffffffu; /* 68000 dereference bus; the stored LONG remains intact. */
     if(!rt||p<ACTOR_BASE)return 0;
     d=p-ACTOR_BASE;
     if((d%ACTOR_STRIDE)!=0u)return 0;

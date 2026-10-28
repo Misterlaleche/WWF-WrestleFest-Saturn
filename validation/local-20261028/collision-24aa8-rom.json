@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "cases": 4096,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "actor_snapshot_sha256": "8dfb121c3747066fd306736cde5226da9c47916ca3da4e9e82ba64a3186bebf8",
+  "globals_snapshot_sha256": "5a4a1f6b77b29ae3cce8f17722f27d86fba2c61ce458f1f0524258036936f2ad",
+  "source_sha256": "7e31a81af56c8987f3f3cf6f03f6d9f1e401c2c79c11baa3015d6800600892e2",
+  "retained_guards": 1,
+  "alternate_unlinked": 2,
+  "key_rom_pcs": [
+    "0x24aa8",
+    "0x24ab8",
+    "0x24af2",
+    "0x24afa",
+    "0x24b02",
+    "0x24b0e",
+    "0x24b14"
+  ],
+  "limits": [
+    "Controlled variations derived from a HOST snapshot; no natural occurrence is claimed.",
+    "Controlled cases exercise subtype-specific response and alternate return.",
+    "No natural match or physical Saturn claim."
+  ]
+}

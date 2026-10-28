@@ -1,0 +1,667 @@
+{
+  "status": "PASS",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+  "literal_action_descriptors_checked": 169,
+  "additional_to_generated_table": 35,
+  "additional_descriptors": [
+    {
+      "rom": "01286C",
+      "kind": 1,
+      "frames": 5,
+      "poses_raw": [
+        "0000",
+        "0092",
+        "0093",
+        "0094",
+        "0093"
+      ],
+      "durations_raw": [
+        "0005",
+        "0005",
+        "0005",
+        "0009",
+        "0002"
+      ],
+      "possible_action_selectors": [
+        "00"
+      ]
+    },
+    {
+      "rom": "019E90",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0077",
+        "0078"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008"
+      ],
+      "possible_action_selectors": [
+        "70"
+      ]
+    },
+    {
+      "rom": "0125C0",
+      "kind": 1,
+      "frames": 1,
+      "poses_raw": [
+        "FFFF"
+      ],
+      "durations_raw": [
+        "FF00"
+      ],
+      "possible_action_selectors": [
+        "0F",
+        "2B",
+        "30",
+        "35",
+        "36",
+        "48",
+        "4A"
+      ]
+    },
+    {
+      "rom": "0180B8",
+      "kind": 1,
+      "frames": 1,
+      "poses_raw": [
+        "001E"
+      ],
+      "durations_raw": [
+        "FF00"
+      ],
+      "possible_action_selectors": [
+        "4A"
+      ]
+    },
+    {
+      "rom": "0181FC",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0070",
+        "0071"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C"
+      ],
+      "possible_action_selectors": [
+        "4B"
+      ]
+    },
+    {
+      "rom": "01160A",
+      "kind": 2,
+      "frames": 4,
+      "poses_raw": [
+        "0005",
+        "0006",
+        "0007",
+        "0008"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "000C",
+        "000C"
+      ],
+      "possible_action_selectors": [
+        "3B",
+        "3C",
+        "3E",
+        "68",
+        "6B"
+      ]
+    },
+    {
+      "rom": "011622",
+      "kind": 2,
+      "frames": 4,
+      "poses_raw": [
+        "007C",
+        "007D",
+        "007E",
+        "007F"
+      ],
+      "durations_raw": [
+        "0014",
+        "0010",
+        "0014",
+        "0010"
+      ],
+      "possible_action_selectors": [
+        "3B",
+        "3C",
+        "3E",
+        "68",
+        "6B"
+      ]
+    },
+    {
+      "rom": "01163A",
+      "kind": 2,
+      "frames": 4,
+      "poses_raw": [
+        "0080",
+        "0081",
+        "0082",
+        "0083"
+      ],
+      "durations_raw": [
+        "0014",
+        "0010",
+        "0014",
+        "0010"
+      ],
+      "possible_action_selectors": [
+        "3B",
+        "3C",
+        "3E",
+        "68",
+        "6B"
+      ]
+    },
+    {
+      "rom": "013BB0",
+      "kind": 1,
+      "frames": 4,
+      "poses_raw": [
+        "0084",
+        "0085",
+        "01C1",
+        "01C3"
+      ],
+      "durations_raw": [
+        "0008",
+        "0010",
+        "0018",
+        "FF00"
+      ],
+      "possible_action_selectors": [
+        "0C"
+      ]
+    },
+    {
+      "rom": "018C04",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0017",
+        "001E"
+      ],
+      "durations_raw": [
+        "FF00",
+        "0002"
+      ],
+      "possible_action_selectors": [
+        "51"
+      ]
+    },
+    {
+      "rom": "018C14",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0016",
+        "0013"
+      ],
+      "durations_raw": [
+        "FF00",
+        "0002"
+      ],
+      "possible_action_selectors": [
+        "51"
+      ]
+    },
+    {
+      "rom": "018D22",
+      "kind": 1,
+      "frames": 1,
+      "poses_raw": [
+        "021B"
+      ],
+      "durations_raw": [
+        "0008"
+      ],
+      "possible_action_selectors": [
+        "52"
+      ]
+    },
+    {
+      "rom": "018E4C",
+      "kind": 1,
+      "frames": 1,
+      "poses_raw": [
+        "004F"
+      ],
+      "durations_raw": [
+        "000C"
+      ],
+      "possible_action_selectors": [
+        "53"
+      ]
+    },
+    {
+      "rom": "018E58",
+      "kind": 1,
+      "frames": 1,
+      "poses_raw": [
+        "0051"
+      ],
+      "durations_raw": [
+        "000C"
+      ],
+      "possible_action_selectors": [
+        "53"
+      ]
+    },
+    {
+      "rom": "012AFE",
+      "kind": 1,
+      "frames": 4,
+      "poses_raw": [
+        "009D",
+        "009E",
+        "8100",
+        "0000"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0008",
+        "0008"
+      ],
+      "possible_action_selectors": [
+        "03"
+      ]
+    },
+    {
+      "rom": "016C7E",
+      "kind": 1,
+      "frames": 6,
+      "poses_raw": [
+        "0107",
+        "0108",
+        "0110",
+        "020E",
+        "010A",
+        "010B"
+      ],
+      "durations_raw": [
+        "0006",
+        "0005",
+        "0018",
+        "0010",
+        "0006",
+        "0012"
+      ],
+      "possible_action_selectors": [
+        "2F"
+      ]
+    },
+    {
+      "rom": "01A098",
+      "kind": 1,
+      "frames": 3,
+      "poses_raw": [
+        "0188",
+        "0189",
+        "018A"
+      ],
+      "durations_raw": [
+        "0006",
+        "0006",
+        "0006"
+      ],
+      "possible_action_selectors": [
+        "75"
+      ]
+    },
+    {
+      "rom": "01865C",
+      "kind": 1,
+      "frames": 1,
+      "poses_raw": [
+        "0123"
+      ],
+      "durations_raw": [
+        "0010"
+      ],
+      "possible_action_selectors": [
+        "44"
+      ]
+    },
+    {
+      "rom": "01A354",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0066",
+        "0067"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C"
+      ],
+      "possible_action_selectors": [
+        "7A"
+      ]
+    },
+    {
+      "rom": "01A1E6",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "005A",
+        "0059"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "01A1F6",
+      "kind": 1,
+      "frames": 4,
+      "poses_raw": [
+        "0059",
+        "005A",
+        "005B",
+        "005C"
+      ],
+      "durations_raw": [
+        "0006",
+        "0006",
+        "0006",
+        "0006"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "01A20E",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0059",
+        "005A"
+      ],
+      "durations_raw": [
+        "0010",
+        "0018"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "01A21E",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0059",
+        "005A"
+      ],
+      "durations_raw": [
+        "0030",
+        "0010"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "01A22E",
+      "kind": 1,
+      "frames": 5,
+      "poses_raw": [
+        "0059",
+        "005A",
+        "005B",
+        "005A",
+        "0059"
+      ],
+      "durations_raw": [
+        "0010",
+        "0010",
+        "0010",
+        "0010",
+        "0010"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "01A24A",
+      "kind": 1,
+      "frames": 3,
+      "poses_raw": [
+        "0059",
+        "005A",
+        "0000"
+      ],
+      "durations_raw": [
+        "0028",
+        "0018",
+        "0004"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "01A25E",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0059",
+        "005A"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "01A26E",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0059",
+        "005A"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "01A27E",
+      "kind": 1,
+      "frames": 2,
+      "poses_raw": [
+        "0059",
+        "005A"
+      ],
+      "durations_raw": [
+        "0010",
+        "0030"
+      ],
+      "possible_action_selectors": [
+        "79"
+      ]
+    },
+    {
+      "rom": "0130FE",
+      "kind": 1,
+      "frames": 4,
+      "poses_raw": [
+        "00BF",
+        "00C0",
+        "00C1",
+        "00C0"
+      ],
+      "durations_raw": [
+        "0004",
+        "0004",
+        "0014",
+        "0004"
+      ],
+      "possible_action_selectors": [
+        "07"
+      ]
+    },
+    {
+      "rom": "014FDE",
+      "kind": 1,
+      "frames": 8,
+      "poses_raw": [
+        "01F7",
+        "01F8",
+        "01F9",
+        "01FA",
+        "01FD",
+        "01FD",
+        "01FD",
+        "006A"
+      ],
+      "durations_raw": [
+        "000C",
+        "0008",
+        "0004",
+        "000A",
+        "FF00",
+        "000C",
+        "0010",
+        "0010"
+      ],
+      "possible_action_selectors": [
+        "19"
+      ]
+    },
+    {
+      "rom": "015A0C",
+      "kind": 1,
+      "frames": 3,
+      "poses_raw": [
+        "0079",
+        "007A",
+        "007B"
+      ],
+      "durations_raw": [
+        "0008",
+        "0008",
+        "0008"
+      ],
+      "possible_action_selectors": [
+        "1F"
+      ]
+    },
+    {
+      "rom": "012BF2",
+      "kind": 1,
+      "frames": 4,
+      "poses_raw": [
+        "00A2",
+        "00A3",
+        "00A6",
+        "017A"
+      ],
+      "durations_raw": [
+        "0002",
+        "0004",
+        "FF00",
+        "0020"
+      ],
+      "possible_action_selectors": [
+        "04"
+      ]
+    },
+    {
+      "rom": "012C0A",
+      "kind": 1,
+      "frames": 4,
+      "poses_raw": [
+        "01CB",
+        "01CC",
+        "00A6",
+        "017A"
+      ],
+      "durations_raw": [
+        "0004",
+        "0008",
+        "FF00",
+        "0020"
+      ],
+      "possible_action_selectors": [
+        "04"
+      ]
+    },
+    {
+      "rom": "012F28",
+      "kind": 1,
+      "frames": 4,
+      "poses_raw": [
+        "009F",
+        "00A0",
+        "00A1",
+        "009B"
+      ],
+      "durations_raw": [
+        "0004",
+        "0004",
+        "0006",
+        "0006"
+      ],
+      "possible_action_selectors": [
+        "05"
+      ]
+    },
+    {
+      "rom": "014806",
+      "kind": 1,
+      "frames": 6,
+      "poses_raw": [
+        "0086",
+        "0087",
+        "0089",
+        "008A",
+        "015F",
+        "01B1"
+      ],
+      "durations_raw": [
+        "000C",
+        "000C",
+        "000C",
+        "000C",
+        "0020",
+        "FF00"
+      ],
+      "possible_action_selectors": [
+        "12"
+      ]
+    }
+  ],
+  "limits": [
+    "Only statically declared desc_t literals are compared.",
+    "This does not establish that every callback path selects the right descriptor.",
+    "Possible action selectors come from a conservative source call graph.",
+    "ROM pose data validity and metasprite execution have separate audits."
+  ]
+}

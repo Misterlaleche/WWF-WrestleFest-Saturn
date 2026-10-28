@@ -11,6 +11,33 @@ static void set_state_new_latch(wf_actor_raw_t *a){
 static void add_corr(wf_actor_raw_t *a,size_t dst,size_t corr){
     wf_set_be16(a,dst,(uint16_t)(wf_be16(a,dst)+wf_be16(a,corr)));
 }
+/* $F8D8, called after each eligible wrestler in the outside-ring mode.
+ * The same fixed marker is overwritten and queued once per invocation. */
+static wf_status_t outside_marker_f8d8(wf_runtime_t *rt,wf_actor_raw_t *a,
+                                        wf_r17_render_ctx_t *render){
+    wf_actor_raw_t *marker=&rt->fixed_four_1134;
+    uint16_t x=wf_be16(a,WF_A_X);
+    wf_set_be16(a,WF_A_RENDER_LIST,1u);
+    wf_set_be16(marker,WF_A_RENDER_LIST,0u);
+    wf_set_be16(marker,WF_A_ACTIVE,0x8000u);
+    wf_set_be16(marker,WF_A_CHARACTER,0x000eu);
+    wf_set_be16(marker,WF_A_Y,0x0151u);
+    if(x<0x0290u){
+        wf_set_be16(marker,WF_A_MIRROR,0x0001u);
+        wf_set_be16(marker,WF_A_X,0x0269u);
+        wf_set_be16(marker,WF_A_Z,0x0146u);
+    }else if(x>=0x03b0u){
+        wf_set_be16(marker,WF_A_MIRROR,0x8001u);
+        wf_set_be16(marker,WF_A_X,0x03c7u);
+        wf_set_be16(marker,WF_A_Z,0x0146u);
+    }else{
+        wf_set_be16(marker,WF_A_MIRROR,0u);
+        wf_set_be16(marker,WF_A_X,x);
+        wf_set_be16(marker,WF_A_Z,0x013eu);
+    }
+    wf_status_t s=wf_r17_world_to_screen_247c(marker,render->scroll_a_x,render->scroll_a_y);
+    return s==WF_OK?wf_r17_queue_27b8(render,marker):s;
+}
 
 wf_status_t wf_r17_referee_1f914(wf_runtime_t *rt,wf_actor_raw_t *referee,wf_r17_render_ctx_t *render,const wf_r17_referee_hooks_t *hooks,uint8_t mode_0161){
     wf_status_t s;
@@ -46,6 +73,10 @@ wf_status_t wf_r17_wrestlers_f4c2(wf_runtime_t *rt,wf_r17_render_ctx_t *render,c
         s=wf_r17_world_to_screen_247c(a,render->scroll_a_x,render->scroll_a_y);if(s!=WF_OK)return s;
         s=wf_r17_queue_27b8(render,a);if(s!=WF_OK)return s;
         s=hooks->postqueue_2208(rt,a,hooks->user);if(s!=WF_OK)return s;
+        if((rt->g.mode_0161&0x02u)!=0u &&
+           (wf_u8(a,WF_A_FLAGS33)&0x04u)==0u){
+            s=outside_marker_f8d8(rt,a,render);if(s!=WF_OK)return s;
+        }
     }
     /* $24090: separate active-slot rescan after the whole callback pass. */
     for(i=0;i<WF_ACTOR_SLOTS;i++){

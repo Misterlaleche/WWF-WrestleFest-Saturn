@@ -1,0 +1,14 @@
+{
+  "sha256": "af64fdc2f8f46ab9fe6800a2a32c35f74b85a0f82badc80d6ef39841dc4d508d",
+  "header": [
+    410,
+    4,
+    1,
+    114750,
+    106,
+    1
+  ],
+  "source": "runtime18/validation/local-20261024/full-flow-combat-a600/snapshot-00106.bin",
+  "note": "NaturalHOST manual frontend/paid F8C/A600 frame410 actor4 id6 selector4027 before unported12614 guard. Projected RAM8KiB; not physical Saturn RAM.",
+  "rom_caller": "1C03E ->12614[27] ->16388 ->1639C"
+}

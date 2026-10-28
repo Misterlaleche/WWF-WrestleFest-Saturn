@@ -1,0 +1,25 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "fcb6f6a8020c3a1bda3999cba0ba23b1fa2f55fecb9c050880ce479fe6c18b6c",
+  "header": [
+    600,
+    4,
+    6,
+    149892,
+    7,
+    12
+  ],
+  "header_fields": [
+    "frame",
+    "source_slot",
+    "target_slot",
+    "second_callback",
+    "retained_source_row",
+    "target_row"
+  ],
+  "source_report_sha256": "fbd3b594861f2184e3263d368caedc29443e10a81859226686784c91ed0e981d",
+  "actors_sha256": "dcf77b87f5faec13f06b56c0052cc42678765a0cb76c1c6c1c76f8062cc5b019",
+  "globals_sha256": "9da8f66505f0f5777912fcf0e05d597c6783846376807935fa5774184d80d499",
+  "dregs_sha256": "89d7c72d7b3999eb44739d789a808295bf9316a8637cf14e7fc0c2b1dcf0416a",
+  "provenance": "Natural nativeF8C Royal import -> HOSTbasic600; production failed pair restores src/dst/linked before returningBLOCKED. Diagnostic wrapper independently identifies src4/ID0 row7 -> dst6/ID4 row12, first1ACCEPT then second3BLOCKED on equal BYTEfacing00/00. Source currentprofile0 is retained; original dispatcher still uses cached row7. All9 actor records and liveD8 copied literally; supported globals projected, other arcadeRAMzero. No seed/actor/frame/register forcing."
+}

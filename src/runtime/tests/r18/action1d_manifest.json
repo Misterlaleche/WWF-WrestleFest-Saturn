@@ -1,0 +1,13 @@
+{
+  "sha256": "dcc86366a0e2fd9ace937004fcbb608bfdbeb9d1e55a62a22f1655badaf99903",
+  "source": "validation/local-20261024/full-flow-combat-after27-41-idle/snapshot-00319.bin",
+  "header": [
+    1040,
+    5,
+    1,
+    114750,
+    319,
+    1
+  ],
+  "scope": "Documented HOST gameplay projection, not hardware RAM"
+}

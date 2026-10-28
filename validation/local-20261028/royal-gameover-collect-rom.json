@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "cases": 128,
+  "participant_masks": 16,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "verifier_sha256": "d90c1a549ac1e74d00c5bf7f9ef66f6a473e6b8c311b88938e68aa58defa7ce3",
+  "post_source_sha256": "df226fa149f54eb9c2286de5a549aff82552d515f4c1ad602cf4ad9220eca034",
+  "compared": [
+    "RAM16KiB",
+    "D0-D7",
+    "A0-A6",
+    "ranking request",
+    "boot boundary"
+  ],
+  "limits": [
+    "Ranking call is a handoff, not executed here.",
+    "No physical Saturn or full Royal match claim."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "derived": false,
+  "natural_snapshots": [
+    {
+      "file": "cpu_state0_flag34_snapshot_main.bin",
+      "source": "validation/results/runtime18/action1c-controlled/after78-main/snapshot-01528.bin",
+      "sha256": "1bbcbc3de491bb9ef6a90a26fb3c8ed08df0c1530fb2cd630738b68c15497578",
+      "header": [5677, 1, 0, 115404, 1528, 1]
+    },
+    {
+      "file": "cpu_state0_flag34_snapshot_late.bin",
+      "source": "validation/results/runtime18/action1c-controlled/after78-late/snapshot-01894.bin",
+      "sha256": "bfaa4d98cd43870b7f77dffb9a73198b21800939d497aa687a2eb83dbff97e2c",
+      "header": [7845, 1, 0, 115404, 1894, 1]
+    }
+  ],
+  "purpose": "Both unchanged natural CPU state0 snapshots with FLAGS34=11/B5.bit3 clear. The full original prefix must select state5/raw79 after face/masks and mode/B6 priority; no health qualification exists in ROM."
+}

@@ -1,0 +1,8 @@
+{
+  "source_snapshot": "action2d_snapshot_full_flow_3614.bin",
+  "sha256": "8ce67cd8af8f3c76440226364047333aa9dd00b99d0455cbd3d7025094fa0635",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "header": [3614, 4, 1, 114750, 1248, 1],
+  "selector": "0x002d",
+  "derived": false
+}

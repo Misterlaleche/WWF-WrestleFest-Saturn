@@ -1,0 +1,133 @@
+{
+  "status": "PASS",
+  "mode": "royal-exit-poses",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "direct_rom_cases": 240,
+  "verifier_sha256": "345f1239e5a8fc533bcb7e18777a171493e8d803e752ffaa7805b718471fc97e",
+  "metasprite_source_sha256": "55e005b3924b7453f68b97b930c6b28704c70bd3cb67fbb2f7f354daefd8a2ae",
+  "pose_link_audit_sha256": null,
+  "sprite_classes": {
+    "1:0": 128,
+    "1:512": 56,
+    "3:0": 42,
+    "1:768": 4,
+    "0:512": 8,
+    "0:768": 2
+  },
+  "blocked_cases": [],
+  "cache_bytes": 6916,
+  "cold_rom_reads": 5220,
+  "warm_rom_reads": 690,
+  "warm_rom_read_top": [
+    {
+      "address": "04D2CC",
+      "bytes": 2,
+      "calls": 16
+    },
+    {
+      "address": "04D2BC",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "04D2DC",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "056722",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "05AFA2",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "061608",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "061622",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "06163A",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "06194E",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "061DC0",
+      "bytes": 2,
+      "calls": 6
+    },
+    {
+      "address": "04184E",
+      "bytes": 2,
+      "calls": 4
+    },
+    {
+      "address": "0479D2",
+      "bytes": 2,
+      "calls": 4
+    },
+    {
+      "address": "04B9BE",
+      "bytes": 2,
+      "calls": 4
+    },
+    {
+      "address": "04D2AC",
+      "bytes": 2,
+      "calls": 4
+    },
+    {
+      "address": "04D632",
+      "bytes": 2,
+      "calls": 4
+    },
+    {
+      "address": "04DBA6",
+      "bytes": 2,
+      "calls": 4
+    }
+  ],
+  "action_character_pose_pairs": null,
+  "paired_poses": null,
+  "paired_position": null,
+  "ring_route_descriptors": null,
+  "ring_route_poses": null,
+  "royal_exit_descriptors": [
+    "0115F2",
+    "01A348",
+    "01A354"
+  ],
+  "royal_exit_poses": [
+    "0000",
+    "0001",
+    "0002",
+    "0003",
+    "0004",
+    "002B",
+    "0066",
+    "0067",
+    "0068",
+    "01D3"
+  ],
+  "limits": [
+    "Action mode covers generated matrix links, statically possible alternates, ROM-indexed $79 and both $1E/$1F object-release descriptors in both mirror directions.",
+    "Each paired mode run covers all 904 paired pose entries, twelve partner sets and both mirror directions at its reported screen position.",
+    "Ring-route mode covers the six ROM descriptors used by $68/$69/$6B on all twelve wrestler sets in both mirror directions; a seeded partner and screen position vary by case.",
+    "Royal-exit mode covers three $7A ROM descriptors, explicit visual pose $01D3, neutral pose and captured entry pose on all twelve wrestler sets in both mirror directions.",
+    "Action mode uses one seeded partner and one of several screen positions per case.",
+    "Callback-selected alternate poses, game scheduling, and Saturn VDP1 output require separate evidence."
+  ]
+}

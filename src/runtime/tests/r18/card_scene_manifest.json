@@ -1,0 +1,69 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "rom_7B70_81B6_sha256": "51ec3eb27ae28b98172cfa6ba6762e6cc48f5c2f32cf1c962fbf88d5f94f62c9",
+  "source_sha256": "335a361d55a741ad240d5cfeae6d7eba8f6e670500bca52dce2585f17ac61142",
+  "header_sha256": "3b5c2e1baac5aedae78557d600e7f4206f715994c048b668073f0954d04507c7",
+  "test_sha256": "4706f58dd1ae7976ea07bf11e92b80df6927b310b82d76c00a7e78429f314662",
+  "owners": [
+    "7B70 full card controller through 7E14/7E84",
+    "7F0E actor owner through 8134",
+    "7E86 control graphic through 7F0C",
+    "Live 21B4 RNG"
+  ],
+  "rom_tables": [
+    "8136 eight animation bytes",
+    "813E twelve palette pairs",
+    "816E twelve Royal text IDs",
+    "8186 twelve TAG text pairs"
+  ],
+  "protocol": {
+    "CALL=0": "Complete the actual original dependency, with its fixed original return PC",
+    "WRITE8=2": "Commit board 140011=7B, then complete",
+    "SYNC=3": "Real IRQ ACK at 1C006F.bit1; a successful incomplete poll returns WAIT=5 at the same PC",
+    "failure": "Fatal preserved prefix; WF_BLOCKED is never a wait"
+  },
+  "green_cases": 1100,
+  "guard_protocol_controls": 26,
+  "delayed_ack_waits": 10,
+  "required_external_owners": [
+    "2052",
+    "1FC0",
+    "26E66",
+    "2A06",
+    "285DA",
+    "2AEA",
+    "247C",
+    "27B8",
+    "2836",
+    "8FD6",
+    "1F9E",
+    "2503C",
+    "B29E",
+    "2208",
+    "8F50"
+  ],
+  "evidence": [
+    "validation/local-20261024/card-scene-red.log",
+    "validation/local-20261024/card-scene-green.json",
+    "validation/local-20261024/card-scene-final-green.json",
+    "validation/local-20261024/card-scene-final-1100.json",
+    "validation/local-20261024/card-scene-independent-review.json",
+    "validation/local-20261024/card-scene-paid-independent-review.txt"
+  ],
+  "compared": [
+    "RAM 16 KiB / BG 64 KiB / FG 16 KiB / palette 36 KiB / board, including padding",
+    "D0-D7 / A0-A6 / RNG",
+    "Every CALL/WRITE8/SYNC context, region digest, order and original call/return PC",
+    "Pending request inertness and original RTS boundaries"
+  ],
+  "intercepts": [
+    "2052 sound output only; RAM/D/A preserved"
+  ],
+  "limits": [
+    "External native backend composition remains a separate proof",
+    "Deterministic ACK/VBlank fixtures do not certify physical IRQ cadence",
+    "CCR/A7 temporary stack outside ABI",
+    "Unknown actor/table indices retain guards",
+    "No global ROM, hardware or free-combat equivalence claim"
+  ]
+}

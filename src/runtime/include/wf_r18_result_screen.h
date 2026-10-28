@@ -7,6 +7,7 @@
 typedef wf_status_t (*wf_r18_result_wait_fn)(wf_runtime_t *,uint16_t,void *);
 /* Publish the FG0 changes already made by the real translated $2503C. */
 typedef wf_status_t (*wf_r18_result_commit_fn)(void *);
+typedef wf_status_t (*wf_r18_result_level_fn)(wf_runtime_t *,unsigned,void *);
 
 /* Presentation segment $11CE..$122B only. This is not the complete $11B6
  * owner: scratch clears $0092..$009E and scene changes $122C+ are excluded.
@@ -16,5 +17,12 @@ typedef wf_status_t (*wf_r18_result_commit_fn)(void *);
 wf_status_t wf_r18_result_in_ring(wf_runtime_t *,wf_r18_video_t *,
                                  wf_r18_result_wait_fn,
                                  wf_r18_result_commit_fn,void *);
+/* Literal Royal loss presentation $1AFC..$1B1D. Palette $2A06 waits for
+ * VBlank high, publishes its payload, then waits for low. The same commit
+ * callback publishes palettes and FG. $21E6 waits 97 periods. Stops before
+ * result-record collection $1B1E and $65C0/BOOT; not Royal winner $1B4E.
+ * Callback failures stop immediately; this segment is not resumable. */
+wf_status_t wf_r18_result_royal_game_over(wf_runtime_t *,wf_r18_video_t *,
+ wf_r18_result_level_fn,wf_r18_result_wait_fn,wf_r18_result_commit_fn,void *);
 
 #endif

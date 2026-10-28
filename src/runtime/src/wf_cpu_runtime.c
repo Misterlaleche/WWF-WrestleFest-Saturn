@@ -9,22 +9,28 @@ static wf_actor_raw_t *ptr(wf_runtime_t*rt,const wf_actor_raw_t*a,size_t off){re
  * branches remain explicit dependencies instead of guessing AI behavior. */
 static wf_status_t knockdown_1cbf8(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
 wf_status_t wf_cpu_pursuit_1d5a2(wf_runtime_t*,unsigned,wf_state5_trace_t*);
+extern wf_status_t wf_state5_approach_1f45a(wf_runtime_t*,unsigned,wf_state5_trace_t*);
 static wf_status_t state0_tail(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
 static wf_status_t choose_1dea6(wf_runtime_t*,unsigned,wf_actor_raw_t*,uint32_t,unsigned,wf_cpu_trace_t*);
 static wf_status_t decision_1de66(wf_runtime_t*,unsigned,wf_actor_raw_t*,unsigned,wf_cpu_trace_t*);
 static wf_status_t assist_1f5b2(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
 static wf_status_t state0_defender_prefix(wf_runtime_t*,wf_actor_raw_t*,wf_cpu_trace_t*);
 static wf_status_t state0_ringside_prefix(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
+static wf_status_t state0_royal(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
 static void cpu_face_10be8(wf_actor_raw_t*,const wf_actor_raw_t*);
 static void defender_relation_1c228(wf_runtime_t*,wf_actor_raw_t*,const wf_actor_raw_t*);
 static wf_status_t state0(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
  if(!(wf_u8(a,WF_A_STATE)&0x80u))return WF_OK;
- if((wf_u8(a,WF_A_CPU_B5)&128u)||(wf_u8(a,WF_A_FLAGS34)&4u)||(wf_u8(a,WF_A_CPU_B6)&16u))return state0_defender_prefix(rt,a,tr);
+ if(rt->g.mode_0161&1u)return state0_royal(rt,slot,a,tr);
+ /* $1C348/$1C350 precedes later aggregate guards. B5.bit3 is preserved
+  * by the prefix mask; its clear case selects raw79 without a health test. */
+ if((wf_u8(a,WF_A_CPU_B5)&128u)||(wf_u8(a,WF_A_FLAGS34)&4u)||(wf_u8(a,WF_A_CPU_B6)&16u)||(wf_u8(a,WF_A_CPU_B7)&0x91u)||
+    ((wf_u8(a,WF_A_FLAGS34)&16u)&&!(wf_u8(a,WF_A_CPU_B5)&8u)))return state0_defender_prefix(rt,a,tr);
  if(rt->g.mode_0161==2u)return state0_ringside_prefix(rt,slot,a,tr);
  wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x00010be8u);
  uint8_t f33=wf_u8(a,WF_A_FLAGS33),tf33=wf_u8(t,WF_A_FLAGS33);
  uint8_t f34=wf_u8(a,WF_A_FLAGS34),b5=wf_u8(a,WF_A_CPU_B5),b7=wf_u8(a,WF_A_CPU_B7);
- if(rt->g.mode_0161||wf_u8(a,WF_A_CPU_B6)&0x10u||f34&0x14u||b7&0x91u||b5&0x80u||wf_u8(a,WF_A_CPU_B9)&1u||wf_u8(t,WF_A_FLAGS34)&0x10u)return block(tr,0x0001c2ccu);
+ if(rt->g.mode_0161||wf_u8(a,WF_A_CPU_B6)&0x10u||f34&0x14u||b7&0x91u||b5&0x80u||wf_u8(a,WF_A_CPU_B9)&1u)return block(tr,0x0001c2ccu);
  /* $10BE8: target position and special state can offset the facing test. */
  uint16_t x=wf_be16(t,WF_A_X),off=0;uint8_t ts=wf_u8(t,WF_A_STATE+1u);
  if(ts==4u){uint8_t sub=wf_u8(t,WF_A_STATE4_LO);off=sub==8u?0x40u:sub==9u?0x10u:0u;}
@@ -92,6 +98,16 @@ static int state1_weighted_24cc(wf_runtime_t*rt,const uint8_t *weights,size_t co
 }
 /* $1D7A0, used before the original state2 movement owner. */
 static void run_angle_1d7a0(wf_actor_raw_t*a){wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_FACING)&128u)?0x40u:0xc0u);}
+/* $1CD2C: related-object close range. Knockdown8/9 rejoins $1CCBC;
+ * the B7 clear there is followed by its original set before returning. */
+static wf_status_t state1_related_1cd2c(wf_actor_raw_t*a,const wf_actor_raw_t*t){
+ if(wf_main_state(t)==4u&&(wf_u8(t,WF_A_STATE4_LO)==8u||wf_u8(t,WF_A_STATE4_LO)==9u)){
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~64u));
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|64u));
+  wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3du);
+ }else{wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x1eu);}
+ return WF_OK;
+}
 /* $1CE38: the aligned, nonzero-distance-class continuation of state1. */
 static wf_status_t aligned_1ce38(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_actor_raw_t*t,wf_cpu_trace_t*tr){
  uint8_t f34=wf_u8(a,WF_A_FLAGS34);unsigned distance=wf_be16(a,WF_A_CPU_DISTANCE);uint8_t ts=wf_main_state(t);
@@ -101,7 +117,14 @@ static wf_status_t aligned_1ce38(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,
   wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(f34&~4u));if(wf_u8(a,WF_A_FLAGS33)&2u){wf_set_u8(a,WF_A_ROLE,(uint8_t)(wf_u8(a,WF_A_ROLE)&~64u));if(!(wf_u8(p,WF_A_FLAGS33)&2u))wf_set_u8(a,0x35u,(uint8_t)(wf_u8(a,0x35u)|8u));wf_set_be16(a,WF_A_STATE,0u);return WF_OK;}
   goto horizontal;
  }
- if(wf_u8(a,WF_A_REL_FLAGS)&128u)return block(tr,0x1d032u);
+ if(wf_u8(a,WF_A_REL_FLAGS)&128u){
+  if(distance<104u)return state1_related_1cd2c(a,t);
+  if(distance>=144u)goto horizontal;
+  static const uint8_t weights[2]={50u,50u};int n=state1_weighted_24cc(rt,weights,2u);
+  if(n<0)return block(tr,0x24ccu);
+  if(n)goto horizontal;
+  wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x1fu);return WF_OK;
+ }
  if(wf_u8(a,WF_A_CPU_B4)!=1u){
   if(wf_u8(t,WF_A_FLAGS33)&16u){
    wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(a,WF_A_FACING));if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))goto parallel;
@@ -150,6 +173,25 @@ horizontal:
 }
 /* Live stage-zero route through $1C93E/$1CA82/$1DE66. Other jump-table
  * branches remain explicit ROM dependencies. */
+static wf_status_t state1_target_flag2_1ccf0(wf_runtime_t*rt,wf_actor_raw_t*a,
+                                             const wf_actor_raw_t*t,wf_cpu_trace_t*tr){
+ /* $1CCF0-$1CD2A uses the target's live +$44 word as an unchecked
+  * ROM word-pair index. Some real grapple states index beyond the four
+  * apparent table entries into following code bytes. Preserve those
+  * exact ROM bytes rather than replacing the result with a guessed move. */
+ uint16_t index=wf_be16(t,WF_A_TIMER44);
+ size_t off=(size_t)index*4u;
+ if(off+4u>sizeof cpu_data_1d068)return block(tr,0x0001ccf0u);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)(index<<2));
+ wf_set_be16(a,WF_A_CPU_BE,(uint16_t)((cpu_data_1d068[off]<<8)|cpu_data_1d068[off+1u]));
+ wf_set_be16(a,WF_A_CPU_C0,(uint16_t)((cpu_data_1d068[off+2u]<<8)|cpu_data_1d068[off+3u]));
+ wf_set_be16(a,WF_A_SELECTOR,0x3du);
+ wf_set_be16(a,WF_A_AE,10u);
+ wf_set_u8(a,WF_A_STATE,0u);
+ wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|0x60u));
+ wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)|0x20u));
+ return WF_OK;
+}
 static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
                                 wf_actor_raw_t*a,wf_cpu_trace_t*tr){
  wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);
@@ -162,7 +204,18 @@ static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
  x=(uint16_t)(x+((wf_u8(t,WF_A_FACING)&0x80u)?-off:off));
  wf_set_u8(a,WF_A_FACING,(uint8_t)((wf_u8(a,WF_A_FACING)&0x7fu)|
     (x>=wf_be16(a,WF_A_X)?0x80u:0u)));
- if(rt->g.mode_0161&1u)return block(tr,0x0001c958u);
+ if(rt->g.mode_0161&1u){
+  /* $1C958..$1C99C: Royal bypasses TAG outside/partner transfer and
+   * reaches the shared $1CA82 only with a usable live target. */
+  uint8_t old=wf_u8(a,WF_A_CPU_B6);
+  wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(old&~64u));
+  if(((old&64u)&&!(wf_u8(a,WF_A_CPU_B5)&128u))||
+     !(wf_u8(t,WF_A_ACTIVE)&128u)||(wf_u8(t,WF_A_FLAGS33)&4u)||
+     (wf_u8(t,WF_A_FLAGS32)&16u)){
+   wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|128u));
+   wf_set_be16(a,WF_A_STATE,0u);return WF_OK;
+  }
+ }else{
  /* $1CA2E: two outside actors keep the normal pursuit continuation.
   * When only this actor is outside, the participating actor approaches
   * the ropes; the reserve retargets without recalculating relations. */
@@ -191,8 +244,9 @@ static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
    else if(wf_u8(t,WF_A_FLAGS33)&64u){wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|32u));wf_set_be16(a,WF_A_STATE,0u);return WF_OK;}
   }
  }
+ }
  wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)&~0x20u));
- if(wf_u8(t,WF_A_FLAGS32)&2u)return block(tr,0x0001ccf0u);
+  if(wf_u8(t,WF_A_FLAGS32)&2u)return state1_target_flag2_1ccf0(rt,a,t,tr);
  if(wf_u8(a,WF_A_CPU_B4)||wf_be16(a,WF_A_CPU_DISTANCE_Y)>=12u){
   /* $1CD5C/$1CDD0: approach an opponent in a different lane. */
   if(wf_be16(a,WF_A_CPU_DISTANCE_Y)<12u)return aligned_1ce38(rt,slot,a,t,tr);
@@ -208,9 +262,18 @@ static wf_status_t state1_sub0(wf_runtime_t*rt,unsigned slot,
  }
  uint8_t f34=wf_u8(a,WF_A_FLAGS34);
  wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(f34&~4u));
- if((f34&4u)&&(wf_u8(a,WF_A_FLAGS33)&2u))
-  return block(tr,0x0001cffau);
- if(wf_u8(a,WF_A_REL_FLAGS)&0x80u)return block(tr,0x0001cd2cu);
+ if((f34&4u)&&(wf_u8(a,WF_A_FLAGS33)&2u)){
+  /* ROM $1CFFA-$1D018: end this partner intervention. The partner's
+   * participation bit determines whether the corner pin flag is raised. */
+  wf_actor_raw_t*partner=ptr(rt,a,WF_A_TEAM_LINK);
+  if(!partner)return block(tr,0x0001d000u);
+  wf_set_u8(a,WF_A_ROLE,(uint8_t)(wf_u8(a,WF_A_ROLE)&~0x40u));
+  if(!(wf_u8(partner,WF_A_FLAGS33)&2u))
+   wf_set_u8(a,WF_A_PINFLAGS,(uint8_t)(wf_u8(a,WF_A_PINFLAGS)|8u));
+  wf_set_be16(a,WF_A_STATE,0u);
+  return WF_OK;
+ }
+ if(wf_u8(a,WF_A_REL_FLAGS)&0x80u)return state1_related_1cd2c(a,t);
  if(wf_u8(a,WF_A_CPU_B5)&0x80u)return assist_1f5b2(rt,slot,a,tr);
  if(wf_u8(a,WF_A_CPU_B9)&2u){
   /* $1CAD6..$1CB2A: the latched stand-up wait inspects the target state. */
@@ -287,12 +350,15 @@ static wf_status_t state1_sub1(wf_runtime_t*rt,unsigned slot,
  if((uint8_t)dy<8u){
   wf_set_u8(a,WF_A_ANGLE,0u);
   if(!(wf_u8(a,WF_A_FLAGS34)&1u)){
-   uint32_t link=wf_be32(partner,WF_A_LINK);
-   wf_actor_raw_t*linked=link?ptr(rt,partner,WF_A_LINK):NULL;
+   /* $1D3F4 MOVEA preserves the tag in A2, but $1D3F8 reads through
+    * the 24-bit bus. A tagged physical null therefore reads ROM[$21],
+    * exactly like untagged zero; it is not an unrepresented actor. */
+   uint32_t link=wf_be32(partner,WF_A_LINK)&0x00ffffffu;
+   wf_actor_raw_t*linked=link?wf_actor_from_rom_ptr(rt,link,0):NULL;
    if(link&&!linked)return block(tr,0x0001d3f4u);
    /* With A2=0 the arcade reads ROM byte $21=$FF, so the state-5
     * comparison at $1D3FA is false and pursuit continues. */
-   if(linked&&wf_main_state(linked)==5u&&wf_u8(linked,WF_A_SELECTOR_LO)==0x53u){
+   if(linked&&wf_u8(linked,WF_A_STATE+1u)==5u&&wf_u8(linked,WF_A_SELECTOR_LO)==0x53u){
     uint16_t ax=wf_be16(a,WF_A_X),lx=wf_be16(linked,WF_A_X);
     uint16_t linked_dx=ax>lx?(uint16_t)(ax-lx):(uint16_t)(lx-ax);
     wf_r17_m68k_move_w(&rt->m68k_regs,0u,linked_dx);
@@ -307,7 +373,7 @@ static wf_status_t state1_sub1(wf_runtime_t*rt,unsigned slot,
  if(rt->g.credited_route==0u)return WF_OK;
  wf_actor_raw_t*target=ptr(rt,partner,WF_A_TARGET);
  if(!target)return block(tr,0x0001d436u);
- uint8_t state=wf_main_state(target);
+ uint8_t state=wf_u8(target,WF_A_STATE+1u);
  if(state!=0u&&state!=1u&&
     !(state==4u&&(wf_u8(target,WF_A_STATE4_LO)==1u||
                    wf_u8(target,WF_A_STATE4_LO)==0u||
@@ -332,12 +398,14 @@ static wf_status_t state1_sub1(wf_runtime_t*rt,unsigned slot,
   {25,15,60},{30,20,50},{30,20,50},{35,25,40},{40,30,30},
   {40,30,30},{40,30,30},{40,30,30},{40,30,30},{45,35,20}
  };
+ wf_r17_m68k_moveq(&rt->m68k_regs,0u,0); /* $1D49E precedes the table guard. */
  if(rt->g.progression_0162>=10u)return block(tr,0x0001d4a0u);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)(rt->g.progression_0162<<2));
  int choice=state1_weighted_24cc(rt,weights[rt->g.progression_0162],3u);
  if(choice<0)return block(tr,0x000024ccu);
  if(choice==2)return WF_OK;
  if(choice==0){
-  wf_set_be32(a,WF_A_TARGET,wf_actor_rom_base((unsigned)(target-rt->actors)));
+  wf_set_be32(a,WF_A_TARGET,wf_be32(partner,WF_A_TARGET)); /* $1D4BE MOVE.L A1 preserves its tag. */
   wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x39u);
   return wf_state5_execute(rt,slot,tr?&tr->state5:0);
  }
@@ -354,7 +422,8 @@ int wf_cpu_arrived_1f15c(wf_runtime_t*rt,wf_actor_raw_t*a){
  if(ax<8u&&ay<8u){wf_r17_m68k_moveq(&rt->m68k_regs,0,0);return 1;}
  uint16_t dx=(uint16_t)(tx-x),dy=(uint16_t)(ty-y);unsigned q=0;
  if(dx&0x8000u){q|=1u;dx=(uint16_t)-dx;}if(dy&0x8000u){q|=2u;dy=(uint16_t)-dy;}
- if(dx>255u)dx=255u;if(dy>255u)dy=255u;
+ if(dx>255u)dx=255u;
+ if(dy>255u)dy=255u;
  static const uint8_t base[4]={0,192,64,128};unsigned sum=dx+dy,component=(q==0u||q==3u)?dx:dy;
  uint8_t angle=(uint8_t)(base[q]+component*64u/(sum?sum:1u)),*scratch=rt->g.direction_scratch_15e4;
  scratch[0]=angle;scratch[1]=0x1c;scratch[2]=(uint8_t)(dx>>8);scratch[3]=(uint8_t)dx;scratch[4]=(uint8_t)(dy>>8);scratch[5]=(uint8_t)dy;scratch[6]=(uint8_t)(ty>>8);scratch[7]=(uint8_t)ty;
@@ -366,6 +435,90 @@ static void cpu_face_10be8(wf_actor_raw_t*a,const wf_actor_raw_t*t){
  else if(state==5u)off=wf_u8(t,WF_A_SELECTOR_LO)==0x22u?48u:wf_u8(t,WF_A_SELECTOR_LO)==0x52u?16u:0u;
  x=(uint16_t)(x+((wf_u8(t,WF_A_FACING)&128u)?-off:off));
  wf_set_u8(a,WF_A_FACING,(uint8_t)((wf_u8(a,WF_A_FACING)&127u)|(x>=wf_be16(a,WF_A_X)?128u:0u)));
+}
+/* $1C5FA returns carry after transferring the request to the partner,
+ * or clears carry after selecting the original AE4 wait for a reserve. */
+static wf_status_t state1_tag_request_1c5fa(wf_runtime_t*rt,wf_actor_raw_t*a,
+                                           int*carry,wf_cpu_trace_t*tr){
+ if(!(wf_u8(a,WF_A_FLAGS33)&1u)){
+  wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,4u);*carry=0;return WF_OK;
+ }
+ wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(wf_u8(a,WF_A_FLAGS34)&~2u));
+ uint32_t link=wf_be32(a,WF_A_TEAM_LINK);wf_actor_raw_t*p=ptr(rt,a,WF_A_TEAM_LINK);
+ if(!p)return block(tr,0x1c608u);
+ wf_set_u8(p,WF_A_FLAGS34,(uint8_t)(wf_u8(p,WF_A_FLAGS34)|2u));
+ if(wf_u8(a,WF_A_FLAGS33)&128u)rt->g.global_1684=link;else rt->g.global_1688=link;
+ *carry=1;return WF_OK;
+}
+wf_status_t wf_cpu_tag_request_1c5fa(wf_runtime_t*rt,unsigned slot,int*carry,wf_state5_trace_t*tr){
+ if(!rt||slot>=WF_ACTOR_SLOTS||!carry)return WF_BAD_STATE;
+ wf_cpu_trace_t local={0};
+ wf_status_t st=state1_tag_request_1c5fa(rt,&rt->actors[slot],carry,&local);
+ if(st!=WF_OK&&tr)tr->blocked_dependency_rom=local.blocked_dependency_rom;
+ return st;
+}
+/* $1D078: initial diagonal motion, then AE6 when the WORD Y distance
+ * reaches eighteen. The latch is bit5 of the high byte at +$AE. */
+static wf_status_t state1_sub5_1d078(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+ if(wf_u8(a,WF_A_FLAGS34)&2u){
+  int carry=0;wf_status_t st=state1_tag_request_1c5fa(rt,a,&carry,tr);
+  if(st!=WF_OK||!carry)return st;
+ }
+ wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x10be8u);cpu_face_10be8(a,t);
+ uint8_t old=wf_u8(a,WF_A_AE);wf_set_u8(a,WF_A_AE,(uint8_t)(old|32u));
+ if(!(old&32u)){
+  uint8_t b5=wf_u8(a,WF_A_CPU_B5);wf_set_u8(a,WF_A_CPU_B5,(uint8_t)((b5&~4u)|((b5&1u)?4u:0u)));
+  uint16_t boundary=(rt->g.mode_0161&2u)?0x120u:0x160u;
+  wf_r17_m68k_move_w(&rt->m68k_regs,0,boundary);
+  uint8_t angle=boundary>=wf_be16(t,WF_A_Y)?0xe0u:0xa0u;
+  if(b5&1u)angle=(boundary>=wf_be16(t,WF_A_Y))?0x20u:0x60u;
+  wf_set_u8(a,WF_A_ANGLE,angle);
+ }
+ if(wf_be16(a,WF_A_CPU_DISTANCE_Y)>=18u){wf_set_be16(a,WF_A_AE,6u);wf_set_be16(a,WF_A_STATE,1u);}
+ return WF_OK;
+}
+/* $1D106: horizontal leg. B5 bits0/2 must differ before the unsigned
+ * WORD X distance can advance AE6 to AE7. */
+static wf_status_t state1_sub6_1d106(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+ if(wf_u8(a,WF_A_FLAGS34)&2u){
+  int carry=0;wf_status_t st=state1_tag_request_1c5fa(rt,a,&carry,tr);
+  if(st!=WF_OK||!carry)return st;
+ }
+ wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x10be8u);cpu_face_10be8(a,t);
+ uint8_t old=wf_u8(a,WF_A_AE);wf_set_u8(a,WF_A_AE,(uint8_t)(old|32u));
+ uint8_t b5=wf_u8(a,WF_A_CPU_B5);
+ if(!(old&32u))wf_set_u8(a,WF_A_ANGLE,(b5&4u)?0x40u:0xc0u);
+ if(((b5&4u)!=0u)!=((b5&1u)!=0u)){
+  if(wf_be16(a,WF_A_CPU_DISTANCE)>=0x18u){wf_set_be16(a,WF_A_AE,7u);wf_set_be16(a,WF_A_STATE,1u);}
+ }
+ return WF_OK;
+}
+/* $1D16A: final diagonal leg, returning to AE0 or the original $1DFE2
+ * state5 dispatcher when the saved attack bit was set. */
+static wf_status_t state1_sub7_1d16a(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+ if(wf_u8(a,WF_A_FLAGS34)&2u){
+  int carry=0;wf_status_t st=state1_tag_request_1c5fa(rt,a,&carry,tr);
+  if(st!=WF_OK)return st;
+  if(!carry){wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~128u));return WF_OK;}
+ }
+ wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x10be8u);cpu_face_10be8(a,t);
+ uint8_t old=wf_u8(a,WF_A_AE);wf_set_u8(a,WF_A_AE,(uint8_t)(old|32u));
+ uint8_t b5=wf_u8(a,WF_A_CPU_B5);
+ if(!(old&32u)){
+  wf_set_u8(a,WF_A_ANGLE,(b5&2u)?0x20u:0x60u);
+  if(!(b5&4u))wf_set_be16(a,0x2cu,(uint16_t)(0u-wf_be16(a,0x2cu)));
+ }
+ if(wf_be16(a,WF_A_CPU_DISTANCE_Y)>=5u)return WF_OK;
+ wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(b5&~32u));
+ if(b5&32u){
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));
+  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~16u));
+  wf_set_be16(a,WF_A_STATE,5u);wf_set_u8(a,WF_A_SELECTOR,0u);
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~128u));
+  return wf_state5_execute(rt,slot,tr?&tr->state5:NULL);
+ }
+ wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~128u));
+ wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,0u);return WF_OK;
 }
 /* $1D206: request a TAG, face the opponent, then approach the corner. */
 static wf_status_t state1_tag_1d206(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
@@ -429,6 +582,9 @@ static wf_status_t state1(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_
  wf_r17_m68k_move_b(&rt->m68k_regs,0u,(uint8_t)(sub<<2));
  if(sub==0u)return state1_sub0(rt,slot,a,tr);
  if(sub==1u)return state1_sub1(rt,slot,a,tr);
+ if(sub==5u)return state1_sub5_1d078(rt,a,tr);
+ if(sub==6u)return state1_sub6_1d106(rt,a,tr);
+ if(sub==7u)return state1_sub7_1d16a(rt,slot,a,tr);
  if(sub==8u)return state1_tag_1d206(rt,slot,a,tr);
  if(sub==9u)return state1_corner_1d31e(rt,a,tr);
  /* Both CPU jump-table entries $1C910/$1C914 point to RTS at $1D524. */
@@ -635,7 +791,8 @@ static wf_status_t state4(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_
  if(!(wf_u8(a,WF_A_STATE)&128u)){
   wf_set_be16(a,WF_A_AE,0);wf_set_be16(a,WF_A_CPU_BC,0);
   wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&0xc7u));wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&0x7cu));wf_set_u8(a,WF_A_FLAGS34,(uint8_t)(wf_u8(a,WF_A_FLAGS34)&~4u));
-  if(wf_u8(a,WF_A_FLAGS33)&2u)wf_set_u8(a,WF_A_ROLE,(uint8_t)(wf_u8(a,WF_A_ROLE)&~64u));return WF_OK;
+  if(wf_u8(a,WF_A_FLAGS33)&2u)wf_set_u8(a,WF_A_ROLE,(uint8_t)(wf_u8(a,WF_A_ROLE)&~64u));
+  return WF_OK;
  }
  unsigned sub=wf_u8(a,WF_A_STATE4_LO);
  if(sub==1u){
@@ -799,15 +956,32 @@ static wf_status_t knockdown_1cbf8(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*
 }
 /* $1D5A2 approach continuation shared with state-5 callbacks. */
 wf_status_t wf_cpu_pursuit_1d5a2(wf_runtime_t*rt,unsigned slot,wf_state5_trace_t*tr){
- wf_actor_raw_t*a=&rt->actors[slot],*t=ptr(rt,a,WF_A_TARGET);
+ wf_actor_raw_t*a=&rt->actors[slot];
+ if(wf_u8(a,WF_A_FLAGS34)&2u){
+  int carry=0;wf_status_t st=wf_cpu_tag_request_1c5fa(rt,slot,&carry,tr);
+  if(st!=WF_OK||!carry)return st;
+ }
+ wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);
  if(!t){if(tr)tr->blocked_dependency_rom=0x1d5b2u;return WF_BLOCKED;}
- if(wf_u8(a,WF_A_FLAGS34)&2u){if(tr)tr->blocked_dependency_rom=0x1c5fau;return WF_BLOCKED;}
  uint16_t x=wf_be16(t,WF_A_X),offset=0;unsigned ts=wf_main_state(t),sub=wf_u8(t,WF_A_STATE4_LO),sel=wf_u8(a,WF_A_SELECTOR_LO);
  if(ts==4u)offset=sub==8u?64u:sub==9u?16u:0u;
  if(ts==5u)offset=wf_u8(t,WF_A_SELECTOR_LO)==0x22u?48u:wf_u8(t,WF_A_SELECTOR_LO)==0x52u?16u:0u;
  x=(uint16_t)(x+((wf_u8(t,WF_A_FACING)&128u)?-offset:offset));
  wf_set_u8(a,WF_A_FACING,(uint8_t)((wf_u8(a,WF_A_FACING)&127u)|(x>=wf_be16(a,WF_A_X)?128u:0u)));
- if(sel==0x70u){if(tr)tr->blocked_dependency_rom=0x1d6eeu;return WF_BLOCKED;}
+ if(sel==0x70u){
+  /* $1D6EE reads the object's latch BYTE and reservation WORD. Arrival
+   * writes canonical A0 LONG before the existing $1D728 state5 tail. */
+  uint32_t link=wf_be32(a,WF_A_REL_LINK)&0x00ffffffu;
+  wf_actor_raw_t*o=link==0x1c0f1cu?&rt->fixed_object0:
+                   link==0x1c1028u?&rt->fixed_object1:ptr(rt,a,WF_A_REL_LINK);
+  if(!o){if(tr)tr->blocked_dependency_rom=0x1d6f2u;return WF_BLOCKED;}
+  if(wf_u8(o,WF_A_LATCHED+1u)!=3u||wf_be16(o,WF_A_REL_LINK)){
+   wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~32u));
+   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~32u));wf_set_be16(a,WF_A_STATE,0u);return WF_OK;
+  }
+  if(!wf_cpu_arrived_1f15c(rt,a))return WF_OK;
+  wf_set_be32(o,WF_A_REL_LINK,wf_actor_rom_base(slot));goto arrived;
+ }
  if(sel!=0x69u){
   if(wf_u8(a,WF_A_CPU_B5)&32u){
    if(wf_u8(t,WF_A_FLAGS33)&16u){if(tr)tr->blocked_dependency_rom=0x1d5e2u;return WF_BLOCKED;}
@@ -828,7 +1002,10 @@ wf_status_t wf_cpu_pursuit_1d5a2(wf_runtime_t*rt,unsigned slot,wf_state5_trace_t
    if(wf_u8(a,WF_A_CONTACT+1u)){
     wf_set_u8(a,WF_A_CONTACT+1u,0);
     if(sel==0x3du)goto arrived;
-    if(rt->g.credited_route){if(tr)tr->blocked_dependency_rom=0x1d6e4u;return WF_BLOCKED;}
+    if(rt->g.credited_route){
+     wf_set_be16(a,WF_A_SELECTOR,0x000au);
+     return wf_state5_approach_1f45a(rt,slot,tr);
+    }
    }
   }
  }
@@ -845,7 +1022,13 @@ static wf_status_t assist_1f5b2(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,w
  unsigned index=16u;
  if(wf_main_state(t)==5u){
   uint8_t target_sel=wf_u8(t,WF_A_SELECTOR_LO);
-  if(target_sel==0x4au){if(rt->g.mode_0161&1u)return block(tr,0x1f5dau);}
+  if(target_sel==0x4au){
+   if(rt->g.mode_0161&1u){
+    /* ROM $1F5DA writes WORD selector $49, then branches to $1F45A. */
+    wf_set_be16(a,WF_A_SELECTOR,0x49u);
+    return wf_state5_approach_1f45a(rt,slot,tr?&tr->state5:NULL);
+   }
+  }
   else for(unsigned i=0;i<16u;i++){
    wf_r17_m68k_move_b(&rt->m68k_regs,3,target_sel);
    if(target_sel==selectors[i]){index=i;break;}
@@ -897,7 +1080,8 @@ wf_status_t wf_cpu_relation_1c228(wf_runtime_t*rt,unsigned slot){
   /* The first real phase has null targets. $1C228 reads the canonical ROM
    * reset-vector bytes: X=$0654, Y=$FFFF, state low=$FF (no pose offset). */
   static const wf_actor_raw_t rom_zero={.b={[6]=0x06,[7]=0x54,[10]=0xff,[11]=0xff,[0x21]=0xff}};
-  if(address)return WF_BLOCKED;t=&rom_zero;
+  if(address)return WF_BLOCKED;
+  t=&rom_zero;
  }
  defender_relation_1c228(rt,a,t);return WF_OK;
 }
@@ -925,6 +1109,41 @@ static wf_status_t defender_1c7ec(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_
  }
  return defender_fallback_1c880(rt,a,tr);
 }
+/* $1C390: the latched B7.bit7 decision uses the live $24CC/$21B4
+ * 50/50 table at $1C8F2. Both continuations are complete ROM owners. */
+static wf_status_t state0_latched_1c390(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+ static const uint8_t weights[2]={50u,50u};
+ int choice=state1_weighted_24cc(rt,weights,2u);if(choice<0)return block(tr,0x24ccu);
+ if(!choice){
+  /* $1DF1E: test the target's facing/X, independently of the owner's face. */
+  wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x1df1eu);
+  uint16_t x=wf_be16(t,WF_A_X);
+  if((wf_u8(t,WF_A_FACING)&128u)?x<0x270u:x>=0x2a0u){
+   wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3eu);
+   wf_r17_m68k_moveq(&rt->m68k_regs,0,1);return WF_OK;
+  }
+  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~32u));
+  wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,5u);
+  wf_r17_m68k_moveq(&rt->m68k_regs,0,0);return WF_OK;
+ }
+ /* $1DF7E probes X with WORD arithmetic, preserves the real resolver's
+  * contact/correction writes, then restores only the original X WORD. */
+ uint16_t x=wf_be16(a,WF_A_X),distance=wf_be16(a,WF_A_CPU_DISTANCE);
+ uint16_t delta=(uint16_t)(0xc0u-distance);
+ wf_r17_m68k_move_w(&rt->m68k_regs,0,x);wf_r17_m68k_move_w(&rt->m68k_regs,1,distance);
+ wf_r17_m68k_move_w(&rt->m68k_regs,2,delta);
+ wf_set_be16(a,WF_A_X,(uint16_t)(x+((wf_u8(a,WF_A_FACING)&128u)?(uint16_t)(0u-delta):delta)));
+ wf_status_t st=wf_r17_resolver_280dc(rt,a);wf_set_be16(a,WF_A_X,x);
+ if(st!=WF_OK)return block(tr,0x280dcu);
+ if(wf_u8(a,WF_A_CONTACT+1u)){
+  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~32u));
+  wf_set_be16(a,WF_A_STATE,1u);wf_set_be16(a,WF_A_AE,5u);
+  wf_r17_m68k_moveq(&rt->m68k_regs,0,1);return WF_OK;
+ }
+ wf_r17_m68k_moveq(&rt->m68k_regs,0,0);
+ wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~128u));
+ wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3eu);return WF_OK;
+}
 /* $1C2CC prefix must run before any special defender route is selected. */
 static wf_status_t state0_defender_prefix(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
  wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x10be8u);cpu_face_10be8(a,t);
@@ -935,9 +1154,50 @@ static wf_status_t state0_defender_prefix(wf_runtime_t*rt,wf_actor_raw_t*a,wf_cp
  if(!(wf_u8(a,WF_A_FLAGS34)&4u)){
   uint8_t old=wf_u8(a,WF_A_CPU_B7);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(old&~1u));if(old&1u){wf_set_be16(a,WF_A_STATE,5u);return WF_OK;}
   old=wf_u8(a,WF_A_CPU_B7);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(old&~16u));if(old&16u){wf_set_be16(a,WF_A_SELECTOR,wf_be16(a,WF_A_CPU_BC));wf_set_be16(a,WF_A_STATE,5u);return WF_OK;}
-  if(wf_u8(a,WF_A_CPU_B7)&128u)return block(tr,0x1c390u);
+  if(wf_u8(a,WF_A_CPU_B7)&128u)return state0_latched_1c390(rt,a,tr);
  }
  return (wf_u8(a,WF_A_CPU_B5)&128u)?defender_1c7ec(rt,a,tr):defender_fallback_1c880(rt,a,tr);
+}
+
+/* $1C2CC Royal entry: preserve the literal prefix and branch order before
+ * joining the existing original defender/running/normal continuations. */
+static wf_status_t state0_royal(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf_cpu_trace_t*tr){
+ wf_actor_raw_t*t=ptr(rt,a,WF_A_TARGET);if(!t)return block(tr,0x10be8u);
+ cpu_face_10be8(a,t);
+ wf_set_be16(a,WF_A_AE,0u);wf_set_be16(a,WF_A_TIMER44,0u);wf_set_be16(a,WF_A_TIMER46,0u);
+ wf_set_be16(a,WF_A_FLAGS32,(uint16_t)(wf_be16(a,WF_A_FLAGS32)&0xfba7u));
+ wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&0xcbu));
+ wf_set_be16(a,WF_A_CPU_B6,(uint16_t)(wf_be16(a,WF_A_CPU_B6)&0xf1fdu));
+ wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~32u));
+ /* $1C30A BCLR tests the previous bit, including when B5.bit7 bypasses
+  * the early return. Later priorities consume the newly cleared byte. */
+ uint8_t old=wf_u8(a,WF_A_CPU_B6);
+ wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(old&~64u));
+ if((old&64u)&&!(wf_u8(a,WF_A_CPU_B5)&128u)){
+  wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|128u));return WF_OK;
+ }
+ if(wf_u8(a,WF_A_CPU_B6)&16u){
+  if(rt->g.mode_0161&2u){
+   wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)&~16u));
+   wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x6cu);
+  }
+  return WF_OK;
+ }
+ if((wf_u8(a,WF_A_FLAGS34)&16u)&&!(wf_u8(a,WF_A_CPU_B5)&8u)){
+  wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x79u);return WF_OK;
+ }
+ if(wf_u8(a,WF_A_FLAGS34)&4u)
+  return (wf_u8(a,WF_A_CPU_B5)&128u)?defender_1c7ec(rt,a,tr):defender_fallback_1c880(rt,a,tr);
+ old=wf_u8(a,WF_A_CPU_B7);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(old&~1u));
+ if(old&1u){wf_set_be16(a,WF_A_STATE,5u);return WF_OK;}
+ old=wf_u8(a,WF_A_CPU_B7);wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(old&~16u));
+ if(old&16u){wf_set_be16(a,WF_A_SELECTOR,wf_be16(a,WF_A_CPU_BC));wf_set_be16(a,WF_A_STATE,5u);return WF_OK;}
+ if(wf_u8(a,WF_A_CPU_B7)&128u)return state0_latched_1c390(rt,a,tr);
+ if(wf_u8(a,WF_A_CPU_B5)&128u)return defender_1c7ec(rt,a,tr);
+ if((wf_u8(a,WF_A_FLAGS33)&1u)&&!(wf_u8(t,WF_A_FLAGS33)&1u)&&(wf_u8(t,WF_A_FLAGS32)&1u)){
+  rt->g.global_1697|=1u;return WF_OK;
+ }
+ return state0_tail(rt,slot,a,tr);
 }
 
 /* $1C6B6..$1C7E0: RINGSIDE fixed-object arbitration. The original keeps
@@ -1043,7 +1303,27 @@ static wf_status_t state0_tail(wf_runtime_t*rt,unsigned slot,wf_actor_raw_t*a,wf
  }
  if(!(wf_u8(a,WF_A_CPU_B7)&8u)){
   int carry;wf_status_t st=arbitrate_1f7f0(rt,a,&carry,tr);if(st!=WF_OK)return st;
-  if(!carry)return block(tr,0x1c4f4u);
+  if(!carry){
+   /* $1C4F4..$1C546: the uncredited attract CPU consumes the next
+    * scripted selector through $1DFE2. This is a normal decision, not a
+    * fatal missing action. Preserve the temporary selector bit and the
+    * callback's live D registers before the optional retreat. */
+   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|8u));
+   wf_set_be16(a,WF_A_SELECTOR,wf_be16(a,0x100u));
+   wf_set_u8(a,WF_A_FLAGS33,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&~16u));
+   wf_set_u8(a,WF_A_SELECTOR,(uint8_t)(wf_u8(a,WF_A_SELECTOR)|64u));
+   wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)|16u));
+   st=wf_state5_execute(rt,slot,tr?&tr->state5:NULL);
+   wf_set_u8(a,WF_A_SELECTOR,0u);
+   if(st!=WF_OK)return st;
+   if(!(wf_u8(a,WF_A_FLAGS33)&16u))return WF_OK;
+   wf_set_be16(a,WF_A_STATE,2u);run_angle_1d7a0(a);
+   wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)|4u));
+   wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^128u));
+   wf_set_u8(a,WF_A_ANGLE,(uint8_t)(wf_u8(a,WF_A_ANGLE)^128u));
+   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~2u));
+   return WF_OK;
+  }
   wf_r17_m68k_move_b(&rt->m68k_regs,0,wf_u8(a,WF_A_FACING));
   if(wf_u8(a,WF_A_FACING)==wf_u8(t,WF_A_FACING))return WF_OK;
   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|8u));

@@ -1,0 +1,1058 @@
+{
+  "status": "PASS",
+  "selector": "2f",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "generated_matrix_sha256": "9242d7d5f8d9d4847642c1f27bf54c6609505f4cbee2ca0d3d8e2feb36bdb8a3",
+  "human_table_base": "00E52E",
+  "human_table_character_stride": 64,
+  "human_table_rows_checked": 252,
+  "human_selector_hits": [
+    {
+      "character": 1,
+      "category": 13,
+      "button": 1,
+      "rom_address": "00E595"
+    },
+    {
+      "character": 1,
+      "category": 13,
+      "button": 2,
+      "rom_address": "00E596"
+    },
+    {
+      "character": 1,
+      "category": 13,
+      "button": 3,
+      "rom_address": "00E597"
+    },
+    {
+      "character": 5,
+      "category": 13,
+      "button": 1,
+      "rom_address": "00E695"
+    },
+    {
+      "character": 5,
+      "category": 13,
+      "button": 3,
+      "rom_address": "00E697"
+    }
+  ],
+  "cpu_tables_checked": 144,
+  "cpu_selector_hits": [],
+  "cpu_tables": [
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 0,
+      "rom_address": "021A10",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 1,
+      "rom_address": "021A1A",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 2,
+      "rom_address": "021ABC",
+      "choices": "3d0a48082210"
+    },
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 3,
+      "rom_address": "021AD6",
+      "choices": "3d0a3548"
+    },
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 4,
+      "rom_address": "021AE8",
+      "choices": "00210672"
+    },
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 5,
+      "rom_address": "021AFA",
+      "choices": "fe3eff0072"
+    },
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 6,
+      "rom_address": "021B10",
+      "choices": "2d05fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 7,
+      "rom_address": "021B1E",
+      "choices": "1c1d30"
+    },
+    {
+      "base": "0219B4",
+      "character": 0,
+      "lane": 8,
+      "rom_address": "021B2C",
+      "choices": "2d05"
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 0,
+      "rom_address": "021BF0",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 1,
+      "rom_address": "021BFA",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 2,
+      "rom_address": "021C9C",
+      "choices": "3d0a48082210"
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 3,
+      "rom_address": "021CB6",
+      "choices": "3d0a480e"
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 4,
+      "rom_address": "021CC8",
+      "choices": "002e0672"
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 5,
+      "rom_address": "021CDA",
+      "choices": "fe3e0072ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 6,
+      "rom_address": "021CF0",
+      "choices": "0504fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 7,
+      "rom_address": "021CFE",
+      "choices": "1c1d"
+    },
+    {
+      "base": "0219B4",
+      "character": 1,
+      "lane": 8,
+      "rom_address": "021D08",
+      "choices": "0504"
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 0,
+      "rom_address": "021DCC",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 1,
+      "rom_address": "021DD6",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 2,
+      "rom_address": "021E78",
+      "choices": "3d0a48080910"
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 3,
+      "rom_address": "021E92",
+      "choices": "3d0a480b"
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 4,
+      "rom_address": "021EA4",
+      "choices": "00030672"
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 5,
+      "rom_address": "021EB6",
+      "choices": "fe3eff0072"
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 6,
+      "rom_address": "021ECC",
+      "choices": "2a40fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 7,
+      "rom_address": "021EDA",
+      "choices": "1c1d"
+    },
+    {
+      "base": "0219B4",
+      "character": 2,
+      "lane": 8,
+      "rom_address": "021EE4",
+      "choices": "2a40"
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 0,
+      "rom_address": "021FA8",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 1,
+      "rom_address": "021FB2",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 2,
+      "rom_address": "022040",
+      "choices": "3d0a48082210"
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 3,
+      "rom_address": "02205A",
+      "choices": "3d0a0e48"
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 4,
+      "rom_address": "02206C",
+      "choices": "00063172"
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 5,
+      "rom_address": "02207E",
+      "choices": "fe3e0072ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 6,
+      "rom_address": "022094",
+      "choices": "20fd41"
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 7,
+      "rom_address": "0220A2",
+      "choices": "1c1d"
+    },
+    {
+      "base": "0219B4",
+      "character": 3,
+      "lane": 8,
+      "rom_address": "0220AC",
+      "choices": "2041"
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 0,
+      "rom_address": "022170",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 1,
+      "rom_address": "02217A",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 2,
+      "rom_address": "022230",
+      "choices": "3d0a48082246"
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 3,
+      "rom_address": "02224A",
+      "choices": "3d0a4814"
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 4,
+      "rom_address": "02225C",
+      "choices": "00010672"
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 5,
+      "rom_address": "02226E",
+      "choices": "fe3eff0072"
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 6,
+      "rom_address": "022284",
+      "choices": "054504fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 7,
+      "rom_address": "022296",
+      "choices": "1c1d2b"
+    },
+    {
+      "base": "0219B4",
+      "character": 4,
+      "lane": 8,
+      "rom_address": "0222A4",
+      "choices": "450504"
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 0,
+      "rom_address": "022380",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 1,
+      "rom_address": "02238A",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 2,
+      "rom_address": "022440",
+      "choices": "3d0a48082247"
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 3,
+      "rom_address": "02245A",
+      "choices": "3d0a4846"
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 4,
+      "rom_address": "02246C",
+      "choices": "00062e72"
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 5,
+      "rom_address": "02247E",
+      "choices": "fe3e0072ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 6,
+      "rom_address": "022494",
+      "choices": "2d05fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 7,
+      "rom_address": "0224A2",
+      "choices": "1c301d"
+    },
+    {
+      "base": "0219B4",
+      "character": 5,
+      "lane": 8,
+      "rom_address": "0224B0",
+      "choices": "2d05"
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 0,
+      "rom_address": "022588",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 1,
+      "rom_address": "022592",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 2,
+      "rom_address": "022620",
+      "choices": "3d0a4808220b"
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 3,
+      "rom_address": "02263A",
+      "choices": "3d0a4810"
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 4,
+      "rom_address": "02264C",
+      "choices": "00270672"
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 5,
+      "rom_address": "02265E",
+      "choices": "fe3e0072ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 6,
+      "rom_address": "022674",
+      "choices": "2d05fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 7,
+      "rom_address": "022682",
+      "choices": "1c1d"
+    },
+    {
+      "base": "0219B4",
+      "character": 6,
+      "lane": 8,
+      "rom_address": "02268C",
+      "choices": "2d05"
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 0,
+      "rom_address": "022750",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 1,
+      "rom_address": "02275A",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 2,
+      "rom_address": "0227FC",
+      "choices": "3d0a48080946"
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 3,
+      "rom_address": "022816",
+      "choices": "3d0a4748"
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 4,
+      "rom_address": "022828",
+      "choices": "00060772"
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 5,
+      "rom_address": "02283A",
+      "choices": "fe3e0072ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 6,
+      "rom_address": "022850",
+      "choices": "4505fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 7,
+      "rom_address": "02285E",
+      "choices": "1c1d2b"
+    },
+    {
+      "base": "0219B4",
+      "character": 7,
+      "lane": 8,
+      "rom_address": "02286C",
+      "choices": "4505"
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 0,
+      "rom_address": "022930",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 1,
+      "rom_address": "02293A",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 2,
+      "rom_address": "0229DC",
+      "choices": "3d0a48082210"
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 3,
+      "rom_address": "0229F6",
+      "choices": "3d0a4823"
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 4,
+      "rom_address": "022A08",
+      "choices": "00210672"
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 5,
+      "rom_address": "022A1A",
+      "choices": "fe3e0072ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 6,
+      "rom_address": "022A30",
+      "choices": "2005fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 7,
+      "rom_address": "022A3E",
+      "choices": "1c1d"
+    },
+    {
+      "base": "0219B4",
+      "character": 8,
+      "lane": 8,
+      "rom_address": "022A48",
+      "choices": "2005"
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 0,
+      "rom_address": "022B0C",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 1,
+      "rom_address": "022B16",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 2,
+      "rom_address": "022BB8",
+      "choices": "3d0a08094846"
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 3,
+      "rom_address": "022BD2",
+      "choices": "3d0a1348"
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 4,
+      "rom_address": "022BE4",
+      "choices": "00032e72"
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 5,
+      "rom_address": "022BF6",
+      "choices": "fe3eff0072"
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 6,
+      "rom_address": "022C0C",
+      "choices": "2a41fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 7,
+      "rom_address": "022C1A",
+      "choices": "1c1d36"
+    },
+    {
+      "base": "0219B4",
+      "character": 9,
+      "lane": 8,
+      "rom_address": "022C28",
+      "choices": "2a41"
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 0,
+      "rom_address": "022CEC",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 1,
+      "rom_address": "022CF6",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 2,
+      "rom_address": "022D98",
+      "choices": "3d0a48082210"
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 3,
+      "rom_address": "022DB2",
+      "choices": "3d0a4748"
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 4,
+      "rom_address": "022DC4",
+      "choices": "00062772"
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 5,
+      "rom_address": "022DD6",
+      "choices": "fe3eff0072"
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 6,
+      "rom_address": "022DEC",
+      "choices": "2d05fd"
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 7,
+      "rom_address": "022DFA",
+      "choices": "1c1d"
+    },
+    {
+      "base": "0219B4",
+      "character": 10,
+      "lane": 8,
+      "rom_address": "022E04",
+      "choices": "2d05"
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 0,
+      "rom_address": "022EC8",
+      "choices": "00ff"
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 1,
+      "rom_address": "022ED2",
+      "choices": ""
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 2,
+      "rom_address": "022F74",
+      "choices": "3d0a48082247"
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 3,
+      "rom_address": "022F8E",
+      "choices": "3d0a4810"
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 4,
+      "rom_address": "022FA0",
+      "choices": "00030672"
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 5,
+      "rom_address": "022FB2",
+      "choices": "fe3eff0072"
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 6,
+      "rom_address": "022FC8",
+      "choices": "452dfd"
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 7,
+      "rom_address": "022FD6",
+      "choices": "1c1d30"
+    },
+    {
+      "base": "0219B4",
+      "character": 11,
+      "lane": 8,
+      "rom_address": "022FE4",
+      "choices": "452d"
+    },
+    {
+      "base": "02307C",
+      "character": 0,
+      "lane": 0,
+      "rom_address": "0230B8",
+      "choices": "000672"
+    },
+    {
+      "base": "02307C",
+      "character": 0,
+      "lane": 1,
+      "rom_address": "0230C6",
+      "choices": "00067221"
+    },
+    {
+      "base": "02307C",
+      "character": 0,
+      "lane": 2,
+      "rom_address": "0230D8",
+      "choices": "05062d21"
+    },
+    {
+      "base": "02307C",
+      "character": 1,
+      "lane": 0,
+      "rom_address": "0230F6",
+      "choices": "00062e72"
+    },
+    {
+      "base": "02307C",
+      "character": 1,
+      "lane": 1,
+      "rom_address": "023108",
+      "choices": "062e"
+    },
+    {
+      "base": "02307C",
+      "character": 1,
+      "lane": 2,
+      "rom_address": "023112",
+      "choices": "050604"
+    },
+    {
+      "base": "02307C",
+      "character": 2,
+      "lane": 0,
+      "rom_address": "02312C",
+      "choices": "0672"
+    },
+    {
+      "base": "02307C",
+      "character": 2,
+      "lane": 1,
+      "rom_address": "023136",
+      "choices": "0603"
+    },
+    {
+      "base": "02307C",
+      "character": 2,
+      "lane": 2,
+      "rom_address": "023140",
+      "choices": "2a064003"
+    },
+    {
+      "base": "02307C",
+      "character": 3,
+      "lane": 0,
+      "rom_address": "02315E",
+      "choices": "0631"
+    },
+    {
+      "base": "02307C",
+      "character": 3,
+      "lane": 1,
+      "rom_address": "023168",
+      "choices": "0631"
+    },
+    {
+      "base": "02307C",
+      "character": 3,
+      "lane": 2,
+      "rom_address": "023172",
+      "choices": "20064131"
+    },
+    {
+      "base": "02307C",
+      "character": 4,
+      "lane": 0,
+      "rom_address": "023190",
+      "choices": "0006"
+    },
+    {
+      "base": "02307C",
+      "character": 4,
+      "lane": 1,
+      "rom_address": "02319A",
+      "choices": "00067201"
+    },
+    {
+      "base": "02307C",
+      "character": 4,
+      "lane": 2,
+      "rom_address": "0231AC",
+      "choices": "05060445"
+    },
+    {
+      "base": "02307C",
+      "character": 5,
+      "lane": 0,
+      "rom_address": "0231CA",
+      "choices": "0006722e"
+    },
+    {
+      "base": "02307C",
+      "character": 5,
+      "lane": 1,
+      "rom_address": "0231DC",
+      "choices": "0006722e"
+    },
+    {
+      "base": "02307C",
+      "character": 5,
+      "lane": 2,
+      "rom_address": "0231EE",
+      "choices": "05062d2e"
+    },
+    {
+      "base": "02307C",
+      "character": 6,
+      "lane": 0,
+      "rom_address": "02320C",
+      "choices": "2706"
+    },
+    {
+      "base": "02307C",
+      "character": 6,
+      "lane": 1,
+      "rom_address": "023216",
+      "choices": "00270672"
+    },
+    {
+      "base": "02307C",
+      "character": 6,
+      "lane": 2,
+      "rom_address": "023228",
+      "choices": "052706"
+    },
+    {
+      "base": "02307C",
+      "character": 7,
+      "lane": 0,
+      "rom_address": "023242",
+      "choices": "00060772"
+    },
+    {
+      "base": "02307C",
+      "character": 7,
+      "lane": 1,
+      "rom_address": "023254",
+      "choices": "00060772"
+    },
+    {
+      "base": "02307C",
+      "character": 7,
+      "lane": 2,
+      "rom_address": "023266",
+      "choices": "05060701"
+    },
+    {
+      "base": "02307C",
+      "character": 8,
+      "lane": 0,
+      "rom_address": "023284",
+      "choices": "007206"
+    },
+    {
+      "base": "02307C",
+      "character": 8,
+      "lane": 1,
+      "rom_address": "023292",
+      "choices": "00720721"
+    },
+    {
+      "base": "02307C",
+      "character": 8,
+      "lane": 2,
+      "rom_address": "0232A4",
+      "choices": "20050721"
+    },
+    {
+      "base": "02307C",
+      "character": 9,
+      "lane": 0,
+      "rom_address": "0232C2",
+      "choices": "002e0372"
+    },
+    {
+      "base": "02307C",
+      "character": 9,
+      "lane": 1,
+      "rom_address": "0232D4",
+      "choices": "002e0372"
+    },
+    {
+      "base": "02307C",
+      "character": 9,
+      "lane": 2,
+      "rom_address": "0232E6",
+      "choices": "2a2e0341"
+    },
+    {
+      "base": "02307C",
+      "character": 10,
+      "lane": 0,
+      "rom_address": "023304",
+      "choices": "00062772"
+    },
+    {
+      "base": "02307C",
+      "character": 10,
+      "lane": 1,
+      "rom_address": "023316",
+      "choices": "00062772"
+    },
+    {
+      "base": "02307C",
+      "character": 10,
+      "lane": 2,
+      "rom_address": "023328",
+      "choices": "0605272d"
+    },
+    {
+      "base": "02307C",
+      "character": 11,
+      "lane": 0,
+      "rom_address": "023346",
+      "choices": "0006"
+    },
+    {
+      "base": "02307C",
+      "character": 11,
+      "lane": 1,
+      "rom_address": "023350",
+      "choices": "0006720301"
+    },
+    {
+      "base": "02307C",
+      "character": 11,
+      "lane": 2,
+      "rom_address": "023366",
+      "choices": "062d0345"
+    }
+  ],
+  "limits": [
+    "This checks the normal human action matrix and two ROM CPU choice-table families used by $1DEA6.",
+    "Indirect selector assignments outside these tables, scripts, and corrupted states are not excluded.",
+    "Non-matrix wrestler substitutions in the action continuation are controlled tests, not natural captures."
+  ]
+}

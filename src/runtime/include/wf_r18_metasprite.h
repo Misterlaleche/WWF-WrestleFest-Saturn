@@ -5,15 +5,33 @@ typedef wf_status_t (*wf_r18_read_rom_fn)(void *,uint32_t,void *,size_t);
 typedef struct wf_r18_sprite_record { uint8_t bytes[16]; } wf_r18_sprite_record_t;
 #define WF_R18_METASPRITE_CACHE_ENTRIES 32u
 #define WF_R18_METASPRITE_CACHE_ROWS 32u
+#define WF_R18_METASPRITE_CACHE_BUCKETS 64u
+#define WF_R18_METASPRITE_POSE_CACHE_ENTRIES 32u
+#define WF_R18_METASPRITE_WORD_CACHE_ENTRIES 64u
 typedef struct wf_r18_metasprite_cache_entry {
  uint32_t address,end;
  uint16_t header;
  uint8_t skip_prefix,valid;
  uint8_t rows[WF_R18_METASPRITE_CACHE_ROWS][6];
 } wf_r18_metasprite_cache_entry_t;
+typedef struct wf_r18_metasprite_set_cache_entry {
+ uint32_t base;
+ uint16_t rel;
+ uint8_t valid,reserved;
+} wf_r18_metasprite_set_cache_entry_t;
+typedef struct wf_r18_metasprite_pose_cache_entry {
+ uint16_t pose,offset;
+ uint8_t set,valid;
+} wf_r18_metasprite_pose_cache_entry_t;
 typedef struct wf_r18_metasprite_cache {
  wf_r18_metasprite_cache_entry_t entries[WF_R18_METASPRITE_CACHE_ENTRIES];
+ uint8_t buckets[WF_R18_METASPRITE_CACHE_BUCKETS]; /* One-based entry indices. */
+ uint8_t links[WF_R18_METASPRITE_CACHE_ENTRIES];
  uint8_t next;
+ wf_r18_metasprite_set_cache_entry_t wrestler_sets[12];
+ wf_r18_metasprite_pose_cache_entry_t pose_offsets[WF_R18_METASPRITE_POSE_CACHE_ENTRIES];
+ uint32_t word_tag[WF_R18_METASPRITE_WORD_CACHE_ENTRIES];
+ uint16_t word_data[WF_R18_METASPRITE_WORD_CACHE_ENTRIES];
 } wf_r18_metasprite_cache_t;
 /* Caller-owned, allocation-free decoded-body cache. The ROM source must
  * remain immutable until reset; reset before changing reader/user/source.

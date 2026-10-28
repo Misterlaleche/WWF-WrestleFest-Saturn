@@ -1,0 +1,140 @@
+{
+  "status": "CONFIRMED",
+  "fatal_frame": 1840,
+  "blocked_slot": 6,
+  "blocked_raw": 4,
+  "trace": [
+    {
+      "slot": 0,
+      "callback": 91522,
+      "descriptor": 91498,
+      "tick_descriptor": 91498,
+      "dependency": 0,
+      "selector": 41
+    },
+    {
+      "slot": 1,
+      "callback": 0,
+      "descriptor": 0,
+      "tick_descriptor": 0,
+      "dependency": 0,
+      "selector": 0
+    },
+    {
+      "slot": 2,
+      "callback": 0,
+      "descriptor": 0,
+      "tick_descriptor": 0,
+      "dependency": 0,
+      "selector": 0
+    },
+    {
+      "slot": 3,
+      "callback": 0,
+      "descriptor": 0,
+      "tick_descriptor": 0,
+      "dependency": 0,
+      "selector": 0
+    },
+    {
+      "slot": 4,
+      "callback": 77632,
+      "descriptor": 77576,
+      "tick_descriptor": 77576,
+      "dependency": 0,
+      "selector": 5
+    },
+    {
+      "slot": 5,
+      "callback": 70834,
+      "descriptor": 70828,
+      "tick_descriptor": 70828,
+      "dependency": 0,
+      "selector": 61
+    },
+    {
+      "slot": 6,
+      "callback": 0,
+      "descriptor": 0,
+      "tick_descriptor": 0,
+      "dependency": 75284,
+      "selector": 4
+    },
+    {
+      "slot": 7,
+      "callback": 107364,
+      "descriptor": 107336,
+      "tick_descriptor": 71154,
+      "dependency": 0,
+      "selector": 122
+    },
+    {
+      "slot": 8,
+      "callback": 85568,
+      "descriptor": 85548,
+      "tick_descriptor": 85548,
+      "dependency": 0,
+      "selector": 23
+    }
+  ],
+  "sh2_layout": [
+    4600,
+    1144,
+    4116,
+    20,
+    12,
+    16,
+    384,
+    352,
+    24,
+    7340,
+    7648
+  ],
+  "gameplay_elf_symbol": [
+    101607508,
+    4600
+  ],
+  "runtime_elf_symbol": [
+    101612112,
+    7648
+  ],
+  "gameplay_wram_offset": 1992788,
+  "runtime_wram_offset": 1997392,
+  "report_sha256": "8c9ef0bbde863daff4bceebe5c08e4e0392e0e02aef67acecda105ca5066db8b",
+  "workram_sha256": "8e2a2686315645eee14e8948af29847f2ca7d3e3de91f88170391bc1ac4612b0",
+  "program_sha256": "11a7ee4288e2eba051e1973d2c08b9bb3b49bd3788d272979a7dcf485c5ad579",
+  "elf_sha256": "f248a6685acca34afe658c192589c9dd54fa239013f58d6204c49cbfdf1e3321",
+  "layout_source_sha256": "a70b5efa671e00a691566f0aaf3436b266cb77fe3a9606c04870d3b1b77bbe5b",
+  "layout_assembly_sha256": "eb5201999f1e3ed33539675dfcf8c3cc81876517f97494bff7a354009f3f193a",
+  "layout_command": "sh2eb-elf-gcc -m2 -mb -ffreestanding -I/home/builder/asan-stage4/src/runtime/include -S /tmp/wf-action04-layout-20261024.c -o -",
+  "limits": [
+    "Beetle emulation capture, not physical Saturn",
+    "No state writes or ROM mutation",
+    "Stage4 SH2 symbols and ABI are pinned; not inferred from HOST pointer widths"
+  ],
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "0401f8df8e356c92b8ded001b32ae8e0f26f4657f60049806e3c52cefcd8f5b3",
+  "snapshot_bytes": 16440,
+  "header": [
+    1840,
+    6,
+    1,
+    114750,
+    0,
+    1
+  ],
+  "global_layout_offsets": [
+    31,
+    12,
+    132,
+    124,
+    174,
+    176,
+    178,
+    180
+  ],
+  "projection_limits": [
+    "Typed native model projected to supported arcade globals and all9actors; unrepresented original RAM zero",
+    "No state/seed/pick forcing or timing-equivalence claim"
+  ]
+}

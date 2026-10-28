@@ -1,0 +1,53 @@
+{
+  "observer": "read-only /proc memory, 4096 instruction bytes matched",
+  "binary_sha256": "099ac1d180b96b68910632c88326bae83e963198abfff22e82e17cb091340b39",
+  "video_clock": 42963,
+  "fatal_owner": 2942,
+  "fatal_dependency": 33936,
+  "fatal_frame": 929,
+  "finished_frame": 0,
+  "finished_result": 0,
+  "finished_count": 0,
+  "finished_timer": 0,
+  "finished_presentation": 0,
+  "finished_vblanks": 0,
+  "finished_presentation_vblanks": 0,
+  "legal_first_visible": 400,
+  "frontend_scene_gate": 0,
+  "frontend_serviced_clock": 38533,
+  "frontend_observed": [
+    6,
+    8692,
+    38533,
+    0,
+    2147483651,
+    0,
+    0,
+    3
+  ],
+  "boot_timing": [
+    15,
+    433,
+    765,
+    0,
+    109,
+    112,
+    113,
+    1030
+  ],
+  "scsp_timing": [
+    433,
+    446,
+    446,
+    665,
+    665,
+    731,
+    741,
+    765
+  ],
+  "scsp_io": [
+    179,
+    16
+  ],
+  "frame": 929
+}

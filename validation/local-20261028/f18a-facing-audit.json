@@ -1,0 +1,396 @@
+{
+  "results": [
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-royal-pressure-1000\\pre-f4c2-snapshot.bin",
+      "sha256": "544dbc55e536e930f1e0ca6f0a15b2df8b6342497f094ef31c30ab861cdd869c",
+      "frame": 1000,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 251,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        2,
+        262168,
+        651,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "d_rom": [
+        9,
+        2,
+        262168,
+        651,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "entered_facing_10be8": true,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-royal-pressure-2000\\pre-f4c2-snapshot.bin",
+      "sha256": "012e5632a2e96e484c9c65dfbf0c71ec50fb44547b82982d29b7c6f0712692fe",
+      "frame": 2000,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 182,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        16,
+        24,
+        638,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "d_rom": [
+        9,
+        16,
+        24,
+        638,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-royal-pressure-2200-after-kind2\\pre-f4c2-snapshot.bin",
+      "sha256": "b87847821cfddffe351832f621581d55a15910b09bffde93a26ee122f1b3d06a",
+      "frame": 2200,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 208,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        3,
+        4294836248,
+        634,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "d_rom": [
+        9,
+        3,
+        4294836248,
+        634,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-royal-pressure-500\\pre-f4c2-snapshot.bin",
+      "sha256": "71c50d537357ce217ae9dbbc49dda0b66ed91395d80c0293a9203d14fdc62d51",
+      "frame": 500,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 214,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        20,
+        4,
+        678,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "d_rom": [
+        9,
+        20,
+        4,
+        678,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-tag-pressure-1000\\pre-f4c2-snapshot.bin",
+      "sha256": "62f6f7d6c2dab6b65ec8788ef16aaa2918b478a16cd84a8079aa67e134ffbe18",
+      "frame": 1000,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 178,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        16,
+        341,
+        554,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "d_rom": [
+        9,
+        16,
+        341,
+        554,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-tag-pressure-1500\\pre-f4c2-snapshot.bin",
+      "sha256": "653a94ee87830ee099a488576ac83b8f4eee85cf16d51a7120d7619f9e053306",
+      "frame": 1500,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 245,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        12,
+        496,
+        496,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "d_rom": [
+        9,
+        12,
+        496,
+        496,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "entered_facing_10be8": true,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-tag-pressure-2000\\pre-f4c2-snapshot.bin",
+      "sha256": "aebf542570ea75dd252d70c344ffb68faf0b02c447061d7dbc59db7cdbad9772",
+      "frame": 2000,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 174,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        835,
+        779,
+        835,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "d_rom": [
+        9,
+        835,
+        779,
+        835,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-tag-pressure-2500\\pre-f4c2-snapshot.bin",
+      "sha256": "330423d9976abbc089af3802a5c5adba65c5d6ad6bc0da24fcfe904037d0de16",
+      "frame": 2500,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 174,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        854,
+        784,
+        854,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "d_rom": [
+        9,
+        854,
+        784,
+        854,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-tag-pressure-3000\\pre-f4c2-snapshot.bin",
+      "sha256": "8e1c25b66eb056fbcaf35d8e549b1bffc74b3324db1cab42bcd55d8c04af1ac2",
+      "frame": 3000,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 196,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        20,
+        784,
+        1053,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "d_rom": [
+        9,
+        20,
+        784,
+        1053,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261027\\pre-f4c2-tag-pressure-3100\\pre-f4c2-snapshot.bin",
+      "sha256": "89371dfdf2384c13a475132f2dcbdb5db6b30ec424c55b208ccdf830fcfcc7d7",
+      "frame": 3100,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 153,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        20,
+        784,
+        1053,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "d_rom": [
+        9,
+        20,
+        784,
+        1053,
+        65535,
+        1,
+        65535,
+        256
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261028\\action00-tag-natural-1261\\pre-f4c2-snapshot.bin",
+      "sha256": "d3cea4bc2fc8400362caac74ffbd52bd9456a82d7269af7e0851cc8a8d240378",
+      "frame": 1261,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 151,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        20,
+        339,
+        0,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "d_rom": [
+        9,
+        20,
+        339,
+        0,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    },
+    {
+      "capture": "validation\\local-20261028\\action07-tag-natural-1200\\pre-f4c2-snapshot.bin",
+      "sha256": "6f67615f2a8ea23083c96506d3bbe1e7386030959f8013c7799d1c5feb172364",
+      "frame": 1200,
+      "status": 0,
+      "blocked": "0x0",
+      "rom_instructions": 170,
+      "ram_differences": [],
+      "ram_difference_count": 0,
+      "d_native": [
+        9,
+        8,
+        311,
+        659,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "d_rom": [
+        9,
+        8,
+        311,
+        659,
+        65535,
+        1,
+        65535,
+        0
+      ],
+      "entered_facing_10be8": false,
+      "sound_intercepts": 0
+    }
+  ],
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_sha256": "7c911b0fc5ab7f816dbf5452467ce9fb1079b40019be2c30abccd53311902812",
+  "verifier_sha256": "61b27f74de65ce286379aaaf0d9f0fb696861f166d160241421763e846ecd8fd",
+  "limits": [
+    "F4C2 snapshots reused as controlled F18A starting points; not captured before F18A.",
+    "No comparison of address registers or final video pixels.",
+    "The 2052 sound device is intercepted if reached; no audio verification."
+  ]
+}

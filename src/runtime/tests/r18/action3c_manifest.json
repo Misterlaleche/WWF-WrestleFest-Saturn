@@ -1,0 +1,33 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "e7228afb762ebb3ff70ef7e6322c3c48e182c3854c98f78b9473866a3304401c",
+  "header": [
+    915,
+    5,
+    1,
+    114750,
+    303,
+    1
+  ],
+  "source": "validation\\local-20261024\\full-flow-combat-native-f8c-tag-basic\\snapshot-00303.bin",
+  "source_report_sha256": "ba1257e01ea927863eabd800c2c82d18515e9b39e078f4cb615bf3b53e022f85",
+  "captured_native_handoff": {
+    "valid": true,
+    "ram_sha256": "021427ca5c071a5222af2e5346e11530952b0865701d8b167cee6f29c970d64f",
+    "dregs_sha256": "28ee05ee5669d95406fd7e41c2daaec348657f2fa3c73da50a736ddc5db813d2",
+    "rng": 2598034456,
+    "compared": [
+      "frame0",
+      "RNG",
+      "all9actors"
+    ],
+    "stage": 4,
+    "method": "Read-only borrowed LWRAM after F8C; raw bytes retained, no state forcing"
+  },
+  "provenance": "Exact Beetle stage3 nativeF8C RAM/Dregs imported into HOST without reseeding, then HOSTbasic reaches915 slot5 raw3C. All9 actors from natural HOST pre-dispatch projection; no claim that HOST/SH2 later trajectories or input latency match. Unrepresented arcadeRAMzero.",
+  "green_cases": 4255,
+  "guard_controls": 2,
+  "verified_actions_sha256": "38afb7ae37ef47a23af7f5e934a0965ced1f220ad74f4afbfb8b2a21d2b76114",
+  "green_report": "validation/local-20261024/action3c-green.json",
+  "rom_intercepts": []
+}

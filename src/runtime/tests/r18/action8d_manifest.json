@@ -1,0 +1,34 @@
+{
+  "frame": 7856,
+  "slot": 0,
+  "action": "8d",
+  "header": [
+    7856,
+    0,
+    1,
+    114750,
+    0,
+    1
+  ],
+  "snapshot_sha256": "ccc95b00b2082fbd4b5a6b5326e8ce22ecf952da3e691b80fd1aba8fd59bccb1",
+  "layout_HOST": [
+    7664,
+    384,
+    7340
+  ],
+  "origin": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261024\\human-tag-input-correct-sweep\\policy-002",
+  "report_sha256": "8f8664023b964a6a6dac3ce15487b2c6295c17163a624c53cd5a39c27a17b9e4",
+  "source_manifest_sha256": "b8b49f546a852cff6a125d9eaf0b3325ef5b838af0d273109440413ad745bd2d",
+  "archive_sha256": "6ad93baa6fdb3271892583473e624430a29e818dc36fe8b554d24ccdbac7779a",
+  "dumps_sha256": {
+    "blocked-actors.bin": "30c5c5a49997004cf69d6d0763fb3419a35035cba794b34b45e6382866cd1572",
+    "blocked-dregs.bin": "e721646420270b33d00464229195dd0584d11064544daf1ccf29bce829ca85d9",
+    "blocked-fg.bin": "1e3a9da39c9b2f073cc705efa05709d71354eba279bdcc45a11dcffbe53f3dff",
+    "blocked-globals.bin": "dd1ecb57fe78f27df71e0ab5102d07b9e8ba324ff186cce68869067f301d0713",
+    "blocked-runtime.bin": "7aa8d1632a737c5898959df34b40c719513b5ba7b45f842fe6cd6c37786113d6",
+    "frontend-f8c-ram.bin": "7278f71e2bf145e71e062a229b0099ac5344f214dd96c5fc6ad5ada52ba4d2c8",
+    "handoff-fa4-runtime.bin": "bce948a6a4faaf64c41377bc1eac39790355dabb198a77be02ec83a7ea0a4cf7"
+  },
+  "projection": "All9actors and D0-D7 byte equal. Typed represented globals/records exported over zero raw; no Aregs capture, no native trajectory claim. No combat execution.",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2"
+}

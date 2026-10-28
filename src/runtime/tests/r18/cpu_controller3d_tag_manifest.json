@@ -1,0 +1,16 @@
+{
+  "sha256": "35730d19f08357cd7890c4474e8e07dc44b922601b281767f06efabe80eedc8f",
+  "header": [
+    1928,
+    4,
+    0,
+    122850,
+    649,
+    1
+  ],
+  "source": "validation\\local-20261024\\A600-after-raw40\\snapshot-00649.bin",
+  "emulated_bin_sha256": "aca11de2fe496e9810fc186b32135de744d3b12b2cd4668f14bc180de8e08ca3",
+  "actor_blocks_matching": 9,
+  "post_D_matching": true,
+  "note": "NaturalHOST preCPU snapshot matches9 emulated actors; postCPU D matches emulated guard. Not physicalSaturnRAM."
+}

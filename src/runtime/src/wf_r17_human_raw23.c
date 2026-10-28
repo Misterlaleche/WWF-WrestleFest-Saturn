@@ -118,7 +118,7 @@ static wf_status_t dd02(wf_runtime_t *rt,wf_actor_raw_t *a,const wf_r17_human_ra
 
 /* $EBC4 mash-completion/special pre-action owner. Carry-set in ROM means the
  * fresh-button route was consumed; carry-clear means DE86 continues. */
-static wf_status_t ebc4(wf_runtime_t *rt,wf_actor_raw_t *a,
+static wf_status_t ebc4(wf_runtime_t *rt,wf_actor_raw_t *a,const wf_r17_human_raw23_ctx_t *ctx,
                         wf_r17_human_raw23_trace_t *tr,int *consumed){
     wf_actor_raw_t *t,*link;uint8_t st,sel,lst,lsel;
     *consumed=0;
@@ -140,12 +140,27 @@ static wf_status_t ebc4(wf_runtime_t *rt,wf_actor_raw_t *a,
             return WF_OK;
         }
         if(st==4u&&wf_u8(a,O_STATE4_LO)==9u){
-            link=actor_from_ptr(rt,wf_be32(a,O_LINK),0);
-            if(!link)return block(tr,0x0000EC34u);
-            lst=state_lo(link);lsel=wf_u8(link,O_SELECTOR+1u);
-            if(lst==5u&&(lsel==0x35u||lsel==0x0Eu||lsel==0x0Fu||lsel==0x23u)&&
-               !bit(link,O_SELECTOR,4)){
-                return WF_OK; /* exact $EC60->$EDB0 carry-clear guard */
+            uint32_t physical=wf_be32(a,O_LINK)&0x00FFFFFFu;
+            link=actor_from_ptr(rt,physical,0);
+            if(!link&&physical!=0u){
+                /* DE86 has saved the caller D3, then CLR.L D3 at DEB2.
+                 * Preserve that live prefix when this dependency blocks. */
+                if(ctx->m68k_live&&ctx->m68k_live->valid)ctx->m68k_live->d[3]=0u;
+                return block(tr,0x0000EC34u);
+            }
+            /* EC38 reads BYTE $21(A2), even when A2 is physical zero.
+             * Intact canonical ROM[$21]=$FF, so that case branches EC6A.
+             * This is a ROM-byte specialization, not a default actor. Other
+             * nonactor addresses remain guarded; no generic bus ABI added. */
+            if(link){
+                lst=state_lo(link);
+                if(lst==5u){
+                    lsel=wf_u8(link,O_SELECTOR+1u);
+                    if((lsel==0x35u||lsel==0x0Eu||lsel==0x0Fu||lsel==0x23u)&&
+                       !bit(link,O_SELECTOR,4)){
+                        return WF_OK; /* exact $EC60->$EDB0 carry-clear guard */
+                    }
+                }
             }
             wf_set_be16(a,O_STATE,5u);wf_set_be16(a,O_SELECTOR,0x0078u);
             wf_set_be16(a,O_MASH,0u);*consumed=1;
@@ -571,7 +586,7 @@ wf_status_t wf_r17_human_dcde_raw23(wf_runtime_t *rt,unsigned slot,const wf_r17_
     if((ctx->mode_0161&2u)!=0u&&!bit(a,O_FLAGS32,1)&&!bit(a,O_FLAGS33,2))goto direction_block;
     fresh=(uint8_t)(wf_u8(a,O_INPUT_FRESH_LO)&3u);if(tr)tr->fresh_mask=fresh;
     if(fresh==0u)goto direction_block;
-    s=ebc4(rt,a,tr,&consumed);if(s!=WF_OK||consumed)return s;
+    s=ebc4(rt,a,ctx,tr,&consumed);if(s!=WF_OK||consumed)return s;
     s=pickup_f0ba(a,slot,ctx,tr,&consumed);if(s!=WF_OK||consumed)return s;
     st=state_lo(a);if(st==4u)goto direction_block;
     alt=bit(a,O_FLAGS32,0);

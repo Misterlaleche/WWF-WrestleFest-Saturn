@@ -1,0 +1,15 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_directory": "validation/local-20261023/noinput-three",
+  "source_trace_sha256": "b95811e13b64215be10f39cff0ba4eaaad7ec3c700461e7fe6d0e4b71e78d200",
+  "captures": [
+    {"frame": 1343, "slot": 1, "source_snapshot": "snapshot-00452.bin", "trace_line": 10652, "sha256": "8884a847444391cfecaf5d4f5b8404d5fbe55d8153a3ecf9735912e173cd1d85"},
+    {"frame": 1343, "slot": 4, "source_snapshot": "snapshot-00453.bin", "trace_line": 10653, "sha256": "f266a04e0d4d83568e8ad6634d541a2754e4b6d54b109d00b0c5bb25acf3501c"},
+    {"frame": 1344, "slot": 4, "source_snapshot": "snapshot-00459.bin", "trace_line": 10661, "sha256": "fa331c7ff06a3d92c0db77b5c80884bcedf275d46edc8745bb5baa29b13a599f"},
+    {"frame": 1354, "slot": 1, "source_snapshot": "snapshot-00465.bin", "trace_line": 10740, "sha256": "c767d4fc457db9e4bd0308a2fb311be772cbd0e8e6c6cee3b1fd23618b254d61"},
+    {"frame": 1436, "slot": 0, "source_snapshot": "snapshot-00482.bin", "trace_line": 11395, "sha256": "cec915b5ccf0fd9b6ef7e0688bd74627c38ba00b17f14437553eb09ce3fb6a16"},
+    {"frame": 1440, "slot": 0, "source_snapshot": "snapshot-00487.bin", "trace_line": 11427, "sha256": "ce76dee2e9cc7115c2d6c5f6c7f8cdb2b5ccb325e3feb4dc79b8e04f29b72d44"}
+  ],
+  "provenance": "Unmodified no-input HOST demo snapshots before $1C03E calls for original selector $6B, actor slots 0, 1 and 4.",
+  "limits": ["Snapshots are separated in time and do not constitute a continuous physics trajectory.", "Only the first 8 KiB of arcade work RAM and D0-D7 are projected into the native comparison."]
+}

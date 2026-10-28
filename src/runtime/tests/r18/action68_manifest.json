@@ -1,0 +1,20 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "3f08374ca8385c22bd76850811e989c66ec3eab3ce05bc273c113c908b370a5c",
+  "snapshot_bytes": 16472,
+  "header": [803, 4, 1, 114750, 302, 0],
+  "source": "validation/local-20261023/noinput-three/snapshot-00302.bin",
+  "source_trace_sha256": "b95811e13b64215be10f39cff0ba4eaaad7ec3c700461e7fe6d0e4b71e78d200",
+  "source_trace_line": 6332,
+  "captures": [
+    {"frame": 803, "phase": 0, "source_snapshot": "snapshot-00302.bin", "trace_line": 6332, "sha256": "3f08374ca8385c22bd76850811e989c66ec3eab3ce05bc273c113c908b370a5c"},
+    {"frame": 840, "phase": 0, "source_snapshot": "snapshot-00322.bin", "trace_line": 6628, "sha256": "33727b7c3cd0df2dd745aef6d47e784dd68da52dfdd602ce3f42b5971722d603"},
+    {"frame": 900, "phase": 0, "source_snapshot": "snapshot-00345.bin", "trace_line": 7108, "sha256": "e59cacf29b2c5d689aa168fd4bf20513d4bbcd981aa77f8e47b29f4e8603e562"},
+    {"frame": 960, "phase": 1, "source_snapshot": "snapshot-00360.bin", "trace_line": 7588, "sha256": "69a3bba9de943e5354375ec83708c0f0493ab7a585ca83b04ef7b41378b8cf74"},
+    {"frame": 1020, "phase": 2, "source_snapshot": "snapshot-00371.bin", "trace_line": 8068, "sha256": "015f89156cf90f04e201ff04e811f9ca29d70f3d755078b120dd5136b26992c6"},
+    {"frame": 1080, "phase": 2, "source_snapshot": "snapshot-00385.bin", "trace_line": 8548, "sha256": "89c3ea8a655262f8030ce8a5eb3a72d6def789973950eba878fc4e4d32e982b2"},
+    {"frame": 1140, "phase": 3, "source_snapshot": "snapshot-00395.bin", "trace_line": 9028, "sha256": "a372bc67315dfeb16af481ddca36447540dd07bae3579a88459bdbeba42456b4"}
+  ],
+  "provenance": "No-input HOST demo, frame 803, actor slot 4, original $1C03E dispatcher and raw selector $68 before the owner call. The snapshot was copied without modification.",
+  "limits": ["The HOST capture projects 8 KiB of arcade work RAM and D0-D7; unrepresented work RAM is zero.", "This is neither a physical Saturn capture nor a full ring-exit sequence."]
+}

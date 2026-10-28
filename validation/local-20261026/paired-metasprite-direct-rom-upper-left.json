@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "mode": "paired-all",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "direct_rom_cases": 21696,
+  "metasprite_source_sha256": "55e005b3924b7453f68b97b930c6b28704c70bd3cb67fbb2f7f354daefd8a2ae",
+  "pose_link_audit_sha256": null,
+  "sprite_classes": {
+    "2:512": 6048,
+    "2:768": 9120,
+    "2:0": 4608,
+    "2:256": 1920
+  },
+  "blocked_cases": [],
+  "cache_bytes": 6916,
+  "cold_rom_reads": 983036,
+  "warm_rom_reads": 267306,
+  "warm_rom_read_top": [
+    {
+      "address": "04184E",
+      "bytes": 2,
+      "calls": 378
+    },
+    {
+      "address": "038F1C",
+      "bytes": 2,
+      "calls": 324
+    },
+    {
+      "address": "038F16",
+      "bytes": 2,
+      "calls": 318
+    },
+    {
+      "address": "038F2A",
+      "bytes": 2,
+      "calls": 318
+    },
+    {
+      "address": "038F18",
+      "bytes": 2,
+      "calls": 296
+    },
+    {
+      "address": "03E838",
+      "bytes": 2,
+      "calls": 288
+    },
+    {
+      "address": "038F1E",
+      "bytes": 2,
+      "calls": 276
+    },
+    {
+      "address": "038F14",
+      "bytes": 2,
+      "calls": 274
+    },
+    {
+      "address": "041416",
+      "bytes": 2,
+      "calls": 262
+    },
+    {
+      "address": "038F22",
+      "bytes": 2,
+      "calls": 256
+    },
+    {
+      "address": "038F1A",
+      "bytes": 2,
+      "calls": 252
+    },
+    {
+      "address": "038F26",
+      "bytes": 2,
+      "calls": 234
+    },
+    {
+      "address": "038F24",
+      "bytes": 2,
+      "calls": 230
+    },
+    {
+      "address": "063394",
+      "bytes": 2,
+      "calls": 222
+    },
+    {
+      "address": "03EBCC",
+      "bytes": 2,
+      "calls": 216
+    },
+    {
+      "address": "038F20",
+      "bytes": 2,
+      "calls": 212
+    }
+  ],
+  "action_character_pose_pairs": null,
+  "paired_poses": 904,
+  "paired_position": "upper-left",
+  "ring_route_descriptors": null,
+  "ring_route_poses": null,
+  "limits": [
+    "Action mode covers generated matrix links, statically possible alternates, ROM-indexed $79 and both $1E/$1F object-release descriptors in both mirror directions.",
+    "Each paired mode run covers all 904 paired pose entries, twelve partner sets and both mirror directions at its reported screen position.",
+    "Ring-route mode covers the six ROM descriptors used by $68/$69/$6B on all twelve wrestler sets in both mirror directions; a seeded partner and screen position vary by case.",
+    "Action mode uses one seeded partner and one of several screen positions per case.",
+    "Callback-selected alternate poses, game scheduling, and Saturn VDP1 output require separate evidence."
+  ]
+}

@@ -1,0 +1,26 @@
+TRACE phase0->1 PC0006fc frame0 flags=00/00 credits0 mode0 io=1aa590dd
+TRACE phase1->2 PC0081ba frame539 flags=80/03 credits0 mode0 io=2c658f97
+TRACE phase2->3 PC0052be frame1173 flags=00/13 credits0 mode0 io=3c37abc9
+TRACE phase3->4 PC00533a frame1174 flags=80/03 credits0 mode0 io=05ba0a54
+TRACE phase4->5 PC0057e0 frame1175 flags=80/00 credits0 mode1 io=fcadc5c2
+TRACE phase5->6 PC000ac0 frame1305 flags=80/03 credits0 mode1 io=1bde1cf4
+PAID status=0 pc=000000 dependency=000000 flow=000f8c frames=1773 mode=1 picks=0,0,0,0 seed=ad7ec850
+HANDOFF FA4 mode=1 stage=3 rng=cadaade6 bindings=36 actors=0,0,5,2
+INPUT profile=grapple frames=14000 no post-selection seed reset
+RENDER frame=0 actors=12 commands=158 status=0 rng=bf9f337c
+RENDER frame=1000 actors=10 commands=168 status=0 rng=c3f79504
+RENDER frame=2000 actors=8 commands=163 status=0 rng=8f96e960
+RENDER frame=3000 actors=9 commands=128 status=0 rng=8eb58786
+BLOCK frame=3834 runtime_frame=3834 status=1 phase=024062 dependency=024408 trace=12 video=000000 transition=000000 stage=0
+COLLISION PROBE 00000004 00000006 00000007 0000000c 00000001 00000003 00000000 0000000c 001c0aec 00000001 00000000 00800041
+TRACE 00514e 008b3a 02088e 020958 026936 02983c 00f560 00f18a 01c150 01f914 00f4c2 024062
+GLOBALS rng=771c46a0 mode=01 credited=8000 pipeline=fa referee=0006/0229 count=0000 timer=0022
+actor0 state=8005 pose=ffff id=00 hp=4 target=001c09e0 team=00000000 link=001c0d04 pos=633,367 flags=0843 ae=0000 selector=005e cpu=000000/000000 action=019536/000000
+actor1 state=0000 pose=0000 id=00 hp=0 target=00000000 team=00000000 link=00000000 pos=0,0 flags=0000 ae=0000 selector=0000 cpu=000000/000000 action=000000/000000
+actor2 state=0000 pose=0000 id=00 hp=0 target=00000000 team=00000000 link=00000000 pos=0,0 flags=0000 ae=0000 selector=0000 cpu=000000/000000 action=000000/000000
+actor3 state=0000 pose=0000 id=00 hp=0 target=00000000 team=00000000 link=00000000 pos=0,0 flags=0000 ae=0000 selector=0000 cpu=000000/000000 action=000000/000000
+actor4 state=8005 pose=0094 id=05 hp=86 target=001c0bf8 team=00000000 link=00000000 pos=640,354 flags=0001 ae=0000 selector=0000 cpu=01dfe2/000000 action=012888/000000
+actor5 state=8005 pose=816d id=02 hp=92 target=001c0bf8 team=00000000 link=001c0bf8 pos=570,344 flags=0041 ae=000a selector=c01d cpu=01dfe2/000000 action=015870/000000
+actor6 state=8005 pose=8171 id=0a hp=29 target=001c0aec team=00000000 link=001c0aec pos=606,343 flags=0841 ae=0000 selector=c053 cpu=01dfe2/000000 action=018e64/000000
+actor7 state=8005 pose=0148 id=07 hp=8 target=001c05b0 team=00000000 link=001c05b0 pos=633,367 flags=0041 ae=000a selector=801a cpu=01dfe2/000000 action=015228/000000
+actor8 state=0008 pose=0000 id=0b hp=135 target=00000000 team=00000000 link=00000000 pos=0,0 flags=8005 ae=0000 selector=0000 cpu=01c8f4/000000 action=01a364/000000

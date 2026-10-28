@@ -1,0 +1,13 @@
+{
+  "sha256": "cdbe5d6fd80c0b976758feaea3f6b4c0d0a2ab791edc9829d68d347d1e642593",
+  "header": [
+    1,
+    4,
+    0,
+    115404,
+    12,
+    1
+  ],
+  "source": "runtime18/validation/local-20261024/full-flow-combat-royal-target/snapshot-00012.bin",
+  "note": "NaturalHOST manual Royal frontend/paid flow frame1 actor4, after root20958 target fix. Projected RAM8KiB, not physical Saturn RAM."
+}

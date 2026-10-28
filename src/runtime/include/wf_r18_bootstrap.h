@@ -21,6 +21,8 @@ typedef struct wf_r18_bootstrap_context {
 } wf_r18_bootstrap_context_t;
 wf_status_t wf_r18_tag_setup_1086c(wf_runtime_t *,wf_r18_bootstrap_context_t *);
 wf_status_t wf_r18_live_finalize_8ae6(wf_runtime_t *,wf_r18_bootstrap_context_t *);
+/* Original cached credit display owner, with the same text/video callbacks. */
+wf_status_t wf_r18_credit_1e92(wf_runtime_t *,wf_r18_bootstrap_context_t *);
 typedef struct wf_r18_launch_config {
  uint8_t human,partner;
  uint16_t cabinet_config;

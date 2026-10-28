@@ -1,0 +1,65 @@
+{
+  "entry": 26048,
+  "guard_pc": 6626,
+  "runtime_finished_frame": 3566,
+  "snapshot_sha256": "16bd033488a70646f9c215f50e91ce32891973e50a0b82399ef005557be67932",
+  "snapshot_format": "15LEu32 D0-D7/A0-A6 +RAW16K+FG16K",
+  "D": [
+    65535,
+    60,
+    65535,
+    16,
+    65535,
+    128,
+    8,
+    1
+  ],
+  "A": [
+    1837536,
+    1836464,
+    1836732,
+    1835154,
+    1310752,
+    6276,
+    1841592
+  ],
+  "all9actors_sha256": "2df6683614f70b8bd903b83a97ebdb3fa1c288e302155877df642b7eecf7a80d",
+  "source_report_sha256": "c9e2fed83cd9a642cfba9d249863eea5552f164df9ce9206216faa05bb515f1c",
+  "wram_sha256": "08b61c9521500cb54cb3caa1e319fb6fe1c9331c084371da93afa56b0455de63",
+  "elf_sha256": "3df8eb665185029661636db7fb6a45cbe36d96d5af69f90d0b598ed544a4d3c4",
+  "symbols": {
+    "frontend": [
+      101555648,
+      356
+    ],
+    "frontend_match": [
+      101555476,
+      108
+    ],
+    "video": [
+      101556580,
+      53812
+    ]
+  },
+  "program_sha256": "92344475992161095329f2ac993b0e3e6c499636bf4dfe1f404436de2f1338fe",
+  "bin_sha256": "76356344d201a91ae0f2dde68c84f76d3ba84b86993f8529e46c5f89ee90e3ca",
+  "layout": [
+    356,
+    0,
+    52,
+    88,
+    108,
+    4,
+    8,
+    12
+  ],
+  "layout_source_sha256": "3679cc3698202bcd6a58e1a8e8ef76189ca328e80b3f8a9900a3e0d7f8f4328c",
+  "layout_sh2_sha256": "a2df965a1f0b5322b4e50627f98bc05bfff64d702b51b5ff4df0211ebcf07699",
+  "frozen_header_sha256": "eb10f4bd2185e1ab30546126ee3e7b839c9fca474e70064d7de9a586e9c00272",
+  "live_struct_matches_frozen_header": true,
+  "limits": [
+    "Actual RAW/FG lease at65C0 guard, not prepost checkpoint or stale typed gameplay fields",
+    "All9 raw actors included directly; native D8/A7 read via ELF and SH2 layout with shared pointer/alias checks",
+    "Read-only Beetle capture; no state/input/result forcing or combat execution"
+  ]
+}

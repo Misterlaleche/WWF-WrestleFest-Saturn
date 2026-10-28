@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "target": "sh2eb-elf",
+  "compiler": "sh2eb-elf-gcc (GCC) 13.2.0",
+  "flags": ["-std=c11", "-ffreestanding", "-O2", "-Wall", "-Wextra", "-Werror", "-DWF_PLATFORM_SATURN"],
+  "source_sha256": "55e005b3924b7453f68b97b930c6b28704c70bd3cb67fbb2f7f354daefd8a2ae",
+  "header_sha256": "bf590f6153201bcf2b00fd5d940f9b971cad30b25118c5fd7f28c5494ae6e05a",
+  "object_sections_bytes": {"text": 3900, "data": 0, "bss": 0},
+  "scope": "Compile only of wf_r18_metasprite.c using the modified header in a temporary Linux VM snapshot",
+  "limits": ["The full Saturn program was not linked or run.", "No BIN/CUE was generated."]
+}

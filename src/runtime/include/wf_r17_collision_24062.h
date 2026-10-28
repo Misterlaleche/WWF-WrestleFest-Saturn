@@ -6,5 +6,6 @@ typedef struct wf_r17_collision_24062_trace {
  uint16_t source_pairs_tested;
  uint16_t accepted_pairs;
 } wf_r17_collision_24062_trace_t;
+extern volatile uint32_t wf_collision_blocked_probe[12];
 wf_status_t wf_r17_collision_24062(wf_runtime_t *rt,wf_r17_collision_24062_trace_t *trace);
 #endif

@@ -1,0 +1,13 @@
+{
+  "sha256": "9c08b42db0edf2f8f467450400df1162d1cdfd845951ce6061cae3b4afdb317b",
+  "header": [
+    3098,
+    1,
+    1,
+    114750,
+    819,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\full-flow-combat-after1a-a600\\snapshot-00819.bin",
+  "note": "NaturalHOST manual TAG full frontend/paid flow A600 frame3098 actor1 raw4046. Full new RAM16KiB snapshot plus trailing A0-A7; not physical Saturn RAM."
+}

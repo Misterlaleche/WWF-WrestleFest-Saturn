@@ -1,0 +1,148 @@
+{
+  "status": "PASS",
+  "draws": 10787,
+  "blocked_poses": 0,
+  "baseline_rom_read_calls": 246647,
+  "cached_rom_read_calls": 16706,
+  "saved_rom_read_calls": 229941,
+  "body_cache_hits": 16977,
+  "body_cache_misses": 18561,
+  "cached_read_hotspots": [
+    {
+      "address": "054D28",
+      "bytes": 4,
+      "calls": 595
+    },
+    {
+      "address": "054D2C",
+      "bytes": 1,
+      "calls": 586
+    },
+    {
+      "address": "054D3A",
+      "bytes": 4,
+      "calls": 586
+    },
+    {
+      "address": "054D3E",
+      "bytes": 1,
+      "calls": 586
+    },
+    {
+      "address": "05676C",
+      "bytes": 4,
+      "calls": 250
+    },
+    {
+      "address": "03F77E",
+      "bytes": 4,
+      "calls": 173
+    },
+    {
+      "address": "04CCD8",
+      "bytes": 4,
+      "calls": 126
+    },
+    {
+      "address": "03C9C8",
+      "bytes": 4,
+      "calls": 124
+    },
+    {
+      "address": "03E0EE",
+      "bytes": 2,
+      "calls": 121
+    },
+    {
+      "address": "03C9CC",
+      "bytes": 1,
+      "calls": 116
+    },
+    {
+      "address": "03CDD4",
+      "bytes": 2,
+      "calls": 101
+    },
+    {
+      "address": "03E0AC",
+      "bytes": 4,
+      "calls": 98
+    },
+    {
+      "address": "04AA4E",
+      "bytes": 2,
+      "calls": 97
+    },
+    {
+      "address": "03C9DC",
+      "bytes": 4,
+      "calls": 96
+    },
+    {
+      "address": "03E0B0",
+      "bytes": 1,
+      "calls": 93
+    },
+    {
+      "address": "03C9E0",
+      "bytes": 1,
+      "calls": 88
+    },
+    {
+      "address": "03E5F4",
+      "bytes": 4,
+      "calls": 87
+    },
+    {
+      "address": "03E5F8",
+      "bytes": 1,
+      "calls": 86
+    },
+    {
+      "address": "03CC02",
+      "bytes": 2,
+      "calls": 84
+    },
+    {
+      "address": "03D6DC",
+      "bytes": 2,
+      "calls": 84
+    },
+    {
+      "address": "056804",
+      "bytes": 4,
+      "calls": 84
+    },
+    {
+      "address": "054F3E",
+      "bytes": 2,
+      "calls": 83
+    },
+    {
+      "address": "056802",
+      "bytes": 2,
+      "calls": 83
+    },
+    {
+      "address": "03C9F0",
+      "bytes": 4,
+      "calls": 78
+    }
+  ],
+  "cache_bytes": 6916,
+  "pose_cache_entries": 32,
+  "production_cache_entries": 32,
+  "body_cache_entries": 32,
+  "word_cache_entries": 256,
+  "prototype_word_cache_bytes": 1536,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "metasprite_source_sha256": "55e005b3924b7453f68b97b930c6b28704c70bd3cb67fbb2f7f354daefd8a2ae",
+  "trace_sha256": "244716f3686fde35178c72d6f9ebc24bf3434e2aaec7e4664516e775cde98fb2",
+  "snapshot_sha256": "502840379c63858b6d7792b1a5d5ab7e9779a19791033a263c7ada9b7d37608c",
+  "verifier_sha256": "f0f8e503bba7d4327ac2b6e73c560cb51a817956bb4edb0d93e6e6e524effdba",
+  "limits": [
+    "HOST observed dispatch pose order; central coordinates supplied",
+    "Pre-dispatch partner link may differ from the presentation-time link",
+    "ROM metadata callback calls, not CD reads, SH-2 cycles or Saturn FPS"
+  ]
+}

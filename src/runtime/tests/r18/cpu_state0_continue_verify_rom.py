@@ -51,7 +51,9 @@ for own_x in (0,1,0x7fff,0x8000,0xffff):
 if args.natural_only:cases=cases[:1]
 source_root=args.source_root or root
 cpu_source=(args.cpu_source or source_root/'src/wf_cpu_runtime.c').read_bytes()
-support_sources={}
+# The current CPU owner calls its production state-5 approach wrapper.
+# Freeze that exact dependency and its public contract, not an obsolete base.
+support_sources={name:(source_root/name).read_bytes() for name in ('include/wf_cpu_runtime.h','src/wf_state5_exec.c')}
 results=[];coverage=collections.Counter();continuations=collections.Counter()
 with tempfile.TemporaryDirectory() as temp:
  frozen=Path(temp);archive=subprocess.run(['git','archive',base,'src/runtime'],cwd=repo,stdout=subprocess.PIPE,check=True).stdout

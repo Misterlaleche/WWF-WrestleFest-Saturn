@@ -4,7 +4,7 @@
 Only the board's vblank input bit is supplied by the oracle device. All game,
 map and palette routines execute from the original, SHA1-checked bytes.
 """
-import argparse, ctypes, hashlib, json, random, re, struct, subprocess, tempfile
+import argparse, ctypes, hashlib, json, os, random, re, struct, subprocess, tempfile
 from pathlib import Path
 import machine68k as mus
 p=argparse.ArgumentParser();p.add_argument('--report',type=Path);p.add_argument('--quick',action='store_true');args=p.parse_args()
@@ -16,6 +16,18 @@ rng=random.Random(0x26e66)
 def w(mem,at,value,n=2):mem[at:at+n]=(value&((1<<(n*8))-1)).to_bytes(n,'big')
 cases=[('natural-noinput-frame1343-f98c',0,bytearray(original),struct.unpack_from('=8I',snapshot,24))]
 cases.append(('natural-derived-scene0-to2-to0',3,bytearray(original),struct.unpack_from('=8I',snapshot,24)))
+rescue_report_path=repo/'validation/local-20261026/action68-interleaved-natural-803-rescue-character02.json'
+rescue_report=json.loads(rescue_report_path.read_bytes())
+rescue_state=(repo/'validation/local-20261026'/rescue_report['terminal_state_name']).read_bytes()
+assert rescue_report['status']=='PASS' and hashlib.sha256(rescue_state).hexdigest()==rescue_report['terminal_state_sha256']
+assert rescue_report['verifier_sha256']==hashlib.sha256((here/'action68_sequence_verify_rom.py').read_bytes()).hexdigest()
+assert rescue_report['bridge_sha256']==hashlib.sha256((here/'action_reversal_family_oracle_bridge.c').read_bytes()).hexdigest()
+assert rescue_state[:4]==b'R68T' and len(rescue_state)==4+32+0x4000*2
+rescue_mem=bytearray(original);rescue_mem[0x1c0000:0x1c4000]=rescue_state[36:36+0x4000]
+rescue_mem[0xc0000:0xc4000]=rescue_state[36+0x4000:]
+assert rescue_mem[0x1c0161]==0 and rescue_mem[0x1c1678]&0x80
+assert int.from_bytes(rescue_mem[0x1c05b0+4*0x10c+0x60:0x1c05b0+4*0x10c+0x62],'big')==0x6a
+cases.append(('derived-action68-rescue-to-real-scene',0,rescue_mem,struct.unpack_from('=8I',rescue_state,4)))
 for royal in (0,1):
  for facing in (0,128):
   for ident in (0,4,8):
@@ -41,7 +53,7 @@ global_ranges=[(int(a,16),int(n)) for a,n in re.findall(r' G\(0x([0-9a-f]+),[^,]
 ranges=[(0x1c0000+a,n) for a,n in global_ranges]+[(0x1c05b0,9*0x10c),(0x1c0f1c,0x218),(0x1c1134,0x120),(0x1c16d6,0x100),(0x1c1808,16),(0x1c182a,0x184),(0x80000,0x4000),(0xc0000,0x4000),(0x180000,0x4000),(0x186000,0x800),(0x188000,0x800),(0x140008,2)]
 core=re.search(r'^CORE=(.*)$',(root/'Makefile').read_text(),re.M)[1].split()
 r18=['src/wf_r18_transition.c','src/wf_r18_world.c','src/wf_r18_video.c','src/wf_r18_ring.c','src/wf_r18_display.c','src/wf_r18_hud.c','src/wf_r18_referee.c']
-results=[];guard_results=[];coverage=set()
+results=[];guard_results=[];coverage=set();postscene_state_sha256=None
 with tempfile.TemporaryDirectory() as temp:
  lib=Path(temp)/'transition.so';subprocess.run(['cc','-shared','-fPIC','-std=c11','-O2','-Wall','-Wextra','-Werror','-Iinclude',*core,*r18,'tests/r18/transition_r18_oracle_bridge.c','-o',str(lib)],cwd=root,check=True)
  native=ctypes.CDLL(str(lib));native.transition_r18_oracle.argtypes=[ctypes.c_void_p,ctypes.POINTER(ctypes.c_uint32),ctypes.c_uint,ctypes.c_char_p]
@@ -70,7 +82,17 @@ with tempfile.TemporaryDirectory() as temp:
   for at,n in ranges+([] if op==1 else [(0x140010,2),(0x100000,8)]):
    diffs.extend({'address':hex(at+i),'native':g,'rom':e} for i,(g,e) in enumerate(zip(nb.raw[at:at+n],m.r_block(at,n))) if g!=e)
   regdiff=[{'register':'D'+str(i),'native':hex(nr[i]),'rom':hex(u.r_reg(i))} for i in range(8) if nr[i]!=u.r_reg(i)]
-  results.append({'label':label,'native_status':status,'memory_differences':diffs,'register_differences':regdiff});machine.cleanup()
+  broad_diff=None
+  if label=='derived-action68-rescue-to-real-scene':
+   broad_diff={name:{'count':sum(a!=b for a,b in zip(nb.raw[at:at+n],m.r_block(at,n))),
+                     'first':[(hex(at+i),a,b) for i,(a,b) in enumerate(zip(nb.raw[at:at+n],m.r_block(at,n))) if a!=b][:8]}
+               for name,at,n in [('RAM16KB',0x1c0000,0x4000),('FG16KB',0xc0000,0x4000)]}
+   assert not status and not regdiff and all(not value['count'] for value in broad_diff.values())
+   postscene_state=b'R68S'+struct.pack('=8I',*nr)+nb.raw[0x1c0000:0x1c4000]+nb.raw[0xc0000:0xc4000]
+   postscene_state_sha256=hashlib.sha256(postscene_state).hexdigest()
+   (repo/'validation/local-20261026/action68-rescue-postscene-character02.state').write_bytes(postscene_state)
+  results.append({'label':label,'native_status':status,'memory_differences':diffs,
+                  'register_differences':regdiff,'broad_diff':broad_diff});machine.cleanup()
  # Missing/unusable scene data must stop the real transport; none of these
  # cases substitutes a fallback map or palette.
  guard_root=Path(temp)/'guards';guard_root.mkdir()
@@ -80,8 +102,20 @@ with tempfile.TemporaryDirectory() as temp:
   if payload is not None:(folder/('R18MAP2.BIN' if mode==2 else 'R18RING.BIN')).write_bytes(payload)
   mem=bytearray(original);w(mem,0x1c007e,mode);nb=ctypes.create_string_buffer(bytes(mem));nr=(ctypes.c_uint32*8)(*cases[0][3])
   status=native.transition_r18_oracle(nb,nr,2,str(folder).encode());guard_results.append({'label':label,'native_status':status,'passed':status==-0x26e66})
+ if os.name=='nt':assert ctypes.windll.kernel32.FreeLibrary(ctypes.c_void_p(native._handle))
 failed=[r for r in results if r['native_status'] or r['memory_differences'] or r['register_differences']]
-report={'rom_sha1':hashlib.sha1(rom).hexdigest(),'count':len(results),'passed':len(results)-len(failed),'natural_count':1,'guards':guard_results,'device_model':'only polled vblank input $140026 bit2','rom_pc_coverage':[hex(x) for x in sorted(coverage)],'results':results}
+report={'rom_sha1':hashlib.sha1(rom).hexdigest(),
+        'snapshot_sha256':hashlib.sha256(snapshot).hexdigest(),
+        'rescue_terminal_state_sha256':hashlib.sha256(rescue_state).hexdigest(),
+        'rescue_sequence_report_sha256':hashlib.sha256(rescue_report_path.read_bytes()).hexdigest(),
+        'postscene_state_sha256':postscene_state_sha256,
+        'verifier_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'sources_sha256':{name:hashlib.sha256((root/name).read_bytes()).hexdigest()
+                          for name in ['src/wf_r17_dependencies.c',*r18,
+                                       'tests/r18/transition_r18_oracle_bridge.c']},
+        'count':len(results),'passed':len(results)-len(failed),'natural_count':1,
+        'guards':guard_results,'device_model':'only polled vblank input $140026 bit2',
+        'rom_pc_coverage':[hex(x) for x in sorted(coverage)],'results':results}
 if args.report:args.report.parent.mkdir(exist_ok=True,parents=True);args.report.write_text(json.dumps(report,indent=2)+'\n')
 print('R18 transition ROM:',report['passed'],'/',report['count'],'; guards',sum(r['passed'] for r in guard_results),'/',len(guard_results))
 for r in failed[:5]:print(r['label'],'status',r['native_status'],'memory',r['memory_differences'][:8],'regs',r['register_differences'])

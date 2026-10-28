@@ -1,0 +1,77 @@
+{
+  "captures": [
+    {
+      "policy": 0,
+      "frame": 8023,
+      "slot": 0,
+      "file": "action62_snapshot_host_policy000.bin",
+      "snapshot_sha256": "b0b7242088cbbe23e8e4d8fb09dea06a30b7861b3a0a254b6e900f3b5b85e1d9",
+      "layout_HOST": [
+        7664,
+        384,
+        7340
+      ],
+      "report_sha256": "a4eec4bb52058b6b9d44bdc7b541ca6b51433f6a90cf35343b2990c9cb5d7c77",
+      "dumps_sha256": {
+        "blocked-actors.bin": "34a305479a10e1b0e30d37cce5c497d2296be1a648de642a2fbe49166c1ce0f4",
+        "blocked-dregs.bin": "bf565ea06c51d9298d53778fe835dd24d1b365d9d621f5c3ddcc6c310a549017",
+        "blocked-fg.bin": "de8d51d6df0cce7455117a2be047ff5148d7250f35e25d67316d56d9c6b3c0d2",
+        "blocked-globals.bin": "73cac67b559a0b1203a3fa4d4825f92a4c4bcb110f05ccd6c016a84fd2acdc51",
+        "blocked-runtime.bin": "ae71cf5135a4d0601ff56e23d37fdbea733df78fa6888da98f3a84936ade67ea",
+        "frontend-f8c-ram.bin": "7278f71e2bf145e71e062a229b0099ac5344f214dd96c5fc6ad5ada52ba4d2c8",
+        "handoff-fa4-runtime.bin": "ca612a702a95ed79b012e9b9035792c92ed6f8b4f5c5e7fcde773eee8d319a0f"
+      }
+    },
+    {
+      "policy": 2,
+      "frame": 8957,
+      "slot": 0,
+      "file": "action62_snapshot_host_policy002.bin",
+      "snapshot_sha256": "daea496add156eab61046292cf192937c3ed383b2ea97c61e2d68783fea69551",
+      "layout_HOST": [
+        7664,
+        384,
+        7340
+      ],
+      "report_sha256": "3b9366379c8378c6bec068eac045e5343880471d786c2468e12759805b85651b",
+      "dumps_sha256": {
+        "blocked-actors.bin": "38cb5df1d3c1cdf1b5a61230cdac23aa0ca03ac4865ca4d86044a672539db53a",
+        "blocked-dregs.bin": "6dc33b594a42ae24ef326ea12b939673fd1b9815c3825415c5cbc8d2d0fe2d33",
+        "blocked-fg.bin": "49f00a5d266bd48f77e723ccdd627c26e946cda97e8bd0716809aeda291853bb",
+        "blocked-globals.bin": "e2e084e9206b33ba83ceed8eeda968c546973ac0635134003d71bd69651bf051",
+        "blocked-runtime.bin": "fc79aa6a2ca4ce3025968a4126f9fb3f324e0133ff16c46a216bd56a7329b19c",
+        "frontend-f8c-ram.bin": "7278f71e2bf145e71e062a229b0099ac5344f214dd96c5fc6ad5ada52ba4d2c8",
+        "handoff-fa4-runtime.bin": "ca612a702a95ed79b012e9b9035792c92ed6f8b4f5c5e7fcde773eee8d319a0f"
+      }
+    },
+    {
+      "policy": 5,
+      "frame": 7065,
+      "slot": 0,
+      "file": "action62_snapshot_host_policy005.bin",
+      "snapshot_sha256": "ee4862768194d4863e8b29781f9a6619c67e896595fe4d8e6d0db689913edb45",
+      "layout_HOST": [
+        7664,
+        384,
+        7340
+      ],
+      "report_sha256": "eda959284ae121536bfb78d015ad58dc6086817e25179c7539651466f9c8fa8b",
+      "dumps_sha256": {
+        "blocked-actors.bin": "bb2556e1cdb222af8b2626da5922f561c18e709a269d548ff08a75c64dafd8ad",
+        "blocked-dregs.bin": "4ae997bf5e84df1fb854516dc39ba1233d29139f2e5e81ef4c84076e3a840d63",
+        "blocked-fg.bin": "20a1ff79f290d9338e7657768705f5cfa93fbcc3fe0605b50a6bd5928beb3ecb",
+        "blocked-globals.bin": "34f0819e5a6c0b8a52acd1edcbc995183255d773e8d3b0b68b223a51347d334b",
+        "blocked-runtime.bin": "8a9bd551a752627896ec30681958b307ef220050a8cd4153bf9a1b532d83e100",
+        "frontend-f8c-ram.bin": "7278f71e2bf145e71e062a229b0099ac5344f214dd96c5fc6ad5ada52ba4d2c8",
+        "handoff-fa4-runtime.bin": "ca612a702a95ed79b012e9b9035792c92ed6f8b4f5c5e7fcde773eee8d319a0f"
+      }
+    }
+  ],
+  "origin": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261024\\human-tag-stage9-more-actions",
+  "build": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261024\\human-tag-stage9-final",
+  "exe_sha256": "8d07a3afdef141113c36aab5ec6a86f1251b88a5d6d22b5c996642ba91749fdd",
+  "source_manifest_sha256": "88d9c0289d47d0f2cd602f6c9805491df365c5177fb95a960715ba1ef6e6d663",
+  "archive_sha256": "3a77ea2976c38d17f6653944cdfe96a7a81234075e2029496133f568e0f248a2",
+  "projection": "All9actors and D0-D7 byte equal to actual blocked states; export known globals/records, other arcadeRAMzero; no frame/HP/input/result/RNG substitution; no native trajectory claim.",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2"
+}

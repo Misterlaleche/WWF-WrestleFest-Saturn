@@ -1,0 +1,29 @@
+{
+  "cases": [
+    {
+      "mode": "TAG",
+      "profile": "grapple",
+      "returncode": 0,
+      "hits": []
+    },
+    {
+      "mode": "TAG",
+      "profile": "rush",
+      "returncode": 0,
+      "hits": []
+    },
+    {
+      "mode": "Royal",
+      "profile": "grapple",
+      "returncode": 0,
+      "hits": []
+    },
+    {
+      "mode": "Royal",
+      "profile": "rush",
+      "returncode": 0,
+      "hits": []
+    }
+  ],
+  "scope": "HOST instrumented debug build; no physical Saturn timing or hardware validation"
+}

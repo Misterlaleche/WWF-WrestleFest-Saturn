@@ -1,0 +1,13 @@
+{
+  "sha256": "c1562b75ba85ad8ddfb70cc74aa9f84f06d36fdcf745999861caa0acc3072487",
+  "header": [
+    5369,
+    1,
+    1,
+    114750,
+    1349,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\full-flow-combat-after1c004-a600\\snapshot-01349.bin",
+  "note": "NaturalHOST full frontend/paid TAG A6005369 actor1/id7 selector402B. RAM16KiB typed projection, not physical Saturn RAM."
+}

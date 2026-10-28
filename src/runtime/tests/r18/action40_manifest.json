@@ -1,0 +1,22 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "sha256": "7fa5b051e11b2eee2c90c9f8a3116fb14b520517c3f7a479e6faceef075ec189",
+  "header": [
+    1850,
+    4,
+    1,
+    114750,
+    600,
+    1
+  ],
+  "source": "validation/local-20261024/A600-after-gate/snapshot-00600.bin",
+  "emulator_report": "validation/local-20261024/beetle-A600-gate-budget/report.json",
+  "emulator_program_sha256": "d9db97d85d350aed8ed6e4fc0330c8be1605684f844c3fa1c241655eca563516",
+  "emulator_bin_sha256": "86a29cfde0ca6158987f276561524d7f5153964abeb2107c013a23b7fca818a5",
+  "emulator_schedule_sha256": "de4321132e0d07ca8c9d12f63e92d5dbb4b81667141dba7a99d6982507a765a9",
+  "matched_actor_blocks": 9,
+  "matched_d_registers": true,
+  "derived": false,
+  "owner": "$12614[$40] -> descriptor $183EC, callback $18404",
+  "provenance": "Natural HOST snapshot immediately before F4C2 dispatch. All nine actor blocks and live D0-D7 match the emulated BIN guard frame1850 slot4. No frame, flags, seed or registers were forced; not a physical Saturn RAM dump."
+}

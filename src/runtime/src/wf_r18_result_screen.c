@@ -1,4 +1,25 @@
 #include "wf_r18_result_screen.h"
+#include "wf_r18_frontend_palette.h"
+
+wf_status_t wf_r18_result_royal_game_over(wf_runtime_t *rt,wf_r18_video_t *video,
+ wf_r18_result_level_fn level,wf_r18_result_wait_fn wait_frames,
+ wf_r18_result_commit_fn commit,void *user){
+ wf_status_t st;
+ if(!rt||!video||!rt->m68k_regs.valid||!level||!wait_frames||!commit)
+  return WF_BAD_STATE;
+ if(!video->read_rom)return WF_BLOCKED;
+ if(rt->g.global_15f4>=7u)return WF_BLOCKED;
+ rt->g.global_15fc=1u;
+ st=level(rt,1u,user);if(st!=WF_OK)return st;
+ st=wf_r18_frontend_palette_2a06(rt,video,rt->g.global_15f4,1u);if(st!=WF_OK)return st;
+ st=commit(user);if(st!=WF_OK)return st;
+ st=level(rt,0u,user);if(st!=WF_OK)return st;
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,0x50u);
+ st=wf_r18_text_2503c(rt,0x50u,video);if(st!=WF_OK)return st;
+ st=commit(user);if(st!=WF_OK)return st;
+ wf_r17_m68k_move_w(&rt->m68k_regs,0u,0x60u);
+ return wait_frames(rt,0x61u,user);
+}
 
 wf_status_t wf_r18_result_in_ring(wf_runtime_t *rt,wf_r18_video_t *video,
                                  wf_r18_result_wait_fn wait_frames,

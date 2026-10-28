@@ -1,0 +1,275 @@
+{
+  "status": "PASS",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "complete_routes": 19,
+  "interrupted_or_partial_routes": 9,
+  "routes": [
+    {
+      "trace": "validation/local-20261027/tag-pressure-after-f8d8/trace.csv",
+      "slot": 4,
+      "first_frame": 1261,
+      "last_frame": 1299,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/tag-pressure-after-f8d8/trace.csv",
+      "slot": 1,
+      "first_frame": 1334,
+      "last_frame": 1372,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/tag-pressure-after-f8d8/trace.csv",
+      "slot": 5,
+      "first_frame": 1343,
+      "last_frame": 1358,
+      "dispatches": 16,
+      "terminal": false,
+      "timeline": null
+    },
+    {
+      "trace": "validation/local-20261027/tag-pressure-after-f8d8/trace.csv",
+      "slot": 1,
+      "first_frame": 2032,
+      "last_frame": 2070,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/tag-pressure-after-f8d8/trace.csv",
+      "slot": 1,
+      "first_frame": 2165,
+      "last_frame": 2203,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 8,
+      "first_frame": 186,
+      "last_frame": 224,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 5,
+      "first_frame": 237,
+      "last_frame": 275,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 8,
+      "first_frame": 273,
+      "last_frame": 311,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 7,
+      "first_frame": 277,
+      "last_frame": 298,
+      "dispatches": 22,
+      "terminal": false,
+      "timeline": null
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 6,
+      "first_frame": 289,
+      "last_frame": 298,
+      "dispatches": 10,
+      "terminal": false,
+      "timeline": null
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 5,
+      "first_frame": 310,
+      "last_frame": 348,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 5,
+      "first_frame": 444,
+      "last_frame": 482,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 0,
+      "first_frame": 483,
+      "last_frame": 521,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 5,
+      "first_frame": 510,
+      "last_frame": 512,
+      "dispatches": 3,
+      "terminal": false,
+      "timeline": null
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 7,
+      "first_frame": 617,
+      "last_frame": 655,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 4,
+      "first_frame": 638,
+      "last_frame": 642,
+      "dispatches": 5,
+      "terminal": false,
+      "timeline": null
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 6,
+      "first_frame": 1002,
+      "last_frame": 1040,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 5,
+      "first_frame": 1006,
+      "last_frame": 1026,
+      "dispatches": 21,
+      "terminal": false,
+      "timeline": null
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 4,
+      "first_frame": 1171,
+      "last_frame": 1209,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 7,
+      "first_frame": 1176,
+      "last_frame": 1214,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 4,
+      "first_frame": 2133,
+      "last_frame": 2171,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 6,
+      "first_frame": 2151,
+      "last_frame": 2189,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 4,
+      "first_frame": 2175,
+      "last_frame": 2176,
+      "dispatches": 2,
+      "terminal": false,
+      "timeline": null
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 4,
+      "first_frame": 2195,
+      "last_frame": 2233,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 5,
+      "first_frame": 2630,
+      "last_frame": 2668,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 0,
+      "first_frame": 2641,
+      "last_frame": 2654,
+      "dispatches": 14,
+      "terminal": false,
+      "timeline": null
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 4,
+      "first_frame": 2807,
+      "last_frame": 2845,
+      "dispatches": 39,
+      "terminal": true,
+      "timeline": "base"
+    },
+    {
+      "trace": "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv",
+      "slot": 6,
+      "first_frame": 2808,
+      "last_frame": 2832,
+      "dispatches": 25,
+      "terminal": false,
+      "timeline": null
+    }
+  ],
+  "oracle_reports_sha256": {
+    "base": "74058e4d58d83034d45d926443fb090a055860a9beff37ef1fa65d2854376a22",
+    "alternate": "91bb2c4cd60617de22cc5b6fa0da4a5fa513d641294c5fb1bfeda13b2a4f8721"
+  },
+  "trace_sha256": {
+    "validation/local-20261027/tag-pressure-after-f8d8/trace.csv": "244716f3686fde35178c72d6f9ebc24bf3434e2aaec7e4664516e775cde98fb2",
+    "validation/local-20261027/royal-pressure-after-kind2-wrap/trace.csv": "4ecfd10bfcfe1914a2afbe038c63169ea4fbb1199d1cd589c16a001e8469b9f3"
+  },
+  "verifier_sha256": "37dfbf6ff88c4b2fb0a4552dd7244fa682425a16fd8ddaf1db684836d1e6dede",
+  "limits": [
+    "HOST combat dispatches, not arcade full-frame execution",
+    "The comparison uses graphics pose order and terminal state; RAM and D registers are covered by the separate direct-ROM action reports",
+    "Interrupted and partial routes are listed but not declared equivalent",
+    "No Saturn hardware timing or VDP1 output is measured"
+  ]
+}

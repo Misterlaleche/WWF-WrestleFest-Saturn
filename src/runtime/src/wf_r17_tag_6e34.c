@@ -78,28 +78,46 @@ static void run(wf_participant_machine_t*m){wf_runtime_t*r=m->rt;unsigned i;if(!
  for(i=0;i<3;i++){m->d[0]=i;message(m,i,1);}m->a[1]=((uint32_t)r->g.global_0156[0]<<16)|r->g.global_0156[1];
  if(r->g.global_1690&64){m->d[4]=3;m->a[0]=0x1c05b0;if(r->actors[0].b[0]&128){m->a[0]=0x1c07c8;m->d[4]=1;}r->g.mode_0160=(r->g.mode_0160|64)&~128;r->g.global_1690=0;relocate(m);}else selected_refill(m);
 }
-/* Serialized frame owner: static staging avoids consuming the Saturn SH-2 stack. */
+/* The participant workspace already owns all write records. Rotate its two
+ * recursively partitioned halves in place, preserving order within each
+ * destination without a second 48KiB buffer in scarce SH-2 HWRAM. */
+static void tag_reverse(wf_r17_fg0_write_t*w,size_t first,size_t last){
+ while(first<last){wf_r17_fg0_write_t tmp=w[first];w[first++]=w[--last];w[last]=tmp;}
+}
+static size_t tag_partition(wf_r17_fg0_write_t*w,size_t first,size_t last){
+ if(last-first<2u)return first<last&&w[first].addr<0x180000u?1u:0u;
+ size_t middle=first+(last-first)/2u;
+ size_t left=tag_partition(w,first,middle),right=tag_partition(w,middle,last);
+ if(left<middle-first&&right){
+  tag_reverse(w,first+left,middle);
+  tag_reverse(w,middle,middle+right);
+  tag_reverse(w,first+left,middle+right);
+ }
+ return left+right;
+}
+static void tag_stage_outputs(wf_participant_machine_t*m,size_t*nf,size_t*nv){
+ *nf=tag_partition(m->writes,0u,m->write_count);
+ *nv=m->write_count-*nf;
+}
+/* The shared lease retains machine/snapshot storage through output callbacks. */
 wf_status_t wf_r17_owner_6e34(wf_runtime_t *rt,wf_r17_participant_io_t *io){
- static wf_runtime_t saved;
- static wf_participant_machine_t m;
- static wf_r17_fg0_write_t fg[WF_PARTICIPANT_WRITES],vid[WF_PARTICIPANT_WRITES];
- static unsigned busy;
+ wf_r17_fg0_write_t*fg,*vid;
+ wf_participant_workspace_t*workspace;
  wf_status_t status;
- size_t i,nf=0,nv=0;
- if(!rt||!io||busy)return WF_BAD_STATE;
- busy=1;
- saved=*rt;
- wf_participant_init(&m,rt,io->input_word,io->user);
- run(&m);
- status=m.status;
+ size_t nf=0,nv=0;
+ if(!rt||!io)return WF_BAD_STATE;
+ status=wf_participant_workspace_acquire(WF_PARTICIPANT_TAG,&workspace);if(status!=WF_OK)return status;
+ wf_runtime_t*saved=&workspace->snapshot;wf_participant_machine_t*m=&workspace->machine;
+ fg=m->writes;
+ *saved=*rt;
+ wf_participant_init(m,rt,io->input_word,io->user);
+ run(m);
+ status=m->status;
  if(status==WF_OK){
-  for(i=0;i<m.write_count;i++){
-   if(m.writes[i].addr>=0x180000)vid[nv++]=m.writes[i];
-   else fg[nf++]=m.writes[i];
-  }
+  tag_stage_outputs(m,&nf,&nv);vid=m->writes+nf;
   if(!io->commit_batch&&((nf&&nv)||(nf&&!io->fg0_batch)||(nv&&!io->video_batch))){
    status=WF_BLOCKED;
-   m.failed_address=nf&&!io->fg0_batch?0x75ee:0xc1ea;
+   m->failed_address=nf&&!io->fg0_batch?0x75ee:0xc1ea;
   }else if(io->commit_batch&&(nf||nv)){
    status=io->commit_batch(rt,fg,nf,vid,nv,io->user);
   }else if(nf){
@@ -109,13 +127,13 @@ wf_status_t wf_r17_owner_6e34(wf_runtime_t *rt,wf_r17_participant_io_t *io){
   }
  }
  if(status!=WF_OK){
-  *rt=saved;
-  io->blocked_dependency_rom=m.failed_address?m.failed_address:0x6e34;
+  *rt=*saved;
+  io->blocked_dependency_rom=m->failed_address?m->failed_address:0x6e34;
  }else{
-  rt->m68k_regs=saved.m68k_regs;
-    memcpy(rt->m68k_regs.d,m.d,sizeof m.d);
+  rt->m68k_regs=saved->m68k_regs;
+    memcpy(rt->m68k_regs.d,m->d,sizeof m->d);
   io->blocked_dependency_rom=0;
  }
- busy=0;
+ (void)wf_participant_workspace_release(WF_PARTICIPANT_TAG,workspace);
  return status;
 }

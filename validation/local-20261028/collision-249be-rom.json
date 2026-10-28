@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "cases": 289,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "actor_snapshot_sha256": "8dfb121c3747066fd306736cde5226da9c47916ca3da4e9e82ba64a3186bebf8",
+  "globals_snapshot_sha256": "5a4a1f6b77b29ae3cce8f17722f27d86fba2c61ce458f1f0524258036936f2ad",
+  "source_sha256": "c63b036023997bfb0ecf3bfa5bfe3f7a2f7db84602e7fbe4e28538e2b3f2bfd7",
+  "limits": [
+    "Observed pair is HOST and RAM projection; other cases are controlled variations.",
+    "Subtype 0A is tested with a no-op first callback, not observed naturally.",
+    "Unequal-facing low-timer path only; no physical Saturn claim."
+  ]
+}

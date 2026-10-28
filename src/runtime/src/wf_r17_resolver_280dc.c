@@ -76,7 +76,6 @@ static wf_status_t route_2831c(wf_actor_raw_t *a,uint16_t x,uint16_t y,uint16_t 
 }
 static wf_status_t route_28480(wf_actor_raw_t *a,uint16_t x,uint16_t y,uint16_t z){
     if(y!=0x0160u)corr_y(a,y,0x0160u,1u,2u);
-    setbit(a,WF_A_CONTACT+1u,2u);
     if(z<0x0140u)corr_z(a,z,0x0140u,1u);
     if(x<0x0270u){corr_x(a,x,0x0270u,1u,1u);return WF_OK;}
     if(x>0x03d0u){corr_x(a,x,0x03d0u,1u,0u);return WF_OK;}
@@ -85,8 +84,10 @@ static wf_status_t route_28480(wf_actor_raw_t *a,uint16_t x,uint16_t y,uint16_t 
 }
 static wf_status_t route_2851e(wf_actor_raw_t *a,uint16_t x,uint16_t y,uint16_t z){
     if(y<0x0110u)corr_y(a,y,0x0110u,1u,3u);
-    if(y>0x0140u)corr_y(a,y,0x0140u,1u,2u);
-    if(x>=0x0294u&&x<0x038cu)wf_set_u8(a,WF_A_CONTACT,4u);
+    if(y>0x0140u){
+        corr_y(a,y,0x0140u,1u,2u);
+        if(x>=0x0294u&&x<0x038cu)wf_set_u8(a,WF_A_CONTACT,4u);
+    }
     if(z<0x0100u)corr_z(a,z,0x0100u,4u);
     if(x<0x01c8u){corr_x(a,x,0x01c8u,3u,1u);return WF_OK;}
     if(x>0x0470u)corr_x(a,x,0x0470u,3u,0u);

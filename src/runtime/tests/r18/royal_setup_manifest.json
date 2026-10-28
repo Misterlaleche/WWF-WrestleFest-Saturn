@@ -1,0 +1,43 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "rom_10718_10B62_sha256": "c8483103c19f4810b7864dc8da30d3ca581e3adf3e274c04d7cbe1f1d17c20f0",
+  "wp12_nested_zip_sha256": "742dc77ba94ca21bf9186e8b6655e4b3869e0a6c303de00e4499a6f1d8d2ac4d",
+  "wp12_document": "validation/local-20261024/frontend-research/wp12/WF-Saturn-12-WRESTLER-ENTRANCES-PREMATCH-ROM-EXACT-FINAL.md",
+  "wp12_document_sha256": "2fb0790e0c2862696cf935b9427da3a320de2bb40efce784b343c3ff1ee3a34a",
+  "entry": "1086C Royal branch only",
+  "return": "10ACA",
+  "implemented_helpers": [
+    "24CC with live21B4",
+    "10AF0",
+    "10B26",
+    "Royal/human10782",
+    "10718 referee and palette order"
+  ],
+  "rom_tables": [
+    "10830 human health twelve words",
+    "10ACC six XY pairs",
+    "10AE4 six orientation words",
+    "10B5C six weights"
+  ],
+  "source_sha256": "50f5da1b3caf67d536b607aeeafe0b61c42db210f36b7430b76e38978000dec3",
+  "required_external_effects": [
+    "2AEA"
+  ],
+  "unsupported_guards": [
+    "1034A TAG entry",
+    "1090A ID outside twelve-entry window",
+    "1098C/109DC more than three primary humans in a half",
+    "10B26/10AF0 exhausted occupancy",
+    "10ACC anchor outside six slots"
+  ],
+  "evidence": [
+    "validation/local-20261024/royal-setup-red.log",
+    "validation/local-20261024/royal-setup-final-green.json",
+    "validation/local-20261024/royal-setup-controls-green.json"
+  ],
+  "limits": [
+    "No native palette backend, C98 composition or hardware equivalence claim"
+  ],
+  "original_green_source_sha256": "89371d7caf80a9d22b026e10dcc028ca0e9be952f7480a1425569de9a73d50fa",
+  "post_green_change": "Appended public validated wrapper for already tested10718 referee; original body unchanged. See royal-setup-public-wrapper.json and2181TAG proof."
+}

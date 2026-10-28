@@ -1,0 +1,44 @@
+{
+  "sha256": "87c2c3b754a6f1957a05d6bfd96cbda42f95613485cfbd7c3863236ee795dad9",
+  "header": [
+    1724,
+    0,
+    1,
+    114750,
+    0,
+    1
+  ],
+  "snapshot_bytes": 16440,
+  "source": "validation\\local-20261024\\hardware-input\\beetle-full-flow-stage4-tag-basic",
+  "report_sha256": "94d99cc573c19d85eb85c89dbfb4ab441e8d9c155fac115a0c17aeec2451e085",
+  "workram_sha256": "5e2fb47729cb4c701d5f6901a149c2689b32077d266f3a480740a92494211f0b",
+  "reported_program_sha256": "11a7ee4288e2eba051e1973d2c08b9bb3b49bd3788d272979a7dcf485c5ad579",
+  "reported_bin_sha256": "58754b09fb1450039014ad842e085ac267cd7ffce545572948680f275acbd127",
+  "reported_core_sha256": "88b459ccb216746ced3b0e09c6598725ccfd6e91df9f43a078309975edf685d5",
+  "core_version": "v1.32.1",
+  "decoded_actor_offset": 1997776,
+  "decoded_runtime_offset": 1997392,
+  "layout_offsets": [
+    384,
+    268,
+    352,
+    24,
+    31,
+    4,
+    12,
+    210,
+    211
+  ],
+  "matched_actors": 9,
+  "D0-D7": [
+    1,
+    20,
+    21,
+    778,
+    65535,
+    1,
+    65535,
+    0
+  ],
+  "note": "Read-only real Beetle stage4 guard. All9actors uniquely match decodedWRAM, D0-D7 from report; typed prefix matches SH2 observer and frame. Supported globals projected, other arcadeRAM explicitly zero. No A registers available or fabricated. Not physical Saturn hardware or full original arcadeRAM."
+}

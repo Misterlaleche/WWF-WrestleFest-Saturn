@@ -92,7 +92,7 @@ int main(void){
     CHECK(wf_r18_metasprite_emit(&c,0,1,150,100,1)==WF_OK);warm=source.reads;
     printf("Repeated packed body: cold=%u reads, warm=%u reads\n",cold,warm);fflush(stdout);
     CHECK(warm<cold);
-    CHECK(sizeof cache<=7u*1024u);
+    CHECK(sizeof cache<=8u*1024u);
     /* Palette, clipping, mirror, coordinates, D6/D7, references, partner
      * selection and composition order are recomputed on every cache hit. */
     for(unsigned index=0;index<9;index++){
@@ -110,7 +110,7 @@ int main(void){
         wf_r18_metasprite_cache_reset(&cache);c=context(cached_records);c.cache=&cache;source.reads=0;
         CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)index,150,100,1)==WF_OK);cold=source.reads;
         source.reads=0;c.count=0;
-        CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)index,150,100,1)==WF_OK);CHECK(source.reads==cold);
+        CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)index,150,100,1)==WF_OK);CHECK(source.reads<cold);
         for(unsigned i=0;i<WF_R18_METASPRITE_CACHE_ENTRIES;i++)CHECK(!cache.entries[i].valid);
     }
     /* Failed decode rolls context back and does not make a partial body reusable. */
@@ -122,9 +122,17 @@ int main(void){
     /* A source change becomes visible after the caller's explicit reset. */
     source.rom[0x40204u]=77u;wf_r18_metasprite_cache_reset(&cache);
     CHECK(!compare(1,0,150,100,1,100));CHECK(!compare(1,1,0,0,1,101));
+    /* A changed ROM word must not survive reset in the direct word cache. */
+    wf_r18_metasprite_cache_reset(&cache);
+    CHECK(!compare(0,0,150,100,1,102));
+    CHECK(cache.word_tag[(0x40100u>>1)&(WF_R18_METASPRITE_WORD_CACHE_ENTRIES-1u)]==0x40101u);
+    put16(0x40100u,3u);wf_r18_metasprite_cache_reset(&cache);
+    CHECK(!compare(0,0,150,100,1,103));
+    put16(0x40100u,4u);wf_r18_metasprite_cache_reset(&cache);
     wf_r18_metasprite_cache_reset(NULL);
     /* Sixteen changing actors/compositions must stay warm across draw rounds.
-     * Each hit still needs five metadata reads, but no raw-body read. */
+     * Each hit needs one metadata read after the set and pose are cached,
+     * but no raw-body read. */
     for(unsigned i=0;i<33;i++){
         uint32_t at=0x4a000u+i*0x100u;pose(10u+i,at);put16(at,2u);rows(at+2u,2u,40u+i);
     }
@@ -138,7 +146,7 @@ int main(void){
         c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)(10u+i),150,100,1)==WF_OK);
     }
     printf("Cyclic sixteen-body cache: warm=%u metadata reads, %u body reads\n",source.reads,source.body_reads);
-    CHECK(source.body_reads==0u&&source.reads==3u*16u*5u);
+    CHECK(source.body_reads==0u&&source.reads<=16u*3u);
     /* The complete working set remains resident; insertion 33 evicts only
      * the oldest FIFO entry. Equal headers at different addresses cannot alias. */
     wf_r18_metasprite_cache_reset(&cache);c=context(cached_records);c.cache=&cache;
@@ -149,23 +157,36 @@ int main(void){
     for(unsigned i=0;i<32;i++){
         c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,(uint16_t)(10u+i),150,100,1)==WF_OK);
     }
-    CHECK(source.body_reads==0u&&source.reads==32u*5u);
+    CHECK(source.body_reads==0u&&source.reads<=32u);
     for(unsigned i=0;i<32;i++)CHECK(!compare(10u+i,0,150,100,1,i));
     c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,42,150,100,1)==WF_OK);
     source.reads=source.body_reads=0;c.count=0;
     CHECK(wf_r18_metasprite_emit(&c,0,11,150,100,1)==WF_OK);
-    CHECK(source.body_reads==0u&&source.reads==5u); /* Second entry is still warm. */
+    CHECK(source.body_reads==0u&&source.reads<=1u); /* Second entry is still warm. */
     c=context(cached_records);c.cache=&cache;source.reads=0;
     source.body_reads=0;
     CHECK(wf_r18_metasprite_emit(&c,0,10,150,100,1)==WF_OK);cold=source.reads;
     CHECK(source.body_reads==1u);
     c.count=0;source.reads=0;CHECK(wf_r18_metasprite_emit(&c,0,10,150,100,1)==WF_OK);
     CHECK(source.reads<cold); /* Insertion 33 evicted the first FIFO entry. */
+    /* Mirror bits share a pose-table offset; pose 42 collides with pose 10
+     * in the direct map, so 10 must be reread rather than reusing 42. */
+    wf_r18_metasprite_cache_reset(&cache);c=context(cached_records);c.cache=&cache;
+    CHECK(wf_r18_metasprite_emit(&c,0,10,150,100,1)==WF_OK);
+    c.count=0;source.reads=0;
+    CHECK(wf_r18_metasprite_emit(&c,0,0x800au,150,100,1)==WF_OK);
+    CHECK(source.reads<=1u);
+    c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,42,150,100,1)==WF_OK);
+    CHECK(cache.pose_offsets[10].valid&&cache.pose_offsets[10].pose==42u);
+    source.reads=0;c.count=0;CHECK(wf_r18_metasprite_emit(&c,0,10,150,100,1)==WF_OK);
+    CHECK(cache.pose_offsets[10].valid&&cache.pose_offsets[10].pose==10u);
+    CHECK(!compare(10,0,150,100,1,8));
+    CHECK(!compare(42,1,150,100,1,9));
     /* The header is part of the key, even at the same address. */
     wf_r18_metasprite_cache_reset(&cache);cache.entries[0].valid=1;
     cache.entries[0].address=0x40100u;cache.entries[0].header=5u;cache.entries[0].skip_prefix=1u;
     memset(cache.entries[0].rows,0xff,sizeof cache.entries[0].rows);
     CHECK(!compare(0,0,150,100,1,7));
-    puts("PASS metasprite cache: <=7KiB, cyclic sixteen bodies, transforms, palettes, references, FIFO eviction33, >32 rows, failure and reset");
+    puts("PASS metasprite cache: <=8KiB, cyclic bodies, pose collision/mirror, transforms, palettes, references, FIFO eviction33, >32 rows, failure and reset");
     return 0;
 }

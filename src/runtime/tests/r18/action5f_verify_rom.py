@@ -25,10 +25,12 @@ parser.add_argument('--report',type=Path)
 parser.add_argument('--rom',type=Path,default=ROOT/'audit/runtime18-cd/ROM68K.BIN')
 parser.add_argument('--rom-only',action='store_true')
 parser.add_argument('--snapshot-only',action='store_true')
+parser.add_argument('--selector',type=lambda text:int(text,0),default=0x5f,
+                    choices=(0x5e,0x5f))
 args=parser.parse_args()
 rom=args.rom.read_bytes()
 assert hashlib.sha1(rom).hexdigest()=='a726c46f350723ea73158bc78055d17d418b14e2'
-assert rom[0x12790:0x12794]==bytes.fromhex('00019530')
+assert rom[0x12614+args.selector*4:0x12618+args.selector*4]==bytes.fromhex('00019530')
 assert rom[0x19530:0x19536]==bytes.fromhex('000195360000')
 rng=random.Random(0x19536)
 actors=[0x1c05b0+0x10c*i for i in range(9)]
@@ -49,7 +51,7 @@ def seed(slot):
         for off in (0x32,0x33,0x56,0x74,0xb5,0xb6):put(mem,at+off,0,1)
         put(mem,at+0x70,i%3)
     a=actors[slot];t=actors[(slot+1)%9];p=actors[(slot+2)%9]
-    put(mem,a+0x20,5);put(mem,a+0x1c,5);put(mem,a+0x60,0x005f)
+    put(mem,a+0x20,5);put(mem,a+0x1c,5);put(mem,a+0x60,args.selector)
     put(mem,a+0x24,0x1234);put(mem,a+0x22,0x5678)
     put(mem,a+0x33,1,1);put(mem,a+0xa3,1,1)
     put(mem,0x1c007c,1);put(mem,0x1c0161,0,1)
@@ -57,7 +59,8 @@ def seed(slot):
 
 def fixtures():
     # Every physical actor slot, selector high flags and recovery table tier.
-    for slot,sel,tier in itertools.product(range(9),(0x5f,0x405f,0x805f,0xc05f),(0,1,2)):
+    for slot,high,tier in itertools.product(range(9),(0,0x4000,0x8000,0xc000),(0,1,2)):
+        sel=high|args.selector
         mem,a,t,p=seed(slot);put(mem,a+0x60,sel);put(mem,a+0x70,tier)
         yield (f'init-{slot}-{sel:x}-{tier}',mem,slot)
     # $21732 TAG routes: no credit, inactive owner, human/CPU partner,
@@ -95,13 +98,19 @@ def fixtures():
         put(mem,p+0x34,partner_flags,1);put(mem,a+0xaa,recovery)
         put(mem,a+0xa3,mash,1)
         yield (f'tick-{mode}-{role}-{partner_flags}-{recovery}-{mash}',mem,8)
+    if args.selector==0x5e:
+        for health,mode,role,mash in itertools.product((0,1,0xffff),(0,1),(0,0x40,0xc0),(0,1)):
+            mem,a,t,p=seed(8);put(mem,a+0x1c,0x8005)
+            put(mem,a+0x66,health);put(mem,0x1c0161,mode,1)
+            put(mem,a+0x56,role,1);put(mem,a+0xa3,mash,1)
+            yield (f'health-{health}-{mode}-{role}-{mash}',mem,8)
     # Disabled current state exits before callback. Null/released gameplay
     # link is never dereferenced by $5F; partner pointers remain valid.
     for latched,state,link in itertools.product((False,True),(5,0xff),(0,0x80000000)):
         mem,a,t,p=seed(0);put(mem,a+0x1c,0x8005 if latched else 5)
         put(mem,a+0x20,state);put(mem,a+0x26,link,4)
         yield (f'link-{latched}-{state}-{link}',mem,0)
-    if args.snapshot:
+    if args.snapshot and args.selector==0x5f:
         data=args.snapshot.read_bytes()
         manifest=json.loads(args.snapshot.with_name('action5f_manifest.json').read_text())
         assert hashlib.sha256(data).hexdigest()==manifest['sha256']
@@ -155,6 +164,7 @@ with tempfile.TemporaryDirectory(prefix='wf-action5f-') as temp:
             assert got==expected,(name,'memory',hex(at),[(hex(at+i),g,e) for i,(g,e) in enumerate(zip(got,expected)) if g!=e][:16])
         assert list(nr)==want_regs,(name,'D0-D7',list(nr),want_regs)
     required=(0x19536,0x19540,0x19592,0x195ec,0x19600,0x2173a,0x21756,0x2176e,0x21786,0x2179c,0x217c8,0x217d6,0x217e4,0x217fe,0x21828,0x21936,0x2195c,0x21970,0x11448,0x11456,0x11466,0x10d12,0x10d28,0x10d2e,0x10ca8,0x1c0cc,0x1c0ba)
+    if args.selector==0x5e:required=(0x19536,0x19572,0x195ec,0x195f2,0x195fa,0x19600,0x19606,0x10d12,0x1c0cc)
     if args.snapshot_only:required=(0x19536,0x19540,0x19592,0x10ca8)
     assert all(pc in coverage for pc in required),('missing ROM branch coverage',[hex(pc) for pc in required if pc not in coverage])
     report={'count':count,'passed':0 if args.rom_only else count,'mode':'ROM execution only' if args.rom_only else 'native versus unchanged ROM','rom_sha1':hashlib.sha1(rom).hexdigest(),'snapshot':str(args.snapshot) if args.snapshot and args.snapshot.exists() else None,'compared_memory':[] if args.rom_only else ['$1C0000..$1C1FFF','$0C0000..$0C3FFF'],'compared_registers':None if args.rom_only else 'D0-D7','required_branch_sites':[hex(pc) for pc in required],'covered_branch_sites':[hex(pc) for pc in required if pc in coverage],'intercepted_rom_owners':['$2052 sound output only'],'limitations':['Dereferenced partner pointers identify actors','Recovery and CPU partner tier0..2','Selector$5F only; no gameplay owners intercepted']}
@@ -162,4 +172,4 @@ with tempfile.TemporaryDirectory(prefix='wf-action5f-') as temp:
     if args.report:
         args.report.parent.mkdir(parents=True,exist_ok=True)
         args.report.write_text(json.dumps(report,indent=2)+'\n')
-    print(f'{"ROM ONLY" if args.rom_only else "PASS"} {count} action5f unmodified-ROM fixtures; {len(required)} required branch sites')
+    print(f'{"ROM ONLY" if args.rom_only else "PASS"} {count} action{args.selector:02x} unmodified-ROM fixtures; {len(required)} required branch sites')

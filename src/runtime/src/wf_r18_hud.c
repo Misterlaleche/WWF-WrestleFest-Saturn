@@ -20,7 +20,8 @@ wf_status_t wf_r18_hud_map_update(wf_r18_video_t*v,volatile uint16_t*map,size_t*
   }
   v->hud_dirty[byte]=0;
  }
- if(writes)*writes=n;return WF_OK;
+ if(writes)*writes=n;
+ return WF_OK;
 }
 wf_status_t wf_r18_hud_bind(wf_r18_video_t*v,wf_r18_hud_file_fn read_file){
  if(!v||!read_file)return WF_BAD_STATE;

@@ -1,0 +1,35 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "1f8e30f7f3b1725c18d14c85ec49d40bac505b97dce72561743fc32073199920",
+  "header": [
+    3537,
+    8,
+    1,
+    114750,
+    1389,
+    1
+  ],
+  "source": "validation\\local-20261024\\full-flow-combat-native-f8c-royal-after60-basic\\snapshot-01389.bin",
+  "source_report_sha256": "9d7f08b7675e26df886c3cbbd9ec20d033f31a03f8516c08542d658f144f275b",
+  "source_manifest_sha256": "3798d646ea7cacb295847bc6994beec5a90b60d2408ef839ecc8ee15b5d5015f",
+  "captured_native_handoff": {
+    "valid": true,
+    "ram_sha256": "49e0937426e3b5ff043d91045cb74295283892f76604049fcdbad2fec5665615",
+    "dregs_sha256": "40cd534cb44b0d458ea46c6fb5af16888b76b3523799b5b9114af0ad7c5d77b5",
+    "rng": 4113884288,
+    "compared": [
+      "frame0",
+      "RNG",
+      "all9actors"
+    ],
+    "stage": 4,
+    "method": "Read-only borrowed LWRAM after F8C; raw bytes retained, no state forcing"
+  },
+  "provenance": "Exact Beetle stage3 nativeF8C Royal RAM/Dregs imported into HOST without reseeding, then HOSTbasic reaches3537 slot8 raw8A. Literal pre-dispatch snapshot copies all9 actors/liveD8 and supported globals; unrepresented arcadeRAMzero. No claim that later HOST/SH2 trajectories or physical input latency match.",
+  "green_cases": 6544,
+  "guard_controls": 13,
+  "verified_actions_sha256": "8549849e8f6f670c592b06db01bfa6340dc74387c77a327688625d9203914714",
+  "raw8a_owner_sha256": "9915aedb0a57a72abd65fb23697430e1685fa0835f4b2c405c96a9280f5811e4",
+  "green_report": "validation/local-20261024/action8a-green.json",
+  "rom_intercepts": []
+}

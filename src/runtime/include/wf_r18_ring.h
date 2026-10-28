@@ -8,6 +8,9 @@
  */
 int wf_r18_ring_bind(const void *blob, size_t bytes);
 int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t priority);
+/* Frontend transition: prepare NBG maps and scroll while the caller keeps
+ * the display gated, then expose the complete frame in its own commit. */
+int wf_r18_ring_update_deferred(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t priority);
 /* Host-verifiable exact world lookup; layer0 FG/layer1 BG. */
 int wf_r18_ring_pixel(unsigned layer,int wx,int wy,uint8_t *index);
 int wf_r18_ring_scanline(unsigned layer,int wx,int wy,unsigned transparent,uint8_t out[320]);

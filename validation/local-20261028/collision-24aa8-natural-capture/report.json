@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {
+      "mode": "Royal",
+      "profile": "rush",
+      "returncode": 0,
+      "hits": [
+        "TRACE_24AA8 frame=1550 source=8 target=0 sid=7 tid=20"
+      ]
+    }
+  ],
+  "scope": "HOST instrumented debug build; no physical Saturn timing or hardware validation"
+}

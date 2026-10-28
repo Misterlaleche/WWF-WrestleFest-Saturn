@@ -1,0 +1,5 @@
+{
+  "snapshot_sha256": "5212557605f82313cd71210fe1e6d29e58683f5c6cdbbb5586528c271f90545f",
+  "source": "full-flow-combat-native-f8c-royal-basic/snapshot-00289.bin",
+  "provenance": "HOST gameplay after importing verified read-only SH2 F8C RAM and D registers; no seed or selection edit; projected RAM8KiB/FG."
+}

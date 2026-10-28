@@ -8,6 +8,7 @@ typedef struct wf_collision_pair_ctx {
  uint16_t target_cursor_d1;
  uint8_t source_profile_id;
  uint8_t target_profile_id;
+ struct wf_runtime *runtime; /* optional live globals for effects beyond the pair */
 } wf_collision_pair_ctx_t;
 wf_coll_result_t wf_collision_first_apply(uint8_t selector,wf_collision_pair_ctx_t *c);
 wf_coll_result_t wf_collision_second_apply(uint8_t selector,wf_collision_pair_ctx_t *c);

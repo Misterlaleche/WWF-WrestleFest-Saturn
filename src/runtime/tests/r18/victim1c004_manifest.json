@@ -1,0 +1,13 @@
+{
+  "sha256": "3a1ceb9942d202410520cb767272ae1b9f0036bcd1d0778463a583ca38ae00f8",
+  "header": [
+    4960,
+    5,
+    1,
+    114750,
+    1258,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\full-flow-combat-after5c-a600\\snapshot-01258.bin",
+  "note": "NaturalHOST full frontend/paid TAG A6004960 actor5/id3 state4/sub27, after original raw5C release. Projected RAM16KiB, not physical Saturn RAM."
+}

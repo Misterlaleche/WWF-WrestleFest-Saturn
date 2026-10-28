@@ -12,7 +12,7 @@ static wf_status_t read_rom(void *user,uint32_t at,void *dst,size_t n){if(at>0x8
 static wf_status_t silent_audio(wf_runtime_t*r,uint16_t command,void*u){(void)r;(void)command;(void)u;return WF_OK;}
 int referee_count_chain(uint8_t *ram,uint8_t *fg,uint32_t *regs,const uint8_t *rom,uint32_t *after){
  wf_runtime_t rt={0};wf_r18_video_t video={0};wf_gameplay_binding_context_t game={0};
- memcpy(rt.actors,ram+0x5b0,sizeof rt.actors);memcpy(rt.referee.b,ram+0x11f4,WF_ACTOR_BYTES);memcpy(rt.m68k_regs.d,regs,32);rt.m68k_regs.valid=1;
+ memcpy(rt.actors,ram+0x5b0,sizeof rt.actors);memcpy(rt.referee.b,ram+0x11f4,0x64);memcpy(rt.transient_1258,ram+0x1258,sizeof rt.transient_1258);memcpy(rt.m68k_regs.d,regs,32);rt.m68k_regs.valid=1;
  rt.g.config_0066=word(ram,0x66);rt.g.credited_route=word(ram,0x7c);rt.g.mode_0161=ram[0x161];rt.g.progression_0162=word(ram,0x162);
  rt.g.global_169a=word(ram,0x169a);rt.g.global_169b=ram[0x169b];rt.g.global_169e=word(ram,0x169e);
  rt.g.rng_state=lng(ram,0x5c);rt.g.rng_state_valid=1;rt.g.frame_counter=lng(ram,0x80);
@@ -27,7 +27,7 @@ int referee_count_chain(uint8_t *ram,uint8_t *fg,uint32_t *regs,const uint8_t *r
   if(game.render_queue.list[0][i]!=&rt.referee)return WF_BAD_STATE;
   putl(ram,0x19d0+i*4u,0x1c11f4u);
  }
- memcpy(ram+0x5b0,rt.actors,sizeof rt.actors);memcpy(ram+0x11f4,rt.referee.b,WF_ACTOR_BYTES);putw(ram,0x169a,rt.g.global_169a);putw(ram,0x169e,rt.g.global_169e);
+ memcpy(ram+0x5b0,rt.actors,sizeof rt.actors);memcpy(ram+0x11f4,rt.referee.b,0x64);memcpy(ram+0x1258,rt.transient_1258,sizeof rt.transient_1258);putw(ram,0x169a,rt.g.global_169a);putw(ram,0x169e,rt.g.global_169e);
  memcpy(fg,video.fg0,sizeof video.fg0);memcpy(regs,rt.m68k_regs.d,32);
  wf_r17_rng21b4_live(&rt.g.rng_state,rt.g.frame_counter,&rt.m68k_regs);putl(ram,0x5c,rt.g.rng_state);memcpy(after,rt.m68k_regs.d,32);
  return result;

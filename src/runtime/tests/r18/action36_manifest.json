@@ -1,0 +1,13 @@
+{
+  "sha256": "2c0c7158799392b9a41a86536958bd36a1bf094bb46c85f85108a2c59f7f83fa",
+  "header": [
+    1755,
+    4,
+    1,
+    114750,
+    562,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\full-flow-combat-native-f8c-tag-after12-basic\\snapshot-00562.bin",
+  "note": "NaturalHOST exploration from verified native Beetle TAG F8C handoff, basic profile1755 actor4/id9 raw4036. RAM16KiB projection, not original physical arcade/Saturn RAM."
+}

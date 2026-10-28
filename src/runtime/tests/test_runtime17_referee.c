@@ -24,7 +24,40 @@ static void test_count_entry_clears_word24(void){wf_runtime_t rt;wf_r17_referee_
 static void test_even_phase(void){wf_runtime_t rt;wf_r17_referee_ctx_t c=ctx0();display_calls=audio_calls=0;prep_count(&rt,1u,1u,0);wf_set_u8(&rt.referee,WF_A_LATCHED,(uint8_t)(wf_u8(&rt.referee,WF_A_LATCHED)|0x80u));wf_set_be16(&rt.referee,0x54u,0x3162u);wf_set_u8(&rt.referee,WF_A_MIRROR+1u,4u);assert(wf_r17_referee_logic_1f914(&rt,&rt.referee,&c)==WF_OK);assert(wf_u8(&rt.referee,WF_A_ACTION_PHASE)==2u);assert(rt.g.global_169a==0x0100u);assert(rt.g.global_169b==0u);assert(display_calls==1u);assert(audio_calls==1u&&audio_log[0]==0x3162u);assert(wf_be16(&rt.referee,0x54u)==0x3163u);puts("PASS even count phase display/audio producer sequence");}
 static void test_cancel(void){wf_runtime_t rt;wf_r17_referee_ctx_t c=ctx0();clear_calls=0;prep_count(&rt,5u,10u,0);wf_set_u8(&rt.actors[0],WF_A_PINFLAGS,0u);assert(wf_r17_referee_logic_1f914(&rt,&rt.referee,&c)==WF_OK);assert(clear_calls==1u);assert((wf_be16(&rt.referee,WF_A_STATE)&0x7fffu)==5u);puts("PASS pre-lock cancel +$25<6");prep_count(&rt,6u,10u,0);wf_set_u8(&rt.actors[0],WF_A_PINFLAGS,0u);clear_calls=0;assert(wf_r17_referee_logic_1f914(&rt,&rt.referee,&c)==WF_OK);assert(clear_calls==0u);assert((wf_be16(&rt.referee,WF_A_STATE)&0x7fffu)==6u);puts("PASS no false cancel +$25>=6");}
 static void test_terminals(void){wf_runtime_t rt;wf_r17_referee_ctx_t c=ctx0();clear_calls=0;prep_count(&rt,6u,1u,0);wf_set_u8(&rt.referee,WF_A_LATCHED,(uint8_t)(wf_u8(&rt.referee,WF_A_LATCHED)|0x80u));assert(wf_r17_referee_logic_1f914(&rt,&rt.referee,&c)==WF_OK);assert((wf_be16(&rt.referee,WF_A_STATE)&0x7fffu)==9u);assert(wf_be16(&rt.actors[0],0x4au)==4u);assert(clear_calls==1u);puts("PASS TAG phase7 terminal");prep_count(&rt,6u,1u,1);wf_set_u8(&rt.referee,WF_A_LATCHED,(uint8_t)(wf_u8(&rt.referee,WF_A_LATCHED)|0x80u));clear_calls=0;assert(wf_r17_referee_logic_1f914(&rt,&rt.referee,&c)==WF_OK);assert((wf_be16(&rt.referee,WF_A_STATE)&0x7fffu)==5u);assert(wf_be16(&rt.actors[0],0x4au)==0u);assert(clear_calls==1u);puts("PASS Royal terminal divergence");}
+static void test_result_rejects_invalid_pair(void){
+ wf_runtime_t rt;wf_r17_referee_ctx_t c=ctx0();memset(&rt,0,sizeof rt);
+ for(unsigned i=0;i<4u;i++)active(&rt.actors[i]);
+ wf_set_be32(&rt.actors[0],WF_A_TEAM_LINK,wf_actor_rom_base(1));
+ wf_set_be32(&rt.actors[1],WF_A_TEAM_LINK,wf_actor_rom_base(0));
+ wf_set_be32(&rt.actors[2],WF_A_TEAM_LINK,wf_actor_rom_base(3));
+ wf_set_be32(&rt.actors[3],WF_A_TEAM_LINK,wf_actor_rom_base(2));
+ wf_set_be32(&rt.actors[0],WF_A_TARGET,wf_actor_rom_base(2));
+ wf_set_be32(&rt.referee,WF_A_ROLE,wf_actor_rom_base(0));
+ wf_set_be16(&rt.referee,WF_A_STATE,9u);
+ wf_set_be16(&rt.referee,WF_A_LATCHED,0x8009u);
+ wf_set_be16(&rt.referee,WF_A_MIRROR,17u);
+ wf_set_be16(&rt.referee,WF_A_ANIM_COUNTER,1u);
+ assert(wf_r17_referee_logic_1f914(&rt,&rt.referee,&c)==WF_BLOCKED);
+ assert(c.blocked_dependency_rom==0x20482u);
+ assert(!(wf_u8(&rt.actors[2],WF_A_LOCKOUT)&0x80u));
+ puts("PASS result requires the original grapple pair; no target substitution");
+}
+static void test_idle_reacquires_pin(void){
+ for(unsigned locked=0;locked<2;locked++){
+  wf_runtime_t rt;wf_r17_referee_ctx_t c=ctx0();memset(&rt,0,sizeof rt);
+  rt.g.mode_0161=1u;rt.g.credited_route=1u;
+  active(&rt.actors[0]);active(&rt.actors[2]);
+  wf_set_be16(&rt.actors[0],WF_A_LOCKOUT,locked?0x8000u:0u);
+  wf_set_u8(&rt.actors[2],WF_A_PINFLAGS,1u);
+  wf_set_be32(&rt.referee,WF_A_ROLE,wf_actor_rom_base(0));
+  wf_set_be16(&rt.referee,WF_A_LATCHED,0x8000u);
+  assert(wf_r17_referee_logic_1f914(&rt,&rt.referee,&c)==WF_OK);
+  assert(wf_be32(&rt.referee,WF_A_ROLE)==wf_actor_rom_base(locked?0u:2u));
+  assert(wf_be16(&rt.referee,WF_A_STATE)==(locked?0u:0x8006u));
+ }
+ puts("PASS referee reacquires a pin only while previous actor is unlocked");
+}
 static void test_render_and_scheduler(void){wf_runtime_t rt;wf_gameplay_binding_context_t g;wf_phase_binding_t b[40];size_t n;memset(&rt,0,sizeof(rt));n=wf_gameplay_bindings_build(&g,b,40);assert(n>=29u);wf_runtime_init(&rt,b,n);rt.g.rng_state_valid=1u;rt.g.rng_state=0x13579bdfu;g.camera_valid=1u;g.camera.scroll0_x=0x0140;g.camera.scroll0_y=0x0200;g.cabinet_words_valid=1u;g.cabinet_word_140020=g.cabinet_word_140022=0xffffu;rt.g.mode_0161=1u;wf_r17_referee_init_10718(&rt);assert(wf_phase_referee_1f914(&rt,0x1f914u,&g)==WF_OK);assert(g.render_queue.count[0]==1u&&g.render_queue.list[0][0]==&rt.referee);assert(wf_be16(&rt.referee,WF_A_SCREEN_X)==0x0140u);puts("PASS $247C/$27B8 referee render registration");wf_r17_render_queue_clear(&g.render_queue);assert(wf_runtime_frame(&rt)==WF_BLOCKED);assert(rt.trace_count==23u);assert(rt.trace[22]==0x008cf8u);assert(rt.trace[8]==0x01c150u&&rt.trace[9]==0x01f914u&&rt.trace[10]==0x00f4c2u&&rt.trace[11]==0x024062u&&rt.trace[12]==0x024e58u&&rt.trace[13]==0x00fdeeu&&rt.trace[14]==0x010120u&&rt.trace[15]==0x010e6au);puts("PASS scheduler crosses referee/F4C2/$24062/$24E58/$FDEE and crosses $10E6A and crosses $7A00 and blocks at $8CF8");}
 static void test_fail_closed(void){wf_runtime_t rt;wf_r17_referee_ctx_t c;memset(&c,0,sizeof(c));prep_count(&rt,1u,1u,0);wf_set_u8(&rt.referee,WF_A_LATCHED,(uint8_t)(wf_u8(&rt.referee,WF_A_LATCHED)|0x80u));wf_set_be16(&rt.referee,0x54u,0x3162u);assert(wf_r17_referee_logic_1f914(&rt,&rt.referee,&c)==WF_BLOCKED);assert(c.blocked_dependency_rom==0x0002067cu);puts("PASS unresolved count graphics remain fail-closed; no fabricated kickout/submission/rope-break");}
 static void test_visibility(void){wf_actor_raw_t a;memset(&a,0,sizeof(a));wf_set_be16(&a,WF_A_SCREEN_X,(uint16_t)-63);wf_set_be16(&a,WF_A_SCREEN_Y,(uint16_t)-63);assert(wf_r17_visibility_2188_exact(&a,0)==WF_R17_YES);wf_set_be16(&a,WF_A_SCREEN_X,383u);assert(wf_r17_visibility_2188_exact(&a,0)==WF_R17_NO);wf_set_be16(&a,WF_A_SCREEN_X,0u);wf_set_be16(&a,WF_A_SCREEN_Y,319u);assert(wf_r17_visibility_2188_exact(&a,0)==WF_R17_NO);puts("PASS $2188 signed visibility bounds");}
-int main(void){test_init();test_tables();test_raw48_acquire();test_approach_link();test_count_entry_clears_word24();test_even_phase();test_cancel();test_terminals();test_render_and_scheduler();test_fail_closed();test_visibility();puts("PASS test_runtime17_referee");return 0;}
+int main(void){test_init();test_tables();test_raw48_acquire();test_approach_link();test_count_entry_clears_word24();test_even_phase();test_cancel();test_terminals();test_result_rejects_invalid_pair();test_idle_reacquires_pin();test_render_and_scheduler();test_fail_closed();test_visibility();puts("PASS test_runtime17_referee");return 0;}

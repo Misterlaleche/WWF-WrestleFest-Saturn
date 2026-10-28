@@ -1,0 +1,13 @@
+{
+  "sha256": "db7bc388156949abb48b332697728458ff18e94d4acf5527f82ebb313ef9b204",
+  "header": [
+    5427,
+    5,
+    1,
+    114750,
+    1359,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\full-flow-combat-after2b-a600\\snapshot-01359.bin",
+  "note": "NaturalHOST full frontend/paid TAG A6005427 actor5/id3 state4/sub24 after original raw2B release. RAM16KiB typed projection, not physical Saturn RAM."
+}

@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "cases": 337,
+  "guard_controls": 16,
+  "waits": 6,
+  "source_sha256": "df226fa149f54eb9c2286de5a549aff82552d515f4c1ad602cf4ad9220eca034",
+  "coverage_pcs": 1335,
+  "compared": [
+    "raw16KB/BG/FG/palettes/board",
+    "D0-D7/A0-A6",
+    "request entry/return PCs/order/live context/digests",
+    "unchanged pending request"
+  ],
+  "delegated_intact_rom": [
+    "0x139c",
+    "0x15f4",
+    "0x1f6c",
+    "0x1f9e",
+    "0x1fc0",
+    "0x1fde",
+    "0x21e6",
+    "0x27b8",
+    "0x2836",
+    "0x2988",
+    "0x2a06",
+    "0x2aea",
+    "0x2b58",
+    "0x65c0",
+    "0x8eb6",
+    "0x9aca",
+    "0xae20",
+    "0xb608",
+    "0xbda6",
+    "0x2067c",
+    "0x206fe",
+    "0x2503c",
+    "0x264e2",
+    "0x26772",
+    "0x26844",
+    "0x26e66"
+  ],
+  "intercepts": [
+    "2052 silent sound output only"
+  ],
+  "limits": [
+    "This regression suite covers AE20 argument3; other programs require separate evidence",
+    "65C0 ranking and ending1B4E not supplied by this module",
+    "206FE/2067C are explicit calls to existing native referee video helpers"
+  ]
+}

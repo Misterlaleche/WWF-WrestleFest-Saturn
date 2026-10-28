@@ -1,0 +1,16 @@
+{
+  "source_commit": "805be2a plus ROM-exact owner chain through raw34",
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/after34/snapshot-01393.bin",
+  "sha256": "42f8c5b0f28de3d8487815608556b484a67f187b63396875257b0bdcb98f7194",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 5091,
+  "slot": 1,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 1393,
+  "recorded_blocked_status": 1,
+  "state4": "0x2023",
+  "health": 0,
+  "derived": false,
+  "comparison": "Natural untouched RAM/D0-D7; native bounded dispatcher versus unchanged ROM; full RAM, FG RAM and D0-D7 including RNG invariant."
+}

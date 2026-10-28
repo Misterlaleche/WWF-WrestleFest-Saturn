@@ -1,0 +1,54 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "rom_range_A654_AE20_sha256": "f4391241f26856ddd51b4b6c637a8dd1f2fb7a41fa195d6a11c1d7e01751d276",
+  "wp12_nested_zip_sha256": "742dc77ba94ca21bf9186e8b6655e4b3869e0a6c303de00e4499a6f1d8d2ac4d",
+  "wp12_document": "validation/local-20261024/frontend-research/wp12/WF-Saturn-12-WRESTLER-ENTRANCES-PREMATCH-ROM-EXACT-FINAL.md",
+  "wp12_document_sha256": "2fb0790e0c2862696cf935b9427da3a320de2bb40efce784b343c3ff1ee3a34a",
+  "controller_entry": "A68A",
+  "controller_return": "A6A2",
+  "actor_owner": "ACB6",
+  "controller_table": "A7B4[24]",
+  "visual_tables": [
+    "AD6C[12]",
+    "AD9C[12]",
+    "ADA8..AE1F"
+  ],
+  "source_sha256": "e93f1c52c808acea64bdc4802dbff3697009163f1c2003d3f7cd7b6cff12374b",
+  "required_external_effects": [
+    "2052",
+    "2AEA",
+    "9A42",
+    "2208",
+    "98BA",
+    "247C",
+    "27B8",
+    "2836",
+    "2B58",
+    "7506",
+    "2A06",
+    "8EB6"
+  ],
+  "implemented_scope": [
+    "24 TAG presenter callbacks",
+    "ACB6 twelve identity visual programs",
+    "Complete A654 scene cursor through A7B2",
+    "TAG/Royal render traversal and exact physical input skip",
+    "Original A778 teardown order"
+  ],
+  "pending_scope": [
+    "CallerC6C and subsequent composition",
+    "native platform dependencies",
+    "Royal1086C setup"
+  ],
+  "evidence": [
+    "validation/local-20261024/prematch-green.json",
+    "validation/local-20261024/prematch-controls-green.json",
+    "validation/local-20261024/prematch-scene-green.json",
+    "validation/local-20261024/prematch-scene-controls-green.json"
+  ],
+  "prior_controller_actor_sha256": "63531cc5790ac3b5a1793924f7fba009731d888392db920ee7bc5f99334f2c59",
+  "external_io": [
+    "SYNC A728 ACK1C006F.bit1",
+    "READ16 physical140020/22/24/26"
+  ]
+}

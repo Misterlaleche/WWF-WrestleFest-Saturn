@@ -1,0 +1,23 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_sha256": "2b70532d79165d2f29930c14225ec5af95f057d170870800ab5f8fe277f4ac71",
+  "owners": [
+    "Paid AC0/BD2..C96",
+    "C6C common presentation finalize",
+    "8AE6..8B38",
+    "Original JMP F8C"
+  ],
+  "protocol": "Explicit CALL request/complete; 6FC/57E0 ENTRY requires the actual continuation PC; WF_BLOCKED is never WAIT",
+  "green_cases": 156,
+  "protocol_controls": 18,
+  "evidence": [
+    "match-flow-red.log",
+    "match-flow-green.json",
+    "match-flow-controls-green.json"
+  ],
+  "limits": [
+    "Original CALL owners delegated to intact ROM by the orchestration oracle",
+    "Paid fixtures use the replay 7B70 fast path; full 7B70 has a separate proof",
+    "RT import at F8C, parent driver and hardware outside this owner proof"
+  ]
+}

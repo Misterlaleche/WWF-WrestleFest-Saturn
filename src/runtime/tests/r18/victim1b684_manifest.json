@@ -1,0 +1,17 @@
+{
+  "sha256": "d1729d5f9537df2c3ca545f670dc76918ef0d07c36e44b14969fb1fe1070d103",
+  "header": [
+    2935,
+    5,
+    1,
+    114750,
+    936,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\A600-after-controller3d-tag\\snapshot-00936.bin",
+  "provenance": "NaturalHOST A600 trace after controller3D TAG admission. Before dispatch1C03E frame2935 slot5, subtype0F at+64, inherited selectorC048. Host capture, not physicalSaturnRAM.",
+  "ram_before_offset": 56,
+  "ram_after_offset": 8280,
+  "post_D_offset": 8248,
+  "rom_caller": "1C03E -> state4 table1AFD4[0F] -> descriptor1B66C -> callback1B684 -> original animation tail1C0C8"
+}

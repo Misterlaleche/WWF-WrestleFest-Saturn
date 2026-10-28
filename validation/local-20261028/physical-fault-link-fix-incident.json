@@ -1,0 +1,37 @@
+{
+  "description": "Physical Saturn TAG fault in last delivered R05; user reports Hogan and Big Boss Man, does not remember immediate action.",
+  "diagnostic_page_revision": "R04",
+  "owner": "0x024062",
+  "reported_dependency": "0x024408",
+  "combat_frame_hex": "0x29c",
+  "slot": "0xff",
+  "explanation": "R05 reports the first pair callback even when second callback blocked; first selector 1 accepts or rejects, so second callback blocked. Photos did not show pair, profiles or second selector.",
+  "unknowns": [
+    "Exact collision pair, input just before failure, and exact blocked second callback.",
+    "Whether the subsequent $24A90 fix resolves this particular physical incident."
+  ],
+  "evidence_photos": [
+    {
+      "path": "C:\\Users\\VersusPC\\Downloads\\Imagen de ChatGPT 28 oct 2026, 16_12_34.jpg",
+      "sha256": "c4e033cc7f7bb592fa66c0aa231d6b0651cbfcd377b5955ebc412cb0a6e45d08"
+    },
+    {
+      "path": "C:\\Users\\VersusPC\\Downloads\\Imagen de ChatGPT 28 oct 2026, 16_12_48.jpg",
+      "sha256": "fb5e20e2155f37f25345d59ee2964b1244254c7c17ca666d2f4bea568737b408"
+    },
+    {
+      "path": "C:\\Users\\VersusPC\\Downloads\\Imagen de ChatGPT 28 oct 2026, 16_12_58.jpg",
+      "sha256": "89c089c0ff6bb507481b5e6e56b10600a8b8917f04c324f72603cda4d248c195"
+    },
+    {
+      "path": "C:\\Users\\VersusPC\\Downloads\\Imagen de ChatGPT 28 oct 2026, 16_13_05.jpg",
+      "sha256": "7c272ec3a83ccb19bc9b1a929be542768285a84f5a83d42fd56330fc4f0c8910"
+    },
+    {
+      "path": "C:\\Users\\VersusPC\\Downloads\\Imagen de ChatGPT 28 oct 2026, 16_13_10.jpg",
+      "sha256": "47031a2070c7a5913a6471f2d8553b1ce75a2d08b234f11eee930af27fd37b7e"
+    }
+  ],
+  "post_r05_fix": "collision-24a90-rom.json",
+  "host_regression": "physical-fault-link-fix-tag/report.json"
+}

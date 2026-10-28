@@ -67,7 +67,8 @@ static void apply(wf_r18_video_t*v,const wf_r17_fg0_write_t*w,size_t n){
   uint8_t*p=mapped(v,w[i].addr,w[i].width);
   for(unsigned k=0;k<w[i].width;k++){
    uint8_t value=(uint8_t)(w[i].value>>(8*(w[i].width-1-k)));
-   if(p[k]==value)continue;p[k]=value;
+   if(p[k]==value)continue;
+   p[k]=value;
    uint32_t a=w[i].addr+k;
    palette_changed(v,a);
    if(a>=0xc0000u&&a<0xc2000u&&(a&1u)){

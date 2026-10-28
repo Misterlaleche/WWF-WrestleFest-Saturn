@@ -28,6 +28,13 @@ SH_SRCS:= \
  src/wf_r17_follow_10e86.c src/wf_r17_dependencies.c src/wf_r17_integration.c src/wf_r17_post7a00.c src/wf_r17_postack_2017a.c
 SH_SRCS+= src/wf_r17_participant_helpers.c src/wf_r17_participant_native.c src/wf_r17_royal_9132.c src/wf_r17_tag_6e34.c
 SH_SRCS+= src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_result_screen.c src/wf_r18_bootstrap.c src/wf_r18_cdfs.c src/wf_r18_metasprite.c $(R18_PRESENT) src/wf_r18_ring.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_transition.c
+SH_SRCS+= src/wf_r18_frontend_input.c src/wf_r18_frontend_palette.c src/wf_r18_frontend_fade.c src/wf_r18_frontend_effect.c src/wf_r18_mode_select.c src/wf_r18_title_palette.c src/wf_r18_frontend_boot.c src/wf_r18_title.c src/wf_r18_roster_select.c src/wf_r18_prematch.c src/wf_r18_frontend_io.c src/wf_r18_frontend_map.c src/wf_r18_frontend_render.c src/wf_r18_frontend_leaf.c src/wf_r18_royal_setup.c
+SH_SRCS+= src/wf_r18_frontend_driver.c src/wf_r18_frontend_reset.c src/wf_r18_frontend_coin.c src/wf_r18_frontend_irq.c src/wf_r18_frontend_mode_plate.c src/wf_r18_frontend_board.c src/wf_r18_match_setup.c src/wf_r18_match_flow.c src/wf_r18_match_hud.c src/wf_r18_match_flash.c src/wf_r18_match_aux.c src/wf_r18_match_driver.c src/wf_r18_match_support.c src/wf_r18_card_scene.c src/wf_r18_runtime_handoff.c
+SH_SRCS+= src/wf_r18_frontend_world.c
+SH_SRCS+= src/wf_r18_attract_setup.c src/wf_r18_post_tag.c
+SH_SRCS+= src/wf_r18_ranking.c src/wf_r18_ranking_glyph.c src/wf_r18_records_aux.c
+SH_SRCS+= src/wf_r18_save.c src/wf_r18_save_saturn.c
+SH_SRCS+= src/wf_r18_scsp.c ../audio/native/wf_native_host.c ../audio/native/wf_native_queue.c ../audio/native/wf_native_elf.c ../audio/native/wf_native_yaul.c ../audio/native/wf_sfx_upload.c ../audio/native/wf_music_elf.c
 ifneq ($(R18_REPLAY_TEST),)
 SH_CFLAGS+= -DWF_R18_REPLAY_TEST=1
 endif
@@ -40,8 +47,11 @@ endif
 ifneq ($(R18_PROFILE_STOP),)
 SH_CFLAGS+= -DWF_R18_PROFILE_STOP=$(R18_PROFILE_STOP)
 endif
+ifneq ($(R18_DIAG_RATE),)
+SH_CFLAGS+= -DWF_R18_DIAG_RATE=1
+endif
 SH_CFLAGS+= -O2 -Iinclude -Wall -Wextra -Werror -DWF_PLATFORM_SATURN=1
-SH_DEFSYMS+= -Wl,--defsym=___master_stack=0x06004000 -Wl,--defsym=___slave_stack=0x06001E00
+SH_DEFSYMS+= -Wl,--defsym=___master_stack=0x06004000 -Wl,--defsym=___slave_stack=0x060FF000
 
 # Proven WP33 / Yaul single-data-track boot contract.
 IMAGE_DIRECTORY:= audit/runtime18-cd
@@ -52,13 +62,13 @@ IP_AREAS:= JTUBKAEL
 IP_PERIPHERALS:= J
 IP_TITLE:= WWF WrestleFest Runtime18
 IP_MASTER_STACK_ADDR:= 0x06004000
-IP_SLAVE_STACK_ADDR:= 0x06001E00
+IP_SLAVE_STACK_ADDR:= 0x060FF000
 IP_1ST_READ_ADDR:= 0x06004000
 IP_1ST_READ_SIZE:= -1
 include $(YAUL_INSTALL_ROOT)/share/build.post.iso-cue.mk
 
 pre-build-iso:
 	@mkdir -p $(IMAGE_DIRECTORY)
-	@printf 'WrestleFest Saturn Runtime18 direct combat build\n' > $(IMAGE_DIRECTORY)/ABS.TXT
+	@printf 'WrestleFest Saturn Runtime18 native frontend and combat build\n' > $(IMAGE_DIRECTORY)/ABS.TXT
 	@printf 'Boot/CD pipeline: WF-CLEAN-R01 WP33 and Yaul SDK\n' > $(IMAGE_DIRECTORY)/BIB.TXT
 	@printf 'WrestleFest assets retain their original rights holders.\n' > $(IMAGE_DIRECTORY)/CPY.TXT

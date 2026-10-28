@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """CPU state1 target-ringside choice vs untouched ROM.
 
-Only wf_cpu_runtime.c is taken from the working tree. Every other native
-source is extracted from immutable f88acad. Natural frame1328 slot5 is
+The CPU owner and its state-5 dependency are taken from the working tree.
+Other native sources are extracted from immutable f88acad. Natural frame1328 slot5 is
 preserved verbatim; derived boundaries are labeled. Checks include all nine
 actors, globals, RNG, D0-D7 and direction scratch. The $1C8F0 {30,70} choice
 must either set B6.bit4/state0 or B7.bit6/state5/selector3D, preserving the
@@ -55,7 +55,9 @@ for own_inside,target_inside in ((0,0),(0,1),(1,0)):
 if args.natural_only:cases=cases[:1]
 source_root=args.source_root or root
 cpu_source=(args.cpu_source or source_root/'src/wf_cpu_runtime.c').read_bytes()
-support_sources={}
+# The current CPU owner calls its production state-5 approach wrapper.
+# Freeze that exact dependency and its public contract, not an obsolete base.
+support_sources={name:(source_root/name).read_bytes() for name in ('include/wf_cpu_runtime.h','src/wf_state5_exec.c')}
 results=[];coverage=collections.Counter();continuations=collections.Counter()
 with tempfile.TemporaryDirectory() as temp:
  frozen=Path(temp);archive=subprocess.run(['git','archive',base,'src/runtime'],cwd=repo,stdout=subprocess.PIPE,check=True).stdout

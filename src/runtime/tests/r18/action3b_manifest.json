@@ -1,0 +1,18 @@
+{
+  "sha256": "d0430556ce82d4f2311e479fd1a6ce602d0dd2607c941e823b84f8ed95aeda23",
+  "header": [
+    5026,
+    4,
+    1,
+    114750,
+    1524,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\tag-current-basic-afterraw79\\snapshot-01524.bin",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "owner": "12614[3B] descriptor17CF6/callback17D12",
+  "limits": [
+    "Natural cold HOST TAG basic5026; no forced actor/seed/input/results",
+    "Typed runtime snapshot projects documented raw fields; unrepresented RAM zero; not physical Saturn"
+  ]
+}

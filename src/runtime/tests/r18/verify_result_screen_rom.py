@@ -9,6 +9,7 @@ The $11B6 scratch clears and $122C onward scene transition are outside scope.
 import argparse
 import ctypes
 import hashlib
+import os
 from pathlib import Path
 import random
 import subprocess
@@ -25,9 +26,9 @@ assert (ROOT / 'include/wf_r18_result_screen.h').is_file(), 'missing in-ring pre
 assert (ROOT / 'src/wf_r18_result_screen.c').is_file(), 'missing in-ring presentation implementation'
 
 rng = random.Random(0x11ce122c)
-sources = ['src/wf_r18_result_screen.c', 'src/wf_r18_video.c', 'src/wf_r17_m68k_shadow.c']
+sources = ['src/wf_r18_result_screen.c', 'src/wf_r18_frontend_palette.c', 'src/wf_r18_video.c', 'src/wf_r17_m68k_shadow.c']
 flags = ['cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-Wno-misleading-indentation', '-O2', '-Iinclude']
-with tempfile.TemporaryDirectory(prefix='wf-result-screen-') as temporary:
+with tempfile.TemporaryDirectory(prefix='wf-result-screen-',ignore_cleanup_errors=os.name=='nt') as temporary:
     tmp = Path(temporary)
     host = tmp / 'result-screen-host'
     subprocess.run([*flags, *sources, 'tests/r18/test_result_screen.c', '-o', str(host)], cwd=ROOT, check=True)

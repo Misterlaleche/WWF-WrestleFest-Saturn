@@ -10,6 +10,7 @@
 #include "wf_r17_contract.h"
 #include "wf_r17_resolver_280dc.h"
 #include "wf_r17_dispatch_1c03e.h"
+#include "wf_r17_actions_r11.h"
 #include "wf_physics.h"
 #include "wf_r17_ringside_fdee.h"
 #include "wf_r17_fixed_four_10120.h"
@@ -22,12 +23,19 @@ static wf_status_t f4c2_audio_emit(uint16_t command,void *user){
  if(!c||!c->f4c2_active_rt||!c->audio_command)return WF_BLOCKED;
  return c->audio_command(c->f4c2_active_rt,command,c->r17_owner_user);
 }
+static wf_status_t f4c2_partner_215b6(wf_runtime_t *rt,wf_actor_raw_t *actor,void *user){
+ wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;
+ uint32_t blocked_rom=0u;
+ wf_status_t status=wf_r17_action_partner_215b6(rt,actor,&blocked_rom);
+ if(status!=WF_OK&&c)c->last_blocked_dependency=blocked_rom;
+ return status;
+}
 static void f4c2_sync_raw23_in(wf_runtime_t *rt,wf_gameplay_binding_context_t*c){
  wf_r17_raw23_ctx_t*x=&c->f4c2_raw23_ctx;
  x->mode_0161=rt->g.mode_0161;x->global_15d2=rt->g.global_15d2;x->global_15d3=rt->g.global_15d3;x->shake_1800=rt->g.global_1800;
  x->referee_1150=rt->g.global_1150;x->referee_1180=rt->g.global_1180;x->referee_11b0=rt->g.global_11b0;x->referee_11e0=rt->g.global_11e0;
  x->referee_1151=(uint8_t)rt->g.global_1150;x->referee_11b1=(uint8_t)rt->g.global_11b0;
- x->audio_emit=f4c2_audio_emit;x->special_215b6=0;x->user=c;
+ x->audio_emit=f4c2_audio_emit;x->special_215b6=f4c2_partner_215b6;x->user=c;
 }
 static void f4c2_sync_raw23_out(wf_runtime_t *rt,wf_gameplay_binding_context_t*c){
  wf_r17_raw23_ctx_t*x=&c->f4c2_raw23_ctx;
@@ -44,6 +52,8 @@ static wf_status_t f4c2_dispatch_hook(wf_runtime_t *rt,wf_actor_raw_t *a,void *u
  c->f4c2_active_rt=rt;f4c2_sync_raw23_in(rt,c);
  c->f4c2_actions.raw23_ctx=&c->f4c2_raw23_ctx;c->f4c2_actions.fixed_object0=&rt->fixed_object0;c->f4c2_actions.fixed_object1=&rt->fixed_object1;c->f4c2_dispatch.actions=&c->f4c2_actions;
  c->f4c2_actions.video_batch=c->post7_video_batch;c->f4c2_actions.video_user=c->r17_owner_user;
+ c->f4c2_actions.resource_2b58=c->post7_resource_2b58;
+ c->f4c2_actions.resource_2aea=c->post7_resource_2aea;
  int raw23=wf_u8(a,WF_A_LATCHED+1u)==5u&&wf_u8(a,WF_A_SELECTOR_LO)==0x23u;
  s=wf_r17_dispatch_1c03e_bounded(rt,a,&c->f4c2_dispatch);if(raw23)f4c2_sync_raw23_out(rt,c);c->f4c2_active_rt=0;
  if(s==WF_OK&&c->f4c2_dispatch.extra_render_actor){
@@ -58,6 +68,8 @@ static wf_status_t f4c2_dispatch_hook(wf_runtime_t *rt,wf_actor_raw_t *a,void *u
   if(s!=WF_OK)c->last_blocked_dependency=0x00012592u;
  }
  if(s!=WF_OK&&c->last_blocked_dependency==0u){c->last_blocked_dependency=c->f4c2_dispatch.blocked_dependency_rom?c->f4c2_dispatch.blocked_dependency_rom:0x0001c03eu;}
+ if(s!=WF_OK)for(unsigned i=0;i<WF_ACTOR_SLOTS;i++)
+  if(a==&rt->actors[i]){c->last_blocked_slot=(uint8_t)i;break;}
  return s;
 }
 static wf_status_t f4c2_postqueue_2208(wf_runtime_t *rt,wf_actor_raw_t *a,void *user){
@@ -88,15 +100,23 @@ wf_status_t wf_phase_input_real(wf_runtime_t *rt,uint32_t addr,void *user){
   wf_r17_m68k_move_w(&rt->m68k_regs,0u,(uint16_t)(i+1u));
   wf_actor_raw_t *a=&rt->actors[i];if((wf_u8(a,WF_A_ACTIVE)&0x80u)==0u)continue;
   if((wf_u8(a,WF_A_ROLE)&0x80u)!=0u)continue; /* $5170 */
-  if((c->input_valid_mask&(uint16_t)(1u<<i))==0u){c->last_blocked_phase=0x00514eu;c->last_blocked_dependency=0x00514eu;return WF_BLOCKED;}
-  uint16_t nibble=(uint16_t)(((uint8_t)~c->input_hw_low[i])>>4);
+  /* $5178 loads the live +8A source, which TAG can exchange between
+   * partners. $517C consumes its physical WORD only after the role gate. */
+  uint32_t source=wf_be32(a,WF_A_INPUT_SOURCE)&0x00ffffffu;
+  if(!c->participant_input_word){c->last_blocked_phase=0x00514eu;c->last_blocked_dependency=0x00517cu;return WF_BLOCKED;}
+  uint16_t physical;wf_r17_m68k_shadow_t saved_regs=rt->m68k_regs;
+  wf_status_t input_status=c->participant_input_word(rt,source,&physical,c->r17_owner_user);
+  rt->m68k_regs=saved_regs;
+  if(input_status!=WF_OK){c->last_blocked_phase=0x00514eu;c->last_blocked_dependency=0x00517cu;return WF_BLOCKED;}
+  uint8_t hardware_low=(uint8_t)physical;
+  uint16_t nibble=(uint16_t)(((uint8_t)~hardware_low)>>4);
   uint16_t d2=(uint16_t)((nibble<<5)&0x100u);
   uint16_t d1=(uint16_t)((nibble&7u)|d2);
   wf_r17_m68k_move_w(&rt->m68k_regs,2u,d2);
   if((rt->g.pipeline_mode&1u)!=0u){d1=(uint16_t)(d1|wf_be16(a,WF_A_INPUT_ACC));wf_r17_m68k_move_w(&rt->m68k_regs,3u,d1);}
   else d1=wf_be16(a,WF_A_INPUT_ACC);
   wf_r17_m68k_move_w(&rt->m68k_regs,1u,d1);
-  wf_input_decode_514e(a,c->input_hw_low[i],rt->g.pipeline_mode&1u);
+  wf_input_decode_514e(a,hardware_low,rt->g.pipeline_mode&1u);
  }
  return WF_OK;
 }
@@ -201,7 +221,7 @@ wf_status_t wf_phase_wrestlers_f4c2(wf_runtime_t *rt,uint32_t addr,void *user){
  if(!rt||!c||!c->camera_valid)return WF_BLOCKED;
  render.scroll_a_x=(uint16_t)c->camera.scroll0_x;render.scroll_a_y=(uint16_t)c->camera.scroll0_y;render.queue=&c->render_queue;render.visibility_2188=wf_r17_visibility_2188_exact;render.visibility_user=0;
  h.resolver_280dc=wf_r17_resolver_280dc_hook;h.dispatcher_1c03e=f4c2_dispatch_hook;h.postqueue_2208=f4c2_postqueue_2208;h.user=c;
- c->last_blocked_phase=0u;c->last_blocked_dependency=0u;s=wf_r17_wrestlers_f4c2(rt,&render,&h);
+ c->last_blocked_phase=0u;c->last_blocked_dependency=0u;c->last_blocked_slot=0xffu;s=wf_r17_wrestlers_f4c2(rt,&render,&h);
  if(s!=WF_OK){c->last_blocked_phase=0x00f4c2u;if(c->last_blocked_dependency==0u)c->last_blocked_dependency=(s==WF_BAD_STATE)?0x000280dcu:0x00f4c2u;return s;}return WF_OK;
 }
 
@@ -226,8 +246,18 @@ wf_status_t wf_phase_ringside_fdee(wf_runtime_t *rt,uint32_t addr,void *user){
 wf_status_t wf_phase_fixed_four_10120(wf_runtime_t *rt,uint32_t addr,void *user){
  wf_gameplay_binding_context_t*c=(wf_gameplay_binding_context_t*)user;wf_r17_render_ctx_t render;wf_status_t s;(void)addr;
  if(!rt||!c||!c->camera_valid)return WF_BLOCKED;
+ /* These four globals are the original compact records' +$1C WORDs.
+  * Actions own the named view; $10120 owns the compact view while running. */
+ wf_actor_raw_t*o[4]={&rt->fixed_four_1134,&rt->referee_aux,&rt->fixed_four_1194,&rt->fixed_four_11c4};
+ uint16_t*g[4]={&rt->g.global_1150,&rt->g.global_1180,&rt->g.global_11b0,&rt->g.global_11e0};
+ uint16_t before[4];
+ for(unsigned i=0;i<4u;i++){before[i]=wf_be16(o[i],WF_A_LATCHED);wf_set_be16(o[i],WF_A_LATCHED,*g[i]);}
  render.scroll_a_x=(uint16_t)c->camera.scroll0_x;render.scroll_a_y=(uint16_t)c->camera.scroll0_y;render.queue=&c->render_queue;render.visibility_2188=wf_r17_visibility_2188_exact;render.visibility_user=0;
  s=wf_r17_fixed_four_10120(rt,&render,(wf_r17_fixed_four_audio_fn)c->audio_command,c->r17_owner_user,&c->fixed_four_10120);
+ for(unsigned i=0;i<4u;i++){
+  if(s==WF_OK)*g[i]=wf_be16(o[i],WF_A_LATCHED);
+  else wf_set_be16(o[i],WF_A_LATCHED,before[i]);
+ }
  if(s!=WF_OK){c->last_blocked_phase=0x010120u;c->last_blocked_dependency=c->fixed_four_10120.blocked_dependency_rom?c->fixed_four_10120.blocked_dependency_rom:0x010120u;}
  return s;
 }

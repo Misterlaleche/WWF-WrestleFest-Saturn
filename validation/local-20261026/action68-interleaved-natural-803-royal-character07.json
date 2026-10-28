@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "route": "68",
+  "steps": 98,
+  "start_frame": 803,
+  "start_slot": 4,
+  "mode": "royal",
+  "rescue": false,
+  "through_rescue": false,
+  "scene_handoff_at": null,
+  "through_69": false,
+  "source_character": 2,
+  "character": 7,
+  "start_snapshot_sha256": "3f08374ca8385c22bd76850811e989c66ec3eab3ce05bc273c113c908b370a5c",
+  "source_transition_report_sha256": null,
+  "terminal_state_name": null,
+  "terminal_state_sha256": null,
+  "outside_scene_snapshot_sha256": null,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "phase_history": [
+    [
+      0,
+      0
+    ]
+  ],
+  "selector_history": [
+    [
+      0,
+      104
+    ],
+    [
+      97,
+      122
+    ]
+  ],
+  "visual_poses": [
+    "0013",
+    "0016",
+    "0068"
+  ],
+  "last": {
+    "tick": 97,
+    "phase": 0,
+    "selector": 122,
+    "state": 5,
+    "x": 887,
+    "y": 388,
+    "descriptor": 104478
+  },
+  "controlled_inputs": {
+    "character_replaced_in_snapshot": true,
+    "royal_mode_bit_set": true,
+    "tag_rescue_flags_set": false,
+    "outside_scene_mode_replayed_from_independent_capture": false,
+    "palette_allocation_seeded": false
+  },
+  "transfer_queue_count": 0,
+  "transfer_commands": [
+    0,
+    0
+  ],
+  "source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+  "verifier_sha256": "9f5835cbd835e8e80503165232afb67be0cdde4d2e30581962c151d90b29d9ba",
+  "bridge_sha256": "5be1cd86603aa2a51670a80462a1789c3bc601ce6fa89057de0ff7e696e9f1fc",
+  "compared": [
+    "RAM16KB",
+    "FG16KB",
+    "D0-D7",
+    "descriptor after each action tick"
+  ],
+  "limits": [
+    "Isolated projection from a HOST capture or a verified native/ROM scene output: other actors do not run.",
+    "Character, Royal, rescue, scene-mode and palette-allocation variants are controlled mutations, not independently captured natural scenes.",
+    "Only 8 KiB of captured arcade work RAM was supplied; unrepresented bytes are zero.",
+    "No physical Saturn, audio, VDP1 or frame-rate equivalence claim."
+  ]
+}

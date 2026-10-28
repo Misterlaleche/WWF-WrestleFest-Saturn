@@ -20,6 +20,7 @@ typedef struct wf_r18_transition_context {
  uint8_t *priority_140010;
  uint16_t sprite_control_140008;
  uint32_t blocked_pc;
+ uint8_t unblank_pending;
 } wf_r18_transition_context_t;
 void wf_r18_transition_bind(wf_r18_transition_context_t *);
 wf_status_t wf_r18_transition_reset(wf_runtime_t *,uint8_t,void *);

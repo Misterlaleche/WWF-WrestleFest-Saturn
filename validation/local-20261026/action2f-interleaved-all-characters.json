@@ -1,0 +1,781 @@
+{
+  "status": "PASS",
+  "route": "2f",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "50be4bfc97894715ab3d3a42f6e4edbce8e2f8bf77d2805edf8993336942c93f",
+  "source_character": 1,
+  "cases": [
+    {
+      "character": 0,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 1,
+      "steps": 162,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          52,
+          1
+        ],
+        [
+          86,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0039",
+        "0107",
+        "0108",
+        "0110",
+        "020E",
+        "020F"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 2,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 3,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 4,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 5,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 6,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 7,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 8,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 9,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 10,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 11,
+      "steps": 125,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          55,
+          1
+        ],
+        [
+          97,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          47
+        ]
+      ],
+      "visual_poses": [
+        "0039",
+        "0107",
+        "0108",
+        "010A",
+        "010B",
+        "0110",
+        "020E"
+      ],
+      "terminal_state": 0
+    }
+  ],
+  "total_steps": 1537,
+  "visual_character_pose_pairs": 84,
+  "graphic_covered_visual_pairs": 14,
+  "graphic_target_visual_pairs": 14,
+  "visual_character_pose_pair_list": [
+    {
+      "character": 0,
+      "pose": "0039"
+    },
+    {
+      "character": 0,
+      "pose": "0107"
+    },
+    {
+      "character": 0,
+      "pose": "0108"
+    },
+    {
+      "character": 0,
+      "pose": "010A"
+    },
+    {
+      "character": 0,
+      "pose": "010B"
+    },
+    {
+      "character": 0,
+      "pose": "0110"
+    },
+    {
+      "character": 0,
+      "pose": "020E"
+    },
+    {
+      "character": 1,
+      "pose": "0000"
+    },
+    {
+      "character": 1,
+      "pose": "0039"
+    },
+    {
+      "character": 1,
+      "pose": "0107"
+    },
+    {
+      "character": 1,
+      "pose": "0108"
+    },
+    {
+      "character": 1,
+      "pose": "0110"
+    },
+    {
+      "character": 1,
+      "pose": "020E"
+    },
+    {
+      "character": 1,
+      "pose": "020F"
+    },
+    {
+      "character": 2,
+      "pose": "0039"
+    },
+    {
+      "character": 2,
+      "pose": "0107"
+    },
+    {
+      "character": 2,
+      "pose": "0108"
+    },
+    {
+      "character": 2,
+      "pose": "010A"
+    },
+    {
+      "character": 2,
+      "pose": "010B"
+    },
+    {
+      "character": 2,
+      "pose": "0110"
+    },
+    {
+      "character": 2,
+      "pose": "020E"
+    },
+    {
+      "character": 3,
+      "pose": "0039"
+    },
+    {
+      "character": 3,
+      "pose": "0107"
+    },
+    {
+      "character": 3,
+      "pose": "0108"
+    },
+    {
+      "character": 3,
+      "pose": "010A"
+    },
+    {
+      "character": 3,
+      "pose": "010B"
+    },
+    {
+      "character": 3,
+      "pose": "0110"
+    },
+    {
+      "character": 3,
+      "pose": "020E"
+    },
+    {
+      "character": 4,
+      "pose": "0039"
+    },
+    {
+      "character": 4,
+      "pose": "0107"
+    },
+    {
+      "character": 4,
+      "pose": "0108"
+    },
+    {
+      "character": 4,
+      "pose": "010A"
+    },
+    {
+      "character": 4,
+      "pose": "010B"
+    },
+    {
+      "character": 4,
+      "pose": "0110"
+    },
+    {
+      "character": 4,
+      "pose": "020E"
+    },
+    {
+      "character": 5,
+      "pose": "0039"
+    },
+    {
+      "character": 5,
+      "pose": "0107"
+    },
+    {
+      "character": 5,
+      "pose": "0108"
+    },
+    {
+      "character": 5,
+      "pose": "010A"
+    },
+    {
+      "character": 5,
+      "pose": "010B"
+    },
+    {
+      "character": 5,
+      "pose": "0110"
+    },
+    {
+      "character": 5,
+      "pose": "020E"
+    },
+    {
+      "character": 6,
+      "pose": "0039"
+    },
+    {
+      "character": 6,
+      "pose": "0107"
+    },
+    {
+      "character": 6,
+      "pose": "0108"
+    },
+    {
+      "character": 6,
+      "pose": "010A"
+    },
+    {
+      "character": 6,
+      "pose": "010B"
+    },
+    {
+      "character": 6,
+      "pose": "0110"
+    },
+    {
+      "character": 6,
+      "pose": "020E"
+    },
+    {
+      "character": 7,
+      "pose": "0039"
+    },
+    {
+      "character": 7,
+      "pose": "0107"
+    },
+    {
+      "character": 7,
+      "pose": "0108"
+    },
+    {
+      "character": 7,
+      "pose": "010A"
+    },
+    {
+      "character": 7,
+      "pose": "010B"
+    },
+    {
+      "character": 7,
+      "pose": "0110"
+    },
+    {
+      "character": 7,
+      "pose": "020E"
+    },
+    {
+      "character": 8,
+      "pose": "0039"
+    },
+    {
+      "character": 8,
+      "pose": "0107"
+    },
+    {
+      "character": 8,
+      "pose": "0108"
+    },
+    {
+      "character": 8,
+      "pose": "010A"
+    },
+    {
+      "character": 8,
+      "pose": "010B"
+    },
+    {
+      "character": 8,
+      "pose": "0110"
+    },
+    {
+      "character": 8,
+      "pose": "020E"
+    },
+    {
+      "character": 9,
+      "pose": "0039"
+    },
+    {
+      "character": 9,
+      "pose": "0107"
+    },
+    {
+      "character": 9,
+      "pose": "0108"
+    },
+    {
+      "character": 9,
+      "pose": "010A"
+    },
+    {
+      "character": 9,
+      "pose": "010B"
+    },
+    {
+      "character": 9,
+      "pose": "0110"
+    },
+    {
+      "character": 9,
+      "pose": "020E"
+    },
+    {
+      "character": 10,
+      "pose": "0039"
+    },
+    {
+      "character": 10,
+      "pose": "0107"
+    },
+    {
+      "character": 10,
+      "pose": "0108"
+    },
+    {
+      "character": 10,
+      "pose": "010A"
+    },
+    {
+      "character": 10,
+      "pose": "010B"
+    },
+    {
+      "character": 10,
+      "pose": "0110"
+    },
+    {
+      "character": 10,
+      "pose": "020E"
+    },
+    {
+      "character": 11,
+      "pose": "0039"
+    },
+    {
+      "character": 11,
+      "pose": "0107"
+    },
+    {
+      "character": 11,
+      "pose": "0108"
+    },
+    {
+      "character": 11,
+      "pose": "010A"
+    },
+    {
+      "character": 11,
+      "pose": "010B"
+    },
+    {
+      "character": 11,
+      "pose": "0110"
+    },
+    {
+      "character": 11,
+      "pose": "020E"
+    }
+  ],
+  "graphic_action_report_sha256": "ad754da6a3056af5b0a0576008ea3db9890e0ebf25ae8f1245382697abf673bb",
+  "graphic_royal_report_sha256": "fddbe548d5f09f9cf3ba7d639d97fb63e5c594f88bf7b70bc9425c5be1f82b28",
+  "verifier_sha256": "e55bea0e134f557c957a4ccdfb326b9cf6fce1b1ee4a652439fa854561276059",
+  "action_source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+  "resolver_source_sha256": "db875a89c715c582fb06e32eced7baf810c66661a0be9efebb3ea3b40136e700",
+  "bridges_sha256": {
+    "action2f_oracle_bridge.c": "8c33e3f74cfd871b7c875aeaf15ffc0d08aa4ad718498cee300e452ec47d6137",
+    "action_reversal_family_oracle_bridge.c": "5be1cd86603aa2a51670a80462a1789c3bc601ce6fa89057de0ff7e696e9f1fc"
+  },
+  "compared": [
+    "RAM16KB",
+    "FG16KB",
+    "D0-D7",
+    "action descriptor after each action tick"
+  ],
+  "limits": [
+    "Character IDs other than the captured ID are controlled variants of one natural HOST snapshot.",
+    "Other actors and the full frame scheduler do not run.",
+    "Only $2052 audio output is intercepted in the ROM.",
+    "No Saturn timing or audible sound claim.",
+    "Only characters 1 and 5 appear for $2F in the generated choice matrix; 26 pose pairs of artificial non-matrix variants are absent in the ROM. Dynamic reachability remains to be checked."
+  ]
+}

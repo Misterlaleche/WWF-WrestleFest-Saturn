@@ -1,0 +1,8 @@
+{
+  "sha256": "d00c0cf4b85ee09f3f75ac29b3456e139922261660ab0533c4bcdc74df740422",
+  "source": "runtime18\\validation\\local-20261023\\active-tag-complete\\snapshot-00971.bin",
+  "frame": 2759,
+  "slot": 5,
+  "provenance": "HOST schedule derived from actual emulated input. All nine actor blocks match Beetle Saturn frame2759 byte for byte. Remaining arcade RAM is the HOST represented snapshot, not a physical arcade dump.",
+  "emulator_report": "validation/local-20261023/beetle-tag-final/report.json"
+}

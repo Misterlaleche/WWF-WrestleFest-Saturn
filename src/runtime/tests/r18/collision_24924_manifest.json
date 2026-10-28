@@ -1,0 +1,29 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "54253600b27059b2249bcef9a9e89fca4c3b4b0c2a3a46024a032c6a69bc0365",
+  "header": [
+    970,
+    5,
+    4,
+    149796,
+    7,
+    10
+  ],
+  "header_fields": [
+    "frame",
+    "source_slot",
+    "target_slot",
+    "second_callback",
+    "retained_source_row",
+    "target_row"
+  ],
+  "source_report_sha256": "6f1902f4f01e9866f455dbeb114f47267ebd4ff776d2bdc171b313ebdc087ad7",
+  "actors_sha256": "37d2b750713a7105228b78e69bd70628765c5c24145a6bff39848da17ae2104c",
+  "globals_sha256": "17549bac6a069e1a280414e2a7aaa5a373f5b6fdc493a60ab20beb8623bc221a",
+  "dregs_sha256": "dc91501a0a90c2217752ee80534d1e652342f7f18c186c5fdafbbc4d4a665923",
+  "provenance": "Natural nativeF8C TAG import -> HOSTbasic970; production failed pair restores src/dst/linked before returningBLOCKED. Diagnostic wrapper independently identifies src5/ID3 row7 -> dst4/ID9 row10, first1ACCEPT then second2BLOCKED on BYTEfacing00/80. Source currentprofile0 is retained; original dispatcher still uses cached row7. All9 actor records and liveD8 copied literally; supported globals projected, other arcadeRAMzero. No seed/actor/frame/register forcing.",
+  "green_cases": 4167,
+  "verified_dispatch_source_sha256": "c2a35d2c803aa3a6ab493dd27e6d8e5297aa71842cbd66db95be6e1bc35ac683",
+  "green_report": "validation/local-20261024/collision-24924-green.json",
+  "rom_intercepts": []
+}

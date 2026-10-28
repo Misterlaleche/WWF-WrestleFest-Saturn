@@ -70,6 +70,28 @@ int main(int argc, char **argv)
         fprintf(stderr, "Aligned bulk read used %u CD commands\n",block_reads-before);
         return 1;
     }
+    /* Independent working sets beyond the resident window count must
+     * evict/reload exact source bytes, including unaligned sector crossings. */
+    for(unsigned round=0;round<3u;round++)for(unsigned which=0;which<6u;which++){
+        uint32_t offset=131072u+which*32768u+2041u;
+        if(fseek(pack,(long)offset,SEEK_SET)||fread(expected,1,128u,pack)!=128u||
+           wf_r18_file_read("SPRITES.PAK",offset,got,128u)!=0||memcmp(got,expected,128u)){
+            fputs("CDFS window eviction differs from source bytes\n",stderr);return 1;
+        }
+    }
+    uint32_t refills[WF_R18_CDFS_FILE_CLASSES]={0};
+    uint32_t bulk[WF_R18_CDFS_FILE_CLASSES]={0};
+    uint32_t total_refills=0;
+    wf_r18_cdfs_file_stats(refills,bulk);
+    wf_r18_cdfs_stats(&total_refills,NULL);
+    if (!refills[1] || refills[1]!=total_refills || bulk[1]!=16u) {
+        fputs("CDFS file attribution differs from command totals\n",stderr);
+        return 1;
+    }
+    for(unsigned i=0;i<WF_R18_CDFS_FILE_CLASSES;i++)if(i!=1u&&(refills[i]||bulk[i])){
+        fputs("CDFS attributed sprite reads to another file class\n",stderr);
+        return 1;
+    }
     fclose(pack);
     fclose(disc);
     puts("PASS RUNTIME-18 contiguous CDFS payload and command count");

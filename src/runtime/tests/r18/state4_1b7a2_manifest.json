@@ -1,0 +1,21 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "5e562c883e440a3d46d369474195cb7113c5f75637eeca6d5e2547969ebaa9b5",
+  "header": [
+    427,
+    0,
+    1,
+    114750,
+    116,
+    1
+  ],
+  "source": "validation\\local-20261024\\full-flow-combat-after27-41-a600\\snapshot-00116.bin",
+  "report_sha256": "717060c7a06c06994ff53221ea80f993a4e3e1f06ebd713f14d797f108c3f45c",
+  "source_manifest_sha256": "83488eb8e0c2fae444d5dce5f0e58f1d768ccf3e87222ca9850b1bdbe09d6784",
+  "provenance": "Natural HOST cold frontend/manual TAG0/7 -> paidF8C -> A600 tape, no post-selection seed reset. Snapshot immediately before failed1C03E callback1B7A2 at frame427 slot0. Nine actors copied literally by allies trace; supported globals projected into RAM8KiB, other arcade bytes zero. No Beetle or physical Saturn all-actors equivalence claimed for this HOST capture.",
+  "verified_source_sha256": "62fc76f31df6049e797efd45457d0fcd1355a076f33325b077298f7fae3d9b86",
+  "green_cases": 5604,
+  "guard_controls": 5,
+  "green_report": "validation/local-20261024/state4-1b7a2-green.json",
+  "rom_intercepts": []
+}

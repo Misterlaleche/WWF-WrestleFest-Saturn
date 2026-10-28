@@ -1,0 +1,22 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "101cc51252b142f1b9cbb32d53202aaccb3976872d50713c01d0410a407b34fb",
+  "snapshot_bytes": 16472,
+  "header": [
+    2800,
+    1,
+    1,
+    114750,
+    859,
+    1
+  ],
+  "source": "validation\\local-20261024\\tag-winner-pressure\\snapshot-00859.bin",
+  "source_report_sha256": "ef6f54c9c9f7997cf5f79a6c8e263805848a83196c6f27e23950b2a6dd197b6f",
+  "source_manifest_sha256": "a5b338139176073e9084e37f6c835a4a26a824d3dfd39eef9400b34c21e8f5c1",
+  "provenance": "Real manual frontend TAG picks0/7 -> paidF8C; HOST validation-only pressure profile observes positions to produce pad bits, without changing actors/HP/RNG/results. Observed raw47 guard at frame2800/slot1/ID7. Snapshot format metadata24 +preD32 +preRAM8KB +postD32 +postRAM8KB. Only preRAM is input; unrepresented originalRAM zero.",
+  "limits": [
+    "HOST trajectory, not physical Saturn or native SH2 equivalence",
+    "No fixed pick or post-selection reseeding beyond normal frontend harness input",
+    "Snapshot post section is not a continuation of the preRAM buffer"
+  ]
+}

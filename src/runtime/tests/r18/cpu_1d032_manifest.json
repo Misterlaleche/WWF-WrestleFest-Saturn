@@ -1,0 +1,21 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "d21211db153c76cd6fc82e6fac48fdd4350a1b81fb57a3200e816294b94327c2",
+  "header": [
+    3674,
+    5,
+    0,
+    116980,
+    1102,
+    1
+  ],
+  "source": "validation\\local-20261024\\tag-winner-pressure-after1d6ee\\snapshot-01102.bin",
+  "source_report_sha256": "3fb40eb180f5d52d26bfa77089c03a8e14058d0fd34717f1da346dc7317707b0",
+  "source_manifest_sha256": "3b9d2cfc05df207ece265d8d91917855c3a2f63a9e35f788cd08669cc3d3830d",
+  "provenance": "Natural HOST fullfrontend pressure3674 actor5/ID3 AE0 mode02; no result/health/seed/input/register forcing. Snapshot retains actors/fixed/liveD8/represented globals; unrepresented RAMzero. No HOST/SH2 trajectory identity claim.",
+  "green_cases": 1882,
+  "guard_controls": 4,
+  "aligned_owner_sha256": "ae5292cf4c7ab2a644e21621ee2b912d2457519986ca403e36e185d3fd04a3ad",
+  "verified_cpu_sha256": "cc0ba7a1524636fd118846fe2e0be4406385a27e6c909c41623d0907b0dfd68d",
+  "green_report": "validation/local-20261024/cpu-1d032-green.json"
+}

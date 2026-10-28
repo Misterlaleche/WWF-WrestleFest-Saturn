@@ -1,0 +1,25 @@
+TRACE phase0->1 PC0006fc frame0 flags=00/00 credits0 mode0 io=1aa590dd
+TRACE phase1->2 PC0081ba frame539 flags=80/03 credits0 mode0 io=2c658f97
+TRACE phase2->3 PC0052be frame1173 flags=00/13 credits0 mode0 io=3c37abc9
+TRACE phase3->4 PC00533a frame1174 flags=80/03 credits0 mode0 io=05ba0a54
+TRACE phase4->5 PC0057e0 frame1175 flags=80/00 credits0 mode1 io=fcadc5c2
+TRACE phase5->6 PC000ac0 frame1305 flags=80/03 credits0 mode1 io=1bde1cf4
+PAID status=0 pc=000000 dependency=000000 flow=000f8c frames=1773 mode=1 picks=0,0,0,0 seed=ad7ec850
+HANDOFF FA4 mode=1 stage=3 rng=cadaade6 bindings=36 actors=0,0,5,2
+INPUT profile=rush frames=14000 no post-selection seed reset
+RENDER frame=0 actors=12 commands=158 status=0 rng=bf9f337c
+RENDER frame=1000 actors=11 commands=156 status=0 rng=ad995bb0
+TRACE_24AA8 frame=1550 source=8 target=0 sid=7 tid=20
+RENDER frame=2000 actors=11 commands=157 status=0 rng=d9981278
+RENDER frame=3000 actors=10 commands=167 status=0 rng=b91eaf3e
+RENDER frame=4000 actors=8 commands=163 status=0 rng=6db94f90
+RENDER frame=5000 actors=12 commands=168 status=0 rng=d9df86c0
+RENDER frame=6000 actors=10 commands=176 status=0 rng=8eeb9db7
+RENDER frame=7000 actors=9 commands=98 status=0 rng=4a3daa71
+RENDER frame=8000 actors=7 commands=135 status=0 rng=67eb0d60
+RENDER frame=9000 actors=8 commands=145 status=0 rng=a66d6fda
+RENDER frame=10000 actors=6 commands=111 status=0 rng=6bdf3fdc
+RENDER frame=11000 actors=6 commands=101 status=0 rng=f70f04b8
+RENDER frame=12000 actors=8 commands=97 status=0 rng=e4f279cc
+RENDER frame=13000 actors=6 commands=109 status=0 rng=fb0071a8
+PASS full-flow manual Royal profile=rush frames=14000 runtime_frame=14000 rng=ad77f3b8

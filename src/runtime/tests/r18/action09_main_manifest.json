@@ -1,0 +1,16 @@
+{
+  "source_commit": "805be2a plus completed native owners through raw6D",
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/after6d/snapshot-01285.bin",
+  "sha256": "9c1b5f74be5136cdbb8e75e614d99f3bcd145761347a846d4baef05ccd103710",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 4519,
+  "slot": 4,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 1285,
+  "recorded_blocked_status": 1,
+  "selector": "0x4009",
+  "derived": false,
+  "input_schedule": "RIGHT frames60..179; A180..183; then no input",
+  "comparison": "Untouched natural main controlled-route pre-dispatch RAM and D0-D7 versus intact ROM. Full RAM, FG RAM and D0-D7 are compared."
+}

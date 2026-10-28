@@ -1,0 +1,16 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_snapshot": "validation/local-20261023/active-ae6/snapshot-01088.bin",
+  "sha256": "608a2aa030e88a76d69072a635d8150a5d129d4749b26feaa3aae7980f2ba91f",
+  "header": [
+    3098,
+    4,
+    0,
+    116980,
+    1088,
+    1
+  ],
+  "derived": false,
+  "blocked_dependency": "0x1d16a",
+  "owner": "CPU state1 AE7 with original TAG request and state5 tail"
+}

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\VersusPC\OneDrive - Lydia Puerto Vadillo\Documentos\ChatGPT\Wrestlefest Saturn\.tmp\wf-natural-r05-ib4vva5k\runtime18\src\runtime\tests\r18\collision_24aa8_natural_verify_rom.py", line 27, in <module>
+    want=bytes(mem.r_block(RAM,0x2000));actual=b.raw[RAM:RAM+0x2000];delta=[(hex(RAM+i),x,y)for i,(x,y) in enumerate(zip(actual,want)) if x!=y];assert not delta,delta[:20]
+                                                                                                                                                       ^^^^^^^^^
+AssertionError: [('0x1c05d6', 0, 128), ('0x1c05e3', 67, 3), ('0x1c05e5', 2, 0), ('0x1c0a13', 65, 1), ('0x1c0a15', 4, 0), ('0x1c0a96', 0, 128), ('0x1c0ba1', 129, 1), ('0x1c0ba2', 0, 128)]

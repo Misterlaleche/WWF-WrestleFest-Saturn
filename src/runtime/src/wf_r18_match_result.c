@@ -5,6 +5,19 @@ int wf_r18_tag_match_complete(const wf_runtime_t *rt){
  return ((wf_be16(&rt->actors[0],WF_A_RESULT)|
           wf_be16(&rt->actors[2],WF_A_RESULT))&0xc000u)!=0u;
 }
+int wf_r18_attract_timeout(const wf_runtime_t *rt){
+ static const uint16_t threshold_119a[14]={
+  0x0350u,0x02e0u,0x0410u,0x03a0u,0x0290u,0x03a0u,0x04b0u,
+  0x03b0u,0x0650u,0x0480u,0x0320u,0x0330u,0x0340u,0x0360u
+ };
+ return rt&&rt->frame_stage==2u&&rt->frame_ready&&rt->vblank_ack&&
+  !rt->g.credited_route&&rt->g.global_0166<14u&&
+  rt->g.frame_counter>threshold_119a[rt->g.global_0166];
+}
+int wf_r18_royal_game_over(const wf_runtime_t *rt){
+ return rt&&rt->frame_stage==2u&&rt->frame_ready&&rt->vblank_ack&&
+  rt->g.credited_route&&(rt->g.mode_0161&1u)&&rt->g.global_16c4==3u;
+}
 /* $90D6: post-pin bonus only for the four credited player records whose
  * +$FF.bit0 is clear. ADD.W wraps before the unsigned maximum comparison. */
 wf_status_t wf_r18_tag_bonus_90d6(wf_runtime_t *rt,void *user){

@@ -1,0 +1,15 @@
+{
+  "attack_unique": 4991,
+  "noinput_unique": 4924,
+  "required_union": 7120,
+  "old_hot": 7817,
+  "old_hot_missing_from_replays": 2228,
+  "new_hot": 7822,
+  "retained_other_tiles": 702,
+  "removed_old_tiles": 1526,
+  "resident_bytes": 637952,
+  "cold_slots": 96,
+  "pack_bytes": 769024,
+  "historic_uses_removed": 1203,
+  "historic_uses_total": 966139
+}

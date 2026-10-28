@@ -63,3 +63,65 @@ wf_status_t wf_vdp1_plan_validate(const wf_vdp1_frame_plan_t *p,const wf_vdp1_as
     for(unsigned i=0;i<p->cmd_count;i++) if(p->cmd[i].stream_tile>=p->tile_count||p->cmd[i].cram_slot>=p->palette_count)return WF_BAD_STATE;
     return WF_OK;
 }
+
+wf_status_t wf_vdp1_plan_retain_tile_slots(wf_vdp1_frame_plan_t *p,
+    const uint16_t *resident_tiles,const uint8_t *resident_bits,unsigned resident_count){
+    /* Scratch is static because the Saturn master stack is deliberately small.
+     * This renderer is serialized by the presentation owner. */
+    /* The top seven bits are a generation, the low nine are slot+1.
+     * Recycle once per 127 calls instead of clearing 1 KiB every frame. */
+    static uint16_t lookup[512],slot_of[WF_VDP1_STREAM_TILES_MAX];
+    static uint8_t lookup_epoch;
+    static uint16_t source_at[WF_VDP1_STREAM_TILES_MAX];
+    static uint8_t occupied[WF_VDP1_STREAM_TILES_MAX/8u];
+    if(!p||!resident_tiles||!resident_bits||p->tile_count>WF_VDP1_STREAM_TILES_MAX||
+       resident_count>WF_VDP1_STREAM_TILES_MAX||p->cmd_count>WF_VDP1_COMMANDS_MAX)return WF_BAD_STATE;
+    unsigned count=p->tile_count;
+    if(++lookup_epoch==128u){memset(lookup,0,sizeof lookup);lookup_epoch=1u;}
+    memset(occupied,0,sizeof occupied);
+    for(unsigned i=0;i<count;i++){
+        uint16_t source=p->tile_upload[i].source_tile;
+        unsigned hash=((uint32_t)source*0x9e3779b1u)>>23;
+        while((lookup[hash]>>9)==lookup_epoch){
+            unsigned old=((unsigned)lookup[hash]&511u)-1u;
+            if(p->tile_upload[old].source_tile==source)return WF_BAD_STATE;
+            hash=(hash+1u)&511u;
+        }
+        lookup[hash]=(uint16_t)(((unsigned)lookup_epoch<<9)|(i+1u));slot_of[i]=0xffffu;
+    }
+    for(unsigned i=0;i<p->cmd_count;i++)if(p->cmd[i].stream_tile>=count)return WF_BAD_STATE;
+    unsigned limit=resident_count<count?resident_count:count;
+    for(unsigned slot=0;slot<limit;slot++){
+        if(!(resident_bits[slot>>3]&(uint8_t)(1u<<(slot&7u))))continue;
+        uint16_t source=resident_tiles[slot];
+        unsigned hash=((uint32_t)source*0x9e3779b1u)>>23;
+        while((lookup[hash]>>9)==lookup_epoch){
+            unsigned old=((unsigned)lookup[hash]&511u)-1u;
+            if(p->tile_upload[old].source_tile==source){
+                /* A source can remain resident in several old slots after
+                 * previous compactions. Claim only one, or the free-slot
+                 * count would no longer match the unmatched current tiles. */
+                if(slot_of[old]==0xffffu){
+                    slot_of[old]=(uint16_t)slot;occupied[slot>>3]|=(uint8_t)(1u<<(slot&7u));
+                }
+                break;
+            }
+            hash=(hash+1u)&511u;
+        }
+    }
+    unsigned vacant=0;
+    for(unsigned i=0;i<count;i++){
+        if(slot_of[i]!=0xffffu)continue;
+        while(occupied[vacant>>3]&(uint8_t)(1u<<(vacant&7u)))++vacant;
+        slot_of[i]=(uint16_t)vacant;occupied[vacant>>3]|=(uint8_t)(1u<<(vacant&7u));
+    }
+    for(unsigned i=0;i<count;i++)source_at[slot_of[i]]=p->tile_upload[i].source_tile;
+    for(unsigned i=0;i<count;i++){
+        uint16_t source=source_at[i];
+        p->tile_upload[i].source_tile=source;p->tile_upload[i].stream_slot=(uint16_t)i;
+        p->tile_upload[i].src_byte_offset=(uint32_t)source*WF_VDP1_TILE_BYTES_16X16_4BPP;
+        p->tile_upload[i].dst_byte_offset=i*WF_VDP1_TILE_BYTES_16X16_4BPP;
+    }
+    for(unsigned i=0;i<p->cmd_count;i++)p->cmd[i].stream_tile=slot_of[p->cmd[i].stream_tile];
+    return WF_OK;
+}

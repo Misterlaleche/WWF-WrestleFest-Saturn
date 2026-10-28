@@ -1,0 +1,11 @@
+{
+  "archive_sha256": "23a5e7b851496905ff2c2b5cd92ac0a7450e68d5327b8f035cb77f9cbdbba1f3",
+  "files": {
+    "src/runtime/src/wf_r17_actions_r11.c": {
+      "source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+      "build_sha256": "0315430bc08635b7f899d5d5404ba8dc506911e0eec1e4abc8cb04b2b673a173",
+      "bytes": 322130
+    }
+  },
+  "provenance": "Source-only extraction from R05 frozen source; excludes ROM and disc assets."
+}

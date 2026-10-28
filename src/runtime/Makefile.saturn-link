@@ -26,7 +26,7 @@ SH_SRCS:= \
  src/wf_r17_follow_10e86.c src/wf_r17_dependencies.c src/wf_r17_integration.c src/wf_r17_post7a00.c src/wf_r17_postack_2017a.c
 SH_SRCS+= src/wf_r17_participant_helpers.c src/wf_r17_participant_native.c src/wf_r17_royal_9132.c src/wf_r17_tag_6e34.c
 SH_CFLAGS+= -Os -Iinclude -Wall -Wextra -Werror -DWF_PLATFORM_SATURN=1
-SH_DEFSYMS+= -Wl,--defsym=___master_stack=0x06004000 -Wl,--defsym=___slave_stack=0x06001E00
+SH_DEFSYMS+= -Wl,--defsym=___master_stack=0x06004000 -Wl,--defsym=___slave_stack=0x060FF000
 
 # ELF-only audit gate. Do not generate a Saturn BIN/CUE unless explicitly requested.
 OUTPUT_FILES:= $(SH_BUILD_PATH)/$(SH_PROGRAM).elf

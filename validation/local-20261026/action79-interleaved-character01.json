@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "79ac65851776a5be5113949d5ba5b164afae415df4fa2464f88fb700c57a1e0e",
+  "source_character": 1,
+  "cases": [
+    {
+      "character": 1,
+      "steps": 72,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          35,
+          1
+        ],
+        [
+          71,
+          0
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    }
+  ],
+  "total_steps": 72,
+  "visual_character_pose_pairs": 4,
+  "graphic_covered_visual_pairs": 4,
+  "graphic_action_report_sha256": "abfdea517aa87378b45031aa92a0e8d62975240f3cf2af679a8545bf7d3eaa8c",
+  "graphic_royal_report_sha256": "51ac6504254a0afbf46331a17aec19e6f53fc740f4f93cccb3feda8875043728",
+  "verifier_sha256": "4a8af0dc44e0505a7ddc8318605499c0fd40633331de73db15f19a0b81413010",
+  "action_source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+  "bridges_sha256": {
+    "action79_oracle_bridge.c": "67564a673c5cc727aa19fe6fa182eb24af41c5f19202f6ede548dd2cdb5757a2",
+    "action_reversal_family_oracle_bridge.c": "5be1cd86603aa2a51670a80462a1789c3bc601ce6fa89057de0ff7e696e9f1fc"
+  },
+  "compared": [
+    "RAM16KB",
+    "FG16KB",
+    "D0-D7",
+    "action descriptor after each action tick"
+  ],
+  "limits": [
+    "Character IDs other than the captured ID are controlled variants of one natural HOST snapshot.",
+    "Other actors and the full frame scheduler do not run.",
+    "Only $2052 audio output is intercepted in the ROM; no Saturn timing or audible sound claim."
+  ]
+}

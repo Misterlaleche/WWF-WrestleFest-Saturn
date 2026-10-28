@@ -1,0 +1,22 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "dfb6c0e6c2aa7c79a6ddeb29b7f00e00bdfa9f79f9e6e61b48f3b93f3329c9d9",
+  "header": [
+    3632,
+    5,
+    0,
+    116980,
+    1085,
+    1
+  ],
+  "source": "validation\\local-20261024\\tag-winner-pressure-after83\\snapshot-01085.bin",
+  "source_report_sha256": "895014fb439d318bbc32e583cfa49ae3d2f0e44dd58a995b182926b1585825d6",
+  "source_manifest_sha256": "92adcb3c41f630db73795520695dc52eb9cbc2bcd2cb534bb8fca1c902c2e11f",
+  "provenance": "Natural HOST full frontend pressure3632, mode02, CPU5/ID3 AE10 raw70; fixed objectF1C. No outcome, health, seed, input or registers changed for the natural fixture. All9 actors/fixed records/liveD8 represented in snapshot; unrepresented arcadeRAMzero. HOST and SH2 trajectories not claimed identical.",
+  "green_cases": 4291,
+  "guard_controls": 4,
+  "pursuit_owner_sha256": "0b9bf6ca4cfe05388871586d32cfc367e6bac7bacbcbf197cfe68d48026a4daa",
+  "verified_cpu_sha256": "86ef8935331d6f4c9f6898906f1f9d3ba61b944c073a3c11b2b68ef3ff55eaaa",
+  "green_report": "validation/local-20261024/cpu-1d6ee-green.json",
+  "credited_contact_regression_cases": 2229
+}

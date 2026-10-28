@@ -145,14 +145,21 @@ wf_status_t wf_phase_target_relation_20958(wf_runtime_t *rt,uint32_t addr,void *
   if((rt->g.mode_0161&1u)==0u){wf_status_t s=tag_pair_20ccc(rt,slot);if(s!=WF_OK)return s;continue;}
   wf_status_t s=royal_primary_20e00(rt,slot);if(s!=WF_OK)return s;
   wf_actor_raw_t *c=ptr(rt,rt->g.global_168c);if(!c){if(rt->g.global_168c==0u)continue;return WF_BLOCKED;}
-  if((rt->g.mode_0161&1u)==0u)continue;
-  if(wf_u8(c,WF_A_STATE+1)!=5u)continue;
-  if(wf_u8(c,WF_A_SELECTOR_LO)==0x4au){
-   uint32_t q=bit(c,WF_A_SELECTOR,5)?wf_be32(c,WF_A_LINK):wf_be32(c,WF_A_SECONDARY_LINK); if(q&&!ptr(rt,q))return WF_BLOCKED; wf_set_be32(a,WF_A_TARGET,q);
-  }else if(wf_u8(c,WF_A_SELECTOR_LO)==0x48u){
-   uint32_t lp=wf_be32(c,WF_A_LINK);wf_actor_raw_t*l=ptr(rt,lp);if(!l)return WF_BLOCKED;uint32_t q=wf_be32(l,WF_A_SECONDARY_LINK);if(q==0u)continue;
-   if(!bit(l,WF_A_SELECTOR,5)){if(!ptr(rt,q))return WF_BLOCKED;wf_set_be32(a,WF_A_TARGET,q);}else wf_set_be32(a,WF_A_TARGET,rt->g.global_168c);
+  /* $20A20 supplies the normal candidate, including on the first Royal
+   * frame when +7A is still zero. Only the two literal linked-action
+   * branches bypass that store. Preserve their original bit5 polarity. */
+  uint32_t chosen=rt->g.global_168c;
+  if(wf_u8(c,WF_A_STATE+1)==5u){
+   if(wf_u8(c,WF_A_SELECTOR_LO)==0x4au)
+    chosen=bit(c,WF_A_SELECTOR,5)?wf_be32(c,WF_A_SECONDARY_LINK):wf_be32(c,WF_A_LINK);
+   else if(wf_u8(c,WF_A_SELECTOR_LO)==0x48u){
+    wf_actor_raw_t*l=ptr(rt,wf_be32(c,WF_A_LINK));if(!l)return WF_BLOCKED;
+    uint32_t q=wf_be32(l,WF_A_SECONDARY_LINK);
+    if(q&&bit(l,WF_A_SELECTOR,5))chosen=q;
+   }
   }
+  if(chosen&&!ptr(rt,chosen))return WF_BLOCKED;
+  wf_set_be32(a,WF_A_TARGET,chosen);
  }
  wf_r17_m68k_moveq(&rt->m68k_regs,6u,8);
  if((rt->g.mode_0161&1u)==0u){

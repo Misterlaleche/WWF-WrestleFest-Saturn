@@ -1,0 +1,14 @@
+{
+  "sha256": "acac8f691ac17d8aeaa664f2f91c2f4c0e397da5084d76e0808d5122f654d96c",
+  "header": [
+    4865,
+    5,
+    1,
+    114750,
+    1654,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\A600-after-raw31\\snapshot-01654.bin",
+  "note": "NaturalHOST A600 frame4865 slot5 raw32, before production12614 guard. Not physicalSaturnRAM.",
+  "rom_caller": "1C03E ->12614[32] ->1716C ->17194"
+}

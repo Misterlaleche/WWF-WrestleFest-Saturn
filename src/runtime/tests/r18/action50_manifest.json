@@ -1,0 +1,15 @@
+{
+  "source_commit": "805be2a plus ROM-exact owner chain through05-active route",
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/after05-active/snapshot-01052.bin",
+  "sha256": "e1748c5a8ce427fbe8f87ae7b066420ef332639138c6b27e2305f2d54e346564",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 3047,
+  "slot": 4,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 1052,
+  "recorded_blocked_status": 1,
+  "selector": "0x0050",
+  "derived": false,
+  "comparison": "Natural untouched RAM/D0-D7; native bounded dispatcher versus unchanged ROM; full RAM, FG RAM, D0-D7/RNG and real ROM A1 at common-tick entry."
+}

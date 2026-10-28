@@ -1,0 +1,20 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "bbde1dcc77b255defb794f0b2a948306f140873b9f51df796518d8d6fff79c80",
+  "header": [
+    1148,
+    4,
+    0,
+    116980,
+    365,
+    1
+  ],
+  "source": "validation\\local-20261024\\full-flow-combat-after53-idle\\snapshot-00365.bin",
+  "report_sha256": "7b59dbeb8991f20d1370d36d78d60d1e6d1bf5686f78ea745a5d4dbcd04a1654",
+  "provenance": "Natural HOST cold frontend/manual TAG0/7 -> paidF8C -> idle1148; pre-CPU slot4 AE10. Typed supported globals projected, all9 actor records copied; other arcade RAM zero. Not hardware RAM.",
+  "verified_source_sha256": "e31059f91a248643d4c9bbb6771764881937813bbc334f629f8899382ea54770",
+  "green_cases": 1483,
+  "guard_controls": 6,
+  "green_report": "validation/local-20261024/cpu-pursuit-tag-green.json",
+  "rom_intercepts": []
+}

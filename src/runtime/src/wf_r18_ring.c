@@ -124,7 +124,8 @@ static uint8_t surface_pixel(unsigned layer,unsigned wx,unsigned wy,ring_sample_
   c->tx=tx;c->ty=ty;c->valid=1;
  }
  unsigned x=wx&15u,y=wy&15u;
- if(c->attr&64u)x=15u-x;if(c->attr&128u)y=15u-y;
+ if(c->attr&64u)x=15u-x;
+ if(c->attr&128u)y=15u-y;
  uint8_t packed=g[tiles+c->tile*128u+y*8u+x/2u];
  return (uint8_t)(((c->attr&15u)<<4)|((x&1u)?packed&15u:packed>>4));
 }
@@ -239,16 +240,25 @@ int wf_r18_ring_cells_update(unsigned layer,int wx,int wy,volatile uint16_t *map
  for(unsigned i=0;i<dirty_count[layer];i++)overlay_dirty[layer][dirty_cells[layer][i]]=0;
  dirty_count[layer]=0;if(writes)*writes=count;return 0;
 }
-int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t pri){
- if(!g||(pri!=0x78&&pri!=0x7b&&pri!=0x7c))return -1;
- if(last[0]==sx0&&last[1]==sy0&&last[2]==sx1&&last[3]==sy1&&last[4]==pri)return 0;
 #ifdef __sh__
- vdp2_scrn_priority_set(VDP2_SCRN_NBG0,pri==0x78?2:1);
- vdp2_scrn_priority_set(VDP2_SCRN_NBG1,pri==0x78?1:pri==0x7b?2:3);
- /* ROM $26E9E selects the board mode. In7C the BG-world ropes are
-  * above sprites, including the sprite-built side ropes/posts (WP26). */
+static void ring_show(uint8_t pri){
+ /* No screen or sprite priority is exposed until all pattern names have
+  * reached VRAM. The frontend uses its own gated commit instead. */
  for(unsigned i=0;i<8u;i++)vdp2_sprite_priority_set(i,pri==0x7c?2:3);
  vdp2_scrn_display_set(VDP2_SCRN_DISPTP_NBG2|(pri==0x78?(VDP2_SCRN_DISPTP_NBG0|VDP2_SCRN_DISP_NBG1):(VDP2_SCRN_DISP_NBG0|VDP2_SCRN_DISPTP_NBG1)));
+}
+#endif
+static int ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t pri,unsigned show){
+ if(!g||(pri!=0x78&&pri!=0x7b&&pri!=0x7c))return -1;
+ if(last[0]==sx0&&last[1]==sy0&&last[2]==sx1&&last[3]==sy1&&last[4]==pri){
+#ifdef __sh__
+  if(show)ring_show(pri);
+#else
+  (void)show;
+#endif
+  return 0;
+ }
+#ifdef __sh__
  for(unsigned layer=0;layer<2;layer++){
   int first=(pri==0x78)?layer==0:layer==1;
   int sx=first?sx0:sx1,sy=first?sy0:sy1;
@@ -260,8 +270,17 @@ int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t p
   vdp2_scrn_scroll_x_set(screen,fix16_int32_from((uint32_t)sx&511u));
   vdp2_scrn_scroll_y_set(screen,fix16_int32_from((uint32_t)wy&511u));
  }
+ vdp2_scrn_priority_set(VDP2_SCRN_NBG0,pri==0x78?2:1);
+ vdp2_scrn_priority_set(VDP2_SCRN_NBG1,pri==0x78?1:pri==0x7b?2:3);
+ if(show)ring_show(pri);
 #endif
  last[0]=sx0;last[1]=sy0;last[2]=sx1;last[3]=sy1;last[4]=pri;return 0;
+}
+int wf_r18_ring_update(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t pri){
+ return ring_update(sx0,sy0,sx1,sy1,pri,1u);
+}
+int wf_r18_ring_update_deferred(int16_t sx0,int16_t sy0,int16_t sx1,int16_t sy1,uint8_t pri){
+ return ring_update(sx0,sy0,sx1,sy1,pri,0u);
 }
 
 static void mark_overlay_dirty(unsigned layer,unsigned cell){

@@ -6,9 +6,17 @@
 #include <yaul.h>
 #include "wf_r18_present.h"
 static const wf_saturn_render_ops_t *counted_ops(void);
+static size_t index_cleared_bytes;
+static void *counted_memset(void *dst,int value,size_t bytes);
 #define wf_saturn_yaul_render_ops counted_ops
+#define memset counted_memset
 #include "../../src/wf_r18_present.c"
+#undef memset
 #undef wf_saturn_yaul_render_ops
+static void *counted_memset(void *dst,int value,size_t bytes){
+ if(dst==plan_tile_index)index_cleared_bytes+=bytes;
+ return memset(dst,value,bytes);
+}
 uint8_t mock_vram[0x80000];uint32_t mock_cram[1024];
 unsigned mock_sync_calls,mock_sprite_priorities[8],mock_screen_priorities[3];
 static unsigned palette_calls,fail_end;
@@ -45,5 +53,21 @@ int main(void){
  assert(wf_r18_present_batch(&r,NULL,0,&v)==WF_OK);
  assert(palette_calls==18&&wf_saturn_cram_writes==257&&mock_cram[273]==255);
  assert(wf_r18_present_batch(&r,NULL,0,&v)==WF_OK&&palette_calls==18);
- puts("PASS real sprite palette submission: initial zero banks, unchanged/text skip, abort/retry and exact CRAM");return 0;
+ /* Reusing the same-size tile index must avoid clearing 1 KiB per frame.
+  * Vary identities across an epoch wrap and still deduplicate each frame. */
+ index_cleared_bytes=0;
+ for(unsigned frame=0;frame<260;frame++){
+  assert(wf_r18_present_batch(&r,NULL,0,&v)==WF_OK);
+  uint16_t tile=(uint16_t)(1000u+frame*257u);
+  /* Tile 0 and 233 collide in the 512-entry hash table. */
+  assert(add_cmd(0,10,10,0,0,0));
+  assert(add_cmd(233,26,10,0,0,0));
+  assert(add_cmd(tile,42,10,0,0,0));
+  assert(add_cmd(0,58,10,0,0,0));
+  assert(plan.tile_count==3&&plan.cmd_count==4);
+  assert(plan.cmd[0].stream_tile==0&&plan.cmd[1].stream_tile==1&&
+         plan.cmd[2].stream_tile==2&&plan.cmd[3].stream_tile==0);
+ }
+ assert(index_cleared_bytes<=2u*sizeof plan_tile_index);
+ printf("PASS sprite palette and 260-frame tile-index reuse: %zu index-clear bytes (old path 266240)\n",index_cleared_bytes);return 0;
 }

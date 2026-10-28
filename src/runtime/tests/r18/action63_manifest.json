@@ -1,0 +1,13 @@
+{
+  "sha256": "55cf85675901b82c267328dbbaf9cb40634daef3c1fe19ec1c8a98317357758b",
+  "header": [
+    1825,
+    0,
+    1,
+    114750,
+    575,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\full-flow-combat-native-f8c-tag-after36-basic\\snapshot-00575.bin",
+  "note": "HOST exploration from verified nativeF8C TAG handoff, basic1825 actor0/id7 raw63, produced by original36. RAM16KiB projection, no physical timing claim."
+}

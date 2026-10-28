@@ -5,6 +5,23 @@
 
 static uint8_t low(const wf_actor_raw_t *a,size_t o){return wf_u8(a,o+1u);}
 static wf_status_t blocked(wf_r17_dispatch_1c03e_ctx_t *c,uint32_t pc){if(c)c->blocked_dependency_rom=pc;return WF_BLOCKED;}
+/* $1BFFE/$1C004: raw5C release victim. Kind-zero descriptor; the
+ * callback owns the timer, including the decrement on the init call. */
+static void state4_1c004(wf_actor_raw_t*a){
+    int latched=(wf_u8(a,WF_A_LATCHED)&0x80u)!=0u;
+    wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|0x80u));
+    if(!latched){wf_set_be16(a,WF_A_MIRROR,(uint16_t)(0x17du|wf_be16(a,WF_A_FACING)));wf_set_be16(a,WF_A_ANIM_COUNTER,8u);}
+    uint16_t timer=(uint16_t)(wf_be16(a,WF_A_ANIM_COUNTER)-1u);wf_set_be16(a,WF_A_ANIM_COUNTER,timer);
+    if(!timer){wf_set_be16(a,WF_A_STATE,4u);wf_set_be16(a,WF_A_STATE4,2u);wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^0x80u));}
+}
+/* $1BECC/$1BED8: raw2B release pose, then grounded BYTE subtype5. */
+static void state4_1bed8(wf_actor_raw_t*a){
+    if(!(wf_u8(a,WF_A_LATCHED)&0x80u)){wf_set_u8(a,WF_A_MOTION_MODE,0u);return;}
+    if(low(a,WF_A_ANIM_INDEX)==0xfeu){
+        wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,5u);
+        wf_set_be16(a,WF_A_MIRROR,0x1fu);wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+    }
+}
 static void exact_tail_1c0b4(wf_actor_raw_t *a){
     if((wf_u8(a,WF_A_FIELD18)&0x80u)!=0u){wf_set_be16(a,WF_A_FIELD18,0u);wf_set_be16(a,WF_A_FIELD1A,0u);}
 }
@@ -28,7 +45,8 @@ static void movement_magnitude(wf_actor_raw_t*a){
     static const uint8_t magnitude[12]={27,29,28,25,30,27,24,30,22,27,28,27};
     unsigned v=movement_bit(a,0x32u,3u)?12u:magnitude[wf_be16(a,2u)];
     if(movement_bit(a,0x56u,7u)&&movement_bit(a,0x33u,5u))v=(v+6u)&255u;
-    if(movement_bit(a,0x74u,7u))v=(v-8u)&65535u;wf_set_be16(a,0x2au,(uint16_t)v);
+    if(movement_bit(a,0x74u,7u))v=(v-8u)&65535u;
+    wf_set_be16(a,0x2au,(uint16_t)v);
 }
 static unsigned movement_descriptor(wf_actor_raw_t*a){
     if(movement_bit(a,0x74u,7u)){wf_set_u8(a,0x1bu,16u);return movement_bit(a,0x75u,0u)?3u:2u;}
@@ -52,7 +70,8 @@ static int movement_arrived(wf_runtime_t*rt,wf_actor_raw_t*a){
     static const uint8_t base[4]={0,192,64,128};unsigned quadrant=0;
     uint16_t dx=(uint16_t)(tx-x),dy=(uint16_t)(ty-y);
     if(dx&0x8000u){quadrant|=1u;dx=(uint16_t)(0u-dx);}if(dy&0x8000u){quadrant|=2u;dy=(uint16_t)(0u-dy);}
-    if(dx>255u)dx=255u;if(dy>255u)dy=255u;
+    if(dx>255u)dx=255u;
+    if(dy>255u)dy=255u;
     unsigned sum=(unsigned)dx+dy,component=(quadrant==0u||quadrant==3u)?dx:dy;
     uint8_t angle=(uint8_t)(base[quadrant]+component*64u/(sum?sum:1u));uint8_t*s=rt->g.direction_scratch_15e4;
     s[0]=angle;s[1]=(uint8_t)(wf_actor_rom_base((unsigned)(a-rt->actors))>>16);s[2]=(uint8_t)(dx>>8);s[3]=(uint8_t)dx;s[4]=(uint8_t)(dy>>8);s[5]=(uint8_t)dy;s[6]=(uint8_t)(ty>>8);s[7]=(uint8_t)ty;
@@ -130,7 +149,8 @@ static wf_status_t main_one_11652(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_disp
         if(rt->g.mode_0161&1u){wf_set_be16(a,0x20u,0u);wf_set_be16(a,4u,0u);wf_set_be16(a,0x2eu,0u);movement_clear(a,0x33u,2u);}
         else{
             movement_set(a,0x2eu,0x80u);wf_actor_raw_t*t=wf_actor_from_rom_ptr(rt,wf_be32(a,0x86u),0);if(!t)return blocked(ctx,0x11c08u);
-            if(wf_be16(t,6u)<wf_be16(a,6u))movement_clear(a,0x2eu,0x80u);wf_set_be16(a,4u,wf_be16(a,0x2eu));
+            if(wf_be16(t,6u)<wf_be16(a,6u))movement_clear(a,0x2eu,0x80u);
+            wf_set_be16(a,4u,wf_be16(a,0x2eu));
             if(low(t,0x20u)==1u&&wf_be16(t,0xaeu)==0x800cu){wf_set_be16(a,0x20u,5u);wf_set_be16(a,0x60u,0x8bu);wf_set_be16(t,0x20u,5u);wf_set_be16(t,0x60u,0x8bu);}
         }
     }
@@ -215,7 +235,8 @@ static wf_status_t main_eleven_12474(wf_runtime_t *rt,wf_actor_raw_t *a,
         uint16_t count=(uint16_t)(wf_be16(a,WF_A_ANIM_COUNTER)-1u);
         wf_set_be16(a,WF_A_ANIM_COUNTER,count);
         if(count==0xffffu){
-            unsigned idx=(wf_be16(a,WF_A_ANIM_INDEX)+1u)&3u;
+            unsigned idx=(unsigned)wf_be16(a,WF_A_ANIM_INDEX)+1u;
+            if(idx>=4u)idx=0u; /* $1C10A/$1C11E: kind-2 FE sentinel wraps to pose zero. */
             if(alternate){
                 wf_set_be16(a,WF_A_ANIM_INDEX,0xfeu);
                 wf_set_be16(a,WF_A_ANIM_COUNTER,0u);
@@ -279,7 +300,8 @@ static wf_status_t main_twelve_124fa(wf_runtime_t *rt,wf_actor_raw_t *a,
         uint16_t count=(uint16_t)(wf_be16(a,WF_A_ANIM_COUNTER)-1u);
         wf_set_be16(a,WF_A_ANIM_COUNTER,count);
         if(count==0xffffu){
-                unsigned idx=(wf_be16(a,WF_A_ANIM_INDEX)+1u)&3u;
+                unsigned idx=(unsigned)wf_be16(a,WF_A_ANIM_INDEX)+1u;
+                if(idx>=4u)idx=0u; /* $1C10A/$1C11E: kind-2 FE sentinel wraps to pose zero. */
                 if(alternate){
                     wf_set_be16(a,WF_A_ANIM_INDEX,0xfeu);
                     wf_set_be16(a,WF_A_ANIM_COUNTER,0u);
@@ -405,28 +427,46 @@ static void main_six_11de0(wf_actor_raw_t *a){
     }
 }
 
-/* $11F3A -> $12078, jumping into the ring after the TAG handover.
- * Routes 4/5 use $11F26, routes 6/7 use $11ECA. */
+/* $11F3A selects $11FAE (routes0..3), $12078 (4..7), or
+ * $12122 (8..9), then the matching original animation descriptor. */
 static wf_status_t main_eight_12078(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_dispatch_1c03e_ctx_t *ctx){
     unsigned route=wf_be16(a,WF_A_TIMER44);
-    if(route<4u||route>7u)return blocked(ctx,0x11f3au);
-    static const uint16_t coords[4][2]={{0x1dcu,0x193u},{0x314u,0x193u},{0x1bdu,0x120u},{0x338u,0x120u}};
+    if(route>=10u)return blocked(ctx,0x11f3au);
+    static const uint16_t coords[6][2]={{0x1dcu,0x193u},{0x314u,0x193u},{0x1bdu,0x120u},{0x338u,0x120u},{0x278u,0x160u},{0x3c8u,0x160u}};
+    unsigned staged=route<4u||route>=8u;
     if(!(wf_u8(a,WF_A_LATCHED)&128u)){
-        wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,WF_A_AE,0u);
+        wf_set_u8(a,WF_A_MOTION_MODE,0u);
         wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)|2u));
-        wf_set_be16(a,WF_A_RENDER_LIST,(route&2u)?4u:0u);
-        wf_set_be16(a,WF_A_X,(uint16_t)(coords[route&3u][0]+((route&1u)?24u:0xffe8u)));
-        wf_set_be16(a,WF_A_Y,coords[route&3u][1]);wf_set_be16(a,WF_A_Z,0x180u);
-        wf_set_u8(a,WF_A_FACING,(route&1u)?0u:128u);
+        unsigned coord=route<8u?(route&3u):route-4u;
+        wf_set_be16(a,WF_A_X,coords[coord][0]);wf_set_be16(a,WF_A_Y,coords[coord][1]);
+        if(staged){
+            wf_set_be16(a,WF_A_Z,0x140u);wf_set_u8(a,WF_A_FACING,(route&1u)?128u:0u);
+            if(route<4u){
+                wf_set_be16(a,WF_A_RENDER_LIST,2u);
+                if(!(rt->g.mode_0161&1u))wf_set_be16(a,0x4au,1u);
+            }
+        }else{
+            wf_set_be16(a,WF_A_AE,0u);wf_set_be16(a,WF_A_RENDER_LIST,(route&2u)?4u:0u);
+            wf_set_be16(a,WF_A_X,(uint16_t)(coords[coord][0]+((route&1u)?24u:0xffe8u)));
+            wf_set_be16(a,WF_A_Z,0x180u);wf_set_u8(a,WF_A_FACING,(route&1u)?0u:128u);
+        }
         rt->g.global_15d2=wf_u8(a,WF_A_CHARACTER+1u);rt->g.global_15d3=0x17u;
         /* $2052 is the silent sound output device. */
+    }else if(staged&&wf_u8(a,WF_A_ANIM_INDEX+1u)==1u&&wf_be16(a,WF_A_ANIM_COUNTER)==0u){
+        wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+((route&1u)?24u:0xffe8u)));
+        wf_set_be16(a,WF_A_Z,0x180u);wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^128u));
+        if(route<4u)wf_set_be16(a,WF_A_RENDER_LIST,(route&2u)?0u:4u);
     }else if(wf_u8(a,WF_A_ANIM_INDEX+1u)==0xfeu){
-        wf_set_be16(a,WF_A_STATE,9u);wf_set_be16(a,WF_A_RENDER_LIST,0u);
+        wf_set_be16(a,WF_A_STATE,9u);
+        if(route<8u)wf_set_be16(a,WF_A_RENDER_LIST,0u);
     }
-    unsigned count=(route&2u)?5u:3u,pose=(route&2u)?0x31u:0x2du;
+    /* Descriptors $11F0A/$11EA6/$11F26/$11ECA/$11EE6; every delay is12. */
+    static const uint8_t counts[5]={5,7,3,5,7};
+    static const uint16_t poses[5][7]={{0x66,0x67,0x2d,0x2e,0x2f},{0x66,0x67,0x31,0x32,0x33,0x34,0x35},{0x2d,0x2e,0x2f},{0x31,0x32,0x33,0x34,0x35},{0x66,0x67,0x31,0x32,0x33,0x34,0x37}};
+    unsigned row=route>=8u?4u:route>=4u?2u+((route&2u)?1u:0u):((route&2u)?1u:0u),count=counts[row];
     if(!(wf_u8(a,WF_A_LATCHED)&128u)){
         wf_set_be16(a,WF_A_ANIM_INDEX,0u);wf_set_be16(a,WF_A_ANIM_COUNTER,12u);
-        wf_set_be16(a,WF_A_MIRROR,(uint16_t)(pose^wf_be16(a,WF_A_FACING)));
+        wf_set_be16(a,WF_A_MIRROR,(uint16_t)(poses[row][0]^wf_be16(a,WF_A_FACING)));
         wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|128u));
     }else if(wf_be16(a,WF_A_ANIM_COUNTER)!=0xff00u){
         uint16_t timer=(uint16_t)(wf_be16(a,WF_A_ANIM_COUNTER)-1u);
@@ -435,7 +475,7 @@ static wf_status_t main_eight_12078(wf_runtime_t *rt,wf_actor_raw_t *a,wf_r17_di
             uint16_t index=(uint16_t)(wf_be16(a,WF_A_ANIM_INDEX)+1u);
             wf_set_be16(a,WF_A_ANIM_INDEX,index<count?index:0xfeu);
             wf_set_be16(a,WF_A_ANIM_COUNTER,index<count?12u:0u);
-            if(index<count)wf_set_be16(a,WF_A_MIRROR,(uint16_t)((pose+index)^wf_be16(a,WF_A_FACING)));
+            if(index<count)wf_set_be16(a,WF_A_MIRROR,(uint16_t)(poses[row][index]^wf_be16(a,WF_A_FACING)));
         }
     }
     return WF_OK;
@@ -463,6 +503,87 @@ static wf_status_t main_nine_121e6(wf_actor_raw_t *a,wf_r17_dispatch_1c03e_ctx_t
     wf_set_be32(a,WF_A_LINK,0u);return WF_OK;
 }
 
+/* $122E6: finish the turnbuckle descent selected by state9. The callback
+ * chooses one of three original descriptors; all use 16-tick, kind-one poses. */
+static wf_status_t main_ten_122e6(wf_runtime_t *rt,wf_actor_raw_t *a,
+                                   wf_r17_dispatch_1c03e_ctx_t *ctx,unsigned *variant){
+    /* TAG indexes from $121C8, including the following descriptor bytes for
+     * route 6/7. Royal indexes the two coordinate pairs at $121D8. */
+    static const uint16_t tag_coords[8][2]={
+        {0x01dcu,0x0193u},{0x0314u,0x0193u},{0x01bdu,0x0120u},{0x0338u,0x0120u},
+        {0x0278u,0x0160u},{0x03c8u,0x0160u},{0x0001u,0x21e6u},{0x0000u,0x0828u}};
+    static const uint16_t royal_coords[2][2]={{0x0278u,0x0160u},{0x03c8u,0x0160u}};
+    uint16_t route=wf_be16(a,WF_A_TIMER44);
+    uint8_t low44=wf_u8(a,WF_A_TIMER44+1u);
+    unsigned royal=(rt->g.mode_0161&2u)!=0u;
+    unsigned latched=(wf_u8(a,WF_A_LATCHED)&0x80u)!=0u;
+    unsigned royal_select=0u;
+    if(!latched){
+        if((royal&&(route<8u||route>=10u))||(!royal&&route>=8u))return blocked(ctx,0x12318u);
+        if(royal)wf_set_u8(a,WF_A_FLAGS33,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&~4u));
+        const uint16_t *xy=royal?royal_coords[route-8u]:tag_coords[route];
+        wf_set_be16(a,WF_A_X,xy[0]);wf_set_be16(a,WF_A_Y,xy[1]);
+        wf_set_be16(a,WF_A_Z,0x180u);
+        uint16_t offset=(low44&1u)?24u:0xffe8u;
+        wf_r17_m68k_move_w(&rt->m68k_regs,0u,offset);
+        wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+offset));
+        wf_set_be16(a,WF_A_RENDER_LIST,(low44&2u)?0u:4u);
+        royal_select=royal;
+    }else if(!royal){
+        if(((low44&2u)?wf_u8(a,WF_A_ACTION_PHASE)==4u:
+             wf_u8(a,WF_A_ACTION_PHASE)==2u)&&!wf_be16(a,WF_A_ANIM_COUNTER)){
+            wf_set_be16(a,WF_A_RENDER_LIST,2u);wf_set_be16(a,WF_A_Z,0x140u);
+        }
+        if(wf_u8(a,WF_A_ACTION_PHASE)==0xfeu){
+            wf_set_be16(a,WF_A_STATE,0u);
+            wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+            rt->g.global_1670=0u;wf_set_be16(a,0x4au,0u);
+            wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)&~2u));
+            uint16_t offset=(low44&1u)?0xffd8u:40u;
+            wf_r17_m68k_move_w(&rt->m68k_regs,0u,offset);
+            wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+offset));
+        }
+    }else{
+        if(wf_u8(a,WF_A_ACTION_PHASE)==4u&&!wf_be16(a,WF_A_ANIM_COUNTER))
+            wf_set_be16(a,WF_A_Z,0x140u);
+        if(wf_u8(a,WF_A_ACTION_PHASE)==0xfeu){
+            royal_select=1u;
+            wf_set_be16(a,WF_A_STATE,0u);
+            wf_set_be16(a,WF_A_MIRROR,wf_be16(a,WF_A_FACING));
+            rt->g.global_1670=0u;
+            wf_set_u8(a,WF_A_FLAGS33,(uint8_t)(wf_u8(a,WF_A_FLAGS33)&~4u));
+            wf_set_be16(a,0x4au,0u);
+            wf_set_u8(a,WF_A_FLAGS32,(uint8_t)(wf_u8(a,WF_A_FLAGS32)&~2u));
+            uint16_t offset=(low44&1u)?0xffe8u:24u;
+            wf_r17_m68k_move_w(&rt->m68k_regs,0u,offset);
+            wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+offset));
+        }
+    }
+    *variant=royal?(royal_select?2u:0u):((low44&2u)?0u:1u);
+    if(royal_select)wf_set_be16(a,WF_A_RENDER_LIST,0u);
+    return WF_OK;
+}
+static void main_ten_tick(wf_actor_raw_t *a,unsigned variant){
+    static const uint16_t poses[3][7]={
+        {0x35u,0x34u,0x33u,0x32u,0x31u,0x66u,0x67u},
+        {0x2fu,0x2eu,0x2du,0x66u,0x67u,0u,0u},
+        {0x37u,0x34u,0x33u,0x32u,0x31u,0x66u,0x67u}};
+    unsigned count=variant==1u?5u:7u;
+    uint16_t index=wf_be16(a,WF_A_ANIM_INDEX);
+    if(!(wf_u8(a,WF_A_LATCHED)&0x80u))index=0u;
+    else{
+        uint16_t timer=wf_be16(a,WF_A_ANIM_COUNTER);
+        if(timer==0xff00u)return;
+        wf_set_be16(a,WF_A_ANIM_COUNTER,(uint16_t)(timer-1u));if(timer)return;
+        index=(uint16_t)(index+1u);
+        if(index>=count){wf_set_be16(a,WF_A_ANIM_INDEX,0xfeu);
+            wf_set_be16(a,WF_A_ANIM_COUNTER,0u);return;}
+    }
+    wf_set_be16(a,WF_A_ANIM_INDEX,index);wf_set_be16(a,WF_A_ANIM_COUNTER,16u);
+    wf_set_be16(a,WF_A_MIRROR,(uint16_t)(poses[variant][index]^wf_be16(a,WF_A_FACING)));
+    wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|0x80u));
+}
+
 /* Exact $1C0C8/$1C12C animation tail for a ROM-derived descriptor.
  * The callback may change state but A1 still names the original descriptor. */
 static wf_status_t tick_descriptor(wf_actor_raw_t *a,const wf_anim_desc_t *d){
@@ -484,6 +605,87 @@ static wf_status_t tick_descriptor(wf_actor_raw_t *a,const wf_anim_desc_t *d){
     wf_set_be16(a,WF_A_MIRROR,(uint16_t)(entry->pose_raw^wf_be16(a,WF_A_FACING)));
     wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|128u));return WF_OK;
 }
+/* $1BCF6/$1BD0E, raw54's victim subtype $1E. EXG A0,A2 makes $10B9A
+ * position the attacker's own linked actor, which need not be this victim. */
+static wf_status_t state4_1bd0e(wf_runtime_t*rt,wf_actor_raw_t*a,
+                               wf_r17_dispatch_1c03e_ctx_t*ctx,unsigned*alternate){
+    *alternate=0u;
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        uint32_t saved_d0=rt->m68k_regs.d[0];wf_set_u8(a,WF_A_MOTION_MODE,0u);
+        wf_r17_m68k_move_w(&rt->m68k_regs,0u,40u);
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,0xffffu);
+        wf_r17_m68k_move_w(&rt->m68k_regs,2u,20u);
+        wf_actor_raw_t*attacker=wf_actor_from_rom_ptr(rt,wf_be32(a,WF_A_LINK),0);
+        if(!attacker)return blocked(ctx,0x10b9eu);
+        wf_actor_raw_t*recipient=wf_actor_from_rom_ptr(rt,wf_be32(attacker,WF_A_LINK),0);
+        if(!recipient)return blocked(ctx,0x10ba2u);
+        /* Literal $10BA2..$10BC6: copy all coordinates before translating. */
+        wf_set_be16(recipient,WF_A_X,wf_be16(attacker,WF_A_X));
+        wf_set_be16(recipient,WF_A_Y,wf_be16(attacker,WF_A_Y));
+        wf_set_be16(recipient,WF_A_Z,wf_be16(attacker,WF_A_Z));
+        uint16_t dx=(wf_u8(attacker,WF_A_FACING)&128u)?0xffd8u:40u;
+        wf_set_be16(recipient,WF_A_X,(uint16_t)(wf_be16(recipient,WF_A_X)+dx));
+        wf_set_be16(recipient,WF_A_Y,(uint16_t)(wf_be16(recipient,WF_A_Y)-1u));
+        wf_set_be16(recipient,WF_A_Z,(uint16_t)(wf_be16(recipient,WF_A_Z)+20u));
+        /* $2052 is the silent sound device; $1C0C2 restores caller D0. */
+        rt->m68k_regs.d[0]=saved_d0;
+    }else{
+        if(low(a,WF_A_ANIM_INDEX)!=0xfeu)return WF_OK;
+        wf_set_be16(a,WF_A_STATE,4u);wf_set_be16(a,WF_A_STATE4,0x100fu);
+    }
+    *alternate=low(a,WF_A_SELECTOR)!=0x0fu;return WF_OK;
+}
+static wf_status_t state4_1bd0e_tick(wf_actor_raw_t*a,const wf_anim_desc_t*d,unsigned alternate){
+    int loads=!(wf_u8(a,WF_A_LATCHED)&128u)||
+        (wf_be16(a,WF_A_ANIM_COUNTER)==0u&&wf_be16(a,WF_A_ANIM_INDEX)==0xffffu);
+    wf_status_t status=tick_descriptor(a,d);
+    /* $1BD02 has the same kind/count/period16 as $1BCF6, pose $1AE. */
+    if(status==WF_OK&&alternate&&loads&&wf_be16(a,WF_A_ANIM_INDEX)==0u)
+        wf_set_be16(a,WF_A_MIRROR,(uint16_t)(0x1aeu^wf_be16(a,WF_A_FACING)));
+    return status;
+}
+
+/* $1BB08, shared by state4 $18/$29. The callback keeps the original
+ * descriptor for $1C0C8 even after $29 returns to state4/subtype3. */
+static void state4_1bb08(wf_actor_raw_t*a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,0x54u,64u);
+    }else if(low(a,WF_A_ANIM_INDEX)==0xfeu){
+        wf_set_be16(a,WF_A_STATE,0u);
+        if(low(a,WF_A_STATE4)==0x29u){wf_set_be16(a,WF_A_STATE,4u);wf_set_be16(a,WF_A_STATE4,3u);}
+    }
+}
+
+/* $1B7A2: linked victim, descriptor $1B78A or the local $1B796 alternate.
+ * Terminal exits retain the incoming descriptor even after changing subtype. */
+static wf_status_t state4_1b7a2(wf_runtime_t*rt,wf_actor_raw_t*a,wf_r17_dispatch_1c03e_ctx_t*ctx,unsigned*alternate){
+    *alternate=0u;
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        wf_set_u8(a,WF_A_FACING,(uint8_t)(wf_u8(a,WF_A_FACING)^128u));wf_set_be32(a,WF_A_LINK,wf_be32(a,WF_A_RECIP_LINK));
+        wf_actor_raw_t*t=wf_actor_from_rom_ptr(rt,wf_be32(a,WF_A_LINK),NULL);if(!t)return blocked(ctx,0x1b7b6u);
+        wf_set_be16(a,WF_A_X,wf_be16(t,WF_A_X));wf_set_be16(a,WF_A_Y,wf_be16(t,WF_A_Y));wf_set_be16(a,WF_A_Y,(uint16_t)(wf_be16(a,WF_A_Y)-1u));wf_set_be16(a,WF_A_Z,wf_be16(t,WF_A_Z));wf_set_u8(a,WF_A_MOTION_MODE,0u);
+    }else if(low(a,WF_A_ANIM_INDEX)==0xfeu){
+        unsigned high=low(a,WF_A_PRIOR)==2u;wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,high?0x1bu:2u);
+        uint8_t face=(uint8_t)(wf_u8(a,WF_A_FACING)^128u);wf_set_u8(a,WF_A_FACING,face);
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,0xffffu);wf_r17_m68k_move_w(&rt->m68k_regs,2u,high?64u:16u);
+        wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+(face&128u?0xfff8u:8u)));wf_set_be16(a,WF_A_Y,(uint16_t)(wf_be16(a,WF_A_Y)-1u));wf_set_be16(a,WF_A_Z,(uint16_t)(wf_be16(a,WF_A_Z)+(high?64u:16u)));
+        if(!high){wf_set_be16(a,WF_A_MIRROR,0x11u);wf_set_u8(a,WF_A_MIRROR,face);}return WF_OK;
+    }
+    *alternate=low(a,WF_A_STATE4)!=0x14u;return WF_OK;
+}
+/* Both original descriptors have kind1/count1/counter12. $1B796 is a local
+ * callback-selected descriptor absent from the generated dispatch catalog. */
+static void state4_1b7a2_tick(wf_actor_raw_t*a,unsigned alternate){
+    uint16_t index=0;
+    if(wf_u8(a,WF_A_LATCHED)&128u){
+        uint16_t timer=wf_be16(a,WF_A_ANIM_COUNTER);if(timer==0xff00u)return;
+        wf_set_be16(a,WF_A_ANIM_COUNTER,(uint16_t)(timer-1u));if(timer)return;
+        index=(uint16_t)(wf_be16(a,WF_A_ANIM_INDEX)+1u);
+        if(index>=1u){wf_set_be16(a,WF_A_ANIM_INDEX,0xfeu);wf_set_be16(a,WF_A_ANIM_COUNTER,0);return;}
+    }
+    wf_set_be16(a,WF_A_ANIM_INDEX,index);wf_set_be16(a,WF_A_ANIM_COUNTER,12u);wf_set_be16(a,WF_A_MIRROR,(uint16_t)((alternate?0x196u:0x195u)^wf_be16(a,WF_A_FACING)));wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|128u));
+}
+
 /* $1B706/$1B700, state4 subtypes $10/$11/$12: hide for 32 owner calls.
  * Kind-zero animation leaves the callback's $FF00 counter unchanged. */
 static void state4_1b706(wf_actor_raw_t *a){
@@ -560,6 +762,59 @@ static int edge_reaction_10fc6(wf_runtime_t *rt,wf_actor_raw_t *a){
     }else if(contact==3u){wf_set_be16(a,WF_A_STATE,4u);wf_set_be16(a,WF_A_STATE4,0x17u);}
     return 0;
 }
+/* $1B73E/$1B72E, victim subtype LOW13. The descriptor remains $1B72E
+ * after the landing changes LOW subtype to5; edge carry is not consumed. */
+static void state4_1b73e(wf_runtime_t*rt,wf_actor_raw_t*a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E preset6 at$25EE, with caller D1 restored before$10F9C. */
+        wf_set_be16(a,WF_A_VX,(wf_u8(a,WF_A_FACING)&128u)?0x100u:0xff00u);
+        wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0x300u);
+        wf_set_be16(a,WF_A_VZ_DEC,0x38u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+        uint16_t y=wf_be16(a,WF_A_Y),d1=(uint16_t)(y+32u);
+        if(d1>=0x198u)wf_set_be16(a,WF_A_VY,0xffd0u);
+        else{d1=(uint16_t)(y-32u);if(d1<0x118u)wf_set_be16(a,WF_A_VY,48u);}
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,d1);return;
+    }
+    (void)edge_reaction_10fc6(rt,a);
+    if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+        /* $1110E is the explicit sound output device; D0 is dispatch-saved. */
+        wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,5u);
+        wf_set_be16(a,WF_A_MIRROR,0x1fu);wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+    }
+}
+
+/* $1B684/$1B66C, victim subtype LOW0F. The original landing tail only
+ * loads D0.W=-64/D1.W=0/D2.W=0; it does not call $10BD0 or move X. */
+static void state4_1b684(wf_runtime_t *rt,wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E preset5 at$25E8: VX=-256,VZ=1280,gravity56. */
+        wf_set_be16(a,WF_A_VX,(wf_u8(a,WF_A_FACING)&128u)?0x100u:0xff00u);
+        wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0x500u);
+        wf_set_be16(a,WF_A_VZ_DEC,0x38u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+        uint16_t y=wf_be16(a,WF_A_Y),d1=(uint16_t)(y+32u);
+        if(d1>=0x198u)wf_set_be16(a,WF_A_VY,0xffd0u);
+        else{d1=(uint16_t)(y-32u);if(d1<0x118u)wf_set_be16(a,WF_A_VY,0x30u);}
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,d1);
+        uint8_t flags=wf_u8(a,WF_A_STATE4);
+        wf_set_u8(a,WF_A_STATE4,(uint8_t)(flags&~16u));
+        if(flags&16u){
+            wf_set_u8(a,WF_A_LATCHED,(uint8_t)(wf_u8(a,WF_A_LATCHED)|128u));
+            wf_set_be16(a,WF_A_ANIM_INDEX,0u);wf_set_be16(a,WF_A_ANIM_COUNTER,0u);
+        }
+    }else{
+        edge_reaction_10fc6(rt,a);
+        if(low(a,WF_A_ANIM_INDEX)==3u){
+            wf_set_be16(a,WF_A_FIELD42,0xffe0u);
+            if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+                /* $1110E emits only the existing silent sound device. */
+                wf_set_be16(a,WF_A_FIELD42,0u);wf_set_be16(a,WF_A_STATE,4u);
+                wf_set_u8(a,WF_A_STATE4_LO,5u);
+                wf_set_be16(a,WF_A_MIRROR,0x1fu);wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+                wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
+            }
+        }
+    }
+}
 /* $11D8E/$11D82: slow a released runner, or rebound when $10FC6
  * reports rope contact. The dispatcher still ticks the original descriptor. */
 static void main_three_11d8e(wf_runtime_t *rt,wf_actor_raw_t *a){
@@ -610,6 +865,76 @@ static void state4_1bb4c(wf_runtime_t *rt,wf_actor_raw_t *a){
         }
     }
 }
+/* $1BBC6/$1BBB6, state-4 subtype $1A: small launch, alternating impact
+ * effect, then return to subtype 9 on contact. $1C03E saves D0 around the
+ * callback, while the byte move to D1 remains visible to later owners. */
+static wf_status_t state4_1bbc6(wf_runtime_t *rt,wf_actor_raw_t *a,
+                                wf_r17_dispatch_1c03e_ctx_t *ctx){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E row $17 at $2654: VX=0, VZ=$200, gravity=$40. */
+        wf_set_be16(a,WF_A_VX,0u);wf_set_be16(a,WF_A_VY,0u);
+        wf_set_be16(a,WF_A_VZ,0x200u);wf_set_be16(a,WF_A_VZ_DEC,0x40u);
+        wf_set_u8(a,WF_A_MOTION_MODE,2u);
+    }else if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+        /* $1110E is the existing sound owner. This is a BYTE write to
+         * subtype, preserving the original high byte at $64. */
+        wf_set_be16(a,0x9au,0u);wf_set_be16(a,WF_A_STATE,4u);
+        wf_set_u8(a,WF_A_STATE4_LO,9u);return WF_OK;
+    }
+    uint8_t d1=wf_u8(a,WF_A_ANIM_INDEX+1u);
+    if(!wf_be16(a,WF_A_ANIM_COUNTER))d1=(uint8_t)(d1+1u);
+    wf_r17_m68k_move_b(&rt->m68k_regs,1u,d1);
+    ptrdiff_t slot=a-rt->actors;
+    if(!ctx->actions||slot<0||slot>=(ptrdiff_t)WF_ACTOR_SLOTS)
+        return blocked(ctx,0x10d3au);
+    wf_r17_actions_r11_trace_t *trace=&ctx->actions->trace[(unsigned)slot];
+    uint32_t saved_d0=rt->m68k_regs.d[0];
+    trace->blocked_dependency_rom=0u;
+    wf_status_t st=wf_r17_action_effect_10d3a(rt,a,d1?16u:17u,
+                                                ctx->actions,trace);
+    rt->m68k_regs.d[0]=saved_d0;
+    return st==WF_OK?WF_OK:blocked(ctx,trace->blocked_dependency_rom?
+                                  trace->blocked_dependency_rom:0x10d3au);
+}
+/* $1BC36/$1BC22, subtype $1B: launched linked victim. $1C0C8 keeps
+ * the original descriptor even when the contact tail changes subtype. */
+static void state4_1bc36(wf_runtime_t*rt,wf_actor_raw_t*a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E row20=$FEC0,$0500,$0038, then $10F9C D0.W=$30. */
+        wf_set_be16(a,WF_A_VX,(wf_u8(a,WF_A_FACING)&128u)?0x140u:0xfec0u);
+        wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0x500u);wf_set_be16(a,WF_A_VZ_DEC,0x38u);
+        wf_set_u8(a,WF_A_MOTION_MODE,2u);
+        uint16_t y=wf_be16(a,WF_A_Y),d1=(uint16_t)(y+32u);
+        if(d1>=0x198u)wf_set_be16(a,WF_A_VY,0xffd0u);
+        else{d1=(uint16_t)(y-32u);if(d1<0x118u)wf_set_be16(a,WF_A_VY,48u);}
+        wf_r17_m68k_move_w(&rt->m68k_regs,1u,d1);return;
+    }
+    (void)edge_reaction_10fc6(rt,a);wf_set_be16(a,WF_A_FIELD42,0xfff0u);
+    if(!(wf_u8(a,WF_A_CONTACT+1u)&16u))return;
+    /* $1110E is the existing silent sound-output device. */
+    wf_set_be16(a,WF_A_FIELD42,0u);wf_set_be16(a,WF_A_STATE,4u);wf_set_be16(a,WF_A_STATE4,5u);
+    wf_set_be16(a,WF_A_MIRROR,0x1fu);wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+    wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+(wf_u8(a,WF_A_FACING)&128u?56u:0xffc8u)));
+    wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
+}
+
+/* $1B85E/$1B84E, subtype15: short drop and the original byte-only
+ * transition to grounded subtype5. Rope reaction still precedes landing. */
+static void state4_1b85e(wf_runtime_t*rt,wf_actor_raw_t*a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E row8=$0000,$0010,$0038. */
+        wf_set_be16(a,WF_A_VX,0u);wf_set_be16(a,WF_A_VY,0u);
+        wf_set_be16(a,WF_A_VZ,16u);wf_set_be16(a,WF_A_VZ_DEC,56u);
+        wf_set_u8(a,WF_A_MOTION_MODE,2u);return;
+    }
+    (void)edge_reaction_10fc6(rt,a);
+    if(!(wf_u8(a,WF_A_CONTACT+1u)&16u))return;
+    wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,5u);
+    wf_set_be16(a,WF_A_MIRROR,0x1fu);wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+    wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+(wf_u8(a,WF_A_FACING)&128u?56u:0xffc8u)));
+    wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
+}
+
 /* $1BDE8/$1BDD8, subtype $22: descending throw victim and landing. */
 static void state4_1bde8(wf_runtime_t *rt,wf_actor_raw_t *a){
     if(!(wf_u8(a,WF_A_LATCHED)&128u)){
@@ -633,6 +958,25 @@ static void state4_1bde8(wf_runtime_t *rt,wf_actor_raw_t *a){
                 wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+dx));
                 wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
             }
+        }
+    }
+}
+/* $1BE7C/$1BE6C, subtype LOW23: descending fall. The ROM does not
+ * branch on health; zero-health actors retain the same landing behavior. */
+static void state4_1be7c(wf_runtime_t *rt,wf_actor_raw_t *a){
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E row $1A at $2666; only VX is negated by facing. */
+        wf_set_be16(a,WF_A_VX,(wf_u8(a,WF_A_FACING)&128u)?0x100u:0xff00u);
+        wf_set_be16(a,WF_A_VY,0u);wf_set_be16(a,WF_A_VZ,0x100u);wf_set_be16(a,WF_A_VZ_DEC,0x58u);wf_set_u8(a,WF_A_MOTION_MODE,2u);
+    }else{
+        edge_reaction_10fc6(rt,a);
+        if(wf_u8(a,WF_A_CONTACT+1u)&16u){
+            /* $1110E emits only sound. Preserve the subtype high BYTE. */
+            wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,5u);
+            wf_set_be16(a,WF_A_MIRROR,0x1fu);wf_set_u8(a,WF_A_MIRROR,wf_u8(a,WF_A_FACING));
+            uint16_t dx=(wf_u8(a,WF_A_FACING)&128u)?56u:0xffc8u;
+            wf_set_be16(a,WF_A_X,(uint16_t)(wf_be16(a,WF_A_X)+dx));
+            wf_r17_m68k_move_w(&rt->m68k_regs,1u,0u);wf_r17_m68k_move_w(&rt->m68k_regs,2u,0u);
         }
     }
 }
@@ -786,6 +1130,30 @@ static void recovery_input_10d04(wf_runtime_t *rt,wf_actor_raw_t *a){
             uint16_t timer=(uint16_t)(wf_be16(a,0xaau)-1u);wf_set_be16(a,0xaau,timer?timer:0x4000u);
         }
     }
+}
+/* $1BD6C, subtype LOW21. Airborne paths select $1B1B8 for the tick;
+ * the landing keeps the incoming kind-zero $1BD66 descriptor. */
+static wf_status_t state4_1bd6c(wf_runtime_t*rt,wf_actor_raw_t*a,
+                               wf_r17_dispatch_1c03e_ctx_t*ctx,unsigned*ground_pose){
+    *ground_pose=1u;
+    if(!(wf_u8(a,WF_A_LATCHED)&128u)){
+        /* $258E row3=$0000,$0300,$0038, followed by CLR.W AA and
+         * $10C60 selector1. All helper registers are restored. */
+        wf_set_be16(a,WF_A_VX,0u);wf_set_be16(a,WF_A_VY,0u);
+        wf_set_be16(a,WF_A_VZ,0x300u);wf_set_be16(a,WF_A_VZ_DEC,0x38u);
+        wf_set_u8(a,WF_A_MOTION_MODE,2u);wf_set_be16(a,0xaau,0u);
+        uint16_t unit=(uint16_t)(wf_be16(a,WF_A_STAMINA_MAX)>>2),sum=unit;unsigned level=3u;
+        while(sum<wf_be16(a,WF_A_STAMINA)&&level){sum=(uint16_t)(sum+unit);--level;}
+        static const uint8_t delay[4]={1u,3u,7u,21u};wf_set_be16(a,0xaau,delay[level]);
+        return WF_OK;
+    }
+    recovery_input_10d04(rt,a);
+    wf_status_t status=push_clearance_10b62(rt,a,80u,ctx);if(status!=WF_OK)return status;
+    (void)edge_reaction_10fc6(rt,a);
+    if(!(wf_u8(a,WF_A_CONTACT+1u)&16u))return WF_OK;
+    /* $1110E is the existing silent sound-output device. No motion clear. */
+    wf_set_be16(a,WF_A_STATE,4u);wf_set_u8(a,WF_A_STATE4_LO,low(a,WF_A_TIER)==2u?9u:8u);
+    *ground_pose=0u;return WF_OK;
 }
 /* $1B288: descriptors $1B268/$1B278 (subtypes 6/7). Ground contact
  * releases the indefinite first pose; the original descriptor still ticks. */
@@ -1018,6 +1386,21 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
     if(domain==4u){
         id=wf_u8(a,WF_A_STATE4_LO);if(id>=43u)return blocked(ctx,0x0001afd4u);
         di=wf_anim_state4_dispatch[id];if(di>=wf_anim_desc_count)return blocked(ctx,0x0001afd4u);d=&wf_anim_descs[di];
+        if(d->callback_rom==0x1bed8u){
+            state4_1bed8(a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1c004u){
+            state4_1c004(a);exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1b73eu){
+            state4_1b73e(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1b684u){
+            state4_1b684(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
         if(d->callback_rom==0x1b8cau){
             s=state4_1b8ca(rt,a,ctx);if(s!=WF_OK)return s;
             s=tick_descriptor(a,d);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;
@@ -1052,6 +1435,13 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
         if(d->callback_rom==0x1b478u){
             s=state4_1b478(rt,a,ctx);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;
         }
+        if(d->callback_rom==0x1bb08u){
+            state4_1bb08(a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1b7a2u){
+            unsigned alternate;s=state4_1b7a2(rt,a,ctx,&alternate);if(s!=WF_OK)return s;state4_1b7a2_tick(a,alternate);exact_tail_1c0b4(a);return WF_OK;
+        }
         if(d->callback_rom==0x1b706u){
             state4_1b706(a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
             exact_tail_1c0b4(a);return WF_OK;
@@ -1064,12 +1454,38 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
             state4_1bb4c(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
             exact_tail_1c0b4(a);return WF_OK;
         }
+        if(d->callback_rom==0x1bbc6u){
+            s=state4_1bbc6(rt,a,ctx);if(s!=WF_OK)return s;
+            s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1bc36u){
+            state4_1bc36(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1b85eu){
+            state4_1b85e(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1bd6cu){
+            unsigned ground_pose;s=state4_1bd6c(rt,a,ctx,&ground_pose);if(s!=WF_OK)return s;
+            if(ground_pose)d=&wf_anim_descs[wf_anim_state4_dispatch[5u]]; /* $1B1B8 */
+            s=tick_descriptor(a,d);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1bd0eu){
+            unsigned alternate;s=state4_1bd0e(rt,a,ctx,&alternate);if(s!=WF_OK)return s;
+            s=state4_1bd0e_tick(a,d,alternate);if(s!=WF_OK)return s;exact_tail_1c0b4(a);return WF_OK;
+        }
         if(d->callback_rom==0x1bde8u){
             state4_1bde8(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
             exact_tail_1c0b4(a);return WF_OK;
         }
         if(d->callback_rom==0x1bf1cu){
             state4_1bf1c(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
+            exact_tail_1c0b4(a);return WF_OK;
+        }
+        if(d->callback_rom==0x1be7cu){
+            state4_1be7c(rt,a);s=tick_descriptor(a,d);if(s!=WF_OK)return s;
             exact_tail_1c0b4(a);return WF_OK;
         }
         if(d->callback_rom==0x1bfa6u){
@@ -1110,6 +1526,11 @@ wf_status_t wf_r17_dispatch_1c03e_bounded(wf_runtime_t *rt,wf_actor_raw_t *a,wf_
     if(id==9u&&d->callback_rom==0x000121e6u){
         s=main_nine_121e6(a,ctx);if(s!=WF_OK)return s;
         exact_tail_1c0b4(a);return WF_OK;
+    }
+    if(id==10u&&d->callback_rom==0x000122e6u){
+        unsigned variant=0u;
+        s=main_ten_122e6(rt,a,ctx,&variant);if(s!=WF_OK)return s;
+        main_ten_tick(a,variant);exact_tail_1c0b4(a);return WF_OK;
     }
     if(id==11u&&d->callback_rom==0x00012474u){
         s=main_eleven_12474(rt,a,ctx);if(s!=WF_OK)return s;

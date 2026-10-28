@@ -1,0 +1,54 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "a255561775abede5d0c8e297ba2452af13938446f63b2239fdb8a07f8cb289f5",
+  "snapshot_bytes": 8248,
+  "header": [
+    320,
+    4,
+    1,
+    114750,
+    0,
+    1
+  ],
+  "emulator_report": "validation\\local-20261024\\hardware-input\\beetle-full-flow-stage2-tag\\report.json",
+  "emulator_report_sha256": "156135847ef535fcbeab14edf5001ab757892f14e4a0cce81c51601f3bf859b7",
+  "workram_sha256": "4ed4bcad1b7510a93dee1c572dafb3004edf278479d097c66679cc908ac82db4",
+  "program_sha256": "49a64999dddd3f2b077a9818be39417441b241341945c7cadbd9acbb1352cd12",
+  "bin_sha256": "7934216a3dd6bd338d17930bbe1edbec445c1c3e4b56c63be69c5a26f674bced",
+  "schedule_sha256": "de4321132e0d07ca8c9d12f63e92d5dbb4b81667141dba7a99d6982507a765a9",
+  "core_sha256": "88b459ccb216746ced3b0e09c6598725ccfd6e91df9f43a078309975edf685d5",
+  "core_version": "v1.32.1",
+  "decoded_runtime_wram_offset": 1984172,
+  "decoded_actor_wram_offset": 1984556,
+  "global_layout_offsets": [
+    384,
+    268,
+    352,
+    24,
+    31,
+    4,
+    12,
+    174,
+    176,
+    178,
+    180
+  ],
+  "matched_actor_blocks": 9,
+  "matched_d_registers": 8,
+  "rng": 2918995056,
+  "provenance": "Read-only Beetle guard capture at F4C2/12614 before raw41 callback. Default dispatch guard mutates no actor/RAM/D fields. All nine actor blocks uniquely match byte-swapped WRAM, D0-D7 from report. Typed global prefix layout matches supplied SH2 observer actors/RNG offsets and observed frame320. Projected supported globals only; unrepresented arcade RAM explicitly zero. No HOST identity/seed/frame/register forcing and no physical Saturn dump.",
+  "owner": "12614[41] -> descriptor1848C, callback18498",
+  "limits": [
+    "Captured typed Saturn model is projected into supported arcade RAM fields, not full original arcade RAM",
+    "No independent HOST all-actors match has been claimed for this Beetle-specific7/2 roster"
+  ],
+  "green_cases": 11317,
+  "guard_controls": 4,
+  "raw41_owner_sha256": "de12545932e134c58a5c26921593b28cd9134c126d4d47cb5b552a6336a934f4",
+  "frozen_composed_actions_sha256": "fb43f784d2981fcea7fb4fbc64b9fd02fef593979ea74a5557e99ad659c088ee",
+  "evidence": [
+    "validation/local-20261024/action41-red.log",
+    "validation/local-20261024/action41-final-green.json",
+    "validation/local-20261024/action41-independent-review.txt"
+  ]
+}

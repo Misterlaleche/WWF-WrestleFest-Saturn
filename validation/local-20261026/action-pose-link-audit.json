@@ -1,0 +1,719 @@
+{
+  "status": "PASS",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "generated_table_sha256": "374e1e632b6be1ac36412feafe97ca33bb4a15f799810a6a305fd582efdd7f12",
+  "runtime_descriptor_source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+  "action_matrix_pose_links": 1201,
+  "base_pose_links_parsed": 1200,
+  "unique_character_pose_pairs": 1014,
+  "candidate_alternate_pose_links": 203,
+  "candidate_alternate_unique_pairs": 176,
+  "additional_pose_pairs": [
+    {
+      "character": 0,
+      "pose": "009F"
+    },
+    {
+      "character": 0,
+      "pose": "00A0"
+    },
+    {
+      "character": 0,
+      "pose": "00A1"
+    },
+    {
+      "character": 1,
+      "pose": "009F"
+    },
+    {
+      "character": 1,
+      "pose": "00A0"
+    },
+    {
+      "character": 1,
+      "pose": "00A1"
+    },
+    {
+      "character": 1,
+      "pose": "00A2"
+    },
+    {
+      "character": 1,
+      "pose": "00A3"
+    },
+    {
+      "character": 1,
+      "pose": "01C3"
+    },
+    {
+      "character": 1,
+      "pose": "01CB"
+    },
+    {
+      "character": 1,
+      "pose": "01CC"
+    },
+    {
+      "character": 2,
+      "pose": "009D"
+    },
+    {
+      "character": 2,
+      "pose": "009E"
+    },
+    {
+      "character": 2,
+      "pose": "01C3"
+    },
+    {
+      "character": 4,
+      "pose": "009F"
+    },
+    {
+      "character": 4,
+      "pose": "00A0"
+    },
+    {
+      "character": 4,
+      "pose": "00A1"
+    },
+    {
+      "character": 4,
+      "pose": "00A2"
+    },
+    {
+      "character": 4,
+      "pose": "00A3"
+    },
+    {
+      "character": 4,
+      "pose": "01C3"
+    },
+    {
+      "character": 4,
+      "pose": "01CB"
+    },
+    {
+      "character": 4,
+      "pose": "01CC"
+    },
+    {
+      "character": 5,
+      "pose": "009F"
+    },
+    {
+      "character": 5,
+      "pose": "00A0"
+    },
+    {
+      "character": 5,
+      "pose": "00A1"
+    },
+    {
+      "character": 5,
+      "pose": "01C3"
+    },
+    {
+      "character": 6,
+      "pose": "0005"
+    },
+    {
+      "character": 6,
+      "pose": "0006"
+    },
+    {
+      "character": 6,
+      "pose": "0007"
+    },
+    {
+      "character": 6,
+      "pose": "0008"
+    },
+    {
+      "character": 6,
+      "pose": "007C"
+    },
+    {
+      "character": 6,
+      "pose": "007D"
+    },
+    {
+      "character": 6,
+      "pose": "007E"
+    },
+    {
+      "character": 6,
+      "pose": "007F"
+    },
+    {
+      "character": 6,
+      "pose": "0080"
+    },
+    {
+      "character": 6,
+      "pose": "0081"
+    },
+    {
+      "character": 6,
+      "pose": "0082"
+    },
+    {
+      "character": 6,
+      "pose": "0083"
+    },
+    {
+      "character": 6,
+      "pose": "009F"
+    },
+    {
+      "character": 6,
+      "pose": "00A0"
+    },
+    {
+      "character": 6,
+      "pose": "00A1"
+    },
+    {
+      "character": 7,
+      "pose": "009F"
+    },
+    {
+      "character": 7,
+      "pose": "00A0"
+    },
+    {
+      "character": 7,
+      "pose": "00A1"
+    },
+    {
+      "character": 7,
+      "pose": "01C3"
+    },
+    {
+      "character": 8,
+      "pose": "009F"
+    },
+    {
+      "character": 8,
+      "pose": "00A0"
+    },
+    {
+      "character": 8,
+      "pose": "00A1"
+    },
+    {
+      "character": 9,
+      "pose": "0086"
+    },
+    {
+      "character": 9,
+      "pose": "0087"
+    },
+    {
+      "character": 9,
+      "pose": "0089"
+    },
+    {
+      "character": 9,
+      "pose": "008A"
+    },
+    {
+      "character": 9,
+      "pose": "009D"
+    },
+    {
+      "character": 9,
+      "pose": "009E"
+    },
+    {
+      "character": 10,
+      "pose": "009F"
+    },
+    {
+      "character": 10,
+      "pose": "00A0"
+    },
+    {
+      "character": 10,
+      "pose": "00A1"
+    },
+    {
+      "character": 11,
+      "pose": "009D"
+    },
+    {
+      "character": 11,
+      "pose": "009E"
+    },
+    {
+      "character": 11,
+      "pose": "0123"
+    }
+  ],
+  "action79_dynamic_descriptor_frames": 36,
+  "action79_dynamic_unique_pairs": 31,
+  "action79_new_pose_pairs": [
+    {
+      "character": 0,
+      "pose": "0059"
+    },
+    {
+      "character": 0,
+      "pose": "005A"
+    },
+    {
+      "character": 0,
+      "pose": "005B"
+    },
+    {
+      "character": 0,
+      "pose": "005C"
+    },
+    {
+      "character": 0,
+      "pose": "005D"
+    },
+    {
+      "character": 1,
+      "pose": "0059"
+    },
+    {
+      "character": 1,
+      "pose": "005A"
+    },
+    {
+      "character": 2,
+      "pose": "0059"
+    },
+    {
+      "character": 2,
+      "pose": "005A"
+    },
+    {
+      "character": 2,
+      "pose": "005B"
+    },
+    {
+      "character": 2,
+      "pose": "005C"
+    },
+    {
+      "character": 3,
+      "pose": "0059"
+    },
+    {
+      "character": 3,
+      "pose": "005A"
+    },
+    {
+      "character": 4,
+      "pose": "0059"
+    },
+    {
+      "character": 4,
+      "pose": "005A"
+    },
+    {
+      "character": 5,
+      "pose": "0059"
+    },
+    {
+      "character": 5,
+      "pose": "005A"
+    },
+    {
+      "character": 6,
+      "pose": "0059"
+    },
+    {
+      "character": 6,
+      "pose": "005A"
+    },
+    {
+      "character": 7,
+      "pose": "0059"
+    },
+    {
+      "character": 7,
+      "pose": "005A"
+    },
+    {
+      "character": 7,
+      "pose": "005B"
+    },
+    {
+      "character": 8,
+      "pose": "0059"
+    },
+    {
+      "character": 8,
+      "pose": "005A"
+    },
+    {
+      "character": 9,
+      "pose": "0059"
+    },
+    {
+      "character": 9,
+      "pose": "005A"
+    },
+    {
+      "character": 10,
+      "pose": "0059"
+    },
+    {
+      "character": 10,
+      "pose": "005A"
+    },
+    {
+      "character": 11,
+      "pose": "0059"
+    },
+    {
+      "character": 11,
+      "pose": "005A"
+    }
+  ],
+  "action1e_1f_dynamic_unique_pairs": 72,
+  "action1e_1f_new_pose_pairs": [
+    {
+      "character": 0,
+      "pose": "0079"
+    },
+    {
+      "character": 0,
+      "pose": "007A"
+    },
+    {
+      "character": 0,
+      "pose": "007B"
+    },
+    {
+      "character": 1,
+      "pose": "0079"
+    },
+    {
+      "character": 1,
+      "pose": "007A"
+    },
+    {
+      "character": 1,
+      "pose": "007B"
+    },
+    {
+      "character": 2,
+      "pose": "0079"
+    },
+    {
+      "character": 2,
+      "pose": "007A"
+    },
+    {
+      "character": 2,
+      "pose": "007B"
+    },
+    {
+      "character": 3,
+      "pose": "0079"
+    },
+    {
+      "character": 3,
+      "pose": "007A"
+    },
+    {
+      "character": 3,
+      "pose": "007B"
+    },
+    {
+      "character": 4,
+      "pose": "0079"
+    },
+    {
+      "character": 4,
+      "pose": "007A"
+    },
+    {
+      "character": 4,
+      "pose": "007B"
+    },
+    {
+      "character": 5,
+      "pose": "0079"
+    },
+    {
+      "character": 5,
+      "pose": "007A"
+    },
+    {
+      "character": 5,
+      "pose": "007B"
+    },
+    {
+      "character": 6,
+      "pose": "0079"
+    },
+    {
+      "character": 6,
+      "pose": "007A"
+    },
+    {
+      "character": 6,
+      "pose": "007B"
+    },
+    {
+      "character": 7,
+      "pose": "0079"
+    },
+    {
+      "character": 7,
+      "pose": "007A"
+    },
+    {
+      "character": 7,
+      "pose": "007B"
+    },
+    {
+      "character": 8,
+      "pose": "0079"
+    },
+    {
+      "character": 8,
+      "pose": "007A"
+    },
+    {
+      "character": 8,
+      "pose": "007B"
+    },
+    {
+      "character": 9,
+      "pose": "0079"
+    },
+    {
+      "character": 9,
+      "pose": "007A"
+    },
+    {
+      "character": 9,
+      "pose": "007B"
+    },
+    {
+      "character": 10,
+      "pose": "0079"
+    },
+    {
+      "character": 10,
+      "pose": "007A"
+    },
+    {
+      "character": 10,
+      "pose": "007B"
+    },
+    {
+      "character": 11,
+      "pose": "0079"
+    },
+    {
+      "character": 11,
+      "pose": "007A"
+    },
+    {
+      "character": 11,
+      "pose": "007B"
+    }
+  ],
+  "action1e_1f_capture_new_pose_pairs": [
+    {
+      "character": 0,
+      "pose": "007C"
+    },
+    {
+      "character": 0,
+      "pose": "007F"
+    },
+    {
+      "character": 1,
+      "pose": "007C"
+    },
+    {
+      "character": 1,
+      "pose": "007F"
+    },
+    {
+      "character": 2,
+      "pose": "007C"
+    },
+    {
+      "character": 2,
+      "pose": "007F"
+    },
+    {
+      "character": 3,
+      "pose": "007C"
+    },
+    {
+      "character": 3,
+      "pose": "007F"
+    },
+    {
+      "character": 4,
+      "pose": "007C"
+    },
+    {
+      "character": 4,
+      "pose": "007F"
+    },
+    {
+      "character": 5,
+      "pose": "007C"
+    },
+    {
+      "character": 5,
+      "pose": "007F"
+    },
+    {
+      "character": 7,
+      "pose": "007C"
+    },
+    {
+      "character": 7,
+      "pose": "007F"
+    },
+    {
+      "character": 8,
+      "pose": "007C"
+    },
+    {
+      "character": 8,
+      "pose": "007F"
+    },
+    {
+      "character": 9,
+      "pose": "007C"
+    },
+    {
+      "character": 9,
+      "pose": "007F"
+    },
+    {
+      "character": 10,
+      "pose": "007C"
+    },
+    {
+      "character": 10,
+      "pose": "007F"
+    },
+    {
+      "character": 11,
+      "pose": "007C"
+    },
+    {
+      "character": 11,
+      "pose": "007F"
+    }
+  ],
+  "action2f_capture_new_pose_pairs": [
+    {
+      "character": 0,
+      "pose": "0039"
+    },
+    {
+      "character": 1,
+      "pose": "0039"
+    },
+    {
+      "character": 2,
+      "pose": "0039"
+    },
+    {
+      "character": 3,
+      "pose": "0039"
+    },
+    {
+      "character": 4,
+      "pose": "0039"
+    },
+    {
+      "character": 5,
+      "pose": "0039"
+    },
+    {
+      "character": 6,
+      "pose": "0039"
+    },
+    {
+      "character": 7,
+      "pose": "0039"
+    },
+    {
+      "character": 8,
+      "pose": "0039"
+    },
+    {
+      "character": 9,
+      "pose": "0039"
+    },
+    {
+      "character": 10,
+      "pose": "0039"
+    },
+    {
+      "character": 11,
+      "pose": "0039"
+    }
+  ],
+  "action2f_interleaved_matrix_pose_pairs": 14,
+  "action2f_controlled_nonmatrix_missing_pose_pairs": 26,
+  "action2e_interleaved_matrix_pose_pairs": 6,
+  "action2e_controlled_nonmatrix_missing_pose_pairs": 9,
+  "action2d_capture_new_pose_pairs": [
+    {
+      "character": 0,
+      "pose": "000D"
+    },
+    {
+      "character": 5,
+      "pose": "000D"
+    },
+    {
+      "character": 6,
+      "pose": "000D"
+    },
+    {
+      "character": 10,
+      "pose": "000D"
+    },
+    {
+      "character": 11,
+      "pose": "000D"
+    }
+  ],
+  "action2d_interleaved_matrix_pose_pairs": 10,
+  "action2d_controlled_nonmatrix_missing_pose_pairs": 7,
+  "base_descriptor_absences": [
+    {
+      "selector": "2F",
+      "character": 5,
+      "pose": "020F",
+      "entry": 65534
+    }
+  ],
+  "action2f_alternate_descriptor": {
+    "rom": "016C7E",
+    "character": 5,
+    "poses": [
+      "0107",
+      "0108",
+      "0110",
+      "020E",
+      "010A",
+      "010B"
+    ],
+    "all_pose_records_present": true
+  },
+  "limits": [
+    "The generated character choice matrix does not cover every dynamic selector transition.",
+    "Alternate descriptor links use a conservative C source call graph, not proven branch reachability.",
+    "The alternate descriptor data is present; this audit does not execute the $2F branch.",
+    "ROM sprite definitions were parsed, not compared with Saturn VDP1 output."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "cases": 3072,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "actor_snapshot_sha256": "8dfb121c3747066fd306736cde5226da9c47916ca3da4e9e82ba64a3186bebf8",
+  "globals_snapshot_sha256": "5a4a1f6b77b29ae3cce8f17722f27d86fba2c61ce458f1f0524258036936f2ad",
+  "source_sha256": "4fa17378aa94b248c4c4e5f8278629bb9424ad4dbbdcb4cd302ee96e269304a4",
+  "retained_guards": 1,
+  "limits": [
+    "Controlled variations derived from a HOST snapshot; no natural occurrence is claimed.",
+    "Controlled cases exercise the high-timer linked interruption.",
+    "No natural match or physical Saturn claim."
+  ]
+}

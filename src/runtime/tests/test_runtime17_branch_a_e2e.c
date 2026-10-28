@@ -4,6 +4,9 @@
 #include "wf_gameplay_bindings.h"
 #include "wf_r17_referee.h"
 #include "wf_r17_fixed_four_10120.h"
+static wf_status_t released_input(wf_runtime_t*r,uint32_t at,uint16_t*out,void*u){
+ (void)r;(void)u;assert(at>=0x140020u&&at<=0x140026u&&!(at&1u));*out=0xffffu;return WF_OK;
+}
 
 static wf_status_t render_ok(wf_runtime_t *rt,wf_actor_raw_t *const *actors,size_t count,void *user){
     (void)rt;(void)actors;(void)count;(void)user;return WF_OK;
@@ -38,12 +41,14 @@ int main(void){
     c.camera.scroll1_y=0x0200;
     c.post7_render_2836_batch=render_ok;
     c.post7_tag_6e34=tag_ok;
+    c.participant_input_word=released_input;
 
     /* Non-Royal referee needs two active +$33.bit0 wrestlers. Keep them in
      * CPU state7 and F4C2-suppressed via +$32.bit7 so this fixture exercises
      * the real scheduler without fabricating action callbacks. */
     for(unsigned i=0u;i<2u;i++){
         wf_set_u8(&rt.actors[i],WF_A_ACTIVE,0x80u);
+        wf_set_be32(&rt.actors[i],WF_A_INPUT_SOURCE,0x140020u+i*2u);
         wf_set_u8(&rt.actors[i],WF_A_FLAGS32,0x80u);
         wf_set_u8(&rt.actors[i],WF_A_FLAGS33,0x01u);
         wf_set_u8(&rt.actors[i],WF_A_STATE+1u,0x07u);

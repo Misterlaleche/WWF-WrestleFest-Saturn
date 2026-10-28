@@ -4,6 +4,9 @@
 #include "wf_gameplay_bindings.h"
 #include "wf_r17_referee.h"
 #include "wf_r17_fixed_four_10120.h"
+static wf_status_t released_input(wf_runtime_t*r,uint32_t at,uint16_t*out,void*u){
+ (void)r;(void)u;assert(at>=0x140020u&&at<=0x140026u&&!(at&1u));*out=0xffffu;return WF_OK;
+}
 
 static wf_status_t render_ok(wf_runtime_t *rt,wf_actor_raw_t *const *actors,size_t count,void *user){(void)rt;(void)actors;(void)count;(void)user;return WF_OK;}
 
@@ -22,8 +25,10 @@ int main(void){
     c.cabinet_words_valid=1u;c.cabinet_word_140020=0xffffu;c.cabinet_word_140022=0xffffu;
     c.camera_valid=1u;c.camera.scene_index=0u;c.camera.scroll0_x=0x0140;c.camera.scroll1_x=0x0140;c.camera.scroll0_y=0x0200;c.camera.scroll1_y=0x0200;
     c.post7_render_2836_batch=render_ok;
+    c.participant_input_word=released_input;
 
     for(unsigned i=0u;i<2u;i++){
+        wf_set_be32(&rt.actors[i],WF_A_INPUT_SOURCE,0x140020u+i*2u);
         wf_set_u8(&rt.actors[i],WF_A_ACTIVE,0x80u);wf_set_u8(&rt.actors[i],WF_A_FLAGS32,0x80u);wf_set_u8(&rt.actors[i],WF_A_FLAGS33,0x01u);wf_set_u8(&rt.actors[i],WF_A_STATE+1u,0x07u);
         wf_set_be16(&rt.actors[i],WF_A_X,(uint16_t)(0x0200u+i*0x20u));wf_set_be16(&rt.actors[i],WF_A_Y,0x0180u);c.input_valid_mask=(uint16_t)(c.input_valid_mask|(1u<<i));c.input_hw_low[i]=0xffu;
     }

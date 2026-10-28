@@ -1,0 +1,62 @@
+{
+  "header": [
+    1230,
+    1,
+    1,
+    114750,
+    0,
+    1
+  ],
+  "snapshot_bytes": 16440,
+  "snapshot_sha256": "e7c37e1e3cc7c9bdcb27e9b1ee7d27321b1aa5074aebe83d7c47eeb0ac5709e4",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "emulator_report": "validation\\local-20261024\\hardware-input\\beetle-full-flow-stage7b-human-tag\\report.json",
+  "emulator_report_sha256": "a56e24b9d4468649aad5c21f380b03055e4a3c40a169075c13e2dd96f81da91e",
+  "workram_sha256": "df424637b82b0459e47b07cf587df69818bf50f0af0b25565b7198780543a1a8",
+  "program_sha256": "893ca5e639d8c07022c59dc592f6fce70a8e54cab8ad31e46c7af08196bc8eec",
+  "bin_sha256": "ad6c2a8228eb4ed01025031be97d9ec3e869e7196c2fd6c2bac13983cd1df421",
+  "cue_sha256": "331eb9fe748cb398415cb21f64397fbe39e8caba991408b17b8304cea1d24c14",
+  "core_sha256": "88b459ccb216746ced3b0e09c6598725ccfd6e91df9f43a078309975edf685d5",
+  "core_version": "v1.32.1",
+  "schedule_sha256": "1801b2b5716fb89dfaedcf2ce28478e43f8059f9e95384c5bfcf2d17e4a94f43",
+  "elf_sha256": "5acd6d98fd7f5f026d3a2561fb7a35efa4e5bca21aad5172aa8641793c3c1900",
+  "map_sha256": "f51715446fecadaa360c1c3b9889dc2a5d00dc844fffd4bf9c9ca3b9347a7aad",
+  "freeze_manifest_sha256": "23e572ac5b6fbf75f496d284c25a2f5510ccc71f9ded8be9c3ee1eb3bc62b9c1",
+  "sh2_layout_sha256": "d9621df05c4b322a5e74db7921f3178153eb2753d92514d92bea502d47050a7e",
+  "sh2_layout": [
+    384,
+    268,
+    352,
+    7340,
+    0
+  ],
+  "scalar_prefix_layout": [
+    384,
+    268,
+    352,
+    7340,
+    0,
+    24,
+    31,
+    12,
+    132,
+    124,
+    174,
+    176,
+    178,
+    180
+  ],
+  "elf_runtime_symbol": "_rt",
+  "elf_runtime_address": 101600696,
+  "elf_runtime_bytes": 7648,
+  "runtime_wram_offset": 1985976,
+  "actors_wram_offset": 1986360,
+  "matched_actor_records": 9,
+  "matched_live_D_registers": 8,
+  "owner": "12614[3E] ->18314/1831A, 1174C/11710 and four original walk descriptors",
+  "limits": [
+    "Read-only Beetle Stage7b capture, not physical Saturn RAM/timing",
+    "Native typed actors/liveD8/supported scalar globals projected into arcadeRAM; all unrepresented original RAM explicitly zero",
+    "Default12614 guard occurs before callback and changes no actor/RAM/D fields; no state, seed, roster, health or result forcing"
+  ]
+}

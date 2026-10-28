@@ -1,0 +1,16 @@
+{
+  "source_commit": "805be2a plus completed native owners before raw09",
+  "source_snapshot": "validation/results/runtime18/action1c-controlled/pad-variation/run/snapshot-00206.bin",
+  "sha256": "2bc05beba09fa9d4f013b21df64435458d16fbc4d60d015d6f6758b11aa993e0",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "frame": 727,
+  "slot": 4,
+  "kind": 1,
+  "pc": "0x1c03e",
+  "sequence": 206,
+  "recorded_blocked_status": 1,
+  "selector": "0x4009",
+  "derived": false,
+  "input_schedule": "RIGHT frames62..181; A182..185; then no input",
+  "comparison": "Untouched natural pre-dispatch RAM and D0-D7 versus intact ROM; full RAM, FG RAM and D0-D7 are compared. The input timing is a physical-pad-path timing variant, not a forced match result."
+}

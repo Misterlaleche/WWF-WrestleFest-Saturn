@@ -1,0 +1,55 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "source_sha256": "0f13ce6c041f4ddadb1971786ad61c354a129a005fc394703b64db68b4e595b8",
+  "header_sha256": "573842a64174a798afb5e4b6dce18d2b1df6087c29852603ad78f0b9e211b8d1",
+  "test_sha256": "3219bd92354b5b82c13c81aefc36f4b22aa71c964cc64baf8bf09d75d66c9b4e",
+  "ROM_ranges": {
+    "B1C..BD2": "d4b8f69b8bbbc8fa3f8fe3aabce3c3247b043cb6fe2a56513fd6bb3f49b229b0",
+    "E02..F8C": "8b6afc2c9fffca7b3a4231a7276e91ec493a3bf521dcaa9725261f506d458d9f",
+    "21E6..2208": "90a4b17f001ba2b0c5d842d3e9653fe89763e048faaef2461da538ccf412de5a"
+  },
+  "implemented": [
+    "Complete B1C controller through original BD0 RTS",
+    "Complete raw E02 setup through F20 RTS",
+    "Physical high/low delay21E6 through2206 RTS"
+  ],
+  "tables": [
+    "F22 fourteen health WORDs",
+    "F3E fourteen four-actor identity rows",
+    "F76 six Royal identities",
+    "F7C four reciprocal actor links"
+  ],
+  "external_dependencies": [
+    "AE20",
+    "264E2",
+    "69C8 (native special ranking scene pending)",
+    "8490 (native special visual/input scene pending)",
+    "C98",
+    "8FD6",
+    "1F9E",
+    "2A06",
+    "2AEA",
+    "2988",
+    "1086C"
+  ],
+  "green": {
+    "cases": 115,
+    "controls": 19,
+    "wrong_level_waits": 18
+  },
+  "evidence": [
+    "validation/local-20261024/attract-setup-red.log",
+    "validation/local-20261024/attract-setup-final-green.json",
+    "validation/local-20261024/attract-setup-controls-green.json"
+  ],
+  "fixture_provenance": "Constructed raw RAM/register inputs; selector0 validates the original first-timeout route but is not a captured live frontend snapshot. Parent driver owns live composition proof.",
+  "intercepts": [
+    "2052 sound output only"
+  ],
+  "limits": [
+    "B1C preparation only; no attract combat-loop equivalence claim",
+    "Special ranking69C8 and visual8490 remain explicit required native owners",
+    "CCR/A7 temporary stack outside ABI",
+    "Physical IRQ cadence, controller policy and hardware outside proof"
+  ]
+}

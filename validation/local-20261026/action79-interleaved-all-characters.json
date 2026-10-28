@@ -1,0 +1,606 @@
+{
+  "status": "PASS",
+  "route": "79",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "snapshot_sha256": "79ac65851776a5be5113949d5ba5b164afae415df4fa2464f88fb700c57a1e0e",
+  "source_character": 1,
+  "cases": [
+    {
+      "character": 0,
+      "steps": 110,
+      "phase_history": [
+        [
+          0,
+          1
+        ],
+        [
+          109,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "005B",
+        "005C",
+        "005D",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 1,
+      "steps": 72,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          35,
+          1
+        ],
+        [
+          71,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 2,
+      "steps": 60,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          29,
+          1
+        ],
+        [
+          59,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "005B",
+        "005C",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 3,
+      "steps": 44,
+      "phase_history": [
+        [
+          0,
+          1
+        ],
+        [
+          43,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 4,
+      "steps": 44,
+      "phase_history": [
+        [
+          0,
+          1
+        ],
+        [
+          43,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 5,
+      "steps": 44,
+      "phase_history": [
+        [
+          0,
+          1
+        ],
+        [
+          43,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 6,
+      "steps": 68,
+      "phase_history": [
+        [
+          0,
+          1
+        ],
+        [
+          67,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 7,
+      "steps": 87,
+      "phase_history": [
+        [
+          0,
+          1
+        ],
+        [
+          86,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "005B",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 8,
+      "steps": 73,
+      "phase_history": [
+        [
+          0,
+          1
+        ],
+        [
+          72,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 9,
+      "steps": 112,
+      "phase_history": [
+        [
+          0,
+          4
+        ],
+        [
+          27,
+          3
+        ],
+        [
+          55,
+          2
+        ],
+        [
+          83,
+          1
+        ],
+        [
+          111,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 10,
+      "steps": 40,
+      "phase_history": [
+        [
+          0,
+          2
+        ],
+        [
+          19,
+          1
+        ],
+        [
+          39,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    },
+    {
+      "character": 11,
+      "steps": 68,
+      "phase_history": [
+        [
+          0,
+          1
+        ],
+        [
+          67,
+          0
+        ]
+      ],
+      "selector_history": [
+        [
+          0,
+          121
+        ]
+      ],
+      "visual_poses": [
+        "0000",
+        "0059",
+        "005A",
+        "0068"
+      ],
+      "terminal_state": 0
+    }
+  ],
+  "total_steps": 822,
+  "visual_character_pose_pairs": 54,
+  "graphic_covered_visual_pairs": 54,
+  "graphic_target_visual_pairs": 54,
+  "visual_character_pose_pair_list": [
+    {
+      "character": 0,
+      "pose": "0000"
+    },
+    {
+      "character": 0,
+      "pose": "0059"
+    },
+    {
+      "character": 0,
+      "pose": "005A"
+    },
+    {
+      "character": 0,
+      "pose": "005B"
+    },
+    {
+      "character": 0,
+      "pose": "005C"
+    },
+    {
+      "character": 0,
+      "pose": "005D"
+    },
+    {
+      "character": 0,
+      "pose": "0068"
+    },
+    {
+      "character": 1,
+      "pose": "0000"
+    },
+    {
+      "character": 1,
+      "pose": "0059"
+    },
+    {
+      "character": 1,
+      "pose": "005A"
+    },
+    {
+      "character": 1,
+      "pose": "0068"
+    },
+    {
+      "character": 2,
+      "pose": "0000"
+    },
+    {
+      "character": 2,
+      "pose": "0059"
+    },
+    {
+      "character": 2,
+      "pose": "005A"
+    },
+    {
+      "character": 2,
+      "pose": "005B"
+    },
+    {
+      "character": 2,
+      "pose": "005C"
+    },
+    {
+      "character": 2,
+      "pose": "0068"
+    },
+    {
+      "character": 3,
+      "pose": "0000"
+    },
+    {
+      "character": 3,
+      "pose": "0059"
+    },
+    {
+      "character": 3,
+      "pose": "005A"
+    },
+    {
+      "character": 3,
+      "pose": "0068"
+    },
+    {
+      "character": 4,
+      "pose": "0000"
+    },
+    {
+      "character": 4,
+      "pose": "0059"
+    },
+    {
+      "character": 4,
+      "pose": "005A"
+    },
+    {
+      "character": 4,
+      "pose": "0068"
+    },
+    {
+      "character": 5,
+      "pose": "0000"
+    },
+    {
+      "character": 5,
+      "pose": "0059"
+    },
+    {
+      "character": 5,
+      "pose": "005A"
+    },
+    {
+      "character": 5,
+      "pose": "0068"
+    },
+    {
+      "character": 6,
+      "pose": "0000"
+    },
+    {
+      "character": 6,
+      "pose": "0059"
+    },
+    {
+      "character": 6,
+      "pose": "005A"
+    },
+    {
+      "character": 6,
+      "pose": "0068"
+    },
+    {
+      "character": 7,
+      "pose": "0000"
+    },
+    {
+      "character": 7,
+      "pose": "0059"
+    },
+    {
+      "character": 7,
+      "pose": "005A"
+    },
+    {
+      "character": 7,
+      "pose": "005B"
+    },
+    {
+      "character": 7,
+      "pose": "0068"
+    },
+    {
+      "character": 8,
+      "pose": "0000"
+    },
+    {
+      "character": 8,
+      "pose": "0059"
+    },
+    {
+      "character": 8,
+      "pose": "005A"
+    },
+    {
+      "character": 8,
+      "pose": "0068"
+    },
+    {
+      "character": 9,
+      "pose": "0000"
+    },
+    {
+      "character": 9,
+      "pose": "0059"
+    },
+    {
+      "character": 9,
+      "pose": "005A"
+    },
+    {
+      "character": 9,
+      "pose": "0068"
+    },
+    {
+      "character": 10,
+      "pose": "0000"
+    },
+    {
+      "character": 10,
+      "pose": "0059"
+    },
+    {
+      "character": 10,
+      "pose": "005A"
+    },
+    {
+      "character": 10,
+      "pose": "0068"
+    },
+    {
+      "character": 11,
+      "pose": "0000"
+    },
+    {
+      "character": 11,
+      "pose": "0059"
+    },
+    {
+      "character": 11,
+      "pose": "005A"
+    },
+    {
+      "character": 11,
+      "pose": "0068"
+    }
+  ],
+  "graphic_action_report_sha256": "ad754da6a3056af5b0a0576008ea3db9890e0ebf25ae8f1245382697abf673bb",
+  "graphic_royal_report_sha256": "fddbe548d5f09f9cf3ba7d639d97fb63e5c594f88bf7b70bc9425c5be1f82b28",
+  "verifier_sha256": "e55bea0e134f557c957a4ccdfb326b9cf6fce1b1ee4a652439fa854561276059",
+  "action_source_sha256": "4611835b6c8732cef5c0a21e2576f58aaea5080aa2cc4325416c4395d19fdcfd",
+  "resolver_source_sha256": "db875a89c715c582fb06e32eced7baf810c66661a0be9efebb3ea3b40136e700",
+  "bridges_sha256": {
+    "action79_oracle_bridge.c": "67564a673c5cc727aa19fe6fa182eb24af41c5f19202f6ede548dd2cdb5757a2",
+    "action_reversal_family_oracle_bridge.c": "5be1cd86603aa2a51670a80462a1789c3bc601ce6fa89057de0ff7e696e9f1fc"
+  },
+  "compared": [
+    "RAM16KB",
+    "FG16KB",
+    "D0-D7",
+    "action descriptor after each action tick"
+  ],
+  "limits": [
+    "Character IDs other than the captured ID are controlled variants of one natural HOST snapshot.",
+    "Other actors and the full frame scheduler do not run.",
+    "Only $2052 audio output is intercepted in the ROM.",
+    "No Saturn timing or audible sound claim."
+  ]
+}

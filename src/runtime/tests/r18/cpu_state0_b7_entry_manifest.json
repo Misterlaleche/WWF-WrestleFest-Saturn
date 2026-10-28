@@ -1,0 +1,16 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "sha256": "0445971295794a9976720bbac1bc1cd40f5c288002a35dc88950577b332f7f2f",
+  "header": [
+    767,
+    1,
+    0,
+    115404,
+    273,
+    1
+  ],
+  "source": "runtime18\\validation\\local-20261024\\A600-capture\\snapshot-00273.bin",
+  "emulated_report": "validation/local-20261024/beetle-A600-baseline/report.json",
+  "provenance": "HOST natural A600 snapshot; all nine actor blocks match emulated WorkRAM byte for byte. Not a physical Saturn RAM dump.",
+  "cpu_flags": "B7=03, missing independent bit0 entry gate"
+}

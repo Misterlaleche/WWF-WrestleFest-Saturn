@@ -14,7 +14,7 @@ typedef struct wf_r17_referee_ctx {
  wf_r17_ref_simple_fn clear_206fe;
  wf_r17_ref_actor_fn direction_20c8;
  wf_r17_ref_actor_fn resolver_280dc;
- wf_r17_ref_actor_fn royal_phase6_21358;
+ wf_r17_ref_actor_fn royal_phase6_21358; /* optional override; original A0 is referee */
  wf_r17_ref_simple_fn tag_phase6_90d6;
  wf_r17_ref_simple_fn result_20156;
  wf_r17_ref_audio_fn audio_2052;

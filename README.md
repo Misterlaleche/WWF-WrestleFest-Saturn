@@ -1,4 +1,6 @@
-> RUNTIME-18 (2026-10-20): direct ring boot, ROM-backed CPU progress and measured presentation improvements. See CURRENT-STATE-LATEST.md and validation/RUNTIME18-CPU-CHECKPOINT.md. Partial combat only; no physical Saturn or ROM-EXACT certification.
+> Continuación actual y preparación en otro PC: [GITHUB-SYNC-20261028.md](GITHUB-SYNC-20261028.md). Estado y pruebas recientes: [CURRENT-STATE-LATEST.md](CURRENT-STATE-LATEST.md).
+
+> RUNTIME-18 (2026-10-26): R02 se queda en negro tras Technos en Saturn real; no usarla como versión jugable. La prueba de aislamiento del audio está en `entregas/WrestleFest-Saturn-diagnostico-audio-20261026/`. Ver `CURRENT-STATE-LATEST.md` y `validation/FRONTEND-GATING-20261026.md`. La nota stage9b anterior queda como historial.
 
 # WWF WrestleFest arcade -> Sega Saturn
 

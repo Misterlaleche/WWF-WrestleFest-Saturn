@@ -5,6 +5,9 @@
 #include "arcade_cpu_final_bridge.h"
 #include "wf_cpu_runtime.h"
 #include "wf_gameplay_bindings.h"
+static wf_status_t released_input(wf_runtime_t*r,uint32_t at,uint16_t*out,void*u){
+ (void)r;(void)u;assert(at>=0x140020u&&at<=0x140026u&&!(at&1u));*out=0xffffu;return WF_OK;
+}
 
 static void bind_target(wf_runtime_t *rt,unsigned a,unsigned t){wf_set_be32(&rt->actors[a],WF_A_TARGET,wf_actor_rom_base(t));}
 static void prep5(wf_actor_raw_t *a,uint8_t sel){memset(a,0,sizeof(*a));wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,sel);}
@@ -25,8 +28,11 @@ int main(void){
  assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be32(&rt.actors[0],WF_A_LINK)==wf_actor_rom_base(1));assert(wf_be32(&rt.actors[1],WF_A_LINK)==wf_actor_rom_base(0));
  /* Selector 01 applies its state0 prefix; a missing target still fails closed at $1C5B6. */
  prep5(&rt.actors[0],0x01u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED);assert(tr.blocked_dependency_rom==0x001c5b6u);assert(wf_be16(&rt.actors[0],WF_A_STATE)==0u);assert(wf_be16(&rt.actors[0],WF_A_CPU_BC)==0x0080u);
- /* Selector 79 cannot invent inherited D0 for $10C60. */
- prep5(&rt.actors[0],0x79u);wf_set_u8(&rt.actors[0],WF_A_CPU_B5,0x80u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED);assert(tr.blocked_dependency_rom==0x0010c60u);
+ /* Selector79 inherits D0=$1E27A. A missing consumed target preserves
+  * the original state0 prefix and blocks its first write at $1E292. */
+ prep5(&rt.actors[0],0x79u);wf_set_u8(&rt.actors[0],WF_A_CPU_B5,0x80u);wf_set_u8(&rt.actors[0],WF_A_FLAGS34,0x10u);assert(wf_state5_execute(&rt,0,&tr)==WF_BLOCKED);assert(tr.blocked_dependency_rom==0x001e292u);assert(wf_be16(&rt.actors[0],WF_A_STATE)==0u);assert((wf_u8(&rt.actors[0],WF_A_FLAGS34)&0x10u)==0u);
+ /* Actual inherited D0 indexes original ROM byte $B455=0 at tier0. */
+ prep5(&rt.actors[0],0x79u);wf_set_u8(&rt.actors[0],WF_A_CPU_B5,0x80u);bind_target(&rt,0,1);wf_set_be16(&rt.actors[1],WF_A_TIER,0u);assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be16(&rt.actors[1],0xaau)==0xffffu);assert(wf_be16(&rt.actors[1],0x9au)==0x30u);assert(rt.m68k_regs.d[0]==0x1e27au);
  /* $1E5AE B5.bit4 link path has an extra target +$7A back-pointer absent from generic $1E6E2. */
  memset(&rt,0,sizeof(rt));prep5(&rt.actors[0],0x09u);prep5(&rt.actors[1],2u);bind_target(&rt,0,1);wf_set_u8(&rt.actors[0],WF_A_CPU_B5,0x10u);
  assert(wf_state5_execute(&rt,0,&tr)==WF_OK);assert(wf_be32(&rt.actors[1],WF_A_TARGET)==wf_actor_rom_base(0));assert(wf_be32(&rt.actors[0],WF_A_LINK)==wf_actor_rom_base(1));assert(wf_be32(&rt.actors[1],WF_A_LINK)==wf_actor_rom_base(0));
@@ -48,7 +54,8 @@ int main(void){
  memset(&rt,0,sizeof(rt));wf_set_be16(&rt.actors[0],WF_A_STATE,9u);wf_set_u8(&rt.actors[0],WF_A_CPU_BD,7u);wf_set_be32(&rt.actors[0],WF_A_TEAM_LINK,wf_actor_rom_base(1));wf_set_be32(&rt.actors[0],WF_A_TARGET,wf_actor_rom_base(2));wf_set_u8(&rt.actors[2],WF_A_INTERNAL_ID,0u);wf_set_be16(&rt.actors[1],WF_A_STATE,5u);wf_set_be16(&rt.actors[1],WF_A_SELECTOR,0x0089u);assert(wf_cpu_actor_step(&rt,0,&ct)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_STATE)==5u);assert(wf_be16(&rt.actors[0],WF_A_SELECTOR)==0x0004u);
  /* Real WP28 binding table remains concrete; later cumulative checkpoints add more owners without replacing these. */
  wf_phase_binding_t b[40];wf_gameplay_binding_context_t gc;size_t bn=wf_gameplay_bindings_build(&gc,b,40);assert(bn>=5u);assert(b[0].rom_addr==0x00514eu&&b[1].rom_addr==0x008b3au&&b[2].rom_addr==0x02088eu);
- wf_runtime_init(&rt,b,bn);rt.g.rng_state_valid=1u;rt.g.rng_state=0x13579bdfu;wf_set_u8(&rt.actors[0],WF_A_ACTIVE,0x80u);wf_set_be16(&rt.actors[0],WF_A_STATE,7u);gc.input_valid_mask=1u;gc.input_hw_low[0]=0xffu;assert(wf_dispatch_phase(&rt,0x00514eu)==WF_OK);assert(wf_dispatch_phase(&rt,0x01c150u)==WF_OK);wf_set_be16(&rt.actors[0],WF_A_STAMINA,30u);wf_set_be16(&rt.actors[0],WF_A_PENDING_DAMAGE,7u);assert(wf_dispatch_phase(&rt,0x024e58u)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_STAMINA)==23u);
+ gc.participant_input_word=released_input;
+ wf_runtime_init(&rt,b,bn);rt.g.rng_state_valid=1u;rt.g.rng_state=0x13579bdfu;wf_set_u8(&rt.actors[0],WF_A_ACTIVE,0x80u);wf_set_be32(&rt.actors[0],WF_A_INPUT_SOURCE,0x140020u);wf_set_be16(&rt.actors[0],WF_A_STATE,7u);gc.input_valid_mask=1u;gc.input_hw_low[0]=0xffu;assert(wf_dispatch_phase(&rt,0x00514eu)==WF_OK);assert(wf_dispatch_phase(&rt,0x01c150u)==WF_OK);wf_set_be16(&rt.actors[0],WF_A_STAMINA,30u);wf_set_be16(&rt.actors[0],WF_A_PENDING_DAMAGE,7u);assert(wf_dispatch_phase(&rt,0x024e58u)==WF_OK);assert(wf_be16(&rt.actors[0],WF_A_STAMINA)==23u);
  /* Cumulative runtime must still fail closed at the first mandatory owner not yet integrated. */
  memset(&rt,0,sizeof(rt));wf_runtime_init(&rt,b,bn);rt.g.rng_state_valid=1u;rt.g.rng_state=0x13579bdfu;gc.cabinet_words_valid=1u;gc.cabinet_word_140020=0xffffu;gc.cabinet_word_140022=0xffffu;gc.camera_valid=1u;gc.camera.scene_index=0u;gc.camera.scroll0_x=0x0140;gc.camera.scroll1_x=0x0140;gc.camera.scroll0_y=0x0200;gc.camera.scroll1_y=0x0200;assert(wf_runtime_frame(&rt)==WF_BLOCKED);assert(rt.trace_count>=4u);
  puts("PASS test_runtime12");return 0;

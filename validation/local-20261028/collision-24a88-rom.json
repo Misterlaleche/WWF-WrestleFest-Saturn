@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "cases": 49,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "actor_snapshot_sha256": "49b3a145219bcb49d8783f9b4501c6d1ffd88e1edca065bc4598463355f0c380",
+  "globals_snapshot_sha256": "5a4a1f6b77b29ae3cce8f17722f27d86fba2c61ce458f1f0524258036936f2ad",
+  "source_sha256": "c63b036023997bfb0ecf3bfa5bfe3f7a2f7db84602e7fbe4e28538e2b3f2bfd7",
+  "limits": [
+    "Observed pair is HOST and RAM projection; not a physical Saturn capture.",
+    "Unequal facing path only; equal-facing path is checked separately."
+  ]
+}

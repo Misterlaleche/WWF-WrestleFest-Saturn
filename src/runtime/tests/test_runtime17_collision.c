@@ -29,5 +29,15 @@ int main(void){
  /* $24DDC ROM branch adds +1 only when +$33.bit4 is SET. */
  memset(&rt,0,sizeof(rt));arm(&rt.actors[0],0x0007u,0x0200u,0x0140u,0x0100u,0x00u);arm(&rt.actors[1],0x0001u,0x0200u,0x0140u,0x0100u,0x00u);wf_set_u8(&rt.actors[1],WF_A_FLAGS33,0x10u);
  assert(wf_r17_collision_24062(&rt,&tr)==WF_OK);assert(wf_be16(&rt.actors[1],WF_A_PENDING_DAMAGE)==2u);
- puts("PASS R17 $24062 exact source/target scan, retained source row, ROM damage bytes and $24DDC polarity");return 0;
+ /* Full collision scan must resolve $24A90 relation from +$76, not +$26. */
+ memset(&rt,0,sizeof(rt));arm(&rt.actors[0],7u,0x0200u,0x0140u,0x0100u,0u);
+ arm(&rt.actors[1],14u,0x0200u,0x0140u,0x0100u,0x80u);
+ wf_set_be32(&rt.actors[1],WF_A_LINK,0u);
+ wf_set_be16(&rt.actors[1],WF_A_REL_FLAGS,0x1234u);
+ wf_set_be32(&rt.actors[1],WF_A_REL_LINK,wf_actor_rom_base(2));
+ wf_set_be16(&rt.actors[2],WF_A_LATCHED,0x7777u);
+ assert(wf_r17_collision_24062(&rt,&tr)==WF_OK);assert(tr.accepted_pairs==1u);
+ assert(wf_be16(&rt.actors[1],WF_A_REL_FLAGS)==0u&&wf_be32(&rt.actors[1],WF_A_REL_LINK)==0u);
+ assert(wf_be16(&rt.actors[2],WF_A_LATCHED)==2u);
+ puts("PASS R17 $24062 exact source/target scan, retained source row, ROM damage bytes, $24DDC polarity and $24A90 relation");return 0;
 }

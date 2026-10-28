@@ -1,0 +1,16 @@
+{
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "captures": [
+    {
+      "frame": 2276,
+      "slot": 0,
+      "sha256": "20dc65171964be776c4fb209ca3b99cc21407a4cdfbb36aae3c26f04adbdde33",
+      "header": [2276, 0, 1, 114750, 1213, 1],
+      "source": "existing full-flow HOST capture before original $1C03E, Royal retire selector $7A"
+    }
+  ],
+  "limits": [
+    "The capture projects 8 KiB of arcade work RAM, foreground RAM and D0-D7.",
+    "The remaining actors and scene pipeline are not continued by the isolated sequence."
+  ]
+}

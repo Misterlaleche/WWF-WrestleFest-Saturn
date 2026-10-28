@@ -31,6 +31,19 @@ symbols = {}
 for optional in ('finished_presentation','finished_vblanks','finished_presentation_vblanks'):
     if re.search(r'\.bss\.'+optional+r'(?:\.lto_priv\.\d+)?\s+0x', mapping):
         names += (optional,)
+if re.search(r'\.bss\.frontend_observed\s+0x', mapping):
+    names += ('frontend_observed',)
+if re.search(r'\.bss\.boot_timing\s+0x', mapping):
+    names += ('boot_timing',)
+if re.search(r'\.bss\.scsp_timing\s+0x', mapping):
+    names += ('scsp_timing',)
+if re.search(r'\.bss\.scsp_io\s+0x', mapping):
+    names += ('scsp_io',)
+if re.search(r'\.bss\.legal_first_visible\s+0x', mapping):
+    names += ('legal_first_visible',)
+for optional in ('frontend_scene_gate','frontend_serviced_clock'):
+    if re.search(r'\.bss\.'+optional+r'\s+0x', mapping):
+        names += (optional,)
 if a.layout:
     names += ('gameplay',)
 if a.graphics_layout:
@@ -63,7 +76,15 @@ with open(f'/proc/{a.pid}/mem', 'rb', buffering=0) as mem:
                 mem.seek(base + addr - 0x06000000)
                 raw = mem.read(4)
                 return int.from_bytes(raw[1::-1] + raw[3:1:-1], 'big')
-            values = {name: read32(addr) for name, addr in symbols.items() if name not in ('rt', 'gameplay', 'backend', 'display', 'video')}
+            values = {name: read32(addr) for name, addr in symbols.items() if name not in ('rt', 'gameplay', 'backend', 'display', 'video', 'frontend_observed', 'boot_timing', 'scsp_timing', 'scsp_io')}
+            if 'frontend_observed' in symbols:
+                values['frontend_observed'] = [read32(symbols['frontend_observed'] + i * 4) for i in range(8)]
+            if 'boot_timing' in symbols:
+                values['boot_timing'] = [read32(symbols['boot_timing'] + i * 4) for i in range(8)]
+            if 'scsp_timing' in symbols:
+                values['scsp_timing'] = [read32(symbols['scsp_timing'] + i * 4) for i in range(8)]
+            if 'scsp_io' in symbols:
+                values['scsp_io'] = [read32(symbols['scsp_io'] + i * 4) for i in range(2)]
             # g is the first field; frame_counter is at +24 on SH-2.
             values['frame'] = read32(symbols['rt'] + 24)
             if a.profile:

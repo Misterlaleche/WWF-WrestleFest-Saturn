@@ -1,0 +1,15 @@
+{
+  "source": "validation/local-20261024/tag-winner-punch-after1d6ee/snapshot-01856.bin",
+  "header": [
+    9693,
+    4,
+    1,
+    114750,
+    1856,
+    1
+  ],
+  "sha256": "0898c9baa95f0f0896f82fbd2ca857bd3445f869f8805847269fb0ee66fd30a8",
+  "bytes": 16472,
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "scope": "Natural cold manual TAG, punch physical input tape, frame9693 actor4/id6 selector401B; no state edits"
+}
