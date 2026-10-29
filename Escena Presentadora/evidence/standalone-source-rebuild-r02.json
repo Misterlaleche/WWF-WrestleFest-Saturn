@@ -1,0 +1,17 @@
+{
+  "release_executable": "wp02_r02/work/scene/build/WP02-TAG-R02.bin",
+  "standalone_executable": "wp02_r02/verification/standalone-rebuild/scene/build/WP02-TAG-R02.bin",
+  "packaged_cd_executable": "wp02_r02/deliverables/WP02-Saturn-TAG-R02/source/scene/cd/A.BIN",
+  "sha256": [
+    "1a3566c451fb195c3e2973fa3adece54b604d5bb9913a78a83f88ed748f2c776",
+    "1a3566c451fb195c3e2973fa3adece54b604d5bb9913a78a83f88ed748f2c776",
+    "1a3566c451fb195c3e2973fa3adece54b604d5bb9913a78a83f88ed748f2c776"
+  ],
+  "bytes": [
+    967476,
+    967476,
+    967476
+  ],
+  "status": "PASS",
+  "research_directories_available_to_standalone": false
+}

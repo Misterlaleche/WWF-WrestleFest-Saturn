@@ -1,0 +1,80 @@
+{
+  "revision": "R02",
+  "disc_bin_sha256": "c491c330f5e2016bf2c48aa2046dc539fd760d7b20e672e4ae9ec2217bd1f552",
+  "executable_sha256": "1a3566c451fb195c3e2973fa3adece54b604d5bb9913a78a83f88ed748f2c776",
+  "emulator": "Mednafen 1.32.1",
+  "cpu_cache_emulation": "Full",
+  "reference_metrics": {
+    "ticks": 1569,
+    "renders": 2320,
+    "missed": 0,
+    "max_commands": 195,
+    "elapsed_us": 38745611,
+    "done": 1,
+    "ids_packed": 395521,
+    "state": 24,
+    "vblanks": 3541,
+    "end_us": 27329191,
+    "bgm_refills": 1165,
+    "bgm_failures": 0,
+    "bgm_max_service_us": 4862,
+    "ids": [
+      0,
+      6,
+      9,
+      1
+    ]
+  },
+  "release_before_restart": {
+    "ticks": 1226,
+    "renders": 2481,
+    "missed": 0,
+    "max_commands": 186,
+    "elapsed_us": 41436759,
+    "done": 1,
+    "ids_packed": 168493571,
+    "state": 24,
+    "vblanks": 3653,
+    "end_us": 21345196,
+    "bgm_refills": 906,
+    "bgm_failures": 0,
+    "bgm_max_service_us": 4852,
+    "ids": [
+      10,
+      11,
+      2,
+      3
+    ]
+  },
+  "release_after_restart": {
+    "ticks": 1505,
+    "renders": 2883,
+    "missed": 0,
+    "max_commands": 185,
+    "elapsed_us": 48156218,
+    "done": 1,
+    "ids_packed": 134807559,
+    "state": 24,
+    "vblanks": 7110,
+    "end_us": 26209277,
+    "bgm_refills": 1117,
+    "bgm_failures": 0,
+    "bgm_max_service_us": 4852,
+    "ids": [
+      8,
+      9,
+      0,
+      7
+    ]
+  },
+  "physical_hardware_tested": false,
+  "original_hardware_fault_exact_cause_proven": false,
+  "all_original_project_sources_and_r01_unchanged": true,
+  "no_repository_modified": true,
+  "video_name": "WP02-Saturn-TAG-R02-Mednafen.mp4",
+  "video_sha256": "9c8ce7cb85b2a31644243b884000974749cae817bbb20123dae799512ffb86f4",
+  "video_duration_seconds": 49.77759637188208,
+  "video_frames": 2978,
+  "video_edits": "Trim initial boot, inter-scene completed-ring idle, and final idle; crop32 pixels of horizontal overscan each side. All scene frames and native timing retained.",
+  "captured_audio_audit": "PASS:13 original cues,54 BGM windows at0 sample lag,36 complete ring cycles"
+}

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "accepted_package": "WP02-Saturn-TAG-R02.zip",
+  "accepted_zip_sha256": "69673d389d872af5d66e37670c228f1b6ab72e7d737066ecc2fde28ad90f4730",
+  "original_source_files_byte_identical_after_restoration": 375,
+  "external_resources_verified": 273,
+  "native_build": {
+    "status": "PASS",
+    "executable_bytes": 967476,
+    "executable_sha256": "1a3566c451fb195c3e2973fa3adece54b604d5bb9913a78a83f88ed748f2c776",
+    "matches_accepted_executable": true,
+    "build_directory_has_no_spaces": true
+  },
+  "host_tests": {
+    "status": "PASS",
+    "cases": 16,
+    "expected_failing_r01_regression_included": true,
+    "inherited_late_copy_window_explicitly_documented": true
+  },
+  "runtime_sources_changed_for_upload": false,
+  "new_hardware_claim": false,
+  "acceptance": {
+    "date": "2026-10-29",
+    "user_statement": "Ok lo doy por bueno. Sube el codigo fuente en github con el nombre Escena Presentadora",
+    "test_platform_not_specified_in_acceptance": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "commit": "71dac9d944d1e4156cb586526251bc759151e433",
+  "main.c": {
+    "url": "https://raw.githubusercontent.com/ponut64/SCSP_poneSound/71dac9d944d1e4156cb586526251bc759151e433/PROJ/main.c",
+    "bytes": 60490,
+    "git_blob": "48b2796a4e0983ee7ab3671c5af3c1df3095cac1",
+    "sha256": "29cc6e0c641dd575651022a61fc378117a65d2a720cc74c8be9847178916dcd6"
+  },
+  "sdrv.bin": {
+    "url": "https://raw.githubusercontent.com/ponut64/SCSP_poneSound/71dac9d944d1e4156cb586526251bc759151e433/PROJ/sdrv.bin",
+    "bytes": 8732,
+    "git_blob": "e62e4ade1691f766af9d04b58d72b723079694d1",
+    "sha256": "340c0bea107d4319beea7ba94e7654f859b281b923a26bb93b75757f02ff9ff5"
+  },
+  "matches_bundled_driver": true
+}

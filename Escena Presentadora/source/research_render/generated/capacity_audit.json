@@ -1,0 +1,378 @@
+{
+  "canonical_rosters": 1792,
+  "maximum_initial_commands": 186,
+  "maximum_initial_roster": [
+    9,
+    8,
+    6,
+    1
+  ],
+  "conservative_all_poses_commands": 220,
+  "conservative_all_poses_roster": [
+    9,
+    2,
+    1,
+    0
+  ],
+  "command_capacity": 256,
+  "texture_bytes": 381056,
+  "vdp1_bytes_with_commands_and_alignment": 389280,
+  "vdp1_capacity": 524288,
+  "fixture_initial_commands_before": 562,
+  "fixture_initial_commands_after": 186,
+  "fixture_peak_commands_before": 562,
+  "fixture_peak_commands_after": 195,
+  "fixture_frames": 1570,
+  "static_text_frames": [
+    {
+      "label": "credit",
+      "before": 8,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_00_0",
+      "before": 55,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_00_1",
+      "before": 55,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_00_2",
+      "before": 55,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_00_3",
+      "before": 55,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_01_0",
+      "before": 88,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_01_1",
+      "before": 88,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_01_2",
+      "before": 88,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_01_3",
+      "before": 88,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_02_0",
+      "before": 86,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_02_1",
+      "before": 86,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_02_2",
+      "before": 86,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_02_3",
+      "before": 86,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_03_0",
+      "before": 95,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_03_1",
+      "before": 95,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_03_2",
+      "before": 95,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_03_3",
+      "before": 95,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_04_0",
+      "before": 192,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_04_1",
+      "before": 192,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_04_2",
+      "before": 192,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_04_3",
+      "before": 192,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_05_0",
+      "before": 192,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_05_1",
+      "before": 192,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_05_2",
+      "before": 192,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_05_3",
+      "before": 192,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_06_0",
+      "before": 71,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_06_1",
+      "before": 71,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_06_2",
+      "before": 71,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_06_3",
+      "before": 71,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_07_0",
+      "before": 142,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_07_1",
+      "before": 142,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_07_2",
+      "before": 142,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_07_3",
+      "before": 142,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_08_0",
+      "before": 101,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_08_1",
+      "before": 101,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_08_2",
+      "before": 101,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_08_3",
+      "before": 101,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_09_0",
+      "before": 128,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_09_1",
+      "before": 128,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_09_2",
+      "before": 128,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_09_3",
+      "before": 128,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_0a_0",
+      "before": 276,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_0a_1",
+      "before": 276,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_0a_2",
+      "before": 276,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_0a_3",
+      "before": 276,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_0b_0",
+      "before": 276,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_0b_1",
+      "before": 276,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_0b_2",
+      "before": 276,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "name_0b_3",
+      "before": 276,
+      "after": 1,
+      "transparent_cells_removed": 0,
+      "offscreen_cells_removed": 0
+    },
+    {
+      "label": "versus",
+      "before": 32,
+      "after": 1,
+      "transparent_cells_removed": 2,
+      "offscreen_cells_removed": 0
+    }
+  ]
+}

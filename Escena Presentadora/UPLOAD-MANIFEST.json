@@ -1,0 +1,1605 @@
+{
+  "schema": "wp02-source-publication-v1",
+  "publication_date": "2026-10-29",
+  "repository": "Misterlaleche/WWF-WrestleFest-Saturn-Private",
+  "branch": "main",
+  "folder": "Escena Presentadora",
+  "observed_base_commit": "7424617e3a0a5189f125ac6a5244c1ab1231d7f3",
+  "scope": "Add this folder only; preserve all existing repository paths.",
+  "accepted_release": {
+    "name": "WP02-Saturn-TAG-R02.zip",
+    "sha256": "69673d389d872af5d66e37670c228f1b6ab72e7d737066ecc2fde28ad90f4730",
+    "url": "https://chatgpt.com/library?file_id=libfile_9090d6e523f08191a8b046188c6f0aab&account_id=personal"
+  },
+  "acceptance": {
+    "date": "2026-10-29",
+    "user_text": "Ok lo doy por bueno. Sube el codigo fuente en github con el nombre Escena Presentadora",
+    "new_hardware_measurement_claimed": false
+  },
+  "source_publication": {
+    "source_files_preserved_verbatim": 102,
+    "external_resources_manifest": "ASSETS-MANIFEST.json",
+    "external_resources": 273,
+    "generated_original_source_file_not_committed": "source/scene/cd/A.BIN",
+    "runtime_source_changes": false
+  },
+  "verification": "evidence/github-upload-checks.json",
+  "manifest_excludes_itself": true,
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 12195,
+      "sha256": "f57148ef354149d9480b6f1328fc0fd1e3dc2a94af6773b84dd466cb19ec150d",
+      "git_blob_sha1": "476ddef399cb3210e77822f022519870ebb5b62c",
+      "origin": {
+        "kind": "publication_handoff_document_or_manifest"
+      }
+    },
+    {
+      "path": "ASSETS-MANIFEST.json",
+      "bytes": 81687,
+      "sha256": "bf5456940349857b4504b2502058841ed9c94c40f3b0ec0fbef71bd004f5176a",
+      "git_blob_sha1": "196ddee75904a5d0d55ac6a4756abd3f3860c877",
+      "origin": {
+        "kind": "publication_handoff_document_or_manifest"
+      }
+    },
+    {
+      "path": "INTEGRACION_CODEX.md",
+      "bytes": 6008,
+      "sha256": "24bb2be8e352929a9e037c6e830772aeba5bfc5cf3a42d9f75ee46df968b1560",
+      "git_blob_sha1": "fa38dea8473a3b59cb2fa55080ccf2d1a452d504",
+      "origin": {
+        "kind": "publication_handoff_document_or_manifest"
+      }
+    },
+    {
+      "path": "README.md",
+      "bytes": 4702,
+      "sha256": "b033389e8b30904cd492459cc3d36e751e8a7abbf2c02d09c7da511213312262",
+      "git_blob_sha1": "e8c3e2f78e43e7d669be3b836bae61033bf87063",
+      "origin": {
+        "kind": "publication_handoff_document_or_manifest"
+      }
+    },
+    {
+      "path": "docs/LEEME-R02-ORIGINAL.md",
+      "bytes": 9989,
+      "sha256": "b04962f4f205d0e1fbd32b539aefa7eadd91c5e44c014ced7a710b0bf46dbec3",
+      "git_blob_sha1": "aa5a2cc86b1922de147487198078b6ac62bbe241",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/LEEME.md"
+        ]
+      }
+    },
+    {
+      "path": "docs/R02-ORIGINAL-SHA256SUMS.txt",
+      "bytes": 46454,
+      "sha256": "d252bda7105e191df160496f3abb73fcac5abd44e554e9f3055d7ffe62c3016c",
+      "git_blob_sha1": "0d36d8c5ad3328decab7a5dbfbdac0fea50ab6a7",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/SHA256SUMS.txt"
+        ]
+      }
+    },
+    {
+      "path": "evidence/FINAL-VALIDATION.json",
+      "bytes": 518,
+      "sha256": "76d7066d074ae089e3125bd7040cb12088872f02d0522548ae7abbc70aad739b",
+      "git_blob_sha1": "95ca276d9ea4f49f6a7ed32d601039afc861156d",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/FINAL-VALIDATION.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/INTEGRATION_REVIEW.md",
+      "bytes": 9181,
+      "sha256": "6019350f0f4c6e8f183f3efe4dec47904b174190dae6616477c7da75d3d40485",
+      "git_blob_sha1": "0f7b07c383a152f0aac0841b9b3c3eadd5bc38cf",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/INTEGRATION_REVIEW.md"
+        ]
+      }
+    },
+    {
+      "path": "evidence/R02-DELIVERY.json",
+      "bytes": 2096,
+      "sha256": "c98905969919e681658524fed9060e8b95bf87fd9f443fcca69af2b90f649fb9",
+      "git_blob_sha1": "c0c82eeca3930625ef0639b7f712e89e4d660c1a",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/DELIVERY.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/audio_r02/AUDIO-HARDWARE-FINDINGS.md",
+      "bytes": 16240,
+      "sha256": "84b3da1bad1cf3aa79d46fe9f7546a4c765b489cded00b6c10c4bf403ecd740e",
+      "git_blob_sha1": "4ead8c6c6bff6763987f4eff90b735b8ff0f9056",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/audio_r02/AUDIO-HARDWARE-FINDINGS.md"
+        ]
+      }
+    },
+    {
+      "path": "evidence/audio_r02/FINAL-CAPTURED-AUDIO-AUDIT.md",
+      "bytes": 6668,
+      "sha256": "d398c6f05c69c5e0134482f30ca3352b9e4be7c3d76cda4acc3224998d96a8ca",
+      "git_blob_sha1": "eee30b1c2c65c58676b1472f4490e0bf3468de39",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/audio_r02/FINAL-CAPTURED-AUDIO-AUDIT.md"
+        ]
+      }
+    },
+    {
+      "path": "evidence/audio_r02/SERVICE-TIMING-REVIEW.md",
+      "bytes": 4812,
+      "sha256": "70dc3a4ca94fc4acafd69ca3f3f6c05c75ad5502b69283e757d7eabbce66a55b",
+      "git_blob_sha1": "43bf82165354d152aebe9c58481e2d9ca13d8849",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/audio_r02/SERVICE-TIMING-REVIEW.md"
+        ]
+      }
+    },
+    {
+      "path": "evidence/audio_r02/packaged-test-results.json",
+      "bytes": 27332,
+      "sha256": "ccecea224cd295ec51efd5b9526c7b7d691d8beae472100cf776576863266a8c",
+      "git_blob_sha1": "d2400261470d4a545506a8bc0658dd32607c6965",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/audio_r02/packaged-test-results.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/audio_r02/reference_r02_final_audio_audit.json",
+      "bytes": 19945,
+      "sha256": "f7e2ba64b2e552acd571cab14e52f9d7243732f768aabd1a4fcb1908dc94c47b",
+      "git_blob_sha1": "236782236213a36837aa9d7d4cc4e071c5932b16",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/audio_r02/reference_r02_final_audio_audit.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/final_graphics_capacity.json",
+      "bytes": 8374,
+      "sha256": "e7fa7a36bfc740a0a69ac58f63c129070dd6454d69774e441512c5bfb0738ae3",
+      "git_blob_sha1": "209ecebabba411d873b4e5210cd62de386891ec0",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/final_graphics_capacity.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/github-upload-checks.json",
+      "bytes": 993,
+      "sha256": "bef97a90187640906c664470b562696df087d2db3c97565ad072931d539cced2",
+      "git_blob_sha1": "cde4854da2ac375c763c9628ad48949d6bb405e9",
+      "origin": {
+        "kind": "publication_handoff_document_or_manifest"
+      }
+    },
+    {
+      "path": "evidence/r01_reference/original_audio/PINNED-DRIVER-VOLUME-PROOF.json",
+      "bytes": 704,
+      "sha256": "64e5a1f7d3c502c5afb63086070663659722fe3a87aad62b1d3c833185940905",
+      "git_blob_sha1": "bbf63c6c02d6927bd3f43b9da6f94c410d231503",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/r01_reference/original_audio/PINNED-DRIVER-VOLUME-PROOF.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/r01_reference/original_audio/README.md",
+      "bytes": 10285,
+      "sha256": "47e67d9067a8923091d19963411542dff64fd2f0e5d485d18f772586f7712587",
+      "git_blob_sha1": "12ec7954ef995124e9ae7248d2abd6030c47bd66",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/r01_reference/original_audio/README.md"
+        ]
+      }
+    },
+    {
+      "path": "evidence/r01_reference/original_audio/confirmed_background_report.json",
+      "bytes": 18807,
+      "sha256": "df0a1311b1cb0d2ae6426b78110b54b7134c0e48b28e69c4f52ac9a99996e582",
+      "git_blob_sha1": "7ed06937848c8e1ced17dab8bbad237412319e41",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/r01_reference/original_audio/confirmed_background_report.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/r01_reference/original_audio/driver_2023_main.c",
+      "bytes": 60490,
+      "sha256": "29cc6e0c641dd575651022a61fc378117a65d2a720cc74c8be9847178916dcd6",
+      "git_blob_sha1": "48b2796a4e0983ee7ab3671c5af3c1df3095cac1",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/r01_reference/original_audio/driver_2023_main.c"
+        ]
+      }
+    },
+    {
+      "path": "evidence/reference-r02-final-full.json",
+      "bytes": 1943,
+      "sha256": "c807e6d63fde6ac36c9e2e117e80dc775fed86358170d71fdc13f8ae823b51a6",
+      "git_blob_sha1": "ce1096378fe1120d2983689b361e6e4ecc8562fd",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/reference-r02-final-full.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/reference-visual-audit.json",
+      "bytes": 119487,
+      "sha256": "231de848565735971c1fdff4da95ee4fc9cce7045153ed9588455af32d230f76",
+      "git_blob_sha1": "06d4608ed6fd553bc6176bdc89ec3981d86bd09d",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/reference-visual-audit.json",
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_r02_final_full_capture_audit.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/release-r02-full.json",
+      "bytes": 2302,
+      "sha256": "3409ca22ffa09d1971deb0ef14e3fd5be971780241eb3517cfdb6a5d43b70587",
+      "git_blob_sha1": "6a6805213e1c80bffb3ab4acd0bd47aa0e4e8231",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/release-r02-full.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/source_archives_sha256.json",
+      "bytes": 4752,
+      "sha256": "60ab2ed00ca8a4529794ca6c1566a8bf28e1e90ceb1fc0c0a54914b7ef076a6c",
+      "git_blob_sha1": "0f0182e90a1f13fdd0e727666d99c07efeb5eb9f",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/source_archives_sha256.json"
+        ]
+      }
+    },
+    {
+      "path": "evidence/standalone-source-rebuild-r02.json",
+      "bytes": 632,
+      "sha256": "70b940c789399b5e0144f1dd0f6af3984be6b93488a874010120dafc3cd78e30",
+      "git_blob_sha1": "a0bf36f7877eda227733e422132d74375da82904",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/audit/standalone-source-rebuild-r02.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/README.md",
+      "bytes": 19681,
+      "sha256": "5cb00bee284e59bb770a5038d1eb0dde1fa2154e18290fce571bceb8a7d6e09b",
+      "git_blob_sha1": "ebc8e3dddb6fa01515648b4aa44511feb6487936",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/README.md"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/SHA256SUMS.txt",
+      "bytes": 2490,
+      "sha256": "d41f450d4bb58a892fecddc4706771358145858e30354dd86385346126f31999",
+      "git_blob_sha1": "fbafac460cb0ed414e9c8de5e8339f207ae00c21",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/SHA256SUMS.txt"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/audio_assets.json",
+      "bytes": 10371,
+      "sha256": "d7fa0b4e33acc95e55a3ba7a83de907b85f37d7e93fe200b2b5b973873233d08",
+      "git_blob_sha1": "4ad1d228a5c243ceee4612b0bb630eff6472e590",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/audio_assets.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/cd/WP02BGM.json",
+      "bytes": 950,
+      "sha256": "945066bdb69a33eabc88297e35b9e458c09eb703a530ba01f2d7f3015c5a8565",
+      "git_blob_sha1": "ad056ef22c7f834557e0eec3e0505477265331c5",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/cd/WP02BGM.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/cue_table.csv",
+      "bytes": 898,
+      "sha256": "39bb9fe31003ca59c0edc83c0f831ed8490ae11b8544de62b4be6b462c926c30",
+      "git_blob_sha1": "1cae24594b81ae998c29dac0808eb62ed4e15e93",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/cue_table.csv"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/ponesound_min.c",
+      "bytes": 3102,
+      "sha256": "cff129f5887a59d665141316069362226d650924c3937fbadceaebaea8d6dcdf",
+      "git_blob_sha1": "4b92a9084e46fc28018a68c3011e462ac8f773ce",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/ponesound_min.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/ponesound_min.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/ponesound_min.h",
+      "bytes": 1339,
+      "sha256": "6ab2a285bc707df9806dde9b60534bfbf682c848e559fe023797fbc087cf9c56",
+      "git_blob_sha1": "91afbe2ad745ba5f59e82a704d072091962b2278",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/ponesound_min.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/ponesound_min.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/tests/HOST-RESULTS.txt",
+      "bytes": 675,
+      "sha256": "f19d7cff061a2c495eef8c3d429d4646ebbbdf70046c16d6988d832ae20d2482",
+      "git_blob_sha1": "7afb18efb4fb3e9acc7662156c210bf290017778",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/tests/HOST-RESULTS.txt"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/tests/run_host.py",
+      "bytes": 1245,
+      "sha256": "a3a6c9c6e630906d9e13bd65e83acb234ffdbc37f32d14b7e377004df88a596d",
+      "git_blob_sha1": "acc0cf5425a98fdcdf2626c1d51d86d12755e8e5",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/tests/run_host.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/tests/test_bgm_codec.c",
+      "bytes": 3401,
+      "sha256": "4dea4ee3cb537fcd08477a15d5c55c0cdef00e7442d60482b7c4477df088d0ef",
+      "git_blob_sha1": "e1968a27bf1c5433d6753b43924ac3407d94f176",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/tests/test_bgm_codec.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/tests/test_bgm_stream.c",
+      "bytes": 4727,
+      "sha256": "34bdddf3d628d82a5eec7f5a57d960f4e26cff2566cc81cb8cfc341d93a76154",
+      "git_blob_sha1": "507e10c15abefb7615ab77520022e7ce7902507e",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/tests/test_bgm_stream.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/tests/test_pcm16_format.c",
+      "bytes": 1252,
+      "sha256": "fe7b69224f526df8665271f1f43e808443d4af63c119239e835a00220c8d627e",
+      "git_blob_sha1": "03f2f0e0358d0dd80f462124e0f2879ebdc5bba4",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/tests/test_pcm16_format.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/tests/test_pcm16_gain.c",
+      "bytes": 1423,
+      "sha256": "a4e4b4528e95cef5e007ca231c8633082c128dd2878de52372393e909fa012f3",
+      "git_blob_sha1": "bac773045f0d9c290b83c0647d29bfe13fc0491a",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/tests/test_pcm16_gain.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/tests/test_wp02_audio.c",
+      "bytes": 9422,
+      "sha256": "af10974b05464d738b453a262a48ba44e50019b9ba80d4f13e3d4ebd88d6e1d6",
+      "git_blob_sha1": "9ddedd06290b5a402e2f1c63fd3ec6869f7a9f30",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/tests/test_wp02_audio.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/tests/yaul.h",
+      "bytes": 912,
+      "sha256": "52b2981eda78097e11d305bc18d20dbbda64352f2b1eddb47e0886ac03c50640",
+      "git_blob_sha1": "ea2409a3f05960450674be0905fae985fd28c4c7",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/tests/yaul.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wf_audio_sfx.c",
+      "bytes": 16860,
+      "sha256": "7129466a7d688fcfd2600413b91d4951d80c16de1f411489bbfbfa66fdbc5e6b",
+      "git_blob_sha1": "bab1d5a4af4e179d4e9fe7febb95e669dd263814",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wf_audio_sfx.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wf_audio_sfx.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wf_audio_sfx.h",
+      "bytes": 1293,
+      "sha256": "3365d89f48631d2e4f7b519f95441f33eb67cad85fe329877503d199318e35ed",
+      "git_blob_sha1": "d94a8d4179017fe49e44985f67d662743be05679",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wf_audio_sfx.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wf_audio_sfx.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_audio.c",
+      "bytes": 11659,
+      "sha256": "d683000d8f2d02f08846d028eccc01aaee9ad26a515e25977f674a108424164c",
+      "git_blob_sha1": "17ad8e332642d6f99fa36970a46a85bdea5bf6af",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_audio.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_audio.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_audio.h",
+      "bytes": 2224,
+      "sha256": "184cb3641e1b5c4a345bd0f46d9efd492f6b71deed01592d601dba57fc65ca92",
+      "git_blob_sha1": "2d888f53833ec7cf6e99ad9bfa2db59cf67737b3",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_audio.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_audio.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_audio_assets.h",
+      "bytes": 917,
+      "sha256": "1bd2c7eb42cc80e30b61e0e7b0be80e4a9574891f3de9b4250b5b44f3c333675",
+      "git_blob_sha1": "48f22a2b888d19b72e43efd1f1bd1001be5e43f8",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_audio_assets.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_audio_assets.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_bgm.c",
+      "bytes": 10455,
+      "sha256": "e2fbc37fd2c5f693d8215219a0de913c418770d0da00c498dec7511709bcbb59",
+      "git_blob_sha1": "66152aaf68b0e6c5b3fcb23e852edebb360abb7b",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_bgm.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_bgm.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_bgm.h",
+      "bytes": 1634,
+      "sha256": "c76369e3e49481884851db4d55286153d20554968d99ce1e61c8b9ca397df92f",
+      "git_blob_sha1": "87df920b1f6f547e4c959d3dfdf4be50ee72ad8f",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_bgm.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_bgm.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_bgm_codec.c",
+      "bytes": 5113,
+      "sha256": "cd8d016acb51943584a480e19b27861cefc4cb7343224ca892d24583df65f55e",
+      "git_blob_sha1": "d6bbc1259c62e4baa0c98a1239f99501eded1d3a",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_bgm_codec.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_bgm_codec.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_bgm_codec.h",
+      "bytes": 689,
+      "sha256": "5d84dccb5400811c7cc31403eb05fd05be373475acbc0977fa36b34b90d6ae54",
+      "git_blob_sha1": "fc92b0c8bac3411265475e25529d4acf632d35c6",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_bgm_codec.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_bgm_codec.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_pcm16.c",
+      "bytes": 1132,
+      "sha256": "d1803b716d1b42528d830a2dfb228c8ffd7cd7c1ee4d100fb5fa4cb3867982ed",
+      "git_blob_sha1": "dd34d1ca48cbcd76964ac6b261e9153df3d5d870",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_pcm16.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_pcm16.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_pcm16.h",
+      "bytes": 588,
+      "sha256": "c8dcb31af44eb8b7258a154da95627c408599ddcac6ce45b8e0478b5a5df9619",
+      "git_blob_sha1": "319c8dd6ea74c3ce92fc68ecf9975b13ebc7d318",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_pcm16.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_pcm16.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/integration/wp02_pcm16_gain.h",
+      "bytes": 1304,
+      "sha256": "8d95b60ef03e2ca5749aa3538b0ca3996fd92a67830d2106bca89c02648456fa",
+      "git_blob_sha1": "cc2045a8a433ebe7998e599e6db303926d004397",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_pcm16_gain.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_pcm16_gain.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/pack_bgm.py",
+      "bytes": 4304,
+      "sha256": "8fa7d35bfd237f38e6ce2a66c8afdea773b1ca707f59cb1a6c0c6ff5ac728d53",
+      "git_blob_sha1": "6542e83a717b976770d0f16cfc6f045c57ed1f13",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/pack_bgm.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/prepare_assets.py",
+      "bytes": 7797,
+      "sha256": "0a338f91f1ae8627c349d0e3d936f80f139293bf69b6ec33d40ea73f46faaba3",
+      "git_blob_sha1": "0f8d3efdec18e8178f7b5e022f38f5be3959e3b1",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/prepare_assets.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_audio/verify_pcm16.py",
+      "bytes": 3458,
+      "sha256": "dc666bee4ed4be428138e8bc7693b249e3c95377997d40b15d647b0ff2d60db2",
+      "git_blob_sha1": "c349c47df2e973457b60cfab4124f5b67714c50e",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/verify_pcm16.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/RENDER-ASSET-HANDOFF.md",
+      "bytes": 10101,
+      "sha256": "d5fcf7eda113d7218fa0d1c8979d3dc582448b22e93eea60cd2ba76cf48b3a6d",
+      "git_blob_sha1": "ad5c1b261e109eb6fc2dc200011e31a8a66649d1",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/RENDER-ASSET-HANDOFF.md"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/audit_capacity.py",
+      "bytes": 4418,
+      "sha256": "cb21b5045608294cb4d0cbb2614d711a7d3e1d9e430c4d230bdd029b4bea45cb",
+      "git_blob_sha1": "f58f38ad61a8f99f929931628904b5c30e2fea2e",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/audit_capacity.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/dump_native_scene.c",
+      "bytes": 1030,
+      "sha256": "05ce3b282375d947a6b421f907b488cb111e5bd4f80de2b0ccea277ad4cd4de7",
+      "git_blob_sha1": "d9c03da1adc7204f2aa4296b7d66b48a9da9c3de",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/dump_native_scene.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generate_assets.py",
+      "bytes": 19646,
+      "sha256": "8f5f8a940ab3ce1b32ed52e47fbc48fee25bfd8b879ddaa56fa0943d45d67fe7",
+      "git_blob_sha1": "b71cd844c60ee20e4a4a8cac465e851907680172",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generate_assets.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/SHA256SUMS.txt",
+      "bytes": 384,
+      "sha256": "378d48a107a25539b7a9186a20e51e684a1d4e581c5575bb2dd0100625e735f4",
+      "git_blob_sha1": "aa40914256af2e0e281ca30f57ffa51ee626dd62",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/SHA256SUMS.txt"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/capacity_audit.json",
+      "bytes": 8210,
+      "sha256": "1967a964ec41d22a38d1bdc66a922f314fc13edae2a7bf6546436dabd3fb4f8f",
+      "git_blob_sha1": "598a67342ca3bfa9f7fbe23181e3a5449e265f82",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/capacity_audit.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/native_composition_audit.json",
+      "bytes": 63698,
+      "sha256": "29e13dacd41e4e3925fc6826bede296ed7249556c0428e082e7b13e73339f273",
+      "git_blob_sha1": "e8f5861d2c150da3cbd7c654ee9bdda511dabc7e",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/native_composition_audit.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/pixel_comparison.json",
+      "bytes": 203,
+      "sha256": "dadb9d0af21f8937d618216f005b9ca1f57ae0ebee88f0b95e28e98109c18dd2",
+      "git_blob_sha1": "827bf406627570a58a0302efb569358a4fc5f93a",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/pixel_comparison.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/reference_r02_final_full_decode.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_r02_final_full_decode.log",
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_scene_lossless_decode.log",
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_v7_decode.log"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/reference_scene_lossless_decode.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_r02_final_full_decode.log",
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_scene_lossless_decode.log",
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_v7_decode.log"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/reference_v7_decode.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_r02_final_full_decode.log",
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_scene_lossless_decode.log",
+          "WP02-Saturn-TAG-R02/source/research_render/generated/reference_v7_decode.log"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/rom_name_audit.json",
+      "bytes": 815,
+      "sha256": "d36b2bbc80eac5d8f0c403bedfb49167734c9ac563fd803766a915f720fb7b6f",
+      "git_blob_sha1": "2504d155f610692e45a0a1c7049930d7fed81c73",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/rom_name_audit.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/wp02_assets.c",
+      "bytes": 79620,
+      "sha256": "bb30461f263bd81bef0562dc377a96cdf418261fefa0352205b3e677d6582c84",
+      "git_blob_sha1": "3ebf2c497ae585388e88ad16b7ca4fa24b77a555",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/wp02_assets.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_assets.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/generated/wp02_assets.h",
+      "bytes": 1147,
+      "sha256": "60254d9b44ac2fe653c03575eb6b495da45237d733ba562ecba33bead356d666",
+      "git_blob_sha1": "85957163c9c17797139d2550165c94c7b71c0ae0",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/wp02_assets.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_assets.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/test_assets.py",
+      "bytes": 3381,
+      "sha256": "c1fa68f613cc78f6b98330c8ae924012f73d093b9c091f6a8fe33df83fbd48c3",
+      "git_blob_sha1": "3c9241630d3b6993db528d5f1327d938c1c7e2aa",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/test_assets.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/test_capture_verifier.py",
+      "bytes": 1827,
+      "sha256": "80d94de117ed27c767ec0aec4d9bcc957b56810fc7ff9c237718c59ff2ebe61c",
+      "git_blob_sha1": "c0d3748082f3ba2ba1c13a2dc32347d2d67aedcc",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/test_capture_verifier.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/verify_mednafen_capture.py",
+      "bytes": 12718,
+      "sha256": "13bcb395bd199f2a301f8ae70129942e527cca833687c715af5a163e3ee85efb",
+      "git_blob_sha1": "3a020907cefb1907c87ce865a5a72f1a04da4b14",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/verify_mednafen_capture.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/verify_native_composition.py",
+      "bytes": 5095,
+      "sha256": "b15315d5dc1261b25d58ba4ca22fee7c6e6a914f264cb328177ff05168801ea6",
+      "git_blob_sha1": "08ee93cb866097313c040ddceee7de63daf02502",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/verify_native_composition.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/verify_rom_names.py",
+      "bytes": 3201,
+      "sha256": "fa9054e0b22086299cada24e228dc16c4be41ffcc705b834d7556983022debe8",
+      "git_blob_sha1": "b53ca485f33605d25c77ffe6f56818f240f0c8a0",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/verify_rom_names.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/workpack_25/tables/SUBSET-PROVENANCE.json",
+      "bytes": 457,
+      "sha256": "88434ee97327d0e782bb28eef84d8c38b00753c54cab9899e30aec1572d9dd93",
+      "git_blob_sha1": "01a8130355b59146311cf3bea6abeb0c31468704",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/workpack_25/tables/SUBSET-PROVENANCE.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_render/workpack_25/tools/wf25_graphics.py",
+      "bytes": 35409,
+      "sha256": "9dad22eee46a36efde92d309e7b4d0f54509bf6cc0c056f85b904ba736b28e91",
+      "git_blob_sha1": "1f3737ff92633a0a3a77e20900a1babfcc9ec093",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/workpack_25/tools/wf25_graphics.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/WP02_CHOREOGRAPHY_AUDIT.md",
+      "bytes": 9940,
+      "sha256": "f4036f746f63347a0be337c8cd65c2c31ffc39bd673a3686d24f494f000981a5",
+      "git_blob_sha1": "86e72c59cf84a1cd309ec4d582ee36f99053bbb7",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/WP02_CHOREOGRAPHY_AUDIT.md"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/composer_rng_context.json",
+      "bytes": 3657,
+      "sha256": "41c7ef174cb634dcbd0760936607cd40b06d5c0ce1053a98a77ca6a2500ca603",
+      "git_blob_sha1": "0dfad8d414e228cdb17a71fc8acd850268856c4e",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/composer_rng_context.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/extract_wp02_tables.py",
+      "bytes": 1555,
+      "sha256": "43648b2ce4e303f19537222f56ff2f178741c985dcde8fe6970f1263737957da",
+      "git_blob_sha1": "f8ed8464dbde50ffc2cf474a87dc698901327248",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/extract_wp02_tables.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/mame_differential_results.json",
+      "bytes": 3532,
+      "sha256": "fd050a49534436f8ff90cbbeff73cef0ea452b3c2c5fcd860b791523a0abb5ff",
+      "git_blob_sha1": "0b0b7f27b955e260058e9ce5c016196b300bb96e",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/mame_differential_results.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/native_differential_results.json",
+      "bytes": 14019,
+      "sha256": "1208570dac9dabd7ac2694e5b871a4014e628c3513cde8c43033b6a9eaaa5f52",
+      "git_blob_sha1": "4866f8d15582295f2f91f4b0e9554eaecf8977f6",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/native_differential_results.json"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/probe_composer_rng.py",
+      "bytes": 665,
+      "sha256": "04777f93e304d88a4dea276c1d59f2d1f1b8723b920b7bfac47edf22eecff011",
+      "git_blob_sha1": "dead2945a031aa23f7da49c5fb6d3b8d3ee00554",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/probe_composer_rng.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/rom_oracle.py",
+      "bytes": 6021,
+      "sha256": "a340710a131c4ed2f94e67e999d04996c96b6e78d246edac21a8143503d89bba",
+      "git_blob_sha1": "d76b37a2ccd91714f460ebe00c71f1c4231300c8",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/rom_oracle.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/test_scene_against_mame.py",
+      "bytes": 3682,
+      "sha256": "d9c1525a521ef2a68bcd988c969d1701a7c5d9e05d9d34b331279daffaec8282",
+      "git_blob_sha1": "33e4690a77ab3bb113c85579827b1ed11e375408",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/test_scene_against_mame.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/test_scene_against_rom.py",
+      "bytes": 4355,
+      "sha256": "b2271ca929628623b9616f607b85c17d70192ca450ea342c139bc4226f1ef438",
+      "git_blob_sha1": "9754748d031b5862744453771df3b5f64f5cc137",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/test_scene_against_rom.py"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/wp02_rom_tables.h",
+      "bytes": 918,
+      "sha256": "ff83e83e466f23cefced396f4abf093d22e7751df407807a1d215bc85cb707cd",
+      "git_blob_sha1": "ae7d8073efb680f00a1443a796116a0a79ed4fbb",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_rom_tables.h",
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_rom_tables.regenerated.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_rom_tables.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/wp02_rom_tables.regenerated.h",
+      "bytes": 918,
+      "sha256": "ff83e83e466f23cefced396f4abf093d22e7751df407807a1d215bc85cb707cd",
+      "git_blob_sha1": "ae7d8073efb680f00a1443a796116a0a79ed4fbb",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_rom_tables.h",
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_rom_tables.regenerated.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_rom_tables.h"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/wp02_scene.c",
+      "bytes": 7667,
+      "sha256": "d83da7e1cec9921483e51f331bbfc34fa71c62e14702c7a818af04ac45042f4e",
+      "git_blob_sha1": "3844e59c82281a20dae6cdfd2e365d5db7e99831",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_scene.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_scene.c"
+        ]
+      }
+    },
+    {
+      "path": "source/research_rom/wp02_scene.h",
+      "bytes": 1651,
+      "sha256": "47eb343204b7b6be5349824fad1d039d8e6dcc6833ee0b5134a4ae89c81eb945",
+      "git_blob_sha1": "95d71888a84a94baeb9aea81eff8a2522350e98f",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_scene.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_scene.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/build.py",
+      "bytes": 3297,
+      "sha256": "939344ae63a87c72bd10c576fed1d323ddb2ac8612c3736dbd5462581f046c11",
+      "git_blob_sha1": "607ae53a7918f68b28fea6ae78b2fe0d078628a4",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/scene/build.py"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/cd/ABS.TXT",
+      "bytes": 84,
+      "sha256": "3ad5496bd3a5c7e8061b2931b123bfa9eba226b8ab3ca8435d4750894de26362",
+      "git_blob_sha1": "acd01f7891ade22120954df0e09c22376fa15171",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/scene/cd/ABS.TXT",
+          "WP02-Saturn-TAG-R02/source/scene/cd/BIB.TXT",
+          "WP02-Saturn-TAG-R02/source/scene/cd/CPY.TXT"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/cd/BIB.TXT",
+      "bytes": 84,
+      "sha256": "3ad5496bd3a5c7e8061b2931b123bfa9eba226b8ab3ca8435d4750894de26362",
+      "git_blob_sha1": "acd01f7891ade22120954df0e09c22376fa15171",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/scene/cd/ABS.TXT",
+          "WP02-Saturn-TAG-R02/source/scene/cd/BIB.TXT",
+          "WP02-Saturn-TAG-R02/source/scene/cd/CPY.TXT"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/cd/CPY.TXT",
+      "bytes": 84,
+      "sha256": "3ad5496bd3a5c7e8061b2931b123bfa9eba226b8ab3ca8435d4750894de26362",
+      "git_blob_sha1": "acd01f7891ade22120954df0e09c22376fa15171",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/scene/cd/ABS.TXT",
+          "WP02-Saturn-TAG-R02/source/scene/cd/BIB.TXT",
+          "WP02-Saturn-TAG-R02/source/scene/cd/CPY.TXT"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/main.c",
+      "bytes": 14892,
+      "sha256": "9dbf428efc56362a452e0ca11c6fa7f045d341c6e31e7cdd9249a8aad794a378",
+      "git_blob_sha1": "c8400a3a5d12630841ba2e37cf45c8bc89223a5e",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/scene/src/main.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/ponesound_min.c",
+      "bytes": 3102,
+      "sha256": "cff129f5887a59d665141316069362226d650924c3937fbadceaebaea8d6dcdf",
+      "git_blob_sha1": "4b92a9084e46fc28018a68c3011e462ac8f773ce",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/ponesound_min.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/ponesound_min.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/ponesound_min.h",
+      "bytes": 1339,
+      "sha256": "6ab2a285bc707df9806dde9b60534bfbf682c848e559fe023797fbc087cf9c56",
+      "git_blob_sha1": "91afbe2ad745ba5f59e82a704d072091962b2278",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/ponesound_min.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/ponesound_min.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wf_audio_sfx.c",
+      "bytes": 16860,
+      "sha256": "7129466a7d688fcfd2600413b91d4951d80c16de1f411489bbfbfa66fdbc5e6b",
+      "git_blob_sha1": "bab1d5a4af4e179d4e9fe7febb95e669dd263814",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wf_audio_sfx.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wf_audio_sfx.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wf_audio_sfx.h",
+      "bytes": 1293,
+      "sha256": "3365d89f48631d2e4f7b519f95441f33eb67cad85fe329877503d199318e35ed",
+      "git_blob_sha1": "d94a8d4179017fe49e44985f67d662743be05679",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wf_audio_sfx.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wf_audio_sfx.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_assets.c",
+      "bytes": 79620,
+      "sha256": "bb30461f263bd81bef0562dc377a96cdf418261fefa0352205b3e677d6582c84",
+      "git_blob_sha1": "3ebf2c497ae585388e88ad16b7ca4fa24b77a555",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/wp02_assets.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_assets.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_assets.h",
+      "bytes": 1147,
+      "sha256": "60254d9b44ac2fe653c03575eb6b495da45237d733ba562ecba33bead356d666",
+      "git_blob_sha1": "85957163c9c17797139d2550165c94c7b71c0ae0",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_render/generated/wp02_assets.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_assets.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_audio.c",
+      "bytes": 11659,
+      "sha256": "d683000d8f2d02f08846d028eccc01aaee9ad26a515e25977f674a108424164c",
+      "git_blob_sha1": "17ad8e332642d6f99fa36970a46a85bdea5bf6af",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_audio.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_audio.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_audio.h",
+      "bytes": 2224,
+      "sha256": "184cb3641e1b5c4a345bd0f46d9efd492f6b71deed01592d601dba57fc65ca92",
+      "git_blob_sha1": "2d888f53833ec7cf6e99ad9bfa2db59cf67737b3",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_audio.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_audio.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_audio_assets.h",
+      "bytes": 917,
+      "sha256": "1bd2c7eb42cc80e30b61e0e7b0be80e4a9574891f3de9b4250b5b44f3c333675",
+      "git_blob_sha1": "48f22a2b888d19b72e43efd1f1bd1001be5e43f8",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_audio_assets.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_audio_assets.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_bgm.c",
+      "bytes": 10455,
+      "sha256": "e2fbc37fd2c5f693d8215219a0de913c418770d0da00c498dec7511709bcbb59",
+      "git_blob_sha1": "66152aaf68b0e6c5b3fcb23e852edebb360abb7b",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_bgm.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_bgm.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_bgm.h",
+      "bytes": 1634,
+      "sha256": "c76369e3e49481884851db4d55286153d20554968d99ce1e61c8b9ca397df92f",
+      "git_blob_sha1": "87df920b1f6f547e4c959d3dfdf4be50ee72ad8f",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_bgm.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_bgm.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_bgm_codec.c",
+      "bytes": 5113,
+      "sha256": "cd8d016acb51943584a480e19b27861cefc4cb7343224ca892d24583df65f55e",
+      "git_blob_sha1": "d6bbc1259c62e4baa0c98a1239f99501eded1d3a",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_bgm_codec.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_bgm_codec.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_bgm_codec.h",
+      "bytes": 689,
+      "sha256": "5d84dccb5400811c7cc31403eb05fd05be373475acbc0977fa36b34b90d6ae54",
+      "git_blob_sha1": "fc92b0c8bac3411265475e25529d4acf632d35c6",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_bgm_codec.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_bgm_codec.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_diag.h",
+      "bytes": 4186,
+      "sha256": "394428824e6baf6db2ed24707bfc06624d131b85e505920cce243644b1bcbe81",
+      "git_blob_sha1": "0c4623f5328e25b312c13b0f837e7fbaed60ebb0",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_diag.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_pcm16.c",
+      "bytes": 1132,
+      "sha256": "d1803b716d1b42528d830a2dfb228c8ffd7cd7c1ee4d100fb5fa4cb3867982ed",
+      "git_blob_sha1": "dd34d1ca48cbcd76964ac6b261e9153df3d5d870",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_pcm16.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_pcm16.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_pcm16.h",
+      "bytes": 588,
+      "sha256": "c8dcb31af44eb8b7258a154da95627c408599ddcac6ce45b8e0478b5a5df9619",
+      "git_blob_sha1": "319c8dd6ea74c3ce92fc68ecf9975b13ebc7d318",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_pcm16.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_pcm16.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_pcm16_gain.h",
+      "bytes": 1304,
+      "sha256": "8d95b60ef03e2ca5749aa3538b0ca3996fd92a67830d2106bca89c02648456fa",
+      "git_blob_sha1": "cc2045a8a433ebe7998e599e6db303926d004397",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_audio/integration/wp02_pcm16_gain.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_pcm16_gain.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_rom_tables.h",
+      "bytes": 918,
+      "sha256": "ff83e83e466f23cefced396f4abf093d22e7751df407807a1d215bc85cb707cd",
+      "git_blob_sha1": "ae7d8073efb680f00a1443a796116a0a79ed4fbb",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_rom_tables.h",
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_rom_tables.regenerated.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_rom_tables.h"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_scene.c",
+      "bytes": 7667,
+      "sha256": "d83da7e1cec9921483e51f331bbfc34fa71c62e14702c7a818af04ac45042f4e",
+      "git_blob_sha1": "3844e59c82281a20dae6cdfd2e365d5db7e99831",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_scene.c",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_scene.c"
+        ]
+      }
+    },
+    {
+      "path": "source/scene/src/wp02_scene.h",
+      "bytes": 1651,
+      "sha256": "47eb343204b7b6be5349824fad1d039d8e6dcc6833ee0b5134a4ae89c81eb945",
+      "git_blob_sha1": "95d71888a84a94baeb9aea81eff8a2522350e98f",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/research_rom/wp02_scene.h",
+          "WP02-Saturn-TAG-R02/source/scene/src/wp02_scene.h"
+        ]
+      }
+    },
+    {
+      "path": "source/tools/iso_to_bin.py",
+      "bytes": 3614,
+      "sha256": "716643661d63dcd64521793a082f38b55279b9d7c1c46c1cab13630031c42859",
+      "git_blob_sha1": "f1951804f20eacc95f1b95a8ac1b776f38a756ee",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/tools/iso_to_bin.py"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/audit_reference_audio.py",
+      "bytes": 13856,
+      "sha256": "d3101bb89eccff9a1827ce31e68cf8ef27e34d659b62c0ca0e01b96465ef650f",
+      "git_blob_sha1": "6e5a39f2f7fc2e6e3674ea06ffd2a586744fa89b",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/audit_reference_audio.py"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/capture_mednafen.py",
+      "bytes": 6508,
+      "sha256": "c77c3965af215a844b586b5e93c0e1d934f83787ad99f6b87c41d92062d1a7cc",
+      "git_blob_sha1": "d1880a9673f807120d20ceb8a35fe9d8b60db797",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/capture_mednafen.py"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/export_release_video.py",
+      "bytes": 4245,
+      "sha256": "7d877036abb6b86389d9e61c823367b6b6bafa764682259c3fbc8b443f5d5632",
+      "git_blob_sha1": "c634c02030ce7c75c2ec61c4e5c369e69fdd9700",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/export_release_video.py"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/mame/audio_music.lua",
+      "bytes": 2577,
+      "sha256": "858e5b911a123face66878ccd0dee38f9040bb6b8595e12adfdba6df7073fed3",
+      "git_blob_sha1": "eb8548ca55648a386de7d06524ca46957c336fb1",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/mame/audio_music.lua"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/mame/audio_trace.lua",
+      "bytes": 1942,
+      "sha256": "3e9944fb34acc11f4c4e3620c76185ad6bc8ccf6d203553743053b3300b9e039",
+      "git_blob_sha1": "1abafcf905592053371dffd60775f64e444e7b57",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/mame/audio_trace.lua"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/mame/full.lua",
+      "bytes": 1716,
+      "sha256": "f9ca8e1bb7e385a2fa9d572a609c14c21b951d4d57a6f9cb088efc1d0fe6c5e6",
+      "git_blob_sha1": "f087505f06dd007d732cc0a50eb94f50ac8c6c69",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/mame/full.lua"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/r02_audio/fixtures/r01/wp02_bgm.c",
+      "bytes": 7933,
+      "sha256": "14a5262d5510ee018b8de7b6356b40d4eeacc26dd004c9c695c20ac7a103a1c0",
+      "git_blob_sha1": "f11fa6a1c89ca2b461dd335239491559fb83b240",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/r02_audio/fixtures/r01/wp02_bgm.c"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/r02_audio/fixtures/r01/wp02_bgm.h",
+      "bytes": 575,
+      "sha256": "e9c5a6a391e9e5a67bad4417b544746752ede85876a8bb071e5c0b10117ce586",
+      "git_blob_sha1": "5ff2b73925bad73f82337c0e5f28c71f07db6ab3",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/r02_audio/fixtures/r01/wp02_bgm.h"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/r02_audio/run_tests.py",
+      "bytes": 6423,
+      "sha256": "8e05ecb5c2d488c01c4faf0099f62c9a1dc43855cdc1cbe2e9218718a54ca2a6",
+      "git_blob_sha1": "457c910a66c3e89d8a9825272ce5e00a1336d2e8",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/r02_audio/run_tests.py"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/r02_audio/test_bgm_failure_snapshot.c",
+      "bytes": 7558,
+      "sha256": "1e254c99bf122992c1c2d3bf8a59ceb9102836f6a181079866b9d24d1417f594",
+      "git_blob_sha1": "164274e14f9144f8e101f192eeb86619d498b7fd",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/r02_audio/test_bgm_failure_snapshot.c"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/r02_audio/test_bgm_service_cadence.c",
+      "bytes": 5095,
+      "sha256": "dac5c917cfcb11b56fcd63bcf7ce6784ddcbd20378f7359a7ce38c4ca464ed32",
+      "git_blob_sha1": "a205a9f100a809e2130782644d6ac426084b812a",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/r02_audio/test_bgm_service_cadence.c"
+        ]
+      }
+    },
+    {
+      "path": "source/verification/r02_audio/test_bgm_service_duration.c",
+      "bytes": 3815,
+      "sha256": "cdb57425a54d01542174c384d6cbcc0075add3317e63067724fc175c3bcb9605",
+      "git_blob_sha1": "a93a0299c22da06cc3697f937008ec0e2e6fd1d0",
+      "origin": {
+        "kind": "accepted_r02_archive_exact_bytes",
+        "archive_members": [
+          "WP02-Saturn-TAG-R02/source/verification/r02_audio/test_bgm_service_duration.c"
+        ]
+      }
+    },
+    {
+      "path": "tools/restore_assets.py",
+      "bytes": 3089,
+      "sha256": "3e8e9b9ae770a13d52129bd6563d42be4801409419e47a777430497aefb39eab",
+      "git_blob_sha1": "662e3b6ed44e7c305c018e36aba8d2c7e9989470",
+      "origin": {
+        "kind": "existing_repository_helper_exact_bytes",
+        "path": "Entrada Ring/tools/restore_assets.py",
+        "ref": "7424617e3a0a5189f125ac6a5244c1ab1231d7f3"
+      }
+    }
+  ]
+}

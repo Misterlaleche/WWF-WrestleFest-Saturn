@@ -1,0 +1,7 @@
+PASS: PCM16 bank selection, concurrent cues, F1, natural tails, no runtime CD reads, worst roster fits
+PASS: free-running FRT retains latency, 16-bit wrap, pending IRQs, zero compare and >65s restart; audio catches up
+PASS: native PCM16 descriptor, sample units, closest 8 kHz pitch, driver ownership
+PASS: all14 original OKI gains, signed PCM16BE, unbiased rounding, no clipping
+PASS lossless BGM blocks: complete sample equality, limits, truncation, invalid modes
+PASS resident BGM: every emitted PCM16 sample, ring seams, inactive writes, cached reload, no runtime CD, delayed monitor, late-service stop
+PASS: exact NTSC320 time conversion and monotonic live FRT residual

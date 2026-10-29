@@ -1,0 +1,31 @@
+{
+  "source": "wp02/verification/mame/audio_music/music.wav",
+  "source_sha256": "1bf99c064837cdf60b91bedd69cbfa089c489e9a5eb225ee829ac9b3d8829e5c",
+  "source_start_requested_seconds": 56.550597916,
+  "source_first_sample": 2493882,
+  "source_start_actual_seconds": 56.55061224489796,
+  "samples": 1278900,
+  "rate_hz": 44100,
+  "channels": 1,
+  "bits": 16,
+  "seconds": 29.0,
+  "packed_bytes": 1752708,
+  "packed_sha256": "13b38d5738297fbdfc780e000ca3b02ddeb00154f614d09086a562928c1c8ee1",
+  "decoded_sha256": "eaf45b236b32e545f7d484946b240e0fe79255b6093b35215706fe1d5acc04fb",
+  "blocks": {
+    "order1_k10": 299,
+    "order1_k9": 262,
+    "order2_k10": 50,
+    "order2_k8": 315,
+    "order2_k9": 122,
+    "order1_k8": 124,
+    "order2_k7": 58,
+    "order2_k6": 3,
+    "order2_k4": 6,
+    "order2_k5": 4,
+    "order1_k11": 3,
+    "order1_k7": 2,
+    "order2_k3": 1
+  },
+  "transforms": "lossless predictor/Rice packing only; no audio processing"
+}

@@ -1,0 +1,6 @@
+{
+  "comparison": "native ROM name builder + exact sprite snapshot + exact ring maps vs MAME snapshot30",
+  "differing_pixels": 0,
+  "pixels": 76800,
+  "reference": "verification/mame/full/sn0030.png"
+}

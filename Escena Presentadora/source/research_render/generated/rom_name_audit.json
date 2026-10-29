@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "method": "Original 68000 helper98BA in Unicorn, byte-smear-normalized exact text RAM and original palette writes; native generated atlas, deduplicated Demolition wordmark",
+  "cases": [
+    {
+      "raw_identities": [
+        0,
+        6,
+        9,
+        1
+      ],
+      "different_pixels": 0
+    },
+    {
+      "raw_identities": [
+        7,
+        9,
+        10,
+        11
+      ],
+      "different_pixels": 0
+    },
+    {
+      "raw_identities": [
+        10,
+        11,
+        7,
+        9
+      ],
+      "different_pixels": 0
+    },
+    {
+      "raw_identities": [
+        2,
+        3,
+        0,
+        8
+      ],
+      "different_pixels": 0
+    },
+    {
+      "raw_identities": [
+        1,
+        2,
+        6,
+        7
+      ],
+      "different_pixels": 0
+    }
+  ]
+}

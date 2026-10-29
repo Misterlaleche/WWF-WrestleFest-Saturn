@@ -1,0 +1,4498 @@
+{
+  "source": "Native wp02_scene.c executed as host C; generated atlas; exact root renderer order/mirror/anchor equations",
+  "checked_images": 236,
+  "exact_images": 236,
+  "maximum_different_pixels": 0,
+  "total_different_pixels": 0,
+  "offset_counts": {
+    "-1": 236,
+    "0": 0,
+    "1": 0
+  },
+  "rows": [
+    {
+      "mame_frame": 30,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 60,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 90,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 120,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 150,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 180,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          563,
+          0
+        ],
+        [
+          563,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 210,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 240,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 270,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 300,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 330,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          563,
+          0
+        ],
+        [
+          563,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 360,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 390,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 420,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 450,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 480,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          587,
+          0
+        ],
+        [
+          587,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 510,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 540,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          4948,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 570,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          563,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 600,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 630,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 660,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 690,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 720,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 750,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 780,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 810,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 840,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          563,
+          0
+        ],
+        [
+          563,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 870,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          563,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 900,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 930,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 960,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 990,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1020,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1050,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1080,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1383,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1110,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          563,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1140,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1170,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1200,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1230,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1260,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1290,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1320,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1350,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1378,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1646,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1379,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1646,
+          0
+        ],
+        [
+          1635,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1380,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          682,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1381,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1382,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          682,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1383,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1384,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          682,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1385,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1386,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          682,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1387,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1388,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          682,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1389,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          682,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1390,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          682,
+          0
+        ],
+        [
+          993,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1391,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1004,
+          0
+        ],
+        [
+          993,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1392,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          631,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1393,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1394,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          631,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1395,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1396,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          631,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1397,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1398,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          631,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1399,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1400,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          631,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1401,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1402,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          631,
+          0
+        ],
+        [
+          1158,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1403,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1129,
+          0
+        ],
+        [
+          1158,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1404,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          687,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1405,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1406,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          687,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1407,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1408,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          687,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1409,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1410,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          687,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1411,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1412,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          687,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1413,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          687,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1414,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          687,
+          0
+        ],
+        [
+          1089,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1415,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          992,
+          0
+        ],
+        [
+          1089,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1416,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          631,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1417,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1418,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          631,
+          0
+        ],
+        [
+          631,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1419,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          624,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1420,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          624,
+          0
+        ],
+        [
+          624,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1421,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          615,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1422,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          615,
+          0
+        ],
+        [
+          615,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1423,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          608,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1424,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          608,
+          0
+        ],
+        [
+          608,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1425,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          602,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1426,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          602,
+          0
+        ],
+        [
+          1106,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1427,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1116,
+          0
+        ],
+        [
+          1096,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1428,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          651,
+          0
+        ],
+        [
+          651,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1429,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          645,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1430,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          645,
+          0
+        ],
+        [
+          645,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1431,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          641,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1432,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          641,
+          0
+        ],
+        [
+          641,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1433,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          636,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1434,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          636,
+          0
+        ],
+        [
+          636,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1435,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          630,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1436,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          630,
+          0
+        ],
+        [
+          630,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1437,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          622,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1438,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          622,
+          0
+        ],
+        [
+          922,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1439,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          950,
+          0
+        ],
+        [
+          916,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1440,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          564,
+          0
+        ],
+        [
+          564,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1441,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          557,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1442,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          557,
+          0
+        ],
+        [
+          557,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1443,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          550,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1444,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          550,
+          0
+        ],
+        [
+          550,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1445,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          542,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1446,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          542,
+          0
+        ],
+        [
+          542,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1447,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          536,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1448,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          536,
+          0
+        ],
+        [
+          536,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1449,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          531,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1450,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          531,
+          0
+        ],
+        [
+          1021,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1451,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          991,
+          0
+        ],
+        [
+          1014,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1452,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          586,
+          0
+        ],
+        [
+          586,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1453,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          580,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1454,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          580,
+          0
+        ],
+        [
+          580,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1455,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          574,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1456,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          574,
+          0
+        ],
+        [
+          574,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1457,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          564,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1458,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          564,
+          0
+        ],
+        [
+          564,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1459,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          549,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1460,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          549,
+          0
+        ],
+        [
+          549,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1461,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          533,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1462,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          533,
+          0
+        ],
+        [
+          877,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1463,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          805,
+          0
+        ],
+        [
+          856,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1464,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          438,
+          0
+        ],
+        [
+          438,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1465,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          419,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1466,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          419,
+          0
+        ],
+        [
+          419,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1467,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          410,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1468,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          410,
+          0
+        ],
+        [
+          410,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1469,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          397,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1470,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          397,
+          0
+        ],
+        [
+          397,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1471,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          387,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1472,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          387,
+          0
+        ],
+        [
+          1949,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1473,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1931,
+          0
+        ],
+        [
+          1931,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1474,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1475,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1476,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1477,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1478,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1479,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1480,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1481,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1482,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1483,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1484,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1589,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1485,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1589,
+          0
+        ],
+        [
+          1589,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1486,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1487,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1488,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1489,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1490,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1491,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1492,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1493,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1494,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1495,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1496,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1369,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1497,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1369,
+          0
+        ],
+        [
+          1369,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1498,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1499,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1500,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1501,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1502,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1503,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1504,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1505,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1506,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1507,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1508,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1455,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1509,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1455,
+          0
+        ],
+        [
+          1455,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1510,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1511,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1512,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1513,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1514,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1515,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1516,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1517,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1518,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1519,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1520,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1324,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1521,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          1324,
+          0
+        ],
+        [
+          1324,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1522,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1523,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1524,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1525,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1526,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1527,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1528,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1529,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1530,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1531,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1532,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          823,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1533,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          823,
+          0
+        ],
+        [
+          823,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1534,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1535,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1536,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1537,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1538,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1539,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1540,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1541,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1542,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1543,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1544,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          831,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1545,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          831,
+          0
+        ],
+        [
+          831,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1546,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1547,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1548,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1549,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1550,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1551,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1552,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1553,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1554,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1555,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1556,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          826,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1557,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          826,
+          0
+        ],
+        [
+          826,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1558,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1559,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1560,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1561,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1562,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1563,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1564,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1565,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1566,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1567,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "mame_frame": 1568,
+      "different_pixels": 0,
+      "native_index_offset": -1,
+      "attempts": [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          984,
+          1
+        ]
+      ]
+    }
+  ]
+}
