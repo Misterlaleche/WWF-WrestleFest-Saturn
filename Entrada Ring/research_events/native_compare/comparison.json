@@ -1,0 +1,292 @@
+{
+  "role": "Host audio comparison only; not physical Saturn timing proof.",
+  "scsp_model": "unchanged libretro Beetle Saturn Mednafen SCSP source copied with hashes; state/IRQ adapter only",
+  "reference": "MAME0.264 YMFM, actual register writes, original route gain; see reference_render/manifest.json",
+  "method": "No gain fit, time stretch, pitch shift, or sample alignment adjustment. RMS envelopes use10ms blocks. Spectrum peaks are not asserted fundamental pitches.",
+  "rows": [
+    {
+      "channel": 0,
+      "scsp_rms": 0.1393927870085498,
+      "ym_rms": 0.1310231308450952,
+      "scsp_over_ym_rms_db": 0.5378465716771096,
+      "rms_envelope_correlation": 0.9911371067231094,
+      "rms_envelope_nrmse": 0.07248260121538837,
+      "scsp_peak": 0.208587646484375,
+      "ym_peak": 0.206146240234375,
+      "first_passage": {
+        "start": 1105,
+        "end": 17047,
+        "scsp_spectral_peaks": [
+          {
+            "hz": 65.273,
+            "relative_db": 0.0
+          },
+          {
+            "hz": 32.636,
+            "relative_db": -0.43
+          },
+          {
+            "hz": 98.245,
+            "relative_db": -5.31
+          },
+          {
+            "hz": 130.882,
+            "relative_db": -7.2
+          },
+          {
+            "hz": 163.518,
+            "relative_db": -16.97
+          },
+          {
+            "hz": 849.216,
+            "relative_db": -25.22
+          }
+        ],
+        "ym_spectral_peaks": [
+          {
+            "hz": 65.273,
+            "relative_db": 0.0
+          },
+          {
+            "hz": 32.636,
+            "relative_db": -1.31
+          },
+          {
+            "hz": 98.245,
+            "relative_db": -5.42
+          },
+          {
+            "hz": 130.882,
+            "relative_db": -8.03
+          },
+          {
+            "hz": 163.518,
+            "relative_db": -18.12
+          },
+          {
+            "hz": 848.879,
+            "relative_db": -27.06
+          }
+        ]
+      }
+    },
+    {
+      "channel": 1,
+      "scsp_rms": 0.02632914889238892,
+      "ym_rms": 0.025413970725505358,
+      "scsp_over_ym_rms_db": 0.30728590297974795,
+      "rms_envelope_correlation": 0.9914407514288561,
+      "rms_envelope_nrmse": 0.12143144938319567,
+      "scsp_peak": 0.189300537109375,
+      "ym_peak": 0.195831298828125,
+      "first_passage": {
+        "start": 233882,
+        "end": 255932,
+        "scsp_spectral_peaks": [
+          {
+            "hz": 131.554,
+            "relative_db": 0.0
+          },
+          {
+            "hz": 65.609,
+            "relative_db": -4.87
+          },
+          {
+            "hz": 196.49,
+            "relative_db": -8.68
+          },
+          {
+            "hz": 261.427,
+            "relative_db": -10.29
+          },
+          {
+            "hz": 14540.968,
+            "relative_db": -16.16
+          },
+          {
+            "hz": 14803.404,
+            "relative_db": -17.19
+          }
+        ],
+        "ym_spectral_peaks": [
+          {
+            "hz": 131.554,
+            "relative_db": 0.0
+          },
+          {
+            "hz": 65.609,
+            "relative_db": -5.43
+          },
+          {
+            "hz": 196.49,
+            "relative_db": -9.15
+          },
+          {
+            "hz": 261.427,
+            "relative_db": -10.2
+          },
+          {
+            "hz": 523.19,
+            "relative_db": -17.37
+          },
+          {
+            "hz": 393.317,
+            "relative_db": -20.64
+          }
+        ]
+      }
+    },
+    {
+      "channel": 2,
+      "scsp_rms": 0.0307784552941382,
+      "ym_rms": 0.02942181093335355,
+      "scsp_over_ym_rms_db": 0.3915483873780337,
+      "rms_envelope_correlation": 0.5485250469353773,
+      "rms_envelope_nrmse": 0.25837871931061035,
+      "scsp_peak": 0.089569091796875,
+      "ym_peak": 0.098052978515625,
+      "first_passage": {
+        "start": 1411,
+        "end": 23461,
+        "scsp_spectral_peaks": [
+          {
+            "hz": 1046.379,
+            "relative_db": 0.0
+          },
+          {
+            "hz": 521.507,
+            "relative_db": -3.74
+          },
+          {
+            "hz": 1570.578,
+            "relative_db": -6.41
+          },
+          {
+            "hz": 525.208,
+            "relative_db": -6.57
+          },
+          {
+            "hz": 2093.095,
+            "relative_db": -6.66
+          },
+          {
+            "hz": 2615.611,
+            "relative_db": -8.79
+          }
+        ],
+        "ym_spectral_peaks": [
+          {
+            "hz": 1046.379,
+            "relative_db": 0.0
+          },
+          {
+            "hz": 521.507,
+            "relative_db": -4.08
+          },
+          {
+            "hz": 1570.242,
+            "relative_db": -5.93
+          },
+          {
+            "hz": 2092.758,
+            "relative_db": -8.43
+          },
+          {
+            "hz": 525.208,
+            "relative_db": -8.83
+          },
+          {
+            "hz": 3137.791,
+            "relative_db": -10.55
+          }
+        ]
+      }
+    },
+    {
+      "channel": 3,
+      "scsp_rms": 0.031145120060136405,
+      "ym_rms": 0.028160316799031054,
+      "scsp_over_ym_rms_db": 0.8750494623612806,
+      "rms_envelope_correlation": 0.7922477296101741,
+      "rms_envelope_nrmse": 0.20976026225575448,
+      "scsp_peak": 0.090240478515625,
+      "ym_peak": 0.080810546875
+    },
+    {
+      "channel": 4,
+      "scsp_rms": 0.025741527969231362,
+      "ym_rms": 0.025229434328646428,
+      "scsp_over_ym_rms_db": 0.1745361794830352,
+      "rms_envelope_correlation": 0.8096524915504159,
+      "rms_envelope_nrmse": 0.23016859160368924,
+      "scsp_peak": 0.0926513671875,
+      "ym_peak": 0.074920654296875
+    },
+    {
+      "channel": 7,
+      "scsp_rms": 0.015234641107267464,
+      "ym_rms": 0.014253589413448405,
+      "scsp_over_ym_rms_db": 0.5781596656994945,
+      "rms_envelope_correlation": 0.9986982732919176,
+      "rms_envelope_nrmse": 0.08413437153466413,
+      "scsp_peak": 0.075836181640625,
+      "ym_peak": 0.072906494140625,
+      "first_passage": {
+        "start": 1877,
+        "end": 4206,
+        "scsp_spectral_peaks": [
+          {
+            "hz": 5089.574,
+            "relative_db": 0.0
+          },
+          {
+            "hz": 18161.238,
+            "relative_db": -23.85
+          },
+          {
+            "hz": 1853.874,
+            "relative_db": -23.89
+          },
+          {
+            "hz": 7588.099,
+            "relative_db": -24.21
+          },
+          {
+            "hz": 20930.946,
+            "relative_db": -24.28
+          },
+          {
+            "hz": 2935.245,
+            "relative_db": -24.34
+          }
+        ],
+        "ym_spectral_peaks": [
+          {
+            "hz": 5088.565,
+            "relative_db": 0.0
+          },
+          {
+            "hz": 8594.44,
+            "relative_db": -23.39
+          },
+          {
+            "hz": 5003.442,
+            "relative_db": -25.05
+          },
+          {
+            "hz": 10180.495,
+            "relative_db": -25.52
+          },
+          {
+            "hz": 12789.377,
+            "relative_db": -25.73
+          },
+          {
+            "hz": 18775.944,
+            "relative_db": -26.02
+          }
+        ]
+      }
+    }
+  ]
+}

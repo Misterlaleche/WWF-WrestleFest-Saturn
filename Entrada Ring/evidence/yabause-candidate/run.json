@@ -1,0 +1,8 @@
+{
+  "emulator": "Yabause", "version": "v0.9.15 8926b0c",
+  "bios": "built-in HLE", "frameskip": false,
+  "emulated_refresh_hz": 60.000000000, "requested_frames": 1400,
+  "startup_video_callbacks": 0, "video_callbacks": 1401, "duplicate_callbacks": 0, "changed_framebuffers": 630,
+  "last_width": 320, "last_height": 240, "pixel_format": 2,
+  "host_elapsed_seconds": 8.595227, "host_frames_per_second": 162.881
+}

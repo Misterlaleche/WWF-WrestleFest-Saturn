@@ -1,0 +1,24 @@
+{
+  "scene_source_samples": 313219,
+  "channels": 2,
+  "audio_reference_window_matches_r01": true,
+  "window_sha256": "f2463025a8548b63beed51d3d566cc30a22f776f990684540da595c4f5a8f7a3",
+  "condensed_final_ym_shadow_matches_raw": true,
+  "pcm_samples_match_mame0264_decoder": true,
+  "events": 748,
+  "commands": 5,
+  "fm_note_channels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    7
+  ],
+  "fm_operator_slots_required": 24,
+  "oki_voices_used": [
+    0,
+    2
+  ],
+  "maximum_total_hardware_slots_static_allocation": 28
+}

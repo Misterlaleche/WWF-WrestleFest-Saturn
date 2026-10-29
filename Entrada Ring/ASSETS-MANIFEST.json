@@ -1,0 +1,108 @@
+{
+  "package_name": "WF-WP01-ENTRADA-TAG-R02-AUDIO-NATIVO-FUENTES.zip",
+  "package_sha256": "dcacfe5d4de8067067194a9c0117fad95ad912982ebbb0030bf1e09cc4a8024d",
+  "package_library_url": "https://chatgpt.com/library?file_id=libfile_4146d0d0bd40819182f312fdec377858&account_id=personal",
+  "archive_prefix": "WF-WP01-R02-FUENTES/",
+  "files": {
+    "research_events/export/entrance_audio_events.bin": {
+      "bytes": 5984,
+      "sha256": "bf551412615a00f439378ee1bee1ddddcb81685efff86ed69fe4be12661ea0bd"
+    },
+    "research_events/export/oki_bank0_sample001.adpcm": {
+      "bytes": 901,
+      "sha256": "04543f5bc3ce351b14de326a033ced773508a3a3e2540e72a726710f500aff81"
+    },
+    "research_events/export/oki_bank0_sample001.pcm16be": {
+      "bytes": 3604,
+      "sha256": "558d8a7f03076f240d13b32cccba2b60c4112cfe180f12f5a8fcc409bf897390"
+    },
+    "research_events/export/oki_bank0_sample001.wav": {
+      "bytes": 3648,
+      "sha256": "da49fd1d3958bb512c12ac5c97670b0b271254116b9252eca9d5fdbf4ed04d0a"
+    },
+    "research_events/export/oki_bank0_sample018.adpcm": {
+      "bytes": 16009,
+      "sha256": "1d62fa8375107e36b480482d0819d8d4315d4679f4d82f7fe304c5bb85ba4037"
+    },
+    "research_events/export/oki_bank0_sample018.pcm16be": {
+      "bytes": 64036,
+      "sha256": "e3534aae3a3abdfaa750651878c0f2ce4f0dda56e01e8dbc509be2fb4c496a48"
+    },
+    "research_events/export/oki_bank0_sample018.wav": {
+      "bytes": 64080,
+      "sha256": "f405c910847eab2a862b8244af03df9c37b811ea68aed9ea03e1d9679b8747de"
+    },
+    "research_inventory/generated/oki_volume_bank.bin": {
+      "bytes": 67680,
+      "sha256": "480dd64d7426ce9722abfe2b9eaa2ec4ccef1803f238b4cec7b807cb4d51dc08"
+    },
+    "research_scsp/FM-SINE.PCM": {
+      "bytes": 266240,
+      "sha256": "5f342edfd4b89fdc02c1e37dfe173f830b32094bd6a6cd72d793f55af0573abe"
+    },
+    "source/assets/BG0.TEX": {
+      "bytes": 58112,
+      "sha256": "48bf18083d1d47baf5d3a496efb950db4ebb9cbc184836e9b866e51589c2813c"
+    },
+    "source/assets/BG1.TEX": {
+      "bytes": 34432,
+      "sha256": "0577ccfef4122c80887611e01e211c9960c4262c77f86c33c16d58415747a265"
+    },
+    "source/assets/CROWD0.BIN": {
+      "bytes": 4096,
+      "sha256": "a24d0e13e9c5b0c30f9e4d480ed0527db3a566e8f9e64397a985ebd5da78f9d0"
+    },
+    "source/assets/CROWD1.BIN": {
+      "bytes": 4096,
+      "sha256": "a36e9346aebfaab9cd7cc6329713c6aee1b7aaeb6be3ba3eaa796f0c36cef6aa"
+    },
+    "source/assets/CROWD2.BIN": {
+      "bytes": 4096,
+      "sha256": "1f275d6f55b5781b3be5266c029924c28ec51e11c6b7f4ce1a4becdecaec374b"
+    },
+    "source/assets/ENTRANCE.TEX": {
+      "bytes": 90496,
+      "sha256": "7f267a628c9075c30a5b58759f6151a96fed75198eb958feac5f1991891b3841"
+    },
+    "source/assets/ENTRPAL.C32": {
+      "bytes": 704,
+      "sha256": "88e3d03425309131a429c82b39bb777d00e15fb0b53a6573a7e1040ee29872cf"
+    },
+    "source/assets/ENTRPAL.C44": {
+      "bytes": 352,
+      "sha256": "ae2b4076037541d3fa0f500bb865204a7bfb92aa26cfaee16d001d573c594296"
+    },
+    "source/assets/ENVPAL.C32": {
+      "bytes": 3072,
+      "sha256": "5d663fb8e0195911026dae57b61bec95fd9fea310ddfd5dcae449ea835e4c499"
+    },
+    "source/assets/ENVPAL.C44": {
+      "bytes": 1536,
+      "sha256": "cc1b296792d8dd3cbc1767a252f48bed7c7041926745d5b12f6a338f54f79dd2"
+    },
+    "source/assets/FONT.TEX": {
+      "bytes": 131072,
+      "sha256": "a3045c6193d23c334c6af592cc1dfee029dc12eec810d3e2ce353df69580391a"
+    },
+    "source/assets/MAP0.BIN": {
+      "bytes": 4096,
+      "sha256": "a24d0e13e9c5b0c30f9e4d480ed0527db3a566e8f9e64397a985ebd5da78f9d0"
+    },
+    "source/assets/MAP1.BIN": {
+      "bytes": 4096,
+      "sha256": "c028c0b9dbb33cfbc8d097e125ebddee44594697c0fd3d92d16366807c593236"
+    },
+    "source/assets/REFERENCE_TEXT.BIN": {
+      "bytes": 8192,
+      "sha256": "251e88951847a52c86eb16366ba5be6fbce984b6830c18f43a5f661e669a8082"
+    },
+    "source/cd/AUDIOREG.BIN": {
+      "bytes": 19776,
+      "sha256": "9b3e7fef5d8511eeab5bfdf7359c2a01d1306a42a76c10748137a27b566c2ba1"
+    },
+    "source/cd/SOUNDRAM.BIN": {
+      "bytes": 346208,
+      "sha256": "6938a51117b38ce536b675caf69c29e2061ef74d851fa2e738f9b9a2496bb9ee"
+    }
+  }
+}

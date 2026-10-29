@@ -1,0 +1,68 @@
+[
+  {
+    "channel": 0,
+    "baseline": {
+      "spectral_convergence": 0.0910878579298941,
+      "log_abs_error_db": 1.333898122211
+    },
+    "interleaved": {
+      "spectral_convergence": 0.09059309179298929,
+      "log_abs_error_db": 1.2851715760342088
+    }
+  },
+  {
+    "channel": 1,
+    "baseline": {
+      "spectral_convergence": 0.3399912577173589,
+      "log_abs_error_db": 6.700089325615587
+    },
+    "interleaved": {
+      "spectral_convergence": 0.3355592068222013,
+      "log_abs_error_db": 6.726666362461491
+    }
+  },
+  {
+    "channel": 2,
+    "baseline": {
+      "spectral_convergence": 0.39460388730071927,
+      "log_abs_error_db": 4.620519974943408
+    },
+    "interleaved": {
+      "spectral_convergence": 0.3939176551391136,
+      "log_abs_error_db": 4.581365170705637
+    }
+  },
+  {
+    "channel": 3,
+    "baseline": {
+      "spectral_convergence": 0.27898070094571786,
+      "log_abs_error_db": 3.902670842810556
+    },
+    "interleaved": {
+      "spectral_convergence": 0.2803501283739461,
+      "log_abs_error_db": 3.8405050615443623
+    }
+  },
+  {
+    "channel": 4,
+    "baseline": {
+      "spectral_convergence": 0.31273305938755935,
+      "log_abs_error_db": 3.2412291673832816
+    },
+    "interleaved": {
+      "spectral_convergence": 0.33334277705278825,
+      "log_abs_error_db": 3.208990476116323
+    }
+  },
+  {
+    "channel": 7,
+    "baseline": {
+      "spectral_convergence": 0.26106798350236404,
+      "log_abs_error_db": 4.859648497147291
+    },
+    "interleaved": {
+      "spectral_convergence": 0.2683289430484288,
+      "log_abs_error_db": 4.8699672625267425
+    }
+  }
+]

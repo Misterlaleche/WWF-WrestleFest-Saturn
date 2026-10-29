@@ -1,0 +1,12 @@
+[
+  {
+    "file": "scsp_mdfn.h",
+    "source_local": "/workspace/scratch/d7cff254aca8/wp01_audio_r02/research_scsp/scsp_mdfn.h",
+    "sha256": "707bdbfecb158e996cc6c36acba68dc7a0002d648f9b7e958ec7e5277f8872df"
+  },
+  {
+    "file": "scsp_mdfn.inc",
+    "source_local": "/workspace/scratch/d7cff254aca8/wp01_audio_r02/research_scsp/scsp_mdfn.inc",
+    "sha256": "0fa92f80c30bc1a6944d7cbda55f3ecad189408d5a8dc394887a4ec6b1f5e501"
+  }
+]

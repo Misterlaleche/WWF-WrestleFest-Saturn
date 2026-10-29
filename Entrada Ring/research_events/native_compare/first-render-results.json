@@ -1,0 +1,65 @@
+[
+  {
+    "name": "mix",
+    "frames": 313219,
+    "events_applied": 2315,
+    "events_total": 2315,
+    "ram_bytes": 266240,
+    "peak": 16226,
+    "clipped_channel_samples": 0
+  },
+  {
+    "name": "ch0",
+    "frames": 313219,
+    "events_applied": 2315,
+    "events_total": 2315,
+    "ram_bytes": 266240,
+    "peak": 6835,
+    "clipped_channel_samples": 0
+  },
+  {
+    "name": "ch1",
+    "frames": 313219,
+    "events_applied": 2315,
+    "events_total": 2315,
+    "ram_bytes": 266240,
+    "peak": 6203,
+    "clipped_channel_samples": 0
+  },
+  {
+    "name": "ch2",
+    "frames": 313219,
+    "events_applied": 2315,
+    "events_total": 2315,
+    "ram_bytes": 266240,
+    "peak": 2935,
+    "clipped_channel_samples": 0
+  },
+  {
+    "name": "ch3",
+    "frames": 313219,
+    "events_applied": 2315,
+    "events_total": 2315,
+    "ram_bytes": 266240,
+    "peak": 2957,
+    "clipped_channel_samples": 0
+  },
+  {
+    "name": "ch4",
+    "frames": 313219,
+    "events_applied": 2315,
+    "events_total": 2315,
+    "ram_bytes": 266240,
+    "peak": 3036,
+    "clipped_channel_samples": 0
+  },
+  {
+    "name": "ch7",
+    "frames": 313219,
+    "events_applied": 2315,
+    "events_total": 2315,
+    "ram_bytes": 266240,
+    "peak": 2485,
+    "clipped_channel_samples": 0
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "classification": "Native SCSP FM operators plus original individual OKI samples; no music PCM",
+  "original_chip_events": 748,
+  "native_initial_writes": 488,
+  "native_timed_writes": 2224,
+  "source_samples": 313219,
+  "clock_frt_numerator": 120093750,
+  "clock_frt_denominator": 143,
+  "sound_ram_bytes": 346208,
+  "sound_ram_capacity": 524288,
+  "fm_slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "oki_slots": [
+    24,
+    25,
+    26,
+    27
+  ],
+  "native_key_execute_writes": 635,
+  "minimum_key_execute_gap_samples": 0,
+  "key_edge_policy": "Adaptive FRT deadlines; native writer preserves at least2 SCSP samples between KYONEX writes",
+  "exporter_result": "events=748 FM_unsupported=0 OKI_starts=19 OKI_stops=1 OKI_natural_ends=16 errors=0",
+  "assets": {
+    "SOUNDRAM.BIN": {
+      "bytes": 346208,
+      "sha256": "6938a51117b38ce536b675caf69c29e2061ef74d851fa2e738f9b9a2496bb9ee"
+    },
+    "AUDIOREG.BIN": {
+      "bytes": 19776,
+      "sha256": "9b3e7fef5d8511eeab5bfdf7359c2a01d1306a42a76c10748137a27b566c2ba1"
+    }
+  }
+}

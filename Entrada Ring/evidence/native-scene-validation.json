@@ -1,0 +1,25 @@
+{
+  "pass": true,
+  "mame_actor_states_compared": 756,
+  "source_ram": "wp01_work/research_validation/arcade_reference_hogan_perfect/ram.bin",
+  "core_frames": 402,
+  "replayed_rng_bits": [
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ]
+  ],
+  "evidence": "Input-only MAME0.264 full RAM capture; no CPU register or RAM injection"
+}

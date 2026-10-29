@@ -1,0 +1,78 @@
+{
+  "restore": {
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"restored_resources\": 25, \"verified_resources\": 25}",
+    "stderr": ""
+  },
+  "verify": {
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"verified_resources\": 25}",
+    "stderr": ""
+  },
+  "restore_idempotent": {
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"restored_resources\": 0, \"verified_resources\": 25}",
+    "stderr": ""
+  },
+  "regenerate_native_audio": {
+    "returncode": 0,
+    "stdout": "{\n  \"classification\": \"Native SCSP FM operators plus original individual OKI samples; no music PCM\",\n  \"original_chip_events\": 748,\n  \"native_initial_writes\": 488,\n  \"native_timed_writes\": 2224,\n  \"source_samples\": 313219,\n  \"clock_frt_numerator\": 120093750,\n  \"clock_frt_denominator\": 143,\n  \"sound_ram_bytes\": 346208,\n  \"sound_ram_capacity\": 524288,\n  \"fm_slots\": [\n    0,\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8,\n    9,\n    10,\n    11,\n    12,\n    13,\n    14,\n    15,\n    16,\n    17,\n    18,\n    19,\n    20,\n    21,\n    22,\n    23\n  ],\n  \"oki_slots\": [\n    24,\n    25,\n    26,\n    27\n  ],\n  \"native_key_execute_writes\": 635,\n  \"minimum_key_execute_gap_samples\": 0,\n  \"key_edge_policy\": \"Adaptive FRT deadlines; native writer preserves at least2 SCSP samples between KYONEX writes\",\n  \"exporter_result\": \"events=748 FM_unsupported=0 OKI_starts=19 OKI_stops=1 OKI_natural_ends=16 errors=0\",\n  \"assets\": {\n    \"SOUNDRAM.BIN\": {\n      \"bytes\": 346208,\n      \"sha256\": \"6938a51117b38ce536b675caf69c29e2061ef74d851fa2e738f9b9a2496bb9ee\"\n    },\n    \"AUDIOREG.BIN\": {\n      \"bytes\": 19776,\n      \"sha256\": \"9b3e7fef5d8511eeab5bfdf7359c2a01d1306a42a76c10748137a27b566c2ba1\"\n    }\n  }\n}",
+    "stderr": ""
+  },
+  "regenerated_assets_match_approved": {
+    "SOUNDRAM.BIN": "6938a51117b38ce536b675caf69c29e2061ef74d851fa2e738f9b9a2496bb9ee",
+    "AUDIOREG.BIN": "9b3e7fef5d8511eeab5bfdf7359c2a01d1306a42a76c10748137a27b566c2ba1"
+  },
+  "compile_queue": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "queue": {
+    "returncode": 0,
+    "stdout": "PASS: native register ordering, due times, repeat, long timeline, latency and bounds",
+    "stderr": ""
+  },
+  "compile_pairs": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "pairs": {
+    "returncode": 0,
+    "stdout": "PASS:29 unique original-valid TAG teams; Demolition always paired",
+    "stderr": ""
+  },
+  "compile_fm": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "fm": {
+    "returncode": 0,
+    "stdout": "PASS: native FM routing, operator order, key mask, feedback, slot isolation (306 writes)",
+    "stderr": ""
+  },
+  "compile_oki": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "oki": {
+    "returncode": 0,
+    "stdout": "PASS: original OKI pending/start/busy/stop/expiry semantics and SCSP slot ownership",
+    "stderr": ""
+  },
+  "compile_oki_trace": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "oki_trace": {
+    "returncode": 0,
+    "stdout": "PASS: 748 original audio writes; OKI starts=19, natural_ends=16, explicit_stops=1, register_writes=398",
+    "stderr": ""
+  },
+  "production_source_comparison": "All staged source/*.c and source/*.h match the original approved ZIP manifest",
+  "scope": "Upload readiness checks only; prior emulator evidence is unchanged. No new hardware claim."
+}

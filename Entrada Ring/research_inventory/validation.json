@@ -1,0 +1,26 @@
+{
+  "red_test": "Empty stub fails assert(writes>0), exit134",
+  "host_protocol_test": "PASS",
+  "original_trace_replay": {
+    "audio_writes": 748,
+    "accepted_starts": 19,
+    "natural_ends": 16,
+    "explicit_stops": 1,
+    "ignored_busy": 0,
+    "asset_errors": 0,
+    "bank_errors": 0,
+    "register_writes": 398
+  },
+  "sh2_compile": "PASS: -m2 -mb -std=c11 -Os -Wall -Wextra -Werror -ffreestanding",
+  "integrated_emulator_test": false,
+  "physical_saturn_test": false,
+  "sha256": {
+    "wp01_oki.c": "f07fed9f4addd48fad00ba325eb12042893dd9109062536db16e2aa48ee642a9",
+    "wp01_oki.h": "6c08fb1a195d2812b44c3726c090a3d791301fbf139d39698816a9c7ac739aed",
+    "test_wp01_oki.c": "197eaa923757875026b6b246387d40e05c270a8eb6d980529e83d526d5f7c80b",
+    "test_wp01_oki_trace.c": "9b0434b604f88185f9d85ac7d5247d329d119e54bc89d9355f5556b0ba683be4",
+    "build_oki_bank.py": "ebbd4361d1757cfbcf9945ef232d828caa39502f8e8c2a96ee7a9a33b12514b6",
+    "generated/oki_volume_bank.bin": "480dd64d7426ce9722abfe2b9eaa2ec4ccef1803f238b4cec7b807cb4d51dc08",
+    "generated/wp01_oki_assets.h": "1384601d5d6d9b9b8e658795122aab0c888542ea19660e6bfc198b0bf72da0c7"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "review": "FRT byte-read safety and NTSC320 nominal clock",
+  "sources": {
+    "yabause_sh2core.c": {
+      "url": "https://raw.githubusercontent.com/libretro/yabause/master/yabause/src/sh2core.c",
+      "sha256": "fc404cffd64404bb0f7dffe63a7a06785ddaeb5ef347c8184839bcea58d5f51e",
+      "read_byte_lines": [
+        1182,
+        1185
+      ],
+      "read_word_lines": [
+        1248,
+        1288
+      ]
+    },
+    "sh7604_manual": {
+      "url": "https://antime.kapsi.fi/sega/files/sh7604.pdf",
+      "register_access_table_pdf_index": 312,
+      "cpu_interface_pdf_index": 319
+    },
+    "sega_smpc_manual": {
+      "url": "https://antime.kapsi.fi/sega/files/ST-169-R1-072694.pdf",
+      "clock_table_pdf_index": 12
+    }
+  },
+  "clock": {
+    "cpu320_hz": 26874125.874125876,
+    "frt_hz": 839816.4335664336,
+    "old_frt_hz": 838955.9659090909,
+    "new_to_old_ratio": "976/975",
+    "frt_ticks_per_frame": 14037.625,
+    "implied_fps": 59.82610545348188,
+    "old_deadlines_early_over_scene_ms": 7.277114754098361
+  },
+  "production_files_modified_by_this_task": false
+}

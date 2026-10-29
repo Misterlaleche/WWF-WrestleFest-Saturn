@@ -1,0 +1,8 @@
+{
+  "test": "Known1024sample sine, pitchword6428,0.5secondskeyon thenkeyoff",
+  "output_rate": 44100,
+  "peak_frequency_hz": 440.0848388671875,
+  "expected_frequency_hz": 440.0848388671875,
+  "tail_abs_max_after075s": 0,
+  "pass": true
+}

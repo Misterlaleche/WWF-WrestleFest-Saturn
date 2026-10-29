@@ -1,0 +1,12 @@
+{
+  "iso_sha256": "a6cd05f79317c7033cae4ee0b2fe13ddc3b4e4e58c2936573d569b804f77ff83",
+  "bin_sha256": "22c7a780e98f030d7b664bfe3f3c8524a2d5a21e7932f39a51103dd28f74a767",
+  "cue_sha256": "f9ae8d3b5f70324f517f8171f42dab286a1c1a874edd7ca836ed7a347a583f7a",
+  "sectors": 615,
+  "raw_sector_bytes": 2352,
+  "payload_roundtrip": "all sectors byte-identical to ISO",
+  "edc_ecc": "all sectors regenerated and compared",
+  "usa_region": true,
+  "hardware_boot_test": false,
+  "emulator_boot_test": false
+}

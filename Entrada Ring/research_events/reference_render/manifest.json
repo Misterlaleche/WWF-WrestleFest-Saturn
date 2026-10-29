@@ -1,0 +1,315 @@
+{
+  "role": "Validation-only reference waveforms. Never use as Saturn runtime assets.",
+  "implementation": "Unmodified YMFM from MAME tagmame0264; source hashes in ymfm/provenance.json",
+  "clock_hz": 3579545,
+  "native_rate_integer_hz": 55930,
+  "resampled_rate_hz": 44100,
+  "native_first_sample_index": 1236510,
+  "native_first_sample_offset_seconds": 1.0927945645278214e-05,
+  "samples": 313219,
+  "start_original_seconds": 22.10816,
+  "window_duration_seconds": 7.102471655328798,
+  "routes": "original MAME0.264 ddragon3.cpp YMleft0.45+YMright0.45 into mono",
+  "native_stem_tap_validation": "0 output mismatches versus unmodified ym2151::generate over all rendered native samples from boot through29.210624s",
+  "limitations": [
+    "Channel stems are before the common YM3012 DAC quantization; the mixed FM file is after that quantization.",
+    "WAV conversion uses scipy resample_poly FIR; MAME mixer/resampler details may differ, so these WAVs are not claimed byte-identical to MAME WAV output.",
+    "Original register times are applied at the first following YM output sample (<=17.88us quantization).",
+    "PCM16 WAV clips only if amplitude exceeds numeric full scale; peak/clipped counts are reported. Float WAV retains the full signal."
+  ],
+  "channels": [
+    {
+      "name": "ym_channel_0",
+      "peak": 0.2061338573694229,
+      "rms": 0.13102313876152039,
+      "clipped_samples": 0,
+      "pcm16_sha256": "a7b59cc93290ba45d53c71635579cad66f02ddb89ad21a3d3e7124f20bbfa158"
+    },
+    {
+      "name": "ym_channel_1",
+      "peak": 0.19584625959396362,
+      "rms": 0.02541394531726837,
+      "clipped_samples": 0,
+      "pcm16_sha256": "a37b78c87084369009581827186104d5a2165172e6adbd70b4bedd7bd5e8ff0e"
+    },
+    {
+      "name": "ym_channel_2",
+      "peak": 0.09804391115903854,
+      "rms": 0.02942180261015892,
+      "clipped_samples": 0,
+      "pcm16_sha256": "bb987d4b77d47d8f69cc1e7b6bcf528d9a9df94f14ad28dcd87d57a1dea63423"
+    },
+    {
+      "name": "ym_channel_3",
+      "peak": 0.08080115914344788,
+      "rms": 0.02816031686961651,
+      "clipped_samples": 0,
+      "pcm16_sha256": "27bbe0ed7ac4c4b28842365b78466d98c447ce9bd4c49943beea23e9084af2c7"
+    },
+    {
+      "name": "ym_channel_4",
+      "peak": 0.0749175027012825,
+      "rms": 0.025229422375559807,
+      "clipped_samples": 0,
+      "pcm16_sha256": "3ebd818ec7c89ab3eb7a9b20baf7a9aaddde5f4f54d54739313adc1f42d7668d"
+    },
+    {
+      "name": "ym_channel_5",
+      "peak": 0.0,
+      "rms": 0.0,
+      "clipped_samples": 0,
+      "pcm16_sha256": "0f33eec96c4e1313a8a5ea64e1373cc14779fbf6ceb4ca2b35211a37694c3fe4"
+    },
+    {
+      "name": "ym_channel_6",
+      "peak": 0.0,
+      "rms": 0.0,
+      "clipped_samples": 0,
+      "pcm16_sha256": "0f33eec96c4e1313a8a5ea64e1373cc14779fbf6ceb4ca2b35211a37694c3fe4"
+    },
+    {
+      "name": "ym_channel_7",
+      "peak": 0.07289142906665802,
+      "rms": 0.014253572560846806,
+      "clipped_samples": 0,
+      "pcm16_sha256": "afbb8444f4bbfc3725bcd1a1476f5dfd0be7a201febfafb552890980295a2aaf"
+    },
+    {
+      "name": "ym_mono_mix",
+      "peak": 0.43922001123428345,
+      "rms": 0.1518852710723877,
+      "clipped_samples": 0,
+      "pcm16_sha256": "1c06504fd5501e5791f425bf7886312c48c67ac6db114d5af3f782b49414d4d9"
+    }
+  ],
+  "representative_first_notes": [
+    {
+      "channel": 0,
+      "start_sample": 1105,
+      "keyoff_sample": 17047,
+      "end_before_next_note_sample": 19879,
+      "file": "note_ch0_first.wav",
+      "spectral_peaks_not_fundamental_claims": [
+        {
+          "hz": 65.27252197265625,
+          "relative_db": 0.0
+        },
+        {
+          "hz": 32.97271728515625,
+          "relative_db": -1.3585428288177437
+        },
+        {
+          "hz": 98.2452392578125,
+          "relative_db": -5.4185227717663595
+        },
+        {
+          "hz": 130.5450439453125,
+          "relative_db": -8.064625727418921
+        },
+        {
+          "hz": 163.51776123046875,
+          "relative_db": -18.120394043293313
+        },
+        {
+          "hz": 849.2156982421875,
+          "relative_db": -27.116569900798815
+        },
+        {
+          "hz": 196.490478515625,
+          "relative_db": -28.2070078068763
+        },
+        {
+          "hz": 750.970458984375,
+          "relative_db": -30.67639878368361
+        },
+        {
+          "hz": 946.7880249023438,
+          "relative_db": -30.68026860663238
+        },
+        {
+          "hz": 58.54339599609375,
+          "relative_db": -31.547219197096936
+        },
+        {
+          "hz": 72.00164794921875,
+          "relative_db": -32.10202557173111
+        },
+        {
+          "hz": 26.24359130859375,
+          "relative_db": -33.04301130235973
+        }
+      ]
+    },
+    {
+      "channel": 1,
+      "start_sample": 233882,
+      "keyoff_sample": 298847,
+      "end_before_next_note_sample": 300063,
+      "file": "note_ch1_first.wav",
+      "spectral_peaks_not_fundamental_claims": [
+        {
+          "hz": 131.21795654296875,
+          "relative_db": 0.0
+        },
+        {
+          "hz": 65.27252197265625,
+          "relative_db": -5.530356321701505
+        },
+        {
+          "hz": 196.490478515625,
+          "relative_db": -9.089346768030705
+        },
+        {
+          "hz": 261.090087890625,
+          "relative_db": -10.201178580873707
+        },
+        {
+          "hz": 522.8530883789062,
+          "relative_db": -17.311596374706912
+        },
+        {
+          "hz": 393.65386962890625,
+          "relative_db": -20.623090981195862
+        },
+        {
+          "hz": 265.1275634765625,
+          "relative_db": -21.162764692251695
+        },
+        {
+          "hz": 327.70843505859375,
+          "relative_db": -21.547915719098256
+        },
+        {
+          "hz": 18492.984008789062,
+          "relative_db": -22.107456234582692
+        },
+        {
+          "hz": 18753.40118408203,
+          "relative_db": -22.577762522196977
+        },
+        {
+          "hz": 18623.529052734375,
+          "relative_db": -23.138010144508776
+        },
+        {
+          "hz": 787.3077392578125,
+          "relative_db": -23.431897632473092
+        }
+      ]
+    },
+    {
+      "channel": 2,
+      "start_sample": 1411,
+      "keyoff_sample": 29188,
+      "end_before_next_note_sample": 29598,
+      "file": "note_ch2_first.wav",
+      "spectral_peaks_not_fundamental_claims": [
+        {
+          "hz": 1046.3790893554688,
+          "relative_db": -7.461369758820479
+        },
+        {
+          "hz": 521.5072631835938,
+          "relative_db": -11.536361739390832
+        },
+        {
+          "hz": 1570.5780029296875,
+          "relative_db": -13.475279712330057
+        },
+        {
+          "hz": 2092.7581787109375,
+          "relative_db": -15.894087150999743
+        },
+        {
+          "hz": 525.5447387695312,
+          "relative_db": -16.614823600278726
+        },
+        {
+          "hz": 3137.7914428710938,
+          "relative_db": -18.00819950932012
+        },
+        {
+          "hz": 3660.64453125,
+          "relative_db": -18.04088754781393
+        },
+        {
+          "hz": 2614.9383544921875,
+          "relative_db": -18.10436147143568
+        },
+        {
+          "hz": 4183.497619628906,
+          "relative_db": -18.25063504202291
+        },
+        {
+          "hz": 4706.3507080078125,
+          "relative_db": -18.555807756812435
+        },
+        {
+          "hz": 5229.203796386719,
+          "relative_db": -18.9141341631151
+        },
+        {
+          "hz": 5752.056884765625,
+          "relative_db": -19.28475368435862
+        }
+      ]
+    },
+    {
+      "channel": 7,
+      "start_sample": 1877,
+      "keyoff_sample": 4206,
+      "end_before_next_note_sample": 5423,
+      "file": "note_ch7_first.wav",
+      "spectral_peaks_not_fundamental_claims": [
+        {
+          "hz": 5088.5650634765625,
+          "relative_db": 0.0
+        },
+        {
+          "hz": 8594.439697265625,
+          "relative_db": -23.3920606968371
+        },
+        {
+          "hz": 5003.778076171875,
+          "relative_db": -25.046156341273814
+        },
+        {
+          "hz": 10180.494689941406,
+          "relative_db": -25.522949289487393
+        },
+        {
+          "hz": 12789.376831054688,
+          "relative_db": -25.729377720059677
+        },
+        {
+          "hz": 18776.280212402344,
+          "relative_db": -26.028588475013255
+        },
+        {
+          "hz": 868.0572509765625,
+          "relative_db": -26.11449558733094
+        },
+        {
+          "hz": 708.5769653320312,
+          "relative_db": -26.165558623440237
+        },
+        {
+          "hz": 7521.8170166015625,
+          "relative_db": -26.437142124089842
+        },
+        {
+          "hz": 2701.0711669921875,
+          "relative_db": -26.508492952275326
+        },
+        {
+          "hz": 9993.424987792969,
+          "relative_db": -26.51208660884265
+        },
+        {
+          "hz": 9305.035400390625,
+          "relative_db": -26.530636518845725
+        }
+      ]
+    }
+  ]
+}
