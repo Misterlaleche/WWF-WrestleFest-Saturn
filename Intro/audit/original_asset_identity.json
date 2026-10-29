@@ -1,0 +1,47 @@
+{
+  "ABS.TXT": {
+    "bytes": 6,
+    "sha256": "45fd2f9df187bc411dc80df5c4c4844ac00f4dd69bc69453f1893a5d143433d6",
+    "identical_to_r03": true
+  },
+  "BG0.TEX": {
+    "bytes": 23168,
+    "sha256": "41761350b0e3a4c695cd134818e62ec089a1238ef4e74ff08ab406303c5bf1be",
+    "identical_to_r03": true
+  },
+  "BG1.TEX": {
+    "bytes": 30848,
+    "sha256": "507cb16659dccce557d96bf63ebf5e0c2f9c2f0b8ae5c5f4cd9fa88760291a32",
+    "identical_to_r03": true
+  },
+  "BIB.TXT": {
+    "bytes": 6,
+    "sha256": "45fd2f9df187bc411dc80df5c4c4844ac00f4dd69bc69453f1893a5d143433d6",
+    "identical_to_r03": true
+  },
+  "CPY.TXT": {
+    "bytes": 6,
+    "sha256": "45fd2f9df187bc411dc80df5c4c4844ac00f4dd69bc69453f1893a5d143433d6",
+    "identical_to_r03": true
+  },
+  "FONT.TEX": {
+    "bytes": 9920,
+    "sha256": "b1d9517ce7de7e3dc39c36d3a6fbc1d55d1e4463279530c2b52eae978a5b3f67",
+    "identical_to_r03": true
+  },
+  "SEQ.DAT": {
+    "bytes": 398444,
+    "sha256": "07f6a5587d52df35789ada2d30ae887a3983b69844fd924f0d97de96c062d9b9",
+    "identical_to_r03": true
+  },
+  "SPR.TEX": {
+    "bytes": 33664,
+    "sha256": "311da8a6c6cdb6c16f2cef10cfad24719b153cfb9652b2eee849d1ea8fa26b84",
+    "identical_to_r03": true
+  },
+  "TITLE02.RIC": {
+    "bytes": 2395902,
+    "sha256": "c3dcfce99b6addfe5f670f711c65478cf402d6c73d4ac063bd4d5c432559373e",
+    "identical_to_r03": true
+  }
+}

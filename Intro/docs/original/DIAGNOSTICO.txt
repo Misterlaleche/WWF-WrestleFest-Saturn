@@ -1,0 +1,72 @@
+WP0 R04 — LECTURA DEL PANEL
+
+Todos los valores son decimales. UNKNOWN indica un dato todavía no
+observado; OVERFLOW, un valor que no cabe en ocho dígitos.
+Conserva el panel completo, incluido el rótulo WP0 R04 ERROR.
+
+CODE: error principal.
+  401: venció el plazo de preparación/transferencia del campo.
+  402: VDP1 no había terminado de dibujar al comprobar el plazo.
+  403: envío de comandos o estado del controlador no válido.
+  307: falló el servicio de audio; consultar AUDIO.
+  301–306: carga, preparación o arranque de audio.
+  100–105: memoria, carga o tamaño de gráficos/secuencia.
+  201–208: estructura o límites de un paquete de secuencia.
+  209: no se pudo preparar o resolver la caché de secuencia.
+
+AUDIO: error del reproductor.
+  0: ninguno registrado.
+  1: fuente comprimida incorrecta o incompleta.
+  2: operación del backend o posición SCSP no válida.
+  3: intervalo de servicio o avance demasiado grande.
+  4: el consumidor alcanzó datos aún no repuestos.
+
+FRAME: índice fuente registrado por el parser. Puede actualizarse después
+de la interrupción que detectó el fallo; no identifica por sí solo la
+última imagen completa vista en pantalla.
+MISS: VBlanks perdidos detectados por el bucle. Un401 detectado antes de
+actualizarlo puede coexistir con MISS0.
+CPU: máximo histórico de ticks FRT de trabajo activo medido.
+DRAW: máximo histórico entre lanzamiento y observación del final de dibujo.
+REG: última región observada del anillo SCSP, normalmente0..7.
+GAPUS: último intervalo pasado al servicio de audio, en microsegundos.
+QUEUE: muestras preparadas acumuladas, incluido relleno final.
+PLAY: cota inferior de muestras consumidas, con granularidad de región CA.
+BLOCK: bloques decodificados desde la última preparación.
+
+FLAGS:
+  Bits0–1: bits0–1 de EDSR observados al comprobar el plazo.
+  Bit2, valor4: envío aceptado y dibujo solicitado con PTMR=1 después de
+    completar DMA y volver a comprobar el plazo.
+  Bit3, valor8: se observó la finalización de ese dibujo.
+  Bit4, valor16: estándar PAL detectado.
+  Bit5, valor32: se usó una comprobación CEF de respaldo.
+  Bits8–11: último avance CA.15 representa UINT32_MAX cuando el servicio
+    falló antes de obtener ese avance; antes del primer servicio puede
+    valer0 por la inicialización.
+
+Un DMA tardío puede haber transferido comandos y ser rechazado después
+con bit2 a cero, sin solicitar el dibujo. FLAGS1 conserva EDSR bit0; no
+significa que se hubiese aceptado el envío de esa preparación. Los bits
+de envío/finalización son2/3, no0/1. No es una instantánea simultánea de
+todos los registros físicos.
+
+CPU/DRAW usan FRT a CPU/32, no FPS. R04 protege las lecturas de los dos
+bytes del contador contra interrupciones que reutilicen su latch TEMP.
+CPU no incluye la carga oculta ni garantiza que el último campo fallido
+se haya llegado a medir. No deben sumarse ambos máximos como si fuesen
+del mismo campo. DRAW incluye latencia de interrupción/observación.
+GAPUS procede de VBlanks del llamador; no es un reloj independiente.
+
+El plazo de coherencia está en VBlank-IN antes de confirmar VDP2. No es
+una medición del último instante físico posible antes del intercambio
+de framebuffer en VBlank-OUT.
+
+La foto de R03 muestra401/614/AUDIO0 y un máximoCPU65401. El máximo no
+identifica el coste de614. Se ha corregido una lectura FRT interrumpible
+que podía producir valores de esa forma; no se afirma que la foto pruebe
+ese historial exacto. Caché y decoder reducen el trabajo de la escena;
+la confirmación de R04 en la Saturn física sigue pendiente.
+
+audit/probes/active_r04/ documenta una espera artificial, aislada y ausente
+del BIN de producción. Su pantalla401 es el resultado esperado del test.

@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "scope": "Fresh verification of source checkout prepared for GitHub, after external asset restoration. No runtime changes.",
+  "pass": true,
+  "source_text_files_exact": 34,
+  "original_delivery_files_unchanged": 310,
+  "restoration": {
+    "wrong_archive_rejected_without_changes": true,
+    "existing_conflict_rejected_before_writes": true,
+    "restore": {
+      "result": "PASS",
+      "verified": 8,
+      "written": 8,
+      "reused": 0
+    },
+    "idempotent_reuse": {
+      "result": "PASS",
+      "verified": 8,
+      "written": 0,
+      "reused": 8
+    },
+    "fresh_asset_check": {
+      "result": "PASS",
+      "verified": 8,
+      "written": 0
+    },
+    "source_text_exact": true
+  },
+  "build": {
+    "exit_code": 0,
+    "preexisting_build": false,
+    "preexisting_A_BIN": false,
+    "runtime_bytes": 874100,
+    "runtime_sha256": "32aa415f594f3860798ac942e936f322c2d53d1d14cf96762e1fe7d8694bb670",
+    "identical_to_original_runtime": true,
+    "bin_bytes": 4769856,
+    "sectors": 2028,
+    "edc_ecc": "all sectors regenerated and compared",
+    "report": "audit/publication/rebuild.json"
+  },
+  "host_tests": [
+    {
+      "name": "lossless_codec",
+      "result": "PASS"
+    },
+    {
+      "name": "audio_ring",
+      "result": "PASS"
+    },
+    {
+      "name": "audio_observation",
+      "result": "PASS"
+    },
+    {
+      "name": "framebuffer_controller",
+      "result": "PASS"
+    },
+    {
+      "name": "sequence_cache",
+      "result": "PASS"
+    }
+  ],
+  "decoder_cases": 8151,
+  "asan_ubsan_cases": 25869,
+  "graphics_tests": {
+    "original_graphics": "PASS",
+    "native_conversion": "PASS",
+    "original_ROM_required": true
+  },
+  "independent_review": {
+    "source_identity": "PASS",
+    "restorer": "PASS",
+    "dependencies": "PASS",
+    "documentation": "PASS; NMI wording and output-directory prerequisite clarified"
+  },
+  "historical_reports_preserved": true,
+  "new_emulator_run": false,
+  "new_hardware_run": false,
+  "hardware_feedback": "User said Intro ok. after R04 delivery; limited to standalone intro."
+}

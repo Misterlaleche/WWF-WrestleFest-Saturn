@@ -1,0 +1,90 @@
+{
+  "pass": true,
+  "scope": "Direct fresh build of restored publishable checkout; no emulator, profiling, Git or remote mutation.",
+  "checkout": "/workspace/scratch/b6e49f458b75/wp0_github_r04/restored_checkout/Intro",
+  "command_script": "/workspace/scratch/b6e49f458b75/wp0_github_r04/restored_build_verification/commands.sh",
+  "build_execution": {
+    "command": [
+      "bash",
+      "/workspace/scratch/b6e49f458b75/wp0_github_r04/restored_build_verification/commands.sh"
+    ],
+    "return_code": 0,
+    "started_utc": "2026-10-29T12:57:18.777595+00:00",
+    "elapsed_seconds": 9.002812073000314
+  },
+  "preexisting_build": false,
+  "preexisting_A_BIN": false,
+  "all_checkout_inputs_preserved": true,
+  "changed_checkout_input_paths": [],
+  "staged_source_identical_to_built_source": true,
+  "staged_source_differences": [],
+  "restored_assets_verified": 8,
+  "staging_full_tree_unchanged_since_build_snapshot": true,
+  "staging_changed_paths_since_snapshot": [],
+  "packaged_source_unchanged": true,
+  "packaged_source_changed_paths": [],
+  "prebuild_non_source_differences_from_staging": [
+    "COMPILAR.md",
+    "INTEGRACION_CODEX.md",
+    "PROCEDENCIA.json"
+  ],
+  "prebuild_python_cache_files": [
+    "source/tests/__pycache__/test_arcade_graphics.cpython-312.pyc",
+    "source/tests/__pycache__/test_native_assets.cpython-312.pyc",
+    "source/tools/__pycache__/arcade_graphics.cpython-312.pyc",
+    "source/tools/__pycache__/native_assets.cpython-312.pyc"
+  ],
+  "prebuild_context": "Parent confirmed concurrent host checks generated the Python caches and reviewer updates changed documentation. No productive source differed.",
+  "A_BIN": {
+    "bytes": 874100,
+    "sha256": "32aa415f594f3860798ac942e936f322c2d53d1d14cf96762e1fe7d8694bb670",
+    "expected_bytes": 874100,
+    "expected_sha256": "32aa415f594f3860798ac942e936f322c2d53d1d14cf96762e1fe7d8694bb670",
+    "generated_fresh": true,
+    "identical_to_packaged_A_BIN": true,
+    "identical_to_objcopy_output": true,
+    "identical_to_A_BIN_embedded_in_ISO": true
+  },
+  "ELF": {
+    "bytes": 648384,
+    "sha256": "21f7dcb41d28cee6ca0ab9bfa82aa48c319b585d86a84f6dc41a14204d4e6db5",
+    "includes_absolute_build_path": true
+  },
+  "ISO": {
+    "bytes": 4153344,
+    "sha256": "d6ad31336a279cd0d519b980411208308439cc15f68d7e0fa1ec2dc31afee18d",
+    "physical_sectors": 2028,
+    "pvd_volume_sectors": 2028,
+    "sector_bytes": 2048
+  },
+  "RAW_BIN": {
+    "path": "/tmp/wp0-r04-restored-build-iyhni5_n/disc/WF-WP0-R04.bin",
+    "bytes": 4769856,
+    "sha256": "b394aae5d5410257d10cae4a294abfd639e1112f929d80a366e1bc21c41fc4bc",
+    "sectors": 2028,
+    "sector_bytes": 2352
+  },
+  "CUE": {
+    "path": "/tmp/wp0-r04-restored-build-iyhni5_n/disc/WF-WP0-R04.cue",
+    "bytes": 73,
+    "sha256": "c4da48d181e449583d5e7f1fc93eaad5435b55e3b419bdf710f7eedc40a92fac"
+  },
+  "fresh_disc_validation": {
+    "iso_sha256": "d6ad31336a279cd0d519b980411208308439cc15f68d7e0fa1ec2dc31afee18d",
+    "bin_sha256": "b394aae5d5410257d10cae4a294abfd639e1112f929d80a366e1bc21c41fc4bc",
+    "cue_sha256": "c4da48d181e449583d5e7f1fc93eaad5435b55e3b419bdf710f7eedc40a92fac",
+    "sectors": 2028,
+    "raw_sector_bytes": 2352,
+    "payload_roundtrip": "all sectors byte-identical to ISO",
+    "edc_ecc": "all sectors regenerated and compared",
+    "usa_region": true,
+    "hardware_boot_test": false,
+    "emulator_boot_test": false
+  },
+  "fresh_validation_matches_converter_record": true,
+  "warnings": [
+    "/workspace/scratch/b6e49f458b75/wp0_github_r04/restored_checkout/Intro/source/build/WF-WP0-R04.elf has a LOAD segment with RWX permissions"
+  ],
+  "hardware_boot_test": false,
+  "emulator_boot_test": false
+}

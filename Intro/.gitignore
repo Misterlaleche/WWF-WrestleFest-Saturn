@@ -1,0 +1,19 @@
+# External assets: restore from the SHA-256-pinned R04 delivery ZIP.
+/source/cd/BG0.TEX
+/source/cd/BG1.TEX
+/source/cd/FONT.TEX
+/source/cd/SPR.TEX
+/source/cd/SEQ.DAT
+/source/cd/TITLE02.RIC
+/source/tests/fixtures/intro_sources.zip
+/audit/audio/TITLE02.PCM
+
+# Reproducible build products.
+/source/build/
+/source/out/
+/source/cd/A.BIN
+/source/*.iso
+/source/*.bin
+/source/*.cue
+__pycache__/
+*.pyc

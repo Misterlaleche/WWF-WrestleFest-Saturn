@@ -1,0 +1,40 @@
+LOCALIZACIÓN DE EVIDENCIAS Y RECETAS
+
+Los informes forenses preservan las rutas y hashes originales de trabajo.
+Una referencia a un archivo local en esos informes no significa que ese
+archivo voluminoso o externo esté duplicado en el ZIP.
+
+Se incluyen las fuentes y datos completos de producción, el ELF probado,
+informes, registros, capturas seleccionadas y las entradas necesarias de
+las pruebas principales de REPRODUCIR.txt.
+
+Los manuales SH7604 y SMPC, sus extracciones de texto y la imagen de su
+tabla de reloj fueron consultados durante la auditoría. No se duplican
+en la entrega. Las URLs primarias están en TIMER_AUDIT.txt,
+FINAL_CODE_REVIEW.txt y CLOCK_CORRIGENDUM.txt; final_review_evidence.json
+conserva el hash del manual SMPC consultado. Las copias de ss.c/smpc.c y
+sound.c que sustentan las notas del core sí se incluyen como evidencia.
+
+El script reproduce_guard_review.sh conserva exactamente la receta del
+entorno de trabajo original y sus rutas absolutas. Es un registro histórico,
+no el comando portable para una descarga del ZIP. Usa en su lugar:
+
+  python3 audit/review_final/run_guard_review.py
+
+Ese runner genera guard_corpus.bin en un directorio temporal, comprueba
+su hash contra la auditoría y compila la prueba ASan/UBSan usando la fuente
+R04 y el decoder R03 conservado en audit/reference/r03_decoder/. No deja
+objetos ni corpus en el paquete ni modifica su manifiesto.
+
+Los dumps completos de RAM, el PCM largo de captura y las7.500 PNG se
+regeneran con el wrapper Beetle descrito en REPRODUCIR.txt. Las capturas
+seleccionadas y todos los hashes/filas de telemetría sí están incluidos.
+Los scripts forenses que recorren varios candidatos y dumps históricos
+requieren reconstruir esa estructura original; sus informes registran
+qué entradas se comprobaron y a qué candidato corresponden.
+
+Los siete informes de perfiles incluidos se han normalizado eliminando
+solo las conversiones de ticks que utilizaban el reloj de352 píxeles.
+audit/profile_units_normalization.json enlaza los hashes originales con
+los informes entregados. Los ticks y los argumentos audio_gap_us no se
+modifican. La corrección de reloj está documentada por separado.

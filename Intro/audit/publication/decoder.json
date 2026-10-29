@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "cases": 8151,
+  "valid_cases": 3233,
+  "original_blocks": 1594,
+  "original_samples_exact": 1631700,
+  "all_k_0_through_16": true,
+  "orders": [
+    0,
+    1,
+    2
+  ],
+  "baseline_sha256": "75a5c8a2ac5f5f271a1a8b657a770f3ca7a93b518f62a8b52d3db7d2f6198017",
+  "candidate_sha256": "40e7475cec99fb393fde3afbeee4486f62a66bb20a18080b8e990373bb4cd4c8",
+  "pcm_sha256": "4b382ef768b6409b7fd549002e0efe6b3f92539ecaa73ecc9e9ed6827cb201c8"
+}

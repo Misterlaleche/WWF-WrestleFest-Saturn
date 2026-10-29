@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "archive": {
+    "name": "WF-WP0-R04-BIN-CUE-Y-FUENTES.zip",
+    "bytes": 12869253,
+    "sha256": "a6ef24b69de89abc25d4882829b36d7497beb1f0464318facc527f413ecde5d7",
+    "library_file_id": "libfile_51aacfacc41c8191a67f2943b27d5678"
+  },
+  "files": [
+    {
+      "path": "source/cd/BG0.TEX",
+      "archive_member": "WF-WP0-R04/source/cd/BG0.TEX",
+      "bytes": 23168,
+      "sha256": "41761350b0e3a4c695cd134818e62ec089a1238ef4e74ff08ab406303c5bf1be",
+      "purpose": "build"
+    },
+    {
+      "path": "source/cd/BG1.TEX",
+      "archive_member": "WF-WP0-R04/source/cd/BG1.TEX",
+      "bytes": 30848,
+      "sha256": "507cb16659dccce557d96bf63ebf5e0c2f9c2f0b8ae5c5f4cd9fa88760291a32",
+      "purpose": "build"
+    },
+    {
+      "path": "source/cd/FONT.TEX",
+      "archive_member": "WF-WP0-R04/source/cd/FONT.TEX",
+      "bytes": 9920,
+      "sha256": "b1d9517ce7de7e3dc39c36d3a6fbc1d55d1e4463279530c2b52eae978a5b3f67",
+      "purpose": "build"
+    },
+    {
+      "path": "source/cd/SPR.TEX",
+      "archive_member": "WF-WP0-R04/source/cd/SPR.TEX",
+      "bytes": 33664,
+      "sha256": "311da8a6c6cdb6c16f2cef10cfad24719b153cfb9652b2eee849d1ea8fa26b84",
+      "purpose": "build"
+    },
+    {
+      "path": "source/cd/SEQ.DAT",
+      "archive_member": "WF-WP0-R04/source/cd/SEQ.DAT",
+      "bytes": 398444,
+      "sha256": "07f6a5587d52df35789ada2d30ae887a3983b69844fd924f0d97de96c062d9b9",
+      "purpose": "build"
+    },
+    {
+      "path": "source/cd/TITLE02.RIC",
+      "archive_member": "WF-WP0-R04/source/cd/TITLE02.RIC",
+      "bytes": 2395902,
+      "sha256": "c3dcfce99b6addfe5f670f711c65478cf402d6c73d4ac063bd4d5c432559373e",
+      "purpose": "build"
+    },
+    {
+      "path": "source/tests/fixtures/intro_sources.zip",
+      "archive_member": "WF-WP0-R04/source/tests/fixtures/intro_sources.zip",
+      "bytes": 10780,
+      "sha256": "99a479a51aa274908a34514e82b2268cf966e119e14ff0c9ea9799abab7509a4",
+      "purpose": "verification"
+    },
+    {
+      "path": "audit/audio/TITLE02.PCM",
+      "archive_member": "WF-WP0-R04/audit/audio/TITLE02.PCM",
+      "bytes": 3263400,
+      "sha256": "4b382ef768b6409b7fd549002e0efe6b3f92539ecaa73ecc9e9ed6827cb201c8",
+      "purpose": "verification"
+    }
+  ]
+}
