@@ -1,0 +1,31 @@
+{
+  "title": "Implementaci\u00f3n de Combate real en Saturn",
+  "module": "WP1979",
+  "status": "CANDIDATE",
+  "emulator_validation": "PASS",
+  "hardware_validation": "PENDING",
+  "integration_into_master": "PENDING",
+  "rom_authority": "wwfwfest.zip",
+  "reference_commit": "d95b8c37f62402bce4dead13cf7c0567b8fc2439",
+  "fixture_seed": 1085,
+  "fixture_only": true,
+  "characters": [
+    "Hulk Hogan",
+    "Ultimate Warrior",
+    "Ted DiBiase",
+    "Mr. Perfect"
+  ],
+  "bin_sha256": "f1232edb31d6e3748b60001d8d82bca5f9b6171d16aaf812f618f3dbf858da5e",
+  "native_program_sha256": "49b03fc81c6801eb376979079f96746f1bbc887346b29c90d55f1003bad2720e",
+  "full_match_steps": 7372,
+  "full_match_vblanks": 7376,
+  "fps_from_start": 59.96746203904555,
+  "minimum_fps_1s": 58.0,
+  "minimum_fps_5s": 59.6,
+  "minimum_fps_10s": 59.8,
+  "combat_cd_reads_tested_routes": 0,
+  "fatal_owners_tested_routes": 0,
+  "emulator_limit": "Software VDP1 completion does not prove physical raster/bus timing.",
+  "external_assets": "RECURSOS.json",
+  "original_source_zip_sha256": "83e231d0ba11826683aaa6d22c1746e2fb9fba9ebfc0540529a73f61ab181f33"
+}

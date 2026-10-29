@@ -1,0 +1,62 @@
+--- a/src/wf_r18_present.c
++++ b/src/wf_r18_present.c
+@@ -272,7 +272,13 @@
+  plan.tile_upload[slot]=(wf_vdp1_tile_upload_t){.source_tile=tile,.stream_slot=(uint16_t)slot};
+  plan_tile_index[hash]=(uint16_t)(((unsigned)plan_tile_epoch<<9)|(slot+1u));plan.tile_count++;
+ found:;
+- wf_vdp1_sprite_cmd_t*c=&plan.cmd[plan.cmd_count++];memset(c,0,sizeof *c);c->x=(int16_t)x;c->y=(int16_t)y;c->stream_tile=(uint16_t)slot;c->cram_slot=(uint8_t)palette;c->flip_x=(uint8_t)fx;c->flip_y=(uint8_t)fy;return 1;}
++ wf_vdp1_sprite_cmd_t*c=&plan.cmd[plan.cmd_count++];
++ /* These three trailing bytes include chain fields and any struct padding.
++  * All preceding fields are overwritten below. Keep exact zeroed bytes
++  * without a freestanding memset call per visible sprite on SH-2. */
++ for(size_t i=offsetof(wf_vdp1_sprite_cmd_t,chain_index);i<sizeof *c;i++)
++  ((unsigned char*)c)[i]=0;
++ c->x=(int16_t)x;c->y=(int16_t)y;c->stream_tile=(uint16_t)slot;c->cram_slot=(uint8_t)palette;c->flip_x=(uint8_t)fx;c->flip_y=(uint8_t)fy;return 1;}
+ static wf_status_t submit_records(wf_r18_video_t*v,size_t count){
+  wf_status_t status=WF_OK;const wf_saturn_render_ops_t*ops=wf_saturn_yaul_render_ops();
+  if(backup_workspace_leased)return WF_BAD_STATE;
+--- a/src/wf_vdp1_plan.c
++++ b/src/wf_vdp1_plan.c
+@@ -64,6 +64,13 @@
+     return WF_OK;
+ }
+ 
++/* Match the backend's byte-mask lookup: SH-2 has no variable barrel shift.
++ * Keep each residency/occupancy test inline instead of calling __ashlsi3. */
++static unsigned byte_mask(unsigned bit){
++    static const uint8_t masks[8]={1,2,4,8,16,32,64,128};
++    return masks[bit&7u];
++}
++
+ wf_status_t wf_vdp1_plan_retain_tile_slots(wf_vdp1_frame_plan_t *p,
+     const uint16_t *resident_tiles,const uint8_t *resident_bits,unsigned resident_count){
+     /* Scratch is static because the Saturn master stack is deliberately small.
+@@ -92,7 +99,7 @@
+     for(unsigned i=0;i<p->cmd_count;i++)if(p->cmd[i].stream_tile>=count)return WF_BAD_STATE;
+     unsigned limit=resident_count<count?resident_count:count;
+     for(unsigned slot=0;slot<limit;slot++){
+-        if(!(resident_bits[slot>>3]&(uint8_t)(1u<<(slot&7u))))continue;
++        if(!(resident_bits[slot>>3]&(uint8_t)byte_mask(slot)))continue;
+         uint16_t source=resident_tiles[slot];
+         unsigned hash=((uint32_t)source*0x9e3779b1u)>>23;
+         while((lookup[hash]>>9)==lookup_epoch){
+@@ -102,7 +109,7 @@
+                  * previous compactions. Claim only one, or the free-slot
+                  * count would no longer match the unmatched current tiles. */
+                 if(slot_of[old]==0xffffu){
+-                    slot_of[old]=(uint16_t)slot;occupied[slot>>3]|=(uint8_t)(1u<<(slot&7u));
++                    slot_of[old]=(uint16_t)slot;occupied[slot>>3]|=(uint8_t)byte_mask(slot);
+                 }
+                 break;
+             }
+@@ -112,8 +119,8 @@
+     unsigned vacant=0;
+     for(unsigned i=0;i<count;i++){
+         if(slot_of[i]!=0xffffu)continue;
+-        while(occupied[vacant>>3]&(uint8_t)(1u<<(vacant&7u)))++vacant;
+-        slot_of[i]=(uint16_t)vacant;occupied[vacant>>3]|=(uint8_t)(1u<<(vacant&7u));
++        while(occupied[vacant>>3]&(uint8_t)byte_mask(vacant))++vacant;
++        slot_of[i]=(uint16_t)vacant;occupied[vacant>>3]|=(uint8_t)byte_mask(vacant);
+     }
+     for(unsigned i=0;i<count;i++)source_at[slot_of[i]]=p->tile_upload[i].source_tile;
+     for(unsigned i=0;i<count;i++){

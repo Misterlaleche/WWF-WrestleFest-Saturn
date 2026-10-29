@@ -1,0 +1,1 @@
+{"mame_version":"0.264","fixture":"state2_id06_to09","program_sha1":"a726c46f350723ea73158bc78055d17d418b14e2","lineup":[0,1,9,7],"lineup_read_overrides":2,"frames":1040,"motion_observations":634,"motion_mismatches":0,"reason":"original_state2_1040_frame_threshold","refresh_hz_reference":57.444852941234,"refresh_status":"MAME emulator reference; PCB totals marked guessed"}

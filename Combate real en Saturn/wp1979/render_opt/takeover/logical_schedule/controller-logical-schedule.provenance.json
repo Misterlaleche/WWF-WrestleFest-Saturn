@@ -1,0 +1,122 @@
+{
+  "kind": "derived-from-actual-baseline-read-only-observations",
+  "baseline_report": "/workspace/scratch/1e822aeaeac7/wp1979/measure/candidate-2-controller/report.json",
+  "baseline_report_sha256": "fe39b25622210f30929a4e53ca7efe074167a76f0bc05d439094ffbdaa231905",
+  "original_schedule_sha256": "dbb993348c2648fad4ac9240b96d5adadec178a025930f2f4f1ff9fe817afe56",
+  "method": "Threshold = report.samples[event.frame - 1].game_frame; no forced native counter",
+  "event_derivation": [
+    {
+      "original_emulator_frame": 540,
+      "preceding_sample_emulator_frame": 539,
+      "observed_game_frame": 64,
+      "first_eligible_emulator_frame": 540,
+      "buttons": [
+        "left"
+      ]
+    },
+    {
+      "original_emulator_frame": 588,
+      "preceding_sample_emulator_frame": 587,
+      "observed_game_frame": 111,
+      "first_eligible_emulator_frame": 588,
+      "buttons": []
+    },
+    {
+      "original_emulator_frame": 600,
+      "preceding_sample_emulator_frame": 599,
+      "observed_game_frame": 123,
+      "first_eligible_emulator_frame": 600,
+      "buttons": [
+        "up"
+      ]
+    },
+    {
+      "original_emulator_frame": 636,
+      "preceding_sample_emulator_frame": 635,
+      "observed_game_frame": 159,
+      "first_eligible_emulator_frame": 636,
+      "buttons": []
+    },
+    {
+      "original_emulator_frame": 648,
+      "preceding_sample_emulator_frame": 647,
+      "observed_game_frame": 171,
+      "first_eligible_emulator_frame": 648,
+      "buttons": [
+        "right"
+      ]
+    },
+    {
+      "original_emulator_frame": 696,
+      "preceding_sample_emulator_frame": 695,
+      "observed_game_frame": 218,
+      "first_eligible_emulator_frame": 696,
+      "buttons": []
+    },
+    {
+      "original_emulator_frame": 708,
+      "preceding_sample_emulator_frame": 707,
+      "observed_game_frame": 230,
+      "first_eligible_emulator_frame": 708,
+      "buttons": [
+        "down"
+      ]
+    },
+    {
+      "original_emulator_frame": 744,
+      "preceding_sample_emulator_frame": 743,
+      "observed_game_frame": 266,
+      "first_eligible_emulator_frame": 744,
+      "buttons": []
+    },
+    {
+      "original_emulator_frame": 768,
+      "preceding_sample_emulator_frame": 767,
+      "observed_game_frame": 290,
+      "first_eligible_emulator_frame": 768,
+      "buttons": [
+        "a"
+      ]
+    },
+    {
+      "original_emulator_frame": 776,
+      "preceding_sample_emulator_frame": 775,
+      "observed_game_frame": 298,
+      "first_eligible_emulator_frame": 776,
+      "buttons": []
+    },
+    {
+      "original_emulator_frame": 804,
+      "preceding_sample_emulator_frame": 803,
+      "observed_game_frame": 326,
+      "first_eligible_emulator_frame": 804,
+      "buttons": [
+        "b"
+      ]
+    },
+    {
+      "original_emulator_frame": 812,
+      "preceding_sample_emulator_frame": 811,
+      "observed_game_frame": 334,
+      "first_eligible_emulator_frame": 812,
+      "buttons": []
+    },
+    {
+      "original_emulator_frame": 840,
+      "preceding_sample_emulator_frame": 839,
+      "observed_game_frame": 362,
+      "first_eligible_emulator_frame": 840,
+      "buttons": [
+        "c"
+      ]
+    },
+    {
+      "original_emulator_frame": 848,
+      "preceding_sample_emulator_frame": 847,
+      "observed_game_frame": 370,
+      "first_eligible_emulator_frame": 848,
+      "buttons": []
+    }
+  ],
+  "derived_schedule_sha256": "ad80a0f70a76e1f65205b43718fe341926ea67973140584863536b1c6622723f"
+}

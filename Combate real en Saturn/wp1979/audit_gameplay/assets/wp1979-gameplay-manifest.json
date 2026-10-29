@@ -1,0 +1,561 @@
+{
+  "schema": "wp1979-native-gameplay-evidence-v4",
+  "created_utc": "2026-10-29T12:27:02.962280+00:00",
+  "source_repository": "Misterlaleche/WWF-WrestleFest-Saturn-Private",
+  "source_commit": "d95b8c37f62402bce4dead13cf7c0567b8fc2439",
+  "production_translation_units": 114,
+  "bootstrap": {
+    "owner": "wf_r18_direct_boot",
+    "human": 0,
+    "partner": 1,
+    "cabinet_config": 768,
+    "rng_state": 1085,
+    "actor_slots": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "character_ids": [
+      0,
+      1,
+      9,
+      7
+    ],
+    "initial_stamina": [
+      110,
+      106,
+      145,
+      130
+    ],
+    "post_boot_actor_edits": false
+  },
+  "role_semantics": {
+    "active_0_bit7": "actor exists, not proof of legal participation",
+    "flags33_bit0": "legal member of team; must exchange between partners",
+    "flags33_bit1": "human-control flag; may transfer temporarily during rescue without legal tag",
+    "role56_bit6": "reserve/temporary CPU-control role; not equivalent to apron location",
+    "flags32_bit0": "apron/outside-rope mode",
+    "input8a": "input link; both human partners initially have same port so equal values alone do not establish transfer"
+  },
+  "timing_scope": "Logic frames are exact host observations. CSV nominal seconds divide by 60; they are not measured video timestamps. Native integration measures presentation/VBlank cadence separately.",
+  "historical_pre_correction": {
+    "scope": "All v2 results used uncorrected EA42 register context and must not be presented as current-code regressions. Files retained unchanged.",
+    "manifest_path": "handoff/pre-correction-v2/wp1979-gameplay-manifest.json",
+    "selected_demo": {
+      "name": "both-teams-three-real-tags",
+      "input_tape": {
+        "path": "host/tag-after3600-input.csv",
+        "bytes": 21900,
+        "sha256": "fc10e643f8e70f2f420bbb374d3ef55653363942c358a5336f6e362339f7bc5b",
+        "events": 2465,
+        "format": "decimal zero-based input frame, active-low byte; no header; event persists"
+      },
+      "atlas": {
+        "path": "assets/HOTSPR-both-tags-full-32.BIN",
+        "bytes": 702624,
+        "sha256": "33ca5ead281fe8833dee65388e5aef6e7db68c2a501d510d8ae77512bb3e163c",
+        "format": "R18D",
+        "tile_ids": 6381,
+        "chunk_bytes": 32,
+        "unique_dictionary_chunks": 19849,
+        "mapping_bytes": 51048,
+        "aligned_mapping_bytes": 51072,
+        "dictionary_bytes": 635168,
+        "header_bytes": 16384,
+        "resident_lwram_bytes": 635264,
+        "cold_fallback_slots": 117,
+        "all_tiles_reconstructed_byte_exact": true
+      },
+      "rom_pages_header": {
+        "path": "assets/wp1979_rom_hot_pages_both_tags.h",
+        "bytes": 1577,
+        "sha256": "5b1736d94cc2be346e3f089dc0e6f65c4b7cb82e6b3dd2e161b6d69e30096208",
+        "main_pages": 209,
+        "extra_pages": 14,
+        "unique_pages": 211,
+        "extra_only_pages": [
+          48,
+          156
+        ]
+      },
+      "event_timeline": {
+        "path": "host/both-tags-events.csv",
+        "bytes": 753,
+        "sha256": "4d8ee467de6b450b9dfadf6c97a31d0b6bdb4e7a5a0666560add31263dce2821"
+      },
+      "tag_transactions": [
+        {
+          "outgoing_slot": 4,
+          "incoming_slot": 5,
+          "start_frame": 3531,
+          "exchange_frame": 3584,
+          "entrant_ready_frame": 3611
+        },
+        {
+          "outgoing_slot": 0,
+          "incoming_slot": 1,
+          "start_frame": 3938,
+          "exchange_frame": 3991,
+          "entrant_ready_frame": 4018
+        },
+        {
+          "outgoing_slot": 5,
+          "incoming_slot": 4,
+          "start_frame": 4022,
+          "exchange_frame": 4075,
+          "entrant_ready_frame": 4103
+        }
+      ],
+      "result": {
+        "endpoint_rom": "0x0011B6",
+        "frame": 9980,
+        "words_hex": [
+          "4001",
+          "4000",
+          "8000",
+          "8000"
+        ],
+        "final_pin_count_frames": [
+          9584,
+          9672,
+          9760
+        ],
+        "count_169a_hex": "0300",
+        "timer_16a0_hex": "0009",
+        "result_wait_vblanks": 131,
+        "post_boot_rom_file_reads": 0,
+        "post_boot_sprite_file_reads": 0,
+        "blocked_owners": 0,
+        "all_four_active_frames": 9980
+      },
+      "validation_log": {
+        "path": "host/both-tags-full-resident.log",
+        "bytes": 3823,
+        "sha256": "9baa7cb40a7d94e4543cc0f064191ae825360d296e84ff53c1741f551ed53298"
+      },
+      "role_trace": {
+        "path": "host/both-tags-full-resident-roles.csv",
+        "bytes": 3891911,
+        "sha256": "b1d391aacf905cfd1633b919357c6b6eac77b227f1e1d65a8bb9caf6db37b673"
+      },
+      "generated_vs_csv_replay_trace_byte_identical": true,
+      "original_policy_prefix_identical_through_frame": 3600,
+      "generation_parameters": {
+        "WP1979_TAG_POLICY": "1",
+        "WP1979_TAG_AFTER": "3600",
+        "WP1979_TAG_X": "520",
+        "WP1979_TAG_Y": "400",
+        "WP1979_TAG_DEFEND": "1"
+      }
+    },
+    "alternative_early_human_tag": {
+      "input_tape": {
+        "path": "host/tag-long-input.csv",
+        "bytes": 22170,
+        "sha256": "ae5fe210fa4c17bd2fbee70e30f9a1e230d14bed13de616e190432f992b7d020",
+        "events": 2491
+      },
+      "atlas": {
+        "path": "assets/HOTSPR-tag-full-4.BIN",
+        "bytes": 678080,
+        "sha256": "193a6df33bd9667a6995b48b2273a1831031cea3eaf66c9c97a7517685b697bf",
+        "format": "R18D",
+        "tile_ids": 6904,
+        "chunk_bytes": 4,
+        "unique_dictionary_chunks": 54960,
+        "mapping_bytes": 441856,
+        "aligned_mapping_bytes": 441856,
+        "dictionary_bytes": 219840,
+        "header_bytes": 16384,
+        "resident_lwram_bytes": 547072,
+        "cold_fallback_slots": 806,
+        "all_tiles_reconstructed_byte_exact": true
+      },
+      "rom_pages_header": {
+        "path": "assets/wp1979_rom_hot_pages_both_tags.h",
+        "bytes": 1577,
+        "sha256": "5b1736d94cc2be346e3f089dc0e6f65c4b7cb82e6b3dd2e161b6d69e30096208"
+      },
+      "tag_start_frame": 476,
+      "legal_exchange_frame": 529,
+      "entrant_ready_frame": 556,
+      "win_frame": 10033,
+      "post_boot_rom_file_reads": 0,
+      "post_boot_sprite_file_reads": 0,
+      "validation_log": {
+        "path": "host/early-tag-final-header.log",
+        "bytes": 4521,
+        "sha256": "093ff8f376c2fe8d2542f85c6755bf28736c19c29ed5703d6017a8cd0b9c0017"
+      }
+    },
+    "old_selected_tape_on_corrected_code": {
+      "endpoint_frame": 11345,
+      "human_team_wins": false,
+      "first_actor_state_divergence_frame": 3241
+    }
+  },
+  "verification_scope": "114 native C production owners, two changed translation units implementing four causally demonstrated ROM families. Canonical ROM immutable; independent68000 executor is test-only. No post-boot actor/RNG/health/position/result edits. Selected input route residency and logic completion verified; no claim of exhaustive ROM equivalence, all-input support, emulator scanout performance or physical Saturn validation.",
+  "native_corrections": {
+    "patch": {
+      "path": "fixes/state6/proposed-combined-v4.patch",
+      "bytes": 7969,
+      "sha256": "15ab9e2b7f46909c0c23001a72ec35a017f9648c3dd4ffa636306ed9026d5166"
+    },
+    "incremental_from_v3": {
+      "path": "fixes/state6/proposed-state6.patch",
+      "bytes": 2356,
+      "sha256": "eb5669892f8895e009c302361ccda99f2d4a9556b867292bb58c51e23b4384ac"
+    },
+    "source_hashes": [
+      {
+        "file": "wf_cpu_runtime.c",
+        "path": "fixes/state6/src/wf_cpu_runtime.c",
+        "original_sha256": "630386cce0dcb7d38d44744866d4dada7c01dfefca3a96e3db98385597c331d2",
+        "proposed_sha256": "0d921d63c76829c39e45c6487717fd5ee346eed3a541c4a724f3ab8fcdcf2e86"
+      },
+      {
+        "file": "wf_r17_human_raw23.c",
+        "path": "fixes/src/wf_r17_human_raw23.c",
+        "original_sha256": "7ae4c4bf2286279b48c18e45f4ad257468408565eaf029ab1ad5f6b0ae79d066",
+        "proposed_sha256": "eb35cc13ea8e548919eda614482169ced7ea23a76ceffd410550a21cf5f8bb20"
+      }
+    ],
+    "changed_translation_units": 2,
+    "unchanged_guard": "wf_r17_actions_r11.c dependency 0x1C094 retained",
+    "rom68k_sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306",
+    "source_repository_mutated": false,
+    "correction_families": [
+      "CPU1CCB4 original TAG reaction",
+      "CPU1CFB4 to existing1C5FA carry flow",
+      "HumanEA42 DE86/DEB2/DFFC local D0-D3 context",
+      "CPUstate6 1EDFE live24CC context and1EE36 return"
+    ]
+  },
+  "selected_demo": {
+    "name": "both-teams-early-human-tag-rom-v4",
+    "input_tape": {
+      "path": "host/tag-rom-v4-input.csv",
+      "bytes": 15600,
+      "sha256": "1095900ede97757e497e66ac2a9c6f103782b399c5d41168acc3f2ff72ef7b3f",
+      "events": 1761,
+      "format": "decimal zero-based input frame, active-low byte; no header; event persists"
+    },
+    "atlas": {
+      "path": "assets/HOTSPR-ROM-v4-32.BIN",
+      "bytes": 698304,
+      "sha256": "1c28c71853c146dc11d514ee1c642fc7068675ec18eea772201ca37e28292ec6",
+      "format": "R18D",
+      "tile_ids": 6357,
+      "chunk_bytes": 32,
+      "unique_dictionary_chunks": 19720,
+      "mapping_bytes": 50856,
+      "aligned_mapping_bytes": 50880,
+      "dictionary_bytes": 631040,
+      "header_bytes": 16384,
+      "resident_lwram_bytes": 631040,
+      "cold_fallback_slots": 150,
+      "all_tiles_reconstructed_byte_exact": true
+    },
+    "rom_pages_header": {
+      "path": "assets/wp1979_rom_hot_pages_both_tags.h",
+      "bytes": 1577,
+      "sha256": "5b1736d94cc2be346e3f089dc0e6f65c4b7cb82e6b3dd2e161b6d69e30096208",
+      "main_pages": 209,
+      "extra_pages": 14,
+      "unique_pages": 211,
+      "extra_only_pages": [
+        48,
+        156
+      ]
+    },
+    "event_timeline": {
+      "path": "host/tag-rom-v4-events.csv",
+      "bytes": 478,
+      "sha256": "8eaec6148c0c578e4a703f94099b9c3af1d7e257c575219249ae9ba2735f9cd8"
+    },
+    "tag_transactions": [
+      {
+        "outgoing_slot": 0,
+        "incoming_slot": 1,
+        "start_frame": 476,
+        "exchange_frame": 529,
+        "entrant_ready_frame": 556
+      },
+      {
+        "outgoing_slot": 4,
+        "incoming_slot": 5,
+        "start_frame": 5715,
+        "exchange_frame": 5768,
+        "entrant_ready_frame": 5795
+      }
+    ],
+    "result": {
+      "endpoint_rom": "0x0011B6",
+      "frame": 7372,
+      "words_hex": [
+        "4001",
+        "4000",
+        "8000",
+        "8000"
+      ],
+      "final_pin_count_frames": [
+        6994,
+        7082,
+        7170
+      ],
+      "count_169a_hex": "0300",
+      "timer_16a0_hex": "0015",
+      "result_wait_vblanks": 131,
+      "post_boot_rom_file_reads": 0,
+      "post_boot_sprite_file_reads": 0,
+      "blocked_owners": 0,
+      "all_four_active_frames": 7372
+    },
+    "validation_log": {
+      "path": "host/tag-rom-v4-resident.log",
+      "bytes": 3775,
+      "sha256": "94f9e1f8d9d5a7d953cd4e5301cc32d5a99f5d69425d27bc936c44fec05c2f87"
+    },
+    "role_trace": {
+      "path": "host/tag-rom-v4-resident-roles.csv",
+      "bytes": 2898612,
+      "sha256": "7c1724e5badd5717ed2633f1ac7c1a349098a80b4125ad81e6ee64317c97a31e"
+    },
+    "generated_vs_csv_replay_trace_byte_identical": true,
+    "generation_parameters": {
+      "WP1979_TAG_POLICY": "1",
+      "WP1979_TAG_AFTER": "0",
+      "WP1979_TAG_X": "520",
+      "WP1979_TAG_Y": "400",
+      "WP1979_TAG_DEFEND": "1"
+    },
+    "frozen_original_paths": [
+      "fixes/state6/routes/tag-after0/input.csv",
+      "fixes/state6/routes/tag-after0/HOTSPR-32.BIN"
+    ]
+  },
+  "historical_pre_state6": {
+    "scope": "v3 has the two earlier CPU fixes and human EA42 register fix, but predates state6 live-register correction. Its files remain frozen.",
+    "manifest_path": "handoff/pre-state6-v3/wp1979-gameplay-manifest.json",
+    "selected_demo": {
+      "name": "both-teams-three-real-tags-corrected-ea42-register-context",
+      "input_tape": {
+        "path": "host/tag-corrected-after3600-input.csv",
+        "bytes": 23603,
+        "sha256": "55a58e4375f22777b7f60b4da26c83fcfc72cda47982c679f5346569d7eec8ec",
+        "events": 2635,
+        "format": "decimal zero-based input frame, active-low byte; no header; event persists"
+      },
+      "atlas": {
+        "path": "assets/HOTSPR-both-tags-corrected-32.BIN",
+        "bytes": 712128,
+        "sha256": "3ab9f60d3fee1b74c1814caae95d551aaea0290dbf84e042e14968bafa5dced3",
+        "format": "R18D",
+        "tile_ids": 6450,
+        "chunk_bytes": 32,
+        "unique_dictionary_chunks": 20129,
+        "mapping_bytes": 51600,
+        "aligned_mapping_bytes": 51616,
+        "dictionary_bytes": 644128,
+        "header_bytes": 16384,
+        "resident_lwram_bytes": 644224,
+        "cold_fallback_slots": 47,
+        "all_tiles_reconstructed_byte_exact": true
+      },
+      "rom_pages_header": {
+        "path": "assets/wp1979_rom_hot_pages_both_tags.h",
+        "bytes": 1577,
+        "sha256": "5b1736d94cc2be346e3f089dc0e6f65c4b7cb82e6b3dd2e161b6d69e30096208",
+        "main_pages": 209,
+        "extra_pages": 14,
+        "unique_pages": 211,
+        "extra_only_pages": [
+          48,
+          156
+        ]
+      },
+      "event_timeline": {
+        "path": "host/both-tags-corrected-events.csv",
+        "bytes": 618,
+        "sha256": "e896b3f3b25a3396540d670c351e0113ccf781de393275c897982903d18199d8"
+      },
+      "tag_transactions": [
+        {
+          "outgoing_slot": 4,
+          "incoming_slot": 5,
+          "start_frame": 3374,
+          "exchange_frame": 3427,
+          "entrant_ready_frame": 3454
+        },
+        {
+          "outgoing_slot": 0,
+          "incoming_slot": 1,
+          "start_frame": 3906,
+          "exchange_frame": 3959,
+          "entrant_ready_frame": 3986
+        },
+        {
+          "outgoing_slot": 5,
+          "incoming_slot": 4,
+          "start_frame": 3990,
+          "exchange_frame": 4043,
+          "entrant_ready_frame": 4071
+        }
+      ],
+      "result": {
+        "endpoint_rom": "0x0011B6",
+        "frame": 10675,
+        "words_hex": [
+          "4001",
+          "4000",
+          "8000",
+          "8000"
+        ],
+        "final_pin_count_frames": [
+          10323,
+          10411,
+          10499
+        ],
+        "count_169a_hex": "0300",
+        "timer_16a0_hex": "0008",
+        "result_wait_vblanks": 131,
+        "post_boot_rom_file_reads": 0,
+        "post_boot_sprite_file_reads": 0,
+        "blocked_owners": 0,
+        "all_four_active_frames": 10675
+      },
+      "validation_log": {
+        "path": "host/both-tags-corrected-confirm.log",
+        "bytes": 4403,
+        "sha256": "68238fab41a98b27840b3533c25023b55bca7ead72612c294f987dd26c5dfda7"
+      },
+      "role_trace": {
+        "path": "host/both-tags-corrected-confirm-roles.csv",
+        "bytes": 4149898,
+        "sha256": "5dec175acf13e562fcf759d6e68a4cf8468558adb75429f37162def1a6d2dae2"
+      },
+      "generated_vs_csv_replay_trace_byte_identical": true,
+      "generation_parameters": {
+        "WP1979_TAG_POLICY": "1",
+        "WP1979_TAG_AFTER": "3600",
+        "WP1979_TAG_X": "520",
+        "WP1979_TAG_Y": "400",
+        "WP1979_TAG_DEFEND": "1"
+      },
+      "frozen_original_paths": [
+        "fixes/routes/tag-after3600/input.csv",
+        "fixes/routes/tag-after3600/HOTSPR-32.BIN"
+      ]
+    },
+    "v3_selected_tape_on_v4": {
+      "endpoint_frame": 14409,
+      "words_hex": [
+        "8001",
+        "8000",
+        "8000",
+        "8000"
+      ],
+      "log": "fixes/state6/frozen-tape-regressions/v3-selected.log"
+    }
+  },
+  "regressions": {
+    "previous_cpu_cases": 50,
+    "retained_1c094_guard_cases": 4,
+    "previous_human_rng_cases": 33,
+    "state6_independent_cases": 149,
+    "state6_red_pass": 13,
+    "state6_red_fail": 136,
+    "state6_green_pass": 149,
+    "state6_green_fail": 0,
+    "state6_red_results": {
+      "path": "fixes/state6/red/results.json",
+      "bytes": 127153,
+      "sha256": "1c6efd95e60659b7e3f3de40fbc71cc0acc936390ebec7ceded60084e949bcaf"
+    },
+    "state6_green_results": {
+      "path": "fixes/state6/green/results.json",
+      "bytes": 109765,
+      "sha256": "f525691e68466ffa095a6bbdda8302ce387064a42cfc556bd5ea0a2a65dbefc9"
+    },
+    "original_input_routes": [
+      {
+        "name": "tag-react",
+        "tape": "tag-x500-y394-d1-input.csv",
+        "exit_code": 0,
+        "observed_block": null,
+        "pass_without_block": true,
+        "original_reproduced": false
+      },
+      {
+        "name": "run-stale-link",
+        "tape": "tag-after3800-input.csv",
+        "exit_code": 0,
+        "observed_block": null,
+        "pass_without_block": true,
+        "original_reproduced": false
+      },
+      {
+        "name": "request-carry",
+        "tape": "tag-after4000-input.csv",
+        "exit_code": 0,
+        "observed_block": null,
+        "pass_without_block": true,
+        "original_reproduced": false
+      }
+    ],
+    "original_6127_input_complete": {
+      "endpoint_frame": 9015,
+      "human_team_wins": false,
+      "blocked_owners": 0,
+      "log": {
+        "path": "fixes/state6/frozen-tape-regressions/original3800.log",
+        "bytes": 3853,
+        "sha256": "9f0cbc53e177244d00a7cfb02527c66cd48f3cd28daf386c689b181a36f01150"
+      }
+    },
+    "phase_differential": {
+      "interval": "5800..6127",
+      "input": "host/tag-after3800-input.csv",
+      "phases": [
+        "F18A",
+        "1C150",
+        "F4C2"
+      ],
+      "cases": 984,
+      "matches_all_four_full_actor_records": 984,
+      "remaining_differences": 0,
+      "fixture_scope": "Each complete original ROM phase starts from the corresponding observed native RAM/live-register snapshot. This is not an original-PCB end-to-end run.",
+      "results": {
+        "path": "fixes/state6/observed-v4-rom/results.json",
+        "bytes": 384924,
+        "sha256": "59341d244c26485507b5f74183ec9be80a3cfe1def6b376fd8a6cc607a957622"
+      }
+    }
+  },
+  "harness": {
+    "path": "fixes/state6/guard_probe.c",
+    "bytes": 27680,
+    "sha256": "b8d6e6ce9d256937b88c76c8e44801c2eebe2935b7bf24b605898c3c48263eb0"
+  },
+  "build_script": {
+    "path": "fixes/state6/build.py",
+    "bytes": 1375,
+    "sha256": "3c546198ba6bcb35fe0fe365c419fd2ffdf78f5fec8dabfa40912d73409b02f5"
+  },
+  "audit_report": {
+    "path": "GAMEPLAY-AUDIT.md",
+    "bytes": 6612,
+    "sha256": "e6aa7f2fa12ecc8607590de987682782ab8ef378d2974db81f830c2619a3e66a"
+  },
+  "handoff": {
+    "path": "HANDOFF.md",
+    "bytes": 6798,
+    "sha256": "39bd298c44e9a7e90715fcee43af23397c1b7755cca9b58585a70b1606101b54"
+  },
+  "verification_script": {
+    "path": "fixes/state6/verify_final.py",
+    "bytes": 4734,
+    "sha256": "05887f89a0aaa2483abacf861cea8d9ef0cfea4b35de0d26f31f5524ef0953d8"
+  }
+}

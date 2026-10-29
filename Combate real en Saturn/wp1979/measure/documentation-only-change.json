@@ -1,0 +1,8 @@
+{
+  "file": "wp1979/native/src/runtime/include/wf_saturn_memory.h",
+  "before_sha256": "a7096c4b27fbea0566fd1f83e52fb412faa82ac53f172ef58ebd1a3a75de3e58",
+  "after_sha256": "7e9b70a766f2a8e7b454d36c51b46514ed50a67c498cc5b4880db53d02d94d17",
+  "noncomment_bytes_identical": true,
+  "line_count_unchanged": true,
+  "note": "Comment only after candidate4 build; no preprocessing tokens or line numbers changed."
+}

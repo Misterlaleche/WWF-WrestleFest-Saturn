@@ -1,0 +1,36 @@
+--- a/src/wf_r18_scsp.c
++++ b/src/wf_r18_scsp.c
+@@ -49,6 +49,15 @@
+ }
+ static void release(void *u){(void)u;owner=0;}
+ bool wf_r18_scsp_smpc_owned(void){return owner!=0;}
++/* FRT high/low are read separately by the SDK. Retry at a byte rollover
++ * so a torn sample cannot become a spurious full16-bit elapsed interval. */
++static uint16_t stable_frt_count(void)
++{
++    volatile cpu_ioregs_t *const regs=(volatile cpu_ioregs_t *)CPU_IOREG_BASE;
++    uint16_t high,low,check;
++    do{high=regs->frch;low=regs->frcl;check=regs->frch;}while(high!=check);
++    return (uint16_t)((high<<8)|low);
++}
+ static uint32_t now(void *u)
+ {
+     (void)u;
+@@ -56,7 +65,7 @@
+     /* During boot poll FRT frequently, including while video is blank.
+      * No FRT IRQ or long-lived timer takeover. The video backend may
+      * subsequently initialize FRT as before; runtime deadlines use VBlank. */
+-    uint16_t sample=cpu_frt_count_get();
++    uint16_t sample=stable_frt_count();
+     uint32_t numerator=(uint16_t)(sample-last_frt)*1000u+fraction;
+     last_frt=sample;
+     boot_us+=numerator/CPU_FRT_NTSC_320_128_COUNT_1MS;
+@@ -87,7 +96,7 @@
+     clock_frames=frames;owner=0;music_native=false;booting=true;boot_us=fraction=0;
+     scsp_timing[0]=*frames;
+     scsp_io[0]=scsp_io[1]=0;
+-    cpu_frt_init(CPU_FRT_CLOCK_DIV_128);last_frt=cpu_frt_count_get();
++    cpu_frt_init(CPU_FRT_CLOCK_DIV_128);last_frt=stable_frt_count();
+     platform.now_us=now;platform.wait_us=delay;platform.idle=idle;
+     platform.enter_owner=take;platform.leave_owner=release;
+     wf_native_yaul_complete_platform(&platform);

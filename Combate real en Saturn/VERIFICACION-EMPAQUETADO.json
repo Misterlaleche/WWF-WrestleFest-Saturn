@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "scope": "GitHub handoff packaging only; no new Saturn build or performance claim",
+  "package_sha256": "83e231d0ba11826683aaa6d22c1746e2fb9fba9ebfc0540529a73f61ab181f33",
+  "restorer_sha256": "c1c1388b2ac734019d37c803fe2b3b82f86393e3865a1f1329867456e40e3471",
+  "checks": [
+    {
+      "name": "restore_build_from_exact_zip",
+      "status": "PASS",
+      "scope": "build",
+      "restored_files": 19,
+      "verified_files": 19
+    },
+    {
+      "name": "verify_build",
+      "status": "PASS",
+      "scope": "build",
+      "verified_files": 19
+    },
+    {
+      "name": "refuse_conflicting_resource_before_any_write",
+      "status": "PASS"
+    },
+    {
+      "name": "restore_all_archive_data",
+      "status": "PASS",
+      "scope": "all",
+      "restored_files": 1245,
+      "verified_files": 2080
+    },
+    {
+      "name": "verify_all",
+      "status": "PASS",
+      "scope": "all",
+      "verified_files": 2080
+    },
+    {
+      "name": "versioned_candidate_source_equals_frozen_archive",
+      "status": "PASS",
+      "files": 817
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "status": "red-green-confirmed",
+  "results": {
+    "baseline": {
+      "exit_code": 1,
+      "stdout": "PASS baseline RIGHT physical_low=fe ROM_F2D6_index=1 angle=0040 delta_fixed=(138240,0) desired=(138240,0)\nPASS baseline LEFT physical_low=fd ROM_F2D6_index=2 angle=00c0 delta_fixed=(-138240,0) desired=(-138240,0)\nFAIL baseline UP physical_low=fb ROM_F2D6_index=4 angle=0000 delta_fixed=(0,110592) desired=(0,-110592)\nFAIL baseline DOWN physical_low=f7 ROM_F2D6_index=8 angle=0080 delta_fixed=(0,-110592) desired=(0,110592)\n"
+    },
+    "proposed": {
+      "exit_code": 0,
+      "stdout": "PASS proposed RIGHT physical_low=fe ROM_F2D6_index=1 angle=0040 delta_fixed=(138240,0) desired=(138240,0)\nPASS proposed LEFT physical_low=fd ROM_F2D6_index=2 angle=00c0 delta_fixed=(-138240,0) desired=(-138240,0)\nPASS proposed UP physical_low=f7 ROM_F2D6_index=8 angle=0080 delta_fixed=(0,-110592) desired=(0,-110592)\nPASS proposed DOWN physical_low=fb ROM_F2D6_index=4 angle=0000 delta_fixed=(0,110592) desired=(0,110592)\n"
+    }
+  },
+  "physical_route": {
+    "up": {
+      "libretro_id": 4,
+      "core_pad_byte_active_low": "0xef",
+      "yaul_pressed_mask_after_inversion": "0x1000",
+      "sdk_declared_mask": "0x1000"
+    },
+    "down": {
+      "libretro_id": 5,
+      "core_pad_byte_active_low": "0xdf",
+      "yaul_pressed_mask_after_inversion": "0x2000",
+      "sdk_declared_mask": "0x2000"
+    }
+  },
+  "ROM68K_sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306",
+  "source_sha256": {
+    "render_opt/takeover/wp1979_entry-baseline.c": "dae8341fa51ead6d5ad541e379eb2fe18baf6f27623ec62125029c38e3451fbb",
+    "render_opt/takeover/wp1979_entry-proposed.c": "925e889e89fd26e79a9e89f70a0a9949893c423e62932364e557162801894e99"
+  },
+  "note": "Host mock supplies named pressed fields. Actual core and SDK raw-bit definitions independently confirm those names preserve Up/Down; no emulated-memory writes or Saturn build."
+}

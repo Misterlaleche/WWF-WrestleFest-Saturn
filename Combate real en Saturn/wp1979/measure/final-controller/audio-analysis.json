@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "capture": "final-controller",
+  "source": "Actual libretro audio callbacks; no replacement soundtrack or amplitude processing",
+  "music_state_values_during_gameplay": [
+    2
+  ],
+  "music_error_values_during_gameplay": [
+    0
+  ],
+  "scsp_mail_state_values_during_gameplay": [
+    2
+  ],
+  "music_events_final": 401,
+  "dsp_intervals_checked": 562,
+  "dsp_ticks_per_emulated_video_frame": 735,
+  "dsp_sample_rate_hz": 44100.0,
+  "dsp_clock_mismatches": [],
+  "wav": {
+    "channels": 2,
+    "sample_rate_hz": 44100,
+    "samples_per_channel": 764400,
+    "duration_seconds": 17.333333333333332,
+    "nonzero_channel_samples": 815834,
+    "peak_pcm16": 1564,
+    "rms_pcm16": 204.62715685255316,
+    "sha256": "e3968bb0054c107ebf240c1ae1cca774458faac772e79a3f84e7b923511d8f1c"
+  },
+  "hardware_test": false
+}

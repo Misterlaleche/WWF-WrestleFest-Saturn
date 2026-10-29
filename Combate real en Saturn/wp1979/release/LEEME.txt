@@ -1,0 +1,65 @@
+WP1979 — WWF WRESTLEFEST TAG PARA SEGA SATURN
+Entrega independiente: Hulk Hogan + Ultimate Warrior contra Ted DiBiase + Mr. Perfect.
+
+ARRANQUE EN SATURN
+
+1. Extrae wrestlefest-wp1979.bin y wrestlefest-wp1979.cue en la misma carpeta.
+2. Abre/carga el CUE con tu método habitual para ejecutar homebrew en Saturn.
+   El CUE describe una pista de datos MODE1/2352; no renombres sólo uno de los dos archivos.
+3. El programa arranca directamente en este combate TAG. Deja el mando sin pulsar
+   para repetir la demostración del vídeo. Cualquier pulsación de cruceta, A, B,
+   C o Start cancela permanentemente esa secuencia y entrega el control al mando.
+   Reinicia el programa para volver a la demostración inicial.
+
+Objetivo de vídeo: NTSC, 320x240. No requiere cartucho de ampliación de RAM.
+No se ha efectuado una prueba en consola física ni una validación PAL.
+La capacidad de arrancar homebrew depende del método habitual de tu consola.
+
+RESULTADO VERIFICADO
+
+El combate nativo completo ejecuta 7.372 pasos y dibujos en 7.376 VBlanks:
+59,967462 fps, incluyendo el comienzo. Mínimos en ventanas de 1/5/10 segundos:
+58,0 / 59,6 / 59,8 fps. Ambos relevos legales y el final del combate se producen
+mediante la lógica del juego. Cero fallos fatales y cero lecturas de CD durante
+los dos recorridos de combate probados. Música y efectos proceden del programa.
+
+La referencia temporal arcade utilizada es MAME: 57,444852941 Hz. Sus totales
+de vídeo están marcados como estimados en el driver; no son una medida de PCB.
+Los incrementos de desplazamiento y los tiempos de animación conservan la ROM.
+
+El vídeo de 140 segundos procede de Yabause/libretro, intérprete SH-2, VDP por
+software y BIOS HLE libre. El core lleva tres correcciones documentadas para
+DSP/fetch de código, sin modificar sus relojes ni su contabilidad de ciclos.
+El vídeo sigue el tiempo emulado nominal; capturarlo consumió unos 191 segundos
+en el anfitrión. El resultado mide cadencia nativa por VBlank emulado.
+El core no modela una competición de ciclos entre raster VDP1 y CPU; la tasa
+en Saturn físico y su contención de buses quedan pendientes de esa prueba.
+
+IDENTIDAD DEL DISCO
+
+BIN SHA-256:
+f1232edb31d6e3748b60001d8d82bca5f9b6171d16aaf812f618f3dbf858da5e
+CUE SHA-256:
+e3a329a9b0e57b1b22440c4165e302fcdf64b5409a98149579f7fbb299ba0fdb
+
+Se han verificado los 6.592 sectores, sus EDC/ECC, los 19 archivos del disco
+y la igualdad entre A.BIN y el ejecutable congelado para ambas capturas.
+
+ARCHIVOS DE LA ENTREGA
+
+- wp1979-saturn-tag-bin-cue.zip: disco, este LEEME y sumas SHA-256.
+- wp1979-saturn-tag.mp4: captura completa de 2:20 con audio.
+- wp1979-control-mando.mp4: prueba de toma de control de 17,33 segundos con audio.
+- wp1979-fuentes-pruebas.zip: fuentes completas del ejecutable, datos del disco,
+  referencia fijada, parches, herramientas, registros, audio sin procesar,
+  comprobaciones y fuentes del core utilizado. El SDK de compilación va aparte.
+- wp1979-informe.txt: explicación detallada, resultados y límites.
+- wp1979-verificacion.json y SHA256SUMS.txt: identidad de los entregables.
+
+La precarga de gráficos y páginas cubre el combate completo mostrado y la ruta
+de mando comprobada. Una secuencia distinta puede necesitar el lector de CD.
+No se presenta esta demostración acotada como una validación de todos los
+movimientos posibles, modos, personajes o condiciones de la ROM completa.
+
+Se trabajó exclusivamente en wp1979 y en temporales. No se modificó ningún
+repositorio ni trabajo anterior. Los recursos originales conservan sus derechos.

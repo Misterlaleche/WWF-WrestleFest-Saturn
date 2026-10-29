@@ -1,0 +1,17 @@
+[
+  {"frame": 0, "port": 0, "buttons": []},
+  {"frame": 540, "port": 0, "buttons": ["left"]},
+  {"frame": 588, "port": 0, "buttons": []},
+  {"frame": 600, "port": 0, "buttons": ["up"]},
+  {"frame": 636, "port": 0, "buttons": []},
+  {"frame": 648, "port": 0, "buttons": ["right"]},
+  {"frame": 696, "port": 0, "buttons": []},
+  {"frame": 708, "port": 0, "buttons": ["down"]},
+  {"frame": 744, "port": 0, "buttons": []},
+  {"frame": 768, "port": 0, "buttons": ["a"]},
+  {"frame": 776, "port": 0, "buttons": []},
+  {"frame": 804, "port": 0, "buttons": ["b"]},
+  {"frame": 812, "port": 0, "buttons": []},
+  {"frame": 840, "port": 0, "buttons": ["c"]},
+  {"frame": 848, "port": 0, "buttons": []}
+]

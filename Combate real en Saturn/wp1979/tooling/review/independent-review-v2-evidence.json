@@ -1,0 +1,330 @@
+{
+  "review_utc": "2026-10-29T12:30:34.993973+00:00",
+  "status": "candidate2-reviewed-minimum-speed-and-hardware-throughput-not-approved",
+  "manifest_schema": "wp1979-native-gameplay-evidence-v4",
+  "source_sha256": {
+    "Makefile.wp1979": "c0671437f6945f442dd052b79679b6e282b51da9502a1bf74b26354c01f38ed5",
+    "src/wp1979_entry.c": "925e889e89fd26e79a9e89f70a0a9949893c423e62932364e557162801894e99",
+    "src/wp1979_input.c": "1aa5e3d53eb814d5f03df35dc35c66c056064f72b393f0e01ae12c91511a7fb9",
+    "src/wp1979_tape.inc": "2dcb67568e0dcace7f552cfbb96a64233c81b74dd5774b4b900a6da1cdc9f0dc",
+    "src/wp1979_cd_read.c": "fd7fd486955f451fdaaf2a3ee5615b19f9888de39d280211e1093482d5b05dec",
+    "src/wf_cpu_runtime.c": "0d921d63c76829c39e45c6487717fd5ee346eed3a541c4a724f3ab8fcdcf2e86",
+    "src/wf_r17_human_raw23.c": "eb35cc13ea8e548919eda614482169ced7ea23a76ceffd410550a21cf5f8bb20",
+    "src/wf_vdp1_plan.c": "12efe9e1b007fe63fd39a282c5aeb17d857b96567cd6e8e025388be92baa7f76",
+    "src/wf_r18_present.c": "bde7dddbcda8fcb19a11e4c1dca06370a5260d83bae9de9adbe230e7bab0acb3",
+    "src/wf_saturn_yaul_backend.c": "d28b88c499a40e84eaca94a63785e8f37d126b74f78fea6ec2b5e170d8147109",
+    "include/wf_saturn_yaul_backend.h": "e4626e1abe28f53c198cba0f465d184e3e5810c1b7690627a7500d8a28f7669a"
+  },
+  "historical_candidate1": {
+    "status": "complete",
+    "frames_run": 11600,
+    "encoded_frames": 11600,
+    "steps": 10645,
+    "vblanks": 10768,
+    "fps": 59.31463595839524,
+    "rolling": {
+      "60": {
+        "minimum_fps": 56.0,
+        "emulator_frame": 8132,
+        "start_game_frame": 7586,
+        "end_game_frame": 7642
+      },
+      "300": {
+        "minimum_fps": 57.4,
+        "emulator_frame": 7996,
+        "start_game_frame": 7455,
+        "end_game_frame": 7742
+      },
+      "600": {
+        "minimum_fps": 58.0,
+        "emulator_frame": 7696,
+        "start_game_frame": 7162,
+        "end_game_frame": 7742
+      }
+    },
+    "endpoint": 10675,
+    "fatal_observed": false,
+    "finished_presentation": 1,
+    "elf_flat_binary_identity_independently_verified": true,
+    "frozen_hashes_verified": {
+      "program.elf": true,
+      "program.map": true,
+      "program.bin": true,
+      "disc/wrestlefest-wp1979.cue": true,
+      "disc/wrestlefest-wp1979.bin": true
+    },
+    "identity": {
+      "a_bin_matches": true,
+      "sha256": {
+        "program.elf": "30079b2c3ce0b7bede1c3806fbf4d59448f9a51ab9bcb45c56973a03a153b0bd",
+        "program.map": "eaecc9a51f6d6aae37ac84a7636c57e2edcc77e2795745a66c45870e3236d85e",
+        "program.bin": "35eebff8c8181284603ff665e82093e6da5e6b42c5e91ee3207a837c6033bc16",
+        "disc/wrestlefest-wp1979.cue": "e3a329a9b0e57b1b22440c4165e302fcdf64b5409a98149579f7fbb299ba0fdb",
+        "disc/wrestlefest-wp1979.bin": "f9fed6e078bbe0c2cdc2bd7bfc62e02b1694ffb33464beeff64a88143dde5492"
+      }
+    }
+  },
+  "fresh_host_tests": {
+    "renderer_microopts": {
+      "retention_cases": 8198,
+      "present_cases": 4096,
+      "commands": 2478928,
+      "tiles": 1233733,
+      "digest": "13495aa1dbe19bec",
+      "status": "pass"
+    },
+    "crop_6450_asan_ubsan": {
+      "raster_cases": 28479,
+      "submitted_frames": 28481,
+      "atlas_flip_cases": 25800,
+      "status": "pass"
+    }
+  },
+  "state6_recorded_evidence": {
+    "red/results.json": {
+      "cases": 149,
+      "passing": 13,
+      "unmapped_reads": 0,
+      "unmapped_writes": 0,
+      "ignored_rom_write_bytes": 0
+    },
+    "green/results.json": {
+      "cases": 149,
+      "passing": 149,
+      "unmapped_reads": 0,
+      "unmapped_writes": 0,
+      "ignored_rom_write_bytes": 0
+    },
+    "observed-v4-rom/results.json": {
+      "cases": 984,
+      "passing": 984,
+      "unmapped_reads": 0,
+      "unmapped_writes": 0,
+      "ignored_rom_write_bytes": 0
+    }
+  },
+  "core_archive_comparison": {
+    "archive_sha256": "7f1bff1d902b8c0574c650463ba872d86029eb7c513b3e39ee03bf3b991795a4",
+    "unchanged_files": 1328,
+    "changed_files": [
+      "yabause/src/libretro/libretro.c",
+      "yabause/src/scspdsp.c",
+      "yabause/src/sh2int.c"
+    ],
+    "missing_files": 0,
+    "core_sha256": "176c4611333b458c6aa04cb877d69795070f05480bd5c082884c4259cacb6297"
+  },
+  "current_tape": {
+    "native_events": 1761,
+    "manifest_events": 1761,
+    "native_equals_manifest_csv": true,
+    "manifest_csv_sha256": "1095900ede97757e497e66ac2a9c6f103782b399c5d41168acc3f2ff72ef7b3f"
+  },
+  "v4_atlas_independent_validation": {
+    "tiles": 6357,
+    "all_canonical_pixels_match": true,
+    "stage_matches_manifest_atlas": true,
+    "sha256": "1c28c71853c146dc11d514ee1c642fc7068675ec18eea772201ca37e28292ec6",
+    "resident_lwram_bytes": 631040,
+    "cold_fallback_slots": 150
+  },
+  "candidate2_controller_observation": {
+    "status": "control-pass-audio-file-fail",
+    "report_runs": 1000,
+    "report_audio_frames": 735000,
+    "wav_file_bytes": 2890064,
+    "wav_header_frames": 735,
+    "wav_actual_payload_frames": 722505,
+    "wav_sha256": "c8496138248a9b90eef377f2c6846dedb159d613bc2b6b47b13f2299d69d9200",
+    "takeover_emulator_frame": 541,
+    "exact_walk_steps_left": 13,
+    "exact_walk_steps_up": 6,
+    "runtime_fatal": false,
+    "combat_cd_windows": 3,
+    "combat_cd_sectors": 24,
+    "minimum_60_vblank_fps": 53.0,
+    "resolution": "Historical defective WAV excluded; complete new local capture and all59 copied files independently verified; new WAV hash4f1727896eec604e64f27cbab15663644c93584b5df233036a67d24af79e8018"
+  },
+  "candidate2_disc_independent_validation": {
+    "status": "PASS",
+    "sectors": 6577,
+    "all_raw_sectors_edc_ecc_exact": true,
+    "all_root_payloads_exact": {
+      "A.BIN": true,
+      "ABS.TXT": true,
+      "BIB.TXT": true,
+      "CPY.TXT": true,
+      "FONT8.BIN": true,
+      "FRONTSPR.BIN": true,
+      "HOTSPR.BIN": true,
+      "MUSIC.ELF": true,
+      "POSTSPR.BIN": true,
+      "R18MAP1.BIN": true,
+      "R18MAP2.BIN": true,
+      "R18MAP4.BIN": true,
+      "R18MAP5.BIN": true,
+      "R18MENU.BIN": true,
+      "R18RING.BIN": true,
+      "ROM68K.BIN": true,
+      "SCSP.ELF": true,
+      "SFX.DAT": true,
+      "SPRITES.PAK": true
+    },
+    "raw_sha256": "703efdc05500c08c07121af4eb39599016b9c921df859cbb1ecec9a5d1bbc872",
+    "iso_sha256": "c92530c39ea053b90c1c14cdda6447e1cc8fef6717f37f7429981225c7d50425",
+    "boot_master_stack": "0x6004000",
+    "boot_slave_stack": "0x60ff000",
+    "boot_load_address": "0x6004000",
+    "boot_load_size": 919060,
+    "release_bin_matches_capture": true
+  },
+  "candidate2_elf_flat_binary_identity_independently_verified": true,
+  "candidate2_controller_and_full_image_identical": true,
+  "candidate2_full_independent_observation": {
+    "status": "complete",
+    "runs": 8400,
+    "encoded_frames": 8400,
+    "video_rate": 60.0,
+    "steps": 7342,
+    "vblanks": 7454,
+    "draws": 7342,
+    "fps": 59.098470619801446,
+    "rolling": {
+      "60": {
+        "min_fps": 56.0,
+        "emulator_frame": 2252,
+        "start_game_frame": 1755,
+        "end_game_frame": 1811
+      },
+      "300": {
+        "min_fps": 57.8,
+        "emulator_frame": 3378,
+        "start_game_frame": 2862,
+        "end_game_frame": 3151
+      },
+      "600": {
+        "min_fps": 58.3,
+        "emulator_frame": 3273,
+        "start_game_frame": 2759,
+        "end_game_frame": 3342
+      }
+    },
+    "finish": {
+      "finished_frame": 7372,
+      "finished_result": 16385,
+      "finished_count": 768,
+      "finished_timer": 21,
+      "finished_presentation": 1,
+      "finished_vblanks": 7486,
+      "finished_presentation_vblanks": 131
+    },
+    "max_gap": 2,
+    "combat_cd_windows": 0,
+    "combat_cd_sectors": 0,
+    "all_fatal_zero": true,
+    "actor_ids": {
+      "0": [
+        0
+      ],
+      "1": [
+        1
+      ],
+      "4": [
+        9
+      ],
+      "5": [
+        7
+      ]
+    },
+    "role_changes": [
+      {
+        "observed_completed_game_frame": 0,
+        "emulator_frame": 473,
+        "video_seconds": 7.883333333333334,
+        "legal_slots": [
+          0,
+          4
+        ]
+      },
+      {
+        "observed_completed_game_frame": 528,
+        "emulator_frame": 1008,
+        "video_seconds": 16.8,
+        "legal_slots": [
+          1,
+          4
+        ]
+      },
+      {
+        "observed_completed_game_frame": 5767,
+        "emulator_frame": 6329,
+        "video_seconds": 105.48333333333333,
+        "legal_slots": [
+          1,
+          5
+        ]
+      }
+    ],
+    "audio": {
+      "reported_samples": 6174000,
+      "DSP_interval_histogram": {
+        "735": 7926
+      },
+      "music_states": [
+        2
+      ],
+      "music_errors": [
+        0
+      ]
+    },
+    "artifact_sha256": {
+      "native-video.mp4": "41c9a832798d3ec0054de8d8fa861902a8c6d51310d4eb36c0cf05d5c808f4c1",
+      "native-capture.mp4": "b83974411a8b5b0cc0c229d21b18873ec648f5e875c6bd04a0e6eebd66705321",
+      "native-audio.wav": "da23f70876ad8aae10b3c0cb4714c1523c1476bfdba1d18a5be507456a2bc618",
+      "report.json": "2fcc961249917adb344f9023e01157f285d7c9296b0095fcd3c0902f6d5cd23c"
+    }
+  },
+  "final_audio_independent_validation": {
+    "final_demo": {
+      "samples_per_channel": 6174000,
+      "channels": 2,
+      "rate": 44100,
+      "duration": 140.0,
+      "payload_frame_count_matches_header": true,
+      "matches_reported_callbacks": true,
+      "byte_size_exact": true,
+      "nonzero_channel_samples": 11630492,
+      "peak": 2923,
+      "rms": 384.17085014533956,
+      "sha256": "da23f70876ad8aae10b3c0cb4714c1523c1476bfdba1d18a5be507456a2bc618",
+      "video_present": true
+    },
+    "final_controller_local": {
+      "samples_per_channel": 735000,
+      "channels": 2,
+      "rate": 44100,
+      "duration": 16.666666666666668,
+      "payload_frame_count_matches_header": true,
+      "matches_reported_callbacks": true,
+      "byte_size_exact": true,
+      "nonzero_channel_samples": 762894,
+      "peak": 1492,
+      "rms": 199.6355818216074,
+      "sha256": "4f1727896eec604e64f27cbab15663644c93584b5df233036a67d24af79e8018",
+      "video_present": true
+    }
+  },
+  "final_controller_copy_independently_verified": {
+    "files": 59,
+    "mismatches": [],
+    "source": "/tmp/wp1979-captures/candidate-2-controller-local",
+    "destination": "wp1979/measure/candidate-2-controller-local"
+  },
+  "closed_utc": "2026-10-29T12:39:47.181400+00:00",
+  "capture_tools_current_sha256": {
+    "measure/run_capture.py": "b821641985d02ccfec36d8cf037929c467427bf815d74c63c34c2ec9c3d3955a",
+    "measure/analyze_capture.py": "ea998aaf63d5d4b3b28e8de09cbea45db39da9f375576a4431a59d209e976211",
+    "measure/analyze_audio.py": "e3a4b1d1845c01307259de92dd3f261fb5598338c5254bd74eae0738fa54f709",
+    "tooling/capture_yabause.py": "6d1ee46299b685a41e9e426d26f6b95cec32cf645fb57f252fd0a453c8e4db89"
+  }
+}

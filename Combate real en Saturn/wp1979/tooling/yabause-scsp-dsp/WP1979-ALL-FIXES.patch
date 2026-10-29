@@ -1,0 +1,33 @@
+--- a/yabause/src/libretro/libretro.c
++++ b/yabause/src/libretro/libretro.c
+@@ -1114,7 +1114,7 @@
+    yinit.carttype             = addon_cart_type;
+    yinit.regionid             = REGION_AUTODETECT;
+    yinit.buppath              = bup_path;
+-   yinit.use_new_scsp         = 0;
++   yinit.use_new_scsp         = 1;
+    yinit.mpegpath             = NULL;
+    yinit.videoformattype      = VIDEOFORMATTYPE_NTSC;
+    yinit.frameskip            = frameskip_enable;
+--- a/yabause/src/scspdsp.c
++++ b/yabause/src/scspdsp.c
+@@ -147,7 +147,7 @@
+       shift_temp = saturate_24(dsp->acc * 2);
+    else if (instruction.part.shift == 2)
+       shift_temp = (dsp->acc * 2) & 0xffffff;
+-   else if (instruction.part.shift == 2)
++   else if (instruction.part.shift == 3)
+       shift_temp = dsp->acc & 0xffffff;
+ 
+    if (instruction.part.ewt)
+--- a/yabause/src/sh2int.c
++++ b/yabause/src/sh2int.c
+@@ -186,7 +186,7 @@
+ }
+ 
+ extern u8 * Vdp1Ram;
+-static u32 FASTCALL FetchVram(u32 addr)
++static u32 FASTCALL FetchVram(UNUSED SH2_struct *sh, u32 addr)
+ {
+   addr &= 0x07FFFF;
+   return T1ReadWord(Vdp1Ram, addr);

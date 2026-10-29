@@ -1,0 +1,4059 @@
+--- /dev/null
++++ native/src/runtime/Makefile.wp1979
+@@ -0,0 +1,94 @@
++ifeq ($(strip $(YAUL_INSTALL_ROOT)),)
++  $(error Undefined YAUL_INSTALL_ROOT)
++endif
++SH_PROGRAM:= wrestlefest-wp1979
++SH_BUILD_DIR:= audit/runtime18-build
++SH_OUTPUT_DIR:= audit/runtime18-disc
++R18_ENTRY?= src/wp1979_entry.c
++R18_REPLAY_TEST:= 1
++WP1979_AUDIO?= 1
++R18_PRESENT?= src/wf_r18_present.c
++
++# build.pre.mk expands the map filename immediately from these settings.
++include $(YAUL_INSTALL_ROOT)/share/build.pre.mk
++
++SH_SRCS:= \
++ src/wf_actor.c src/wf_payment.c src/wf_spatial.c src/wf_target_relation.c src/wf_pair_relation.c src/wf_actor_prepass.c src/wf_state5_exec.c src/arcade_cpu_final_bridge.c \
++ src/wf_cpu_runtime.c src/wf_gameplay_bindings.c src/wf_damage.c src/wf_scheduler.c \
++ src/wf_core_phases.c src/wf_input.c generated/wf_action_matrix.c \
++ generated/wf_animation_tables.c generated/wf_physics_tables.c \
++ generated/wf_state5_tables.c generated/wf_collision_tables.c src/wf_collision.c \
++ src/wf_collision_runtime.c src/wf_collision_dispatch.c src/wf_victim65.c \
++ src/wf_ground.c src/wf_pin.c src/wf_ringout.c src/wf_match_rules.c \
++ src/wf_royal.c src/wf_doomsday.c src/wf_animation.c src/wf_physics.c \
++ src/wf_camera.c src/wf_visual.c src/wf_graphics.c src/wf_vdp1_plan.c \
++ src/wf_combat_frame.c src/wf_saturn_render_bridge.c src/wf_saturn_memory.c \
++ src/wf_saturn_yaul_backend.c src/wf_saturn_combat_present.c $(R18_ENTRY) \
++ src/wf_r17_m68k_shadow.c src/wf_r17_bootstrap.c src/wf_r17_rng1129e.c \
++ src/wf_r17_human_ddc8.c src/wf_r17_human_raw23.c src/wf_r17_raw23.c \
++ src/wf_r17_actions_r11.c src/wf_r17_dispatch_1c03e.c src/wf_r17_resolver_280dc.c src/wf_r17_collision_24062.c src/wf_r17_ringside_fdee.c src/wf_r17_fixed_four_10120.c src/wf_r17_transient_reset_10e6a.c src/wf_r17_effects_7a00.c src/wf_r17_render_contract.c src/wf_r17_referee.c src/wf_r17_scheduler_owners.c \
++ src/wf_r17_follow_10e86.c src/wf_r17_dependencies.c src/wf_r17_integration.c src/wf_r17_post7a00.c src/wf_r17_postack_2017a.c
++SH_SRCS+= src/wf_r17_participant_helpers.c src/wf_r17_participant_native.c src/wf_r17_royal_9132.c src/wf_r17_tag_6e34.c
++SH_SRCS+= src/wf_r18_referee.c src/wf_r18_match_result.c src/wf_r18_result_screen.c src/wf_r18_bootstrap.c src/wf_r18_cdfs.c src/wf_r18_metasprite.c $(R18_PRESENT) src/wf_r18_ring.c src/wf_r18_video.c src/wf_r18_hud.c src/wf_r18_display.c src/wf_r18_world.c src/wf_r18_transition.c
++SH_SRCS+= src/wf_r18_frontend_input.c src/wf_r18_frontend_palette.c src/wf_r18_frontend_fade.c src/wf_r18_frontend_effect.c src/wf_r18_mode_select.c src/wf_r18_title_palette.c src/wf_r18_frontend_boot.c src/wf_r18_title.c src/wf_r18_roster_select.c src/wf_r18_prematch.c src/wf_r18_frontend_io.c src/wf_r18_frontend_map.c src/wf_r18_frontend_render.c src/wf_r18_frontend_leaf.c src/wf_r18_royal_setup.c
++SH_SRCS+= src/wf_r18_frontend_driver.c src/wf_r18_frontend_reset.c src/wf_r18_frontend_coin.c src/wf_r18_frontend_irq.c src/wf_r18_frontend_mode_plate.c src/wf_r18_frontend_board.c src/wf_r18_match_setup.c src/wf_r18_match_flow.c src/wf_r18_match_hud.c src/wf_r18_match_flash.c src/wf_r18_match_aux.c src/wf_r18_match_driver.c src/wf_r18_match_support.c src/wf_r18_card_scene.c src/wf_r18_runtime_handoff.c
++SH_SRCS+= src/wf_r18_frontend_world.c
++SH_SRCS+= src/wf_r18_attract_setup.c src/wf_r18_post_tag.c
++SH_SRCS+= src/wf_r18_ranking.c src/wf_r18_ranking_glyph.c src/wf_r18_records_aux.c
++SH_SRCS+= src/wf_r18_save.c src/wf_r18_save_saturn.c
++SH_SRCS+= src/wp1979_input.c src/wp1979_cd_read.c
++ifeq ($(WP1979_AUDIO),1)
++SH_SRCS+= src/wf_r18_scsp.c ../audio/native/wf_native_host.c ../audio/native/wf_native_queue.c ../audio/native/wf_native_elf.c ../audio/native/wf_native_yaul.c ../audio/native/wf_sfx_upload.c ../audio/native/wf_music_elf.c
++else
++SH_SRCS+= src/wp1979_audio_stub.c
++SH_CFLAGS+= -DWP1979_VIDEO_BASELINE=1
++endif
++ifneq ($(R18_REPLAY_TEST),)
++SH_CFLAGS+= -DWF_R18_REPLAY_TEST=1
++endif
++ifeq ($(R18_REPLAY_TEST),noinput)
++SH_CFLAGS+= -DWF_R18_REPLAY_NOINPUT=1
++endif
++ifneq ($(R18_PROFILE_START),)
++SH_CFLAGS+= -DWF_R18_PROFILE_START=$(R18_PROFILE_START)
++endif
++ifneq ($(R18_PROFILE_STOP),)
++SH_CFLAGS+= -DWF_R18_PROFILE_STOP=$(R18_PROFILE_STOP)
++endif
++ifneq ($(R18_DIAG_RATE),)
++SH_CFLAGS+= -DWF_R18_DIAG_RATE=1
++endif
++SH_CFLAGS+= -O2 -Iinclude -Wall -Wextra -Werror -DWF_PLATFORM_SATURN=1
++SH_DEFSYMS+= -Wl,--defsym=___master_stack=0x06004000 -Wl,--defsym=___slave_stack=0x060FF000
++
++# Proven WP33 / Yaul single-data-track boot contract.
++IMAGE_DIRECTORY:= audit/runtime18-cd
++AUDIO_TRACKS_DIRECTORY:= audit/runtime18-empty-audio
++IP_VERSION:= V1.979
++IP_RELEASE_DATE:= 20261029
++IP_AREAS:= JTUBKAEL
++IP_PERIPHERALS:= J
++IP_TITLE:= WWF WrestleFest WP1979 TAG
++IP_MASTER_STACK_ADDR:= 0x06004000
++IP_SLAVE_STACK_ADDR:= 0x060FF000
++IP_1ST_READ_ADDR:= 0x06004000
++IP_1ST_READ_SIZE:= -1
++include $(YAUL_INSTALL_ROOT)/share/build.post.iso-cue.mk
++
++# The supplied SDK does not track compiler flags, entry selection or asset
++# changes. Keep diagnostic/audio switches from silently reusing stale objects.
++WP1979_CONFIG_STAMP:= $(SH_BUILD_PATH)/wp1979-build-config.txt
++.PHONY: wp1979-config-check wp1979-disc-inputs
++$(WP1979_CONFIG_STAMP): wp1979-config-check
++	$(file >$(WP1979_CONFIG_STAMP).request,$(SH_SRCS)|$(SH_CFLAGS)|$(SH_LDFLAGS)|$(SH_SPECS)|$(IP_VERSION)|$(IP_RELEASE_DATE)|$(IP_AREAS)|$(IP_PERIPHERALS)|$(IP_TITLE)|$(IP_MASTER_STACK_ADDR)|$(IP_SLAVE_STACK_ADDR)|$(IP_1ST_READ_ADDR)|$(IP_1ST_READ_SIZE)|$(YAUL_INSTALL_ROOT))
++	@python3 tools/wp1979_config_stamp.py "$(WP1979_CONFIG_STAMP).request" "$@"
++$(SH_OBJS_UNIQ): $(WP1979_CONFIG_STAMP)
++$(SH_BUILD_PATH)/$(SH_PROGRAM).elf: $(WP1979_CONFIG_STAMP)
++# Repack the complete current staging set, including deletions, on each build.
++$(SH_OUTPUT_PATH)/$(SH_PROGRAM).iso: wp1979-disc-inputs
++
++pre-build-iso:
++	@mkdir -p $(IMAGE_DIRECTORY)
++	@printf 'WP1979 independent native Saturn TAG combat demonstration\n' > $(IMAGE_DIRECTORY)/ABS.TXT
++	@printf 'Native R18 reference d95b8c37; WP33/Yaul boot; original ROM data\n' > $(IMAGE_DIRECTORY)/BIB.TXT
++	@printf 'WrestleFest assets retain their original rights holders.\n' > $(IMAGE_DIRECTORY)/CPY.TXT
+--- reference_r18/src/runtime/include/wf_r18_rom_hot_pages.h
++++ native/src/runtime/include/wf_r18_rom_hot_pages.h
+@@ -1,20 +1,31 @@
+-/* Original-ROM 1 KiB pages demanded by complete noinput3008, active-pad3854 and emulated-input3305.
+- * This measured profile does not promise residency for historical partial paths. */
++/* wp1979 complete TAG demonstrations, immutable canonical-ROM metadata.
++ * Measured seed1085: original policy WIN11015, noinput LOSS4267,
++ * early human TAG WIN10033, both-team TAGs WIN9980. No arbitrary-path claim.
++ * 209 main pages + 14 HWRAM pages (48/156 unique there, 12 duplicated hot).
++ * Storage changes only; all gameplay owners and source bytes unchanged. */
+ #ifndef WF_R18_ROM_HOT_PAGES_H
+ #define WF_R18_ROM_HOT_PAGES_H
+ #include <stdint.h>
+ static const uint16_t wf_r18_rom_hot_pages[]={
+-10,11,12,15,18,19,38,40,48,129,130,148,151,152,155,156,157,162,163,164,165,166,167,168,169,170,171,172,180,181,182,183,184,185,186,187,188,205,206,207,209,210,227,228,229,230,231,232,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,273,274,275,276,277,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,307,308,310,311,312,314,315,316,319,322,389,392,396,399,418,419,420,428,429,430,431,432,433,434,435,436,437,438,439,440,441,442,443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507
++11,12,13,38,40,129,148,151,152,155,162,163,165,166,167,168,
++169,170,171,172,227,228,229,230,235,236,237,238,239,241,242,243,
++244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,
++260,261,262,263,264,265,266,267,268,269,270,271,272,274,275,276,
++277,278,279,280,281,282,288,290,291,295,308,309,310,311,312,315,
++316,318,319,320,322,351,352,353,354,355,356,357,358,359,360,361,
++362,363,376,377,378,379,380,381,382,383,384,385,386,387,388,389,
++390,391,392,393,394,395,396,397,398,399,400,401,403,404,418,419,
++420,428,429,430,431,432,433,434,435,436,437,438,439,440,441,442,
++443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458,
++459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,
++475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,
++491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,
++507
+ };
+-/* Complete controlled and no-input TAG replays: pages first touched by
+- * late actions/result presentation after the main LWRAM preload. */
+-static const uint16_t wf_r18_rom_tag_extra_pages[]={150,272,278,306,309,381};
+-/* Royal route: repeated LWRAM victims plus absent pages. Existing
+- * LWRAM pages are copied into HWRAM; absent pages are read once before play. */
+-#ifdef WF_R18_DIAG_RATE
+-/* Keep the hardware-rate test on the validated stage9an cache footprint. */
+-static const uint16_t wf_r18_rom_royal_extra_pages[]={170,244,250,252,254,318,353,361,373,411};
+-#else
+-static const uint16_t wf_r18_rom_royal_extra_pages[]={170,244,245,250,252,254,318,353,361,368,373,395,411,415};
++static const uint16_t wf_r18_rom_tag_extra_pages[]={
++48,156,162,163,165,227,241,243,249,261,352,376,418,419
++};
++static const uint16_t wf_r18_rom_royal_extra_pages[]={
++48,156,162,163,165,227,241,243,249,261,352,376,418,419
++};
+ #endif
+-#endif
+--- reference_r18/src/runtime/include/wf_saturn_memory.h
++++ native/src/runtime/include/wf_saturn_memory.h
+@@ -24,9 +24,9 @@
+ #define WF_SATURN_LWRAM_FRONT_TILE_BYTES   0x0007ac00u
+ #define WF_SATURN_LWRAM_FRONT_RAM          0x002fc000u
+ #define WF_SATURN_LWRAM_FRONT_RAM_BYTES    0x00004000u
+-/* Keep more dictionary indices in HWRAM so frequently observed TAG tiles
+- * fit beside the resident dictionary. Leave at least96 cold LWRAM slots;
+- * the traced match used at most68 cold IDs in one frame before expansion. */
++/* Keep dictionary indices in HWRAM beside the resident LWRAM dictionary.
++ * Cold-slot capacity depends on the lossless atlas; the final WP1979
++ * 6474-tile atlas leaves53 bounded fallback slots after both traced routes. */
+ #define WF_SATURN_HWRAM_HOT_INDEX_BYTES    0x0001c000u
+ 
+ /* WP32 baseline ownership. Offsets are relative to VDP1 VRAM. */
+--- reference_r18/src/runtime/include/wf_saturn_yaul_backend.h
++++ native/src/runtime/include/wf_saturn_yaul_backend.h
+@@ -21,7 +21,9 @@
+     uint8_t defer_sync; /* caller commits VDP1 and VDP2 together before the next frame */
+     /* Bounds describe staged bytes only while the slot is resident or dirty.
+      * A zero height consumes the logical request without a hardware sprite. */
+-    uint8_t crop_top[WF_VDP1_STREAM_TILES_MAX];
++    /* Low5 bits: original top row; bit5: packed8px width; bit6: right
++     * source half. Reuses the former top byte: backend size is unchanged. */
++    uint8_t crop_meta[WF_VDP1_STREAM_TILES_MAX];
+     uint8_t crop_height[WF_VDP1_STREAM_TILES_MAX];
+ } wf_saturn_yaul_backend_t;
+ 
+--- /dev/null
++++ native/src/runtime/include/wp1979_cd_read.h
+@@ -0,0 +1,40 @@
++#ifndef WP1979_CD_READ_H
++#define WP1979_CD_READ_H
++
++#include <cd-block.h>
++#include <stdint.h>
++
++enum {
++    WP1979_CD_ARGUMENT = -1,
++    WP1979_CD_COMMAND_TIMEOUT = -2,
++    WP1979_CD_READY_TIMEOUT = -3,
++    WP1979_CD_SECTOR_TIMEOUT = -4,
++    WP1979_CD_REJECT = -5,
++    WP1979_CD_WAIT = -6,
++    WP1979_CD_OPEN = -7,
++    WP1979_CD_NO_DISC = -8,
++    WP1979_CD_ERROR = -9,
++    WP1979_CD_FATAL = -10,
++    WP1979_CD_BUFFER_COUNT = -11,
++    WP1979_CD_TRANSFER_COUNT = -12
++};
++
++/* Synchronous, single-owner CD transport. The CD block must be initialized.
++ * FAD is LBA + 150. The caller supplies a CPU-writable destination of at
++ * least length bytes. Any byte alignment is supported. The source command
++ * partition is selector 0, matching the existing R18 transport.
++ *
++ * Returns 0 on success or a negative value above. Polling is bounded without
++ * changing FRT configuration, which the sound boot path also uses.
++ */
++int wp1979_cd_sector_read(fad_t fad, void *output_buffer);
++int wp1979_cd_sectors_read(fad_t fad, void *output_buffer, uint32_t length);
++
++typedef struct {
++    uint32_t stage, fad, requested_bytes, copied_bytes;
++    uint16_t command[4], response[4];
++    int32_t error;
++} wp1979_cd_diagnostics_t;
++extern volatile wp1979_cd_diagnostics_t wp1979_cd_diagnostics;
++
++#endif
+--- /dev/null
++++ native/src/runtime/include/wp1979_input.h
+@@ -0,0 +1,6 @@
++#ifndef WP1979_INPUT_H
++#define WP1979_INPUT_H
++#include <stdint.h>
++uint8_t wp1979_input(uint32_t frame,uint8_t physical);
++extern volatile uint32_t wp1979_demo_active;
++#endif
+--- reference_r18/src/runtime/src/wf_cpu_runtime.c
++++ native/src/runtime/src/wf_cpu_runtime.c
+@@ -8,6 +8,7 @@
+ /* Direct-ROM $1C2CC fast routes reached by the fresh TAG participants. Other
+  * branches remain explicit dependencies instead of guessing AI behavior. */
+ static wf_status_t knockdown_1cbf8(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
++static wf_status_t state1_tag_request_1c5fa(wf_runtime_t*,wf_actor_raw_t*,int*,wf_cpu_trace_t*);
+ wf_status_t wf_cpu_pursuit_1d5a2(wf_runtime_t*,unsigned,wf_state5_trace_t*);
+ extern wf_status_t wf_state5_approach_1f45a(wf_runtime_t*,unsigned,wf_state5_trace_t*);
+ static wf_status_t state0_tail(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
+@@ -280,7 +281,12 @@
+   int idle=(ts==0u)||(ts==1u&&wf_u8(t,WF_A_CPU_SUBSTATE)==0u)||
+            (ts==4u&&wf_u8(t,WF_A_STATE4_LO)==1u);
+   if(idle){
+-   if(wf_u8(a,WF_A_FLAGS34)&2u)return block(tr,0x0001c5fau);
++   /* $1CFB4-$1CFC2: only carry set rejoins $1D01A. A reserve
++    * selects AE4 and returns with its existing direction unchanged. */
++   if(wf_u8(a,WF_A_FLAGS34)&2u){
++    int carry=0;wf_status_t st=state1_tag_request_1c5fa(rt,a,&carry,tr);
++    if(st!=WF_OK||!carry)return st;
++   }
+    wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_CPU_B5)&1u)?0x40u:0xc0u);
+    return WF_OK;
+   }
+@@ -302,7 +308,14 @@
+     return choose_1dea6(rt,slot,a,0x2307cu,0u,tr);
+    wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x75u);return WF_OK;
+   }
+-  if(selector==0x4cu)return block(tr,0x1ccb4u);
++  if(selector==0x4cu){
++   /* $1CCB4-$1CCCE: pursue the tagging target's partner. Preserve the
++    * full pointer, then BSET B7.6 and select state5/raw3D; no relation
++    * recalculation or immediate execution occurs on this ROM branch. */
++   wf_set_be32(a,WF_A_TARGET,wf_be32(t,WF_A_TEAM_LINK));
++   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|64u));
++   wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3du);return WF_OK;
++  }
+   if((wf_u8(t,WF_A_FLAGS33)&64u)&&(rt->g.mode_0161&1u)){
+    wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|128u));
+    wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)|1u));wf_set_be16(a,WF_A_STATE,0u);return WF_OK;
+@@ -319,7 +332,12 @@
+    wf_r17_m68k_move_b(&rt->m68k_regs,0u,wf_u8(a,WF_A_FACING));
+    if(wf_u8(a,WF_A_FACING)!=wf_u8(t,WF_A_FACING))
+     return choose_1dea6(rt,slot,a,0x2307cu,0u,tr);
+-   if(wf_u8(a,WF_A_FLAGS34)&2u)return block(tr,0x1c5fau);
++   /* $1CFB4-$1CFC2: only carry set rejoins $1D01A. A reserve
++    * selects AE4 and returns with its existing direction unchanged. */
++   if(wf_u8(a,WF_A_FLAGS34)&2u){
++    int carry=0;wf_status_t st=state1_tag_request_1c5fa(rt,a,&carry,tr);
++    if(st!=WF_OK||!carry)return st;
++   }
+    wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_CPU_B5)&1u)?0x40u:0xc0u);return WF_OK;
+   }
+   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|64u));
+@@ -598,15 +616,6 @@
+  return WF_OK;
+ }
+ 
+-static int weighted_runtime(wf_runtime_t *rt,const uint8_t *weights,size_t count,int *choice){
+- if(!rt||!weights||!choice||!rt->g.rng_state_valid||!rt->g.rng_register_context_valid)return 0;
+- arcade_cpu_rng_t r={rt->g.rng_state,rt->g.frame_counter,rt->g.rng_d2,rt->g.rng_d3,rt->g.rng_d4,rt->g.rng_d5,rt->g.rng_d6,rt->g.rng_d7};
+- int c=arcade_cpu_weighted_select(&r,weights,count,0);
+- if(c<0)return 0;
+- rt->g.rng_state=r.seed;
+- *choice=c;
+- return 1;
+-}
+ static wf_status_t state6(wf_runtime_t*rt,unsigned slot,wf_cpu_trace_t*tr){
+  wf_actor_raw_t*a=&rt->actors[slot];
+  /* $1EDC4: disabled when $1C007C==0 or +$45==0. */
+@@ -619,15 +628,23 @@
+   wf_set_be16(a,WF_A_TIMER44,0u);
+   wf_set_be16(a,WF_A_STATE,5u);
+   wf_set_be16(a,WF_A_SELECTOR,0x003fu);
+-  return wf_state5_execute(rt,slot,&tr->state5);
++  /* $1EE36 RTS: the scheduled action phase owns raw3F initialization. */
++  return WF_OK;
+  }
+  /* First phase: clear bit4, choose exact two-byte row by $1C0162 and tier. */
+  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~0x10u));
+- if(rt->g.progression_0162>=10u||wf_u8(a,WF_A_TIER_LO)>=3u)return WF_BAD_STATE;
+- const uint8_t *w=arcade_cpu_state6_weight_pair((uint8_t)rt->g.progression_0162,wf_u8(a,WF_A_TIER_LO));
++ if(rt->g.progression_0162>=10u||wf_be16(a,WF_A_TIER)>=3u)return WF_BAD_STATE;
++ /* $1EDE2-$1EDFA establish D0, then $1EDFE calls $24CC with the
++  * current D2-D7. The legacy launch-time rng_d* cache is not this context. */
++ wf_r17_m68k_moveq(&rt->m68k_regs,0,0);
++ wf_r17_m68k_move_w(&rt->m68k_regs,0,rt->g.progression_0162);
++ wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(rt->m68k_regs.d[0]*4u));
++ const uint8_t *w=arcade_cpu_state6_weight_pair((uint8_t)rt->g.progression_0162,(uint8_t)wf_be16(a,WF_A_TIER));
+  if(!w)return WF_BAD_STATE;
+- int c;
+- if(!weighted_runtime(rt,w,2u,&c))return block(tr,0x000024ccu);
++ wf_r17_m68k_move_w(&rt->m68k_regs,0,wf_be16(a,WF_A_TIER));
++ wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(rt->m68k_regs.d[0]*2u));
++ int c=state1_weighted_24cc(rt,w,2u);
++ if(c<0)return block(tr,0x000024ccu);
+  if(c==0){wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)|0x10u));return WF_OK;}
+  wf_set_be16(a,WF_A_CPU_BC,0u);
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~0x02u));
+--- reference_r18/src/runtime/src/wf_r17_human_raw23.c
++++ native/src/runtime/src/wf_r17_human_raw23.c
+@@ -257,7 +257,8 @@
+     dst->state_1c005c=src->state_1c005c;
+     dst->global_1c0080=src->global_1c0080;
+     dst->d[0]=src->d[0];dst->d[1]=(src->d[1]&0xFFFF0000u)|(uint32_t)mode;
+-    dst->d[2]=src->d[2];dst->d[3]=src->d[3];dst->d[4]=src->d[4];
++    /* $DEB2 CLR.L D3 is local to DE86, whose MOVEM restores D0-D3. */
++    dst->d[2]=src->d[2];dst->d[3]=0u;dst->d[4]=src->d[4];
+     dst->d[5]=src->d[5];dst->d[6]=src->d[6];dst->d[7]=src->d[7];
+     dst->valid=src->valid;
+ }
+@@ -315,8 +316,13 @@
+     if(wf_be16(a,O_STATE)==0x8006u&&wf_be16(a,O_TIMER44)!=0u&&wf_u8(a,0x25u)==0u){
+         wf_r17_rng21b4_context_t rc;wf_r17_1129e_trace_t rr;int carry=0;wf_status_t rs;
+         if(ctx->m68k_live&&ctx->rng_state_1c005c){
+-            wf_r17_m68k_move_w(ctx->m68k_live,1u,2u); /* $EB7C MOVE.W #2,D1; preserve high WORD */
+-            rs=wf_r17_1129e_live(rt,actor_slot,ctx->mode_0161,ctx->global_0162,ctx->rng_state_1c005c,ctx->global_1c0080,ctx->m68k_live,&rr,&carry);
++            /* $DE86 saves D0-D3; $DEB2 clears D3 before EA42. The
++             * $EB7C mode write and $1129E temporaries must not escape
++             * the matching $DFFC MOVEM restore in the caller. */
++            wf_r17_m68k_shadow_t call_regs=*ctx->m68k_live;
++            wf_r17_m68k_clr_l(&call_regs,3u);
++            wf_r17_m68k_move_w(&call_regs,1u,2u);
++            rs=wf_r17_1129e_live(rt,actor_slot,ctx->mode_0161,ctx->global_0162,ctx->rng_state_1c005c,ctx->global_1c0080,&call_regs,&rr,&carry);
+         }else{
+             if(!ctx->rng_1129e)return block(tr,0x0001129Eu);
+             rng_context_with_mode(&rc,ctx->rng_1129e,2u);
+@@ -334,8 +340,13 @@
+         if(bit(a,O_SELECTOR,7))return WF_OK;
+         wf_set_u8(a,O_SELECTOR,(uint8_t)(wf_u8(a,O_SELECTOR)|0x80u)); /* $EB9E BSET #7,+$60 */
+         if(ctx->m68k_live&&ctx->rng_state_1c005c){
+-            wf_r17_m68k_move_w(ctx->m68k_live,1u,0u); /* $EBA6 MOVE.W #0,D1; preserve high WORD */
+-            rs=wf_r17_1129e_live(rt,actor_slot,ctx->mode_0161,ctx->global_0162,ctx->rng_state_1c005c,ctx->global_1c0080,ctx->m68k_live,&rr,&carry);
++            /* $DE86 saves D0-D3; $DEB2 clears D3 before EA42. The
++             * $EBA6 mode write and $1129E temporaries must not escape
++             * the matching $DFFC MOVEM restore in the caller. */
++            wf_r17_m68k_shadow_t call_regs=*ctx->m68k_live;
++            wf_r17_m68k_clr_l(&call_regs,3u);
++            wf_r17_m68k_move_w(&call_regs,1u,0u);
++            rs=wf_r17_1129e_live(rt,actor_slot,ctx->mode_0161,ctx->global_0162,ctx->rng_state_1c005c,ctx->global_1c0080,&call_regs,&rr,&carry);
+         }else{
+             if(!ctx->rng_1129e)return block(tr,0x0001129Eu);
+             rng_context_with_mode(&rc,ctx->rng_1129e,0u);
+--- reference_r18/src/runtime/src/wf_r18_cdfs.c
++++ native/src/runtime/src/wf_r18_cdfs.c
+@@ -1,5 +1,6 @@
+ #include "wf_r18_cdfs.h"
+ #include <cd-block.h>
++#include "wp1979_cd_read.h"
+ #include <string.h>
+ 
+ #define SECTOR_BYTES 2048u
+@@ -23,6 +24,9 @@
+ static unsigned active_file_class=5u;
+ static uint32_t cached_lba, volume_sectors, file_count;
+ static int cache_valid, ready;
++/* WP1979 read-only bootstrap diagnostics. */
++volatile uint32_t wp1979_cdfs_stage,wp1979_cdfs_lba,wp1979_cdfs_probe[4];
++volatile int32_t wp1979_cdfs_rc;
+ void wf_r18_cdfs_stats(uint32_t *out_windows, uint32_t *out_sectors) {
+     if (out_windows) *out_windows=window_misses;
+     if (out_sectors) *out_sectors=window_sectors;
+@@ -48,6 +52,7 @@
+     return (uint32_t)p[3] | (uint32_t)p[2]<<8 | (uint32_t)p[1]<<16 | (uint32_t)p[0]<<24;
+ }
+ static int fetch(uint32_t lba) {
++    wp1979_cdfs_lba=lba;
+     if (lba > UINT32_MAX - 150u) return -1;
+     if (cache_valid && cached_lba == lba) return 0;
+     cache_valid = 0;
+@@ -68,7 +73,7 @@
+         uint32_t count = volume_sectors-first;
+         if (count > window_span) count=window_span;
+         uint32_t *data=window_data+slot*window_span*SECTOR_BYTES/sizeof(uint32_t);
+-        if (cd_block_sectors_read(LBA2FAD(first), data,
++        if (wp1979_cd_sectors_read(LBA2FAD(first), data,
+                                   count*SECTOR_BYTES) != 0) return -1;
+         ++window_misses; window_sectors += count;
+         ++file_refills[active_file_class];
+@@ -81,7 +86,9 @@
+         cached_lba=lba; cache_valid=1;
+         return 0;
+     }
+-    if (cd_block_sector_read(LBA2FAD(lba), cache) != 0) return -1;
++    wp1979_cdfs_rc=wp1979_cd_sector_read(LBA2FAD(lba), cache);
++    for(unsigned i=0;i<4u;++i)wp1979_cdfs_probe[i]=cache[i];
++    if (wp1979_cdfs_rc != 0) return -1;
+     cached_lba = lba; cache_valid = 1;
+     return 0;
+ }
+@@ -110,15 +117,20 @@
+         windows[i].sectors=0;
+         windows[i].last_used=0;
+     }
++    wp1979_cdfs_stage=1;
+     if (fetch(16u) != 0) return -1;
++    wp1979_cdfs_stage=2;
+     if (p[0] != 1u || memcmp(p+1,"CD001",5) != 0 || p[6] != 1u ||
+         p[128] != 0u || p[129] != 8u || p[130] != 8u || p[131] != 0u) return -1;
++    wp1979_cdfs_stage=3;
+     volume_sectors = le32(p+80);
+     if (volume_sectors != be32(p+84) || volume_sectors <= 16u ||
+         volume_sectors > UINT32_MAX-150u || p[156] < 34u || !(p[181]&2u)) return -1;
++    wp1979_cdfs_stage=4;
+     root_lba = le32(p+158); root_size = le32(p+166);
+     if (root_lba != be32(p+162) || root_size != be32(p+170) ||
+         !root_size || !extent_ok(root_lba,root_size)) return -1;
++    wp1979_cdfs_stage=5;
+     for (pos=0; pos<root_size;) {
+         uint32_t offset=pos%SECTOR_BYTES, len, lba, size, n, i;
+         const uint8_t *r;
+@@ -145,6 +157,7 @@
+             if (strcmp(files[i].name,files[file_count].name)==0) return -1;
+         files[file_count].lba=lba; files[file_count].size=size; ++file_count;
+     }
++    wp1979_cdfs_stage=6;
+     ready=1;
+     return 0;
+ }
+@@ -170,7 +183,7 @@
+         size_t take=SECTOR_BYTES-within;
+         if (!within && bytes>=16u*SECTOR_BYTES &&
+             ((uintptr_t)out&31u)==0u) {
+-            if (cd_block_sectors_read(LBA2FAD(file->lba+offset/SECTOR_BYTES),
++            if (wp1979_cd_sectors_read(LBA2FAD(file->lba+offset/SECTOR_BYTES),
+                                       out,16u*SECTOR_BYTES)!=0) goto failed;
+             window_sectors+=16u;
+             file_bulk_sectors[active_file_class]+=16u;
+--- reference_r18/src/runtime/src/wf_r18_present.c
++++ native/src/runtime/src/wf_r18_present.c
+@@ -9,11 +9,7 @@
+ static int rom_preloaded;
+ static uint16_t rom_page[256],rom_slot[512];static uint32_t rom_age[256],rom_clock;
+ /* Fourteen Royal pages stay pinned despite cold misses in the LWRAM cache. */
+-#ifdef WF_R18_DIAG_RATE
+-#define WF_R18_ROM_EXTRA_CAPACITY 10u
+-#else
+ #define WF_R18_ROM_EXTRA_CAPACITY 14u
+-#endif
+ static uint8_t rom_extra[WF_R18_ROM_EXTRA_CAPACITY][1024] __attribute__((aligned(32)));
+ static uint8_t rom_extra_slot[512];
+ /* Immutable metadata is repeatedly read as bytes/words/longs. Keep small
+@@ -276,7 +272,13 @@
+  plan.tile_upload[slot]=(wf_vdp1_tile_upload_t){.source_tile=tile,.stream_slot=(uint16_t)slot};
+  plan_tile_index[hash]=(uint16_t)(((unsigned)plan_tile_epoch<<9)|(slot+1u));plan.tile_count++;
+ found:;
+- wf_vdp1_sprite_cmd_t*c=&plan.cmd[plan.cmd_count++];memset(c,0,sizeof *c);c->x=(int16_t)x;c->y=(int16_t)y;c->stream_tile=(uint16_t)slot;c->cram_slot=(uint8_t)palette;c->flip_x=(uint8_t)fx;c->flip_y=(uint8_t)fy;return 1;}
++ wf_vdp1_sprite_cmd_t*c=&plan.cmd[plan.cmd_count++];
++ /* These three trailing bytes include chain fields and any struct padding.
++  * All preceding fields are overwritten below. Keep exact zeroed bytes
++  * without a freestanding memset call per visible sprite on SH-2. */
++ for(size_t i=offsetof(wf_vdp1_sprite_cmd_t,chain_index);i<sizeof *c;i++)
++  ((unsigned char*)c)[i]=0;
++ c->x=(int16_t)x;c->y=(int16_t)y;c->stream_tile=(uint16_t)slot;c->cram_slot=(uint8_t)palette;c->flip_x=(uint8_t)fx;c->flip_y=(uint8_t)fy;return 1;}
+ static wf_status_t submit_records(wf_r18_video_t*v,size_t count){
+  wf_status_t status=WF_OK;const wf_saturn_render_ops_t*ops=wf_saturn_yaul_render_ops();
+  if(backup_workspace_leased)return WF_BAD_STATE;
+--- reference_r18/src/runtime/src/wf_r18_ring.c
++++ native/src/runtime/src/wf_r18_ring.c
+@@ -8,6 +8,12 @@
+ static const uint8_t *g;
+ static uint32_t tiles,palettes;
+ static uint16_t tiles_n;
++/* The board's FG/BG IDs fit in13 bits. Keep this immutable translation in
++ * HWRAM: animation writes otherwise binary-search the same slow LWRAM IDs
++ * hundreds of times on one tick. Larger public API IDs retain the general
++ * sorted-table fallback, so the accepted ring-pack format is unchanged. */
++#define SOURCE_TILE_DIRECT_COUNT 8192u
++static uint16_t source_tile_direct[SOURCE_TILE_DIRECT_COUNT];
+ static uint16_t overlay[2][1024][2];
+ static uint8_t overlay_valid[2][1024];
+ static uint8_t overlay_dirty[2][1024];
+@@ -33,6 +39,11 @@
+  }
+  const uint8_t *ids=p+t+count*128u;
+  for(unsigned i=1;i<count;i++)if(u16(ids+(i-1u)*2u)>=u16(ids+i*2u))return -1;
++ memset(source_tile_direct,0xff,sizeof source_tile_direct);
++ for(unsigned i=0;i<count;i++){
++  unsigned source=u16(ids+i*2u);
++  if(source<SOURCE_TILE_DIRECT_COUNT)source_tile_direct[source]=(uint16_t)i;
++ }
+  g=p;tiles=t;palettes=c;tiles_n=count;memset(overlay_valid,0,sizeof overlay_valid);
+  memset(overlay_dirty,0,sizeof overlay_dirty);dirty_count[0]=dirty_count[1]=0;
+  ++ring_generation;surface_generation[0]=0;surface_generation[1]=0;
+@@ -116,11 +127,14 @@
+ static uint8_t surface_pixel(unsigned layer,unsigned wx,unsigned wy,ring_sample_t*c){
+  unsigned tx=wx>>4,ty=wy>>4;
+  if(!c->valid||c->tx!=tx||c->ty!=ty){
+-  unsigned po=u32(g+32+(layer*64u+(ty/16u)*8u+tx/20u)*4u);
+-  const uint8_t *cell=g+po+((ty%16u)*20u+tx%20u)*4u;
+-  c->attr=u16(cell);c->tile=u16(cell+2);
+   unsigned physical=(ty&31u)*32u+(tx&31u);
+-  if(overlay_valid[layer][physical]){c->attr=overlay[layer][physical][0];c->tile=overlay[layer][physical][1];}
++  if(overlay_valid[layer][physical]){
++   c->attr=overlay[layer][physical][0];c->tile=overlay[layer][physical][1];
++  }else{
++   unsigned po=u32(g+32+(layer*64u+(ty/16u)*8u+tx/20u)*4u);
++   const uint8_t *cell=g+po+((ty%16u)*20u+tx%20u)*4u;
++   c->attr=u16(cell);c->tile=u16(cell+2);
++  }
+   c->tx=tx;c->ty=ty;c->valid=1;
+  }
+  unsigned x=wx&15u,y=wy&15u;
+@@ -292,6 +306,11 @@
+ }
+ static int source_tile_index(uint16_t source_tile,unsigned *tile){
+  if(!g)return -1;
++ if(source_tile<SOURCE_TILE_DIRECT_COUNT){
++  unsigned index=source_tile_direct[source_tile];
++  if(index==0xffffu)return -1;
++  *tile=index;return 0;
++ }
+  /* The pack's strictly sorted source-ID table is validated at bind. */
+  const uint8_t *ids=g+tiles+tiles_n*128u;unsigned lo=0,hi=tiles_n;
+  while(lo<hi){unsigned mid=lo+(hi-lo)/2u;if(u16(ids+mid*2u)<source_tile)lo=mid+1u;else hi=mid;}
+--- reference_r18/src/runtime/src/wf_r18_scsp.c
++++ native/src/runtime/src/wf_r18_scsp.c
+@@ -49,6 +49,15 @@
+ }
+ static void release(void *u){(void)u;owner=0;}
+ bool wf_r18_scsp_smpc_owned(void){return owner!=0;}
++/* FRT high/low are read separately by the SDK. Retry at a byte rollover
++ * so a torn sample cannot become a spurious full16-bit elapsed interval. */
++static uint16_t stable_frt_count(void)
++{
++    volatile cpu_ioregs_t *const regs=(volatile cpu_ioregs_t *)CPU_IOREG_BASE;
++    uint16_t high,low,check;
++    do{high=regs->frch;low=regs->frcl;check=regs->frch;}while(high!=check);
++    return (uint16_t)((high<<8)|low);
++}
+ static uint32_t now(void *u)
+ {
+     (void)u;
+@@ -56,7 +65,7 @@
+     /* During boot poll FRT frequently, including while video is blank.
+      * No FRT IRQ or long-lived timer takeover. The video backend may
+      * subsequently initialize FRT as before; runtime deadlines use VBlank. */
+-    uint16_t sample=cpu_frt_count_get();
++    uint16_t sample=stable_frt_count();
+     uint32_t numerator=(uint16_t)(sample-last_frt)*1000u+fraction;
+     last_frt=sample;
+     boot_us+=numerator/CPU_FRT_NTSC_320_128_COUNT_1MS;
+@@ -87,7 +96,7 @@
+     clock_frames=frames;owner=0;music_native=false;booting=true;boot_us=fraction=0;
+     scsp_timing[0]=*frames;
+     scsp_io[0]=scsp_io[1]=0;
+-    cpu_frt_init(CPU_FRT_CLOCK_DIV_128);last_frt=cpu_frt_count_get();
++    cpu_frt_init(CPU_FRT_CLOCK_DIV_128);last_frt=stable_frt_count();
+     platform.now_us=now;platform.wait_us=delay;platform.idle=idle;
+     platform.enter_owner=take;platform.leave_owner=release;
+     wf_native_yaul_complete_platform(&platform);
+--- reference_r18/src/runtime/src/wf_saturn_yaul_backend.c
++++ native/src/runtime/src/wf_saturn_yaul_backend.c
+@@ -19,11 +19,60 @@
+     return (unsigned)row[0]|row[1]|row[2]|row[3]|row[4]|row[5]|row[6]|row[7];
+ }
+ 
+-static void cache_crop(wf_saturn_yaul_backend_t *b,unsigned slot,const uint8_t *tile){
++enum { CROP_TOP_MASK=0x1fu,CROP_NARROW=0x20u,CROP_RIGHT=0x40u };
++_Static_assert(WF_VDP1_TILE_BYTES_16X16_4BPP==128u,"Cropping owns one 16x16 4bpp tile");
++_Static_assert(WF_SATURN_VDP1_STREAM_TILE_BYTES==128u,"VRAM slots retain their 128-byte stride");
++
++static unsigned half_nonzero(const uint8_t *row){
++    return (unsigned)row[0]|row[1]|row[2]|row[3];
++}
++
++static void cache_crop(wf_saturn_yaul_backend_t *b,unsigned slot,uint8_t *tile){
+     unsigned top=0,bottom=16;
+     while(top<16u&&!row_nonzero(tile+top*8u))++top;
+     while(bottom>top&&!row_nonzero(tile+(bottom-1u)*8u))--bottom;
+-    b->crop_top[slot]=(uint8_t)top;b->crop_height[slot]=(uint8_t)(bottom-top);
++    unsigned meta=top;
++    if(top<bottom){
++        unsigned left=0,right=0;
++        for(unsigned y=top;y<bottom&&!(left&&right);++y){
++            left|=half_nonzero(tile+y*8u);
++            right|=half_nonzero(tile+y*8u+4u);
++        }
++        if(!left||!right){
++            unsigned column=left?0u:4u;
++            meta|=CROP_NARROW;if(column)meta|=CROP_RIGHT;
++            /* Eight-pixel rows occupy four bytes. Pack the cropped image
++             * at the slot base so odd crop_top values also have an 8-byte
++             * aligned SRCA. Forward copies are safe: source>=destination. */
++            uint8_t *dst=tile;
++            const uint8_t *src=tile+top*8u+column;
++            for(unsigned y=top;y<bottom;++y){
++                dst[0]=src[0];dst[1]=src[1];dst[2]=src[2];dst[3]=src[3];
++                dst+=4u;src+=8u;
++            }
++        }
++    }
++    b->crop_meta[slot]=(uint8_t)meta;b->crop_height[slot]=(uint8_t)(bottom-top);
++}
++
++static unsigned tile_matches(wf_saturn_yaul_backend_t *b,unsigned slot,const uint8_t *src,const uint8_t *dst){
++    unsigned meta=b->crop_meta[slot];
++    if(!(meta&CROP_NARROW))return !memcmp(dst,src,128u);
++    /* Staging is compacted, while a generic caller supplies a raw16x16
++     * tile. Compare its full logical picture, including the discarded
++     * transparent rows/half. A raw memcmp here can produce false hits. */
++    unsigned top=meta&CROP_TOP_MASK,bottom=top+b->crop_height[slot];
++    unsigned column=(meta&CROP_RIGHT)?4u:0u;
++    for(unsigned y=0;y<top;++y)if(row_nonzero(src+y*8u))return 0;
++    for(unsigned y=top;y<bottom;++y){
++        const uint8_t *row=src+y*8u;
++        if(half_nonzero(row+(column^4u)))return 0;
++        row+=column;
++        if((dst[0]^row[0])|(dst[1]^row[1])|(dst[2]^row[2])|(dst[3]^row[3]))return 0;
++        dst+=4u;
++    }
++    for(unsigned y=bottom;y<16u;++y)if(row_nonzero(src+y*8u))return 0;
++    return 1;
+ }
+ #endif
+ 
+@@ -62,10 +111,11 @@
+     /* Stage the complete contiguous stream in HWRAM: SCU-DMA cannot read
+      * LWRAM. No VRAM transfer occurs until the frame is complete. */
+     unsigned mask=byte_mask(slot);uint8_t *dst=b->hwr_stage+(size_t)slot*bytes;
+-    if((b->resident[slot>>3]&mask)&&!memcmp(dst,src,bytes))++b->texture_reused;
++    if((b->resident[slot>>3]&mask)&&tile_matches(b,slot,src,dst))++b->texture_reused;
+     else {
+         memcpy(dst,src,bytes);b->dirty[slot>>3]|=(uint8_t)mask;
+-        /* Read HWRAM once on a changed upload; cache hits never scan LWRAM. */
++        /* Analyze/compact HWRAM only on a changed upload. ROM identity hits
++         * above this path never decode or scan a tile. */
+         cache_crop(b,slot,dst);
+         /* Staging no longer describes VRAM until end_frame commits it. */
+         b->resident[slot>>3]&=(uint8_t)~mask;
+@@ -103,13 +153,15 @@
+     if(c->cram_slot>=WF_SATURN_CRAM_SPRITE_BANKS)return WF_BLOCKED;
+     if(wf_saturn_stream_tile_offset(c->stream_tile,&off)!=WF_OK)return WF_BLOCKED;
+ #ifdef WF_PLATFORM_SATURN
+-    unsigned top=0,height=16;
++    unsigned top=0,height=16,left=0,width=16;
+     /* VRAM accepts512 slots, while staging and these bounds own256. Slots
+      * without valid staged/resident bytes retain the complete16-row sprite. */
+     if(c->stream_tile<WF_VDP1_STREAM_TILES_MAX){
+         unsigned slot=c->stream_tile,mask=byte_mask(slot);
+         if((b->resident[slot>>3]|b->dirty[slot>>3])&mask){
+-            top=b->crop_top[slot];height=b->crop_height[slot];
++            unsigned meta=b->crop_meta[slot];
++            top=meta&CROP_TOP_MASK;height=b->crop_height[slot];
++            if(meta&CROP_NARROW){width=8u;left=(meta&CROP_RIGHT)?8u:0u;}
+         }
+     }
+     /* Pen0 remains transparent. An empty source has no hardware work, but
+@@ -117,16 +169,17 @@
+     if(!height){++b->emitted_cmds;return WF_OK;}
+     if(g_cmd_index>=WF_VDP1_COMMANDS_MAX+3u)return WF_BLOCKED;
+     vdp1_cmdt_t *cmd=&g_cmdts[g_cmd_index++];
+-    /* Write every hardware word once. A sprite is normal16x1..16,
++    /* Write every hardware word once. A sprite is normal8/16x1..16,
+      * CB16/replace with transparent pen0 and end-code disabled (penF is
+      * a real arcade color). No full clear followed by rewriting fields. */
+     cmd->cmd_ctrl=(uint16_t)((c->flip_x?0x10u:0u)|(c->flip_y?0x20u:0u));
+     cmd->cmd_link=0;
+     cmd->cmd_pmod=0x0080u;
+     cmd->cmd_colr=(uint16_t)(WF_SATURN_CRAM_SPRITE_FIRST+(unsigned)c->cram_slot*16u);
+-    cmd->cmd_srca=(uint16_t)((off>>3)+top);
+-    cmd->cmd_size=(uint16_t)(0x0200u|height);
+-    cmd->cmd_xa=c->x;cmd->cmd_ya=(int16_t)(c->y+(c->flip_y?16u-top-height:top));
++    cmd->cmd_srca=(uint16_t)((off>>3)+(width==16u?top:0u));
++    cmd->cmd_size=(uint16_t)((width==8u?0x0100u:0x0200u)|height);
++    cmd->cmd_xa=(int16_t)(c->x+(int)(c->flip_x?16u-left-width:left));
++    cmd->cmd_ya=(int16_t)(c->y+(int)(c->flip_y?16u-top-height:top));
+     cmd->cmd_xb=cmd->cmd_yb=cmd->cmd_xc=cmd->cmd_yc=0;
+     cmd->cmd_xd=cmd->cmd_yd=0;
+     cmd->cmd_grda=cmd->reserved=0;
+--- reference_r18/src/runtime/src/wf_vdp1_plan.c
++++ native/src/runtime/src/wf_vdp1_plan.c
+@@ -64,6 +64,13 @@
+     return WF_OK;
+ }
+ 
++/* Match the backend's byte-mask lookup: SH-2 has no variable barrel shift.
++ * Keep each residency/occupancy test inline instead of calling __ashlsi3. */
++static unsigned byte_mask(unsigned bit){
++    static const uint8_t masks[8]={1,2,4,8,16,32,64,128};
++    return masks[bit&7u];
++}
++
+ wf_status_t wf_vdp1_plan_retain_tile_slots(wf_vdp1_frame_plan_t *p,
+     const uint16_t *resident_tiles,const uint8_t *resident_bits,unsigned resident_count){
+     /* Scratch is static because the Saturn master stack is deliberately small.
+@@ -92,7 +99,7 @@
+     for(unsigned i=0;i<p->cmd_count;i++)if(p->cmd[i].stream_tile>=count)return WF_BAD_STATE;
+     unsigned limit=resident_count<count?resident_count:count;
+     for(unsigned slot=0;slot<limit;slot++){
+-        if(!(resident_bits[slot>>3]&(uint8_t)(1u<<(slot&7u))))continue;
++        if(!(resident_bits[slot>>3]&(uint8_t)byte_mask(slot)))continue;
+         uint16_t source=resident_tiles[slot];
+         unsigned hash=((uint32_t)source*0x9e3779b1u)>>23;
+         while((lookup[hash]>>9)==lookup_epoch){
+@@ -102,7 +109,7 @@
+                  * previous compactions. Claim only one, or the free-slot
+                  * count would no longer match the unmatched current tiles. */
+                 if(slot_of[old]==0xffffu){
+-                    slot_of[old]=(uint16_t)slot;occupied[slot>>3]|=(uint8_t)(1u<<(slot&7u));
++                    slot_of[old]=(uint16_t)slot;occupied[slot>>3]|=(uint8_t)byte_mask(slot);
+                 }
+                 break;
+             }
+@@ -112,8 +119,8 @@
+     unsigned vacant=0;
+     for(unsigned i=0;i<count;i++){
+         if(slot_of[i]!=0xffffu)continue;
+-        while(occupied[vacant>>3]&(uint8_t)(1u<<(vacant&7u)))++vacant;
+-        slot_of[i]=(uint16_t)vacant;occupied[vacant>>3]|=(uint8_t)(1u<<(vacant&7u));
++        while(occupied[vacant>>3]&(uint8_t)byte_mask(vacant))++vacant;
++        slot_of[i]=(uint16_t)vacant;occupied[vacant>>3]|=(uint8_t)byte_mask(vacant);
+     }
+     for(unsigned i=0;i<count;i++)source_at[slot_of[i]]=p->tile_upload[i].source_tile;
+     for(unsigned i=0;i<count;i++){
+--- /dev/null
++++ native/src/runtime/src/wp1979_audio_stub.c
+@@ -0,0 +1,8 @@
++/* VIDEO-ONLY BASELINE. This object is excluded when WP1979_AUDIO=1. */
++#include "wf_r18_scsp.h"
++wf_native_queue_t wf_r18_scsp_queue;
++bool wf_r18_scsp_boot(volatile uint32_t *v,const void *e,size_t n){(void)v;(void)e;(void)n;return true;}
++bool wf_r18_scsp_smpc_owned(void){return false;}
++void wf_r18_scsp_vblank(void){}
++bool wf_r18_scsp_service(void){return true;}
++wf_status_t wf_r18_scsp_audio(wf_runtime_t *r,uint16_t c,void *u){(void)r;(void)c;(void)u;return WF_OK;}
+--- /dev/null
++++ native/src/runtime/src/wp1979_cd_read.c
+@@ -0,0 +1,189 @@
++/* Native Saturn CD sector transport, using the 32-bit A-bus FIFO alias.
++ *
++ * The supplied libyaul reads 16-bit words from 0x25890000. Yabause's sector
++ * FIFO instead implements long reads at 0x25818000, matching the retail BIOS
++ * sector transfer path. This is ordinary Saturn bus I/O, not an emulator API.
++ * See README.md for Sega's access-method bulletin and primary bus evidence.
++ */
++#include "wp1979_cd_read.h"
++#include <cpu/intc.h>
++#include <stddef.h>
++#include <stdint.h>
++
++#define REG16(address) (*(volatile uint16_t *)(uintptr_t)(address))
++#define FIFO32 (*(volatile uint32_t *)(uintptr_t)0x25818000u)
++#define HIRQ REG16(0x25890008u)
++#define CR1 REG16(0x25890018u)
++#define CR2 REG16(0x2589001cu)
++#define CR3 REG16(0x25890020u)
++#define CR4 REG16(0x25890024u)
++#define CMOK 0x0001u
++#define DRDY 0x0002u
++#define CSCT 0x0004u
++#define PEND 0x0010u
++#define ESEL 0x0040u
++#define EHST 0x0080u
++#define EFLS 0x0200u
++#define POLL_LIMIT 0x240000u
++#define EMPTY_COMMAND_LIMIT 16384u
++#define SECTOR_BYTES 2048u
++
++volatile wp1979_cd_diagnostics_t wp1979_cd_diagnostics;
++
++typedef struct { uint16_t cr1, cr2, cr3, cr4; } response_t;
++
++static int wait_flag(uint16_t flag)
++{
++    for (uint32_t i = 0; i < POLL_LIMIT; ++i)
++        if ((HIRQ & flag) != 0u) return 0;
++    return -1;
++}
++
++static int command(uint16_t cr1, uint16_t cr2, uint16_t cr3,
++                   uint16_t cr4, uint16_t clear, response_t *response)
++{
++    wp1979_cd_diagnostics.command[0] = cr1;
++    wp1979_cd_diagnostics.command[1] = cr2;
++    wp1979_cd_diagnostics.command[2] = cr3;
++    wp1979_cd_diagnostics.command[3] = cr4;
++    uint8_t mask = cpu_intc_mask_get();
++    cpu_intc_mask_set(15);
++    if (wait_flag(CMOK)) {
++        cpu_intc_mask_set(mask);
++        return WP1979_CD_COMMAND_TIMEOUT;
++    }
++    /* A zero acknowledges a flag; ones preserve unrelated pending flags. */
++    HIRQ = (uint16_t)~(CMOK | clear);
++    CR1 = cr1; CR2 = cr2; CR3 = cr3; CR4 = cr4;
++    if (wait_flag(CMOK)) {
++        cpu_intc_mask_set(mask);
++        return WP1979_CD_COMMAND_TIMEOUT;
++    }
++    response->cr1 = CR1;
++    response->cr2 = CR2;
++    response->cr3 = CR3;
++    response->cr4 = CR4;
++    cpu_intc_mask_set(mask);
++    wp1979_cd_diagnostics.response[0] = response->cr1;
++    wp1979_cd_diagnostics.response[1] = response->cr2;
++    wp1979_cd_diagnostics.response[2] = response->cr3;
++    wp1979_cd_diagnostics.response[3] = response->cr4;
++    /* CR1 high byte is status; low byte is flags/repeat or command data.
++     * Drive states are ordinal values, not independent bit flags. */
++    uint8_t status = (uint8_t)(response->cr1 >> 8);
++    if (status == 0xffu) return WP1979_CD_REJECT;
++    if (status & 0x80u) return WP1979_CD_WAIT;
++    switch (status & 0x0fu) {
++        case 6: return WP1979_CD_OPEN;
++        case 7: return WP1979_CD_NO_DISC;
++        case 9: return WP1979_CD_ERROR;
++        case 10: return WP1979_CD_FATAL;
++        default: return 0;
++    }
++}
++
++static int setting(uint16_t cr1, uint16_t cr2, uint16_t cr3,
++                   uint16_t clear, response_t *response)
++{
++    int result = command(cr1, cr2, cr3, 0, clear, response);
++    if (result) return result;
++    return wait_flag(ESEL) ? WP1979_CD_READY_TIMEOUT : 0;
++}
++
++int wp1979_cd_sectors_read(fad_t fad, void *output_buffer, uint32_t length)
++{
++    response_t response;
++    uint8_t *out = output_buffer;
++    uint32_t sectors = length / SECTOR_BYTES + (length % SECTOR_BYTES != 0u);
++    int result = 0, transferring = 0;
++    wp1979_cd_diagnostics.stage = 0;
++    wp1979_cd_diagnostics.fad = (uint32_t)fad;
++    wp1979_cd_diagnostics.requested_bytes = length;
++    wp1979_cd_diagnostics.copied_bytes = 0;
++    wp1979_cd_diagnostics.error = 0;
++    if (!out || !length || fad < 150 || (uint32_t)fad > 0x7fffffu ||
++        sectors > 0xffffu || sectors > 0x800000u - (uint32_t)fad ||
++        (uintptr_t)out > UINTPTR_MAX - (length - 1u)) {
++        wp1979_cd_diagnostics.error = WP1979_CD_ARGUMENT;
++        return WP1979_CD_ARGUMENT;
++    }
++
++    wp1979_cd_diagnostics.stage = 1;
++    if ((result = setting(0x6000u, 0, 0, ESEL, &response))) goto failed;
++    wp1979_cd_diagnostics.stage = 2;
++    if ((result = setting(0x4800u, 0, 0, ESEL, &response))) goto failed;
++    wp1979_cd_diagnostics.stage = 3;
++    if ((result = setting(0x3000u, 0, 0, ESEL, &response))) goto failed;
++    wp1979_cd_diagnostics.stage = 4;
++    if ((result = command((uint16_t)(0x1080u | ((uint32_t)fad >> 16)),
++                          (uint16_t)fad, 0x0080u, (uint16_t)sectors,
++                          PEND | CSCT, &response))) goto failed;
++
++    uint32_t bytes_left = length;
++    while (sectors) {
++        uint32_t available = 0;
++        wp1979_cd_diagnostics.stage = 5;
++        for (uint32_t poll = 0; poll < EMPTY_COMMAND_LIMIT; ++poll) {
++            if ((result = command(0x5100u, 0, 0, 0, 0, &response))) goto failed;
++            available = response.cr4;
++            if (available) break;
++        }
++        if (!available) { result = WP1979_CD_SECTOR_TIMEOUT; goto failed; }
++        if (available > 200u) { result = WP1979_CD_BUFFER_COUNT; goto failed; }
++        uint32_t take = available < sectors ? available : sectors;
++        uint32_t transfer_bytes = take * SECTOR_BYTES;
++        wp1979_cd_diagnostics.stage = 6;
++        if ((result = command(0x6300u, 0, 0, (uint16_t)take,
++                              DRDY | EHST, &response))) goto failed;
++        transferring = 1;
++        wp1979_cd_diagnostics.stage = 7;
++        if (wait_flag(DRDY)) { result = WP1979_CD_READY_TIMEOUT; goto failed; }
++        HIRQ = (uint16_t)~DRDY;
++        wp1979_cd_diagnostics.stage = 8;
++        if (((uintptr_t)out & 3u) == 0u && bytes_left >= transfer_bytes) {
++            uint32_t *words = (uint32_t *)(void *)out;
++            for (uint32_t i = 0; i < transfer_bytes / 4u; ++i) words[i] = FIFO32;
++            out += transfer_bytes;
++            bytes_left -= transfer_bytes;
++        } else {
++            /* Consume complete sectors even for an unaligned/partial final
++             * request, while writing exactly the caller's byte capacity. */
++            for (uint32_t i = 0; i < transfer_bytes / 4u; ++i) {
++                uint32_t word = FIFO32;
++                for (unsigned b = 0; b < 4u; ++b) {
++                    if (bytes_left) { *out++ = (uint8_t)(word >> 24); --bytes_left; }
++                    word <<= 8;
++                }
++            }
++        }
++        wp1979_cd_diagnostics.copied_bytes = length - bytes_left;
++        wp1979_cd_diagnostics.stage = 9;
++        if ((result = command(0x0600u, 0, 0, 0, 0, &response))) goto failed;
++        transferring = 0;
++        uint32_t transferred_words = ((uint32_t)(response.cr1 & 255u) << 16) | response.cr2;
++        if (transferred_words != transfer_bytes / 2u) {
++            result = WP1979_CD_TRANSFER_COUNT;
++            goto failed;
++        }
++        sectors -= take;
++    }
++    wp1979_cd_diagnostics.stage = 10;
++    return 0;
++
++failed:
++    /* Best-effort cleanup leaves retry/setup possible; preserve the original
++     * failure and diagnostic response, including if cleanup also times out. */
++    {
++        wp1979_cd_diagnostics_t saved = wp1979_cd_diagnostics;
++        if (transferring) (void)command(0x0600u, 0, 0, 0, 0, &response);
++        (void)command(0x7500u, 0, 0, 0, EFLS, &response);
++        wp1979_cd_diagnostics = saved;
++        wp1979_cd_diagnostics.error = result;
++    }
++    return result;
++}
++
++int wp1979_cd_sector_read(fad_t fad, void *output_buffer)
++{
++    return wp1979_cd_sectors_read(fad, output_buffer, SECTOR_BYTES);
++}
+--- /dev/null
++++ native/src/runtime/src/wp1979_entry.c
+@@ -0,0 +1,790 @@
++#include <yaul.h>
++#include <stdint.h>
++#include <string.h>
++#include "wf_gameplay_bindings.h"
++#include "wf_r18_bootstrap.h"
++#include "wf_r18_referee.h"
++#include "wf_r18_match_result.h"
++#include "wf_r18_result_screen.h"
++#include "wf_r18_cdfs.h"
++#include "wf_r18_present.h"
++#include "wf_r18_rom_hot_pages.h"
++#include "wf_r18_ring.h"
++#include "wf_r18_video.h"
++#include "wf_r18_display.h"
++#include "wf_r18_hud.h"
++#include "wf_r18_world.h"
++#include "wf_r18_transition.h"
++#include "wf_r18_fault_pages.h"
++#include "wf_r17_collision_24062.h"
++#include "wf_collision.h"
++#include "wf_r18_reset_combo.h"
++#include "wf_r18_pad_route.h"
++#include "wf_r18_save_saturn.h"
++#include "wf_r18_scsp.h"
++#include "wp1979_input.h"
++
++/* WP1979 direct native TAG fixture. Original setup selects IDs0,1,9,7. */
++static volatile uint32_t wp1979_started,wp1979_draws,wp1979_vblanks,wp1979_max_gap;
++static uint32_t wp1979_start_clock;
++static volatile int32_t wp1979_cd_init_rc;
++
++/* The IP loader places the executable in HWRAM. Borrowed CPU-owned LWRAM
++ * caches and video-write staging have disjoint ranges and no allocation. */
++#define RING_BLOB ((void *)WF_SATURN_LWRAM_SCENE)
++#define ROM_CACHE ((void *)WF_SATURN_LWRAM_ROM_CACHE)
++#define TILE_CACHE ((void *)WF_SATURN_LWRAM_TILE_CACHE)
++#define BOOT_RNG ((volatile uint32_t *)0x0020005cu)
++static volatile uint32_t video_clock;
++/* One-time boot stamps for read-only emulator profiling. No per-frame cost. */
++static volatile uint32_t boot_timing[8];
++static volatile uint32_t legal_first_visible;
++static volatile uint32_t fatal_owner, fatal_dependency, fatal_frame;
++static volatile uint32_t fatal_diagnostic[10], boot_seed_observed;
++static wf_fault_snapshot_t fatal_snapshot;
++static volatile uint32_t finished_frame, finished_result;
++static volatile uint32_t attract_exit_frame;
++static volatile uint32_t finished_count, finished_timer;
++static volatile uint32_t finished_presentation;
++static volatile uint32_t finished_vblanks,finished_presentation_vblanks;
++static wf_runtime_t rt;
++static wf_gameplay_binding_context_t gameplay;
++static wf_phase_binding_t bindings[48];
++static wf_r18_video_t video;
++static wf_r18_display_t display;
++static wf_r18_world_ctx_t world;
++static wf_r18_bootstrap_context_t boot;
++static wf_r18_transition_context_t transition;
++static smpc_peripheral_digital_t pad;
++static smpc_peripheral_digital_t frontend_pad2,frontend_pad3,frontend_pad4;
++static smpc_peripheral_digital_t *const player_pads[4]={&pad,&frontend_pad2,&frontend_pad3,&frontend_pad4};
++static uint32_t controllers_sample_clock=UINT32_MAX;
++#ifndef WF_R18_REPLAY_TEST
++static unsigned scsp_boot_complete;
++static wf_r18_reset_combo_t reset_combo;
++static unsigned reset_to_title_requested;
++static unsigned title_loading_hidden;
++static unsigned reset_combo_held(void)
++{
++    return pad.connected && pad.pressed.button.a && pad.pressed.button.b &&
++           pad.pressed.button.c && pad.pressed.button.start;
++}
++#endif
++static unsigned saturn_port_pads(unsigned port,smpc_peripheral_digital_t out[4])
++{
++    unsigned count=0;
++    const smpc_peripheral_port_t *raw=smpc_peripheral_raw_port((uint8_t)port);
++    if(raw){
++        const smpc_peripheral_t *device;
++        TAILQ_FOREACH(device,&raw->peripherals,peripherals){
++            if(count==4u)break;
++            if(device->type!=TYPE_DIGITAL&&device->type!=TYPE_ANALOG)continue;
++            smpc_peripheral_digital_get(device,&out[count]);
++            if(out[count].connected)++count;
++        }
++    }
++    if(!count){
++        smpc_peripheral_digital_port((uint8_t)port,&out[0]);
++        if(out[0].connected)count=1u;
++    }
++    return count;
++}
++static void saturn_controllers_sample(void)
++{
++    smpc_peripheral_digital_t physical[2][4];
++    unsigned counts[2];
++    wf_r18_pad_location_t route[4];
++    if(controllers_sample_clock==video_clock)return;
++    controllers_sample_clock=video_clock;
++    smpc_peripheral_process();
++    counts[0]=saturn_port_pads(1u,physical[0]);
++    counts[1]=saturn_port_pads(2u,physical[1]);
++    wf_r18_pad_route(counts[0],counts[1],route);
++    for(unsigned i=0;i<4u;i++){
++        if(route[i].port)*player_pads[i]=physical[route[i].port-1u][route[i].slot];
++        else memset(player_pads[i],0,sizeof *player_pads[i]);
++    }
++}
++int main(void);
++static void marker(unsigned r, unsigned g, unsigned b)
++{
++    const vdp2_scrn_bitmap_format_t fmt = {
++        .scroll_screen = VDP2_SCRN_NBG0,
++        .ccc = VDP2_SCRN_CCC_PALETTE_256,
++        .bitmap_size = VDP2_SCRN_BITMAP_SIZE_512X256,
++        .palette_base = VDP2_CRAM_MODE_2_OFFSET(0,0,0),
++        .bitmap_base = VDP2_VRAM_ADDR(0,0)
++    };
++    vdp2_cram_mode_set(2);
++    vdp2_scrn_bitmap_format_set(&fmt);
++    vdp2_scrn_scroll_x_set(VDP2_SCRN_NBG0, FIX16(0));
++    vdp2_scrn_scroll_y_set(VDP2_SCRN_NBG0, FIX16(0));
++    vdp2_scrn_priority_set(VDP2_SCRN_NBG0, 7);
++    vdp2_vram_cycp_t *cy = vdp2_vram_cycp_get();
++    cy->pt[0].raw = 0x44eeeeeeu;
++    vdp2_vram_cycp_set(cy);
++    memset((void *)VDP2_VRAM_ADDR(0,0), 1, 512u*240u);
++    vdp2_scrn_display_set(VDP2_SCRN_DISP_NBG0);
++    *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,1) =
++        (b*255u/31u << 16) | (g*255u/31u << 8) | (r*255u/31u);
++    vdp2_sync();
++    vdp2_sync_wait();
++    vdp2_tvmd_display_set();
++}
++
++static void vblank(void *work __unused)
++{
++    ++video_clock;
++    wf_r18_scsp_vblank();
++    if(!wf_r18_scsp_smpc_owned())smpc_peripheral_intback_issue();
++}
++
++void user_init(void)
++{
++    wp1979_cd_init_rc=cd_block_init();
++    smpc_peripheral_init();
++    vdp_sync_vblank_out_set(vblank, NULL);
++    vdp2_tvmd_display_clear();
++    vdp2_tvmd_display_res_set(VDP2_TVMD_INTERLACE_NONE,
++        VDP2_TVMD_HORZ_NORMAL_A, VDP2_TVMD_VERT_240);
++    vdp2_scrn_back_color_set(VDP2_VRAM_ADDR(1, WF_SATURN_VDP2_BACK_COLOR),
++        RGB1555(1, 0, 0, 0));
++    (void)main();
++}
++
++static void fail(uint32_t owner, uint32_t dependency)
++{
++    fatal_owner = owner;
++    fatal_dependency = dependency;
++    fatal_frame = rt.g.frame_counter;
++    unsigned slot=0xffu;
++    for(unsigned i=0;dependency&&i<WF_ACTOR_SLOTS;i++){
++        if(gameplay.cpu_trace[i].blocked_dependency_rom==dependency||
++           gameplay.cpu_trace[i].state5.blocked_dependency_rom==dependency||
++           gameplay.f4c2_actions.trace[i].blocked_dependency_rom==dependency){slot=i;break;}
++    }
++    if(slot==0xffu&&owner==0x0000f4c2u&&
++       gameplay.last_blocked_slot<WF_ACTOR_SLOTS)
++        slot=gameplay.last_blocked_slot;
++    fatal_diagnostic[0]=owner;
++    fatal_diagnostic[1]=dependency;
++    fatal_diagnostic[2]=rt.g.frame_counter;
++    fatal_diagnostic[3]=boot_seed_observed;
++    fatal_diagnostic[4]=rt.g.rng_state;
++    fatal_diagnostic[5]=((uint32_t)pad.type<<24)|((uint32_t)pad.size<<16)|
++        ((uint32_t)(pad.connected?1u:0u)<<8)|gameplay.input_hw_low[0];
++    fatal_diagnostic[6]=((uint32_t)pad.pressed.raw<<16)|pad.held.raw;
++    fatal_diagnostic[7]=((uint32_t)slot<<24)|((uint32_t)rt.g.mode_0161<<16);
++    fatal_diagnostic[8]=0u;
++    if(slot<WF_ACTOR_SLOTS){
++        wf_actor_raw_t*a=&rt.actors[slot];
++        wf_actor_raw_t*t=wf_actor_from_rom_ptr(&rt,wf_be32(a,WF_A_TARGET),NULL);
++        fatal_diagnostic[7]|=((uint32_t)wf_u8(a,WF_A_FLAGS34)<<8)|
++            (t?wf_u8(t,WF_A_FLAGS34):0u);
++        fatal_diagnostic[8]=((uint32_t)wf_u8(a,WF_A_CPU_B5)<<24)|
++            ((uint32_t)wf_u8(a,WF_A_CPU_B6)<<16)|
++            ((uint32_t)wf_u8(a,WF_A_CPU_B7)<<8)|wf_u8(a,WF_A_CPU_B9);
++    }
++    fatal_diagnostic[9]=0x20261024u;
++    /* Copy every field before changing video memory or polling the pad.
++     * The action trace's selector is the value entering the dispatch, even
++     * if the actor record was changed by a partial action callback. */
++    memset(&fatal_snapshot,0,sizeof fatal_snapshot);
++    fatal_snapshot.owner=owner;
++    fatal_snapshot.dep=dependency;
++    wf_fault_capture_collision(&fatal_snapshot,owner,dependency,wf_collision_blocked_probe,
++                               wf_first_callbacks,wf_second_callbacks);
++    fatal_snapshot.frame=rt.g.frame_counter;
++    fatal_snapshot.vblank=video_clock;
++    fatal_snapshot.rng=rt.g.rng_state;
++    fatal_snapshot.seed=boot_seed_observed;
++    fatal_snapshot.mode=rt.g.mode_0161;
++    fatal_snapshot.progression=rt.g.progression_0162;
++    fatal_snapshot.slot=(uint8_t)slot;
++    fatal_snapshot.pad_type=pad.type;
++    fatal_snapshot.pad_size=pad.size;
++    fatal_snapshot.pad_connected=(uint8_t)(pad.connected?1u:0u);
++    fatal_snapshot.pad_pressed=pad.pressed.raw;
++    fatal_snapshot.pad_held=pad.held.raw;
++    fatal_snapshot.input_low=gameplay.input_hw_low[0];
++    fatal_snapshot.cabinet=gameplay.cabinet_word_140020;
++    fatal_snapshot.video_failed=video.failed_address;
++    wf_r18_cdfs_stats(&fatal_snapshot.cd_windows,&fatal_snapshot.cd_sectors);
++    wf_r18_cdfs_file_stats(fatal_snapshot.cd_refills,fatal_snapshot.cd_bulk_sectors);
++    for(unsigned i=0;i<WF_ACTOR_SLOTS;i++){
++        const wf_actor_raw_t*a=&rt.actors[i];
++        wf_fault_actor_t*d=&fatal_snapshot.actor[i];
++        uint32_t target=wf_be32(a,WF_A_TARGET);
++        d->id=wf_be16(a,WF_A_CHARACTER);
++        d->state=wf_be16(a,WF_A_STATE);
++        d->action=wf_be16(a,WF_A_SELECTOR);
++        d->x=wf_be16(a,WF_A_X);d->y=wf_be16(a,WF_A_Y);d->z=wf_be16(a,WF_A_Z);
++        d->vx=wf_be16(a,WF_A_VX);d->vy=wf_be16(a,WF_A_VY);
++        d->mirror=wf_be16(a,WF_A_MIRROR);
++        d->stamina=wf_be16(a,WF_A_STAMINA);
++        d->anim=wf_be16(a,WF_A_ANIM_INDEX);
++        d->timer=wf_be16(a,WF_A_TIMER44);
++        d->active=wf_u8(a,WF_A_ACTIVE);
++        d->role=wf_u8(a,WF_A_ROLE);
++        d->flags=wf_u8(a,WF_A_FLAGS34);
++        d->latch=wf_u8(a,WF_A_LATCHED+1u);
++        d->phase=wf_u8(a,WF_A_ACTION_PHASE);
++        d->facing=wf_u8(a,WF_A_FACING);
++        d->input_fresh=wf_u8(a,WF_A_INPUT_FRESH);
++        d->input_held=wf_u8(a,WF_A_INPUT_HELD);
++        d->input_derived=wf_u8(a,WF_A_INPUT_DERIVED);
++        d->target=0xffu;
++        unsigned target_slot;
++        if(wf_actor_from_rom_ptr(&rt,target,&target_slot))
++            d->target=(uint8_t)target_slot;
++    }
++    if(slot<WF_ACTOR_SLOTS){
++        const wf_r17_actions_r11_trace_t*t=&gameplay.f4c2_actions.trace[slot];
++        const wf_cpu_trace_t*c=&gameplay.cpu_trace[slot];
++        fatal_snapshot.trace_action=t->selector;
++        fatal_snapshot.descriptor=t->descriptor_rom;
++        fatal_snapshot.callback=t->callback_rom;
++        fatal_snapshot.tick=t->tick_descriptor_rom;
++        fatal_snapshot.action_dep=t->blocked_dependency_rom;
++        fatal_snapshot.cpu_state=c->state;
++        fatal_snapshot.cpu_handler=c->handler_rom;
++        fatal_snapshot.cpu_dep=c->blocked_dependency_rom?
++            c->blocked_dependency_rom:c->state5.blocked_dependency_rom;
++    }
++    marker(31, 0, 0);
++    for(unsigned i=0;i<8u;i++)vdp2_sprite_priority_set(i,0);
++    vdp2_scrn_display_set(VDP2_SCRN_DISP_NBG0);
++    *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,1)=0x00102483u;
++    *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,3)=0x00ffffffu;
++    *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,4)=0x00ffde3bu;
++    *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,5)=0x0082eaffu;
++    wf_fault_draw((volatile uint16_t *)VDP2_VRAM_ADDR(0,0),&fatal_snapshot,0u);
++    vdp2_sync();
++    vdp2_sync_wait();
++    /* Navigation reads a fresh pad, but never changes the frozen snapshot. */
++    unsigned page=0u;
++    unsigned prior=pad.pressed.button.right?1u:pad.pressed.button.left?2u:0u;
++    smpc_peripheral_digital_t fault_pad;
++    for (;;) {
++        smpc_peripheral_process();
++        smpc_peripheral_digital_port(1u,&fault_pad);
++        unsigned nav=fault_pad.pressed.button.right?1u:
++                     fault_pad.pressed.button.left?2u:0u;
++        if(nav&&nav!=prior){
++            page=nav==1u?(page+1u)%5u:(page+4u)%5u;
++            wf_fault_draw((volatile uint16_t *)VDP2_VRAM_ADDR(0,0),
++                          &fatal_snapshot,page);
++            vdp2_sync();vdp2_sync_wait();
++        }
++        prior=nav;
++    }
++}
++
++static wf_status_t read_ram(wf_runtime_t *r, uint32_t addr,
++                            uint16_t *value, void *user)
++{
++    (void)user;
++    if (!value) return WF_BAD_STATE;
++    switch (addr) {
++    case 0x1c0062u:
++    case 0x1c0063u: *value = r->g.global_0063; return WF_OK;
++    case 0x1c004eu:
++        *value = (uint16_t)((r->g.credit_remainder_004e << 8) |
++                             r->g.credit_count_004f);
++        return WF_OK;
++    case 0x1c004au: *value = r->g.credit_cycle_units_004b; return WF_OK;
++    default: video.failed_address = addr; return WF_BLOCKED;
++    }
++}
++static wf_status_t text_owner(wf_runtime_t *r, uint32_t pc, void *user)
++{
++    uint16_t id = (uint16_t)r->m68k_regs.d[0];
++    return pc == 0x2503cu ? wf_r18_text_2503c(r, id, user) :
++                            wf_r18_number_26122(r, id, user);
++}
++static wf_status_t palette_reset(wf_runtime_t *r, void *user)
++{
++    wf_r18_video_t *v = user;
++    (void)r;
++    memset(v->palette_map, 0, sizeof v->palette_map);
++    memset(v->palette_used, 0, sizeof v->palette_used);
++    return WF_OK;
++}
++static wf_status_t map_26e66(wf_runtime_t *r, void *user)
++{
++    (void)user;
++    return wf_r18_ring_update((int16_t)r->g.global_17e6,
++        (int16_t)r->g.global_17ee, (int16_t)r->g.global_17ea,
++        (int16_t)r->g.global_17f2_word, boot.priority_140010) == 0 ?
++        WF_OK : WF_BLOCKED;
++}
++static wf_status_t input_word(wf_runtime_t *r, uint32_t addr,
++                              uint16_t *out, void *user)
++{
++    (void)r; (void)user;
++    if (!out) return WF_BAD_STATE;
++    addr &= 0x00ffffffu;
++    if (addr < 0x140020u || addr > 0x140026u || (addr & 1u)) return WF_BAD_STATE;
++    /* Cached physical pad level from this combat quantum. Other ports and
++     * the coin/DIP byte remain released; reading does not resample SMPC. */
++    *out = (uint16_t)(0xff00u | gameplay.input_hw_low[(addr-0x140020u)/2u]);
++    return WF_OK;
++}
++static wf_status_t world_288f0(wf_runtime_t *r, uint8_t a[4],
++                                uint8_t b, void *user)
++{
++    (void)user;
++    return wf_r18_world_288f0(r, a, b, &world);
++}
++static wf_status_t world_26b68(wf_runtime_t *r, uint8_t s,
++                                uint16_t d, void *user)
++{
++    (void)user;
++    return wf_r18_world_26b68(r, s, d, &world);
++}
++/* $21E6 DBRA D0 waits for D0.W+1 complete vertical-blank edges. */
++static wf_status_t wait_21e6(wf_runtime_t *r,uint16_t raw,void *user)
++{
++    (void)r; (void)user;
++    uint32_t start=video_clock;
++    while ((uint32_t)(video_clock-start)<(uint32_t)raw+1u) {
++        if(!wf_r18_scsp_service())return WF_BAD_STATE;
++        smpc_peripheral_process();
++    }
++    return WF_OK;
++}
++static wf_status_t result_wait(wf_runtime_t *r,uint16_t periods,void *user)
++{
++    if(!periods)return WF_BAD_STATE;
++    return wait_21e6(r,(uint16_t)(periods-1u),user);
++}
++static wf_status_t result_commit(void *user)
++{
++    /* The character map and CRAM are direct stores. No extra sync wait:
++     * the original33/33/65-period waits own the terminal presentation. */
++    return wf_r18_hud_commit(user);
++}
++static wf_status_t royal_result_commit(void *user)
++{
++    wf_r18_video_t *v=user;
++    wf_status_t s=wf_r18_hud_commit(v);
++    if(s!=WF_OK)return s;
++    for(unsigned role=WF_R18_PALETTE_TEXT;role<=WF_R18_PALETTE_BG;role++){
++        s=wf_r18_palettes_commit(v,role);if(s!=WF_OK)return s;
++    }
++    return WF_OK;
++}
++static wf_status_t result_level(wf_runtime_t *r,unsigned high,void *user)
++{
++    (void)r;(void)user;
++    while(!!vdp2_tvmd_vblank_in()!=!!high)smpc_peripheral_process();
++    return WF_OK;
++}
++static wf_status_t render(wf_runtime_t *r, wf_actor_raw_t *const *actors,
++                           size_t count, void *user)
++{
++    return wf_r18_present_batch(r, actors, count, user);
++}
++static uint8_t controls(const smpc_peripheral_digital_t *sample)
++{
++    uint8_t bits = 0xffu;
++    if (!sample->connected) return bits;
++    /* Yaul pressed is the sampled level; held contains rising edges. */
++    if (sample->pressed.button.right) bits &= (uint8_t)~0x01u;
++    if (sample->pressed.button.left)  bits &= (uint8_t)~0x02u;
++    /* ROM $F2D6 maps bit3 to angle $80 (negative Y/north), and bit2
++     * to angle $00 (positive Y/south). Yaul's up/down names retain the
++     * physical Saturn directions; translate them to the arcade bits here. */
++    if (sample->pressed.button.up)    bits &= (uint8_t)~0x08u;
++    if (sample->pressed.button.down)  bits &= (uint8_t)~0x04u;
++    if (sample->pressed.button.a)     bits &= (uint8_t)~0x10u;
++    if (sample->pressed.button.b)     bits &= (uint8_t)~0x20u;
++    if (sample->pressed.button.c)     bits &= (uint8_t)~0x40u;
++    if (sample->pressed.button.start) bits &= (uint8_t)~0x80u;
++    return bits;
++}
++#ifdef WF_R18_DIAG_RATE
++/* Diagnostic only: count completed combat draws per 60 video blanks. The
++ * arcade HUD shadow and gameplay state are untouched. FONT8.BIN glyphs
++ * 32..41 are digits and glyph 54 is F. */
++#define WF_R18_RATE_CELL (29u*64u+36u)
++static uint32_t rate_start_clock,rate_draws;
++static uint8_t rate_value,rate_palette,rate_ready;
++static void rate_reset(void)
++{
++    rate_start_clock=video_clock;rate_draws=0;rate_value=rate_ready=0;
++    rate_palette=0;
++    for(unsigned row=0;row<30u;row++)for(unsigned col=0;col<40u;col++){
++        const uint8_t*p=video.fg0+(row*64u+col)*4u;
++        unsigned tile=(unsigned)p[1]|((unsigned)(p[3]&15u)<<8);
++        if(tile>=32u&&tile<=74u){rate_palette=p[3]>>4;return;}
++    }
++}
++static void rate_restore(void)
++{
++    volatile uint16_t*map=(volatile uint16_t*)VDP2_VRAM_ADDR(1,WF_SATURN_VDP2_HUD_NAMES);
++    for(unsigned i=0;i<3u;i++){
++        const uint8_t*p=video.fg0+(WF_R18_RATE_CELL+i)*4u;
++        map[WF_R18_RATE_CELL+i]=(uint16_t)((p[3]<<8)|p[1]);
++    }
++    rate_ready=0;
++}
++static void rate_draw(void)
++{
++    ++rate_draws;
++    uint32_t elapsed=video_clock-rate_start_clock;
++    if(elapsed>=60u){
++        uint32_t value=(rate_draws*60u+elapsed/2u)/elapsed;
++        rate_value=(uint8_t)(value>99u?99u:value);
++        rate_start_clock=video_clock;rate_draws=0;rate_ready=1;
++    }
++    if(rate_ready){
++        volatile uint16_t*map=(volatile uint16_t*)VDP2_VRAM_ADDR(1,WF_SATURN_VDP2_HUD_NAMES);
++        uint16_t palette=(uint16_t)rate_palette<<12;
++        map[WF_R18_RATE_CELL]=(uint16_t)(palette|54u);
++        map[WF_R18_RATE_CELL+1u]=(uint16_t)(palette|(32u+rate_value/10u));
++        map[WF_R18_RATE_CELL+2u]=(uint16_t)(palette|(32u+rate_value%10u));
++    }
++}
++#endif
++static void palette_and_ring(void)
++{
++    if(wf_r18_hud_commit(&video)!=WF_OK)fail(0x0c0000u,0);
++#ifdef WF_R18_DIAG_RATE
++    rate_draw();
++#endif
++    if (wf_r18_palettes_commit(&video,WF_R18_PALETTE_FG) != WF_OK ||
++        wf_r18_palettes_commit(&video,WF_R18_PALETTE_BG) != WF_OK ||
++        (transition.unblank_pending?wf_r18_ring_update_deferred:wf_r18_ring_update)((int16_t)display.scroll[0],
++            (int16_t)(2048u-display.scroll[1]), (int16_t)display.scroll[2],
++            (int16_t)(2048u-display.scroll[3]),
++            boot.priority_140010) != 0)
++        fail(0x26e66u, video.failed_address);
++}
++
++#ifndef WF_R18_REPLAY_TEST
++#include "wf_saturn_frontend.inc"
++#endif
++
++int main(void)
++{
++    uint32_t size, previous, gameplay_start;
++#ifdef WF_R18_REPLAY_TEST
++    wf_r18_launch_config_t launch;
++#endif
++    wf_status_t status;
++    size_t count;
++
++    if (wf_r18_cdfs_init() != 0) fail(0x18cd00u, 0);
++    boot_timing[0]=video_clock;
++#ifdef WF_R18_REPLAY_TEST
++#ifndef WP1979_VIDEO_BASELINE
++    /* Both sound executables borrow the scene buffer before ring loading. */
++    if(wf_r18_file_size("SCSP.ELF",&size)!=0||size>WF_SATURN_LWRAM_SCENE_BYTES||
++       wf_r18_file_read("SCSP.ELF",0,RING_BLOB,size)!=0)fail(0x2052u,0x68000u);
++    boot_timing[1]=video_clock;
++    if(!wf_r18_scsp_boot(&video_clock,RING_BLOB,size))fail(0x2052u,0x68000u);
++    boot_timing[2]=video_clock;
++#endif
++    if (wf_r18_file_size("R18RING.BIN", &size) != 0 || size != 114918u ||
++        wf_r18_file_read("R18RING.BIN", 0, RING_BLOB, size) != 0)
++        fail(0x18cd01u, size);
++    boot_timing[3]=video_clock;
++#endif
++    if (wf_r18_file_size("ROM68K.BIN", &size) != 0 || size != 524288u)
++        fail(0x18cd02u, size);
++    if (wf_r18_file_size("SPRITES.PAK", &size) != 0 || size != 8388608u)
++        fail(0x18cd03u, size);
++    if (wf_saturn_yaul_video_init() != WF_OK) fail(0x18cd04u, 0);
++#ifdef WF_R18_REPLAY_TEST
++    if (wf_r18_ring_bind(RING_BLOB, 114918u) != 0) fail(0x18cd04u, 0);
++#endif
++    if(wf_r18_file_size("FONT8.BIN",&size)!=0||size!=WF_SATURN_FONT_BYTES||
++       wf_r18_hud_bind(&video,wf_r18_file_read)!=WF_OK)fail(0x18cd08u,size);
++    boot_timing[4]=video_clock;
++    video.read_rom = wf_r18_rom_read;
++    video.read_ram = read_ram;
++    world.read_rom = wf_r18_rom_read;
++    boot.palette_2aea = wf_r18_palette_2aea;
++    boot.palette_release_2b58 = wf_r18_palette_2b58;
++    boot.palette_reset = palette_reset;
++    boot.map_26e66 = map_26e66;
++    boot.video_batch = wf_r18_video_batch;
++    boot.fg0_batch = wf_r18_video_batch;
++    boot.text_owner = text_owner;
++    boot.user = &video;
++    count = wf_gameplay_bindings_build(&gameplay, bindings,
++                                       sizeof bindings/sizeof bindings[0]);
++    if (!count) fail(0x18cd05u, 0);
++    wf_runtime_init(&rt, bindings, count);
++#ifdef WF_R18_REPLAY_TEST
++    wf_r18_present_init(wf_r18_file_read, ROM_CACHE, WF_SATURN_LWRAM_ROM_BYTES,
++                         TILE_CACHE, WF_SATURN_LWRAM_TILE_BYTES);
++    if (wf_r18_rom_pages_preload(wf_r18_rom_hot_pages,sizeof wf_r18_rom_hot_pages/sizeof wf_r18_rom_hot_pages[0]) != WF_OK) fail(0x18cd06u, 0);
++    if (wf_r18_rom_extra_pages_preload(wf_r18_rom_tag_extra_pages,
++        sizeof wf_r18_rom_tag_extra_pages/sizeof wf_r18_rom_tag_extra_pages[0]) != WF_OK) fail(0x18cd06u, 1);
++    if (wf_r18_file_size("HOTSPR.BIN", &size) != 0 ||wf_r18_hot_sprites_load() != WF_OK||
++        size != wf_r18_hot_sprites_bytes()) fail(0x18cd07u, size);
++    memset(&launch, 0, sizeof launch);
++    launch.human = 0;
++    launch.partner = 1;
++    launch.cabinet_config = 0x300u;
++    launch.rng_state = *BOOT_RNG;
++#if defined(WF_R18_REPLAY_TEST) || defined(WF_R18_BOOT_SEED_ZERO)
++    launch.rng_state = 1085u; /* Validation fixture: same reset seed as the HOST replay. */
++#endif
++    boot_seed_observed=launch.rng_state;
++    wf_r17_m68k_software_reset(&launch.registers);
++    status = wf_r18_direct_boot(&rt, &boot, &launch);
++    if (status != WF_OK) fail(boot.blocked_pc, video.failed_address);
++#else
++    wf_r18_save_saturn_init();
++    boot_seed_observed=*BOOT_RNG;
++#ifdef WF_R18_BOOT_SEED_ZERO
++    boot_seed_observed=0u;
++#endif
++frontend_restart:
++    reset_to_title_requested=0;
++    boot_timing[5]=video_clock;
++    if(frontend_begin(boot_seed_observed,title_loading_hidden)!=WF_OK){
++        if(reset_to_title_requested)goto frontend_soft_reset;
++        fail(frontend.pc,frontend.blocked_dependency);
++    }
++    if(frontend_to_gameplay()!=WF_OK){
++        if(reset_to_title_requested)goto frontend_soft_reset;
++        fail(frontend_match.blocked_pc?frontend_match.blocked_pc:frontend.pc,
++             frontend_match.blocked_dependency?frontend_match.blocked_dependency:frontend.blocked_dependency);
++    }
++    if(frontend_combat_cache()!=WF_OK)fail(0x18cd06u,0);
++    frontend_observed[7]=5;
++#endif
++#ifndef WF_R18_REPLAY_TEST
++combat_resume:
++    frontend_observed[7]=5;
++#endif
++    wf_r18_video_ring_bind(&video);
++
++    gameplay.cabinet_words_valid = 1;
++    gameplay.cabinet_word_140020 = 0xffffu;
++    gameplay.cabinet_word_140022 = 0xffffu;
++    gameplay.camera_valid = 1;
++    gameplay.camera.scene_index = rt.g.global_007e;
++    gameplay.camera.scroll0_x = rt.g.global_17e6;
++    gameplay.camera.scroll1_x = rt.g.global_17ea;
++    gameplay.camera.scroll0_y = rt.g.global_17ee;
++    gameplay.camera.scroll1_y = rt.g.global_17f2_word;
++    gameplay.input_valid_mask = 0x1ffu;
++    memset(gameplay.input_hw_low, 0xff, sizeof gameplay.input_hw_low);
++    gameplay.audio_command = wf_r18_scsp_audio;
++    gameplay.referee_direction_20c8=wf_r18_referee_direction_20c8;
++    gameplay.referee_display_2067c=wf_r18_referee_display_2067c;
++    gameplay.referee_number_2067c=wf_r18_referee_number_2067c;
++    gameplay.referee_clear_206fe=wf_r18_referee_clear_206fe;
++    gameplay.referee_tag_phase6_90d6=wf_r18_tag_bonus_90d6;
++    gameplay.referee_result_20156=wf_r18_result_sound_20156;
++
++    gameplay.participant_input_word = input_word;
++    gameplay.participant_commit_batch = wf_r18_video_commit;
++    gameplay.post7_wait_21e6 = wait_21e6;
++    gameplay.post7_fg0_batch = wf_r18_video_batch;
++    gameplay.post7_video_batch = wf_r18_video_batch;
++    gameplay.post7_resource_2aea = wf_r18_palette_2aea;
++    gameplay.post7_resource_2b58 = wf_r18_palette_2b58;
++    gameplay.post7_raw_2503c = wf_r18_text_2503c;
++    gameplay.post7_raw_9aca = wf_r18_strip_9aca;
++    gameplay.post7_fg0_peek_long = wf_r18_video_peek;
++    gameplay.post7_render_2836_batch = render;
++    gameplay.branchb_288f0 = world_288f0;
++    gameplay.branchb_26b68 = world_26b68;
++    gameplay.r17_owner_user = &video;
++    if(wf_r18_display_init(&display,&rt,wf_r18_rom_read,NULL)!=WF_OK)fail(0x27048u,0);
++    transition=(wf_r18_transition_context_t){
++        .video=&video,.world=&world,.display=&display,
++        .render_queue=&gameplay.render_queue,.camera=&gameplay.camera,
++        .scene_blob=RING_BLOB,.scene_capacity=WF_SATURN_LWRAM_SCENE_BYTES,
++        .file_size=wf_r18_file_size,.file_read=wf_r18_file_read,
++        .priority_140010=&boot.priority_140010
++    };
++    wf_r18_transition_bind(&transition);
++    gameplay.transition_reset=wf_r18_transition_reset;
++    gameplay.transition_barrier=wf_r18_transition_barrier;
++#ifndef WF_R18_REPLAY_TEST
++    /* The frontend and combat share the NBG2 name table. Refresh every
++     * visible cell while blank, then reveal the ring only after its first
++     * VDP1 command list has completed. Physical VDP2 can retain old menu
++     * names even when the RAM shadow already contains the combat HUD. */
++    vdp2_scrn_display_set(0);
++    frontend_sprite_priority_set(0);
++    vdp2_sync();vdp2_sync_wait();
++    wf_r18_hud_reset(&video);
++    transition.unblank_pending=1u;
++#endif
++#ifdef WF_R18_DIAG_RATE
++    rate_reset();
++#endif
++    palette_and_ring();
++#ifndef WF_R18_REPLAY_TEST
++    vdp2_scrn_display_set(0);
++#endif
++    vdp2_sync();
++    vdp2_sync_wait();
++#ifndef WF_R18_REPLAY_TEST
++    transition.unblank_pending=1u;
++#else
++    vdp2_tvmd_display_set();
++#endif
++    previous = video_clock;
++    gameplay_start = video_clock;
++    wp1979_start_clock=video_clock;wp1979_started=1u;
++    for (;;) {
++        if(!wf_r18_scsp_service())fail(0x2052u,0x68001u);
++        saturn_controllers_sample();
++#ifndef WF_R18_REPLAY_TEST
++        if(wf_r18_reset_combo_poll(&reset_combo,reset_combo_held(),0)==WF_R18_RESET_TITLE)
++            goto frontend_soft_reset;
++#endif
++        for(unsigned i=0;i<4u;i++)gameplay.input_hw_low[i]=controls(player_pads[i]);
++        gameplay.cabinet_word_140020=(uint16_t)(0xff00u|gameplay.input_hw_low[0]);
++        gameplay.cabinet_word_140022=(uint16_t)(0xff00u|gameplay.input_hw_low[1]);
++#ifdef WF_R18_REPLAY_TEST
++        /* A recorded ordinary-pad input sequence drives the native simulation.
++         * Any physical game button gives control to the human immediately. */
++        gameplay.input_hw_low[0] = wp1979_input(rt.g.frame_counter,gameplay.input_hw_low[0]);
++        gameplay.cabinet_word_140020=(uint16_t)(0xff00u|gameplay.input_hw_low[0]);
++#endif
++        status = wf_runtime_frame(&rt);
++        if (status == WF_BLOCKED && rt.frame_ready) {
++            if(wf_r18_display_irq(&rt,&display)!=WF_OK)fail(0x27012u,0);
++            if (wf_r18_world_commit(&rt, &world) != WF_OK)
++                fail(0x2946u, 0);
++            if(wf_r18_hud_irq(&rt,&video)!=WF_OK)fail(0x264aau,0);
++            palette_and_ring();
++            /* Queue both processors before waiting for their shared VBlank. */
++            vdp1_sync();
++            vdp2_sync();
++            vdp1_sync_wait();
++            vdp2_sync_wait();
++            if(transition.unblank_pending){
++                unsigned priority=boot.priority_140010;
++                vdp2_scrn_display_set(VDP2_SCRN_DISPTP_NBG2|
++                    (priority==0x78u?(VDP2_SCRN_DISPTP_NBG0|VDP2_SCRN_DISP_NBG1):
++                     (VDP2_SCRN_DISP_NBG0|VDP2_SCRN_DISPTP_NBG1)));
++#ifndef WF_R18_REPLAY_TEST
++                frontend_sprite_priority_set(priority==0x7cu?2u:3u);
++#endif
++                vdp2_sync();vdp2_sync_wait();
++                vdp2_tvmd_display_set();transition.unblank_pending=0;
++            }
++            while (video_clock == previous) {}
++            uint32_t gap=video_clock-previous;
++            if(gap>wp1979_max_gap)wp1979_max_gap=gap;
++            wp1979_draws++;wp1979_vblanks=video_clock-wp1979_start_clock;
++            previous = video_clock;
++            wf_runtime_vblank_ack(&rt);
++            status = wf_runtime_frame(&rt);
++        }
++        *BOOT_RNG = rt.g.rng_state;
++        /* The full frontend path resumes the original TAG main at$11B6.
++         * The direct-ring test entry keeps its bounded result segment. */
++        if (status == WF_BLOCKED &&
++            (wf_r18_tag_match_complete(&rt)||wf_r18_royal_game_over(&rt)||
++             wf_r18_attract_timeout(&rt))) {
++#ifdef WF_R18_DIAG_RATE
++            rate_restore();
++#endif
++            if(wf_r18_attract_timeout(&rt)){
++#ifndef WF_R18_REPLAY_TEST
++                attract_exit_frame=rt.g.frame_counter;
++                if(frontend_after_attract()!=WF_OK){
++                    if(reset_to_title_requested)goto frontend_soft_reset;
++                    fail(frontend_match.blocked_pc?frontend_match.blocked_pc:0x1120u,
++                         frontend_match.blocked_dependency?frontend_match.blocked_dependency:frontend.blocked_dependency);
++                }
++                if(frontend_to_gameplay()!=WF_OK){
++                    if(reset_to_title_requested)goto frontend_soft_reset;
++                    fail(frontend_match.blocked_pc?frontend_match.blocked_pc:frontend.pc,
++                         frontend_match.blocked_dependency?frontend_match.blocked_dependency:frontend.blocked_dependency);
++                }
++                if(frontend_combat_cache()!=WF_OK)fail(0x18cd06u,0);
++                goto combat_resume;
++#else
++                fail(0x1120u,0u);
++#endif
++            }
++            int royal=wf_r18_royal_game_over(&rt);
++            finished_frame = rt.g.frame_counter;
++            finished_result = wf_be16(&rt.actors[0], WF_A_RESULT);
++            finished_count = rt.g.global_169a;
++            finished_timer = rt.g.global_16a0;
++            finished_vblanks=video_clock-gameplay_start;
++            uint32_t presentation_start=video_clock;
++#ifndef WF_R18_REPLAY_TEST
++            if(!royal){
++                if(frontend_after_tag()!=WF_OK){
++                    if(reset_to_title_requested)goto frontend_soft_reset;
++                    fail(frontend_match.blocked_pc?frontend_match.blocked_pc:0x11b6u,
++                         frontend_match.blocked_dependency?frontend_match.blocked_dependency:frontend.blocked_dependency);
++                }
++                finished_presentation_vblanks=video_clock-presentation_start;
++                finished_presentation=1u;
++                if(frontend_to_gameplay()!=WF_OK){
++                    if(reset_to_title_requested)goto frontend_soft_reset;
++                    fail(frontend_match.blocked_pc?frontend_match.blocked_pc:frontend.pc,
++                         frontend_match.blocked_dependency?frontend_match.blocked_dependency:frontend.blocked_dependency);
++                }
++                if(frontend_combat_cache()!=WF_OK)fail(0x18cd06u,0);
++                goto combat_resume;
++            }
++#endif
++            status=royal?wf_r18_result_royal_game_over(&rt,&video,result_level,result_wait,royal_result_commit,&video):
++                wf_r18_result_in_ring(&rt,&video,result_wait,result_commit,&video);
++            if(status!=WF_OK)fail(royal?0x1afcu:0x11ceu,video.failed_address);
++            finished_presentation_vblanks=video_clock-presentation_start;
++            finished_presentation=royal?2u:1u;
++#ifndef WF_R18_REPLAY_TEST
++            if(royal){
++                if(frontend_after_royal()!=WF_OK){
++                    if(reset_to_title_requested)goto frontend_soft_reset;
++                    fail(frontend_match.blocked_pc?frontend_match.blocked_pc:0x1b1eu,
++                         frontend_match.blocked_dependency?frontend_match.blocked_dependency:frontend.blocked_dependency);
++                }
++                if(frontend_to_gameplay()!=WF_OK){
++                    if(reset_to_title_requested)goto frontend_soft_reset;
++                    fail(frontend_match.blocked_pc?frontend_match.blocked_pc:frontend.pc,
++                         frontend_match.blocked_dependency?frontend_match.blocked_dependency:frontend.blocked_dependency);
++                }
++                if(frontend_combat_cache()!=WF_OK)fail(0x18cd06u,0);
++                goto combat_resume;
++            }
++#endif
++#if 0 /* WP1979 keeps the authentic in-ring result visible. */
++            /* Test-disc terminal report, only after the real $11B6 condition.
++             * Green plus the frame RGB bytes makes completion externally visible. */
++            marker(0,31,0);
++            *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,1) = 0x0000ff00u;
++            *(volatile uint32_t *)VDP2_CRAM_MODE_2_OFFSET(0,0,2) =
++                ((finished_frame & 255u) << 16) | (finished_frame & 0xff00u) |
++                ((finished_frame >> 16) & 255u);
++            memset((void *)(VDP2_VRAM_ADDR(0,0)+512u*120u),2,512u*120u);
++            vdp2_sync();vdp2_sync_wait();
++#endif
++            for (;;) smpc_peripheral_process();
++        }
++        if (status != WF_OK)
++            fail(transition.blocked_pc ? 0xf560u : gameplay.last_blocked_phase ?
++                 gameplay.last_blocked_phase : boot.blocked_pc,
++                 transition.blocked_pc ? transition.blocked_pc : gameplay.last_blocked_dependency ?
++                 gameplay.last_blocked_dependency : video.failed_address);
++    }
++#ifndef WF_R18_REPLAY_TEST
++frontend_soft_reset:
++    frontend_settle();vdp1_sync_wait();vdp2_sync_wait();
++    vdp2_scrn_display_set(0);vdp2_sync();vdp2_sync_wait();
++    vdp2_tvmd_display_set();
++    title_loading_hidden=1;
++    frontend_bound_world=0xffffu;
++    video.read_rom=wf_r18_rom_read;video.read_ram=read_ram;video.read_user=NULL;
++    wf_runtime_init(&rt,bindings,count);
++    goto frontend_restart;
++#endif
++}
+--- /dev/null
++++ native/src/runtime/src/wp1979_input.c
+@@ -0,0 +1,19 @@
++#include "wp1979_input.h"
++#include <stddef.h>
++typedef struct { uint16_t frame;uint8_t level; } input_event_t;
++static const input_event_t input_tape[]={
++#include "wp1979_tape.inc"
++};
++#ifdef WF_R18_REPLAY_NOINPUT
++volatile uint32_t wp1979_demo_active=0u;
++#else
++volatile uint32_t wp1979_demo_active=1u;
++#endif
++uint8_t wp1979_input(uint32_t frame,uint8_t physical)
++{
++    static size_t index;
++    if(physical!=0xffu)wp1979_demo_active=0u;
++    if(!wp1979_demo_active)return physical;
++    while(index+1u<sizeof input_tape/sizeof input_tape[0]&&input_tape[index+1u].frame<=frame)++index;
++    return input_tape[index].level;
++}
+--- /dev/null
++++ native/src/runtime/src/wp1979_tape.inc
+@@ -0,0 +1,1763 @@
++/* Ordinary pad levels only; live native TAG match. Seed1085.
++ * Source: ROM-corrected v4 tag-after0/input.csv; SHA256 1095900ede97757e497e66ac2a9c6f103782b399c5d41168acc3f2ff72ef7b3f. */
++{0u,249u},
++{37u,251u},
++{49u,255u},
++{50u,239u},
++{52u,255u},
++{56u,239u},
++{60u,255u},
++{64u,239u},
++{68u,255u},
++{72u,239u},
++{76u,255u},
++{80u,239u},
++{84u,255u},
++{88u,239u},
++{92u,255u},
++{96u,239u},
++{100u,255u},
++{104u,239u},
++{108u,255u},
++{112u,239u},
++{116u,255u},
++{120u,239u},
++{124u,255u},
++{128u,239u},
++{132u,255u},
++{136u,239u},
++{140u,255u},
++{144u,207u},
++{148u,255u},
++{152u,207u},
++{156u,255u},
++{160u,207u},
++{164u,255u},
++{168u,207u},
++{172u,255u},
++{176u,207u},
++{180u,255u},
++{184u,207u},
++{188u,255u},
++{192u,207u},
++{196u,255u},
++{200u,207u},
++{204u,255u},
++{208u,239u},
++{212u,255u},
++{216u,239u},
++{220u,255u},
++{224u,239u},
++{228u,255u},
++{232u,239u},
++{236u,255u},
++{240u,239u},
++{244u,255u},
++{248u,239u},
++{252u,255u},
++{256u,239u},
++{260u,255u},
++{264u,239u},
++{268u,255u},
++{272u,239u},
++{276u,255u},
++{280u,239u},
++{284u,255u},
++{288u,239u},
++{292u,255u},
++{296u,239u},
++{300u,255u},
++{304u,239u},
++{308u,255u},
++{312u,239u},
++{316u,255u},
++{320u,239u},
++{324u,255u},
++{328u,239u},
++{332u,255u},
++{336u,207u},
++{340u,255u},
++{344u,207u},
++{348u,255u},
++{352u,207u},
++{356u,255u},
++{360u,207u},
++{364u,255u},
++{368u,207u},
++{372u,255u},
++{376u,207u},
++{380u,255u},
++{384u,207u},
++{388u,255u},
++{392u,207u},
++{396u,255u},
++{400u,207u},
++{402u,239u},
++{404u,255u},
++{408u,239u},
++{412u,255u},
++{416u,239u},
++{420u,255u},
++{424u,239u},
++{428u,255u},
++{432u,239u},
++{436u,255u},
++{440u,239u},
++{444u,255u},
++{448u,239u},
++{452u,255u},
++{456u,239u},
++{460u,255u},
++{464u,239u},
++{468u,255u},
++{472u,250u},
++{474u,234u},
++{476u,255u},
++{480u,239u},
++{484u,255u},
++{488u,239u},
++{492u,255u},
++{496u,239u},
++{500u,255u},
++{556u,246u},
++{560u,214u},
++{562u,223u},
++{564u,255u},
++{568u,239u},
++{572u,255u},
++{576u,223u},
++{580u,255u},
++{584u,239u},
++{588u,255u},
++{592u,223u},
++{596u,246u},
++{597u,255u},
++{600u,207u},
++{604u,255u},
++{608u,207u},
++{609u,223u},
++{612u,255u},
++{616u,239u},
++{620u,255u},
++{624u,223u},
++{628u,255u},
++{632u,239u},
++{636u,255u},
++{640u,223u},
++{644u,255u},
++{648u,239u},
++{652u,255u},
++{656u,223u},
++{660u,255u},
++{664u,239u},
++{668u,255u},
++{672u,223u},
++{676u,255u},
++{680u,239u},
++{684u,255u},
++{688u,223u},
++{692u,255u},
++{696u,239u},
++{700u,255u},
++{704u,223u},
++{708u,255u},
++{712u,237u},
++{714u,239u},
++{716u,255u},
++{720u,223u},
++{724u,255u},
++{728u,239u},
++{732u,255u},
++{736u,223u},
++{740u,255u},
++{744u,239u},
++{748u,255u},
++{752u,223u},
++{756u,255u},
++{760u,239u},
++{764u,255u},
++{768u,223u},
++{772u,255u},
++{776u,239u},
++{780u,255u},
++{784u,223u},
++{788u,255u},
++{795u,246u},
++{802u,254u},
++{816u,222u},
++{818u,223u},
++{820u,255u},
++{824u,223u},
++{828u,255u},
++{832u,223u},
++{836u,255u},
++{840u,223u},
++{844u,255u},
++{848u,223u},
++{852u,254u},
++{856u,222u},
++{858u,239u},
++{860u,255u},
++{864u,223u},
++{868u,255u},
++{872u,239u},
++{876u,255u},
++{880u,223u},
++{884u,255u},
++{888u,239u},
++{892u,255u},
++{896u,223u},
++{900u,255u},
++{904u,239u},
++{908u,255u},
++{912u,223u},
++{916u,255u},
++{920u,239u},
++{924u,255u},
++{928u,223u},
++{932u,255u},
++{936u,239u},
++{940u,255u},
++{944u,223u},
++{948u,255u},
++{952u,239u},
++{956u,255u},
++{960u,223u},
++{964u,255u},
++{968u,207u},
++{972u,255u},
++{976u,207u},
++{980u,255u},
++{984u,207u},
++{988u,255u},
++{992u,207u},
++{996u,255u},
++{1000u,207u},
++{1004u,255u},
++{1008u,207u},
++{1012u,255u},
++{1016u,207u},
++{1020u,255u},
++{1024u,207u},
++{1028u,255u},
++{1032u,207u},
++{1036u,255u},
++{1040u,207u},
++{1044u,255u},
++{1048u,207u},
++{1050u,239u},
++{1052u,255u},
++{1056u,223u},
++{1059u,255u},
++{1091u,251u},
++{1098u,235u},
++{1100u,255u},
++{1104u,223u},
++{1108u,255u},
++{1112u,239u},
++{1116u,255u},
++{1120u,223u},
++{1124u,255u},
++{1128u,239u},
++{1132u,255u},
++{1136u,223u},
++{1138u,219u},
++{1140u,251u},
++{1141u,255u},
++{1144u,239u},
++{1148u,255u},
++{1152u,223u},
++{1156u,255u},
++{1160u,239u},
++{1164u,255u},
++{1168u,223u},
++{1172u,255u},
++{1176u,239u},
++{1180u,255u},
++{1184u,223u},
++{1188u,255u},
++{1192u,223u},
++{1196u,255u},
++{1200u,223u},
++{1204u,255u},
++{1208u,223u},
++{1212u,255u},
++{1216u,223u},
++{1220u,255u},
++{1224u,223u},
++{1228u,255u},
++{1232u,223u},
++{1236u,255u},
++{1240u,239u},
++{1244u,255u},
++{1248u,223u},
++{1252u,255u},
++{1256u,239u},
++{1260u,255u},
++{1264u,223u},
++{1268u,255u},
++{1272u,239u},
++{1276u,255u},
++{1280u,223u},
++{1284u,255u},
++{1288u,239u},
++{1292u,255u},
++{1296u,223u},
++{1300u,255u},
++{1304u,239u},
++{1308u,255u},
++{1312u,223u},
++{1316u,255u},
++{1320u,239u},
++{1324u,255u},
++{1328u,223u},
++{1332u,255u},
++{1336u,239u},
++{1340u,255u},
++{1344u,223u},
++{1348u,255u},
++{1352u,239u},
++{1356u,255u},
++{1360u,223u},
++{1364u,255u},
++{1368u,239u},
++{1372u,255u},
++{1376u,223u},
++{1380u,255u},
++{1384u,239u},
++{1388u,255u},
++{1392u,223u},
++{1396u,255u},
++{1400u,239u},
++{1404u,255u},
++{1408u,223u},
++{1412u,255u},
++{1416u,239u},
++{1420u,255u},
++{1424u,223u},
++{1428u,255u},
++{1432u,223u},
++{1436u,255u},
++{1440u,223u},
++{1444u,255u},
++{1448u,223u},
++{1452u,255u},
++{1456u,223u},
++{1460u,255u},
++{1464u,223u},
++{1468u,255u},
++{1471u,250u},
++{1472u,218u},
++{1473u,222u},
++{1474u,223u},
++{1476u,255u},
++{1480u,239u},
++{1484u,255u},
++{1488u,223u},
++{1492u,255u},
++{1496u,239u},
++{1500u,255u},
++{1504u,223u},
++{1508u,255u},
++{1512u,239u},
++{1516u,255u},
++{1520u,223u},
++{1524u,255u},
++{1528u,239u},
++{1532u,255u},
++{1536u,223u},
++{1540u,255u},
++{1544u,239u},
++{1548u,255u},
++{1552u,223u},
++{1556u,255u},
++{1560u,239u},
++{1564u,255u},
++{1568u,223u},
++{1572u,255u},
++{1576u,239u},
++{1580u,255u},
++{1584u,223u},
++{1588u,255u},
++{1592u,239u},
++{1596u,255u},
++{1600u,223u},
++{1604u,255u},
++{1608u,239u},
++{1612u,255u},
++{1616u,207u},
++{1620u,255u},
++{1624u,207u},
++{1628u,255u},
++{1632u,207u},
++{1636u,255u},
++{1640u,207u},
++{1644u,255u},
++{1648u,207u},
++{1652u,255u},
++{1656u,207u},
++{1660u,255u},
++{1664u,207u},
++{1668u,255u},
++{1672u,207u},
++{1676u,255u},
++{1680u,207u},
++{1684u,255u},
++{1688u,207u},
++{1692u,255u},
++{1696u,207u},
++{1698u,223u},
++{1700u,255u},
++{1704u,239u},
++{1708u,255u},
++{1712u,223u},
++{1714u,255u},
++{1739u,251u},
++{1744u,219u},
++{1746u,223u},
++{1748u,255u},
++{1752u,239u},
++{1756u,255u},
++{1760u,223u},
++{1764u,255u},
++{1768u,239u},
++{1772u,255u},
++{1776u,223u},
++{1780u,251u},
++{1784u,235u},
++{1785u,239u},
++{1788u,255u},
++{1792u,223u},
++{1796u,255u},
++{1800u,239u},
++{1804u,255u},
++{1808u,223u},
++{1812u,255u},
++{1816u,239u},
++{1820u,255u},
++{1824u,223u},
++{1828u,255u},
++{1832u,239u},
++{1836u,255u},
++{1840u,223u},
++{1844u,255u},
++{1848u,239u},
++{1852u,255u},
++{1856u,223u},
++{1860u,255u},
++{1864u,239u},
++{1868u,255u},
++{1872u,223u},
++{1876u,255u},
++{1880u,223u},
++{1884u,255u},
++{1888u,223u},
++{1892u,255u},
++{1896u,223u},
++{1900u,255u},
++{1904u,223u},
++{1908u,255u},
++{1912u,223u},
++{1916u,255u},
++{1920u,223u},
++{1924u,255u},
++{1928u,222u},
++{1930u,239u},
++{1932u,255u},
++{1936u,223u},
++{1940u,255u},
++{1944u,239u},
++{1948u,255u},
++{1952u,223u},
++{1956u,255u},
++{1960u,239u},
++{1964u,255u},
++{1968u,223u},
++{1972u,255u},
++{1976u,239u},
++{1980u,255u},
++{1984u,223u},
++{1988u,255u},
++{1992u,239u},
++{1996u,255u},
++{2000u,223u},
++{2004u,255u},
++{2008u,239u},
++{2012u,255u},
++{2016u,223u},
++{2020u,255u},
++{2024u,207u},
++{2028u,255u},
++{2032u,207u},
++{2036u,255u},
++{2040u,207u},
++{2044u,255u},
++{2048u,207u},
++{2052u,255u},
++{2056u,207u},
++{2060u,255u},
++{2064u,207u},
++{2068u,255u},
++{2072u,207u},
++{2076u,255u},
++{2080u,207u},
++{2084u,255u},
++{2088u,207u},
++{2092u,255u},
++{2096u,207u},
++{2100u,255u},
++{2104u,207u},
++{2106u,239u},
++{2108u,255u},
++{2112u,223u},
++{2116u,255u},
++{2120u,239u},
++{2123u,255u},
++{2147u,251u},
++{2152u,235u},
++{2154u,239u},
++{2156u,255u},
++{2160u,223u},
++{2164u,255u},
++{2168u,239u},
++{2172u,255u},
++{2176u,223u},
++{2180u,255u},
++{2184u,239u},
++{2188u,255u},
++{2192u,223u},
++{2196u,255u},
++{2200u,239u},
++{2204u,255u},
++{2208u,223u},
++{2212u,255u},
++{2216u,239u},
++{2220u,255u},
++{2224u,223u},
++{2228u,255u},
++{2232u,239u},
++{2236u,255u},
++{2240u,223u},
++{2244u,255u},
++{2248u,239u},
++{2252u,255u},
++{2256u,223u},
++{2260u,255u},
++{2264u,239u},
++{2268u,255u},
++{2272u,223u},
++{2276u,255u},
++{2280u,239u},
++{2284u,255u},
++{2288u,223u},
++{2292u,255u},
++{2296u,239u},
++{2300u,255u},
++{2304u,223u},
++{2308u,255u},
++{2312u,239u},
++{2316u,255u},
++{2320u,223u},
++{2324u,255u},
++{2328u,239u},
++{2332u,255u},
++{2336u,223u},
++{2340u,255u},
++{2344u,239u},
++{2348u,255u},
++{2352u,223u},
++{2356u,255u},
++{2360u,239u},
++{2364u,255u},
++{2368u,223u},
++{2372u,255u},
++{2376u,239u},
++{2380u,255u},
++{2384u,223u},
++{2388u,255u},
++{2392u,239u},
++{2396u,255u},
++{2400u,223u},
++{2404u,255u},
++{2408u,239u},
++{2412u,255u},
++{2416u,223u},
++{2420u,255u},
++{2424u,239u},
++{2428u,255u},
++{2432u,223u},
++{2436u,255u},
++{2440u,239u},
++{2444u,255u},
++{2456u,253u},
++{2496u,221u},
++{2498u,223u},
++{2500u,255u},
++{2504u,239u},
++{2508u,255u},
++{2512u,223u},
++{2516u,255u},
++{2520u,239u},
++{2524u,255u},
++{2528u,223u},
++{2532u,255u},
++{2536u,239u},
++{2540u,255u},
++{2544u,223u},
++{2548u,255u},
++{2552u,239u},
++{2556u,255u},
++{2560u,223u},
++{2564u,255u},
++{2568u,239u},
++{2572u,255u},
++{2576u,223u},
++{2580u,255u},
++{2584u,223u},
++{2588u,255u},
++{2592u,223u},
++{2596u,255u},
++{2597u,254u},
++{2600u,222u},
++{2602u,239u},
++{2604u,255u},
++{2608u,223u},
++{2612u,255u},
++{2616u,239u},
++{2620u,255u},
++{2624u,223u},
++{2628u,255u},
++{2632u,239u},
++{2636u,255u},
++{2640u,223u},
++{2644u,255u},
++{2648u,239u},
++{2652u,255u},
++{2656u,223u},
++{2660u,255u},
++{2664u,239u},
++{2668u,255u},
++{2672u,223u},
++{2676u,255u},
++{2680u,239u},
++{2684u,255u},
++{2688u,223u},
++{2692u,255u},
++{2696u,239u},
++{2700u,255u},
++{2704u,223u},
++{2708u,255u},
++{2712u,239u},
++{2716u,255u},
++{2720u,223u},
++{2724u,255u},
++{2728u,239u},
++{2732u,255u},
++{2736u,223u},
++{2740u,255u},
++{2744u,239u},
++{2748u,255u},
++{2752u,223u},
++{2756u,255u},
++{2760u,239u},
++{2764u,255u},
++{2768u,223u},
++{2772u,255u},
++{2776u,239u},
++{2780u,255u},
++{2784u,223u},
++{2788u,255u},
++{2792u,239u},
++{2796u,255u},
++{2800u,207u},
++{2804u,255u},
++{2808u,207u},
++{2812u,255u},
++{2816u,207u},
++{2820u,255u},
++{2824u,207u},
++{2828u,255u},
++{2832u,207u},
++{2836u,255u},
++{2840u,207u},
++{2844u,255u},
++{2848u,207u},
++{2852u,255u},
++{2856u,207u},
++{2860u,255u},
++{2864u,207u},
++{2868u,255u},
++{2872u,207u},
++{2874u,239u},
++{2876u,255u},
++{2880u,223u},
++{2884u,255u},
++{2888u,239u},
++{2892u,255u},
++{2915u,246u},
++{2920u,230u},
++{2922u,239u},
++{2924u,255u},
++{2928u,223u},
++{2932u,255u},
++{2936u,239u},
++{2940u,255u},
++{2944u,223u},
++{2948u,255u},
++{2952u,239u},
++{2956u,255u},
++{2960u,215u},
++{2962u,223u},
++{2964u,255u},
++{2968u,239u},
++{2972u,255u},
++{2976u,223u},
++{2980u,255u},
++{2984u,239u},
++{2988u,255u},
++{2992u,223u},
++{2996u,247u},
++{3000u,231u},
++{3001u,239u},
++{3004u,255u},
++{3008u,223u},
++{3012u,255u},
++{3016u,223u},
++{3020u,255u},
++{3024u,223u},
++{3028u,255u},
++{3032u,223u},
++{3036u,255u},
++{3040u,223u},
++{3044u,255u},
++{3048u,239u},
++{3052u,255u},
++{3056u,223u},
++{3060u,255u},
++{3064u,239u},
++{3068u,255u},
++{3072u,223u},
++{3076u,255u},
++{3080u,239u},
++{3084u,255u},
++{3088u,223u},
++{3092u,255u},
++{3096u,239u},
++{3100u,255u},
++{3104u,223u},
++{3108u,255u},
++{3112u,239u},
++{3116u,255u},
++{3120u,223u},
++{3124u,255u},
++{3128u,239u},
++{3132u,255u},
++{3136u,223u},
++{3140u,255u},
++{3144u,239u},
++{3148u,255u},
++{3152u,223u},
++{3156u,255u},
++{3160u,239u},
++{3164u,255u},
++{3168u,223u},
++{3172u,255u},
++{3176u,239u},
++{3180u,255u},
++{3184u,223u},
++{3188u,255u},
++{3192u,239u},
++{3193u,207u},
++{3196u,255u},
++{3200u,207u},
++{3204u,255u},
++{3208u,207u},
++{3212u,255u},
++{3216u,207u},
++{3220u,255u},
++{3224u,207u},
++{3228u,255u},
++{3232u,207u},
++{3236u,255u},
++{3240u,207u},
++{3244u,255u},
++{3248u,207u},
++{3252u,255u},
++{3256u,207u},
++{3260u,255u},
++{3264u,207u},
++{3268u,255u},
++{3272u,207u},
++{3274u,239u},
++{3276u,255u},
++{3280u,223u},
++{3284u,255u},
++{3315u,250u},
++{3323u,234u},
++{3324u,255u},
++{3328u,223u},
++{3332u,255u},
++{3336u,239u},
++{3340u,255u},
++{3344u,223u},
++{3348u,255u},
++{3352u,239u},
++{3356u,255u},
++{3360u,223u},
++{3362u,218u},
++{3364u,255u},
++{3368u,239u},
++{3372u,255u},
++{3376u,223u},
++{3380u,255u},
++{3384u,239u},
++{3388u,255u},
++{3392u,223u},
++{3396u,255u},
++{3400u,239u},
++{3404u,255u},
++{3408u,223u},
++{3412u,255u},
++{3416u,239u},
++{3420u,255u},
++{3424u,223u},
++{3428u,255u},
++{3432u,239u},
++{3436u,255u},
++{3440u,223u},
++{3444u,255u},
++{3448u,239u},
++{3452u,255u},
++{3456u,223u},
++{3460u,255u},
++{3464u,239u},
++{3468u,255u},
++{3472u,223u},
++{3476u,255u},
++{3480u,239u},
++{3484u,255u},
++{3488u,223u},
++{3492u,255u},
++{3496u,239u},
++{3500u,255u},
++{3504u,223u},
++{3508u,255u},
++{3512u,239u},
++{3516u,255u},
++{3520u,223u},
++{3524u,255u},
++{3528u,239u},
++{3532u,255u},
++{3536u,223u},
++{3540u,255u},
++{3544u,239u},
++{3548u,255u},
++{3552u,223u},
++{3556u,255u},
++{3560u,239u},
++{3562u,237u},
++{3564u,253u},
++{3568u,221u},
++{3570u,223u},
++{3572u,255u},
++{3576u,239u},
++{3579u,223u},
++{3580u,255u},
++{3584u,223u},
++{3588u,255u},
++{3592u,223u},
++{3596u,255u},
++{3600u,223u},
++{3604u,253u},
++{3608u,221u},
++{3610u,239u},
++{3612u,255u},
++{3616u,223u},
++{3620u,255u},
++{3624u,239u},
++{3628u,255u},
++{3632u,223u},
++{3636u,255u},
++{3640u,239u},
++{3644u,255u},
++{3648u,223u},
++{3652u,255u},
++{3656u,239u},
++{3660u,255u},
++{3664u,223u},
++{3668u,255u},
++{3672u,239u},
++{3676u,255u},
++{3680u,223u},
++{3684u,255u},
++{3688u,239u},
++{3692u,255u},
++{3696u,223u},
++{3700u,255u},
++{3704u,239u},
++{3708u,255u},
++{3712u,223u},
++{3716u,255u},
++{3720u,239u},
++{3724u,255u},
++{3728u,223u},
++{3732u,255u},
++{3736u,239u},
++{3740u,255u},
++{3744u,223u},
++{3748u,255u},
++{3752u,239u},
++{3756u,255u},
++{3760u,223u},
++{3764u,255u},
++{3768u,239u},
++{3772u,255u},
++{3776u,223u},
++{3780u,255u},
++{3784u,239u},
++{3788u,255u},
++{3792u,223u},
++{3796u,255u},
++{3800u,239u},
++{3804u,255u},
++{3808u,223u},
++{3812u,255u},
++{3816u,239u},
++{3820u,255u},
++{3824u,223u},
++{3828u,255u},
++{3832u,239u},
++{3836u,255u},
++{3840u,223u},
++{3844u,255u},
++{3848u,239u},
++{3852u,255u},
++{3856u,223u},
++{3860u,255u},
++{3864u,239u},
++{3868u,255u},
++{3872u,223u},
++{3876u,255u},
++{3880u,239u},
++{3884u,255u},
++{3888u,223u},
++{3892u,255u},
++{3896u,239u},
++{3900u,255u},
++{3904u,223u},
++{3908u,255u},
++{3912u,239u},
++{3916u,255u},
++{3920u,223u},
++{3924u,255u},
++{3928u,239u},
++{3932u,255u},
++{3936u,207u},
++{3940u,255u},
++{3944u,207u},
++{3948u,255u},
++{3952u,207u},
++{3956u,255u},
++{3960u,207u},
++{3964u,255u},
++{3968u,207u},
++{3972u,255u},
++{3976u,207u},
++{3980u,255u},
++{3984u,207u},
++{3988u,255u},
++{3992u,207u},
++{3996u,255u},
++{4000u,207u},
++{4004u,255u},
++{4008u,207u},
++{4012u,255u},
++{4016u,207u},
++{4018u,223u},
++{4020u,255u},
++{4024u,239u},
++{4028u,255u},
++{4032u,223u},
++{4036u,255u},
++{4059u,247u},
++{4064u,215u},
++{4066u,223u},
++{4068u,255u},
++{4072u,239u},
++{4076u,255u},
++{4080u,223u},
++{4084u,255u},
++{4088u,239u},
++{4092u,255u},
++{4096u,223u},
++{4100u,247u},
++{4104u,239u},
++{4108u,255u},
++{4112u,223u},
++{4116u,255u},
++{4120u,239u},
++{4124u,255u},
++{4128u,223u},
++{4132u,255u},
++{4136u,239u},
++{4140u,255u},
++{4144u,223u},
++{4148u,255u},
++{4152u,239u},
++{4156u,255u},
++{4160u,223u},
++{4164u,255u},
++{4168u,239u},
++{4172u,255u},
++{4176u,223u},
++{4180u,255u},
++{4184u,239u},
++{4188u,255u},
++{4192u,223u},
++{4196u,255u},
++{4200u,239u},
++{4204u,255u},
++{4208u,223u},
++{4212u,255u},
++{4216u,239u},
++{4220u,255u},
++{4224u,223u},
++{4228u,255u},
++{4232u,239u},
++{4236u,255u},
++{4240u,223u},
++{4244u,255u},
++{4248u,239u},
++{4252u,255u},
++{4256u,223u},
++{4260u,255u},
++{4264u,239u},
++{4268u,255u},
++{4272u,223u},
++{4276u,255u},
++{4280u,239u},
++{4284u,255u},
++{4288u,223u},
++{4292u,255u},
++{4296u,239u},
++{4300u,255u},
++{4304u,223u},
++{4308u,255u},
++{4312u,239u},
++{4316u,255u},
++{4320u,223u},
++{4324u,255u},
++{4328u,239u},
++{4332u,255u},
++{4336u,223u},
++{4340u,251u},
++{4342u,255u},
++{4344u,239u},
++{4348u,255u},
++{4352u,223u},
++{4356u,255u},
++{4360u,239u},
++{4364u,255u},
++{4368u,223u},
++{4372u,255u},
++{4376u,239u},
++{4380u,255u},
++{4384u,219u},
++{4386u,223u},
++{4387u,207u},
++{4388u,255u},
++{4392u,207u},
++{4396u,255u},
++{4400u,223u},
++{4404u,255u},
++{4408u,239u},
++{4412u,255u},
++{4416u,223u},
++{4420u,255u},
++{4424u,239u},
++{4428u,255u},
++{4432u,223u},
++{4436u,255u},
++{4440u,239u},
++{4444u,255u},
++{4448u,223u},
++{4452u,255u},
++{4456u,239u},
++{4460u,255u},
++{4464u,223u},
++{4468u,255u},
++{4472u,239u},
++{4476u,255u},
++{4480u,223u},
++{4484u,255u},
++{4488u,239u},
++{4492u,255u},
++{4504u,254u},
++{4576u,222u},
++{4578u,223u},
++{4580u,255u},
++{4584u,239u},
++{4588u,255u},
++{4592u,223u},
++{4596u,255u},
++{4600u,239u},
++{4604u,255u},
++{4608u,223u},
++{4612u,255u},
++{4616u,239u},
++{4620u,255u},
++{4624u,223u},
++{4628u,255u},
++{4632u,239u},
++{4636u,255u},
++{4640u,223u},
++{4644u,255u},
++{4648u,239u},
++{4652u,255u},
++{4656u,223u},
++{4660u,255u},
++{4664u,223u},
++{4668u,255u},
++{4671u,253u},
++{4672u,221u},
++{4674u,223u},
++{4676u,255u},
++{4680u,239u},
++{4684u,255u},
++{4688u,223u},
++{4692u,255u},
++{4696u,239u},
++{4700u,255u},
++{4704u,223u},
++{4708u,255u},
++{4712u,239u},
++{4716u,255u},
++{4720u,223u},
++{4724u,255u},
++{4728u,239u},
++{4732u,255u},
++{4736u,223u},
++{4740u,255u},
++{4744u,239u},
++{4748u,255u},
++{4752u,223u},
++{4756u,255u},
++{4760u,239u},
++{4764u,255u},
++{4768u,223u},
++{4772u,255u},
++{4776u,239u},
++{4780u,255u},
++{4784u,223u},
++{4788u,255u},
++{4792u,239u},
++{4796u,255u},
++{4800u,223u},
++{4804u,255u},
++{4808u,239u},
++{4812u,255u},
++{4816u,223u},
++{4820u,255u},
++{4824u,239u},
++{4828u,255u},
++{4832u,223u},
++{4836u,255u},
++{4840u,239u},
++{4844u,255u},
++{4848u,223u},
++{4852u,255u},
++{4856u,239u},
++{4860u,255u},
++{4864u,223u},
++{4868u,255u},
++{4872u,239u},
++{4876u,255u},
++{4880u,223u},
++{4884u,255u},
++{4888u,239u},
++{4892u,255u},
++{4896u,223u},
++{4900u,255u},
++{4904u,239u},
++{4908u,255u},
++{4912u,223u},
++{4916u,255u},
++{4920u,207u},
++{4924u,255u},
++{4928u,207u},
++{4932u,255u},
++{4936u,207u},
++{4940u,255u},
++{4944u,207u},
++{4948u,255u},
++{4952u,207u},
++{4956u,255u},
++{4960u,207u},
++{4964u,255u},
++{4968u,207u},
++{4972u,255u},
++{4976u,207u},
++{4980u,255u},
++{4984u,207u},
++{4988u,255u},
++{4992u,207u},
++{4996u,255u},
++{5000u,207u},
++{5002u,239u},
++{5004u,255u},
++{5008u,223u},
++{5012u,255u},
++{5016u,239u},
++{5017u,255u},
++{5043u,249u},
++{5044u,251u},
++{5048u,235u},
++{5050u,239u},
++{5052u,255u},
++{5056u,223u},
++{5060u,255u},
++{5064u,239u},
++{5068u,255u},
++{5072u,223u},
++{5076u,255u},
++{5080u,239u},
++{5084u,255u},
++{5088u,219u},
++{5090u,223u},
++{5092u,255u},
++{5096u,239u},
++{5100u,255u},
++{5104u,223u},
++{5108u,255u},
++{5112u,239u},
++{5116u,255u},
++{5120u,223u},
++{5124u,255u},
++{5128u,239u},
++{5132u,255u},
++{5136u,223u},
++{5140u,255u},
++{5144u,239u},
++{5148u,255u},
++{5152u,223u},
++{5156u,255u},
++{5160u,239u},
++{5164u,255u},
++{5168u,223u},
++{5172u,255u},
++{5176u,239u},
++{5180u,255u},
++{5192u,254u},
++{5248u,222u},
++{5250u,223u},
++{5252u,255u},
++{5256u,239u},
++{5260u,255u},
++{5264u,223u},
++{5268u,255u},
++{5272u,239u},
++{5276u,255u},
++{5280u,223u},
++{5283u,222u},
++{5284u,254u},
++{5288u,238u},
++{5289u,207u},
++{5292u,255u},
++{5296u,207u},
++{5300u,255u},
++{5304u,207u},
++{5308u,254u},
++{5311u,255u},
++{5312u,223u},
++{5316u,255u},
++{5320u,239u},
++{5324u,255u},
++{5328u,223u},
++{5332u,255u},
++{5336u,207u},
++{5340u,255u},
++{5344u,207u},
++{5348u,255u},
++{5352u,239u},
++{5356u,255u},
++{5360u,223u},
++{5364u,255u},
++{5368u,239u},
++{5372u,255u},
++{5376u,223u},
++{5380u,255u},
++{5384u,239u},
++{5388u,255u},
++{5392u,223u},
++{5396u,255u},
++{5400u,239u},
++{5404u,255u},
++{5408u,223u},
++{5412u,255u},
++{5416u,239u},
++{5418u,237u},
++{5420u,253u},
++{5423u,255u},
++{5424u,207u},
++{5428u,255u},
++{5432u,207u},
++{5436u,255u},
++{5440u,207u},
++{5444u,255u},
++{5447u,253u},
++{5448u,237u},
++{5452u,253u},
++{5456u,221u},
++{5457u,207u},
++{5458u,223u},
++{5460u,255u},
++{5464u,239u},
++{5468u,255u},
++{5472u,223u},
++{5476u,255u},
++{5480u,239u},
++{5484u,255u},
++{5488u,223u},
++{5492u,255u},
++{5496u,239u},
++{5500u,255u},
++{5504u,223u},
++{5508u,255u},
++{5512u,239u},
++{5516u,255u},
++{5520u,223u},
++{5522u,207u},
++{5524u,255u},
++{5528u,207u},
++{5532u,255u},
++{5536u,207u},
++{5540u,255u},
++{5544u,207u},
++{5548u,255u},
++{5552u,207u},
++{5556u,255u},
++{5560u,207u},
++{5564u,255u},
++{5568u,207u},
++{5572u,255u},
++{5576u,207u},
++{5580u,255u},
++{5584u,207u},
++{5588u,255u},
++{5592u,207u},
++{5596u,255u},
++{5600u,207u},
++{5604u,255u},
++{5608u,207u},
++{5612u,255u},
++{5616u,207u},
++{5620u,255u},
++{5624u,207u},
++{5628u,255u},
++{5632u,207u},
++{5636u,255u},
++{5640u,207u},
++{5644u,255u},
++{5648u,207u},
++{5652u,255u},
++{5656u,207u},
++{5658u,239u},
++{5660u,255u},
++{5699u,246u},
++{5747u,254u},
++{5768u,246u},
++{5769u,254u},
++{5795u,223u},
++{5796u,255u},
++{5800u,239u},
++{5804u,255u},
++{5808u,223u},
++{5812u,255u},
++{5816u,239u},
++{5820u,255u},
++{5824u,223u},
++{5828u,255u},
++{5832u,239u},
++{5836u,255u},
++{5840u,223u},
++{5844u,255u},
++{5848u,239u},
++{5852u,255u},
++{5856u,223u},
++{5860u,255u},
++{5864u,239u},
++{5868u,255u},
++{5872u,223u},
++{5876u,255u},
++{5880u,239u},
++{5884u,255u},
++{5888u,223u},
++{5892u,255u},
++{5896u,239u},
++{5900u,255u},
++{5904u,223u},
++{5908u,255u},
++{5912u,239u},
++{5916u,255u},
++{5920u,223u},
++{5924u,255u},
++{5928u,239u},
++{5932u,255u},
++{5936u,223u},
++{5940u,255u},
++{5944u,239u},
++{5948u,255u},
++{5952u,223u},
++{5956u,255u},
++{5960u,239u},
++{5964u,255u},
++{5968u,223u},
++{5972u,255u},
++{5976u,239u},
++{5980u,255u},
++{5984u,223u},
++{5988u,255u},
++{5992u,239u},
++{5996u,255u},
++{6000u,223u},
++{6004u,255u},
++{6008u,239u},
++{6012u,255u},
++{6016u,223u},
++{6020u,255u},
++{6024u,239u},
++{6028u,255u},
++{6032u,223u},
++{6036u,255u},
++{6040u,239u},
++{6044u,255u},
++{6048u,223u},
++{6052u,255u},
++{6056u,239u},
++{6060u,255u},
++{6064u,223u},
++{6068u,255u},
++{6072u,239u},
++{6076u,255u},
++{6080u,223u},
++{6084u,255u},
++{6088u,239u},
++{6092u,255u},
++{6096u,223u},
++{6100u,255u},
++{6104u,239u},
++{6108u,255u},
++{6112u,223u},
++{6116u,255u},
++{6120u,239u},
++{6124u,255u},
++{6128u,223u},
++{6132u,255u},
++{6136u,239u},
++{6140u,255u},
++{6144u,223u},
++{6148u,255u},
++{6152u,239u},
++{6156u,255u},
++{6160u,223u},
++{6163u,217u},
++{6164u,249u},
++{6168u,217u},
++{6170u,239u},
++{6172u,255u},
++{6176u,223u},
++{6180u,255u},
++{6184u,239u},
++{6188u,255u},
++{6201u,239u},
++{6204u,255u},
++{6208u,223u},
++{6212u,255u},
++{6216u,239u},
++{6220u,255u},
++{6224u,223u},
++{6228u,255u},
++{6232u,239u},
++{6236u,255u},
++{6240u,223u},
++{6244u,255u},
++{6248u,239u},
++{6252u,255u},
++{6256u,223u},
++{6260u,255u},
++{6264u,239u},
++{6268u,255u},
++{6272u,223u},
++{6276u,255u},
++{6280u,239u},
++{6284u,255u},
++{6288u,223u},
++{6292u,255u},
++{6296u,239u},
++{6300u,255u},
++{6304u,223u},
++{6308u,255u},
++{6312u,239u},
++{6316u,255u},
++{6320u,207u},
++{6324u,255u},
++{6328u,207u},
++{6332u,255u},
++{6336u,207u},
++{6340u,255u},
++{6344u,207u},
++{6348u,255u},
++{6352u,207u},
++{6356u,255u},
++{6360u,207u},
++{6364u,255u},
++{6368u,207u},
++{6372u,255u},
++{6376u,207u},
++{6380u,255u},
++{6384u,207u},
++{6388u,255u},
++{6392u,207u},
++{6396u,255u},
++{6400u,207u},
++{6402u,255u},
++{6408u,239u},
++{6412u,255u},
++{6416u,223u},
++{6420u,255u},
++{6424u,239u},
++{6428u,255u},
++{6432u,223u},
++{6436u,255u},
++{6440u,239u},
++{6443u,229u},
++{6444u,245u},
++{6447u,255u},
++{6448u,207u},
++{6452u,255u},
++{6456u,207u},
++{6460u,255u},
++{6464u,223u},
++{6468u,255u},
++{6472u,239u},
++{6476u,255u},
++{6480u,223u},
++{6484u,255u},
++{6488u,239u},
++{6492u,255u},
++{6496u,223u},
++{6500u,255u},
++{6504u,239u},
++{6508u,255u},
++{6512u,223u},
++{6516u,255u},
++{6520u,239u},
++{6524u,255u},
++{6528u,223u},
++{6532u,255u},
++{6536u,239u},
++{6540u,255u},
++{6544u,207u},
++{6548u,255u},
++{6552u,207u},
++{6556u,255u},
++{6560u,207u},
++{6564u,255u},
++{6568u,207u},
++{6572u,255u},
++{6576u,207u},
++{6580u,255u},
++{6584u,207u},
++{6586u,239u},
++{6588u,255u},
++{6592u,223u},
++{6596u,255u},
++{6600u,239u},
++{6604u,255u},
++{6608u,223u},
++{6612u,255u},
++{6616u,239u},
++{6620u,255u},
++{6624u,223u},
++{6627u,218u},
++{6628u,250u},
++{6632u,234u},
++{6633u,238u},
++{6634u,239u},
++{6636u,255u},
++{6640u,207u},
++{6644u,255u},
++{6648u,207u},
++{6652u,255u},
++{6656u,223u},
++{6660u,255u},
++{6664u,239u},
++{6668u,255u},
++{6672u,223u},
++{6676u,255u},
++{6680u,239u},
++{6684u,255u},
++{6688u,223u},
++{6692u,255u},
++{6696u,239u},
++{6700u,255u},
++{6704u,223u},
++{6708u,255u},
++{6712u,239u},
++{6716u,255u},
++{6720u,223u},
++{6724u,255u},
++{6728u,239u},
++{6732u,255u},
++{6736u,223u},
++{6740u,255u},
++{6744u,239u},
++{6747u,255u},
++{6760u,253u},
++{6776u,237u},
++{6778u,239u},
++{6780u,255u},
++{6784u,223u},
++{6788u,255u},
++{6792u,239u},
++{6796u,255u},
++{6800u,223u},
++{6804u,255u},
++{6808u,239u},
++{6812u,255u},
++{6816u,223u},
++{6820u,255u},
++{6824u,239u},
++{6828u,255u},
++{6832u,223u},
++{6836u,255u},
++{6840u,239u},
++{6844u,255u},
++{6848u,223u},
++{6852u,255u},
++{6856u,223u},
++{6860u,255u},
++{6864u,223u},
++{6868u,255u},
++{6872u,223u},
++{6875u,222u},
++{6876u,254u},
++{6880u,222u},
++{6882u,223u},
++{6884u,255u},
++{6888u,239u},
++{6892u,255u},
++{6896u,223u},
++{6900u,255u},
++{6904u,239u},
++{6908u,255u},
++{6912u,223u},
++{6916u,255u},
++{6920u,239u},
++{6924u,255u},
++{6928u,223u},
++{6932u,255u},
++{6936u,239u},
++{6940u,255u},
++{6944u,223u},
++{6948u,255u},
++{6952u,239u},
++{6956u,255u},
++{6960u,223u},
++{6964u,255u},
++{6968u,239u},
++{6972u,255u},
++{6976u,223u},
++{6980u,255u},
++{6984u,239u},
++{6988u,255u},
++{6992u,223u},
++{6996u,255u},
++{7000u,239u},
++{7004u,255u},
++{7008u,223u},
++{7012u,255u},
++{7016u,239u},
++{7020u,255u},
++{7024u,223u},
++{7028u,255u},
++{7032u,239u},
++{7036u,255u},
++{7040u,223u},
++{7044u,255u},
++{7048u,239u},
++{7052u,255u},
++{7056u,223u},
++{7060u,255u},
++{7064u,239u},
++{7068u,255u},
++{7072u,223u},
++{7076u,255u},
++{7080u,239u},
++{7084u,255u},
++{7088u,223u},
++{7092u,255u},
++{7096u,239u},
++{7100u,255u},
++{7104u,223u},
++{7108u,255u},
++{7112u,239u},
++{7116u,255u},
++{7120u,223u},
++{7124u,255u},
++{7128u,239u},
++{7132u,255u},
++{7136u,223u},
++{7140u,255u},
++{7144u,239u},
++{7148u,255u},
++{7152u,223u},
++{7156u,255u},
++{7160u,239u},
++{7164u,255u},
++{7168u,223u},
++{7172u,255u},
++{7176u,239u},
++{7180u,255u},
++{7184u,223u},
++{7188u,255u},
++{7192u,239u},
++{7196u,255u},
++{7200u,223u},
++{7204u,255u},
++{7208u,239u},
++{7212u,255u},
++{7216u,223u},
++{7220u,255u},
++{7224u,239u},
++{7228u,255u},
++{7232u,223u},
++{7236u,255u},
++{7240u,239u},
++{7244u,255u},
++{7248u,223u},
++{7252u,255u},
++{7256u,239u},
++{7260u,255u},
++{7264u,223u},
++{7268u,255u},
++{7272u,239u},
++{7276u,255u},
++{7280u,223u},
++{7284u,255u},
++{7288u,223u},
++{7292u,255u},
++{7296u,223u},
++{7300u,255u},
++{7304u,223u},
++{7305u,218u},
++{7308u,250u},
++{7310u,254u},
++{7312u,222u},
++{7316u,254u},
++{7317u,246u},
++{7320u,230u},
++{7324u,246u},
++{7328u,214u},
++{7332u,246u},
++{7344u,255u},
+--- /dev/null
++++ native/src/runtime/tests/r18/wp1979_profile_entry.c
+@@ -0,0 +1,66 @@
++/* WP1979 diagnostic entry only, never linked into the final delivery.
++ * Real gameplay, no skipped phases or synthetic success. Stop after ACK120.
++ * FRT /128 wraps after~312ms; each measured hot component is shorter.
++ * Totals overlap: runtime includes present, and present includes file reads. */
++#include <yaul.h>
++#include <string.h>
++#include "wf_gameplay_bindings.h"
++#include "wf_r18_bootstrap.h"
++#include "wf_r18_world.h"
++#include "wf_r18_present.h"
++#include "wf_r18_cdfs.h"
++#include "wf_r18_ring.h"
++#include "wf_r18_hud.h"
++volatile uint32_t profile_totals[24],profile_calls[24];
++volatile uint32_t profile_frames,profile_vblanks,profile_start_vblank;
++#ifndef WF_R18_PROFILE_START
++#define WF_R18_PROFILE_START 30u
++#endif
++#ifndef WF_R18_PROFILE_STOP
++#define WF_R18_PROFILE_STOP 120u
++#endif
++static unsigned measure;
++static wf_status_t profile_frame(wf_runtime_t *);
++static wf_status_t profile_present(wf_runtime_t *,wf_actor_raw_t *const *,size_t,void *);
++static wf_status_t profile_world(wf_runtime_t *,wf_r18_world_ctx_t *);
++static int profile_ring(int16_t,int16_t,int16_t,int16_t,uint8_t);
++static wf_status_t profile_palette(wf_r18_video_t *,unsigned);
++static int profile_file(const char *,uint32_t,void *,size_t);
++static wf_status_t profile_boot(wf_runtime_t *,wf_r18_bootstrap_context_t *,const wf_r18_launch_config_t *);
++static void profile_vdp1wait(void),profile_vdp2wait(void);
++#define wf_runtime_frame profile_frame
++#define wf_r18_present_batch profile_present
++#define wf_r18_world_commit profile_world
++#define wf_r18_ring_update profile_ring
++#define wf_r18_palettes_commit profile_palette
++#define wf_r18_file_read profile_file
++#define wf_r18_direct_boot profile_boot
++#define vdp1_sync_wait profile_vdp1wait
++#define vdp2_sync_wait profile_vdp2wait
++#include "../../src/wp1979_entry.c"
++#undef wf_runtime_frame
++#undef wf_r18_present_batch
++#undef wf_r18_world_commit
++#undef wf_r18_ring_update
++#undef wf_r18_palettes_commit
++#undef wf_r18_file_read
++#undef wf_r18_direct_boot
++#undef vdp1_sync_wait
++#undef vdp2_sync_wait
++void wf_r18_profile_stage(unsigned i,uint16_t start,uint32_t units){if(measure){profile_totals[i]+=(uint16_t)(cpu_frt_count_get()-start);profile_calls[i]+=units;}}
++static void record(unsigned i,uint16_t start){wf_r18_profile_stage(i,start,1);}
++static wf_status_t profile_boot(wf_runtime_t*r,wf_r18_bootstrap_context_t*c,const wf_r18_launch_config_t*l){wf_status_t s=wf_r18_direct_boot(r,c,l);cpu_frt_init(CPU_FRT_CLOCK_DIV_128);return s;}
++static wf_status_t profile_frame(wf_runtime_t*r){
++ if(!measure&&r->g.frame_counter==WF_R18_PROFILE_START){measure=1;profile_start_vblank=video_clock;}
++ uint16_t start=cpu_frt_count_get();uint32_t frame=r->g.frame_counter;wf_status_t s=wf_runtime_frame(r);record(0,start);
++ if(measure&&r->g.frame_counter>frame){profile_frames++;profile_vblanks=video_clock-profile_start_vblank;}
++ if(r->g.frame_counter==WF_R18_PROFILE_STOP){measure=0;for(;;)smpc_peripheral_process();}
++ return s;
++}
++static wf_status_t profile_present(wf_runtime_t*r,wf_actor_raw_t *const*a,size_t n,void*u){uint16_t t=cpu_frt_count_get();wf_status_t s=wf_r18_present_batch(r,a,n,u);record(1,t);return s;}
++static wf_status_t profile_world(wf_runtime_t*r,wf_r18_world_ctx_t*c){uint16_t t=cpu_frt_count_get();wf_status_t s=wf_r18_world_commit(r,c);record(2,t);return s;}
++static int profile_ring(int16_t a,int16_t b,int16_t c,int16_t d,uint8_t p){uint16_t t=cpu_frt_count_get();int s=wf_r18_ring_update(a,b,c,d,p);record(3,t);return s;}
++static wf_status_t profile_palette(wf_r18_video_t *v,unsigned role){uint16_t t=cpu_frt_count_get();wf_status_t s=wf_r18_palettes_commit(v,role);record(4,t);return s;}
++static int profile_file(const char*n,uint32_t off,void*p,size_t bytes){uint16_t t=cpu_frt_count_get();int s=wf_r18_file_read(n,off,p,bytes);record(!strcmp(n,"SPRITES.PAK")?7:8,t);return s;}
++static void profile_vdp1wait(void){uint16_t t=cpu_frt_count_get();vdp1_sync_wait();record(5,t);}
++static void profile_vdp2wait(void){uint16_t t=cpu_frt_count_get();vdp2_sync_wait();record(6,t);}
+--- /dev/null
++++ native/src/runtime/tools/wp1979_config_stamp.py
+@@ -0,0 +1,11 @@
++#!/usr/bin/env python3
++"""Invalidate native objects only when the actual build configuration changes."""
++import sys
++from pathlib import Path
++
++request, stamp = map(Path, sys.argv[1:])
++data = request.read_bytes()
++if not stamp.exists() or stamp.read_bytes() != data:
++    request.replace(stamp)
++else:
++    request.unlink()
+--- /dev/null
++++ native/tools/audio/native_probe/build_driver.py
+@@ -0,0 +1,140 @@
++"""Build the experimental 68000 driver as ELF and SH2 C segments; no flat image."""
++import argparse
++import hashlib
++import json
++import os
++from pathlib import Path
++import re
++import struct
++import subprocess
++from build_m68k import build, FLAGS
++
++
++def load_segments(path):
++    data = path.read_bytes()
++    if data[:7] != b'\x7fELF\x01\x02\x01':
++        raise ValueError('ELF32 BE required')
++    h = struct.unpack_from('>HHIIIIIHHHHHH', data, 16)
++    if h[0] != 2 or h[1] != 4 or h[6] != 0x1000000 or h[8] != 32:
++        raise ValueError('baseline 68000 executable required')
++    result = []
++    for i in range(h[9]):
++        p = struct.unpack_from('>8I', data, h[4]+i*h[8])
++        if p[0] != 1:
++            continue
++        _, offset, address, physical, filesz, memsz, flags, align = p
++        if (address != physical or filesz > memsz or offset+filesz > len(data) or
++                (address | filesz | memsz) & 1):
++            raise ValueError('Invalid load segment')
++        if not any(lo <= address and address+memsz <= hi for lo, hi in
++                   [(0, 0xbc00), (0xc100, 0x12400), (0x70000, 0x71800)]):
++            raise ValueError('Load segment violates reserved RAM map')
++        if any(address < b+lenmem and b < address+memsz for b, _, lenmem in result):
++            raise ValueError('Overlapping segments')
++        result.append((address, data[offset:offset+filesz], memsz))
++    if len(result) != 3 or result[0][0] != 0 or len(result[0][1]) < 1024:
++        raise ValueError('Expected three segments with reset vectors')
++    stack, pc = struct.unpack_from('>II', result[0][1])
++    if stack != 0x14000 or pc != h[3] or pc & 1 or not 0x400 <= pc < len(result[0][1]):
++        raise ValueError('Invalid reset vectors')
++    if result[-1][0] not in (0x10000,0x70000) or len(result[-1][1]) not in (6144,9216):
++        raise ValueError('Invalid wave segment')
++    if result[-1][0]==0x10000 and (result[0][2]>0x3000 or result[1][0]!=0xc100 or result[1][0]+result[1][2]>0x10000):
++        raise ValueError('Resident SFX segment overlaps PCM or FM RAM')
++    return result
++
++
++def build_driver(repo, toolchain, instrument, output):
++    repo, toolchain, instrument, output = [p.resolve() for p in
++                                         (repo, toolchain, instrument, output)]
++    build(repo, toolchain, instrument, output)
++    env = dict(os.environ)
++    env['PATH'] = str(toolchain/'bin')+os.pathsep+env.get('PATH', '')
++    commands = []
++
++    def run(name, *args):
++        tool = toolchain/'bin'/('m68k-elf-'+name+('.exe' if os.name=='nt' else ''))
++        command = [str(tool), *map(str, args)]
++        r = subprocess.run(command, cwd=output, env=env, text=True, capture_output=True)
++        commands.append(dict(command=command, exit_code=r.returncode,
++                             stdout=r.stdout, stderr=r.stderr))
++        (output/'driver-commands.json').write_text(json.dumps(commands, indent=2)+'\n')
++        if r.returncode:
++            raise RuntimeError(r.stderr)
++        return r.stdout
++
++    def rel(p):
++        return Path(os.path.relpath(p, output)).as_posix()
++
++    source = repo/'src/audio/native'
++    objects = []
++    for name in ['wf_native_driver.c', 'ponesound/wf_ponesound.c', 'wf_m68k_start.S']:
++        obj = Path(name).stem+'.o'
++        flags = FLAGS if name.endswith('.c') else ['-m68000']
++        # Keep upstream warnings visible; its legacy style is not -Werror clean.
++        if name.startswith('ponesound/'):
++            flags = [f for f in flags if f not in ['-Werror', '-Wpedantic']]
++            flags += ['-fno-delete-null-pointer-checks']
++        run('gcc', *flags, '-I', rel(source), '-c', rel(source/name), '-o', obj)
++        objects.append(obj)
++    wave_s = (output/'observed-wave.s').read_text()
++    wave_s = wave_s.replace('.rodata.wf_scsp_wave', '.wf_native_wave')
++    (output/'driver-wave.s').write_text(wave_s)
++    run('as', '-m68000', '-o', 'driver-wave.o', 'driver-wave.s')
++    objects += ['wf_scsp_fm_probe.m68000.o', 'wf_scsp_fm_patch.m68000.o', 'driver-wave.o']
++    run('gcc', '-m68000', '-msoft-float', '-nostdlib',
++        '-Wl,-T,'+rel(source/'wf_m68k.ld'), '-Wl,-Map,wf_scsp_driver.map',
++        *objects, '-o', 'wf_scsp_driver.elf')
++    if run('nm', '-u', 'wf_scsp_driver.elf').strip():
++        raise ValueError('Unresolved firmware symbols')
++    syms = {}
++    for line in run('nm', '-n', 'wf_scsp_driver.elf').splitlines():
++        parts = line.split()
++        if len(parts) == 3:
++            syms[parts[2]] = int(parts[0], 16)
++    (output/'symbols.json').write_text(json.dumps(syms, indent=2)+'\n')
++    dis = run('objdump', '-d', '-m', 'm68k:68000', 'wf_scsp_driver.elf')
++    if re.search(r'\t(?:reset|tas|fmov|fadd|fsub|fmul|fdiv)\b|\(bad\)', dis):
++        raise ValueError('Prohibited or invalid instruction')
++    (output/'driver-disassembly.txt').write_text(dis)
++    (output/'driver-elf.txt').write_text(run('readelf', '-h', '-l', '-S', 'wf_scsp_driver.elf'))
++    segs = load_segments(output/'wf_scsp_driver.elf')
++    if segs[-1][1] != (output/'sine-three-cycles.pcm').read_bytes():
++        raise ValueError('Wave segment mismatch')
++    c = ['/* Generated from the verified ELF PT_LOAD segments. */',
++         '#include "wf_native_host.h"']
++    for n, (address, content, memory) in enumerate(segs):
++        if content:
++            c.append('static const uint8_t segment_%d[] = {' % n)
++            for start in range(0, len(content), 16):
++                c.append('    '+','.join('0x%02x'%v for v in content[start:start+16])+',')
++            c.append('};')
++    c.append('static const wf_native_segment_t segments[] = {')
++    for n, (address, content, memory) in enumerate(segs):
++        c.append('    {0x%x, %s, %d, %d},' %
++                 (address, 'segment_%d'%n if content else 'NULL', len(content), memory))
++    c += ['};', 'const wf_native_image_t wf_native_driver_image = {segments, 3};']
++    (output/'wf_native_image.c').write_text('\n'.join(c)+'\n')
++    report = {
++        'elf_sha256': hashlib.sha256((output/'wf_scsp_driver.elf').read_bytes()).hexdigest(),
++        'elf_bytes': (output/'wf_scsp_driver.elf').stat().st_size,
++        'cpu': '68000', 'elf_type': 'EXEC', 'entry': syms['wf_m68k_reset'],
++        'stack': [0x12000, 0x14000], 'legacy_com': 0xc008, 'mail': 0xc040,
++        'segments': [dict(address=a, file_bytes=len(d), memory_bytes=m) for a,d,m in segs],
++        'undefined_symbols': [], 'bin_cue_iso_generated': False,
++        'hardware_validation': 'NOT PERFORMED',
++        'ponesound_commit': 'c2b0d3a929d6f4f124fccad5f1e0359f8862c7e2'
++    }
++    (output/'driver-build-report.json').write_text(json.dumps(report, indent=2)+'\n')
++    return report
++
++
++if __name__ == '__main__':
++    p = argparse.ArgumentParser(description=__doc__)
++    p.add_argument('--repo', type=Path, default=Path(__file__).resolve().parents[3])
++    p.add_argument('--toolchain', type=Path, required=True)
++    p.add_argument('--instrument', type=Path, required=True)
++    p.add_argument('--out', type=Path, required=True)
++    a = p.parse_args()
++    print(json.dumps(build_driver(a.repo, a.toolchain, a.instrument, a.out), indent=2))
++
+--- /dev/null
++++ native/tools/audio/native_probe/build_music_module.py
+@@ -0,0 +1,51 @@
++"""Build the standalone slave-SH2 control module, not a disc image."""
++import argparse,hashlib,json,os,subprocess,struct
++from pathlib import Path
++from generate_z80_control import generate
++from compact_music_elf import compact
++def build(repo,toolchain,sdk,rom,out):
++ repo,toolchain,sdk,rom,out=[p.resolve() for p in (repo,toolchain,sdk,rom,out)];out.mkdir(parents=True,exist_ok=True)
++ data=rom.read_bytes()
++ if hashlib.sha1(data).hexdigest()!='30073963e965250d94f0dc3bd261a054850adf95':raise ValueError('Unsupported sound ROM')
++ (out/'sound.rom').write_bytes(data[:0xc000]);(out/'include').mkdir(exist_ok=True)
++ (out/'include/stdio.h').write_text('#include <stddef.h>\ntypedef struct FILE FILE; extern FILE *stderr; int fprintf(FILE *,const char *,...); int printf(const char *,...);\n')
++ (out/'module-data.S').write_text('''.section .wf_music_header,"a"
++.long 0x57464d53
++.word 2,32
++.long 0x05c5c000,__music_image_end,_wf_music_module_prepare,_wf_music_module_run,0x25c7f000,0
++.section .rodata.music_rom,"a"
++.global _wf_music_sound_rom
++_wf_music_sound_rom:
++.incbin "sound.rom"
++''')
++ cc=toolchain/'bin/sh-elf-gcc.exe';binutils=toolchain/'sh-elf/bin';env=dict(os.environ);env['PATH']=str(toolchain/'bin')+os.pathsep+env['PATH'];logs=[]
++ def run(cmd):
++  r=subprocess.run(list(map(str,cmd)),cwd=out,env=env,text=True,capture_output=True);logs.append(dict(command=list(map(str,cmd)),exit_code=r.returncode,stdout=r.stdout,stderr=r.stderr));(out/'commands.json').write_text(json.dumps(logs,indent=2)+'\n')
++  if r.returncode:raise RuntimeError(r.stderr)
++  return r.stdout
++ native_report=generate(repo,rom,out/'z80-native.c')
++ src=repo/'src/audio/native';flags=['-m2','-mb','-Os','-std=c11','-ffreestanding','-fno-builtin','-ffunction-sections','-fdata-sections','-fstack-usage','-Wall','-Wextra','-Werror','-B',str(binutils)+os.sep,'-I',out/'include','-I',src,'-isystem',sdk/'sh2eb-elf/include']
++ objects=[]
++ for name in ['wf_music_seq.c','wf_music_module.c','wf_music_module_memory.c','wf_scsp_ym.c','reference_driver/z80.c']:
++  obj=Path(name).stem+'.o';use=list(flags)+['-DWF_MUSIC_NATIVE_CONTROL=1','-I',src/'reference_driver']
++  if name in ('wf_music_seq.c','reference_driver/z80.c'):use=[f for f in use if f!='-Os']+['-O2']
++  if name.startswith('reference_driver/'):use.remove('-Werror')
++  run([cc,*use,'-c',(out/'z80-native.c' if name=='reference_driver/z80.c' else src/name),'-o',obj]);objects.append(obj)
++ run([cc,'-m2','-mb','-B',str(binutils)+os.sep,'-c','module-data.S','-o','module-data.o']);objects.append('module-data.o')
++ libgcc=sdk/'lib/gcc/sh2eb-elf/13.2.0/libgcc.a'
++ run([binutils/'ld.exe','--gc-sections','-static','-T',src/'wf_music_module.ld','-Map','module.map',*objects,libgcc,'-o','MUSIC.ELF'])
++ if run([binutils/'nm.exe','-u','MUSIC.ELF']).strip():raise ValueError('Undefined module symbols')
++ (out/'symbols.txt').write_text(run([binutils/'nm.exe','-n','MUSIC.ELF']))
++ (out/'MUSIC.DEBUG.ELF').write_bytes((out/'MUSIC.ELF').read_bytes())
++ (out/'MUSIC.ELF').write_bytes(compact((out/'MUSIC.DEBUG.ELF').read_bytes()))
++ (out/'elf.txt').write_text(run([binutils/'readelf.exe','-h','-l','-S','MUSIC.ELF']))
++ elf=(out/'MUSIC.ELF').read_bytes();h=struct.unpack_from('>HHIIIIIHHHHHH',elf,16);segs=[]
++ for i in range(h[9]):
++  p=struct.unpack_from('>8I',elf,h[4]+i*h[8]);segs.append(dict(type=p[0],address=p[2],file_bytes=p[4],memory_bytes=p[5]))
++ report=dict(elf_bytes=len(elf),elf_sha256=hashlib.sha256(elf).hexdigest(),segments=segs,entry=h[3],rom_bytes=0xc000,rom_sha256=hashlib.sha256(data).hexdigest(),synthesizer_opm_linked=False,native_control=native_report,module_abi=2,lookahead_fs=4096,lookahead_ms=4096*1000/44100,debug_elf_bytes=(out/'MUSIC.DEBUG.ELF').stat().st_size,bin_cue_iso_generated=False,physical_validation=False)
++ (out/'module-build-report.json').write_text(json.dumps(report,indent=2)+'\n');return report
++if __name__=='__main__':
++ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--repo',type=Path,default=Path(__file__).resolve().parents[3])
++ for n in ['toolchain','sdk','rom','out']:p.add_argument('--'+n,type=Path,required=True)
++ a=p.parse_args();print(json.dumps(build(a.repo,a.toolchain,a.sdk,a.rom,a.out),indent=2))
++
+--- /dev/null
++++ native/tools/audio/native_probe/build_runtime18.py
+@@ -0,0 +1,88 @@
++"""Compile/link the FPS runtime with SCSP to ELF only; no disc tool is called."""
++import argparse,hashlib,json,os,subprocess
++from pathlib import Path
++
++def build(repo,toolchain,sdk,out,baseline=False):
++    repo,toolchain,sdk,out=[p.resolve() for p in (repo,toolchain,sdk,out)]
++    out.mkdir(parents=True,exist_ok=True)
++    runtime=repo/'src/runtime'
++    manifest=json.loads((runtime/'FPS-SOURCE-MANIFEST.json').read_text())
++    units=manifest['translation_units']
++    if baseline:
++        frozen=out/'frozen'
++        for name in manifest['source_files']:
++            target=frozen/name;target.parent.mkdir(parents=True,exist_ok=True)
++            data=subprocess.check_output(['git','-C',str(repo),'show',
++                  'a72456d5077da334a2dd461d7eafff51dedcce2e:src/runtime/'+name])
++            target.write_bytes(data)
++        runtime=frozen
++    sources=[runtime/n for n in units]
++    if not baseline:
++        sources += [runtime/'src/wf_r18_scsp.c']
++        sources += [repo/'src/audio/native'/n for n in
++                    ['wf_native_host.c','wf_native_queue.c','wf_native_elf.c','wf_native_yaul.c','wf_sfx_upload.c','wf_music_elf.c']]
++    env=dict(os.environ)
++    env['PATH']=str(toolchain/'bin')+os.pathsep+env.get('PATH','')
++    cc=toolchain/'bin/sh-elf-gcc.exe'
++    binutils=toolchain/'sh-elf/bin'
++    logs=[]
++    def run(command,cwd=out):
++        r=subprocess.run(list(map(str,command)),cwd=cwd,env=env,
++                         text=True,capture_output=True)
++        logs.append(dict(command=list(map(str,command)),exit_code=r.returncode,
++                         stdout=r.stdout,stderr=r.stderr))
++        (out/'commands.json').write_text(json.dumps(logs,indent=2)+'\n')
++        if r.returncode:raise RuntimeError(r.stderr)
++        return r.stdout
++    flags=['-m2','-mb','-ffreestanding','-fno-builtin','-O2','-std=c11',
++           '-fomit-frame-pointer','-ffast-math','-fstrict-aliasing',
++           '-ffunction-sections','-fdata-sections','-Wall','-Wextra','-Werror',
++           '-DWF_PLATFORM_SATURN=1','-DWF_R18_DIAG_RATE=1',
++           '-B',str(binutils)+os.sep,'-I',str(runtime/'include'),
++           '-I',str(repo/'src/audio/native'),
++           '-isystem',str(sdk/'sh2eb-elf/include'),
++           '-isystem',str(sdk/'sh2eb-elf/include/yaul')]
++    objects=[]
++    for i,source in enumerate(sources):
++        obj=out/(source.stem+'.o')
++        run([cc,*flags,'-c',source,'-o',obj])
++        objects.append(obj)
++        if i%25==0:print('Compiled',i+1,'/',len(sources),flush=True)
++    lib=sdk/'sh2eb-elf/lib'
++    gcc=sdk/'lib/gcc/sh2eb-elf/13.2.0/libgcc.a'
++    elf=out/'wrestlefest-runtime18-scsp.elf'
++    run([binutils/'ld.exe','-static','--gc-sections','-Map',out/'runtime18.map',
++         '-T','ldscripts/yaul.x','--defsym','___master_stack=0x06004000',
++         '--defsym','___slave_stack=0x06001E00',
++         lib/'crt0.o',lib/'init.o',*objects,
++         '--start-group',lib/'libyaul.a',gcc,'--end-group','-o',elf],lib)
++    undefined=run([binutils/'nm.exe','-u',elf])
++    if undefined.strip():raise ValueError('Unresolved symbols: '+undefined)
++    symbols=run([binutils/'nm.exe','-n',elf])
++    (out/'symbols.txt').write_text(symbols)
++    end=None
++    for line in symbols.splitlines():
++        p=line.split()
++        if len(p)==3 and p[2]=='___end':end=int(p[0],16)
++    if end is None:raise ValueError('No heap boundary')
++    report=dict(baseline=baseline,translation_units=len(sources),
++                elf_sha256=hashlib.sha256(elf.read_bytes()).hexdigest(),
++                elf_bytes=elf.stat().st_size,linked_end=end,
++                heap_available=0x6100000-end,heap_reserved=16384,
++                heap_gate_passed=(0x6100000-end)>=16384,
++                unresolved_symbols=[],bin_cue_iso_generated=False,
++                hardware_validation=False,
++                embedded_firmware=False,cdfs_firmware_asset='SCSP.ELF',cdfs_music_module='MUSIC.ELF',cdfs_sfx_pack='SFX.DAT',vdp1_music_reserve=[0x05c5c000,0x05c80000])
++    (out/'build-report.json').write_text(json.dumps(report,indent=2)+'\n')
++    (out/'elf.txt').write_text(run([binutils/'readelf.exe','-h','-l',elf]))
++    if not report['heap_gate_passed']:
++        raise ValueError('Runtime exceeds the reserved HWRAM heap budget')
++    print(json.dumps(report,indent=2))
++    return report
++if __name__=='__main__':
++    p=argparse.ArgumentParser(description=__doc__)
++    p.add_argument('--repo',type=Path,default=Path(__file__).resolve().parents[3])
++    for name in ['toolchain','sdk','out']:p.add_argument('--'+name,type=Path,required=True)
++    p.add_argument('--baseline',action='store_true')
++    a=p.parse_args();build(a.repo,a.toolchain,a.sdk,a.out,a.baseline)
++
+--- /dev/null
++++ native/tools/audio/native_probe/build_sfx_driver.py
+@@ -0,0 +1,67 @@
++"""Build resident SFX + first FM instrument firmware, ELF only."""
++import argparse,hashlib,json,os,re,subprocess
++from pathlib import Path
++from build_m68k import build,FLAGS
++from build_driver import load_segments
++
++def build_sfx(repo,toolchain,instrument,out):
++    repo,toolchain,instrument,out=[p.resolve() for p in (repo,toolchain,instrument,out)]
++    build(repo,toolchain,instrument,out)
++    env=dict(os.environ);env['PATH']=str(toolchain/'bin')+os.pathsep+env.get('PATH','')
++    logs=[]
++    def run(name,*args):
++        cmd=[str(toolchain/'bin'/('m68k-elf-'+name+('.exe' if os.name=='nt' else ''))),*map(str,args)]
++        r=subprocess.run(cmd,cwd=out,env=env,text=True,capture_output=True)
++        logs.append(dict(command=cmd,exit_code=r.returncode,stdout=r.stdout,stderr=r.stderr))
++        (out/'sfx-commands.json').write_text(json.dumps(logs,indent=2)+'\n')
++        if r.returncode:raise RuntimeError(r.stderr)
++        return r.stdout
++    def rel(p):return Path(os.path.relpath(p,out)).as_posix()
++    src=repo/'src/audio/native'
++    # Relocate SA and wave only: every FM EG/pitch/modulation word is preserved.
++    patch=(out/'observed-patch.c').read_text().replace('0x70000u','0x10000u').replace('0x0027u','0x0021u')
++    (out/'sfx-patch.c').write_text(patch)
++    wave=(out/'observed-wave.s').read_text().replace('.rodata.wf_scsp_wave','.wf_native_wave')
++    (out/'sfx-wave.s').write_text(wave)
++    steps=(16,17,19,21,23,25,28,31,34,37,41,45,50,55,60,66,73,80,88,97,107,118,130,143,157,173,190,209,230,253,279,307,337,371,408,449,494,544,598,658,724,796,876,963,1060,1166,1282,1411,1552)
++    shifts=(-1,-1,-1,-1,2,4,6,8);lut=[]
++    for i,step in enumerate(steps):
++        for nibble in range(16):
++            delta=(step>>3)+((step>>2) if nibble&1 else 0)+((step>>1) if nibble&2 else 0)+(step if nibble&4 else 0)
++            lut.append('.word %d,%d'%(-delta if nibble&8 else delta,max(0,min(48,i+shifts[nibble&7]))*64))
++    (out/'oki-lut.inc').write_text('\n'.join(lut)+'\n')
++    objects=[]
++    for source in [src/'wf_scsp_sfx.c',src/'wf_sfx_firmware.c',src/'wf_sfx_memory.c',src/'wf_sfx_start.S',src/'wf_sfx_decode.S',out/'sfx-patch.c']:
++        obj=source.stem+'.o';objects.append(obj)
++        run('gcc',*(FLAGS+['-DWF_SFX_FAST_68000=1'] if source.suffix=='.c' else ['-m68000']),'-I',rel(src),'-c',rel(source),'-o',obj)
++    run('as','-m68000','sfx-wave.s','-o','sfx-wave.o')
++    objects+=['sfx-wave.o','wf_scsp_fm_probe.m68000.o']
++    run('gcc','-m68000','-msoft-float','-nostdlib','-Wl,-T,'+rel(src/'wf_sfx.ld'),
++        '-Wl,-Map,sfx.map',*objects,'-lgcc','-o','SCSP.ELF')
++    if run('nm','-u','SCSP.ELF').strip():raise ValueError('Undefined native symbols')
++    syms={}
++    for line in run('nm','-n','SCSP.ELF').splitlines():
++        p=line.split()
++        if len(p)==3:syms[p[2]]=int(p[0],16)
++    (out/'symbols.json').write_text(json.dumps(syms,indent=2)+'\n')
++    dis=run('objdump','-d','-m','m68k:68000','SCSP.ELF')
++    if re.search(r'\t(?:reset|tas|fmov|fadd|fsub|fmul|fdiv)\b|\(bad\)',dis):raise ValueError('Invalid instruction')
++    (out/'disassembly.txt').write_text(dis)
++    (out/'elf.txt').write_text(run('readelf','-h','-l','-S','SCSP.ELF'))
++    segments=load_segments(out/'SCSP.ELF')
++    if segments[-1][1]!=(instrument/'sine-three-cycles.pcm').read_bytes():raise ValueError('Wave mismatch')
++    report=dict(elf_bytes=(out/'SCSP.ELF').stat().st_size,
++                elf_sha256=hashlib.sha256((out/'SCSP.ELF').read_bytes()).hexdigest(),
++                segments=[dict(address=a,file_bytes=len(b),memory_bytes=n) for a,b,n in segments],
++                code_limit=0x3000,pcm_rings=[0x3000,0x5000,0x7000,0x9000],
++                bss_end=syms['__bss_end'],wave=[0x10000,0x11800],stack=[0x12000,0x14000],
++                resident_pack=[0x14000,0x80000],abi=3,undefined_symbols=[],
++                bin_cue_iso_generated=False,hardware_validation=False)
++    (out/'sfx-build-report.json').write_text(json.dumps(report,indent=2)+'\n')
++    return report
++if __name__=='__main__':
++    p=argparse.ArgumentParser(description=__doc__)
++    p.add_argument('--repo',type=Path,default=Path(__file__).resolve().parents[3])
++    for n in ['toolchain','instrument','out']:p.add_argument('--'+n,type=Path,required=True)
++    a=p.parse_args();print(json.dumps(build_sfx(a.repo,a.toolchain,a.instrument,a.out),indent=2))
++
+--- /dev/null
++++ native/tools/audio/native_probe/build_sfx_pack.py
+@@ -0,0 +1,71 @@
++"""Build the resident native SFX pack from the user's ROM and audited tables."""
++import argparse,csv,hashlib,json,re,struct,zlib
++from pathlib import Path
++RATE_NUM=3579545
++RATE_DEN=64*253
++BASE=0x14000
++CAPACITY=0x80000-BASE
++def build(rom_path,manifest_path,model_path,output):
++    rom=rom_path.read_bytes()
++    if len(rom)!=0x80000:raise ValueError('Expected 512 KiB OKI ROM')
++    with manifest_path.open(newline='',encoding='utf-8') as source:
++        rows=list(csv.DictReader(source))
++    expected={(b,i) for b,n in [(0,73),(1,41)] for i in range(1,n+1)}
++    if len(rows)!=114 or {(int(r['bank']),int(r['index'])) for r in rows}!=expected:
++        raise ValueError('114 exact bank entries required')
++    matches=re.findall(r'^ \{(\d+)u,(\d+)u,(\d+)u,(\d+)u,\{(.+)\}\},?$',
++                       model_path.read_text(),re.M)
++    if len(matches)!=98:raise ValueError('Expected 98 recovered commands')
++    commands=bytearray();events=bytearray()
++    for pri,bank,count,cleanup,body in matches:
++        ev=re.findall(r'\{(\d+)u,(\d+)u,(\d+)u,(\d+)u\}',body)
++        pri,bank,count,cleanup=map(int,(pri,bank,count,cleanup))
++        if len(ev)!=9 or count>9 or bank>2:raise ValueError('Invalid command')
++        commands+=struct.pack('>4BH',pri,bank,count,cleanup,len(events))
++        for a in ev[:count]:
++            values=list(map(int,a))
++            if not 1<=values[0]<=73 or values[2]>15 or values[3]>3:
++                raise ValueError('Invalid event')
++            events+=bytes(values)
++    sample_offset=32
++    command_offset=sample_offset+116*8
++    event_offset=command_offset+len(commands)
++    raw_offset=event_offset+len(events)
++    table=bytearray(116*8);raw=bytearray();seen={};audit=[]
++    for r in sorted(rows,key=lambda r:(int(r['bank']),int(r['index']))):
++        b,sid=int(r['bank']),int(r['index'])
++        a,n=int(r['adpcm_start']),int(r['adpcm_bytes'])
++        if a<0 or n<=0 or n>65535 or a+n>0x40000 or a+n-1!=int(r['adpcm_end_inclusive']):
++            raise ValueError('Sample span')
++        encoded=rom[(b<<18)+a:(b<<18)+a+n]
++        h=hashlib.sha1(encoded).hexdigest()
++        if h!=r['sha1'] or int(r['pcm16_frames'])!=n*2:raise ValueError('ROM mismatch')
++        if h not in seen:seen[h]=raw_offset+len(raw);raw+=encoded
++        offset=seen[h]
++        ticks=(n*2*RATE_NUM+8000*RATE_DEN-1)//(8000*RATE_DEN)
++        idx=sid if b==0 else 74+sid
++        struct.pack_into('>IHH',table,idx*8,offset,n,ticks)
++        audit.append(dict(bank=b,sample=sid,offset=offset,adpcm_bytes=n,ticks=ticks,
++                          sha1_adpcm=h))
++    if len(seen)!=95:raise ValueError('Expected 95 distinct samples')
++    payload=table+commands+events+raw
++    payload+=b'\0'*(-len(payload)%2)
++    header=struct.pack('>4sHH6I',b'WFSX',1,116,32+len(payload),sample_offset,
++                       command_offset,event_offset,raw_offset,zlib.crc32(payload))
++    pack=header+payload
++    if len(pack)>CAPACITY:raise ValueError('Resident pack exceeds sound RAM')
++    output.mkdir(parents=True,exist_ok=True)
++    (output/'SFX.DAT').write_bytes(pack)
++    report=dict(pack_bytes=len(pack),capacity=CAPACITY,unused_bytes=CAPACITY-len(pack),
++                sample_entries=114,distinct_samples=95,commands=98,event_count=len(events)//4,
++                raw_adpcm_bytes=len(raw),sha256=hashlib.sha256(pack).hexdigest(),
++                source_rom_sha256=hashlib.sha256(rom).hexdigest(),
++                model_sha256=hashlib.sha256(model_path.read_bytes()).hexdigest(),samples=audit)
++    (output/'sfx-pack.json').write_text(json.dumps(report,indent=2)+'\n')
++    return report
++if __name__=='__main__':
++    p=argparse.ArgumentParser(description=__doc__)
++    for n in ['rom','manifest','model','out']:p.add_argument('--'+n,type=Path,required=True)
++    a=p.parse_args();r=build(a.rom,a.manifest,a.model,a.out)
++    print(json.dumps({k:r[k] for k in ['pack_bytes','unused_bytes','event_count','raw_adpcm_bytes']},indent=2))
++
+--- reference_r18/validation/verify_disc_exact.py
++++ native/validation/verify_disc_exact.py
+@@ -17,8 +17,8 @@
+         assert lba==int.from_bytes(r[6:10],'big');assert sz==int.from_bytes(r[14:18],'big');assert name not in files;assert lba*2048+sz<=len(data)
+         files[name]={'lba':lba,'size':sz,'data':data[lba*2048:lba*2048+sz]}
+     return files
+-def verify(root,iso,binary,cue,build_dir='audit/runtime18-build'):
+-    root=Path(root);iso=Path(iso);binary=Path(binary);cue=Path(cue);build_dir=Path(build_dir);mk=(root/'Makefile.saturn-disc').read_text();data=iso.read_bytes();raw=binary.read_bytes();ct=cue.read_text()
++def verify(root,iso,binary,cue,build_dir='audit/runtime18-build',makefile='Makefile.saturn-disc'):
++    root=Path(root);iso=Path(iso);binary=Path(binary);cue=Path(cue);build_dir=Path(build_dir);mk=(root/makefile).read_text();data=iso.read_bytes();raw=binary.read_bytes();ct=cue.read_text()
+     assert len(data)%2048==0 and data[:16]==b'SEGA SEGASATURN '
+     ip=(root/build_dir/'IP.BIN').read_bytes()
+     assert data[:len(ip)] == ip, 'ISO boot area differs from SDK IP.BIN'
+@@ -38,5 +38,5 @@
+         b=p.read_bytes();assert files[name]['data']==b,f'CDFS payload mismatch {name}';manifest.append({'name':name,'lba':files[name]['lba'],'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+     return {'status':'PASS','iso_sha256':hashlib.sha256(data).hexdigest(),'bin_sha256':hashlib.sha256(raw).hexdigest(),'cue_sha256':hashlib.sha256(ct.encode()).hexdigest(),'sectors':len(data)//2048,'cdfs_root_files':len(files),'all_sector_edc_ecc_exact':True,'all_cdfs_payloads_exact':True,'a_bin_equals_linked_binary':True,'manifest':manifest,'hardware_test':False,'emulator_test':False}
+ def main():
+-    p=argparse.ArgumentParser();p.add_argument('--root',required=True,type=Path);p.add_argument('--iso',required=True,type=Path);p.add_argument('--bin',required=True,type=Path);p.add_argument('--cue',required=True,type=Path);p.add_argument('--build-dir',default='audit/runtime18-build');p.add_argument('--json',type=Path);a=p.parse_args();r=verify(a.root,a.iso,a.bin,a.cue,a.build_dir);txt=json.dumps(r,indent=2);print(txt);a.json and a.json.write_text(txt+'\n')
++    p=argparse.ArgumentParser();p.add_argument('--root',required=True,type=Path);p.add_argument('--iso',required=True,type=Path);p.add_argument('--bin',required=True,type=Path);p.add_argument('--cue',required=True,type=Path);p.add_argument('--build-dir',default='audit/runtime18-build');p.add_argument('--makefile',default='Makefile.saturn-disc');p.add_argument('--json',type=Path);a=p.parse_args();r=verify(a.root,a.iso,a.bin,a.cue,a.build_dir,a.makefile);txt=json.dumps(r,indent=2);print(txt);a.json and a.json.write_text(txt+'\n')
+ if __name__=='__main__':main()

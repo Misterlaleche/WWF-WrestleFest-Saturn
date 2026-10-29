@@ -1,0 +1,17 @@
+{
+  "production_helper_sha256": "aedd610d2e83c80677acaa6b1b6cb1c24f88ed22d113b8233d72d56d2879372d",
+  "test_method": "Exact helper body extracted from production proposal; register reads replaced with deterministic counter accessors; independent interval oracle exhausts all65536 counts and nine inter-read advance schedules",
+  "compile_command": [
+    "gcc",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=undefined",
+    "/workspace/scratch/1e822aeaeac7/wp1979/perf_probe/ring-test/frt_rollover_generated.c",
+    "-o",
+    "/workspace/scratch/1e822aeaeac7/wp1979/perf_probe/ring-test/frt_rollover_generated"
+  ],
+  "stdout": "PASS cases=589824 old_torn_samples=2304 stable_invalid_samples=0 retry_cases=4608 example_old=1200 example_stable=1302\n"
+}

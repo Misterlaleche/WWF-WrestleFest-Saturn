@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "switches": [
+    {
+      "audio": 0,
+      "boot_call_in_preprocessed_entry": false,
+      "unchanged_config_keeps_timestamp": true
+    },
+    {
+      "audio": 1,
+      "boot_call_in_preprocessed_entry": true,
+      "unchanged_config_keeps_timestamp": true
+    },
+    {
+      "audio": 0,
+      "boot_call_in_preprocessed_entry": false,
+      "unchanged_config_keeps_timestamp": true
+    }
+  ]
+}

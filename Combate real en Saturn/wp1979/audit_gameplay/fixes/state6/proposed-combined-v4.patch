@@ -1,0 +1,143 @@
+--- a/src/wf_cpu_runtime.c
++++ b/src/wf_cpu_runtime.c
+@@ -8,6 +8,7 @@
+ /* Direct-ROM $1C2CC fast routes reached by the fresh TAG participants. Other
+  * branches remain explicit dependencies instead of guessing AI behavior. */
+ static wf_status_t knockdown_1cbf8(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
++static wf_status_t state1_tag_request_1c5fa(wf_runtime_t*,wf_actor_raw_t*,int*,wf_cpu_trace_t*);
+ wf_status_t wf_cpu_pursuit_1d5a2(wf_runtime_t*,unsigned,wf_state5_trace_t*);
+ extern wf_status_t wf_state5_approach_1f45a(wf_runtime_t*,unsigned,wf_state5_trace_t*);
+ static wf_status_t state0_tail(wf_runtime_t*,unsigned,wf_actor_raw_t*,wf_cpu_trace_t*);
+@@ -280,7 +281,12 @@
+   int idle=(ts==0u)||(ts==1u&&wf_u8(t,WF_A_CPU_SUBSTATE)==0u)||
+            (ts==4u&&wf_u8(t,WF_A_STATE4_LO)==1u);
+   if(idle){
+-   if(wf_u8(a,WF_A_FLAGS34)&2u)return block(tr,0x0001c5fau);
++   /* $1CFB4-$1CFC2: only carry set rejoins $1D01A. A reserve
++    * selects AE4 and returns with its existing direction unchanged. */
++   if(wf_u8(a,WF_A_FLAGS34)&2u){
++    int carry=0;wf_status_t st=state1_tag_request_1c5fa(rt,a,&carry,tr);
++    if(st!=WF_OK||!carry)return st;
++   }
+    wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_CPU_B5)&1u)?0x40u:0xc0u);
+    return WF_OK;
+   }
+@@ -302,7 +308,14 @@
+     return choose_1dea6(rt,slot,a,0x2307cu,0u,tr);
+    wf_set_u8(a,WF_A_MOTION_MODE,0u);wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x75u);return WF_OK;
+   }
+-  if(selector==0x4cu)return block(tr,0x1ccb4u);
++  if(selector==0x4cu){
++   /* $1CCB4-$1CCCE: pursue the tagging target's partner. Preserve the
++    * full pointer, then BSET B7.6 and select state5/raw3D; no relation
++    * recalculation or immediate execution occurs on this ROM branch. */
++   wf_set_be32(a,WF_A_TARGET,wf_be32(t,WF_A_TEAM_LINK));
++   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|64u));
++   wf_set_be16(a,WF_A_STATE,5u);wf_set_be16(a,WF_A_SELECTOR,0x3du);return WF_OK;
++  }
+   if((wf_u8(t,WF_A_FLAGS33)&64u)&&(rt->g.mode_0161&1u)){
+    wf_set_u8(a,WF_A_CPU_B6,(uint8_t)(wf_u8(a,WF_A_CPU_B6)|128u));
+    wf_set_u8(a,WF_A_CPU_B9,(uint8_t)(wf_u8(a,WF_A_CPU_B9)|1u));wf_set_be16(a,WF_A_STATE,0u);return WF_OK;
+@@ -319,7 +332,12 @@
+    wf_r17_m68k_move_b(&rt->m68k_regs,0u,wf_u8(a,WF_A_FACING));
+    if(wf_u8(a,WF_A_FACING)!=wf_u8(t,WF_A_FACING))
+     return choose_1dea6(rt,slot,a,0x2307cu,0u,tr);
+-   if(wf_u8(a,WF_A_FLAGS34)&2u)return block(tr,0x1c5fau);
++   /* $1CFB4-$1CFC2: only carry set rejoins $1D01A. A reserve
++    * selects AE4 and returns with its existing direction unchanged. */
++   if(wf_u8(a,WF_A_FLAGS34)&2u){
++    int carry=0;wf_status_t st=state1_tag_request_1c5fa(rt,a,&carry,tr);
++    if(st!=WF_OK||!carry)return st;
++   }
+    wf_set_u8(a,WF_A_ANGLE,(wf_u8(a,WF_A_CPU_B5)&1u)?0x40u:0xc0u);return WF_OK;
+   }
+   wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)|64u));
+@@ -598,15 +616,6 @@
+  return WF_OK;
+ }
+ 
+-static int weighted_runtime(wf_runtime_t *rt,const uint8_t *weights,size_t count,int *choice){
+- if(!rt||!weights||!choice||!rt->g.rng_state_valid||!rt->g.rng_register_context_valid)return 0;
+- arcade_cpu_rng_t r={rt->g.rng_state,rt->g.frame_counter,rt->g.rng_d2,rt->g.rng_d3,rt->g.rng_d4,rt->g.rng_d5,rt->g.rng_d6,rt->g.rng_d7};
+- int c=arcade_cpu_weighted_select(&r,weights,count,0);
+- if(c<0)return 0;
+- rt->g.rng_state=r.seed;
+- *choice=c;
+- return 1;
+-}
+ static wf_status_t state6(wf_runtime_t*rt,unsigned slot,wf_cpu_trace_t*tr){
+  wf_actor_raw_t*a=&rt->actors[slot];
+  /* $1EDC4: disabled when $1C007C==0 or +$45==0. */
+@@ -619,15 +628,23 @@
+   wf_set_be16(a,WF_A_TIMER44,0u);
+   wf_set_be16(a,WF_A_STATE,5u);
+   wf_set_be16(a,WF_A_SELECTOR,0x003fu);
+-  return wf_state5_execute(rt,slot,&tr->state5);
++  /* $1EE36 RTS: the scheduled action phase owns raw3F initialization. */
++  return WF_OK;
+  }
+  /* First phase: clear bit4, choose exact two-byte row by $1C0162 and tier. */
+  wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)&~0x10u));
+- if(rt->g.progression_0162>=10u||wf_u8(a,WF_A_TIER_LO)>=3u)return WF_BAD_STATE;
+- const uint8_t *w=arcade_cpu_state6_weight_pair((uint8_t)rt->g.progression_0162,wf_u8(a,WF_A_TIER_LO));
++ if(rt->g.progression_0162>=10u||wf_be16(a,WF_A_TIER)>=3u)return WF_BAD_STATE;
++ /* $1EDE2-$1EDFA establish D0, then $1EDFE calls $24CC with the
++  * current D2-D7. The legacy launch-time rng_d* cache is not this context. */
++ wf_r17_m68k_moveq(&rt->m68k_regs,0,0);
++ wf_r17_m68k_move_w(&rt->m68k_regs,0,rt->g.progression_0162);
++ wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(rt->m68k_regs.d[0]*4u));
++ const uint8_t *w=arcade_cpu_state6_weight_pair((uint8_t)rt->g.progression_0162,(uint8_t)wf_be16(a,WF_A_TIER));
+  if(!w)return WF_BAD_STATE;
+- int c;
+- if(!weighted_runtime(rt,w,2u,&c))return block(tr,0x000024ccu);
++ wf_r17_m68k_move_w(&rt->m68k_regs,0,wf_be16(a,WF_A_TIER));
++ wf_r17_m68k_move_w(&rt->m68k_regs,0,(uint16_t)(rt->m68k_regs.d[0]*2u));
++ int c=state1_weighted_24cc(rt,w,2u);
++ if(c<0)return block(tr,0x000024ccu);
+  if(c==0){wf_set_u8(a,WF_A_CPU_B5,(uint8_t)(wf_u8(a,WF_A_CPU_B5)|0x10u));return WF_OK;}
+  wf_set_be16(a,WF_A_CPU_BC,0u);
+  wf_set_u8(a,WF_A_CPU_B7,(uint8_t)(wf_u8(a,WF_A_CPU_B7)&~0x02u));
+--- a/src/wf_r17_human_raw23.c
++++ b/src/wf_r17_human_raw23.c
+@@ -257,7 +257,8 @@
+     dst->state_1c005c=src->state_1c005c;
+     dst->global_1c0080=src->global_1c0080;
+     dst->d[0]=src->d[0];dst->d[1]=(src->d[1]&0xFFFF0000u)|(uint32_t)mode;
+-    dst->d[2]=src->d[2];dst->d[3]=src->d[3];dst->d[4]=src->d[4];
++    /* $DEB2 CLR.L D3 is local to DE86, whose MOVEM restores D0-D3. */
++    dst->d[2]=src->d[2];dst->d[3]=0u;dst->d[4]=src->d[4];
+     dst->d[5]=src->d[5];dst->d[6]=src->d[6];dst->d[7]=src->d[7];
+     dst->valid=src->valid;
+ }
+@@ -315,8 +316,13 @@
+     if(wf_be16(a,O_STATE)==0x8006u&&wf_be16(a,O_TIMER44)!=0u&&wf_u8(a,0x25u)==0u){
+         wf_r17_rng21b4_context_t rc;wf_r17_1129e_trace_t rr;int carry=0;wf_status_t rs;
+         if(ctx->m68k_live&&ctx->rng_state_1c005c){
+-            wf_r17_m68k_move_w(ctx->m68k_live,1u,2u); /* $EB7C MOVE.W #2,D1; preserve high WORD */
+-            rs=wf_r17_1129e_live(rt,actor_slot,ctx->mode_0161,ctx->global_0162,ctx->rng_state_1c005c,ctx->global_1c0080,ctx->m68k_live,&rr,&carry);
++            /* $DE86 saves D0-D3; $DEB2 clears D3 before EA42. The
++             * $EB7C mode write and $1129E temporaries must not escape
++             * the matching $DFFC MOVEM restore in the caller. */
++            wf_r17_m68k_shadow_t call_regs=*ctx->m68k_live;
++            wf_r17_m68k_clr_l(&call_regs,3u);
++            wf_r17_m68k_move_w(&call_regs,1u,2u);
++            rs=wf_r17_1129e_live(rt,actor_slot,ctx->mode_0161,ctx->global_0162,ctx->rng_state_1c005c,ctx->global_1c0080,&call_regs,&rr,&carry);
+         }else{
+             if(!ctx->rng_1129e)return block(tr,0x0001129Eu);
+             rng_context_with_mode(&rc,ctx->rng_1129e,2u);
+@@ -334,8 +340,13 @@
+         if(bit(a,O_SELECTOR,7))return WF_OK;
+         wf_set_u8(a,O_SELECTOR,(uint8_t)(wf_u8(a,O_SELECTOR)|0x80u)); /* $EB9E BSET #7,+$60 */
+         if(ctx->m68k_live&&ctx->rng_state_1c005c){
+-            wf_r17_m68k_move_w(ctx->m68k_live,1u,0u); /* $EBA6 MOVE.W #0,D1; preserve high WORD */
+-            rs=wf_r17_1129e_live(rt,actor_slot,ctx->mode_0161,ctx->global_0162,ctx->rng_state_1c005c,ctx->global_1c0080,ctx->m68k_live,&rr,&carry);
++            /* $DE86 saves D0-D3; $DEB2 clears D3 before EA42. The
++             * $EBA6 mode write and $1129E temporaries must not escape
++             * the matching $DFFC MOVEM restore in the caller. */
++            wf_r17_m68k_shadow_t call_regs=*ctx->m68k_live;
++            wf_r17_m68k_clr_l(&call_regs,3u);
++            wf_r17_m68k_move_w(&call_regs,1u,0u);
++            rs=wf_r17_1129e_live(rt,actor_slot,ctx->mode_0161,ctx->global_0162,ctx->rng_state_1c005c,ctx->global_1c0080,&call_regs,&rr,&carry);
+         }else{
+             if(!ctx->rng_1129e)return block(tr,0x0001129Eu);
+             rng_context_with_mode(&rc,ctx->rng_1129e,0u);

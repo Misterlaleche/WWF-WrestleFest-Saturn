@@ -1,0 +1,248 @@
+{
+  "program_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "refresh": {
+    "reference_hz": 57.44485294117647,
+    "numerator": 15625,
+    "denominator": 272,
+    "provenance": "MAME machine configuration: pixel clock 28MHz/4, HTOTAL448, VTOTAL272. Totals explicitly guessed; not a measured original-PCB rate."
+  },
+  "cadence_contract": "One gameplay iteration per original VBlank frame-ready/ack handshake. Never alter movement or animation constants to compensate for renderer cost.",
+  "characters": [
+    {
+      "id": 0,
+      "name": "Hulk Hogan",
+      "walking": {
+        "magnitude": 27,
+        "magnitude_rom_address": "0x116ae",
+        "x": {
+          "delta_16_16_per_tick": 138240,
+          "pixels_per_tick": 2.109375,
+          "pixels_per_second_at_mame_reference": 121.17273667279412
+        },
+        "y": {
+          "delta_16_16_per_tick": 110592,
+          "pixels_per_tick": 1.6875,
+          "pixels_per_second_at_mame_reference": 96.93818933823529
+        }
+      },
+      "running": {
+        "magnitude": 47,
+        "magnitude_rom_address": "0x11d4a",
+        "x": {
+          "delta_16_16_per_tick": 240640,
+          "pixels_per_tick": 3.671875,
+          "pixels_per_second_at_mame_reference": 210.93031939338235
+        },
+        "y": {
+          "delta_16_16_per_tick": 192512,
+          "pixels_per_tick": 2.9375,
+          "pixels_per_second_at_mame_reference": 168.74425551470588
+        }
+      }
+    },
+    {
+      "id": 1,
+      "name": "Ultimate Warrior",
+      "walking": {
+        "magnitude": 29,
+        "magnitude_rom_address": "0x116af",
+        "x": {
+          "delta_16_16_per_tick": 148480,
+          "pixels_per_tick": 2.265625,
+          "pixels_per_second_at_mame_reference": 130.14849494485293
+        },
+        "y": {
+          "delta_16_16_per_tick": 118784,
+          "pixels_per_tick": 1.8125,
+          "pixels_per_second_at_mame_reference": 104.11879595588235
+        }
+      },
+      "running": {
+        "magnitude": 53,
+        "magnitude_rom_address": "0x11d4b",
+        "x": {
+          "delta_16_16_per_tick": 271360,
+          "pixels_per_tick": 4.140625,
+          "pixels_per_second_at_mame_reference": 237.8575942095588
+        },
+        "y": {
+          "delta_16_16_per_tick": 217088,
+          "pixels_per_tick": 3.3125,
+          "pixels_per_second_at_mame_reference": 190.28607536764707
+        }
+      }
+    },
+    {
+      "id": 9,
+      "name": "Ted DiBiase",
+      "walking": {
+        "magnitude": 27,
+        "magnitude_rom_address": "0x116b7",
+        "x": {
+          "delta_16_16_per_tick": 138240,
+          "pixels_per_tick": 2.109375,
+          "pixels_per_second_at_mame_reference": 121.17273667279412
+        },
+        "y": {
+          "delta_16_16_per_tick": 110592,
+          "pixels_per_tick": 1.6875,
+          "pixels_per_second_at_mame_reference": 96.93818933823529
+        }
+      },
+      "running": {
+        "magnitude": 47,
+        "magnitude_rom_address": "0x11d53",
+        "x": {
+          "delta_16_16_per_tick": 240640,
+          "pixels_per_tick": 3.671875,
+          "pixels_per_second_at_mame_reference": 210.93031939338235
+        },
+        "y": {
+          "delta_16_16_per_tick": 192512,
+          "pixels_per_tick": 2.9375,
+          "pixels_per_second_at_mame_reference": 168.74425551470588
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "Mr. Perfect",
+      "walking": {
+        "magnitude": 30,
+        "magnitude_rom_address": "0x116b5",
+        "x": {
+          "delta_16_16_per_tick": 153600,
+          "pixels_per_tick": 2.34375,
+          "pixels_per_second_at_mame_reference": 134.63637408088235
+        },
+        "y": {
+          "delta_16_16_per_tick": 122880,
+          "pixels_per_tick": 1.875,
+          "pixels_per_second_at_mame_reference": 107.70909926470588
+        }
+      },
+      "running": {
+        "magnitude": 56,
+        "magnitude_rom_address": "0x11d51",
+        "x": {
+          "delta_16_16_per_tick": 286720,
+          "pixels_per_tick": 4.375,
+          "pixels_per_second_at_mame_reference": 251.32123161764707
+        },
+        "y": {
+          "delta_16_16_per_tick": 229376,
+          "pixels_per_tick": 3.5,
+          "pixels_per_second_at_mame_reference": 201.05698529411765
+        }
+      }
+    }
+  ],
+  "animation": {
+    "interpreter": "0x1C0C8",
+    "finite_duration": "stored N means N+1 interpreter ticks",
+    "hold": 65280,
+    "hold_semantics": "0xFF00: external/callback hold; no automatic expiry",
+    "loop_kind": 2,
+    "walking": {
+      "descriptor": "0x115F2",
+      "callback": "0x11652",
+      "poses": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "stored_duration_each": 10,
+      "ticks_each": 11,
+      "cycle_ticks": 44
+    },
+    "running": {
+      "descriptor": "0x11C62",
+      "callback": "0x11C82",
+      "poses": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "stored_duration_each": 6,
+      "ticks_each": 7,
+      "cycle_ticks": 42
+    }
+  },
+  "actors": {
+    "wrestler_base": "0x1C05B0",
+    "stride": 268,
+    "count": 9,
+    "referee": "0x1C11F4",
+    "tag_partner_pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "fields": {
+      "identity_word": 2,
+      "visual_word": 4,
+      "x_16_16": 6,
+      "y_16_16": 10,
+      "z_16_16": 14,
+      "display_x": 20,
+      "display_y": 22,
+      "latched_state": 28,
+      "previous_state": 30,
+      "main_state": 32,
+      "animation_countdown": 34,
+      "animation_index": 36,
+      "linked_actor": 38,
+      "magnitude_word": 42,
+      "angle_word": 44,
+      "facing_word": 46,
+      "contact_word": 54,
+      "control_flags": 86,
+      "identity_byte": 87,
+      "vx8_8": 88,
+      "vy8_8": 90,
+      "vz8_8": 92,
+      "vertical_decrement": 94,
+      "raw_action": 96,
+      "state4_subtype_word": 100,
+      "stamina": 102,
+      "pending_damage": 104,
+      "stamina_tier": 112,
+      "target_actor": 122,
+      "partner_actor": 134,
+      "input_source_pointer": 138
+    }
+  },
+  "frame": {
+    "gameplay_entry": "0xF8C",
+    "iteration_start": "0xF9A",
+    "loop_counter": "0x1C0080",
+    "handshake_byte": "0x1C006F",
+    "ready_bit": 0,
+    "ack_bit": 1,
+    "actor_order": "ascending, live active set",
+    "actor_turn": [
+      "clear contact +36/+37",
+      "resolver280DC",
+      "apply high-WORD corrections",
+      "state callback1C03E",
+      "animation1C0C8",
+      "projection247C",
+      "queue27B8",
+      "motion2208"
+    ],
+    "after_actor_turns": [
+      "24090 collision profile invalidation",
+      "branchA:24062 collision",
+      "branchA:24E58 damage"
+    ]
+  }
+}

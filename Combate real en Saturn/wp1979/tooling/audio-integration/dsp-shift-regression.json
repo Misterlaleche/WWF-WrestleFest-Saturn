@@ -1,0 +1,24 @@
+{
+  "original": {
+    "returncode": 1,
+    "cases": 44,
+    "failures": 10,
+    "failures_by_mode": [
+      0,
+      0,
+      0,
+      10
+    ]
+  },
+  "shift3_corrected": {
+    "returncode": 0,
+    "cases": 44,
+    "failures": 0,
+    "failures_by_mode": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

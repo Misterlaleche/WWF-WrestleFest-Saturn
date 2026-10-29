@@ -1,0 +1,16 @@
+{
+  "verified_artifact_hashes": 33,
+  "source_files_verified": 2,
+  "exact_tile_reconstructions": 6357,
+  "complete_replay_frame": 7372,
+  "role_trace_byte_identical": true,
+  "legal_tag_frames": [
+    529,
+    5768
+  ],
+  "post_boot_rom_reads": 0,
+  "post_boot_sprite_reads": 0,
+  "blocked_owners": 0,
+  "original_phase_actor_comparisons_pass": 984,
+  "state6_rom_cases_pass": 149
+}

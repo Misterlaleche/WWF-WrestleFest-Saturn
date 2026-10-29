@@ -1,0 +1,25 @@
+{
+  "yabause/src/yabause.c": {
+    "unchanged": true,
+    "sha256": "dab56aca6acafbd990764085aa7ac083c4e8f0bef2e260ff6c74903daf75011b"
+  },
+  "yabause/src/yabause.h": {
+    "unchanged": true,
+    "sha256": "e285af0c2f14d27dafe24e5420a6262d9e434fc12491c2d87a347340ebbe2603"
+  },
+  "yabause/src/sh2core.c": {
+    "unchanged": true,
+    "sha256": "fc404cffd64404bb0f7dffe63a7a06785ddaeb5ef347c8184839bcea58d5f51e"
+  },
+  "yabause/src/sh2core.h": {
+    "unchanged": true,
+    "sha256": "230f0a37215f9dfdfa2578689ce59d1ed035505b32a8e9389d9d869f0b683ce2"
+  },
+  "yabause/src/sh2int.h": {
+    "unchanged": true,
+    "sha256": "d7bdbfc4783c59aa55768e0363698e01cfe67269be188f353b11a675b343d478"
+  },
+  "original_archive_sha256": "7f1bff1d902b8c0574c650463ba872d86029eb7c513b3e39ee03bf3b991795a4",
+  "original_core_sha256": "9128e3e1ca5b26ced9bf7c6879424d38a138c6d55c654bd61e651a414c72230a",
+  "configured_core_sha256": "176c4611333b458c6aa04cb877d69795070f05480bd5c082884c4259cacb6297"
+}

@@ -1,0 +1,7 @@
+{
+  "kind": "synthetic-analyzer-regression",
+  "positive": "pass",
+  "rejects_missing_takeover": true,
+  "rejects_reversed_vertical": true,
+  "actual_capture_performed": false
+}
