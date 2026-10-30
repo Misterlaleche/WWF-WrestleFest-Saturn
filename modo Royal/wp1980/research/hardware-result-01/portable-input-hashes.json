@@ -1,0 +1,98 @@
+{
+  "comparison": "Final result probe input hashes before and after the power-of-two hot_header assertion change",
+  "files": [
+    {
+      "file": "work/hwfix01/native/src/wf_r18_present.c",
+      "previous_sha256": "8af25fbf1b206948156656b47815de47c7fe2bbb7c6d9a3150d80f91ec2974aa",
+      "current_sha256": "bfc0ef87d91dcc36eadd6bb2ea2d6963cdd30feda719f7fb87e87a304c294d6e",
+      "unchanged": false
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_r18_result_screen.c",
+      "previous_sha256": "f0f659f9255e48e2c6f57a53208835923e76fd15be1619c080e35510ff5187c3",
+      "current_sha256": "f0f659f9255e48e2c6f57a53208835923e76fd15be1619c080e35510ff5187c3",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_r18_frontend_palette.c",
+      "previous_sha256": "2ad7c0d3b1dd77e0c62012cd98701bf2c499e57533bcd0ec091faca79f94ac59",
+      "current_sha256": "2ad7c0d3b1dd77e0c62012cd98701bf2c499e57533bcd0ec091faca79f94ac59",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_r18_video.c",
+      "previous_sha256": "1fe21b29bf46875ae6d05ef7b63fdb306f16d6f2436e96f20f701914f0aa6a9d",
+      "current_sha256": "1fe21b29bf46875ae6d05ef7b63fdb306f16d6f2436e96f20f701914f0aa6a9d",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_r17_m68k_shadow.c",
+      "previous_sha256": "2092b95e5afbf990fe8ecc714d80543b54fdf870101938da1748916d6cd5e499",
+      "current_sha256": "2092b95e5afbf990fe8ecc714d80543b54fdf870101938da1748916d6cd5e499",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_r18_metasprite.c",
+      "previous_sha256": "5a41cad778e1425384b75a40b8eacc4d03bb9706f6fe05475b1eb29c39a9e772",
+      "current_sha256": "5a41cad778e1425384b75a40b8eacc4d03bb9706f6fe05475b1eb29c39a9e772",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_saturn_yaul_backend.c",
+      "previous_sha256": "e4851bdc4c3f1ae889b16ee35ff494edf5260a6f320efcbb41e208caca96b12b",
+      "current_sha256": "e4851bdc4c3f1ae889b16ee35ff494edf5260a6f320efcbb41e208caca96b12b",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_saturn_memory.c",
+      "previous_sha256": "57cbdde15ab844e3f1b33706dbc70bf23ef1e6873507faad0855a24ece9f7ce0",
+      "current_sha256": "57cbdde15ab844e3f1b33706dbc70bf23ef1e6873507faad0855a24ece9f7ce0",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_r18_hud.c",
+      "previous_sha256": "387839d0b33005cbbcd5da16efa2fda7737ba19a12af6ceb74bd53d6b5f2145b",
+      "current_sha256": "387839d0b33005cbbcd5da16efa2fda7737ba19a12af6ceb74bd53d6b5f2145b",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/src/wf_r18_runtime_handoff.c",
+      "previous_sha256": "acd6a534ba8b611d9c3b6f38ecb4c2000b47e0a480544312f1fe0476876522e2",
+      "current_sha256": "acd6a534ba8b611d9c3b6f38ecb4c2000b47e0a480544312f1fe0476876522e2",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/include/wp1980_royal_rom_pages.h",
+      "previous_sha256": "b0a023353cda63a9862e6c9855f5e0800fe4e5b1a03eaf9a9b17c6142ca9f7a2",
+      "current_sha256": "b0a023353cda63a9862e6c9855f5e0800fe4e5b1a03eaf9a9b17c6142ca9f7a2",
+      "unchanged": true
+    },
+    {
+      "file": "work/hwfix01/native/include/wp1980_royal_rom_pages_cart.h",
+      "previous_sha256": "74215b7f34adb6fbf6dc3f8e9b5fc40f40e517774fff9a04fa923d406d82f307",
+      "current_sha256": "74215b7f34adb6fbf6dc3f8e9b5fc40f40e517774fff9a04fa923d406d82f307",
+      "unchanged": true
+    },
+    {
+      "file": "native/audit/wp1980-release-cd/ROM68K.BIN",
+      "previous_sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306",
+      "current_sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306",
+      "unchanged": true
+    },
+    {
+      "file": "native/audit/wp1980-release-cd/ROYINIT.BIN",
+      "previous_sha256": "40c53836ca6591f9bdc3cfcc879fda054ffc43f0d168ac02733b93d0d83cefbb",
+      "current_sha256": "40c53836ca6591f9bdc3cfcc879fda054ffc43f0d168ac02733b93d0d83cefbb",
+      "unchanged": true
+    },
+    {
+      "file": "research/hardware-result-01/fixtures/terminal-actors.bin",
+      "previous_sha256": "656f7934c1c1b1cbac5afef25e4d17c8503c050c011effc734a0e00e1fb6f884",
+      "current_sha256": "656f7934c1c1b1cbac5afef25e4d17c8503c050c011effc734a0e00e1fb6f884",
+      "unchanged": true
+    }
+  ],
+  "changed": [
+    "work/hwfix01/native/src/wf_r18_present.c"
+  ]
+}

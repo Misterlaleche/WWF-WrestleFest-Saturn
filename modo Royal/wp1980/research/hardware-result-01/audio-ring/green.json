@@ -1,0 +1,29 @@
+{
+  "source": "/workspace/scratch/e1d72d5a13f7/wp1980/work/hwfix01/audio/native/wf_scsp_sfx.c",
+  "source_sha256": "6ef374c5fe71770b40729cc29d9ce4ecf5c57ace1259c75e7d64f9d0f2abca8f",
+  "scope": "Production FAST_68000 fill/work/advance, relocated sound RAM; deterministic contiguous decoder replaces assembly only.",
+  "physical_hardware_validation": false,
+  "compile_command": [
+    "cc",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "/workspace/scratch/e1d72d5a13f7/wp1980/work/hwfix01/audio/native",
+    "-DWF_SFX_SOURCE=\"/workspace/scratch/e1d72d5a13f7/wp1980/work/hwfix01/audio/native/wf_scsp_sfx.c\"",
+    "/workspace/scratch/e1d72d5a13f7/wp1980/research/hardware-result-01/audio-ring/fast_ring_regression.c",
+    "-o",
+    "/workspace/scratch/e1d72d5a13f7/wp1980/research/hardware-result-01/audio-ring/fast-ring-green"
+  ],
+  "compile_exit": 0,
+  "compile_stdout": "",
+  "compile_stderr": "",
+  "run_command": [
+    "/workspace/scratch/e1d72d5a13f7/wp1980/research/hardware-result-01/audio-ring/fast-ring-green"
+  ],
+  "run_exit": 0,
+  "stdout": "OBS boundary_voice0_stride8192 own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=2\nOBS boundary_voice1_stride8192 own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=2\nOBS boundary_voice2_stride8192 own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=2\nOBS boundary_voice3_stride8192 own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=2\nOBS boundary_voice0_stride8194 own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=2\nOBS boundary_voice1_stride8194 own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=2\nOBS boundary_voice2_stride8194 own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=2\nOBS boundary_voice3_stride8194 own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=2\nOBS ordinary_fill own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=1\nOBS available_tail_only own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=1\nOBS exact_ring_end own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=1\nOBS initial_fill_completion own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=1\nOBS empty_work own_ring_wrong=0 outside_voice_changed=0 next_voice_changed=0 guard_match=1 decoder_calls=0\nRESULT cases=13 failures=0\n",
+  "stderr": ""
+}

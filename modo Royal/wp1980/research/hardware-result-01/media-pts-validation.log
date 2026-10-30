@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "scope": "Recorded video timestamps; not gameplay update rate",
+  "source_sha256": "f323987d3c119f0ff22faf84db55162526afc7175573554dc6cc39e9a804823e",
+  "mp4_sha256": "4471148e8891030f31a338ff57756222f9b3aee56406b304a74f9464b72be682",
+  "source_frames": 11552,
+  "mp4_frames": 11552,
+  "all_video_pts_identical": true,
+  "source_time_base": "1/44100",
+  "mp4_time_base": "1/44100",
+  "source_first_pts": 0,
+  "source_last_pts": 8514660,
+  "mean_recorded_field_rate": 59.82612341538006,
+  "mean_recorded_field_rate_fraction": "1212855/20273",
+  "source_geometry": [
+    704,
+    480
+  ],
+  "mp4_geometry": [
+    704,
+    480
+  ],
+  "final_source_packet_duration": 737,
+  "final_mp4_packet_duration": null,
+  "duration_note": "Last-packet duration metadata may differ; each actual frame PTS is compared exactly."
+}

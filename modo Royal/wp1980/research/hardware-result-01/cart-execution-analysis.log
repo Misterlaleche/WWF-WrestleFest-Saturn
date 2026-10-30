@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "full_match": {
+    "updates": 8474,
+    "vblanks": 8618,
+    "updates_per_field": 0.9832907867254583,
+    "native_seconds": 144.05078430645048,
+    "updates_per_second": 58.82647595984343
+  },
+  "first_windows": [
+    {
+      "draws_first": 1,
+      "draws_last": 100,
+      "updates": 99,
+      "vblanks": 102,
+      "updates_per_field": 0.9705882352941176,
+      "updates_per_second": 58.066531550221825
+    },
+    {
+      "draws_first": 1,
+      "draws_last": 500,
+      "updates": 499,
+      "vblanks": 505,
+      "updates_per_field": 0.9881188118811881,
+      "updates_per_second": 59.115317988662675
+    },
+    {
+      "draws_first": 1,
+      "draws_last": 1000,
+      "updates": 999,
+      "vblanks": 1013,
+      "updates_per_field": 0.9861796643632774,
+      "updates_per_second": 58.99930630993552
+    }
+  ],
+  "sliding_windows": [
+    {
+      "updates": 59,
+      "possible_windows": 8415,
+      "observed_endpoint_windows": 7899,
+      "worst_observed": {
+        "draws_first": 4407,
+        "draws_last": 4466,
+        "updates": 59,
+        "vblanks": 65,
+        "updates_per_field": 0.9076923076923077,
+        "updates_per_second": 54.30371202319113
+      }
+    },
+    {
+      "updates": 99,
+      "possible_windows": 8375,
+      "observed_endpoint_windows": 7865,
+      "worst_observed": {
+        "draws_first": 4373,
+        "draws_last": 4472,
+        "updates": 99,
+        "vblanks": 107,
+        "updates_per_field": 0.9252336448598131,
+        "updates_per_second": 55.353142225445104
+      }
+    },
+    {
+      "updates": 499,
+      "possible_windows": 7975,
+      "observed_endpoint_windows": 7497,
+      "worst_observed": {
+        "draws_first": 4359,
+        "draws_last": 4858,
+        "updates": 499,
+        "vblanks": 517,
+        "updates_per_field": 0.965183752417795,
+        "updates_per_second": 57.74320229066664
+      }
+    },
+    {
+      "updates": 999,
+      "possible_windows": 7475,
+      "observed_endpoint_windows": 7027,
+      "worst_observed": {
+        "draws_first": 5748,
+        "draws_last": 6747,
+        "updates": 999,
+        "vblanks": 1029,
+        "updates_per_field": 0.9708454810495627,
+        "updates_per_second": 58.081921566535165
+      }
+    }
+  ],
+  "combat_cd_delta": {
+    "window_misses": 0,
+    "window_sectors": 0
+  },
+  "terminal_state_comparison": {
+    "path": "/workspace/scratch/e1d72d5a13f7/wp1980/research/hardware-result-01/fixtures/delivered-release-4mb/report.json",
+    "sha256": "10f6dc6cf94d374d568145d467b6577047e4382a7c9002491fc6a4665cf4fbd2",
+    "fields": {
+      "rng_state": true,
+      "actor0": true,
+      "actor1": true,
+      "actor2": true,
+      "actor3": true,
+      "actor4": true,
+      "actor5": true,
+      "actor6": true,
+      "actor7": true,
+      "actor8": true
+    },
+    "all_equal": true,
+    "native_finished_frame_reference": 8474
+  }
+}

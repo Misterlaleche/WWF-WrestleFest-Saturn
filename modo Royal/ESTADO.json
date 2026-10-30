@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "name": "modo Royal",
+  "checkpoint": "WP1980 Royal HW1",
+  "snapshot_date": "2026-10-29",
+  "handoff_date": "2026-10-30",
+  "classification": "CANDIDATE; emulator and scoped host evidence; physical HW1 validation pending",
+  "production_root": "wp1980/work/hwfix01",
+  "prior_baseline_root_external": "wp1980",
+  "reference_source_commit": "d95b8c37f62402bce4dead13cf7c0567b8fc2439",
+  "repository_scope": {
+    "repository": "Misterlaleche/WWF-WrestleFest-Saturn-Private",
+    "branch": "main",
+    "base_commit": "ea1e193d9a72c534bdead5206e9b8449757437b2",
+    "base_root_tree": "3e2d4305db4e510aa658e01b385cbe7d55cae2f7",
+    "only_new_folder": "modo Royal",
+    "existing_paths_modified": false,
+    "source_integration_into_master": false
+  },
+  "preservation": {
+    "candidate_inputs": 356,
+    "candidate_input_bytes": 17841618,
+    "candidate_utf8_files_in_git": 337,
+    "candidate_utf8_bytes": 2335202,
+    "candidate_external_binary_files": 19,
+    "candidate_external_binary_bytes": 15506416,
+    "source_bytes_unchanged": true,
+    "candidate_modified_vs_original": [
+      {
+        "path": "audio/native/wf_scsp_sfx.c",
+        "original_sha256": "e298bc39b2aff506e13e8154499fc754c1da39b7ac680412609e7702a8483056",
+        "candidate_sha256": "6ef374c5fe71770b40729cc29d9ce4ecf5c57ace1259c75e7d64f9d0f2abca8f"
+      },
+      {
+        "path": "native/Makefile.wp1980",
+        "original_sha256": "92f0301db6ec0620f90a21825940ab3e50838406b6a3e9087134f7c27197c8cb",
+        "candidate_sha256": "e9f328d8755abd49e6ffde8ef620ad055426b58d73cc643e8ef04d39a0ae81c1"
+      },
+      {
+        "path": "native/audit/wp1980-release-cd/SCSP.ELF",
+        "original_sha256": "bdf84aa656a0a1b03ac6a9a6f11a7d125acbf619f6f72ebf6c53e74e3ece83b4",
+        "candidate_sha256": "c06a9244dd36eb8b735f3328a59dfff32515c9e3405fb3ec64616b778c7b07ae"
+      },
+      {
+        "path": "native/include/wf_r18_fault_pages.h",
+        "original_sha256": "86b8e23a467bb2633fc2177b9d19fd250f43cf0698149b559949ee01bce160ee",
+        "candidate_sha256": "c07a90d5e3ab6f6429f9893d8c650e42de0c011e0acbad4103856fb4dccf4475"
+      },
+      {
+        "path": "native/include/wp1980_royal_rom_pages.h",
+        "original_sha256": "0f84d081370c15af46ea9bef72d334f5429eb1253518c77cc5e5950d78ab7208",
+        "candidate_sha256": "b0a023353cda63a9862e6c9855f5e0800fe4e5b1a03eaf9a9b17c6142ca9f7a2"
+      },
+      {
+        "path": "native/include/wp1980_royal_rom_pages_cart.h",
+        "original_sha256": "9d030abac1e96609af07af34ebb45e82d056e7e81db4530d383874ecb5f87d49",
+        "candidate_sha256": "74215b7f34adb6fbf6dc3f8e9b5fc40f40e517774fff9a04fa923d406d82f307"
+      },
+      {
+        "path": "native/src/wf_r18_frontend_palette.c",
+        "original_sha256": "c67dfccf3e7acf4350399cf18709508631677a3d174fd2884ebd0e21727677c5",
+        "candidate_sha256": "2ad7c0d3b1dd77e0c62012cd98701bf2c499e57533bcd0ec091faca79f94ac59"
+      },
+      {
+        "path": "native/src/wf_r18_present.c",
+        "original_sha256": "a502ab731dc47b30519ac082964779d7848d08cc4ee52135615a8fe1272be4a3",
+        "candidate_sha256": "bfc0ef87d91dcc36eadd6bb2ea2d6963cdd30feda719f7fb87e87a304c294d6e"
+      },
+      {
+        "path": "native/src/wp1980_combat_entry.c",
+        "original_sha256": "904b5dcaeff6dfa98bcfa40b0b47e30133d6ec9b905ceb0e22197b3368cce154",
+        "candidate_sha256": "5d9123fd3dd295455491c94b1defb5fcf6b0a5a5d0057a9af0798ad7f8693f5d"
+      }
+    ],
+    "full_bundle_members": 1444,
+    "full_bundle_uncompressed_bytes": 90637756,
+    "source_manifest": "FUENTES-SHA256.json",
+    "resource_manifest": "RECURSOS.json"
+  },
+  "private_bundle": {
+    "name": "wp1980_hw1_fuentes_y_pruebas.zip",
+    "sha256": "afa7132a241e06208bd47b10487e2361e9cba59e5085a17e4d3bc0a3c135eb70",
+    "url": "https://chatgpt.com/library?file_id=libfile_f6afc43063a88191ac2e44793a99433c&account_id=personal"
+  },
+  "delivered_images": {
+    "cart_4mb": {
+      "bin_sha256": "52d86a7a5092702f0e874fb1b89078f5583bc67cb6bb5f65a2227b819393f6ba",
+      "cue_sha256": "bdc7a9921156dccffc19daadb8e1a084c9bc627102024ae4ad1088570f7ea77c"
+    },
+    "base": {
+      "bin_sha256": "ba90765efc1789ba9719a5365021b6e5fdd97739cb09f3dac759ae865dd5fad9",
+      "cue_sha256": "a2b2198a429d351fb11ef1c91d9a7b311f23aad3cefabbd634d50aa677f3147f"
+    }
+  },
+  "delivered_video": {
+    "name": "wp1980_hw1_mednafen_royal_4mb.mp4",
+    "sha256": "4471148e8891030f31a338ff57756222f9b3aee56406b304a74f9464b72be682",
+    "seconds": 193.092993,
+    "frames": 11552,
+    "in_git": false
+  },
+  "audio": {
+    "effects_enabled": true,
+    "music_enabled": false,
+    "corrected_firmware_sha256": "c06a9244dd36eb8b735f3328a59dfff32515c9e3405fb3ec64616b778c7b07ae",
+    "commands_submitted_each_run": 131,
+    "commands_completed_each_run": 131,
+    "queue_transport_not_acoustic_fidelity": true,
+    "physical_audio_fix_proven": false
+  },
+  "observed_execution": {
+    "emulator": "Mednafen standalone 1.32.1",
+    "cache": "full",
+    "region": "NTSC",
+    "fast_forward": 1,
+    "frameskip": 0,
+    "field_rate_hz_from_pts": 59.82612341538,
+    "base_reuses_cart_pts_calibration": true,
+    "cart": {
+      "updates": 8474,
+      "fields": 8618,
+      "seconds": 144.05078430645048,
+      "updates_per_second": 58.82647595984343,
+      "worst_observed_99": 55.353142225445104,
+      "worst_observed_59": 54.30371202319113
+    },
+    "base": {
+      "updates": 8474,
+      "fields": 10022,
+      "seconds": 167.51879326052992,
+      "updates_per_second": 50.58536917001902,
+      "worst_observed_99": 41.70976209945511,
+      "worst_observed_59": 37.954207328036816
+    },
+    "presentation_fields_each": 98,
+    "result_cd_delta_each": 0,
+    "terminal_frame": 8474,
+    "terminal_rng_hex": "B8A86C74",
+    "actor_bytes_compared": 2412,
+    "actors_and_rng_equal_to_prior_reference": true,
+    "asynchronous_observed_endpoints_only": true,
+    "instantaneous_uniform_speed_claim": false
+  },
+  "independent_rebuild_2026_10_30": {
+    "scope": "4 MB linked program rebuilt independently during handoff; existing HW1 production source unchanged",
+    "program_bytes": 976116,
+    "program_sha256": "5b7aaac6eb9a014d60f804b60984908526cbc13ea4fbc78219f664fff7adb634",
+    "matches_delivered_hw1_program": true,
+    "heap_available_bytes": 56076,
+    "bss_to_slave_stack_bytes": 52192,
+    "iso_hash_identity_claim": false,
+    "physical_validation": false
+  },
+  "gates": {
+    "arcade_minimum_speed_met": false,
+    "physical_hw1_test": "PENDING",
+    "general_make_test": "BLOCKED: supplied tests/test_core.c missing",
+    "general_project_suite_pass": false,
+    "complete_game_rom_exact": false,
+    "all_mechanics_or_seeds_proven": false,
+    "integrated_music_and_effects_hardware": "PENDING",
+    "pal_performance": "NOT TESTED"
+  },
+  "evidence": {
+    "report": "wp1980/deliverables/hw1/INFORME_HW1.txt",
+    "host_result": "wp1980/research/hardware-result-01/portable-validation.json",
+    "host_audio": "wp1980/research/hardware-result-01/audio-ring/green.json",
+    "cart_speed": "wp1980/research/hardware-result-01/cart-execution-analysis.log",
+    "base_speed": "wp1980/research/hardware-result-01/base-execution-analysis.log",
+    "terminal": "wp1980/research/hardware-result-01/independent-observation/summary.json",
+    "packaging": "VERIFICACION-EMPAQUETADO.json"
+  }
+}

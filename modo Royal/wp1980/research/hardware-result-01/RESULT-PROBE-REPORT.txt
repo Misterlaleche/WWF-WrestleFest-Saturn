@@ -1,0 +1,91 @@
+WP1980 Royal result regression evidence
+
+Outcome
+All intended RED and GREEN contracts were observed. The unchanged production
+loader/result path fails on the first post-preload ROM fetch at file offset
+0x2800 when file reads are denied. The isolated fixed source completes the same
+result with zero file reads, including after full eviction pressure. Successful
+native output matches both the original-source unrestricted reference and direct
+execution of the immutable original 68000 result code.
+
+Production scope
+The probe links the real production ROM loader, result owner, palette loader,
+text renderer, HUD commits/map writer and runtime importer. It does not replace
+cache arrays or game-owner implementations. File availability, VBlank callbacks
+and host display-memory destinations are the external test boundaries.
+The probe agent made no production-source edits. Old source remains native/;
+fixed source is work/hwfix01/native/. Relevant source/header hashes still match
+each recorded run. Root owns the implementation and physical/emulator gates.
+
+Observed results
+Case                               Exit  Result file reads  Commits  Wait
+Old base 32, unrestricted              0          4               2     97
+Old cart 128, unrestricted             0          4               2     97
+Old base 32, deny                      1          1 denied        0      0
+Old cart 128, deny                     1          1 denied        0      0
+Old base 32, churn then deny           1          1 denied        0      0
+Old cart 128, churn then deny          1          1 denied        0      0
+Fixed base 39, deny                    0          0               2     97
+Fixed cart 135, deny                   0          0               2     97
+Fixed base 39, churn then deny         0          0               2     97
+Fixed cart 135, churn then deny        0          0               2     97
+
+All four old denied-read cases return WF_BLOCKED at 0x2800, before any commit
+or result wait. The owner has reached the initial high-VBlank callback only.
+They retain the old missing provenance value video.failed_address=0. The
+unrestricted old-source result required four ROM page fetches; this count is
+at the file callback boundary, not the Saturn CDFS window counter.
+
+Final fixed runs use WP1980_HOT_HEADER_BYTES=4096, with base capacity 39 or
+cart capacity 135. Every successful run records callbacks H,C,L,C,W and the
+original 97-period wait. The probe does not model elapsed CD latency, Saturn
+interrupt scheduling or physical audio playback.
+
+Eviction and exact page coverage
+The complete result reads precisely pages 10,11,14,17,18,148,151. It validates
+all 1024 bytes of each page against the unchanged original ROM: 7168 bytes.
+Churn reads every non-pinned ROM page through the real production loader:
+473 pages for fixed base and 377 for fixed cart, exceeding all 209 LWRAM slots.
+It then uses real small reads to replace all 64 tiny-cache indices with unrelated
+pages 0/1. File reads are denied only after churn; no result dependency is warmed
+after churn. Both final churn runs complete with zero result file reads.
+
+Behavior equality
+All final native snapshots are byte identical to their old-source unrestricted
+reference: 69688 bytes spanning the complete runtime, normalized video object
+and HUD map. All nine actors remain unchanged.
+An independent Musashi execution runs original ROM 0x1AFC through 0x1B1E with
+no instruction patch or function stub. It executes 2350 instructions, observes
+196 VBlank-port reads (one palette high/low pair and 97 wait pairs), and performs
+no unmapped reads, unmapped writes or ROM writes. Every final fixed case matches
+its 55702-byte board projection exactly: text/sprite RAM, background RAM, three
+palette regions, all D registers, nine actors, RNG, frame and result selector.
+Projection SHA256:
+917d2d2a1a7c616eba830ddbc8bd66ff74859c539464622657d6137b00942e4b
+
+Palette failure provenance
+Separate fault injection into the real palette owner reproduces the diagnostic
+hole: failed pointer read 0x2A98 and failed payload read 0x3922 both reported 0
+before the fix (probe exit 1). The fixed owner reports 0x2A98 and 0x3922 respectively
+(probe exit 0) while retaining WF_BLOCKED in both cases; checks are not suppressed.
+
+Fixture and interpretation
+The fixture combines original ROYINIT board/work state with the exact nine
+actors from the delivered Mednafen terminal report, frame 8474 and RNG B8A86C74.
+This is a result-only contract test; it is not a complete terminal board capture
+or a new whole-game replay. Direct original-ROM equality applies to that same
+declared fixture. These tests demonstrate removal of this result-time CD
+read dependency and preservation of result behavior. They do not establish the
+physical drive's precise error code or prove the physical audio issue resolved.
+
+Evidence and reproduction
+result-red/                 Preserved initial reference and expected failures.
+result-green-final/         Fresh tests against final isolated source.
+provenance-red/ and -green/ Exact diagnostic failure/success pairs.
+original-oracle/            Immutable-ROM execution and final byte comparisons.
+fixtures/                  Terminal actor bytes and delivered-report provenance.
+result-probe-summary.json  Machine-readable metrics, hashes and assertions.
+RESULT-PROBE-COMMANDS.txt  Exact build/run commands and runner invocations.
+
+Original ROM SHA256:
+265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306

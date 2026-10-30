@@ -1,0 +1,82 @@
+WP1980 isolated PCM ring-tail correction
+
+Status
+The actual FAST_68000 fill path failed a host regression before the change
+and passes after a minimal ring-tail bound. The new SCSP.ELF builds and is
+accepted by the production loader. This is a separately demonstrated audio
+corruption defect; its occurrence in the reported physical run, its effect on
+that run's sound, and its connection to the result-screen fault are unproven.
+
+Defect and change
+The fast decoder writes consecutive words. Refill targets are aligned to 32
+samples, but work may request 64. At ring index 4064, a 64-sample decode crossed
+the 4096-sample ring end. In the DSP layout it left 32 stale samples in its own
+ring, replaced the interpolation guard, and overwrote 31 samples of the next
+voice. The final voice could instead overwrite following sound-RAM metadata.
+
+The valid regression witness uses played=4128, write_at=write_end=8160, then
+353 elapsed SCSP frames. Production advance reaches played=4192 and
+write_end=8224 without a stall or underrun. Both pre-existing checks permit
+the bad write. This witness establishes the code defect, not physical timing.
+
+Only work/hwfix01/audio/native/wf_scsp_sfx.c was edited in production.
+Fast fill now caps count at 4096-(write_at&4095). The next bounded work call
+continues at index zero, preserving decoded order and the existing guard
+refresh. The old comment claiming alignment alone prevents crossing was
+corrected. The >512-frame stall policy, deadlines, command logic, DSP program,
+assembly decoder and music-disabled configuration were not changed.
+
+Regression evidence
+run_regression.py compiles the actual production source with FAST_68000.
+Only the sound-RAM base is relocated and the 68000 assembly boundary replaced
+by a deterministic contiguous decoder. The 14-byte decoder ABI is retained.
+The test checks all four voices, both supported strides, ring sample order,
+other-voice and surrounding-memory preservation, guard mirroring, ordinary
+refill, available-tail limiting, exact ring end, initial-fill completion and
+empty work. It does not establish ADPCM waveform fidelity or physical timing.
+
+RED:   red.json   -- compiled cleanly; 13 cases, 20 failed assertions, exit 1.
+GREEN: green.json -- compiled cleanly; 13 cases, 0 failed assertions, exit 0.
+The same test source was used for both. Eight crossing cases failed before;
+the five non-crossing controls passed. Boundary refills now complete in two
+bounded calls, with no stale, neighboring or guard samples.
+
+Project-wide test availability
+The actual `make -C work/hwfix01/native test` command exits 2 because the
+supplied tree lacks tests/test_core.c. See project-test-gate.json. The older
+SFX firmware suite referenced by SFX-NATIVE.md was also absent from the
+supplied extracted sources. No broader suite pass is claimed.
+
+Firmware build and validation
+build_firmware.py preserves the supplied Linux GCC 13.3 build recipe while
+exposing source/output paths and confining outputs below this directory.
+It rebuilds the baseline 68000 runtime helpers from the supplied GCC source
+instead of linking the toolchain's incompatible prebuilt libgcc helper.
+
+An independent baseline rebuild is byte-identical to the prior staged ELF:
+bdf84aa656a0a1b03ac6a9a6f11a7d125acbf619f6f72ebf6c53e74e3ece83b4
+
+Candidate: firmware/SCSP.ELF -- 53,404 bytes
+SHA256: c06a9244dd36eb8b735f3328a59dfff32515c9e3405fb3ec64616b778c7b07ae
+
+The low segment grows by 20 bytes, from 0x2C14 to 0x2C28, below 0x3000.
+The high/state segment still ends at 0xFB80. Generated DSP, OKI and waveform
+inputs and the three rebuilt 68000 helpers are identical to the baseline.
+Both production ELF-loader checks pass; see loader-validation.json.
+The link retains the baseline GNU-stack, RWX-segment and discarded-build-id
+warnings. Compilation, undefined-symbol, instruction and segment gates pass.
+
+Reproduce from /workspace/scratch/e1d72d5a13f7/wp1980:
+
+python -B research/hardware-result-01/audio-ring/run_regression.py \
+  --source work/hwfix01/audio/native/wf_scsp_sfx.c --label green-repeat
+
+python -B research/hardware-result-01/audio-ring/build_firmware.py \
+  --source work/hwfix01/audio/native \
+  --tooling /workspace/scratch/1e822aeaeac7/wp1979/tooling \
+  --out research/hardware-result-01/audio-ring/firmware-repeat
+
+All previous source and released assets remain unchanged. The candidate ELF
+is provided separately; this task did not replace any staging asset or run
+an emulator. Exact commands, hashes and the patch are retained alongside this
+note in finding-and-changes.json, firmware/commands.json and ring-tail.patch.

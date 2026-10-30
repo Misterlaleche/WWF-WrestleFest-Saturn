@@ -1,0 +1,140 @@
+WP1980 HW1 — fuentes, reconstrucción y pruebas
+
+ESTRUCTURA DEL ZIP
+
+Dentro de wp1980/:
+
+  native/, audio/, tooling/build.sh y tooling/env.sh:
+    los 356 inputs de producción de la entrega anterior, sin cambios.
+    Se conservan para las pruebas que reproducen el defecto original.
+
+  work/hwfix01/:
+    copia independiente con los 356 inputs del candidato HW1.
+    Ésta es la raíz que hay que compilar para obtener HW1.
+
+  research/hardware-result-01/:
+    diagnóstico de las fotos, diff, manifests, pruebas RED/GREEN, comparación
+    con la ROM, revisión independiente y observaciones de Mednafen HW1.
+
+  reference/musashi/:
+    nueve archivos del intérprete 68000 usado para el oráculo de resultado,
+    conservando sus avisos de licencia.
+
+  validation/, tooling/mednafen/:
+    comprobación de memoria/disco y captura/análisis del emulador.
+
+La BIOS, el SDK y las instalaciones de los emuladores no están incluidos.
+Tampoco se incluye la captura MOV grande; el MP4 entregado conserva los PTS
+de todos sus fotogramas y se acompaña del informe de comprobación.
+El ZIP BIN/CUE y el vídeo son entregables separados de estas fuentes.
+
+RECONSTRUIR SATURN
+
+Requisitos usados: SDK Yaul con sh2eb-elf GCC 13.2.0, make, Python 3 y
+xorrisofs. Usa el SDK suministrado con el proyecto. Define WP1980_TOOLING_ROOT
+como su directorio padre, que contiene sh2eb-elf/ y, si procede, host/.
+También se admite YAUL_INSTALL_ROOT apuntando a un SDK compatible.
+
+Desde wp1980/ (elige directorios de salida nuevos):
+
+  export WP1980_TOOLING_ROOT=/ruta/al/tooling
+
+  bash work/hwfix01/tooling/build.sh WP1980_CART=0 \
+    SH_BUILD_DIR=audit/hw1-base-rebuild \
+    SH_OUTPUT_DIR=audit/hw1-base-rebuild-disc
+
+  python3 validation/verify-hwram-budget.py \
+    work/hwfix01/native/audit/hw1-base-rebuild/wrestlefest-wp1980.map
+  python3 validation/verify_saturn_stack_layout.py \
+    work/hwfix01/native/audit/hw1-base-rebuild/wrestlefest-wp1980.elf
+
+  bash work/hwfix01/tooling/build.sh WP1980_CART=1 \
+    SH_BUILD_DIR=audit/hw1-cart-rebuild \
+    SH_OUTPUT_DIR=audit/hw1-cart-rebuild-disc
+
+  python3 validation/verify-hwram-budget.py \
+    work/hwfix01/native/audit/hw1-cart-rebuild/wrestlefest-wp1980.map
+  python3 validation/verify_saturn_stack_layout.py \
+    work/hwfix01/native/audit/hw1-cart-rebuild/wrestlefest-wp1980.elf
+
+Compila las variantes secuencialmente: comparten el directorio de recursos
+del CD y su archivo temporal A.BIN. Las dos imágenes finales se guardan en
+directorios diferentes. No se han relajado los límites de memoria.
+
+Para convertir un ISO a BIN/CUE MODE1/2352 con EDC/ECC exactos:
+
+  python3 validation/iso_to_bin_exact.py /ruta/imagen.iso /ruta/salida-nueva
+
+El nombre de los BIN/CUE procede del nombre del ISO. El verificador
+validation/verify_disc_exact.py compara sectores, archivos ISO9660 y A.BIN
+contra el programa enlazado; consulta --help para los directorios de cada
+variante. Las fechas internas del ISO pueden variar al reconstruir: no se
+promete un hash de disco idéntico con un timestamp diferente.
+
+FIRMWARE DE EFECTOS
+
+El SCSP.ELF corregido ya está en el directorio de recursos del candidato y
+queda incluido en ambos discos. Para reconstruirlo por separado:
+
+  python3 research/hardware-result-01/audio-ring/build_firmware.py \
+    --source work/hwfix01/audio/native \
+    --tooling /ruta/al/tooling \
+    --out /ruta/nueva/firmware
+
+El proceso usa el compilador 68000 proporcionado y reconstruye sus helpers
+para MC68000. La documentación y hashes de la reconstrucción, incluida la
+igualdad exacta del firmware anterior reconstruido, están en audio-ring/.
+
+REPRODUCIR LA PRUEBA DEL RESULTADO
+
+Solo requiere Python 3.8+ y un compilador C11 host con --gc-sections:
+
+  python3 research/hardware-result-01/run_hw1_probe.py check \
+    --source-root work/hwfix01 --original-root . \
+    --out research/hardware-result-01/rerun-result-probes
+
+La salida debe ser nueva. El wrapper usa el informe terminal original
+incluido en fixtures/, verifica sus hashes y reconstruye las referencias
+locales. Ejecuta la reproducción del fallo anterior, las pruebas corregidas
+con lecturas denegadas y cachés reemplazadas, la procedencia del error de
+paleta y el tramo original de la ROM 68000. PORTABLE-PROBES.txt detalla el
+alcance. No necesita rutas /tmp, SDK ni BIOS.
+
+La prueba del anillo de audio está en audio-ring/run_regression.py; consulta
+su --help. atlas-bounds/ conserva las comprobaciones de lectura de sprites
+con ASan/UBSan. Se desactivó únicamente LeakSanitizer por la restricción de
+enumeración de procesos del entorno de pruebas.
+
+La suite general heredada de make test no puede completarse porque falta
+tests/test_core.c en las fuentes recibidas. No se afirma que esa suite pase.
+
+MEDNAFEN
+
+Las pruebas de aceptación HW1 usan Mednafen standalone 1.32.1, caché CPU full,
+reloj normal, sin fast-forward y sin frameskip. El observador abre solo para
+lectura la memoria de su propio proceso hijo y valida su identidad; no
+inyecta estados ni modifica registros o RAM.
+
+  python3 tooling/mednafen/run_mednafen.py /ruta/imagen.cue /tmp/captura-nueva \
+    --elf /ruta/al/programa.elf --bios /ruta/mpr-17933.bin \
+    --mednafen /ruta/mednafen --sdk /ruta/sh2eb-elf \
+    --cartridge 4MiB --cache full --offscreen
+
+Para la variante base usa --cartridge None. Para una pasada sin vídeo añade
+--no-movie. El script requiere ffmpeg/ffprobe y Pillow por su módulo de
+identidad de discos. Su módulo importado de tooling/beetle se utiliza solo
+para leer el disco y verificar A.BIN; no ejecuta ese emulador.
+
+Si usas bibliotecas dinámicas suministradas, define
+WP1980_MEDNAFEN_RUNTIME_ROOT. Para pruebas de mando usa Xvfb/xdotool en
+WP1980_HOST_TOOLS_ROOT y omite --offscreen. Las rutas de las instalaciones
+originales son valores de reserva de la sesión, no dependencias incluidas.
+
+Analiza los tiempos con verify_media.py y analyze_execution.py. La media
+de actualizaciones se calcula desde contadores de Saturn y PTS grabados,
+no desde el tiempo de procesamiento del PC. Para una captura sin película,
+--pts-check permite la calibración explícita del mismo modo de vídeo.
+
+Las observaciones de audio distinguen cola vacía y señal no silenciosa de
+fidelidad/sincronización acústica. Esta última requiere validación adicional,
+especialmente en la consola física.

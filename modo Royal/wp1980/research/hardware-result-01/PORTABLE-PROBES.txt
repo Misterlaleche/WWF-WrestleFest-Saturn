@@ -1,0 +1,167 @@
+WP1980 HW1: reproducción de los probes de resultado
+
+Estructura del paquete
+
+Los comandos de este documento se ejecutan desde la raíz wp1980 extraída:
+
+  native/                  Fuentes y datos originales conservados.
+  work/hwfix01/native/     Fuentes del candidato HW1.
+  reference/musashi/       Los nueve archivos del intérprete 68000 original.
+  research/hardware-result-01/
+
+Se necesitan Python 3.8 o posterior y un compilador C11 para Linux con un
+enlazador compatible con --gc-sections. El comando de compilador predeterminado
+es cc; --cc permite indicar otro ejecutable. No se necesitan SDK de Saturn,
+BIOS, Mednafen ni un driver m68k externo. Estos comandos solo compilan y ejecutan
+probes de host; no construyen ni modifican los discos de Saturn.
+
+El runner portable es run_hw1_probe.py. El runner anterior, sus comandos y los
+resultados históricos se conservan como evidencia. Las rutas de captura antiguas
+que aparecen dentro de sus metadatos no son dependencias del runner portable.
+
+Una ejecución completa
+
+  python3 research/hardware-result-01/run_hw1_probe.py check \
+    --source-root work/hwfix01 \
+    --original-root . \
+    --out research/hardware-result-01/rerun-result-probes
+
+La carpeta indicada con --out NO debe existir. El wrapper rechaza sobrescribir
+una carpeta existente; para repetir la prueba, elija otro nombre. Todas las
+compilaciones, comandos, hashes, stdout y stderr se guardan en esa carpeta.
+
+La comprobación completa realiza 13 ejecuciones:
+
+  - El resultado original 68000 desde 0x1AFC hasta 0x1B1E.
+  - Diez casos result: referencia original, denegación de lectura y churn para
+    base/cart; y denegación/churn con el candidato HW1.
+  - Dos programas de provenance, original y corregido. Cada uno inyecta dos
+    fallos: puntero 0x2A98 y carga de paleta 0x3922.
+
+El exit global esperado es 0 cuando TODOS los contratos se observan. Los
+programas originales que reproducen el fallo deben devolver 1; ese exit real
+queda registrado. Un fallo de compilación no se acepta como RED. Los registros
+de cada caso están en evidence.json y el resumen en check-summary.json.
+
+La comprobación recompila referencias originales en el mismo host antes de
+comparar snapshots C. No depende de que la disposición de structs, el tamaño
+de punteros o el compilador coincidan con los resultados históricos archivados.
+Además compara la proyección portable con la ejecución original 68000.
+
+Comandos individuales
+
+1. Ejecutar el código 68000 original y producir su proyección portable:
+
+  python3 research/hardware-result-01/run_hw1_probe.py oracle \
+    --original-root . \
+    --out research/hardware-result-01/rerun-oracle
+
+2. Crear una referencia base con el loader y el resultado originales:
+
+  python3 research/hardware-result-01/run_hw1_probe.py result \
+    --source-root . --original-root . \
+    --variant base --capacity 32 --hot-header 4096 --mode baseline \
+    --board-reference research/hardware-result-01/rerun-oracle/original-board-state.bin \
+    --out research/hardware-result-01/rerun-base-reference
+
+3. Reproducir el fallo original (exit 1 esperado):
+
+  python3 research/hardware-result-01/run_hw1_probe.py result \
+    --source-root . --original-root . \
+    --variant base --capacity 32 --hot-header 4096 --mode deny \
+    --reference research/hardware-result-01/rerun-base-reference/result-state.bin \
+    --out research/hardware-result-01/rerun-base-red
+
+4. Verificar el candidato después de expulsar las páginas normales y las
+   64 líneas pequeñas de caché (exit 0 esperado):
+
+  python3 research/hardware-result-01/run_hw1_probe.py result \
+    --source-root work/hwfix01 --original-root . \
+    --variant base --capacity 39 --hot-header 4096 --mode churn \
+    --reference research/hardware-result-01/rerun-base-reference/result-state.bin \
+    --board-reference research/hardware-result-01/rerun-oracle/original-board-state.bin \
+    --out research/hardware-result-01/rerun-base-green
+
+Para cart use --variant cart, capacidad original 128 y corregida 135, además de
+una referencia cart creada con el mismo comando de baseline. Para probar solo
+la denegación posterior al preload, sin churn, use --mode deny. En source-root
+original, la macro hot-header no existía y el flag no cambia su staging de 16 KiB.
+
+5. Procedencia del error de paleta, antes y después:
+
+  python3 research/hardware-result-01/run_hw1_probe.py provenance \
+    --source-root . --original-root . \
+    --out research/hardware-result-01/rerun-provenance-red
+
+  python3 research/hardware-result-01/run_hw1_probe.py provenance \
+    --source-root work/hwfix01 --original-root . \
+    --out research/hardware-result-01/rerun-provenance-green
+
+El primero debe devolver 1: ambos fallos dejan failed_address a cero.
+El segundo debe devolver 0: conserva WF_BLOCKED y registra 0x2A98 o 0x3922.
+
+Raíces alternativas
+
+--source-root siempre designa la raíz de proyecto que contiene native/src y
+native/include a probar. --original-root designa una raíz original que contiene:
+
+  native/audit/wp1980-release-cd/ROM68K.BIN
+  native/audit/wp1980-release-cd/ROYINIT.BIN
+  reference/musashi/        Necesario para oracle y check.
+  native/src y native/include originales, necesarios para los RED de check.
+
+Si se coloca el candidato directamente en wp1980/native y se extrae el original
+en una carpeta hermana wp1980-original, el comando completo pasa a ser:
+
+  python3 research/hardware-result-01/run_hw1_probe.py check \
+    --source-root . --original-root ../wp1980-original \
+    --out research/hardware-result-01/rerun-result-probes
+
+Los fixtures se localizan respecto al propio wrapper, no al directorio de trabajo.
+No se necesita acceso a la captura temporal de la sesión original.
+
+Fixtures preservados
+
+  fixtures/delivered-release-4mb/report.json   Informe terminal original íntegro.
+  fixtures/terminal-actors.bin                Nueve actores, 2.412 bytes.
+  fixtures/portable-fixture.json              Rutas relativas, hashes y alcance.
+
+El wrapper verifica el hash de ROM68K.BIN, ROYINIT.BIN, report.json y los actores;
+también reconstruye los actores a partir del report y exige igualdad. El informe
+se copió sin modificar sus 19.259 bytes. No se copió RAM del emulador ni otro
+archivo de la captura. El JSON histórico terminal-actors.json se conserva, pero
+el wrapper portable no usa su antigua ruta de captura.
+
+Validación realizada tras el último assert
+
+La pasada única del comando check está archivada en portable-verification/.
+Los trece contratos se observaron. portable-validation.json conserva la
+comparación de los estados nuevos con los cuatro GREEN históricos, y
+portable-input-hashes.json compara los inputs relevantes antes y después.
+
+El assert nuevo cambia el SHA256 del archivo wf_r18_present.c. Ese cambio no se
+presenta como identidad de fuente. Los hashes de ROM, ROYINIT, actores, ambas
+tablas de páginas y los otros nueve archivos C del probe permanecen iguales.
+Los cuatro snapshots corregidos de 69.688 bytes y sus proyecciones portables de
+55.702 bytes siguen siendo idénticos a los resultados anteriores. El guard se
+evalúa al compilar; las pruebas de tamaños del staging están documentadas por
+separado en header-size-guard/ y no se ejecutan desde este wrapper.
+
+Límites de la evidencia
+
+El fixture usa board/work state de ROYINIT más los nueve actores terminales,
+frame 8474 y RNG B8A86C74. No es una captura completa del estado terminal.
+Las lecturas de archivo y los callbacks de VBlank son fronteras de prueba del
+host. El oráculo ejecuta los bytes originales sin parchear rutinas y alterna
+el nivel de VBlank en el puerto de entrada; no simula los tiempos de un Saturn.
+Los probes verifican las dependencias de ROM del resultado, el resultado de
+memoria y sus 97 períodos de espera. No verifican el mecanismo del fallo físico
+de CD, el tiempo total de presentación, el audio físico ni una partida completa.
+
+Inclusión en el paquete
+
+PORTABLE-PROBE-FILES.txt enumera los archivos mínimos y los archivos adicionales
+que justifican la validación. PORTABLE-PROBE-FILES.json añade tamaño y SHA256.
+Los nueve archivos reference/musashi suman 931.380 bytes y contienen sus avisos
+de licencia; deben conservarse íntegros. Los fuentes native y los datos originales
+ya pertenecen a los árboles de proyecto conservados en el paquete HW1.

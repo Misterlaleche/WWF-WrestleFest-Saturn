@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "linked_end": "0x60f24f4",
+  "heap_available": 56076,
+  "heap_reserved": 16384,
+  "scope": "HWRAM linked image and runtime heap; stack below06004000"
+}

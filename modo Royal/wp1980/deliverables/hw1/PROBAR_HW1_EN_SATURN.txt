@@ -1,0 +1,73 @@
+WP1980 — Royal — revisión HW1
+Prueba del resultado final y corrección del búfer de efectos
+
+IMÁGENES
+
+Con cartucho RAM de 4 MB:
+  royal_4mb/wp1980_royal_hw1_4mb.cue
+  royal_4mb/wp1980_royal_hw1_4mb.bin
+
+Sin cartucho RAM:
+  royal_base/wp1980_royal_hw1_base.cue
+  royal_base/wp1980_royal_hw1_base.bin
+
+Conserva cada BIN y CUE juntos y con sus nombres originales. Carga el CUE con
+el mismo método que utilizaste para las versiones anteriores. Cada disco
+contiene una pista MODE1/2352. La variante de 4 MB sigue requiriendo el
+cartucho: no cambia automáticamente a la variante base si falta la expansión.
+La configuración medida en Mednafen es NTSC; no se ha medido PAL a 50 Hz.
+
+QUÉ CAMBIA
+
+El combate alcanza el mismo final original. Las siete páginas de la ROM que
+necesita la presentación de GAME OVER permanecen en memoria desde la carga.
+Así se elimina la lectura de CD pendiente en la transición que señalaron
+las cinco fotografías del fallo. No se ha saltado la presentación ni se han
+desactivado sus comprobaciones de error.
+
+También se corrige un cruce del límite físico del búfer circular de efectos
+PCM. El defecto podía escribir fuera del anillo de una voz. Esta corrección
+está comprobada con una prueba específica; todavía debe confirmarse en tu
+Saturn si resuelve la ausencia o desincronización que observaste.
+
+La música sigue desactivada. El audio de esta revisión corresponde a efectos,
+sin una banda sonora añadida al vídeo. Sigue pendiente verificar el audio
+completo y su sincronía en hardware real.
+
+CÓMO COMPROBAR ESTA REVISIÓN
+
+1. Carga la imagen adecuada al cartucho que tengas instalado.
+2. Deja terminar la demostración sin pulsar el mando. El combate automático
+   tiene 8.474 actualizaciones. El tiempo real de combate depende de la
+   variante; las cifras de esta revisión figuran en INFORME_HW1.txt. La carga
+   inicial y la presentación final son intervalos adicionales.
+3. Comprueba que aparece GAME OVER y que no sale el informe de cinco páginas.
+   La pantalla final permanece a la espera; la demo no se repite sola.
+4. Comprueba los efectos durante golpes y acciones. La ausencia de música
+   es deliberada; la ausencia o desincronización de efectos sigue siendo
+   relevante para esta prueba.
+5. A+B+C+START vuelve al inicio Royal y conserva el control manual.
+
+CONTROLES
+
+Cruceta: desplazamiento mediante la lógica original.
+A/B/C: acciones 1/2/3; la ROM decide la acción según el estado del luchador.
+Una dirección o A/B/C desactiva la demostración y permite jugar.
+A+B+C+START: reinicio Royal, también desde GAME OVER.
+
+SI VUELVE A APARECER UN INFORME
+
+Las cinco páginas de esta revisión llevan HW1/R06. Fotografíalas y anota qué
+imagen estabas usando y si había cartucho. La página 2 añade el último estado
+del CD cuando el fallo no corresponde a un participante. Ese estado es una
+pista de diagnóstico; puede pertenecer a una operación anterior al fallo.
+Un vídeo con sonido del tramo afectado ayudaría a estudiar los efectos.
+
+ALCANCE
+
+HW1 es una revisión separada. Conserva las imágenes, fuentes y trabajos
+anteriores. La prueba en Mednafen no sustituye la comprobación de HW1 en
+Saturn real. Tampoco certifica todos los movimientos, semillas o secuencias
+de entrada. Los recursos fríos ajenos a este resultado todavía conservan una
+ruta de lectura de CD. Las medidas de velocidad y sus límites se publican
+sin convertir una media en una garantía de velocidad mínima uniforme.

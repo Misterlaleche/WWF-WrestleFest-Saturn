@@ -1,0 +1,85 @@
+{
+  "scope": "Packaging verification only; no Saturn compilation, no emulator run.",
+  "private_archive_sha256": "afa7132a241e06208bd47b10487e2361e9cba59e5085a17e4d3bc0a3c135eb70",
+  "restorer_sha256": "2fcd3bece387895fa35c33d0ef43873d90ed49d3bb6a94958d705a5c4271d7b7",
+  "behavior_tests_sha256": "220f865645dbce5340ebe9e5635a9211e47d58d89358e5e0928b7345c147fcba",
+  "candidate_inputs": 356,
+  "candidate_text_in_git": 337,
+  "external_build_resources": 19,
+  "tests": {
+    "real_build_restore": {
+      "status": "PASS",
+      "operation": "restore",
+      "scope": "build",
+      "files": 356,
+      "bytes": 17841618,
+      "existing_unchanged": 337,
+      "created": 19,
+      "archive_sha256": "afa7132a241e06208bd47b10487e2361e9cba59e5085a17e4d3bc0a3c135eb70"
+    },
+    "real_build_verify": {
+      "status": "PASS",
+      "operation": "verify",
+      "scope": "build",
+      "files": 356,
+      "bytes": 17841618,
+      "existing_unchanged": 356,
+      "created": 0,
+      "archive_sha256": "afa7132a241e06208bd47b10487e2361e9cba59e5085a17e4d3bc0a3c135eb70"
+    },
+    "real_overwrite_refusal": {
+      "exit_code": 1,
+      "existing_bytes_unchanged": true,
+      "new_files_created": 0
+    },
+    "real_archive_tamper_refusal": {
+      "exit_code": 1,
+      "destination_created": false
+    },
+    "real_all_restore": {
+      "status": "PASS",
+      "operation": "restore",
+      "scope": "all",
+      "files": 1444,
+      "bytes": 90637756,
+      "existing_unchanged": 0,
+      "created": 1444,
+      "archive_sha256": "afa7132a241e06208bd47b10487e2361e9cba59e5085a17e4d3bc0a3c135eb70"
+    },
+    "real_all_verify": {
+      "status": "PASS",
+      "operation": "verify",
+      "scope": "all",
+      "files": 1444,
+      "bytes": 90637756,
+      "existing_unchanged": 1444,
+      "created": 0,
+      "archive_sha256": "afa7132a241e06208bd47b10487e2361e9cba59e5085a17e4d3bc0a3c135eb70"
+    },
+    "isolated_behavior_suite": {
+      "command": "python3 tools/test_restore_resources.py",
+      "exit_code": 0,
+      "tests": 9,
+      "stdout": "",
+      "stderr": "test_all_restores_original_baseline_as_well (__main__.RestoreTests.test_all_restores_original_baseline_as_well)\nCatches a scope selector that silently omits old-reference inputs. ... ok\ntest_build_restores_exact_bytes_and_keeps_identical_sources (__main__.RestoreTests.test_build_restores_exact_bytes_and_keeps_identical_sources)\nCatches rewriting present source bytes or restoring unrelated old inputs. ... ok\ntest_changed_bundle_is_refused_without_writes (__main__.RestoreTests.test_changed_bundle_is_refused_without_writes)\nCatches accepting a different ZIP even if its selected entries still match. ... ok\ntest_changed_existing_file_is_refused_before_any_restoration (__main__.RestoreTests.test_changed_existing_file_is_refused_before_any_restoration)\nCatches replacing user edits or partially restoring before finding a conflict. ... ok\ntest_directory_replaced_with_symlink_during_creation_cannot_escape (__main__.RestoreTests.test_directory_replaced_with_symlink_during_creation_cannot_escape)\nCatches a link swap after preflight but before a new file is opened. ... ok\ntest_member_hash_is_checked_before_writing (__main__.RestoreTests.test_member_hash_is_checked_before_writing)\nCatches trusting only the archive envelope and ignoring the file manifest. ... ok\ntest_symlink_ancestor_is_refused (__main__.RestoreTests.test_symlink_ancestor_is_refused)\nCatches following a preexisting link into another working directory. ... ok\ntest_unsafe_manifest_path_is_refused (__main__.RestoreTests.test_unsafe_manifest_path_is_refused)\nCatches escaping the chosen restoration folder through path traversal. ... ok\ntest_verify_does_not_repair_missing_or_changed_files (__main__.RestoreTests.test_verify_does_not_repair_missing_or_changed_files)\nCatches a verification command that mutates files or ignores corruption. ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.599s\n\nOK\n"
+    },
+    "concurrent_symlink_swap": {
+      "before_fix": "FAIL: sample.c created in outside directory after swap",
+      "after_fix": "PASS: swap executed, operation refused, outside directory remains empty",
+      "implementation": "POSIX descriptor-relative traversal, O_NOFOLLOW and O_EXCL"
+    }
+  },
+  "source_copy_checks": {
+    "files": 429,
+    "bytes": 2853933,
+    "all_match_exact_private_bundle": true
+  },
+  "status": "PASS",
+  "independent_review": {
+    "result": "No blocker found",
+    "scope": "New restoration tool, byte preservation and documentation against frozen HW1; no Saturn build or emulator run by reviewer",
+    "preserved_source_files_verified": 429,
+    "behavior_suite_tests_passed": 9,
+    "concurrent_symlink_swap_fix_reviewed": true
+  }
+}

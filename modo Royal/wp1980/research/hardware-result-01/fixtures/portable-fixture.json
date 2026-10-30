@@ -1,0 +1,11 @@
+{
+  "report": "fixtures/delivered-release-4mb/report.json",
+  "report_sha256": "10f6dc6cf94d374d568145d467b6577047e4382a7c9002491fc6a4665cf4fbd2",
+  "report_bytes": 19259,
+  "actors": "fixtures/terminal-actors.bin",
+  "actors_sha256": "656f7934c1c1b1cbac5afef25e4d17c8503c050c011effc734a0e00e1fb6f884",
+  "actors_bytes": 2412,
+  "frame": 8474,
+  "rng": 3098045556,
+  "scope": "Original ROYINIT board/work state plus exact delivered terminal actors, RNG and frame. Result-only fixture; not a full terminal board capture."
+}
