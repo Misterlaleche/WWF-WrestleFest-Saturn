@@ -1,0 +1,44 @@
+/* BIOS SCU entry owns R0..R7, PR, GBR, SR and RTE; it omits MACH/MACL.
+ * Enter/return as an ordinary void(void) handler. Preserve both MAC registers
+ * around the ENTIRE pre-existing handler, including SDK-internal callbacks.
+ * The wrapper neither masks IRQs nor reads/writes the SCU interrupt registers.
+ */
+    .section .text
+    .align 2
+    .macro MAC_ENTRY vector, offset
+    .global _wp2015_irq_mac_\vector
+    .type _wp2015_irq_mac_\vector,@function
+_wp2015_irq_mac_\vector:
+    bra .Lmac_guard
+    mov #\offset,r0
+    .size _wp2015_irq_mac_\vector,.-_wp2015_irq_mac_\vector
+    .endm
+    MAC_ENTRY 40,0
+    MAC_ENTRY 41,4
+    MAC_ENTRY 42,8
+    MAC_ENTRY 43,12
+    MAC_ENTRY 44,16
+    MAC_ENTRY 45,20
+    MAC_ENTRY 46,24
+    MAC_ENTRY 47,28
+    MAC_ENTRY 48,32
+    MAC_ENTRY 49,36
+    MAC_ENTRY 4a,40
+    MAC_ENTRY 4b,44
+    MAC_ENTRY 4c,48
+    MAC_ENTRY 4d,52
+.Lmac_guard:
+    sts.l mach,@-r15
+    sts.l macl,@-r15
+    sts.l pr,@-r15
+    mov.l .Loriginals,r1
+    mov.l @(r0,r1),r1
+    jsr @r1
+    nop
+    lds.l @r15+,pr
+    lds.l @r15+,macl
+    lds.l @r15+,mach
+    rts
+    nop
+    .align 2
+.Loriginals: .long _wp2015_irq_mac_original
