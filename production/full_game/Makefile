@@ -9,7 +9,7 @@ CORE := src/wf_arcade_clock.c src/wf_prematch.c
 verify-sources:
 	$(PYTHON) tools/check_sources.py
 
-test: verify-sources test-platform test-assets test-identity
+test: verify-sources test-platform test-assets test-identity test-session
 	@mkdir -p build
 	$(CC) $(CFLAGS) $(INCLUDES) tests/test_clock.c src/wf_arcade_clock.c -o build/test_clock
 	./build/test_clock
@@ -17,7 +17,7 @@ test: verify-sources test-platform test-assets test-identity
 	./build/test_prematch
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -p 'test_*.py' -v
 
-sanitize: verify-sources sanitize-platform sanitize-assets sanitize-identity
+sanitize: verify-sources sanitize-platform sanitize-assets sanitize-identity sanitize-session
 	@mkdir -p build
 	$(CC) $(CFLAGS) -fsanitize=address,undefined $(INCLUDES) tests/test_clock.c src/wf_arcade_clock.c -o build/test_clock_sanitized
 	./build/test_clock_sanitized
@@ -60,3 +60,9 @@ sanitize-identity:
 	@mkdir -p build
 	$(CC) $(CFLAGS) -fsanitize=address,undefined -Isrc tests/test_roster_identity.c src/wf_roster_identity.c -o build/test_identity_san
 	./build/test_identity_san
+
+.PHONY: test-session sanitize-session
+test-session:
+	$(PYTHON) tools/run_session_checks.py
+sanitize-session:
+	$(PYTHON) tools/run_session_checks.py --sanitize

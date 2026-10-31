@@ -1,0 +1,2 @@
+         U _memcpy
+         U _memset

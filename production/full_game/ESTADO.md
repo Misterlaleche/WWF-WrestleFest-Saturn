@@ -1,9 +1,34 @@
 # Estado de integración — 2026-10-31
 
-Estado: CHECKPOINT04 PARCIAL, no beta completa.
-Hay un disco universal de integración MODE/ROSTER probado en Mednafen1.32.1
-None/1MiB/4MiB. La confirmación termina esta ruta parcial; aún no abre combate.
-La ampliación se detecta y valida, pero las cachés de gameplay no están integradas.
+Estado: CHECKPOINT05 PARCIAL, no beta completa.
+El nuevo núcleo conserva el estado original desde RESET hasta la entrada F8C
+de combate. Está probado en host y compilado para SH-2; todavía no está unido
+al renderer y a los eventos reales de Saturn. No hay un nuevo disco05.
+El último disco visual sigue siendo04: MODE/ROSTER en Mednafen1.32.1
+None/1MiB/4MiB, con final al confirmar un luchador y sin combate.
+
+## Nuevo en checkpoint05
+
+- Una sola RAM de16KiB, registros y contexto de control desde RESET654,
+  moneda, START, modo, roster y compañero hasta AC0 y preparación original F8C.
+- Propietarios HW1 originales enlazados sin cambios. El adaptador exige RAM
+  inicial y eventos de plataforma explícitos; no inventa semilla ni equipos.
+- Diez recorridos con ROM externa pasan en host normal y ASan/UBSan: incluyen
+  TAG/P2, Demolition/P2, ROYAL/Crush, cancelación de attract por START, otra
+  semilla de fixture, eventos agrupados y fallo terminal de recurso.
+- El orden Demolition desdeP2 es11/10, como produce la normalización original.
+  Los actores sólo se importan después de F8C; el fallo no repite efectos.
+- 408 comparaciones directas de crédito/START contra ROM68000: RAM persistente,
+  D/A y carry. No es un diferencial de todo el recorrido.
+- Núcleo SH-2 GCC13.2.0 enlazado:183464B, sólo memcpy/memset pendientes de libc.
+  Reconstrucción comprobada con un miembro obsoleto insertado en el archivo:
+  queda únicamente el objeto del núcleo y el mismo SHA256 final.
+- Suite completa C11/ASan/UBSan y9testsPython con ROM PASS; originales2023/2023
+  intactos. Dos hallazgos de revisión resueltos con sus regresiones.
+
+Reproducción, hashes, evidencias y límites: docs/RECOVERY-05.md.
+Pendiente conectar la sesión a bus/IRQ/renderer Saturn y fijar el origen de la
+RAM inicial. No hay nuevas pruebas visuales, de rendimiento ni de hardware05.
 
 ## Nuevo en checkpoint04
 
@@ -84,9 +109,11 @@ Evidencia histórica del disco03: docs/RECOVERY-03.md.
 2. Completar los traspasos VDP1/VDP2 entre escenas sobre CD/SMPC/reloj compartidos.
 3. Conectar la detección4MiB ya probada al presupuesto dinámico; Royal usa dos builds por macros y no
    cabe sumar sus máximos estáticos en la Saturn base.
-4. Frontend completo y escenas gráficas integradas: estado original persistente
-   de créditos/start/modo/roster, selección de compañero TAG, flash original,
-   imágenes/posición separadas de Demolition en ROYAL y continuidad RNG.
+4. Conectar la sesión original05 al frontend y escenas gráficas de Saturn:
+   bus/IRQ/reloj, fuente de RAM inicial, selección de compañero TAG, flash
+   original e imágenes/posición separadas de Demolition en ROYAL.
+   El núcleo05 ya conserva créditos/start/modo/roster/RNG y prepara F8C con
+   eventos de test declarados; la integración visual sigue pendiente.
    El terminal de Intro R04 no define créditos ni transición automática a MODE.
    Eventos Presentadora conservados; contrato prepare/start/stop y registros
    de Entrada OPEN. Las semillas de fixtures no justifican un arranque real.
@@ -101,11 +128,14 @@ código original para auditoría; no se promueven como beta de esta integración
 ## Reproducción del checkpoint
 
 Desde este directorio: `WF_ROM=/ruta/wwfwfest.zip make test sanitize`.
-`make test` sin WF_ROM omite explícitamente cinco tests que requieren la ROM.
+`make test` sin WF_ROM omite explícitamente los tests y recorridos que requieren ROM.
 
 En Linux con Python3,make y SDK suministrado:
 `YAUL_INSTALL_ROOT=/ruta/sh2eb-elf make sh2`.
 El resultado es `build/sh2/libwf_full_game_core.a`, no un disco.
+El nuevo núcleo de sesión se construye por separado con
+`YAUL_INSTALL_ROOT=/ruta/sh2eb-elf python3 tools/build_session.py --sh2 --out /ruta/nueva`;
+ver docs/RECOVERY-05.md. Tampoco es un disco.
 
 Para repetir los diferenciales originales, usar un venv con Unicorn2.1.4 y
 compilador host/liblz4 disponibles:

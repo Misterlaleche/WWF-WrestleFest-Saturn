@@ -86,3 +86,30 @@ Retrato terminal comparado con03: RGB idéntico, sin extrapolar a la animación.
 Suite host con ROM9testsPython y originales2023/2023 PASS. Revisión independiente
 sin defectos accionables en este alcance. No hay validación física, combate ni
 prueba de todos los fallos posibles del CD; fases completas siguen OPEN.
+
+Checkpoint05: wf_session compone los propietarios HW1 exactos con una única
+RAM16KiB, D/A y contexto de control desde RESET654 hasta AC0/F8C. Diez
+recorridos completos del alcance pasan normal y ASan/UBSan: TAG/P2,
+Demolition/P2, Royal0/9, START durante attract, semilla alternativa, eventos
+agrupados y error de recurso. Inicialización exige RAM inicial y callbacks
+explícitos; no hay selección, créditos ni semilla inyectados por producción.
+RED: módulo ausente; GREEN: contratos de init, rechazo de solapamiento/entrada
+temprana y fallo terminal sin repetición. El harness sólo genera inputs/eventos;
+los propietarios originales producen participantes, equipos, RNG y flags.
+408 fixtures crédito/START comparadas con68000: RAM persistente, D/A y carry
+PASS. No extrapolar estos helpers a equivalencia ROM de toda la ruta.
+Revisión final por GPT-6 Astra: dos P2 de validación, sin bloqueo del estado
+de producción en el alcance. Final: fixed DemolitionP2 expectation — RED
+de auditoría esperaba10/11; la ROM normaliza11/10 desdeP2. Se corrige sólo el
+harness y se añade la ruta a normal/ASan/UBSan: GREEN. Final: fixed SH-2
+symbol validation — ld-r retenía símbolos sin relocaciones de secciones
+descartadas; objcopy elimina los innecesarios conservando la API. Build final
+PASS,183464B, sólo memcpy/memset pendientes. Regresión de archivo contaminado:
+miembro obsoleto descartado y SHA256 final idéntico. No P2 de revisión05 abiertos.
+Suite completa con ROM: C11/ASan/UBSan,53 recorridos prematch y9testsPython PASS.
+Originales2023/2023 intactos. Logs, configuración y hashes en evidence/session05;
+snapshots de RAM se conservan en el paquete externo, sin ROM/BIOS.
+Ruling: núcleo05 todavía no se conecta a renderer/IRQ/cold-state de Saturn;
+el disco04 permanece como último visual. No se entrega un disco05 ni nuevos
+vídeos. Coste: falta completar la plataforma/escenas antes de validar el flujo
+con mando real emulado. Gameplay/progresión, presupuesto dinámico y beta OPEN.

@@ -58,8 +58,10 @@ Produces: estado explícito de carga, escena, fin y error; acceso a estado previ
 - [x] Subhito03: main/SMPC/VBlank/reloj y renderer MODE/ROSTER, pruebas con mando.
 - [x] Subhito04: CD/FRT compartidos, precarga verificada de recursos antes de
   MODE, conversión de identidades contra ROM, rechazo nativo de corrupción.
-- [ ] Conectar estado original de créditos/start/modo/roster, compañero TAG,
-  flash/imagen ROYAL y handoff de máquina completa; ver docs/SELECTION-04.md.
+- [x] Subhito05: sesión nativa RESET→créditos/START/modo/roster/compañero→AC0→F8C
+  con RAM/registros compartidos; diez recorridos host y núcleo SH-2 enlazado.
+- [ ] Conectar la sesión05 a bus/IRQ/renderer Saturn, origen de RAM inicial,
+  flash/imagen ROYAL y escenas; ver docs/SESSION-05.md y SELECTION-04.md.
 
 ### Task 5: Gameplay y progresión completos
 - [ ] Completar todas las rutas TAG/Royal desde estados de partida, sin fixtures.

@@ -1,0 +1,4088 @@
+{
+  "status": "PASS",
+  "rom_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "cases": 408,
+  "scope": "Persistent RAM below3AD4, D0-D7, A0-A6, carry; explicit fixtures, not cold boot",
+  "results": [
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 0,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "77394f3d8a427f89816eac796be285c0b9a5c32e46e490e47d09381db7569bb0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "7b47743112e66deaf6c02c0ab0f4604081bacdf047451843a9b2ef81e6da3894"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "3e2a7441aeafe2eb33bfa6f4a8a9e953883861b76beebd965f25e965e778b33c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f1920dbddf68c8d86306f5aecf896bac8edc84233c295099063e2ca4444cd5f8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "1c0020839e14093e270e164dd2a4ab30f9220c5154ba476f914ab712b06837e8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "ee8924c95bf6d65c5d1c18ad76077a2c510b78675df21ade148ad566ae3ae130"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "3e2a7441aeafe2eb33bfa6f4a8a9e953883861b76beebd965f25e965e778b33c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f1920dbddf68c8d86306f5aecf896bac8edc84233c295099063e2ca4444cd5f8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "5a63389a2655a9c5201fd4998d7b95dba61a360fde429d51784b86675c5233db"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "ce3aeede4af09f50b6d4072fd2054a3dad4892476d731b10e9d52d799bef2731"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "3e2a7441aeafe2eb33bfa6f4a8a9e953883861b76beebd965f25e965e778b33c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f1920dbddf68c8d86306f5aecf896bac8edc84233c295099063e2ca4444cd5f8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "1c0020839e14093e270e164dd2a4ab30f9220c5154ba476f914ab712b06837e8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "ee8924c95bf6d65c5d1c18ad76077a2c510b78675df21ade148ad566ae3ae130"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "3e2a7441aeafe2eb33bfa6f4a8a9e953883861b76beebd965f25e965e778b33c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f1920dbddf68c8d86306f5aecf896bac8edc84233c295099063e2ca4444cd5f8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "f44768486710aef7caefd73b373fee85c85fe3eafbdd441422219a5ad41ad6bc"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "b88338b1a1bee8d4a7a3f1058d82f515f439cc2b9340617981433dc606bbaa3b"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "3e2a7441aeafe2eb33bfa6f4a8a9e953883861b76beebd965f25e965e778b33c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f1920dbddf68c8d86306f5aecf896bac8edc84233c295099063e2ca4444cd5f8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "1c0020839e14093e270e164dd2a4ab30f9220c5154ba476f914ab712b06837e8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "ee8924c95bf6d65c5d1c18ad76077a2c510b78675df21ade148ad566ae3ae130"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "3e2a7441aeafe2eb33bfa6f4a8a9e953883861b76beebd965f25e965e778b33c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f1920dbddf68c8d86306f5aecf896bac8edc84233c295099063e2ca4444cd5f8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "5a63389a2655a9c5201fd4998d7b95dba61a360fde429d51784b86675c5233db"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "ce3aeede4af09f50b6d4072fd2054a3dad4892476d731b10e9d52d799bef2731"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "3e2a7441aeafe2eb33bfa6f4a8a9e953883861b76beebd965f25e965e778b33c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f1920dbddf68c8d86306f5aecf896bac8edc84233c295099063e2ca4444cd5f8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "1c0020839e14093e270e164dd2a4ab30f9220c5154ba476f914ab712b06837e8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "ee8924c95bf6d65c5d1c18ad76077a2c510b78675df21ade148ad566ae3ae130"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "3e2a7441aeafe2eb33bfa6f4a8a9e953883861b76beebd965f25e965e778b33c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 1,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f1920dbddf68c8d86306f5aecf896bac8edc84233c295099063e2ca4444cd5f8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "ba7c880210053e1f5242e6c212b9e5fb033487353062fe09022830899ca2306a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f1150522ace28bea204ecdbd96ab684705c19e8c96a314055eb0c29ddf8706e9"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "73e1021f6fffc7a6b9af988dd045a7165c04e00451ecaabeeaf48c4f41f85370"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a2f0a4fc3e2fb7720cc78bc69611468ff3670bf21baa12b44cbd505087b6c58a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "57abcc741e5cf2f95bd73342ba53b6f6f6d9865683abcd0ba179d3f532a941d6"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "9d5afde3e7213151ed572689409624f3d45ffbe62ab6a9aecfa6541d387418b3"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "73e1021f6fffc7a6b9af988dd045a7165c04e00451ecaabeeaf48c4f41f85370"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a2f0a4fc3e2fb7720cc78bc69611468ff3670bf21baa12b44cbd505087b6c58a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "1592d807ef900c94c7fb20fcba64bff9de9bbe465e4893a7c6aa582522f8d1c8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "d14bbc97a2a42d725be7ad8a0c3d23e2c9285fe16315f86be654b5f9f78b6204"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "73e1021f6fffc7a6b9af988dd045a7165c04e00451ecaabeeaf48c4f41f85370"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a2f0a4fc3e2fb7720cc78bc69611468ff3670bf21baa12b44cbd505087b6c58a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "57abcc741e5cf2f95bd73342ba53b6f6f6d9865683abcd0ba179d3f532a941d6"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "9d5afde3e7213151ed572689409624f3d45ffbe62ab6a9aecfa6541d387418b3"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "73e1021f6fffc7a6b9af988dd045a7165c04e00451ecaabeeaf48c4f41f85370"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a2f0a4fc3e2fb7720cc78bc69611468ff3670bf21baa12b44cbd505087b6c58a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "8e906f79c1ce41339bb619a8feeb0c81eb16ffe46d6bf4889daaf04aab4b2edc"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "d7679f6e7d20a0366505e1f9fec83de6b789540f2290feff8b6e777ffb01e1d7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "73e1021f6fffc7a6b9af988dd045a7165c04e00451ecaabeeaf48c4f41f85370"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a2f0a4fc3e2fb7720cc78bc69611468ff3670bf21baa12b44cbd505087b6c58a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "57abcc741e5cf2f95bd73342ba53b6f6f6d9865683abcd0ba179d3f532a941d6"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "9d5afde3e7213151ed572689409624f3d45ffbe62ab6a9aecfa6541d387418b3"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "73e1021f6fffc7a6b9af988dd045a7165c04e00451ecaabeeaf48c4f41f85370"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a2f0a4fc3e2fb7720cc78bc69611468ff3670bf21baa12b44cbd505087b6c58a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "1592d807ef900c94c7fb20fcba64bff9de9bbe465e4893a7c6aa582522f8d1c8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "d14bbc97a2a42d725be7ad8a0c3d23e2c9285fe16315f86be654b5f9f78b6204"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "73e1021f6fffc7a6b9af988dd045a7165c04e00451ecaabeeaf48c4f41f85370"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a2f0a4fc3e2fb7720cc78bc69611468ff3670bf21baa12b44cbd505087b6c58a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "57abcc741e5cf2f95bd73342ba53b6f6f6d9865683abcd0ba179d3f532a941d6"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "9d5afde3e7213151ed572689409624f3d45ffbe62ab6a9aecfa6541d387418b3"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "73e1021f6fffc7a6b9af988dd045a7165c04e00451ecaabeeaf48c4f41f85370"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 2,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a2f0a4fc3e2fb7720cc78bc69611468ff3670bf21baa12b44cbd505087b6c58a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "89cb56bc27fe5ddaf005bd70489ee2fa0865c0ffcb77c27e410fece21ec46d57"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "a5b5ca2f310a5c5b3e174ee09e888694dcc62009ced1ca26717af0bea7659239"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "db21f91d50e84f7b8dd631722e1b29bd18c7c6ee82e65cdf72487982b24a4958"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f26bd06a38566f437448605ece7a7d089b085bd111ccc01c5fb4c00843c25457"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "374bf96fc649b7654e0bee76bf794e6cd1af4ca50c461625ab4a2cfa4472b332"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "c401d2e492b1374222bd5b7d079e6f71822d7b03953abae9936cb623e9d3c2c9"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "db21f91d50e84f7b8dd631722e1b29bd18c7c6ee82e65cdf72487982b24a4958"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f26bd06a38566f437448605ece7a7d089b085bd111ccc01c5fb4c00843c25457"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "1d7e5a333ab71e9605ed3e7559cf0c9732c9ad218ed655b9f122fb3ccf734ab9"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "8a73bdaa40d844e55b9fcf6a77eb596c257b12e8fef3f3bdacee5df5646b0ef5"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "db21f91d50e84f7b8dd631722e1b29bd18c7c6ee82e65cdf72487982b24a4958"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f26bd06a38566f437448605ece7a7d089b085bd111ccc01c5fb4c00843c25457"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "374bf96fc649b7654e0bee76bf794e6cd1af4ca50c461625ab4a2cfa4472b332"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "c401d2e492b1374222bd5b7d079e6f71822d7b03953abae9936cb623e9d3c2c9"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "db21f91d50e84f7b8dd631722e1b29bd18c7c6ee82e65cdf72487982b24a4958"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f26bd06a38566f437448605ece7a7d089b085bd111ccc01c5fb4c00843c25457"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "37ab6c0310b2aa844d428c28238aa908708445a564cb6b5e6a11b8e8f7302503"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "60b92085166e39045f672e855cd83fde9c2fc4f2f1364ac04af6c380633047f7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "db21f91d50e84f7b8dd631722e1b29bd18c7c6ee82e65cdf72487982b24a4958"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f26bd06a38566f437448605ece7a7d089b085bd111ccc01c5fb4c00843c25457"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "374bf96fc649b7654e0bee76bf794e6cd1af4ca50c461625ab4a2cfa4472b332"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "c401d2e492b1374222bd5b7d079e6f71822d7b03953abae9936cb623e9d3c2c9"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "db21f91d50e84f7b8dd631722e1b29bd18c7c6ee82e65cdf72487982b24a4958"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f26bd06a38566f437448605ece7a7d089b085bd111ccc01c5fb4c00843c25457"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "1d7e5a333ab71e9605ed3e7559cf0c9732c9ad218ed655b9f122fb3ccf734ab9"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "8a73bdaa40d844e55b9fcf6a77eb596c257b12e8fef3f3bdacee5df5646b0ef5"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "db21f91d50e84f7b8dd631722e1b29bd18c7c6ee82e65cdf72487982b24a4958"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f26bd06a38566f437448605ece7a7d089b085bd111ccc01c5fb4c00843c25457"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "374bf96fc649b7654e0bee76bf794e6cd1af4ca50c461625ab4a2cfa4472b332"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "c401d2e492b1374222bd5b7d079e6f71822d7b03953abae9936cb623e9d3c2c9"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "db21f91d50e84f7b8dd631722e1b29bd18c7c6ee82e65cdf72487982b24a4958"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 98,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "f26bd06a38566f437448605ece7a7d089b085bd111ccc01c5fb4c00843c25457"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "dc108cf5cb9ef40e6998add8acd9ef3ff05bb9361f7f7776d075ccf378c4ece9"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d6cb1511774d69113e24bd4e65848771d135f39a0c395ffa1181fcc3c0119550"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "72d4386caec5119555053db251e7469959a967b31404638721105cdb0c309ba0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "2af63d126d860baa642393fc6f8fa3b1e0874e2e36334ae9006a44e25ccd134a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "8f770551717ec9a11c3a2accf8481a0ce23b6a3921f76be55136bcbd66db7312"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "d4a49d9eb1172d8d22605df9f291f601387001549cb128abc0fa951ac48f4391"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "72d4386caec5119555053db251e7469959a967b31404638721105cdb0c309ba0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "2af63d126d860baa642393fc6f8fa3b1e0874e2e36334ae9006a44e25ccd134a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "830396af37ed56b997e05634ddb4b73ced848fe070bf5d6b2e8ac0ea39042b38"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "ffba1e7d8005b1a442157b5077dc852de731a0f1038258473f9794794aacca2c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "72d4386caec5119555053db251e7469959a967b31404638721105cdb0c309ba0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "2af63d126d860baa642393fc6f8fa3b1e0874e2e36334ae9006a44e25ccd134a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "8f770551717ec9a11c3a2accf8481a0ce23b6a3921f76be55136bcbd66db7312"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "d4a49d9eb1172d8d22605df9f291f601387001549cb128abc0fa951ac48f4391"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "72d4386caec5119555053db251e7469959a967b31404638721105cdb0c309ba0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "2af63d126d860baa642393fc6f8fa3b1e0874e2e36334ae9006a44e25ccd134a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "c2bd15897bb96faa2515e583ccdf41ffa829ad3918394470f4ece2e28236554d"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "4a2f19a0123f765b5240cead71ad3e97478a954ba8cc734d1ab8478e9a48fbd7"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "72d4386caec5119555053db251e7469959a967b31404638721105cdb0c309ba0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "2af63d126d860baa642393fc6f8fa3b1e0874e2e36334ae9006a44e25ccd134a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "8f770551717ec9a11c3a2accf8481a0ce23b6a3921f76be55136bcbd66db7312"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "d4a49d9eb1172d8d22605df9f291f601387001549cb128abc0fa951ac48f4391"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "72d4386caec5119555053db251e7469959a967b31404638721105cdb0c309ba0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "2af63d126d860baa642393fc6f8fa3b1e0874e2e36334ae9006a44e25ccd134a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "830396af37ed56b997e05634ddb4b73ced848fe070bf5d6b2e8ac0ea39042b38"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "ffba1e7d8005b1a442157b5077dc852de731a0f1038258473f9794794aacca2c"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "72d4386caec5119555053db251e7469959a967b31404638721105cdb0c309ba0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "2af63d126d860baa642393fc6f8fa3b1e0874e2e36334ae9006a44e25ccd134a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "8f770551717ec9a11c3a2accf8481a0ce23b6a3921f76be55136bcbd66db7312"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "d4a49d9eb1172d8d22605df9f291f601387001549cb128abc0fa951ac48f4391"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "72d4386caec5119555053db251e7469959a967b31404638721105cdb0c309ba0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 99,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "2af63d126d860baa642393fc6f8fa3b1e0874e2e36334ae9006a44e25ccd134a"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "e6ddba71178fdb962cda40225a3e4d2cfe10394dda23303646be18148479f9ab"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "9d291aeb6cae2e2f14d529d49a20654f089f808206c26f154302ee980766e55b"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "cdcaa1ecff5aa77f1af7a3094b39d8431af23f6d391f50a2f557769d72c59cf0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "0e3b528b5dc1a814dfd1f44fda5982d3229ee6dddc5f4fd35c2c7cc1e91ff625"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "a79ddae876fb9f5233edb5f2afd67ae7d12a0a1f22fbb053e1bfd3b1bca19cdb"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "5c7ec997d708d34c8640ab143c089988937eaa7dfd2bac21b1dd92e253b2f003"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "cdcaa1ecff5aa77f1af7a3094b39d8431af23f6d391f50a2f557769d72c59cf0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "0e3b528b5dc1a814dfd1f44fda5982d3229ee6dddc5f4fd35c2c7cc1e91ff625"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "b6e9f2db297717c7bf431d54b2d43cbb9a672f4743ae0de21eb53bbf4b8449ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "52a32a965ed7822bf1eb06349e84947014aa280dc18f98c17e5993a88a2adfb8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "cdcaa1ecff5aa77f1af7a3094b39d8431af23f6d391f50a2f557769d72c59cf0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "0e3b528b5dc1a814dfd1f44fda5982d3229ee6dddc5f4fd35c2c7cc1e91ff625"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "a79ddae876fb9f5233edb5f2afd67ae7d12a0a1f22fbb053e1bfd3b1bca19cdb"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "5c7ec997d708d34c8640ab143c089988937eaa7dfd2bac21b1dd92e253b2f003"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "cdcaa1ecff5aa77f1af7a3094b39d8431af23f6d391f50a2f557769d72c59cf0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "0e3b528b5dc1a814dfd1f44fda5982d3229ee6dddc5f4fd35c2c7cc1e91ff625"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "aa3f7dbeb97215d1f109007168547ab24c3bdc0817275400b6c623f4a3d06ddc"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 8,
+      "ram_sha256": "b134478c6837cbe19ce9ffe0863d3a510ea4c3354f5182f7ab3863ae55507a47"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "cdcaa1ecff5aa77f1af7a3094b39d8431af23f6d391f50a2f557769d72c59cf0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "0e3b528b5dc1a814dfd1f44fda5982d3229ee6dddc5f4fd35c2c7cc1e91ff625"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "a79ddae876fb9f5233edb5f2afd67ae7d12a0a1f22fbb053e1bfd3b1bca19cdb"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "5c7ec997d708d34c8640ab143c089988937eaa7dfd2bac21b1dd92e253b2f003"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "cdcaa1ecff5aa77f1af7a3094b39d8431af23f6d391f50a2f557769d72c59cf0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "0e3b528b5dc1a814dfd1f44fda5982d3229ee6dddc5f4fd35c2c7cc1e91ff625"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "b6e9f2db297717c7bf431d54b2d43cbb9a672f4743ae0de21eb53bbf4b8449ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 4,
+      "ram_sha256": "52a32a965ed7822bf1eb06349e84947014aa280dc18f98c17e5993a88a2adfb8"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "cdcaa1ecff5aa77f1af7a3094b39d8431af23f6d391f50a2f557769d72c59cf0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "0e3b528b5dc1a814dfd1f44fda5982d3229ee6dddc5f4fd35c2c7cc1e91ff625"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "a79ddae876fb9f5233edb5f2afd67ae7d12a0a1f22fbb053e1bfd3b1bca19cdb"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 2,
+      "ram_sha256": "5c7ec997d708d34c8640ab143c089988937eaa7dfd2bac21b1dd92e253b2f003"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "cdcaa1ecff5aa77f1af7a3094b39d8431af23f6d391f50a2f557769d72c59cf0"
+    },
+    {
+      "owner": "0x978",
+      "config": 0,
+      "credits": 255,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "0e3b528b5dc1a814dfd1f44fda5982d3229ee6dddc5f4fd35c2c7cc1e91ff625"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "4235c3af2b7d46a9e5d83ec2c5249fd63c1991f66f8cd723d1ce44a0b94f3b76"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 0,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1f9f4f0a2c702ca1dc21dc9b371a77d4b2150591022c1406f4d864e2db3667a7"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "569a80853a82ec8dc023f19970b06748bda2c161379537da83e3263fb782c512"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f455faf0f07ac2fef099d16db0d84dc182aa1f0ffb2ae1623cccd9a0215cc3ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "82d73b270e3b15da024f89909757d313a66a1aeb1e969b22cf3260e84487539c"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "86d7a1507e63870bfcc14a774c03e008bcf2d24e3f7242ed93b838471667f3d3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "569a80853a82ec8dc023f19970b06748bda2c161379537da83e3263fb782c512"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f455faf0f07ac2fef099d16db0d84dc182aa1f0ffb2ae1623cccd9a0215cc3ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "82d73b270e3b15da024f89909757d313a66a1aeb1e969b22cf3260e84487539c"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "86d7a1507e63870bfcc14a774c03e008bcf2d24e3f7242ed93b838471667f3d3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "569a80853a82ec8dc023f19970b06748bda2c161379537da83e3263fb782c512"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f455faf0f07ac2fef099d16db0d84dc182aa1f0ffb2ae1623cccd9a0215cc3ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "82d73b270e3b15da024f89909757d313a66a1aeb1e969b22cf3260e84487539c"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "86d7a1507e63870bfcc14a774c03e008bcf2d24e3f7242ed93b838471667f3d3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "569a80853a82ec8dc023f19970b06748bda2c161379537da83e3263fb782c512"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f455faf0f07ac2fef099d16db0d84dc182aa1f0ffb2ae1623cccd9a0215cc3ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "82d73b270e3b15da024f89909757d313a66a1aeb1e969b22cf3260e84487539c"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "86d7a1507e63870bfcc14a774c03e008bcf2d24e3f7242ed93b838471667f3d3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "569a80853a82ec8dc023f19970b06748bda2c161379537da83e3263fb782c512"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f455faf0f07ac2fef099d16db0d84dc182aa1f0ffb2ae1623cccd9a0215cc3ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "82d73b270e3b15da024f89909757d313a66a1aeb1e969b22cf3260e84487539c"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "86d7a1507e63870bfcc14a774c03e008bcf2d24e3f7242ed93b838471667f3d3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "569a80853a82ec8dc023f19970b06748bda2c161379537da83e3263fb782c512"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f455faf0f07ac2fef099d16db0d84dc182aa1f0ffb2ae1623cccd9a0215cc3ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "82d73b270e3b15da024f89909757d313a66a1aeb1e969b22cf3260e84487539c"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "86d7a1507e63870bfcc14a774c03e008bcf2d24e3f7242ed93b838471667f3d3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "569a80853a82ec8dc023f19970b06748bda2c161379537da83e3263fb782c512"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f455faf0f07ac2fef099d16db0d84dc182aa1f0ffb2ae1623cccd9a0215cc3ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "82d73b270e3b15da024f89909757d313a66a1aeb1e969b22cf3260e84487539c"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "86d7a1507e63870bfcc14a774c03e008bcf2d24e3f7242ed93b838471667f3d3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "569a80853a82ec8dc023f19970b06748bda2c161379537da83e3263fb782c512"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "f455faf0f07ac2fef099d16db0d84dc182aa1f0ffb2ae1623cccd9a0215cc3ed"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "82d73b270e3b15da024f89909757d313a66a1aeb1e969b22cf3260e84487539c"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 1,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "86d7a1507e63870bfcc14a774c03e008bcf2d24e3f7242ed93b838471667f3d3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "b9cf537b3577c34adc27532c534c09c4c42583e63cb757b71be8940a59ea3b61"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "8dc51f3a7d3e3f8228f2a10c96e78be27838acb364f50e51889fc36332e83d12"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6ab25029b5b0ef156e5a600556590f0c24c8385821b86ed9b9d265ebc753d06a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "c5f9399d64f93e3264fb17f6cf2d826b2a3a7a5288fa12a2fb045d4bd1b8974d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "5effa3905ddb9f0408eb27f9d77d522053cf60163bfcdff1555d52be89eebd5f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "14d9d91aad2efbe6cfc77c29e2085bed42fd3cb1ad09e5db11fcfe09e7895f11"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6ab25029b5b0ef156e5a600556590f0c24c8385821b86ed9b9d265ebc753d06a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "c5f9399d64f93e3264fb17f6cf2d826b2a3a7a5288fa12a2fb045d4bd1b8974d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "b9cf537b3577c34adc27532c534c09c4c42583e63cb757b71be8940a59ea3b61"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "8dc51f3a7d3e3f8228f2a10c96e78be27838acb364f50e51889fc36332e83d12"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6ab25029b5b0ef156e5a600556590f0c24c8385821b86ed9b9d265ebc753d06a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "c5f9399d64f93e3264fb17f6cf2d826b2a3a7a5288fa12a2fb045d4bd1b8974d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "5effa3905ddb9f0408eb27f9d77d522053cf60163bfcdff1555d52be89eebd5f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "14d9d91aad2efbe6cfc77c29e2085bed42fd3cb1ad09e5db11fcfe09e7895f11"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6ab25029b5b0ef156e5a600556590f0c24c8385821b86ed9b9d265ebc753d06a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "c5f9399d64f93e3264fb17f6cf2d826b2a3a7a5288fa12a2fb045d4bd1b8974d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "b9cf537b3577c34adc27532c534c09c4c42583e63cb757b71be8940a59ea3b61"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "8dc51f3a7d3e3f8228f2a10c96e78be27838acb364f50e51889fc36332e83d12"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6ab25029b5b0ef156e5a600556590f0c24c8385821b86ed9b9d265ebc753d06a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "c5f9399d64f93e3264fb17f6cf2d826b2a3a7a5288fa12a2fb045d4bd1b8974d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "5effa3905ddb9f0408eb27f9d77d522053cf60163bfcdff1555d52be89eebd5f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "14d9d91aad2efbe6cfc77c29e2085bed42fd3cb1ad09e5db11fcfe09e7895f11"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6ab25029b5b0ef156e5a600556590f0c24c8385821b86ed9b9d265ebc753d06a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "c5f9399d64f93e3264fb17f6cf2d826b2a3a7a5288fa12a2fb045d4bd1b8974d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "b9cf537b3577c34adc27532c534c09c4c42583e63cb757b71be8940a59ea3b61"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "8dc51f3a7d3e3f8228f2a10c96e78be27838acb364f50e51889fc36332e83d12"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6ab25029b5b0ef156e5a600556590f0c24c8385821b86ed9b9d265ebc753d06a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "c5f9399d64f93e3264fb17f6cf2d826b2a3a7a5288fa12a2fb045d4bd1b8974d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "5effa3905ddb9f0408eb27f9d77d522053cf60163bfcdff1555d52be89eebd5f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "14d9d91aad2efbe6cfc77c29e2085bed42fd3cb1ad09e5db11fcfe09e7895f11"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6ab25029b5b0ef156e5a600556590f0c24c8385821b86ed9b9d265ebc753d06a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 2,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "c5f9399d64f93e3264fb17f6cf2d826b2a3a7a5288fa12a2fb045d4bd1b8974d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d8f1a0453f205fe7790cb9c81cacf767384123851e3789de0ff9a708064305e3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "555f42228864d8f1ad36323174d81cfac155de4e7af599d73aebcbdbc63a5842"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6c8519ef87f0bbe856cc1187c159eaf335316389f58ec20d3a1f1428c86163a6"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "8b002ad662acb4bfe165d4dab142b537ba2af0f3de09827794c04d9983469164"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "56bb2d2a4845ca80337be4fdfc4ac570f619124dbe14c75ba38d0b88d1ad642a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "4b848300168d84dd49ec95e4ecd30096c5f713485f7c24847ce69881e9d7f993"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6c8519ef87f0bbe856cc1187c159eaf335316389f58ec20d3a1f1428c86163a6"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "8b002ad662acb4bfe165d4dab142b537ba2af0f3de09827794c04d9983469164"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d8f1a0453f205fe7790cb9c81cacf767384123851e3789de0ff9a708064305e3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "555f42228864d8f1ad36323174d81cfac155de4e7af599d73aebcbdbc63a5842"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6c8519ef87f0bbe856cc1187c159eaf335316389f58ec20d3a1f1428c86163a6"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "8b002ad662acb4bfe165d4dab142b537ba2af0f3de09827794c04d9983469164"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "56bb2d2a4845ca80337be4fdfc4ac570f619124dbe14c75ba38d0b88d1ad642a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "4b848300168d84dd49ec95e4ecd30096c5f713485f7c24847ce69881e9d7f993"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6c8519ef87f0bbe856cc1187c159eaf335316389f58ec20d3a1f1428c86163a6"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "8b002ad662acb4bfe165d4dab142b537ba2af0f3de09827794c04d9983469164"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d8f1a0453f205fe7790cb9c81cacf767384123851e3789de0ff9a708064305e3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "555f42228864d8f1ad36323174d81cfac155de4e7af599d73aebcbdbc63a5842"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6c8519ef87f0bbe856cc1187c159eaf335316389f58ec20d3a1f1428c86163a6"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "8b002ad662acb4bfe165d4dab142b537ba2af0f3de09827794c04d9983469164"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "56bb2d2a4845ca80337be4fdfc4ac570f619124dbe14c75ba38d0b88d1ad642a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "4b848300168d84dd49ec95e4ecd30096c5f713485f7c24847ce69881e9d7f993"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6c8519ef87f0bbe856cc1187c159eaf335316389f58ec20d3a1f1428c86163a6"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "8b002ad662acb4bfe165d4dab142b537ba2af0f3de09827794c04d9983469164"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d8f1a0453f205fe7790cb9c81cacf767384123851e3789de0ff9a708064305e3"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "555f42228864d8f1ad36323174d81cfac155de4e7af599d73aebcbdbc63a5842"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6c8519ef87f0bbe856cc1187c159eaf335316389f58ec20d3a1f1428c86163a6"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "8b002ad662acb4bfe165d4dab142b537ba2af0f3de09827794c04d9983469164"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "56bb2d2a4845ca80337be4fdfc4ac570f619124dbe14c75ba38d0b88d1ad642a"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "4b848300168d84dd49ec95e4ecd30096c5f713485f7c24847ce69881e9d7f993"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "6c8519ef87f0bbe856cc1187c159eaf335316389f58ec20d3a1f1428c86163a6"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 98,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "8b002ad662acb4bfe165d4dab142b537ba2af0f3de09827794c04d9983469164"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "c1095859bab1ee47deed99fc583925215e4670471c15c7491a7a61007c88d206"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "13fc610b31a3a44918f5e8cd7985bb47ab1fba274c4ed89801e25c269f296c8d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "9e24f7cd06350dd17dcfa46ced793e39c8353588c7d26456303858b61fcdfae9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "d0f2b8b447b1a3c4281f37ed125f0cbd3692f11f8e0d80fbad45987666e25b23"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "b7e418eedf07db88e7a7a513d5abd51eab76781d23cb8d140379091e39d573f4"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "2778576ccfa831f119cee371c8ff9a80d93f24c518db1733f47b93361c57db86"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "9e24f7cd06350dd17dcfa46ced793e39c8353588c7d26456303858b61fcdfae9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "d0f2b8b447b1a3c4281f37ed125f0cbd3692f11f8e0d80fbad45987666e25b23"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "c1095859bab1ee47deed99fc583925215e4670471c15c7491a7a61007c88d206"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "13fc610b31a3a44918f5e8cd7985bb47ab1fba274c4ed89801e25c269f296c8d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "9e24f7cd06350dd17dcfa46ced793e39c8353588c7d26456303858b61fcdfae9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "d0f2b8b447b1a3c4281f37ed125f0cbd3692f11f8e0d80fbad45987666e25b23"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "b7e418eedf07db88e7a7a513d5abd51eab76781d23cb8d140379091e39d573f4"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "2778576ccfa831f119cee371c8ff9a80d93f24c518db1733f47b93361c57db86"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "9e24f7cd06350dd17dcfa46ced793e39c8353588c7d26456303858b61fcdfae9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "d0f2b8b447b1a3c4281f37ed125f0cbd3692f11f8e0d80fbad45987666e25b23"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "c1095859bab1ee47deed99fc583925215e4670471c15c7491a7a61007c88d206"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "13fc610b31a3a44918f5e8cd7985bb47ab1fba274c4ed89801e25c269f296c8d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "9e24f7cd06350dd17dcfa46ced793e39c8353588c7d26456303858b61fcdfae9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "d0f2b8b447b1a3c4281f37ed125f0cbd3692f11f8e0d80fbad45987666e25b23"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "b7e418eedf07db88e7a7a513d5abd51eab76781d23cb8d140379091e39d573f4"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "2778576ccfa831f119cee371c8ff9a80d93f24c518db1733f47b93361c57db86"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "9e24f7cd06350dd17dcfa46ced793e39c8353588c7d26456303858b61fcdfae9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "d0f2b8b447b1a3c4281f37ed125f0cbd3692f11f8e0d80fbad45987666e25b23"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "c1095859bab1ee47deed99fc583925215e4670471c15c7491a7a61007c88d206"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "13fc610b31a3a44918f5e8cd7985bb47ab1fba274c4ed89801e25c269f296c8d"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "9e24f7cd06350dd17dcfa46ced793e39c8353588c7d26456303858b61fcdfae9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "d0f2b8b447b1a3c4281f37ed125f0cbd3692f11f8e0d80fbad45987666e25b23"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "b7e418eedf07db88e7a7a513d5abd51eab76781d23cb8d140379091e39d573f4"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "2778576ccfa831f119cee371c8ff9a80d93f24c518db1733f47b93361c57db86"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "9e24f7cd06350dd17dcfa46ced793e39c8353588c7d26456303858b61fcdfae9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 99,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "d0f2b8b447b1a3c4281f37ed125f0cbd3692f11f8e0d80fbad45987666e25b23"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1060af1960310b42443c046a6475ff86cb74a4f9a53a25c35ce0c30234036133"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d3d1e60a03ca4a0082f36b9c3d0f193d728d61168514abd6b4baa53da4a5cf9f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 1,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a447e620f73c3e5678fcdf7ca96d3aefa0985e4010a5592ef3e16835e38ada01"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 1,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "e35858555f3a03d50f08fa887d4470504555e1ce73e59a94a3f6299ddc94138f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 2,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "ba9f948962e16bba7a8dc6483bdb741a9b986e5009321488355453dd8cb54cc9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 2,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "de6230ef7448b4aa12ff63dc80b42c39143319652549a5972ddd2c8f5a846388"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 3,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a447e620f73c3e5678fcdf7ca96d3aefa0985e4010a5592ef3e16835e38ada01"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 3,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "e35858555f3a03d50f08fa887d4470504555e1ce73e59a94a3f6299ddc94138f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1060af1960310b42443c046a6475ff86cb74a4f9a53a25c35ce0c30234036133"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d3d1e60a03ca4a0082f36b9c3d0f193d728d61168514abd6b4baa53da4a5cf9f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 5,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a447e620f73c3e5678fcdf7ca96d3aefa0985e4010a5592ef3e16835e38ada01"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 5,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "e35858555f3a03d50f08fa887d4470504555e1ce73e59a94a3f6299ddc94138f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 6,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "ba9f948962e16bba7a8dc6483bdb741a9b986e5009321488355453dd8cb54cc9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 6,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "de6230ef7448b4aa12ff63dc80b42c39143319652549a5972ddd2c8f5a846388"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 7,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a447e620f73c3e5678fcdf7ca96d3aefa0985e4010a5592ef3e16835e38ada01"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 7,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "e35858555f3a03d50f08fa887d4470504555e1ce73e59a94a3f6299ddc94138f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 8,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1060af1960310b42443c046a6475ff86cb74a4f9a53a25c35ce0c30234036133"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 8,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d3d1e60a03ca4a0082f36b9c3d0f193d728d61168514abd6b4baa53da4a5cf9f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 9,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a447e620f73c3e5678fcdf7ca96d3aefa0985e4010a5592ef3e16835e38ada01"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 9,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "e35858555f3a03d50f08fa887d4470504555e1ce73e59a94a3f6299ddc94138f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 10,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "ba9f948962e16bba7a8dc6483bdb741a9b986e5009321488355453dd8cb54cc9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 10,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "de6230ef7448b4aa12ff63dc80b42c39143319652549a5972ddd2c8f5a846388"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 11,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a447e620f73c3e5678fcdf7ca96d3aefa0985e4010a5592ef3e16835e38ada01"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 11,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "e35858555f3a03d50f08fa887d4470504555e1ce73e59a94a3f6299ddc94138f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 12,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "1060af1960310b42443c046a6475ff86cb74a4f9a53a25c35ce0c30234036133"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 12,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "d3d1e60a03ca4a0082f36b9c3d0f193d728d61168514abd6b4baa53da4a5cf9f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 13,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a447e620f73c3e5678fcdf7ca96d3aefa0985e4010a5592ef3e16835e38ada01"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 13,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "e35858555f3a03d50f08fa887d4470504555e1ce73e59a94a3f6299ddc94138f"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 14,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "ba9f948962e16bba7a8dc6483bdb741a9b986e5009321488355453dd8cb54cc9"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 14,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 3,
+      "ram_sha256": "de6230ef7448b4aa12ff63dc80b42c39143319652549a5972ddd2c8f5a846388"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 15,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "a447e620f73c3e5678fcdf7ca96d3aefa0985e4010a5592ef3e16835e38ada01"
+    },
+    {
+      "owner": "0x978",
+      "config": 2048,
+      "credits": 255,
+      "buttons": 15,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 1,
+      "ram_sha256": "e35858555f3a03d50f08fa887d4470504555e1ce73e59a94a3f6299ddc94138f"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 0,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 0,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 0,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 0,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 1,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 1,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 1,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "77394f3d8a427f89816eac796be285c0b9a5c32e46e490e47d09381db7569bb0"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 1,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 0,
+      "accepted_mask": 0,
+      "ram_sha256": "7b47743112e66deaf6c02c0ab0f4604081bacdf047451843a9b2ef81e6da3894"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 2,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "77394f3d8a427f89816eac796be285c0b9a5c32e46e490e47d09381db7569bb0"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 2,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "7b47743112e66deaf6c02c0ab0f4604081bacdf047451843a9b2ef81e6da3894"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 2,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "6b06823c00106344af9c9fb1eba7c8f8ae86b2ff604f2725b741030cb6092183"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 2,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "93ac236173c27ef5839ba6653a708bb69646a82c5b6f9903c17edc8995582cc7"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 98,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "2338a1f9c94ca58c0533b16a4e947605ff296fe200442ccb5f2617686995b7e0"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 98,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "0c7084a0179937f74304c7ecc391764fca269c71497b3d73906429834b32a111"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 98,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "d0d9c5d061aea766ef6e6778d7f1cd28ba983773bd6c1e5382c667893dfa2d7e"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 98,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "9daf099333321f82bad6eb38d1935bfbc3650909871b48b11a75d4a986a0f418"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 99,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "89cb56bc27fe5ddaf005bd70489ee2fa0865c0ffcb77c27e410fece21ec46d57"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 99,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "a5b5ca2f310a5c5b3e174ee09e888694dcc62009ced1ca26717af0bea7659239"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 99,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "2338a1f9c94ca58c0533b16a4e947605ff296fe200442ccb5f2617686995b7e0"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 99,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "0c7084a0179937f74304c7ecc391764fca269c71497b3d73906429834b32a111"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 255,
+      "buttons": 0,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "d26f18e20a32407b479cce4cbc3c9a6488d1f6d6a8d86193b95e293663e2aa3d"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 255,
+      "buttons": 0,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "7dbb43ef33f1229b47f5edf7b728975e42819d077ec5663db25d24fcfb66e249"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 255,
+      "buttons": 4,
+      "pattern": 0,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "78910d591c4e9ae413eb8b33441e4f94dbe2b70eeff28264c4d107c67e68fdee"
+    },
+    {
+      "owner": "0x55a",
+      "config": 0,
+      "credits": 255,
+      "buttons": 4,
+      "pattern": 1,
+      "carry": 1,
+      "accepted_mask": 0,
+      "ram_sha256": "e0bc038c10496d62db536d2823a3cfb6f7b14d55693ed6351c019eeffff2c420"
+    }
+  ]
+}

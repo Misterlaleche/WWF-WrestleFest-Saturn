@@ -1,0 +1,43 @@
+{
+  "scope": "Partial native RESET/credits/START/mode/roster/partner to AC0/F8C session; no new bootable disc",
+  "audio_backend": false,
+  "native_runtime": true,
+  "bootable_disc": false,
+  "baseline_commit": "e349c776d35c861a87a2f4346308f3e0b15eb37a",
+  "rom_program_sha1": "a726c46f350723ea73158bc78055d17d418b14e2",
+  "rom_zip_sha256": "2a99ae04704941fe1e2a6362dbc4feb18554de4fc83baa0622487d84716127b8",
+  "normal_cases": 10,
+  "sanitized_cases": 10,
+  "start_credit_oracle_cases": 408,
+  "fixture_seeds": [
+    1085,
+    305419896
+  ],
+  "fixture_events": "Controlled host bus; 17 coin IRQ quanta per fixture tick, VBlank admitted by SR; input releases observed by original input owner",
+  "cold_state_policy": "Caller supplies full RAM and control context; Saturn cold-state source and event schedule OPEN",
+  "clock_saturn_integration": "OPEN; harness clocks are not Saturn performance measurements",
+  "core_bytes": 183464,
+  "core_sha256": "86f9259f148d56f9f326c5111ebf3a9bd02da68a5d3f2e69d2744f54bf66a452",
+  "core_unresolved_symbols": [
+    "_memcpy",
+    "_memset"
+  ],
+  "build_image": "sha256:4aabb94283fcd504a91649e24394d0242d619b22ebeb549e1b8ab97a74676ed6",
+  "build_platform": "linux/amd64",
+  "build_network": "none",
+  "compiler": "sh2eb-elf-gcc (GCC) 13.2.0",
+  "sdk": "/Users/alejandro/.codex/.chatgpt-projects/g-p-6a9f87b30c048191b8ef33b79152e278/work/sh2/sh2eb-elf",
+  "host_compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+  "oracle_unicorn": "2.1.4",
+  "source_evidence_paths": [
+    "/Users/alejandro/Documents/Codex/2026-10-30/files-pasted-by-the-user-encargo/work/repo/production/full_game/build/session-smmxcacc/checks",
+    "/Users/alejandro/Documents/Codex/2026-10-30/files-pasted-by-the-user-encargo/work/repo/production/full_game/build/session-atod8b4z/checks"
+  ],
+  "last_visual_checkpoint": "checkpoint04",
+  "last_visual_commit": "e349c776d35c861a87a2f4346308f3e0b15eb37a",
+  "last_visual_disc_bin_sha256": "aee117821c75dceb2d438ad74c5eb44deb25b77029659ed370986a237f68059a",
+  "last_visual_package": "/Users/alejandro/Documents/Codex/2026-10-30/files-pasted-by-the-user-encargo/outputs/checkpoint04",
+  "new_emulator_video": false,
+  "physical_validation": false,
+  "review": "Independent GPT-6 Astra review; two harness/build P2 resolved"
+}
