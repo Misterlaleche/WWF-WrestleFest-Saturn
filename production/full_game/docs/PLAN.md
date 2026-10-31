@@ -53,7 +53,9 @@ Produces: estado explícito de carga, escena, fin y error; acceso a estado previ
 - [x] Recuperar/verificar ZIP aprobados y frontend TEST03.
 - [x] Reconstruir Intro/Entrada/Presentadora/TAG/Royal en copias aisladas.
 - [ ] Adaptar render/CD/SMPC y traspaso de propiedad; un único main.
-- [ ] Verificar perfiles de memoria y detección 4MiB por SDK/prueba de bancos.
+- [x] Detección4MiB por SDK/prueba de bancos en un mismo disco None/1MiB/4MiB.
+- [ ] Conectar perfiles de memoria/caché dinámicos de combate.
+- [x] Subhito03: main/SMPC/VBlank/reloj y renderer MODE/ROSTER, pruebas con mando.
 
 ### Task 5: Gameplay y progresión completos
 - [ ] Completar todas las rutas TAG/Royal desde estados de partida, sin fixtures.

@@ -1,0 +1,24 @@
+{
+  "scope": "Partial platform+MODE/ROSTER, not full game",
+  "compiler": "sh2eb-elf-gcc (GCC) 13.2.0",
+  "cart": "same executable: SDK detection +16-point bank validation",
+  "audio_backend": false,
+  "files": {
+    "build/saturn/wrestlefest-full-game.elf": {
+      "bytes": 695800,
+      "sha256": "340cbbb419c7e67b720be16180d0419c1032b9acd4479dec03d45caa13f775ac"
+    },
+    "build/saturn/wrestlefest-full-game.bin": {
+      "bytes": 499572,
+      "sha256": "dde3287d49170f1a1b655150d5dc0c27a6f6ec72047843415ea030b3fa0be63e"
+    },
+    "build/saturn/wrestlefest-full-game.map": {
+      "bytes": 555746,
+      "sha256": "f595a898663c3c1aa7024a64a099f11a539366f86f3f23e4e1d1af8828e29668"
+    },
+    "build/disc/wrestlefest-full-game.iso": {
+      "bytes": 880640,
+      "sha256": "953b7bf99a2cd5bc1edae16e895bde41b4269e989aec864db6f8ed50f5f948f2"
+    }
+  }
+}

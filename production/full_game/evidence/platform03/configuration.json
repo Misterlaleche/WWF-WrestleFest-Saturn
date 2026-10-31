@@ -1,0 +1,12 @@
+{
+  "build_image": "sha256:4aabb94283fcd504a91649e24394d0242d619b22ebeb549e1b8ab97a74676ed6",
+  "emulation_image": "sha256:e2ba1cf888d1eadfb52ab715234fb3cee51fbf820cb5afba3810347fdecb3f53",
+  "audio_backend": false,
+  "reference_packages": "/Users/alejandro/Downloads",
+  "restored_packages": "/Users/alejandro/Documents/Codex/2026-10-30/files-pasted-by-the-user-encargo/work/upstream_rebuilds",
+  "captures": "/Users/alejandro/Documents/Codex/2026-10-30/files-pasted-by-the-user-encargo/work/platform03-tests",
+  "disc": "/Users/alejandro/Documents/Codex/2026-10-30/files-pasted-by-the-user-encargo/work/platform03-disc-final",
+  "bios": "/Users/alejandro/Library/Application Support/OpenEmu/BIOS/mpr-17933.bin",
+  "sdk": "/Users/alejandro/.codex/.chatgpt-projects/g-p-6a9f87b30c048191b8ef33b79152e278/work/sh2/sh2eb-elf",
+  "scope": "Partial MODE/ROSTER universal platform; no complete beta"
+}

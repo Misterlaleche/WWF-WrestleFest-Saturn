@@ -44,8 +44,7 @@ traspaso, la equivalencia RNG del recorrido completo queda OPEN.
 
 Este primer enlace es una prueba ejecutable host y compilable SH-2 del código
 de integración. No contiene un renderer maestro ni se etiqueta como juego,
-disco o beta completa. Los recursos ausentes bloquean la reconstrucción visual
-de las escenas aprobadas y se registran con sus hashes y procedencia.
+disco o beta completa. Los recursos se recuperaron en el checkpoint02 y sus hashes están verificados.
 
 Se regeneran únicamente recursos cuyos IDs/tablas y formatos están disponibles
 y cuyo hash coincide con el aprobado. Una coincidencia de imagen aproximada
@@ -53,7 +52,7 @@ no es suficiente. Recursos originales, ROM y BIOS permanecen externos a Git.
 
 ## Integración siguiente
 
-Recuperar ZIP aprobados; reconstruir cada bloque intacto; adaptar renderer y
+ZIP aprobados recuperados y bloques reconstruidos en checkpoint02; adaptar renderer y
 carga a plataforma única; importar frontend TEST03; hacer dinámico el presupuesto
 de Royal (las capacidades máximas de sus dos builds no caben juntas en base);
 unir los motores con contratos de estado reales; completar las rutas ROM abiertas;

@@ -1,0 +1,39 @@
+{
+  "pass": true,
+  "files_checked": 2023,
+  "upstream_commit": "aedca6827c7801a88dbb1eae280830cd4776b95f",
+  "failures": []
+}
+build/frontend/renderer.c
+src/saturn/main.c
+src/saturn/wf_platform.c
+src/wf_arcade_clock.c
+src/wf_cart.c
+src/wf_frontend.c
+build/frontend-assets/CURSOR0.BIN
+build/frontend-assets/CURSOR0.PAL
+build/frontend-assets/MODE.PAL
+build/frontend-assets/MODEX.RLE
+build/frontend-assets/SELBG.RLE
+build/frontend-assets/SELPAL.BIN
+build/frontend-assets/SELWORLD.RLE
+wrestlefest-full-game.elf
+/sdk/bin/../lib/gcc/sh2eb-elf/13.2.0/../../../../sh2eb-elf/bin/ld: warning: /work/repo/production/full_game/build/saturn/wrestlefest-full-game.elf has a LOAD segment with RWX permissions
+/sdk/bin/../lib/gcc/sh2eb-elf/13.2.0/../../../../sh2eb-elf/bin/ld: warning: /work/repo/production/full_game/build/saturn/wrestlefest-full-game.elf has a LOAD segment with RWX permissions
+/sdk/bin/../lib/gcc/sh2eb-elf/13.2.0/../../../../sh2eb-elf/bin/ld: warning: /work/repo/production/full_game/build/saturn/wrestlefest-full-game.elf has a LOAD segment with RWX permissions
+/sdk/bin/../lib/gcc/sh2eb-elf/13.2.0/../../../../sh2eb-elf/bin/ld: warning: /work/repo/production/full_game/build/saturn/wrestlefest-full-game.elf has a LOAD segment with RWX permissions
+wrestlefest-full-game.bin
+wrestlefest-full-game.iso
+wrestlefest-full-game.cue
+{
+  "iso_sha256": "953b7bf99a2cd5bc1edae16e895bde41b4269e989aec864db6f8ed50f5f948f2",
+  "bin_sha256": "2001eb3a75e6893587fae57078de8aee2e9448169d03eb739402e490e89e431c",
+  "cue_sha256": "7a6f904feefd766bca9a44ea484af7db14125b500fc89e7c5bae4c62b09159fa",
+  "sectors": 430,
+  "raw_sector_bytes": 2352,
+  "payload_roundtrip": "all sectors byte-identical to ISO",
+  "edc_ecc": "all sectors regenerated and compared",
+  "usa_region": true,
+  "hardware_boot_test": false,
+  "emulator_boot_test": false
+}

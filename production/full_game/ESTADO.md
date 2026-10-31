@@ -1,10 +1,27 @@
 # Estado de integración — 2026-10-31
 
-Estado: CHECKPOINT DE FUENTES PARCIAL. La beta completa sigue en desarrollo.
-No hay todavía disco universal ni gameplay integrado. Las nuevas pruebas
-Mednafen descritas aquí corresponden a reconstrucciones de referencia Royal.
+Estado: CHECKPOINT03 PARCIAL, no beta completa.
+Hay un disco universal de integración MODE/ROSTER probado en Mednafen1.32.1
+None/1MiB/4MiB. La confirmación termina esta ruta parcial; aún no abre combate.
+La ampliación se detecta y valida, pero las cachés de gameplay no están integradas.
 
-## Verificado en esta sesión
+## Nuevo en checkpoint03
+
+- Único main, VBlank/SMPC y reloj37609/39168; deuda conservada.
+- Detección SDK más validación de16 puntos en bancos;1MiB no activa4MiB.
+- Renderer TEST03 derivado de fuente fijada por hash; reutiliza122880B.
+- Mando real emulado: MODE, páginas del roster, regreso y confirmación.
+- Cuatro pruebas Mednafen PASS sobre el mismo ejecutable; incluye mantenerA
+  durante scroll. Esta regresión fue reproducida y corregida antes de publicar.
+- Reloj observado con publicación coherente; ninguna violación en
+  247/264/246/200 publicaciones activas distintas. Deuda máxima observada2.
+- Tests C11/ASan/UBSan y9testsPython con ROM pasan; originales2023/2023 intactos.
+- BIN/CUE, ELF/mapa, vídeos reales y configuración conservados. Sin audio de juego.
+
+Reproducción, hashes, evidencias y límites: docs/RECOVERY-03.md.
+No hay prueba física del nuevo disco ni prueba del recorrido completo.
+
+## Referencias verificadas en checkpoints01/02
 
 - Recuperados 2023 archivos del commit aedca682; sus 989 blobs y árbol Git
   coinciden. Las carpetas originales permanecen intactas por SHA256.
@@ -38,16 +55,16 @@ Mednafen descritas aquí corresponden a reconstrucciones de referencia Royal.
 
 ## OPEN y trabajo siguiente
 
-1. Integrar plataforma y completar pruebas con mando; las pasadas largas Royal
+1. Completar integración de plataforma y pruebas con mando del juego completo; las pasadas largas Royal
    de referencia y sus binarios,mapas,presupuestos,hashes y vídeos están registrados.
 2. Runtime maestro con único CD/SMPC/reloj/VDP1/VDP2 y traspasos de propiedad.
-3. Detección4MiB y presupuesto dinámico; Royal usa dos builds por macros y no
+3. Conectar la detección4MiB ya probada al presupuesto dinámico; Royal usa dos builds por macros y no
    cabe sumar sus máximos estáticos en la Saturn base.
 4. Frontend completo y escenas gráficas integradas. Eventos Presentadora
    conservados; contrato prepare/start/stop y registros de Entrada OPEN.
 5. TAG/Royal con todos los participantes,acciones,IA y transiciones originales;
    resultados,progresión,continues,records,rankings y finales.
-6. Disco universal real;Mednafen1.32.1 None/4MiB,mando,vídeos y todas las métricas
+6. Disco universal del juego completo;Mednafen1.32.1 None/4MiB,mando,vídeos y todas las métricas
    pedidas. Las tasas históricas no son medidas de este nuevo core.
 
 Sin sonido en producción. Reconstrucciones de referencia pueden conservar el
@@ -66,7 +83,7 @@ Para repetir los diferenciales originales, usar un venv con Unicorn2.1.4 y
 compilador host/liblz4 disponibles:
 `python tools/run_reference_checks.py --rom /ruta/wwfwfest.zip --out /ruta/nueva`.
 
-Para restaurar los cinco ZIP a una copia nueva:
+Para restaurar los seis ZIP a una copia nueva:
 `python tools/restore_packages.py --packages /ruta/paquetes --out /ruta/nueva`.
 Los binarios protegidos y la ROM permanecen externos a Git.
 

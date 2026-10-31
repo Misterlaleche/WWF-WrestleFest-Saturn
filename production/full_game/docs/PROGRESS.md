@@ -38,3 +38,27 @@ a HW1,CDdelta0,fatal0. Media50,5904base/58,8948cart;objetivo base todavía incum
 Ventanas60/99 y1/5s cuantizadas medidas;PTS de cada fotograma MOV/MP4 idénticos.
 El analizador nuevo de ventanas99 coincide con el original. No se usa wall-time.
 Fuentes R3 completas370 y TEST03 guardadas bajo vendor; no recuperación R6.
+
+Checkpoint03: plataforma única VBlank/SMPC y reloj racional,
+detección SDK y validación de16 puntos sobre ocho bancos antes de usar4MiB.
+El renderer TEST03 se extrae de una fuente fijada por hash; main/reloj/input
+privados excluidos; MODE reutiliza el almacenamiento del fondo ROSTER (122880B).
+Ruling: se rechazan códigos de dirección>10 antes de indexar las tablas; la
+semántica ROM de entradas contradictorias sigue OPEN, coste: error explícito en
+ese input en lugar de lectura fuera de límites. No inventar normalización.
+Ruling: el alcance del disco03 es MODE/ROSTER con terminal de selección; la
+identidad ROM, formación de equipo y siguiente escena requieren sus propietarios.
+No se reutiliza el slot visual como ID ni se anuncia beta completa.
+Revisión independiente encontró dos P2: SMPC consumía el flanco de A durante
+scroll y el runner ignoraba muestras incoherentes. El primero se reprodujo
+con mando en Mednafen (scroll-edge-red: timeout, sigue ROSTER). Corregido
+manteniendo la frontera original de polling. El segundo tiene tres tests RED→GREEN;
+se añadió secuencia de publicación par/impar y rechazo de violación del reloj,
+contando sólo publicaciones distintas en escenas activas. Cuatro pasadas finales PASS: None,1MiB,4MiB y flanco durante scroll.
+247/264/246/200 publicaciones distintas activas, sin violación del reloj;
+deuda máxima observada2, sin descartar ticks. Suite host con ROM9testsPython,
+C11 y ASan/UBSan de reloj/adaptador/cartucho/frontend PASS.
+Final: fixed input boundary — Mednafen scroll-edge RED→GREEN y las tres
+rutas normales PASS. Final: fixed evidence gate — tres regresionesPython
+RED→GREEN y muestras nativas con secuencia coherente. No quedan P2 abiertos
+de esta revisión del alcance03. El resto del juego sigue OPEN.

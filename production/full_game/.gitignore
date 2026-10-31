@@ -2,3 +2,5 @@ build/
 resources/
 __pycache__/
 *.pyc
+# SDK default staging from the initial platform build
+cd/
