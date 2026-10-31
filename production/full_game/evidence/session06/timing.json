@@ -1,0 +1,173 @@
+{
+  "final-none": {
+    "distinct_clock_publications": 833,
+    "max_pending": 100,
+    "cd_sectors": 776,
+    "phases": {
+      "1": {
+        "samples": 535,
+        "elapsed_fields": 628,
+        "elapsed_ticks": 541,
+        "first_pending": 13,
+        "last_pending": 75,
+        "observed_updates_per_second": 51.538161136621355
+      },
+      "2": {
+        "samples": 2,
+        "elapsed_fields": 8,
+        "elapsed_ticks": 1,
+        "first_pending": 75,
+        "last_pending": 82,
+        "observed_updates_per_second": 7.478272919084614
+      },
+      "3": {
+        "samples": 2,
+        "elapsed_fields": 8,
+        "elapsed_ticks": 1,
+        "first_pending": 84,
+        "last_pending": 91,
+        "observed_updates_per_second": 7.478272919084614
+      },
+      "4": {
+        "samples": 35,
+        "elapsed_fields": 36,
+        "elapsed_ticks": 36,
+        "first_pending": 94,
+        "last_pending": 92,
+        "observed_updates_per_second": 59.826183352676914
+      },
+      "5": {
+        "samples": 232,
+        "elapsed_fields": 244,
+        "elapsed_ticks": 236,
+        "first_pending": 92,
+        "last_pending": 91,
+        "observed_updates_per_second": 57.86466914439242
+      },
+      "6": {
+        "samples": 27,
+        "elapsed_fields": 28,
+        "elapsed_ticks": 28,
+        "first_pending": 91,
+        "last_pending": 90,
+        "observed_updates_per_second": 59.826183352676914
+      }
+    }
+  },
+  "final-1m": {
+    "distinct_clock_publications": 834,
+    "max_pending": 100,
+    "cd_sectors": 776,
+    "phases": {
+      "1": {
+        "samples": 534,
+        "elapsed_fields": 628,
+        "elapsed_ticks": 541,
+        "first_pending": 13,
+        "last_pending": 75,
+        "observed_updates_per_second": 51.538161136621355
+      },
+      "2": {
+        "samples": 2,
+        "elapsed_fields": 8,
+        "elapsed_ticks": 1,
+        "first_pending": 75,
+        "last_pending": 82,
+        "observed_updates_per_second": 7.478272919084614
+      },
+      "3": {
+        "samples": 2,
+        "elapsed_fields": 8,
+        "elapsed_ticks": 1,
+        "first_pending": 84,
+        "last_pending": 91,
+        "observed_updates_per_second": 7.478272919084614
+      },
+      "4": {
+        "samples": 35,
+        "elapsed_fields": 36,
+        "elapsed_ticks": 36,
+        "first_pending": 94,
+        "last_pending": 92,
+        "observed_updates_per_second": 59.826183352676914
+      },
+      "5": {
+        "samples": 233,
+        "elapsed_fields": 245,
+        "elapsed_ticks": 237,
+        "first_pending": 92,
+        "last_pending": 91,
+        "observed_updates_per_second": 57.872675324834404
+      },
+      "6": {
+        "samples": 28,
+        "elapsed_fields": 28,
+        "elapsed_ticks": 28,
+        "first_pending": 91,
+        "last_pending": 90,
+        "observed_updates_per_second": 59.826183352676914
+      }
+    }
+  },
+  "final-4m": {
+    "distinct_clock_publications": 1037,
+    "max_pending": 101,
+    "cd_sectors": 776,
+    "phases": {
+      "1": {
+        "samples": 534,
+        "elapsed_fields": 628,
+        "elapsed_ticks": 541,
+        "first_pending": 13,
+        "last_pending": 75,
+        "observed_updates_per_second": 51.53817392292601
+      },
+      "2": {
+        "samples": 3,
+        "elapsed_fields": 10,
+        "elapsed_ticks": 2,
+        "first_pending": 75,
+        "last_pending": 82,
+        "observed_updates_per_second": 11.965239639037907
+      },
+      "3": {
+        "samples": 2,
+        "elapsed_fields": 7,
+        "elapsed_ticks": 1,
+        "first_pending": 86,
+        "last_pending": 92,
+        "observed_updates_per_second": 8.546599742169933
+      },
+      "4": {
+        "samples": 67,
+        "elapsed_fields": 69,
+        "elapsed_ticks": 69,
+        "first_pending": 95,
+        "last_pending": 92,
+        "observed_updates_per_second": 59.826198195189534
+      },
+      "5": {
+        "samples": 404,
+        "elapsed_fields": 427,
+        "elapsed_ticks": 416,
+        "first_pending": 92,
+        "last_pending": 86,
+        "observed_updates_per_second": 58.285008077749055
+      },
+      "6": {
+        "samples": 27,
+        "elapsed_fields": 28,
+        "elapsed_ticks": 28,
+        "first_pending": 86,
+        "last_pending": 85,
+        "observed_updates_per_second": 59.826198195189534
+      }
+    }
+  },
+  "final-corrupt": {
+    "distinct_clock_publications": 0,
+    "max_pending": 0,
+    "cd_sectors": null,
+    "phases": {}
+  }
+}

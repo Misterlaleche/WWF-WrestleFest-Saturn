@@ -1,0 +1,12 @@
+cc -std=c11 -O2 -Wall -Wextra -Werror -Isrc tests/test_board.c src/wf_board.c -o build/test_board
+./build/test_board
+board: active-low VBlank, ordered raster/vblank, masks/ACK, DIP/input and bounded bus PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -Isrc tests/test_video_plan.c src/wf_video_plan.c -o build/test_video_plan
+./build/test_video_plan
+video plan: bank identity, flips, cache reuse, RGB444 and sprite clipping PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc tests/test_board.c src/wf_board.c -o build/test_board_san
+UBSAN_OPTIONS=halt_on_error=1 ./build/test_board_san
+board: active-low VBlank, ordered raster/vblank, masks/ACK, DIP/input and bounded bus PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc tests/test_video_plan.c src/wf_video_plan.c -o build/test_video_plan_san
+UBSAN_OPTIONS=halt_on_error=1 ./build/test_video_plan_san
+video plan: bank identity, flips, cache reuse, RGB444 and sprite clipping PASS

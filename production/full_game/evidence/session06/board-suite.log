@@ -1,0 +1,12 @@
+session: explicit cold state, early-match rejection, preserved RAM, terminal dependency failure PASS
+
+PASS session mode=0 targets=0,1 port=0 fixture_seed=1085 stride=1 clock=578 active=4 world=0 commits=578 submissions=464 sound_events=16 cancellations=0 rng=4a79221d
+PASS session mode=0 targets=0,1 port=1 fixture_seed=1085 stride=1 clock=578 active=4 world=0 commits=578 submissions=464 sound_events=16 cancellations=0 rng=4a79221d
+PASS session mode=0 targets=8,9 port=0 fixture_seed=1085 stride=1 clock=610 active=4 world=0 commits=610 submissions=496 sound_events=16 cancellations=0 rng=fe9809dc
+PASS session mode=0 targets=8,9 port=1 fixture_seed=1085 stride=1 clock=604 active=4 world=0 commits=604 submissions=490 sound_events=16 cancellations=0 rng=9c0aa86a
+PASS session mode=1 targets=0,0 port=0 fixture_seed=1085 stride=1 clock=570 active=6 world=0 commits=570 submissions=456 sound_events=15 cancellations=0 rng=aea4cc88
+PASS session mode=1 targets=9,0 port=0 fixture_seed=1085 stride=1 clock=610 active=6 world=0 commits=610 submissions=496 sound_events=15 cancellations=0 rng=c387f03a
+PASS session mode=1 targets=0,0 port=0 fixture_seed=1085 stride=1 clock=3197 active=6 world=0 commits=3197 submissions=965 sound_events=17 cancellations=1 rng=aea4cc88
+PASS session mode=0 targets=0,1 port=0 fixture_seed=305419896 stride=1 clock=578 active=4 world=0 commits=578 submissions=464 sound_events=16 cancellations=0 rng=99bba475
+PASS expected match dependency failure pc=7bf8 owner=26e66; no handoff/replay
+Evidence: /Users/alejandro/Documents/Codex/2026-10-30/files-pasted-by-the-user-encargo/work/session06/board-suite

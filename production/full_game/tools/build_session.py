@@ -10,6 +10,7 @@ def main():
     p.add_argument('--probe',type=Path)
     p.add_argument('--sanitize',action='store_true')
     p.add_argument('--sh2',action='store_true')
+    p.add_argument('--entry',action='append',default=[],help='Additional native public root, without underscore')
     args=p.parse_args()
     root=Path(__file__).resolve().parents[1]
     native=root.parents[1]/'modo Royal/wp1980/work/hwfix01/native'
@@ -45,15 +46,16 @@ def main():
         library=out/'libwf_session.a'
         combined=out/'wf_session_core.o'
         libgcc=subprocess.check_output([cc,'-m2','-mb','-print-libgcc-file-name'],text=True).strip()
-        subprocess.run([str(sdk/'bin/sh2eb-elf-ld'),'-r','--gc-sections',
-                        '-u','_wf_session_init','-u','_wf_session_step','-u','_wf_session_prepare_match',
+        exports=['wf_session_init','wf_session_step','wf_session_prepare_match',*args.entry]
+        if any(not re.fullmatch(r'[a-zA-Z_][a-zA-Z0-9_]*',e) for e in exports):raise ValueError('Invalid symbol')
+        roots=[v for e in exports for v in ('-u','_'+e)]
+        subprocess.run([str(sdk/'bin/sh2eb-elf-ld'),'-r','--gc-sections',*roots,
                         *map(str,objects),libgcc,'-o',str(combined)],check=True)
         # ld -r retains undefined symbol-table entries from discarded input
         # sections. Remove only symbols not needed by any relocation; retain
         # the public session API explicitly. Never whitelist missing owners.
         subprocess.run([str(sdk/'bin/sh2eb-elf-objcopy'),'--strip-unneeded',
-                        '--keep-symbol=_wf_session_init','--keep-symbol=_wf_session_step',
-                        '--keep-symbol=_wf_session_prepare_match',str(combined)],check=True)
+                        *['--keep-symbol=_'+e for e in exports],str(combined)],check=True)
         undefined=subprocess.check_output([str(sdk/'bin/sh2eb-elf-nm'),'-u',str(combined)],text=True)
         (out/'unresolved.txt').write_text(undefined)
         unexpected={line.split()[-1] for line in undefined.splitlines()}-{'_memcpy','_memset','_memcmp'}

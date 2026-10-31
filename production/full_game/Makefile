@@ -9,7 +9,7 @@ CORE := src/wf_arcade_clock.c src/wf_prematch.c
 verify-sources:
 	$(PYTHON) tools/check_sources.py
 
-test: verify-sources test-platform test-assets test-identity test-session
+test: verify-sources test-platform test-assets test-identity test-live test-session
 	@mkdir -p build
 	$(CC) $(CFLAGS) $(INCLUDES) tests/test_clock.c src/wf_arcade_clock.c -o build/test_clock
 	./build/test_clock
@@ -17,7 +17,7 @@ test: verify-sources test-platform test-assets test-identity test-session
 	./build/test_prematch
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -p 'test_*.py' -v
 
-sanitize: verify-sources sanitize-platform sanitize-assets sanitize-identity sanitize-session
+sanitize: verify-sources sanitize-platform sanitize-assets sanitize-identity sanitize-live sanitize-session
 	@mkdir -p build
 	$(CC) $(CFLAGS) -fsanitize=address,undefined $(INCLUDES) tests/test_clock.c src/wf_arcade_clock.c -o build/test_clock_sanitized
 	./build/test_clock_sanitized
@@ -66,3 +66,15 @@ test-session:
 	$(PYTHON) tools/run_session_checks.py
 sanitize-session:
 	$(PYTHON) tools/run_session_checks.py --sanitize
+
+.PHONY: test-live sanitize-live
+test-live:
+	$(CC) $(CFLAGS) -Isrc tests/test_board.c src/wf_board.c -o build/test_board
+	./build/test_board
+	$(CC) $(CFLAGS) -Isrc tests/test_video_plan.c src/wf_video_plan.c -o build/test_video_plan
+	./build/test_video_plan
+sanitize-live:
+	$(CC) $(CFLAGS) -fsanitize=address,undefined -Isrc tests/test_board.c src/wf_board.c -o build/test_board_san
+	UBSAN_OPTIONS=halt_on_error=1 ./build/test_board_san
+	$(CC) $(CFLAGS) -fsanitize=address,undefined -Isrc tests/test_video_plan.c src/wf_video_plan.c -o build/test_video_plan_san
+	UBSAN_OPTIONS=halt_on_error=1 ./build/test_video_plan_san

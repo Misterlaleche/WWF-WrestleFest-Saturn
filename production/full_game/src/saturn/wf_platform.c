@@ -29,7 +29,7 @@ bool wf_platform_tick_wait(void){
  /* One present opportunity per call; never update multiple visible poses in a burst.
   * Count every physical field elapsed during drawing, including missed deadlines. */
  for(;;){
-  field_wait();
+  if(wf_fields==last_field)field_wait();
   uint32_t now=wf_fields,elapsed=now-last_field;last_field=now;
   ++wf_logic_sequence;
   while(elapsed--)if(!wf_arcade_clock_field(&clock)){wf_platform_fail(2);break;}

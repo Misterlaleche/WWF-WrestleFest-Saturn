@@ -6,6 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef WF_SESSION_BOARD
+#include "../src/wf_board.c"
+static wf_board_t board;
+#endif
 static wf_session_t session;
 static uint8_t rom_data[0x80000],cold[0x4000],scroll[0x20],control[0x20];
 static uint16_t backdrop;
@@ -78,6 +82,10 @@ static uint16_t port_word(unsigned port){
 }
 static wf_status_t read_bus(void*u,uint32_t at,uint32_t*out,unsigned n){
  (void)u;*out=0;
+#ifdef WF_SESSION_BOARD
+ inputs();for(unsigned k=0;k<4;k++)board.ports[k]=cached_ports[k];
+ return wf_board_read(&board,at,out,n)?WF_OK:WF_BLOCKED;
+#endif
  for(unsigned i=0;i<n;i++){
   uint32_t a=at+i;uint8_t b;
   if(a>=0x140020&&a<0x140028){uint16_t w=port_word((a-0x140020)/2);b=(uint8_t)(w>>((a&1)?0:8));}
@@ -89,7 +97,11 @@ static wf_status_t read_bus(void*u,uint32_t at,uint32_t*out,unsigned n){
  }return WF_OK;
 }
 static wf_status_t store_bus(void*u,uint32_t at,uint32_t v,unsigned n){
- (void)u;uint8_t*p=NULL;
+ (void)u;
+#ifdef WF_SESSION_BOARD
+ if(!wf_board_write(&board,at,v,n))return WF_BLOCKED;
+#endif
+ uint8_t*p=NULL;
  if(at>=0x100000&&at+n<=0x100020)p=scroll+(at-0x100000);
  else if(at>=0x140000&&at+n<=0x140020)p=control+(at-0x140000);
  else if(at==0x184000&&n==2){backdrop=(uint16_t)v;return WF_OK;}
@@ -108,10 +120,20 @@ static wf_status_t tick(wf_r18_frontend_driver_t*d){
    if(wf_r18_frontend_driver_on_vblank(d)!=WF_OK)return WF_BLOCKED;
  }return WF_OK;
 }
+#ifdef WF_SESSION_BOARD
+static bool board_irq(void*u,unsigned level){wf_r18_frontend_driver_t*d=u;return (level==3?wf_r18_frontend_driver_on_vblank(d):wf_r18_frontend_driver_on_raster(d))==WF_OK;}
+static wf_status_t board_event(wf_r18_frontend_driver_t*d){
+ if(wf_board_advance(&board)==0){clock_count++;if(clock_count>30000)return WF_BLOCKED;}
+ high=wf_board_high(&board);return wf_board_dispatch(&board,d->control.sr,board_irq,d)?WF_OK:WF_BLOCKED;
+}
+static wf_status_t wait_level(void*u,wf_r18_frontend_driver_t*d,unsigned level){(void)u;unsigned gen=d->generation;while(wf_board_high(&board)!=!!level){if(board_event(d)!=WF_OK)return WF_BLOCKED;if(gen!=d->generation)break;}return WF_OK;}
+static wf_status_t wait_vblank(void*u,wf_r18_frontend_driver_t*d){(void)u;unsigned gen=d->generation,before=commits;do{if(board_event(d)!=WF_OK)return WF_BLOCKED;}while(before==commits&&gen==d->generation);return WF_OK;}
+#else
 static wf_status_t wait_level(void*u,wf_r18_frontend_driver_t*d,unsigned level){
  (void)u;if(level&&!high)return tick(d);high=level;return WF_OK;
 }
 static wf_status_t wait_vblank(void*u,wf_r18_frontend_driver_t*d){(void)u;high=0;return tick(d);}
+#endif
 static wf_status_t commit(void*u,wf_r18_frontend_driver_t*d){(void)u;(void)d;commits++;return WF_OK;}
 static wf_status_t bind_world(void*u,unsigned mode){
  (void)u;if(reject_match_world&&session.phase==WF_SESSION_MATCH_READY)return WF_BLOCKED;
@@ -136,11 +158,18 @@ int main(int argc,char**argv){
  for(unsigned i=0;i<4;i++)cold[0x5c+i]=(uint8_t)(seed>>(24-8*i));
  wf_session_config_t config={.cold_ram=cold,.cold_ram_bytes=sizeof cold,.ssp=0x1c3bd4,.usp=0x1c3fd4,.sr=0x2700,
   .platform={.read_rom=read_rom,.read_bus=read_bus,.store_bus=store_bus,.wait_level=wait_level,.wait_vblank=wait_vblank,.commit=commit,.bind_world=bind_world,.submit_records=submit}};
+#ifdef WF_SESSION_BOARD
+ wf_board_init(&board,0xef,0xff);
+ (void)tick;
+#endif
  assert(wf_session_init(&session,&config)==WF_OK);
  unsigned guard=0,cancellations=0;
  for(;;){
   while(session.phase==WF_SESSION_FRONTEND){
    if(wf_session_step(&session)!=WF_OK){fprintf(stderr,"frontend failed %x/%x\n",session.error_pc,session.error_owner);return 3;}
+#ifdef WF_SESSION_BOARD
+   assert(wf_board_dispatch(&board,session.frontend.control.sr,board_irq,&session.frontend));
+#endif
    assert(++guard<2000000);
   }
   assert(session.phase==WF_SESSION_MATCH_READY);snapshot(argv[2],"selection");

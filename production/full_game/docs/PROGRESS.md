@@ -113,3 +113,51 @@ Ruling: núcleo05 todavía no se conecta a renderer/IRQ/cold-state de Saturn;
 el disco04 permanece como último visual. No se entrega un disco05 ni nuevos
 vídeos. Coste: falta completar la plataforma/escenas antes de validar el flujo
 con mando real emulado. Gameplay/progresión, presupuesto dinámico y beta OPEN.
+
+Session06 iniciado sobre05. Ruling: mantener la rama/checkouts actuales y
+preservar build04; no nuevo worktree necesario. Ruling: el transporte vivo usa
+mapas/paletas/records originales y formatos gráficos R04, porque la reducción
+TEST03 pierde banco/pen y une Royal8/9; coste: backend VDP2/VDP1 adicional a
+validar, sin promover su fidelidad por el hardware-pass del bitmap anterior.
+Pre-flight: sesión requiere16KiB RAM persistente y callbacks síncronos; plataforma
+actual ofrece ticks racionales y mando, pero carece de fases/ACK arcade. Se
+introduce bus/eventos portable, alimentado por el único reloj compartido.
+Session06 pruebas iniciales: unidad bus/eventos y plan gráfico normal/ASan/UBSan
+PASS; suite05 completa20 recorridos y9testsPython PASS. Otros9 recorridos con
+el calendario de placa original pasan ASan/UBSan, incluidos P2/Demolition y
+cancelación START. No equivalen a medición de ciclos68000.
+Mednafen disc02/03 llega a AC0 por coin/START/TAG/compañero. La inspección de
+vídeo detecta fondos invisibles pese a mapas/paletas correctos en HWRAM.
+RED native VRAM check (disc05): tile2366 no coincide después de SCU DMA directo
+desde LWRAM; texturas FONT/sprites cargadas mediante HWRAM sí aparecen. Adaptar
+la transferencia a staging HWRAM y volver a comprobar todos los bytes.
+Retardo inicial: transferencias completas y conversiones aun sin cambios.
+Se añaden cachés de mapas y pendiente/ACK de paleta; no se omiten cambios.
+Las imágenes/discos iniciales no se promueven como checkpoint visual válido.
+
+Session06 transporte: staging HWRAM con lectura de comprobación completa por
+tile elimina el fallo DMA LWRAM→VDP2. Fondo TAG:70335 píxeles RGB comparados
+con render independiente de bitplanes originales, cero diferencias. Caché
+de mapas y comparación por palabras reduce el trabajo gráfico estable de
+~7300 a~2700 ticks FRT (CPU/32), sin omitir publicaciones ni deuda de reloj.
+RED Royal: el framebuffer CHANGE_ONLY sin limpieza conserva cursores antiguos;
+ERASE_CHANGE limpia sólo hasta parte de la pantalla durante VBlank. Se adopta
+el polígono de borrado completo ya usado por Entrada R02; repetir regresión.
+Ruling: no declarar fidelidad temporal completa06. El arranque/setup acumula
+deuda que se conserva y recupera después; se entrega como integración parcial
+con esta limitación medida, pendiente de presupuestar todas las transiciones.
+Coste: tiempos de espera y recuperación aún no cumplen el objetivo final.
+
+Session06 GREEN visual: polígono original EntradaR02 limpia toda la superficie
+antes de sprites; Royal9/crush70335 y AC076479 píxeles de fondo, cero diferencias.
+Mismo programa63187d108d78b645ee7082fe943e4f18b4368d43cf896044351afc7ffb624c2b
+en None/1MiB/4MiB PASS; CD constante776. Frontend04 recompilado también PASS.
+Revisión final GPT-6 Astra: ningún defecto crítico de runtime; un Important
+de validación. Final: fixed negative gate — disco sano con modo de rechazo
+RED(PASS indebido)→GREEN(FAIL explícito); atlas corrupto exige error4 antes de
+ticks/commits. Minor contable1027→1028 comandos conciliado con el renderer;
+assets regenerados idénticos. Sin nuevo código ni política de juego.
+Final: Ruling: los límites descartados por la revisión permanecen OPEN en
+ESTADO/RECOVERY06 — AC0, fondos y eventos son este hito; combate, escenas,
+multitap y cadencia completa exigen integración posterior. Coste: no beta.
+No hardware ni equivalencia completa de imagen se infieren de Mednafen.

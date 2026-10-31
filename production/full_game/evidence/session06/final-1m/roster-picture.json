@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "checked_background_pixels": 70335,
+  "excluded_text_sprite_pixels": 6465,
+  "mismatches": 0,
+  "examples": [],
+  "scope": "selection background pixels only; sprite rectangles/text pixels excluded",
+  "files": {
+    "work/session06/final-1m/program.elf": "5588b0da9b4d37e570176621bf5d48dbe34b4386fc13b1697159221458291626",
+    "work/session06/final-1m/roster/memory_06000000_saturn.bin": "741bb432e7e88270578b773c9f2d566daba0ca2a3fb79c028978bcef2a4c1f29",
+    "work/session06/final-1m/roster/native.png": "ccd7608746610cfdec120a7afa8d77e8994cb29ea8627a47c5b2a665158879e1"
+  }
+}

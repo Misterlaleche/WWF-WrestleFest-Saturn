@@ -1,11 +1,34 @@
 # Estado de integración — 2026-10-31
 
-Estado: CHECKPOINT05 PARCIAL, no beta completa.
-El nuevo núcleo conserva el estado original desde RESET hasta la entrada F8C
-de combate. Está probado en host y compilado para SH-2; todavía no está unido
-al renderer y a los eventos reales de Saturn. No hay un nuevo disco05.
-El último disco visual sigue siendo04: MODE/ROSTER en Mednafen1.32.1
-None/1MiB/4MiB, con final al confirmar un luchador y sin combate.
+Estado: CHECKPOINT06 PARCIAL, no beta completa.
+La sesión05 ya está conectada a vídeo vivo, mandos y eventos en Saturn.
+El nuevo disco llega desde RESET y moneda/START hasta seleccionar modo,
+luchador y compañero TAG; termina en AC0. Aún no ejecuta combate.
+
+## Nuevo en checkpoint06
+
+- Mismo ejecutable/disco en Mednafen1.32.1 None/1MiB/4MiB: TAG/compañero
+  y ROYAL hasta Crush(slot9). 1MiB se rechaza como expansión de4MiB.
+- IRQ2/IRQ3 ordenados, latches/ACK y señal VBlank; SMPC alimenta puertos
+  activos en bajo. Estado inicial físico explícito, sin créditos/equipos
+  ni semilla de prueba en el código de producción.
+- VDP2 transporta mapas, scroll y bancos/pen originales; VDP1 dibuja los
+  registros de sprites vivos. Borrado completo verificado tras mover cursor.
+  Staging HWRAM y comprobación de cada tile corrigen el DMA desde LWRAM.
+- Fondo Royal:70335 píxeles en Crush y76479 tras confirmar, cero diferencias
+  con un render independiente de los bitplanes originales. Se excluyen
+  sprites/texto según el informe; no se afirma equivalencia de toda la imagen.
+- CRC/tamaño de recursos antes de iniciar sesión; contador CD constante776
+  durante las selecciones probadas. Rechazo temprano de atlas alterado.
+- Regresión del frontend04 recompilado pasa con el reloj compartido actualizado.
+- Límite medido: arranque/setup acumulan hasta101 ticks de deuda, que se
+  conserva y recupera. La fidelidad temporal completa y57.44485 sostenido
+  siguen OPEN. No se descartan ticks ni se presenta esta integración como beta.
+
+Faltan el handoff de Intro R04, entrada/presentadora en esta sesión, recursos y
+frames de combate, progresión, multitap, audio y prueba física. El núcleo05
+sí conserva preparación F8C en host; el main06 todavía no la ejecuta.
+Reproducción y continuación: docs/RECOVERY-06.md. Los discos anteriores se conservan.
 
 ## Nuevo en checkpoint05
 
@@ -27,8 +50,8 @@ None/1MiB/4MiB, con final al confirmar un luchador y sin combate.
   intactos. Dos hallazgos de revisión resueltos con sus regresiones.
 
 Reproducción, hashes, evidencias y límites: docs/RECOVERY-05.md.
-Pendiente conectar la sesión a bus/IRQ/renderer Saturn y fijar el origen de la
-RAM inicial. No hay nuevas pruebas visuales, de rendimiento ni de hardware05.
+Ese pendiente05 de bus/IRQ/renderer y origen de RAM se aborda en06.
+No hubo nuevas pruebas visuales, de rendimiento ni de hardware05.
 
 ## Nuevo en checkpoint04
 
