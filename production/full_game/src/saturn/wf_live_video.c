@@ -5,19 +5,26 @@
 #include "wf_cd.h"
 #include "wf_assets.h"
 #include "assets.h"
+#include "wf_workspace.h"
 #define COMMANDS 1028
-static wf_video_plan_t plan;
-static uint8_t previous_bg[2][4096],previous_text[8192];
-static uint32_t previous_palette[1024];
-static bool valid_maps;
-static wf_video_piece_t pieces[1024];
-static uint32_t tile_stage[32] __aligned(32);
-static uint8_t stage[131072] __aligned(32);
-static vdp1_cmdt_t commands[COMMANDS] __aligned(32);
+#define plan (wf_workspace.front.plan)
+#define previous_bg (wf_workspace.front.previous_bg)
+#define previous_text (wf_workspace.front.previous_text)
+#define previous_palette (wf_workspace.front.previous_palette)
+#define pieces (wf_workspace.front.pieces)
+#define tile_stage (wf_workspace.front.tile_stage)
+#define stage (wf_workspace.front.stage)
+#define commands (wf_workspace.front.commands)
+static bool valid_maps,map_ready[2];
 static vdp1_vram_partitions_t partitions;
 static bool submitted,hidden=true;
 volatile uint32_t wf_render_work,wf_render_wait;
-volatile uint32_t wf_video_error,wf_video_commits,wf_video_sprites,wf_video_tile;
+volatile uint32_t wf_video_error,wf_video_commits,wf_video_sprites,wf_video_tile,wf_video_atlas;
+static const struct {const char*name;const uint16_t*ids;unsigned count,bytes;uint32_t crc;} atlases[]={
+ {"FRONT.TEX",wf_front_sprite_ids,sizeof wf_front_sprite_ids/2,WF_FRONT_SPRITE_BYTES,WF_FRONT_CRC},
+ {"ENTRY.TEX",wf_entry_sprite_ids,sizeof wf_entry_sprite_ids/2,WF_ENTRY_SPRITE_BYTES,WF_ENTRY_CRC},
+ {"RING.TEX",wf_ring_sprite_ids,sizeof wf_ring_sprite_ids/2,WF_RING_SPRITE_BYTES,WF_RING_CRC}};
+static bool atlas_loaded;
 static const vdp2_scrn_t screens[3]={VDP2_SCRN_NBG0,VDP2_SCRN_NBG1,VDP2_SCRN_NBG2};
 static const uintptr_t maps[3]={0x25e60000,0x25e62000,0x25e64000};
 static unsigned rw(const uint8_t*p){return (p[0]<<8)|p[1];}
@@ -43,6 +50,7 @@ static bool upload(void*u __unused,unsigned layer,unsigned slot,unsigned code){
 }
 void wf_live_video_reveal(void){hidden=false;}
 void wf_live_video_hide(void){hidden=true;vdp2_tvmd_display_clear();vdp2_sync();vdp2_sync_wait();}
+void wf_live_video_finish(void){wf_live_video_hide();if(submitted){vdp1_sync_wait();submitted=false;}scu_dma_transfer_wait(0);}
 bool wf_live_video_init(void){
  wf_live_video_hide();wf_video_plan_init(&plan);
  vdp2_tvmd_display_res_set(VDP2_TVMD_INTERLACE_NONE,VDP2_TVMD_HORZ_NORMAL_A,VDP2_TVMD_VERT_240);vdp2_cram_mode_set(2);
@@ -56,32 +64,54 @@ bool wf_live_video_init(void){
   vdp2_scrn_cell_format_set(&fmt,&map);vdp2_scrn_scroll_x_set(screens[i],0);vdp2_scrn_scroll_y_set(screens[i],FIX16(8));vdp2_scrn_priority_set(screens[i],i==2?5:i+1);
  }
  vdp2_vram_cycp_t cycles;cycles.pt[0].raw=0x4FEEEEEE;cycles.pt[1].raw=0x5FEEEEEE;cycles.pt[2].raw=0x6FFFEEEE;cycles.pt[3].raw=0x012FEEEE;vdp2_vram_cycp_set(&cycles);
- if(!file("PROGRAM.BIN",(void*)0x00200000,0x80000,WF_PROGRAM_CRC)||!file("BACK.TEX",(void*)0x00280000,0x80000,WF_BACK_CRC)||!file("FONT.TEX",stage,0x20000,WF_FONT_CRC)){wf_video_error=1;return false;}
- transfer((void*)VDP2_VRAM_ADDR(2,0),stage,0x20000);
- uint32_t size;if(wf_cd_asset_io.size(NULL,"FRONT.TEX",&size)||size!=WF_FRONT_SPRITE_BYTES){wf_video_error=2;return false;}
- /* Verify each complete resident atlas after loading via legal B-bus reads. */
+ if(!file("PROGRAM.BIN",(void*)0x00200000,0x80000,WF_PROGRAM_CRC)||!file("BACK.TEX",(void*)0x00280000,0x80000,WF_BACK_CRC)){wf_video_error=1;return false;}
+ uint32_t font_crc=0xffffffffu,size;
+ if(wf_cd_asset_io.size(NULL,"FONT.TEX",&size)||size!=0x20000){wf_video_error=1;return false;}
+ for(unsigned at=0;at<size;at+=sizeof stage){
+  if(wf_cd_asset_io.read(NULL,"FONT.TEX",at,stage,sizeof stage)){wf_video_error=1;return false;}
+  for(unsigned i=0;i<sizeof stage;i++){font_crc^=stage[i];for(unsigned bit=0;bit<8;bit++)font_crc=(font_crc>>1)^((font_crc&1)?0xedb88320u:0);}
+  transfer((void*)VDP2_VRAM_ADDR(2,at),stage,sizeof stage);
+ }
+ if((font_crc^0xffffffffu)!=WF_FONT_CRC){wf_video_error=1;return false;}
+ return wf_live_video_atlas(0);
+}
+bool wf_live_video_atlas(unsigned which){
+ if(which>=sizeof atlases/sizeof atlases[0])return false;
+ if(atlas_loaded&&wf_video_atlas==which)return true;
+ wf_live_video_hide();if(submitted){vdp1_sync_wait();submitted=false;}
+ const char*name=atlases[which].name;uint32_t size;
+ if(wf_cd_asset_io.size(NULL,name,&size)||size!=atlases[which].bytes||size>WF_FRONT_SPRITE_BYTES){wf_video_error=2;return false;}
  uint32_t crc=0xffffffffu;
  for(unsigned at=0;at<size;){unsigned n=size-at;if(n>sizeof stage)n=sizeof stage;
-  if(wf_cd_asset_io.read(NULL,"FRONT.TEX",at,stage,n)){wf_video_error=3;return false;}
+  if(wf_cd_asset_io.read(NULL,name,at,stage,n)){wf_video_error=3;return false;}
   for(unsigned i=0;i<n;i++){crc^=stage[i];for(unsigned b=0;b<8;b++)crc=(crc>>1)^((crc&1)?0xedb88320u:0);}
   transfer((void*)((uintptr_t)partitions.texture_base+at),stage,n);at+=n;
  }
- if((crc^0xffffffffu)!=WF_FRONT_CRC){wf_video_error=4;return false;}
- return true;
+ if((crc^0xffffffffu)!=atlases[which].crc){wf_video_error=4;return false;}
+ wf_video_atlas=which;atlas_loaded=true;return true;
 }
-static int sprite_slot(unsigned code){unsigned lo=0,hi=sizeof wf_front_sprite_ids/sizeof wf_front_sprite_ids[0];while(lo<hi){unsigned mid=(lo+hi)/2;if(wf_front_sprite_ids[mid]<code)lo=mid+1;else hi=mid;}return lo<sizeof wf_front_sprite_ids/sizeof wf_front_sprite_ids[0]&&wf_front_sprite_ids[lo]==code?(int)lo:-1;}
+static int sprite_slot(unsigned code){
+ const uint16_t*ids=atlases[wf_video_atlas].ids;unsigned count=atlases[wf_video_atlas].count,lo=0,hi=count;
+ while(lo<hi){unsigned mid=(lo+hi)/2;if(ids[mid]<code)lo=mid+1;else hi=mid;}
+ return lo<count&&ids[lo]==code?(int)lo:-1;
+}
+bool wf_live_video_prepare(wf_session_t*s){
+ for(unsigned i=0;i<2;i++){
+  const uint8_t*raw=s->video.background+(i?0:0x2000);unsigned bytes=i?4096:2048;
+  if(!map_ready[i]||!equal(previous_bg[i],raw,bytes)){
+   if(!wf_video_plan_map(&plan,i,raw,upload,NULL)){if(!wf_video_error)wf_video_error=6;return false;}
+   memcpy(previous_bg[i],raw,bytes);transfer((void*)maps[i],plan.maps[i],sizeof plan.maps[i]);map_ready[i]=true;
+  }
+ }return true;
+}
 bool wf_live_video_commit(wf_session_t*s,const wf_board_t*b,const uint8_t*records,unsigned count){
  unsigned begin=cpu_frt_count_get();
  if(submitted){vdp1_sync_wait();submitted=false;}
  wf_render_wait=(uint16_t)(cpu_frt_count_get()-begin);begin=cpu_frt_count_get();
  if(b->scroll[11]&1){wf_video_error=5;return false;}
- bool dirty[3]={!valid_maps||!equal(previous_bg[0],s->video.background+0x2000,2048),!valid_maps||!equal(previous_bg[1],s->video.background,4096),!valid_maps||!equal(previous_text,s->video.fg0,8192)};
- for(unsigned i=0;i<2;i++)if(dirty[i]){
-  const uint8_t*raw=s->video.background+(i?0:0x2000);
-  if(!wf_video_plan_map(&plan,i,raw,upload,NULL)){if(!wf_video_error)wf_video_error=6;return false;}
-  memcpy(previous_bg[i],raw,i?4096:2048);
- }
- if(dirty[2]){wf_video_plan_text(&plan,s->video.fg0);memcpy(previous_text,s->video.fg0,8192);}
+ if(!wf_live_video_prepare(s))return false;
+ bool dirty_text=!valid_maps||!equal(previous_text,s->video.fg0,8192);
+ if(dirty_text){wf_video_plan_text(&plan,s->video.fg0);memcpy(previous_text,s->video.fg0,8192);}
  const wf_r18_palette_role_t roles[4]={WF_R18_PALETTE_TEXT,WF_R18_PALETTE_BG,WF_R18_PALETTE_FG,WF_R18_PALETTE_SPRITES};
  const uint8_t*raw_palettes[4]={s->video.palettes,s->video.bg_palette,s->video.fg_palette,s->video.palettes+0x2000};
  uint16_t pending[4];
@@ -108,8 +138,7 @@ bool wf_live_video_commit(wf_session_t*s,const wf_board_t*b,const uint8_t*record
  unsigned display=VDP2_SCRN_DISPTP_NBG2;
  if(priority==0x78){display|=VDP2_SCRN_DISP_NBG0|VDP2_SCRN_DISPTP_NBG1;vdp2_scrn_priority_set(screens[0],1);vdp2_scrn_priority_set(screens[1],2);}
  else if(priority==0x7b||priority==0x7c){display|=VDP2_SCRN_DISPTP_NBG0|VDP2_SCRN_DISP_NBG1;vdp2_scrn_priority_set(screens[0],priority==0x7c?4:2);vdp2_scrn_priority_set(screens[1],1);}
- for(unsigned i=0;i<2;i++)if(dirty[i])transfer((void*)maps[i],plan.maps[i],sizeof plan.maps[i]);
- if(dirty[2])transfer((void*)maps[2],plan.text,sizeof plan.text);
+ if(dirty_text)transfer((void*)maps[2],plan.text,sizeof plan.text);
  unsigned first=1024,last=0;
  for(unsigned i=0;i<1024;i++)if(!valid_maps||previous_palette[i]!=plan.palette[i]){if(first==1024)first=i;last=i+1;previous_palette[i]=plan.palette[i];}
  if(first<last)transfer((void*)(0x25f00000+first*4),plan.palette+first,(last-first)*4);

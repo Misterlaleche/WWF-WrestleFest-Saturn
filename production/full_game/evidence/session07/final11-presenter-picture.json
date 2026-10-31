@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "checked_background_pixels": 39950,
+  "excluded_text_sprite_pixels": 36850,
+  "mismatches": 0,
+  "examples": [],
+  "priority": 124,
+  "scope": "live background pixels only; sprite rectangles/text pixels excluded; asynchronous dump/PNG may differ in animated palette/map phase",
+  "files": {
+    "../../../../work/session07/final11-tag-none/program.elf": "dc779f8aae95dbf139fd7270fd9f7c5d35f728a185b5717341ac48961f8784c0",
+    "../../../../work/session07/final11-tag-none/presenter/memory_06000000_saturn.bin": "8f5e79450318e115a789785e706d3f9250ad5afd15ee6562ef45c7d654d7d939",
+    "../../../../work/session07/final11-tag-none/presenter/native.png": "a2c8ac5e0c996e3b4297b33766443bd7323ee720eed5b59c94593d4c315aafe3"
+  }
+}

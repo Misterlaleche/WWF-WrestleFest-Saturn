@@ -45,18 +45,26 @@ def png(path):
 def compare(rom,elf,dump,screenshot):
  sy=symbols(elf);mem=dump.read_bytes()
  def data(n):
-  at,size=sy[n];at-=0x06000000
+  candidates=[v for key,v in sy.items() if key.split('.lto_priv')[0]==n]
+  if not candidates:raise ValueError('Missing native symbol: '+n)
+  at,size=max(candidates,key=lambda v:v[1]);at-=0x06000000
   if at<0 or at+size>len(mem):raise ValueError('Symbol outside HWRAM: '+n)
   return mem[at:at+size]
- board=data('_board');raw=data('_previous_bg');text=data('_previous_text')
- pal=struct.unpack('>1024I',data('_previous_palette'))
+ board=data('_board')
+ if '_previous_bg' in sy:
+  raw=data('_previous_bg');text=data('_previous_text');palette=data('_previous_palette');pieces=data('_pieces')
+ else:
+  # ABI offsets asserted in wf_workspace.h; only valid for front lease dumps.
+  workspace=data('_wf_workspace');raw=workspace[0xd000:0xf000];text=workspace[0xf000:0x11000]
+  palette=workspace[0x11000:0x12000];pieces=workspace[0x12000:0x14000]
+  if '_wf_combat_stage' in sy and struct.unpack('>I',data('_wf_combat_stage'))[0]:raise ValueError('Frontend workspace already released to combat')
+ pal=struct.unpack('>1024I',palette)
  scroll=struct.unpack_from('>4H',board,14);priority=board[63]
- if priority!=0x78:raise ValueError('This evidence check covers selection priority78 only')
+ if priority not in (0x78,0x7b,0x7c):raise ValueError('Unsupported live scene priority')
  gfx=Graphics(rom);w,h,actual=png(screenshot)
  if (w,h)!=(352,240):raise ValueError('Expected native352x240 overscan PNG')
  excluded=bytearray(320*240)
  count=struct.unpack('>I',data('_wf_video_sprites'))[0]
- pieces=data('_pieces')
  for i in range(count):
   _,x,y,_,_=struct.unpack_from('>HhhBB',pieces,i*8)
   for yy in range(max(0,y),min(240,y+16)):
@@ -71,15 +79,17 @@ def compare(rom,elf,dump,screenshot):
   for x in range(320):
    if excluded[y*320+x]:continue
    value=0
-   for layer in (0,1):
-    xx=(x+scroll[2 if layer==0 else 0])&511;yy=(y+scroll[3 if layer==0 else 1]+8)&511;i=(yy//16)*32+xx//16
+   order=(0,1) if priority==0x78 else (1,0)
+   for layer in order:
+    axis=(2 if layer==0 else 0) if priority==0x78 else (0 if layer==0 else 2)
+    xx=(x+scroll[axis])&511;yy=(y+scroll[axis+1]+8)&511;i=(yy//16)*32+xx//16
     if layer:attr,code=struct.unpack_from('>HH',raw,4096+i*4);bank=attr&15;flip=(attr>>6)&3
     else:attr=struct.unpack_from('>H',raw,i*2)[0];code=attr&4095;bank=attr>>12;flip=0
     px,py=xx&15,yy&15
     if flip&1:px=15-px
     if flip&2:py=15-py
     pen=gfx.tile('background',code&4095)[py][px]
-    if layer==0 or pen:value=pal[256*(layer+1)+bank*16+pen]
+    if layer==order[0] or pen:value=pal[256*(layer+1)+bank*16+pen]
    wanted=bytes((value&255,(value>>8)&255,(value>>16)&255));observed=bytes(actual[y][(x+16)*3:(x+17)*3])
    checked+=1
    if wanted!=observed:
@@ -87,7 +97,7 @@ def compare(rom,elf,dump,screenshot):
     if len(examples)<10:examples.append({'x':x,'y':y,'expected':list(wanted),'actual':list(observed)})
  return {'status':'PASS' if checked>30000 and mismatch==0 else 'FAIL','checked_background_pixels':checked,
          'excluded_text_sprite_pixels':sum(excluded),'mismatches':mismatch,'examples':examples,
-         'scope':'selection background pixels only; sprite rectangles/text pixels excluded',
+         'priority':priority,'scope':'live background pixels only; sprite rectangles/text pixels excluded; asynchronous dump/PNG may differ in animated palette/map phase',
          'files':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (elf,dump,screenshot)}}
 
 if __name__=='__main__':

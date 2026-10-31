@@ -1,9 +1,38 @@
 # Estado de integración — 2026-10-31
 
-Estado: CHECKPOINT06 PARCIAL, no beta completa.
-La sesión05 ya está conectada a vídeo vivo, mandos y eventos en Saturn.
-El nuevo disco llega desde RESET y moneda/START hasta seleccionar modo,
-luchador y compañero TAG; termina en AC0. Aún no ejecuta combate.
+Estado: CHECKPOINT07 PARCIAL, no beta completa.
+El disco universal ya conecta RESET, selección, Entrada, Presentadora y las
+primeras actualizaciones originales de combate TAG/Royal. Sigue sin cerrar
+cadencia de combate, resultados/progresión, retorno del attract ni audio.
+
+## Nuevo en checkpoint07
+
+- Arranque: fast palette diferencial contra original y cargas explícitas
+  conservando fase/deuda. Ruta completa de referencia: máximo3 ticks frente
+  a101 en06, deuda0 al seleccionar. Sin descartar deuda de escenas activas.
+  En el ejecutable final, BOOT sin entrada anticipada también tiene máximo3;
+  la animación posterior de título/attract alcanza76 y sigue pendiente.
+- Atlas separados front/entry/ring; originales7B70/A654 producen las mismas
+  RAM, paletas, mapas y listas. Incluye poses de LOD ausentes del atlas demo.
+- F8C real instala36 bindings; conserva actores, registros y RNG. Memoria
+  de frontend se cede a caches/renderer de combate una vez terminado VDP1.
+- TAG None/1MiB y Royal None/4MiB:180 frames/180 ACK con mando, mismo disco,
+  cero errores de recursos/propietarios.4MiB validado activa ROYRAW;1MiB no.
+- Borrado de sprites corregido mediante polygon completo: captura09 con
+  rastros y11 limpio conservadas. No se confía en erase parcial del framebuffer.
+- Presentadora:39950 píxeles de fondo coinciden con renderer independiente.
+  Entrada:52 diferencias en58012 píxeles con dump/PNG desfasados; equivalencia
+  completa de sprites/animación/timing sigue OPEN, no se da por aprobada.
+- HWRAM: fin0x060F5894,42860B libres hasta1MiB; staging y workspaces excluyentes.
+  Una recompilación con asserts de layout produce el mismo ejecutable probado.
+- Suite normal/ASan/UBSan, diez rutas host, reloj, bus diferencial y join pasan;
+  se conservan fuentes originales2023/2023. Revisión independiente sin defectos
+  críticos/importantes en alcance parcial, condicionada a evidencia11 ya obtenida.
+
+El combate todavía es lento: entre frames10 y180, la deuda TAG crece31→92;
+Royal4MiB88→360. No se vende como57.44485 sostenido. Cargas se registran por
+separado. Los números completos por perfil están en evidence/session07.
+La continuación exacta y controles están en docs/RECOVERY-07.md.
 
 ## Nuevo en checkpoint06
 

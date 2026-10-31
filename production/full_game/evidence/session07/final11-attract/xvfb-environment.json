@@ -1,0 +1,6 @@
+{
+  "library_path": "/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu",
+  "preload": null,
+  "preload_sha256": null,
+  "scope": "Xvfb host helper only; not supplied to Mednafen"
+}

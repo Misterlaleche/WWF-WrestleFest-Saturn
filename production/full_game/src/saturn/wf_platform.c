@@ -1,11 +1,17 @@
 #include "wf_platform.h"
 #include "wf_cart.h"
 #include "wf_cd.h"
+#include "wf_pacer.h"
 #include <dram-cart.h>
 volatile uint32_t wf_fields,wf_error,wf_cart_id,wf_cart_bytes,wf_cart_valid;
 volatile uint32_t wf_logic_fields,wf_logic_ticks,wf_logic_pending,wf_logic_sequence;
-static wf_arcade_clock_t clock;
-static uint32_t last_field;
+static wf_pacer_t pacer;
+static bool started;
+volatile uint32_t wf_load_fields,wf_load_depth,wf_clock_origin;
+static void clock_publish(void){
+ wf_logic_fields=(uint32_t)pacer.clock.fields;wf_logic_ticks=(uint32_t)pacer.clock.ticks;
+ wf_logic_pending=pacer.clock.pending;wf_load_fields=(uint32_t)pacer.load_fields;wf_load_depth=pacer.load_depth;
+}
 static void vblank_out(void *unused __unused){++wf_fields;smpc_peripheral_intback_issue();}
 static uint32_t bus_read(void *p __unused,uint32_t at){return *(volatile uint32_t *)(uintptr_t)at;}
 static void bus_write(void *p __unused,uint32_t at,uint32_t v){*(volatile uint32_t *)(uintptr_t)at=v;}
@@ -20,24 +26,27 @@ void wf_platform_init(void){
 }
 void wf_platform_scene_begin(uint32_t phase){
  ++wf_logic_sequence;
- if(!wf_arcade_clock_init(&clock,phase)){++wf_logic_sequence;wf_platform_fail(1);return;}
- last_field=wf_fields;wf_logic_fields=wf_logic_ticks=wf_logic_pending=0;
+ if(!wf_pacer_init(&pacer,wf_fields,phase)){++wf_logic_sequence;wf_platform_fail(1);return;}
+ wf_clock_origin=pacer.last_field;started=true;clock_publish();
  ++wf_logic_sequence;
 }
 static void field_wait(void){vdp2_sync();vdp2_sync_wait();}
+bool wf_platform_load(bool begin){
+ if(!started)return true; /* RESET precedes the original ready boundary. */
+ ++wf_logic_sequence;
+ bool ok=begin?wf_pacer_load_begin(&pacer,wf_fields):wf_pacer_load_end(&pacer,wf_fields);
+ clock_publish();++wf_logic_sequence;
+ if(!ok)wf_platform_fail(4);return ok;
+}
 bool wf_platform_tick_wait(void){
- /* One present opportunity per call; never update multiple visible poses in a burst.
-  * Count every physical field elapsed during drawing, including missed deadlines. */
+ if(!started){wf_platform_fail(5);return false;}
+ /* At most one visible tick per call. Active overruns retain their debt. */
  for(;;){
-  if(wf_fields==last_field)field_wait();
-  uint32_t now=wf_fields,elapsed=now-last_field;last_field=now;
+  if(wf_fields==pacer.last_field)field_wait();
   ++wf_logic_sequence;
-  while(elapsed--)if(!wf_arcade_clock_field(&clock)){wf_platform_fail(2);break;}
-  bool ready=wf_arcade_clock_take(&clock);
-  wf_logic_fields=(uint32_t)clock.fields;
-  wf_logic_ticks=(uint32_t)clock.ticks;wf_logic_pending=clock.pending;
-  ++wf_logic_sequence;
-  if(clock.failed){wf_platform_fail(3);return false;}
+  bool ok=wf_pacer_account(&pacer,wf_fields),ready=ok&&wf_pacer_take(&pacer);
+  clock_publish();++wf_logic_sequence;
+  if(pacer.clock.failed){wf_platform_fail(3);return false;}
   if(ready)return true;
  }
 }

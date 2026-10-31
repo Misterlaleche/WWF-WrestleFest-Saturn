@@ -1,0 +1,155 @@
+{
+  "status": "FAIL",
+  "checked_background_pixels": 58012,
+  "excluded_text_sprite_pixels": 18788,
+  "mismatches": 52,
+  "examples": [
+    {
+      "x": 134,
+      "y": 223,
+      "expected": [
+        0,
+        68,
+        119
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 135,
+      "y": 223,
+      "expected": [
+        0,
+        68,
+        119
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 136,
+      "y": 223,
+      "expected": [
+        0,
+        51,
+        102
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 137,
+      "y": 223,
+      "expected": [
+        0,
+        68,
+        119
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 138,
+      "y": 223,
+      "expected": [
+        0,
+        68,
+        119
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 139,
+      "y": 223,
+      "expected": [
+        0,
+        68,
+        119
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 140,
+      "y": 223,
+      "expected": [
+        0,
+        51,
+        102
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 141,
+      "y": 223,
+      "expected": [
+        0,
+        51,
+        102
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 142,
+      "y": 223,
+      "expected": [
+        0,
+        68,
+        119
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    },
+    {
+      "x": 143,
+      "y": 223,
+      "expected": [
+        0,
+        68,
+        119
+      ],
+      "actual": [
+        17,
+        102,
+        153
+      ]
+    }
+  ],
+  "priority": 123,
+  "scope": "live background pixels only; sprite rectangles/text pixels excluded; asynchronous dump/PNG may differ in animated palette/map phase",
+  "files": {
+    "../../../../work/session07/final11-tag-none/program.elf": "dc779f8aae95dbf139fd7270fd9f7c5d35f728a185b5717341ac48961f8784c0",
+    "../../../../work/session07/final11-tag-none/entry/memory_06000000_saturn.bin": "1ab69736adf799a6a7e5a8cbea80938fa979017eda574b44e3145d9c3cd9beb7",
+    "../../../../work/session07/final11-tag-none/entry/native.png": "a1ad68f5d177648a2663ce6912d60d0a5344e46cf41a30cefd632f48fb8b71a0"
+  }
+}

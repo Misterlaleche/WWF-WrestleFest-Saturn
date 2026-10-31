@@ -1,0 +1,187 @@
+{
+  "status": "PASS",
+  "board_schedule": true,
+  "sanitized": true,
+  "full_replay": true,
+  "cases": [
+    {
+      "name": "tag",
+      "inputs": [
+        0,
+        0,
+        1,
+        0,
+        1085,
+        1,
+        0
+      ],
+      "result": "PASS session mode=0 targets=0,1 port=0 fixture_seed=1085 stride=1 clock=578 active=4 world=0 commits=578 submissions=464 sound_events=16 cancellations=0 rng=4a79221d",
+      "files": {
+        "gameplay.json": "eccdf333d002977cad1b6ba46e8d68340c68bc35d7f1e42ff21219555f2ee938",
+        "gameplay.ram": "cef2426b388b189a89e20a135c5cb561e0a62c44922cf4e5fa2fd41de145ee3b",
+        "run.log": "3b257400266da623f1c899c88a9939aca8272f6f6fd779c759aa699f04c9e75e",
+        "selection.json": "8b1cad2ab5d94bf9434ff0eb7813e08c634b8577967aec0720a86a6c6989fc73",
+        "selection.ram": "61fe08b4b3d66216584b507fdb73c898f884f1aa160fb3837d8b0fe43e7ce58b"
+      }
+    },
+    {
+      "name": "tag-p2",
+      "inputs": [
+        0,
+        0,
+        1,
+        1,
+        1085,
+        1,
+        0
+      ],
+      "result": "PASS session mode=0 targets=0,1 port=1 fixture_seed=1085 stride=1 clock=578 active=4 world=0 commits=578 submissions=464 sound_events=16 cancellations=0 rng=4a79221d",
+      "files": {
+        "gameplay.json": "eccdf333d002977cad1b6ba46e8d68340c68bc35d7f1e42ff21219555f2ee938",
+        "gameplay.ram": "128d7bcd7c4d6008595f3c0c9f3b6b0c839df697cb0372cb58058c96af35d709",
+        "run.log": "5b476ec8a01cfd0702f5c992c079b5d7f2de56a635f6dcd988c234937d8f085e",
+        "selection.json": "7cec9a707706596dd3da6cad989004d65f7a13473ecc720da69924a13c849660",
+        "selection.ram": "480b510709d03a247b14229ba2b40df447d93a9d7311dbe9b3f077a5a3d6a0ba"
+      }
+    },
+    {
+      "name": "demolition",
+      "inputs": [
+        0,
+        8,
+        9,
+        0,
+        1085,
+        1,
+        0
+      ],
+      "result": "PASS session mode=0 targets=8,9 port=0 fixture_seed=1085 stride=1 clock=610 active=4 world=0 commits=610 submissions=496 sound_events=16 cancellations=0 rng=fe9809dc",
+      "files": {
+        "gameplay.json": "c5fbe07bf8857544d042bd769b43a1bb87bdc5d367e314736142d34b49d15dab",
+        "gameplay.ram": "becc40ccc7cffd8b6d4962e6c263e85871258fdc46a8cf94d6b4ae0d8c0c1cc1",
+        "run.log": "2238c26d95fd8c51e5d9e11797b765408886961006b248fc65130890f4eaf55b",
+        "selection.json": "34d5dce0aff1b9cee0678c4ab83b1b79036a94fd3e74551f0a2af90839ad369f",
+        "selection.ram": "f698f047d9d8a966017e4bccf8125ff5f43b204500e1f6dfb81cd2870a1d7b95"
+      }
+    },
+    {
+      "name": "demolition-p2",
+      "inputs": [
+        0,
+        8,
+        9,
+        1,
+        1085,
+        1,
+        0
+      ],
+      "result": "PASS session mode=0 targets=8,9 port=1 fixture_seed=1085 stride=1 clock=604 active=4 world=0 commits=604 submissions=490 sound_events=16 cancellations=0 rng=9c0aa86a",
+      "files": {
+        "gameplay.json": "e7d02741588a079a491da7fe330452c30719587a1a61566055ecafacb62ceee6",
+        "gameplay.ram": "21dcf2fc79b5eaca7ad0b59ae99b7821a8c555f0abbfbea9b143048d95e70a7e",
+        "run.log": "ab08d77a06164ff3d90e638a4755f56d1b5b530407d64790a39f7b70bd81e40c",
+        "selection.json": "767a35a43d9999610abb885863edf2c62ea113ef3bbed94899a47a101cbc1141",
+        "selection.ram": "4f0ca0e969568270c143de692b83644cb9246a4eb755b2769af7a463eaa1cbf9"
+      }
+    },
+    {
+      "name": "royal-hogan",
+      "inputs": [
+        1,
+        0,
+        0,
+        0,
+        1085,
+        1,
+        0
+      ],
+      "result": "PASS session mode=1 targets=0,0 port=0 fixture_seed=1085 stride=1 clock=570 active=6 world=0 commits=570 submissions=456 sound_events=15 cancellations=0 rng=aea4cc88",
+      "files": {
+        "gameplay.json": "0a3d62a4760f913fad4eeb4dde26c16add28efc3ad473e3f88fcbc94c3428f4b",
+        "gameplay.ram": "8c188e3e4087774526a73d1b821f6577400afff88144fa935087299f000ca985",
+        "run.log": "41ee0c46b27cdfe3415518f7353eb7039c8b9d523fdbde9b2955dbdac43c0ec0",
+        "selection.json": "36f683e1663706901b255ff5f5f9cce080811c3b1c8d44a50ba4f59388748c34",
+        "selection.ram": "ce92ea7206071dcfe0ea30cd0b19ae5ec8d2adb228845f3b6229756a5b012370"
+      }
+    },
+    {
+      "name": "royal-crush",
+      "inputs": [
+        1,
+        9,
+        0,
+        0,
+        1085,
+        1,
+        0
+      ],
+      "result": "PASS session mode=1 targets=9,0 port=0 fixture_seed=1085 stride=1 clock=610 active=6 world=0 commits=610 submissions=496 sound_events=15 cancellations=0 rng=c387f03a",
+      "files": {
+        "gameplay.json": "75a98f9e6c47ba94d7f8f5a71efc9e0987e87b70ba794083452fc45608eba63c",
+        "gameplay.ram": "858f4b601785602bbd03a9cdb4a3ed5e24efa64e2f3e6dd604cc39177c87ba28",
+        "run.log": "2824cf1dfd30a52455aba48a8a3f5ac8b2b3481d9f793379ffc26c68234208ca",
+        "selection.json": "f8f6662cbcd032359c80d32a847d4ae1d6b5223397b43b9899ef72a9d6740f55",
+        "selection.ram": "978bb4741a799541b77ec9ace4165b223b83c5b70d357cd34191a899ed1670e9"
+      }
+    },
+    {
+      "name": "attract-start",
+      "inputs": [
+        1,
+        0,
+        0,
+        0,
+        1085,
+        1,
+        1
+      ],
+      "result": "PASS session mode=1 targets=0,0 port=0 fixture_seed=1085 stride=1 clock=3197 active=6 world=0 commits=3197 submissions=965 sound_events=17 cancellations=1 rng=aea4cc88",
+      "files": {
+        "gameplay.json": "2d315bab3967e6fc5abebd6712f9e6248f84899c9ddbda3c16c5a4a42aa69128",
+        "gameplay.ram": "c67be72c7c791d1fd614c7198d1d82fa7fe7168772aadd694e209330c2efda0f",
+        "run.log": "8fc91b6e819b6db6c3f8e38f55d1cdaf2acb93a9a2f377ac5e80a766982f70e1",
+        "selection.json": "4618aab5842546e5ec56898138025f6c39145fb4c33ab29ff20ad276845c587e",
+        "selection.ram": "87986d3977d017903e8d482856c2652be4a0304a0534f81103b43a84900c4dd9"
+      }
+    },
+    {
+      "name": "tag-other-seed",
+      "inputs": [
+        0,
+        0,
+        1,
+        0,
+        305419896,
+        1,
+        0
+      ],
+      "result": "PASS session mode=0 targets=0,1 port=0 fixture_seed=305419896 stride=1 clock=578 active=4 world=0 commits=578 submissions=464 sound_events=16 cancellations=0 rng=99bba475",
+      "files": {
+        "gameplay.json": "e733882b8d9083db9b91a7f81068925c58e99056e5bfe9bbd356c31ed325adf8",
+        "gameplay.ram": "121095a75eedd09d43bec24acd347e8c96aeb2b1c8aa434b95a1186f0bcc8283",
+        "run.log": "bd7f4fad7d4fd26d23a0d7a5b39fda3b3b51074638998ffe7f58d578ccfd8b0a",
+        "selection.json": "8b1cad2ab5d94bf9434ff0eb7813e08c634b8577967aec0720a86a6c6989fc73",
+        "selection.ram": "0210a0d013c0b0dd24b0e6847352204b4435eccc75026e5d4936f642f8f0a37b"
+      }
+    },
+    {
+      "name": "match-resource-error",
+      "inputs": [
+        0,
+        0,
+        1,
+        0,
+        1085,
+        1,
+        0
+      ],
+      "result": "PASS expected match dependency failure pc=7bf8 owner=26e66; no handoff/replay",
+      "files": {
+        "run.log": "2fb75658f083330aa1d645b6f444c6a3a79bc92a62d2125c74c76faa122c75de",
+        "selection.json": "8b1cad2ab5d94bf9434ff0eb7813e08c634b8577967aec0720a86a6c6989fc73",
+        "selection.ram": "61fe08b4b3d66216584b507fdb73c898f884f1aa160fb3837d8b0fe43e7ce58b"
+      }
+    }
+  ],
+  "scope": "Native state/owner integration with controlled external bus, not Saturn rendering or timing"
+}

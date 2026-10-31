@@ -1,0 +1,18 @@
+{
+  "iso_sha256": "428501e994e01e41a5ce04e898f55237ee68690167afa1e84c89e699195a6f27",
+  "bin_sha256": "85f3839e52baa2b66042efe29d1de361acfe43155a77f0b7e51d11be5124b665",
+  "cue_sha256": "d3be80f9675e334e44779fa6b742a51f42e9167a2e9921377b55b6f92033e67d",
+  "sectors": 8198,
+  "raw_sector_bytes": 2352,
+  "payload_roundtrip": "all sectors byte-identical to ISO",
+  "edc_ecc": "all sectors regenerated and compared",
+  "usa_region": true,
+  "hardware_boot_test": false,
+  "emulator_boot_test": false,
+  "negative_test": true,
+  "asset": "FRONT.TEX",
+  "iso_byte_offset": 2058240,
+  "before": 0,
+  "after": 1,
+  "original_iso_sha256": "e764dab713b1ddc36322baf65bf093f8df68dde3c2676d151e92637326099665"
+}

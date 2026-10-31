@@ -8,6 +8,7 @@ extern volatile uint32_t wf_logic_fields,wf_logic_ticks,wf_logic_pending;
 void wf_platform_init(void);
 void wf_platform_scene_begin(uint32_t phase);
 bool wf_platform_tick_wait(void);
+bool wf_platform_load(bool begin);
 void wf_platform_hold_fields(uint32_t count);
 void wf_platform_pad(smpc_peripheral_digital_t *pad);
 void wf_platform_fail(uint32_t error);

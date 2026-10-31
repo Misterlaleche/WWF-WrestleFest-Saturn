@@ -1,0 +1,12 @@
+Revisión independiente: GPT-6 Astra, razonamiento alto, contexto limpio.
+Base a295ce6026891a6b94ae6f55c3e27a3cf24aafd0, cambios07 sin publicar.
+Veredicto: publicable como checkpoint parcial, condicionado a disc11.
+Sin defectos Critical/Important confirmados en fast bus, reloj, cargas,
+callbacks, proyecciones, memoria o handoff. Sin minors señalados.
+Condición resuelta por implementador: final11-tag-none y final11-royal-4m
+PASS, 180frames/ACK; inspección de combat-180 muestra borrado completo.
+El modo manual se hereda de wf_live_video_init; el polygon de begin_frame
+corrige los rastros. Cambio del video_init no invocado no acredita nada extra.
+No se aprueban sprites/timing completos de escenas, cadencia de combate,
+progresión/resultados/retorno attract, multitap/audio ni hardware físico.
+La deuda de presenter/handoff previa a combate permanece documentada.

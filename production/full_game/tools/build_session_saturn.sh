@@ -17,5 +17,5 @@ export YAUL_ARCH_SH_PREFIX=sh2eb-elf YAUL_PROG_SH_PREFIX=sh2eb-elf YAUL_ARCH_M68
 export MAKE_ISO_XORRISOFS="${MAKE_ISO_XORRISOFS:-$(command -v xorrisofs)}" NOCOLOR=1 SILENT=1
 make -f Makefile.session -B -j4
 if [[ -n "${WF_DISC_OUTPUT:-}" ]]; then
- python3 vendor/frontend_test03/iso_to_bin.py build/session-disc/wrestlefest-session06.iso "$WF_DISC_OUTPUT"
+ python3 vendor/frontend_test03/iso_to_bin.py build/session-disc/wrestlefest-session07.iso "$WF_DISC_OUTPUT"
 fi

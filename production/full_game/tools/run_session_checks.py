@@ -26,6 +26,9 @@ def main():
     unit=build('test_session')
     result=subprocess.check_output([str(unit)],text=True,env=env)
     (out/'unit.log').write_text(result);print(result,flush=True)
+    extensions=build('session_extensions_probe')
+    result=subprocess.check_output([str(extensions)],text=True,env=env)
+    (out/'extensions.log').write_text(result);print(result,flush=True)
     records=[]
     if args.rom:
         with zipfile.ZipFile(args.rom) as z:

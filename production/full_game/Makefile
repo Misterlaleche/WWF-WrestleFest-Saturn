@@ -13,6 +13,8 @@ test: verify-sources test-platform test-assets test-identity test-live test-sess
 	@mkdir -p build
 	$(CC) $(CFLAGS) $(INCLUDES) tests/test_clock.c src/wf_arcade_clock.c -o build/test_clock
 	./build/test_clock
+	$(CC) $(CFLAGS) -Isrc tests/test_pacer.c src/wf_pacer.c src/wf_arcade_clock.c -o build/test_pacer
+	./build/test_pacer
 	$(CC) $(CFLAGS) $(INCLUDES) tests/test_prematch.c src/wf_prematch.c $(SCENES) -o build/test_prematch
 	./build/test_prematch
 	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m unittest discover -s tests -p 'test_*.py' -v
@@ -21,6 +23,8 @@ sanitize: verify-sources sanitize-platform sanitize-assets sanitize-identity san
 	@mkdir -p build
 	$(CC) $(CFLAGS) -fsanitize=address,undefined $(INCLUDES) tests/test_clock.c src/wf_arcade_clock.c -o build/test_clock_sanitized
 	./build/test_clock_sanitized
+	$(CC) $(CFLAGS) -fsanitize=address,undefined -Isrc tests/test_pacer.c src/wf_pacer.c src/wf_arcade_clock.c -o build/test_pacer_san
+	UBSAN_OPTIONS=halt_on_error=1 ./build/test_pacer_san
 	$(CC) $(CFLAGS) -fsanitize=address,undefined $(INCLUDES) tests/test_prematch.c src/wf_prematch.c $(SCENES) -o build/test_prematch_sanitized
 	./build/test_prematch_sanitized
 

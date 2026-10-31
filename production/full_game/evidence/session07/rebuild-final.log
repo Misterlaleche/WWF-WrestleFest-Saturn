@@ -1,0 +1,22 @@
+build/frontend/wf_r18_cdfs.c
+build/frontend/wp1979_cd_read.c
+src/saturn/session_main.c
+src/saturn/wf_cd.c
+src/saturn/wf_combat_saturn.c
+src/saturn/wf_live_video.c
+src/saturn/wf_platform.c
+src/saturn/wf_workspace.c
+src/wf_arcade_clock.c
+src/wf_assets.c
+src/wf_board.c
+src/wf_cart.c
+src/wf_pacer.c
+src/wf_video_plan.c
+wrestlefest-session07.elf
+/sdk/bin/../lib/gcc/sh2eb-elf/13.2.0/../../../../sh2eb-elf/bin/ld: warning: /work/repo/production/full_game/build/session-saturn/wrestlefest-session07.elf has a LOAD segment with RWX permissions
+/sdk/bin/../lib/gcc/sh2eb-elf/13.2.0/../../../../sh2eb-elf/bin/ld: warning: /work/repo/production/full_game/build/session-saturn/wrestlefest-session07.elf has a LOAD segment with RWX permissions
+/sdk/bin/../lib/gcc/sh2eb-elf/13.2.0/../../../../sh2eb-elf/bin/ld: warning: /work/repo/production/full_game/build/session-saturn/wrestlefest-session07.elf has a LOAD segment with RWX permissions
+/sdk/bin/../lib/gcc/sh2eb-elf/13.2.0/../../../../sh2eb-elf/bin/ld: warning: /work/repo/production/full_game/build/session-saturn/wrestlefest-session07.elf has a LOAD segment with RWX permissions
+wrestlefest-session07.bin
+wrestlefest-session07.iso
+wrestlefest-session07.cue

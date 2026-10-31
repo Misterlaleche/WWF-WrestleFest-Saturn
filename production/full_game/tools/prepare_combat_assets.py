@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+"""Copy the verified HW1 combat resource set; no state/seed fixture."""
+import argparse,hashlib,json,shutil
+from pathlib import Path
+EXPECTED = {'ROM68K.BIN': {'bytes': 524288, 'sha256': '265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306'}, 'SPRITES.PAK': {'bytes': 8388608, 'sha256': '130ac19d5ab3646f2d51c9d2ce52cd42f53f60b125fd18d674ee8de722c55d31'}, 'FONT8.BIN': {'bytes': 131072, 'sha256': 'a3045c6193d23c334c6af592cc1dfee029dc12eec810d3e2ce353df69580391a'}, 'R18RING.BIN': {'bytes': 114918, 'sha256': '774fbc5d9d0b404d1b3fdd825581efb5de892ab15504ecb257190dfa6b30191c'}, 'R18MAP1.BIN': {'bytes': 127138, 'sha256': '75f0e4bb5cc7b90974e4276a274b62144488997c5b4f6f6819070d1bec213359'}, 'R18MAP2.BIN': {'bytes': 95978, 'sha256': '979b622c418307f90b1ce98524db7bade230adf399bd13e6fc3fe4adc699acf0'}, 'R18MAP5.BIN': {'bytes': 115568, 'sha256': '40cccfee8e2cc1509234b023f06754eefe9ba8c71725b7a145cdc050847e8c86'}, 'HOTSPR.BIN': {'bytes': 711616, 'sha256': 'ba8a5be1869cb6a8e101eaf06bff8506bb51f7d5258201b5290b9aea1ca377d9'}, 'ROYSPR.BIN': {'bytes': 717810, 'sha256': '9bdab9d190a1b0a842c1f8a598eac0f596dba001da68358a7751eb75a8eacbb2'}, 'ROYRAW.BIN': {'bytes': 2509696, 'sha256': '48c68b8ed03981bcf0a1c502026e0bdc8288327bc3c5b052b2fbe58d822202c3'}}
+p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--out',type=Path,required=True);a=p.parse_args()
+for name,expected in EXPECTED.items():
+ data=(a.source/name).read_bytes()
+ if len(data)!=expected['bytes'] or hashlib.sha256(data).hexdigest()!=expected['sha256']:
+  raise ValueError('Unverified HW1 resource: '+name)
+a.out.mkdir(parents=True,exist_ok=True)
+for name in EXPECTED:shutil.copy2(a.source/name,a.out/name)
+(a.out/'combat-provenance.json').write_text(json.dumps(EXPECTED,indent=2)+'\n')
+print('PASS: ten HW1 resources verified before copying')
