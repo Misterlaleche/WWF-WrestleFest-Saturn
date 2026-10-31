@@ -1,0 +1,26 @@
+[
+  {
+    "block": "intro",
+    "program_bytes": 874100,
+    "program_sha256": "32aa415f594f3860798ac942e936f322c2d53d1d14cf96762e1fe7d8694bb670",
+    "matches_approved_hash": true
+  },
+  {
+    "block": "entrance",
+    "program_bytes": 509684,
+    "program_sha256": "fc7d9fa0b4de623bad276a92566d3184d8400e3fc96a9f1c64634ceee5075af3",
+    "matches_packaged_program": true
+  },
+  {
+    "block": "presenter",
+    "program_bytes": 967476,
+    "program_sha256": "1a3566c451fb195c3e2973fa3adece54b604d5bb9913a78a83f88ed748f2c776",
+    "matches_approved_hash": true
+  },
+  {
+    "block": "frontend",
+    "program_bytes": 620532,
+    "program_sha256": "c7f7a677a19af158943d893bd8c7035a105e7731b54f37c5597af57c1291bb3f",
+    "matches_packaged_program": true
+  }
+]

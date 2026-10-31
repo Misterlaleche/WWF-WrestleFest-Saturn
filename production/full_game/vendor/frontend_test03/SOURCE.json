@@ -1,0 +1,159 @@
+{
+  "package": "WF-SATURN-MODE-ROSTER-HARDWARE-PASS-HANDOFF-R01.zip",
+  "package_sha256": "65daa21e89f505d6ff23efc80389145e5e32b4ada6bc8fb98df9f43417d1861a",
+  "reference_bin_sha256": "c9e81bb6e7a775079ec3c2783ad06d73ad48aea560b4a0e89c78dcf51144fc05",
+  "original_manifest_uses_absolute_paths": true,
+  "path_prefix_removed_for_verification": "/mnt/data/WF-SATURN-MODE-ROSTER-HARDWARE-PASS-HANDOFF-R01/",
+  "files": [
+    {
+      "path": "00-READ-ME-FIRST.md",
+      "sha256": "b007e7983244ed0cc10b656920110d6cc026d6243821ed3fb1e2292916242cbc",
+      "bytes": 2197
+    },
+    {
+      "path": "ASSET-PROVENANCE.txt",
+      "sha256": "fc2c2770b2273072c5ef97e7602ccc76b71318ad0df7029452cffd930d5e0cd4",
+      "bytes": 2119
+    },
+    {
+      "path": "ELF-SIZE.txt",
+      "sha256": "85a048d645af9391e9b627a2fcfe3c5194fae814c0248ed7d29f320d1eb2efa5",
+      "bytes": 207
+    },
+    {
+      "path": "EVIDENCE/TEST02-confirmation-flash-contact-sheet.jpg",
+      "sha256": "df8f88d3841bef4f5a91b6c4b194b688044c2d383faac22441386c5dd6a221cc",
+      "bytes": 1077853
+    },
+    {
+      "path": "GITHUB-SYNC.txt",
+      "sha256": "783548d815b13b61c292da7c6fd2568b6c1815b0ffc15f37a2c6881c7081df3d",
+      "bytes": 983
+    },
+    {
+      "path": "GITHUB-UPDATE-NOTES.md",
+      "sha256": "85db6b56cadeccc2f6f554a120a71b9f7710d93820470f7d6b3ae5754d870259",
+      "bytes": 781
+    },
+    {
+      "path": "MODE-ROSTER-HARDWARE-PASS-REPORT.md",
+      "sha256": "c36da356909f0b13b47ad559ae8f484ae7e1563bb5f54809df0e49218d223ade",
+      "bytes": 3963
+    },
+    {
+      "path": "PROVENANCE-SHA256.txt",
+      "sha256": "0265d87106be0ef5ae232016127a0d79b93b4ea46334e0fa37475bdcedb75892",
+      "bytes": 739
+    },
+    {
+      "path": "REFERENCE-DISC/disc-validation.json",
+      "sha256": "36e19cbaa5bd375adb68021a969cb02de3ed71895159391b87802eb67723af9d",
+      "bytes": 498
+    },
+    {
+      "path": "REFERENCE-DISC/wrestlefest-saturn-mode-roster-integration-test03.bin",
+      "sha256": "c9e81bb6e7a775079ec3c2783ad06d73ad48aea560b4a0e89c78dcf51144fc05",
+      "bytes": 769104
+    },
+    {
+      "path": "REFERENCE-DISC/wrestlefest-saturn-mode-roster-integration-test03.cue",
+      "sha256": "216182d468c4a2f43208402cc79dd360983752d608e401b34752f7133edff836",
+      "bytes": 112
+    },
+    {
+      "path": "REFERENCE-SOURCE/Makefile",
+      "sha256": "aa09b78f72afed3e49c2b3f19106c37bed356147007ff783e664cbee1ff12c81",
+      "bytes": 871
+    },
+    {
+      "path": "REFERENCE-SOURCE/assets/CURSOR0.BIN",
+      "sha256": "22d1fd705330b5fab769f7fd750675217e4707aa71e7b3e857fe6f83fca40b75",
+      "bytes": 9216
+    },
+    {
+      "path": "REFERENCE-SOURCE/assets/CURSOR0.PAL",
+      "sha256": "30e963c29a0f464316c3fb7b9938283c7e3f980068a326b1f14061c0327721df",
+      "bytes": 32
+    },
+    {
+      "path": "REFERENCE-SOURCE/assets/MODE.PAL",
+      "sha256": "5930871d31b4ff4cbf51e1ef54dc9d2ca4922487434cb2dae8738fd7a1d074bc",
+      "bytes": 512
+    },
+    {
+      "path": "REFERENCE-SOURCE/assets/MODEX.RLE",
+      "sha256": "1665a45b7a5f880195022bbd8570fc81874994426cb9e4b4e003c0a50e9dd9fa",
+      "bytes": 43003
+    },
+    {
+      "path": "REFERENCE-SOURCE/assets/SELBG.RLE",
+      "sha256": "cd8f0d5a35b7d1906996353b2b481658e5637709420804e80d07407c31d72fc8",
+      "bytes": 37910
+    },
+    {
+      "path": "REFERENCE-SOURCE/assets/SELPAL.BIN",
+      "sha256": "511b2486d794ddaede55b3414caa18d255ea32f4f1074328b144f7652dfebdbd",
+      "bytes": 512
+    },
+    {
+      "path": "REFERENCE-SOURCE/assets/SELWORLD.RLE",
+      "sha256": "d0f5bbe84586b19da57da38cb200410d6c0cc74efa6d84623fd2e50da81785ff",
+      "bytes": 39619
+    },
+    {
+      "path": "REFERENCE-SOURCE/cd/A.BIN",
+      "sha256": "c7f7a677a19af158943d893bd8c7035a105e7731b54f37c5597af57c1291bb3f",
+      "bytes": 620532
+    },
+    {
+      "path": "REFERENCE-SOURCE/cd/ABS.TXT",
+      "sha256": "45fd2f9df187bc411dc80df5c4c4844ac00f4dd69bc69453f1893a5d143433d6",
+      "bytes": 6
+    },
+    {
+      "path": "REFERENCE-SOURCE/cd/BIB.TXT",
+      "sha256": "45fd2f9df187bc411dc80df5c4c4844ac00f4dd69bc69453f1893a5d143433d6",
+      "bytes": 6
+    },
+    {
+      "path": "REFERENCE-SOURCE/cd/CPY.TXT",
+      "sha256": "45fd2f9df187bc411dc80df5c4c4844ac00f4dd69bc69453f1893a5d143433d6",
+      "bytes": 6
+    },
+    {
+      "path": "REFERENCE-SOURCE/iso_to_bin.py",
+      "sha256": "716643661d63dcd64521793a082f38b55279b9d7c1c46c1cab13630031c42859",
+      "bytes": 3614
+    },
+    {
+      "path": "REFERENCE-SOURCE/main.c",
+      "sha256": "65797db05530edefabef811d88887bd9bd75412cc8111451c9d8cd35f2fafb00",
+      "bytes": 16839
+    },
+    {
+      "path": "REFERENCE-SOURCE/make_iso_min.py",
+      "sha256": "18f5d6ae13c6b946e3995ea22a38f940cc77a4ae0bc4c58858a8a14d2178e17a",
+      "bytes": 2741
+    },
+    {
+      "path": "REFERENCE-SOURCE/nav_tables.h",
+      "sha256": "8c1bdff02a5ca1e80b9a1c34b1ded3cbd548a5aaabf10afb2db90f0ed5097af3",
+      "bytes": 1069
+    },
+    {
+      "path": "REFERENCE-SOURCE/selection_masks.h",
+      "sha256": "a5d669905562894038f3afeb6b41f7f430866fe2d826f0ab625be37c8ef36ea6",
+      "bytes": 26009
+    },
+    {
+      "path": "RUNTIME-INTEGRATION-CONTRACT.md",
+      "sha256": "07b45ca5b9faff500976ae539dc6f99c6fb42b3d3af947b588ea0cdc2b9a5233",
+      "bytes": 3078
+    },
+    {
+      "path": "TEST03-ORIGINAL-README.md",
+      "sha256": "273987b0af2c01c83b1962654307fbdb756639bf693712aa9f3561caf3d1741c",
+      "bytes": 2910
+    }
+  ]
+}

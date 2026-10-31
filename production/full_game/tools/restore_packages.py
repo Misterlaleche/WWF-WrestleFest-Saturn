@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify and restore the five approved external packages to a NEW directory."""
+"""Verify and restore the six approved external packages to a NEW directory."""
 import argparse
 import hashlib
 import json
@@ -8,6 +8,7 @@ import stat
 import zipfile
 
 PACKAGES = {
+    'frontend': ('WF-SATURN-MODE-ROSTER-HARDWARE-PASS-HANDOFF-R01.zip', '65daa21e89f505d6ff23efc80389145e5e32b4ada6bc8fb98df9f43417d1861a'),
     'intro': ('WF-WP0-R04-BIN-CUE-Y-FUENTES.zip', 'a6ef24b69de89abc25d4882829b36d7497beb1f0464318facc527f413ecde5d7'),
     'entrance': ('WF-WP01-ENTRADA-TAG-R02-AUDIO-NATIVO-FUENTES.zip', 'dcacfe5d4de8067067194a9c0117fad95ad912982ebbb0030bf1e09cc4a8024d'),
     'presenter': ('WP02-Saturn-TAG-R02.zip', '69673d389d872af5d66e37670c228f1b6ab72e7d737066ecc2fde28ad90f4730'),

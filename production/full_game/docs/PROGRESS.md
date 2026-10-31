@@ -27,3 +27,14 @@ sin modificar Git ni paquetes originales. 19/19 recursos visuales verificados.
 Se levanta el bloqueo de recursos de escenas/TAG/Royal. R6 sigue no recuperada.
 Siguiente: reconstruir cada fuente aprobada con el SDK fijado; después adaptar
 plataforma/render/carga sobre este núcleo sin bucles main duplicados.
+
+Checkpoint02: recuperación TEST03 adicional, manifest30/30; reconstrucción de
+los seis bloques completada (7 discos contando Royal base/cart). Cuatro programas
+de escenas/frontend idénticos a referencias. Probes Royal13/13 contratos observados.
+Royal Mednafen1.32.1 None/4MiB:smoke180campos por perfil,176draws,cero fatales,
+MOV original; conversión MP4 de la pasada base conserva todos los PTS.
+Pasadas largas completadas:8474 ticks hasta GAME OVER,actor0..8 y RNG idénticos
+a HW1,CDdelta0,fatal0. Media50,5904base/58,8948cart;objetivo base todavía incumplido.
+Ventanas60/99 y1/5s cuantizadas medidas;PTS de cada fotograma MOV/MP4 idénticos.
+El analizador nuevo de ventanas99 coincide con el original. No se usa wall-time.
+Fuentes R3 completas370 y TEST03 guardadas bajo vendor; no recuperación R6.

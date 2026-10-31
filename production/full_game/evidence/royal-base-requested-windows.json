@@ -1,0 +1,69 @@
+{
+  "scope": "Independent Royal reconstruction, without audio; not integrated universal game",
+  "field_rate_fraction": "67263525/1124317",
+  "full_match_updates": 8474,
+  "full_match_fields": 10021,
+  "mean_updates_per_second": 50.5904151507438,
+  "update_windows": [
+    {
+      "updates": 60,
+      "possible_windows": 8414,
+      "observed_windows": 7744,
+      "worst_observed": {
+        "first_update": 5779,
+        "last_update": 5839,
+        "updates": 60,
+        "fields": 94,
+        "seconds": 1.5712200334430881,
+        "updates_per_second": 38.186885810333756
+      }
+    },
+    {
+      "updates": 99,
+      "possible_windows": 8375,
+      "observed_windows": 7701,
+      "worst_observed": {
+        "first_update": 4365,
+        "last_update": 4464,
+        "updates": 99,
+        "fields": 142,
+        "seconds": 2.3735451569033885,
+        "updates_per_second": 41.70976048720258
+      }
+    }
+  ],
+  "time_windows": [
+    {
+      "requested_seconds": 1,
+      "physical_fields": 60,
+      "actual_seconds": 1.0029064043253755,
+      "unambiguous_field_endpoints": 8123,
+      "observed_windows": 6537,
+      "worst_observed": {
+        "first_field": 244,
+        "last_field": 304,
+        "first_update": 236,
+        "last_update": 273,
+        "updates": 37,
+        "updates_per_second": 36.89277468009467
+      }
+    },
+    {
+      "requested_seconds": 5,
+      "physical_fields": 300,
+      "actual_seconds": 5.014532021626877,
+      "unambiguous_field_endpoints": 8123,
+      "observed_windows": 6389,
+      "worst_observed": {
+        "first_field": 482,
+        "last_field": 782,
+        "first_update": 436,
+        "last_update": 661,
+        "updates": 225,
+        "updates_per_second": 44.86959082714217
+      }
+    }
+  ],
+  "limits": "Asynchronous read-only samples; ambiguous/missing endpoints excluded, never interpolated. Worst observed windows are not a guarantee of the absolute worst window.",
+  "graphics_preparation_upload_timing": "OPEN: not provided by these native counters"
+}

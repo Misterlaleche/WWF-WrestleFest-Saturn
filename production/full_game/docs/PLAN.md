@@ -29,29 +29,29 @@ Python 3, Yaul SH-2 GCC 13.2.0, Mednafen 1.32.1.
 ### Task 1: Recuperación y referencias
 - [x] Recuperar 2023 archivos y verificar sus 989 blobs Git únicos y árbol completo.
 - [x] Verificar programa 68000 local, identificar SDK y Mednafen existentes.
-- [ ] Guardar inventario de fuentes/recursos y comprobar originales intactos.
-- [ ] Regenerar texturas ROM-only demostrables, comparar hashes aprobados.
+- [x] Guardar inventario de fuentes/recursos y comprobar originales intactos.
+- [x] Regenerar texturas ROM-only demostrables, comparar hashes aprobados.
 
 ### Task 2: Reloj compartido
 Files: src/wf_arcade_clock.{h,c}, tests/test_clock.c.
 Interfaces: init(phase), field(), take(), contadores de campos/ticks pendientes.
-- [ ] RED: 39168 campos producen 37609 ticks; fase inicial válida y errores.
-- [ ] Implementar acumulador entero; mantener deuda durante retrasos.
-- [ ] GREEN: periodos largos, atraso/recuperación, overflow fail-closed.
+- [x] RED: 39168 campos producen 37609 ticks; fase inicial válida y errores.
+- [x] Implementar acumulador entero; mantener deuda durante retrasos.
+- [x] GREEN: periodos largos, atraso/recuperación, overflow fail-closed.
 
 ### Task 3: Adaptador Entrada / Presentadora
 Files: src/wf_prematch.{h,c}, tests/test_prematch.c.
 Consumes: núcleos originales wp01_scene y wp02_scene, cuatro IDs ROM y RNG.
 Produces: estado explícito de carga, escena, fin y error; acceso a estado previo.
-- [ ] RED: carga no avanza, IDs/hook rechazados, 6+402 salidas de Entrada.
-- [ ] Adaptar enter/step/load; preservar IDs lógicos, latencia y terminales.
-- [ ] GREEN: comparar cada estado con ejecución directa de núcleos originales,
+- [x] RED: carga no avanza, IDs/hook rechazados, 6+402 salidas de Entrada.
+- [x] Adaptar enter/step/load; preservar IDs lógicos, latencia y terminales.
+- [x] GREEN: comparar cada estado con ejecución directa de núcleos originales,
   eventos audio y todos los IDs en las posiciones de la matriz de prueba.
-- [ ] Compilar juntos los módulos en host y SH-2; no enlazar audio/main originales.
+- [x] Compilar juntos los módulos en host y SH-2; no enlazar audio/main originales.
 
 ### Task 4: Reconstrucción de bloques y renderer maestro
-- [ ] Recuperar/verificar ZIP aprobados y frontend TEST03.
-- [ ] Reconstruir Intro/Entrada/Presentadora/TAG/Royal en copias aisladas.
+- [x] Recuperar/verificar ZIP aprobados y frontend TEST03.
+- [x] Reconstruir Intro/Entrada/Presentadora/TAG/Royal en copias aisladas.
 - [ ] Adaptar render/CD/SMPC y traspaso de propiedad; un único main.
 - [ ] Verificar perfiles de memoria y detección 4MiB por SDK/prueba de bancos.
 

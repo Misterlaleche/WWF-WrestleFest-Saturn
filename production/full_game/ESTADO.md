@@ -1,7 +1,8 @@
 # Estado de integración — 2026-10-31
 
 Estado: CHECKPOINT DE FUENTES PARCIAL. La beta completa sigue en desarrollo.
-No hay todavía disco universal, gameplay integrado ni nueva prueba Mednafen.
+No hay todavía disco universal ni gameplay integrado. Las nuevas pruebas
+Mednafen descritas aquí corresponden a reconstrucciones de referencia Royal.
 
 ## Verificado en esta sesión
 
@@ -20,13 +21,25 @@ No hay todavía disco universal, gameplay integrado ni nueva prueba Mednafen.
 - Ocho texturas411712B regeneradas desde ROM y hashes aprobados;6 tests pasan.
 - Cinco ZIP suministrados por el usuario coinciden con sus SHA256. Recursos
   visuales19/19 restaurados y verificados. TAG es R3; R6 NO recuperada.
+- Recibido y verificado además MODE+ROSTER TEST03:30 hashes de manifiesto y
+  BIN de referencia coincidente con el hardware-pass. Fuentes preservadas en vendor.
+- R3 recuperada íntegramente:370 fuentes/config/herramientas y SOURCE.json en Git.
+- Reconstruidos Intro,Entrada,Presentadora,TEST03,TAG y Royal base/4MiB.
+  Los cuatro primeros ejecutables coinciden con sus referencias aprobadas.
+  Siete discos de referencia pasan EDC/ECC completo y correspondencia A.BIN.
+- Royal sin audio:smoke Mednafen1.32.1/full,180 campos por perfil,None/4MiB,
+  176 dibujos,cero contadores fatales y MOV nativo. No es recorrido completo.
+- Pasadas largas Royal completadas:8474 actualizaciones hasta GAME OVER por
+  perfil;RNG y9 actores iguales a HW1,CDdelta0,cero fatales. Media50,5904/s base
+  y58,8948/s4MiB;limitaciones y ventanas en docs/PERFORMANCE-02.md.
+  Los vídeos MOV/MP4 conservan todos los PTS. El objetivo integrado sigue OPEN.
 - Royal: inflate fijo378 comprobaciones,LZ4 1536,dinámico ASan/UBSan13005;
   estas pruebas iniciales no incluían atlas original.
 
 ## OPEN y trabajo siguiente
 
-1. Reconstruir IntroR04,EntradaR02,PresentadoraR02,TAGR3 y RoyalHW1 intactos
-   en directorios nuevos. Registrar binarios,mapas,presupuestos y hashes.
+1. Integrar plataforma y completar pruebas con mando; las pasadas largas Royal
+   de referencia y sus binarios,mapas,presupuestos,hashes y vídeos están registrados.
 2. Runtime maestro con único CD/SMPC/reloj/VDP1/VDP2 y traspasos de propiedad.
 3. Detección4MiB y presupuesto dinámico; Royal usa dos builds por macros y no
    cabe sumar sus máximos estáticos en la Saturn base.

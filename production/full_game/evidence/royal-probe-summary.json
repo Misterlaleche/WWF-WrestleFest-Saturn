@@ -1,0 +1,83 @@
+{
+  "pass": true,
+  "cases": [
+    {
+      "case": "oracle",
+      "expected_exit_code": 0,
+      "observed_exit_code": 0,
+      "contract_observed": true
+    },
+    {
+      "case": "original-base-reference",
+      "expected_exit_code": 0,
+      "observed_exit_code": 0,
+      "contract_observed": true
+    },
+    {
+      "case": "original-base-deny",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "contract_observed": true
+    },
+    {
+      "case": "fixed-base-deny",
+      "expected_exit_code": 0,
+      "observed_exit_code": 0,
+      "contract_observed": true
+    },
+    {
+      "case": "original-base-churn",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "contract_observed": true
+    },
+    {
+      "case": "fixed-base-churn",
+      "expected_exit_code": 0,
+      "observed_exit_code": 0,
+      "contract_observed": true
+    },
+    {
+      "case": "original-cart-reference",
+      "expected_exit_code": 0,
+      "observed_exit_code": 0,
+      "contract_observed": true
+    },
+    {
+      "case": "original-cart-deny",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "contract_observed": true
+    },
+    {
+      "case": "fixed-cart-deny",
+      "expected_exit_code": 0,
+      "observed_exit_code": 0,
+      "contract_observed": true
+    },
+    {
+      "case": "original-cart-churn",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "contract_observed": true
+    },
+    {
+      "case": "fixed-cart-churn",
+      "expected_exit_code": 0,
+      "observed_exit_code": 0,
+      "contract_observed": true
+    },
+    {
+      "case": "provenance-original",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "contract_observed": true
+    },
+    {
+      "case": "provenance-fixed",
+      "expected_exit_code": 0,
+      "observed_exit_code": 0,
+      "contract_observed": true
+    }
+  ]
+}

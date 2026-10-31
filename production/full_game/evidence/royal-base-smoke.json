@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "scope": "Identity, native execution, read-only observation and recording; not physical-hardware proof",
+  "stop_reason": "requested_native_fields",
+  "emulator_version": "1.32.1",
+  "cache_mode": "Full",
+  "cartridge": "None",
+  "native_start_clock": 1130,
+  "wall_seconds": 35.27622073099997,
+  "movie_recorded": true,
+  "no_memory_writes": true,
+  "no_save_states": true,
+  "no_overclock": true,
+  "no_video_retiming": true,
+  "counters": {
+    "game_frame": 176,
+    "wp1980_draws": 176,
+    "wp1980_vblanks": 180,
+    "wp1980_max_gap": 3,
+    "fatal_owner": 0,
+    "fatal_dependency": 0,
+    "window_misses": 86,
+    "window_sectors": 800,
+    "wp1980_cart_id": null,
+    "wp1980_cart_bytes": null
+  },
+  "native_mov_sha256": "1b20def1cabb8a3c82d63a779563bc07eff779be55a18e942d6359353f519988",
+  "note": "Independent HW1 reconstruction with WP1980_AUDIO=0; not integrated universal game; 180-field smoke only."
+}
