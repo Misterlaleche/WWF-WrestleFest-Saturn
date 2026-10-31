@@ -1,11 +1,36 @@
 # Estado de integración — 2026-10-31
 
-Estado: CHECKPOINT03 PARCIAL, no beta completa.
+Estado: CHECKPOINT04 PARCIAL, no beta completa.
 Hay un disco universal de integración MODE/ROSTER probado en Mednafen1.32.1
 None/1MiB/4MiB. La confirmación termina esta ruta parcial; aún no abre combate.
 La ampliación se detecta y valida, pero las cachés de gameplay no están integradas.
 
-## Nuevo en checkpoint03
+## Nuevo en checkpoint04
+
+- Un propietario CD/FRT y transporte CDFS/CD32 original HW1 conservado.
+- Siete recursos aprobados cargados antes de MODE: tamaños y CRC32 comprobados;
+  sólo se publican los siete punteros cuando termina toda la carga.
+- Ocupación de130848B en una reserva de128KiB de LWRAM. El final de estáticos
+  HWRAM baja105504B respecto al03; no es todavía el presupuesto de combate.
+- Conversión de los diez slots a identidad original comprobada contra ROM.
+  Esto no sustituye la selección de compañero, CPU, RNG ni formación de equipos.
+- Mismo disco en Mednafen1.32.1: None/TAG,1MiB/ROYAL,4MiB/TAG y A mantenido
+  durante scroll PASS. Los96 sectores del contador de carga no aumentan durante
+  estas selecciones. Reloj coherente en247/261/246/203 publicaciones activas.
+- Quinta prueba, disco deliberadamente alterado: rechaza el último recurso
+  por CRC antes de MODE y deja los siete punteros vacíos. No se entrega ese
+  disco negativo como ejecutable funcional.
+- Suite C11/ASan/UBSan y9testsPython con ROM PASS; originales2023/2023 intactos.
+  Revisión independiente sin defectos accionables en el alcance04.
+- Cinco vídeos de ejecución conservan todos los PTS de los MOV nativos.
+  El retrato final probado coincide píxel a píxel con03; no se afirma equivalencia
+  de toda la animación ni del selector arcade completo.
+
+Reproducción, hashes, evidencias y límites: docs/RECOVERY-04.md.
+Auditoría de selección, compañero y límites de TEST03: docs/SELECTION-04.md.
+No hay prueba física del nuevo disco ni prueba del recorrido completo.
+
+## Conservado desde checkpoint03
 
 - Único main, VBlank/SMPC y reloj37609/39168; deuda conservada.
 - Detección SDK más validación de16 puntos en bancos;1MiB no activa4MiB.
@@ -18,8 +43,7 @@ La ampliación se detecta y valida, pero las cachés de gameplay no están integ
 - Tests C11/ASan/UBSan y9testsPython con ROM pasan; originales2023/2023 intactos.
 - BIN/CUE, ELF/mapa, vídeos reales y configuración conservados. Sin audio de juego.
 
-Reproducción, hashes, evidencias y límites: docs/RECOVERY-03.md.
-No hay prueba física del nuevo disco ni prueba del recorrido completo.
+Evidencia histórica del disco03: docs/RECOVERY-03.md.
 
 ## Referencias verificadas en checkpoints01/02
 
@@ -57,11 +81,15 @@ No hay prueba física del nuevo disco ni prueba del recorrido completo.
 
 1. Completar integración de plataforma y pruebas con mando del juego completo; las pasadas largas Royal
    de referencia y sus binarios,mapas,presupuestos,hashes y vídeos están registrados.
-2. Runtime maestro con único CD/SMPC/reloj/VDP1/VDP2 y traspasos de propiedad.
+2. Completar los traspasos VDP1/VDP2 entre escenas sobre CD/SMPC/reloj compartidos.
 3. Conectar la detección4MiB ya probada al presupuesto dinámico; Royal usa dos builds por macros y no
    cabe sumar sus máximos estáticos en la Saturn base.
-4. Frontend completo y escenas gráficas integradas. Eventos Presentadora
-   conservados; contrato prepare/start/stop y registros de Entrada OPEN.
+4. Frontend completo y escenas gráficas integradas: estado original persistente
+   de créditos/start/modo/roster, selección de compañero TAG, flash original,
+   imágenes/posición separadas de Demolition en ROYAL y continuidad RNG.
+   El terminal de Intro R04 no define créditos ni transición automática a MODE.
+   Eventos Presentadora conservados; contrato prepare/start/stop y registros
+   de Entrada OPEN. Las semillas de fixtures no justifican un arranque real.
 5. TAG/Royal con todos los participantes,acciones,IA y transiciones originales;
    resultados,progresión,continues,records,rankings y finales.
 6. Disco universal del juego completo;Mednafen1.32.1 None/4MiB,mando,vídeos y todas las métricas

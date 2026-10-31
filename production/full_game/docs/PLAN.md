@@ -56,6 +56,10 @@ Produces: estado explícito de carga, escena, fin y error; acceso a estado previ
 - [x] Detección4MiB por SDK/prueba de bancos en un mismo disco None/1MiB/4MiB.
 - [ ] Conectar perfiles de memoria/caché dinámicos de combate.
 - [x] Subhito03: main/SMPC/VBlank/reloj y renderer MODE/ROSTER, pruebas con mando.
+- [x] Subhito04: CD/FRT compartidos, precarga verificada de recursos antes de
+  MODE, conversión de identidades contra ROM, rechazo nativo de corrupción.
+- [ ] Conectar estado original de créditos/start/modo/roster, compañero TAG,
+  flash/imagen ROYAL y handoff de máquina completa; ver docs/SELECTION-04.md.
 
 ### Task 5: Gameplay y progresión completos
 - [ ] Completar todas las rutas TAG/Royal desde estados de partida, sin fixtures.

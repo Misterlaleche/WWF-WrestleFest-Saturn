@@ -62,3 +62,27 @@ Final: fixed input boundary — Mednafen scroll-edge RED→GREEN y las tres
 rutas normales PASS. Final: fixed evidence gate — tres regresionesPython
 RED→GREEN y muestras nativas con secuencia coherente. No quedan P2 abiertos
 de esta revisión del alcance03. El resto del juego sigue OPEN.
+
+Checkpoint04: único CD/FRT; CDFS y transporte CD32 HW1 copiados sin cambios
+desde fuentes bloqueadas por SHA. Siete recursos TEST03 pasan al CD y se
+precargan en130848B de LWRAM antes de MODE. Tamaños y capacidad se comprueban
+antes de leer; CRC32 antes de publicar ningún puntero. Build valida SHA256.
+Fin de estáticos HWRAM:0x06064314; ahorro105504B respecto03.
+RED→GREEN de cargador y conversión de identidades; C11/ASan/UBSan PASS.
+Oracle ROM: diez conversiones nativas iguales a $5DA0/$64CC. Nueve fixtures de
+confirmación,1500 escrituras de paleta y cuatro setups originales documentan
+los siguientes propietarios, pero no equivalen a su integración nativa.
+Ruling: no inventar transición Intro→MODE, semilla de arranque, compañero ni
+equipo CPU. El handoff real conserva16KiB RAM, registros y control/IRQ;
+el terminal MODE/ROSTER continúa parcial. TAG requiere compañero y ROYAL
+requiere corregir el transporte de imagen/posición de slot9.
+Cuatro rutas normales Mednafen1.32.1 PASS: None,1MiB,4MiB y A durante scroll.
+247/261/246/203 publicaciones activas distintas, deuda máxima2, sin violación;
+contador CD permanece96 desde MODE hasta confirmación. Quinto disco negativo:
+un byte cambiado enSELPAL.BIN, CRC de último recurso falla, no entra MODE y
+los siete punteros quedan cero. Disco bueno y programa idénticos en las cuatro
+rutas normales. Cinco MP4 conservan todos los PTS de sus MOV nativos.
+Retrato terminal comparado con03: RGB idéntico, sin extrapolar a la animación.
+Suite host con ROM9testsPython y originales2023/2023 PASS. Revisión independiente
+sin defectos accionables en este alcance. No hay validación física, combate ni
+prueba de todos los fallos posibles del CD; fases completas siguen OPEN.

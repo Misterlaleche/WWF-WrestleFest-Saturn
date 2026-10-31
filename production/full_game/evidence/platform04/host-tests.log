@@ -1,0 +1,58 @@
+python3 tools/check_sources.py
+{
+  "pass": true,
+  "files_checked": 2023,
+  "upstream_commit": "aedca6827c7801a88dbb1eae280830cd4776b95f",
+  "failures": []
+}
+cc -std=c11 -O2 -Wall -Wextra -Werror -Isrc tests/test_cart.c src/wf_cart.c -o build/test_cart
+./build/test_cart
+cart: valid4MiB, rejected1MiB/invalid/alias/stuck, contents restored PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -Isrc tests/test_frontend.c src/wf_frontend.c -o build/test_frontend
+./build/test_frontend
+frontend: palette, load barrier, edges, both26-step scrolls, terminal, invalid input PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -Isrc tests/test_assets.c src/wf_assets.c -o build/test_assets
+./build/test_assets
+assets: exact pack,alignment,capacity,CRC,read/size failures,no partial publication PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -Isrc tests/test_roster_identity.c src/wf_roster_identity.c -o build/test_identity
+./build/test_identity
+identity: mapped ROM slots and rejected invalid words PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -Isrc -I'../../Entrada Ring/source' -I'../../Escena Presentadora/source/scene/src' tests/test_clock.c src/wf_arcade_clock.c -o build/test_clock
+./build/test_clock
+PASS clock: 100 rational periods, retained debt, invalid inputs, overflow
+cc -std=c11 -O2 -Wall -Wextra -Werror -Isrc -I'../../Entrada Ring/source' -I'../../Escena Presentadora/source/scene/src' tests/test_prematch.c src/wf_prematch.c '../../Entrada Ring/source/wp01_scene.c' '../../Escena Presentadora/source/scene/src/wp02_scene.c' -o build/test_prematch
+./build/test_prematch
+prematch: 53 differential journeys, validation/load/terminal checks passed
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py' -v
+test_count_distinct_active_publications_not_frozen_terminal (test_platform_evidence.ClockEvidenceTest) ... ok
+test_late_clock_corruption_fails_after_correct_samples (test_platform_evidence.ClockEvidenceTest) ... ok
+test_preserved_debt_and_torn_publication (test_platform_evidence.ClockEvidenceTest) ... ok
+test_different_existing_resource_is_never_overwritten (test_recover_graphics.CanonicalRecovery) ... ok
+test_mismatch_with_approved_hash_prevents_all_materialization (test_recover_graphics.CanonicalRecovery) ... ok
+test_recovers_only_verified_textures_and_records_open_resources (test_recover_graphics.CanonicalRecovery) ... ok
+test_wrong_graphics_are_rejected_before_any_resource_is_written (test_recover_graphics.CanonicalRecovery) ... ok
+test_wrong_program_is_rejected_even_with_matching_graphics (test_recover_graphics.CanonicalRecovery) ... ok
+test_invalid_zip_is_rejected_without_creating_output (test_recover_graphics.RecoveryErrors) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 5.140s
+
+OK
+cc -std=c11 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc tests/test_cart.c src/wf_cart.c -o build/test_cart_san
+./build/test_cart_san
+cart: valid4MiB, rejected1MiB/invalid/alias/stuck, contents restored PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc tests/test_frontend.c src/wf_frontend.c -o build/test_frontend_san
+./build/test_frontend_san
+frontend: palette, load barrier, edges, both26-step scrolls, terminal, invalid input PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc tests/test_assets.c src/wf_assets.c -o build/test_assets_san
+./build/test_assets_san
+assets: exact pack,alignment,capacity,CRC,read/size failures,no partial publication PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc tests/test_roster_identity.c src/wf_roster_identity.c -o build/test_identity_san
+./build/test_identity_san
+identity: mapped ROM slots and rejected invalid words PASS
+cc -std=c11 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc -I'../../Entrada Ring/source' -I'../../Escena Presentadora/source/scene/src' tests/test_clock.c src/wf_arcade_clock.c -o build/test_clock_sanitized
+./build/test_clock_sanitized
+PASS clock: 100 rational periods, retained debt, invalid inputs, overflow
+cc -std=c11 -O2 -Wall -Wextra -Werror -fsanitize=address,undefined -Isrc -I'../../Entrada Ring/source' -I'../../Escena Presentadora/source/scene/src' tests/test_prematch.c src/wf_prematch.c '../../Entrada Ring/source/wp01_scene.c' '../../Escena Presentadora/source/scene/src/wp02_scene.c' -o build/test_prematch_sanitized
+./build/test_prematch_sanitized
+prematch: 53 differential journeys, validation/load/terminal checks passed

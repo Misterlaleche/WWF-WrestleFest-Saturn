@@ -10,7 +10,7 @@ python3 - <<'PY'
 import hashlib,json,os,shutil
 from pathlib import Path
 records=json.loads(Path('vendor/frontend_test03/SOURCE.json').read_text())['files']
-out=Path('build/frontend-assets');out.mkdir(parents=True,exist_ok=True)
+out=Path('build/cd');out.mkdir(parents=True,exist_ok=True)
 for r in records:
  if not r['path'].startswith('REFERENCE-SOURCE/assets/'):continue
  p=Path(os.environ['WF_FRONTEND_PACKAGE'])/r['path'];b=p.read_bytes()

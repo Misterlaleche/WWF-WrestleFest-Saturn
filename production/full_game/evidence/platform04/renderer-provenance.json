@@ -1,0 +1,11 @@
+{
+  "source": "vendor/frontend_test03/main.c",
+  "source_sha256": "65797db05530edefabef811d88887bd9bd75412cc8111451c9d8cd35f2fafb00",
+  "changes": [
+    "remove main, SMPC polling, private clock and navigation",
+    "export render/load functions; return failure instead of infinite loading",
+    "reuse mode bitmap storage for roster background: save122880 B",
+    "apply step effects with original render functions"
+  ],
+  "renderer_sha256": "753aa5d09d3332742d9c0848467e6420908d943ce29b2cb66759a2a9edab735b"
+}
