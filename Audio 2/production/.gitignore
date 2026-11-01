@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+build/
+resources/
+captures/
+dependencies/
+*.wav
+*.pcm
+*.pak
+*.PAK
+*.ROM
+*.DAT
+*.ELF
+*.iso
+*.cue
+*.bin
+*.o

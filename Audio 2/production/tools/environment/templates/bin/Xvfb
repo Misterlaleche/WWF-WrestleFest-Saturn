@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+WF_XVFB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export WF_XKB_BIN_DIRECTORY="$WF_XVFB_ROOT/host/usr/bin"
+export LD_LIBRARY_PATH="$WF_XVFB_ROOT/host/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+LD_PRELOAD="$WF_XVFB_ROOT/bin/xvfb-relocate.so" exec "$WF_XVFB_ROOT/host/usr/bin/Xvfb" -xkbdir "$WF_XVFB_ROOT/host/usr/share/X11/xkb" "$@"

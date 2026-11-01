@@ -1,0 +1,31 @@
+{
+  "kind": "INDEPENDENT_NORMALIZED_PHASE_GAIN_ORACLE_NOT_NATIVE_WAVEFORM_ACCEPTANCE",
+  "original_failure": "Modulation depth mismatch: single=0 feedback=0 MDL=12 inputs=-8191,-8191 SCSP_Q6=32 OPM_Q6=8 difference=24",
+  "red_exit_code": 1,
+  "correction": {
+    "single_source_MDL": [
+      11,
+      9
+    ],
+    "two_source_MDL": [
+      12,
+      10
+    ],
+    "feedback_MDL": [
+      "FB+3",
+      "FB+1"
+    ]
+  },
+  "proof": "OPM phase displacement: (o1+o2)/2/1024 cycles. SCSP: (Sx+Sy)/2^(16-MDL)/128 cycles, with nominal S=4*o. Single sources are duplicated by routing. Feedback adds OPM divisor 2^(9-FB).",
+  "quantization_bound": "Normalized test uses exact pinned OPM functions and selected Mednafen shift arithmetic. Circular phase deviation <=6/64 of a native wave sample; this excludes waveform, envelope and pipeline differences.",
+  "unsupported": "FB1..3 require MDL2..4, which SCSP disables; original catalog windows use FB0/5/7.",
+  "green_report": "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/modulation-fixed-logic/ym-and-sequence-validation.json",
+  "green_stdout": "Pinned OPM / selected Mednafen normalized modulation: 726 cases PASS\nPinned Nuked-OPM phase increments: 4194304 exact cases PASS\nTL reset/idempotence and partial key masks PASS; 914095 ROM YM writes, 8923 key-ons; max static pitch error 1.237550404 cents\n",
+  "sources": {
+    "tools-env/src/upstream/mednafen/src/ss/scsp.inc": "0a1e00647022c86c33edfa1601ae7a9fddde45884e34bf4a92015442e04f9906",
+    "audio2-build/reference/deps/opm.c": "983beecc471aebd8884fcc3aa48c50b1a26d4280ddbf1025b5196b540cf24188",
+    "audio2-repo/Audio 2/production/src/wf_scsp_ym.c": "d9e1e41cc7cdfeaf95234955a0d2d30d2f639d25520dce322e3d5993d38f7f88",
+    "audio2-repo/Audio 2/production/tests/test_ym_native.c": "53f774b9982c1564f3e6f8d7074d3e4fb9ed731a4ec64c07812779ae993f8008"
+  },
+  "primary_manual": "https://www.infochunk.com/saturn/segahtml_en/hard/scsp/hon/p04_23.htm"
+}

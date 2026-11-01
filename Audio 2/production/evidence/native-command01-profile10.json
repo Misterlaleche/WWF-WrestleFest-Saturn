@@ -1,0 +1,72 @@
+{
+  "build": {
+    "profile": "isolated-static-HWRAM",
+    "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+    "command": 1,
+    "seconds": 35,
+    "hot_bytes": 14132,
+    "diag_address": 638239068,
+    "hardware_status": "HARDWARE PENDING",
+    "files": {
+      "AUDIO2.ELF": {
+        "bytes": 1112640,
+        "sha256": "2f227514d99ddd332939836176856f7330077dd0c3bbf35df4f6b613b4587058"
+      },
+      "AUDIO2.map": {
+        "bytes": 721322,
+        "sha256": "8f108c0bc2d5ed4ba1b34f7b87dfa8305f48c1ce25408c9abd80c564cb046204"
+      },
+      "AUDIO2.bin": {
+        "bytes": 688776,
+        "sha256": "ab41c5bbc6b71e00d8ca52c40af8d91cbfdcc08f640df1b551c1eddd8f83362c"
+      },
+      "AUDIO2.iso": {
+        "bytes": 1071104,
+        "sha256": "778709ac6ce9f7152862dbf360736c7ea00421622a16cd2724c448a3db41d112"
+      },
+      "AUDIO2.cue": {
+        "bytes": 69,
+        "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      }
+    }
+  },
+  "gates": {
+    "real_module_entered": true,
+    "requested_window_completed": true,
+    "no_reported_worker_error": true,
+    "no_reported_api_error": true,
+    "no_reported_fm_discard": true,
+    "no_reported_rejected_events": true,
+    "no_reported_pcm_underrun": true,
+    "no_reported_transport_lateness": true,
+    "worker_still_running": true,
+    "native_still_ready": true
+  },
+  "diagnostics": {
+    "magic": 1464222002,
+    "state": 4,
+    "videoFrames": 2306,
+    "error": 0,
+    "commandStartFrame": 210,
+    "musicState": 2,
+    "musicEvents": 2153,
+    "batchB03A": 0,
+    "lateB028": 0,
+    "sfxUnderruns32": 0,
+    "lastCommand": 1,
+    "DSPclock16": 57010,
+    "diagAddress": 638239068,
+    "mailState": 2,
+    "FMdiscardEvents": 0,
+    "discardBatches": 0,
+    "rejectedFM": 0,
+    "ringRejected": 0,
+    "SCSPelapsed": 1545038,
+    "APIstate": 2,
+    "APIerror": 0,
+    "commandDSPclock": 19300
+  },
+  "passed": true,
+  "scope": "One isolated native capture; not gameplay, waveform fidelity or hardware certification.",
+  "hardware_status": "HARDWARE PENDING"
+}

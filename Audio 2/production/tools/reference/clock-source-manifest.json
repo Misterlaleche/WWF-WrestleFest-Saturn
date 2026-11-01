@@ -1,0 +1,57 @@
+[
+  {
+    "repo": "mamedev/mame",
+    "path": "src/mame/technos/ddragon3.cpp",
+    "ref": "5c60f61d321dd7869f6cc2e7a6f78191a16b4d84",
+    "name": "mame-ddragon3.cpp",
+    "git_blob_sha": "6c307aeb136b21fe152e706eab2a60bdcb3d3415",
+    "sha256": "a12d148c7f5c7d96f1662319e6403e030edb08798bbf87f9aa3bd36f0d89dc1c",
+    "bytes": 80300,
+    "blob_verified": true,
+    "url": "https://github.com/mamedev/mame/blob/5c60f61d321dd7869f6cc2e7a6f78191a16b4d84/src/mame/technos/ddragon3.cpp"
+  },
+  {
+    "repo": "aaronsgiles/ymfm",
+    "path": "README.md",
+    "ref": "81aec25ccbb98f4873a255f7551ac4dadac59b4a",
+    "name": "ymfm-README.md",
+    "git_blob_sha": "29f0d87dca97c60916396371487b95ec5a1468ca",
+    "sha256": "85fa831f01bb266efe5384e56d0d1f921ca4275a4415ba0123c5226602a44a1a",
+    "bytes": 5891,
+    "blob_verified": true,
+    "url": "https://github.com/aaronsgiles/ymfm/blob/81aec25ccbb98f4873a255f7551ac4dadac59b4a/README.md"
+  },
+  {
+    "repo": "tildearrow/furnace",
+    "path": "src/engine/platform/arcade.cpp",
+    "ref": "b087b28325298952aff552f9227ba83ab2afffcd",
+    "name": "furnace-arcade-b087b28.cpp",
+    "git_blob_sha": "20110b9db2652cf54c0c1b55b74cca4d67685cfb",
+    "sha256": "87c43ca211b2402ef86ad493649ddd17f32b4710c2b67270cdf810d5df14609a",
+    "bytes": 29072,
+    "blob_verified": true,
+    "url": "https://github.com/tildearrow/furnace/blob/b087b28325298952aff552f9227ba83ab2afffcd/src/engine/platform/arcade.cpp"
+  },
+  {
+    "repo": "mamedev/mame",
+    "path": "src/devices/sound/okiadpcm.cpp",
+    "ref": "5c60f61d321dd7869f6cc2e7a6f78191a16b4d84",
+    "name": "mame-okiadpcm.cpp",
+    "git_blob_sha": "631a317724f737929abdd208846194f8214915ae",
+    "sha256": "a49dbd1089b3163a3a38480f6d877462c506b9f85e66a0cf5ea015b2a193dcd8",
+    "bytes": 7892,
+    "blob_verified": true,
+    "url": "https://github.com/mamedev/mame/blob/5c60f61d321dd7869f6cc2e7a6f78191a16b4d84/src/devices/sound/okiadpcm.cpp"
+  },
+  {
+    "repo": "mamedev/mame",
+    "path": "src/devices/sound/okim6295.cpp",
+    "ref": "5c60f61d321dd7869f6cc2e7a6f78191a16b4d84",
+    "name": "mame-okim6295.cpp",
+    "git_blob_sha": "1101cbdfa2fa9c9c6287869b0182be96441ca289",
+    "sha256": "ff6f45f2e7db51cab3344ab3e1a55d0d95e1341c2994a35983e733fae022b18b",
+    "bytes": 11194,
+    "blob_verified": true,
+    "url": "https://github.com/mamedev/mame/blob/5c60f61d321dd7869f6cc2e7a6f78191a16b4d84/src/devices/sound/okim6295.cpp"
+  }
+]

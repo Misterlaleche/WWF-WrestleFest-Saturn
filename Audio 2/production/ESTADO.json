@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "project": "WWF WrestleFest Saturn Audio 2",
+  "source_checkpoint": "db18be40a1d79de200408207573e9f45bf73bf2c",
+  "delivery_branch": "audio-2-production-ready",
+  "production_ready": false,
+  "hardware_status": "HARDWARE PENDING",
+  "owner_listening_approval": "PENDING",
+  "historical_paths_modified": false,
+  "protected_assets_in_git": false,
+  "api_version": 1,
+  "native_mailbox_abi": 3,
+  "game_dynamic_music_abi": 4,
+  "current_gate": "NATIVE_FIDELITY_AND_CONCURRENT_COMBAT_BLOCKED",
+  "verified_historical_profile10": {
+    "firmware_sha256": "b5ecee6e3e2a0efe7c13f1c6f4cb89bbc6b18cb96db23a57203b20e4a2b06b66",
+    "music_captures": 18,
+    "music_runtime_passes": 6,
+    "music_runtime_failures": 12,
+    "music_late_events": 56,
+    "music_fm_dropped_events": 0,
+    "isolated_music_underruns": 0,
+    "tag_logical_steps": 7372,
+    "tag_original_commands": 64,
+    "tag_state_identical": true,
+    "tag_underruns": 19,
+    "tag_late_events": 22,
+    "tag_logic_per_second_audio": 55.337301,
+    "tag_logic_per_second_control": 57.901837,
+    "fidelity_scope": "Historical doubled-pitch profile; not an absolute arcade reference"
+  },
+  "active_work": [
+    "Corrected board-clock and envelope native captures",
+    "Bounded adaptive PCM preparation and cached lookahead target",
+    "Concurrent SFX refill capacity and exact decoder cost",
+    "Full native retest after the source revision settles"
+  ],
+  "pending_gates": [
+    "Zero losses, underruns and deadline failures for the final native matrix",
+    "Native full compositions, loops, fades and transitions",
+    "Final same-input TAG performance meeting the arcade logic cadence",
+    "Reproducible Royal input scenario and measured comparison",
+    "Owner comparative listening",
+    "Physical Saturn NTSC-U with Terraonion MODE"
+  ],
+  "resume": "Read AUDIO-FINAL-AUDIT.md, docs/ARCADE-CLOCK-AUDIT.md and docs/COMBAT-INTEGRATION-GATE.md. Use the source hashes of each evidence profile; never reuse a historical PASS for changed source. Preserve R04/A53 and all previous native captures."
+}

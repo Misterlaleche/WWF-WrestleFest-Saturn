@@ -1,0 +1,34 @@
+{
+  "compiler": "m68k-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "compiler_sha256": "0f90d74700ca5779d2e8bfff0fb6192388a44cf600d0bde8adc7f5c5cdaf4284",
+  "elf_sha256": "0db38651d111c4942ffce1c4a44005249688b46768e2d2edad092751cb3c689b",
+  "elf_bytes": 53580,
+  "segments": [
+    {
+      "address": 0,
+      "file_bytes": 12262,
+      "memory_bytes": 12262,
+      "flags": 5
+    },
+    {
+      "address": 49408,
+      "file_bytes": 14180,
+      "memory_bytes": 16112,
+      "flags": 7
+    },
+    {
+      "address": 65536,
+      "file_bytes": 9216,
+      "memory_bytes": 9216,
+      "flags": 4
+    }
+  ],
+  "bss_end": 65520,
+  "stack_bottom": 75776,
+  "stack_top": 81920,
+  "runtime_source_sha256": "851f082a547137b70dfe686764c9312aed489df0ff00d60e2dd6c6fe64d5ba00",
+  "runtime_mode": "explicit -m68000 source",
+  "diagnostic_timing_enabled": true,
+  "hardware_status": "HARDWARE PENDING",
+  "software_acceptance": "NOT EVALUATED"
+}

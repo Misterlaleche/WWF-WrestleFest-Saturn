@@ -1,0 +1,388 @@
+{
+  "scope": "HOST regression and original-ROM event logic; not emulated Saturn waveform or combat performance",
+  "source_sha256": {
+    "include/wf_audio2.h": "e0b8deb70b9b76776e174c4a3b115b33f447fd926cacd23cc798d8750464cb83",
+    "include/wf_audio2_yaul.h": "ab5eaf0b09dddbdfa2bcaf246a09a6a00b5ad0447d954b1da3a41d32a721e771",
+    "src/generated/wf_ym_envelope.h": "4e629def3f2d8154fd8083e73ebb2ca49d2303a27a6e9d35257bbc6b01f1f273",
+    "src/generated/wf_ym_tables.h": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+    "src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "src/reference_driver/z80-native.c": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+    "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+    "src/reference_driver/z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+    "src/wf_audio2.c": "1849480ae2a54d16df44b200303426d7d8a87622d2ec7d718bd7619f82f998a9",
+    "src/wf_audio2_yaul.c": "205b831868ffc17886aa289ec3cecf31f72339f59b8ca3d35731c671abe0744f",
+    "src/wf_music_clock.h": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+    "src/wf_music_entry.S": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+    "src/wf_music_firmware.c": "dd199a1db635ccf9304fb47ea15834365a24e66dcb96892187cb89c440f53174",
+    "src/wf_music_module.c": "c37928978cb38df5e9c891c4cd524b535948200dad0cdfd86b18746af0c9f790",
+    "src/wf_music_module.h": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c",
+    "src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+    "src/wf_music_seq.h": "b02489430f5fb5eb97712c2a56d1636a4159358930cdcbf6244df0cbadf92471",
+    "src/wf_music_time.h": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+    "src/wf_native_driver.h": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+    "src/wf_native_elf.c": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+    "src/wf_native_elf.h": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+    "src/wf_native_host.c": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+    "src/wf_native_host.h": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+    "src/wf_native_yaul.c": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+    "src/wf_native_yaul.h": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+    "src/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+    "src/wf_scsp_dsp.h": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+    "src/wf_scsp_sfx.c": "affe62d9865b6fc644733c80ad71b11463efdea57f64736140aee4aed7f53ad3",
+    "src/wf_scsp_sfx.h": "0150aeeb3c75e4aaa4ff0fcb49d2a6971d132d02b385f42f09b22f830034efa1",
+    "src/wf_scsp_ym.c": "d9e1e41cc7cdfeaf95234955a0d2d30d2f639d25520dce322e3d5993d38f7f88",
+    "src/wf_scsp_ym.h": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+    "src/wf_sfx_decode.S": "5e97ad36a59fd374886bf3aad571e231a302a2b5ba413a53cc1d72d7cb04bf48",
+    "src/wf_sfx_memory.c": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+    "src/wf_sfx_start.S": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+    "src/wf_z80_control_batch.inc": "6775bdc1db5f94c73ed3dc2f35926fffa40fd21e6a2890a284ce6f0c7f6e2ee2",
+    "src/wf_z80_instrument_post.inc": "b9cd0af3069c405f2b63809c2e6d5157831a8cc84632868d8f3f6dec7fe31f53",
+    "src/wf_z80_instrument_pre.inc": "1353f99b38f72dfb7cc79858f14e16314cc6b90900a2cb8680557e9693197770",
+    "src/wf_z80_multiply.inc": "86dd0ae1b986a7c919f0074db6129833fe0b2ebdc946809d382c75f63d6a2642",
+    "src/wf_z80_startup_copy.inc": "67f4df15c8c115210f69779e8b5d937859002122332ff5bbecbf09ada86742e1",
+    "tests/oracle/wf_music_seq_r01.c": "5432de051afdae58f5cde12e866fa1bd7241dd98b07a588693a750fc50f10200",
+    "tests/saturn_harness.c": "3525bd2284c3af43c76da463ea899ba421ed43f22b4b0998fa889cf16e7a409e",
+    "tests/test_audio2_api.c": "91c16b34124116de655b3cfe1f9b2f44d9adeef1bd5f5e8ff4a141a46ee38ab4",
+    "tests/test_build_safety.py": "8357e0f971fc25e5ed0d44bc396f47c45c5155db98688f5dfde903888304a720",
+    "tests/test_music_firmware_deadline.c": "c0ea2b9456157a9df58d459cd23972918b6797424b80c3e9f4545567c0fddb48",
+    "tests/test_music_module_deadline.c": "78538c26e26f3ef6ffdd280864337db8c097965950800f93d826aa6a08f1d1a6",
+    "tests/test_music_seq_service.c": "70a46d9d363f94049d825e9ef511a014648750badbb4b9581f52f99e48fc64a3",
+    "tests/test_resources.py": "481931c2996437ba1ef95e9614a38d8b8112c07ca5ef5e9dbc089971eecdd67d",
+    "tests/test_seq_a53.c": "985c10817a4a119c92fb7c45289269ad0984f5b8df671dbdd1a3eea4eadd3932",
+    "tests/test_sfx_native.c": "b7e1685ec8d7b6764d600d9bbb93787771ba610308da7ac38f03c524103ec275",
+    "tests/test_ym_native.c": "53f774b9982c1564f3e6f8d7074d3e4fb9ed731a4ec64c07812779ae993f8008"
+  },
+  "inputs": {
+    "/workspace/scratch/46cef04a9eee/project_sources/01-wwfwfest.zip": "2a99ae04704941fe1e2a6362dbc4feb18554de4fc83baa0622487d84716127b8",
+    "/workspace/scratch/46cef04a9eee/audio2-build/resources/SOUND.ROM": "f89e7782e7535576b2ebf8c5daea61c5fa2ecefff0b8b3280dea09efa57c25f7",
+    "/workspace/scratch/46cef04a9eee/audio2-build/resources/SFX.DAT": "dbe749cf4ce13f333ff7318a74a64e30fa2b9af05d953688a0813311cbabd216",
+    "/workspace/scratch/46cef04a9eee/audio2-build/firmware10/SCSP.ELF": "b5ecee6e3e2a0efe7c13f1c6f4cb89bbc6b18cb96db23a57203b20e4a2b06b66"
+  },
+  "sequence_seconds_per_command": 600,
+  "tests": [
+    {
+      "name": "resource_identity_and_corruption",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_resources.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.551654941002198,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.501s\n\nOK\n"
+    },
+    {
+      "name": "build_input_aliases",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_build_safety.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048313309001969174,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "api",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/api",
+        "/workspace/scratch/46cef04a9eee/audio2-build/firmware10/SCSP.ELF",
+        "/workspace/scratch/46cef04a9eee/audio2-build/resources/SFX.DAT"
+      ],
+      "exit_code": 0,
+      "seconds": 0.024596586998086423,
+      "stdout": "audio2_api: payload corruption,18music,98SFX,1F,stop,backpressure,priority,timeout,recovery PASS\n",
+      "stderr": ""
+    },
+    {
+      "name": "module_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/module_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.008611764998931903,
+      "stdout": "scheduler: work=4096 Fs enqueue_due=-100 service_calls=8 max_gap=512 clock_reads=2 batches=0 delivered=1234 rc=0 flushed=1\nPASS starvation\nPASS deadline\nPASS fm-full\nPASS ring-full\nPASS rejected-current\nPASS late-key\nPASS flush-clock\nPASS recovery\nPASS workspace\nPASS lifecycle\n",
+      "stderr": ""
+    },
+    {
+      "name": "firmware_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/firmware_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0009151359990937635,
+      "stdout": "PASS real firmware hard deadline, one count, no stale replay, wrap and bounded prepare at nearest deadline\n",
+      "stderr": ""
+    },
+    {
+      "name": "all18_full_z80_and_live_transitions",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/seq_oracle",
+        "/workspace/scratch/46cef04a9eee/audio2-build/resources/SOUND.ROM",
+        "600"
+      ],
+      "exit_code": 0,
+      "seconds": 59.29613575999974,
+      "stdout": "PASS cmd01 600s+8s fade CPU/RAM/timers/events=1260526 hash=d22b10795d181f69\nPASS cmd02 600s+8s fade CPU/RAM/timers/events=767438 hash=aff0163656cdb0e0\nPASS cmd03 600s+8s fade CPU/RAM/timers/events=1000991 hash=ab7f1c337671e155\nPASS cmd04 600s+8s fade CPU/RAM/timers/events=1413941 hash=4b9ded321dce24e7\nPASS cmd05 600s+8s fade CPU/RAM/timers/events=534747 hash=00fde199c347cce9\nPASS cmd06 600s+8s fade CPU/RAM/timers/events=1460559 hash=19b02042571d1961\nPASS cmd07 600s+8s fade CPU/RAM/timers/events=1648736 hash=3e2ae620496ad7af\nPASS cmd08 600s+8s fade CPU/RAM/timers/events=668414 hash=96af2958ff0facd3\nPASS cmd09 600s+8s fade CPU/RAM/timers/events=538618 hash=3fd84f0c259848e2\nPASS cmd0a 600s+8s fade CPU/RAM/timers/events=1122672 hash=db2a6029e1e926f5\nPASS cmd0b 600s+8s fade CPU/RAM/timers/events=1125666 hash=5da1037928701f12\nPASS cmd0c 600s+8s fade CPU/RAM/timers/events=825771 hash=6d9f9818e6ab5729\nPASS cmd0d 600s+8s fade CPU/RAM/timers/events=833286 hash=011125bd059c9dd2\nPASS cmd0e 600s+8s fade CPU/RAM/timers/events=977318 hash=5661fb3b994f6cf1\nPASS cmd0f 600s+8s fade CPU/RAM/timers/events=950926 hash=a3e8d05231064d58\nPASS cmd10 600s+8s fade CPU/RAM/timers/events=695299 hash=4e6b7af14004c363\nPASS cmd11 600s+8s fade CPU/RAM/timers/events=1426165 hash=fc3029a9bd7697db\nPASS cmd12 600s+8s fade CPU/RAM/timers/events=1880602 hash=d2c98b0c1a3c0d79\nPASS serviced R01 differential tracks=18 score_seconds=600 checkpoints=10962 calls=956109 services=3151318\nPASS live ROM command transitions1,6,12,1f,3,1f,2,1,1f events=89011 hash=e4e46eb2779d4f80 and00 rejection\n",
+      "stderr": ""
+    }
+  ],
+  "commands": [
+    {
+      "name": "resource_identity_and_corruption",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_resources.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.551654941002198,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.501s\n\nOK\n"
+    },
+    {
+      "name": "build_input_aliases",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_build_safety.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048313309001969174,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "build_api",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "tests/test_audio2_api.c",
+        "src/wf_audio2.c",
+        "src/wf_native_host.c",
+        "src/wf_native_elf.c",
+        "src/wf_scsp_sfx.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/api"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4572045699969749,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "api",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/api",
+        "/workspace/scratch/46cef04a9eee/audio2-build/firmware10/SCSP.ELF",
+        "/workspace/scratch/46cef04a9eee/audio2-build/resources/SFX.DAT"
+      ],
+      "exit_code": 0,
+      "seconds": 0.024596586998086423,
+      "stdout": "audio2_api: payload corruption,18music,98SFX,1F,stop,backpressure,priority,timeout,recovery PASS\n",
+      "stderr": ""
+    },
+    {
+      "name": "build_module_deadlines",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "-fno-pie",
+        "-no-pie",
+        "tests/test_music_module_deadline.c",
+        "src/wf_music_seq.c",
+        "src/wf_scsp_ym.c",
+        "src/reference_driver/z80.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/module_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 1.177719438004715,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "module_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/module_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.008611764998931903,
+      "stdout": "scheduler: work=4096 Fs enqueue_due=-100 service_calls=8 max_gap=512 clock_reads=2 batches=0 delivered=1234 rc=0 flushed=1\nPASS starvation\nPASS deadline\nPASS fm-full\nPASS ring-full\nPASS rejected-current\nPASS late-key\nPASS flush-clock\nPASS recovery\nPASS workspace\nPASS lifecycle\n",
+      "stderr": ""
+    },
+    {
+      "name": "build_firmware_deadlines",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "tests/test_music_firmware_deadline.c",
+        "src/wf_scsp_sfx.c",
+        "src/wf_scsp_ym.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/firmware_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.45820724200166296,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "firmware_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/firmware_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0009151359990937635,
+      "stdout": "PASS real firmware hard deadline, one count, no stale replay, wrap and bounded prepare at nearest deadline\n",
+      "stderr": ""
+    },
+    {
+      "name": "build_original_z80",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Dz80_init=wf_ref_z80_init",
+        "-Dz80_step=wf_ref_z80_step",
+        "-Dz80_gen_nmi=wf_ref_z80_gen_nmi",
+        "-Dz80_gen_int=wf_ref_z80_gen_int",
+        "-Dz80_debug_output=wf_ref_z80_debug_output",
+        "-c",
+        "src/reference_driver/z80.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/ref-z80.o"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8040011069970205,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "build_frozen_r01",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Dz80_init=wf_ref_z80_init",
+        "-Dz80_step=wf_ref_z80_step",
+        "-Dz80_gen_nmi=wf_ref_z80_gen_nmi",
+        "-Dz80_gen_int=wf_ref_z80_gen_int",
+        "-Dz80_debug_output=wf_ref_z80_debug_output",
+        "-Dwf_music_seq_init=wf_ref_init",
+        "-Dwf_music_seq_send=wf_ref_send",
+        "-Dwf_music_seq_run=wf_ref_run",
+        "-c",
+        "tests/oracle/wf_music_seq_r01.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/ref-seq.o"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06558026999846334,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "build_serviced_native_oracle",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "-Wno-unused-const-variable",
+        "-Wno-unused-function",
+        "-Wno-misleading-indentation",
+        "-DWF_MUSIC_NATIVE_CONTROL=1",
+        "tests/test_music_seq_service.c",
+        "src/wf_music_seq.c",
+        "src/reference_driver/z80-native.c",
+        "src/reference_driver/z80-cold.c",
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/ref-z80.o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/ref-seq.o",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/seq_oracle"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9212761390008382,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "all18_full_z80_and_live_transitions",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/host-final/seq_oracle",
+        "/workspace/scratch/46cef04a9eee/audio2-build/resources/SOUND.ROM",
+        "600"
+      ],
+      "exit_code": 0,
+      "seconds": 59.29613575999974,
+      "stdout": "PASS cmd01 600s+8s fade CPU/RAM/timers/events=1260526 hash=d22b10795d181f69\nPASS cmd02 600s+8s fade CPU/RAM/timers/events=767438 hash=aff0163656cdb0e0\nPASS cmd03 600s+8s fade CPU/RAM/timers/events=1000991 hash=ab7f1c337671e155\nPASS cmd04 600s+8s fade CPU/RAM/timers/events=1413941 hash=4b9ded321dce24e7\nPASS cmd05 600s+8s fade CPU/RAM/timers/events=534747 hash=00fde199c347cce9\nPASS cmd06 600s+8s fade CPU/RAM/timers/events=1460559 hash=19b02042571d1961\nPASS cmd07 600s+8s fade CPU/RAM/timers/events=1648736 hash=3e2ae620496ad7af\nPASS cmd08 600s+8s fade CPU/RAM/timers/events=668414 hash=96af2958ff0facd3\nPASS cmd09 600s+8s fade CPU/RAM/timers/events=538618 hash=3fd84f0c259848e2\nPASS cmd0a 600s+8s fade CPU/RAM/timers/events=1122672 hash=db2a6029e1e926f5\nPASS cmd0b 600s+8s fade CPU/RAM/timers/events=1125666 hash=5da1037928701f12\nPASS cmd0c 600s+8s fade CPU/RAM/timers/events=825771 hash=6d9f9818e6ab5729\nPASS cmd0d 600s+8s fade CPU/RAM/timers/events=833286 hash=011125bd059c9dd2\nPASS cmd0e 600s+8s fade CPU/RAM/timers/events=977318 hash=5661fb3b994f6cf1\nPASS cmd0f 600s+8s fade CPU/RAM/timers/events=950926 hash=a3e8d05231064d58\nPASS cmd10 600s+8s fade CPU/RAM/timers/events=695299 hash=4e6b7af14004c363\nPASS cmd11 600s+8s fade CPU/RAM/timers/events=1426165 hash=fc3029a9bd7697db\nPASS cmd12 600s+8s fade CPU/RAM/timers/events=1880602 hash=d2c98b0c1a3c0d79\nPASS serviced R01 differential tracks=18 score_seconds=600 checkpoints=10962 calls=956109 services=3151318\nPASS live ROM command transitions1,6,12,1f,3,1f,2,1,1f events=89011 hash=e4e46eb2779d4f80 and00 rejection\n",
+      "stderr": ""
+    }
+  ],
+  "source_stable_during_tests": true,
+  "passed": true,
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
+}

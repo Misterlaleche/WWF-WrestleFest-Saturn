@@ -1,0 +1,99 @@
+{
+  "kind": "HOST_REFERENCE_AND_LOGIC_VALIDATION_NOT_NATIVE_AUDIO_ACCEPTANCE",
+  "opm_commit": "f209e6ed3712032b641d53ce8fb24824eae6adc3",
+  "seconds_per_music": 30.0,
+  "external_handoff_required": false,
+  "stages": [
+    {
+      "name": "music_reference",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference/render_reference.py",
+        "--rom",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/inputs/SOUND.ROM",
+        "--pcm",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/inputs/AUDPCM.PAK",
+        "--index",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/inputs/AUDPCM-INDEX.csv",
+        "--opm-dir",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/deps",
+        "--out",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/music",
+        "--seconds",
+        "30.0",
+        "--jobs",
+        "2",
+        "--cc",
+        "cc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ym_and_sequence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference/verify_ym_and_seq.py",
+        "--rom",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/inputs/SOUND.ROM",
+        "--traces",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/music/traces",
+        "--opm",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/deps",
+        "--out",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/logic",
+        "--cc",
+        "cc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "ym_register_usage",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference/audit_ym_usage.py",
+        "--traces",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/music/traces",
+        "--out",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/ym-register-usage.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "sfx_native",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference/verify_sfx_native.py",
+        "--rom",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/inputs/SAMPLES.ROM",
+        "--reference",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/inputs/a15_model",
+        "--pack",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/inputs/SFX.DAT",
+        "--out",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/sfx-validation",
+        "--cc",
+        "cc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "sfx_model_reference",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference/render_sfx_reference.py",
+        "--golden",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/sfx-validation/WF_OKI_PCM16BE.PAK",
+        "--fixtures",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/sfx-validation",
+        "--reference",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/inputs/a15_model",
+        "--out",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-selfcontained/sfx",
+        "--cc",
+        "cc"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "complete": true
+}

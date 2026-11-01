@@ -1,0 +1,12 @@
+[
+  {
+    "filename": "mednafen-1.32.1.tar.xz",
+    "url": "https://mednafen.github.io/releases/files/mednafen-1.32.1.tar.xz",
+    "sha256": "de7eb94ab66212ae7758376524368a8ab208234b33796625ca630547dbc83832"
+  },
+  {
+    "filename": "gcc-13.3.0-lb1sf68.S",
+    "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-13.3.0/libgcc/config/m68k/lb1sf68.S",
+    "sha256": "851f082a547137b70dfe686764c9312aed489df0ff00d60e2dd6c6fe64d5ba00"
+  }
+]
