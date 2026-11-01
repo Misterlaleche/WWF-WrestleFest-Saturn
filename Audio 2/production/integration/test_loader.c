@@ -2,7 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
-enum{OWNED_BASE=0x06088000u,OWNED_BYTES=18432u,TEXT_BASE=0x05c5c000u};
+#if defined(WF_AUDIO2_WORKSPACE_VDP1) && WF_AUDIO2_WORKSPACE_VDP1
+enum{OWNED_BASE=0x05c78020u};
+#else
+enum{OWNED_BASE=0x06088000u};
+#endif
+enum{OWNED_BYTES=18432u,TEXT_BASE=WF_MUSIC_MODULE_BASE};
 static unsigned writes;
 static uint16_t text[32],state[6144],shared[2048],hot[OWNED_BYTES/2];
 static void put16(uint8_t*p,unsigned x){p[0]=(uint8_t)(x>>8);p[1]=(uint8_t)x;}
@@ -15,8 +20,8 @@ static void fixture(uint8_t*p){
  memset(p,0,512);put32(p,0x7f454c46);p[4]=1;p[5]=2;p[6]=1;
  put16(p+16,2);put16(p+18,42);put32(p+20,1);put32(p+24,TEXT_BASE+32);
  put32(p+28,52);put32(p+36,2);put16(p+40,52);put16(p+42,32);put16(p+44,4);
- ph(p+52,192,TEXT_BASE,64,64,5);ph(p+84,320,0x05c7c000,0,256,6);
- ph(p+116,320,0x05c7f000,0,4096,6);ph(p+148,256,OWNED_BASE,64,3284,7);
+ ph(p+52,192,TEXT_BASE,64,64,5);ph(p+84,320,WF_MUSIC_MODULE_STATE,0,256,6);
+ ph(p+116,320,WF_MUSIC_MODULE_SHARED_ADDRESS,0,4096,6);ph(p+148,256,OWNED_BASE,64,3284,7);
  uint8_t*h=p+192;put32(h,WF_MUSIC_MODULE_MAGIC);put16(h+4,WF_MUSIC_MODULE_ABI);put16(h+6,32);
  put32(h+8,WF_MUSIC_MODULE_BASE);put32(h+12,WF_MUSIC_MODULE_END);
  put32(h+16,TEXT_BASE+32);put32(h+20,TEXT_BASE+34);put32(h+24,WF_MUSIC_MODULE_SHARED);
@@ -33,8 +38,8 @@ static int parse(const void*p,size_t n,wf_music_image_t*m){
 static void store(uint32_t address,uint16_t value,void*u){
  (void)u;assert(address&0x20000000u);address&=0x1fffffffu;++writes;
  if(address>=TEXT_BASE&&address<TEXT_BASE+64)text[(address-TEXT_BASE)/2]=value;
- else if(address>=0x05c7c000&&address<0x05c7f000)state[(address-0x05c7c000)/2]=value;
- else if(address>=0x05c7f000&&address<0x05c80000)shared[(address-0x05c7f000)/2]=value;
+ else if(address>=WF_MUSIC_MODULE_STATE&&address<WF_MUSIC_MODULE_SHARED_ADDRESS)state[(address-WF_MUSIC_MODULE_STATE)/2]=value;
+ else if(address>=WF_MUSIC_MODULE_SHARED_ADDRESS&&address<WF_MUSIC_MODULE_END)shared[(address-WF_MUSIC_MODULE_SHARED_ADDRESS)/2]=value;
  else if(address>=OWNED_BASE&&address<OWNED_BASE+OWNED_BYTES)hot[(address-OWNED_BASE)/2]=value;
  else assert(!"write outside owned windows");
 }
@@ -56,7 +61,7 @@ int main(void){
  uint8_t bad[512];
 #endif
  fixture(p);
- if(!parse(p,320,&m)){puts("RED: four-segment music image for the master-owned HWRAM window was rejected");return 1;}
+ if(!parse(p,320,&m)){puts("RED: four-segment music image for the selected master-owned window was rejected");return 1;}
  memset(text,0xa5,sizeof text);memset(state,0xa5,sizeof state);
  memset(shared,0xa5,sizeof shared);memset(hot,0xa5,sizeof hot);writes=0;
  assert(copy(&m)&&writes==(64+256+4096+3284)/2);
@@ -85,8 +90,18 @@ int main(void){
  memcpy(bad,p,512);put32(bad+192+28,0);reject(bad,320);
  memcpy(bad,p,512);put16(bad+192+4,3);reject(bad,320);
  memcpy(bad,p,512);put32(bad+24,TEXT_BASE+34);reject(bad,320);
+ /* Same ABI number does not authorize a different video-memory profile. */
+ unsigned other=TEXT_BASE==0x05c5c000u?0x05e26000u:0x05c5c000u;
+ memcpy(bad,p,512);put32(bad+52+8,other);put32(bad+52+12,other);
+ put32(bad+192+8,other);reject(bad,320);
  assert(!wf_music_elf_image(p,320,OWNED_BASE+16,OWNED_BYTES,&m));
  assert(!wf_music_elf_image(p,320,OWNED_BASE,16384,&m));
+ /* Even a self-consistent ELF cannot authorize a different workspace
+  * class than the master's compiled memory profile. */
+ unsigned other_hot=OWNED_BASE==0x05c78020u?0x06088000u:0x05c78020u;
+ memcpy(bad,p,512);put32(bad+148+8,other_hot);put32(bad+148+12,other_hot);
+ put32(bad+192+28,other_hot);
+ assert(!wf_music_elf_image(bad,320,other_hot,OWNED_BYTES,&m));
  assert(parse(p,320,&m));
  for(unsigned segment=0;segment<4;segment++){
   wf_music_image_t forged=m;forged.segments[segment].address+=4;writes=0;

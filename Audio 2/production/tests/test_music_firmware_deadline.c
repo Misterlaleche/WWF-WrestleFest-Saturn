@@ -14,6 +14,7 @@
 static wf_native_mail_t test_mail;
 static uint16_t test_ring[16], test_events[256][4], test_clock;
 static unsigned test_record_reads;
+static unsigned test_fallback_starts,test_prepared_starts;
 static volatile uint16_t *test_record(unsigned index)
 {
     ++test_record_reads;return test_events[index&255u];
@@ -33,7 +34,21 @@ static void timed_work(wf_scsp_sfx_t *s)
     for(unsigned v=0;v<4;v++)before+=s->pcm[v].write_at;
     wf_scsp_sfx_work(s);
     for(unsigned v=0;v<4;v++)after+=s->pcm[v].write_at;
-    test_clock=(uint16_t)(test_clock+(148u*(after-before)+127u)/128u);
+    /* Real full mixed TAG replay, faster decoder plus four-voice deadline
+     * selection: maximum complete128-sample refill work113Fs. */
+    test_clock=(uint16_t)(test_clock+(113u*(after-before)+127u)/128u);
+}
+static bool timed_start(wf_scsp_sfx_t *s,unsigned voice,unsigned bank,unsigned id,unsigned volume,bool suppress)
+{
+    bool ok=wf_scsp_sfx_oki_start(s,voice,bank,id,volume,suppress);
+    if(ok){++test_fallback_starts;test_clock=(uint16_t)(test_clock+329);}
+    return ok;
+}
+static bool timed_start_prepared(wf_scsp_sfx_t *s,unsigned voice,unsigned bank,unsigned id,unsigned volume,bool suppress,const wf_sfx_prepared_t *prepared)
+{
+    bool ok=wf_scsp_sfx_oki_start_prepared(s,voice,bank,id,volume,suppress,prepared);
+    if(ok){++test_prepared_starts;test_clock=(uint16_t)(test_clock+118);}
+    return ok;
 }
 #define WF_NATIVE_MAIL_OFFSET ((uintptr_t)&test_mail)
 #define WF_MUSIC_RING_HEADER ((uintptr_t)test_ring)
@@ -42,12 +57,16 @@ static void timed_work(wf_scsp_sfx_t *s)
 #define WF_DSP_CLOCK ((uintptr_t)&test_clock)
 #define wf_scsp_sfx_prepare_step timed_prepare_step
 #define wf_scsp_sfx_work timed_work
+#define wf_scsp_sfx_oki_start timed_start
+#define wf_scsp_sfx_oki_start_prepared timed_start_prepared
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wint-to-pointer-cast"
 #include "../src/wf_music_firmware.c"
 #pragma GCC diagnostic pop
 #undef wf_scsp_sfx_prepare_step
 #undef wf_scsp_sfx_work
+#undef wf_scsp_sfx_oki_start
+#undef wf_scsp_sfx_oki_start_prepared
 
 bool wf_scsp_dsp_load(wf_sfx_write16_fn write, void *user) { (void)write; (void)user; return true; }
 void wf_scsp_dsp_clock_run(void) {}
@@ -82,6 +101,7 @@ static void reset_fixture(unsigned kind, uint16_t when, uint16_t now)
     music_bank = 0;
     prepared_music_valid = false;prepared_music_frames=0;
     test_record_reads=0;
+    test_fallback_starts=test_prepared_starts=0;
 }
 
 static void hard_deadline_is_counted_once_and_never_replayed(void)
@@ -246,15 +266,16 @@ static void refill_respects_the_nearest_deadline(void)
     wf_sfx_engine.bound=1;wf_sfx_engine.pack=pack;
     wf_sfx_engine.write16=cache_test_write;
     wf_scsp_sfx_pcm_t *p=&wf_sfx_engine.pcm[3];
-    p->playing=1;p->write_at=256;p->write_end=1024;p->decoder.remaining=512;
+    p->playing=1;p->write_at=256;p->write_end=1024;p->total_frames=1024;p->decoder.remaining=512;
     music_work();
     assert(test_clock==1000 && p->write_at==256 && "refill crossed the nearest queued deadline");
     /* When the full measured work budget fits, normal128-sample refill still
      * makes progress; no queue, ring size or refill granularity changed. */
-    test_events[0][0]=1300;
+    test_events[0][0]=1140;
     music_work();
-    assert(test_clock==1148 && p->write_at==384);
-    if(WF_MUSIC_TIMING)assert(wf_music_timing[24]==148);
+    assert(test_clock==1113 && p->write_at==384);
+    assert(test_clock<test_events[0][0]);
+    if(WF_MUSIC_TIMING)assert(wf_music_timing[24]==113);
 }
 
 static void preparation_sees_the_start_behind_a_dense_burst(unsigned records)
@@ -289,6 +310,102 @@ static void completed_preparation_does_not_rescan_immutable_records(void)
     assert(test_record_reads<=1 && "complete cache rescanned all immutable transport records");
 }
 
+static void cached_target_tracks_wrap_consumption_and_generation(void)
+{
+    uint16_t saved[32][4];
+    preparation_sees_the_start_behind_a_dense_burst(32);
+    memcpy(saved,test_events,sizeof saved);memset(test_events,0,sizeof test_events);
+    for(unsigned i=0;i<32;i++)memcpy(test_events[(65520u+i)&255u],saved[i],sizeof saved[i]);
+    test_ring[1]=65520;test_ring[0]=16;test_clock=1000;
+    prepared_music_frames=0;prepared_music_valid=false;
+    assert(music_prepare() && prepared_music_frames==64);
+    assert(prepared_music_target==15 && prepared_music_generation==generation);
+    test_record_reads=0;
+    assert(music_prepare() && prepared_music_frames==128);
+    assert(test_record_reads==1 && "partial cache rescanned immutable records across ring wrap");
+    assert(music_prepare() && music_prepare() && prepared_music_valid);
+    test_record_reads=0;
+    assert(!music_prepare() && test_record_reads==0);
+
+    /* Consuming that target ends the shortcut. A later bank switch must be
+     * interpreted before preparing its next sample, even for the same id. */
+    test_ring[1]=16;test_ring[0]=20;
+    uint8_t *pack=(uint8_t *)wf_sfx_engine.pack;
+    pack[635]=64;pack[636]=1; /* bank1/sample1 descriptor */
+    const uint16_t kinds[]={0x400,0x200,0x100,0x100};
+    const uint16_t values[]={3,1,0x81,0x10};
+    for(unsigned i=0;i<4;i++){
+        test_events[16+i][0]=(uint16_t)(6000+i*20);
+        test_events[16+i][1]=kinds[i];test_events[16+i][2]=values[i];
+        test_events[16+i][3]=generation;
+    }
+    assert(music_prepare() && prepared_music_frames==64);
+    assert(prepared_music.bank==1 && prepared_music.id==1 && prepared_music_target==19);
+    assert(music_bank==0 && test_ring[1]==16);
+
+    ++test_ring[2];
+    for(unsigned i=16;i<20;i++)test_events[i][3]=test_ring[2];
+    assert(!music_prepare() && prepared_music_frames==64);
+    assert(music_service());
+    assert(!prepared_music_frames && !prepared_music_valid && !prepared_music_generation);
+    assert(music_prepare() && prepared_music_frames==64);
+    assert(prepared_music_generation==generation && prepared_music.bank==1);
+
+    /* A partial cache whose target was consumed cannot be resumed for an
+     * unrelated sample that now occupies the live span. */
+    test_ring[1]=20;test_ring[0]=22;
+    pack[51]=64;pack[52]=1; /* bank0/sample2 descriptor */
+    for(unsigned i=20;i<22;i++){
+        test_events[i][0]=(uint16_t)(7000+i-20);test_events[i][1]=0x100;
+        test_events[i][2]=i==20?0x82:0x10;test_events[i][3]=generation;
+    }
+    assert(music_prepare() && prepared_music_frames==64);
+    assert(prepared_music.bank==0 && prepared_music.id==2 && prepared_music_target==21);
+}
+
+static void launch_finishes_a_matching_nearly_complete_cache(void)
+{
+    static uint8_t pack[1024];
+    const unsigned fills[]={128,192,208};
+    for(unsigned n=0;n<sizeof fills/sizeof fills[0];n++){
+        memset(pack,0,sizeof pack);pack[43]=64;pack[44]=1;
+        for(unsigned i=64;i<320;i++)pack[i]=(uint8_t)(i*37u+(i>>1));
+        reset_fixture(1,1000,1000);
+        wf_sfx_engine.bound=1;wf_sfx_engine.pack=pack;wf_sfx_engine.samples=32;
+        wf_sfx_engine.write16=cache_test_write;
+        wf_sfx_prepared_t expected;
+        assert(wf_scsp_sfx_prepare(&wf_sfx_engine,&expected,0,1));
+        assert(wf_scsp_sfx_prepare_step(&wf_sfx_engine,&prepared_music,0,1,&prepared_music_frames,fills[n]));
+        test_ring[0]=4;
+        for(unsigned i=0;i<4;i++){
+            test_events[i][0]=1000;test_events[i][1]=0x100;
+            test_events[i][2]=(i&1u)?0x10:0x81;test_events[i][3]=generation;
+        }
+        assert(music_service() && test_ring[1]==4);
+        if(fills[n]>=192){
+            assert(prepared_music_valid && prepared_music_frames==256);
+            assert(test_prepared_starts==1 && !test_fallback_starts);
+            assert(!test_ring[4] && "launch discarded cached samples and repeated the full decode");
+            assert(test_clock<=1256);
+            assert(!memcmp(expected.samples,prepared_music.samples,sizeof expected.samples));
+            assert(expected.decoder.offset==prepared_music.decoder.offset);
+            assert(expected.decoder.remaining==prepared_music.decoder.remaining);
+            assert(expected.decoder.signal==prepared_music.decoder.signal);
+            assert(expected.decoder.index==prepared_music.decoder.index);
+            assert(expected.decoder.low==prepared_music.decoder.low);
+            assert(wf_sfx_engine.pcm[3].decoder.offset==expected.decoder.offset);
+            assert(wf_sfx_engine.pcm[3].decoder.remaining==expected.decoder.remaining);
+            assert(wf_sfx_engine.pcm[3].decoder.signal==expected.decoder.signal);
+            assert(wf_sfx_engine.pcm[3].decoder.index==expected.decoder.index);
+            assert(wf_sfx_engine.pcm[3].decoder.low==expected.decoder.low);
+        }else{
+            assert(!prepared_music_valid && prepared_music_frames==128);
+            assert(test_fallback_starts==1 && !test_prepared_starts);
+            assert(test_ring[4]==2 && "uncached fallback deadlines were hidden");
+        }
+    }
+}
+
 int main(int argc,char **argv)
 {
     void *mmio = mmap((void *)(uintptr_t)0x100000u, 4096, PROT_READ|PROT_WRITE,
@@ -303,13 +420,21 @@ int main(int argc,char **argv)
     }
     if(argc==2&&argv[1][0]=='c'){
         completed_preparation_does_not_rescan_immutable_records();
+        cached_target_tracks_wrap_consumption_and_generation();
         puts("PASS cached preparation target");return 0;
+    }
+    if(argc==2&&argv[1][0]=='p'){
+        launch_finishes_a_matching_nearly_complete_cache();
+        puts("PASS bounded partial launch preparation");return 0;
     }
     preparation_respects_the_nearest_deadline(10);
     preparation_respects_the_nearest_deadline(200);
     refill_respects_the_nearest_deadline();
     preparation_uses_only_admissible_smaller_steps();
     preparation_finishes_in_dense_short_gaps();
+    completed_preparation_does_not_rescan_immutable_records();
+    cached_target_tracks_wrap_consumption_and_generation();
+    launch_finishes_a_matching_nearly_complete_cache();
     if(argc==2)preparation_sees_the_start_behind_a_dense_burst((unsigned)strtoul(argv[1],NULL,0));
     else{
         preparation_sees_the_start_behind_a_dense_burst(14);

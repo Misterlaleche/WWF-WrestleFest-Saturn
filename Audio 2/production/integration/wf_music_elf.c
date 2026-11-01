@@ -3,8 +3,12 @@ static uint16_t be16(const uint8_t *p){return (uint16_t)(p[0]*256u+p[1]);}
 static uint32_t be32(const uint8_t *p){return (uint32_t)be16(p)*65536u+be16(p+2);}
 static bool owned_window(uint32_t base,uint32_t bytes)
 {
+#if defined(WF_AUDIO2_WORKSPACE_VDP1) && WF_AUDIO2_WORKSPACE_VDP1
+ return bytes==WF_MUSIC_HOT_WINDOW_BYTES && base==0x05c78020u;
+#else
  return bytes==WF_MUSIC_HOT_WINDOW_BYTES && !(base&3u) &&
         base>=0x06000000u && base<=0x06100000u-WF_MUSIC_HOT_WINDOW_BYTES;
+#endif
 }
 bool wf_music_elf_image(const void *data,size_t bytes,uint32_t hot_base,
                         uint32_t hot_bytes,wf_music_image_t *out)
@@ -27,11 +31,13 @@ bool wf_music_elf_image(const void *data,size_t bytes,uint32_t hot_base,
      (align>1&&((align&(align-1u))||((address^off)&(align-1u)))))return false;
   if(file&&(size_t)off<(size_t)table+128u)return false;
   if(i==0){
-   if(address!=WF_MUSIC_MODULE_BASE||file!=mem||file<32||mem>0x20000u||flags!=5)return false;
+   if(address!=WF_MUSIC_MODULE_BASE||file!=mem||file<32||
+      mem>WF_MUSIC_MODULE_STATE-WF_MUSIC_MODULE_BASE||flags!=5)return false;
   }else if(i==1){
-   if(address!=0x05c7c000u||file||mem>0x3000u||flags!=6)return false;
+   if(address!=WF_MUSIC_MODULE_STATE||file||
+      mem>WF_MUSIC_MODULE_SHARED_ADDRESS-WF_MUSIC_MODULE_STATE||flags!=6)return false;
   }else if(i==2){
-   if(address!=0x05c7f000u||file||mem!=4096||flags!=6)return false;
+   if(address!=WF_MUSIC_MODULE_SHARED_ADDRESS||file||mem!=4096||flags!=6)return false;
   }else if(address!=hot_base||mem>hot_bytes||!file||flags!=7)return false;
   for(unsigned j=0;j<i;j++){
    if(file&&m.segments[j].file_bytes&&(size_t)off<(size_t)offsets[j]+m.segments[j].file_bytes&&

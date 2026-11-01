@@ -15,12 +15,14 @@ def main():
     p.add_argument('--display',type=int,default=86)
     p.add_argument('--wall-seconds',type=float,default=90)
     p.add_argument('--audio-only',action='store_true')
+    p.add_argument('--presentation-speed',type=int,choices=(1,4),default=1)
     a=p.parse_args();b=json.loads((a.build/'saturn-build.json').read_text())
     command=[sys.executable,str(Path(__file__).with_name('capture_mednafen.py')),
         '--environment-root',str(a.environment_root),'--cue',str(a.build/'AUDIO2.cue'),
         '--bios',str(a.bios),'--out',str(a.out),'--seconds',str(a.wall_seconds),
         '--display',str(a.display),'--dump-wram','--ready-watch','magic',
-        '--ready-value','0x57464132','--stop-watch','state','--stop-value','4']
+        '--ready-value','0x57464132','--stop-watch','state','--stop-value','4',
+        '--presentation-speed',str(a.presentation_speed)]
     if a.audio_only:command+=['--audio-only']
     for i,name in enumerate(FIELDS):command+=['--watch',f'{name}:{b["diag_address"]+i*4}:4']
     subprocess.run(command,check=True)

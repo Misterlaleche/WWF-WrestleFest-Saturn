@@ -102,8 +102,45 @@ Private evidence root: `audio2-build/combat-prerequisites/integration/build10/`.
 
 `production/integration/README.md` gives the fresh private build, exact capture and analyzer commands. Its source-only adapter, strict ABI4 loader, build tools and focused tests are published for review. Queue tests cover original raw-word preservation, same-frame order, BUSY retention, unsupported commands and capacity 64. Cadence tests cover excluding startup/repeated fields, exact gaps, missed-step disclosure and regression detection. These checks validate contracts; the native failure above remains a failed acceptance gate.
 
-## Royal prerequisites
+## Royal prerequisites — archive-specific scope
 
 The archived normal frontend references `ROYSPR.BIN`, which is absent from the staged archive. The archived generator successfully reconstructs it privately from `validation/runtime18-royal-tiles.txt` and `audit/runtime18-cd/SPRITES.PAK`: 7,669 tiles, 769,012 bytes, SHA256 `a408fb7ecc1ddd2902b02128cf704a4d6121c231a8fc868d0f1a4a0c730700d7`. No historical or gameplay source edit is necessary for that asset.
 
-The unresolved gate is an approved reproducible Royal mode/input fixture. The supplied WP1979 entry and recorded tape explicitly boot TAG, and no archived deterministic Royal direct entry or matching Royal tape was found. Entering an unverified menu route or merely displaying four characters would not establish an identical-input Royal comparison. Royal performance, final audio fidelity and real Saturn hardware remain unmeasured.
+The supplied **WP1979 archive** entry and recorded tape explicitly boot TAG; no deterministic Royal direct entry or matching Royal tape was found in that archive. This finding does not apply globally to all provided releases. A later source review located the separate **WP1980 HW1** Royal fixture, including original `ROYINIT.BIN`, deterministic `wp1980_input` and an 8474-step GAME OVER endpoint. The 1444-file archive has since been extracted pristine under `audio2-build/royal-prerequisites/pristine/wp1980`; its audio-only adapter/build integration is a separate ongoing task. Its historical baseline is already below the stated arcade cadence, so its own matched control must be measured before attributing any additional cost to Audio2.
+
+No Royal comparison is claimed by the TAG evidence above. Entering an unverified menu route or merely displaying four characters would not establish an identical-input Royal comparison. Royal performance with this candidate, final audio fidelity and real Saturn hardware remain unmeasured at this checkpoint.
+
+### Independent Royal VDP2 ownership audit
+
+The original HW1 `Makefile.wp1980` selects `src/wp1980_combat_entry.c`, no expansion cart, and 3584 VDP1 texture slots. `wf_saturn_yaul_backend.c` places that pool at offsets `0x08020..0x78020`; it overlaps TAG's audio tail. The original compile-time `WP1980_DISABLE_MUSIC=1` guard is correct and must remain. A VDP1-based Audio2 module is ineligible for this Royal profile.
+
+The independently audited alternative uses the otherwise unowned tail of **VDP2 bank A1 (bank 1)**. Bounds below are half-open physical address intervals. The corresponding uncached CPU alias adds `0x20000000`.
+
+| Existing or proposed owner | Physical interval | Bytes |
+|---|---|---:|
+| Existing FG name reservation | `0x05e20000..0x05e22000` | 8192 |
+| Existing BG name reservation | `0x05e22000..0x05e24000` | 8192 |
+| Existing HUD names | `0x05e24000..0x05e26000` | 8192 |
+| Proposed Audio2 cold code and ROM | `0x05e26000..0x05e3b000` | 86016 (84 KiB) |
+| Proposed Audio2 BSS | `0x05e3b000..0x05e3e000` | 12288 |
+| Proposed Audio2 shared page | `0x05e3e000..0x05e3f000` | 4096 |
+| Untouched guard | `0x05e3f000..0x05e3fffe` | 4094 |
+| Existing back color | `0x05e3fffe..0x05e40000` | 2 |
+
+This is an ownership gate for an isolated native experiment, not a runtime pass. The previously measured 83172-byte cold module fits the proposed 86016-byte capacity with 2844 bytes remaining; every newly linked module must independently satisfy the bounds.
+
+**Write ownership.** `include/wf_saturn_memory.h` declares all three name bases and the back-color word. `wf_r18_ring.c` selects foreground and background character patterns in banks 0 and 2, respectively. The validated ring pack has at most 1024 characters of 128 bytes each, so those uploads cannot spill into bank 1. Its normal name writer has 1024 `uint16_t` cells per layer, staying inside the larger reserved intervals above. `wf_r18_hud_map_update()` iterates 2048 source cells and writes both `cell` and `cell+2048`; its largest write ends exactly at bank-1 offset `0x6000`. The optional rate overlay writes three cells within the same HUD names. The failure bitmap is in bank 0. The source scan found no game VDP2 DMA or whole-bank clear: sprite DMA destinations remain VDP1, font uploads are confined to bank 3, and color updates address separate CRAM.
+
+**Initialization and restart.** In the actual combat entry, `wf_saturn_yaul_video_init()` and the complete bank-3 font upload precede `combat_audio_boot()`. `combat_load_initial()` subsequently binds the ring, uploads only banks 0/2, and commits the unchanged VDP2 cycle pattern. Royal's local restart returns to `royal_restart`, after the one-time audio boot, and repeats these bounded asset operations. It does not reinitialize VDP2 wholesale. The installed Yaul archive does contain a 512 KiB VDP2 DMA clear in `___vdp2_vram_init`; disassembly of the exact SDK `init.o` proves that `___sys_init` calls `___vdp_init` before `_user_init`, hence before the module is loaded. The game's video-init wrapper does not call that SDK initializer again.
+
+**CPU access.** The exact SDK declares `VDP2_VRAM_ADDR(1, offset)` as `0x25e20000+offset`, and its default VRAM-control data is partition mode 3, splitting both A and B banks. The original ring installs bank-1 cycle pattern `0x012ffffe`: three name reads, an idle T6 and CPU read/write at T7. This pattern must remain unchanged. The exact Mednafen 1.32.1 VDP2/SCU implementation accepts byte and word RAM writes, masks byte lanes, and exposes word reads through the B bus. The integration loader already writes through aligned 16-bit stores. Cached cold execution and the uncached shared alias must retain the adapter's cache purge and synchronization rules; changing the address does not remove that obligation.
+
+**Remaining native gate.** Use a separate strict ABI4 profile with the new cold/BSS/shared bounds and reject the TAG profile before any writes. Verify native heartbeat/progress after the original ring setup, exact cold/hot file bytes after gameplay, untouched guard and back color, and identical runtime/graphics versus the matched control. B-bus access cost may differ from VDP1; throughput remains a measured question. No graphics pool, layer, cycle pattern or gameplay change is needed to test this candidate.
+
+The private evidence checkpoint is `audio2-build/royal-prerequisites/vdp2-ownership-audit/`: `audit.json` records 13 exact source/SDK hashes and every interval; the relevant SDK startup, VRAM-init, back-color and partition-data disassemblies are preserved beside it. No original game file was edited during this audit.
+
+The subsequent base-Saturn Royal link exposes a **separate HWRAM blocker**. In `integration-bf2/game/audit/audio2-build/audio2-royal.map`, the unchanged game plus audio adapter ends BSS/uncached storage at aligned address `0x060fca40`. Adding the same 18432-byte hot region and 8192-byte slave stack would end at `0x06103240`, outside HWRAM; retaining the explicit 4096-byte heap guard leaves a 16960-byte deficit. The VDP2 cold-region audit does not resolve that HWRAM failure. Base-Saturn Royal Audio2 is therefore still blocked with the current allocation; no claim that its cartridge is optional follows from this audit.
+
+A further source-only alternative remains untested: the original Royal VDP1 texture pool ends at `0x05c78020`, leaving 32736 bytes below `0x05c80000`. The existing `vdp1_vram_partitions_set(1024,0x53560,0,0)` allocates no Gouraud or CLUT table, every emitted sprite keeps `cmd_grda=0`, and the normal/ROM DMA writers remain bounded below that tail. This region could physically hold an 18 KiB audio hot region and 8 KiB slave stack without altering graphics. The present API deliberately rejects a non-HWRAM hot workspace, and placement there would change bus cost. Such an experiment needs a new explicit ownership profile, strict loader/API agreement and native timing, stack and payload validation before use. It is not part of the accepted TAG memory profile or a demonstrated Royal solution.
+
+The selected follow-up experiment moves **only the 18 KiB hot region** to `0x05c78020..0x05c7c820`. The dedicated 8 KiB slave stack stays in HWRAM at `0x060fca40..0x060fea40`, leaving 5568 bytes for the heap, above the existing 4096-byte guard. Another 14304 bytes of the VDP1 tail remain unused. This variant satisfies the independent static graphics-ownership audit and avoids a VRAM stack. A profile-specific exact workspace check, identical loader/module addresses and native validation are still required; the failed HWRAM-only build remains preserved.

@@ -283,12 +283,37 @@ void wf_scsp_sfx_advance(wf_scsp_sfx_t *s,unsigned n)
     s->timer_phase+=n*3579545u;
     while(s->timer_phase>=714067200u){s->timer_phase-=714067200u;tick(s);}
 }
+#if defined(__m68k__)
+__attribute__((noinline,section(".wf_audio_high")))
+#endif
 static void work_count(wf_scsp_sfx_t *s,unsigned count)
 {
-    unsigned v;if(!s||!s->bound||s->fault)return;
+    unsigned best=0;int16_t best_margin=0;
+    const wf_scsp_sfx_pcm_t *chosen=NULL;
+    if(!s||!s->bound||s->fault)return;
+    unsigned v=s->work_voice;
+    const wf_scsp_sfx_pcm_t *p=&s->pcm[v];
     for(unsigned n=0;n<4;n++){
-        v=s->work_voice;s->work_voice=(uint8_t)((v+1u)&3u);
-        if(s->pcm[v].playing&&s->pcm[v].write_at<s->pcm[v].write_end){fill(s,v,count);return;}
+        if(!p->playing||p->write_at>=p->write_end)goto next;
+        unsigned guard=p->initial_fill?8u:64u;
+        /* Only the sample and its existing safety tail need decoding. A
+         * finished short sound must not fill thousands of silent frames
+         * while another voice approaches its read cursor. */
+        if(!p->decoder.remaining&&p->write_at>=p->total_frames+guard)goto next;
+        /* A live producer is at most one4096-sample ring ahead. Word
+         * subtraction retains this signed distance across cursor wrap. */
+        int16_t margin=(int16_t)((uint16_t)p->write_at-(uint16_t)p->played)-(int16_t)guard;
+        /* Strict comparison preserves round-robin order for equal margins.
+         * The original ROM command priority/suppression logic is unchanged. */
+        if(!chosen||margin<best_margin){best=v;best_margin=margin;chosen=p;}
+next:
+        ++v;++p;if(v==4){v=0;p=s->pcm;}
     }
+    if(!chosen)return;
+    s->work_voice=(uint8_t)((best+1u)&3u);
+    uint32_t limit=chosen->total_frames+(chosen->initial_fill?8u:64u);
+    if(limit>chosen->write_end)limit=chosen->write_end;
+    if(count>limit-chosen->write_at)count=(unsigned)(limit-chosen->write_at);
+    fill(s,best,count);
 }
 void wf_scsp_sfx_work(wf_scsp_sfx_t *s){work_count(s,128);}

@@ -9,15 +9,17 @@ All generated discs, ROM resources and WAVs belong outside the source tree.
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
+import importlib.util
 import json
 import math
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import threading
 
-from build_saturn import build
+from source_snapshot import snapshot_package, source_identity
 
 
 def sha(path):
@@ -34,6 +36,7 @@ def main():
     parser.add_argument('--last', type=lambda s: int(s, 0), default=0x81)
     parser.add_argument('--jobs', type=int, choices=(1, 2), default=2)
     parser.add_argument('--display', type=int, default=90)
+    parser.add_argument('--presentation-speed', type=int, choices=(1, 4), default=1)
     args = parser.parse_args()
     if not 0x20 <= args.first <= args.last <= 0x81:
         parser.error('Original SFX range is 0x20..0x81')
@@ -45,16 +48,54 @@ def main():
     args.out.mkdir(parents=True, exist_ok=False)
     reference = json.loads(args.reference_report.read_text())
     originals = {item['command']: item for item in reference['commands']}
-    package = args.package
-    source_paths = sorted(p for group in ('src', 'include', 'tests')
-                          for p in (package / group).rglob('*') if p.is_file())
-    source_hashes = {str(p.relative_to(package)): sha(p) for p in source_paths}
+    package = args.out / 'source'
+    source_hashes = snapshot_package(args.package, package)
+    # Firmware, symbols and ROM-generated inputs are also immutable per matrix.
+    # They remain private experiment output, never part of the source package.
+    private_inputs = args.out / 'inputs'
+    private_inputs.mkdir()
+    input_identities = {}
+    def freeze_input(source, relative):
+        target = private_inputs / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        digest = sha(source)
+        shutil.copyfile(source, target)
+        if sha(source) != digest or sha(target) != digest:
+            raise RuntimeError('Input changed while making snapshot: ' + str(source))
+        input_identities[str(relative)] = digest
+        return target
+    firmware_source = args.firmware
+    args.firmware = freeze_input(firmware_source, Path('firmware/SCSP.ELF'))
+    freeze_input(firmware_source.parent / 'symbols.json', Path('firmware/symbols.json'))
+    for name in ('firmware-build.json', 'source-manifest.json'):
+        if (firmware_source.parent / name).exists():
+            freeze_input(firmware_source.parent / name, Path('firmware') / name)
+    for name in ('SOUND.ROM', 'SFX.DAT'):
+        freeze_input(args.resources / name, Path('resources') / name)
+    args.resources = private_inputs / 'resources'
+    args.bios = freeze_input(args.bios, Path('bios/ntsc-u.bin'))
+    args.reference_report = freeze_input(args.reference_report, Path('reference/original-report.json'))
+    for command in range(args.first, args.last + 1):
+        item = originals[command]
+        source_wav = Path(item['wav'])
+        if sha(source_wav) != item['wav_sha256']:
+            raise ValueError('Reference WAV hash mismatch')
+        frozen_wav = freeze_input(source_wav, Path('reference') / f'reference-{command:02X}.wav')
+        originals[command] = {**item, 'wav': str(frozen_wav)}
+    spec = importlib.util.spec_from_file_location('audio2_frozen_builder',
+                                                 package / 'tools/build_saturn.py')
+    builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(builder)
     report = {
         'kind': 'COLD_BOOT_NATIVE_SFX_MATRIX',
         'emulator': 'standalone Mednafen 1.32.1',
         'source_sha256_before': source_hashes,
+        'source_snapshot': str(package),
+        'source_origin': str(args.package),
+        'private_input_sha256': input_identities,
         'firmware_sha256': sha(args.firmware),
         'reference_report_sha256': sha(args.reference_report),
+        'presentation_speed_requested': args.presentation_speed,
         'range': [args.first, args.last],
         'reference_scope': reference['kind'],
         'ownership_scope': 'Direct diagnostic commands only; no new gameplay producer evidence',
@@ -74,8 +115,8 @@ def main():
         seconds = math.ceil(item['seconds']) + 2
         work = args.out / f'command-{command:02X}'
         work.mkdir()
-        build_report = build(package, work / 'build', args.resources,
-                             args.firmware, args.sdk, command, seconds)
+        build_report = builder.build(package, work / 'build', args.resources,
+                                     args.firmware, args.sdk, command, seconds)
         with condition:
             condition.wait_for(lambda: bool(displays))
             display = displays.pop()
@@ -84,7 +125,7 @@ def main():
                           '--build', str(work / 'build'), '--environment-root', str(args.environment_root),
                           '--bios', str(args.bios), '--out', str(work / 'capture'),
                           '--display', str(display), '--wall-seconds', str(120 + seconds * 4),
-                          '--audio-only']
+                          '--audio-only', '--presentation-speed', str(args.presentation_speed)]
             with (work / 'capture.log').open('w') as output:
                 result = subprocess.run(invocation, stdout=output, stderr=subprocess.STDOUT)
         finally:
@@ -96,7 +137,7 @@ def main():
         compare_command = [sys.executable, str(package / 'tools/compare_capture.py'),
                            '--capture', str(work / 'capture'), '--reference', str(source_wav),
                            '--build', str(work / 'build'), '--out', str(args.out / 'pairs'),
-                           '--command', hex(command)]
+                           '--command', hex(command), '--reference-profile', 'sfx-model']
         comparison_code = None
         if gates.get('diagnostics', {}).get('state') == 4:
             with (work / 'comparison.log').open('w') as output:
@@ -131,11 +172,14 @@ def main():
             except Exception as error:
                 failures.append({'command': hex(pending[future]), 'error': str(error)})
                 print(json.dumps(failures[-1]), flush=True)
-    report['source_sha256_after'] = {str(p.relative_to(package)): sha(p) for p in source_paths}
+    report['source_sha256_after'] = source_identity(package)
     report['source_stable'] = report['source_sha256_after'] == source_hashes
+    report['private_inputs_stable'] = all(
+        sha(private_inputs / relative) == digest for relative, digest in input_identities.items())
     report['errors'] = failures
     report['complete'] = len(report['commands']) == args.last - args.first + 1 and not failures
     report['all_runtime_gates_passed'] = (report['complete'] and report['source_stable'] and
+                                        report['private_inputs_stable'] and
                                         all(c['passed_runtime_gates'] for c in report['commands']))
     report['all_pairs_available'] = (report['complete'] and
                                     all(c['listening_pair_available'] for c in report['commands']))

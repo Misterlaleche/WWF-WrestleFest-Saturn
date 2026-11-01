@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Analyze two immutable native TAG captures; never writes emulator memory.
+"""Analyze immutable native TAG or Royal captures; never writes emulator memory.
 
 Requires the build's ELF symbol manifests, cross-compiled layout constants,
 native states/RAM dumps, and unmodified native MOV/WAV captures. This proves
@@ -149,21 +149,23 @@ def inspect(profile, a, read_state, master, module, build, layout, sfx_layout):
               'bios_sha256': capture_report['bios_sha256']}
     if profile == 'audio2':
         metadata, sections = read_state(capture_report['native_state']['path'])
-        vram, scsp = sections['VDP1']['VRAM'], sections['SCSP']['RAM']
+        vram, vdp2, scsp = sections['VDP1']['VRAM'], sections['VDP2']['VRAM'], sections['SCSP']['RAM']
         if metadata['data_byte_order'] == 'little':
             vram = b''.join(vram[i:i+2][::-1] for i in range(0, len(vram), 2))
+            vdp2 = b''.join(vdp2[i:i+2][::-1] for i in range(0, len(vdp2), 2))
             scsp = b''.join(scsp[i:i+2][::-1] for i in range(0, len(scsp), 2))
+        def native_memory(address, length):
+            address &= 0x1fffffff
+            for base, data in ((0x05c00000, vram), (0x05e00000, vdp2), (0x06000000, wram)):
+                if base <= address and address + length <= base + len(data):
+                    return data[address-base:address-base+length]
+            raise ValueError(f'Unmapped native audio address {address:#x}, length {length}')
         checks = []
         for segment, expected in elf_loads(a.build / 'cd/MUSIC4.ELF'):
             if not expected:
                 continue
             address = segment[2] & 0x1fffffff
-            if 0x05c00000 <= address < 0x05c80000:
-                actual = vram[address - 0x05c00000:address - 0x05c00000 + len(expected)]
-            elif 0x06000000 <= address < 0x06100000:
-                actual = wram[address - 0x06000000:address - 0x06000000 + len(expected)]
-            else:
-                raise ValueError('Unexpected module segment')
+            actual = native_memory(address, len(expected))
             checks.append({'address': address, 'bytes': len(expected),
                            'sha256': digest(expected), 'loaded_bytes_match': actual == expected})
         result['loaded_module_segments'] = checks
@@ -180,8 +182,7 @@ def inspect(profile, a, read_state, master, module, build, layout, sfx_layout):
         counters = {}
         for symbol in ('_wf_music_fm_discarded_events', '_wf_music_fm_discarded_batches',
                        '_wf_music_fm_rejected_events', '_wf_music_ring_rejected_events'):
-            at = module[symbol] - 0x05c00000
-            counters[symbol.removeprefix('_wf_music_')] = int.from_bytes(vram[at:at+4], 'big')
+            counters[symbol.removeprefix('_wf_music_')] = int.from_bytes(native_memory(module[symbol], 4), 'big')
         for name in ('underruns', 'frames', 'ticks'):
             at = base + sfx_layout[name]
             counters['sfx_' + name + '_32bit'] = int.from_bytes(scsp[at:at+4], 'big')
@@ -192,9 +193,16 @@ def inspect(profile, a, read_state, master, module, build, layout, sfx_layout):
         counters['last_poll_gap_over_512_fs'] = int.from_bytes(scsp[0xb034:0xb036], 'big')
         counters['playing_mask_at_last_long_poll'] = int.from_bytes(scsp[0xb036:0xb038], 'big')
         counters['mail_state'] = int.from_bytes(scsp[0xc046:0xc048], 'big')
-        counters['music_shared_state'] = int.from_bytes(vram[0x7f084:0x7f086], 'big')
-        counters['music_shared_error'] = int.from_bytes(vram[0x7f088:0x7f08c], 'big')
+        shared = build.get('music_memory_profile', {}).get('shared', 0x05c7f000)
+        counters['music_shared_state'] = int.from_bytes(native_memory(shared+132, 2), 'big')
+        counters['music_shared_error'] = int.from_bytes(native_memory(shared+136, 4), 'big')
         result['native_audio_counters'] = counters
+        if build.get('scenario') == 'royal':
+            result['royal_memory_observation'] = {
+                'vdp2_gap_after_module_sha256': digest(native_memory(0x05e3f000, 4094)),
+                'vdp2_back_color_word': int.from_bytes(native_memory(0x05e3fffe, 2), 'big'),
+                'vdp1_unused_tail_after_hot_sha256': digest(native_memory(0x05c7c820, 0x37e0)),
+                'note': 'End-state observation; no fabricated canary or before/after overwrite proof.'}
         low = build['slave_stack_bottom'] - 0x06000000
         high = build['slave_stack_top'] - 0x06000000
         canary = wram[low:high]
@@ -209,14 +217,20 @@ def inspect(profile, a, read_state, master, module, build, layout, sfx_layout):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('build', 'game-layout', 'sfx-layout', 'firmware', 'firmware-symbols',
-                 'capture-analyzer', 'input-tape', 'out'):
+                 'capture-analyzer', 'out'):
         p.add_argument('--' + name, required=True, type=Path)
+    inputs=p.add_mutually_exclusive_group(required=True)
+    inputs.add_argument('--input-tape', type=Path, help='Actual TAG logical-frame input fixture')
+    inputs.add_argument('--input-policy', type=Path, help='Unchanged Royal HW1 ordinary-input policy source; not a recorded input tape')
     a = p.parse_args()
     spec = importlib.util.spec_from_file_location('audio_capture_reader', a.capture_analyzer)
     capture_reader = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(capture_reader)
     master, module = load(a.build / 'master-symbols.json'), load(a.build / 'module-symbols.json')
     build = load(a.build / 'integration-build.json')
+    royal = build.get('scenario') == 'royal'
+    if royal != bool(a.input_policy):
+        raise ValueError('Royal requires its actual input policy; TAG requires its recorded input tape')
     if file_digest(a.firmware) != build['firmware_sha256']:
         raise ValueError('Requested firmware is not the firmware recorded in this build')
     layout = fields(a.game_layout.read_bytes(), ('actors_offset', 'actor_bytes', 'actor_slots',
@@ -227,11 +241,23 @@ def main():
                 for name in ('control', 'audio2')}
     control, audio = profiles['control'][0], profiles['audio2'][0]
     cv, av = control['cadence']['elapsed_vblanks'], audio['cadence']['elapsed_vblanks']
+    active_audio = (audio['diagnostics']['boot_success'] == 1 and
+                    audio['diagnostics']['api_state'] == 2 and
+                    audio['diagnostics']['worker_state'] == 2 and
+                    not audio['diagnostics']['api_error'] and
+                    not audio['diagnostics']['worker_error'] and
+                    not audio['diagnostics']['skipped'])
     result = {'scope': 'frozen performance/integration evidence; no fidelity acceptance',
-              'input_tape_sha256': file_digest(a.input_tape), 'game_layout': layout,
+              'input_tape_sha256': file_digest(a.input_tape) if a.input_tape else None,
+              'input_policy_sha256': file_digest(a.input_policy) if a.input_policy else None,
+              'input_evidence': ('Same original state-dependent Royal policy and released physical controls. Complete per-call input bytes were not recorded; endpoint/event equality is checked separately.'
+                                 if royal else 'Same immutable logical-frame TAG input tape.'),
+              'game_layout': layout,
               'firmware_sha256': file_digest(a.firmware), 'build': build,
               'profiles': {name: data[0] for name, data in profiles.items()},
               'pair': {'runtime_byte_identical': profiles['control'][1] == profiles['audio2'][1],
+                       'audio_remained_operational': active_audio,
+                       'full_match_audio_cost_comparable': active_audio,
                        'actors_byte_identical': profiles['control'][2] == profiles['audio2'][2],
                        'producer_events_identical': profiles['control'][3] == profiles['audio2'][3],
                        'emulator_identical': control['emulator_sha256'] == audio['emulator_sha256'],
@@ -240,7 +266,7 @@ def main():
                        'additional_combat_vblanks': av - cv,
                        'additional_combat_time_percent': 100 * (av - cv) / cv,
                        'logical_throughput_change_percent': 100 * (cv / av - 1)},
-              'timing_note': 'Combat window uses cadence first/last VBlank, excluding boot. API mail latency uses 16667 nominal microseconds per VBlank and is quantized, not precise jitter.'}
+              'timing_note': 'Combat window uses cadence first/last VBlank, excluding boot. If audio_remained_operational is false, throughput includes time after audio failed and cannot certify the cost of sustained audio. API mail latency uses16667 nominal microseconds per VBlank and is quantized, not precise jitter.'}
     a.out.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'pair': result['pair'], 'profiles': {name: {'cadence': data['cadence'],
           'diagnostics': data['diagnostics'], 'audio_counters': data.get('native_audio_counters')}

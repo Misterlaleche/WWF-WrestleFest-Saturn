@@ -177,7 +177,13 @@ void wf_music_module_prepare(void)
  uint32_t workspace=SHARED.workspace;
  uintptr_t code=(uintptr_t)wf_hotcode_start,load=(uintptr_t)wf_hotcode_load;
  size_t code_bytes=(uintptr_t)wf_hotcode_end-code;
+#if defined(WF_AUDIO2_WORKSPACE_VDP1) && WF_AUDIO2_WORKSPACE_VDP1
+ /* Royal base owns only this audited free VDP1 tail. The slave stack
+  * remains in HWRAM. This profile is not interchangeable with HWRAM. */
+ if(workspace!=0x05c78020u||code_bytes+sizeof(wf_music_hot_t)>18432u){
+#else
  if((workspace&3u)||workspace<0x06004000u||workspace>0x06100000u-18432u||code_bytes+sizeof(wf_music_hot_t)>18432u){
+#endif
   SHARED.error=13;SHARED.state=WF_MUSIC_FAULT;return;
  }
  /* Direct/static loads need the same ownership check as copied ABI3 code.

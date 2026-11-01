@@ -6,6 +6,14 @@ El nombre de la rama `audio-2-production-ready` identifica el encargo, no una ce
 
 La autoridad de datos sigue siendo el `wwfwfest.zip` original. R04, A53 y todas las implementaciones históricas permanecen intactos. Una coincidencia con un modelo histórico prueba esa coincidencia; no demuestra por sí sola que el modelo reproduzca correctamente el reloj o la salida física del arcade.
 
+## Corte de progreso posterior al primer commit
+
+El perfil corregido de reloj621b5dfc completa las18 músicas aisladas durante35s por comando con todos los contadores de ejecución a cero, fuentes/inputs congelados y36 WAV comparativos disponibles. La referencia corrige tono y PCM, pero aún hereda el MMIO A53 con TimerB solamente; se está auditando por separado el modelo completo TimerA+B/busy. Esta prueba no certifica fidelidad absoluta.
+
+El decoder por pares conserva1.034.226 muestras verificadas y reduce31,9% el coste nativo del bloque128 medido. El replay mixto bf0 consigue2 underruns/8late; el candidato posterior work128 sigue fallando con3/9. La transición real después de1F también falla en work128:2 eventos FM descartados,8late y4/9 comandos aceptados. No se ocultan estas regresiones.
+
+Royal HW1 ya se recuperó y se ejecutaron parejas completas base/4MiB:8474pasos,133 productores y estado idéntico en cada pareja. Ambas fallan en audio; véase[ROYAL-INTEGRATION-GATE.md](docs/ROYAL-INTEGRATION-GATE.md). El promedio de una ejecución cuyo audio se detiene no sirve para aprobar su coste sostenido. Dos cargas corruptas probadas en Mednafen se rechazan con API FAULT/RESOURCE antes del primer comando;[evidencia](docs/evidence/native-load-failures-621.json).
+
 ## 1. Recuperación y selección de fuentes
 
 Punto de partida: `audio-2`, commit `db18be40a1d79de200408207573e9f45bf73bf2c`. Se recuperaron 415 archivos seleccionados, correspondientes a 304 blobs distintos, comprobando sus identidades Git. El verificador del paquete histórico aprobó sus 380 archivos. Se inspeccionaron README, ESTADO, INTEGRACION, COMPILACION, experimentos, base y evidencia de Audio 2; los documentos R04, validación física y propiedad de productores; PROJECT-STATE y la issue #2.
@@ -102,10 +110,10 @@ El ensayo TAG completo conserva idénticos los7648 bytes de estado y los64 produ
 | 98 efectos: decoder/estado/prioridad contra modelo independiente | Aprobado en host |
 | Native35s comando01, perfil10 | Aprobado en sus contadores de estabilidad |
 | Native18 músicas, perfil10 | Completa:6 aprobadas,12 fallidas,56 avisos de retraso; salida de tono histórico |
-| Capturas WAV de18 músicas y98 efectos/voces | Generación nativa en curso; sólo manifiestos finalizados acreditan disponibilidad |
+| Capturas WAV de18 músicas y98 efectos/voces |18 parejas corregidas disponibles;98 parejas individuales completas, pero la matriz antigua cambió de fuente durante su ejecución y requiere corte estable |
 | Fidelidad musical física/arquitectónica | Pendiente; discrepancias demostradas en revisión |
 | TAG cuatro luchadores con/sin audio | Completo7372 pasos: estado idéntico, pero19 underruns,22 tardíos y55,337logic/s; falla aceptación |
-| Royal bajo carga con idéntica entrada | Pendiente de escenario/input verificable |
+| Royal HW1 bajo carga | Parejas base/4MiB completas con política original y estado/productores idénticos; fallan9/16 descartes FM. No existe cinta de entradas por llamada |
 | Bucles completos, transiciones y estrés prolongado nativos | Pendiente de cubrir toda la matriz |
 | Aprobación auditiva del propietario | Pendiente |
 | Saturn NTSC-U con MODE | HARDWARE PENDING |

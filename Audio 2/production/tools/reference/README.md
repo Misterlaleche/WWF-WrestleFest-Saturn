@@ -120,3 +120,37 @@ python3 tools/reference/calibrate_native_envelopes.py \
 ```
 
 Native captures and comparisons against the raw reference levels are a separate required measurement. A favorable sequence hash or a reproduced A53 software hash cannot certify the native waveform or physical Saturn performance.
+
+## Frozen native music matrix
+
+`tools/run_music_matrix.py` snapshots the complete production source, input resources, firmware and its symbols, BIOS, primary reference report and WAVs before building any command. It runs the selected standalone Mednafen on one or two supplied displays and retains a failed runtime result even if an audio pair can still be exported. The default runs at normal presentation speed. It does not change emulated hardware clocks.
+
+After sourcing the reproduced environment's `env.sh`, run from `production`:
+
+```sh
+python3 tools/run_music_matrix.py \
+  --resources /path/to/private-board-reference/inputs \
+  --firmware /path/to/frozen-firmware/SCSP.ELF \
+  --sdk /path/to/environment/sh2eb-elf \
+  --environment-root /path/to/environment \
+  --bios /path/to/user-owned/mpr-17933.bin \
+  --reference-report /path/to/private-board-reference/reference-report.json \
+  --out /path/to/private-native-matrix \
+  --profile-label exact-source-and-firmware-profile \
+  --seconds 35 --displays 86,88
+```
+
+The report identifies all sources and inputs before and after the run, verifies that the expected firmware prefix is in native SCSP RAM, and checks native transport counters, finalized stereo WAV output and `ss.cart none`. `pairs/` contains decimal music filenames `01` through `18`; command directories use hexadecimal `01` through `12`. A 35-second runtime window supplies the 30-second reference comparison plus its alignment margin. Neither this window nor a green runtime gate proves a complete composition, gameplay stability or waveform acceptance.
+
+## Reproduce the original feedback timing diagnostic
+
+The corrected native captures localized a residual high-frequency difference to an original feedback branch. The following host-only unit diagnostic records the original command-01/channel-1 M1 phase, attenuation and output from the unchanged pinned core. It first verifies the scalar transfer and feedback recurrence against every observed core output, then changes only the feedback interval while retaining the original physical pitch and attenuation trajectory. It produces state/metric evidence, not a replacement reference WAV.
+
+```sh
+python3 tools/reference/analyze_original_feedback.py \
+  --trace /path/to/private-board-reference/traces/music-01.csv \
+  --opm-dir /path/to/pinned-Nuked-OPM \
+  --out /path/to/private-feedback-diagnostic
+```
+
+The tool rejects altered dependencies or an incompatible first-note window. `feedback-interval-experiment.json` records all equality checks, exact rates, identities, spectral observations and limitations. The [clock and native audit](../../docs/ARCADE-CLOCK-AUDIT.md) relates this controlled experiment to the actual isolated Mednafen captures. No original note or instrument is replaced in production.

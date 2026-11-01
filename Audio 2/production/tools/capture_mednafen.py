@@ -63,6 +63,10 @@ def main():
     parser.add_argument('--dump-wram', action='store_true')
     parser.add_argument('--audio-only', action='store_true',
                         help='Keep real soundrecord, native state and screenshot; omit QuickTime video')
+    parser.add_argument('--presentation-speed', type=int, choices=(1, 4), default=1,
+                        help='Upstream fast-forward multiplier after ready; WAV precedes its resampler and emulated hardware clocks are unchanged')
+    parser.add_argument('--cartridge', choices=('none', 'extram4'), default='none',
+                        help='Explicit diagnostic cartridge; extra RAM is never enabled implicitly')
     args = parser.parse_args()
     ROOT = args.environment_root.resolve()
     args.cue = args.cue.resolve()
@@ -87,6 +91,8 @@ def main():
         raise ValueError('--stop-watch must name a --watch')
     if args.ready_watch and args.ready_watch not in [w[0] for w in watches]:
         raise ValueError('--ready-watch must name a --watch')
+    if args.presentation_speed != 1 and not args.ready_watch:
+        raise ValueError('Presentation fast-forward requires a native --ready-watch')
     env = dict(os.environ)
     env.update(DISPLAY=f':{args.display}', SDL_VIDEODRIVER='x11',
                MEDNAFEN_HOME=str(medhome), XDG_RUNTIME_DIR=str(runtime))
@@ -98,17 +104,22 @@ def main():
                '-sound.driver', 'dummy', '-sound', '1', '-sound.rate', '44100',
                '-ss.bios_na_eu', str(args.bios), '-ss.region_autodetect', '0',
                '-ss.region_default', 'na', '-ss.bios_sanity', '1',
-               '-ss.cart', 'none',
+               '-ss.cart', args.cartridge,
                '-ss.correct_aspect', '0', '-ss.xscale', '2', '-ss.yscale', '2',
                '-filesys.state_comp_level', '0',
                '-qtrecord.w_double_threshold', '0', '-qtrecord.h_double_threshold', '0',
                '-soundrecord', str(out / 'native.wav'), str(args.cue)]
     if not args.audio_only:
         command[-1:-1] = ['-qtrecord', str(out / 'native.mov')]
+    if args.presentation_speed != 1:
+        command[-1:-1] = ['-fftoggle', '1', '-ffspeed', str(args.presentation_speed)]
     report = {'emulator': 'standalone Mednafen 1.32.1', 'command': command,
               'emulator_sha256': sha256(executable), 'cue_sha256': sha256(args.cue),
               'bios_sha256': sha256(args.bios), 'wall_time_limit_seconds': args.seconds,
               'memory_access': 'read only', 'frame_skip': False,
+              'presentation_speed_requested': args.presentation_speed,
+              'cartridge': args.cartridge,
+              'emulated_hardware_clock_change': False,
               'stop_watch': args.stop_watch, 'stop_value': args.stop_value,
               'ready_watch': args.ready_watch, 'ready_value': args.ready_value,
               'stop_reason': None, 'trace': []}
@@ -181,6 +192,7 @@ def main():
                 memory = open(f'/proc/{emu.pid}/mem', 'rb', buffering=0)
             next_snapshot = args.snapshot_every
             next_status = 5
+            fast_forward_started = False
             while time.monotonic() - started < args.seconds:
                 if emu.poll() is not None:
                     raise RuntimeError(f'Mednafen exited with {emu.returncode}; see mednafen.log')
@@ -193,6 +205,10 @@ def main():
                     (out / 'report-progress.json').write_text(json.dumps(report, indent=2) + '\n')
                     next_status += 5
                 ready = not args.ready_watch or values[args.ready_watch] == args.ready_value
+                if ready and args.presentation_speed != 1 and not fast_forward_started:
+                    key('grave')
+                    fast_forward_started = True
+                    report['fast_forward_toggle_wall_seconds'] = time.monotonic() - started
                 if args.stop_watch and ready and values[args.stop_watch] >= args.stop_value:
                     report['stop_reason'] = 'watch_threshold_reached'
                     break

@@ -61,6 +61,7 @@ bool wf_scsp_sfx_oki_start_prepared(wf_scsp_sfx_t *,unsigned,unsigned,unsigned,u
 void wf_scsp_sfx_stop(wf_scsp_sfx_t *,unsigned);
 void wf_scsp_sfx_stop_all(wf_scsp_sfx_t *);
 void wf_scsp_sfx_advance(wf_scsp_sfx_t *,unsigned elapsed_scsp_frames);
-void wf_scsp_sfx_work(wf_scsp_sfx_t *); /* <=128 samples globally, round-robin */
+/* <=128 samples globally. Nearest playback guard first; round-robin ties. */
+void wf_scsp_sfx_work(wf_scsp_sfx_t *);
 int16_t wf_scsp_sfx_decode(wf_sfx_decoder_t *,const uint8_t *);
 #endif

@@ -30,18 +30,60 @@
     "fidelity_scope": "Historical doubled-pitch profile; not an absolute arcade reference"
   },
   "active_work": [
-    "Corrected board-clock and envelope native captures",
-    "Bounded adaptive PCM preparation and cached lookahead target",
-    "Concurrent SFX refill capacity and exact decoder cost",
-    "Full native retest after the source revision settles"
+    "Native partial refill under dense command traffic, retaining all buffers and guards",
+    "SH2 sequence/callback cost and real 1F transition deadline failure",
+    "Full-board TimerA+B, YM/OKI busy and active bank reference audit",
+    "Final native long matrix after a stable candidate is identified"
   ],
   "pending_gates": [
     "Zero losses, underruns and deadline failures for the final native matrix",
     "Native full compositions, loops, fades and transitions",
     "Final same-input TAG performance meeting the arcade logic cadence",
-    "Reproducible Royal input scenario and measured comparison",
+    "Royal audio survival and zero-loss performance; base game already below target without audio",
     "Owner comparative listening",
     "Physical Saturn NTSC-U with Terraonion MODE"
   ],
-  "resume": "Read AUDIO-FINAL-AUDIT.md, docs/ARCADE-CLOCK-AUDIT.md and docs/COMBAT-INTEGRATION-GATE.md. Use the source hashes of each evidence profile; never reuse a historical PASS for changed source. Preserve R04/A53 and all previous native captures."
+  "resume": "Read AUDIO-FINAL-AUDIT.md, docs/ARCADE-CLOCK-AUDIT.md and docs/COMBAT-INTEGRATION-GATE.md. Use the source hashes of each evidence profile; never reuse a historical PASS for changed source. Preserve R04/A53 and all previous native captures.",
+  "published_checkpoint": "68e366bf325a631717ac7671eed7ffe959ebffe4",
+  "current_candidate": {
+    "firmware_sha256": "effd807741f9f2682b33e08ec493e2d9eb2ee10135ae2c4a4b784b4ea0561d43",
+    "name": "work128",
+    "accepted": false,
+    "isolated_tag_command_replay_seconds": 138,
+    "accepted_original_commands": 64,
+    "fm_discarded_events": 0,
+    "underruns": 3,
+    "transport_late": 9,
+    "transition_1f_fm_discarded_events": 2,
+    "transition_1f_transport_late": 8
+  },
+  "verified_board_clock_music_profile": {
+    "firmware_sha256": "621b5dfcfe1b2a1841ff09e32de62b8198c63cd5d5c12d1f660d5c8426c06634",
+    "native_commands": 18,
+    "native_seconds_per_command": 35,
+    "all_individual_runtime_counters_zero": true,
+    "source_and_inputs_stable": true,
+    "listening_wav_files": 36,
+    "reference_scope": "Corrected board clock, PCM16/reset0, inherited TimerB-only A53 MMIO; full-board model being audited",
+    "fidelity_accepted": false
+  },
+  "royal_hw1": {
+    "source_recovered": true,
+    "base_and_optional4m_pairs_complete": true,
+    "original_game_files_unchanged": 305,
+    "logical_endpoint": 8474,
+    "original_commands": 133,
+    "base_fm_drops": 9,
+    "optional4m_fm_drops": 16,
+    "runtime_actors_producer_events_identical_in_each_pair": true,
+    "audio_remained_operational": false,
+    "base_control_logic_hz": 50.89005146691635,
+    "accepted": false
+  },
+  "native_corrupt_load_tests": {
+    "cases": 2,
+    "source_profile": "621b5dfc",
+    "expected_rejections_passed": true,
+    "report": "docs/evidence/native-load-failures-621.json"
+  }
 }

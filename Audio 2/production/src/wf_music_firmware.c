@@ -21,8 +21,9 @@ static unsigned music_bank;
 static wf_sfx_prepared_t prepared_music;
 static bool prepared_music_valid;
 static uint16_t prepared_music_frames;
+static uint16_t prepared_music_target,prepared_music_generation;
 /* Private observation words, read with the matching ELF symbols:
- * 0 last fallback filled count; 3 last fallback cache bank/id;
+ * 0 last unready filled count; 3 last unready cache bank/id;
  * 1/2/4 max due by kind; 6/7/9 late counts by kind;
  * 5/8/10 max prepare work for32/16/64 samples, including preview;
  * 11/12 max fallback/prepared launch work; 13 prepares; 14/15 hits/misses;
@@ -30,8 +31,9 @@ static uint16_t prepared_music_frames;
  * 22 smallest prepare lead; 23 last fallback sample; 24 max refill work.
  * Durations are DSP Fs, not inclusive CPU-cycle profiles. Counts wrap16. */
 volatile uint16_t wf_music_timing[25];
+volatile uint16_t wf_music_partial_finishes;
 #if WF_MUSIC_TIMING
-static void __attribute__((noinline)) timing_max(unsigned index,uint16_t value)
+static void __attribute__((noinline,section(".wf_audio_high"))) timing_max(unsigned index,uint16_t value)
 {
  if(value>wf_music_timing[index])wf_music_timing[index]=value;
 }
@@ -64,7 +66,19 @@ static void stop_music(void)
  for(unsigned slot=0;slot<32;slot++)(void)write16(0x100000u+slot*32u,0x21,NULL);
  wf_scsp_ym_stop(&wf_ym_engine);wf_scsp_sfx_stop(&wf_sfx_engine,3);
  oki_pending=-1;music_bank=0;mail->fm_active=0;
- prepared_music_valid=false;prepared_music_frames=0;
+ prepared_music_valid=false;prepared_music_frames=0;prepared_music_generation=0;
+}
+static bool __attribute__((noinline,section(".wf_audio_high"))) music_complete_partial(unsigned sample)
+{
+ /* A measured startup miss retained208 correct samples. Re-decoding all256
+  * discarded useful work and cost329Fs. Finish at most64 remaining samples
+  * before the existing118Fs prepared launch; never publish an incomplete
+  * cache. Mismatched or less-complete caches retain the explicit fallback. */
+ if(prepared_music_frames<192||prepared_music.bank!=music_bank||prepared_music.id!=sample)return false;
+ if(!wf_scsp_sfx_prepare_step(&wf_sfx_engine,&prepared_music,music_bank,sample,&prepared_music_frames,64))return false;
+ prepared_music_valid=prepared_music_frames==256;
+ if(WF_MUSIC_TIMING)++wf_music_partial_finishes;
+ return prepared_music_valid;
 }
 static void oki(unsigned value,uint16_t when,uint16_t before)
 {
@@ -78,6 +92,7 @@ static void oki(unsigned value,uint16_t when,uint16_t before)
     wf_music_timing[0]=prepared_music_frames;
     wf_music_timing[3]=(uint16_t)((prepared_music.bank<<8)|prepared_music.id);
    }
+   prepared=prepared||music_complete_partial(sample);
    if(prepared)
     ok=wf_scsp_sfx_oki_start_prepared(&wf_sfx_engine,3,music_bank,sample,value&15u,false,&prepared_music);
    else ok=wf_scsp_sfx_oki_start(&wf_sfx_engine,3,music_bank,sample,value&15u,false);
@@ -105,45 +120,56 @@ static void oki(unsigned value,uint16_t when,uint16_t before)
  * This bounds local sound-RAM reads; no ring or timestamp lead is enlarged. */
 static bool __attribute__((noinline,section(".wf_audio_high"))) music_prepare(void)
 {
- uint16_t producer=ring[0],consumer=ring[1],now=*(volatile uint16_t *)WF_DSP_CLOCK;
- unsigned bank=music_bank,budget=64;int pending=oki_pending;bool first=true;
- if(!wf_sfx_engine.bound||ring[2]!=generation||(uint16_t)(producer-consumer)>WF_MUSIC_RING_COUNT)return false;
+ uint16_t producer=ring[0],consumer=ring[1],queued=(uint16_t)(producer-consumer),now;
+ unsigned bank=music_bank,budget,sample;int pending=oki_pending;
+ if(!wf_sfx_engine.bound||ring[2]!=generation||!queued||queued>WF_MUSIC_RING_COUNT)return false;
+ /* Published records cannot change while this target remains in the live
+  * span. The producer only appends. Retain its index across16-bit ring wrap,
+  * and discard the shortcut once consumed or on a generation change. */
+ bool cached=prepared_music_frames&&prepared_music_generation==generation&&
+             (uint16_t)(prepared_music_target-consumer)<queued;
+ if(cached&&prepared_music_valid)return false;
+ volatile uint16_t *head=WF_MUSIC_RING_EVENT(consumer);
+ if(head[3]!=generation)return false;
+ now=*(volatile uint16_t *)WF_DSP_CLOCK;
+ int16_t head_due=wf_music_clock_due(now,head[0]);
+ if(head_due>-64)return false;
+ budget=head_due<=-128?64:(head_due<=-96?32:16);
+ if(cached){bank=prepared_music.bank;sample=prepared_music.id;goto step;}
  for(unsigned n=0;n<32&&consumer!=producer;n++,consumer++){
   volatile uint16_t *e=WF_MUSIC_RING_EVENT(consumer);
   if(e[3]!=generation)continue;
-  if(first){
-   int16_t due=wf_music_clock_due(now,e[0]);
-   if(due>-64)return false;
-   budget=due<=-128?64:(due<=-96?32:16);first=false;
-  }
   unsigned kind=e[1]>>8,value=e[2];
   if(kind==2)bank=value&1u;
   else if(kind==1){
    if(pending>=0){
-    unsigned sample=(unsigned)pending;pending=-1;
+    sample=(unsigned)pending;pending=-1;
     if((value>>4)==1u){
      int16_t due=wf_music_clock_due(now,e[0]);
      bool same=prepared_music_frames&&prepared_music.bank==bank&&prepared_music.id==sample;
-     if((!same&&due<=-256)||(same&&!prepared_music_valid)){
-      if(!same){
-       prepared_music_valid=false;prepared_music_frames=0;
-       if(WF_MUSIC_TIMING){
-        ++wf_music_timing[13];uint16_t lead=(uint16_t)-due;
-        if(!wf_music_timing[22]||lead<wf_music_timing[22])wf_music_timing[22]=lead;
-       }
+     if(!same&&due>-256)return false;
+     prepared_music_target=consumer;prepared_music_generation=generation;
+     if(same&&prepared_music_valid)return false;
+     if(!same){
+      prepared_music_valid=false;prepared_music_frames=0;
+      if(WF_MUSIC_TIMING){
+       ++wf_music_timing[13];uint16_t lead=(uint16_t)-due;
+       if(!wf_music_timing[22]||lead<wf_music_timing[22])wf_music_timing[22]=lead;
       }
-      if(!wf_scsp_sfx_prepare_step(&wf_sfx_engine,&prepared_music,bank,sample,&prepared_music_frames,budget))return false;
-      prepared_music_valid=prepared_music_frames==256;
-      timing_max(budget==64?10:(budget==32?5:8),(uint16_t)(*(volatile uint16_t *)WF_DSP_CLOCK-now));
-      return true;
      }
-     return false;
+     goto step;
     }
    }else if(value&128u)pending=(int)(value&127u);
   }
  }
  return false;
+step:
+ if(!wf_scsp_sfx_prepare_step(&wf_sfx_engine,&prepared_music,bank,sample,&prepared_music_frames,budget))return false;
+ prepared_music_valid=prepared_music_frames==256;
+ timing_max(budget==64?10:(budget==32?5:8),(uint16_t)(*(volatile uint16_t *)WF_DSP_CLOCK-now));
+ return true;
 }
+
 static bool music_service(void)
 {
  if(wf_ym_engine.fault)return false;
@@ -186,17 +212,17 @@ static bool music_service(void)
 static void __attribute__((noinline,section(".wf_audio_high"))) music_work(void)
 {
  /* Finish pending cache steps at the existing service boundaries before
-  * background refill. Normal refill remains128 samples, round-robin. */
+  * background refill. Refill remains at most128 samples, nearest guard first. */
  if(music_prepare())return;
  uint16_t before=*(volatile uint16_t *)WF_DSP_CLOCK;
- /* Refill measured148Fs. Starting it across an imminent head event leaves
-  * too little time for that event's118Fs launch and the rest of its burst.
-  * Reserve192Fs before the nearest event; return to service when it cannot
-  * fit. These are work-admission budgets, not changed lateness thresholds. */
+ /* The faster decoder and four-voice deadline selector measured113Fs for
+  * complete refill work during the138-second mixed TAG replay. Admit it
+  * with128Fs before the nearest event. The old192Fs budget wasted useful
+  * gaps. Playback lateness and service-gap thresholds remain unchanged. */
  uint16_t consumer=ring[1];
  if(consumer!=ring[0]){
   volatile uint16_t *head=WF_MUSIC_RING_EVENT(consumer);
-  if(head[3]!=generation||wf_music_clock_due(before,head[0])>-192)return;
+  if(head[3]!=generation||wf_music_clock_due(before,head[0])>-128)return;
  }
  wf_scsp_sfx_work(&wf_sfx_engine);
  timing_max(24,(uint16_t)(*(volatile uint16_t *)WF_DSP_CLOCK-before));

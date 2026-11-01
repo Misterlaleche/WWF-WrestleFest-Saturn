@@ -64,8 +64,35 @@ The optional `divider-only-pcm8` profile changes only the YM divider in the hist
 
 All reference WAVs use 44,100 Hz mono signed PCM16 and nominal fixed routing, with no normalization or time stretching. The host output uses sample/hold conversion and does not reconstruct the original analog DAC/filter path. These WAVs are software references, not physical arcade recordings and not Saturn runtime assets.
 
-## Native capture status
+## Actual corrected native captures
 
-Earlier actual Mednafen channel-isolation captures localized substantial high-frequency excess to command-01 channel 1's algorithm-4/feedback-7 patch. The bass channel's first-note frequencies were close to the historical A53 reference, which is now understood to have the same doubled-clock error. Those captures remain historical evidence with their exact compiled-source identities.
+The corrected profile has now run all 18 original music commands for 35 seconds each in unmodified standalone Mednafen 1.32.1. Each command has a complete 30-second native stereo/reference mono WAV pair. All 18 captures report zero worker/API errors, discarded or rejected events, transport lateness and PCM underruns. The source snapshot, firmware, resources, BIOS, references and emulator identities remained stable. This is an isolated cold-boot public-API profile, not a gameplay, listening or physical-hardware acceptance result.
 
-The corrected pitch/envelope profile requires fresh actual native captures and comparisons against the new primary reference. A passing phase test, a smaller spectral metric or an unchanged original command trace does not establish full native fidelity. Pitch quantization, envelope curves, sampled-sine quantization, modulation timing/feedback, resampling and the analog path remain distinct questions. Physical Saturn validation remains pending.
+The tested intermediate firmware SHA256 is `621b5dfcfe1b2a1841ff09e32de62b8198c63cd5d5c12d1f660d5c8426c06634`. The YM source SHA256 is `c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76`; the envelope header SHA256 is `5f2e75edb5de0d5f3c1979f9e86b5d51602106a5cdad67671abfce4b4ca9bcf8`. The complete private report is `music-matrix-boardclock-intermediate/native-music-matrix.json`, SHA256 `e523149700925bcee9309d2571eb214e063934f354a023224b7c8e81d6235fac`. A metadata-only summary is included as `tools/reference/evidence/native-music-board-clock-intermediate.json`. A later decoder or firmware build needs its own runtime gates; this result cannot be transferred to it.
+
+For command `0x01`, the 30-second matrix pair measures a reference spectral centroid of 373.27 Hz and a native centroid of 505.05 Hz, a log-power spectral RMSE of 3.495 dB and a native RMS level 1.123 dB lower. These measurements use raw levels, with no normalization, resampling or time stretching. Waveform phase is not independently calibrated. These differences remain material and are not a fidelity pass.
+
+### Original-operator isolation
+
+Separate 8-second diagnostics used the same corrected YM/envelope source with frozen experimental firmware SHA256 `044484de2418b145c05e068d6a0eaf2b442990d3b0cb1a66919c05c94e474f7c`. Only mixer output gates were changed. Original register writes, note timing, operator phase, feedback and envelope state remained active. PCM output was muted. All four isolated captures completed without the runtime errors listed above.
+
+| Original command-01/channel-1 output | Reference centroid | Native centroid | 10 ms envelope correlation |
+| --- | ---: | ---: | ---: |
+| Both original carriers | 3190.24 Hz | 4256.32 Hz | 0.866 |
+| C1, fed by M1 with feedback 7 | 3847.90 Hz | 5520.19 Hz | 0.839 |
+| C2, fed by M2 without feedback | 1260.56 Hz | 1221.53 Hz | 0.965 |
+| Internal M1 output, made audible only for diagnosis | 1100.68 Hz | 1216.30 Hz | 0.695 |
+
+The two separate host carrier taps sum back to the complete isolated channel with a maximum difference of four PCM16 units and RMS difference of 0.982 units, consistent with output rounding. This validates the tap interpretation without altering the pinned synthesis core. The actual native results localize much of the high-frequency excess to the feedback branch; they do not identify every remaining difference.
+
+### A demonstrated feedback timing difference
+
+`tools/reference/analyze_original_feedback.py` inspects the unchanged pinned core while replaying the original full-Z80 command-01 trace. It records the actual first M1 operator's unmodulated phase, attenuation, feedback history and output. For 61,524 observed samples, independently evaluated logarithmic-sine/exponential transfer and feedback formulas have zero mismatches. A free-running scalar recurrence over the first note also reproduces every pinned-core output exactly at the original rate.
+
+The diagnostic then changes only the recurrence interval to 44.1 kHz. It interpolates the original physical phase trajectory and attenuation onto that grid, keeping feedback 7. This is a counterfactual unit experiment, not a Saturn capture or an alternate primary reference. The original recurrence rate is `3579545/64 = 55930.390625 Hz`.
+
+In the 40–210 ms first-note window, the strongest high-frequency peaks move from approximately 18.154/17.455 kHz in the original recurrence to 13.964/14.662 kHz in the interval-only counterfactual. Actual native M1/C1 captures contain corresponding peaks near 13.972/14.672 kHz. The small frequency offset is consistent with the separately measured native pitch quantization. This demonstrates that the feedback sample interval contributes to the observed timbre difference. It does not prove that it explains the whole error, or that every possible native architecture is incapable of reducing it.
+
+The scalar amplitude transfer also differs: at original M1 TL22 and zero envelope attenuation, the selected native equation gives a peak of 5055, while the pinned OPM peak multiplied by four is 4856, a difference of 0.349 dB. Choosing another static TL to fit this one point would not preserve the whole envelope transfer. No such level adjustment has been applied to production.
+
+Earlier A53 comparisons remain preserved as historical evidence, including their known doubled-clock profile. A passing phase test, a smaller spectral metric or an unchanged original command trace does not establish full native fidelity. Envelope curves, sampled-sine quantization, modulation/feedback timing, resampling and the analog path remain distinct questions. Physical Saturn validation remains pending.

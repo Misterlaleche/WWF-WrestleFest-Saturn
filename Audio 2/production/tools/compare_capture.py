@@ -22,6 +22,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('capture','reference','build','out'):p.add_argument('--'+key,type=Path,required=True)
     p.add_argument('--command',type=lambda x:int(x,0),required=True)
+    p.add_argument('--reference-profile',choices=('a53-historical','board-pcm16','full-board','sfx-model'),
+                   help='Explicit reference provenance; defaults to historical A53 for music and A15 model for SFX')
     a=p.parse_args();a.out.mkdir(parents=True,exist_ok=True)
     report=json.loads((a.capture/'report.json').read_text());d=report['final_watch_values']
     build=json.loads((a.build/'saturn-build.json').read_text())
@@ -52,7 +54,8 @@ def main():
     ey=np.sqrt(np.mean(y[:count*block].reshape(-1,block)**2,axis=1))
     corr=signal.correlate(ey-ey.mean(),ex-ex.mean(),mode='full')
     lags=signal.correlation_lags(len(ey),len(ex),mode='full');allow=np.abs(lags)<=25
-    best=int(lags[allow][np.argmax(corr[allow])])
+    best=(int(lags[allow][np.argmax(corr[allow])])
+          if np.std(ex)>0 and np.std(ey)>0 else None)
     freq,px=signal.welch(x,44100,nperseg=4096);_,py=signal.welch(y,44100,nperseg=4096)
     selected=(freq>=40)&(freq<=16000)
     def correlation(left,right):
@@ -67,15 +70,20 @@ def main():
       'raw_waveform_correlation':correlation(x,y),
       'raw_waveform_error_rms':rms(y-x),
       'envelope_10ms_correlation':correlation(ex,ey),
-      'envelope_best_lag_ms_diagnostic_only':best*10,
+      'envelope_best_lag_ms_diagnostic_only':best*10 if best is not None else None,
       'spectral_centroid_reference_hz':float((freq*px).sum()/px.sum()) if px.sum() else None,
       'spectral_centroid_saturn_hz':float((freq*py).sum()/py.sum()) if py.sum() else None,
       'spectral_log_power_rmse_db_40_to_16000hz':float(np.sqrt(np.mean((10*np.log10(py[selected]+1e-20)-10*np.log10(px[selected]+1e-20))**2))),
       'clipped_reference_samples':int(np.count_nonzero((reference==-32768)|(reference==32767))),
       'clipped_saturn_samples':int(np.count_nonzero((excerpt==-32768)|(excerpt==32767)))}
+    profile=a.reference_profile or ('a53-historical' if is_music else 'sfx-model')
+    reference_kinds={
+      'a53-historical':'Preserved A53 historical software render; doubled YM pitch, not an absolute arcade-pitch oracle',
+      'board-pcm16':'Original-ROM trace, board YM external-clock/64, original PCM16/reset0; inherited TimerB-only A53 MMIO model, not a full board or physical arcade recording',
+      'full-board':'Original full Z80 coupled to pinned Nuked TimerA+B/busy and ROM-addressed OKI; instruction-level bus model, not physical arcade recording',
+      'sfx-model':'A15 original-ROM command/sample model; not a physical arcade or full Z80 capture'}
     result={'command':f'0x{a.command:02X}','seconds':len(reference)/44100,
-      'reference_kind':('A53 host software reference; not a physical arcade recording' if is_music else
-                        'A15 original-ROM command/sample model; not a physical arcade or full Z80 capture'),
+      'reference_profile':profile,'reference_kind':reference_kinds[profile],
       'saturn_kind':'Real standalone Mednafen 1.32.1 execution',
       'alignment':{'method':'native final SCSP clock minus elapsed since command, plus documented command lead',
         'command_lead_frames':lead,

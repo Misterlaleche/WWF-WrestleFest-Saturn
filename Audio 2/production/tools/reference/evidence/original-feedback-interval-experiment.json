@@ -1,0 +1,149 @@
+{
+  "kind": "ORIGINAL_OPERATOR_SCALAR_RECURRENCE_DIAGNOSTIC_NOT_REFERENCE_AUDIO",
+  "OPM_source_sha256": "983beecc471aebd8884fcc3aa48c50b1a26d4280ddbf1025b5196b540cf24188",
+  "input_trace_sha256": "c55271c074cfa7ff0d81c19798f4dc07bd1f3bc1c297eaf45a121f856dee9338",
+  "probe_source_sha256": "c74f156ce75045fe8b75d091ec67db41f0ca5cc5b70625223b8b1875fa2a76ca",
+  "state_trace_sha256": "45db248167c58491ed9d314acead8a48c71e76b760c868eb9b4ad7ec59c7e11f",
+  "samples": 61524,
+  "transfer_output_mismatch": 0,
+  "feedback_formula_mismatch": 0,
+  "free_recurrence_same_rate_mismatch": 0,
+  "original": {
+    "rate_hz": 55930.390625,
+    "centroid_hz": 1280.8829290031722,
+    "rms_operator_units": 703.0993832616789,
+    "top_peaks_hz_power": [
+      [
+        698.1057667732239,
+        14126.725480939565
+      ],
+      [
+        1396.6382485628128,
+        2733.8205520581455
+      ],
+      [
+        2094.7440153360367,
+        1010.7973774702417
+      ],
+      [
+        2792.8497821092606,
+        484.82168613693057
+      ],
+      [
+        3491.3822638988495,
+        269.21693896883613
+      ],
+      [
+        4189.488030672073,
+        164.7373183451502
+      ],
+      [
+        4887.593797445297,
+        107.78463421340632
+      ],
+      [
+        5585.699564218521,
+        74.37403066287983
+      ]
+    ],
+    "high_peaks_hz_power": [
+      [
+        18153.736941218376,
+        39.50174319455534
+      ],
+      [
+        17455.204459428787,
+        26.957369898764597
+      ],
+      [
+        16757.098692655563,
+        18.735317290342554
+      ],
+      [
+        18852.269423007965,
+        16.397002639981924
+      ],
+      [
+        16058.99292588234,
+        15.464426567249442
+      ],
+      [
+        10473.293361663818,
+        14.876072852743958
+      ]
+    ],
+    "power_above10k_fraction": 0.012072109214867682
+  },
+  "counterfactual_44k1_interval_only": {
+    "rate_hz": 44100,
+    "centroid_hz": 1313.7947902695093,
+    "rms_operator_units": 705.90883574327,
+    "top_peaks_hz_power": [
+      [
+        698.1468200683594,
+        17629.34769490443
+      ],
+      [
+        1396.2936401367188,
+        3329.7648384400627
+      ],
+      [
+        2094.7769165039062,
+        1204.4364411831843
+      ],
+      [
+        2792.9237365722656,
+        568.1571414380433
+      ],
+      [
+        3491.070556640625,
+        312.1793620518839
+      ],
+      [
+        4189.217376708984,
+        189.9878115302245
+      ],
+      [
+        4887.700653076172,
+        124.75985838546234
+      ],
+      [
+        13963.945770263672,
+        117.39216961945009
+      ]
+    ],
+    "high_peaks_hz_power": [
+      [
+        13963.945770263672,
+        117.39216961945009
+      ],
+      [
+        14662.42904663086,
+        98.74886967260744
+      ],
+      [
+        13265.798950195312,
+        45.81513533133572
+      ],
+      [
+        12567.652130126953,
+        38.453124769849
+      ],
+      [
+        11869.505310058594,
+        30.59992304958258
+      ],
+      [
+        11171.358489990234,
+        27.54630886023918
+      ]
+    ],
+    "power_above10k_fraction": 0.017591910008661664
+  },
+  "limitations": [
+    "Original physical phase trajectory and attenuation are interpolated onto44.1kHz. Only feedback history interval changes; feedback7 remains original.",
+    "This scalar counterfactual does not include SCSP amplitude, interpolation, or envelope equations and is not a Saturn capture.",
+    "The real native capture is compared separately. This is a causal mechanism experiment, not a fidelity score."
+  ],
+  "private_complete_report_sha256": "784e4b2be68a52d94f311ed5806292eea9e966f3159ae83bc2618e30619a7fa3"
+}

@@ -28,10 +28,13 @@ def main():
     common=[a.cc,'-std=c11','-O2','-Wall','-Wextra','-Iinclude','-Isrc','-Isrc/reference_driver']
     run('resource_identity_and_corruption',[sys.executable,'-B','-m','unittest','discover','-s','tests','-p','test_resources.py'])
     run('build_input_aliases',[sys.executable,'-B','-m','unittest','discover','-s','tests','-p','test_build_safety.py'])
+    run('source_profile_snapshot',[sys.executable,'-B','-m','unittest','discover','-s','tests','-p','test_source_snapshot.py'])
     cases=[
       ('api',['tests/test_audio2_api.c','src/wf_audio2.c','src/wf_native_host.c','src/wf_native_elf.c','src/wf_scsp_sfx.c'],[],[a.firmware.resolve(),(a.resources/'SFX.DAT').resolve()]),
       ('module_deadlines',['tests/test_music_module_deadline.c','src/wf_music_seq.c','src/wf_scsp_ym.c','src/reference_driver/z80.c'],['-fno-pie','-no-pie'],[]),
-      ('firmware_deadlines',['tests/test_music_firmware_deadline.c','src/wf_scsp_sfx.c','src/wf_scsp_ym.c'],[],[])]
+      ('firmware_deadlines',['tests/test_music_firmware_deadline.c','src/wf_scsp_sfx.c','src/wf_scsp_ym.c'],[],[]),
+      ('firmware_deadlines_no_timing',['tests/test_music_firmware_deadline.c','src/wf_scsp_sfx.c','src/wf_scsp_ym.c'],['-DWF_MUSIC_TIMING=0'],[]),
+      ('sfx_refill_deadlines',['tests/test_sfx_refill_deadline.c','src/wf_scsp_sfx.c'],[],[])]
     for name,sources,flags,args in cases:
         exe=out/name;run('build_'+name,[*common,'-Werror',*flags,*sources,'-o',exe],False);run(name,[exe,*args])
     aliases=['z80_init=wf_ref_z80_init','z80_step=wf_ref_z80_step','z80_gen_nmi=wf_ref_z80_gen_nmi','z80_gen_int=wf_ref_z80_gen_int','z80_debug_output=wf_ref_z80_debug_output']

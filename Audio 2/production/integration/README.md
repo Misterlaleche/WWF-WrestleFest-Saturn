@@ -95,4 +95,4 @@ cc -std=c11 -Wall -Wextra -Werror -I production/integration -I production/src \
 /private/test_loader
 ```
 
-Royal remains a separate prerequisite gate. The supplied deterministic entry/tape is TAG-specific. The normal frontend lacks a staged `ROYSPR.BIN`; its archived generator can reconstruct that file from existing sprite assets, but no approved deterministic Royal mode/input fixture is present. Four active sprites are not a Royal gameplay comparison.
+The WP1979 entry/tape described here is TAG-specific. Its normal frontend lacks a staged `ROYSPR.BIN`; its archived generator can reconstruct that file from existing sprite assets. A separate subsequently located WP1980 HW1 release supplies an original deterministic Royal fixture and8474-step endpoint; its integration and matched control are being prepared independently. The absence of a Royal tape in the WP1979 archive is not a global absence of a Royal fixture. Four active sprites alone are not a Royal gameplay comparison.
