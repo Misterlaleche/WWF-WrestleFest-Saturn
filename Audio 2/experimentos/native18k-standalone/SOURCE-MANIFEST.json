@@ -1,0 +1,234 @@
+{
+  "ADMISSION-BASELINE-EVIDENCE.json": {
+    "bytes": 1144,
+    "sha256": "099ca7e3c30ad9376c764554a4cf40bbd58326543b44b815afd36cb8b08d5e4c"
+  },
+  "input/sound.rom": {
+    "bytes": 65536,
+    "sha256": "f89e7782e7535576b2ebf8c5daea61c5fa2ecefff0b8b3280dea09efa57c25f7"
+  },
+  "LEEME.txt": {
+    "bytes": 2414,
+    "sha256": "ba51209eb031b4a044962b072786e1e0c5ad58af47d9e8795ac4c7a03192eb4d"
+  },
+  "linker/module.ld.in": {
+    "bytes": 1148,
+    "sha256": "e24380491d84fc6d42f5f938d772e0ca3e2635ff1ab98f81cb3ab8351a6631a8"
+  },
+  "master/wrestlefest-runtime18-scsp.elf": {
+    "bytes": 2241916,
+    "sha256": "e56b027b8a3e89f92ecbb0a419363c11eb2996334b8b819e87ab9137152d0221"
+  },
+  "oracle/wf_music_seq_r01.c": {
+    "bytes": 4059,
+    "sha256": "5432de051afdae58f5cde12e866fa1bd7241dd98b07a588693a750fc50f10200"
+  },
+  "original-matrices/admission.c": {
+    "bytes": 1483,
+    "sha256": "f804cefcd18d1dccb7d5e8c589bb45e9ba0905d843926c3a63e02afd547b4e30"
+  },
+  "original-matrices/long.c": {
+    "bytes": 3619,
+    "sha256": "47011558c8802b034b8d248e8c6fa8fa2ef7d9ac73d72b4d71246cbb1965985e"
+  },
+  "original-matrices/post.c": {
+    "bytes": 6904,
+    "sha256": "0664361b39d29e459a1146acc05a1bdb3e792bf924c261f82df317d952c96a6a"
+  },
+  "original-matrices/pre.c": {
+    "bytes": 8500,
+    "sha256": "a49641d1ec6d8a527806e0cf1989748bfcaaec5040e298a16c6803f1bc0444d1"
+  },
+  "original-matrices/ref-seq.c": {
+    "bytes": 4059,
+    "sha256": "5432de051afdae58f5cde12e866fa1bd7241dd98b07a588693a750fc50f10200"
+  },
+  "original-matrices/startup.c": {
+    "bytes": 4347,
+    "sha256": "376a855297b9dd8ec514b90595e76f1a1e7d105832ea5eb5e54373a4cac11ab0"
+  },
+  "original-matrices/wide.c": {
+    "bytes": 1519,
+    "sha256": "3b6b500e2a2c06a3ac2ab22c787f81bc82ea5d66b0047958e8359d60b4999f84"
+  },
+  "PIN.json": {
+    "bytes": 8714,
+    "sha256": "7fe5e9ca7132f43edc991566dc65a5cdb134877762133aa8555f147f1c479a72"
+  },
+  "RELOCATION-RESULT.json": {
+    "bytes": 13374,
+    "sha256": "6b49e122e7dc7bd806c00a7980699080e04a846d951cb94212270757b6445021"
+  },
+  "RESULT.json": {
+    "bytes": 3088,
+    "sha256": "5a5ace6c766377cd3b9f242a4117f6358c8084a56f7457d7fbb7f4d447865f31"
+  },
+  "src/audio/native/generated/wf_ym_envelope.h": {
+    "bytes": 770,
+    "sha256": "4e629def3f2d8154fd8083e73ebb2ca49d2303a27a6e9d35257bbc6b01f1f273"
+  },
+  "src/audio/native/generated/wf_ym_tables.h": {
+    "bytes": 24605,
+    "sha256": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8"
+  },
+  "src/audio/native/reference_driver/LICENSE": {
+    "bytes": 1073,
+    "sha256": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5"
+  },
+  "src/audio/native/reference_driver/PROVENANCE.json": {
+    "bytes": 407,
+    "sha256": "0ca85690faec2124d141f74abb6f42ea4cb994b486b657e076722e34c63f22f1"
+  },
+  "src/audio/native/reference_driver/z80.c": {
+    "bytes": 50103,
+    "sha256": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698"
+  },
+  "src/audio/native/reference_driver/z80.h": {
+    "bytes": 1136,
+    "sha256": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa"
+  },
+  "src/audio/native/wf_music_clock.h": {
+    "bytes": 487,
+    "sha256": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41"
+  },
+  "src/audio/native/wf_music_entry.S": {
+    "bytes": 384,
+    "sha256": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf"
+  },
+  "src/audio/native/wf_music_module.c": {
+    "bytes": 9466,
+    "sha256": "ceab714d6999efd39b7dc94d19a8d78b82f0d0e5e34ae508889f9a2c80ba2dc6"
+  },
+  "src/audio/native/wf_music_module.h": {
+    "bytes": 1181,
+    "sha256": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c"
+  },
+  "src/audio/native/wf_music_module_memory.c": {
+    "bytes": 638,
+    "sha256": "0cbfba23d6ec2d24f076302619d1044389782cdd9664b9d7b113ecdc80a16c3c"
+  },
+  "src/audio/native/wf_music_seq.c": {
+    "bytes": 5728,
+    "sha256": "6b9c209edc03b3b34ccf608f43fe8f8b20c7ba8ab42c93cd5c6f5db78906df90"
+  },
+  "src/audio/native/wf_music_seq.h": {
+    "bytes": 965,
+    "sha256": "66c23b13f0c44765eeca7047f052a7574b3fa437acd6b5f389f358082dc90cd8"
+  },
+  "src/audio/native/wf_music_time.h": {
+    "bytes": 620,
+    "sha256": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35"
+  },
+  "src/audio/native/wf_scsp_sfx.h": {
+    "bytes": 2193,
+    "sha256": "ef746dc5b2ab96437e11d998f55a8799a82ca933f8733fa9644b8d9d9c6da7c4"
+  },
+  "src/audio/native/wf_scsp_ym.c": {
+    "bytes": 8498,
+    "sha256": "71a058ba15779412f1ae2241944916720c32427f4fde488633c899f829c0877c"
+  },
+  "src/audio/native/wf_scsp_ym.h": {
+    "bytes": 538,
+    "sha256": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72"
+  },
+  "templates/z80-cold.c": {
+    "bytes": 50574,
+    "sha256": "454e19fddbb9682b493a80d3566b686cba114f313b48b3a08033d5a97d04f38c"
+  },
+  "templates/z80-native.c": {
+    "bytes": 39409,
+    "sha256": "ad2eb64498e50f53eca96ee0ad59530fe318a28571e938c5416646725e5dce12"
+  },
+  "test_host.py": {
+    "bytes": 4588,
+    "sha256": "e4567ac94c81838e6edd42cf2af0f56ed50e42322ce9c533b68c0910fb7ef054"
+  },
+  "test_interactions.c": {
+    "bytes": 4799,
+    "sha256": "977f9bebf92e4c6738e09cadb6e8adc2c01539c607bf08dd8bc3b82afb0bb6d4"
+  },
+  "tests/test_control_batch.c": {
+    "bytes": 8362,
+    "sha256": "e49d6131d08d1feca744beb7219020abd13136c94b3497247809e4037b1d9e80"
+  },
+  "tests/test_control_differential.c": {
+    "bytes": 2392,
+    "sha256": "0f7372102def7579d08ff6bb0221a3498e93eb9ce284dd08fd80e16f0e0f5856"
+  },
+  "tools/build.py": {
+    "bytes": 8710,
+    "sha256": "84dd990cd44469af239a9722c5d6f7b892d4bf631c2038b1b9f284a59a169d16"
+  },
+  "tools/compact.py": {
+    "bytes": 895,
+    "sha256": "39cfcfc952a93ac125a05f9765493523d2a1c6202dc191a80f6693a3af940247"
+  },
+  "tools/elf.py": {
+    "bytes": 1430,
+    "sha256": "0ee6c5133d173a036201eeb7c064386250d92a9ea7551fafadabac19776fa13c"
+  },
+  "tools/generate.py": {
+    "bytes": 1270,
+    "sha256": "a6367f0f8cb8693ec8383378f78c90c5071493555a2a7fc743dfcffef69e35f4"
+  },
+  "tools/pins.py": {
+    "bytes": 592,
+    "sha256": "32cde6715bfc391323ac35dcdffb968e707c53bfd4b06459e0ced7005663053e"
+  },
+  "verified/BUILD-RESULT.json": {
+    "bytes": 6091,
+    "sha256": "ef5fd87c91009cd18c509fbbc06de0983802a0e54914f28e8ffe51fd077f5dc8"
+  },
+  "verified/commands.json": {
+    "bytes": 21109,
+    "sha256": "0d970b64c82056212aa65fb686486a61aa290ef0746cef20d818ff7c02b59f34"
+  },
+  "verified/green-build.log": {
+    "bytes": 6091,
+    "sha256": "ef5fd87c91009cd18c509fbbc06de0983802a0e54914f28e8ffe51fd077f5dc8"
+  },
+  "verified/green-generate.log": {
+    "bytes": 2257,
+    "sha256": "69b953995245a48235e79f533d65fb069c9284afeac491faf22d212f8f7b48ca"
+  },
+  "verified/HOST-PROGRESS.json": {
+    "bytes": 3984,
+    "sha256": "757d3641a9b5f453d9e70901905650e8b8a1283973ccbb8ccc7ef136701fe997"
+  },
+  "verified/HOST-RESULT.json": {
+    "bytes": 4710,
+    "sha256": "966d99f70a47bf51705be64a96addc20ed9a790aff75be95510a9a747e714698"
+  },
+  "verified/host.log": {
+    "bytes": 3494,
+    "sha256": "1ffc9ce473df6855ca9f7a0f664c900ac01b4c267d0e8de9a7ed0930a15f1f6d"
+  },
+  "verified/MUSIC.DEBUG.ELF": {
+    "bytes": 110948,
+    "sha256": "9d0f7e2ebdf697a2e124c25868ba1bb069256bc5a581cc9f313cbc91d6f73bb2"
+  },
+  "verified/MUSIC.ELF": {
+    "bytes": 95792,
+    "sha256": "fab67aa14504b7eea7379879f368775eb0d1de445a7b0d1db8fd04ae8e93cf90"
+  },
+  "verified/red-master.log": {
+    "bytes": 1326,
+    "sha256": "36614eef9b8afc283c5815a94e2fdc458b92bf3d5e5549343b704670579b2a8f"
+  },
+  "verified/red-rom.log": {
+    "bytes": 1172,
+    "sha256": "3c1280e1303a98dcf0398f7eb0eea895d69e2193ff9ae56a627cef154286fc56"
+  },
+  "verified/red.log": {
+    "bytes": 1590,
+    "sha256": "350fce42e0b0db3ac3fb79ebf4893417e4431e2c04249f3ec5994c6f68da00b6"
+  },
+  "verified/RESULT.json": {
+    "bytes": 13374,
+    "sha256": "6b49e122e7dc7bd806c00a7980699080e04a846d951cb94212270757b6445021"
+  },
+  "verified/STATE-LAYOUT.json": {
+    "bytes": 1343,
+    "sha256": "bff62d63b72e4c95035407ba5789fa696d606cb33939797eed601256bf9e55ec"
+  }
+}

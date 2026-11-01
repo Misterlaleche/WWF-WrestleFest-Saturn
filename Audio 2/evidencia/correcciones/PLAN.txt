@@ -1,0 +1,46 @@
+AUDIO REPAIR — 2026-10-28
+Authorization: user explicitly requests fixes for blocking, heap/stack overlap,
+PCM and graphics performance verification. R04 and old deliveries remain intact;
+no BIN/CUE/ISO creation. Previous expanded audit is the approved problem/spec.
+
+Execution: current recovered runtime checkout, file-by-file snapshots/hashes.
+A worktree from HEAD would omit the imported, untracked audio sources and current
+graphics changes. No checkout/reset/stage/commit of unrelated work. Agents own
+non-overlapping production files; final integration and builds remain sequential.
+
+Task PCM (agent): red/green actual independent DSP tests; correct signed ADRS
+for all 4 rings, both interpolation neighbors and fractional/end wrap. Own
+build_dsp_mixer.py, wf_scsp_dsp.c, related 68000 write range, PCM tests only.
+Preserve ring size/stride, 32 FM slots, 128 instruction limit, safe loader.
+
+Task memory/build (agent): red gate on existing unsafe ELF; actual allocator
+partition and stack reservation, preserve >=16 KiB usable configured heap and
+>=8 KiB slave stack. Own memory contract/build files/SDK adapter and memory tests.
+No linker-only fix, no relaxing budget to hide overlap, no graphics algorithm edit.
+Identify a concrete safe partition, implement and validate actual linked ELF.
+
+Task containment/waits (root): tests first for full/faulted queues returning
+successful gameplay status with explicit diagnostics and bounded audio-only
+shutdown. Keep poison safety. Add independent master/VBlank heartbeat and slave
+progress fields after existing shared ABI fields; old worker offsets unchanged.
+No master busy waits or per-frame file I/O; stop delivery/ordering must be explicit.
+Bound generation/full-ring/FM waits and detect stalled RUNNING worker.
+
+Task integration (root): build only ELF/modules using compatible M68k/SH2 tools.
+Corrected cold boot on existing disc via in-memory file/ELF substitution or an
+ELF loader; never create/overwrite disc images. Compare music vs SFX with identical
+graphics payload/core options, full cache, exact interleave, JIT disabled.
+Measure emulated game/render progress, FM/PCM late/drop, minimum headroom. Host
+wall time is not Saturn FPS. If graphics regression persists, investigate it.
+
+Final gates: independent review; all relevant host/native suites; source/layout
+contracts on actual ELF; no pending observed hangs/PCM corruption. Report all
+unresolved hardware or throughput limits honestly, no invented percentage.
+
+LEDGER: PCM independent DSP RED80fail -> GREEN144/144 +12moving; new firmware compiled120steps/12RAMops. Containment/waits RED propagatedfault/unbounded -> GREEN C11/W4/WX. Added16-bit atomic VDP1 heartbeat stamps (ABI3), signedmodular deadlines; RED one-frame-ahead race -> GREEN. Two sound ELFs compiled; master ELF allocator wrapper LTO link under active repair. Restored native-driver regression tests from preserved R02 sources; DSP reference remains pinned and adapter explicit. No disc outputs.
+
+PERFORMANCE BLOCKER: full cache coldboot at8400 with safeELF05202297: MUSIC game0/220FMdrops, SFXgame733/noFMdrops. No approval. Controlled diagnostic A(same control, noKEYONB) stillblack82drops@4200; B(idle module noZ80) title/noFMdrops, same runtime/header. This narrows cost to control/module accesses; cause not yet proven. C instruction-priority cache and D smaller FMqueue experiments are isolated copies, no production. ELF53eaf24 adds real SDKstats and is under baseline9600 test; heap18436 useful>=16384 and8KiB stackexclusive.
+
+Ruling: an FM deadline miss now faults the stream instead of silently discarding its queue and continuing a saturated slave. This is containment, not a music performance fix; audio_gate must reject disabled audio. RED silent success -> GREEN false/fault, runtime mutes+shutdown and gameplay continues. Diagnostic optimization copies remain pinned before this fail-fast to expose workload.
+
+CURRENT VERIFIED: final-safe MUSICdae8c38a faults on first missedFM deadline, master disables/mutes; 9600cold game849 vsSFX849, fatal0, no allocatorfaults. Stable game300..600 traces align exactly under215framebootshift (1005samples,tex404->787,cmd84->97). Endgame zero texturecounters/black9600 are common transitions, not evidence of new render corruption. Strict final SFXsameMUSICdaemon-control run underway; fullmusic gate remainsFAIL becauseaudio disabled. Native optimized bookkeeping conservative experiment327680functional checks passes but coldFM87fails(no promotion). Need await large-stub same129k layout to disentangle footprint before attributingcontrolcost alone. Other Codex concurrently changed metasprite_cache hook and CDFS; leave unrelated changes intact; validatedmasterELF53eaf uses pinnedpriorgraphics snapshot.

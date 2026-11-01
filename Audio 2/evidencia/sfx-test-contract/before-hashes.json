@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\starter\\WF_SCSP_NATIVE_OPT_R01\\assets\\WF_OKI_PCM16BE.PAK",
+    "Hash": "45A22577841FC0CA9BDF84F6EC8ACF72F2C87602C9A50EB42FCE395A57131BEE"
+  },
+  {
+    "Path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\audio-repair\\pcm\\firmware-tests\\input\\inputs\\SFX.DAT",
+    "Hash": "DBE749CF4CE13F333FF7318A74A64E30FA2B9AF05D953688A0813311CBABD216"
+  },
+  {
+    "Path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\src\\audio\\native\\wf_scsp_sfx.c",
+    "Hash": "E298BC39B2AFF506E13E8154499FC754C1DA39B7AC680412609E7702A8483056"
+  },
+  {
+    "Path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\tests\\audio\\native-driver\\test_sfx.c",
+    "Hash": "6A6AADE62CCE127B77B2C5DC08DAFC86C10EBDF1F3D8F82F742C7CA4DE4ED602"
+  }
+]

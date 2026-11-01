@@ -1,0 +1,193 @@
+{
+  "passed": true,
+  "physical_relocation": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package",
+  "legacy_failure_is_real_missing_module": true,
+  "template_LF_bytes_exact": true,
+  "transport_ELF_exact": true,
+  "all_PT_LOAD_bytes_ranges_exact": true,
+  "unchanged_failed_audio_algorithm": true,
+  "no_emulator_run": true,
+  "no_media_created": true,
+  "elf_sha256": "fab67aa14504b7eea7379879f368775eb0d1de445a7b0d1db8fd04ae8e93cf90",
+  "compiler": {
+    "prefix": "sh-elf",
+    "path": "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\sh2-toolchain\\bin\\sh-elf-gcc.exe",
+    "sha256": "d7318edc908585e6b9e8f104a474a797572e68998fac074a5b7ffbe2cc90e007",
+    "version": "sh-elf-gcc.exe (GCC) 9.3.0\nCopyright (C) 2019 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "target": "sh-elf",
+    "binutils": "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\sh2-toolchain\\sh-elf\\bin",
+    "libgcc_path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\toolchains\\sh2eb-elf\\lib\\gcc\\sh2eb-elf\\13.2.0\\libgcc.a",
+    "libgcc_sha256": "0380c1a9433fd00827f7edc4d2b61bab80a45cb75d3251fd3cece3c56611571f"
+  },
+  "layout": {
+    "seq_bytes": 2164,
+    "ym_bytes": 1056,
+    "hot_state_bytes": 3220,
+    "io_epoch_offset": 2160,
+    "cycles_offset": 2124,
+    "last_cpu_offset": 2120,
+    "steps_offset": 2132,
+    "skipped_offset": 2140,
+    "cpu_userdata_offset": 16,
+    "synth_write16_offset": 1036,
+    "synth_writes_offset": 1044,
+    "shared_bytes": 176,
+    "workspace_offset": 172,
+    "compiler": {
+      "prefix": "sh-elf",
+      "path": "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\sh2-toolchain\\bin\\sh-elf-gcc.exe",
+      "sha256": "d7318edc908585e6b9e8f104a474a797572e68998fac074a5b7ffbe2cc90e007",
+      "version": "sh-elf-gcc.exe (GCC) 9.3.0\nCopyright (C) 2019 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "target": "sh-elf",
+      "binutils": "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\sh2-toolchain\\sh-elf\\bin",
+      "libgcc_path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\toolchains\\sh2eb-elf\\lib\\gcc\\sh2eb-elf\\13.2.0\\libgcc.a",
+      "libgcc_sha256": "0380c1a9433fd00827f7edc4d2b61bab80a45cb75d3251fd3cece3c56611571f"
+    }
+  },
+  "tests": {
+    "RED_legacy_missing_dependency": {
+      "returncode": 1,
+      "seconds": 0.07618069997988641,
+      "command": [
+        "C:\\Users\\VersusPC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\red\\run.py"
+      ]
+    },
+    "GREEN_relocated_generator": {
+      "returncode": 0,
+      "seconds": 0.06582960003288463,
+      "command": [
+        "C:\\Users\\VersusPC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\tools\\generate.py",
+        "--rom",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\input\\sound.rom",
+        "--out",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\build\\z80-native.c"
+      ]
+    },
+    "GREEN_relocated_exact_build": {
+      "returncode": 0,
+      "seconds": 2.57786139997188,
+      "command": [
+        "C:\\Users\\VersusPC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\tools\\build.py",
+        "--toolchain",
+        "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\sh2-toolchain",
+        "--compiler-prefix",
+        "sh-elf",
+        "--sdk",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\toolchains\\sh2eb-elf",
+        "--rom",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\input\\sound.rom",
+        "--master",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\master\\wrestlefest-runtime18-scsp.elf",
+        "--out",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\build"
+      ]
+    },
+    "RED_wrong_master": {
+      "returncode": 1,
+      "seconds": 0.08044679998420179,
+      "command": [
+        "C:\\Users\\VersusPC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\tools\\build.py",
+        "--toolchain",
+        "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\sh2-toolchain",
+        "--compiler-prefix",
+        "sh-elf",
+        "--sdk",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\toolchains\\sh2eb-elf",
+        "--rom",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\input\\sound.rom",
+        "--master",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\wrong-master.elf",
+        "--out",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\must-not-build"
+      ]
+    },
+    "RED_wrong_ROM": {
+      "returncode": 1,
+      "seconds": 0.06364619999658316,
+      "command": [
+        "C:\\Users\\VersusPC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\tools\\generate.py",
+        "--rom",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\wrong.rom",
+        "--out",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\must-not-generate\\z80-native.c"
+      ]
+    },
+    "HOST": {
+      "returncode": 0,
+      "seconds": 47.605550899985246,
+      "command": [
+        "C:\\Users\\VersusPC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\native18k-selftest-20261029\\run-01\\green\\package\\test_host.py"
+      ]
+    }
+  },
+  "host": {
+    "passed": true,
+    "tests": {
+      "pre": {
+        "passed": true,
+        "seconds": 0.6851924000075087,
+        "output": "PASS PRE0E6A: 64336 full15-step original-R01 CPU/RAM/timer/emit-state+timestamp comparisons, 87489 immutable guard declines, memory/stack aliases, callbackfalse,NMI/IRQ/delay mutations andwrap32\n"
+      },
+      "post": {
+        "passed": true,
+        "seconds": 0.9422884999657981,
+        "output": "PASS POST EX_AF+RET(E71)+INCIX+INCHL+DJNZ: 206032 exact full CPU/RAM/R/WZ/AF/timing cases, 156312 immutable guard declines, 2048 split budget/target comparisons; original pinned oracle\n"
+      },
+      "startup": {
+        "passed": true,
+        "seconds": 3.1739382999949157,
+        "output": "PASS startup copy:10000 full CPU/sequence/RAM differentials vs331 pinned z80_step each; 7544 immutable declines; 32-bit cycle wrap, budget0..330, span0..6945, NMI/IRQ/delay/halt/range guards\n"
+      },
+      "batch": {
+        "passed": true,
+        "seconds": 0.3833243999979459,
+        "output": "PASS post-callback control through real adapters: 64000 exact cases,20 scalar forms, NMI/IRQ modes0/1/2/iff_delay1/2/maskedIRQ/callbacktruefalse/32wrap\nPASS control-batch: 586433 functional-state checks, 1325 I/O barriers, 75309 immutable randomized declines; target/budget/timer32wrap/actualTBCTL/callbackfalse/IRQ/NMI/delay/halt/003A\n"
+      },
+      "wide": {
+        "passed": true,
+        "seconds": 2.2392923000152223,
+        "output": "GREEN elapsed overflow: budget=67108864 elapsed=671088640 taken=67108864 old_product=0 reference_rc=0 fixed_rc=0 fullCPU/RAM/cycles/timers/steps exact\nGREEN elapsed overflow: budget=67108863 elapsed=671088630 taken=67108863 old_product=4294967232 reference_rc=0 fixed_rc=0 fullCPU/RAM/cycles/timers/steps exact\nGREEN elapsed overflow: budget=67108865 elapsed=671088650 taken=67108865 old_product=64 reference_rc=0 fixed_rc=0 fullCPU/RAM/cycles/timers/steps exact\n"
+      },
+      "control": {
+        "passed": true,
+        "seconds": 1.0882326000137255,
+        "output": "music sequence: all18, exact CPU/RAM/I-O with idle optimization, fade and chunking PASS\n"
+      },
+      "interactions": {
+        "passed": true,
+        "seconds": 0.13259890000335872,
+        "output": "PASS combined PRE/POST: 48000 full CPU/RAM/timer/callback-state+time checks; 24000 mandatory post-C801 I/O barriers; 3000 exact POST5 continuations; callbackfalse,NMI,IM2,delay,PC/return mutations,epoch/cycle wrap\n"
+      },
+      "long": {
+        "passed": true,
+        "seconds": 34.54035170003772,
+        "output": "cmd01 PASS600s+8sfade checkpoints608 events=1260526 hash=d22b10795d181f69\ncmd02 PASS600s+8sfade checkpoints608 events=767438 hash=aff0163656cdb0e0\ncmd03 PASS600s+8sfade checkpoints608 events=1000991 hash=ab7f1c337671e155\ncmd04 PASS600s+8sfade checkpoints608 events=1413941 hash=4b9ded321dce24e7\ncmd05 PASS600s+8sfade checkpoints608 events=534747 hash=00fde199c347cce9\ncmd06 PASS600s+8sfade checkpoints608 events=1460559 hash=19b02042571d1961\ncmd07 PASS600s+8sfade checkpoints608 events=1648736 hash=3e2ae620496ad7af\ncmd08 PASS600s+8sfade checkpoints608 events=668414 hash=96af2958ff0facd3\ncmd09 PASS600s+8sfade checkpoints608 events=538618 hash=3fd84f0c259848e2\ncmd0a PASS600s+8sfade checkpoints608 events=1122672 hash=db2a6029e1e926f5\ncmd0b PASS600s+8sfade checkpoints608 events=1125666 hash=5da1037928701f12\ncmd0c PASS600s+8sfade checkpoints608 events=825771 hash=6d9f9818e6ab5729\ncmd0d PASS600s+8sfade checkpoints608 events=833286 hash=011125bd059c9dd2\ncmd0e PASS600s+8sfade checkpoints608 events=977318 hash=5661fb3b994f6cf1\ncmd0f PASS600s+8sfade checkpoints608 events=950926 hash=a3e8d05231064d58\ncmd10 PASS600s+8sfade checkpoints608 events=695299 hash=4e6b7af14004c363\ncmd11 PASS600s+8sfade checkpoints608 events=1426165 hash=fc3029a9bd7697db\ncmd12 PASS600s+8sfade checkpoints608 events=1880602 hash=d2c98b0c1a3c0d79\nPASS Q512/B4096:18x600s+8sfade, 10962 exact frozen-R01 CPU/RAM/timer/event checkpoints, candidate calls=956109 exhaustions=2613; globalFs512 grid preserved with common1s observation splits\n"
+      }
+    },
+    "tracks": 18,
+    "score_seconds": 600,
+    "fade_seconds": 8,
+    "quantum_fs": 512,
+    "budget": 4096,
+    "long_checkpoints": 10962,
+    "hot_sha256": "ad2eb64498e50f53eca96ee0ad59530fe318a28571e938c5416646725e5dce12",
+    "cold_sha256": "454e19fddbb9682b493a80d3566b686cba114f313b48b3a08033d5a97d04f38c",
+    "seq_sha256": "6b9c209edc03b3b34ccf608f43fe8f8b20c7ba8ab42c93cd5c6f5db78906df90",
+    "post_test_only_symbol_renames": true,
+    "original_post_test_sha256": "0664361b39d29e459a1146acc05a1bdb3e792bf924c261f82df317d952c96a6a",
+    "guest_sources_unchanged_during_test": true,
+    "media_created": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "public_or_private_scalar_symbols": [],
+  "batch_shift_helper_sites": [],
+  "batch_admission_table_loads": [
+    {
+      "pc": "0x608b8d6",
+      "next_words": [
+        "d327",
+        "033c",
+        "2338",
+        "8b01"
+      ]
+    }
+  ],
+  "one_exact_shared_table256": true,
+  "hot_bytes": 13992,
+  "state_bytes": 3220,
+  "spare": 1220,
+  "scope": "Actual linked SH2 words in batch; other functions may still use the shift helper"
+}

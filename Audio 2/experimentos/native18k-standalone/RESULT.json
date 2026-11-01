@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "scope": "Maintainability only; same failed native audio diagnostic",
+  "master_sha256": "e56b027b8a3e89f92ecbb0a419363c11eb2996334b8b819e87ab9137152d0221",
+  "compact_elf_sha256": "fab67aa14504b7eea7379879f368775eb0d1de445a7b0d1db8fd04ae8e93cf90",
+  "hot_LF_sha256": "ad2eb64498e50f53eca96ee0ad59530fe318a28571e938c5416646725e5dce12",
+  "cold_LF_sha256": "454e19fddbb9682b493a80d3566b686cba114f313b48b3a08033d5a97d04f38c",
+  "normalization": "CRLF/CR -> LF for C templates/output only",
+  "same_all_PT_LOAD_bytes_ranges": true,
+  "real_missing_dependency_RED": true,
+  "relocated_package_GREEN": true,
+  "wrong_master_and_ROM_rejected_before_compilation": true,
+  "HOST": {
+    "passed": true,
+    "tracks": 18,
+    "score_seconds": 600,
+    "fade_seconds": 8,
+    "checkpoints": 10962,
+    "interactions": 48000
+  },
+  "compiler": {
+    "prefix": "sh-elf",
+    "path": "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\sh2-toolchain\\bin\\sh-elf-gcc.exe",
+    "sha256": "d7318edc908585e6b9e8f104a474a797572e68998fac074a5b7ffbe2cc90e007",
+    "version": "sh-elf-gcc.exe (GCC) 9.3.0\nCopyright (C) 2019 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "target": "sh-elf",
+    "binutils": "C:\\Users\\VersusPC\\Documents\\Codex\\2026-10-25\\https-github-com-misterlaleche-wwf-wrestlefest\\work\\sh2-toolchain\\sh-elf\\bin",
+    "libgcc_path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\toolchains\\sh2eb-elf\\lib\\gcc\\sh2eb-elf\\13.2.0\\libgcc.a",
+    "libgcc_sha256": "0380c1a9433fd00827f7edc4d2b61bab80a45cb75d3251fd3cece3c56611571f"
+  },
+  "layout": {
+    "seq_bytes": 2164,
+    "ym_bytes": 1056,
+    "hot_state_bytes": 3220,
+    "io_epoch_offset": 2160,
+    "cycles_offset": 2124,
+    "last_cpu_offset": 2120,
+    "steps_offset": 2132,
+    "skipped_offset": 2140,
+    "cpu_userdata_offset": 16,
+    "synth_write16_offset": 1036,
+    "synth_writes_offset": 1044,
+    "shared_bytes": 176,
+    "workspace_offset": 172
+  },
+  "metrics": {
+    "generator_before": {
+      "files": 10,
+      "bytes": 30246,
+      "lines": 459
+    },
+    "generator_after": {
+      "files": 1,
+      "bytes": 1270,
+      "lines": 23
+    },
+    "all_new_tools": {
+      "files": 5,
+      "bytes": 12897,
+      "lines": 196
+    },
+    "templates": {
+      "files": 2,
+      "bytes": 89983
+    },
+    "executable_delta_bytes": 0,
+    "PT_LOAD_delta_bytes": 0,
+    "hot_code_delta_bytes": 0,
+    "unchanged_hot_code_bytes": 13588,
+    "unchanged_state_bytes": 3220
+  },
+  "proposal": "Maintain two versioned C templates, one generator and one hash-bound builder. New semantics require a new pinned snapshot and oracle; no patch chain.",
+  "no_audio_repair_claim": true,
+  "no_canonical_changes": true,
+  "no_media_created": true,
+  "no_emulator_run": true
+}

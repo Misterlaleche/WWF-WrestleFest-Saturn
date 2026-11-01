@@ -1,0 +1,80 @@
+ISOLATED PCM DEADLINE CORRECTION — design/plan before implementation
+2026-10-29. Authorized scope: validation only, no SH changes or real-disc media.
+
+Measured fault, original SCSP b882... and unmodified M68K/DSP stepper:
+cmd02,3 ongoing direct effects+PCM3, future ring publication512Fs early.
+The worst first poll is660Fs late after300080 CPUcycles from publication.
+230324 cycles(76.75%) in that interval are ADPCM block decode, not Python
+clock granularity. The1-instruction run has maximum100cycles per execute;
+the256cycle run gives658Fs rather than660Fs. A64sample block costs12830
+cycles=50.12Fs;256sample prefill49886cycles=194.87Fs/4.42ms. One work() can
+do4x64samples, approximately200Fs/4.55ms, before returning to deadlines.
+Do not add inclusive work() time to its decode() children.
+
+Current timing contract:
+B028 adds one per event due>256Fs and another due>2205Fs. Both branches
+execute known kinds; this is not a drop count. kind4 only changes mailbox
+FM-active metadata; kind1/2 change musical OKI/bank. FM hardware writes and
+FM loss belong to the SH worker/B03A. B028 and PCM underruns remain blocked
+until evidence permits a new, explicit gate; this experiment never hides them.
+
+Approaches considered:
+1. Only shrink ordinary refill. Smallest change, but still decodes256samples
+   after the requested start and cannot by itself fix causal launch latency.
+2. Prepare one upcoming musical launch before its timestamp, and bound
+   ordinary refill work. Chosen first isolated experiment. It attacks the
+   measured cause without larger ring, earlier SH publication or clock change.
+3. Stage every future SFX sequence launch as well. Broader engine work; reserve
+   this for evidence that simultaneous scheduled SFX starts still break the
+   deadline. No speculative4-voice asynchronous command queue in experiment1.
+
+Minimum contracts by scenario:
+A. PCM3 idle, future start already in existing ring: decode its initial256
+   samples ahead of due into inactive PCM3 storage. No gain/keyon before when.
+B. PCM3 still playing: use a512B staging buffer plus decoder/identity metadata
+   (estimate<560B total) so preparation never overwrites audible ring data.
+   At due, preserve original busy/suppress/stop semantics. A start while busy
+   is still ignored; preparation must not force a restart. A prior scheduled
+   stop permits commit. If needed, copy256samples after stop and enable only
+   when due. Measure copy/control time, do not assume exact zero latency.
+C. Bank/sample-select bytes: preparation simulates only the ordered lookahead
+   in a local descriptor; real music_bank/oki_pending/consumer still commit at
+   their timestamps. Preserve generation and raw event order; invalidate on
+   generation, changed head identity, STOP or a mismatching prepared sample.
+D. Ordinary refill: total globally bounded chunk, initially32decoded samples
+   per service call (about26Fs), round-robin across four voices. Preserve every
+   decoded value/ring safety margin and sample end. This adds no lookahead or
+   queue capacity. Confirm producer bandwidth and zero real32bit underruns.
+E. Mail/SFX launch: measure request->ACK and request->first new PCM output,
+   including the prelaunch refill. Reduce its ordinary refill to the same
+   bounded service contract; don't redefine ACK to precede accepted launch.
+   Preserve all98commands, priorities, deterministic preemption, inherited bank,
+   suppression, stop, delayed event order, and generation separation of PCM3.
+F. Simultaneous scheduled SFX launches remain an explicit risk: three fresh
+   synchronous256sample prefills cost~585Fs even without other work. If the
+   measured corpus exercises this, experiment1 cannot claim full delivery;
+   add future per-voice staging only with its own red/green proof and sizes.
+
+Implementation plan (native execution, explicit parent authorization):
+[x] Pin original firmware/debug/core/DSP inputs and capture per-kind due,
+    publication, first poll, consume, PCM controls and decode spans read-only.
+[ ] Add request->ACK/first-output metrics for all98 mailbox commands and
+    representative four-voice mixes. Re-run fine timing baseline.
+[ ] Write red test against original ELF: same512Fs lead, no early gain/start,
+    every causally audible PCM3 control <=256Fs late, no lost events or PCM
+    underruns; include wrap, generation, busy/stop/bank and priority scenarios.
+[ ] Copy only affected native sources/build files into isolated late-fix/repo.
+    Implement minimum prepare/commit and globally bounded refill there.
+[ ] Build isolated M68K ELF with exact compiler/flags. Pin layout/provenance;
+    original ELF, source, R04 and canonical files stay unchanged.
+[ ] Green same M68K/DSP tests including timing-finer comparison, all98 commands,
+   114goldenPCM, mixed priorities, ACK maxima and simultaneous voices. Report
+    any remaining failure honestly rather than widening the256Fs threshold.
+[ ] Parent source review before combining with SH; no Saturn run by this agent.
+
+Existing HOST R01 controller equivalence does not prove this audio deadline.
+The historical Saturn364/1448 counts cannot be typed retroactively from the
+single aggregate counter. A consumed-event trace from that exact run is still
+needed; this design's HOST evidence must not be relabeled as its attribution.
+Graphics eventually need same-master audio-disabled comparison as well as
+SFX-only control. Shared SFX service cost is not evidence of zero total impact.

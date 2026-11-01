@@ -1,0 +1,6 @@
+{
+  "mode": "red",
+  "exit_code": 1,
+  "output": "RED: four-segment music image for the master-owned HWRAM window was rejected\n",
+  "loader_sha256": "2fcb50f8fad674681ed5d5007553ad9ad903590f6b2463b6a91d836c2490e362"
+}

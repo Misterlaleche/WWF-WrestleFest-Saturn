@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "allPC": 65536,
+  "guard_modes": 7,
+  "cases": [
+    "0x0e6a",
+    "0x0f5f",
+    "0x037c",
+    "0x0f2d",
+    "0x08c1",
+    "0x0f4b",
+    "0x0a8f",
+    "0x0aa0",
+    "0x0991",
+    "0x0a0b",
+    "0x080d",
+    "0x08a7"
+  ],
+  "red_green": {
+    "RED": {
+      "returncode": 3221226505,
+      "output": "admission cases=458752 fast_calls=458752 expected=84 fast_misses=458668\nAssertion failed: wf_test_fast_calls==expected, file C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\audio-repair\\control-fix\\integrated-native18k-admission\\admission-host\\test.c, line 27\n"
+    },
+    "GREEN": {
+      "returncode": 0,
+      "output": "admission cases=458752 fast_calls=84 expected=84 fast_misses=0\nPASS all65536PC x7 control declines: exact functional state and fast never entered for a miss\n"
+    }
+  },
+  "expected_GREEN_fast_calls": 84,
+  "baseline_unchanged": true,
+  "guest_source_instrumentation": false,
+  "generated_hot_sha256": "573575b540df1db5cf96676d49575d7c67a40feb29ae461df1ee413a0d891ea8"
+}

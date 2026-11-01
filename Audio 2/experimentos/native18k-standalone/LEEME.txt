@@ -1,0 +1,40 @@
+Snapshot de audio nativo ABI3, consolidado sin cambiar su algoritmo.
+
+Este paquete conserva el diagnóstico que obtuvo0descartes a4200 y212descartes
+a9600. No acredita audio reparado ni autoriza una imagen.
+
+tools/generate.py copia dos plantillas C legibles y verificadas porSHA256.
+Las plantillas y los C de salida usan UTF-8 con LF. Sólo se normalizan CRLF/CR
+aLF respecto del snapshot; no se sustituyen expresiones ni se encadenan
+generadores históricos. El core y su licencia MIT están en
+src/audio/native/reference_driver. PIN.json fija ROM, oracle, fuentes y versión.
+
+Desde la raíz del paquete, con Python y las dependencias locales indicadas:
+
+python tools/build.py --toolchain RUTA_TOOLCHAIN --compiler-prefix sh-elf --sdk RUTA_SDK --rom input/sound.rom --master master/wrestlefest-runtime18-scsp.elf --out build
+python test_host.py
+
+RUTA_TOOLCHAIN es la raíz del compilador GCC9.3SH2 fijado por hash; RUTA_SDK
+contiene sh2eb-elf/include y lib/gcc/sh2eb-elf/13.2.0/libgcc.a. El prefijo es
+obligatorio; se admite .exe o la herramienta sin extensión, pero el ejecutable
+y libgcc deben coincidir con sus hashes. HOST usa MSVC BuildTools2022, cuya
+ruta de vcvars64.bat está declarada en test_host.py. No se descarga nada.
+
+El builder exige el masterSHAe56b027b8a3e89f92ecbb0a419363c11eb2996334b8b819e87ab9137152d0221,
+lee sus símbolos ELF y deriva inicio, final y capacidad de la ventana estática.
+La partición14KiBTLSF/18KiBhot/8KiBpila, ABI3 y workspace172 no cambian.
+Prepare, diagnóstico pre-failfast, temporización, presupuestos y caché también
+permanecen iguales. Un master o ROM incorrectos se rechazan antes de compilar.
+
+build/BUILD-RESULT.json declara prefijo, ejecutable, versión, target, hashes,
+libgcc, comandos y flags. build/STATE-LAYOUT.json deriva sizeof/offsetof con
+ese compilador mediante un objeto aparte que no se enlaza en MUSIC.ELF.
+
+La aceptación exige todos los bytes y rangos PT_LOAD originales y el ELF
+compacto completoSHAfab67aa14504b7eea7379879f368775eb0d1de445a7b0d1db8fd04ae8e93cf90.
+Cambiar compilador, plantillas o algoritmo requiere un nuevo snapshot y su
+validación; este builder no acepta diferencias silenciosas.
+
+Propuesta de mantenimiento: editar explícitamente las plantillas versionadas,
+actualizar sus pins tras revisión y ejecutar oracle/build. Mantener un único
+generador y un único builder; no acumular nuevos parches sobre scripts viejos.

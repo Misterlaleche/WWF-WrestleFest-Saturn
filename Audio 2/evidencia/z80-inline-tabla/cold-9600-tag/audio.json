@@ -1,0 +1,12 @@
+{
+  "base_harness_sha256": "a16e52ae4cdf8db6fca5192f810f68c43afd00f4375468add5007048afa5873c",
+  "extension_sha256": "5911c48e90a6365e338a787d17928f9b25bce690bb4621ca8909311df4450f52",
+  "identity_adapter_sha256": "1cc4b0d16fcd620022e6d2cdaa57a919eba326c778194b8d03f244be20df92da",
+  "wav_sha256": "2108b0de2dfd121d8460c81fabef6d810faf39a3a0306f4cd6ec777802a0c970",
+  "frames": 7076507,
+  "sample_rate": 44100,
+  "seconds": 160.46501133786848,
+  "guest_audio_modified": false,
+  "state_loads": 0,
+  "guest_memory_edits": false
+}

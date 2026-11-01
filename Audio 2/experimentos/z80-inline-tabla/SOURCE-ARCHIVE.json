@@ -1,0 +1,6 @@
+{
+  "archive": "scalar-inline-admission-table-sources.tar.gz",
+  "sha256": "9dae485936f500479e6777e689c67e57b2ae39e2189a966c8d8601db6c7d9d58",
+  "bytes": 656076,
+  "scope": "isolated source plus validation tools/reports; requires pinned local SDK/compiler/master listed by build_sh2.py; private inputs remain local"
+}

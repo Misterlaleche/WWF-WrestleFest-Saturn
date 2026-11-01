@@ -1,0 +1,6 @@
+{
+  "mode": "green",
+  "exit_code": 0,
+  "output": "PASS owned 18KiB window, four loads, exact copy/zero-fill, 351 malformed images, no partial output or writes\n",
+  "loader_sha256": "0b84c338a7315b723e63a4110f87096bb4e2e20370bdb40f941926f8517fadf3"
+}

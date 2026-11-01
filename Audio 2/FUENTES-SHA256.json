@@ -1,0 +1,2668 @@
+{
+  "schema": 1,
+  "name": "Audio 2",
+  "date": "2026-11-01",
+  "scope": "Selected audio sources and evidence; no protected payload/media/toolchain",
+  "files": [
+    {
+      "path": "base/src/audio/native/generated/envelope-calibration.json",
+      "bytes": 40352,
+      "sha256": "86d208e6a48104077f70f4ff2fd91a6ac81b3ad874c4ccbfe43c84eadca3898d",
+      "git_blob_sha1": "e601c8db7a509029e3bbeae4ff79c66327133f01",
+      "origin": "runtime18/src/audio/native/generated/envelope-calibration.json"
+    },
+    {
+      "path": "base/src/audio/native/generated/PROVENANCE.json",
+      "bytes": 762,
+      "sha256": "ae6fef7f492bf875afebcc58f83c5e1a76813fd706290609208d6d86feff4ad5",
+      "git_blob_sha1": "6fffc460ed7ef9b850ff1830eeac192ae975c860",
+      "origin": "runtime18/src/audio/native/generated/PROVENANCE.json"
+    },
+    {
+      "path": "base/src/audio/native/generated/wf_ym_envelope.h",
+      "bytes": 770,
+      "sha256": "4e629def3f2d8154fd8083e73ebb2ca49d2303a27a6e9d35257bbc6b01f1f273",
+      "git_blob_sha1": "97b4879f23d2b873ee67a787a0f36c545c1ba736",
+      "origin": "runtime18/src/audio/native/generated/wf_ym_envelope.h"
+    },
+    {
+      "path": "base/src/audio/native/generated/wf_ym_tables.h",
+      "bytes": 24605,
+      "sha256": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+      "git_blob_sha1": "7355798ced6b5a03325dbd4d8466ea880e28887f",
+      "origin": "runtime18/src/audio/native/generated/wf_ym_tables.h"
+    },
+    {
+      "path": "base/src/audio/native/generated/wf_z80_blocks.json",
+      "bytes": 8256,
+      "sha256": "f25035888226fd08e77d4d3427d5402fbbb14f4ad6105e6d324e0a0cb9e823b4",
+      "git_blob_sha1": "5244d23925f965284a704104002215373418f49c",
+      "origin": "runtime18/src/audio/native/generated/wf_z80_blocks.json"
+    },
+    {
+      "path": "base/src/audio/native/ponesound/LICENSE",
+      "bytes": 1064,
+      "sha256": "192ddf55fe9e17185164b1102b2ed705fa346aa993a4fbcad54e18722069edae",
+      "git_blob_sha1": "2bf440163bec7771a9a38ad8a865852783bb9926",
+      "origin": "runtime18/src/audio/native/ponesound/LICENSE"
+    },
+    {
+      "path": "base/src/audio/native/ponesound/wf_ponesound.c",
+      "bytes": 56513,
+      "sha256": "766b5db511ad9e4bcb08fd593760fb7ab7e1973a7ba6a0ec2b33ce319a677628",
+      "git_blob_sha1": "923f22df0bc99c41ee1482a717712b292f058f71",
+      "origin": "runtime18/src/audio/native/ponesound/wf_ponesound.c"
+    },
+    {
+      "path": "base/src/audio/native/reference_driver/LICENSE",
+      "bytes": 1073,
+      "sha256": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5",
+      "git_blob_sha1": "e593d41514e6dbbc205624e8f5d9cba8040755e7",
+      "origin": "runtime18/src/audio/native/reference_driver/LICENSE"
+    },
+    {
+      "path": "base/src/audio/native/reference_driver/PROVENANCE.json",
+      "bytes": 407,
+      "sha256": "0ca85690faec2124d141f74abb6f42ea4cb994b486b657e076722e34c63f22f1",
+      "git_blob_sha1": "0b592b082488eea0bf5a86b1c4259c9a44dfb831",
+      "origin": "runtime18/src/audio/native/reference_driver/PROVENANCE.json"
+    },
+    {
+      "path": "base/src/audio/native/reference_driver/z80.c",
+      "bytes": 50103,
+      "sha256": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+      "git_blob_sha1": "366c508a32fb4edf4d1cf8b9367512c428cc1c43",
+      "origin": "runtime18/src/audio/native/reference_driver/z80.c"
+    },
+    {
+      "path": "base/src/audio/native/reference_driver/z80.h",
+      "bytes": 1136,
+      "sha256": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+      "git_blob_sha1": "4e2b0b42c06d0c623528d4c3394e08384f884c1a",
+      "origin": "runtime18/src/audio/native/reference_driver/z80.h"
+    },
+    {
+      "path": "base/src/audio/native/SFX-NATIVE.md",
+      "bytes": 6516,
+      "sha256": "83edc3e8e87e5e0b022d4c903b24f3b5f774d34682c75ac7c9da38b1dee707a7",
+      "git_blob_sha1": "83eca13c9e61cf357a0f9d885633d398f36a20f3",
+      "origin": "runtime18/src/audio/native/SFX-NATIVE.md"
+    },
+    {
+      "path": "base/src/audio/native/wf_m68k.ld",
+      "bytes": 999,
+      "sha256": "4aff5a6dad158e4fc24c7b0751a97459afe3876df58983a6c55a25bfda7a21a1",
+      "git_blob_sha1": "6d46ccf9db48d3f248ceb6df3f24449c9b47a957",
+      "origin": "runtime18/src/audio/native/wf_m68k.ld"
+    },
+    {
+      "path": "base/src/audio/native/wf_m68k_start.S",
+      "bytes": 498,
+      "sha256": "bd1a965c32b231a93925a4ed0372643d9b7b38a3a18c9852054d63df8f7d5ebe",
+      "git_blob_sha1": "bceaaf7363157f5d79075c123a62086b6aec910d",
+      "origin": "runtime18/src/audio/native/wf_m68k_start.S"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_clock.h",
+      "bytes": 487,
+      "sha256": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+      "git_blob_sha1": "c80f7fa36ef2136b1f6c48b9c62efba5d09f7f11",
+      "origin": "runtime18/src/audio/native/wf_music_clock.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_elf.c",
+      "bytes": 2433,
+      "sha256": "2fcb50f8fad674681ed5d5007553ad9ad903590f6b2463b6a91d836c2490e362",
+      "git_blob_sha1": "4dbeb9d20e20c66b7911140546c34e81f90cc022",
+      "origin": "runtime18/src/audio/native/wf_music_elf.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_elf.h",
+      "bytes": 363,
+      "sha256": "2a991dff9ab4817a2d1845e71c8cf050c288d45402dbfb39673c3a266567e5c8",
+      "git_blob_sha1": "ee7610d0f493331d6b0e5a095346cd834f9be990",
+      "origin": "runtime18/src/audio/native/wf_music_elf.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_firmware.c",
+      "bytes": 6932,
+      "sha256": "800d755ef32eb60d1994b0bca453c593f3a68069275c7387c1aa2e8c465d28b6",
+      "git_blob_sha1": "bdf4f2290ac5fa95906582cfbdf0de50668e966f",
+      "origin": "runtime18/src/audio/native/wf_music_firmware.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_m68k.ld",
+      "bytes": 931,
+      "sha256": "1b639a4e3527ead0b8a92ee278007dfc9cc9544837604909230e1e3dfbeea110",
+      "git_blob_sha1": "74aa518668d3e481ec3098803b6fa92643934428",
+      "origin": "runtime18/src/audio/native/wf_music_m68k.ld"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_module.c",
+      "bytes": 8203,
+      "sha256": "39a85bf38cf6bda2d1ef2e31e471d41f7382cf390b4b03a84380f9a6a5b196ba",
+      "git_blob_sha1": "e23c92de733a34582b590f786ba8eb698067677c",
+      "origin": "runtime18/src/audio/native/wf_music_module.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_module.h",
+      "bytes": 948,
+      "sha256": "e2e0b412d3d137ccc562a70bb29aab9cae8e0777690dc0a0f01f70430eb3c387",
+      "git_blob_sha1": "4dc95fb03cf37d6b560e1f627dae581c4ec1b75f",
+      "origin": "runtime18/src/audio/native/wf_music_module.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_module.ld",
+      "bytes": 676,
+      "sha256": "d8753d6ba83d8629464ee37c74c5ce6410dbd539546f16322da20b26e1469cf7",
+      "git_blob_sha1": "40d172a59685fe28f1a4337ad186a571a8538995",
+      "origin": "runtime18/src/audio/native/wf_music_module.ld"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_module_memory.c",
+      "bytes": 638,
+      "sha256": "0cbfba23d6ec2d24f076302619d1044389782cdd9664b9d7b113ecdc80a16c3c",
+      "git_blob_sha1": "e5e17b0547be72d5741a707d7a35b0a19b41a13c",
+      "origin": "runtime18/src/audio/native/wf_music_module_memory.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_seq.c",
+      "bytes": 5067,
+      "sha256": "2beb115be4e44753f45bbdd929b04d4d2253c74e596652d62e0b8e18aecee20b",
+      "git_blob_sha1": "978f1ea6f37ad464ab9600664107bfa766b15eab",
+      "origin": "runtime18/src/audio/native/wf_music_seq.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_seq.h",
+      "bytes": 841,
+      "sha256": "275a0e1a4a14765cf24ba9f42d90099ea2f99251dd42c118cc63ade81bd4e768",
+      "git_blob_sha1": "08310ac5c5df72c9c2c230a5df6ad6a049b22290",
+      "origin": "runtime18/src/audio/native/wf_music_seq.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_music_time.h",
+      "bytes": 620,
+      "sha256": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+      "git_blob_sha1": "7a73677c0947029dc7f5906e05458abdb77b9f76",
+      "origin": "runtime18/src/audio/native/wf_music_time.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_driver.c",
+      "bytes": 3552,
+      "sha256": "3d00eb62eb8e993a3de4f0018bb24259eac769ed5fa157ac460f4aa6d6a8f251",
+      "git_blob_sha1": "4df74eec3824ba7f073217d7af2a2ff4fa523bdf",
+      "origin": "runtime18/src/audio/native/wf_native_driver.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_driver.h",
+      "bytes": 1507,
+      "sha256": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+      "git_blob_sha1": "3191c53d989c922d7a8c15f5cc90744b6d123a26",
+      "origin": "runtime18/src/audio/native/wf_native_driver.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_elf.c",
+      "bytes": 1232,
+      "sha256": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+      "git_blob_sha1": "b6e61aab9ab8b5b55909b298e49b1433d0faf35d",
+      "origin": "runtime18/src/audio/native/wf_native_elf.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_elf.h",
+      "bytes": 348,
+      "sha256": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+      "git_blob_sha1": "76988fced2c34c08b0b27da70d48dbfc8226c022",
+      "origin": "runtime18/src/audio/native/wf_native_elf.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_host.c",
+      "bytes": 5928,
+      "sha256": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+      "git_blob_sha1": "81f13b892ce6e6d9525707ff3bfdb49e970de8b3",
+      "origin": "runtime18/src/audio/native/wf_native_host.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_host.h",
+      "bytes": 2144,
+      "sha256": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+      "git_blob_sha1": "3c16edaf916c90bde8300da3a3dde4dfadef125f",
+      "origin": "runtime18/src/audio/native/wf_native_host.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_queue.c",
+      "bytes": 2168,
+      "sha256": "479c23a85271ee05d7537f6ee01ef9bbd61e15212082ad4a3db44821f784dd90",
+      "git_blob_sha1": "1a12c6096f9144fa757ce54ded162a9fc02af77b",
+      "origin": "runtime18/src/audio/native/wf_native_queue.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_queue.h",
+      "bytes": 1003,
+      "sha256": "840b7e85c194c10149bfeae2bbcc5cc94f253802e1b13081a5d01dc0ec72a6aa",
+      "git_blob_sha1": "0611699f8905a66e129d64f04a120beb816ca4cf",
+      "origin": "runtime18/src/audio/native/wf_native_queue.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_wp24.c",
+      "bytes": 2746,
+      "sha256": "0d5615cf530ffc4b751257bdab22881bfc2f021b5f99214d9286c217795c06ce",
+      "git_blob_sha1": "691f49d4eb61d9ce000f9ba387d7afcad835456c",
+      "origin": "runtime18/src/audio/native/wf_native_wp24.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_wp24.h",
+      "bytes": 524,
+      "sha256": "b48976a4722cb243623eaefb9bf6ce249cef3f3454ebfed02a3dcc50da17db39",
+      "git_blob_sha1": "dd4bf74da95f84cdc62e56de056ba9cb49c673c8",
+      "origin": "runtime18/src/audio/native/wf_native_wp24.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_yaul.c",
+      "bytes": 712,
+      "sha256": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+      "git_blob_sha1": "bcc11d2326c705638973a733f1cb67420d5c03d5",
+      "origin": "runtime18/src/audio/native/wf_native_yaul.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_native_yaul.h",
+      "bytes": 437,
+      "sha256": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+      "git_blob_sha1": "d395332fa05914fca9ce775d97ce770691c61cb3",
+      "origin": "runtime18/src/audio/native/wf_native_yaul.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_dsp.c",
+      "bytes": 2049,
+      "sha256": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+      "git_blob_sha1": "c47e2e80364e7d5a8cbd24cb99e5dc8b7d8730bc",
+      "origin": "runtime18/src/audio/native/wf_scsp_dsp.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_dsp.h",
+      "bytes": 315,
+      "sha256": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+      "git_blob_sha1": "c642b05c0d0d397994e36a89e44133cced379810",
+      "origin": "runtime18/src/audio/native/wf_scsp_dsp.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_fm_bundle.h",
+      "bytes": 316,
+      "sha256": "a180d9a119e03feb739c9c4a9b2d30f350eac3d75f8e1db944789f4c867378db",
+      "git_blob_sha1": "c89374dcb5f3876646f803c94e433d7e1e5320b8",
+      "origin": "runtime18/src/audio/native/wf_scsp_fm_bundle.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_fm_probe.c",
+      "bytes": 3034,
+      "sha256": "f2ab28f198a7a7b3f25a2fa6bf5cb070c54ff090c491e7a8aef4a967c6fb1359",
+      "git_blob_sha1": "65b58e13f75a4a6f194ee62c7439869a3b7ac3f3",
+      "origin": "runtime18/src/audio/native/wf_scsp_fm_probe.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_fm_probe.h",
+      "bytes": 1620,
+      "sha256": "dfcb492b9ccba78880dc7e3226424879cdc3d682476d0918c63a20802e78eb7d",
+      "git_blob_sha1": "323c4bb7d2a9cd83581faab6ebd37eb81f9a5c44",
+      "origin": "runtime18/src/audio/native/wf_scsp_fm_probe.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_sfx.c",
+      "bytes": 10629,
+      "sha256": "e298bc39b2aff506e13e8154499fc754c1da39b7ac680412609e7702a8483056",
+      "git_blob_sha1": "fd201151d75aa89f8df774f678ecdae108dbd4d5",
+      "origin": "runtime18/src/audio/native/wf_scsp_sfx.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_sfx.h",
+      "bytes": 2193,
+      "sha256": "ef746dc5b2ab96437e11d998f55a8799a82ca933f8733fa9644b8d9d9c6da7c4",
+      "git_blob_sha1": "507bf8efa6f2df80a5357b617dc94c98e36bdda9",
+      "origin": "runtime18/src/audio/native/wf_scsp_sfx.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_ym.c",
+      "bytes": 7683,
+      "sha256": "7f3d0c1ba27fadc35db73d5b32ca644b5138d1a050ea25be0ad13b43356893d7",
+      "git_blob_sha1": "92303fc2cd30b8b7e8e265b9bf07c5ad7ce8e309",
+      "origin": "runtime18/src/audio/native/wf_scsp_ym.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_scsp_ym.h",
+      "bytes": 538,
+      "sha256": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+      "git_blob_sha1": "3f7d66eca1a9d3d93123e17f60b4c109f09d508c",
+      "origin": "runtime18/src/audio/native/wf_scsp_ym.h"
+    },
+    {
+      "path": "base/src/audio/native/wf_sfx.ld",
+      "bytes": 780,
+      "sha256": "091151a606cebeef8226fae32ccb06d2a6ca5649bed5f0f03af9d7420e290ab7",
+      "git_blob_sha1": "38a2cb40136231a117c80f8e5aaac9a642199fbe",
+      "origin": "runtime18/src/audio/native/wf_sfx.ld"
+    },
+    {
+      "path": "base/src/audio/native/wf_sfx_decode.S",
+      "bytes": 1353,
+      "sha256": "5e97ad36a59fd374886bf3aad571e231a302a2b5ba413a53cc1d72d7cb04bf48",
+      "git_blob_sha1": "f156a266e8b68ed6ce2a9e010954e6ce63bd3b9a",
+      "origin": "runtime18/src/audio/native/wf_sfx_decode.S"
+    },
+    {
+      "path": "base/src/audio/native/wf_sfx_firmware.c",
+      "bytes": 5367,
+      "sha256": "998826941ed3e2ba205a651d037cb5826917ac812de388c2b3fa221f826220fe",
+      "git_blob_sha1": "ef5ef5e8f67a63294a73d88dcf2c9697ad284ba9",
+      "origin": "runtime18/src/audio/native/wf_sfx_firmware.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_sfx_memory.c",
+      "bytes": 367,
+      "sha256": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+      "git_blob_sha1": "71e058b9cb510a57ff77ef3b1b4b5e93d755018a",
+      "origin": "runtime18/src/audio/native/wf_sfx_memory.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_sfx_start.S",
+      "bytes": 483,
+      "sha256": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+      "git_blob_sha1": "6244693ba9abf88800f4f81345c49a2c4489bd0b",
+      "origin": "runtime18/src/audio/native/wf_sfx_start.S"
+    },
+    {
+      "path": "base/src/audio/native/wf_sfx_upload.c",
+      "bytes": 2606,
+      "sha256": "f9d009d48f51b5af21245e2c662e6a9cc4c740b126e861caf5c6677bbf3baf95",
+      "git_blob_sha1": "127c8088c703f1bbd12cf0734748b3ec114a71b0",
+      "origin": "runtime18/src/audio/native/wf_sfx_upload.c"
+    },
+    {
+      "path": "base/src/audio/native/wf_sfx_upload.h",
+      "bytes": 789,
+      "sha256": "fd765041632d16c48a34f71359e43c0717dff645e8bda0a03c8bffdfe2c7b094",
+      "git_blob_sha1": "a3a11a3e12b904a9bf0b8a2642293073a5d96395",
+      "origin": "runtime18/src/audio/native/wf_sfx_upload.h"
+    },
+    {
+      "path": "base/src/audio/tests/test_clock_delta.c",
+      "bytes": 496,
+      "sha256": "feff81ba6b50868189559f4194cbcd15d3ae1389d4705433ddc124b87b906b6e",
+      "git_blob_sha1": "d0be9c259547bf693a165f751e51ba3b549df73e",
+      "origin": "runtime18/src/audio/tests/test_clock_delta.c"
+    },
+    {
+      "path": "base/src/audio/tests/test_idle_gap.c",
+      "bytes": 1545,
+      "sha256": "9f36ca7fd4518a2a6c02c31a27ce2afc8807026c800499153714ad18363267e8",
+      "git_blob_sha1": "87e75a73d1a96bd6232e7ee813f9226012ea25cb",
+      "origin": "runtime18/src/audio/tests/test_idle_gap.c"
+    },
+    {
+      "path": "base/src/audio/tests/test_sfx_upload_bulk.c",
+      "bytes": 2225,
+      "sha256": "b1c0d9800d1681fe5ebdc8d9c2022fe1c0a177176b1d5aae7e66255e0a7fd2e0",
+      "git_blob_sha1": "d913b7ce31a3fc7dcef2d86405ea60a013cebffe",
+      "origin": "runtime18/src/audio/tests/test_sfx_upload_bulk.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/dsp_oracle/bridge.cpp",
+      "bytes": 1056,
+      "sha256": "c72f5b49dd5e76dd6b0054b700b66bffb400a7fabb77df157734050a31188f22",
+      "git_blob_sha1": "ae0df9b7831938cfeb256a0bc10aae3cda82e299",
+      "origin": "runtime18/tests/audio/native-driver/dsp_oracle/bridge.cpp"
+    },
+    {
+      "path": "base/tests/audio/native-driver/dsp_oracle/COPYING",
+      "bytes": 11532,
+      "sha256": "9814ccb157fdb0a8f0fa049f858b6ac761320e90eb28f54e2972468d6d6ac0ca",
+      "git_blob_sha1": "7f5bf1b1070672895aa9136cc6f0e26680f90fae",
+      "origin": "runtime18/tests/audio/native-driver/dsp_oracle/COPYING"
+    },
+    {
+      "path": "base/tests/audio/native-driver/dsp_oracle/emu.h",
+      "bytes": 598,
+      "sha256": "e6efa8dc9fe97b8b564c519d303475e1fec2858d4a3a9b88252a30463200280b",
+      "git_blob_sha1": "68dbf12018d67f71c5715b82530897dd577681d7",
+      "origin": "runtime18/tests/audio/native-driver/dsp_oracle/emu.h"
+    },
+    {
+      "path": "base/tests/audio/native-driver/dsp_oracle/provenance.json",
+      "bytes": 596,
+      "sha256": "0d66a302fc51fac4519876b118b8a6e0363e91de2408ef4c4733cc2c38320a9c",
+      "git_blob_sha1": "8ef2bac6e8c6039d0beb58dc35c2333f871096d4",
+      "origin": "runtime18/tests/audio/native-driver/dsp_oracle/provenance.json"
+    },
+    {
+      "path": "base/tests/audio/native-driver/dsp_oracle/scspdsp.cpp",
+      "bytes": 5867,
+      "sha256": "9d4b1de166e5d7d5128b591c612eff3fd5cec78af79c1acabb9d5e93341917fd",
+      "git_blob_sha1": "05c6e2082de218c67058ec9a1c3c4ade9e0d3e30",
+      "origin": "runtime18/tests/audio/native-driver/dsp_oracle/scspdsp.cpp"
+    },
+    {
+      "path": "base/tests/audio/native-driver/dsp_oracle/scspdsp.h",
+      "bytes": 822,
+      "sha256": "db522ecaa04665063e46f7f6c699eb7781c672fd7624ac58a60b0b180652d3cc",
+      "git_blob_sha1": "b84bbc3f245dd563468baf33f1453fd2301ea73f",
+      "origin": "runtime18/tests/audio/native-driver/dsp_oracle/scspdsp.h"
+    },
+    {
+      "path": "base/tests/audio/native-driver/reference/provenance.json",
+      "bytes": 968,
+      "sha256": "58c391e767d10c87ab6559cdc027b41b1b81a2d7c9177eeecfbae369a55c1b07",
+      "git_blob_sha1": "6b40d212ab79abfee3b1ae02a0e89f46642c5398",
+      "origin": "runtime18/tests/audio/native-driver/reference/provenance.json"
+    },
+    {
+      "path": "base/tests/audio/native-driver/reference/ROM_OKI_MANIFEST.csv",
+      "bytes": 10975,
+      "sha256": "3392aa3d172ed23d54942f8c62df847e8fc679c384e3a4c69c171eeabece5a65",
+      "git_blob_sha1": "f7e1f7994bb8d62689abe21024e7092afca54233",
+      "origin": "runtime18/tests/audio/native-driver/reference/ROM_OKI_MANIFEST.csv"
+    },
+    {
+      "path": "base/tests/audio/native-driver/reference/wf_audio_sfx.c",
+      "bytes": 16860,
+      "sha256": "7129466a7d688fcfd2600413b91d4951d80c16de1f411489bbfbfa66fdbc5e6b",
+      "git_blob_sha1": "bab1d5a4af4e179d4e9fe7febb95e669dd263814",
+      "origin": "runtime18/tests/audio/native-driver/reference/wf_audio_sfx.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/reference/wf_audio_sfx.h",
+      "bytes": 1293,
+      "sha256": "3365d89f48631d2e4f7b519f95441f33eb67cad85fe329877503d199318e35ed",
+      "git_blob_sha1": "d94a8d4179017fe49e44985f67d662743be05679",
+      "origin": "runtime18/tests/audio/native-driver/reference/wf_audio_sfx.h"
+    },
+    {
+      "path": "base/tests/audio/native-driver/reference/wf_music_seq_r01.c",
+      "bytes": 4059,
+      "sha256": "5432de051afdae58f5cde12e866fa1bd7241dd98b07a588693a750fc50f10200",
+      "git_blob_sha1": "b3ef060a04cbd164a63e71109acb561bd88ea3a8",
+      "origin": "runtime18/tests/audio/native-driver/reference/wf_music_seq_r01.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/reference/WF_OKI_AUDIT.json",
+      "bytes": 31780,
+      "sha256": "43fd70e707bf0fb99340a97767d9fd6be367d3bb16133735e5405805031ca564",
+      "git_blob_sha1": "3c5613fbee3d3744703ab8debb63277522a7bafb",
+      "origin": "runtime18/tests/audio/native-driver/reference/WF_OKI_AUDIT.json"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_control_differential.c",
+      "bytes": 2392,
+      "sha256": "0f7372102def7579d08ff6bb0221a3498e93eb9ce284dd08fd80e16f0e0f5856",
+      "git_blob_sha1": "af68982000d505f779bbdea8ee4fcc0989a3e285",
+      "origin": "runtime18/tests/audio/native-driver/test_control_differential.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_dsp_mixer.py",
+      "bytes": 3099,
+      "sha256": "31051e332c291238cc1e80f723322738d8a281eb83537e4c8330730e84e879c2",
+      "git_blob_sha1": "c4b010380c2d40abcacbd8da25095c12b866495f",
+      "origin": "runtime18/tests/audio/native-driver/test_dsp_mixer.py"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_elf.c",
+      "bytes": 1172,
+      "sha256": "b3f5af97717b2998f75ab3b990e7dbe10cb69f96d610e160ef6231abf957ca43",
+      "git_blob_sha1": "78c2befb1db448552bcc6366f6f423d1539e03fe",
+      "origin": "runtime18/tests/audio/native-driver/test_elf.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_firmware.py",
+      "bytes": 5985,
+      "sha256": "06d44f1e2746254cb9a9b208c3fec834bf152d5bd0d412c1ce6162ccf9473dd9",
+      "git_blob_sha1": "c0923d54eb0174fd301bfc99549aebfecf93a000",
+      "origin": "runtime18/tests/audio/native-driver/test_firmware.py"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_host.c",
+      "bytes": 4896,
+      "sha256": "b290c0e9a0cc05331ed55aa2a19b3dddc9c6f30f9cf11fea5b107958eb706ec8",
+      "git_blob_sha1": "f80df92c616487c85f6df25acb32819c89c93307",
+      "origin": "runtime18/tests/audio/native-driver/test_host.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_music_catalogue.c",
+      "bytes": 2088,
+      "sha256": "d3febbf7b3e51c81bb3aa56852c2d62318c2a72f8bc59cf774d8224a854d3a6b",
+      "git_blob_sha1": "a497154b1a397be0514390938d95a4b7e02a0a70",
+      "origin": "runtime18/tests/audio/native-driver/test_music_catalogue.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_music_elf.c",
+      "bytes": 1336,
+      "sha256": "95214a06d4d03a9124158dca1cab447c6056c57da780ac0646ff7e1311a31ed1",
+      "git_blob_sha1": "a207bfcbeaf94f93b5718ffd06ec65e4ce1cbf7f",
+      "origin": "runtime18/tests/audio/native-driver/test_music_elf.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_music_firmware.py",
+      "bytes": 7264,
+      "sha256": "c1ee20f071fbf6568fc57a924982d279b2ca9e941288b64f7b927e9773de8e38",
+      "git_blob_sha1": "9370d273827195f3044df7e06c4b0cf98a65bb9c",
+      "origin": "runtime18/tests/audio/native-driver/test_music_firmware.py"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_music_module.c",
+      "bytes": 2487,
+      "sha256": "34c95ab87b8206fbaa5c77034da6ca73f66fd5c9080b7c98d812ac85705d0465",
+      "git_blob_sha1": "10dbe95ef7559cb61364225020431e2ab4174b9c",
+      "origin": "runtime18/tests/audio/native-driver/test_music_module.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_music_seq.c",
+      "bytes": 2120,
+      "sha256": "7387b0f0cc716a85855162f262cdde04a6971a0a0c7ffd782faee77767505515",
+      "git_blob_sha1": "57b69636fc6d8fd1e95e14d881f80e531dc03418",
+      "origin": "runtime18/tests/audio/native-driver/test_music_seq.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_music_time.c",
+      "bytes": 749,
+      "sha256": "c427a3235779a1acc4bd894065bee3c77153b8693903a5a6559a752289f37f49",
+      "git_blob_sha1": "f00c0c51153bd8709e1c1d5ab4bfced2d66a44ad",
+      "origin": "runtime18/tests/audio/native-driver/test_music_time.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_queue.c",
+      "bytes": 2593,
+      "sha256": "6416011fc4545609dee19f4850bb38f5b88ff9a7ba6e9e07937431c41005ffe5",
+      "git_blob_sha1": "aab48b76e74e1620fefa647779e95a0757ec1221",
+      "origin": "runtime18/tests/audio/native-driver/test_queue.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_sfx.c",
+      "bytes": 6214,
+      "sha256": "0de377761e332a80fd3598e3f1b0584dd74a5c501bffe92c0f92ab74ba17df85",
+      "git_blob_sha1": "2b5bfd15c94e7a8bcd5530b2aa940156e369f1c4",
+      "origin": "runtime18/tests/audio/native-driver/test_sfx.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_sfx_firmware.py",
+      "bytes": 6977,
+      "sha256": "f83bcad4f1e9c5f71a32a1435b9795a540ec5680412faed28d120046724f7a9b",
+      "git_blob_sha1": "e227dace677c31e92fc085f95cd4338a867c6ad2",
+      "origin": "runtime18/tests/audio/native-driver/test_sfx_firmware.py"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_sfx_pack.py",
+      "bytes": 637,
+      "sha256": "d8e5433816e93fccb84b8f775922d349a29edaa97f6dcdc9e7cf2db794a0e4f0",
+      "git_blob_sha1": "37d6e3c220c0fc50cb8c4a323c4553f9e407410a",
+      "origin": "runtime18/tests/audio/native-driver/test_sfx_pack.py"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_upload.c",
+      "bytes": 2204,
+      "sha256": "d532b5a528bc306c03ce654537cbf75edb58a91bb55f83fba3dc0cd14da8384d",
+      "git_blob_sha1": "ee312cdad4146d9e0a780b886248ce86297cc74e",
+      "origin": "runtime18/tests/audio/native-driver/test_upload.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/test_ym.c",
+      "bytes": 2739,
+      "sha256": "12b2085db3892c3c6ab5573b65187212dc48440265418f9069a985c958582ca8",
+      "git_blob_sha1": "69d161f70275de7cdf8b6d90ff753a5ea9ddd258",
+      "origin": "runtime18/tests/audio/native-driver/test_ym.c"
+    },
+    {
+      "path": "base/tests/audio/native-driver/ym_bridge.c",
+      "bytes": 273,
+      "sha256": "980766c75c15eb11cd08bf895c90ebce5871ee0c4424a576843c77971f0bc333",
+      "git_blob_sha1": "2e12d67b50c3174b60fb312b96ad74eec960c927",
+      "origin": "runtime18/tests/audio/native-driver/ym_bridge.c"
+    },
+    {
+      "path": "base/tests/audio/native-probe/test_dsp_instruction_layout.py",
+      "bytes": 1054,
+      "sha256": "4406d08dad8a6390744d17a20df40fcd03e3549631e4312e3fd8287449265191",
+      "git_blob_sha1": "94b3c6d156ead4f8cd1a75e170f9b44488d44e17",
+      "origin": "runtime18/tests/audio/native-probe/test_dsp_instruction_layout.py"
+    },
+    {
+      "path": "base/tests/audio/native-probe/test_music_waits.c",
+      "bytes": 2508,
+      "sha256": "c049e021991d79b5288d1502ca65bbf77c28cb557edbe3c723890656acb81bb0",
+      "git_blob_sha1": "325ead84c88acfe86c9445a6eeca8805c2244165",
+      "origin": "runtime18/tests/audio/native-probe/test_music_waits.c"
+    },
+    {
+      "path": "base/tests/audio/native-probe/test_pcm_signed_address_beetle.py",
+      "bytes": 12022,
+      "sha256": "6c1b92c7caa0c1ac7ed25c69534b1c3de6d205fa28ff2b141e62327cb74a7ad8",
+      "git_blob_sha1": "d0086e41641cbc0c9fab44c3ea67e5ea0682d55a",
+      "origin": "runtime18/tests/audio/native-probe/test_pcm_signed_address_beetle.py"
+    },
+    {
+      "path": "base/tests/audio/native-probe/test_runtime_containment.c",
+      "bytes": 4032,
+      "sha256": "94efb80eb3aa0c1ebdeee86f073a209e5156587a9bdbd6ffd0ba3429a39779f3",
+      "git_blob_sha1": "09878ec41fd7a666a0bbb050ea867435c22bfbdd",
+      "origin": "runtime18/tests/audio/native-probe/test_runtime_containment.c"
+    },
+    {
+      "path": "base/tools/audio/native_probe/adapt_dsp_oracle.py",
+      "bytes": 1177,
+      "sha256": "7f1d791f10803f81ffe1555f3e0064051820fb9d4468b17446ed360b4a9743dd",
+      "git_blob_sha1": "b93e417c9316c948009fbf6d3115a2dea765dd46",
+      "origin": "runtime18/tools/audio/native_probe/adapt_dsp_oracle.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_audio_models.py",
+      "bytes": 3210,
+      "sha256": "dfcf98d31f94d9a3c8f72666c56f24435b2664b35cc0cb8d9ed6c3ff7eb0a16e",
+      "git_blob_sha1": "2c9a68cfc7af0e654aa6d9d0f91f3780dbcde54f",
+      "origin": "runtime18/tools/audio/native_probe/build_audio_models.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_driver.py",
+      "bytes": 7073,
+      "sha256": "7c854d2227d3be50c019a9fb0678528d730bed53dbe462d76980e981f9c7fc02",
+      "git_blob_sha1": "123483ff248151aba39e4827bdee04aeb563a9e2",
+      "origin": "runtime18/tools/audio/native_probe/build_driver.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_dsp_mixer.py",
+      "bytes": 3789,
+      "sha256": "7cb9c74727fa8443620749a86fee33e24f87fef5b8e47d0316c858dfcbbf9ac0",
+      "git_blob_sha1": "7335c281dbf9bb2981bf7da81aba31d57b2b141f",
+      "origin": "runtime18/tools/audio/native_probe/build_dsp_mixer.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_host_sh2.py",
+      "bytes": 4033,
+      "sha256": "2f9f338396f9818ef19d91add76ada2d79298a383e0fe296746f2dfae711fab1",
+      "git_blob_sha1": "a28b54badaf1522c2dfd8ae67268ac2b7246e636",
+      "origin": "runtime18/tools/audio/native_probe/build_host_sh2.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_m68k.py",
+      "bytes": 9282,
+      "sha256": "0af4bf2b4326601cfcb8611247af65329728c7de0f4ed2c000f6e096cf90ddad",
+      "git_blob_sha1": "47a49c23fe046d03ccc6d1102a329d6ef7cc8c09",
+      "origin": "runtime18/tools/audio/native_probe/build_m68k.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_music_driver.py",
+      "bytes": 3738,
+      "sha256": "48a943a9a407f0bc45eda5bcbbee1eac2db491f666444aff2f031b1a70d17872",
+      "git_blob_sha1": "bc03e005a0a48cfbf4d7591fc394530cea8f009f",
+      "origin": "runtime18/tools/audio/native_probe/build_music_driver.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_music_host.py",
+      "bytes": 3908,
+      "sha256": "3a30f5219edfe8a35c6510de3ac026c124a28494782a24a98de947e7366f5d0b",
+      "git_blob_sha1": "de8a4c84c3806f7054826670ed38b952751954d9",
+      "origin": "runtime18/tools/audio/native_probe/build_music_host.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_music_module.py",
+      "bytes": 4326,
+      "sha256": "a930423240de6c24b037b6c8ad113140bb68f27fb74396e561c28842f47b2136",
+      "git_blob_sha1": "7cf4a4a93f40bfddd67fe8f941059662188e9889",
+      "origin": "runtime18/tools/audio/native_probe/build_music_module.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_runtime18.py",
+      "bytes": 7602,
+      "sha256": "1dbba02dea81cb4f0329d36fc8022359faf2957a4cacd5d9316e2f8934d70af7",
+      "git_blob_sha1": "1990474544722297266207055e06fa01e027768d",
+      "origin": "runtime18/tools/audio/native_probe/build_runtime18.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_sfx_driver.py",
+      "bytes": 4316,
+      "sha256": "d5a6e848b737592811206839a8086783dde3c92f23212138312622cb76912d0d",
+      "git_blob_sha1": "1e87f8fa8eb152675133435d8f1175e72bd9e822",
+      "origin": "runtime18/tools/audio/native_probe/build_sfx_driver.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/build_sfx_pack.py",
+      "bytes": 3907,
+      "sha256": "fa342578a4d32d8eb537aa8b60087b932cf577047979f0a0cacfce3d161450e3",
+      "git_blob_sha1": "06cd11aee3d3762cf6a605a79c399c75b71e01ad",
+      "origin": "runtime18/tools/audio/native_probe/build_sfx_pack.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/capture_music.py",
+      "bytes": 3963,
+      "sha256": "0a0ea0527e3aad8c3499cc9aaaf1b0d09a61f86b8ed85a81390cdb24e215edb0",
+      "git_blob_sha1": "5b09cd9a71ce4aa3afe22a97db4796ceb6eeec06",
+      "origin": "runtime18/tools/audio/native_probe/capture_music.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/compact_music_elf.py",
+      "bytes": 1191,
+      "sha256": "6a5892a449aab0273623198a8bdf3ed550b5fa70a92bb9da0ab01dfec99d6a0c",
+      "git_blob_sha1": "c2d1b2506f38002113fca7fc6d0ec9da314f5908",
+      "origin": "runtime18/tools/audio/native_probe/compact_music_elf.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/extract_instrument.py",
+      "bytes": 8833,
+      "sha256": "635e013b7467e623bde447ce5fa733b43ebdf12ae451f57051e6cdaffbe0fbe3",
+      "git_blob_sha1": "2c17d705e08b314eb72e43d5f993113fec9b2244",
+      "origin": "runtime18/tools/audio/native_probe/extract_instrument.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/generate_ym_envelopes.py",
+      "bytes": 1055,
+      "sha256": "8f128581d67c1f4d3fdee65766e738d928a53a99083a2b46794f103c01bfa5bd",
+      "git_blob_sha1": "d31c3fc744e66521fc986988fd078bb59aaca09a",
+      "origin": "runtime18/tools/audio/native_probe/generate_ym_envelopes.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/generate_ym_tables.py",
+      "bytes": 1549,
+      "sha256": "2ad06b7befd4e965ddf5d82847b41235e29d13d950fe64f29213e2e68334c7c9",
+      "git_blob_sha1": "0a0f27cd4fc308ead440cc43924ac6a53f5d4e37",
+      "origin": "runtime18/tools/audio/native_probe/generate_ym_tables.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/generate_z80_control.py",
+      "bytes": 7716,
+      "sha256": "f0378c2bfffccf52397efaf0aca81ac65e5803c8ed6b1e21b950d136f1cce784",
+      "git_blob_sha1": "7c3d701329a8f155fbb3c7f739e288093c231eb2",
+      "origin": "runtime18/tools/audio/native_probe/generate_z80_control.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/prepare_allocator_sdk.py",
+      "bytes": 1785,
+      "sha256": "595f4a94569f45a69565f3d51fd05b1b2cdb911567edd8254b6aa4663309cb81",
+      "git_blob_sha1": "e07de847524c04440cdb546c9d02df8a9db828ed",
+      "origin": "runtime18/tools/audio/native_probe/prepare_allocator_sdk.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/prepare_probe.py",
+      "bytes": 3643,
+      "sha256": "51886a2227b0e6d3f0a8a72b3c98cc9fee4fba0ddeb9a3d00df6361a7a4325da",
+      "git_blob_sha1": "a5c5f716ab5849707fc65bc7fcd51d53186bbcf3",
+      "origin": "runtime18/tools/audio/native_probe/prepare_probe.py"
+    },
+    {
+      "path": "base/tools/audio/native_probe/verify_sfx.py",
+      "bytes": 2739,
+      "sha256": "454aa6be81fa6f8a364cedaf78cb427d48846d90c9e72990be550d1a7d5c944f",
+      "git_blob_sha1": "0ffd7e69460ce85b58fcbc08ffb152f5f65e2cfe",
+      "origin": "runtime18/tools/audio/native_probe/verify_sfx.py"
+    },
+    {
+      "path": "COMPILACION.md",
+      "bytes": 1908,
+      "sha256": "7658d21b03e3ac576549157476f2ff930ae3720a8a56605d672232045d126156",
+      "git_blob_sha1": "7c96bbaae82e1a786c848956dfbb9fdfa64228d7",
+      "origin": "publication documentation, 2026-11-01"
+    },
+    {
+      "path": "ESTADO.json",
+      "bytes": 2075,
+      "sha256": "e3a6c6e6671323fa50d801d5d416be3b71b22a56aa4e779001ec1b08aad8940d",
+      "git_blob_sha1": "ffc9f2df84307ed542fc8642ab38f4c12396f5c3",
+      "origin": "publication documentation, 2026-11-01"
+    },
+    {
+      "path": "evidencia/compiler-graphics/compare_compilers.py",
+      "bytes": 2626,
+      "sha256": "873430c5ff58d6e19ebc9acbeaee4010bd14342877d9a31e027fc7f21c901700",
+      "git_blob_sha1": "03230b749ae30ad8487e1d044328cf5448254486",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/compiler-graphics/compare_compilers.py"
+    },
+    {
+      "path": "evidencia/compiler-graphics/compare_windows13.py",
+      "bytes": 2701,
+      "sha256": "9d7e9dd0aab9ea7893654d290b73b1fbf8878f6a9c733d18b42f6ddd6235a844",
+      "git_blob_sha1": "30b6c6707a8378994535bf2818ba69cbf1458779",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/compiler-graphics/compare_windows13.py"
+    },
+    {
+      "path": "evidencia/compiler-graphics/LEEME.txt",
+      "bytes": 531,
+      "sha256": "9f6d23d8dca7f99d192c3c1108e46592d790b355594aeaee7f9afd32e8445e63",
+      "git_blob_sha1": "eb62766f9fb2167f96730d609ddb7dc94c457fcf",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/compiler-graphics/LEEME.txt"
+    },
+    {
+      "path": "evidencia/compiler-graphics/RESULT.json",
+      "bytes": 10059,
+      "sha256": "b8ac5f4b5e6e458100b70ed2fd81b48efb5b81028bc6c56236ac7902450f00fa",
+      "git_blob_sha1": "5e99409fe1e5bfb5c4cbdc148045e006cec19fc1",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/compiler-graphics/RESULT.json"
+    },
+    {
+      "path": "evidencia/compiler-graphics/WINDOWS13-RESULT.json",
+      "bytes": 9260,
+      "sha256": "7e8b02542a408c877203df7c28ff072b333b5953d129ba32002df5d6571d75d5",
+      "git_blob_sha1": "c6003883e67dfeec56471a3c995f693e1ef02850",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/compiler-graphics/WINDOWS13-RESULT.json"
+    },
+    {
+      "path": "evidencia/correcciones/PLAN.txt",
+      "bytes": 4794,
+      "sha256": "8ce99cb63c55c5c530f7adbdf95e7eb6340e33d183e8e159afc2271791ba128b",
+      "git_blob_sha1": "4cec1b0895007c50286d96e1c026a2cbd456c93a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/PLAN.txt"
+    },
+    {
+      "path": "evidencia/correcciones/RESULTADO-CORRECCIONES.txt",
+      "bytes": 7511,
+      "sha256": "e7c190691d7b47fa91203dced7c88cbd60161dbfda4b863a55eaf163800b234e",
+      "git_blob_sha1": "ce7b7386b0a584b087906f171dea4f9977a73ab6",
+      "origin": "runtime18/validation/local-20261028/audio-repair/RESULTADO-CORRECCIONES.txt"
+    },
+    {
+      "path": "evidencia/correcciones/VERIFIED-RESULT.json",
+      "bytes": 6547,
+      "sha256": "47a7aea2ff1a24193345d84841350e9b21a750928d3ec3de374ad804d26ff23d",
+      "git_blob_sha1": "f7a6a195a9cfcb16e2e10286afec660330e94ffc",
+      "origin": "runtime18/validation/local-20261028/audio-repair/VERIFIED-RESULT.json"
+    },
+    {
+      "path": "evidencia/correcciones/verify_repair.py",
+      "bytes": 6879,
+      "sha256": "a533afe1c9caa0d7b3f3d336ea4940448c8828fbffde90325676f7d93453a0f8",
+      "git_blob_sha1": "1b23b9f17e0e4d32adbd11efd02a307bda9e697a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/verify_repair.py"
+    },
+    {
+      "path": "evidencia/CRONOLOGIA-HISTORICA.txt",
+      "bytes": 13361,
+      "sha256": "cec3a67d96d2e567a4d648dc8ed893d8ab0729ce78a9feff41b557abbcdf1267",
+      "git_blob_sha1": "1f86e0ddb6d3d9fccb056476bb612ad3b10979a8",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/ESTADO-ACTUAL-TRABAJO.txt"
+    },
+    {
+      "path": "evidencia/loader-abi4/cold-4200/MEMORY-AND-COMBAT-READBACK.json",
+      "bytes": 7787,
+      "sha256": "123694164598574f91731cd4ab9845987bf44be6592f48f8aaedbacf235eff0a",
+      "git_blob_sha1": "26e8d07f9d9ce50469189380cd2ff2e65f568fb7",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/cold-4200/MEMORY-AND-COMBAT-READBACK.json"
+    },
+    {
+      "path": "evidencia/loader-abi4/green/RESULT.json",
+      "bytes": 259,
+      "sha256": "6685941dddd685f9f430f5bffe84bf6ac74bcfee5bd8b27f4415ab604dccc3e0",
+      "git_blob_sha1": "f140c0f98a635c3e64490ce96877c4363f012c05",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/green/RESULT.json"
+    },
+    {
+      "path": "evidencia/loader-abi4/red/RESULT.json",
+      "bytes": 225,
+      "sha256": "fa877feee34fb5a6b4705cf2f369fbb7532583cf7ef16ed6d603fe3a5bc1da30",
+      "git_blob_sha1": "69685ea459a016b9fce92a71ce0399fa3cd9bead",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/red/RESULT.json"
+    },
+    {
+      "path": "evidencia/pcm-servicio/all18-resumen.json",
+      "bytes": 36772,
+      "sha256": "46bdf9796e87d3609ca670e0350296e0538ce5659167b78199e7d68c49e04837",
+      "git_blob_sha1": "0744181c2078389d8a86d6ba5cda8200b735e1c3",
+      "origin": "publication documentation, 2026-11-01"
+    },
+    {
+      "path": "evidencia/pcm-servicio/BUILD.json",
+      "bytes": 5799,
+      "sha256": "4bbf33897b72be240594b2809070028f3168ac1d87f63c337464655cb60a0317",
+      "git_blob_sha1": "9c58c51bf2dadf20635032d4c89a379b634ef458",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/prepared-service/BUILD.json"
+    },
+    {
+      "path": "evidencia/pcm-servicio/c-tests.json",
+      "bytes": 713,
+      "sha256": "8636b128cb7dbfb6c048897d6fe691e6dfeaea1f168d43e35f7848facfb335f7",
+      "git_blob_sha1": "c545ca7ca47bfde7524843fee60eca9e04283171",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/host-sfx-full/c-tests.json"
+    },
+    {
+      "path": "evidencia/pcm-servicio/mail98-q1.json",
+      "bytes": 322092,
+      "sha256": "284b7a9ba3356ce0bedb94b26c83629fe8bf8bfa36eee6a5af94748f4652fc61",
+      "git_blob_sha1": "d4f895409f89eeed712d3d2fca3219202390e138",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/prepared-service/mail98-q1.json"
+    },
+    {
+      "path": "evidencia/pcm-servicio/symbols.json",
+      "bytes": 2167,
+      "sha256": "6e926321e0a044402b86bbedfb6cfab67631707abcae4293f3d7ce407c670a4d",
+      "git_blob_sha1": "c818ef0be13179b7614cd51a3a641254e5c4da10",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/prepared-service/symbols.json"
+    },
+    {
+      "path": "evidencia/scalar-admission-table-review/REVIEW.json",
+      "bytes": 561,
+      "sha256": "45787b283b5bde3419cc941fa3c80d7242e64a529b8a4f261ceae0f5d0f883d1",
+      "git_blob_sha1": "c4a9402fdd8e5d681c0d421b8a5c63665ea9cf75",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-admission-table-review/REVIEW.json"
+    },
+    {
+      "path": "evidencia/scalar-admission-table-review/review.py",
+      "bytes": 2460,
+      "sha256": "deccd414e2f67d0fde4aac6e2f21f4cbe4fc4347060568c0f40c66c96314be16",
+      "git_blob_sha1": "a39e46663cf7b1bcb59fbe3da1041972e8621262",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-admission-table-review/review.py"
+    },
+    {
+      "path": "evidencia/scalar-inline-review/REVIEW.json",
+      "bytes": 666,
+      "sha256": "4cc5cf5064df26fe2a3c7ae53051bd2d72bf2deef2886b274d7ec33654bd9415",
+      "git_blob_sha1": "7a96479a75fc5d2bcf31b4e957f96347bb13246b",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-review/REVIEW.json"
+    },
+    {
+      "path": "evidencia/scalar-inline-review/review.py",
+      "bytes": 2722,
+      "sha256": "96929c810b0685e5b1cf3d0b0a2ec41440f73cd7014d8be99d68e748198643aa",
+      "git_blob_sha1": "0faa2fae4042eb8c7dd085aa0cc414e24e3ea0be",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-review/review.py"
+    },
+    {
+      "path": "evidencia/scalar-inline-table-functional-review/RESULT.json",
+      "bytes": 2516,
+      "sha256": "d1d80e93a383604ca49678d91f26742010d6897acdd695d13d582284b4dc12b7",
+      "git_blob_sha1": "17c243d7805e1126f638b7ecac1c3c2a34ee51f6",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-table-functional-review/RESULT.json"
+    },
+    {
+      "path": "evidencia/scalar-inline-table-functional-review/review.py",
+      "bytes": 4205,
+      "sha256": "d40089304719de4643f81d6b1a23dfea661e9b28eb776d0ef2dbee03642ae499",
+      "git_blob_sha1": "cbd377e57d9f714f0d18d38b6f9b2826e4d2f62b",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-table-functional-review/review.py"
+    },
+    {
+      "path": "evidencia/scalar-inline-table-review/REVIEW.json",
+      "bytes": 679,
+      "sha256": "bbf0bffbf8da9a5b73157571786717797de82b021d47ec313c72a710892f8ccf",
+      "git_blob_sha1": "49921974a2cf95eaeb045d0a77855effda1ab1a1",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-table-review/REVIEW.json"
+    },
+    {
+      "path": "evidencia/scalar-inline-table-review/review.py",
+      "bytes": 2945,
+      "sha256": "eb9557c4d62482643112376f2209d2325b9a46ce5793ec407aea91a1fe2ded76",
+      "git_blob_sha1": "ef83d660c3dee3cfd58b33915940ca434821bd5d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-table-review/review.py"
+    },
+    {
+      "path": "evidencia/sfx-test-contract/before-hashes.json",
+      "bytes": 1076,
+      "sha256": "8e9731b11e26dc24057c303c3f1918439e741844ba679b1de118ee7d3f5b12ec",
+      "git_blob_sha1": "d06559c244918d32c7b5adc5b5b270d80128a07b",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/sfx-test-contract/before-hashes.json"
+    },
+    {
+      "path": "evidencia/sfx-test-contract/REVIEW.json",
+      "bytes": 1512,
+      "sha256": "fcebc992a62bbad01f66bb7d165be07bcf4f4a66225137da436f98ac6bce73be",
+      "git_blob_sha1": "f718bffc4fe9069e40c250321437710fc1e53481",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/sfx-test-contract/REVIEW.json"
+    },
+    {
+      "path": "evidencia/sfx-test-contract/REVIEW.txt",
+      "bytes": 988,
+      "sha256": "bc70b486a5d8eef5d23db128a4f72c5930f31d2930fca33d43b41e1cdc55874d",
+      "git_blob_sha1": "7e6d56d675677a210af46e4588cccb2c70c4df3b",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/sfx-test-contract/REVIEW.txt"
+    },
+    {
+      "path": "evidencia/sfx-test-contract/test-only.patch",
+      "bytes": 771,
+      "sha256": "51c071a2c72d606c2874bcae2801f381b25dbe3a40308fa77395385d55c5fc1d",
+      "git_blob_sha1": "e68c1449364583c314b94c7a8e84219c31a02956",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/sfx-test-contract/test-only.patch"
+    },
+    {
+      "path": "evidencia/sfx-test-contract/test_sfx.before.c",
+      "bytes": 6004,
+      "sha256": "6a6aade62cce127b77b2c5dc08dafc86c10ebdf1f3d8f82f742c7ca4de4ed602",
+      "git_blob_sha1": "8ea8a5ea1b1027255a24900c0ab32cf781c963c6",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/sfx-test-contract/test_sfx.before.c"
+    },
+    {
+      "path": "evidencia/z80-inline-tabla/cold-4200-tag/audio.json",
+      "bytes": 540,
+      "sha256": "407f249076339dc73cd9b631d44e6ff5fb342c0e127e684c95a0f0c7fae887d3",
+      "git_blob_sha1": "98e1a9cc41f6581a27a773ba34767b0d6b31f138",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/cold-4200-tag/audio.json"
+    },
+    {
+      "path": "evidencia/z80-inline-tabla/cold-4200-tag/DEBT-FIFO-READBACK.json",
+      "bytes": 2428,
+      "sha256": "88d6ed853d2105572107abf091d6739a3f0d82105868991a2263bb74e47a1cb4",
+      "git_blob_sha1": "71c6d9acabcdb5773ba994af168b41917a70897c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/cold-4200-tag/DEBT-FIFO-READBACK.json"
+    },
+    {
+      "path": "evidencia/z80-inline-tabla/cold-4200-tag/MEMORY-AND-COMBAT-READBACK.json",
+      "bytes": 7818,
+      "sha256": "1875382ba633eff770afb2cbbdb0b835404c9bb1b78f98543b7132eba7e8bd7f",
+      "git_blob_sha1": "c137c3d386410443de1592c422251b9f616f25c9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/cold-4200-tag/MEMORY-AND-COMBAT-READBACK.json"
+    },
+    {
+      "path": "evidencia/z80-inline-tabla/cold-4200-tag/report.json",
+      "bytes": 98467,
+      "sha256": "b3ab49b744cac3a2f1ca9be458854e431cbd43c7e691122d7a6cf0f8e14002e7",
+      "git_blob_sha1": "9d223a426dae2ab0b5798ae17a24b60abddea194",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/cold-4200-tag/report.json"
+    },
+    {
+      "path": "evidencia/z80-inline-tabla/cold-9600-tag/audio.json",
+      "bytes": 541,
+      "sha256": "bb9b4185a031fc732f56b309a56aaa54a2e0ddca818d4e4f035b277e5d5bd8db",
+      "git_blob_sha1": "711032f36f5d30a19e82ae6ed462a7924d193d99",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/cold-9600-tag/audio.json"
+    },
+    {
+      "path": "evidencia/z80-inline-tabla/cold-9600-tag/report.json",
+      "bytes": 184392,
+      "sha256": "79a9d97c673762c6552d90e0f4f77df9cfe430d65a7d042f126e95f3b8c493f0",
+      "git_blob_sha1": "6c8496450213d98fb0f5f74dbf6dec4d56bb8230",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/cold-9600-tag/report.json"
+    },
+    {
+      "path": "experimentos/loader-abi4/audit_saved_states.py",
+      "bytes": 7031,
+      "sha256": "a0d73a0a0cfc4337deae729fe4186ea1c29cdeaf622db62efa98b5b28b56cd14",
+      "git_blob_sha1": "6279ac9a2d2f10b3ecdbf93bf20913abc50a8e1e",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/audit_saved_states.py"
+    },
+    {
+      "path": "experimentos/loader-abi4/prepare_module.py",
+      "bytes": 4424,
+      "sha256": "d873515964dccc29896b01481000277e975cf7d82c4ebd22fe85757f00fa2e26",
+      "git_blob_sha1": "a52af92322092071ad15b4030d3cde74df51fa70",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/prepare_module.py"
+    },
+    {
+      "path": "experimentos/loader-abi4/prepare_runtime.py",
+      "bytes": 3311,
+      "sha256": "33e9c4c46bb09e5f2575759deae3bb30ac69d4865b6cdbcec9b08a1ebbda879b",
+      "git_blob_sha1": "14e08026175f9dd5cc1c0e31b1f760fa9246c368",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/prepare_runtime.py"
+    },
+    {
+      "path": "experimentos/loader-abi4/RESULTADO.txt",
+      "bytes": 2962,
+      "sha256": "ca4beb21434f9cc35ce968a6ac32c309429ddd49d12e94118ae02e387f21f5ce",
+      "git_blob_sha1": "90f932fe376106e245d4a0f1f3f09751f67d54a9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/RESULTADO.txt"
+    },
+    {
+      "path": "experimentos/loader-abi4/resume_module.py",
+      "bytes": 2235,
+      "sha256": "6beadd913dc9794ec6328729f4d7a112254422b0ee3668530902fcfda3790163",
+      "git_blob_sha1": "7de5b5413ad482eb3c28c62725ae5bd2542adda1",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/resume_module.py"
+    },
+    {
+      "path": "experimentos/loader-abi4/run_test.py",
+      "bytes": 1248,
+      "sha256": "5cf0883f0b07e401a9d673da0d516813751c485227f536ad11382d058ae59970",
+      "git_blob_sha1": "211aca06f88bfdafccbac2e9bb8a53420d49c7a7",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/run_test.py"
+    },
+    {
+      "path": "experimentos/loader-abi4/src/compact_music_elf.py",
+      "bytes": 1462,
+      "sha256": "929dd086bcc976aaeef3e7a2372f1a06dde8b7fb801ac4b83fcb3531746903d2",
+      "git_blob_sha1": "04eea8521fdf2f6399c377b1f834ce6a2d639ca3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/src/compact_music_elf.py"
+    },
+    {
+      "path": "experimentos/loader-abi4/src/wf_music_elf.c",
+      "bytes": 3485,
+      "sha256": "0b84c338a7315b723e63a4110f87096bb4e2e20370bdb40f941926f8517fadf3",
+      "git_blob_sha1": "96d41fdc7fc6c05260f456b030ba8a7b76590ea4",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/src/wf_music_elf.c"
+    },
+    {
+      "path": "experimentos/loader-abi4/src/wf_music_elf.h",
+      "bytes": 856,
+      "sha256": "35c8943527db4f4466b62f40eb63d9d8661b428f39224a273d402d0139cf929b",
+      "git_blob_sha1": "b6a2014563d2d89fadff231f23ffd581c1c3fb9e",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/src/wf_music_elf.h"
+    },
+    {
+      "path": "experimentos/loader-abi4/src/wf_music_module.h",
+      "bytes": 1223,
+      "sha256": "e96aa8938fbb03496b55eb1f55e396a1a012ed6d246e397e55d5d3690ff05649",
+      "git_blob_sha1": "b85ec4437689645f3ae7e83fe8b04ddf01e23ac4",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/src/wf_music_module.h"
+    },
+    {
+      "path": "experimentos/loader-abi4/test_compact.py",
+      "bytes": 1682,
+      "sha256": "80f6ac6f6aa3585c177ec6d307c35752f19e606dcb8f7e5ed267a276fbef46bf",
+      "git_blob_sha1": "9de83d44903b950d468d24869d98064c3a824263",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/test_compact.py"
+    },
+    {
+      "path": "experimentos/loader-abi4/test_loader.c",
+      "bytes": 4916,
+      "sha256": "46c668d21d1493576ff2515e9b4fc2ad3a8dcc211ddfdd5083a939d10b8a0b4b",
+      "git_blob_sha1": "2f140eb6946c936f11926b638ddacd5c8f4787a5",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/abi4-loader/test_loader.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/ADMISSION-BASELINE-EVIDENCE.json",
+      "bytes": 1144,
+      "sha256": "099ca7e3c30ad9376c764554a4cf40bbd58326543b44b815afd36cb8b08d5e4c",
+      "git_blob_sha1": "b252fdc623b2974836f1bfde2922e53a909ce88d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/ADMISSION-BASELINE-EVIDENCE.json"
+    },
+    {
+      "path": "experimentos/native18k-standalone/ARCHIVE.json",
+      "bytes": 149,
+      "sha256": "5231e9b8ea7cb741bc0f7cd125a3cc06a1dfac57e278629ce8ad8e909eaffe4e",
+      "git_blob_sha1": "8a2682bb737385a07a56bace827bdb567b3f715f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/ARCHIVE.json"
+    },
+    {
+      "path": "experimentos/native18k-standalone/LEEME.txt",
+      "bytes": 2414,
+      "sha256": "ba51209eb031b4a044962b072786e1e0c5ad58af47d9e8795ac4c7a03192eb4d",
+      "git_blob_sha1": "88b6f92126bbd373422e106685deb558c865963a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/LEEME.txt"
+    },
+    {
+      "path": "experimentos/native18k-standalone/linker/module.ld.in",
+      "bytes": 1148,
+      "sha256": "e24380491d84fc6d42f5f938d772e0ca3e2635ff1ab98f81cb3ab8351a6631a8",
+      "git_blob_sha1": "b6833cd55b8944b5384a66a7c536ed05c64ecbd3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/linker/module.ld.in"
+    },
+    {
+      "path": "experimentos/native18k-standalone/oracle/wf_music_seq_r01.c",
+      "bytes": 4059,
+      "sha256": "5432de051afdae58f5cde12e866fa1bd7241dd98b07a588693a750fc50f10200",
+      "git_blob_sha1": "b3ef060a04cbd164a63e71109acb561bd88ea3a8",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/oracle/wf_music_seq_r01.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/original-matrices/admission.c",
+      "bytes": 1483,
+      "sha256": "f804cefcd18d1dccb7d5e8c589bb45e9ba0905d843926c3a63e02afd547b4e30",
+      "git_blob_sha1": "cb94ff1c92ff9a4cf1e465e9fbf105abcc249700",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/original-matrices/admission.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/original-matrices/long.c",
+      "bytes": 3619,
+      "sha256": "47011558c8802b034b8d248e8c6fa8fa2ef7d9ac73d72b4d71246cbb1965985e",
+      "git_blob_sha1": "5b8c7deddc2da1cd225665e42623785fa696db74",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/original-matrices/long.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/original-matrices/post.c",
+      "bytes": 6904,
+      "sha256": "0664361b39d29e459a1146acc05a1bdb3e792bf924c261f82df317d952c96a6a",
+      "git_blob_sha1": "a0bffd865496696b7e186bd2107571a0c27c8d21",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/original-matrices/post.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/original-matrices/pre.c",
+      "bytes": 8500,
+      "sha256": "a49641d1ec6d8a527806e0cf1989748bfcaaec5040e298a16c6803f1bc0444d1",
+      "git_blob_sha1": "68e4b698b3c5e1c7a31e1749572acf1c141ed913",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/original-matrices/pre.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/original-matrices/ref-seq.c",
+      "bytes": 4059,
+      "sha256": "5432de051afdae58f5cde12e866fa1bd7241dd98b07a588693a750fc50f10200",
+      "git_blob_sha1": "b3ef060a04cbd164a63e71109acb561bd88ea3a8",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/original-matrices/ref-seq.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/original-matrices/startup.c",
+      "bytes": 4347,
+      "sha256": "376a855297b9dd8ec514b90595e76f1a1e7d105832ea5eb5e54373a4cac11ab0",
+      "git_blob_sha1": "1e33f1c9cad74551f9b968af1936197d089278ab",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/original-matrices/startup.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/original-matrices/wide.c",
+      "bytes": 1519,
+      "sha256": "3b6b500e2a2c06a3ac2ab22c787f81bc82ea5d66b0047958e8359d60b4999f84",
+      "git_blob_sha1": "af519cab485e024f0bb7e9f2855ca50f5e591313",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/original-matrices/wide.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/PIN.json",
+      "bytes": 8714,
+      "sha256": "7fe5e9ca7132f43edc991566dc65a5cdb134877762133aa8555f147f1c479a72",
+      "git_blob_sha1": "4b7ab51646ca2561d9e1ad3a20707473cc729d2d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/PIN.json"
+    },
+    {
+      "path": "experimentos/native18k-standalone/RELOCATION-RESULT.json",
+      "bytes": 13374,
+      "sha256": "6b49e122e7dc7bd806c00a7980699080e04a846d951cb94212270757b6445021",
+      "git_blob_sha1": "a982f44dfbf4b11cbd750f2773b67593e3e52d12",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/RELOCATION-RESULT.json"
+    },
+    {
+      "path": "experimentos/native18k-standalone/RESULT.json",
+      "bytes": 3088,
+      "sha256": "5a5ace6c766377cd3b9f242a4117f6358c8084a56f7457d7fbb7f4d447865f31",
+      "git_blob_sha1": "c5e0353387dc499dfa306e30422511c4b55b653e",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/RESULT.json"
+    },
+    {
+      "path": "experimentos/native18k-standalone/SOURCE-MANIFEST.json",
+      "bytes": 8279,
+      "sha256": "1de823fb6351cd55bd7b6c6e69c73d8e3022e3f3316c4786d68945f4ea6b6202",
+      "git_blob_sha1": "8af7d78ffe677f2283878cf4fb9160d576a8849d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/SOURCE-MANIFEST.json"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/generated/wf_ym_envelope.h",
+      "bytes": 770,
+      "sha256": "4e629def3f2d8154fd8083e73ebb2ca49d2303a27a6e9d35257bbc6b01f1f273",
+      "git_blob_sha1": "97b4879f23d2b873ee67a787a0f36c545c1ba736",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/generated/wf_ym_envelope.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/generated/wf_ym_tables.h",
+      "bytes": 24605,
+      "sha256": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+      "git_blob_sha1": "7355798ced6b5a03325dbd4d8466ea880e28887f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/generated/wf_ym_tables.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/reference_driver/LICENSE",
+      "bytes": 1073,
+      "sha256": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5",
+      "git_blob_sha1": "e593d41514e6dbbc205624e8f5d9cba8040755e7",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/reference_driver/LICENSE"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/reference_driver/PROVENANCE.json",
+      "bytes": 407,
+      "sha256": "0ca85690faec2124d141f74abb6f42ea4cb994b486b657e076722e34c63f22f1",
+      "git_blob_sha1": "0b592b082488eea0bf5a86b1c4259c9a44dfb831",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/reference_driver/PROVENANCE.json"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/reference_driver/z80.c",
+      "bytes": 50103,
+      "sha256": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+      "git_blob_sha1": "366c508a32fb4edf4d1cf8b9367512c428cc1c43",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/reference_driver/z80.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/reference_driver/z80.h",
+      "bytes": 1136,
+      "sha256": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+      "git_blob_sha1": "4e2b0b42c06d0c623528d4c3394e08384f884c1a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/reference_driver/z80.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_music_clock.h",
+      "bytes": 487,
+      "sha256": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+      "git_blob_sha1": "c80f7fa36ef2136b1f6c48b9c62efba5d09f7f11",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_music_clock.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_music_entry.S",
+      "bytes": 384,
+      "sha256": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+      "git_blob_sha1": "b5aee7feba13c4bba69acc66db747fae38becc2f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_music_entry.S"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_music_module.c",
+      "bytes": 9466,
+      "sha256": "ceab714d6999efd39b7dc94d19a8d78b82f0d0e5e34ae508889f9a2c80ba2dc6",
+      "git_blob_sha1": "85b077790710cd33c979d878d1cf3814deb534e7",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_music_module.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_music_module.h",
+      "bytes": 1181,
+      "sha256": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c",
+      "git_blob_sha1": "11b44aa29b52025021104172151d95aec18e3644",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_music_module.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_music_module_memory.c",
+      "bytes": 638,
+      "sha256": "0cbfba23d6ec2d24f076302619d1044389782cdd9664b9d7b113ecdc80a16c3c",
+      "git_blob_sha1": "e5e17b0547be72d5741a707d7a35b0a19b41a13c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_music_module_memory.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_music_seq.c",
+      "bytes": 5728,
+      "sha256": "6b9c209edc03b3b34ccf608f43fe8f8b20c7ba8ab42c93cd5c6f5db78906df90",
+      "git_blob_sha1": "a42320df0dcf91f01bb1671cb26eeb81e382c44a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_music_seq.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_music_seq.h",
+      "bytes": 965,
+      "sha256": "66c23b13f0c44765eeca7047f052a7574b3fa437acd6b5f389f358082dc90cd8",
+      "git_blob_sha1": "c549ee5fbbbbe1e8a840b89f5c83090bfe3dea39",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_music_seq.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_music_time.h",
+      "bytes": 620,
+      "sha256": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+      "git_blob_sha1": "7a73677c0947029dc7f5906e05458abdb77b9f76",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_music_time.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_scsp_sfx.h",
+      "bytes": 2193,
+      "sha256": "ef746dc5b2ab96437e11d998f55a8799a82ca933f8733fa9644b8d9d9c6da7c4",
+      "git_blob_sha1": "507bf8efa6f2df80a5357b617dc94c98e36bdda9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_scsp_sfx.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_scsp_ym.c",
+      "bytes": 8498,
+      "sha256": "71a058ba15779412f1ae2241944916720c32427f4fde488633c899f829c0877c",
+      "git_blob_sha1": "c7573e947d0515ed09edf746b708a04f401d9e40",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_scsp_ym.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/src/audio/native/wf_scsp_ym.h",
+      "bytes": 538,
+      "sha256": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+      "git_blob_sha1": "3f7d66eca1a9d3d93123e17f60b4c109f09d508c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/src/audio/native/wf_scsp_ym.h"
+    },
+    {
+      "path": "experimentos/native18k-standalone/templates/z80-cold.c",
+      "bytes": 50574,
+      "sha256": "454e19fddbb9682b493a80d3566b686cba114f313b48b3a08033d5a97d04f38c",
+      "git_blob_sha1": "536dc651223b63885fd60b867621c659fa8a2665",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/templates/z80-cold.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/templates/z80-native.c",
+      "bytes": 39409,
+      "sha256": "ad2eb64498e50f53eca96ee0ad59530fe318a28571e938c5416646725e5dce12",
+      "git_blob_sha1": "98c51b8a416fa68a64e929c25c96c62297b32fe2",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/templates/z80-native.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/test_host.py",
+      "bytes": 4588,
+      "sha256": "e4567ac94c81838e6edd42cf2af0f56ed50e42322ce9c533b68c0910fb7ef054",
+      "git_blob_sha1": "0d3e05df939bfb34c774f588db082131702d823c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/test_host.py"
+    },
+    {
+      "path": "experimentos/native18k-standalone/test_interactions.c",
+      "bytes": 4799,
+      "sha256": "977f9bebf92e4c6738e09cadb6e8adc2c01539c607bf08dd8bc3b82afb0bb6d4",
+      "git_blob_sha1": "46e953c2beed16f33036a907cfd165c989abedc1",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/test_interactions.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/tests/test_control_batch.c",
+      "bytes": 8362,
+      "sha256": "e49d6131d08d1feca744beb7219020abd13136c94b3497247809e4037b1d9e80",
+      "git_blob_sha1": "c8365c819db0a2475ca548a226909981ee7e9f20",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/tests/test_control_batch.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/tests/test_control_differential.c",
+      "bytes": 2392,
+      "sha256": "0f7372102def7579d08ff6bb0221a3498e93eb9ce284dd08fd80e16f0e0f5856",
+      "git_blob_sha1": "af68982000d505f779bbdea8ee4fcc0989a3e285",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/tests/test_control_differential.c"
+    },
+    {
+      "path": "experimentos/native18k-standalone/tools/build.py",
+      "bytes": 8710,
+      "sha256": "84dd990cd44469af239a9722c5d6f7b892d4bf631c2038b1b9f284a59a169d16",
+      "git_blob_sha1": "d2b8bb7289928b6f077f297b04612f8825171364",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/tools/build.py"
+    },
+    {
+      "path": "experimentos/native18k-standalone/tools/compact.py",
+      "bytes": 895,
+      "sha256": "39cfcfc952a93ac125a05f9765493523d2a1c6202dc191a80f6693a3af940247",
+      "git_blob_sha1": "f57584c3bca54e83785491e6b82cc6e4330d147e",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/tools/compact.py"
+    },
+    {
+      "path": "experimentos/native18k-standalone/tools/elf.py",
+      "bytes": 1430,
+      "sha256": "0ee6c5133d173a036201eeb7c064386250d92a9ea7551fafadabac19776fa13c",
+      "git_blob_sha1": "5519972690f3b0f2cc5f19a2ccbda58711adb459",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/tools/elf.py"
+    },
+    {
+      "path": "experimentos/native18k-standalone/tools/generate.py",
+      "bytes": 1270,
+      "sha256": "a6367f0f8cb8693ec8383378f78c90c5071493555a2a7fc743dfcffef69e35f4",
+      "git_blob_sha1": "73b89199a573e2b3c51b8fb1ebaf6cbda63f6628",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/tools/generate.py"
+    },
+    {
+      "path": "experimentos/native18k-standalone/tools/pins.py",
+      "bytes": 592,
+      "sha256": "32cde6715bfc391323ac35dcdffb968e707c53bfd4b06459e0ced7005663053e",
+      "git_blob_sha1": "82f8f4005024ce4fbb0218f9828d16580313cdbc",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/native18k-standalone/tools/pins.py"
+    },
+    {
+      "path": "experimentos/pcm-servicio/build_isolated.py",
+      "bytes": 4303,
+      "sha256": "6e75f73ba30f77f1b4e986c72f76338ca9f66a1f080bb24dbd20fdcd8a032fa9",
+      "git_blob_sha1": "38099c30743f3b85fa03b0e589f31e2dd27ec04a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/build_isolated.py"
+    },
+    {
+      "path": "experimentos/pcm-servicio/DESIGN-AND-PLAN.txt",
+      "bytes": 5467,
+      "sha256": "87bc96f5e120536b8285d3f40c9ca968390f5b28df6c2272729f92722168f88f",
+      "git_blob_sha1": "c91b7b2028d9a557edf2f0323ee6432a8decaea1",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/DESIGN-AND-PLAN.txt"
+    },
+    {
+      "path": "experimentos/pcm-servicio/profile_firmware.py",
+      "bytes": 17041,
+      "sha256": "c4a02e832488c09a7022badbb107b6f03d60d41d51b8d1eaa949feb1c62c38a2",
+      "git_blob_sha1": "b82769628e7a54731e88866d51ef4c16dba51be2",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/profile_firmware.py"
+    },
+    {
+      "path": "experimentos/pcm-servicio/run_prepare.py",
+      "bytes": 1453,
+      "sha256": "6faafa89443834b3397afccc4e0483f01ceeaed269a2f83406211d603cc3412d",
+      "git_blob_sha1": "9c5289128d577a4bec8e4f88319cea35e507b717",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/run_prepare.py"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/generated/envelope-calibration.json",
+      "bytes": 40352,
+      "sha256": "86d208e6a48104077f70f4ff2fd91a6ac81b3ad874c4ccbfe43c84eadca3898d",
+      "git_blob_sha1": "e601c8db7a509029e3bbeae4ff79c66327133f01",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/generated/envelope-calibration.json"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/generated/PROVENANCE.json",
+      "bytes": 762,
+      "sha256": "ae6fef7f492bf875afebcc58f83c5e1a76813fd706290609208d6d86feff4ad5",
+      "git_blob_sha1": "6fffc460ed7ef9b850ff1830eeac192ae975c860",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/generated/PROVENANCE.json"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/generated/wf_ym_envelope.h",
+      "bytes": 770,
+      "sha256": "4e629def3f2d8154fd8083e73ebb2ca49d2303a27a6e9d35257bbc6b01f1f273",
+      "git_blob_sha1": "97b4879f23d2b873ee67a787a0f36c545c1ba736",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/generated/wf_ym_envelope.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/generated/wf_ym_tables.h",
+      "bytes": 24605,
+      "sha256": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+      "git_blob_sha1": "7355798ced6b5a03325dbd4d8466ea880e28887f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/generated/wf_ym_tables.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/generated/wf_z80_blocks.json",
+      "bytes": 8256,
+      "sha256": "f25035888226fd08e77d4d3427d5402fbbb14f4ad6105e6d324e0a0cb9e823b4",
+      "git_blob_sha1": "5244d23925f965284a704104002215373418f49c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/generated/wf_z80_blocks.json"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/ponesound/LICENSE",
+      "bytes": 1064,
+      "sha256": "192ddf55fe9e17185164b1102b2ed705fa346aa993a4fbcad54e18722069edae",
+      "git_blob_sha1": "2bf440163bec7771a9a38ad8a865852783bb9926",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/ponesound/LICENSE"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/ponesound/wf_ponesound.c",
+      "bytes": 56513,
+      "sha256": "766b5db511ad9e4bcb08fd593760fb7ab7e1973a7ba6a0ec2b33ce319a677628",
+      "git_blob_sha1": "923f22df0bc99c41ee1482a717712b292f058f71",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/ponesound/wf_ponesound.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/reference_driver/LICENSE",
+      "bytes": 1073,
+      "sha256": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5",
+      "git_blob_sha1": "e593d41514e6dbbc205624e8f5d9cba8040755e7",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/reference_driver/LICENSE"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/reference_driver/PROVENANCE.json",
+      "bytes": 407,
+      "sha256": "0ca85690faec2124d141f74abb6f42ea4cb994b486b657e076722e34c63f22f1",
+      "git_blob_sha1": "0b592b082488eea0bf5a86b1c4259c9a44dfb831",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/reference_driver/PROVENANCE.json"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/reference_driver/z80.c",
+      "bytes": 50103,
+      "sha256": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+      "git_blob_sha1": "366c508a32fb4edf4d1cf8b9367512c428cc1c43",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/reference_driver/z80.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/reference_driver/z80.h",
+      "bytes": 1136,
+      "sha256": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+      "git_blob_sha1": "4e2b0b42c06d0c623528d4c3394e08384f884c1a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/reference_driver/z80.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/SFX-NATIVE.md",
+      "bytes": 6516,
+      "sha256": "83edc3e8e87e5e0b022d4c903b24f3b5f774d34682c75ac7c9da38b1dee707a7",
+      "git_blob_sha1": "83eca13c9e61cf357a0f9d885633d398f36a20f3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/SFX-NATIVE.md"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_m68k.ld",
+      "bytes": 999,
+      "sha256": "4aff5a6dad158e4fc24c7b0751a97459afe3876df58983a6c55a25bfda7a21a1",
+      "git_blob_sha1": "6d46ccf9db48d3f248ceb6df3f24449c9b47a957",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_m68k.ld"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_m68k_start.S",
+      "bytes": 498,
+      "sha256": "bd1a965c32b231a93925a4ed0372643d9b7b38a3a18c9852054d63df8f7d5ebe",
+      "git_blob_sha1": "bceaaf7363157f5d79075c123a62086b6aec910d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_m68k_start.S"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_clock.h",
+      "bytes": 487,
+      "sha256": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+      "git_blob_sha1": "c80f7fa36ef2136b1f6c48b9c62efba5d09f7f11",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_clock.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_elf.c",
+      "bytes": 2433,
+      "sha256": "2fcb50f8fad674681ed5d5007553ad9ad903590f6b2463b6a91d836c2490e362",
+      "git_blob_sha1": "4dbeb9d20e20c66b7911140546c34e81f90cc022",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_elf.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_elf.h",
+      "bytes": 363,
+      "sha256": "2a991dff9ab4817a2d1845e71c8cf050c288d45402dbfb39673c3a266567e5c8",
+      "git_blob_sha1": "ee7610d0f493331d6b0e5a095346cd834f9be990",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_elf.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_firmware.c",
+      "bytes": 8544,
+      "sha256": "d6a6f0d1c2fd9ebaac9d7dd2a971571f4152254e47187a219e5fff0c26f47adb",
+      "git_blob_sha1": "7ec819b21d212caa516e8b39e969aa0deb60acad",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_firmware.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_m68k.ld",
+      "bytes": 931,
+      "sha256": "1b639a4e3527ead0b8a92ee278007dfc9cc9544837604909230e1e3dfbeea110",
+      "git_blob_sha1": "74aa518668d3e481ec3098803b6fa92643934428",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_m68k.ld"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_module.c",
+      "bytes": 8203,
+      "sha256": "39a85bf38cf6bda2d1ef2e31e471d41f7382cf390b4b03a84380f9a6a5b196ba",
+      "git_blob_sha1": "e23c92de733a34582b590f786ba8eb698067677c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_module.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_module.h",
+      "bytes": 948,
+      "sha256": "e2e0b412d3d137ccc562a70bb29aab9cae8e0777690dc0a0f01f70430eb3c387",
+      "git_blob_sha1": "4dc95fb03cf37d6b560e1f627dae581c4ec1b75f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_module.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_module.ld",
+      "bytes": 676,
+      "sha256": "d8753d6ba83d8629464ee37c74c5ce6410dbd539546f16322da20b26e1469cf7",
+      "git_blob_sha1": "40d172a59685fe28f1a4337ad186a571a8538995",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_module.ld"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_module_memory.c",
+      "bytes": 638,
+      "sha256": "0cbfba23d6ec2d24f076302619d1044389782cdd9664b9d7b113ecdc80a16c3c",
+      "git_blob_sha1": "e5e17b0547be72d5741a707d7a35b0a19b41a13c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_module_memory.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_seq.c",
+      "bytes": 5067,
+      "sha256": "2beb115be4e44753f45bbdd929b04d4d2253c74e596652d62e0b8e18aecee20b",
+      "git_blob_sha1": "978f1ea6f37ad464ab9600664107bfa766b15eab",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_seq.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_seq.h",
+      "bytes": 841,
+      "sha256": "275a0e1a4a14765cf24ba9f42d90099ea2f99251dd42c118cc63ade81bd4e768",
+      "git_blob_sha1": "08310ac5c5df72c9c2c230a5df6ad6a049b22290",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_seq.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_music_time.h",
+      "bytes": 620,
+      "sha256": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+      "git_blob_sha1": "7a73677c0947029dc7f5906e05458abdb77b9f76",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_music_time.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_driver.c",
+      "bytes": 3552,
+      "sha256": "3d00eb62eb8e993a3de4f0018bb24259eac769ed5fa157ac460f4aa6d6a8f251",
+      "git_blob_sha1": "4df74eec3824ba7f073217d7af2a2ff4fa523bdf",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_driver.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_driver.h",
+      "bytes": 1507,
+      "sha256": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+      "git_blob_sha1": "3191c53d989c922d7a8c15f5cc90744b6d123a26",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_driver.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_elf.c",
+      "bytes": 1232,
+      "sha256": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+      "git_blob_sha1": "b6e61aab9ab8b5b55909b298e49b1433d0faf35d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_elf.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_elf.h",
+      "bytes": 348,
+      "sha256": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+      "git_blob_sha1": "76988fced2c34c08b0b27da70d48dbfc8226c022",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_elf.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_host.c",
+      "bytes": 5928,
+      "sha256": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+      "git_blob_sha1": "81f13b892ce6e6d9525707ff3bfdb49e970de8b3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_host.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_host.h",
+      "bytes": 2144,
+      "sha256": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+      "git_blob_sha1": "3c16edaf916c90bde8300da3a3dde4dfadef125f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_host.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_queue.c",
+      "bytes": 2168,
+      "sha256": "479c23a85271ee05d7537f6ee01ef9bbd61e15212082ad4a3db44821f784dd90",
+      "git_blob_sha1": "1a12c6096f9144fa757ce54ded162a9fc02af77b",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_queue.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_queue.h",
+      "bytes": 1003,
+      "sha256": "840b7e85c194c10149bfeae2bbcc5cc94f253802e1b13081a5d01dc0ec72a6aa",
+      "git_blob_sha1": "0611699f8905a66e129d64f04a120beb816ca4cf",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_queue.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_wp24.c",
+      "bytes": 2746,
+      "sha256": "0d5615cf530ffc4b751257bdab22881bfc2f021b5f99214d9286c217795c06ce",
+      "git_blob_sha1": "691f49d4eb61d9ce000f9ba387d7afcad835456c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_wp24.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_wp24.h",
+      "bytes": 524,
+      "sha256": "b48976a4722cb243623eaefb9bf6ce249cef3f3454ebfed02a3dcc50da17db39",
+      "git_blob_sha1": "dd4bf74da95f84cdc62e56de056ba9cb49c673c8",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_wp24.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_yaul.c",
+      "bytes": 712,
+      "sha256": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+      "git_blob_sha1": "bcc11d2326c705638973a733f1cb67420d5c03d5",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_yaul.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_native_yaul.h",
+      "bytes": 437,
+      "sha256": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+      "git_blob_sha1": "d395332fa05914fca9ce775d97ce770691c61cb3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_native_yaul.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_dsp.c",
+      "bytes": 2049,
+      "sha256": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+      "git_blob_sha1": "c47e2e80364e7d5a8cbd24cb99e5dc8b7d8730bc",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_dsp.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_dsp.h",
+      "bytes": 315,
+      "sha256": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+      "git_blob_sha1": "c642b05c0d0d397994e36a89e44133cced379810",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_dsp.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_fm_bundle.h",
+      "bytes": 316,
+      "sha256": "a180d9a119e03feb739c9c4a9b2d30f350eac3d75f8e1db944789f4c867378db",
+      "git_blob_sha1": "c89374dcb5f3876646f803c94e433d7e1e5320b8",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_fm_bundle.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_fm_probe.c",
+      "bytes": 3034,
+      "sha256": "f2ab28f198a7a7b3f25a2fa6bf5cb070c54ff090c491e7a8aef4a967c6fb1359",
+      "git_blob_sha1": "65b58e13f75a4a6f194ee62c7439869a3b7ac3f3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_fm_probe.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_fm_probe.h",
+      "bytes": 1620,
+      "sha256": "dfcb492b9ccba78880dc7e3226424879cdc3d682476d0918c63a20802e78eb7d",
+      "git_blob_sha1": "323c4bb7d2a9cd83581faab6ebd37eb81f9a5c44",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_fm_probe.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_sfx.c",
+      "bytes": 13019,
+      "sha256": "fa47ad61c7cbdbbd1e3b3d196da9e3d584b71b5e2ec4643defbcc47b74236228",
+      "git_blob_sha1": "a26c2daeb50766af07e082e37e75ff4b4dcd0092",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_sfx.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_sfx.h",
+      "bytes": 2672,
+      "sha256": "5316227f0a36d31b66dbc7f85d7e46c222e6c8c12a5e995d790ba5c1bbec8477",
+      "git_blob_sha1": "95e8cc7e68c3515b2b840fe7197bab7007d4de19",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_sfx.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_ym.c",
+      "bytes": 7683,
+      "sha256": "7f3d0c1ba27fadc35db73d5b32ca644b5138d1a050ea25be0ad13b43356893d7",
+      "git_blob_sha1": "92303fc2cd30b8b7e8e265b9bf07c5ad7ce8e309",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_ym.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_scsp_ym.h",
+      "bytes": 538,
+      "sha256": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+      "git_blob_sha1": "3f7d66eca1a9d3d93123e17f60b4c109f09d508c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_scsp_ym.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_sfx.ld",
+      "bytes": 780,
+      "sha256": "091151a606cebeef8226fae32ccb06d2a6ca5649bed5f0f03af9d7420e290ab7",
+      "git_blob_sha1": "38a2cb40136231a117c80f8e5aaac9a642199fbe",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_sfx.ld"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_sfx_decode.S",
+      "bytes": 1353,
+      "sha256": "5e97ad36a59fd374886bf3aad571e231a302a2b5ba413a53cc1d72d7cb04bf48",
+      "git_blob_sha1": "f156a266e8b68ed6ce2a9e010954e6ce63bd3b9a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_sfx_decode.S"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_sfx_firmware.c",
+      "bytes": 5367,
+      "sha256": "998826941ed3e2ba205a651d037cb5826917ac812de388c2b3fa221f826220fe",
+      "git_blob_sha1": "ef5ef5e8f67a63294a73d88dcf2c9697ad284ba9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_sfx_firmware.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_sfx_memory.c",
+      "bytes": 367,
+      "sha256": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+      "git_blob_sha1": "71e058b9cb510a57ff77ef3b1b4b5e93d755018a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_sfx_memory.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_sfx_start.S",
+      "bytes": 483,
+      "sha256": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+      "git_blob_sha1": "6244693ba9abf88800f4f81345c49a2c4489bd0b",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_sfx_start.S"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_sfx_upload.c",
+      "bytes": 2606,
+      "sha256": "f9d009d48f51b5af21245e2c662e6a9cc4c740b126e861caf5c6677bbf3baf95",
+      "git_blob_sha1": "127c8088c703f1bbd12cf0734748b3ec114a71b0",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_sfx_upload.c"
+    },
+    {
+      "path": "experimentos/pcm-servicio/src/audio/native/wf_sfx_upload.h",
+      "bytes": 789,
+      "sha256": "fd765041632d16c48a34f71359e43c0717dff645e8bda0a03c8bffdfe2c7b094",
+      "git_blob_sha1": "a3a11a3e12b904a9bf0b8a2642293073a5d96395",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/repo/src/audio/native/wf_sfx_upload.h"
+    },
+    {
+      "path": "experimentos/pcm-servicio/test_deadline.py",
+      "bytes": 1588,
+      "sha256": "85273cbc01060a524cb88461427d800d090ad0c63f8e15047a061b50174cb718",
+      "git_blob_sha1": "2eea6deb6477c03d6aeebdc29202740ec8982d92",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/test_deadline.py"
+    },
+    {
+      "path": "experimentos/pcm-servicio/test_prepare.c",
+      "bytes": 3244,
+      "sha256": "b58ce0cc9bc1e1f9fb0d5ec09083d10dcc8976e2d3b2be9f3e0110e79a74633f",
+      "git_blob_sha1": "4fd3669a8e934878181c09c2ed244feb1e0f3b26",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/late-classification/late-fix/test_prepare.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/audit_saved_states.py",
+      "bytes": 7128,
+      "sha256": "5aa811394dd667e472b7b20a2faa863b9ee86dedf972ea9f241af4bb9a0912e0",
+      "git_blob_sha1": "6683ca4d40700b9ed2877fe1246b853e4ac1e1c6",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/audit_saved_states.py"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/audit_timeline.py",
+      "bytes": 2003,
+      "sha256": "e9a5333b34342244fae23585132ddcbc2b8c89e990be700dd328a39065dfa6ae",
+      "git_blob_sha1": "4ba3a2ba881b5a1a205e0138be96d2ebd2e83861",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/audit_timeline.py"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/build_sh2.py",
+      "bytes": 2081,
+      "sha256": "26edc8c28b4ddd17d7f56c07d6955a61e49be10f068ead8ab36dd5e790099a93",
+      "git_blob_sha1": "0f59891b2ae9bd9dcc25b604cba3b7abca2b9fc1",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/build_sh2.py"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/check_factorial.py",
+      "bytes": 2519,
+      "sha256": "9f00c1d896fcda29baae4c0c8a7cdc3cb58fcd8c3be2ef8909106692545d4d5a",
+      "git_blob_sha1": "7f048daefe6604fa09e606984af24731784bebc2",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/check_factorial.py"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/FROZEN-INPUTS.json",
+      "bytes": 42922,
+      "sha256": "e2ef834af8aea10a77a8a3095a67a1ac915d38d94abc3b4b15dd7492b0c5081d",
+      "git_blob_sha1": "453a7da2f10d01f92097be86158cf9a3b82822c5",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/FROZEN-INPUTS.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/generate.py",
+      "bytes": 502,
+      "sha256": "95e26797ff306c48263c05326ce1a6ae7a159e4a030d8ea131c644c62b4591b4",
+      "git_blob_sha1": "ef3f531f2036a3c5a2a36fbea26ad8570fa4cd9d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/generate.py"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/generated/generator.json",
+      "bytes": 3003,
+      "sha256": "ffb6e586817098749e074ba8881e396099f73c5f8666d7b051dce2ed39bc6d54",
+      "git_blob_sha1": "6294a61df18977fc967bde51ac07f835ae33d5f3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/generated/generator.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/generated/z80-cold.c",
+      "bytes": 52356,
+      "sha256": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+      "git_blob_sha1": "fc12af1f3752fedb37490cbce8c38ccbfffa4531",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/generated/z80-cold.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/generated/z80-native.c",
+      "bytes": 44120,
+      "sha256": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+      "git_blob_sha1": "9eec66efdf20406795b08ba3e835f93c821e7dee",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/generated/z80-native.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/green-FACTORIAL-GATE.json",
+      "bytes": 482,
+      "sha256": "7659da86e89226119498570fab3cc5fcf47d2f34553d37031bf7224907bf8297",
+      "git_blob_sha1": "933d9b9cabdb02a653cd525e9cd48f7d1c0602d5",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/green-FACTORIAL-GATE.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/HOST-RESULT.json",
+      "bytes": 4745,
+      "sha256": "5f9537904bcb5a010cbf4b7819a87e4b7b73a5e3ac0b05378ca317fd801ae7f2",
+      "git_blob_sha1": "200950426d2b01ac6bcfa7e67f71827edb9a96a0",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/HOST-RESULT.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/readback_cold.py",
+      "bytes": 3511,
+      "sha256": "c123343b9f6c9a616e41bb184a90bb627d5d8845a92fb58d55b8c08bbd2271ee",
+      "git_blob_sha1": "3a7e5a58ecc7283d178cf0d7bad38fd60f457c64",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/readback_cold.py"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/run_host.py",
+      "bytes": 4963,
+      "sha256": "0d722e5cd1632724eb834bc919ab242beed6cf341c3ba89d613fd270cb18b283",
+      "git_blob_sha1": "2afbcf8ae8c9ffdfa97ec3790b52d320b6561817",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/run_host.py"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/RUNTIME-CONTRACT.json",
+      "bytes": 1242,
+      "sha256": "d28af7cd614cca233bd919b0568fc8fd628f024af389a1a7829812220632983e",
+      "git_blob_sha1": "62d7923471a5c65b14c62fddc4871af198a72027",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/RUNTIME-CONTRACT.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/SH2-RESULT.json",
+      "bytes": 4674,
+      "sha256": "cedd2a55192fad4a88ed27b425d63024601e4ad06460bf60cb9dae51762150f4",
+      "git_blob_sha1": "131dd077fff4979c46ac6ac1b05ba98e59dee3ab",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/SH2-RESULT.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/SOURCE-ARCHIVE.json",
+      "bytes": 324,
+      "sha256": "593dd3fe5f440e73408a9484f4e4b67292ab67b2310edbf4ff34a7ecbc59a548",
+      "git_blob_sha1": "f1e165972ab5c715164bc8c2ee5850de47bb17d9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/SOURCE-ARCHIVE.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/SOURCE-MANIFEST.json",
+      "bytes": 2625,
+      "sha256": "b4b9d69e4986629649f89eba8babaefdc9d4093a466b870085cd95db3b073290",
+      "git_blob_sha1": "937b6ac352858e2abccdbc12661a69d8e4ae7a79",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/SOURCE-MANIFEST.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/source.patch",
+      "bytes": 2227,
+      "sha256": "fcb923a776b01ff254c5fb829c3bf72c8d988a162c3f7fde2674af252b9768c1",
+      "git_blob_sha1": "71fe38dd9c46fb1756aeb2f8e762e890190cd268",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/source.patch"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/generated/wf_ym_envelope.h",
+      "bytes": 770,
+      "sha256": "4e629def3f2d8154fd8083e73ebb2ca49d2303a27a6e9d35257bbc6b01f1f273",
+      "git_blob_sha1": "97b4879f23d2b873ee67a787a0f36c545c1ba736",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/generated/wf_ym_envelope.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/generated/wf_ym_tables.h",
+      "bytes": 24605,
+      "sha256": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+      "git_blob_sha1": "7355798ced6b5a03325dbd4d8466ea880e28887f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/generated/wf_ym_tables.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/generated/wf_z80_blocks.json",
+      "bytes": 8256,
+      "sha256": "f25035888226fd08e77d4d3427d5402fbbb14f4ad6105e6d324e0a0cb9e823b4",
+      "git_blob_sha1": "5244d23925f965284a704104002215373418f49c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/generated/wf_z80_blocks.json"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/ponesound/wf_ponesound.c",
+      "bytes": 56513,
+      "sha256": "766b5db511ad9e4bcb08fd593760fb7ab7e1973a7ba6a0ec2b33ce319a677628",
+      "git_blob_sha1": "923f22df0bc99c41ee1482a717712b292f058f71",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/ponesound/wf_ponesound.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/reference_driver/z80.c",
+      "bytes": 50103,
+      "sha256": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+      "git_blob_sha1": "366c508a32fb4edf4d1cf8b9367512c428cc1c43",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/reference_driver/z80.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/reference_driver/z80.h",
+      "bytes": 1136,
+      "sha256": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+      "git_blob_sha1": "4e2b0b42c06d0c623528d4c3394e08384f884c1a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/reference_driver/z80.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_m68k.ld",
+      "bytes": 999,
+      "sha256": "4aff5a6dad158e4fc24c7b0751a97459afe3876df58983a6c55a25bfda7a21a1",
+      "git_blob_sha1": "6d46ccf9db48d3f248ceb6df3f24449c9b47a957",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_m68k.ld"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_clock.h",
+      "bytes": 487,
+      "sha256": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+      "git_blob_sha1": "c80f7fa36ef2136b1f6c48b9c62efba5d09f7f11",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_clock.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_elf.c",
+      "bytes": 2433,
+      "sha256": "2fcb50f8fad674681ed5d5007553ad9ad903590f6b2463b6a91d836c2490e362",
+      "git_blob_sha1": "4dbeb9d20e20c66b7911140546c34e81f90cc022",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_elf.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_elf.h",
+      "bytes": 363,
+      "sha256": "2a991dff9ab4817a2d1845e71c8cf050c288d45402dbfb39673c3a266567e5c8",
+      "git_blob_sha1": "ee7610d0f493331d6b0e5a095346cd834f9be990",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_elf.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_entry.S",
+      "bytes": 384,
+      "sha256": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+      "git_blob_sha1": "b5aee7feba13c4bba69acc66db747fae38becc2f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_entry.S"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_firmware.c",
+      "bytes": 6932,
+      "sha256": "800d755ef32eb60d1994b0bca453c593f3a68069275c7387c1aa2e8c465d28b6",
+      "git_blob_sha1": "bdf4f2290ac5fa95906582cfbdf0de50668e966f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_firmware.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_m68k.ld",
+      "bytes": 931,
+      "sha256": "1b639a4e3527ead0b8a92ee278007dfc9cc9544837604909230e1e3dfbeea110",
+      "git_blob_sha1": "74aa518668d3e481ec3098803b6fa92643934428",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_m68k.ld"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_module.c",
+      "bytes": 9466,
+      "sha256": "ceab714d6999efd39b7dc94d19a8d78b82f0d0e5e34ae508889f9a2c80ba2dc6",
+      "git_blob_sha1": "85b077790710cd33c979d878d1cf3814deb534e7",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_module.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_module.h",
+      "bytes": 1181,
+      "sha256": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c",
+      "git_blob_sha1": "11b44aa29b52025021104172151d95aec18e3644",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_module.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_module.ld",
+      "bytes": 1159,
+      "sha256": "f9a3f7627a77b4bd858f2fdb03a089ff5c4baf781567c20b021b5b54de2a14c7",
+      "git_blob_sha1": "9cb7ad9789d26bc5b075036dc51487867c1771e8",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_module.ld"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_module_memory.c",
+      "bytes": 638,
+      "sha256": "0cbfba23d6ec2d24f076302619d1044389782cdd9664b9d7b113ecdc80a16c3c",
+      "git_blob_sha1": "e5e17b0547be72d5741a707d7a35b0a19b41a13c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_module_memory.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_seq.c",
+      "bytes": 5728,
+      "sha256": "6b9c209edc03b3b34ccf608f43fe8f8b20c7ba8ab42c93cd5c6f5db78906df90",
+      "git_blob_sha1": "a42320df0dcf91f01bb1671cb26eeb81e382c44a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_seq.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_seq.h",
+      "bytes": 965,
+      "sha256": "66c23b13f0c44765eeca7047f052a7574b3fa437acd6b5f389f358082dc90cd8",
+      "git_blob_sha1": "c549ee5fbbbbe1e8a840b89f5c83090bfe3dea39",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_seq.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_music_time.h",
+      "bytes": 620,
+      "sha256": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+      "git_blob_sha1": "7a73677c0947029dc7f5906e05458abdb77b9f76",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_music_time.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_driver.c",
+      "bytes": 3552,
+      "sha256": "3d00eb62eb8e993a3de4f0018bb24259eac769ed5fa157ac460f4aa6d6a8f251",
+      "git_blob_sha1": "4df74eec3824ba7f073217d7af2a2ff4fa523bdf",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_driver.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_driver.h",
+      "bytes": 1507,
+      "sha256": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+      "git_blob_sha1": "3191c53d989c922d7a8c15f5cc90744b6d123a26",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_driver.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_elf.c",
+      "bytes": 1232,
+      "sha256": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+      "git_blob_sha1": "b6e61aab9ab8b5b55909b298e49b1433d0faf35d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_elf.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_elf.h",
+      "bytes": 348,
+      "sha256": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+      "git_blob_sha1": "76988fced2c34c08b0b27da70d48dbfc8226c022",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_elf.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_host.c",
+      "bytes": 5928,
+      "sha256": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+      "git_blob_sha1": "81f13b892ce6e6d9525707ff3bfdb49e970de8b3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_host.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_host.h",
+      "bytes": 2144,
+      "sha256": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+      "git_blob_sha1": "3c16edaf916c90bde8300da3a3dde4dfadef125f",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_host.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_queue.c",
+      "bytes": 2168,
+      "sha256": "479c23a85271ee05d7537f6ee01ef9bbd61e15212082ad4a3db44821f784dd90",
+      "git_blob_sha1": "1a12c6096f9144fa757ce54ded162a9fc02af77b",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_queue.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_queue.h",
+      "bytes": 1003,
+      "sha256": "840b7e85c194c10149bfeae2bbcc5cc94f253802e1b13081a5d01dc0ec72a6aa",
+      "git_blob_sha1": "0611699f8905a66e129d64f04a120beb816ca4cf",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_queue.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_wp24.c",
+      "bytes": 2746,
+      "sha256": "0d5615cf530ffc4b751257bdab22881bfc2f021b5f99214d9286c217795c06ce",
+      "git_blob_sha1": "691f49d4eb61d9ce000f9ba387d7afcad835456c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_wp24.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_wp24.h",
+      "bytes": 524,
+      "sha256": "b48976a4722cb243623eaefb9bf6ce249cef3f3454ebfed02a3dcc50da17db39",
+      "git_blob_sha1": "dd4bf74da95f84cdc62e56de056ba9cb49c673c8",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_wp24.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_yaul.c",
+      "bytes": 712,
+      "sha256": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+      "git_blob_sha1": "bcc11d2326c705638973a733f1cb67420d5c03d5",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_yaul.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_native_yaul.h",
+      "bytes": 437,
+      "sha256": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+      "git_blob_sha1": "d395332fa05914fca9ce775d97ce770691c61cb3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_native_yaul.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_dsp.c",
+      "bytes": 2049,
+      "sha256": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+      "git_blob_sha1": "c47e2e80364e7d5a8cbd24cb99e5dc8b7d8730bc",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_dsp.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_dsp.h",
+      "bytes": 315,
+      "sha256": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+      "git_blob_sha1": "c642b05c0d0d397994e36a89e44133cced379810",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_dsp.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_fm_bundle.h",
+      "bytes": 316,
+      "sha256": "a180d9a119e03feb739c9c4a9b2d30f350eac3d75f8e1db944789f4c867378db",
+      "git_blob_sha1": "c89374dcb5f3876646f803c94e433d7e1e5320b8",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_fm_bundle.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_fm_probe.c",
+      "bytes": 3034,
+      "sha256": "f2ab28f198a7a7b3f25a2fa6bf5cb070c54ff090c491e7a8aef4a967c6fb1359",
+      "git_blob_sha1": "65b58e13f75a4a6f194ee62c7439869a3b7ac3f3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_fm_probe.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_fm_probe.h",
+      "bytes": 1620,
+      "sha256": "dfcb492b9ccba78880dc7e3226424879cdc3d682476d0918c63a20802e78eb7d",
+      "git_blob_sha1": "323c4bb7d2a9cd83581faab6ebd37eb81f9a5c44",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_fm_probe.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_sfx.c",
+      "bytes": 10629,
+      "sha256": "e298bc39b2aff506e13e8154499fc754c1da39b7ac680412609e7702a8483056",
+      "git_blob_sha1": "fd201151d75aa89f8df774f678ecdae108dbd4d5",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_sfx.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_sfx.h",
+      "bytes": 2193,
+      "sha256": "ef746dc5b2ab96437e11d998f55a8799a82ca933f8733fa9644b8d9d9c6da7c4",
+      "git_blob_sha1": "507bf8efa6f2df80a5357b617dc94c98e36bdda9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_sfx.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_ym.c",
+      "bytes": 8498,
+      "sha256": "71a058ba15779412f1ae2241944916720c32427f4fde488633c899f829c0877c",
+      "git_blob_sha1": "c7573e947d0515ed09edf746b708a04f401d9e40",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_ym.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_scsp_ym.h",
+      "bytes": 538,
+      "sha256": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+      "git_blob_sha1": "3f7d66eca1a9d3d93123e17f60b4c109f09d508c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_scsp_ym.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_sfx.ld",
+      "bytes": 780,
+      "sha256": "091151a606cebeef8226fae32ccb06d2a6ca5649bed5f0f03af9d7420e290ab7",
+      "git_blob_sha1": "38a2cb40136231a117c80f8e5aaac9a642199fbe",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_sfx.ld"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_sfx_firmware.c",
+      "bytes": 5367,
+      "sha256": "998826941ed3e2ba205a651d037cb5826917ac812de388c2b3fa221f826220fe",
+      "git_blob_sha1": "ef5ef5e8f67a63294a73d88dcf2c9697ad284ba9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_sfx_firmware.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_sfx_memory.c",
+      "bytes": 367,
+      "sha256": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+      "git_blob_sha1": "71e058b9cb510a57ff77ef3b1b4b5e93d755018a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_sfx_memory.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_sfx_upload.c",
+      "bytes": 2606,
+      "sha256": "f9d009d48f51b5af21245e2c662e6a9cc4c740b126e861caf5c6677bbf3baf95",
+      "git_blob_sha1": "127c8088c703f1bbd12cf0734748b3ec114a71b0",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_sfx_upload.c"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_sfx_upload.h",
+      "bytes": 789,
+      "sha256": "fd765041632d16c48a34f71359e43c0717dff645e8bda0a03c8bffdfe2c7b094",
+      "git_blob_sha1": "a3a11a3e12b904a9bf0b8a2642293073a5d96395",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_sfx_upload.h"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_z80_control_batch.inc",
+      "bytes": 843,
+      "sha256": "6775bdc1db5f94c73ed3dc2f35926fffa40fd21e6a2890a284ce6f0c7f6e2ee2",
+      "git_blob_sha1": "ec615774861fee9c483c1ab573875cfd44f4801d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_z80_control_batch.inc"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_z80_instrument_post.inc",
+      "bytes": 685,
+      "sha256": "b9cd0af3069c405f2b63809c2e6d5157831a8cc84632868d8f3f6dec7fe31f53",
+      "git_blob_sha1": "60cb64517bea7f2089cd63ef2d003ebfb6fea450",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_z80_instrument_post.inc"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_z80_instrument_pre.inc",
+      "bytes": 851,
+      "sha256": "1353f99b38f72dfb7cc79858f14e16314cc6b90900a2cb8680557e9693197770",
+      "git_blob_sha1": "d1280a9c2dab19663f5e32bf8730778b663fda59",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_z80_instrument_pre.inc"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_z80_multiply.inc",
+      "bytes": 1025,
+      "sha256": "86dd0ae1b986a7c919f0074db6129833fe0b2ebdc946809d382c75f63d6a2642",
+      "git_blob_sha1": "4f54230387bf32b810ecddaa208a1518880a8f55",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_z80_multiply.inc"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/src/audio/native/wf_z80_startup_copy.inc",
+      "bytes": 1052,
+      "sha256": "67f4df15c8c115210f69779e8b5d937859002122332ff5bbecbf09ada86742e1",
+      "git_blob_sha1": "fc688ef3291c9d8acbb34f4c40c79c9ea0548200",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/repo/src/audio/native/wf_z80_startup_copy.inc"
+    },
+    {
+      "path": "experimentos/z80-inline-tabla/test_interactions.c",
+      "bytes": 4878,
+      "sha256": "f1303b7285ca8d1208700aec48f605ee8864b31936c7e85fe83397b7e758d432",
+      "git_blob_sha1": "b756de1adb4fefb0b35ea05d95ccf5a2a13d246c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/scalar-inline-admission-table/test_interactions.c"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/include/wf_r18_scsp.h",
+      "bytes": 481,
+      "sha256": "deb08d9bffbc69e0306dce85b23130fef2608074dffca05eb407eabcb30f0420",
+      "git_blob_sha1": "830cc6f2bf02cc60aa79f5ece0edac25fd914d62",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/include/wf_r18_scsp.h"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/include/wf_r18_scsp_runtime.h",
+      "bytes": 728,
+      "sha256": "ea6b5ac490e20603a8b9c6b02d86c6cf771d40261ac977cf39054f6dc7a8d9bd",
+      "git_blob_sha1": "b308080b55a628f2b0c363095a54432bbdfbbceb",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/include/wf_r18_scsp_runtime.h"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/include/wf_saturn_memory.h",
+      "bytes": 4446,
+      "sha256": "be3e55e94defbd5133a11afc1eca09b3132e57ea679828885bdde00bbff35873",
+      "git_blob_sha1": "233d776399be262734725c9f2674ea146619cba3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/include/wf_saturn_memory.h"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/ldscripts/wf_memory.mk",
+      "bytes": 1368,
+      "sha256": "58fbd76db52e26389f529d777c0e0b3fe02046c353d155094fc27264b8c7460e",
+      "git_blob_sha1": "ae2a8b1ac03a6c49dab7392695368ad77b41bacb",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/ldscripts/wf_memory.mk"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/ldscripts/wf_memory.specs",
+      "bytes": 33,
+      "sha256": "f63b55a669d076e7edd419ec7691edfc4bf0ab89138f35e93d09ac30c3be3279",
+      "git_blob_sha1": "27c7d4b2e6e06e8bb7affafa36cfc1769ec1d3f2",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/ldscripts/wf_memory.specs"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/ldscripts/wf_memory.x",
+      "bytes": 2799,
+      "sha256": "4997d2eef2a6c35163aeb41b3f8dd39ffcbd8d5dea50687cdf2f16719d13f8d8",
+      "git_blob_sha1": "7a8447daea48e51ff8c880f4f4341657010ca253",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/ldscripts/wf_memory.x"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/src/wf_r18_scsp.c",
+      "bytes": 5925,
+      "sha256": "6b9100e154e34dbebfadc82774aa6234334116bd323752c9b49c25ba0352b7eb",
+      "git_blob_sha1": "dceee8fd40347be4ba0951c75d0d7a5ced9f41dd",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/src/wf_r18_scsp.c"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/src/wf_r18_scsp_runtime.c",
+      "bytes": 3494,
+      "sha256": "bde8f0aeda3d70e7c99e3ba6e6acd15e9f78553e683e6923157f99672e3b86b4",
+      "git_blob_sha1": "123ee5b40b315a77f439e3b40394d1a11ff1839e",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/src/wf_r18_scsp_runtime.c"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/src/wf_saturn_allocator_partition.c",
+      "bytes": 6813,
+      "sha256": "3343eaeb14feeeac653777e45aac825339de18e026f52d64c3042825c8148801",
+      "git_blob_sha1": "7d936cf3492a108c843267ab2a4431c0638d3339",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/src/wf_saturn_allocator_partition.c"
+    },
+    {
+      "path": "integracion/master-congelado/src/runtime/src/wf_saturn_entry.c",
+      "bytes": 34887,
+      "sha256": "aa1469eeee7811731d0e84cbbe623bb871e902edf9c1ce4fd9ab7ff471100aee",
+      "git_blob_sha1": "af5e3f84af528d0ea590767d25864e4a8d743a0e",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/windows-master-probe/partition18/repo/src/runtime/src/wf_saturn_entry.c"
+    },
+    {
+      "path": "INTEGRACION.md",
+      "bytes": 1823,
+      "sha256": "a93d9ab0147d13ae77763b7df8990e46675064afb64f87fea9141692fdb85faf",
+      "git_blob_sha1": "4f93c15397ff42e644dc4a209316342ef592c947",
+      "origin": "publication documentation, 2026-11-01"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3548,
+      "sha256": "9ca4d5265bcce203f455171fa9e3de61b9b1a50e63ac860baebe5706aca6591b",
+      "git_blob_sha1": "d413608bb51a21003a6123d6d022236635fc786c",
+      "origin": "publication documentation, 2026-11-01"
+    },
+    {
+      "path": "validacion/assess_tracks.py",
+      "bytes": 13752,
+      "sha256": "e1aac75df3712e0088c241fa2d276ba684ba1a9f57c2cddddddfecb926def27c",
+      "git_blob_sha1": "c72924a8450e18d2d22031cbe68c94a5267554a5",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/assess_tracks.py"
+    },
+    {
+      "path": "validacion/catalogo/build_requirements.py",
+      "bytes": 7766,
+      "sha256": "02b1f77dcc2bd976d90b8cc0138956f253a286580caf43db9f0daeafaffcdc42",
+      "git_blob_sha1": "b237344d492e12bce3fd552bfb40dabea9922988",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/integration-suite/build_requirements.py"
+    },
+    {
+      "path": "validacion/catalogo/COMMAND-ROUTES.csv",
+      "bytes": 18559,
+      "sha256": "226f5452f02ae70fedf666b575b4e3066d61a008af05fafd15d0537706d7fd44",
+      "git_blob_sha1": "6d0a96bf8d259affbd273db2a955e0708b2168a9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/integration-suite/COMMAND-ROUTES.csv"
+    },
+    {
+      "path": "validacion/catalogo/HOST-MUSIC-SFX-MATRIX.csv",
+      "bytes": 303447,
+      "sha256": "ee2aa79dd7bfb3f6b5114f46897e61dfbe8612a59e95ba6aa3621f5fc2695c46",
+      "git_blob_sha1": "ac303c1a50266af4cc0f76798bd5f06a6b903345",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/integration-suite/HOST-MUSIC-SFX-MATRIX.csv"
+    },
+    {
+      "path": "validacion/catalogo/PLAN-Y-LIMITES.txt",
+      "bytes": 6815,
+      "sha256": "dff6e0db823741627d30383d226edda4a6cf9aeba9284ca4412e81b6205be37d",
+      "git_blob_sha1": "2bf689442ef66967753d986cdaeabac6ca59904a",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/integration-suite/PLAN-Y-LIMITES.txt"
+    },
+    {
+      "path": "validacion/catalogo/REQUIREMENTS.json",
+      "bytes": 47636,
+      "sha256": "4838c29472320887d79ce4ce4acbde7ef1ab1727a64d6bc088a87c9c8651cf26",
+      "git_blob_sha1": "224c94038f2faca0b85428ad6d35fd7fc02570fb",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/integration-suite/REQUIREMENTS.json"
+    },
+    {
+      "path": "validacion/catalogo/SFX-CATALOGUE.csv",
+      "bytes": 2670,
+      "sha256": "abbe1db17d50e1562a06a689cb03c80866334101a309faa35da169388a667570",
+      "git_blob_sha1": "1b095c0737d4b80c8fdb667749a0193d8f52765c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/score-analysis/integration-suite/SFX-CATALOGUE.csv"
+    },
+    {
+      "path": "validacion/emulador/cold_audio_capture.py",
+      "bytes": 4283,
+      "sha256": "5911c48e90a6365e338a787d17928f9b25bce690bb4621ca8909311df4450f52",
+      "git_blob_sha1": "1adb27510ec7ff6ff15ad3de22cbee03a0e19f60",
+      "origin": "runtime18/validation/local-20261028/audio-repair/emulator/cold_audio_capture.py"
+    },
+    {
+      "path": "validacion/emulador/cold_overlay.py",
+      "bytes": 27504,
+      "sha256": "a16e52ae4cdf8db6fca5192f810f68c43afd00f4375468add5007048afa5873c",
+      "git_blob_sha1": "108f17787ae8bdac0a515193b36def9cd4814224",
+      "origin": "runtime18/validation/local-20261028/audio-repair/emulator/cold_overlay.py"
+    },
+    {
+      "path": "validacion/emulador/materialize_audio_test.py",
+      "bytes": 5242,
+      "sha256": "e1d41a005242e1dfabff6421ded00b0ab867aff6627b6581aecd05cdbe5f9bf3",
+      "git_blob_sha1": "15facceac45092f9595c3b2323cdba866c18222e",
+      "origin": "runtime18/validation/local-20261028/audio-repair/emulator/materialize_audio_test.py"
+    },
+    {
+      "path": "validacion/emulador/observer_identity.py",
+      "bytes": 1132,
+      "sha256": "1cc4b0d16fcd620022e6d2cdaa57a919eba326c778194b8d03f244be20df92da",
+      "git_blob_sha1": "3414bfff54ab254f48d6cfdba9a17e463f48be25",
+      "origin": "runtime18/validation/local-20261028/audio-repair/emulator/observer_identity.py"
+    },
+    {
+      "path": "validacion/emulador/test_code_identity.py",
+      "bytes": 1632,
+      "sha256": "32ea5c532d8f75ad0752f2c15c7abeb3974766e0c18cb89f08d7fda1fb17c039",
+      "git_blob_sha1": "e4cd602625435012ea166f171b3583e771c03101",
+      "origin": "runtime18/validation/local-20261028/audio-repair/emulator/test_code_identity.py"
+    },
+    {
+      "path": "validacion/observe_cold.py",
+      "bytes": 15253,
+      "sha256": "08de7b4ad4159667b17dc800c3f663a175c5928ad8f69a729ca93dd9f254ac49",
+      "git_blob_sha1": "f6ea27bfac8b5b4d48ed47b718420d72967bd845",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/observe_cold.py"
+    },
+    {
+      "path": "validacion/pcm-layout/build_layout.py",
+      "bytes": 3122,
+      "sha256": "08eae82fd33592e28c4fd4b88bf4d6b5988fad9ba22ebc69c21aaee8b4d043b2",
+      "git_blob_sha1": "9c477cc40e4a2b3bb9d345498f015bf786acbdf5",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/pcm-layout/build_layout.py"
+    },
+    {
+      "path": "validacion/pcm-layout/music-layout.json",
+      "bytes": 2311,
+      "sha256": "d58be0ac6d432f5c6ec626dd054de267c41528182f78f1c6e7e6b76208e38c63",
+      "git_blob_sha1": "cd876dff02053eaee2a6a334af176ecd5f42cc3c",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/pcm-layout/music-layout.json"
+    },
+    {
+      "path": "validacion/pcm-layout/native/wf_scsp_sfx.h",
+      "bytes": 2193,
+      "sha256": "ef746dc5b2ab96437e11d998f55a8799a82ca933f8733fa9644b8d9d9c6da7c4",
+      "git_blob_sha1": "507bf8efa6f2df80a5357b617dc94c98e36bdda9",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/pcm-layout/native/wf_scsp_sfx.h"
+    },
+    {
+      "path": "validacion/pcm-layout/probe.c",
+      "bytes": 164,
+      "sha256": "9adcbbbab11ca8890876b216a31acd7a6c685a81d8ebcd4a8b58ebc650433e9c",
+      "git_blob_sha1": "5cb2d079dc1aebe4f0ca1ff7b97dadd99b90bfe2",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/pcm-layout/probe.c"
+    },
+    {
+      "path": "validacion/pcm-layout/probe.su",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/pcm-layout/probe.su"
+    },
+    {
+      "path": "validacion/pcm-layout/RESULT.json",
+      "bytes": 1983,
+      "sha256": "2c63bfd2325e4a74fe812b27d1f9afe20d2b157c0f091ebb96cd6be1524a4533",
+      "git_blob_sha1": "3475fb0f617f67e22ae4750d0d8ab6503d16fcb3",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/pcm-layout/RESULT.json"
+    },
+    {
+      "path": "validacion/pcm-layout/sfx-layout.json",
+      "bytes": 2346,
+      "sha256": "d7e77014feb8a1e7f73b9dccc187598dfdfa79ba8f4756afdb02ebf4bcddedac",
+      "git_blob_sha1": "8b7b2b1b89b757ca7ae4dbb0d96d3fd7cd614a2d",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/pcm-layout/sfx-layout.json"
+    },
+    {
+      "path": "validacion/README.txt",
+      "bytes": 7559,
+      "sha256": "86028f0a5b0173d7a9f36eb521fc1661cec1490216ed9a352f399db0ef1e4283",
+      "git_blob_sha1": "cc9292f9e329cef50e23853be98322b6123d1335",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/README.txt"
+    },
+    {
+      "path": "validacion/test_lto_symbols.py",
+      "bytes": 1732,
+      "sha256": "9a680f14f490b8f8acc4e6ef2975390fe6a6ee9abf1589f0b92eb736b4ca8abf",
+      "git_blob_sha1": "dd6b4089c9cf06cc9576b87ce50fef29487de9bd",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/test_lto_symbols.py"
+    },
+    {
+      "path": "validacion/test_suite_identity.py",
+      "bytes": 2348,
+      "sha256": "3292bc86c3a05d8370cd516eb70ae6fd00a1dd9181932462074cc0ff22979b7a",
+      "git_blob_sha1": "a78ed1a24fb43f533e66ebfd6ecdedf31a62c335",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/test_suite_identity.py"
+    },
+    {
+      "path": "validacion/tests/check_real_pcm_state.py",
+      "bytes": 2470,
+      "sha256": "3d11d46de8dc2ff535528b0df31ed68ad6d4ba3af0df56e7c5776120dcf5ab10",
+      "git_blob_sha1": "792d3645b54d1f663df2379285ede029d307455b",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/tests/check_real_pcm_state.py"
+    },
+    {
+      "path": "validacion/tests/pcm-counter-red/assess_tracks.py",
+      "bytes": 11700,
+      "sha256": "bbb68c8839857d189e707e7217cc1b566170e1c9436137fd5aa68295a6aa8eb8",
+      "git_blob_sha1": "87a8f784852c45e5ea3aef2730791d9881d8f7e2",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/tests/pcm-counter-red/assess_tracks.py"
+    },
+    {
+      "path": "validacion/tests/pcm-counter-red/observe_cold.py",
+      "bytes": 9619,
+      "sha256": "cff611e1b054ba9e6e430a3f3235c232aa9903c4da34559ed6ec57f9f388359f",
+      "git_blob_sha1": "55213dac2e17b7bd49d1d9391fa63cef1d5ca706",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/tests/pcm-counter-red/observe_cold.py"
+    },
+    {
+      "path": "validacion/tests/real-pcm-state-result.json",
+      "bytes": 2463,
+      "sha256": "d43ab3b022c17735e686025946d1c66e8e615f5942151e1085d8eb44ef5f2a0c",
+      "git_blob_sha1": "586740c2234838bd866c6739dfa74bf62f228dc0",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/tests/real-pcm-state-result.json"
+    },
+    {
+      "path": "validacion/tests/test_pcm_counter.py",
+      "bytes": 6071,
+      "sha256": "537706ceee80aca1782df3a7efe0716697d766b8618f1bf327badd86243410f0",
+      "git_blob_sha1": "baada7b753f6d343397b1577cdfc0585f482bfe2",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/tests/test_pcm_counter.py"
+    },
+    {
+      "path": "validacion/track_suite.py",
+      "bytes": 16996,
+      "sha256": "f095fc58937a815202dacdcf577796c286721731553c48194ed88498d17f5a0f",
+      "git_blob_sha1": "ddcb2c9895d4b7475296ca9e93fab9442d6bafc4",
+      "origin": "runtime18/validation/local-20261028/audio-repair/control-fix/validation/track_suite.py"
+    },
+    {
+      "path": "VERIFICACION-PUBLICACION.json",
+      "bytes": 451,
+      "sha256": "20249f4c3e8534b287d5aba739938c6fbd80b4240efd775638e8ed0fb8a78a50",
+      "git_blob_sha1": "41e6be99219827f91f7eaa032f7c71a73ea8a42d",
+      "origin": "publication documentation, 2026-11-01"
+    },
+    {
+      "path": "verificar_paquete.py",
+      "bytes": 806,
+      "sha256": "abfc32a44a7f8f88435b992cd0b53e841884871bda7133bef0b035273fd14e4f",
+      "git_blob_sha1": "88434c4c8a85974a539176e845db74fee60db182",
+      "origin": "publication documentation, 2026-11-01"
+    }
+  ]
+}

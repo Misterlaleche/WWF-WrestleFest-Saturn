@@ -1,0 +1,213 @@
+ESTADO ACTUAL — CONTROL Z80 / 28-10-2026
+
+ACTUALIZACION MAS RECIENTE (lo posterior conserva historia, no vigencia):
+V19 sustituye037C por multiplicador8x8 0F2D exacto (60+pop pasos,511+6pop T,
+R+86+pop). HOST18x600+fade y revisionindependientePASS. Cold baja8->4drops.
+V20 combina multiplicador con bombeoIRQ: sigue4, TODOSALARRANQUE. Perfil
+sololecturaidentico: pico8458Fs/191.8ms, colas32..98 nunca llenas, cabezas
+FM generadasya>2205Fs antesdelosdrops. Despuesdearranque sinmasdropsa4200.
+V21 reemplaza tabla256B de timingDD/FD por formulaexacta; ahorra232B, HOST
+18x600+fade ymutantesPASS;cold5dropsiniciales, no9600. Margen364B.
+V22 es ym-kcode-once (desdeV20): reutilizaK solo trasrevalidarKC/KF/DT2
+despuescallback, APIs/mutantes/reentrancia/18trazasexactos. Hot16344total,
+cold4200 sigue5drops. No promover; benchmarkHOST no prueba mejoraperf.
+Guard-dedup(V18) excede16kpor200B por expansioncuerpoGCC; descartado. Tail
+0F5F EX_AF_AF'+RETsemanticaexacta, +200B sinprefixahorronocabe; nopromovido.
+
+IDENTIDAD COMPLETA: audit_vdp_program.py/VDP-PROGRAM-IDENTITY.json confirma
+programasVDP1enteros(inclROMsonido/YMfactstablas/blob) byteexactos V15/19/20/21
+en1800,3000,4200. No haynuevasobreescriturasqueexpliquenestosfallos.
+
+ENSAYOENPREPARACION v23-rom4096: copiar4096B ROMcode aHWRAMmallocusuario
+SOLOenmasterprepare. DIAGV4user22308->~18200>=16384, verificarstats/arena y
+cache4kcompletoreal. Appendcode_rom2164,seq2168,state3224,hot13020,total16244
+cabe/margen140. HOSTconcacheREAL/todosaddresses/18x600pendiente; sincoldaun.
+NOENTREGARestoaun: releaseV4tiene18.6k ynoadmite4k; finalrequierepropiedad
+explicita ypresupuestodelmasterACTUALconGCC13, sinmermar16kutiles.
+
+COMPILADOR: Windows9OscompilaV4yactualperoCONTROLGRAFICOrechazaOs. Misma
+fuenteV4/SFX,combate300..600:1003VBlanksGCC13LTOvs1148GCC9Os(+14.46%),
+estimadorrender17vs15. compiler-graphics/RESULT.json deja limites(noobjhash).
+No promoverOsparaganarmemoria. LTO9localfaltaLTO1/wrapper/pluginSH2.
+Se construye GCC13Windows/SH2 medianteCanadianCross enVM SOLOCONFUENTESGNU
+PUBLICAS ypaquetesMinGW. NOSEENVIA ROM/port/paquetesprivados. Script/logs
+toolchains/public-sh2-windows13; primerasdificultades publics: seleccionar
+GCC_FOR_TARGETLinuxpara specs yquitar debugdeobjetosHOSTpublicporfaltadisco.
+Reanudado conenlaceserial; no instalado aun. Esto no cambia SDK/compiladores
+anteriores ni requiere nuevasimagenesdeljuego.
+
+ACTUALIZACION 2026-10-29. ESTA SECCION PREVALECE SOBRE LAS NOTAS HISTORICAS.
+
+Objetivo: integrar y comprobar las 18 musicas y todos los efectos antes de
+generar la imagen para Saturn real. El usuario autorizo BIN/CUE para la prueba
+fisica, pero eligio expresamente completar TODO el catalogo antes de recibirla.
+NO SE HA GENERADO BIN/CUE/ISO NUEVO. R04 debe permanecer intacto.
+
+R04 sonoro es un oraculo de software (Z80 + Nuked-OPM y salida PCM), NO una
+imagen jugable terminada. Acredita prefijos de 12 segundos de 18 temas, pero
+su integracion con efectos y presupuesto SH2/RAM siguen pendientes. El R04
+grafico que tiene BIN/CUE declara audio pendiente. No intercambiar referencias.
+Las capturas PCM existentes tampoco acreditan catalogo completo: faltan cuatro
+manifiestos y cinco capturas limitadas no tienen periodo demostrado. No usarlas
+como entrega completa ni ponerles bucles arbitrarios.
+
+Se obtuvo compilador publico Windows GCC13/ZSTD + binutils. Se compilan todos
+los fuentes privados LOCALMENTE. No se enviaron proyecto/ROM/BIOS a la VM.
+toolchains/public-sh2-windows13-zstd/install es el toolchain compatible con LTO
+del SDK. El GCC9 Os del master completo empeora el grafico y queda descartado.
+
+Master diagnostico partition18 (copia congelada actual, no produccion):
+windows-master-probe/partition18/master-build/wrestlefest-runtime18-scsp.elf
+SHA e56b027b8a3e89f92ecbb0a419363c11eb2996334b8b819e87ab9137152d0221.
+TLSF privado14KiB + ventana hot18KiB + pila8KiB dentro de los mismos40KiB SDK.
+Ventana060889D0..0608D1D0, userheap33052. En combate: privado libre5612,
+mayor5568, faults0/TLSF0. Propiedad real de memoria verificada en ELF y vivo.
+
+Modulo saturn-real-v25/music-hot: parity4 + prefix compacto + multiply lift
++ startup037C + IRQ-only pump, hot12840 + estado3220, margen2372/18432.
+Trampolin uncached20B purga CCR y salta a cuerpo cached; codigo y transporte
+leidos de vuelta sin alteraciones en checkpoints. SIN EMBARGO FALLA EN JUEGO:
+284 descartes FM @9600 (game_frame467),1761 @12000 (game_frame1317).
+RUNNING/error0 no acredita audio correcto: los ensayos no son fail-fast finales.
+No entregar este modulo ni reutilizar la etiqueta de prueba fisica como listo.
+
+Trabajo en paralelo actual (actualizado despues de las primeras pruebas):
+1. Compuesto integrado18k PRE/POST+V25+elapsedfix: HOST18x600+fade y matrices
+   originales pasan. Cold4200 reduce4 a2drops, aun FALLA. No9600 ni entrega.
+2. Profiler validado9600: original==baseline==profileOFF==ON, estados completos,
+   RAM/video/audio exactos. En combate no hay idle; fast_step tiene84..85% de
+   llamadas que retornan0. Nueva whitelist previa enbatch pasa oracle largo,
+   todasPC/guardas y review; cold4200 da3drops vs4V25. Se compone con PRE/POST
+   en un ensayo nuevo antes de introducir mas algoritmos o cambios de memoria.
+3. Cobertura18temas+98ordenes documentada en score-analysis/integration-suite.
+   Matriz1764pares es PLAN HOST, no ejecucion de1764emulaciones. Gate de entrega
+   debe incluir PCM3 musical simultaneo a3SFX, transiciones y fade real.
+
+ABI4 en aislamiento: abi4-loader/src, cuatro PT_LOAD incluida HWRAM directa,
+base y capacidad18KiB obtenidas de master, validacion completa antes de escribir,
+proveniencia ELF revalidada al copiar. RED contra parser anterior conservado;
+GREEN351imagenes malformadas + copia/zero-fill exactos, sin writes en rechazo.
+Ya conectado y probado en runtime AISLADO: master87a5f061... y modulo0d8f3605...
+ABI4cold4200 RUNNING/error0 y codigo entero leido de vuelta sin cambios;
+pila/privado/HWRAM respetados. Sigue4FMdrops V25, no prueba combate. Ver
+abi4-loader/RESULTADO.txt. Sin promocionar y no afecta los perfiles ABI3.
+
+Tooling suite corregido: PCM underrun32 real del motor+mailbox, layouts68000
+por compilador y hash; falta/reset/positivo bloquean entrega (15testsPASS).
+Alias LTO unicos y no ambiguos (2testsPASS); fuentes/casos/ELF/DEBUG/layouts/
+observadores pinneados antes de jobs (4testsPASS). Todavia no se lanza suite18.
+El generador de imagen DIAGNOSTICA anterior esta retirado en su entrada CLI:
+el usuario requiere catalogo entero antes de imagen, no reutilizar su gate viejo.
+
+GCC13Windows vs Linux con mismoV4/SFX/autoplay: combate300..6001000VBlanks vs
+1003, mediana diagnostico render17 ambos; sin fallos observados en esasclaves.
+compiler-graphics/WINDOWS13-RESULT.json. No es certificado de carga grafica
+identica por actores, ni de graficos canonicos actuales con musica activa.
+
+Pendiente antes de entrega: eliminar descartes y retrasos reales en combate,
+restaurar fail-fast de produccion, consolidar fuentes/build (no cadena de
+generadores experimentales), finalizar contrato de carga y coherencia, pruebas
+largas18temas+mezclas de efectos, comparacion grafica con mismo master SFX,
+y solo entonces materializar y volver a arrancar BIN/CUE autorizado.
+
+---------------- NOTAS HISTORICAS; NO SON ESTADO ACTUAL ----------------
+
+OBJETIVO AUN NO CUMPLIDO. NO ENTREGAR LOS PROTOTIPOS COMO AUDIO TERMINADO.
+R04, medios y ZIP original intactos; no BIN/CUE/ISO nuevos. Produccion de audio
+no modificada por estos ensayos. Las pruebas se construyen en copias aisladas.
+
+NOTA DE ACTUALIZACION: V11..V15 YA MEDIDOS. Esta seccion V10 es historica.
+Mejor arquitectura medida posteriormente: V14/V15, ambos aun con8 descartesFM.
+Master fijo132970456147bd6e1954e4b6a203f9a0d1278d4a547103188899403fa7f667b7.
+
+V14: word-access +startup-copy +control-batch, Q256/B4096. 8 descartes.
+V15: mismo codigo HWRAM y estado, soloQ512/B4096. Tambien8 descartes.
+V15: ELF722d0b4e16516a84b9335cf1e576a6e494362ed27678179b434e055e50fe7c6e.
+12912B codigo+3220B estado=16132/16384; FIFO512 sigueVDP1. CCR1/1.
+V15 deuda634.78Fs@3000 y770.09Fs@4200, pero faltan picos porframe.
+No se ejecuta larga9600 ni bateria18tracks mientras fallen plazos cortos.
+
+La copia control-batch/elapsed-overflow corrige overflow heredado64u*taken
+con una sola condicion, PASSHOST18x600s+8sfade/10962checkpoints y revision
+independiente directa/scheduler/callbacks/bordes2^26. No explica los8drops
+con presupuesto4096. Hotcode12928+estado3220=16148B/margen236B. Sinpromover.
+
+ACTUALIZACION POSTERIOR DE SERVICIO: NO RESUELTO
+Perfil V15 prueba head ya generado2449Fs@2987 con cola70 y deuda799Fs;
+3033head2446Fs/deuda627Fs. Cola pico98/512: starvation de servicio observable,
+no saturacionFIFO. Checkpoints observados identicos al cold original; pequenas
+diferencias seriales se identificaron como relojRTC/backup, no comportamiento.
+La captura V15 empieza2470 y no explica sus4primeros descartes.
+V16 bombeo enCADAevent: unit(realmodule)PASS y revisionindependiente89149casos
+con synthrealPASS, pero cold empeora77drops. DESCARTADO por coste temporal.
+PerfilV16 desde1800:75drops al arranque, deuda pico10026Fs; luego2descartes.
+V17 bombeoSOLO IRQ: 25302casos independientesPASS, pero cold8drops (6tempranos,
+2posteriores). DESCARTADO como arreglo completo. No se aumenta lookahead,
+tolerancia,cola ni se eliminafailfast para declarar exito.
+LWRAM00200100..00200FFF NO adjudicada: scratchBIOS, no demostrar libre.
+
+Investigacion en curso:
+- Perfil V15 externo de PC/PR, deuda, ocupacion y edad del headFM; verificar
+  checkpoints identicos para no confundir instrumentacion y comportamiento.
+- Hipotesis starvation del servicio: fm_flush esta fuera run4096, y dentro
+  solo se llama si FIFO llena. Determinar si los eventos ya generados quedan
+  vencidos mientras ejecuta Z80 o si aun no se generaron por deuda de CPU.
+- Guardas comunes duplicadasfast/scalar porinstruccion: mover una sola guarda
+  a batch con wrapperspublicos intactos. Sin mezclar bombeo/overflow, aun
+  pendiente diferencial/benchmark/enlace/revision antes de ejecutar Saturn.
+- Perfil HOST del arranqueCmd2 y18comandos para identificar inicializacion
+  de instrumento/partitura que aun ejecuta muchas instrucciones scalar/cold.
+- Compilador masterWindows9/SDK13: fuentesV4compilan y SDKfat contiene cuerpos
+  nativos; primer enlaceO2completo sinpendientes pasa stack/pool pero heapusuario
+ 12372B <16384, noaptopromover. Se estudia LTOpropio/Os aislado y actualidad
+  grafica porseparado; no se exportan fuentes aVM.
+
+DATOS HISTORICOS V10:
+MUSIC94980B SHA6aaed3f7d64e162b6b2fe6e4f654394124d09be01d5f16de9d58cad7fad3aca4.
+12824B de codigo +3216B seq/synth HWRAM; FIFO512 en BSS VDP1. Memoria privada
+7656B libres, usuario22308B, pila exclusiva8k. CCR1/1; lookahead4096Fs y
+limite de fallo2205Fs. Quantum256Fs/budget4096, boot1024.
+
+V10: RUNNING/error0, pero23 descartesFM. Deuda2526Fs@3000 y210Fs@4200.
+La ventana4200 aun puede estar en introduccion: game_frame0 NO es certificado
+ni prueba aislada de fallo grafico. La comparacion real sera combate300..600.
+No se ejecuta larga9600 ni bateria18tracks mientras fallen plazos cortos.
+
+PRUEBAS DE SEMANTICA
+- Fast lifts + scalar40 + coldTU R01:18x600s+8sfade exactos con CPU/RAM/timer
+  y hashes/conteos de eventos. Revisiones independientes178192decisiones y
+  64000callbacks que mutan IRQ/NMI/delay, incluido35DEC(HL=C801).
+- Q256/B4096:10962 comparaciones exactas con R01; matriz factorial8configs
+  confirma que quantum64 partia macros y aumentaba instrucciones frias.
+- El coldTU normalizado sigue siendo texto exacto del nucleo pinned.
+
+EVIDENCIA DE CAUSA
+- AOT original40k: deuda19s@4200, perfil dominado por dispatch y bookkeeping.
+- Compact scalar y lifts evitan ~98% de instrucciones en cold, sin omitir ROM.
+- Cola512 suficiente: pico real HOST361 writes en4096Fs, cero stallsideales.
+  PerfilguestV7ocupacionmax172/512, no esperas largas observadas; no aumentar.
+- CacheDreplacementdisabled CCR5 empeoro drasticamente(V8); DESCARTADO.
+- Q256 mejora pero no elimina perdidas. No ampliar lead ni tolerancia.
+
+TRABAJO EN CURSO
+1. word-access: atajos rw/ww para ROM/RAM contiguas; I/O/fronteras mantienen
+   wrappers exactos pinned; pruebas antes de cualquier cold.
+2. startup-copy: lift exacto037C ED-B0 de331bytes, medido como coste frio al
+   comenzar cada cancion; guardas budget/target/IRQ y oracle directo.
+
+HERRAMIENTAS
+La copia de nuevas fuentes/ROM a VM fue rechazada por revision automatica.
+Se abandono esa via. Compilacion SH2 nueva con GCC9.3 Windows local; sin nuevos
+SCP/SSH. Master experimentalV4 Linux13 previamente construido sigue fijo.
+Las pruebas requieren permiso de ejecucion nativa, aprobado para tools locales.
+
+INTEGRACION POSTERIOR (solo despues de cold sin descartes)
+Todavia no se implementa el contrato final ABI4/HWRAMwindow. Plan revisado:
+storageSDK40k ->16kTLSF+16khot+8kstack, sin crecer finHWRAM/userheap. ELF4PT_LOAD
+validados todos antes de escribir; hotbase debe igualar ventana del master;
+zero-fill, purge master y arranque slave con cachelimpia. Actualizar gates y
+probar minimo16k heap usuario, limites y coherencia. Alternativa no aprobada
+como entrega: malloc con direccion fija dependiente del master de ensayo.
+
+Hay cambios graficos concurrentes canonicos (wf_r17_human_raw23.c). Las copias
+experimentales conservan fuentes graficas fijadas; no sobrescribir lo actual.

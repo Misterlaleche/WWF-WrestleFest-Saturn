@@ -1,0 +1,15 @@
+{
+  "origin": "Recovered A15/A16 SFX model and audited sample metadata from the user-supplied package; test oracles only, never linked into the firmware.",
+  "original_sha256": {
+    "wf_audio_sfx.c": "7129466a7d688fcfd2600413b91d4951d80c16de1f411489bbfbfa66fdbc5e6b",
+    "wf_audio_sfx.h": "3365d89f48631d2e4f7b519f95441f33eb67cad85fe329877503d199318e35ed",
+    "ROM_OKI_MANIFEST.csv": "3392aa3d172ed23d54942f8c62df847e8fc679c384e3a4c69c171eeabece5a65",
+    "WF_OKI_AUDIT.json": "43fd70e707bf0fb99340a97767d9fd6be367d3bb16133735e5405805031ca564"
+  },
+  "canonical_lf_sha256": {
+    "wf_audio_sfx.c": "7129466a7d688fcfd2600413b91d4951d80c16de1f411489bbfbfa66fdbc5e6b",
+    "wf_audio_sfx.h": "3365d89f48631d2e4f7b519f95441f33eb67cad85fe329877503d199318e35ed",
+    "ROM_OKI_MANIFEST.csv": "6fd071dae28e5f35e3ddba601228934c87d1d34ec3116255181bedb43ab6dc31",
+    "WF_OKI_AUDIT.json": "43fd70e707bf0fb99340a97767d9fd6be367d3bb16133735e5405805031ca564"
+  }
+}

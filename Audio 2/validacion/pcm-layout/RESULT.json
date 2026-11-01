@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "compiled_sizeof_offsetof": [
+    262,
+    32,
+    4
+  ],
+  "bindings": [
+    {
+      "profile": "music",
+      "layout": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\audio-repair\\control-fix\\validation\\pcm-layout\\music-layout.json",
+      "validated": true,
+      "counter_bytes": 4,
+      "engine_address": 64068,
+      "engine_bytes": 262,
+      "counter_address": 64100,
+      "engine_symbol": "wf_sfx_engine",
+      "layout_sha256": "d58be0ac6d432f5c6ec626dd054de267c41528182f78f1c6e7e6b76208e38c63",
+      "debug_elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+      "release_elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+      "load_segments_sha256": "50c792e0263dfcd1d4fd4753dec6fe8c21bcbee52a9f105f88ae2f35215e59bc",
+      "compiler_id": "m68k-elf-gcc (GCC) 9.3.1 20200508"
+    },
+    {
+      "profile": "sfx",
+      "layout": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\audio-repair\\control-fix\\validation\\pcm-layout\\sfx-layout.json",
+      "validated": true,
+      "counter_bytes": 4,
+      "engine_address": 49424,
+      "engine_bytes": 262,
+      "counter_address": 49456,
+      "engine_symbol": "wf_sfx_engine",
+      "layout_sha256": "d7e77014feb8a1e7f73b9dccc187598dfdfa79ba8f4756afdb02ebf4bcddedac",
+      "debug_elf_sha256": "42b33b2e31a1c558f7d2d8ebba09fa7359cbe8197244389b994438733cb54e33",
+      "release_elf_sha256": "42b33b2e31a1c558f7d2d8ebba09fa7359cbe8197244389b994438733cb54e33",
+      "load_segments_sha256": "c9696e9b6e8ba019ad39af6e9898e258578ee055476a7144fde794fcd24b0479",
+      "compiler_id": "m68k-elf-gcc (GCC) 9.3.1 20200508"
+    }
+  ],
+  "firmware_modified": false,
+  "emulator_run": false,
+  "disc_images_created": false
+}

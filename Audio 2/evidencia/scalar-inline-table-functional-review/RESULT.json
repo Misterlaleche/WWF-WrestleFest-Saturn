@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "no_P1_P2_findings": true,
+  "candidate_elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+  "candidate_hot_RAW_sha256": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+  "independent_seeds": {
+    "batch": "31ac2e91",
+    "interactions": "9ae83f17",
+    "allop_batch": "4b992e1c"
+  },
+  "tests": {
+    "batch": {
+      "passed": true,
+      "seconds": 2.166335900023114,
+      "output": "PASS independent batch: direct=74691 scheduler=294912 mutating=38400 immutable_guards=27042 callback_observations=373294 epoch_wraps=68426; full functional CPU/sequence/RAM/event state, all real adapters, timer TBCTL/deadlines/status, budgets0..4096, callbackfalse/NMI/IRQ/delay/halt, no post-I/O continuation, io_epoch0/FFFFFFFF/FFFFFFFE\n"
+    },
+    "interactions": {
+      "passed": true,
+      "seconds": 0.17429799999808893,
+      "output": "PASS combined PRE/POST: 48000 full CPU/RAM/timer/callback-state+time checks; 24000 mandatory post-C801 I/O barriers; 3000 exact POST5 continuations; callbackfalse,NMI,IM2,delay,PC/return mutations,epoch/cycle wrap\n"
+    },
+    "allop_batch": {
+      "passed": true,
+      "seconds": 0.08956880000187084,
+      "output": "PASS all256 opcodes +CB/DD/FD x256 x8 modes: 170 exact R01 one-step paths,8022 immutable declines\n"
+    }
+  },
+  "PRE_POST_exact_cases": 48000,
+  "mandatory_C801_barriers": 24000,
+  "POST5_continuations": 3000,
+  "all256_and_CB_DD_FD_modes_through_actual_batch": 8192,
+  "structural_review_already_passed": {
+    "structural_review_passed": true,
+    "table_candidate_plus_exact_inline_only": true,
+    "public_private_bodies_exact": true,
+    "source_reverts_to_verified_table_baseline": true,
+    "cold_unchanged": true,
+    "linked_256_byte_table_identical": true,
+    "scalar_effectively_inlined": true,
+    "hot_bytes": 13992,
+    "state_bytes": 3220,
+    "owned_window_bytes": 18432,
+    "spare_bytes": 1220,
+    "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+    "candidate_hot_LF_sha256": "5106e159eb65a0247e2c024058110e019c4ce0ec376e69d72bd93a00fc834aed",
+    "HOST_required_before_emulation": true,
+    "emulator_run": false,
+    "media_created": false
+  },
+  "producer_long_oracle_still_required": true,
+  "review_gate": "Functional GO after producer HOST long also passes; no release approval",
+  "emulator_run": false,
+  "guest_sources_unchanged": true,
+  "media_created": false
+}

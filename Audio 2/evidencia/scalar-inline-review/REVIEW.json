@@ -1,0 +1,18 @@
+{
+  "structural_review_passed": true,
+  "baseline_hot_LF_sha256": "ad2eb64498e50f53eca96ee0ad59530fe318a28571e938c5416646725e5dce12",
+  "candidate_hot_LF_sha256": "e0a4b06bc29f18346aaa00ba154ccaaed2b5139f1ff125b6a4966b5885b5ed7a",
+  "body_byte_exact": true,
+  "cold_LF_byte_exact": true,
+  "one_variable": true,
+  "public_body_preserved": true,
+  "private_body_inlined_and_public_GC_removed": true,
+  "master_abi_budget_lookahead_state_unchanged": true,
+  "hot_bytes": 14084,
+  "state_bytes": 3220,
+  "owned_window_bytes": 18432,
+  "spare_bytes": 1128,
+  "HOST_required_before_emulation": true,
+  "emulation_run": false,
+  "media_created": false
+}

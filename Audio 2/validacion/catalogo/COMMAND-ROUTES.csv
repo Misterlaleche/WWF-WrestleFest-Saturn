@@ -1,0 +1,257 @@
+low_byte,route_in_music_profile,expected_result,positive_catalogue
+00,worker FIFO + mailbox FIFO,ordered music/effects stop,True
+01,worker FIFO,start/reset native score and new generation,True
+02,worker FIFO,start/reset native score and new generation,True
+03,worker FIFO,start/reset native score and new generation,True
+04,worker FIFO,start/reset native score and new generation,True
+05,worker FIFO,start/reset native score and new generation,True
+06,worker FIFO,start/reset native score and new generation,True
+07,worker FIFO,start/reset native score and new generation,True
+08,worker FIFO,start/reset native score and new generation,True
+09,worker FIFO,start/reset native score and new generation,True
+0A,worker FIFO,start/reset native score and new generation,True
+0B,worker FIFO,start/reset native score and new generation,True
+0C,worker FIFO,start/reset native score and new generation,True
+0D,worker FIFO,start/reset native score and new generation,True
+0E,worker FIFO,start/reset native score and new generation,True
+0F,worker FIFO,start/reset native score and new generation,True
+10,worker FIFO,start/reset native score and new generation,True
+11,worker FIFO,start/reset native score and new generation,True
+12,worker FIFO,start/reset native score and new generation,True
+13,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+14,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+15,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+16,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+17,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+18,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+19,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+1A,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+1B,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+1C,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+1D,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+1E,mailbox FIFO,"UNIMPLEMENTED counted, not a covered music command",False
+1F,worker FIFO,native fade if playing; effects unaffected,True
+20,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+21,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+22,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+23,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+24,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+25,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+26,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+27,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+28,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+29,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+2A,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+2B,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+2C,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+2D,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+2E,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+2F,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+30,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+31,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+32,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+33,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+34,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+35,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+36,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+37,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+38,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+39,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+3A,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+3B,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+3C,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+3D,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+3E,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+3F,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+40,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+41,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+42,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+43,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+44,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+45,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+46,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+47,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+48,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+49,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+4A,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+4B,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+4C,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+4D,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+4E,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+4F,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+50,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+51,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+52,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+53,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+54,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+55,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+56,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+57,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+58,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+59,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+5A,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+5B,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+5C,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+5D,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+5E,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+5F,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+60,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+61,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+62,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+63,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+64,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+65,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+66,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+67,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+68,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+69,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+6A,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+6B,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+6C,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+6D,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+6E,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+6F,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+70,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+71,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+72,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+73,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+74,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+75,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+76,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+77,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+78,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+79,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+7A,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+7B,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+7C,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+7D,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+7E,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+7F,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+80,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+81,mailbox FIFO,SFX accepted/legitimate priority reject;20=no-op,True
+82,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+83,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+84,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+85,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+86,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+87,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+88,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+89,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+8A,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+8B,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+8C,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+8D,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+8E,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+8F,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+90,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+91,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+92,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+93,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+94,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+95,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+96,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+97,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+98,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+99,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+9A,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+9B,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+9C,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+9D,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+9E,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+9F,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A0,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A1,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A2,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A3,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A4,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A5,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A6,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A7,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A8,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+A9,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+AA,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+AB,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+AC,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+AD,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+AE,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+AF,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B0,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B1,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B2,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B3,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B4,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B5,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B6,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B7,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B8,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+B9,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+BA,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+BB,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+BC,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+BD,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+BE,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+BF,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C0,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C1,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C2,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C3,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C4,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C5,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C6,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C7,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C8,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+C9,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+CA,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+CB,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+CC,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+CD,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+CE,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+CF,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D0,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D1,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D2,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D3,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D4,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D5,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D6,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D7,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D8,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+D9,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+DA,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+DB,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+DC,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+DD,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+DE,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+DF,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E0,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E1,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E2,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E3,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E4,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E5,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E6,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E7,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E8,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+E9,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+EA,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+EB,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+EC,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+ED,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+EE,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+EF,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F0,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F1,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F2,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F3,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F4,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F5,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F6,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F7,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F8,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+F9,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+FA,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+FB,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+FC,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+FD,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+FE,queue rejects,invalid/dropped_sfx counted; not silently covered,False
+FF,queue rejects,invalid/dropped_sfx counted; not silently covered,False

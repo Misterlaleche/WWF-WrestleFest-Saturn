@@ -1,0 +1,309 @@
+{
+  "scope": "Compiler feasibility only: same frozen V4 source and SFX control; different master binaries. No music stability proof or current-graphics-source claim.",
+  "physical_validation": false,
+  "disc_images_created": false,
+  "changed_files": [
+    "A.BIN"
+  ],
+  "runs": {
+    "gcc13-sfx": {
+      "complete": true,
+      "first_emulated_frame": 6956,
+      "last_emulated_frame": 7959,
+      "first_video_clock": 6242,
+      "last_video_clock": 7245,
+      "video_blanks": 1003,
+      "first_game_frame": 300,
+      "last_game_frame": 600,
+      "game_advances": 300,
+      "game_advances_per_60_video_blanks": 17.94616151545364,
+      "frontend_phase_stage_pairs": [
+        [
+          6,
+          5
+        ]
+      ],
+      "boot_seed_observed": 0,
+      "fatal_seen": false,
+      "backend_counter_resets": 0,
+      "first_rate_draws": 3,
+      "last_rate_draws": 2,
+      "observed_positive_draw_counter_increments": 286,
+      "completed_render_diagnostic_windows": [
+        {
+          "first_video_clock": 6321,
+          "last_video_clock": 6407,
+          "video_blanks": 86,
+          "rate_value": 10,
+          "rate_draws_before_reset": 14,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6407,
+          "last_video_clock": 6467,
+          "video_blanks": 60,
+          "rate_value": 21,
+          "rate_draws_before_reset": 20,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6467,
+          "last_video_clock": 6528,
+          "video_blanks": 61,
+          "rate_value": 30,
+          "rate_draws_before_reset": 30,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6528,
+          "last_video_clock": 6676,
+          "video_blanks": 148,
+          "rate_value": 11,
+          "rate_draws_before_reset": 27,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6676,
+          "last_video_clock": 6736,
+          "video_blanks": 60,
+          "rate_value": 22,
+          "rate_draws_before_reset": 21,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6736,
+          "last_video_clock": 6800,
+          "video_blanks": 64,
+          "rate_value": 17,
+          "rate_draws_before_reset": 17,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6800,
+          "last_video_clock": 6860,
+          "video_blanks": 60,
+          "rate_value": 17,
+          "rate_draws_before_reset": 16,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6860,
+          "last_video_clock": 6923,
+          "video_blanks": 63,
+          "rate_value": 17,
+          "rate_draws_before_reset": 17,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6923,
+          "last_video_clock": 6983,
+          "video_blanks": 60,
+          "rate_value": 23,
+          "rate_draws_before_reset": 22,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6983,
+          "last_video_clock": 7046,
+          "video_blanks": 63,
+          "rate_value": 17,
+          "rate_draws_before_reset": 17,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 7046,
+          "last_video_clock": 7123,
+          "video_blanks": 77,
+          "rate_value": 14,
+          "rate_draws_before_reset": 17,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 7123,
+          "last_video_clock": 7183,
+          "video_blanks": 60,
+          "rate_value": 16,
+          "rate_draws_before_reset": 15,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 7183,
+          "last_video_clock": 7243,
+          "video_blanks": 60,
+          "rate_value": 36,
+          "rate_draws_before_reset": 35,
+          "rate_draws_after_reset": 0
+        }
+      ],
+      "diagnostic_render_estimate_median": 17,
+      "first_audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "last_audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      }
+    },
+    "gcc13win-sfx-observed": {
+      "complete": true,
+      "first_emulated_frame": 6772,
+      "last_emulated_frame": 7772,
+      "first_video_clock": 6060,
+      "last_video_clock": 7060,
+      "video_blanks": 1000,
+      "first_game_frame": 300,
+      "last_game_frame": 600,
+      "game_advances": 300,
+      "game_advances_per_60_video_blanks": 18.0,
+      "frontend_phase_stage_pairs": [
+        [
+          6,
+          5
+        ]
+      ],
+      "boot_seed_observed": 0,
+      "fatal_seen": false,
+      "backend_counter_resets": 0,
+      "first_rate_draws": 1,
+      "last_rate_draws": 2,
+      "observed_positive_draw_counter_increments": 286,
+      "completed_render_diagnostic_windows": [
+        {
+          "first_video_clock": 6139,
+          "last_video_clock": 6225,
+          "video_blanks": 86,
+          "rate_value": 10,
+          "rate_draws_before_reset": 14,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6225,
+          "last_video_clock": 6286,
+          "video_blanks": 61,
+          "rate_value": 22,
+          "rate_draws_before_reset": 21,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6286,
+          "last_video_clock": 6346,
+          "video_blanks": 60,
+          "rate_value": 32,
+          "rate_draws_before_reset": 31,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6346,
+          "last_video_clock": 6492,
+          "video_blanks": 146,
+          "rate_value": 11,
+          "rate_draws_before_reset": 25,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6492,
+          "last_video_clock": 6552,
+          "video_blanks": 60,
+          "rate_value": 22,
+          "rate_draws_before_reset": 21,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6552,
+          "last_video_clock": 6615,
+          "video_blanks": 63,
+          "rate_value": 17,
+          "rate_draws_before_reset": 17,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6615,
+          "last_video_clock": 6675,
+          "video_blanks": 60,
+          "rate_value": 17,
+          "rate_draws_before_reset": 16,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6675,
+          "last_video_clock": 6738,
+          "video_blanks": 63,
+          "rate_value": 17,
+          "rate_draws_before_reset": 17,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6738,
+          "last_video_clock": 6798,
+          "video_blanks": 60,
+          "rate_value": 23,
+          "rate_draws_before_reset": 22,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6798,
+          "last_video_clock": 6861,
+          "video_blanks": 63,
+          "rate_value": 17,
+          "rate_draws_before_reset": 17,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6861,
+          "last_video_clock": 6938,
+          "video_blanks": 77,
+          "rate_value": 14,
+          "rate_draws_before_reset": 17,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6938,
+          "last_video_clock": 6998,
+          "video_blanks": 60,
+          "rate_value": 16,
+          "rate_draws_before_reset": 15,
+          "rate_draws_after_reset": 0
+        },
+        {
+          "first_video_clock": 6998,
+          "last_video_clock": 7058,
+          "video_blanks": 60,
+          "rate_value": 36,
+          "rate_draws_before_reset": 35,
+          "rate_draws_after_reset": 0
+        }
+      ],
+      "diagnostic_render_estimate_median": 17,
+      "first_audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "last_audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      }
+    }
+  },
+  "windows13_to_linux13_video_blank_ratio": 0.9970089730807578,
+  "windows13_minus_linux13_render_estimate": 0,
+  "blockers": [],
+  "feasible_under_observed_keys": true,
+  "limitations": [
+    "Game phase,seed and game frame bounds alone do not prove identical actor state or draw workload.",
+    "rate_value is a render diagnostic estimate, not literal measured framebuffer FPS.",
+    "Only this cold scripted scene and emulator configuration are covered."
+  ]
+}

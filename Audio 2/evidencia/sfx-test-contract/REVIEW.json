@@ -1,0 +1,38 @@
+{
+  "review": "AUTHORIZED_TEST_EXPECTATION_CORRECTION_RED_GREEN",
+  "engine_unchanged": true,
+  "firmware_unchanged": true,
+  "r04_untouched": true,
+  "no_media_created": true,
+  "canonical_change": "tests/audio/native-driver/test_sfx.c only",
+  "before_test_sha256": "6a6aade62cce127b77b2c5dc08dafc86c10ebdf1f3d8f82f742c7ca4de4ed602",
+  "after_test_sha256": "0de377761e332a80fd3598e3f1b0584dd74a5c501bffe92c0f92ab74ba17df85",
+  "engine_sha256": "e298bc39b2aff506e13e8154499fc754c1da39b7ac680412609e7702a8483056",
+  "red_exit_code": 3221226505,
+  "green_results": [
+    {
+      "name": "sfx",
+      "exit_code": 0,
+      "stdout": "wf_scsp_sfx.c\nwf_audio_sfx.c\ntest_sfx.c\nGenerando c\u00c3\u00b3digo...\n114 PCM exactos; 98 secuencias; prioridades mixtas; refills y starvation: OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "upload",
+      "exit_code": 0,
+      "stdout": "wf_native_host.c\nwf_sfx_upload.c\ntest_upload.c\nGenerando c\u00c3\u00b3digo...\nuploader CRC, I/O failure, owner, profile and publish-last: OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "queue",
+      "exit_code": 0,
+      "stdout": "wf_native_queue.c\ntest_queue.c\nGenerando c\u00c3\u00b3digo...\nqueue: raw words, FIFO, overflow, owner, unknown outcome and wrap PASS\n",
+      "stderr": ""
+    }
+  ],
+  "full_pcm_entries": 114,
+  "commands": 98,
+  "ticks_per_command": 2400,
+  "mixed_ticks": 30000,
+  "buffered_peer_survives": true,
+  "underrun_remains_delivery_failure": true
+}

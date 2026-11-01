@@ -1,0 +1,107 @@
+Complete18-music +98-effects integration evidence plan — 2026-10-29
+
+This is a requirement/source audit, not a passing execution report. No new
+audio algorithm,canonical firmware,original ROM,R04 or disc media is changed.
+
+Actual command ownership:
+00 goes through BOTH worker FIFO64 and mailbox FIFO64, ordered stop.
+01..12 and1F go only to the music worker when profile4D46 is present.
+20..81 go through wf_native_queue,ARCADE_WORD7 and the68000 SFX command engine.
+20 is the original empty command.13..1E are not among the18 scores and must
+be counted as UNIMPLEMENTED, not mistaken for successful catalogue coverage.
+The low byte selects the command; raw16 is retained in mailbox diagnostics.
+
+Three effect sequences own PCM0..2. Musical OKI owns PCM3;32YM operators use
+the32SCSP slots and PCM uses the DSP backend. A generation change stops FM
+and musicalPCM3, but preserves effects0..2. A delayed old mailbox stop must
+not silence a newer music generation. Fade1F must not stop unrelated effects.
+The3-effect priority oracle is the recovered A15/A16 reference; equal priority
+is allowed to preempt,lower priority can be legitimately rejected. Selector2
+retains the previous bank. PCM tail can outlast logical sequence activity.
+
+Required proof stages, avoiding1764 redundant long cold runs:
+1.Input/source/layout/ELF/load/header pinning, isolated candidate only.
+2.Host98-command routing via the actual runtime API and mailbox, with A15/A16
+state comparisons.18x98 short pairing matrix records concurrent music/SFX
+ownership; both bank histories and full/empty/boundary queues are explicit.
+3.All114PCM bank entries versus audited golden and all98full sequences plus
+30000mixed ticks. Separate negative starvation containment from delivery.
+4.All18 native score long differential runs against fresh R01. Reuse derived
+intro+one observed loop/natural-end horizons;0B/0C/11 explicitly remain finite
+600s coverage. A RAM repeat is not required where phase makes it inappropriate.
+5.Actual68000+independent DSP: all18finite windows, then representative long
+stress chosen from full-score worst burst windows, with3SFX+musicalPCM3.
+Existing3-second/direct-OKI test does not cover the complete runtime route.
+6.Full cold system with exact final master/module/SCSP/pack/core and gameplay
+inputs. TAG andRoyal stable combat reach>=600game advances; compare same-frame
+scene hashes,seed and render workload with the effects-only control.
+7.Review raw unmodified WAV and native semantic traces; full waveform/timbre
+and physical Saturn validation remain separate from RMS and register checks.
+
+Representative schedules to pin as test inputs:
+-Initial music02 instrument burst while commands6A/6B/6C occupy all three
+effects voices; add musicalPCM3 on its native timeline. Repeat at score12's
+maximum measured4096/2205Fs write-density window.
+-All98 commands accepted individually when idle through the runtime path;
+then priority ladders21(priority1),28(priority4),2F(priority11),equal11 cases,
+bank0/1 selectors and inherited selector2. Compare exact voices/reject counts.
+-Long bank1 sample20 patterns (command6A) with all voices refilling while
+normal effects arrive. Observe every sample tail,not only sequence.active.
+-MusicA->B,00->B,1Fduringeffect,fadeatstartup/loop/late score,late old mailbox
+00 after new generation,ring generation mismatch and FIFO counter wraps.
+-Queue63/64/65 and ACK timeout just below/at100000us,worker FIFO pressure,
+M68K service stall512/513Fs and16/32-bit clock wraps as negative fixtures.
+Expected pressure rejection is containment,never a delivery pass.
+
+Fade completion:
+Native0620 decrements the fade counter every two timerB handlers; on completion
+it clearsC062,C006/C007 and enters03A4 (key-off all FM plus channel8 stop).
+Observe those states and R01 final YM/OKI events,FM keymask/levels,queued-event
+drain and absence of renewed music. Eight seconds without error is insufficient.
+Effects tails may remain audible; global RMS need not become zero while SFX play.
+Do not treat intentional musical rests or natural one-shot end as missing audio.
+
+Minimum live metrics:
+Native/music profile,worker/firmware RUNNING,generation/ACK,full HWRAM code
+identity,score cycles and commands,FIFO occupancies/head age,FMdrop16/late counts,
+mail ACK/results,host queue submitted/completed/unimplemented/priority/overflow,
+native emit counts/hashes,key/operator state,PCM0..3 sample/bank/played/write
+indices and real engine.underruns32/fault/bound. Mail C05C is only a cached16-bit
+summary refreshed during service; it cannot substitute for the live counter.
+
+Positive delivery requires zero real/mailbox PCMunderruns,FMdrops,unknown
+required commands,queue loss,ignored/disabled audio,transport/music faults or
+graphics regression. Priority rejection is allowed only where oracle predicts it.
+Metadata and counters absent -> blocked,not zero. No tolerance/lead changes.
+
+Containment distinction confirmed in source:
+wf_scsp_sfx.c intentionally stops an exhausted voice and increments underruns
+without corrupting firmware/game. The old test_sfx.c assertion requiringfault
+is obsolete; update only that test to require nofault,underrun1,affected voice
+stopped and another voice alive. Positive delivery still fails for any underrun.
+No recommendation is made to restore a fatal engine policy.
+
+Known test limits:
+test_music_catalogue.c600s observes conversion/state without liveSCSP deadlines.
+test_music_firmware.py feeds3s/score and directly starts3OKI voices; it explicitly
+does not emulate FM waveform synthesis. HOST lifts and elapsed tests cannot
+certify bus contention,SCSP arbitration,real-time FIFO service or game coupling.
+Hold-first test modules suppress STOP/fade/new music during a chosen horizon;
+they must never become a release component or substitute for lifecycle cases.
+
+Artifacts:
+REQUIREMENTS.json pins inputs and machine-readable criteria.
+COMMAND-ROUTES.csv covers all256low bytes.
+SFX-CATALOGUE.csv records actual pack priorities/banks/events/tails.
+HOST-MUSIC-SFX-MATRIX.csv contains1764 planned HOST pairs,not claimed executions.
+build_requirements.py deterministically regenerates these from the pinned pack.
+validation/pcm-layout has exact68000 compiler-derived262/32/4 layouts;
+validation/tests/test_pcm_counter.py and check_real_pcm_state.py prove the new
+live-counter gate,including real65536/mail0 negative fixture and missing data.
+
+Reproducibility boundary:
+Root's track_suite.py freezes every candidate/case/layout/ELF/debug/harness/
+helper and input before a job; it rejects old or changed plans. Preserve logs,
+raw WAV callback copies,states read only,counter traces and gate reports by
+case. cold_overlay remains frozen; observe_cold adapts observation in testscope.
+Run no BIN/CUE builder until full evidence and authorization; R04 stays intact.
