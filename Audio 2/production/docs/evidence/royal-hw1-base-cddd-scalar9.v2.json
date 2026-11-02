@@ -1,0 +1,1917 @@
+{
+  "analysis_schema_version": 2,
+  "analyzer_sha256": "cd7aa898ad71fba65e0239a3d4bdd6c69104b1299375ae2635306aa73c873dc5",
+  "scope": "frozen performance/integration evidence; no fidelity acceptance",
+  "input_tape_sha256": null,
+  "input_policy_sha256": "b30ec4abd28e14557a2d8a445109644881c047e434b68369b97f509a7e3d47f1",
+  "input_evidence": "Same original state-dependent Royal policy and released physical controls. Complete per-call input bytes were not recorded; endpoint/event equality is checked separately.",
+  "game_layout": {
+    "actors_offset": 384,
+    "actor_bytes": 268,
+    "actor_slots": 9,
+    "frame_offset": 24,
+    "mode_offset": 31,
+    "progression_offset": 32,
+    "runtime_bytes": 7648
+  },
+  "symbol_verification": {
+    "control": {
+      "elf": "/workspace/scratch/46cef04a9eee/audio2-build/royal-prerequisites/final-scalar9-cddd-base/build/profiles/control/AUDIO2ROYAL.ELF",
+      "elf_sha256": "24167b8cb6effe6a3ad8b87c32e7235963774660eae9b3be62a1680d38f297ff",
+      "verified_values": {
+        "_rt": 101638276,
+        "_wf_audio2_cadence": 101092512,
+        "_wf_audio2_integration_diag": 101093044,
+        "_wf_audio2_game_trace": 101088416,
+        "___audio2_hot_start": 96960544,
+        "___audio2_hot_end": 96978976,
+        "___audio2_slave_stack_bottom": 101697376,
+        "___audio2_slave_stack_top": 101705568,
+        "___end": 101705568
+      },
+      "verified": true
+    },
+    "audio2": {
+      "elf": "/workspace/scratch/46cef04a9eee/audio2-build/royal-prerequisites/final-scalar9-cddd-base/build/profiles/audio2/AUDIO2ROYAL.ELF",
+      "elf_sha256": "4e4738d536e93d308e8111fc296438a4b296d59ae7ecaf6c13d20c7ba6392c7d",
+      "verified_values": {
+        "_rt": 101638276,
+        "_wf_audio2_cadence": 101092512,
+        "_wf_audio2_integration_diag": 101093044,
+        "_wf_audio2_game_trace": 101088416,
+        "___audio2_hot_start": 96960544,
+        "___audio2_hot_end": 96978976,
+        "___audio2_slave_stack_bottom": 101697376,
+        "___audio2_slave_stack_top": 101705568,
+        "___end": 101705568
+      },
+      "verified": true
+    },
+    "module": {
+      "elf": "/workspace/scratch/46cef04a9eee/audio2-build/royal-prerequisites/final-scalar9-cddd-base/build/module/MUSIC4.DEBUG.ELF",
+      "elf_sha256": "f25cee7164eba574998df80a9b640ea3ae13641c02ee67384b195885ea00749e",
+      "verified_values": {
+        "_wf_music_fm_discarded_events": 98807848,
+        "_wf_music_fm_discarded_batches": 98807844,
+        "_wf_music_fm_rejected_events": 98807840,
+        "_wf_music_ring_rejected_events": 98807836
+      },
+      "verified": true
+    },
+    "firmware": {
+      "elf": "/workspace/scratch/46cef04a9eee/audio2-build/production-final-firmware/SCSP.ELF",
+      "elf_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+      "verified_values": {
+        "wf_sfx_engine": 65080
+      },
+      "verified": true
+    }
+  },
+  "immutable_code_scope": "Nonwritable allocated master executable sections, complete module file payloads, and complete firmware file payloads; mutable shared state is excluded.",
+  "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "build": {
+    "scope": "isolated native ROYAL diagnostic, NOT AUDIO ACCEPTED",
+    "scenario": "royal",
+    "artifact_basename": "AUDIO2ROYAL",
+    "music_memory_profile": {
+      "name": "royal-vdp2-bank1",
+      "base": 98721792,
+      "state": 98807808,
+      "shared": 98820096,
+      "end": 98824192
+    },
+    "game_input_scope": "Unchanged HW1 ordinary-input policy and ROM F94 initial state",
+    "expected_gameplay_endpoint": 8474,
+    "expansion_ram_required": false,
+    "emulator_cartridge": "none",
+    "hot_start": 96960544,
+    "hot_end": 96978976,
+    "hot_memory": "VDP1 audited tail (experimental)",
+    "hot_code_const_bytes": 14624,
+    "hot_state_bytes": 3220,
+    "slave_stack_bottom": 101697376,
+    "slave_stack_top": 101705568,
+    "user_heap_start": 101705568,
+    "user_heap_bytes": 6304,
+    "module_bytes": 98028,
+    "control_elf_difference_bytes": 1,
+    "control_elf_difference_offset": 408800,
+    "control_change": "wf_audio2_enabled data word 1 to 0; all executable bytes identical",
+    "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+    "pairs": {
+      "audio2": {
+        "AUDIO2ROYAL.ELF": "4e4738d536e93d308e8111fc296438a4b296d59ae7ecaf6c13d20c7ba6392c7d",
+        "AUDIO2ROYAL.bin": "8094bc778e75bcaf5f82836d91c574005f31114457c3d3db164fac08c1756dd3",
+        "AUDIO2ROYAL.iso": "0629adc8a72149f8f76dd33ef086e53f8b4183262a3b82a514760808ef336165",
+        "AUDIO2ROYAL.cue": "699d277ea4949c5136dffea3d00a952164593b13422e0ec7aa7876407ba4dc24"
+      },
+      "control": {
+        "AUDIO2ROYAL.ELF": "24167b8cb6effe6a3ad8b87c32e7235963774660eae9b3be62a1680d38f297ff",
+        "AUDIO2ROYAL.bin": "91330e1a664fb94b18eaf17732e55e5b051ee6da7d880f3cb4bfad139689d7e5",
+        "AUDIO2ROYAL.iso": "8a692edef18947b2e8c2d60f08c0550f6420df7680f7171fad1bb03e834aecaf",
+        "AUDIO2ROYAL.cue": "699d277ea4949c5136dffea3d00a952164593b13422e0ec7aa7876407ba4dc24"
+      }
+    },
+    "original_game_files_unchanged": 305,
+    "graphics_assets_unchanged": true
+  },
+  "profiles": {
+    "control": {
+      "profile": "control",
+      "game_frame": 8474,
+      "cadence": {
+        "initialized": 1,
+        "first_frame": 0,
+        "first_vblank": 1164,
+        "last_frame": 8474,
+        "last_vblank": 11126,
+        "logical_steps": 8474,
+        "elapsed_vblanks": 9962,
+        "updates": 8474,
+        "unobserved_steps": 0,
+        "max_gap": 7,
+        "regressions": 0,
+        "gap_histogram_vblanks": {
+          "1": 7630,
+          "2": 425,
+          "3": 281,
+          "4": 80,
+          "5": 35,
+          "6": 17,
+          "7": 6
+        },
+        "gap_percentile_vblanks": {
+          "50": 1,
+          "95": 2,
+          "99": 4,
+          "100": 7
+        },
+        "elapsed_seconds": 166.51584653061224,
+        "logical_steps_per_second": 50.89005146691635,
+        "gap_percentile_ms": {
+          "50": 16.715102040816326,
+          "95": 33.43020408163265,
+          "99": 66.8604081632653,
+          "100": 117.00571428571429
+        }
+      },
+      "recording_clock": {
+        "method": "last 1000 complete native video packet durations",
+        "time_base": "1/44100",
+        "duration_ticks": 737136,
+        "packet_count": 1000,
+        "video_hz": 59.82613791756202,
+        "duration_histogram_ticks": {
+          "737": 854,
+          "738": 141,
+          "736": 5
+        },
+        "timestamp_file_sha256": "c20f91e496baa7b820d2af5c46907f65d9863b7118455c4a336057202457f9ac"
+      },
+      "runtime_sha256": "c298420ae6a57c6cb6ef0ad2258c3e14e7137ff5ae818dda6a1edeaffd600e15",
+      "actors_sha256": "656f7934c1c1b1cbac5afef25e4d17c8503c050c011effc734a0e00e1fb6f884",
+      "actors": [
+        {
+          "slot": 0,
+          "active": 128,
+          "character": 0,
+          "role": 0,
+          "state": 32773
+        },
+        {
+          "slot": 1,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 2,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 3,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 4,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32779
+        },
+        {
+          "slot": 5,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32768
+        },
+        {
+          "slot": 6,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 7,
+          "active": 128,
+          "character": 0,
+          "role": 160,
+          "state": 32779
+        },
+        {
+          "slot": 8,
+          "active": 128,
+          "character": 0,
+          "role": 224,
+          "state": 32769
+        }
+      ],
+      "diagnostics": {
+        "enabled": 0,
+        "boot_stage": 9,
+        "api_state": 0,
+        "api_error": 0,
+        "worker_state": 0,
+        "worker_error": 0,
+        "accepted": 0,
+        "queue_used": 0,
+        "queue_completed": 0,
+        "queue_overflows": 0,
+        "unsupported": 0,
+        "skipped": 0,
+        "produced": 133,
+        "command_hash": 3706974640,
+        "first_audio_fault_vblank": 0,
+        "max_mail_latency_nominal_us": 0,
+        "reserved16": 0,
+        "reserved17": 0,
+        "queue_peak": 0,
+        "last_raw": 12624,
+        "boot_success": 0,
+        "pack_bytes": 0,
+        "module_bytes": 0,
+        "last_vblank": 11225
+      },
+      "producer_events": [
+        {
+          "frame": 0,
+          "raw_word": 12548,
+          "reserved": 0
+        },
+        {
+          "frame": 77,
+          "raw_word": 12598,
+          "reserved": 0
+        },
+        {
+          "frame": 105,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 254,
+          "raw_word": 12598,
+          "reserved": 0
+        },
+        {
+          "frame": 282,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 540,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 540,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 542,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 557,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 557,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 590,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 632,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 667,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 667,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 788,
+          "raw_word": 12598,
+          "reserved": 0
+        },
+        {
+          "frame": 816,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 870,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 904,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 1056,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 1090,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 1296,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1296,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1525,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 1559,
+          "raw_word": 12612,
+          "reserved": 0
+        },
+        {
+          "frame": 1594,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1594,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1827,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1827,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1901,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 1935,
+          "raw_word": 12606,
+          "reserved": 0
+        },
+        {
+          "frame": 2028,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 2070,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 2156,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 2198,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 2269,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 2311,
+          "raw_word": 12634,
+          "reserved": 0
+        },
+        {
+          "frame": 2327,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2327,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2358,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2358,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2569,
+          "raw_word": 12622,
+          "reserved": 0
+        },
+        {
+          "frame": 2891,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2891,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2960,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 3000,
+          "raw_word": 12609,
+          "reserved": 0
+        },
+        {
+          "frame": 3160,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 3200,
+          "raw_word": 12609,
+          "reserved": 0
+        },
+        {
+          "frame": 3235,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3235,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3374,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 3416,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 3502,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 3542,
+          "raw_word": 12629,
+          "reserved": 0
+        },
+        {
+          "frame": 3703,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 3745,
+          "raw_word": 12634,
+          "reserved": 0
+        },
+        {
+          "frame": 3761,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3761,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3981,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 4015,
+          "raw_word": 12670,
+          "reserved": 0
+        },
+        {
+          "frame": 4056,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4056,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4149,
+          "raw_word": 12613,
+          "reserved": 0
+        },
+        {
+          "frame": 4229,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 4269,
+          "raw_word": 12670,
+          "reserved": 0
+        },
+        {
+          "frame": 4430,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 4478,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 4513,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4513,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4624,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4624,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4708,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4708,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4786,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4786,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4839,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4839,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4943,
+          "raw_word": 12622,
+          "reserved": 0
+        },
+        {
+          "frame": 5039,
+          "raw_word": 12622,
+          "reserved": 0
+        },
+        {
+          "frame": 5096,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 5184,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 5199,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 5233,
+          "raw_word": 12606,
+          "reserved": 0
+        },
+        {
+          "frame": 5272,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 5457,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 5497,
+          "raw_word": 12609,
+          "reserved": 0
+        },
+        {
+          "frame": 5516,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5516,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5582,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 5616,
+          "raw_word": 12612,
+          "reserved": 0
+        },
+        {
+          "frame": 5798,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 5815,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5815,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5846,
+          "raw_word": 12626,
+          "reserved": 0
+        },
+        {
+          "frame": 5861,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5861,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6050,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6050,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6169,
+          "raw_word": 12601,
+          "reserved": 0
+        },
+        {
+          "frame": 6219,
+          "raw_word": 12614,
+          "reserved": 0
+        },
+        {
+          "frame": 6395,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6395,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6439,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6439,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6492,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 6540,
+          "raw_word": 12633,
+          "reserved": 0
+        },
+        {
+          "frame": 6600,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 6638,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 6686,
+          "raw_word": 12609,
+          "reserved": 0
+        },
+        {
+          "frame": 6688,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 6736,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6736,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6841,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 6844,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 6886,
+          "raw_word": 12634,
+          "reserved": 0
+        },
+        {
+          "frame": 6900,
+          "raw_word": 12555,
+          "reserved": 0
+        },
+        {
+          "frame": 6929,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 7017,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 7018,
+          "raw_word": 12601,
+          "reserved": 0
+        },
+        {
+          "frame": 7068,
+          "raw_word": 12624,
+          "reserved": 0
+        },
+        {
+          "frame": 7167,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 7209,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 7280,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 7314,
+          "raw_word": 12606,
+          "reserved": 0
+        },
+        {
+          "frame": 7675,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 7763,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 7851,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 7852,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 7894,
+          "raw_word": 12624,
+          "reserved": 0
+        },
+        {
+          "frame": 8202,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 8290,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 8378,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 8379,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 8427,
+          "raw_word": 12624,
+          "reserved": 0
+        }
+      ],
+      "capture_report_sha256": "ad9d2bf2f2a8b30211d3475e42b05c051c2a2a62f8e216c3502db7d8a2d682e2",
+      "raw_wav_sha256": "a015e18f6d0aece7077c96efb5a226ad2decf1a4a79eab7ca8b2a51003360531",
+      "capture_final_watches": {
+        "started": 1,
+        "draws": 8474,
+        "vblanks": 9963,
+        "fatal_owner": 0,
+        "fatal_dependency": 0,
+        "finished_frame": 8474,
+        "video_clock": 11225,
+        "finished_presentation": 2,
+        "game_frame": 8474,
+        "cadence_steps": 8474,
+        "cadence_vblanks": 9962,
+        "cadence_max_gap": 7,
+        "cadence_missed": 0,
+        "enabled": 0,
+        "boot_stage": 9,
+        "api_state": 0,
+        "api_error": 0,
+        "worker_state": 0,
+        "worker_error": 0,
+        "accepted": 0,
+        "queued": 0,
+        "overflows": 0,
+        "unsupported": 0,
+        "skipped": 0,
+        "produced": 133,
+        "command_hash": 3706974640,
+        "audio_fault_frame": 0,
+        "latency_nominal_us": 0,
+        "completed": 0,
+        "queue_peak": 0
+      },
+      "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+      "bios_sha256": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f",
+      "loaded_master_executable_sections": [
+        {
+          "address": 100679680,
+          "bytes": 358920,
+          "sha256": "1452258f73a0c6e10c2af0a8ca7b19e0aba0ac1c468389a3c182536e2efe15c8",
+          "loaded_bytes_match": true
+        }
+      ]
+    },
+    "audio2": {
+      "profile": "audio2",
+      "game_frame": 8474,
+      "cadence": {
+        "initialized": 1,
+        "first_frame": 0,
+        "first_vblank": 1556,
+        "last_frame": 8474,
+        "last_vblank": 11557,
+        "logical_steps": 8474,
+        "elapsed_vblanks": 10001,
+        "updates": 8474,
+        "unobserved_steps": 0,
+        "max_gap": 8,
+        "regressions": 0,
+        "gap_histogram_vblanks": {
+          "1": 7610,
+          "2": 440,
+          "3": 281,
+          "4": 78,
+          "5": 42,
+          "6": 17,
+          "7": 4,
+          "8": 2
+        },
+        "gap_percentile_vblanks": {
+          "50": 1,
+          "95": 3,
+          "99": 4,
+          "100": 8
+        },
+        "elapsed_seconds": 167.1677355102041,
+        "logical_steps_per_second": 50.69160011133092,
+        "gap_percentile_ms": {
+          "50": 16.715102040816326,
+          "95": 50.14530612244898,
+          "99": 66.8604081632653,
+          "100": 133.7208163265306
+        }
+      },
+      "recording_clock": {
+        "method": "last 1000 complete native video packet durations",
+        "time_base": "1/44100",
+        "duration_ticks": 737136,
+        "packet_count": 1000,
+        "video_hz": 59.82613791756202,
+        "duration_histogram_ticks": {
+          "737": 844,
+          "738": 146,
+          "736": 10
+        },
+        "timestamp_file_sha256": "2d24575ec814e009a2e03cf2598785292ef95b929606097d8ba0d9d832c1462b"
+      },
+      "runtime_sha256": "c298420ae6a57c6cb6ef0ad2258c3e14e7137ff5ae818dda6a1edeaffd600e15",
+      "actors_sha256": "656f7934c1c1b1cbac5afef25e4d17c8503c050c011effc734a0e00e1fb6f884",
+      "actors": [
+        {
+          "slot": 0,
+          "active": 128,
+          "character": 0,
+          "role": 0,
+          "state": 32773
+        },
+        {
+          "slot": 1,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 2,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 3,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 4,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32779
+        },
+        {
+          "slot": 5,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32768
+        },
+        {
+          "slot": 6,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 7,
+          "active": 128,
+          "character": 0,
+          "role": 160,
+          "state": 32779
+        },
+        {
+          "slot": 8,
+          "active": 128,
+          "character": 0,
+          "role": 224,
+          "state": 32769
+        }
+      ],
+      "diagnostics": {
+        "enabled": 1,
+        "boot_stage": 5,
+        "api_state": 5,
+        "api_error": 5,
+        "worker_state": 3,
+        "worker_error": 15,
+        "accepted": 17,
+        "queue_used": 1,
+        "queue_completed": 17,
+        "queue_overflows": 0,
+        "unsupported": 0,
+        "skipped": 115,
+        "produced": 133,
+        "command_hash": 3706974640,
+        "first_audio_fault_vblank": 2639,
+        "max_mail_latency_nominal_us": 50001,
+        "reserved16": 0,
+        "reserved17": 0,
+        "queue_peak": 1,
+        "last_raw": 12624,
+        "boot_success": 1,
+        "pack_bytes": 440710,
+        "module_bytes": 98028,
+        "last_vblank": 11690
+      },
+      "producer_events": [
+        {
+          "frame": 0,
+          "raw_word": 12548,
+          "reserved": 0
+        },
+        {
+          "frame": 77,
+          "raw_word": 12598,
+          "reserved": 0
+        },
+        {
+          "frame": 105,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 254,
+          "raw_word": 12598,
+          "reserved": 0
+        },
+        {
+          "frame": 282,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 540,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 540,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 542,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 557,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 557,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 590,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 632,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 667,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 667,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 788,
+          "raw_word": 12598,
+          "reserved": 0
+        },
+        {
+          "frame": 816,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 870,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 904,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 1056,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 1090,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 1296,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1296,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1525,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 1559,
+          "raw_word": 12612,
+          "reserved": 0
+        },
+        {
+          "frame": 1594,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1594,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1827,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1827,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1901,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 1935,
+          "raw_word": 12606,
+          "reserved": 0
+        },
+        {
+          "frame": 2028,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 2070,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 2156,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 2198,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 2269,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 2311,
+          "raw_word": 12634,
+          "reserved": 0
+        },
+        {
+          "frame": 2327,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2327,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2358,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2358,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2569,
+          "raw_word": 12622,
+          "reserved": 0
+        },
+        {
+          "frame": 2891,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2891,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2960,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 3000,
+          "raw_word": 12609,
+          "reserved": 0
+        },
+        {
+          "frame": 3160,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 3200,
+          "raw_word": 12609,
+          "reserved": 0
+        },
+        {
+          "frame": 3235,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3235,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3374,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 3416,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 3502,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 3542,
+          "raw_word": 12629,
+          "reserved": 0
+        },
+        {
+          "frame": 3703,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 3745,
+          "raw_word": 12634,
+          "reserved": 0
+        },
+        {
+          "frame": 3761,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3761,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3981,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 4015,
+          "raw_word": 12670,
+          "reserved": 0
+        },
+        {
+          "frame": 4056,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4056,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4149,
+          "raw_word": 12613,
+          "reserved": 0
+        },
+        {
+          "frame": 4229,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 4269,
+          "raw_word": 12670,
+          "reserved": 0
+        },
+        {
+          "frame": 4430,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 4478,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 4513,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4513,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4624,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4624,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4708,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4708,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4786,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4786,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4839,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4839,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4943,
+          "raw_word": 12622,
+          "reserved": 0
+        },
+        {
+          "frame": 5039,
+          "raw_word": 12622,
+          "reserved": 0
+        },
+        {
+          "frame": 5096,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 5184,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 5199,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 5233,
+          "raw_word": 12606,
+          "reserved": 0
+        },
+        {
+          "frame": 5272,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 5457,
+          "raw_word": 12662,
+          "reserved": 0
+        },
+        {
+          "frame": 5497,
+          "raw_word": 12609,
+          "reserved": 0
+        },
+        {
+          "frame": 5516,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5516,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5582,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 5616,
+          "raw_word": 12612,
+          "reserved": 0
+        },
+        {
+          "frame": 5798,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 5815,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5815,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5846,
+          "raw_word": 12626,
+          "reserved": 0
+        },
+        {
+          "frame": 5861,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5861,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6050,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6050,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6169,
+          "raw_word": 12601,
+          "reserved": 0
+        },
+        {
+          "frame": 6219,
+          "raw_word": 12614,
+          "reserved": 0
+        },
+        {
+          "frame": 6395,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6395,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6439,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6439,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6492,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 6540,
+          "raw_word": 12633,
+          "reserved": 0
+        },
+        {
+          "frame": 6600,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 6638,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 6686,
+          "raw_word": 12609,
+          "reserved": 0
+        },
+        {
+          "frame": 6688,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 6736,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6736,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6841,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 6844,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 6886,
+          "raw_word": 12634,
+          "reserved": 0
+        },
+        {
+          "frame": 6900,
+          "raw_word": 12555,
+          "reserved": 0
+        },
+        {
+          "frame": 6929,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 7017,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 7018,
+          "raw_word": 12601,
+          "reserved": 0
+        },
+        {
+          "frame": 7068,
+          "raw_word": 12624,
+          "reserved": 0
+        },
+        {
+          "frame": 7167,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 7209,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 7280,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 7314,
+          "raw_word": 12606,
+          "reserved": 0
+        },
+        {
+          "frame": 7675,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 7763,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 7851,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 7852,
+          "raw_word": 12602,
+          "reserved": 0
+        },
+        {
+          "frame": 7894,
+          "raw_word": 12624,
+          "reserved": 0
+        },
+        {
+          "frame": 8202,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 8290,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 8378,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 8379,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 8427,
+          "raw_word": 12624,
+          "reserved": 0
+        }
+      ],
+      "capture_report_sha256": "79b706c048c7a7384e976f31dbbdddd657b6029d62d3c601dc69cc6230b355c4",
+      "raw_wav_sha256": "4f6e2ee0118a59d5fc03ba680d8766bf1dbb5d23c49b45094b5b74a0821377e5",
+      "capture_final_watches": {
+        "started": 1,
+        "draws": 8474,
+        "vblanks": 10002,
+        "fatal_owner": 0,
+        "fatal_dependency": 0,
+        "finished_frame": 8474,
+        "video_clock": 11690,
+        "finished_presentation": 2,
+        "game_frame": 8474,
+        "cadence_steps": 8474,
+        "cadence_vblanks": 10001,
+        "cadence_max_gap": 8,
+        "cadence_missed": 0,
+        "enabled": 1,
+        "boot_stage": 5,
+        "api_state": 5,
+        "api_error": 5,
+        "worker_state": 3,
+        "worker_error": 15,
+        "accepted": 17,
+        "queued": 1,
+        "overflows": 0,
+        "unsupported": 0,
+        "skipped": 115,
+        "produced": 133,
+        "command_hash": 3706974640,
+        "audio_fault_frame": 2639,
+        "latency_nominal_us": 50001,
+        "completed": 17,
+        "queue_peak": 1
+      },
+      "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+      "bios_sha256": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f",
+      "loaded_master_executable_sections": [
+        {
+          "address": 100679680,
+          "bytes": 358920,
+          "sha256": "1452258f73a0c6e10c2af0a8ca7b19e0aba0ac1c468389a3c182536e2efe15c8",
+          "loaded_bytes_match": true
+        }
+      ],
+      "loaded_module_segments": [
+        {
+          "address": 98721792,
+          "bytes": 83148,
+          "sha256": "9eeca0cc48fd7bd339c5099105d97d34f815d9afa7cfd5b011bec6104be791ce",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 96960544,
+          "bytes": 14624,
+          "sha256": "919644c03b0a557a9be4a7be0bddac03e92e4cff60137a5dd7c97358d8867a74",
+          "loaded_bytes_match": true
+        }
+      ],
+      "loaded_firmware_segments": [
+        {
+          "address": 0,
+          "bytes": 12200,
+          "sha256": "dfb7a6087021e8e31a351572005b6e103e17dced7545d8fb8ac1f318614442ab",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 49408,
+          "bytes": 14048,
+          "sha256": "95c46292e90a8a01224eb6495f54e0d31e75d074d708c1dd755f25df32a60d18",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 65536,
+          "bytes": 9216,
+          "sha256": "260012e22772b130d1d3e4f2af82a058b025fff941b901a22855991952dea9fb",
+          "loaded_bytes_match": true
+        }
+      ],
+      "native_audio_counters": {
+        "fm_discarded_events": 4,
+        "fm_discarded_batches": 1,
+        "fm_rejected_events": 0,
+        "ring_rejected_events": 0,
+        "sfx_underruns_32bit": 0,
+        "sfx_frames_32bit": 8270875,
+        "sfx_ticks_32bit": 41391,
+        "sfx_bound": 1,
+        "sfx_fault": 0,
+        "transport_late_16bit": 37,
+        "invalid_fm_batch_16bit": 1,
+        "last_poll_gap_over_512_fs": 0,
+        "playing_mask_at_last_long_poll": 0,
+        "mail_state": 2,
+        "music_shared_state": 3,
+        "music_shared_error": 15
+      },
+      "royal_memory_observation": {
+        "vdp2_gap_after_module_sha256": "e17d6df0e76041e8af7795d47f51a3158cc8bfe8459c55d07fc286ad3735d917",
+        "vdp2_back_color_word": 32768,
+        "vdp1_unused_tail_after_hot_sha256": "1191d952c78fcc3a712b56b73a63c36c0c53ca36dc42e5eda46832a432a99e7a",
+        "note": "End-state observation; no fabricated canary or before/after overwrite proof."
+      },
+      "slave_stack_canary": {
+        "reserved_bytes": 8192,
+        "lowest_untouched_prefix_bytes": 7648,
+        "observed_modified_span_from_top": 544,
+        "note": "Observed high-water evidence only; canary is not a complete overflow proof."
+      }
+    }
+  },
+  "pair": {
+    "runtime_byte_identical": true,
+    "audio_remained_operational": false,
+    "requested_work_integrity": false,
+    "zero_loss_and_deadlines": false,
+    "immutable_code_verified": true,
+    "requested_logical_endpoint_reached": true,
+    "full_match_audio_cost_comparable": false,
+    "actors_byte_identical": true,
+    "producer_events_identical": true,
+    "emulator_identical": true,
+    "bios_identical": true,
+    "logical_endpoint_identical": true,
+    "additional_combat_vblanks": 39,
+    "additional_combat_time_percent": 0.3914876530817105,
+    "logical_throughput_change_percent": -0.3899610038996082
+  },
+  "timing_note": "Combat window uses cadence first/last VBlank, excluding boot. Rates remain observed facts when full_match_audio_cost_comparable is false, but cannot certify the cost of complete, zero-loss, on-time audio work. API worker survival alone is insufficient. If audio_remained_operational is false, the mean also includes time after the worker failed. API mail latency uses16667 nominal microseconds per VBlank and is quantized, not precise FM/DAC jitter."
+}

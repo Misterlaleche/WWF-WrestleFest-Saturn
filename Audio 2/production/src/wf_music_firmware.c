@@ -211,20 +211,23 @@ static bool music_service(void)
 }
 static void __attribute__((noinline,section(".wf_audio_high"))) music_work(void)
 {
- /* Finish pending cache steps at the existing service boundaries before
-  * background refill. Refill remains at most128 samples, nearest guard first. */
- if(music_prepare())return;
+ /* Main already grants future music preparation one slot per iteration.
+  * Keep these two slots for live PCM refill: taking all three for a partial
+  * future cache can exhaust an already-playing voice's usable runway. */
  uint16_t before=*(volatile uint16_t *)WF_DSP_CLOCK;
- /* The faster decoder and four-voice deadline selector measured113Fs for
-  * complete refill work during the138-second mixed TAG replay. Admit it
-  * with128Fs before the nearest event. The old192Fs budget wasted useful
-  * gaps. Playback lateness and service-gap thresholds remain unchanged. */
- uint16_t consumer=ring[1];
+ /* Complete128/64/32-sample work measured110/65/43Fs in the mixed replay.
+  * Admit those sizes only with128/96/64Fs before the nearest live event.
+  * Fixed128-only work wasted every112Fs metadata gap and starved a voice.
+  * Playback lateness and service-gap thresholds remain unchanged. */
+ unsigned count=128;uint16_t consumer=ring[1];
  if(consumer!=ring[0]){
   volatile uint16_t *head=WF_MUSIC_RING_EVENT(consumer);
-  if(head[3]!=generation||wf_music_clock_due(before,head[0])>-128)return;
+  if(head[3]!=generation)return;
+  int16_t due=wf_music_clock_due(before,head[0]);
+  if(due>-64)return;
+  count=due<=-128?128:(due<=-96?64:32);
  }
- wf_scsp_sfx_work(&wf_sfx_engine);
+ wf_scsp_sfx_work_budget(&wf_sfx_engine,count);
  timing_max(24,(uint16_t)(*(volatile uint16_t *)WF_DSP_CLOCK-before));
 }
 static void service(void)

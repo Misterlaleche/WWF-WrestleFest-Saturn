@@ -2,6 +2,39 @@
 
 The preserved A53 renderer omitted the YM2151 input clock divider. The original native pitch conversion inherited the same factor, so agreement between those two paths did not establish correct arcade pitch. Production now uses the documented board clock, while the historical A53/R04 material remains intact. No physical arcade or Saturn recording was obtained for this audit.
 
+## Subsequent control-model audit
+
+The corrected `board-pcm16` references below retained A53's **TimerB-only,
+YM-busy-ignored and OKI-status-zero** control model. They are preserved as that
+specific historical software profile. They must not be described as a complete
+original-board control execution. A53 also supports only OKI bank0.
+
+The separate `full-board` reference couples the unchanged full original Z80
+core to the pinned Nuked OPM TimerA+B/busy/status/IRQ outputs and an original
+ROM-addressed OKI model with real digital busy bits and global bank changes
+during active playback. Its compatibility mode reproduces every byte of the
+old board-pcm16 command01 trace and1,323,000 PCM samples. Enabling the fuller
+model retains the original order/values of the first54,469 non-control YM
+writes but changes their timestamps and moves one further write inside the
+30-second window. OKI writes fall from684 to410 because274 redundant attempts
+are no longer issued after the driver reads busy correctly.
+
+The full model also exposed17 extra physical starts in the legacy A15 SFX
+model and previous native engine. The ROM-grounded bounded correction and
+RED→GREEN98-command fixture are documented in
+`F1-ROM-SEQUENCE-AUDIT.md`. Historical A15/A53 material remains unchanged.
+`tools/reference/reproduce_full_board_references.py` regenerates the separate
+18 corrected full-board reference windows. These remain host software audio,
+with instruction-level bus boundaries and no measured analog filtering; they
+are not physical arcade recordings or certification of native SCSP fidelity.
+
+The full model also proves an active-bank fidelity failure in the observed
+mixed replay: 2,641 encoded-byte fetches and 2,663 decoded voice samples differ
+from the current start-latched native policy, changing 14,680 mixed output
+frames. The [active-bank audit](ACTIVE-OKI-BANK-AUDIT.md) records the causal
+check, exact storage coverage and remaining playback-state/deadline work.
+Native waveform fidelity remains **BLOCKED** independently of runtime counters.
+
 ## Primary evidence
 
 `tools/reference/clock-source-manifest.json` records complete SHA256, verified Git blob ID, repository commit and canonical URL for each upstream file. The source files themselves are development evidence outside the source package. No ROM data or audio is stored in this document or manifest.
@@ -54,9 +87,20 @@ Across all 18 original 30-second traces, 17,271 rising operator key edges reques
 
 All 914,095 YM writes in those trace windows pass the bridge checks, including the effective decay/release invariants. All 923,055 YM/OKI/bank events from the serviced native sequence still match the full original Z80 oracle in value, order and cycle. These counts bound the checked windows; they do not establish complete musical loops or native waveform equality.
 
-## Reproducible reference profiles
+## Current and preserved reference profiles
 
-`tools/reference/reproduce_board_clock_references.py` is the primary renderer. Given the original ROM zip and hash-verified pinned Nuked dependency, it reconstructs its inputs, captures the original Z80 sequence and writes 18 reference WAVs. No recovered handoff directory is required.
+`tools/reference/reproduce_full_board_references.py` is the current primary
+software renderer. Given the original ROM zip and hash-verified pinned Nuked
+dependency, it reconstructs inputs and captures the original Z80 with both
+timers, busy/status/IRQ and global ROM banking. It writes 18 reference WAVs and
+an explicit `full-board` report. `verify_full_board_sfx.py` and
+`export_full_board_sfx.py` provide the corresponding 98-command validation and
+`full-board-sfx` WAVs. No recovered handoff directory is required.
+
+`reproduce_board_clock_references.py` is retained as the intermediate
+**Timer-B-only** clock/PCM comparison. Its complete scope is described at the
+start of this document. The following `board-pcm16` measurements belong to
+that preserved profile.
 
 The default `board-pcm16` profile uses the corrected YM clock, original initial-zero PCM16, an 8,000 Hz OKI clock, and the complete final sample interval. It writes `ARCADE-REFERENCIA-01.wav` through `-18.wav`. The completed 30-second set has 1,323,000 frames per track and no clipped samples. The original decoded pack is 1,755,496 bytes with SHA256 `45a22577841fc0ca9bdf84f6ec8acf72f2c87602c9a50eb42fce395a57131bee`; all 114 entries also have independent original-sample digest checks.
 
@@ -71,6 +115,14 @@ The corrected profile has now run all 18 original music commands for 35 seconds 
 The tested intermediate firmware SHA256 is `621b5dfcfe1b2a1841ff09e32de62b8198c63cd5d5c12d1f660d5c8426c06634`. The YM source SHA256 is `c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76`; the envelope header SHA256 is `5f2e75edb5de0d5f3c1979f9e86b5d51602106a5cdad67671abfce4b4ca9bcf8`. The complete private report is `music-matrix-boardclock-intermediate/native-music-matrix.json`, SHA256 `e523149700925bcee9309d2571eb214e063934f354a023224b7c8e81d6235fac`. A metadata-only summary is included as `tools/reference/evidence/native-music-board-clock-intermediate.json`. A later decoder or firmware build needs its own runtime gates; this result cannot be transferred to it.
 
 For command `0x01`, the 30-second matrix pair measures a reference spectral centroid of 373.27 Hz and a native centroid of 505.05 Hz, a log-power spectral RMSE of 3.495 dB and a native RMS level 1.123 dB lower. These measurements use raw levels, with no normalization, resampling or time stretching. Waveform phase is not independently calibrated. These differences remain material and are not a fidelity pass.
+
+The later [PCM/capture-level audit](PCM-INTERPOLATION-AND-CAPTURE-GAIN.md)
+identified a fixed `27/32` multiplier after `SCSP.RunSample()` in the selected
+unmodified Mednafen output path, equivalent to -1.475724 dB. All raw native
+captures include that factor. It is a separate analytic consideration when
+interpreting levels, not a reason to rescale delivered audio or alter the
+runtime to compensate for an emulator-specific factor. It does not remove
+the measured spectral, envelope, phase or control-model differences.
 
 ### Original-operator isolation
 

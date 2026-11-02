@@ -4,9 +4,61 @@ This directory can reproduce all reference assets and the independent host gates
 
 These tools are for development on a host computer. Nuked-OPM is never linked into the Saturn firmware. The native runtime generates FM with the SCSP and decodes original sample ADPCM; the WAVs below are comparison assets, not runtime music playback assets.
 
-## Primary board-clock reference
+## Current primary reference: coupled full-board model
 
-The clock audit found that the preserved A53 renderer advances Nuked-OPM at twice the rate implied by the original WWF board clock. Its exact hashes remain useful historical regression evidence; its pitch is not the absolute arcade reference. The primary reference now uses the verified YM external-clock divider and original initial-zero PCM16 samples. See [the complete clock audit](../../docs/ARCADE-CLOCK-AUDIT.md) and `clock-source-manifest.json` for primary-source commits, Git blob IDs and SHA256 hashes.
+New comparisons use `full-board`: the original complete Z80 program coupled to
+the pinned Nuked YM2151 with **Timer A and Timer B, busy/status and IRQ**, plus
+an original-ROM OKI model with busy bits and a global bank applied to every
+active encoded-byte fetch. This is the current software reference, not a
+physical arcade recording. Its instruction-level bus scheduling and digital
+sample/hold output remain explicit model limits.
+
+| Profile | Use and boundary |
+| --- | --- |
+| `full-board` / `full-board-sfx` | Current music/SFX reference; coupled original CPU, both YM timers, YM/OKI status and active global ROM banking |
+| `board-pcm16` | Preserved corrected-clock intermediate reference; Timer-B-only CPU/MMIO model and no original busy coupling |
+| `divider-only-pcm8` | Historical causal clock diagnostic; retains the partial A53 MMIO and PCM8 behavior |
+| A53 | Immutable historical prefix regression; doubled YM pitch and partial MMIO, not current arcade authority |
+| A15 SFX model | Historical command/PCM regression; 17 commands produce extra physical starts under F1, so it is not an audible acceptance oracle |
+
+Requirements: Python 3.10 or newer, a C99 host compiler and the original user
+ROM zip containing `31a11-2.ic42` and `31j10.ic73`. Input and pinned dependency
+SHA256 identities are verified. From `production`, use new private output
+directories:
+
+```sh
+python3 tools/reference/reproduce_full_board_references.py \
+  --rom-zip /path/to/01-wwfwfest.zip --out /path/to/private-full-board --jobs 2
+python3 tools/reference/verify_full_board_sfx.py \
+  --rom-zip /path/to/01-wwfwfest.zip --out /path/to/private-full-board-sfx --jobs 2
+python3 tools/reference/export_full_board_sfx.py \
+  --validation /path/to/private-full-board-sfx --out /path/to/private-full-board-sfx-wav
+```
+
+The music output contains 18 unnormalized 30-second mono PCM16/44.1 kHz WAVs.
+The SFX validator generates its original-ROM fixtures privately, checks the
+actual physical starts and preserves the comparison with the historical A15
+model; the exporter verifies every source PCM identity before writing WAVs.
+Both use the verified board clock, initial-zero OKI decode and documented
+nominal mix gains. See the [clock/MMIO audit](../../docs/ARCADE-CLOCK-AUDIT.md),
+[F1 audit](../../docs/F1-ROM-SEQUENCE-AUDIT.md) and
+[active-bank blocker](../../docs/ACTIVE-OKI-BANK-AUDIT.md).
+
+The current native engine does not reproduce the original global-bank case
+proved by the mixed replay. Successful isolated starts, sample hashes or native
+runtime counters therefore do not establish complete audible fidelity.
+
+All reproduction outputs must use new directories. The coupled C producer
+also refuses any existing output path, including when a recorded direct
+command bypasses the Python wrapper. The
+[output integrity and recovery audit](../../docs/REFERENCE-OUTPUT-INTEGRITY.md)
+records the preserved truncated attempts, separate exact-hash recoveries,
+causal overwrite regression and current full-board register-use summary.
+Historical command arguments must not be replayed into their original files.
+
+## Preserved intermediate board-clock reference: partial MMIO
+
+The clock audit found that the preserved A53 renderer advances Nuked-OPM at twice the rate implied by the original WWF board clock. Its exact hashes remain useful historical regression evidence; its pitch is not the absolute arcade reference. The following intermediate profile corrected the YM divider and PCM source while retaining the Timer-B-only MMIO model. It is preserved for causal comparisons; use the coupled profile above for current listening references. See [the complete clock audit](../../docs/ARCADE-CLOCK-AUDIT.md) and `clock-source-manifest.json` for primary-source commits, Git blob IDs and SHA256 hashes.
 
 Requirements: Python 3.10 or newer, a C99 host compiler (`cc` by default), and the original WrestleFest ROM zip containing `31a11-2.ic42` and `31j10.ic73`. Contents are identified by SHA256, so an unrelated or modified ROM fails before rendering.
 
@@ -25,7 +77,8 @@ This writes `wav/ARCADE-REFERENCIA-01.wav` through `-18.wav`, the unchanged orig
 
 ## Historical A53 and independent logic gates
 
-To reproduce the immutable historical baseline, all independent logic tests, and the 98 independent command-model effect references:
+To reproduce the immutable historical baseline, its independent logic tests,
+and the 98 historical command-model effects (including the known F1 mismatch):
 
 ```sh
 python3 tools/reference/reproduce_all_references.py \
@@ -123,18 +176,18 @@ Native captures and comparisons against the raw reference levels are a separate 
 
 ## Frozen native music matrix
 
-`tools/run_music_matrix.py` snapshots the complete production source, input resources, firmware and its symbols, BIOS, primary reference report and WAVs before building any command. It runs the selected standalone Mednafen on one or two supplied displays and retains a failed runtime result even if an audio pair can still be exported. The default runs at normal presentation speed. It does not change emulated hardware clocks.
+`tools/run_music_matrix.py` snapshots the complete production source, input resources, firmware and its symbols, BIOS, primary reference report and WAVs before building any command. It runs the selected standalone Mednafen on one to four supplied displays and retains a failed runtime result even if an audio pair can still be exported. The default runs at normal presentation speed. It does not change emulated hardware clocks.
 
 After sourcing the reproduced environment's `env.sh`, run from `production`:
 
 ```sh
 python3 tools/run_music_matrix.py \
-  --resources /path/to/private-board-reference/inputs \
+  --resources /path/to/private-full-board/inputs \
   --firmware /path/to/frozen-firmware/SCSP.ELF \
   --sdk /path/to/environment/sh2eb-elf \
   --environment-root /path/to/environment \
   --bios /path/to/user-owned/mpr-17933.bin \
-  --reference-report /path/to/private-board-reference/reference-report.json \
+  --reference-report /path/to/private-full-board/reference-report.json \
   --out /path/to/private-native-matrix \
   --profile-label exact-source-and-firmware-profile \
   --seconds 35 --displays 86,88
@@ -154,3 +207,60 @@ python3 tools/reference/analyze_original_feedback.py \
 ```
 
 The tool rejects altered dependencies or an incompatible first-note window. `feedback-interval-experiment.json` records all equality checks, exact rates, identities, spectral observations and limitations. The [clock and native audit](../../docs/ARCADE-CLOCK-AUDIT.md) relates this controlled experiment to the actual isolated Mednafen captures. No original note or instrument is replaced in production.
+## Full-board mixed replay and long-run scope
+
+Use the separate coupled profile for new listening comparisons. It executes
+the original full Z80 with pinned Nuked TimerA+B, YMbusy/status/IRQ and a
+ROM-addressed OKI model with busy bits and active global banking. Historical
+A53 and `board-pcm16` remain reproducible, with their narrower MMIO scope.
+
+```sh
+python3 tools/reference/reproduce_full_board_references.py \
+  --rom-zip /private-input/wwfwfest.zip --out /private-output/full-board --jobs 2
+python3 tools/reference/verify_full_board_sfx.py \
+  --rom-zip /private-input/wwfwfest.zip --out /private-output/full-board-sfx --jobs 2
+python3 tools/reference/export_full_board_sfx.py \
+  --validation /private-output/full-board-sfx --out /private-output/sfx-wav
+```
+
+Every output path must be new. `--opm-dir` can supply the already downloaded,
+hash-verified dependency. The new SFX fixture and all ROM-derived state/audio
+are generated privately. The gate compares actual native physical starts with
+full original execution; it catches17 extra starts that the preserved A15
+physical model makes under F1. See `docs/F1-ROM-SEQUENCE-AUDIT.md`.
+
+For an isolated native replay, supply its original request plan, completed
+build and capture to `reproduce_mix_reference.py`. That tool uses the measured
+API admissions, refuses simultaneous or overlapping unread NMI/latches,
+retains native runtime failures and musical lead, and exports complete and
+fixed30-second WAV pairs without gain, time stretching or waveform alignment.
+It does not reconstruct game video or PCB command timing.
+
+The600-second control detector and native long-matrix workflow are documented
+in `docs/MUSIC-STRUCTURE-AND-LONG-VALIDATION.md`. The detector's current evidence
+uses the historical TimerB-only model; its recurrence tiers do not prove PCM
+loops. Native stability results apply only to the exact frozen firmware/source
+profile captured. Full-board software references are not physical recordings.
+
+## Private PCM interpolation A/B
+
+`prepare_dsp_zoh_probe.py` constructs a private DSP-only ZOH variant and checks
+its exact integer arithmetic. `run_dsp_zoh_probe.py` freezes the source, builds
+both firmware variants, captures one original SFX command twice and verifies
+that every changed ELF byte is in the DSP program. Native F5 states also check
+the loaded programs, unchanged coefficients, registers, phase constants and
+PCM rings. The [experiment report](../../docs/PCM-INTERPOLATION-AND-CAPTURE-GAIN.md)
+gives the complete reproduction command, raw metrics and the separately
+identified Mednafen `27/32` output factor. This is a private experiment;
+production and the main acceptance matrices retain their frozen DSP profile.
+
+
+## Closed prolonged native result
+
+The [frozen candidate long-run report](../../docs/NATIVE-LONG-FINAL-CANDIDATE.md)
+records all 18 music windows of 600 seconds plus original fade/tail, the
+transition case, and independent v2 capture audits. Runtime acceptance fails:
+4 music cases pass, 14 music cases and the transition fail. Every selected
+capture has complete identity evidence; the two ENOSPC attempts and their
+unchanged-disc retries remain explicit. Final digital silence is not treated
+as a successful fade after a runtime fault.

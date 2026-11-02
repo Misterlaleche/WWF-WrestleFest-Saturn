@@ -34,9 +34,11 @@ def main():
     parser.add_argument('--package', type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument('--first', type=lambda s: int(s, 0), default=0x20)
     parser.add_argument('--last', type=lambda s: int(s, 0), default=0x81)
-    parser.add_argument('--jobs', type=int, choices=(1, 2), default=2)
+    parser.add_argument('--jobs', type=int, choices=(1, 2, 3, 4), default=2)
     parser.add_argument('--display', type=int, default=90)
     parser.add_argument('--presentation-speed', type=int, choices=(1, 4), default=1)
+    parser.add_argument('--reference-profile', choices=('sfx-model', 'full-board'),
+                        help='Defaults to full-board for the explicit full-board-sfx report; otherwise the historical A15 model')
     args = parser.parse_args()
     if not 0x20 <= args.first <= args.last <= 0x81:
         parser.error('Original SFX range is 0x20..0x81')
@@ -47,7 +49,14 @@ def main():
             setattr(args, key, value.resolve())
     args.out.mkdir(parents=True, exist_ok=False)
     reference = json.loads(args.reference_report.read_text())
-    originals = {item['command']: item for item in reference['commands']}
+    reference_profile = args.reference_profile or (
+        'full-board' if reference.get('profile') == 'full-board-sfx' else 'sfx-model')
+    if reference.get('profile') == 'full-board-sfx' and reference_profile != 'full-board':
+        parser.error('Do not relabel a full-board reference as the historical A15 model')
+    originals = {int(item['command'], 0) if isinstance(item['command'], str) else item['command']: item
+                 for item in reference['commands']}
+    emulator = args.environment_root / 'mednafen/bin/mednafen'
+    emulator_before = sha(emulator)
     package = args.out / 'source'
     source_hashes = snapshot_package(args.package, package)
     # Firmware, symbols and ROM-generated inputs are also immutable per matrix.
@@ -89,6 +98,7 @@ def main():
     report = {
         'kind': 'COLD_BOOT_NATIVE_SFX_MATRIX',
         'emulator': 'standalone Mednafen 1.32.1',
+        'emulator_sha256': emulator_before,
         'source_sha256_before': source_hashes,
         'source_snapshot': str(package),
         'source_origin': str(args.package),
@@ -97,7 +107,8 @@ def main():
         'reference_report_sha256': sha(args.reference_report),
         'presentation_speed_requested': args.presentation_speed,
         'range': [args.first, args.last],
-        'reference_scope': reference['kind'],
+        'reference_scope': reference.get('kind', reference.get('profile')),
+        'reference_profile': reference_profile,
         'ownership_scope': 'Direct diagnostic commands only; no new gameplay producer evidence',
         'commands': [],
         'hardware_status': 'HARDWARE PENDING',
@@ -137,7 +148,7 @@ def main():
         compare_command = [sys.executable, str(package / 'tools/compare_capture.py'),
                            '--capture', str(work / 'capture'), '--reference', str(source_wav),
                            '--build', str(work / 'build'), '--out', str(args.out / 'pairs'),
-                           '--command', hex(command), '--reference-profile', 'sfx-model']
+                           '--command', hex(command), '--reference-profile', reference_profile]
         comparison_code = None
         if gates.get('diagnostics', {}).get('state') == 4:
             with (work / 'comparison.log').open('w') as output:
@@ -176,10 +187,11 @@ def main():
     report['source_stable'] = report['source_sha256_after'] == source_hashes
     report['private_inputs_stable'] = all(
         sha(private_inputs / relative) == digest for relative, digest in input_identities.items())
+    report['emulator_stable'] = sha(emulator) == emulator_before
     report['errors'] = failures
     report['complete'] = len(report['commands']) == args.last - args.first + 1 and not failures
     report['all_runtime_gates_passed'] = (report['complete'] and report['source_stable'] and
-                                        report['private_inputs_stable'] and
+                                        report['private_inputs_stable'] and report['emulator_stable'] and
                                         all(c['passed_runtime_gates'] for c in report['commands']))
     report['all_pairs_available'] = (report['complete'] and
                                     all(c['listening_pair_available'] for c in report['commands']))

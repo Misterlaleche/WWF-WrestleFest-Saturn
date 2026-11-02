@@ -1,0 +1,41 @@
+{
+  "phase": "GREEN",
+  "tests": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "tests/test_output_preservation.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.025s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "tests/test_build_safety.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+    }
+  ],
+  "firmware_bytes": 53612,
+  "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "expected_firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "firmware_identical": true,
+  "firmware_build_report": "/workspace/scratch/46cef04a9eee/audio2-build/output-preservation-review/firmware/firmware-build.json",
+  "source_sha256": {
+    "tools/build_firmware.py": "83a78488222835c8b7accb3c2afd78667168c0502bb8e0597318906ac7ee9105",
+    "tools/generate_resources.py": "6efb41a27129c33eb39433f4fb8704d3b15f96ba8e0692958105bff040d63a06",
+    "tests/test_output_preservation.py": "15dbd37c79f2c6d21bd4bae30c646e4542683c61121daa6d171b35f17b1c186c"
+  },
+  "passed": true,
+  "callers_reviewed": [
+    "tools/reference/run_dsp_zoh_probe.py (fresh firmware-linear/firmware-zoh destinations)",
+    "tools/reference/prepare_reference_inputs.py (imports generate only; unchanged)"
+  ],
+  "runtime_or_integration_changes": false
+}

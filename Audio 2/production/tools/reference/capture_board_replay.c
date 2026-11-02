@@ -7,6 +7,26 @@
 #undef main
 #include "opm.h"
 #include "reference_oki.h"
+#include <errno.h>
+#include <sys/stat.h>
+
+/* Recorded commands may be replayed without the Python new-directory guard.
+ * Refuse every existing output before opening any of them; exclusive fopen
+ * modes below also protect against a path appearing after this preflight. */
+static int board_outputs_are_new(char **argv)
+{
+    for(unsigned i=5;i<=8;i++){
+        for(unsigned j=5;j<i;j++)if(!strcmp(argv[i],argv[j])){
+            fprintf(stderr,"Duplicate output path: %s\n",argv[i]);return 0;
+        }
+        struct stat status;
+        if(!stat(argv[i],&status)){
+            fprintf(stderr,"Refusing existing output: %s\n",argv[i]);return 0;
+        }
+        if(errno!=ENOENT){fprintf(stderr,"Cannot establish new output: %s\n",argv[i]);return 0;}
+    }
+    return 1;
+}
 
 enum {PROFILE_FULL,PROFILE_MASK_A,PROFILE_A53_MMIO};
 typedef struct {uint64_t sample;unsigned word;} board_command_t;
@@ -86,6 +106,12 @@ static void board_write(void *user,uint16_t address,uint8_t value)
 static void board_step(board_t *b)
 {
     wf_ctx_t *c=&b->original;
+    /* Original C049+voice is a sequence suppression latch, independent of the
+     * physical OKI busy bit. Observe the actual JP NZ,0523 before executing it. */
+    if(b->capturing&&c->cpu.pc==0x047f&&!c->cpu.zf){
+        unsigned voice=c->ram[0x3d];
+        if(voice<3)loge(c,"F1SKIP",(voice<<8)|c->ram[0x49+voice],c->cpu.d);
+    }
     if(b->profile!=PROFILE_A53_MMIO){
         unsigned status=OPM_Read(&b->opm,1)&3;
         unsigned irq=b->profile==PROFILE_MASK_A?(status&2):OPM_ReadIRQ(&b->opm);
@@ -104,6 +130,7 @@ int main(int argc,char **argv)
     if(argc!=10){fprintf(stderr,"usage: %s SOUND.ROM SAMPLES.ROM SCHEDULE.csv SECONDS TRACE.csv PCM16BE REPORT.json DELIVERIES.csv PROFILE(full|mask-a|a53-mmio)\n",argv[0]);return 2;}
     unsigned seconds=(unsigned)strtoul(argv[4],NULL,0);
     if(!seconds||seconds>1800||sizeof(unsigned long)<8)return 2;
+    if(!board_outputs_are_new(argv))return 8;
     board_command_t commands[4096];unsigned count=0;char line[256];
     FILE *schedule=fopen(argv[3],"r");if(!schedule)return 3;
     while(fgets(line,sizeof line,schedule)){
@@ -119,8 +146,8 @@ int main(int argc,char **argv)
     else if(!strcmp(argv[9],"mask-a"))b->profile=PROFILE_MASK_A;
     else if(!strcmp(argv[9],"a53-mmio"))b->profile=PROFILE_A53_MMIO;
     else return 2;
-    wf_ctx_t *c=&b->original;c->log=fopen(argv[5],"w");b->pcm=fopen(argv[6],"wb");
-    FILE *report=fopen(argv[7],"w");b->deliveries=fopen(argv[8],"w");
+    wf_ctx_t *c=&b->original;c->log=fopen(argv[5],"wx");b->pcm=fopen(argv[6],"wbx");
+    FILE *report=fopen(argv[7],"wx");b->deliveries=fopen(argv[8],"wx");
     if(!c->log||!b->pcm||!report||!b->deliveries)return 5;
     fprintf(c->log,"cycle,kind,a,b\n");fprintf(b->deliveries,"index,delivery_relative_cycle,latch_read_relative_cycle\n");
     OPM_Reset(&b->opm,opm_flags_none);reference_oki_reset(&b->oki,samples,0x80000);
@@ -151,6 +178,8 @@ int main(int argc,char **argv)
         (unsigned long long)b->irq_a,(unsigned long long)b->irq_b,
         (unsigned long long)b->oki.bank_changes_while_active,(unsigned long long)b->oki.ignored_busy_starts,
         (unsigned long long)b->oki.invalid_starts);
-    fclose(c->log);fclose(b->pcm);fclose(report);fclose(b->deliveries);
+    int close_failed=fclose(c->log)!=0;
+    close_failed|=fclose(b->pcm)!=0;close_failed|=fclose(report)!=0;close_failed|=fclose(b->deliveries)!=0;
+    if(close_failed){fprintf(stderr,"Reference output close failure\n");free(samples);free(b);return 10;}
     free(samples);free(b);return valid?0:7;
 }

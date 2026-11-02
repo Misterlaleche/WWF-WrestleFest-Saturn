@@ -1,0 +1,56 @@
+{
+  "kind": "COMMAND01_THIRTY_SECOND_COUPLED_MMIO_CAUSAL_AUDIT",
+  "comparisons": [
+    {
+      "left": "a53-mmio",
+      "right": "mask-a",
+      "common_YM_non14_write_count": 54469,
+      "common_values_order_equal": true,
+      "counts": [
+        54469,
+        54470
+      ],
+      "cycle_delta_min": -1607,
+      "cycle_delta_max": -13,
+      "cycle_delta_last_common": -231,
+      "raw_PCM_different_frames": 1318075,
+      "raw_PCM_rms_error_units": 474.42362684603995,
+      "raw_PCM_correlation": 0.9718818628785815
+    },
+    {
+      "left": "mask-a",
+      "right": "full",
+      "common_YM_non14_write_count": 54470,
+      "common_values_order_equal": true,
+      "counts": [
+        54470,
+        54470
+      ],
+      "cycle_delta_min": -121,
+      "cycle_delta_max": 331,
+      "cycle_delta_last_common": -43,
+      "raw_PCM_different_frames": 1294341,
+      "raw_PCM_rms_error_units": 266.28545500929766,
+      "raw_PCM_correlation": 0.991142424603665
+    },
+    {
+      "left": "a53-mmio",
+      "right": "full",
+      "common_YM_non14_write_count": 54469,
+      "common_values_order_equal": true,
+      "counts": [
+        54469,
+        54470
+      ],
+      "cycle_delta_min": -1440,
+      "cycle_delta_max": 168,
+      "cycle_delta_last_common": -274,
+      "raw_PCM_different_frames": 1318128,
+      "raw_PCM_rms_error_units": 488.6544195069801,
+      "raw_PCM_correlation": 0.9701732370161344
+    }
+  ],
+  "full_current_pcm_matches_initial_experiment": true,
+  "old_board_pcm_matches_compatibility": true,
+  "full_reference_report_sha256": "62aa5ad3ea9a39b201aa2dc36e0cf20dc3798ba67c4f7b78c14564df92f144a7"
+}

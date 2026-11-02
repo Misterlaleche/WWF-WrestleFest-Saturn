@@ -46,6 +46,95 @@ def elf_loads(path):
             yield p, data[p[1]:p[1] + p[4]]
 
 
+def elf_sections(path, machine):
+    """Read the linked ELF itself; detached symbol JSON is never authority."""
+    data = Path(path).read_bytes()
+    if (len(data) < 52 or data[:7] != b'\x7fELF\x01\x02\x01' or
+            struct.unpack_from('>HHI', data, 16) != (2, machine, 1)):
+        raise ValueError('Expected a linked native ELF32 big-endian executable')
+    table = struct.unpack_from('>I', data, 32)[0]
+    stride, count = struct.unpack_from('>HH', data, 46)
+    if stride != 40 or not count or table + stride * count > len(data):
+        raise ValueError('Missing or truncated native ELF sections')
+    sections = [struct.unpack_from('>10I', data, table + i * stride) for i in range(count)]
+    for section in sections:
+        if section[1] != 8 and section[4] + section[5] > len(data):
+            raise ValueError('Native ELF section exceeds file bounds')
+    return data, sections
+
+
+def verify_symbols(path, machine, sidecar, required):
+    data, sections = elf_sections(path, machine)
+    found = {name: set() for name in required}
+    for section in sections:
+        if section[1] != 2:
+            continue
+        if section[9] != 16 or section[5] % 16 or section[6] >= len(sections):
+            raise ValueError('Invalid native ELF symbol table')
+        strings = sections[section[6]]
+        if strings[1] != 3:
+            raise ValueError('ELF symbol names are not in a string table')
+        names = data[strings[4]:strings[4] + strings[5]]
+        for at in range(section[4], section[4] + section[5], 16):
+            name_at, value, _, info, _, index = struct.unpack_from('>IIIBBH', data, at)
+            end = names.find(b'\0', name_at)
+            if name_at >= len(names) or end < name_at:
+                raise ValueError('Invalid ELF symbol name')
+            name = names[name_at:end].decode('ascii')
+            # Include local/LTO symbols when explicitly requested. Reject an
+            # ambiguous same-name definition rather than choosing one by order.
+            if name in found and index and info & 15 not in (3, 4):
+                found[name].add(value)
+    verified = {}
+    for name, values in found.items():
+        if len(values) != 1:
+            raise ValueError('Missing or ambiguous native ELF symbol: ' + name)
+        value = next(iter(values))
+        if type(sidecar.get(name)) is not int or sidecar[name] != value:
+            raise ValueError('Symbol sidecar disagrees with actual ELF: ' + name)
+        verified[name] = value
+    return verified, {'elf': str(path), 'elf_sha256': digest(data),
+                      'verified_values': verified, 'verified': True}
+
+
+def immutable_master_sections(path):
+    data, sections = elf_sections(path, 42)
+    # Writable executable sections can also hold live shared data. Only
+    # allocated, nonwritable executable bytes are immutable at section scope.
+    return [(s[3], data[s[4]:s[4] + s[5]]) for s in sections
+            if s[1] == 1 and s[5] and s[2] & 6 == 6 and not s[2] & 1]
+
+
+def comparable_audio_work(audio):
+    """Keep worker survival separate from delivered work and native integrity."""
+    diag = audio.get('diagnostics', {})
+    native = audio.get('native_audio_counters', {})
+    operational = (diag.get('enabled') == 1 and diag.get('boot_success') == 1 and
+                   diag.get('api_state') == 2 and diag.get('worker_state') == 2 and
+                   diag.get('api_error') == 0 and diag.get('worker_error') == 0 and
+                   diag.get('first_audio_fault_vblank') == 0)
+    produced = diag.get('produced')
+    requested = (type(produced) is int and produced >= 0 and
+                 produced == len(audio.get('producer_events', [])) and
+                 diag.get('accepted') == produced and diag.get('queue_completed') == produced and
+                 all(diag.get(name) == 0 for name in
+                     ('queue_used', 'queue_overflows', 'unsupported', 'skipped')))
+    zero = all(native.get(name) == 0 for name in
+               ('fm_discarded_events', 'fm_discarded_batches', 'fm_rejected_events',
+                'ring_rejected_events', 'sfx_underruns_32bit', 'sfx_fault',
+                'transport_late_16bit', 'invalid_fm_batch_16bit', 'music_shared_error'))
+    zero = (zero and native.get('sfx_bound') == 1 and native.get('mail_state') == 2 and
+            native.get('music_shared_state') == 2)
+    immutable = all(isinstance(audio.get(name), list) and bool(audio[name]) and
+                    all(item.get('loaded_bytes_match') is True for item in audio[name])
+                    for name in ('loaded_master_executable_sections',
+                                 'loaded_module_segments', 'loaded_firmware_segments'))
+    return {'audio_remained_operational': operational,
+            'requested_work_integrity': requested,
+            'zero_loss_and_deadlines': zero,
+            'immutable_code_verified': immutable}
+
+
 def percentile(histogram, p):
     target = math.ceil(sum(histogram) * p / 100)
     seen = 0
@@ -94,6 +183,17 @@ def inspect(profile, a, read_state, master, module, build, layout, sfx_layout):
     if capture_report['frame_skip']:
         raise ValueError('Frame skipping is not a valid comparison')
     wram = (capture / 'WorkRAMH-saturn-order.bin').read_bytes()
+    artifact = build.get('artifact_basename', 'AUDIO2TAG')
+    profile_elf = a.build / 'profiles' / profile / (artifact + '.ELF')
+    if file_digest(profile_elf) != build['pairs'][profile][artifact + '.ELF']:
+        raise ValueError('Actual master ELF differs from build identity')
+    if capture_report.get('cue_sha256') != build['pairs'][profile][artifact + '.cue']:
+        raise ValueError('Capture CUE differs from build identity')
+    captured_discs = capture_report.get('disc_images', [])
+    if (len(captured_discs) != 1 or
+            Path(captured_discs[0]['path']).name != artifact + '.iso' or
+            captured_discs[0]['sha256'] != build['pairs'][profile][artifact + '.iso']):
+        raise ValueError('Captured disc does not match the built profile')
 
     def memory(symbol, length):
         offset = (master[symbol] & 0x1fffffff) - 0x06000000
@@ -147,6 +247,15 @@ def inspect(profile, a, read_state, master, module, build, layout, sfx_layout):
               'capture_final_watches': capture_report['final_watch_values'],
               'emulator_sha256': capture_report['emulator_sha256'],
               'bios_sha256': capture_report['bios_sha256']}
+    master_checks = []
+    for address, expected in immutable_master_sections(profile_elf):
+        offset = (address & 0x1fffffff) - 0x06000000
+        if not 0 <= offset <= len(wram) - len(expected):
+            raise ValueError('Immutable master executable section is outside captured HWRAM')
+        actual = wram[offset:offset + len(expected)]
+        master_checks.append({'address': address, 'bytes': len(expected),
+                              'sha256': digest(expected), 'loaded_bytes_match': actual == expected})
+    result['loaded_master_executable_sections'] = master_checks
     if profile == 'audio2':
         metadata, sections = read_state(capture_report['native_state']['path'])
         vram, vdp2, scsp = sections['VDP1']['VRAM'], sections['VDP2']['VRAM'], sections['SCSP']['RAM']
@@ -177,8 +286,7 @@ def inspect(profile, a, read_state, master, module, build, layout, sfx_layout):
             {'address': segment[2], 'bytes': len(payload), 'sha256': digest(payload),
              'loaded_bytes_match': scsp[segment[2]:segment[2]+len(payload)] == payload}
             for segment, payload in firmware_loads if payload]
-        fsymbols = load(a.firmware_symbols)
-        base = fsymbols['wf_sfx_engine']
+        base = a.verified_firmware_symbols['wf_sfx_engine']
         counters = {}
         for symbol in ('_wf_music_fm_discarded_events', '_wf_music_fm_discarded_batches',
                        '_wf_music_fm_rejected_events', '_wf_music_ring_rejected_events'):
@@ -226,13 +334,39 @@ def main():
     spec = importlib.util.spec_from_file_location('audio_capture_reader', a.capture_analyzer)
     capture_reader = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(capture_reader)
-    master, module = load(a.build / 'master-symbols.json'), load(a.build / 'module-symbols.json')
     build = load(a.build / 'integration-build.json')
     royal = build.get('scenario') == 'royal'
     if royal != bool(a.input_policy):
         raise ValueError('Royal requires its actual input policy; TAG requires its recorded input tape')
     if file_digest(a.firmware) != build['firmware_sha256']:
         raise ValueError('Requested firmware is not the firmware recorded in this build')
+    artifact = build.get('artifact_basename', 'AUDIO2TAG')
+    master_names = ('_rt', '_wf_audio2_cadence', '_wf_audio2_integration_diag',
+                    '_wf_audio2_game_trace', '___audio2_hot_start', '___audio2_hot_end',
+                    '___audio2_slave_stack_bottom', '___audio2_slave_stack_top', '___end')
+    module_names = ('_wf_music_fm_discarded_events', '_wf_music_fm_discarded_batches',
+                    '_wf_music_fm_rejected_events', '_wf_music_ring_rejected_events')
+    symbol_proof = {}
+    master_sidecar = load(a.build / 'master-symbols.json')
+    for profile in ('control', 'audio2'):
+        master, symbol_proof[profile] = verify_symbols(
+            a.build / 'profiles' / profile / (artifact + '.ELF'), 42, master_sidecar, master_names)
+    for key, symbol in (('hot_start', '___audio2_hot_start'), ('hot_end', '___audio2_hot_end'),
+                        ('slave_stack_bottom', '___audio2_slave_stack_bottom'),
+                        ('slave_stack_top', '___audio2_slave_stack_top'), ('user_heap_start', '___end')):
+        if build[key] != master[symbol]:
+            raise ValueError('Memory ownership manifest disagrees with actual master ELF: ' + key)
+    module_debug = a.build / 'module/MUSIC4.DEBUG.ELF'
+    module, symbol_proof['module'] = verify_symbols(
+        module_debug, 42, load(a.build / 'module-symbols.json'), module_names)
+    # Packing changes file offsets and p_align, never destination, size, flags
+    # or any payload byte. Bind counter symbols from DEBUG to the loaded file.
+    def load_signature(path):
+        return [(segment[2:7], digest(payload)) for segment, payload in elf_loads(path)]
+    if load_signature(module_debug) != load_signature(a.build / 'cd/MUSIC4.ELF'):
+        raise ValueError('Symbol-bearing module differs from packed load payloads')
+    a.verified_firmware_symbols, symbol_proof['firmware'] = verify_symbols(
+        a.firmware, 4, load(a.firmware_symbols), ('wf_sfx_engine',))
     layout = fields(a.game_layout.read_bytes(), ('actors_offset', 'actor_bytes', 'actor_slots',
                     'frame_offset', 'mode_offset', 'progression_offset', 'runtime_bytes'))
     sfx_layout = fields(a.sfx_layout.read_bytes(), ('sfx_size', 'underruns', 'frames', 'ticks',
@@ -241,23 +375,32 @@ def main():
                 for name in ('control', 'audio2')}
     control, audio = profiles['control'][0], profiles['audio2'][0]
     cv, av = control['cadence']['elapsed_vblanks'], audio['cadence']['elapsed_vblanks']
-    active_audio = (audio['diagnostics']['boot_success'] == 1 and
-                    audio['diagnostics']['api_state'] == 2 and
-                    audio['diagnostics']['worker_state'] == 2 and
-                    not audio['diagnostics']['api_error'] and
-                    not audio['diagnostics']['worker_error'] and
-                    not audio['diagnostics']['skipped'])
-    result = {'scope': 'frozen performance/integration evidence; no fidelity acceptance',
+    integrity = comparable_audio_work(audio)
+    integrity['immutable_code_verified'] = (integrity['immutable_code_verified'] and
+        bool(control['loaded_master_executable_sections']) and
+        all(x['loaded_bytes_match'] for x in control['loaded_master_executable_sections']))
+    endpoint = build.get('expected_gameplay_endpoint', 8474 if royal else 7372)
+    full_endpoint = all(p['game_frame'] == endpoint and p['cadence']['logical_steps'] == endpoint
+                        for p in (control, audio))
+    same_work = all(profiles['control'][i] == profiles['audio2'][i] for i in (1, 2, 3))
+    same_machine = all(control[k] == audio[k] for k in ('emulator_sha256', 'bios_sha256'))
+    comparable = all(integrity.values()) and full_endpoint and same_work and same_machine
+    result = {'analysis_schema_version': 2,
+              'analyzer_sha256': file_digest(__file__),
+              'scope': 'frozen performance/integration evidence; no fidelity acceptance',
               'input_tape_sha256': file_digest(a.input_tape) if a.input_tape else None,
               'input_policy_sha256': file_digest(a.input_policy) if a.input_policy else None,
               'input_evidence': ('Same original state-dependent Royal policy and released physical controls. Complete per-call input bytes were not recorded; endpoint/event equality is checked separately.'
                                  if royal else 'Same immutable logical-frame TAG input tape.'),
               'game_layout': layout,
+              'symbol_verification': symbol_proof,
+              'immutable_code_scope': 'Nonwritable allocated master executable sections, complete module file payloads, and complete firmware file payloads; mutable shared state is excluded.',
               'firmware_sha256': file_digest(a.firmware), 'build': build,
               'profiles': {name: data[0] for name, data in profiles.items()},
               'pair': {'runtime_byte_identical': profiles['control'][1] == profiles['audio2'][1],
-                       'audio_remained_operational': active_audio,
-                       'full_match_audio_cost_comparable': active_audio,
+                       **integrity,
+                       'requested_logical_endpoint_reached': full_endpoint,
+                       'full_match_audio_cost_comparable': comparable,
                        'actors_byte_identical': profiles['control'][2] == profiles['audio2'][2],
                        'producer_events_identical': profiles['control'][3] == profiles['audio2'][3],
                        'emulator_identical': control['emulator_sha256'] == audio['emulator_sha256'],
@@ -266,7 +409,7 @@ def main():
                        'additional_combat_vblanks': av - cv,
                        'additional_combat_time_percent': 100 * (av - cv) / cv,
                        'logical_throughput_change_percent': 100 * (cv / av - 1)},
-              'timing_note': 'Combat window uses cadence first/last VBlank, excluding boot. If audio_remained_operational is false, throughput includes time after audio failed and cannot certify the cost of sustained audio. API mail latency uses16667 nominal microseconds per VBlank and is quantized, not precise jitter.'}
+              'timing_note': 'Combat window uses cadence first/last VBlank, excluding boot. Rates remain observed facts when full_match_audio_cost_comparable is false, but cannot certify the cost of complete, zero-loss, on-time audio work. API worker survival alone is insufficient. If audio_remained_operational is false, the mean also includes time after the worker failed. API mail latency uses16667 nominal microseconds per VBlank and is quantized, not precise FM/DAC jitter.'}
     a.out.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'pair': result['pair'], 'profiles': {name: {'cadence': data['cadence'],
           'diagnostics': data['diagnostics'], 'audio_counters': data.get('native_audio_counters')}

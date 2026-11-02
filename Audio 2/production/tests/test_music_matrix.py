@@ -34,4 +34,11 @@ class LongMatrixChecks(unittest.TestCase):
         self.assertFalse(matrix.inspect_replay_rows([(1,0,60,0),(0x1f,44100,120,1)],events)['passed'])
         self.assertFalse(matrix.inspect_replay_rows([(1,0,60,0),(0x1f,46000,120,0)],events)['passed'])
 
+    def test_unwritten_ram_does_not_count_as_an_accepted_command(self):
+        events=[{'sample':0,'word':1},{'sample':44100,'word':0x1f}]
+        partial=matrix.inspect_replay_rows([(1,0,60,0),(0,0,0,0)],events)
+        self.assertFalse(partial['passed'])
+        self.assertFalse(partial['gates']['all_rows_present'])
+        self.assertFalse(partial['gates']['all_results_accepted'])
+
 if __name__=='__main__':unittest.main()

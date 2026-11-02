@@ -1,0 +1,83 @@
+{
+  "build": {
+    "profile": "isolated-static-HWRAM",
+    "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+    "command": 4,
+    "seconds": 138,
+    "hot_bytes": 14096,
+    "diag_address": 638239868,
+    "replay": {
+      "sha256": "f8939a69a76785d519141e0bdf4fa99e42f5b6bd11ae2de6ee6f69ea31d591cb",
+      "events": 64,
+      "source": "/workspace/scratch/46cef04a9eee/audio2-build/combat-replay/replay.json",
+      "scope": "Diagnostic replay of all observed original TAG commands at the documented arcade logical cadence. No game producer is added, and this is not an arcade gameplay capture."
+    },
+    "harness": "saturn_harness.c",
+    "hardware_status": "HARDWARE PENDING",
+    "files": {
+      "AUDIO2.ELF": {
+        "bytes": 1114544,
+        "sha256": "3385acf516e5f7caac9d626712cbf8e2b7471b31b9cdab5f16d3970d8a335caa"
+      },
+      "AUDIO2.map": {
+        "bytes": 727211,
+        "sha256": "2384ca3b88b19416df44e0c01e5e0e23284c3288dccef45e990b040fef1365e1"
+      },
+      "AUDIO2.bin": {
+        "bytes": 690600,
+        "sha256": "1a74c17e0054386af73d4101348fd0ad8c9974e849a8007c6ed3d4caf2db1ec5"
+      },
+      "AUDIO2.iso": {
+        "bytes": 1073152,
+        "sha256": "97339d2bbb8f55379b6c24fae9c4d92695b3b73bf4c5f954217cf3bdb99efad6"
+      },
+      "AUDIO2.cue": {
+        "bytes": 69,
+        "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      }
+    }
+  },
+  "gates": {
+    "real_module_entered": true,
+    "requested_window_completed": true,
+    "no_reported_worker_error": true,
+    "no_reported_api_error": true,
+    "no_reported_fm_discard": true,
+    "no_reported_rejected_events": true,
+    "no_reported_pcm_underrun": true,
+    "no_reported_transport_lateness": false,
+    "worker_still_running": true,
+    "native_still_ready": true,
+    "all_replay_words_accepted": true
+  },
+  "diagnostics": {
+    "magic": 1464222002,
+    "state": 4,
+    "videoFrames": 8469,
+    "error": 0,
+    "commandStartFrame": 209,
+    "musicState": 2,
+    "musicEvents": 10684,
+    "batchB03A": 0,
+    "lateB028": 2,
+    "sfxUnderruns32": 0,
+    "lastCommand": 4,
+    "DSPclock16": 12441,
+    "diagAddress": 638239868,
+    "mailState": 2,
+    "FMdiscardEvents": 0,
+    "discardBatches": 0,
+    "rejectedFM": 0,
+    "ringRejected": 0,
+    "SCSPelapsed": 6088747,
+    "APIstate": 2,
+    "APIerror": 0,
+    "commandDSPclock": 18542,
+    "replayAccepted": 64,
+    "replayExpected": 64
+  },
+  "passed": false,
+  "scope": "One isolated native capture; not gameplay, waveform fidelity or hardware certification.",
+  "hardware_status": "HARDWARE PENDING",
+  "original_report_sha256": "f0ad9b8f6c102e284d73a8e1bd36ac3bbec1fd6474ca4ed304c61b91041e3b1b"
+}

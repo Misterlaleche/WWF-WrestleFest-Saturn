@@ -6,13 +6,15 @@ API pública versión1; candidato nativo en validación. No integrar como audio 
 
 La unidad de entrega es esta carpeta. Ningún paso necesita recuperar código musical de documentación antigua. Los recursos protegidos se generan desde `wwfwfest.zip` del propietario. El secuenciador no admite una ROM parecida: verifica la identidad del controlador usado por sus optimizaciones.
 
+**Bloqueos actuales de integración final:** el banco OKI de una voz activa no sigue todavía el comportamiento global del original; hay fallos nativos de plazo, underrun y transición, y no se ha aprobado el coste sostenido en combate. Las pruebas y sus perfiles exactos están en la auditoría. No corresponde a Codex ocultar estas diferencias cambiando productores, eliminando notas o ampliando tolerancias.
+
 ## API que debe usar el juego
 
 Incluir `include/wf_audio2.h`; compilar con los directorios `include/` y `src/` en la búsqueda de cabeceras. El ejecutable de prueba completo está en `tests/saturn_harness.c` y muestra los callbacks reales de Yaul.
 
 | Función | Contrato |
 |---|---|
-| `wf_audio2_init(context, config)` | Inicialización fría, antes de habilitar productores. Valida recursos/ventanas, arranca 68000, carga SFX, lanza el worker y devuelve STARTING. Puede esperar durante SMPC/arranque; nunca llamarla desde combate o VBlank. |
+| `wf_audio2_init(context, config)` | Inicialización fría, antes de habilitar productores. Valida recursos/ventanas, arranca 68000, carga SFX y lanza el worker. Devuelve `true` y deja el estado en STARTING si acepta el arranque inicial. Puede esperar durante SMPC/arranque; nunca llamarla desde combate o VBlank. |
 | `wf_audio2_command(context, original_word)` | Publica un comando original sin esperar su ACK. Usa el byte bajo; conserva la palabra completa para SFX/diagnóstico. Devuelve ACCEPTED, BUSY, NOT_READY, UNSUPPORTED o FAILED. |
 | `wf_audio2_service(context)` | Trabajo acotado en el contexto normal del master: ACK, errores, inicio/parada y watchdog. No interpreta Z80 ni sintetiza audio. |
 | `wf_audio2_vblank(context, video_frame)` | Única operación de audio permitida en VBlank: publicar el contador de vídeo de16bits. No copiar datos ni esperar SMPC. |
@@ -77,7 +79,8 @@ python tools/build_saturn.py --out "$WF_AUDIO_BUILD/music01" \
 python tools/run_host_tests.py --rom-zip /ruta/wwfwfest.zip \
   --resources "$WF_AUDIO_BUILD/resources" --firmware "$WF_AUDIO_BUILD/firmware/SCSP.ELF" \
   --out "$WF_AUDIO_BUILD/host-tests" --seconds 600
-python tools/reference/reproduce_all_references.py --help
+python tools/reference/reproduce_full_board_references.py --help
+python tools/reference/verify_full_board_sfx.py --help
 python tools/run_native_test.py --build "$WF_AUDIO_BUILD/music01" \
   --environment-root "$WF_AUDIO_ENV" --bios /ruta/mpr-17933.bin \
   --out "$WF_AUDIO_BUILD/captures/music01" --display 86 --wall-seconds 90
@@ -94,3 +97,5 @@ Los errores de FM tardío, FIFO lleno, transporte lleno y key tardío son15/16/1
 La API diferencia fallo de worker, fallo nativo, timeout de mailbox, timeout de inicio/parada, protocolo y estancamiento de worker/DSP. El watchdog usa120 VBlanks con comparación modular y una lectura ordenada de los stamps. Tras FAULT se solicita salida, y ninguna nueva configuración puede eludir la comprobación del worker anterior.
 
 Guardar estado y contadores antes de recuperar: una preparación nueva reinicia las métricas de la nueva generación. No volver a declarar RUNNING para continuar una secuencia que ya perdió datos.
+
+`wf_audio2_status()` informa del transporte y de los fallos de API/worker; por sí solo no certifica cero underruns. Las herramientas de validación leen también el contador real de 32 bits de `wf_sfx_engine`, identificado mediante los símbolos del firmware exacto, y los contadores de retraso y FM. El campo de 16 bits del mailbox es una observación parcial, actualizada al atender comandos. No usar su cero como prueba de continuidad PCM. La instrumentación de aceptación debe conservar estas lecturas hasta que exista un contrato público de telemetría que cubra el contador completo sin depender del mapa del ELF.

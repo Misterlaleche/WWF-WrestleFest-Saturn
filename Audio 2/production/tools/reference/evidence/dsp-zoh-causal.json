@@ -1,0 +1,84 @@
+{
+  "kind": "ONE_ORIGINAL_SFX_NATIVE_INTERPOLATION_CAUSAL_EXPERIMENT",
+  "command": 33,
+  "linear_firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "zoh_firmware_sha256": "4bd228d923d05b8c264d5e11c3ef1fe8f70c95bd3b935c848faa86653f5ad10a",
+  "different_elf_bytes": 89,
+  "dsp_program_file_range": [
+    16232,
+    17256
+  ],
+  "gates": {
+    "all_firmware_changes_inside_dsp_program": true,
+    "native_programs_match_their_elf": true,
+    "same_original_reference": true,
+    "same_emulator": true,
+    "same_64_native_coefficients": true,
+    "same_native_slot_registers": true,
+    "same_native_address_registers": true,
+    "same_all_four_final_pcm_ring_bytes": true,
+    "same_native_phase_clock_constants": true,
+    "both_runtime_pass": true,
+    "sources_and_inputs_stable": true
+  },
+  "isolated_experiment_valid": true,
+  "metrics": {
+    "linear": {
+      "reference_rms_dbfs": -37.865097890915706,
+      "saturn_rms_dbfs_analysis_mono": -39.43477018148732,
+      "saturn_minus_reference_rms_db": -1.56967229057162,
+      "reference_peak": 12661,
+      "saturn_peak": 10490,
+      "raw_waveform_correlation": 0.6530959327466027,
+      "raw_waveform_error_rms": 0.009907791169801455,
+      "envelope_10ms_correlation": 0.9986944935845325,
+      "envelope_best_lag_ms_diagnostic_only": 0,
+      "spectral_centroid_reference_hz": 141.64687146392433,
+      "spectral_centroid_saturn_hz": 107.53657689009984,
+      "spectral_log_power_rmse_db_40_to_16000hz": 17.08232187092078,
+      "clipped_reference_samples": 0,
+      "clipped_saturn_samples": 0
+    },
+    "zoh": {
+      "reference_rms_dbfs": -37.865097890915706,
+      "saturn_rms_dbfs_analysis_mono": -39.325063761451155,
+      "saturn_minus_reference_rms_db": -1.45996587053545,
+      "reference_peak": 12661,
+      "saturn_peak": 10685,
+      "raw_waveform_correlation": 0.6163462344165901,
+      "raw_waveform_error_rms": 0.010433872337184964,
+      "envelope_10ms_correlation": 0.9992393887736254,
+      "envelope_best_lag_ms_diagnostic_only": 0,
+      "spectral_centroid_reference_hz": 141.64687146392433,
+      "spectral_centroid_saturn_hz": 145.2535857822657,
+      "spectral_log_power_rmse_db_40_to_16000hz": 2.8083345880489965,
+      "clipped_reference_samples": 0,
+      "clipped_saturn_samples": 0
+    }
+  },
+  "measured_zoh_minus_linear_rms_db": 0.10970642003617015,
+  "upstream_post_scsp_gain": {
+    "numerator": 27,
+    "denominator": 32,
+    "decibels": -1.4757242832183732,
+    "location": "selected Mednafen1.32.1 src/ss/sound.cpp RunSCSP, after SCSP.RunSample",
+    "source_sha256": "2e83769d98a737a9e277aab7a42c6b14686aa0eb5df84e16490ed4bc195f0bbb",
+    "scsp_source_sha256": "0a1e00647022c86c33edfa1601ae7a9fddde45884e34bf4a92015442e04f9906",
+    "scope": "Emulator digital output factor; not an assertion about original PCB or physical Saturn analog gain"
+  },
+  "zoh_rms_minus_analytic_backend_prediction_db": 0.01575841268292333,
+  "normalization": false,
+  "gain_adjustment_applied": false,
+  "output_pcm_modified": false,
+  "native_quantized_oki_hz": 7999.5849609375,
+  "nominal_oki_hz": 8000,
+  "native_vs_reference_phase_independently_calibrated": false,
+  "listening_files_sha256": {
+    "SATURN-EXPERIMENTO-LINEAR-0x21.wav": "7acfbcd9af376c83116c2412680ad5f6f614900583fac681613db47a30eb961e",
+    "SATURN-EXPERIMENTO-ZOH-0x21.wav": "0a77f931614a8b5b9cb4c052c0fab35dc232e3145bed4022df0ef202510ea8e4",
+    "ARCADE-REFERENCIA-SFX-0x21.wav": "856de6174a07f367cc1ce76f2320697270ab0edd6d14f82f9a8640d28001fbb5"
+  },
+  "runtime_scope": "One original cold-boot command only; no load/combat throughput improvement is claimed",
+  "production_installed": false,
+  "full_audio_fidelity_accepted": false
+}

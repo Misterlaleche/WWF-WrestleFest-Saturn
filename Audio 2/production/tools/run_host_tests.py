@@ -29,6 +29,8 @@ def main():
     run('resource_identity_and_corruption',[sys.executable,'-B','-m','unittest','discover','-s','tests','-p','test_resources.py'])
     run('build_input_aliases',[sys.executable,'-B','-m','unittest','discover','-s','tests','-p','test_build_safety.py'])
     run('source_profile_snapshot',[sys.executable,'-B','-m','unittest','discover','-s','tests','-p','test_source_snapshot.py'])
+    run('output_preservation',[sys.executable,'-B','-m','unittest','discover','-s','tests','-p','test_output_preservation.py'])
+    run('native_capture_evidence',[sys.executable,'-B','-m','unittest','discover','-s','tests','-p','test_native_capture_gate.py'])
     cases=[
       ('api',['tests/test_audio2_api.c','src/wf_audio2.c','src/wf_native_host.c','src/wf_native_elf.c','src/wf_scsp_sfx.c'],[],[a.firmware.resolve(),(a.resources/'SFX.DAT').resolve()]),
       ('module_deadlines',['tests/test_music_module_deadline.c','src/wf_music_seq.c','src/wf_scsp_ym.c','src/reference_driver/z80.c'],['-fno-pie','-no-pie'],[]),
@@ -36,6 +38,11 @@ def main():
       ('firmware_deadlines_no_timing',['tests/test_music_firmware_deadline.c','src/wf_scsp_sfx.c','src/wf_scsp_ym.c'],['-DWF_MUSIC_TIMING=0'],[]),
       ('sfx_refill_deadlines',['tests/test_sfx_refill_deadline.c','src/wf_scsp_sfx.c'],[],[])]
     for name,sources,flags,args in cases:
+        if 'src/wf_music_seq.c' in sources:
+            seq_object=out/(name+'-sequence.o')
+            seq_flags=['-Os' if x=='-O2' else x for x in common]
+            run('build_'+name+'_sequence',[*seq_flags,'-Werror',*flags,'-c','src/wf_music_seq.c','-o',seq_object],False)
+            sources=[seq_object if x=='src/wf_music_seq.c' else x for x in sources]
         exe=out/name;run('build_'+name,[*common,'-Werror',*flags,*sources,'-o',exe],False);run(name,[exe,*args])
     aliases=['z80_init=wf_ref_z80_init','z80_step=wf_ref_z80_step','z80_gen_nmi=wf_ref_z80_gen_nmi','z80_gen_int=wf_ref_z80_gen_int','z80_debug_output=wf_ref_z80_debug_output']
     defs=['-D'+v for v in aliases]
@@ -43,8 +50,11 @@ def main():
     run('build_original_z80',[*common,*defs,'-c','src/reference_driver/z80.c','-o',ref_z80],False)
     run('build_frozen_r01',[*common,*defs,'-Dwf_music_seq_init=wf_ref_init','-Dwf_music_seq_send=wf_ref_send','-Dwf_music_seq_run=wf_ref_run','-c','tests/oracle/wf_music_seq_r01.c','-o',ref_seq],False)
     exe=out/'seq_oracle'
+    candidate_seq=out/'candidate-sequence.o'
+    seq_flags=['-Os' if x=='-O2' else x for x in common]
+    run('build_native_sequence_Os',[*seq_flags,'-Werror','-DWF_MUSIC_NATIVE_CONTROL=1','-c','src/wf_music_seq.c','-o',candidate_seq],False)
     run('build_serviced_native_oracle',[*common,'-Werror','-Wno-unused-const-variable','-Wno-unused-function','-Wno-misleading-indentation','-DWF_MUSIC_NATIVE_CONTROL=1',
-        'tests/test_music_seq_service.c','src/wf_music_seq.c','src/reference_driver/z80-native.c','src/reference_driver/z80-cold.c',ref_z80,ref_seq,'-o',exe],False)
+        'tests/test_music_seq_service.c',candidate_seq,'src/reference_driver/z80-native.c','src/reference_driver/z80-cold.c',ref_z80,ref_seq,'-o',exe],False)
     run('all18_full_z80_and_live_transitions',[exe,(a.resources/'SOUND.ROM').resolve(),a.seconds])
     after={str(q.relative_to(root)):sha(q) for q in sorted(files)}
     report['source_stable_during_tests']=before==after

@@ -2,7 +2,7 @@
 
 This directory binds Audio2 to the existing `wf_r18_scsp_*` audio hooks in a **new private copy** of the supplied WP1979 native game. It does not contain game sources, graphics, ROM data, BIOS data, firmware binaries or discs. Main, WP1979/80 and historical source exports remain unchanged.
 
-**Status: integration path reproduced; audio acceptance blocked.** The frozen firmware10 full TAG comparison preserves the complete game state and original audio producer sequence, but records 19 PCM underruns, 22 late events and a 4.6344% increase in combat time. It also predates the pending ROM-authoritative pitch correction. See `../docs/COMBAT-INTEGRATION-GATE.md`. A successful build or deterministic replay does not imply accepted audio.
+**Status: integration reproduced; selected audio and cadence gates failed.** The full 7372-step TAG pair with scalar9/sequence `-Os` and firmware `cddd1b01…` preserves the complete game state and all 64 original producers. It records 0 PCM underruns, 0 FM losses and **1 late event**, with **55.33036 logical steps/s** versus **57.90184** for control: 4.6475% more observed combat time. See `../docs/COMBAT-INTEGRATION-GATE.md` and `../evidence/tag7372-final-scalar9-cddd.v2.json`. V2 requires complete, zero-loss, on-time work and verified code before certifying cost comparability; worker survival alone is insufficient. A successful build or deterministic replay does not imply accepted audio.
 
 ## Ownership contract
 
@@ -52,10 +52,11 @@ python3 production/integration/capture_combat_pair.py \
 
 Choose an unused display. The tool records profiles sequentially and refuses to overwrite existing captures. `--prepare-only` emits the exact command vectors without launching the emulator. `--seconds` is a wall timeout including BIOS/CD startup; it is never a gameplay timing measurement. A timeout is not a successful replay.
 
-Compile the SFX observer layout against the **same frozen header** as the firmware. This records actual m68k ABI offsets, including the real 32-bit underrun counter; mailbox `C05A` is not that counter.
+Compile the SFX observer layout against the **same frozen header and macros** as the firmware. The example below matches selected firmware cddd's fast decoder and no-timing profile. This records actual m68k ABI offsets, including the real 32-bit underrun counter; mailbox `C05A` is not that counter.
 
 ```bash
 m68k-linux-gnu-gcc -m68000 -msoft-float -ffreestanding -fno-pic -fno-pie \
+  -DWF_SFX_FAST_68000=1 -DWF_MUSIC_TIMING=0 \
   -I /absolute/path/to/new-combat-build/audio2/src \
   -c production/tools/environment/src/sfx-layout.c \
   -o /absolute/path/to/new-combat-build/sfx-layout.o
@@ -73,7 +74,7 @@ python3 production/integration/analyze_combat_pair.py \
   --out /absolute/path/to/new-combat-build/comparison.json
 ```
 
-The analyzer verifies endpoint/cadence consistency, complete game state and actor equality, the full producer trace, actual loaded module/firmware bytes, counters, stack canary and recording sample timestamps. It rejects missed logical observations rather than inventing precise percentiles. It labels the output as evidence, never `PASS` or a fidelity certificate. At least 1000 complete stable game video intervals are required for the timing report.
+The analyzer verifies endpoint/cadence consistency, complete game state and actor equality, the full producer trace, actual loaded immutable master/module/firmware bytes, counters, stack canary and recording sample timestamps. Used symbols and owned addresses are checked against the actual linked ELF tables; detached symbol JSON alone is insufficient. V2 reports API survival, producer delivery, native loss/deadline integrity and immutable-code verification separately. `full_match_audio_cost_comparable` requires all of them and identical complete work; otherwise rates remain observations of a limited or faulty run. It rejects missed logical observations rather than inventing precise percentiles. It labels the output as evidence, never `PASS` or a fidelity certificate. At least 1000 complete stable game video intervals are required for the timing report. Run `python3 production/integration/test_combat_analysis.py` for the47 analysis/ELF-boundary cases.
 
 ## Focused host checks
 
@@ -95,4 +96,4 @@ cc -std=c11 -Wall -Wextra -Werror -I production/integration -I production/src \
 /private/test_loader
 ```
 
-The WP1979 entry/tape described here is TAG-specific. Its normal frontend lacks a staged `ROYSPR.BIN`; its archived generator can reconstruct that file from existing sprite assets. A separate subsequently located WP1980 HW1 release supplies an original deterministic Royal fixture and8474-step endpoint; its integration and matched control are being prepared independently. The absence of a Royal tape in the WP1979 archive is not a global absence of a Royal fixture. Four active sprites alone are not a Royal gameplay comparison.
+The WP1979 entry/tape described here is TAG-specific. Its normal frontend lacks a staged `ROYSPR.BIN`; its archived generator can reconstruct that file from existing sprite assets. The separate WP1980 HW1 Royal fixture has now completed both final control/audio pairs and v2 audits: base without a cartridge and the original 4MiB graphics profile, each ending at8474 logical steps. See `../docs/ROYAL-INTEGRATION-GATE.md`. Royal uses the original state-dependent input policy with released physical controls; no complete per-call input tape was recorded. State and producer equality are reported separately from that limitation. Four active sprites alone are not a Royal gameplay comparison.

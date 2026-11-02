@@ -142,7 +142,7 @@ int main(void)
         audio2_diag[18]=scsp_elapsed;audio2_diag[19]=audio.status.state;
         audio2_diag[20]=audio.status.error;
         if((frame%30)==0){
-            dbgio_printf("\x1b[H\x1b[2JAUDIO 2 DIAGNOSTIC\nCOMMAND %02X  FRAME %lu\nBOOT %s  STATE %u\nERROR %lu  FM DROPS %lu\nLATE %lu  EVENTS %lu\n\nHARDWARE PENDING\nNATIVE FIDELITY UNDER AUDIT\n%s\n",AUDIO2_COMMAND,(unsigned long)frame,ok?"OK":"FAIL",music->state,(unsigned long)music->error,(unsigned long)audio2_diag[7],(unsigned long)audio2_diag[8],(unsigned long)music->events,finished?"CAPTURE WINDOW COMPLETE":"");
+            dbgio_printf("\x1b[H\x1b[2JAUDIO 2 DIAGNOSTIC\nCOMMAND %02X  FRAME %lu\nBOOT %s  STATE %u\nWORKER ERROR %lu\nFM EVENTS LOST %lu  BATCHES %lu\nLATE %lu  PCM UNDERRUNS %lu\nAPI STATE %lu  ERROR %lu\n\nHARDWARE PENDING\nNATIVE FIDELITY UNDER AUDIT\n%s\n",AUDIO2_COMMAND,(unsigned long)frame,ok?"OK":"FAIL",music->state,(unsigned long)music->error,(unsigned long)audio2_diag[14],(unsigned long)audio2_diag[15],(unsigned long)audio2_diag[8],(unsigned long)audio2_diag[9],(unsigned long)audio2_diag[19],(unsigned long)audio2_diag[20],finished?"CAPTURE WINDOW COMPLETE":"");
             dbgio_flush();
         }
         vdp2_sync();vdp2_sync_wait();

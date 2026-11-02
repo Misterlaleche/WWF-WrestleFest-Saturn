@@ -1,0 +1,65 @@
+{
+  "kind": "PRIVATE_DELIVERY_METADATA_ONLY",
+  "production_ready": false,
+  "hardware_status": "HARDWARE PENDING",
+  "owner_listening_approval": "PENDING",
+  "private_contents_not_in_git": true,
+  "new_prepared_deliveries": [
+    {
+      "kind": "current_music",
+      "filename": "AUDIO2-COMPARATIVAS-18-MUSICAS.zip",
+      "bytes": 80861919,
+      "sha256": "d347756f7f342ddbd2272f810adf21d75773055e846eee8e85b8f55ea04d4c25",
+      "wav_files": 36,
+      "delivery_status": "PREPARED_AND_VERIFIED; automatic approval requires explicit authorization of private destination"
+    },
+    {
+      "kind": "current_sfx_metadata_revision",
+      "filename": "AUDIO2-COMPARATIVAS-98-EFECTOS-Y-VOCES.zip",
+      "bytes": 11942975,
+      "sha256": "a3679bd82b6eb4eeb4def33c096533a60530bb0d0a72e5ba5e5d5675c6cfc850",
+      "wav_files": 196,
+      "delivery_status": "PREPARED_AND_VERIFIED; automatic approval requires explicit authorization of private destination"
+    },
+    {
+      "kind": "validation_artifacts",
+      "filename": "AUDIO2-VALIDACION-ARTIFACTOS.zip",
+      "bytes": 215285626,
+      "sha256": "7a504f6b37b5b10f45db60a271c859c5c975a6c50c9667ef5792e4d2dc34d05e",
+      "wav_files": 0,
+      "delivery_status": "PREPARED_AND_VERIFIED; automatic approval requires explicit authorization of private destination"
+    },
+    {
+      "kind": "validation_native_states",
+      "filename": "AUDIO2-VALIDACION-ESTADOS-F5.zip",
+      "bytes": 168669826,
+      "sha256": "af31bd5e52a1057ee87ce1ec2311b1885031da63b6f25d964cb29b420ba0fd7a",
+      "wav_files": 0,
+      "delivery_status": "PREPARED_AND_VERIFIED; automatic approval requires explicit authorization of private destination"
+    }
+  ],
+  "paired_validation_manifest_sha256": "ddbff4555416a967fb7e2a165ddf88b457585d35bb1d36bb36af816486d9ce97",
+  "existing_private_deliveries": [
+    {
+      "kind": "music_previous_profile_621",
+      "filename": "AUDIO2-COMPARATIVAS-18-MUSICAS.zip",
+      "sha256": "5616629c70418782da0142ecc8b7e2adb1a7e7b0673d838f05a9ebc5892a8260",
+      "wav_files": 36,
+      "status": "Previously delivered; not selected cddd capture profile"
+    },
+    {
+      "kind": "sfx_selected_cddd_previous_metadata",
+      "filename": "AUDIO2-COMPARATIVAS-98-EFECTOS-Y-VOCES.zip",
+      "sha256": "b9c6e7a78359ca204074dda654e91caeead85599580f0eedde51ce7903a39d8b",
+      "wav_files": 196,
+      "status": "Previously delivered; all196WAV byte-identical to prepared metadata revision"
+    },
+    {
+      "kind": "mixes_and_tag_selected_cddd_and_labeled_zoh_probe",
+      "filename": "AUDIO2-COMPARATIVAS-MEZCLAS-Y-COMBATE.zip",
+      "sha256": "528384a0b8b588c4e42ea2666845327721b16b534dcf5a5aa286b4513b691fb6",
+      "wav_files": 8,
+      "status": "Previously delivered; retains observed mixed/TAG failures and experimental DSP label"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "kind": "REFERENCE_OUTPUT_GUARD_CAUSAL_TEST",
+  "red_direct_existing_output_cases_failed": 4,
+  "green_direct_existing_outputs_preserved": 4,
+  "existing_python_wrapper_guards_passed": 2,
+  "fresh_original_command05_seconds": 1,
+  "fresh_outputs_unchanged": true,
+  "cases": {
+    "before": {
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/full-board-reference/capture_board_replay",
+        "/workspace/scratch/46cef04a9eee/audio2-build/full-board-reference/inputs/SOUND.ROM",
+        "/workspace/scratch/46cef04a9eee/audio2-build/full-board-reference/inputs/SAMPLES.ROM",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/before/schedule.csv",
+        "1",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/before/trace.csv",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/before/audio.pcm",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/before/capture.json",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/before/deliveries.csv",
+        "full"
+      ],
+      "exe_sha256": "d96049ba8b3e3fd2784521bf97f76f8c8f796e1be549812edd6f881773202334",
+      "outputs": {
+        "trace.csv": "1d35cbff8ec998fd13b9788d49fbef7f4e3700107eb897cd349d54151652337d",
+        "audio.pcm": "4cfba7dcce63b95c3b8b151fa32ac7f7af91c43eeae2dc78c50871175ef9423f",
+        "capture.json": "d0247408a535c44ff1d0a7c831368f7ae4214ab301cb6db9a83769d31731d8cd",
+        "deliveries.csv": "90782fa643c9f053369b0504e6e8edaf6231c9cda10d3862e5712fc976e54ff5"
+      }
+    },
+    "after": {
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/capture_board_replay",
+        "/workspace/scratch/46cef04a9eee/audio2-build/full-board-reference/inputs/SOUND.ROM",
+        "/workspace/scratch/46cef04a9eee/audio2-build/full-board-reference/inputs/SAMPLES.ROM",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/after/schedule.csv",
+        "1",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/after/trace.csv",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/after/audio.pcm",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/after/capture.json",
+        "/workspace/scratch/46cef04a9eee/audio2-build/reference-output-guards/after/deliveries.csv",
+        "full"
+      ],
+      "exe_sha256": "b7c8beb5afc1f129ecb3f8457c3137daa883edba688b94bffe6f42b954690207",
+      "outputs": {
+        "trace.csv": "1d35cbff8ec998fd13b9788d49fbef7f4e3700107eb897cd349d54151652337d",
+        "audio.pcm": "4cfba7dcce63b95c3b8b151fa32ac7f7af91c43eeae2dc78c50871175ef9423f",
+        "capture.json": "d0247408a535c44ff1d0a7c831368f7ae4214ab301cb6db9a83769d31731d8cd",
+        "deliveries.csv": "90782fa643c9f053369b0504e6e8edaf6231c9cda10d3862e5712fc976e54ff5"
+      }
+    }
+  }
+}

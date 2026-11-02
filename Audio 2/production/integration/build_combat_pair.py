@@ -207,7 +207,7 @@ SECTIONS {
         # These generated driver splits retain unused declarations by design;
         # use the same warning policy as the pinned production build.
         options=[x for x in flags if x!='-Werror'] if f.parent.name=='reference_driver' else flags
-        run([cc,*options,'-O2' if f.stem in ('wf_music_seq','z80-native') else '-Os','-c',f,'-o',obj],module)
+        run([cc,*options,'-O2' if f.stem == 'z80-native' else '-Os','-c',f,'-o',obj],module)
     for f in (src/'wf_music_entry.S',module/'module-data.S'):
         obj=module/(f.stem+'.o');objects.append(obj);run([cc,'-m2','-mb','-c',f,'-o',obj],module)
     debug=module/'MUSIC4.DEBUG.ELF'

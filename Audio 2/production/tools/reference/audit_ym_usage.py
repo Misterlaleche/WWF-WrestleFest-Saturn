@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Describe actual YM-register use in the original-ROM A53 trace windows.
+"""Describe actual YM-register use in identified original-ROM trace windows.
 
 The observation is bounded by each trace's ORIGIN/END. Absence in these windows
 does not prove absence in an unobserved full score, fade or cross-command path.
@@ -14,11 +14,26 @@ from pathlib import Path
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--traces", type=Path, required=True)
+    source = p.add_mutually_exclusive_group(required=True)
+    source.add_argument("--traces", type=Path, help="Historical A53 music-*.csv directory")
+    source.add_argument("--full-board-report", type=Path, help="Complete coupled reference manifest; verify every trace hash")
     p.add_argument("--out", type=Path, required=True)
     a = p.parse_args()
     report = {"kind": "ORIGINAL_ROM_REGISTER_OBSERVATION_NOT_NATIVE_AUDIO_VALIDATION", "tracks": []}
-    for path in sorted(a.traces.glob("music-*.csv")):
+    if a.full_board_report:
+        manifest = json.loads(a.full_board_report.read_text())
+        if manifest.get('profile') != 'full-board' or not manifest.get('complete'):
+            raise ValueError('Require a complete explicitly coupled full-board reference')
+        paths = [(Path(t['trace']), t['command'], t['output_sha256']['trace']) for t in manifest['tracks']]
+        report.update(profile='full-board', reference_report_sha256=hashlib.sha256(a.full_board_report.read_bytes()).hexdigest(),
+                      command_identity_source='Verified full-board manifest; this capture uses zero in the ORIGIN command field')
+    else:
+        paths = [(path, None, None) for path in sorted(a.traces.glob('music-*.csv'))]
+        report.update(profile='historical-A53-partial-MMIO', command_identity_source='Historical ORIGIN command field')
+    for path, expected_command, expected_sha in paths:
+        before_sha = hashlib.sha256(path.read_bytes()).hexdigest()
+        if expected_sha is not None and before_sha != expected_sha:
+            raise ValueError('Reference trace identity mismatch: ' + str(path))
         registers = [0] * 256
         keys = [0] * 8
         ever_keyed = set()
@@ -41,7 +56,7 @@ def main():
             for row in csv.DictReader(f):
                 kind, cycle = row["kind"], int(row["cycle"])
                 reg, value = int(row["a"]), int(row["b"])
-                if kind == "ORIGIN": origin, command = cycle, reg
+                if kind == "ORIGIN": origin, command = cycle, reg if expected_command is None else expected_command
                 if kind == "END": end = cycle
                 if kind != "YM_D": continue
                 count += 1
@@ -77,6 +92,8 @@ def main():
                     if modulating and keys[channel]: keyed_lfo_states += 1
                     if modulating and channel in ever_keyed: configured_lfo_on_ever_keyed.add(channel)
         assert origin is not None and end is not None
+        if hashlib.sha256(path.read_bytes()).hexdigest() != before_sha:
+            raise ValueError('Reference trace changed during the audit')
         report["tracks"].append({
             "command": command, "trace": str(path.resolve()), "trace_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             "origin_cycle": origin, "end_cycle": end, "observed_seconds": (end - origin) / 3579545,

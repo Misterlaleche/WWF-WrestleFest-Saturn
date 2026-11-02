@@ -31,7 +31,9 @@ La mezcla usa32 slots FM (8 canales×4 operadores), y cuatro voces PCM en el DSP
 | Loader ABI4 histórico | Exactamente4 PT_LOAD; incorpora una ventana caliente propiedad del master, revalida antes de escribir y no acepta el módulo ABI3. |
 | Integración nueva | Debe enlazar y validar master+módulo conjuntamente; no basta cambiar el campo ABI. Toda reserva nueva debe quedar fuera del heap y de ambas pilas. |
 
-ABI4 delimita programa VDP1`0x05C5C000..0x05C7C000`, BSS`0x05C7C000..0x05C7F000`, compartido`0x05C7F000..0x05C80000` (alias no cacheado`0x25C7F000`) y exactamente18KiB calientes en HWRAM. El renderer debe demostrar que no usa esos intervalos. No son RAM libre genérica.
+El perfil ABI4 de TAG delimita programa VDP1`0x05C5C000..0x05C7C000`, BSS`0x05C7C000..0x05C7F000`, compartido`0x05C7F000..0x05C80000` (alias no cacheado`0x25C7F000`) y exactamente18KiB calientes en HWRAM. El renderer debe demostrar que no usa esos intervalos. No son RAM libre genérica.
+
+Royal HW1 usa explícitamente otro perfil: programa frío en VDP2 `0x05E26000..0x05E3B000`, BSS `0x05E3B000..0x05E3E000` y compartido `0x05E3E000..0x05E3F000`. En la variante sin cartucho, los 18 KiB de código/estado caliente residen en la cola auditada de VDP1 `0x05C78020..0x05C7C820`; su pila permanece en HWRAM. La variante con cartucho reserva el bloque caliente en HWRAM. Esos contratos se seleccionan al compilar master, loader y módulo juntos; el mismo número ABI4 no permite intercambiarlos. Las direcciones, reservas del renderer, mapas y resultados negativos están en [ROYAL-INTEGRATION-GATE.md](ROYAL-INTEGRATION-GATE.md).
 
 El estado caliente es3220bytes en el ABI SH-2. El código debe enlazarse en el mismo `workspace` que posee el master, incluso si VMA=LMA. La corrección de prepare comprueba esa igualdad antes de copiar/borrar. La ruta de arranque purga la cache del master y entra al slave mediante código no cacheado antes de habilitar su cache.
 
@@ -44,3 +46,5 @@ Se comprueban por compilación: segmentos Sound RAM, tamaño exacto de onda/vect
 Se miden en ejecución: descartes individuales y por lote, rechazos de transporte, underruns32bit, contador de retrasos, máximos de preparación/refill/lanzamiento y estado de ambos procesadores. La instrumentación privada tiene coste observable y se contrasta con un perfil sin ella.
 
 No se certifica un porcentaje de CPU ni un ancho de banda sin medida del mismo combate con/sin audio. El audio reserva un slave; la fidelidad no justifica ralentizar el juego. DMA no se habilita en el camino de muestras: las copias de arranque son explícitas, y no hay un beneficio DMA medido que autorice añadir contención. La cadencia de lógica objetivo(~57,44/s) se comprueba separadamente del refresco de vídeo.
+
+El análisis del cambio de banco OKI ha identificado un resolvedor de direcciones y datos faltantes que requeriría 704 bytes adicionales de recurso. Un esquema de checkpoints estudiado ocuparía al menos 528 bytes, sin incluir su control ni garantizar plazo. Es una propuesta medida de almacenamiento, **no una reserva ni una implementación aprobada**. El motor actual todavía no cambia correctamente el banco de una voz activa. Véase [ACTIVE-OKI-BANK-AUDIT.md](ACTIVE-OKI-BANK-AUDIT.md).

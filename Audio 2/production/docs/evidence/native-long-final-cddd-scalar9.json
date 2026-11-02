@@ -1,0 +1,1269 @@
+{
+  "kind": "FROZEN_NATIVE_LONG_CANDIDATE_AUDIT",
+  "profile": "final-cddd-scalar9",
+  "runtime_status": "FAIL",
+  "music_passed": 4,
+  "music_failed": 14,
+  "transition_passed": false,
+  "all19_evidence_complete": true,
+  "music_counter_totals": {
+    "FMdiscardEvents": 30,
+    "ringRejected": 1,
+    "lateB028": 97,
+    "sfxUnderruns32": 0
+  },
+  "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+  "source_file_count": 327,
+  "source_stable": true,
+  "inputs_stable": true,
+  "emulator_stable": true,
+  "selected_source_sha256": {
+    "src/reference_driver/z80-native.c": "c408e4a8ad5d7b54a55706f4c96fd9f4d39271dcd0fb5e2de14331af138f4fad",
+    "src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+    "src/wf_music_module.c": "f7fe65540e2d6604b9c038d82f4426ed75f204ac9c1ff4b025f48f01653f2850",
+    "src/wf_music_firmware.c": "81cee191220e30dfe1ba42aed0fccbe1232842a78b271bec50eea72c64a21e90",
+    "src/wf_scsp_ym.c": "c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76",
+    "src/wf_scsp_sfx.c": "4745461ca0439802e0f4ffc4395e07ef89d7b09ff41e83868b3bc7dfefa7d05b",
+    "tests/saturn_harness.c": "49535de835bf9ff83353db8865ec6bf9356a3b3c6396ee475ea376fba4245f71"
+  },
+  "reconciled_matrix_sha256": "db1f7716a3e8c754ebf6099b54c269df98e98924198bdb0057c9bc8eb33ebcc1",
+  "independent_audit_matrix_sha256": "efc84bf18e8a6dc08407067ab5ea1b0ea74ca500780c4b602de0bf28324349b7",
+  "catalogue_sha256": "9111da25b5ee740fe7935c68462e73d959c5570214b62287d9975b96f32c8902",
+  "retry_report_sha256": "f519a40a6a6da175765596dabf03c2147886a718775336e76531547c569c111d",
+  "retry_audio_integrity_sha256": "253176130f9a3edce37bb7ec4d7e27aa96fcdf03807c0a36136495ff804087d2",
+  "original_attempt_ENOSPC_preserved": true,
+  "presentation_speed": 4,
+  "hardware_clock_changed": false,
+  "cartridge": "none",
+  "hardware_status": "HARDWARE PENDING",
+  "cases": [
+    {
+      "id": "command-01",
+      "kind": "music",
+      "command": 1,
+      "runtime_passed": false,
+      "audit_sha256": "6160c6f5ba7711b6e06af34bc839cb9853e8fce1468f08d72c6e0bb16342aa3b",
+      "capture_report_sha256": "d7adba7a81ceaf13180495f7e2443e6212bf098a379840f3b2e255825ef8caa5",
+      "native_wav_sha256": "0e70251c4f5038300d4b3b9e0a479f43e13cc89b5295c3dce06ac3dd29c80853",
+      "elf_sha256": "17efe6f20646d7886d05ad85e0303f75242fe69ae4b4b8e8fe06dbefc2f04d26",
+      "iso_sha256": "4bc95d8e9cf32e803b36fb799b99998b400b628edd35c65e053a554098c807bc",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 1,
+      "ringRejected": 0,
+      "lateB028": 0,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26816285,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 24776,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26473517,
+          "seconds_since_first_command": 600.306507936508,
+          "video_frame": 36123,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26532487,
+          "seconds_since_first_command": 601.6436961451247,
+          "video_frame": 36203,
+          "last_command": 31,
+          "errors": {
+            "error": 15,
+            "APIerror": 5,
+            "FMdiscardEvents": 1,
+            "discardBatches": 1,
+            "batchB03A": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 1.6380725623582766,
+        "pre_fade_observations": 24573,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 1,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 0,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-02",
+      "kind": "music",
+      "command": 2,
+      "runtime_passed": false,
+      "audit_sha256": "64fbd014dad010ff8fdc63bee8c5fb673cc16dcbbb37585416c480d75819d262",
+      "capture_report_sha256": "c54b53dca68e61a3d5219ae804fce50e2da6e85d97995176eb250ba49f0888a7",
+      "native_wav_sha256": "a0b3e5a3f380bfa4fbcb2fa20ed6ca459fb0f651c419e5cfa5f9d4d8d075dd5c",
+      "elf_sha256": "55067fff02c000511f34e06a591e554330bb5c4c6927f472cc4c780054041133",
+      "iso_sha256": "953af812b3e0bdc2b2ebe399c280f8dd356ab9aac1e4946766ad15518aff7f20",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 3,
+      "ringRejected": 0,
+      "lateB028": 34,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26814810,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 21647,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26489734,
+          "seconds_since_first_command": 600.6742403628118,
+          "video_frame": 36145,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26491208,
+          "seconds_since_first_command": 600.707664399093,
+          "video_frame": 36147,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.7020408163265306,
+        "pre_fade_observations": 21469,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 3,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 34,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-03",
+      "kind": "music",
+      "command": 3,
+      "runtime_passed": false,
+      "audit_sha256": "6669a320cf557235bb2ac551effd5729b25d3393d5364e1d302f127438b43792",
+      "capture_report_sha256": "655b1919d0702526367f0238ee4a0cc2c75f605745167c8fd90779d494e54079",
+      "native_wav_sha256": "669626667957941d5565c14441dc8378b0d549085a4f537e6b89e2590ee25bdc",
+      "elf_sha256": "eb32bdbc77a9f42897a54f868634c04d4947cdb5dfa8ea0c83fe976002552329",
+      "iso_sha256": "8534686b5f319c7b3bc0409e6b3404776a66f2ea3a299f7f424a141b8a62c44b",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 2,
+      "ringRejected": 0,
+      "lateB028": 4,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26845033,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 22711,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26418968,
+          "seconds_since_first_command": 599.0695691609977,
+          "video_frame": 36049,
+          "last_command": 3,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26508162,
+          "seconds_since_first_command": 601.0921088435374,
+          "video_frame": 36170,
+          "last_command": 31,
+          "errors": {
+            "error": 15,
+            "APIerror": 5,
+            "FMdiscardEvents": 2,
+            "discardBatches": 1,
+            "lateB028": 4,
+            "batchB03A": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 1.086485260770975,
+        "pre_fade_observations": 22554,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": false,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 2,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 4,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-04",
+      "kind": "music",
+      "command": 4,
+      "runtime_passed": false,
+      "audit_sha256": "d94c341a1d39bd6853ff77fa412f3ae4f033c96aaff2cbbf47e5609c385f8543",
+      "capture_report_sha256": "172b8d1237b3968078a15c6df1f73a930027275161bcfb7610c64c37cd113e4c",
+      "native_wav_sha256": "267027665b7ee42a516f44cf5315856b3596c9af5e243c7ce2e54dc2f9ccc977",
+      "elf_sha256": "7d8743e9658bb5ba1da3a878be53fac009e0d2a973a342918feccba1050700ac",
+      "iso_sha256": "596d8360a00cf1eac034edac3600881eed09dd6396a044557230109988dadf9c",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 4,
+      "ringRejected": 0,
+      "lateB028": 3,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26916535,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 26057,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26452877,
+          "seconds_since_first_command": 599.8384807256235,
+          "video_frame": 36095,
+          "last_command": 4,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26550178,
+          "seconds_since_first_command": 602.0448526077098,
+          "video_frame": 36227,
+          "last_command": 31,
+          "errors": {
+            "error": 15,
+            "APIerror": 5,
+            "FMdiscardEvents": 4,
+            "discardBatches": 1,
+            "lateB028": 3,
+            "batchB03A": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 2.0392290249433107,
+        "pre_fade_observations": 25896,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": false,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 4,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 3,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-05",
+      "kind": "music",
+      "command": 5,
+      "runtime_passed": true,
+      "audit_sha256": "6ced1a941eba83100f95f50f303ec727b861c924cd98a5824916db5b86c9ff44",
+      "capture_report_sha256": "09e8dd8cf08abfcd012e54b74fec1f09b388b612e2d86647582c2c07461fed84",
+      "native_wav_sha256": "ba6f6ee250b2265db275f4d4922eaf691f254bfa9b8905d6afb10e8828612689",
+      "elf_sha256": "72885fee845d61597f795881827cd4deb4547a51b146ec30592b48624ac34080",
+      "iso_sha256": "7e193cefbefcdfb528cd6374c9e9ba82a0041842214006556065c48cc75f1f6c",
+      "worker_error": 0,
+      "api_error": 0,
+      "mail_state": 2,
+      "FMdiscardEvents": 0,
+      "ringRejected": 0,
+      "lateB028": 0,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26814074,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 19518,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26813336,
+          "seconds_since_first_command": 608.0121541950114,
+          "video_frame": 36584,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": null,
+        "first_failure_seconds_after_first_fade": null,
+        "pre_fade_observations": 19107,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 0,
+          "batchB03A": 0
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-06",
+      "kind": "music",
+      "command": 6,
+      "runtime_passed": false,
+      "audit_sha256": "2073cbf5a00797717004525de6be29e05903ea7cbb9dd509e7ddcf49a657c5ac",
+      "capture_report_sha256": "59114c76cab975585ff7306117f377559ff253a44726253ca023e20de1aab6fd",
+      "native_wav_sha256": "8b0f2ac068dcecc8d22d5c8734f952f573b3cdd1bdb55903a6d4294ce9d07111",
+      "elf_sha256": "c947942f9c5594c80c0d37052b9cfd3158e3534c0bbfcba997ed518a1211ee0c",
+      "iso_sha256": "dc485d7b877823560c1ccab954e120667edd0184a8d667d9eeca62bc22364621",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 1,
+      "ringRejected": 0,
+      "lateB028": 2,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26815547,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 21047,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26467619,
+          "seconds_since_first_command": 600.1727664399093,
+          "video_frame": 36115,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26469094,
+          "seconds_since_first_command": 600.2062131519274,
+          "video_frame": 36117,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.20058956916099774,
+        "pre_fade_observations": 20901,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 1,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 2,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-07",
+      "kind": "music",
+      "command": 7,
+      "runtime_passed": false,
+      "audit_sha256": "6c83654883ac7e5a9d402cc949ba818fc61585df573c730144660bb7426e8861",
+      "capture_report_sha256": "c5bbdf4232249d7085f629933d808ce42a28723a544a3ca57e48a6c344962b75",
+      "native_wav_sha256": "3015bcfe3aabb63f5a1a9ed9f378f8e9f5b07d23dcd995fc5ca792119912fddf",
+      "elf_sha256": "597819e04ba65fe17383d9f8cbb4399ef58fa689cb8bfb2d0cf7122f20fee90b",
+      "iso_sha256": "b34360f2f02bcff8f90391259c4854952d9fe29de93c4947c8ff48e238e3a41c",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 1,
+      "ringRejected": 0,
+      "lateB028": 0,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26816285,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 20661,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26472048,
+          "seconds_since_first_command": 600.2731972789115,
+          "video_frame": 36121,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26474253,
+          "seconds_since_first_command": 600.3231972789116,
+          "video_frame": 36124,
+          "last_command": 31,
+          "errors": {
+            "error": 15,
+            "APIerror": 5,
+            "FMdiscardEvents": 1,
+            "discardBatches": 1,
+            "batchB03A": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.3175736961451247,
+        "pre_fade_observations": 20520,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 1,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 0,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-08",
+      "kind": "music",
+      "command": 8,
+      "runtime_passed": true,
+      "audit_sha256": "e2395cf530ff463e38e92b1c8f62f306a887abf74505da7aefbade6c235138f9",
+      "capture_report_sha256": "475edfcb18da8d0d7bb37ff8e7ad3aa2a75119b1b0fe7b8dc4ad59085110c6e9",
+      "native_wav_sha256": "f26cf59fb5d2c9df4cad458ec1c76101edf00f322f6c59a3efe2af2678524456",
+      "elf_sha256": "09a77ea43fd3e1e5ccfcf164b8fd87796bf5781c1cf05789e95b99edbcd04424",
+      "iso_sha256": "17367609402340dd28c848cd0388f213b251bf70b62c98ad284a27f1aa83841e",
+      "worker_error": 0,
+      "api_error": 0,
+      "mail_state": 2,
+      "FMdiscardEvents": 0,
+      "ringRejected": 0,
+      "lateB028": 0,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26824394,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 18540,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26821445,
+          "seconds_since_first_command": 608.1960317460317,
+          "video_frame": 36595,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": null,
+        "first_failure_seconds_after_first_fade": null,
+        "pre_fade_observations": 18312,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 0,
+          "batchB03A": 0
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-09",
+      "kind": "music",
+      "command": 9,
+      "runtime_passed": true,
+      "audit_sha256": "fc27367fe1a09c54f1b29eba69579ed0c266896a6be2fbaa36a3a8dd2416d366",
+      "capture_report_sha256": "fb9b44dd5e521c0d9263d6a3e5ad4dd59303bb32efc52237120c85337d2492dd",
+      "native_wav_sha256": "ff39e3be7978efd73ae394d2c75e307ae954ff4ffc1476e3d2ed04abb1bc20d0",
+      "elf_sha256": "93d63bc2c3f3d6472c0662beeaa2ed98580f23c1efec38f6a7a550b36445c66b",
+      "iso_sha256": "3ff09fd052b5e657a41eb85f2f351b02ffd243efd9618798017a23139129b1a6",
+      "worker_error": 0,
+      "api_error": 0,
+      "mail_state": 2,
+      "FMdiscardEvents": 0,
+      "ringRejected": 0,
+      "lateB028": 0,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26815548,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 13510,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26814074,
+          "seconds_since_first_command": 608.0288888888889,
+          "video_frame": 36585,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": null,
+        "first_failure_seconds_after_first_fade": null,
+        "pre_fade_observations": 13352,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 0,
+          "batchB03A": 0
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-0A",
+      "kind": "music",
+      "command": 10,
+      "runtime_passed": false,
+      "audit_sha256": "ac1477d1371ca8d5b79916b7569431d69cf7c82de41e690ce5858a39b84154a2",
+      "capture_report_sha256": "05c09f4a7d0978f8c50cf47401cd9afe856d867ce91954092935cc4179a57ccf",
+      "native_wav_sha256": "f2e82b143b3f459d6682e93d615a6e8efdfe4fee384b852203164f52b4ac6f0a",
+      "elf_sha256": "757ce8ffc3e050df206afc1749ee8038002316ea7a8a8383f7a62603caeaa226",
+      "iso_sha256": "5b2d616f2945ae12087495cf22e1362aa0ae3f13efede8bfbab1bb297d1b593f",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 1,
+      "ringRejected": 0,
+      "lateB028": 9,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26817022,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 15061,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26474254,
+          "seconds_since_first_command": 600.3232199546485,
+          "video_frame": 36124,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26476465,
+          "seconds_since_first_command": 600.3733560090703,
+          "video_frame": 36127,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 9
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.3677324263038549,
+        "pre_fade_observations": 14941,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 1,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 9,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-0B",
+      "kind": "music",
+      "command": 11,
+      "runtime_passed": false,
+      "audit_sha256": "5da96b7a303b35818bfbb47eff9569d3dccf16bf85cfc1f99a5d2a619281bbd9",
+      "capture_report_sha256": "df45bde52ea503f244f3b27397e36fb395c0bf380e7755e5773de4158ed0f3fe",
+      "native_wav_sha256": "6d9d5633dc56efe027243591797845f42eb79290ae8cf560d1f5d0e6d01a5afb",
+      "elf_sha256": "d803b0d0510be28472c1d359967e72cc54c515d7f7ba6d4f6cc2ef4176c00303",
+      "iso_sha256": "c3f981a7421d276cca61950143076c67e1cc1d7f971a2adf5ffb2453cb2b96d2",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 5,
+      "ringRejected": 0,
+      "lateB028": 2,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26849456,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 15039,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26474991,
+          "seconds_since_first_command": 600.3399319727891,
+          "video_frame": 36125,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26476465,
+          "seconds_since_first_command": 600.3733560090703,
+          "video_frame": 36127,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.3677324263038549,
+        "pre_fade_observations": 14892,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 5,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 2,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-0C",
+      "kind": "music",
+      "command": 12,
+      "runtime_passed": false,
+      "audit_sha256": "9a9688f6ab9fdfabff9928a262200017baa2dc768ab37fa9503742d12fcf863f",
+      "capture_report_sha256": "d7953f7f8cf80752e33aae6ebbc08d852a14cec6c27e57b09dc54cb0af0c4f80",
+      "native_wav_sha256": "4ee942bf29aa24e6adde122026d3367f37516a8b651fd0f62007a70edddb2142",
+      "elf_sha256": "ff39c2cd4454772a195f3b294d41e127b6c1f3af173e7d4159c4efc8a4199687",
+      "iso_sha256": "821f648a0e68c2f8a56b3571ebe1fc893e62da32303509f7e5780b979c22ee2e",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 2,
+      "ringRejected": 0,
+      "lateB028": 25,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26818496,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 14093,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26489734,
+          "seconds_since_first_command": 600.6742403628118,
+          "video_frame": 36145,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26491208,
+          "seconds_since_first_command": 600.707664399093,
+          "video_frame": 36147,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 2
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.7020408163265306,
+        "pre_fade_observations": 13946,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 2,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 25,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-0D",
+      "kind": "music",
+      "command": 13,
+      "runtime_passed": false,
+      "audit_sha256": "17cef5c473bc5be4498632d111a25865da308e4345f8dd3cca29b1811c2a39cc",
+      "capture_report_sha256": "344dbda97731f47338f35e1f128a4b0e6235f325af08d6aa0357c7dd7d23b30b",
+      "native_wav_sha256": "51e6b70144673e2f9b5b9ae96fa7127e094c284c7ffbfae66fe7f8ad1fd5a60d",
+      "elf_sha256": "657c835e958ff5d36a906eee7cea649fb08d121c62912b87e5d070f3fc5db68e",
+      "iso_sha256": "ff03c9c028d46bc80edd443551ea0cfb09474c90cfb17a04abf3c322a36f3cb1",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 1,
+      "ringRejected": 0,
+      "lateB028": 1,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26816285,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 13715,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26485311,
+          "seconds_since_first_command": 600.5739455782312,
+          "video_frame": 36139,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26486785,
+          "seconds_since_first_command": 600.6073696145124,
+          "video_frame": 36141,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.6017460317460317,
+        "pre_fade_observations": 13564,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 1,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 1,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-0E",
+      "kind": "music",
+      "command": 14,
+      "runtime_passed": false,
+      "audit_sha256": "8ebd6ce44a390dfdf2483320e3281faf8327a247ca96d6fb24ba7a5c1e433d9e",
+      "capture_report_sha256": "5073bfe1e74f30559523dbefa8c48a5a0edd22bd48e6d68fcbcac553565070e2",
+      "native_wav_sha256": "9e4a2c8bca1b672306acfaefd563313c5ed4a0c2feb5ce756763cc47e73e21c3",
+      "elf_sha256": "c7a83a19007f15045e6c6a30d94fba833d770bcea7be6b36a07b51319838a139",
+      "iso_sha256": "2a1033b9f4e9cc508585ae43b98aca8cb3295eefd60714d07ad725c30a5e151e",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 1,
+      "ringRejected": 0,
+      "lateB028": 8,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26817759,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 14137,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26474254,
+          "seconds_since_first_command": 600.3232199546485,
+          "video_frame": 36124,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26475728,
+          "seconds_since_first_command": 600.3566439909297,
+          "video_frame": 36126,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 2
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.3510204081632653,
+        "pre_fade_observations": 14002,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 1,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 8,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-0F",
+      "kind": "music",
+      "command": 15,
+      "runtime_passed": false,
+      "audit_sha256": "a4d97bae06cfc59f04d0e1c1c9d4114aba8a2aa250e78dc87a708d636f0814c5",
+      "capture_report_sha256": "5d0ab5132a46a096210432c060f57414c939aea4e2a79b4daf3bf7d8a4561385",
+      "native_wav_sha256": "a3486b897713e37723691002710f999b0cd43957fc94837f5c5daf98500949bc",
+      "elf_sha256": "883e0ac532aa092802b5ac446e9789677c1cf2c8c0afe73a5f71bc93a661c520",
+      "iso_sha256": "b69fef40bf7690bd39dc814c21a55fce1a4545762fa3e64a5e41b02e22220dde",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 1,
+      "ringRejected": 0,
+      "lateB028": 4,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26814810,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 14290,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26478677,
+          "seconds_since_first_command": 600.4235147392291,
+          "video_frame": 36130,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26480151,
+          "seconds_since_first_command": 600.4569387755103,
+          "video_frame": 36132,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 2
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.4513151927437642,
+        "pre_fade_observations": 14176,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 1,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 4,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-10",
+      "kind": "music",
+      "command": 16,
+      "runtime_passed": true,
+      "audit_sha256": "1a926e1073d5b0cf98b8c0df442712e9a2fd17d30490ee6fe6144f408851f566",
+      "capture_report_sha256": "1789eba4f72b42a69bc807dd56862d8ea0a916e6273cbaf5a04a987b621d9383",
+      "native_wav_sha256": "15d861c58644a26399886128dd40c72346aa339893fe602a3a3612b42a6e41bb",
+      "elf_sha256": "8ba5bf8925da336c440a69fa013af6a51b0fed7a357485dd1c2b2bb1087323f2",
+      "iso_sha256": "bb0e2f8e21b11f6c1319b9e363743b2cdf6cfa656c09650902f774214ba21b6e",
+      "worker_error": 0,
+      "api_error": 0,
+      "mail_state": 2,
+      "FMdiscardEvents": 0,
+      "ringRejected": 0,
+      "lateB028": 0,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26815548,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 13659,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26813336,
+          "seconds_since_first_command": 608.0121541950114,
+          "video_frame": 36584,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": null,
+        "first_failure_seconds_after_first_fade": null,
+        "pre_fade_observations": 13468,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 0,
+          "batchB03A": 0
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    },
+    {
+      "id": "command-11",
+      "kind": "music",
+      "command": 17,
+      "runtime_passed": false,
+      "audit_sha256": "78d9fb491e01a813c219f7f8a5bef6c7dd8cd5aa1601a86a4d959a2db1d8d9fc",
+      "capture_report_sha256": "c7ae22071f76fecc9ea18eae22e67c4889bff1f1995b03510a77aea14706d889",
+      "native_wav_sha256": "9b1eed74b7f1bff498e7a22f4eaf543c019c0dd09fbd860f1b5fe8918d984668",
+      "elf_sha256": "d4acd364130b7dac0c438b1643dc8cfff4a0a29582a14ba3d73696fa49725606",
+      "iso_sha256": "13abf6b7851ffedbed432d9e7de1c9af9633e6f3d0f8452d9adcf5d7d3fec169",
+      "worker_error": 15,
+      "api_error": 6,
+      "mail_state": 3,
+      "FMdiscardEvents": 2,
+      "ringRejected": 0,
+      "lateB028": 4,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26814073,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 14940,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26470568,
+          "seconds_since_first_command": 600.2396371882086,
+          "video_frame": 36119,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26472048,
+          "seconds_since_first_command": 600.2731972789115,
+          "video_frame": 36121,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.2675736961451247,
+        "pre_fade_observations": 14837,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 6,
+          "FMdiscardEvents": 2,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 4,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 2
+    },
+    {
+      "id": "command-12",
+      "kind": "music",
+      "command": 18,
+      "runtime_passed": false,
+      "audit_sha256": "29b1f8df7089b7ceee79fab8c53057d976fdb88cc2ee50af828adaf90cad4f0f",
+      "capture_report_sha256": "01add78d73f092c0717346c38351927d053ba55e5858972954494b46bd2ab2e6",
+      "native_wav_sha256": "04fe42a4a8a71eefb116880c36fdc849a7748ae1643c795000e0efcb896b3822",
+      "elf_sha256": "6cf1386276cb06d85eb4b9178f191f3fd3c3f176df3fd9750a4aeff62ffa7245",
+      "iso_sha256": "5a2f8a3e6d28856d2ffb7176e2def659da54c792ffd2c4def3f79bcbe0745796",
+      "worker_error": 18,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 5,
+      "ringRejected": 1,
+      "lateB028": 1,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 2,
+      "expected_commands": 2,
+      "requested_SCSP_samples": 26812800,
+      "observed_SCSP_samples": 26814073,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 16385,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          26460248
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 26468357,
+          "seconds_since_first_command": 600.1895011337868,
+          "video_frame": 36116,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 26513321,
+          "seconds_since_first_command": 601.2090929705215,
+          "video_frame": 36177,
+          "last_command": 31,
+          "errors": {
+            "error": 18,
+            "APIerror": 5,
+            "FMdiscardEvents": 5,
+            "discardBatches": 1,
+            "ringRejected": 1,
+            "lateB028": 1
+          }
+        },
+        "first_failure_seconds_after_first_fade": 1.2034693877551021,
+        "pre_fade_observations": 16272,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": true,
+        "final_counters": {
+          "error": 18,
+          "APIerror": 5,
+          "FMdiscardEvents": 5,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 1,
+          "sfxUnderruns32": 0,
+          "lateB028": 1,
+          "batchB03A": 0
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 2
+    },
+    {
+      "id": "transitions",
+      "kind": "transitions",
+      "command": 1,
+      "runtime_passed": false,
+      "audit_sha256": "32d18645c4c81fa4560a958f1e8e2d05284147728b75ffbec1367bbefaf087e0",
+      "capture_report_sha256": "0164727de9f72fa0b7911a2f5bc9ce35f3ba0fbb0769645120b53b625aa5f010",
+      "native_wav_sha256": "f1ee9a88c009b4c40160bb04b58e8f0f2bdd34267d652b4bf66ec37ba0b1bcb8",
+      "elf_sha256": "773ae3caaa596bf265f3ce698ab9a7bddfaee2464dd8c041663372944bb3889e",
+      "iso_sha256": "e000269e238090c66141ef31a95edd578cfc73967fe59b1aac318e9d3072db60",
+      "worker_error": 15,
+      "api_error": 5,
+      "mail_state": 2,
+      "FMdiscardEvents": 1,
+      "ringRejected": 0,
+      "lateB028": 2,
+      "sfxUnderruns32": 0,
+      "accepted_commands": 4,
+      "expected_commands": 9,
+      "requested_SCSP_samples": 1411200,
+      "observed_SCSP_samples": 1413090,
+      "sh2_functions_verified": 468,
+      "evidence_errors": [],
+      "failure_window": {
+        "valid_observations": 583,
+        "boot_filter": "magic57464132, state2/3/4 and positive commandStartFrame",
+        "accepted_fade_samples": [
+          397316
+        ],
+        "last_clean_before_first_observed_failure": {
+          "SCSPelapsed": 404688,
+          "seconds_since_first_command": 9.176598639455783,
+          "video_frame": 758,
+          "last_command": 31,
+          "errors": {}
+        },
+        "first_observed_failure": {
+          "SCSPelapsed": 406162,
+          "seconds_since_first_command": 9.210022675736962,
+          "video_frame": 760,
+          "last_command": 31,
+          "errors": {
+            "lateB028": 2
+          }
+        },
+        "first_failure_seconds_after_first_fade": 0.20058956916099774,
+        "pre_fade_observations": 226,
+        "pre_fade_observations_with_errors": 0,
+        "clean_observation_at_or_after_600_seconds": null,
+        "final_counters": {
+          "error": 15,
+          "APIerror": 5,
+          "FMdiscardEvents": 1,
+          "discardBatches": 1,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "sfxUnderruns32": 0,
+          "lateB028": 2,
+          "batchB03A": 1
+        },
+        "scope": "Observed diagnostic samples only. The interval between the last clean read and first failure read is not an exact onset timestamp; no fidelity or complete-composition claim."
+      },
+      "final_two_seconds_exact_silence": true,
+      "capture_attempt_count": 1
+    }
+  ],
+  "scope": "18 actual isolated608s native music captures plus32s transitions; finite windows do not establish complete compositions or exact loops. Runtime stability, audible fidelity and physical hardware acceptance are separate."
+}

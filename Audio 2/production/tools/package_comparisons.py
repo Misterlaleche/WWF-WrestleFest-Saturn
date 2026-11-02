@@ -13,6 +13,7 @@ from pathlib import Path
 import struct
 import wave
 import zipfile
+import numpy as np
 
 
 def sha(path):
@@ -34,20 +35,58 @@ def wav_info(path):
             'frames': frames, 'seconds': frames / 44100, 'sha256': sha(path), 'bytes': len(raw)}
 
 
+def digital_support(path):
+    """Exact nonzero PCM support, without a fitted threshold or gain change."""
+    with wave.open(str(path), 'rb') as stream:
+        channels, frames = stream.getnchannels(), stream.getnframes()
+        values = np.frombuffer(stream.readframes(frames), dtype='<i2').reshape(-1, channels)
+    indices = np.flatnonzero(np.any(values != 0, axis=1))
+    if not len(indices):
+        return {'all_exact_zero': True, 'window_frames': frames,
+                'first_nonzero_frame': None, 'last_nonzero_frame_exclusive': None,
+                'nonzero_span_seconds': None, 'touches_end_of_window': False}
+    first, end = int(indices[0]), int(indices[-1]) + 1
+    return {'all_exact_zero': False, 'window_frames': frames,
+            'first_nonzero_frame': first, 'last_nonzero_frame_exclusive': end,
+            'first_nonzero_seconds': first / 44100,
+            'last_nonzero_seconds_exclusive': end / 44100,
+            'nonzero_span_seconds': (end - first) / 44100,
+            'trailing_exact_silence_seconds': (frames - end) / 44100,
+            'touches_end_of_window': end == frames}
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--matrix', type=Path, required=True)
     p.add_argument('--kind', choices=('music', 'sfx'), required=True)
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--reference-note', default='', help='Explicit additional provenance limit, retained in the ZIP and catalogue manifest')
+    p.add_argument('--comparison-matrix', type=Path, help='Optional separately audited new references for exactly the same native captures')
     a = p.parse_args()
     if a.out.exists():
         raise ValueError('Refuse to replace an earlier listening delivery')
     matrix_path = a.matrix.resolve()
     matrix = json.loads(matrix_path.read_text())
+    pairs = matrix_path.parent / 'pairs'
+    replacement = None
+    if a.comparison_matrix:
+        replacement = json.loads(a.comparison_matrix.read_text())
+        if (not replacement.get('complete') or not replacement.get('compare_source_stable') or
+                replacement.get('native_matrix_sha256') != sha(matrix_path) or
+                replacement.get('firmware_sha256') != matrix.get('firmware_sha256')):
+            raise ValueError('Replacement reference matrix does not identify these exact native captures')
+        pairs = a.comparison_matrix.resolve().parent / 'pairs'
     expected = list(range(1, 19)) if a.kind == 'music' else list(range(0x20, 0x82))
-    entries = {int(row['command'], 0) if isinstance(row['command'], str) else row['command']: row
-               for row in matrix['commands']}
+    # Long matrices also contain a transition case beginning with command01.
+    # It is a separate test, never a replacement for the command01 music case.
+    catalogue = [row for row in matrix['commands']
+                 if a.kind != 'music' or row.get('kind', 'music') == 'music']
+    entries = {}
+    for row in catalogue:
+        command = int(row['command'], 0) if isinstance(row['command'], str) else row['command']
+        if command in entries:
+            raise ValueError('Duplicate catalogue command; do not select a later attempt silently')
+        entries[command] = row
     if sorted(entries) != expected or not matrix.get('all_pairs_available'):
         raise ValueError('The requested complete command catalogue is not available')
     folder = 'MUSICAS' if a.kind == 'music' else 'EFECTOS'
@@ -55,10 +94,20 @@ def main():
     members, rows = {}, []
     for command in expected:
         label = f'{command:02d}' if a.kind == 'music' else f'{command:02X}'
-        comparison_path = matrix_path.parent / 'pairs' / ('COMPARACION-' + label + '.json')
+        comparison_path = pairs / ('COMPARACION-' + label + '.json')
         comparison = json.loads(comparison_path.read_text())
         if int(comparison['command'], 0) != command:
             raise ValueError('Command identity mismatch')
+        expected_files = entries[command]['build']['files']
+        for identity, filename in [('source_executable', 'AUDIO2.ELF'),
+                                   ('source_iso', 'AUDIO2.iso')]:
+            if comparison['identities'][identity] != expected_files[filename]['sha256']:
+                raise ValueError('Listening comparison belongs to another native build')
+        if replacement:
+            original_comparison = json.loads((matrix_path.parent / 'pairs' / comparison_path.name).read_text())
+            for identity in ('saturn_wav', 'source_capture_wav', 'source_executable', 'source_iso'):
+                if comparison['identities'][identity] != original_comparison['identities'][identity]:
+                    raise ValueError('Replacement reference changed a native capture identity')
         row = {'command_rom': f'0x{command:02X}', 'file_label': label,
                'reference_scope': comparison['reference_kind'],
                'saturn_scope': comparison['saturn_kind'],
@@ -66,6 +115,8 @@ def main():
                'metrics': comparison['metrics'], 'native_diagnostics': comparison['diagnostics'],
                'identities': comparison['identities'],
                'runtime_gates_passed': entries[command]['native_gates']['passed'],
+               'capture_attempts': entries[command].get('capture_attempts'),
+               'independent_native_audit_sha256': entries[command].get('independent_native_audit_sha256'),
                'firmware_sha256': matrix['firmware_sha256'],
                'owner_listening_approval': 'PENDING', 'hardware_status': 'HARDWARE PENDING',
                'files': {}}
@@ -81,6 +132,17 @@ def main():
             row['files'][prefix] = dict(info, path=member)
         if row['files']['ARCADE-REFERENCIA']['frames'] != row['files']['SATURN-AUDIO2']['frames']:
             raise ValueError('Pair has different frame counts')
+        support = {prefix: digital_support(comparison_path.parent / f'{prefix}-{label}.wav')
+                   for prefix in ('ARCADE-REFERENCIA', 'SATURN-AUDIO2')}
+        left, right = support['ARCADE-REFERENCIA'], support['SATURN-AUDIO2']
+        for field in ('first_nonzero_frame', 'last_nonzero_frame_exclusive'):
+            support[field + '_saturn_minus_reference_ms'] = (
+                (right[field] - left[field]) * 1000 / 44100
+                if right[field] is not None and left[field] is not None else None)
+        row['additional_activity_measurement'] = dict(
+            method='Exact nonzero raw PCM; no threshold, alignment fit or signal change',
+            limitation='Window bounds and PCM quantization apply; not a composition duration or a calibrated DAC latency',
+            numpy_version=np.__version__, **support)
         if a.kind == 'music' and row['files']['SATURN-AUDIO2']['frames'] < 30 * 44100:
             raise ValueError('Music listening excerpt is shorter than 30 seconds')
         members[f'{root}/{folder}/{comparison_path.name}'] = comparison_path
@@ -88,9 +150,13 @@ def main():
     manifest = {
         'schema': 1, 'purpose': 'Private comparative listening; protected audio, do not commit to GitHub',
         'kind': a.kind, 'commands': rows, 'source_matrix_sha256': sha(matrix_path),
+        'replacement_reference_matrix_sha256': sha(a.comparison_matrix) if replacement else None,
+        'reference_report_sha256': (replacement or matrix).get('reference_report_sha256'),
         'source_stable': matrix.get('source_stable', False),
         'matrix_runtime_gates_passed': matrix.get('all_runtime_gates_passed', False),
         'all_individual_runtime_gates_passed': all(row['runtime_gates_passed'] for row in rows),
+        'capture_attempt_policy': matrix.get('capture_attempt_policy'),
+        'original_campaign_runtime_gates_passed': matrix.get('original_campaign_runtime_gates_passed'),
         'emulator': matrix['emulator'], 'emulator_sha256': matrix.get('emulator_sha256'),
         'production_ready': False, 'owner_listening_approval': 'PENDING',
         'hardware_status': 'HARDWARE PENDING',

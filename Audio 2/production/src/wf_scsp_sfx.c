@@ -181,7 +181,12 @@ static bool start(wf_scsp_sfx_t *s,unsigned v,unsigned bank,unsigned id,unsigned
         }
 #endif
         p->write_at=256;
-    }else fill(s,v,256);
+    }else{
+        /* An initial game-SFX decode of256 measured282Fs and blocked music
+         * deadlines. Launch voices0..2 after128 correct samples, then use
+         * the ordinary urgent refill service. Music voice3 retains256. */
+        fill(s,v,v==3?256:128);
+    }
     if(s->pcm_control){
         p->last_frame=s->now?s->now(s->user)+s->start_guard:s->frames;
         if(!s->pcm_control(v,true,vol,s->user)){s->fault=1;return false;}
@@ -210,7 +215,14 @@ static void fire(wf_scsp_sfx_t *s,unsigned v,const uint8_t *c)
 {
     wf_scsp_sfx_sequence_t *q=&s->sequence[v];
     const uint8_t *e=s->pack+s->events+be16(c+4)+q->event_index*4u;
-    if(!wf_scsp_sfx_oki_start(s,v,q->bank,e[0],e[2],(e[3]&1u)!=0))s->fault=1;
+    /* Original047F tests the sequence's C049+voice latch and skips the
+     * complete stop/start path under F1, even after physical PCM completion.
+     * Pack flags1 is that continuation; flags3 marks a new note followed by
+     * F1. The distinction was checked against all165 original stream events. */
+    if((e[3]&3u)!=1u){
+        s->pcm[v].suppress=0;
+        if(!wf_scsp_sfx_oki_start(s,v,q->bank,e[0],e[2],(e[3]&1u)!=0))s->fault=1;
+    }
     q->ticks_remaining=e[1];
 }
 int wf_scsp_sfx_command(wf_scsp_sfx_t *s,uint8_t cmd)
@@ -317,3 +329,9 @@ next:
     fill(s,best,count);
 }
 void wf_scsp_sfx_work(wf_scsp_sfx_t *s){work_count(s,128);}
+
+void wf_scsp_sfx_work_budget(wf_scsp_sfx_t *s,unsigned count)
+{
+    if(count>128)count=128;
+    if(count)work_count(s,count);
+}

@@ -28,15 +28,16 @@ static bool timed_prepare_step(const wf_scsp_sfx_t *s,wf_sfx_prepared_t *p,unsig
     if(ok)test_clock=(uint16_t)(test_clock+(294u*(*filled-before)+255u)/256u);
     return ok;
 }
-static void timed_work(wf_scsp_sfx_t *s)
+static void timed_work_budget(wf_scsp_sfx_t *s,unsigned count)
 {
     uint32_t before=0,after=0;
     for(unsigned v=0;v<4;v++)before+=s->pcm[v].write_at;
-    wf_scsp_sfx_work(s);
+    wf_scsp_sfx_work_budget(s,count);
     for(unsigned v=0;v<4;v++)after+=s->pcm[v].write_at;
-    /* Real full mixed TAG replay, faster decoder plus four-voice deadline
-     * selection: maximum complete128-sample refill work113Fs. */
-    test_clock=(uint16_t)(test_clock+(113u*(after-before)+127u)/128u);
+    /* Conservative synthetic cost:20Fs selection plus93Fs/128 decoder.
+     * Real mixed-replay maxima128/64/32 were110/65/43Fs; this model charges
+     * 113/67/44Fs and still requires each nearest-head budget to fit. */
+    if(after>before)test_clock=(uint16_t)(test_clock+20u+(93u*(after-before)+127u)/128u);
 }
 static bool timed_start(wf_scsp_sfx_t *s,unsigned voice,unsigned bank,unsigned id,unsigned volume,bool suppress)
 {
@@ -56,7 +57,7 @@ static bool timed_start_prepared(wf_scsp_sfx_t *s,unsigned voice,unsigned bank,u
 #define WF_MUSIC_RING_EVENT(index) test_record(index)
 #define WF_DSP_CLOCK ((uintptr_t)&test_clock)
 #define wf_scsp_sfx_prepare_step timed_prepare_step
-#define wf_scsp_sfx_work timed_work
+#define wf_scsp_sfx_work_budget timed_work_budget
 #define wf_scsp_sfx_oki_start timed_start
 #define wf_scsp_sfx_oki_start_prepared timed_start_prepared
 #pragma GCC diagnostic push
@@ -64,7 +65,7 @@ static bool timed_start_prepared(wf_scsp_sfx_t *s,unsigned voice,unsigned bank,u
 #include "../src/wf_music_firmware.c"
 #pragma GCC diagnostic pop
 #undef wf_scsp_sfx_prepare_step
-#undef wf_scsp_sfx_work
+#undef wf_scsp_sfx_work_budget
 #undef wf_scsp_sfx_oki_start
 #undef wf_scsp_sfx_oki_start_prepared
 
@@ -262,7 +263,7 @@ static void preparation_finishes_in_dense_short_gaps(void)
 static void refill_respects_the_nearest_deadline(void)
 {
     static uint8_t pack[1024];
-    reset_fixture(4,1100,1000);
+    reset_fixture(4,1063,1000);
     wf_sfx_engine.bound=1;wf_sfx_engine.pack=pack;
     wf_sfx_engine.write16=cache_test_write;
     wf_scsp_sfx_pcm_t *p=&wf_sfx_engine.pcm[3];
@@ -270,12 +271,82 @@ static void refill_respects_the_nearest_deadline(void)
     music_work();
     assert(test_clock==1000 && p->write_at==256 && "refill crossed the nearest queued deadline");
     /* When the full measured work budget fits, normal128-sample refill still
-     * makes progress; no queue, ring size or refill granularity changed. */
+     * makes progress; the existing maximum and ring size are unchanged. */
     test_events[0][0]=1140;
     music_work();
     assert(test_clock==1113 && p->write_at==384);
     assert(test_clock<test_events[0][0]);
     if(WF_MUSIC_TIMING)assert(wf_music_timing[24]==113);
+}
+
+static void refill_uses_only_admissible_smaller_steps(void)
+{
+    static uint8_t pack[8192];
+    const unsigned leads[]={63,64,95,96,127,128};
+    const unsigned samples[]={0,32,32,64,64,128};
+    for(unsigned i=0;i<sizeof leads/sizeof leads[0];i++){
+        reset_fixture(4,(uint16_t)(1000+leads[i]),1000);
+        wf_sfx_engine.bound=1;wf_sfx_engine.pack=pack;wf_sfx_engine.write16=cache_test_write;
+        wf_scsp_sfx_pcm_t *p=&wf_sfx_engine.pcm[2];
+        p->playing=1;p->initial_fill=1;p->write_at=256;p->write_end=4096;
+        p->total_frames=8192;p->decoder.remaining=7936;
+        music_work();
+        assert(p->write_at==256+samples[i]);
+        assert(test_clock<=test_events[0][0] && "smaller refill crossed head deadline");
+        assert(test_ring[1]==0 && !wf_sfx_engine.underruns);
+    }
+}
+
+static void refill_survives_dense_short_metadata_gaps(void)
+{
+    static uint8_t pack[8192];
+    reset_fixture(4,1100,1000);
+    wf_sfx_engine.bound=1;wf_sfx_engine.pack=pack;
+    wf_sfx_engine.write16=cache_test_write;
+    wf_scsp_sfx_pcm_t *p=&wf_sfx_engine.pcm[2];
+    p->playing=1;p->initial_fill=1;p->write_at=256;p->write_end=4096;
+    p->total_frames=8192;p->decoder.remaining=7936;
+    test_ring[0]=20;
+    for(unsigned i=0;i<20;i++){
+        test_events[i][0]=(uint16_t)(1100+112*i);test_events[i][1]=0x400;
+        test_events[i][2]=(uint16_t)(1u<<(i&7u));test_events[i][3]=generation;
+    }
+    while(test_clock<2900){
+        poll_clock();assert(music_service());
+        uint16_t nearest=test_events[test_ring[1]][0];
+        music_work();
+        assert(test_clock<=nearest && "refill crossed a transport deadline");
+        test_clock=(uint16_t)(test_clock+12);
+    }
+    assert(!wf_sfx_engine.underruns&&p->playing &&
+           "fixed128 refill wasted every useful sub128Fs metadata gap");
+    assert(p->write_at>256 && !test_ring[4] && !wf_ym_engine.fault);
+}
+
+static void future_cache_cannot_take_the_live_refill_slots(void)
+{
+    static uint8_t pack[8192];
+    memset(pack,0,sizeof pack);pack[43]=64;pack[44]=8;
+    reset_fixture(4,2000,1000);
+    wf_sfx_engine.bound=1;wf_sfx_engine.pack=pack;wf_sfx_engine.samples=32;
+    wf_sfx_engine.write16=cache_test_write;
+    wf_scsp_sfx_pcm_t *p=&wf_sfx_engine.pcm[2];
+    p->playing=1;p->initial_fill=1;p->write_at=256;p->played=213;
+    p->write_end=4096;p->total_frames=8192;p->decoder.remaining=7936;
+    test_ring[0]=3;
+    test_events[1][0]=3500;test_events[1][1]=0x100;test_events[1][2]=0x81;test_events[1][3]=generation;
+    test_events[2][0]=3502;test_events[2][1]=0x100;test_events[2][2]=0x10;test_events[2][3]=generation;
+    /* The production loop has one prepare slot and two background work
+     * slots. Taking all three for this future cache costs222Fs, exceeding
+     * the existing43-sample voice's35-sample usable playback runway. */
+    poll_clock();assert(music_service());assert(music_prepare());
+    poll_clock();assert(music_service());music_work();
+    poll_clock();assert(music_service());music_work();
+    poll_clock();assert(music_service());
+    assert(!wf_sfx_engine.underruns && p->playing &&
+           "future music preparation stole both live PCM refill slots");
+    assert(p->write_at>256 && test_clock<test_events[0][0]);
+    assert(!test_ring[4] && !wf_ym_engine.fault);
 }
 
 static void preparation_sees_the_start_behind_a_dense_burst(unsigned records)
@@ -413,6 +484,12 @@ int main(int argc,char **argv)
     assert(mmio != MAP_FAILED);
     hard_deadline_is_counted_once_and_never_replayed();
     existing_soft_and_hard_boundaries_are_preserved();
+    if(argc==2&&argv[1][0]=='v'){future_cache_cannot_take_the_live_refill_slots();puts("PASS live refill slots");return 0;}
+    if(argc==2&&argv[1][0]=='r'){
+        refill_uses_only_admissible_smaller_steps();
+        refill_survives_dense_short_metadata_gaps();
+        puts("PASS adaptive refill in dense metadata gaps");return 0;
+    }
     if(argc==2&&argv[1][0]=='s'){
         preparation_uses_only_admissible_smaller_steps();
         preparation_finishes_in_dense_short_gaps();
@@ -430,6 +507,9 @@ int main(int argc,char **argv)
     preparation_respects_the_nearest_deadline(10);
     preparation_respects_the_nearest_deadline(200);
     refill_respects_the_nearest_deadline();
+    future_cache_cannot_take_the_live_refill_slots();
+    refill_survives_dense_short_metadata_gaps();
+    refill_uses_only_admissible_smaller_steps();
     preparation_uses_only_admissible_smaller_steps();
     preparation_finishes_in_dense_short_gaps();
     completed_preparation_does_not_rescan_immutable_records();

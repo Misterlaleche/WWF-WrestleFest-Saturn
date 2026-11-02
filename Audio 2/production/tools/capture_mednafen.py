@@ -114,6 +114,7 @@ def main():
     if args.presentation_speed != 1:
         command[-1:-1] = ['-fftoggle', '1', '-ffspeed', str(args.presentation_speed)]
     report = {'emulator': 'standalone Mednafen 1.32.1', 'command': command,
+              'capture_tool_sha256': sha256(Path(__file__).resolve()),
               'emulator_sha256': sha256(executable), 'cue_sha256': sha256(args.cue),
               'bios_sha256': sha256(args.bios), 'wall_time_limit_seconds': args.seconds,
               'memory_access': 'read only', 'frame_skip': False,
@@ -141,11 +142,12 @@ def main():
     emu = None
     memory = None
 
-    def key(name):
+    def key(name, release=True):
         subprocess.run(['xdotool', 'keydown', name], env=env, check=True)
         time.sleep(0.08)
-        subprocess.run(['xdotool', 'keyup', name], env=env, check=True)
-        time.sleep(0.08)
+        if release:
+            subprocess.run(['xdotool', 'keyup', name], env=env, check=True)
+            time.sleep(0.08)
 
     def read_values():
         result = {}
@@ -231,7 +233,11 @@ def main():
                     # Saturn bytes restored by reversing each native uint16.
                     (out / (name + '-saturn-order.bin')).write_bytes(
                         b''.join(data[i:i+2][::-1] for i in range(0, len(data), 2)))
-            key('F12')
+            # F12 closes the last emulator window. A later keyup can race the
+            # X server reset and fail after a fully completed native capture.
+            # No release is needed for a process we immediately wait for.
+            # Exit status, finalized WAV and the unique F5 state remain gates.
+            key('F12', release=False)
             emu.wait(timeout=10)
             report['exit_code'] = emu.returncode
             report['wall_seconds'] = round(time.monotonic() - started, 6)

@@ -1,5 +1,12 @@
 # Original score endings, recurrence and fade observations
 
+**Model scope:** this 600-second detector retains the preserved A53 TimerB-only
+MMIO model. The later coupled `full-board` audit supplies TimerA+B and real
+digital busy/status. The branch identities below establish what the original
+program executed in the stated model, but these measured timestamps and
+recurrence intervals have not yet been reproduced with the coupled model.
+See `ARCADE-CLOCK-AUDIT.md` and `F1-ROM-SEQUENCE-AUDIT.md` for that distinction.
+
 ## What was actually established
 
 The original 65,536-byte sound ROM was executed with the preserved full Z80
@@ -138,3 +145,13 @@ identical stereo sample values over 30 seconds. Every native result must still
 identify its exact firmware/source snapshot and maintain the distinction
 between runtime stability, control-sequence equivalence, digital audio fidelity
 and physical hardware approval.
+
+## Closed native candidate result
+
+The completed cddd/scalar9 collection and all 19 independent native audits are
+recorded in [NATIVE-LONG-FINAL-CANDIDATE.md](NATIVE-LONG-FINAL-CANDIDATE.md).
+Four music cases pass; fourteen music cases and the transition fail. All zero
+PCM-underrun counters and silent final tails are retained separately from those
+failures. The report preserves the two ENOSPC attempts and their exact-disc
+retries. This does not extend the partial-MMIO score detector's completeness
+or loop claims.

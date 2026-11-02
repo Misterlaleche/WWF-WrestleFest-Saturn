@@ -3,7 +3,7 @@
 from pathlib import Path
 import argparse, hashlib, json, os, shutil, struct, subprocess
 
-def build(package,out,resources,firmware,sdk,command,seconds,replay=None):
+def build(package,out,resources,firmware,sdk,command,seconds,replay=None,lifecycle=False):
     package,out,resources,firmware,sdk=map(lambda x:Path(x).resolve(),(package,out,resources,firmware,sdk))
     # Reject aliases before writing: an in-place build would truncate the
     # complete source sound ROM to the module's 48KiB executable window.
@@ -15,6 +15,8 @@ def build(package,out,resources,firmware,sdk,command,seconds,replay=None):
         raise ValueError('Build output must not alias any input resource or firmware')
     out.mkdir(parents=True,exist_ok=True);src=package/'src';log=[]
     replay_identity=None
+    if lifecycle and replay is not None:
+        raise ValueError('Lifecycle diagnostic owns its explicit command schedule')
     if replay is not None:
         replay=Path(replay).resolve();plan=json.loads(replay.read_text())
         events=plan['events']
@@ -69,16 +71,18 @@ _wf_music_sound_rom: .incbin "SOUND.ROM"
     flags=['-m2','-mb','-std=c11','-ffreestanding','-fno-builtin','-ffunction-sections','-fdata-sections',
            '-fstack-usage','-Wall','-Wextra','-I',package/'include','-I',src,'-I',src/'reference_driver',
            '-I',sdk/'sh2eb-elf/include/yaul','-DWF_MUSIC_NATIVE_CONTROL=1']
-    sources=[package/'tests/saturn_harness.c',src/'wf_audio2.c',src/'wf_audio2_yaul.c',src/'wf_native_host.c',src/'wf_native_elf.c',src/'wf_native_yaul.c',
+    harness=package/'tests'/('saturn_lifecycle.c' if lifecycle else 'saturn_harness.c')
+    sources=[harness,src/'wf_audio2.c',src/'wf_audio2_yaul.c',src/'wf_native_host.c',src/'wf_native_elf.c',src/'wf_native_yaul.c',
              src/'wf_scsp_sfx.c',src/'wf_music_module.c',src/'wf_music_seq.c',src/'wf_scsp_ym.c',
              src/'reference_driver/z80-native.c',src/'reference_driver/z80-cold.c']
     objects=[]
     firmware_symbols=json.loads((firmware.parent/'symbols.json').read_text())
     for f in sources:
         obj=out/(f.stem+'.o');objects.append(obj)
-        is_native=f.stem in ['z80-native','wf_music_seq']
+        # Native checkpoint: sequence -Os is faster/smaller; core stays -O2.
+        is_native=f.stem in ['z80-native']
         options=[*flags,'-O2' if is_native else '-Os']
-        if f.name=='saturn_harness.c':
+        if f==harness:
             options+=['-DAUDIO2_COMMAND='+str(command),'-DAUDIO2_SECONDS='+str(seconds),
                 '-DAUDIO2_SFX_ENGINE_ADDR='+str(firmware_symbols['wf_sfx_engine'])]
             if replay is not None:options+=['-DAUDIO2_REPLAY=1','-I',out]
@@ -113,7 +117,7 @@ _wf_music_sound_rom: .incbin "SOUND.ROM"
     (out/'AUDIO2.cue').write_text('FILE "AUDIO2.iso" BINARY\n  TRACK 01 MODE1/2048\n    INDEX 01 00:00:00\n')
     report=dict(profile='isolated-static-HWRAM',music_abi='static link, not ABI3/ABI4 ELF interchange',
                 command=command,seconds=seconds,hot_bytes=syms['_wf_hotcode_end']-syms['_wf_hotcode_start'],
-                diag_address=syms['_audio2_diag'],replay=replay_identity,hardware_status='HARDWARE PENDING',
+                diag_address=syms['_audio2_diag'],replay=replay_identity,harness=harness.name,hardware_status='HARDWARE PENDING',
                 files={n:dict(bytes=(out/n).stat().st_size,sha256=hashlib.sha256((out/n).read_bytes()).hexdigest()) for n in ['AUDIO2.ELF','AUDIO2.map','AUDIO2.bin','AUDIO2.iso','AUDIO2.cue']})
     (out/'saturn-build.json').write_text(json.dumps(report,indent=2)+'\n');return report
 
@@ -123,4 +127,5 @@ if __name__=='__main__':
     for key in ['out','resources','firmware','sdk']:p.add_argument('--'+key,type=Path,required=True)
     p.add_argument('--command',type=lambda x:int(x,0),default=1);p.add_argument('--seconds',type=int,default=35)
     p.add_argument('--replay',type=Path)
-    a=p.parse_args();print(json.dumps(build(a.package,a.out,a.resources,a.firmware,a.sdk,a.command,a.seconds,a.replay),indent=2))
+    p.add_argument('--lifecycle',action='store_true',help='Native BUSY/stop/quiescence/cold-recovery diagnostic, not a music capture')
+    a=p.parse_args();print(json.dumps(build(a.package,a.out,a.resources,a.firmware,a.sdk,a.command,a.seconds,a.replay,a.lifecycle),indent=2))

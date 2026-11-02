@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Cold-boot all18 music commands from one immutable source/input snapshot.
 
-Uses only the selected real standalone Mednafen1.32.1. Corrected board-pcm16
-references are required. Runtime failures remain recorded even when a WAV
+Uses only the selected real standalone Mednafen1.32.1. Full-board references
+are preferred; the historical board-pcm16 profile remains explicit. Runtime failures remain recorded even when a WAV
 pair is available; metrics never stand in for listening or hardware approval.
 """
 import argparse
@@ -40,15 +40,20 @@ def make_cases(first, last, seconds, score_seconds=None, tail_seconds=8, transit
 
 def inspect_replay_rows(rows, events, maximum_delay=1475):
     observations = []
+    # The harness writes a record only after ACCEPTED. Unused static RAM is
+    # all zero, including result=0; it is not an accepted command record.
+    written = [row[0] != 0 and row[2] > 0 for row in rows]
     for expected, row in zip(events, rows):
         word, sample, frame, result = row
         observations.append({'expected': expected, 'word': word, 'sample': sample,
                              'video_frame': frame, 'result': result,
+                             'recorded': word != 0 and frame > 0,
                              'admission_delay_samples': sample - expected['sample']})
     gates = {
-        'all_rows_present': len(rows) == len(events),
+        'all_rows_present': bool(rows) and len(rows) == len(events) and all(written),
         'exact_original_words': all(e['word'] == r[0] for e, r in zip(events, rows)),
-        'all_results_accepted': all(r[3] == 0 for r in rows),
+        'all_results_accepted': bool(rows) and len(rows) == len(events)
+            and all(written) and all(r[3] == 0 for r in rows),
         'first_admission_is_epoch': bool(rows) and rows[0][1] == 0,
         'no_early_admission': all(r[1] >= e['sample'] for e, r in zip(events, rows)),
         'monotonic_admission': all(a[1] <= b[1] for a, b in zip(rows, rows[1:])),
@@ -169,9 +174,10 @@ def main():
         if isinstance(value, Path):
             setattr(a, name, value.resolve())
     reference = json.loads(a.reference_report.read_text())
-    if (reference.get('profile') != 'board-pcm16' or not reference.get('complete') or
+    if (reference.get('profile') not in ('full-board','board-pcm16') or not reference.get('complete') or
             reference.get('external_ym_clock_hz') != 3579545 or reference.get('opm_pipeline_divider') != 2):
-        raise ValueError('Require complete corrected board-pcm16 reference report; historical A53 is separate')
+        raise ValueError('Require complete full-board or explicitly historical board-pcm16 reference report')
+    reference_profile=reference['profile']
     tracks = {t['command']: t for t in reference['tracks']}
     if set(tracks) != set(range(1, 19)):
         raise ValueError('Reference report must identify all18 original commands')
@@ -211,7 +217,7 @@ def main():
         'source_origin': str(a.package), 'source_snapshot': str(package), 'source_sha256_before': sources,
         'input_snapshot': str(inputs), 'input_sha256_before': input_identity,
         'firmware_sha256': sha(frozen_firmware), 'reference_report_sha256': sha(inputs / 'reference-report.json'),
-        'reference_profile': 'board-pcm16', 'range': [a.first, a.last],
+        'reference_profile': reference_profile, 'range': [a.first, a.last],
         'native_window_seconds': cases[0]['seconds'], 'score_seconds_before_1F':a.score_seconds,
         'tail_seconds':a.tail_seconds if a.score_seconds is not None else None,
         'presentation_speed_requested':a.presentation_speed,'emulated_hardware_clock_change':False,
@@ -297,7 +303,7 @@ def main():
             item['pair_available'] = False if case['kind']=='music' else None
             if case['kind']=='music' and extra['native_wav_finalized'] and details.get('final_watch_values', {}).get('state') == 4:
                 stage = run_stage([sys.executable, package / 'tools/compare_capture.py', '--capture', native,
-                    '--reference', inputs / 'reference' / f'ARCADE-REFERENCIA-{command:02d}.wav', '--reference-profile', 'board-pcm16',
+                    '--reference', inputs / 'reference' / f'ARCADE-REFERENCIA-{command:02d}.wav', '--reference-profile', reference_profile,
                     '--build', build, '--out', pair, '--command', command], work / 'compare.log', 90)
                 item['stages'].append(stage); item['pair_available'] = stage['exit_code'] == 0
                 if item['pair_available']:

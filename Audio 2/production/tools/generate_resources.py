@@ -12,6 +12,26 @@ import struct
 import zipfile
 import zlib
 
+PACKAGE = Path(__file__).resolve().parents[1]
+
+
+def private_output(path):
+    """Protect source/history and prior evidence before generating any files."""
+    original = Path(path)
+    out = original.resolve()
+    protected = {PACKAGE.resolve()}
+    if PACKAGE.name == 'production' and PACKAGE.parent.name == 'Audio 2':
+        protected.add(PACKAGE.parent.parent.resolve())
+    for parent in PACKAGE.resolve().parents:
+        if (parent / '.git').exists():
+            protected.add(parent)
+            break
+    if original.is_symlink() or out.exists() or any(
+            out == root or root in out.parents for root in protected):
+        raise ValueError('Use a fresh private output outside the source package and repository')
+    return out
+
+
 SOUND_SHA256 = 'f89e7782e7535576b2ebf8c5daea61c5fa2ecefff0b8b3280dea09efa57c25f7'
 SAMPLES_SHA256 = 'e4cbe71f079e2cb95b3463115557fa1d99e18ea975f2d3354827b01994fc4615'
 COMMANDS_SHA256 = '962114bf6693c4b32f59eac0139d7206161a4a67780e459cdffdb3f0dfd4e624'
@@ -115,11 +135,12 @@ def generate(sound, samples):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--rom-zip',type=Path,required=True)
-    p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--out',type=Path,required=True,help='New private directory outside the source package/repository')
     a=p.parse_args()
+    a.out=private_output(a.out)
     with zipfile.ZipFile(a.rom_zip) as archive:
         data=generate(archive.read('31a11-2.ic42'),archive.read('31j10.ic73'))
-    a.out.mkdir(parents=True,exist_ok=True)
+    a.out.mkdir(parents=True,exist_ok=False)
     identities={}
     for name,key in [('SFX.DAT','pack'),('SOUND.ROM','sound'),('PCM16BE.PAK','pcm16be')]:
         content=data.pop(key);(a.out/name).write_bytes(content)

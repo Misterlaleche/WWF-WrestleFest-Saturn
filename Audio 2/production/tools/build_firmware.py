@@ -4,8 +4,28 @@ from pathlib import Path
 import argparse, hashlib, json, math, os, shutil, struct, subprocess
 from build_dsp_mixer import generate
 
+
+def private_output(path, package):
+    """Protect both selected sources and this tool's repository/history."""
+    original = Path(path)
+    out = original.resolve()
+    packages = {Path(package).resolve(), Path(__file__).resolve().parents[1]}
+    protected = set(packages)
+    for source in packages:
+        if source.name == 'production' and source.parent.name == 'Audio 2':
+            protected.add(source.parent.parent)
+        for parent in source.parents:
+            if (parent / '.git').exists():
+                protected.add(parent)
+                break
+    if original.is_symlink() or out.exists() or any(
+            out == root or root in out.parents for root in protected):
+        raise ValueError('Use a fresh private output outside the source package and repository')
+    return out
+
+
 def build(package, out, prefix, runtime_source=None, timing=True):
-    package=Path(package).resolve();out=Path(out).resolve();out.mkdir(parents=True,exist_ok=True)
+    package=Path(package).resolve();out=private_output(out,package);out.mkdir(parents=True,exist_ok=False)
     src=package/'src';logs=[]
     (out/'include').mkdir(exist_ok=True)
     (out/'include/string.h').write_text('#include <stddef.h>\nvoid *memcpy(void *,const void *,size_t);\nvoid *memset(void *,int,size_t);\nint memcmp(const void *,const void *,size_t);\n')
@@ -87,7 +107,7 @@ def build(package, out, prefix, runtime_source=None, timing=True):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--package',type=Path,default=Path(__file__).resolve().parents[1])
-    p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--out',type=Path,required=True,help='New private directory outside the source package/repository')
     p.add_argument('--prefix',default='m68k-linux-gnu-')
     p.add_argument('--runtime-source',type=Path,help='Pinned GCC13.3 lb1sf68.S; build base68000 helpers instead of distribution libgcc')
     p.add_argument('--no-timing',action='store_true',help='Remove private measurement overhead; keep all error/drop/underrun guards')

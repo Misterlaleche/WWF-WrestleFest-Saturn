@@ -1034,19 +1034,19 @@ bool wf_z80_native_compatible(const uint8_t *p,size_t n){
 
 
 static const uint8_t wf_scalar_admission[256] __attribute__((section(".wf_hotdata_const")))={
- 1,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,
+ 1,1,0,0,1,1,1,0,1,1,0,0,0,0,1,0,
  1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
  1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,
- 1,0,1,0,0,1,0,0,0,0,1,0,1,1,1,0,
+ 1,0,1,0,0,1,0,0,1,0,1,0,1,1,1,0,
  0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
- 0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,
+ 0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,
  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,
- 0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+ 0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,
+ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
- 0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
- 1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,
+ 0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,
+ 1,0,0,1,0,0,1,0,1,1,1,0,0,1,0,0,
  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
  0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
  0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,
@@ -1076,6 +1076,17 @@ static const uint8_t wf_scalar_admission[256] __attribute__((section(".wf_hotdat
   if(!wf_scalar_admission[op])return 0;
   z->pc=(uint16_t)(pc+1);z->cyc+=cyc_00[op];inc_r(z);
   switch(op){
+  /* Original scalar helpers; one instruction and the same timing/IRQ tail. */
+  case 0x01: set_bc(z, nextw(z)); break;
+  case 0x04: z->b = inc(z, z->b); break;
+  case 0x0e: z->c = nextb(z); break;
+  case 0x38: cond_jr(z, z->cf == 1); break;
+  case 0x56: z->d = rb(z, get_hl(z)); break;
+  case 0x82: z->a = addb(z, z->a, z->d, 0); break;
+  case 0x90: z->a = subb(z, z->a, z->b, 0); break;
+  case 0xba: cp(z, z->d); break;
+  case 0xc6: z->a = addb(z, z->a, nextb(z), 0); break;
+
   case 0x00: break;
 case 0x05: z->b = dec(z, z->b); break;
 case 0x06: z->b = nextb(z); break;
@@ -1180,6 +1191,17 @@ WF_SCALAR_ALWAYS_INLINE unsigned wf_z80_scalar_inline(z80*z,unsigned budget,uint
   if(!wf_scalar_admission[op])return 0;
   z->pc=(uint16_t)(pc+1);z->cyc+=cyc_00[op];inc_r(z);
   switch(op){
+  /* Original scalar helpers; one instruction and the same timing/IRQ tail. */
+  case 0x01: set_bc(z, nextw(z)); break;
+  case 0x04: z->b = inc(z, z->b); break;
+  case 0x0e: z->c = nextb(z); break;
+  case 0x38: cond_jr(z, z->cf == 1); break;
+  case 0x56: z->d = rb(z, get_hl(z)); break;
+  case 0x82: z->a = addb(z, z->a, z->d, 0); break;
+  case 0x90: z->a = subb(z, z->a, z->b, 0); break;
+  case 0xba: cp(z, z->d); break;
+  case 0xc6: z->a = addb(z, z->a, nextb(z), 0); break;
+
   case 0x00: break;
 case 0x05: z->b = dec(z, z->b); break;
 case 0x06: z->b = nextb(z); break;

@@ -40,19 +40,26 @@ def main():
                       tests / "test_ym_native.c", tests / "test_seq_a53.c"]
     before = {str(path): sha(path) for path in native_sources}
     common = [a.cc, "-std=c99", "-O2", "-I", str(src)]
+    # Match the selected native profile without changing the independent oracle.
+    sequence_object = a.out / "candidate-sequence.o"
+    sequence_build = [a.cc, "-std=c99", "-Os", "-I", str(src),
+                      "-DWF_MUSIC_NATIVE_CONTROL=1", "-c", str(src / "wf_music_seq.c"),
+                      "-o", str(sequence_object)]
     cases = [
         ("ym_phase_and_bridge", common + ["-DWF_TEST_PINNED_OPM", "-I", str(a.opm),
          str(tests / "test_ym_native.c"), str(src / "wf_scsp_ym.c"), "-lm", "-o",
          str(a.out / "test_ym_pinned")], [str(a.out / "test_ym_pinned"), *map(str, traces)]),
         ("serviced_native_sequence_vs_full_z80_a53", common + ["-DWF_MUSIC_NATIVE_CONTROL=1",
          "-I", str(src / "reference_driver"), str(tests / "test_seq_a53.c"),
-         str(src / "wf_music_seq.c"), str(src / "reference_driver/z80-cold.c"),
+         str(sequence_object), str(src / "reference_driver/z80-cold.c"),
          str(src / "reference_driver/z80-native.c"), "-o", str(a.out / "test_seq_a53")],
          [str(a.out / "test_seq_a53"), str(a.rom), *map(str, traces)]),
     ]
     report = {"kind": "HOST_PHASE_AND_REGISTER_LOGIC_NOT_NATIVE_WAVEFORM_VALIDATION",
               "source_sha256": before,
-              "input_sha256": {str(path): sha(path) for path in [a.rom, *traces]}, "tests": []}
+              "input_sha256": {str(path): sha(path) for path in [a.rom, *traces]},
+              "sequence_build_command": sequence_build, "tests": []}
+    subprocess.run(sequence_build, check=True, capture_output=True, text=True)
     for name, build, run in cases:
         subprocess.run(build, check=True, capture_output=True, text=True)
         result = subprocess.run(run, capture_output=True, text=True)

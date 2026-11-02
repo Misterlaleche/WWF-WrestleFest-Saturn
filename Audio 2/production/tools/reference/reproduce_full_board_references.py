@@ -28,8 +28,9 @@ def prepare_and_build(out,rom_zip,opm_dir,cc='cc'):
     inputs=out/'inputs';deps=out/'deps';prepare(Path(rom_zip).resolve(),inputs);dependencies(deps,opm_dir)
     audit=json.loads((HERE/'oracle_sfx/WF_OKI_AUDIT.json').read_text())
     if sha(inputs/'PCM16BE.PAK')!=audit['pak_sha256']:raise ValueError('Independent complete PCM audit mismatch')
+    pcm=(inputs/'PCM16BE.PAK').read_bytes()
     for sample in audit['samples']:
-        data=(inputs/'PCM16BE.PAK').read_bytes()[sample['offset']:sample['offset']+sample['bytes']]
+        data=pcm[sample['offset']:sample['offset']+sample['bytes']]
         if hashlib.sha256(data).hexdigest()!=sample['sha256_pcm16be']:raise ValueError('Independent PCM sample mismatch')
     fixture='typedef struct {unsigned bank,id,offset,frames;} fixture_t;\nstatic const fixture_t fixtures[114]={\n'
     fixture+=''.join('{%d,%d,%d,%d},\n'%(s['bank'],s['sample_id'],s['offset'],s['frames']) for s in audit['samples'])+'};\n'
@@ -68,8 +69,7 @@ def run_case(out,stem,events,seconds,profile='full'):
 def write_wav(raw,destination):
     import array
     data=array.array('h',Path(raw).read_bytes())
-    if sys.byteorder=='little':data.byteswap()
-    if sys.byteorder=='big':data.byteswap()
+    data.byteswap() # Serialized PCM16BE becomes WAV PCM16LE on either host endian.
     with wave.open(str(destination),'wb') as sink:
         sink.setnchannels(1);sink.setsampwidth(2);sink.setframerate(44100);sink.writeframes(data.tobytes())
 

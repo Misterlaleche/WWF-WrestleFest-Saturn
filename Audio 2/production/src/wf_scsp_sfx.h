@@ -63,5 +63,7 @@ void wf_scsp_sfx_stop_all(wf_scsp_sfx_t *);
 void wf_scsp_sfx_advance(wf_scsp_sfx_t *,unsigned elapsed_scsp_frames);
 /* <=128 samples globally. Nearest playback guard first; round-robin ties. */
 void wf_scsp_sfx_work(wf_scsp_sfx_t *);
+/* Same urgent selector, bounded to min(max_samples,128), zero means no work. */
+void wf_scsp_sfx_work_budget(wf_scsp_sfx_t *,unsigned max_samples);
 int16_t wf_scsp_sfx_decode(wf_sfx_decoder_t *,const uint8_t *);
 #endif
