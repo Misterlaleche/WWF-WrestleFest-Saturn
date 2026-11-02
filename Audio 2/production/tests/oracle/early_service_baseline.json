@@ -1,0 +1,16 @@
+{
+  "purpose": "Exact pre-early-service control for causal RED, frozen from the TL/F5F-return candidate with core SHA24b84435. No ROM or audio data.",
+  "license": "../../src/reference_driver/LICENSE (pinned MIT Z80 core; same attribution as native source)",
+  "oracles": {
+    "tests/oracle/z80_native_pre_early_service.c": {
+      "bytes": 50667,
+      "sha256": "24b844357544e12cfa7b1a09f7d368d895a918b00c129815438827102b1ea0fa",
+      "frozen_from": "src/reference_driver/z80-native.c"
+    },
+    "tests/oracle/wf_music_seq_pre_early_service.c": {
+      "bytes": 6412,
+      "sha256": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+      "frozen_from": "src/wf_music_seq.c"
+    }
+  }
+}

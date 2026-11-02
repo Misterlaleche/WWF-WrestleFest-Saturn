@@ -821,6 +821,26 @@ static WF_SMALL __attribute__((section(".wf_hotcode"))) unsigned wf_cost_macro(z
  return 0;
 }
 
+/* Four original TL prefixes plus the existing exact YM writer. Each stops
+ * at C801, before EX AF,AF' / RET, so the cooperative scheduler still sees
+ * the observable I/O boundary. The last prefix is a tail JP, not a CALL. */
+static WF_SMALL __attribute__((noinline))
+unsigned wf_score_tl_write(z80 *z,unsigned budget,uint32_t limit)
+{
+ wf_music_seq_t *v=(wf_music_seq_t *)z->userdata;
+ unsigned pc=z->pc,first=pc==0x0c09,last=pc==0x0c2c;
+ unsigned prefix=first?58u:last?42u:49u;
+ if(budget<18u||(int32_t)(limit-(uint32_t)z->cyc)<(int32_t)(prefix+81u)||
+    z->sp<0xc402||z->sp>0xc800||(v->status&128u))return 0;
+ unsigned level=first?0x8a:pc==0x0c16?0x8c:pc==0x0c21?0x8b:0x8d;
+ z->d=first?addb(z,v->ram[0x65],0x60,0):addb(z,8,z->d,0);
+ z->a=z->e=v->ram[level];
+ z->cyc+=prefix;z->r=(uint8_t)((z->r&128u)|((z->r+6u)&127u));
+ z->pc=0x0f4b;z->mem_ptr=0x0f4b;
+ if(!last)pushw(z,(uint16_t)(first?0x0c16:pc+11u));
+ return 6u+wf_cost_macro(z,budget-6u,limit);
+}
+
 /* Exact setup+YM-write segments. End at the observable C801 store, before
  * EX AF,AF' and RET. The caller still commits timer/target boundaries there.
  * Uses pinned-core helpers and the same RAM adapter as the AOT executor. */
@@ -927,6 +947,80 @@ static WF_SMALL __attribute__((section(".wf_hotcode"))) unsigned wf_score_countd
 }
 
 
+/* Exact instrument/TL preparation, 0B68..0B97. The table and four source
+ * bytes remain reads of the original ROM. No I/O, stack access or branch to
+ * a sound producer is folded into this operation. Keep this bounded helper
+ * out of the fixed 18KiB hot-code/state allocation; its text is cacheable. */
+static WF_SMALL __attribute__((noinline))
+unsigned wf_score_level_prepare(z80 *z,unsigned budget,uint32_t limit)
+{
+ if(budget<27u||(int32_t)(limit-(uint32_t)z->cyc)<301)return 0;
+ wf_music_seq_t *v=(wf_music_seq_t *)z->userdata;
+ unsigned channel=v->ram[0x65];if(channel>=8)return 0;
+ unsigned table=0x135fu+(uint8_t)(v->ram[0x82+channel]*2u);
+ unsigned base=v->rom[table]|((unsigned)v->rom[table+1]<<8);
+ if(base>0xbfe7)return 0;
+ z->a=v->rom[base+24]&7u;
+ for(unsigned i=0;i<4;i++)v->ram[0x8a+i]=v->rom[base+4+i];
+ unsigned sum=(uint8_t)(z->a+v->rom[base+7]);
+ set_f(z,(uint8_t)(((base+4)&0x8000u?0x80u:0u)|(sum&8u)|((sum&2u)<<4)));
+ set_bc(z,0x0400);set_de(z,0xc08e);set_hl(z,(uint16_t)(base+8));z->iy=(uint16_t)(table+1);
+ z->pc=0x0b98;z->mem_ptr=0x0b95;z->cyc+=301;
+ z->r=(uint8_t)((z->r&128u)|((z->r+37u)&127u));
+ return 27;
+}
+
+/* Exact 0BD7..0BE6 scale operation including its original multiply call.
+ * Preserve all three residual stack words, 8-bit complements and final SUB.
+ * Like the other lifts, this performs no chip access and must fit wholly
+ * before the caller's instruction/time boundary. */
+static WF_SMALL __attribute__((section(".wf_hotcode")))
+unsigned wf_score_fade_scale(z80 *z,unsigned budget,uint32_t limit)
+{
+ if(z->sp<0xc406||z->sp>0xc7fe)return 0;
+ wf_music_seq_t *v=(wf_music_seq_t *)z->userdata;
+ unsigned factor=v->ram[0x63],pop=factor;
+ pop-=((pop>>1)&0x55u);pop=(pop&0x33u)+((pop>>2)&0x33u);pop=(pop+(pop>>4))&15u;
+ unsigned steps=70u+pop,ticks=585u+6u*pop;
+ if(budget<steps||(int32_t)(limit-(uint32_t)z->cyc)<(int32_t)ticks)return 0;
+ unsigned at=z->sp-0xc000u;
+ uint16_t back=(uint16_t)(v->ram[at]|((unsigned)v->ram[at+1]<<8));
+ z->a=subb(z,0x7f,z->a,0);unsigned product=z->a*factor;
+ v->ram[at-2]=0xe3;v->ram[at-1]=0x0b;
+ v->ram[at-4]=get_f(z);v->ram[at-3]=(uint8_t)factor;
+ v->ram[at-6]=z->l;v->ram[at-5]=z->h;
+ set_bc(z,(uint16_t)product);z->e=0;z->a=subb(z,0x7f,z->b,0);
+ z->sp+=2;z->pc=back;z->mem_ptr=back;z->cyc+=ticks;
+ z->r=(uint8_t)((z->r&128u)|((z->r+96u+pop)&127u));
+ return steps;
+}
+
+/* Exact 0BE7..0C08 total-level adjustment and RET. The original intermediate
+ * PUSH AF remains in RAM, and the final CP flags survive the optional clamp.
+ * Stack admission excludes aliases of the channel/fade tables read here.
+ * The common dispatcher checks IRQ state; this path never crosses its limit. */
+static WF_SMALL __attribute__((section(".wf_hotcode")))
+unsigned wf_score_fade_level(z80 *z,unsigned budget,uint32_t limit)
+{
+ wf_music_seq_t *v=(wf_music_seq_t *)z->userdata;
+ if(z->sp<0xc402||z->sp>0xc7fe)return 0;
+ unsigned channel=v->ram[0x65],selector=v->ram[7];
+ uint8_t first=(uint8_t)(v->ram[0x8e + channel]+z->a);
+ uint8_t delta=v->rom[0x133f+selector],result=(uint8_t)(first+delta);
+ unsigned clamp=result>=0x7f,steps=20u+clamp,ticks=158u+12u*clamp;
+ if(budget<steps||(int32_t)(limit-(uint32_t)z->cyc)<(int32_t)ticks)return 0;
+ unsigned at=z->sp-0xc000u;
+ uint16_t back=(uint16_t)(v->ram[at]|((unsigned)v->ram[at+1]<<8));
+ z->a=addb(z,v->ram[0x8e + channel],z->a,0);
+ v->ram[at-2]=get_f(z);v->ram[at-1]=z->a;
+ z->b=0;z->c=(uint8_t)selector;set_hl(z,(uint16_t)(0x133f+selector));
+ z->a=addb(z,z->a,delta,0);z->d=0x7f;cp(z,0x7f);
+ if(clamp)z->a=0x7f;
+ z->sp+=2;z->pc=back;z->mem_ptr=back;z->cyc+=ticks;
+ z->r=(uint8_t)((z->r&128u)|((z->r+steps)&127u));
+ return steps;
+}
+
 /* Exact 0F2D..0F4A unsigned 8x8 multiplication and RET. No I/O.
  * Complete admission precedes every CPU/RAM mutation. */
 WF_SMALL __attribute__((section(".wf_hotcode")))
@@ -951,11 +1045,37 @@ unsigned wf_score_multiply(z80 *z,unsigned budget,uint32_t limit)
  return steps;
 }
 
+/* Resume the original multiply at its loop head (SLA E, not LD A,8).
+ * A whole-call lift may have been declined at a service or timer boundary.
+ * Admit only the remaining iterations and original POP HL/POP AF/RET tail;
+ * no original cycle, stack byte, refresh increment or interrupt is skipped. */
+static WF_SMALL __attribute__((section(".wf_hotcode")))
+unsigned wf_score_multiply_resume(z80 *z,unsigned budget,uint32_t limit)
+{
+ unsigned n=z->a;
+ if(n<1||n>8||z->sp<0xc000||z->sp>0xc7fa)return 0;
+ unsigned e=z->e,bc=get_bc(z),result=get_hl(z),pop=0;
+ for(unsigned i=0;i<n;i++){
+  if(e&128u){result+=bc;++pop;}
+  e=(e<<1)&255u;bc>>=1;
+ }
+ unsigned steps=6u*n+pop+5u,ticks=52u*n+6u*pop+33u;
+ if(budget<steps||(int32_t)(limit-(uint32_t)z->cyc)<(int32_t)ticks)return 0;
+ wf_music_seq_t *v=(wf_music_seq_t *)z->userdata;unsigned at=z->sp-0xc000u;
+ set_bc(z,(uint16_t)result);z->e=(uint8_t)e;
+ set_hl(z,(uint16_t)(v->ram[at]|((unsigned)v->ram[at+1]<<8)));
+ set_f(z,v->ram[at+2]);z->a=v->ram[at+3];
+ uint16_t back=(uint16_t)(v->ram[at+4]|((unsigned)v->ram[at+5]<<8));
+ z->sp+=6;z->pc=back;z->mem_ptr=back;z->cyc+=ticks;
+ z->r=(uint8_t)((z->r&128u)|((z->r+9u*n+pop+5u)&127u));
+ return steps;
+}
+
 /* Isolated experiment. Exact pinned ED B0 at037C, never a generic LDIR.
  * Precondition: z belongs to the compatible wf_music_seq_t memory adapter.
  * Source10F0..123A is ROM; destinationC057..C1A1 is ordinary RAM.
  * 330 repeated21T iterations + final16T; no I/O or interrupt boundary. */
-WF_SMALL __attribute__((section(".wf_hotcode")))
+WF_SMALL __attribute__((noinline))
 unsigned wf_z80_startup_copy(z80*z,unsigned budget,uint32_t limit)
 {
  if(z->pc!=0x037c||budget<331u||(int32_t)(limit-(uint32_t)z->cyc)<6946||
@@ -1001,21 +1121,32 @@ unsigned wf_score_instrument_pre(z80*z,unsigned budget,uint32_t limit)
    case 0x0e6a:return wf_score_instrument_pre(z,budget,limit);
    /* Separate continuation: never crosses the preceding C801 callback. */
    case 0x0f5f:{
-    if(budget<5u||z->sp<0xc000||z->sp>0xc7fe)return 0;
-    bool taken=z->b!=1u;unsigned ticks=taken?43u:38u;
-    if((int32_t)(limit-(uint32_t)z->cyc)<(int32_t)ticks)return 0;
+    if(budget<2u||z->sp<0xc000||z->sp>0xc7fe)return 0;
     wf_music_seq_t*v=(wf_music_seq_t*)z->userdata;unsigned at=z->sp-0xc000u;
-    if(v->ram[at]!=0x71||v->ram[at+1]!=0x0e)return 0;
+    uint16_t back=(uint16_t)(v->ram[at]|((unsigned)v->ram[at+1]<<8));
+    bool taken=z->b!=1u;unsigned ticks=taken?43u:38u;
+    bool instrument=back==0x0e71&&budget>=5u&&
+      (int32_t)(limit-(uint32_t)z->cyc)>=(int32_t)ticks;
+    if(!instrument)ticks=14;
+    if((int32_t)(limit-(uint32_t)z->cyc)<(int32_t)ticks)return 0;
     uint8_t a=z->a,f=get_f(z);
     z->a=z->a_;set_f(z,z->f_);z->a_=a;z->f_=f;
-    z->sp+=2;++z->ix;set_hl(z,(uint16_t)(get_hl(z)+1u));--z->b;
-    z->pc=taken?0x0e6a:0x0e76;z->mem_ptr=taken?0x0e6a:0x0e71;
-    z->cyc+=ticks;z->r=(uint8_t)((z->r&128u)|((z->r+6u)&127u));
-    return 5;
+    z->sp+=2;
+    if(instrument){
+     ++z->ix;set_hl(z,(uint16_t)(get_hl(z)+1u));--z->b;
+     z->pc=taken?0x0e6a:0x0e76;z->mem_ptr=taken?0x0e6a:0x0e71;
+    }else z->pc=z->mem_ptr=back;
+    z->cyc+=ticks;z->r=(uint8_t)((z->r&128u)|((z->r+(instrument?6u:2u))&127u));
+    return instrument?5u:2u;
    }
 
    case 0x037c:return wf_z80_startup_copy(z,budget,limit);
+   case 0x0be7:return wf_score_fade_level(z,budget,limit);
+   case 0x0bd7:return wf_score_fade_scale(z,budget,limit);
+   case 0x0b68:return wf_score_level_prepare(z,budget,limit);
+   case 0x0c09:case 0x0c16:case 0x0c21:case 0x0c2c:return wf_score_tl_write(z,budget,limit);
    case 0x0f2d:return wf_score_multiply(z,budget,limit);
+   case 0x0f3a:return wf_score_multiply_resume(z,budget,limit);
    case 0x08c1:case 0x0f4b:return wf_cost_macro(z,budget,limit);
    case 0x0a8f:case 0x0aa0:return wf_score_pitchwrite(z,budget,limit);
    case 0x0991:case 0x0a0b:return wf_score_modupdate(z,budget,limit);
@@ -1271,6 +1402,50 @@ case 0xf5: pushw(z, (z->a << 8) | get_f(z)); break;
  }
 #undef WF_SCALAR_ALWAYS_INLINE
 
+/* Sparse exact-PC admission hint. All selected entry points have distinct
+ * low bytes. Compare the complete PC before dispatching, so another address
+ * with the same low byte cannot enter a lifted operation. PC 0000 may take
+ * the default fast-step rejection; that leaves the ordinary scalar path. */
+static const uint16_t wf_native_pc_hint[256]={
+ [0x6a]=0x0e6a,[0x5f]=0x0f5f,[0x7c]=0x037c,[0xe7]=0x0be7,
+ [0xd7]=0x0bd7,[0x68]=0x0b68,[0x2d]=0x0f2d,[0x3a]=0x0f3a,
+ [0xc1]=0x08c1,[0x4b]=0x0f4b,[0x8f]=0x0a8f,[0xa0]=0x0aa0,
+ [0x91]=0x0991,[0x0b]=0x0a0b,[0x0d]=0x080d,[0xa7]=0x08a7,
+ [0x09]=0x0c09,[0x16]=0x0c16,[0x21]=0x0c21,[0x2c]=0x0c2c
+};
+
+/* Private combined experiment: maximum original-instruction quota.
+ * Generic F5F returns need two steps; the instrument continuation needs five.
+ * This helper performs no I/O and remains outside the fixed hot allocation. */
+WF_SMALL __attribute__((noinline))
+unsigned wf_z80_lift_quota(z80 *z)
+{
+ switch(z->pc){
+  case 0x08c1:{
+   if(z->sp<0xc408||z->sp>0xc7fe)return 0;
+   wf_music_seq_t *v=(wf_music_seq_t *)z->userdata;unsigned ch=v->ram[0x65];
+   if(ch>=8u)return 0;
+   unsigned active=(v->ram[0xd2+8u*ch]!=0)+(v->ram[0x112+8u*ch]!=0);
+   /* Each active mod costs at most7+15 steps. The final extra step can
+    * occur only after the cheaper add-overflow path, so needs no extra
+    * allowance with an active mod. With none active reserve that step. */
+   return 57u+((v->ram[0xaa+ch]&128u)?5u:0u)+(active?22u*active:1u);
+  }
+  case 0x0be7:return 21u;
+  case 0x0bd7:return 78u;
+  case 0x0f3a:return 61u;
+  case 0x0f2d:return 68u;
+  case 0x0b68:return 27u;
+  case 0x0c09:case 0x0c16:case 0x0c21:case 0x0c2c:return 18u;
+  case 0x0f5f:{
+   if(z->sp<0xc000||z->sp>0xc7fe)return 0;
+   wf_music_seq_t *v=(wf_music_seq_t *)z->userdata;unsigned at=z->sp-0xc000u;
+   return v->ram[at]==0x71&&v->ram[at+1]==0x0e?5u:2u;
+  }
+  default:return 0;
+ }
+}
+
 WF_SMALL __attribute__((section(".wf_hotcode")))
 unsigned wf_z80_control_batch(z80 *z,unsigned budget,uint32_t limit)
 {
@@ -1278,9 +1453,10 @@ unsigned wf_z80_control_batch(z80 *z,unsigned budget,uint32_t limit)
  while(!v->error){
   uint32_t io=v->io_epoch;
   unsigned n=0;
-  switch(z->pc){case 0x0e6a:case 0x0f5f:case 0x037c:case 0x0f2d:case 0x08c1:case 0x0f4b:case 0x0a8f:case 0x0aa0:case 0x0991:case 0x0a0b:case 0x080d:case 0x08a7:
-   n=wf_z80_control_fast_step(z,budget,limit);break;
-  default:break;
+  if(wf_native_pc_hint[z->pc&255u]==z->pc){
+   /* Yield only after progress; global-budget shortage still falls back. */
+   if(total&&budget<106u&&budget<wf_z80_lift_quota(z))break;
+   n=wf_z80_control_fast_step(z,budget,limit);
   }
   if(!n)n=wf_z80_scalar_inline(z,budget,limit);
   if(!n)break;

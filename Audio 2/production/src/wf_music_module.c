@@ -144,6 +144,10 @@ static bool __attribute__((section(".wf_hotcode"))) event(unsigned kind,unsigned
 {
  (void)user;
  if(kind==WF_MUSIC_IRQ)return booting||fm_flush();
+ /* The mapper already elides these identical writes. Keep their Z80 I/O
+  * callbacks, but advance the exact rational clock at the next real event. */
+ if(kind==WF_MUSIC_YM&&!synth.fault&&(reg>=0x20u||reg==0x18u||reg==0x1bu)&&
+    synth.reg[reg]==value)return true;
  output_frame=booting?SOUND16(0xb010):wf_music_time_advance(&event_time,cycle);
  if(kind==WF_MUSIC_YM){
   bool key_change=reg==8&&synth.key[value&7u]!=((value>>3)&15u);

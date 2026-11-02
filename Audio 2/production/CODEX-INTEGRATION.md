@@ -4,9 +4,11 @@
 
 API pública versión1; candidato nativo en validación. No integrar como audio final ni inferir aprobación por el nombre de la carpeta/rama. Consultar `AUDIO-FINAL-AUDIT.md` y los resultados concretos del ejecutable que se utilice. El diagnóstico estático ya ha arrancado en Mednafen1.32.1; la integración dinámica y el rendimiento del juego tienen comprobaciones independientes.
 
+El propietario ha reservado la integración en ROM Graphics Final a Codex. Este corte modifica y comprueba únicamente el audio aislado; las instrucciones de integración siguientes son el contrato para ese trabajo posterior.
+
 La unidad de entrega es esta carpeta. Ningún paso necesita recuperar código musical de documentación antigua. Los recursos protegidos se generan desde `wwfwfest.zip` del propietario. El secuenciador no admite una ROM parecida: verifica la identidad del controlador usado por sus optimizaciones.
 
-**Bloqueos actuales de integración final:** el banco OKI de una voz activa no sigue todavía el comportamiento global del original; hay fallos nativos de plazo, underrun y transición, y no se ha aprobado el coste sostenido en combate. Las pruebas y sus perfiles exactos están en la auditoría. No corresponde a Codex ocultar estas diferencias cambiando productores, eliminando notas o ampliando tolerancias.
+**Bloqueos actuales de integración final:** el banco OKI de una voz activa no sigue todavía el comportamiento global del original; no está aprobada la fidelidad acústica ni el coste sostenido en combate. El candidato `d9bd93a7` pasa la matriz aislada corta de las 18 músicas y la transición de nueve comandos; la matriz larga de 18 × (600 s + 8 s) y la misma transición también pasa, con cero contadores de error. Los fallos previos de mezcla, presión y combate pertenecen al perfil `c408/scalar9` y conservan su identidad. Las pruebas y sus perfiles exactos están en la auditoría. No corresponde a Codex ocultar estas diferencias cambiando productores, eliminando notas o ampliando tolerancias.
 
 ## API que debe usar el juego
 

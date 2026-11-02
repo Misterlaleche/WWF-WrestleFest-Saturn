@@ -1,0 +1,944 @@
+{
+  "schema_version": 1,
+  "kind": "NATIVE_MUSIC_D9BD_SHORT_AND_HOST_CHECKPOINT",
+  "checkpoint": {
+    "label": "d9bd93a7",
+    "label_meaning": "Prefix of the native core source SHA-256, not a Git commit ID.",
+    "record_date_utc": "2026-11-02",
+    "native_short_runtime_status": "PASS",
+    "host_regression_status": "PASS",
+    "native_600s_campaign_status": "IN_PROGRESS",
+    "native_600s_campaign_passed": null,
+    "native_600s_partial_results_used": false,
+    "isolated_mixed_138s_runtime_status": "FAIL",
+    "current_profile_runtime_acceptance": "BLOCKED",
+    "current_blocker": "Two transport-late events in the completed64-word/138-second isolated mixed replay."
+  },
+  "source_sha256": {
+    "src/reference_driver/z80-native.c": "d9bd93a7cfdf8e5dbb022bce6df1dc132e6caf7e9c3c05a18e75e2debd9602e0",
+    "src/wf_music_seq.c": "8d833f42349267376e0d29ff5b2c0db0fa31af5c544252e7306e87ec7bfd66bc",
+    "src/wf_music_module.c": "4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69",
+    "src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+    "src/wf_music_seq.h": "b02489430f5fb5eb97712c2a56d1636a4159358930cdcbf6244df0cbadf92471"
+  },
+  "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "emulator": "standalone Mednafen1.32.1",
+  "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+  "evidence_identity_sha256": {
+    "native_short_matrix": "45ec80c066051fac6057f6333019f8735c72f7954f4291d45e864035c7a10f7d",
+    "host_14_groups": "ce430e76431530883acfdd5934b329cbc2df72b38ba5ee4d8e53906442f64f42",
+    "early_service_public_proof": "e2ca68d62cbe371b938046b712f7a4088532d0710a860d82cb8f95e644bcad62",
+    "timestamp_elision_public_proof": "8aac1b51d406af48c54fd6de88666ff2b764459488decc75748556daf2ef615e",
+    "independent_08c1_review": "c32656cba9ad5bff9fff198340e5cdb5d3d87a34e5049ed9659c9aafa3f22d75",
+    "isolated_08c1_native_ab": "9eed51e017cfc81740e9507ab0b3bb58013be5f8fce8d4a3501f2f232da3c87b",
+    "current_isolated_mixed_138s_native_gates": "c1d7ec9dd352fc5381cb1ac06ad5760e57a4468e9b05c8b5294b05264c672128"
+  },
+  "native_short_matrix": {
+    "profile_label": "cddd-exact-TL-return-timestamp-early08c1-d9bd93a7-30s-screen",
+    "completed": true,
+    "source_stable": true,
+    "inputs_stable": true,
+    "emulator_stable": true,
+    "music_cases": 18,
+    "music_cases_passed": 18,
+    "transition_cases": 1,
+    "transition_cases_passed": 1,
+    "all_runtime_gates_passed": true,
+    "score_seconds_before_1F": 30,
+    "tail_seconds": 8,
+    "music_window_seconds": 38,
+    "transition_window_seconds": 32,
+    "transition_commands_hex": [
+      "0x01",
+      "0x06",
+      "0x12",
+      "0x1F",
+      "0x03",
+      "0x1F",
+      "0x02",
+      "0x01",
+      "0x1F"
+    ],
+    "transition_interval_seconds": 3,
+    "replay_words_accepted_total": 45,
+    "replay_words_expected_total": 45,
+    "all_recorded_counter_values_zero": true,
+    "counter_totals": {
+      "error": 0,
+      "APIerror": 0,
+      "FMdiscardEvents": 0,
+      "discardBatches": 0,
+      "rejectedFM": 0,
+      "ringRejected": 0,
+      "lateB028": 0,
+      "batchB03A": 0,
+      "sfxUnderruns32": 0
+    },
+    "observed_history_error_count": 0,
+    "evidence_error_count": 0,
+    "presentation_speed_requested": 4,
+    "emulated_hardware_clock_change": false,
+    "expansion_cartridge": "none",
+    "case_summaries": [
+      {
+        "id": "command-01",
+        "kind": "music",
+        "command_hex": "0x01",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "e273279445ba523ab7fb7950b6f2643acebcf12d6c1b11c74ab39c867482e320",
+        "replay_sha256": "3317a3cd4b59250afa7b48dc4d17daa11b0ac279d309f94203affb7d234fc55b",
+        "capture_report_sha256": "fada3db8e79daaba068a068cfacaf1735c35b07e92607a266262195ab64f206c"
+      },
+      {
+        "id": "command-02",
+        "kind": "music",
+        "command_hex": "0x02",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "f7b30b5ec0cee69f993cd76ebede51696bbd105bd4ef8ffd3a776f359ece135c",
+        "replay_sha256": "088bebcec45bcacd4ba2945ac322722d4e3d3a93dba1c47534b4d4075cf7d9b1",
+        "capture_report_sha256": "c4c0a2e1377ef71ebbec8f481ae13d2c0103ae9d2c85e9c33bb52c5262730f09"
+      },
+      {
+        "id": "command-03",
+        "kind": "music",
+        "command_hex": "0x03",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "96bbb8d3d2d786b30656c5dbdf865d2fd74dbb12fd7d87e93ba3659dffab2f66",
+        "replay_sha256": "b631952c6808a6216466e5ea90d65903c22fe687d02f379141cf970337565ff0",
+        "capture_report_sha256": "88da3c02c1892cc11531fcc1bec296aade0880769383fd324c4b7591c26eccf2"
+      },
+      {
+        "id": "command-04",
+        "kind": "music",
+        "command_hex": "0x04",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "01b7944fd2ab04fcbdd9f70c2c7c8bcb3576483b79ab12c8c311565b313c1c3a",
+        "replay_sha256": "367533ea251292563943ef8325b15426bd59a251eaa2d40c7a0ee219789837a9",
+        "capture_report_sha256": "bfe256d0c58516e87d75de2d789cae9603e7896d42814a1459b9124e9fd24e9a"
+      },
+      {
+        "id": "command-05",
+        "kind": "music",
+        "command_hex": "0x05",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "44e1c842af6c35549b613ea6f609580b4d27800164c70a2a7dcdf59e78461e94",
+        "replay_sha256": "f2ebf79dc11e34692e23cb6c9dfd1d7d251616fa28dfcbedd1b5c4cb50bff226",
+        "capture_report_sha256": "dd5242c9f0e346f0ed3484191ddfd03c907e34fbd1591263f7055c2c1de64bdc"
+      },
+      {
+        "id": "command-06",
+        "kind": "music",
+        "command_hex": "0x06",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "a6bc147814836e9a3d6892c34ea5c7ac2e5f58cb1573f2325499cf98ac107297",
+        "replay_sha256": "54b48c203b62c4045296af52fe929e967bf689bbb4dbf6dc223dbc592c28c159",
+        "capture_report_sha256": "b90c8917bc66016427401a5eca665ee408254707cab38e95239abfba7b3f4457"
+      },
+      {
+        "id": "command-07",
+        "kind": "music",
+        "command_hex": "0x07",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "43c2fc0ce9e2ee12941ba260afc9c4008ae3b4a93e5e985ee9f09d4b80d8bb97",
+        "replay_sha256": "ff56f330e389adcd02804dfd45007207ba2ed2be9db4b6f2ff4d0f0e0b968c69",
+        "capture_report_sha256": "d320ab0ad49810bb7da43ee1b744133d5e8f003a4dbede9cdad3cf9a916f4020"
+      },
+      {
+        "id": "command-08",
+        "kind": "music",
+        "command_hex": "0x08",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "131d30b603eb4fef52982d9302e40741529a1a48cfc7614f6079599ed5c1bdee",
+        "replay_sha256": "47c669ad0db5ac46c87983b2443d25b49878e98dd37af8b1e3c3851a110bcc73",
+        "capture_report_sha256": "8242dadb40f5af33b2f243d33c2d663bbd20c74b22d1c4b8af4d584d99122786"
+      },
+      {
+        "id": "command-09",
+        "kind": "music",
+        "command_hex": "0x09",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "e1dc410c5e6dd418929f0ce9a2c77df5617c3644669a3b7880ec1e9402671d4c",
+        "replay_sha256": "9f065466b8da485b32e16f70d8aa022b5ca11711dead52e017d82a24b8b1f214",
+        "capture_report_sha256": "b400fb719738b1d1f4ee9cdd95f535c9645510adc24ceb23aed60f0500abb467"
+      },
+      {
+        "id": "command-0A",
+        "kind": "music",
+        "command_hex": "0x0A",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "7a7bf13efc3f226ee236a6b4a85ba141381e9d12f391f9003b3c1cae35b1cfc3",
+        "replay_sha256": "125c706db004ee788aa65eec020fc821a1fed12e351b557f766998f2941cff89",
+        "capture_report_sha256": "ec544482e450a2a983ab0907c823c13c89fcf3c3dd4960c8d17b1a2de2791229"
+      },
+      {
+        "id": "command-0B",
+        "kind": "music",
+        "command_hex": "0x0B",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "961d546f7da0c85b1dba1ce62e2858b331cb48ecae586df86306eb010b51e90d",
+        "replay_sha256": "588e736ef45d029f5ff615e486e74e6fa76e45bc10223fb76f5b42976942001c",
+        "capture_report_sha256": "f9aa3801d6e0653ff1d8de03f194b9adaf8be4dc13440c303fb114931ae4ee0c"
+      },
+      {
+        "id": "command-0C",
+        "kind": "music",
+        "command_hex": "0x0C",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "38687c4f96874ed6869215a4e93f18fab056906bff5fae4b7238fadad8a13282",
+        "replay_sha256": "e5177118f44edcfcc8f638911581cb37e707aecebeff417c547736767e39ef65",
+        "capture_report_sha256": "ae09a7d6cadeb820571d7e6378307d376b0f1d446b96668965a2f672f66bb22b"
+      },
+      {
+        "id": "command-0D",
+        "kind": "music",
+        "command_hex": "0x0D",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "8ea12073b19546f80b34d290df720ba3a4e656a93a6a7e61ba9b824207cea612",
+        "replay_sha256": "4e4fd97530e4a5c32b3bc3bc198651f4e52a8327c8c55c64bbf10edb4aa63462",
+        "capture_report_sha256": "96ae86b71be6bfce793fb462d8a9ba82f1aecd203e9a0a86cc35cace4fc5e726"
+      },
+      {
+        "id": "command-0E",
+        "kind": "music",
+        "command_hex": "0x0E",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "a1756491955065256abe41e6feed2fab5702aeed8cc66ee7fb543e76d0ec8f14",
+        "replay_sha256": "934fbce4acedc20d5a170ca5bdb20c73d6b989d8aff6459ac6816bdaaa9f9c58",
+        "capture_report_sha256": "97cd85f808be86f2bb0e325c194b17cb2d62613c932d26f62821ec84ef5f9eab"
+      },
+      {
+        "id": "command-0F",
+        "kind": "music",
+        "command_hex": "0x0F",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "6f522b27dd6ab04ee44368618649fe027708cfe2e5a4ed08e1674e831c5151c9",
+        "replay_sha256": "2c1e14fd433ea6a70de5673f0d0a9b0a1aa5bad00e2a373fc025f1fa6abb9474",
+        "capture_report_sha256": "15c401db5ce4050c38013ea47fab7366dd0cfccbe7b3b730c10aeddaabd81acd"
+      },
+      {
+        "id": "command-10",
+        "kind": "music",
+        "command_hex": "0x10",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "92143c9664724c66b5cb01288fb343c35aa6b70c44592dd5c74b16bc9d11f353",
+        "replay_sha256": "b0a769e6682d6893730dc80c6eb0ed0a9c1d67845b8866e95a347fdce1b2b902",
+        "capture_report_sha256": "66ef7e87e551b6052af9e4b863d0af227fccfea6dbd4daceceb0a08fd77262da"
+      },
+      {
+        "id": "command-11",
+        "kind": "music",
+        "command_hex": "0x11",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "6815ebcf3a4244fe0f3f753739e88e18cfe193b3bdb75939417cd6413cefc964",
+        "replay_sha256": "d3ab9eaa34387735d05cd55e1009b35aa9ab2bc2372042a45c1bc555ba017f98",
+        "capture_report_sha256": "ab950432b3db6a91480c84427a5a56363f84f472f568e9cb0d6ad70d5acb123d"
+      },
+      {
+        "id": "command-12",
+        "kind": "music",
+        "command_hex": "0x12",
+        "requested_seconds": 38,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 2,
+        "replay_words_expected": 2,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "eb7d2f8054c09f434a79740c58250dab428f80d34974bc3ad3284c67a3735825",
+        "replay_sha256": "93bb8ec75476cd034e7afa1f3a993c5ce4a6b61ed9eeb21f490e8fa450336ab9",
+        "capture_report_sha256": "2395875bb553a322eb24f36293647858d072e30eaa2a7e935e8c65c49da4f8e8"
+      },
+      {
+        "id": "transitions",
+        "kind": "transitions",
+        "command_hex": "0x01",
+        "requested_seconds": 32,
+        "passed": true,
+        "counter_values": {
+          "error": 0,
+          "APIerror": 0,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "lateB028": 0,
+          "batchB03A": 0,
+          "sfxUnderruns32": 0
+        },
+        "replay_words_accepted": 9,
+        "replay_words_expected": 9,
+        "history_error_observations": 0,
+        "evidence_errors": 0,
+        "runtime_image_sha256": "0773012b02e0e303bcfa76b0c54ed6fbe64640e9ee4e3fc1058a321304ff60cd",
+        "replay_sha256": "617d67b4f715cfeac79e503bbf9107e23ae5f63a900214be01a6baa8b305df1d",
+        "capture_report_sha256": "d2b58d9d925ad9dfe154801808554f7cb7148ea7edca0d9e4d0939e710daf72a"
+      }
+    ],
+    "all_final_tails_exact_silence_observed": false,
+    "tail_scope": "Runtime acceptance is separate from acoustic fidelity or exact digital silence. No waveform or listening approval is asserted."
+  },
+  "host_regression": {
+    "completed": true,
+    "passed": true,
+    "groups": 14,
+    "groups_passed": 14,
+    "source_stable": true,
+    "sequence_seconds_per_command": 600,
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "group_results": [
+      {
+        "name": "resource_identity_and_corruption",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "build_input_aliases",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "source_profile_snapshot",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "output_preservation",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "native_capture_evidence",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "api",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "module_deadlines",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "timestamp_elision",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "firmware_deadlines",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "firmware_deadlines_no_timing",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "sfx_refill_deadlines",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "exact_fade_lifts",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "exact_tl_writes",
+        "exit_code": 0,
+        "passed": true
+      },
+      {
+        "name": "all18_full_z80_and_live_transitions",
+        "exit_code": 0,
+        "passed": true
+      }
+    ],
+    "R01_all18_600s_plus_8s": {
+      "tracks": 18,
+      "score_seconds": 600,
+      "checkpoints": 10962,
+      "calls": 956109,
+      "services": 3200182,
+      "all_passed": true,
+      "comparison": "Complete CPU/RAM/timer state at checkpoints plus original event counts/hashes.",
+      "track_event_summaries": [
+        {
+          "command_hex": "0x01",
+          "events": 1260526,
+          "event_hash": "d22b10795d181f69"
+        },
+        {
+          "command_hex": "0x02",
+          "events": 767438,
+          "event_hash": "aff0163656cdb0e0"
+        },
+        {
+          "command_hex": "0x03",
+          "events": 1000991,
+          "event_hash": "ab7f1c337671e155"
+        },
+        {
+          "command_hex": "0x04",
+          "events": 1413941,
+          "event_hash": "4b9ded321dce24e7"
+        },
+        {
+          "command_hex": "0x05",
+          "events": 534747,
+          "event_hash": "00fde199c347cce9"
+        },
+        {
+          "command_hex": "0x06",
+          "events": 1460559,
+          "event_hash": "19b02042571d1961"
+        },
+        {
+          "command_hex": "0x07",
+          "events": 1648736,
+          "event_hash": "3e2ae620496ad7af"
+        },
+        {
+          "command_hex": "0x08",
+          "events": 668414,
+          "event_hash": "96af2958ff0facd3"
+        },
+        {
+          "command_hex": "0x09",
+          "events": 538618,
+          "event_hash": "3fd84f0c259848e2"
+        },
+        {
+          "command_hex": "0x0A",
+          "events": 1122672,
+          "event_hash": "db2a6029e1e926f5"
+        },
+        {
+          "command_hex": "0x0B",
+          "events": 1125666,
+          "event_hash": "5da1037928701f12"
+        },
+        {
+          "command_hex": "0x0C",
+          "events": 825771,
+          "event_hash": "6d9f9818e6ab5729"
+        },
+        {
+          "command_hex": "0x0D",
+          "events": 833286,
+          "event_hash": "011125bd059c9dd2"
+        },
+        {
+          "command_hex": "0x0E",
+          "events": 977318,
+          "event_hash": "5661fb3b994f6cf1"
+        },
+        {
+          "command_hex": "0x0F",
+          "events": 950926,
+          "event_hash": "a3e8d05231064d58"
+        },
+        {
+          "command_hex": "0x10",
+          "events": 695299,
+          "event_hash": "4e6b7af14004c363"
+        },
+        {
+          "command_hex": "0x11",
+          "events": 1426165,
+          "event_hash": "fc3029a9bd7697db"
+        },
+        {
+          "command_hex": "0x12",
+          "events": 1880602,
+          "event_hash": "d2c98b0c1a3c0d79"
+        }
+      ],
+      "live_transition_events": 89011,
+      "live_transition_event_hash": "e4e46eb2779d4f80",
+      "command00_rejection_verified": true
+    },
+    "exact_fade_lift_original_state_cases": 1507643,
+    "exact_TL_writes": {
+      "accepted": 790920,
+      "rejected": 2424,
+      "callback_snapshots_per_engine": 1581840
+    },
+    "scope": "Host state/event regression. It does not establish Saturn deadline performance for600s or acoustic fidelity.",
+    "source_input_count": 140,
+    "source_boundary": "The completed14-group run is bound to its recorded source hashes. Subsequent v1.1.0 exporter work has separate verification; the six runtime identities selected in this record remain unchanged.",
+    "subsequent_exporter_changes_covered": false
+  },
+  "early_service_proof": {
+    "completed": true,
+    "source_stable": true,
+    "red_observed": {
+      "quota": 38,
+      "entries": 11
+    },
+    "green_passed": true,
+    "new_original_CPU_RAM_cycle_cases": 65,
+    "quota_bound_and_guard_cases": 602369,
+    "previous_entry_cases": 44,
+    "maximum_actual_operation_steps": 106,
+    "maximum_predicted_quota": 106,
+    "quota_formula": "57 + (negative_offset ? 5 : 0) + (active_modulators ? 22*active_modulators : 1)",
+    "quota_valid_stack_hex": [
+      "0xC408",
+      "0xC7FE"
+    ],
+    "quota_valid_channels": [
+      0,
+      7
+    ],
+    "quota_rejection_is_read_only": true,
+    "service_threshold": 406,
+    "batch_shortage_threshold": 106,
+    "R01_short_score_seconds": 15,
+    "R01_short_fade_seconds": 8,
+    "R01_short_checkpoints": 432,
+    "original_instructions_audited": 62497765,
+    "service_callbacks_audited": 144812,
+    "maximum_original_instructions_between_callbacks": 512,
+    "maximum_serviced_grant": 512,
+    "instruction_count_scope": "Counts original instructions represented by lifts and scalar execution. Existing idle_skip retains its separate skipped-instruction counter.",
+    "public_runner": "tools/reference/verify_early_service.py"
+  },
+  "timestamp_elision_proof": {
+    "passed": true,
+    "source_stable": true,
+    "red": {
+      "duplicate_time_advances": 1,
+      "total_time_advances": 10103,
+      "trace_matches_clock_algebra": true
+    },
+    "green": {
+      "duplicate_time_advances": 0,
+      "total_time_advances": 4579,
+      "trace_matches_clock_algebra": true
+    },
+    "complete_trace_bytes_equal": true,
+    "trace_bytes": 33889139,
+    "trace_sha256": "003a537ee75ce0bb27dfba2e868436af141fa8e1700a98de3bdb7ad3b96cd844",
+    "avoided_time_conversions": 5524,
+    "trace_scope": "Synthetic module proof covering mapper state, FM queue and mailbox timestamps; equality does not certify acoustic fidelity.",
+    "original_CPU_callbacks_preserved": true,
+    "public_runner": "tools/verify_timestamp_elision.py"
+  },
+  "independent_08c1_review": {
+    "passed": true,
+    "complete": true,
+    "source_stable": true,
+    "additional_original_state_cases": 9216,
+    "nonmutating_rejection_cases": 92415,
+    "scheduler_target_timer_wrap_cases": 720,
+    "IRQ_callback_CPU_cases": 360,
+    "command04_score_seconds": 30,
+    "command04_fade_seconds": 8,
+    "literal_event_and_complete_callback_CPU_comparisons": 94542,
+    "event_hash": "a633a1b50e7b4935",
+    "maximum_service_and_grant": 512
+  },
+  "isolated_native_08c1_AB": {
+    "scope": "Same04+1F30s+8s; control already has TL/F5F/early service/timestamp elision. Only08C1 quota and matching thresholds are added.",
+    "control": {
+      "passed": false,
+      "error": 15,
+      "APIerror": 5,
+      "FMdiscardEvents": 10,
+      "lateB028": 49,
+      "ringRejected": 0,
+      "rejectedFM": 0,
+      "sfxUnderruns32": 0,
+      "musicEvents_metadata_counter": 2313,
+      "runtime_image_sha256": "3b16d87f8cabea99d79c55113bd1831b4d930833854c14a5f0548ae8e492d456",
+      "hot_code_and_state_bytes": 18228
+    },
+    "candidate": {
+      "passed": true,
+      "error": 0,
+      "APIerror": 0,
+      "FMdiscardEvents": 0,
+      "lateB028": 0,
+      "ringRejected": 0,
+      "rejectedFM": 0,
+      "sfxUnderruns32": 0,
+      "musicEvents_metadata_counter": 2376,
+      "runtime_image_sha256": "01b7944fd2ab04fcbdd9f70c2c7c8bcb3576483b79ab12c8c311565b313c1c3a",
+      "hot_code_and_state_bytes": 18228
+    },
+    "inference": "The complete08C1 source increment changes this replay from failure to all-zero runtime acceptance. This includes any code-layout effect and does not assign a native speedup to a host-only measurement."
+  },
+  "memory_and_limits": {
+    "hot_code_bytes": 15008,
+    "hot_state_bytes": 3220,
+    "hot_total_bytes": 18228,
+    "hot_limit_bytes": 18432,
+    "hot_remaining_bytes": 204,
+    "linker_limit_unchanged": true,
+    "caller_instruction_budget": 4096,
+    "service_instruction_grant": 512,
+    "TimerB_and_target_limits_unchanged": true,
+    "queue_sizes_unchanged": true,
+    "deadlines_unchanged": true,
+    "instruction_semantics_and_CPU_event_callbacks_preserved": true
+  },
+  "historical_checkpoint_preserved": {
+    "label": "24b84435",
+    "native_core_sha256": "24b844357544e12cfa7b1a09f7d368d895a918b00c129815438827102b1ea0fa",
+    "music_cases_passed": 14,
+    "music_cases_total": 18,
+    "failed_music_commands_hex": [
+      "0x04",
+      "0x06",
+      "0x07",
+      "0x12"
+    ],
+    "transition_passed": false,
+    "document": "docs/NATIVE-FADE-COST-CORRECTION.md",
+    "document_sha256": "45ea532cc7f0b81160c3c5c6a0fd490f218544909a4a0e7147d6a0ea119733e4",
+    "evidence": "docs/evidence/native-fade-cost-24b84435.json",
+    "evidence_sha256": "45f3cd2aa12cb71dc954d1b9a40eb2486dead7d1dd7e93eedefd9b001c22d8e4",
+    "historical_failure_reclassified": false
+  },
+  "scope_limits": {
+    "acoustic_fidelity_approval": false,
+    "listening_approval": "PENDING",
+    "physical_Saturn_verified": false,
+    "combat_rerun_for_this_checkpoint": false,
+    "Graphics_Final_integration_approval": false,
+    "production_approval": false,
+    "native_600s_campaign_status": "IN_PROGRESS",
+    "native_600s_result_included": false,
+    "raw_ROM_WAV_or_event_trace_data_included": false,
+    "private_filesystem_paths_included": false,
+    "current_profile_zero_transport_lateness": false,
+    "current_runtime_blocker": "The isolated mixed138-second replay fails with2 transport-late events."
+  },
+  "publication_scope": "Aggregate counts, pass/fail states, public repository-relative paths and identity hashes only. The native600s campaign is excluded while in progress.",
+  "current_isolated_mixed_138s": {
+    "status": "FAIL",
+    "passed": false,
+    "current_d9bd_profile": true,
+    "requested_seconds": 138,
+    "replay_words_expected": 64,
+    "replay_words_accepted": 64,
+    "counter_values": {
+      "error": 0,
+      "APIerror": 0,
+      "FMdiscardEvents": 0,
+      "discardBatches": 0,
+      "rejectedFM": 0,
+      "ringRejected": 0,
+      "lateB028": 2,
+      "batchB03A": 0,
+      "sfxUnderruns32": 0
+    },
+    "failed_gate_names": [
+      "no_reported_transport_lateness",
+      "observed_history_has_no_errors",
+      "no_actual_native_counter_errors"
+    ],
+    "capture_subprocess_exit_code": 0,
+    "requested_window_completed": true,
+    "evidence_errors": 0,
+    "loaded_firmware_matches": true,
+    "linked_SH2_functions_match": true,
+    "diagnostic_mirror_matches_F5_and_ELF": true,
+    "runtime_image_sha256": "913d5399cf1b562e24163fc2308cdd1e0ff0e89452041c2ccec51dcfd4920e30",
+    "replay_sha256": "f8939a69a76785d519141e0bdf4fa99e42f5b6bd11ae2de6ee6f69ea31d591cb",
+    "capture_report_sha256": "76136fbc2faa7771e7560607540ff00a15a1064d0764fafe44c9ed1c2bb44e9f",
+    "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+    "hot_code_bytes": 15008,
+    "hot_state_bytes": 3220,
+    "hot_total_bytes": 18228,
+    "scope": "Current isolated replay harness only. This is not a gameplay/combat rerun and is not an older historical-profile failure.",
+    "current_blocker": "lateB028=2 prevents all-zero runtime acceptance despite all64 words being accepted."
+  }
+}

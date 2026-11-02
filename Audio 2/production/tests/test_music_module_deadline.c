@@ -15,7 +15,10 @@
 #define _Static_assert(condition, message)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wint-to-pointer-cast"
-#include "../src/wf_music_module.c"
+#ifndef WF_MUSIC_MODULE_SOURCE
+#define WF_MUSIC_MODULE_SOURCE "../src/wf_music_module.c"
+#endif
+#include WF_MUSIC_MODULE_SOURCE
 #pragma GCC diagnostic pop
 #undef _Static_assert
 

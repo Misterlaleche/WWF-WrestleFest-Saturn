@@ -41,6 +41,8 @@ El perfil del juego necesita una pila slave independiente de8KiB y un límite de
 
 ## Presupuestos que se verifican y los que faltan
 
+El candidato `d9bd` mide 15.008 bytes de código caliente y 3.220 de estado: 18.228 bytes, con 204 bytes libres dentro de los 18.432 originales. El helper de copia inicial se sitúa en código frío; no se ha ampliado ninguna ventana. Ese mapa corresponde al diagnóstico aislado y no sustituye el relink ABI4 del juego.
+
 Se comprueban por compilación: segmentos Sound RAM, tamaño exacto de onda/vector, estado caliente, límite18432, tipos de ELF y símbolos sin resolver. Se conservan mapas, `.su`, hashes y comandos de compilación.
 
 Se miden en ejecución: descartes individuales y por lote, rechazos de transporte, underruns32bit, contador de retrasos, máximos de preparación/refill/lanzamiento y estado de ambos procesadores. La instrumentación privada tiene coste observable y se contrasta con un perfil sin ella.

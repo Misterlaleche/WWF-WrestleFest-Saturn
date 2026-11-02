@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "tool_version": "1.2.0",
+  "kind": "PUBLIC_METADATA_ONLY_AUDIO_PAIR_EXPORT_VERIFICATION",
+  "source_sha256": {
+    "tools/prepare_music_audio_pairs.py": "18ddd56e932afbd9cadab669af4f7ed7c4281dc31929ecde2e4e7700acba9b87",
+    "tests/test_prepare_music_audio_pairs.py": "d1c7ac5c9de8adf2b3f5dd3113b7fd3d6c210fbd40571b1369c826dfd54b8e03",
+    "tools/run_music_matrix.py": "9fa08981bc2ad649d20a8196fec1277396103a2c0c24527f49e3dae194d0a6d9",
+    "tools/source_snapshot.py": "77483c82d1a882fe690cb746eababaa6c2c5ddf44c39afdc42f2bfcca3e1e216",
+    "tools/run_native_test.py": "30e354e024f7c5ec3d546b5579cf0733a444616a8ca4292621f448e0f1e854e2",
+    "tools/analyze_audio_capture.py": "b02bf62984129542b9c109cc82c45ee0f222c60fc3d72f760f67a0f113aa3ea7",
+    "tools/capture_mednafen.py": "d91eb1b2f1811e6d78ecfc889c3e5844eb8ae96fd2a85fbacea49940207f94c4"
+  },
+  "focused_tests": {
+    "passed": 27,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "red_regressions": {
+    "version_1_1_0": {
+      "initial_subtest_failures": 35,
+      "initial_test_count": 22,
+      "input_stability_failures": 1,
+      "input_stability_test_count": 23
+    },
+    "version_1_2_0": {
+      "test_count": 27,
+      "parallel_reference_regressions_failed_before_implementation": 4
+    }
+  },
+  "full_python_suite_before_adjacent_tool_additions": {
+    "passed": 97,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tool_version": "1.1.0"
+  },
+  "initial_unconfigured_suite": {
+    "test_count": 94,
+    "errors": 1,
+    "skipped": 1,
+    "reason": "WF_ROM_ZIP unset; rerun succeeded using existing private original-ROM and reference inputs",
+    "tool_version": "1.1.0"
+  },
+  "final_combined_python_suite": {
+    "passed": 123,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "python_sources_stable": true,
+    "exporter_tests": 27,
+    "packaging_tests": 6,
+    "analysis_tests": 16,
+    "source_inventory_sha256": "164712444218ed603ea3d20273a8912bd6e66e5879b7c4d95c1590f30ac51c07",
+    "log_sha256": "85c5c812e8327c8033e6074105e61a95fa594bb49dcb326ffd7f0b5e1ed986eb"
+  },
+  "command_01_diagnostic": {
+    "seconds": 38,
+    "native_pcm_exact": true,
+    "reference_endian_round_trip_exact": true,
+    "native_start_frame": 661887,
+    "native_end_frame_exclusive": 2337687,
+    "coherent_final_clock_residual_frames": 59,
+    "later_diagnostic_clock_skew_frames": 1,
+    "observed_fade_sample": 1323159,
+    "requested_fade_sample": 1323000,
+    "native_music_lead_removed_frames": 0,
+    "native_music_lead_preserved_frames": 4096,
+    "native_f5_sha256": "e2644a18bb398bf24a011ffb38000b52618f019dc2d64aaacd3931305c9a972d",
+    "native_wav_sha256": "4f79017aa552c872283e64cc0282220a3d5950dbb521a6f5bf2208e7a725ef6e",
+    "original_host_wav_sha256": "4df8a211c4ddd52e9ac18fb14e7db36d5206eabcc0d09cb4685477c342161455",
+    "public_manifest_sha256": "e7e8fc3d9624b57ed5508af7d3c5f2fb91525377c5b8766f68fdaac8dedc8443",
+    "tool_version": "1.2.0",
+    "reference_jobs_requested": 4,
+    "maximum_reference_cases_in_flight": 1,
+    "WAV_hashes_unchanged_from_verified_v1_1_0": true
+  },
+  "command_04_failed_runtime_diagnostic": {
+    "seconds": 38,
+    "native_pcm_exact": true,
+    "runtime_status": "FAIL",
+    "native_audit_revalidated": true,
+    "complete_capture_export": true,
+    "complete_18_music_collection": false,
+    "failed_gates": [
+      "no_reported_worker_error",
+      "no_reported_api_error",
+      "no_reported_fm_discard",
+      "no_reported_transport_lateness",
+      "worker_still_running",
+      "api_still_running",
+      "observed_history_has_no_errors",
+      "no_actual_native_counter_errors"
+    ],
+    "public_manifest_sha256": "baa840e5e19832f365ce93d6616cd04e124ccbf686e2545c7d9fd800f0d6ba87",
+    "tool_version": "1.1.0",
+    "scope": "Real failed-runtime diagnostic exercised at v1.1.0; the current v1.2.0 focused suite also verifies genuine runtime-failure preservation"
+  },
+  "short_failed_matrix_rejected_for_full_export": true,
+  "matrix_failures_preserved": [
+    "command-04",
+    "command-06",
+    "command-07",
+    "command-12",
+    "transitions"
+  ],
+  "private_input_and_source_hashes_rechecked_unchanged": true,
+  "public_metadata_has_no_private_paths_or_sample_arrays": true,
+  "logs_sha256": {
+    "v1.1.0-focused-red.log": "c3905f818661077b8db7a0d87eddefb327fbf70f94714c03fb9835fa84e5760a",
+    "v1.1.0-input-stability-red.log": "7b0ab985b32e5ccc6358fe78a13587fa6e66568a10de262b29c38aa7bbc08e96",
+    "v1.1.0-focused-green.log": "fef755578f385678ae88a62aa86e160992acbe57c41fb3a255d14433639a2e7d",
+    "v1.1.0-full-python-suite.log": "bbbf74a31e2e8d77a8e9386c6581a487ffb0cd51082f0365fc6d9cd6e218e75d",
+    "v1.1.0-full-python-suite-with-inputs.log": "8ee2c20871a6bfeaf53dfcbf1830be1e4cad8db6aef05f0c617804896e456c92",
+    "v1.1.0-real-command-01-38s.log": "0fd71439f0dd4bd8911b53228c87ad8280542784068e7388c274ff7ffd78b2ba",
+    "v1.1.0-real-command-04-failed-runtime.log": "daa41fae9c378d0c6278501d2606943c04edc74a915fefd8545c5b2dad270468",
+    "v1.1.0-real-short-matrix-full-rejection.log": "1c88c3f46333640bb714b8d95f4262d7ebfde383cc96e2b428db7c2fda9d4c7f",
+    "v1.2.0-focused-red.log": "5c1016bb2097f119f4aa8ed9bd3dd0c6ff6394955b65bfc2fa07ee1d86ff9391",
+    "v1.2.0-focused-green.log": "da8a13a25f227bc8f9707e4b6ae8c8d85e5190b513deef19e15bac46b13109d7",
+    "v1.2.0-real-command-01-38s.log": "4405825a1faf99c45c73342f844b3dd88301714386df75e0d8298e1d05a28217",
+    "v1.2.0-final-combined-python-suite.log": "85c5c812e8327c8033e6074105e61a95fa594bb49dcb326ffd7f0b5e1ed986eb",
+    "package-v1.0.1-focused.log": "32ecbdf29ad4d73ae0b6cceaacdf64e15f2d81cfe407ebd762506d1cd3498b16"
+  },
+  "preserved_negative_reproduction_sha256": {
+    "negative_repros.py": "367fd0fecc8ace2dc6c19093a06aa7b4bd55dea2a9d44036a35c6e943d2b955c",
+    "negative_repros-v1.0.1.json": "d56f1e29ee09c6096dda44677221061f2fef8d5f9da374641759ff806394d13b"
+  },
+  "fidelity_approved": false,
+  "native_loop_verified": false,
+  "sample_exact_PCM_period_proven": false,
+  "owner_listening_approval": "PENDING",
+  "hardware_status": "HARDWARE PENDING",
+  "alignment_scope": "Observed SCSP clock mark sampled before an accepted API call; exact API-call instant and DAC alignment are not independently calibrated",
+  "scope": "Exporter/provenance/concurrency regressions, two version-identified 38-second diagnostic pairs, and the final combined Python suite; the running full collection, gameplay integration, physical hardware and native active-OKI-bank correction are separate",
+  "reference_parallelism_verification": {
+    "reference_only_cases": 4,
+    "seconds_per_case": 2,
+    "serial_jobs": 1,
+    "parallel_jobs": 4,
+    "observed_concurrent_reference_wrappers": 4,
+    "PCM_trace_report_delivery_hashes_identical": true,
+    "results_consumed_in_declared_order": true,
+    "all_running_wrappers_joined": true,
+    "case_order": [
+      "command-01",
+      "command-02",
+      "command-03",
+      "command-04"
+    ],
+    "verification_sha256": "bcc28f79d340fdd67a94c5bb605e48936f872114d3b6bb8f56da9d42de21f44e",
+    "scope": "Short original-board reference subprocess runs only; no native/emulator execution or long-collection completion claim"
+  },
+  "adjacent_component_source_sha256": {
+    "tools/package_complete_music.py": "8574efa9851209e86e93eac9d88168ec0006c1e4c7e535ab7ffdd6daaba5042e",
+    "tests/test_package_complete_music.py": "90bd85e992b8b4c8f3555c2969d04f99d5c707277607395b1e0c25ac7de744fb",
+    "tools/analyze_complete_music_pairs.py": "f3570efe66ef053ae05587d33801e0490221a84f1d8d54d41e34278a3f0da48a",
+    "tests/test_analyze_complete_music_pairs.py": "06ff2f00ea7abae9051880f3d9012c9c964770b8ce4ef16a5c6fd04622e214d7"
+  },
+  "diagnostic_matrix_runtime_passed": false,
+  "full_collection_export_tested": false
+}

@@ -34,6 +34,7 @@ def main():
     cases=[
       ('api',['tests/test_audio2_api.c','src/wf_audio2.c','src/wf_native_host.c','src/wf_native_elf.c','src/wf_scsp_sfx.c'],[],[a.firmware.resolve(),(a.resources/'SFX.DAT').resolve()]),
       ('module_deadlines',['tests/test_music_module_deadline.c','src/wf_music_seq.c','src/wf_scsp_ym.c','src/reference_driver/z80.c'],['-fno-pie','-no-pie'],[]),
+      ('timestamp_elision',['tests/test_music_timestamp_elision.c','src/wf_music_seq.c','src/wf_scsp_ym.c','src/reference_driver/z80.c'],['-fno-pie','-no-pie'],[out/'timestamp-elision.trace']),
       ('firmware_deadlines',['tests/test_music_firmware_deadline.c','src/wf_scsp_sfx.c','src/wf_scsp_ym.c'],[],[]),
       ('firmware_deadlines_no_timing',['tests/test_music_firmware_deadline.c','src/wf_scsp_sfx.c','src/wf_scsp_ym.c'],['-DWF_MUSIC_TIMING=0'],[]),
       ('sfx_refill_deadlines',['tests/test_sfx_refill_deadline.c','src/wf_scsp_sfx.c'],[],[])]
@@ -48,6 +49,16 @@ def main():
     defs=['-D'+v for v in aliases]
     ref_z80=out/'ref-z80.o';ref_seq=out/'ref-seq.o'
     run('build_original_z80',[*common,*defs,'-c','src/reference_driver/z80.c','-o',ref_z80],False)
+    fade=out/'fade_lifts'
+    run('build_exact_fade_lifts',[*common,'-Werror','-Wno-unused-const-variable','-Wno-unused-function','-Wno-misleading-indentation',
+        'tests/test_sh2_fade_lifts.c','src/reference_driver/z80-native.c',
+        'src/reference_driver/z80-cold.c',ref_z80,'-o',fade],False)
+    run('exact_fade_lifts',[fade,(a.resources/'SOUND.ROM').resolve()])
+    tl=out/'tl_writes'
+    run('build_exact_tl_writes',[*common,'-Werror','-Wno-unused-const-variable','-Wno-unused-function','-Wno-misleading-indentation',
+        'tests/test_sh2_tl_writes.c','src/reference_driver/z80-native.c',
+        'src/reference_driver/z80-cold.c',ref_z80,'-o',tl],False)
+    run('exact_tl_writes',[tl,(a.resources/'SOUND.ROM').resolve()])
     run('build_frozen_r01',[*common,*defs,'-Dwf_music_seq_init=wf_ref_init','-Dwf_music_seq_send=wf_ref_send','-Dwf_music_seq_run=wf_ref_run','-c','tests/oracle/wf_music_seq_r01.c','-o',ref_seq],False)
     exe=out/'seq_oracle'
     candidate_seq=out/'candidate-sequence.o'

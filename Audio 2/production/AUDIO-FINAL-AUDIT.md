@@ -6,17 +6,42 @@ El nombre de la rama `audio-2-production-ready` identifica el encargo, no una ce
 
 La autoridad de datos sigue siendo el `wwfwfest.zip` original. R04, A53 y todas las implementaciones históricas permanecen intactos. Una coincidencia con un modelo histórico prueba esa coincidencia; no demuestra por sí sola que el modelo reproduzca correctamente el reloj o la salida física del arcade.
 
-## Resultado y candidato seleccionado
+## Resultado actual — corrección aislada `d9bd93a7`
 
-El candidato de firmware es `cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090`, combinado con las nueve instrucciones SH-2 admitidas tras comparación exacta (`z80-native.c`, SHA256 `c408e4a8ad5d7b54a55706f4c96fd9f4d39271dcd0fb5e2de14331af138f4fad`) y `wf_music_seq.c` compilado con `-Os`. El núcleo Z80 sigue con `-O2`. No se seleccionaron los lifts adicionales ni la ventana experimental de 24 KiB.
+El propietario autorizó corregir sólo Audio 2 y preparar los audios; la integración en ROM Graphics Final queda a Codex. No se han modificado ni vuelto a ejecutar las escenas TAG/Royal en esta continuación.
+
+| Componente seleccionado | SHA-256 |
+|---|---|
+| Firmware 68000/SCSP, sin cambio | `cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090` |
+| Núcleo Z80 nativo | `d9bd93a7cfdf8e5dbb022bce6df1dc132e6caf7e9c3c05a18e75e2debd9602e0` |
+| Servicio del secuenciador | `8d833f42349267376e0d29ff5b2c0db0fa31af5c544252e7306e87ec7bfd66bc` |
+| Traducción y reloj de eventos | `4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69` |
+
+La corrección conserva el trabajo original y sus efectos observables. Se verificaron lifts de CPU/RAM/ciclos, las dos escrituras de cada acceso TL, el retorno original y las cuotas que evitan fragmentar el trabajo `08C1` en el borde de servicio. La elisión de conversiones temporales redundantes conserva literalmente la salida del mapper/transporte. No cambia el presupuesto global, el grant de 512 instrucciones, el lead, las colas ni los plazos. Código caliente + estado: **18.228 de 18.432 bytes**.
+
+**Verificado:** 14 grupos host, con 18 × (600 s + 8 s) y transiciones; 18 capturas nativas de 30 s + 8 s y una transición de nueve comandos, todos los contadores de error a cero. **Verificado también:** las 18 capturas largas de 600 s + 8 s y los nueve comandos de transición: 19 casos aprobados, fuentes/entradas estables, cero errores de captura y todos los contadores de fallo a cero. [Registro largo](docs/evidence/native-music-d9bd-complete600s.json). [Evidencia y alcance del nuevo candidato](docs/NATIVE-ZERO-DROP-MUSIC-D9BD.md).
+
+La estructura de las 18 partituras se observó en el modelo original completo: tres finales naturales, doce recurrencias visibles y ciclos por canal en `0B/0C/11`. Esos ciclos no demuestran un período PCM común ni una señal SCSP idéntica. [Pruebas de finales y bucles](docs/ARCADE-COMPLETE-MUSIC-STRUCTURE.md).
+
+**Sigue bloqueado ROM-EXACT:** banco OKI activo nativo, diferencias acústicas documentadas, aceptación auditiva, carga concurrente y hardware. El replay aislado actual de64 palabras/138s conserva dos avisos tardíos, aunque entrega todos los comandos y mantiene cero pérdidas FM y underruns. Cero descartes no demuestra igualdad de timbre ni latencia cero.
+
+## Comparativas completas y experimento posterior
+
+La colección `d9bd/cddd` ya contiene **18 parejas musicales completas de608s y una pareja de transición de32s:38WAV**, con las referencias originales recalculadas para las admisiones observadas. El exportador1.2.0 reaudita F5/RAM/ELF, conserva los bytes PCM nativos y usa la pareja coherente de relojes. Las123 pruebas Python conjuntas pasan, con fuentes estables. [Manifiesto de la colección](docs/evidence/complete-music-pairs-d9bd-cddd-v1_2.json). La entrega privada y la aprobación auditiva siguen pendientes.
+
+Un experimento posterior acelera únicamente la copia68000 del PCM preparado. El replay de64 comandos/138s pasa con todos los contadores a cero en firmware `3404eac1`. Su patch, contrato portable y evidencia están en [experiments/prepared-copy-3404](experiments/prepared-copy-3404/README.md). La revisión independiente y las nuevas matrices musicales/SFX siguen en curso; **todavía no sustituye el candidato seleccionado**.
+
+## Campaña anterior conservada — `c408/scalar9`
+
+El candidato de la campaña anterior era `cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090`, combinado con las nueve instrucciones SH-2 admitidas tras comparación exacta (`z80-native.c`, SHA256 `c408e4a8ad5d7b54a55706f4c96fd9f4d39271dcd0fb5e2de14331af138f4fad`) y `wf_music_seq.c` compilado con `-Os`. El núcleo Z80 sigue con `-O2`. En aquel corte no se seleccionaron los lifts adicionales ni la ventana experimental de 24 KiB. El corte `d9bd` selecciona sólo los lifts descritos en su nueva evidencia y conserva 18 KiB.
 
 La referencia actual **full-board** ejecuta el Z80 original con Timer A/B, estado busy/IRQ YM y lectura ROM/busy/banco global OKI. Las 18 parejas musicales del candidato `cddd/scalar9` se generaron con esta referencia y con las capturas de la campaña nativa larga. La entrega privada anterior del perfil `621b5dfc` permanece identificada por separado; la actualización del ZIP requiere autorización del destino tras el rechazo de aprobación automática. Los oráculos A53/R04 y el perfil intermedio Timer-B-only se conservan con sus identidades y limitaciones explícitas.
 
 La auditoría completa encontró dos defectos diferentes de efectos: 17 comandos repetían un inicio que la rama original `F1` suprime; esa corrección ya supera los 98 casos de inicios físicos. El banco global aplicado a voces activas **sigue sin reproducirse correctamente**. Una prueba causal aisló 2.663 muestras ADPCM y 14.680 frames de mezcla diferentes por ese motivo. Este defecto bloquea ROM-EXACT aunque los contadores de ejecución fuesen cero.
 
-El replay final de 138 segundos con las 64 palabras TAG observadas acepta todas, conserva cero descartes FM y cero underruns, pero registra **dos avisos tardíos**. Es un resultado fallido. El mismo firmware con el SH-2 anterior había registrado cuatro avisos; los dos perfiles no se confunden. La prueba de presión y recuperación del candidato final acepta los 98 comandos, ejercita 97 respuestas BUSY, para y recupera el slave correctamente, pero conserva **dos underruns y cuatro avisos** anteriores al reinicio. La segunda época tiene sus contadores a cero; no borra el fallo de la primera.
+El replay histórico `c408/scalar9` de 138 segundos con las 64 palabras TAG observadas acepta todas, conserva cero descartes FM y cero underruns, pero registra **dos avisos tardíos**. Es un resultado fallido. El mismo firmware con el SH-2 anterior había registrado cuatro avisos; los dos perfiles no se confunden. La prueba de presión y recuperación del candidato histórico acepta los 98 comandos, ejercita 97 respuestas BUSY, para y recupera el slave correctamente, pero conserva **dos underruns y cuatro avisos** anteriores al reinicio. La segunda época tiene sus contadores a cero; no borra el fallo de la primera.
 
-Royal HW1 ya se recuperó y se ejecutaron parejas completas base/4 MiB: 8.474 pasos, 133 productores y estado idéntico en cada pareja. Con el candidato actual, la variante base descarta cuatro eventos FM y registra 37 avisos; la variante 4 MiB completa los 133 comandos con cero descartes/underruns, pero seis avisos. Ambas fallan la aceptación; véase [ROYAL-INTEGRATION-GATE.md](docs/ROYAL-INTEGRATION-GATE.md). El promedio de una ejecución cuyo audio se detiene no sirve para aprobar su coste sostenido. Dos cargas corruptas probadas de nuevo con el candidato actual en Mednafen se rechazan con API FAULT/RESOURCE antes del primer comando; [evidencia](docs/evidence/native-load-failures-final-cddd.json).
+Royal HW1 ya se recuperó y se ejecutaron parejas completas base/4 MiB: 8.474 pasos, 133 productores y estado idéntico en cada pareja. Con el candidato histórico `c408/scalar9`, la variante base descarta cuatro eventos FM y registra 37 avisos; la variante 4 MiB completa los 133 comandos con cero descartes/underruns, pero seis avisos. Ambas fallan la aceptación; véase [ROYAL-INTEGRATION-GATE.md](docs/ROYAL-INTEGRATION-GATE.md). El promedio de una ejecución cuyo audio se detiene no sirve para aprobar su coste sostenido. Dos cargas corruptas probadas con `c408/scalar9` en Mednafen se rechazan con API FAULT/RESOURCE antes del primer comando; [evidencia](docs/evidence/native-load-failures-final-cddd.json).
 
 ## 1. Recuperación y selección de fuentes
 
@@ -72,7 +97,7 @@ En el perfil instrumentado se midieron 159 lanzamientos preparados y ningún fal
 
 Un cero en B03A no sustituye los contadores individuales. Un cero en el mailbox tampoco sustituye el campo real `wf_sfx_engine.underruns`, de 32 bits. Las herramientas actuales observan el campo correcto usando el mapa del firmware exacto.
 
-### Matriz nativa larga del candidato actual
+### Matriz nativa larga histórica — `c408/scalar9`
 
 El firmware `cddd` y SH-2 `scalar9/seqOs` completaron los 18 ensayos de 600 segundos seguidos de ocho segundos tras `1F`, más la secuencia separada de transiciones. La reauditoría v2 vincula los 19 resultados a sus ELF, firmware, F5 y WAV: las 19 evidencias están completas, con cero errores de identidad/captura. **Cuatro músicas aprueban los controles de ejecución; catorce y la transición fallan.** Esto no es una aprobación de fidelidad.
 
@@ -162,13 +187,13 @@ El mapa y los presupuestos están en [MEMORY-AND-ABI.md](docs/MEMORY-AND-ABI.md)
 
 El ensayo TAG completo conserva idénticos los7648 bytes de estado y los64 productores originales. Sin audio mide57,902 pasos/s; con el perfil10 mide55,337 pasos/s, con19 underruns y22 eventos tardíos. El primer incidente es agotamiento de una voz, separado de una pausa global posterior de546Fs. Véase [COMBAT-INTEGRATION-GATE.md](docs/COMBAT-INTEGRATION-GATE.md). La integración aislada conserva las funciones de productor y su secuencia de entrada. No añade sonidos a lugares cuyo origen no está demostrado. El catálogo de comandos implementados no es un cierre de las filas pendientes del mapa ROM-EXACT de productores.
 
-La pareja TAG del candidato actual conserva los 7.372 pasos, los actores y los 64 productores. Completa 64/64 comandos con cero pérdidas FM y cero underruns, pero un aviso tardío. Mide 55,330359 pasos/s frente a 57,901837 del control: añade 354 VBlanks, un 4,6475 % de tiempo. El percentil95 del intervalo entre pasos pasa de uno a dos VBlanks; el máximo pasa de dos a tres. Falla rendimiento y plazos aunque la continuidad PCM haya mejorado.
+La pareja TAG histórica `c408/scalar9` conserva los 7.372 pasos, los actores y los 64 productores. Completa 64/64 comandos con cero pérdidas FM y cero underruns, pero un aviso tardío. Mide 55,330359 pasos/s frente a 57,901837 del control: añade 354 VBlanks, un 4,6475 % de tiempo. El percentil95 del intervalo entre pasos pasa de uno a dos VBlanks; el máximo pasa de dos a tres. Falla rendimiento y plazos aunque la continuidad PCM haya mejorado.
 
 Las reauditorías v2 separan cuatro hechos: API operativa, trabajo solicitado entregado, ausencia de pérdidas/retrasos e identidad del código realmente cargado. La condición de comparabilidad completa exige los cuatro. TAG y Royal4MiB conservan audio operativo, pero sus avisos impiden certificar coste de audio íntegro; Royal base además detiene el worker. Se conservan las tasas observadas y los informes v1, sin convertirlos en un aprobado.
 
 ## 6. Estado de aceptación
 
-| Criterio | Estado de este corte |
+| Criterio | Estado y perfil al que pertenece |
 |---|---|
 | Recuperación y conservación histórica | Verificado |
 | Generación local desde los hashes ROM correctos | Verificada; recursos protegidos fuera de Git |
@@ -177,11 +202,13 @@ Las reauditorías v2 separan cuatro hechos: API operativa, trabajo solicitado en
 | 98 efectos: decoder/estado/prioridad e inicios físicos | PCM/estado aprobados dentro de sus modelos; 98 inicios físicos aprobados contra Z80 original; banco activo sigue fallando |
 | Native35s comando01, perfil10 | Aprobado en sus contadores de estabilidad |
 | Native18 músicas, perfil10 | Completa:6 aprobadas,12 fallidas,56 avisos de retraso; salida de tono histórico |
-| Capturas WAV de18 músicas y98 efectos/voces |18 parejas del candidato actual generadas,36WAV/30s;98 efectos con196WAV y auditoría ELF/F5/WAV aprobada. Se conservan reintentos11/12 por ENOSPC y0x38 por automatización, con idénticos ELF/ISO. Actualización de entrega privada bloqueada por autorización del destino; los ZIP anteriores siguen identificados |
+| Capturas WAV históricas de18 músicas y98 efectos/voces |18 parejas del candidato `c408/scalar9` generadas,36WAV/30s;98 efectos con196WAV y auditoría ELF/F5/WAV aprobada. Se conservan reintentos11/12 por ENOSPC y0x38 por automatización, con idénticos ELF/ISO. Actualización de entrega privada bloqueada por autorización del destino; los ZIP anteriores siguen identificados |
 | Fidelidad musical física/arquitectónica | Pendiente; discrepancias demostradas en revisión |
-| TAG cuatro luchadores con/sin audio, candidato actual | Completo7372 pasos: estado idéntico,0 underruns/0 pérdidas FM,1 aviso y55,330logic/s; falla aceptación |
-| Royal HW1 bajo carga, candidato actual | Parejas completas. Base:4 pérdidas FM/0 underruns/37 avisos y fallo de worker. 4MiB:0 pérdidas/0 underruns/6 avisos,133 comandos completos,58,453logic/s. Política original y estado/productores idénticos; no existe cinta de entradas por llamada |
-| Matriz nativa18 ×600s +1F8s y transiciones | Cerrada:4 músicas PASS,14 FAIL; transición4/9, FAIL. Cero underruns en esta matriz;30 descartes FM/97 avisos musicales. Bucles y composiciones completas con exactitud de señal siguen pendientes |
+| TAG cuatro luchadores con/sin audio, histórico `c408/scalar9` | Completo7372 pasos: estado idéntico,0 underruns/0 pérdidas FM,1 aviso y55,330logic/s; falla aceptación |
+| Royal HW1 bajo carga, histórico `c408/scalar9` | Parejas completas. Base:4 pérdidas FM/0 underruns/37 avisos y fallo de worker. 4MiB:0 pérdidas/0 underruns/6 avisos,133 comandos completos,58,453logic/s. Política original y estado/productores idénticos; no existe cinta de entradas por llamada |
+| Matriz nativa histórica `c408/scalar9` de18 ×600s +1F8s y transiciones | Cerrada:4 músicas PASS,14 FAIL; transición4/9, FAIL. Cero underruns en esta matriz;30 descartes FM/97 avisos musicales. Bucles y composiciones completas con exactitud de señal siguen pendientes |
+| Host `d9bd`, 14 grupos y18 ×600s +8s | Aprobado, fuentes estables |
+| Nativo `d9bd`,18 ×30s +8s y transición | Aprobado: cero contadores de fallo; también pasan18 ×600s +8s y transición9/9 |
 | Aprobación auditiva del propietario | Pendiente |
 | Saturn NTSC-U con MODE | HARDWARE PENDING |
 
@@ -191,7 +218,7 @@ Seguir [CODEX-INTEGRATION.md](CODEX-INTEGRATION.md), el instalador de [entorno](
 
 Los WAV principales son PCM16 a 44.100 Hz. La señal Saturn procede de `soundrecord` de Mednafen1.32.1 real, sin preload, parche de reloj, inyección de memoria ni sustitución por un renderer de PC. Se conservan el arranque, los contadores, el estado nativo F5, el ejecutable exacto y el intervalo recortado. La lectura externa de memoria es únicamente de observación. Los archivos con audio o datos derivados de la ROM se entregan privadamente, fuera de GitHub.
 
-El auditor nativo reforzado lee símbolos del propio ELF, enlaza todos los segmentos inicializados SCSP y las funciones SH-2 con F5, comprueba los contadores reales de RAM y conserva los errores observados antes del último registro. Sus 22 regresiones son sintéticas y no necesitan ROM. Los 97 primeros SFX válidos y el retry separado de0x38 superan esa auditoría; la campaña inicial fallida no se reescribe. El replay final continúa fallando por sus dos avisos bajo las mismas comprobaciones más estrictas.
+El auditor nativo reforzado lee símbolos del propio ELF, enlaza todos los segmentos inicializados SCSP y las funciones SH-2 con F5, comprueba los contadores reales de RAM y conserva los errores observados antes del último registro. Sus 22 regresiones son sintéticas y no necesitan ROM. Los 97 primeros SFX válidos y el retry separado de0x38 superan esa auditoría; la campaña inicial fallida no se reescribe. El replay histórico `c408/scalar9` conserva sus dos avisos bajo las mismas comprobaciones más estrictas.
 
 Se observaron archivos intermedios de referencia truncados, con causa aún no establecida. Los WAV entregados conservaron sus hashes; los intermedios afectados se regeneraron en salidas nuevas y coincidieron con las identidades completas archivadas. La comprobación detectó el problema y se conservó la evidencia anterior. [Integridad de las salidas y guardas reproducidas](docs/REFERENCE-OUTPUT-INTEGRITY.md).
 
@@ -199,10 +226,10 @@ Los generadores de recursos y firmware ahora rechazan salidas existentes, dentro
 
 No fusionar el PR mientras exista un criterio de software fallido o pendiente. [NEXT-SESSION.md](NEXT-SESSION.md) establece el primer experimento pendiente, los comandos de reproducción y la regresión que debe seguir a una corrección. La siguiente sesión debe partir de los hashes y manifiestos de este corte y conservar tanto la evidencia negativa como la positiva.
 
-## 8. Artefactos privados preparados y autorización de entrega
+## 8. Artefactos privados anteriores y autorización de entrega
 
 Los dos ZIP de validación están cerrados y verificados después de escribir: artefactos/informes (4.371 archivos seleccionados) y127 estados F5. Incluyen el firmware seleccionado, ELF, mapas, discos de prueba, configuración, comandos y resultados de las18 músicas, transición,98 SFX, mezcla, lifecycle, corrupción de recursos y seis capturas de combate. Los informes originales no se editan; los manifiestos identifican las rutas preservadas. Los SHA de cada miembro y los hashes cruzados permiten detectar una mezcla de partes. La herramienta de selección tiene siete pruebas sintéticas y excluye ROM/BIOS originales, árboles de fuentes y medios que se entregan aparte.
 
-La revisión automática rechazó actualizar el ZIP privado de efectos por exigir autorización explícita del destino de entrega. Se verificó que sus196WAV eran idénticos a los ya entregados; un segundo intento con esa comprobación también fue rechazado. No se cambió de medio para eludirlo. Quedan preparados cuatro ZIP: músicas del candidato actual, revisión de metadatos SFX y las dos partes de validación. Las entregas anteriores siguen identificadas separadamente. [Manifiesto público de archivos, tamaños, hashes y estado](docs/evidence/private-delivery-status.json).
+La revisión automática rechazó actualizar el ZIP privado de efectos por exigir autorización explícita del destino de entrega. Se verificó que sus196WAV eran idénticos a los ya entregados; un segundo intento con esa comprobación también fue rechazado. No se cambió de medio para eludirlo. Quedan preparados cuatro ZIP: músicas del candidato histórico `c408/scalar9`, revisión de metadatos SFX y las dos partes de validación. Las entregas anteriores siguen identificadas separadamente. [Manifiesto público de archivos, tamaños, hashes y estado](docs/evidence/private-delivery-status.json).
 
 Esta autorización de destino es independiente de la aprobación auditiva y no aprueba el motor. Los fallos de software indicados en esta auditoría siguen bloqueando su aceptación.

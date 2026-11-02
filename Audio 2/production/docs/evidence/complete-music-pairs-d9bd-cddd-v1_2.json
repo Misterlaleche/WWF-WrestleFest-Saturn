@@ -1,0 +1,3441 @@
+{
+  "schema_version": 1,
+  "tool_version": "1.2.0",
+  "kind": "FULL_NATIVE_ORIGINAL_MUSIC_PAIR_COLLECTION",
+  "matrix_sha256": "1c5af394be92016cf959703326e521c48e22a19fc066934757e7c56969dc9975",
+  "structure_evidence_sha256": "acf2df54aa24a9c558c4861259931396108224373eff4b367eabd9c6e10ade8e",
+  "matrix_profile": "cddd-exact-TL-return-timestamp-early08c1-d9bd93a7-complete600s",
+  "complete_capture_export": true,
+  "source_stable": true,
+  "native_runtime_passed": true,
+  "diagnostic_only": false,
+  "complete_18_music_collection": true,
+  "reference_mode": "Existing verified full-board executable; independent original-ROM subprocess replays",
+  "reference_jobs": 4,
+  "maximum_reference_cases_in_flight": 4,
+  "reference_result_order": "Declared case order; replacement after WAV verification, PCM deletion and requested trace cleanup",
+  "reference_traces_retained": false,
+  "normalization": false,
+  "gain": 1,
+  "resampling": false,
+  "time_stretch": false,
+  "waveform_fitted_alignment": false,
+  "native_kind": "Real soundrecord from standalone Mednafen Saturn execution; not physical Saturn hardware",
+  "reference_kind": "Original full Z80/OPM/OKI host model; not a physical arcade recording",
+  "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+  "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "source_sha256": {
+    "tools/prepare_music_audio_pairs.py": "18ddd56e932afbd9cadab669af4f7ed7c4281dc31929ecde2e4e7700acba9b87",
+    "tests/test_prepare_music_audio_pairs.py": "d1c7ac5c9de8adf2b3f5dd3113b7fd3d6c210fbd40571b1369c826dfd54b8e03",
+    "tools/run_music_matrix.py": "9fa08981bc2ad649d20a8196fec1277396103a2c0c24527f49e3dae194d0a6d9",
+    "tools/source_snapshot.py": "77483c82d1a882fe690cb746eababaa6c2c5ddf44c39afdc42f2bfcca3e1e216",
+    "tools/run_native_test.py": "30e354e024f7c5ec3d546b5579cf0733a444616a8ca4292621f448e0f1e854e2",
+    "tools/analyze_audio_capture.py": "b02bf62984129542b9c109cc82c45ee0f222c60fc3d72f760f67a0f113aa3ea7",
+    "tools/capture_mednafen.py": "d91eb1b2f1811e6d78ecfc889c3e5844eb8ae96fd2a85fbacea49940207f94c4"
+  },
+  "matrix_source_sha256": {
+    ".gitignore": "0b2b8aff63e807663bc2484128cdddbc8df0f28349d1a27d73c2c73c415e6833",
+    "AUDIO-FINAL-AUDIT.md": "18a71172cb4ad522605067bbd17279e7392b412fd1451c3729139d372ecbcc83",
+    "CODEX-INTEGRATION.md": "356e77b7fd32a8308c5e7f763905b42fa43f9b18aa2c52263973a6a800d3d5c0",
+    "ESTADO.json": "0465abf6e734fa0d243940b482403549e26a37b2cd6f638fe879225a89981590",
+    "NEXT-SESSION.md": "6f1dbb05f4c2c7415244bd20ee5f140e168d600d0e9763fd538ef251a3362a20",
+    "README.md": "4d8a4ffbf6360f0751dd3a6cf9a2c5f9efdb26d9a2201f5253602fb107a0e6dc",
+    "SHA256SUMS": "9cd2fe8f7c491ff5d4d0613809606350e6358cc6a3aa5533d1afb19e133ba3e4",
+    "docs/ACTIVE-OKI-BANK-AUDIT.md": "3522f1b4053eb1d34002683b8ab46f62add62179d0f35f4e2a07bcc0aba42d7e",
+    "docs/ARCADE-CLOCK-AUDIT.md": "4d796026569b6744b6ae8cdfe85e786ab5535709284178a11a8a8ae69079954d",
+    "docs/ARCADE-COMPLETE-MUSIC-STRUCTURE.md": "943e2cd10f04f5f82fba4f3ee65f0a66c67dbd24142ef5f1e6f7a2ad4f7609a4",
+    "docs/AUDIO-ISOLATED-CORRECTION-PLAN.md": "68016db5a28bc0f7c606fdd227e578c517ce220ebec2c5e5035fa2c14d5b9244",
+    "docs/COMBAT-INTEGRATION-GATE.md": "aacd4484cd90091588073bdbc69f5dfd628112b68d8d3b3a9d586dc603b0cf12",
+    "docs/DEPENDENCIES.md": "8cee13fa693724143511d9e4e4a6d011445a9f86a0e1c3d4ce262d0c5b34ec9d",
+    "docs/F1-ROM-SEQUENCE-AUDIT.md": "cf25fe7ecff4af35ce79cda63fbf70bf1adee7211e8e689f8e6c79c1e7d1ff79",
+    "docs/IMPLEMENTATION-PLAN.md": "ddd25dd0e175bee4158f05752102a68649989e989493b255ca2767298a5ffa44",
+    "docs/MEMORY-AND-ABI.md": "94780fceaf8ecf8f3cb9404674234a2766d3dce03cad3403d3cabf9d217876c2",
+    "docs/MUSIC-STRUCTURE-AND-LONG-VALIDATION.md": "3d26f92b4dd9df6736d2749584073eba81d59181cce380410bf027b0d34ae019",
+    "docs/NATIVE-LONG-FINAL-CANDIDATE.md": "9b236431342cc93304df46426cd1033dee70b0856086b6f4761dd949152de194",
+    "docs/PCM-INTERPOLATION-AND-CAPTURE-GAIN.md": "f725727ba27f8ad26cc2989114a46dbbafc6122de3f9d5503d59d47cb7e79034",
+    "docs/REFERENCE-OUTPUT-INTEGRITY.md": "f174b1b18553e6f3e67f8ec234af3fd26a2013565d5920ab002e4401f6325998",
+    "docs/ROYAL-INTEGRATION-GATE.md": "ea6e0c8026c1ddf71558351fa16f473eaf0c0f0ee63da82b9c635247fac04549",
+    "docs/evidence/final-host-cddd-scalar9.json": "f63633dba3687d378fd837de58976c3843f849d5067e7e45ad510edce82901af",
+    "docs/evidence/final-tooling-host-smoke.json": "c6350dd8fe082211ba723afcdc39b6994555c6c76d8efaceef793462f7c09448",
+    "docs/evidence/listening-metrics-final-cddd-scalar9.json": "e724eb2c546ed17ee98a768761fd0dda7237fd4ae2048226daf68b3c021a2a4c",
+    "docs/evidence/mednafen-presentation-speed.json": "3c98a806e2032f257237d67edf90ae178b6d2cb3d20e85d95f4ff6488a3b2b22",
+    "docs/evidence/native-lifecycle-f1-adaptive.json": "9058fd5a659651c32282db12aec186abc7a832cc2a99addf29c19e65553750c1",
+    "docs/evidence/native-lifecycle-final-cddd-scalar9.json": "dcdfd44d18977dcdfcd037c1879c41858b05e5d52b91d594b1e84b271c40d062",
+    "docs/evidence/native-load-failures-621.json": "d2af5cc0305ca1260c59e27764c57af5f5fa8add4e7701c1a8f35c954e63bb1e",
+    "docs/evidence/native-load-failures-final-cddd.json": "cea2202bbb6b6613a597a2346877eaee30ef3f2a34c220d3822420c360e5dd60",
+    "docs/evidence/native-long-final-cddd-scalar9.json": "70c642f53e86065228d1f220407191a952a5c438bafeed9121620db6fbf0f1c0",
+    "docs/evidence/native-mix-final-cddd-scalar9.json": "a14ab6336c844831f44f654e29060a98c8a136b31adb198291e81de905521d6c",
+    "docs/evidence/native-sfx98-final-cddd-scalar9.json": "69fc0742d446cddffd688f9e1bc43a8a60ba4ca4f634f0c72f5fc8877023a657",
+    "docs/evidence/original-sfx-starts-final-cddd.json": "ac76f00bb53388df3752203198ac91d8c7c9f4e80ae69b4be9eb9ce03e373d86",
+    "docs/evidence/output-preservation-green.json": "333e6f944e5790ad58926184c5081cf2598335c0b0aec1a0a1f40fecc8e207fd",
+    "docs/evidence/output-preservation-red.json": "5f4ceeb2359fe8caf478f6bedd9f3d3ff7106031ab7014f92b701e6cd279306d",
+    "docs/evidence/private-delivery-status.json": "8969c3c3f60771ac88dcdee5d5ca4a529e0c8999f2cf6e12d0ef27bd7d0fe4f0",
+    "docs/evidence/royal-hw1-4m-bf0.json": "2863f8b2c73b0fb5e0223cf997152128986509d1ce15c781d49d447a1530f09b",
+    "docs/evidence/royal-hw1-4m-cddd-scalar9.json": "38eb55a317512223d10b6151bc2ccffc2ce5cbffcb1a31c0c0c12ba2eb485019",
+    "docs/evidence/royal-hw1-4m-cddd-scalar9.v2.json": "aab14e4682fa7f35f520b0f9f60db211ac9ecb645ea9f09786f6384d77cfe849",
+    "docs/evidence/royal-hw1-base-bf0.json": "bb3ec90f634a36c0f918125581bd3f1dc556b9cda6ae798f5a012e49e3bff396",
+    "docs/evidence/royal-hw1-base-cddd-scalar9.json": "19a2d6cdbfeeffc87a932e1860bd7243e2596455b829281c3b2147cf5eef0cce",
+    "docs/evidence/royal-hw1-base-cddd-scalar9.v2.json": "fd9f722b00123993ea11954249d5afaf1da23233f6aef3734c5cf05a1924251c",
+    "evidence/README.md": "1f32248ce08999003bf0bad17541e3e823e913e8e5e056cb28eecd68d78667c1",
+    "evidence/firmware-profile09.json": "609a0c134e150a05ae57388bf5ef1c7d4ecb3a94c987dede1764130f22227e16",
+    "evidence/firmware-profile10.json": "05af0124a8a29d34160cfab21ff8bd767fc4d3134a0a7e55412949a73f85a28d",
+    "evidence/host-profile10.json": "1dbcb354fb7c8d523e6bf28149b6acb4fb566d585301bd5e5a58be14211b7099",
+    "evidence/modulation-depth-regression.json": "9da4a5e28e5e41e6f25d3748488489b169e9a81b43e7cc0a7056aafb2c62f6ba",
+    "evidence/native-command01-profile09.json": "9a18599672d0fe7cc8b3647ef96937015098f48739bf52c520fb8f4dbaf0aaaf",
+    "evidence/native-command01-profile10.json": "d26a8485f9a577171650a92080c0ea4ba2583cb0227596dacc5d6c53637a03e1",
+    "evidence/queue-pcm-profile-history.json": "7c7efcee83368e474b676c98ce34de98c19d48fad4c3aa11d29d2949bf6d6dec",
+    "evidence/reference-regeneration-profileA53.json": "1c5e6dbf211efec923a6b66c0e70e418caf941354dce2a56c02bf073e6177df0",
+    "evidence/sfx-host-profile10.json": "29ac7fc3b7d2d43ca13bb028717d7c487422cab73fa4f29c0117ab56e1239c0b",
+    "evidence/sh2-checkpoint-source-preflight.json": "d38127092acfe19ed28c0e8d9510a6b1e1b09c4ba7437bbff5c69a94498616ec",
+    "evidence/sh2-scalar9-selection.json": "038baa9705cab1a26c83e899e36a145103ed3ba88fc4f321b879d2068730cdcf",
+    "evidence/tag7372-final-scalar9-cddd.json": "ca22223da26a048a2eeffe712d0d6a35563ac81bcddd6b8fbcc5b753e2f22072",
+    "evidence/tag7372-final-scalar9-cddd.v2.json": "d9bd3026b8e8d5afeabe99fef6e019621b3f0ede5042fb9785a1098893ae4906",
+    "evidence/tag7372-profile10.json": "acb32193e397dcf04bb2d475eeb97f9210b1b21cc201b55c57479a236406a45d",
+    "include/wf_audio2.h": "e0b8deb70b9b76776e174c4a3b115b33f447fd926cacd23cc798d8750464cb83",
+    "include/wf_audio2_yaul.h": "ab5eaf0b09dddbdfa2bcaf246a09a6a00b5ad0447d954b1da3a41d32a721e771",
+    "integration/README.md": "faca2120d57b4e7ebaa83e85a420317785dcff4db34ab40b5697a662aa33c3b7",
+    "integration/analyze_combat_pair.py": "cd7aa898ad71fba65e0239a3d4bdd6c69104b1299375ae2635306aa73c873dc5",
+    "integration/build_combat_pair.py": "af1d042b404d776dbff356095f790f46a90f9eea1948cf353a20970e37a81f64",
+    "integration/capture_combat_pair.py": "83c651927b9761dfe1ee6b41cfd284c8ea26657bd89fe94f5dcd54dca5d7597e",
+    "integration/compact_music_elf.py": "929dd086bcc976aaeef3e7a2372f1a06dde8b7fb801ac4b83fcb3531746903d2",
+    "integration/game_layout.c": "6cc7413931e8c397011b391ed7862559431aad1f11df12770f15e8521ab4f430",
+    "integration/test_cadence.c": "91068eb62b8d212dc3cd98e918ee515d1e4a82ff5a6670400dc39dccf604c86c",
+    "integration/test_combat_analysis.py": "f5f9fdecb3a8a01b06f1cdeeb005ef39abed1d18b15c6bcb3232ec19fb595620",
+    "integration/test_game_queue.c": "222b4eb9b8bd007cd5a23def74cab6a03a071337644f3b5cc90eabf52e37e8fc",
+    "integration/test_loader.c": "3be5fa7a7ffbac680cc7b0b0d5d921f975d80a47516ebffb4bf2ed43fa9240b3",
+    "integration/wf_audio2_cadence.h": "e51c4ffeba84663a66e4fc91960375b5758094b90653fe6b75764d77cb590836",
+    "integration/wf_audio2_game_queue.c": "2e0a8aecf49a5cd6d37f9a8d054b27a4be044bb1502cd746062590fae49877f8",
+    "integration/wf_audio2_game_queue.h": "152908150f4fd532e63cbd55f09a29283a666470533fcc2986e8736049da04e2",
+    "integration/wf_audio2_module_memory.c": "0cbfba23d6ec2d24f076302619d1044389782cdd9664b9d7b113ecdc80a16c3c",
+    "integration/wf_audio2_runtime_adapter.c": "4a70151a50fb25bc449ab1bd3e74c003deec52308152f6bae57237eb1fc2d1d8",
+    "integration/wf_music_elf.c": "8939a38414edf20266ab7c43aa2d8fb3bfcfe1b2c2b04b15e38e3a8f19cf6cb5",
+    "integration/wf_music_elf.h": "35c8943527db4f4466b62f40eb63d9d8661b428f39224a273d402d0139cf929b",
+    "integration/wf_music_module.h": "a54a74cb6859971aad141c487828cb31798d663dd256d56d150f19c1d43d9687",
+    "src/generated/wf_ym_envelope.h": "5f2e75edb5de0d5f3c1979f9e86b5d51602106a5cdad67671abfce4b4ca9bcf8",
+    "src/generated/wf_ym_tables.h": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+    "src/reference_driver/LICENSE": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5",
+    "src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "src/reference_driver/z80-native.c": "d9bd93a7cfdf8e5dbb022bce6df1dc132e6caf7e9c3c05a18e75e2debd9602e0",
+    "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+    "src/reference_driver/z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+    "src/wf_audio2.c": "1849480ae2a54d16df44b200303426d7d8a87622d2ec7d718bd7619f82f998a9",
+    "src/wf_audio2_yaul.c": "205b831868ffc17886aa289ec3cecf31f72339f59b8ca3d35731c671abe0744f",
+    "src/wf_music_clock.h": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+    "src/wf_music_entry.S": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+    "src/wf_music_firmware.c": "81cee191220e30dfe1ba42aed0fccbe1232842a78b271bec50eea72c64a21e90",
+    "src/wf_music_m68k.ld": "414130549d44eb62dd7b78db32650cfcbed19e3905d6bd2f373ce7e7a0871d3f",
+    "src/wf_music_module.c": "4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69",
+    "src/wf_music_module.h": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c",
+    "src/wf_music_seq.c": "8d833f42349267376e0d29ff5b2c0db0fa31af5c544252e7306e87ec7bfd66bc",
+    "src/wf_music_seq.h": "b02489430f5fb5eb97712c2a56d1636a4159358930cdcbf6244df0cbadf92471",
+    "src/wf_music_time.h": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+    "src/wf_native_driver.h": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+    "src/wf_native_elf.c": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+    "src/wf_native_elf.h": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+    "src/wf_native_host.c": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+    "src/wf_native_host.h": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+    "src/wf_native_yaul.c": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+    "src/wf_native_yaul.h": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+    "src/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+    "src/wf_scsp_dsp.h": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+    "src/wf_scsp_sfx.c": "4745461ca0439802e0f4ffc4395e07ef89d7b09ff41e83868b3bc7dfefa7d05b",
+    "src/wf_scsp_sfx.h": "d089e10bc23083db14b29577767f36d0ac8582f73c3e0d2bd3a14fc6baa11695",
+    "src/wf_scsp_ym.c": "c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76",
+    "src/wf_scsp_ym.h": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+    "src/wf_sfx_decode.S": "64c8e4137aee642546dcd6c1f5bca1f0103b6b905faa683b3b7aaa093bd705ed",
+    "src/wf_sfx_memory.c": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+    "src/wf_sfx_start.S": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+    "src/wf_z80_control_batch.inc": "6775bdc1db5f94c73ed3dc2f35926fffa40fd21e6a2890a284ce6f0c7f6e2ee2",
+    "src/wf_z80_instrument_post.inc": "b9cd0af3069c405f2b63809c2e6d5157831a8cc84632868d8f3f6dec7fe31f53",
+    "src/wf_z80_instrument_pre.inc": "1353f99b38f72dfb7cc79858f14e16314cc6b90900a2cb8680557e9693197770",
+    "src/wf_z80_multiply.inc": "86dd0ae1b986a7c919f0074db6129833fe0b2ebdc946809d382c75f63d6a2642",
+    "src/wf_z80_startup_copy.inc": "67f4df15c8c115210f69779e8b5d937859002122332ff5bbecbf09ada86742e1",
+    "tests/benchmarks/sh2_checkpoint/README.md": "25ea3014ed06ff5666169ec9d194913c0e39102abc0e3e2d788276dae1eb2ec0",
+    "tests/benchmarks/sh2_checkpoint/audio2/include/wf_audio2.h": "e0b8deb70b9b76776e174c4a3b115b33f447fd926cacd23cc798d8750464cb83",
+    "tests/benchmarks/sh2_checkpoint/audio2/include/wf_audio2_yaul.h": "ab5eaf0b09dddbdfa2bcaf246a09a6a00b5ad0447d954b1da3a41d32a721e771",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/generated/wf_ym_envelope.h": "4e629def3f2d8154fd8083e73ebb2ca49d2303a27a6e9d35257bbc6b01f1f273",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/generated/wf_ym_tables.h": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/reference_driver/LICENSE": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/reference_driver/z80-native.c": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/reference_driver/z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_audio2.c": "1849480ae2a54d16df44b200303426d7d8a87622d2ec7d718bd7619f82f998a9",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_audio2_yaul.c": "205b831868ffc17886aa289ec3cecf31f72339f59b8ca3d35731c671abe0744f",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_clock.h": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_elf.c": "baa790e1d8c780cc0bc54a52b9741af73306b6e04b935deb9dbaf58af99d126f",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_elf.h": "35c8943527db4f4466b62f40eb63d9d8661b428f39224a273d402d0139cf929b",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_entry.S": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_firmware.c": "dd199a1db635ccf9304fb47ea15834365a24e66dcb96892187cb89c440f53174",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_m68k.ld": "414130549d44eb62dd7b78db32650cfcbed19e3905d6bd2f373ce7e7a0871d3f",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_module.c": "2f05485020c8bb74c30389a8c4f9155f7fded0bf14a1dea77c1890d79d672aa9",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_module.h": "a6e0db52f6f3e2577f46d5768d05a5938b91142a23bc8fa17b87c0ba5c363759",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_seq.h": "b02489430f5fb5eb97712c2a56d1636a4159358930cdcbf6244df0cbadf92471",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_music_time.h": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_native_driver.h": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_native_elf.c": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_native_elf.h": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_native_host.c": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_native_host.h": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_native_yaul.c": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_native_yaul.h": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_scsp_dsp.h": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_scsp_sfx.c": "affe62d9865b6fc644733c80ad71b11463efdea57f64736140aee4aed7f53ad3",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_scsp_sfx.h": "0150aeeb3c75e4aaa4ff0fcb49d2a6971d132d02b385f42f09b22f830034efa1",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_scsp_ym.c": "d9e1e41cc7cdfeaf95234955a0d2d30d2f639d25520dce322e3d5993d38f7f88",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_scsp_ym.h": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_sfx_decode.S": "5e97ad36a59fd374886bf3aad571e231a302a2b5ba413a53cc1d72d7cb04bf48",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_sfx_memory.c": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_sfx_start.S": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_z80_control_batch.inc": "6775bdc1db5f94c73ed3dc2f35926fffa40fd21e6a2890a284ce6f0c7f6e2ee2",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_z80_instrument_post.inc": "b9cd0af3069c405f2b63809c2e6d5157831a8cc84632868d8f3f6dec7fe31f53",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_z80_instrument_pre.inc": "1353f99b38f72dfb7cc79858f14e16314cc6b90900a2cb8680557e9693197770",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_z80_multiply.inc": "86dd0ae1b986a7c919f0074db6129833fe0b2ebdc946809d382c75f63d6a2642",
+    "tests/benchmarks/sh2_checkpoint/audio2/src/wf_z80_startup_copy.inc": "67f4df15c8c115210f69779e8b5d937859002122332ff5bbecbf09ada86742e1",
+    "tests/benchmarks/sh2_checkpoint/integration/build_combat_pair.py": "2feed83d465577b799aaef4d997056c941a0ec31d63dbe7614d40902a82a8295",
+    "tests/benchmarks/sh2_checkpoint/integration/compact_music_elf.py": "929dd086bcc976aaeef3e7a2372f1a06dde8b7fb801ac4b83fcb3531746903d2",
+    "tests/benchmarks/sh2_checkpoint/integration/game_layout.c": "6cc7413931e8c397011b391ed7862559431aad1f11df12770f15e8521ab4f430",
+    "tests/benchmarks/sh2_checkpoint/integration/wf_audio2_cadence.h": "e51c4ffeba84663a66e4fc91960375b5758094b90653fe6b75764d77cb590836",
+    "tests/benchmarks/sh2_checkpoint/integration/wf_audio2_game_queue.c": "2e0a8aecf49a5cd6d37f9a8d054b27a4be044bb1502cd746062590fae49877f8",
+    "tests/benchmarks/sh2_checkpoint/integration/wf_audio2_game_queue.h": "152908150f4fd532e63cbd55f09a29283a666470533fcc2986e8736049da04e2",
+    "tests/benchmarks/sh2_checkpoint/integration/wf_audio2_module_memory.c": "0cbfba23d6ec2d24f076302619d1044389782cdd9664b9d7b113ecdc80a16c3c",
+    "tests/benchmarks/sh2_checkpoint/integration/wf_audio2_runtime_adapter.c": "f0555389d4b1c1f1791113f438c5aed9ea2a1397e22ae9380d7b13a89c1699c7",
+    "tests/benchmarks/sh2_checkpoint/integration/wf_music_elf.c": "baa790e1d8c780cc0bc54a52b9741af73306b6e04b935deb9dbaf58af99d126f",
+    "tests/benchmarks/sh2_checkpoint/integration/wf_music_elf.h": "35c8943527db4f4466b62f40eb63d9d8661b428f39224a273d402d0139cf929b",
+    "tests/benchmarks/sh2_checkpoint/integration/wf_music_module.h": "a6e0db52f6f3e2577f46d5768d05a5938b91142a23bc8fa17b87c0ba5c363759",
+    "tests/benchmarks/sh2_checkpoint/source-manifest.json": "32b5331caa580f6a5e127f7477f62c0165f05ee73b5fe4acf7edc62dd8c07754",
+    "tests/benchmarks/sh2_checkpoint/tools/build_dsp_mixer.py": "7cb9c74727fa8443620749a86fee33e24f87fef5b8e47d0316c858dfcbbf9ac0",
+    "tests/benchmarks/sh2_checkpoint/tools/build_firmware.py": "83a78488222835c8b7accb3c2afd78667168c0502bb8e0597318906ac7ee9105",
+    "tests/benchmarks/sh2_checkpoint/tools/generate_resources.py": "6efb41a27129c33eb39433f4fb8704d3b15f96ba8e0692958105bff040d63a06",
+    "tests/decoder-native.md": "b19c88a87aa5b56bc52476dd78f3ecbb955416882411f5fa4be11dd8c87d6a82",
+    "tests/decoder_native.c": "cdf1649f2a0bf4476d295d5099402a7381767cd6a353803506201de828e93303",
+    "tests/decoder_saturn.c": "a34c56015af861ef034ee95b691da946ba94a0be0014f8498c1d5997a47accd8",
+    "tests/decoder_stub.S": "9b6023705d8c5ca09ec77611c6d64ded14218df1ee491df043258a29a1249c1d",
+    "tests/oki_address_replay/NATIVE-2048-READ-ONLY.md": "3de30d7d97ae7b7168082e4fa302004779cfe1c549e3144df11bb1eeb7b85cc9",
+    "tests/oki_address_replay/README.md": "5f2ed2351a1b47cbd9b01986cfcb2ed9888d9c8d965d56e939c3a744e4c3cc77",
+    "tests/oki_address_replay/wf_oki_address.c": "8b908851b0f01150b0794392aa6c644a0dc4da28ca35a35e9f3a967b68bdb2c1",
+    "tests/oki_address_replay/wf_oki_address.h": "902a80f066980eea7ca01ddcc2293709d0834e8c54f09d12a55a424deac7efda",
+    "tests/oracle/wf_music_seq_r01.c": "5432de051afdae58f5cde12e866fa1bd7241dd98b07a588693a750fc50f10200",
+    "tests/oracle/z80_native_before_scalar9.c": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+    "tests/saturn_harness.c": "49535de835bf9ff83353db8865ec6bf9356a3b3c6396ee475ea376fba4245f71",
+    "tests/saturn_lifecycle.c": "e540d949be33ec42704f9cf524a26672b97a213babacc74987865077b2bff3fc",
+    "tests/sh2-scalar-admissions.md": "f1d3eaa272d816506a0fd9316b0b954b6a75b2869befbe3b265c2b88a2095151",
+    "tests/sh2-tl-writes.md": "36bdf15104558460113a85bae6fae278b3318fb90b977770f2bb8b3b22dfc011",
+    "tests/test_audio2_api.c": "91c16b34124116de655b3cfe1f9b2f44d9adeef1bd5f5e8ff4a141a46ee38ab4",
+    "tests/test_build_safety.py": "8357e0f971fc25e5ed0d44bc396f47c45c5155db98688f5dfde903888304a720",
+    "tests/test_full_board_channel_structure.py": "a6037a56f9173d1dd2b9ba8e5f367b4856cd04b90bd99f34df97d182ff75e008",
+    "tests/test_full_board_music_state.c": "a9f5784980ced6b7701d8eaabc7b3426fd8668fe9bbc1f30af61e848ba5aeaa4",
+    "tests/test_full_board_music_state.py": "2c31e7829c8600ff2909cbb517aaf206b5a263cf2069419800a123bfb3348284",
+    "tests/test_music_firmware_deadline.c": "4792c71ab17330945599163127367892f0a2063bdd6b617d66bc067728135da4",
+    "tests/test_music_matrix.py": "b9b32bddc77c14c8e4a126aec5c26eb73d12d1d1053f61b78c89c48ffc4d68e0",
+    "tests/test_music_module_deadline.c": "78538c26e26f3ef6ffdd280864337db8c097965950800f93d826aa6a08f1d1a6",
+    "tests/test_music_seq_service.c": "70a46d9d363f94049d825e9ef511a014648750badbb4b9581f52f99e48fc64a3",
+    "tests/test_music_state_probe.c": "73e8ba00d7fe2dd5e9de2801521efe4b44980c22c6d8b996293e3759de7bd7c9",
+    "tests/test_music_structure.py": "c0d32ee8b5e6602fce69e20f411e233312f86053ffb28a5d29e0ce1ecfbaffb6",
+    "tests/test_native_capture_gate.py": "d3cb533e27ca91fbc1c5f8a91b536fcbd85ba45f6f1c85359a8583fcabc8c161",
+    "tests/test_oki_address_replay.c": "5cf351194b0822ed94effcee330ee8be384fffb34917f6f57c7a222c9567de49",
+    "tests/test_output_preservation.py": "15dbd37c79f2c6d21bd4bae30c646e4542683c61121daa6d171b35f17b1c186c",
+    "tests/test_reference_oki.c": "b0ffd341cd194c4a158056279c1ee647ef14c01245fbbaa17257ff2cadfa7c25",
+    "tests/test_reference_output_ownership.py": "863a1cbebbfccf1b1b3f658cf0d63a5a1fb95d42f9c61a4f319edefc3deb1ce4",
+    "tests/test_resources.py": "481931c2996437ba1ef95e9614a38d8b8112c07ca5ef5e9dbc089971eecdd67d",
+    "tests/test_seq_a53.c": "985c10817a4a119c92fb7c45289269ad0984f5b8df671dbdd1a3eea4eadd3932",
+    "tests/test_sfx_native.c": "b7e1685ec8d7b6764d600d9bbb93787771ba610308da7ac38f03c524103ec275",
+    "tests/test_sfx_original_starts.c": "ca9d89ecc1f6fda8cf5c7dd045fc8b873f6823ecef9de646c242d7443df36587",
+    "tests/test_sfx_refill_deadline.c": "7838c6480e15af1c61d6c42ca03caa3a08aa2844c59fb505f89fedf4244736e4",
+    "tests/test_sh2_fade_lifts.c": "1f0c5209d627ccac549fcab25ef5ab642918ef4623e83609bc1efcf20de29695",
+    "tests/test_sh2_scalar_admissions.c": "8dbdaf5dc17d0bc8d9a0464f2bdc6fb55a74a884eabb1e26395bbd5352d3b155",
+    "tests/test_sh2_tl_writes.c": "3110d6611830e1b9ce0e68e9eedef3af91b7f6afbe61eb91fa4b5feb95ed9aff",
+    "tests/test_source_snapshot.py": "e397e10bbc4536c63d78f23d4c59b15e8ff0f0fbd4eb0a1ff2e4132b596e6823",
+    "tests/test_validation_package.py": "09d9df13ae6c16a6159dd30a1febaa307d3f534726bc321593f44d2104971bd7",
+    "tests/test_ym_native.c": "6b6502d68c77b4805c76f29a648885bab3abc78cc90ebbef64c3e85d69f4d79f",
+    "tests/test_ym_usage.py": "d2ed84ee069c1dbdfe64741b14894f2b891499153e41ade4c5bb81746b866c98",
+    "tests/validation-package.md": "3657d09ed87232dac67e61cdb94c6ffdcf8ecfe721067b63cc64fbb127ab3545",
+    "tools/ENVIRONMENT.md": "93185bb81a5cc87bbed56832a90b6e90106106d667059f940d4e3524361d5935",
+    "tools/analyze_audio_capture.py": "b02bf62984129542b9c109cc82c45ee0f222c60fc3d72f760f67a0f113aa3ea7",
+    "tools/build_dsp_mixer.py": "7cb9c74727fa8443620749a86fee33e24f87fef5b8e47d0316c858dfcbbf9ac0",
+    "tools/build_firmware.py": "83a78488222835c8b7accb3c2afd78667168c0502bb8e0597318906ac7ee9105",
+    "tools/build_saturn.py": "dba663f9e5c45f1de10584dc199f56632b6ad23584615850f5cf2cb7099b8546",
+    "tools/build_sh2_checkpoint_fixture.py": "6b24ea1f0ffbe232935f2d6a306a384236dc8151682915606a83f2f48f51d19b",
+    "tools/capture_mednafen.py": "d91eb1b2f1811e6d78ecfc889c3e5844eb8ae96fd2a85fbacea49940207f94c4",
+    "tools/compare_capture.py": "9e870bf985254c164c40236c0463493c889404b9168d3f170af0c949a60543a0",
+    "tools/decoder_build_native.py": "26f22789e86d5fe4202f2652b8abfc712f26e885a436707e24d8cf53e1c1dd2f",
+    "tools/decoder_capture.py": "4872a400d100f60784fb9f6f5e77af3d92b9e3a84a8f14ab47c6dba737f29068",
+    "tools/environment/README.md": "d09bfa1b077bba067cec99ab67bc07158849f68ead2da63ebd00f8ccd3e62e72",
+    "tools/environment/licenses/GCC-COPYING.RUNTIME": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+    "tools/environment/licenses/GCC-COPYING3": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "tools/environment/licenses/packages/binutils-m68k-linux-gnu-copyright.txt": "a81bdd422c2c015deca84bf6ad249bf0d7d19885fc01d1894463291b0b7313e1",
+    "tools/environment/licenses/packages/cpp-13-m68k-linux-gnu-copyright.txt": "08c6f3dee4c19aa1e57eb7d4ad45829b2e99656313bd07fa0922e2553f500be5",
+    "tools/environment/licenses/packages/gcc-13-m68k-linux-gnu-base-copyright.txt": "08c6f3dee4c19aa1e57eb7d4ad45829b2e99656313bd07fa0922e2553f500be5",
+    "tools/environment/licenses/packages/gcc-13-m68k-linux-gnu-copyright.txt": "08c6f3dee4c19aa1e57eb7d4ad45829b2e99656313bd07fa0922e2553f500be5",
+    "tools/environment/licenses/packages/gcc-m68k-linux-gnu-copyright.txt": "08c6f3dee4c19aa1e57eb7d4ad45829b2e99656313bd07fa0922e2553f500be5",
+    "tools/environment/licenses/packages/libapparmor1-copyright.txt": "52b7cf37d674ca47296cf6270a95ecda0ecbef976cc090d702acbd741e36b3b4",
+    "tools/environment/licenses/packages/libasound2-data-copyright.txt": "9b356b4fae53b5d5e7668e048f085d68a5039de7b6afbf465f50e81513334062",
+    "tools/environment/licenses/packages/libasound2t64-copyright.txt": "9b356b4fae53b5d5e7668e048f085d68a5039de7b6afbf465f50e81513334062",
+    "tools/environment/licenses/packages/libasyncns0-copyright.txt": "26f98be71539b8f1038fbaf51551598d0e2eb16f98db9a62094fc85db5f1c25d",
+    "tools/environment/licenses/packages/libaudit-common-copyright.txt": "6c7011e93f643b112c4cc3622131e28a30477afad6c4f5efe466b13aa7f603cc",
+    "tools/environment/licenses/packages/libaudit1-copyright.txt": "6c7011e93f643b112c4cc3622131e28a30477afad6c4f5efe466b13aa7f603cc",
+    "tools/environment/licenses/packages/libbrotli1-copyright.txt": "24a64e5bb83d0960d1835696a1e23c0896ad6055b0ca47c66ab0eb9a766324b1",
+    "tools/environment/licenses/packages/libbsd0-copyright.txt": "978426553ab7b9cfb4503d98e578a77b8c3142c099100aa9791fd21be5a95f97",
+    "tools/environment/licenses/packages/libburn4t64-copyright.txt": "b4735cc6f50842d9409bb8f49a6c82791c12de91f21765b15b64a29bd15c8572",
+    "tools/environment/licenses/packages/libbz2-1.0-copyright.txt": "832ed535ff3c3d025a8d2348eb1b697b89addcf2eaadbc17650262040b9145e2",
+    "tools/environment/licenses/packages/libcap-ng0-copyright.txt": "567997de097e3738564c90e6fe13343b2daae21a7926d6fb161df41322c1840b",
+    "tools/environment/licenses/packages/libcap2-copyright.txt": "e60a5642e12e340060e4e519a65b2eb0330be2917854841c644e36268f607d54",
+    "tools/environment/licenses/packages/libdbus-1-3-copyright.txt": "20d4fee565b0a0910670b8202c15f040ed5dd488a685a3008eb04b65d987f89c",
+    "tools/environment/licenses/packages/libdecor-0-0-copyright.txt": "598201e144e867fc6ea003d8418e730db56448825e3989a66f0ac3b79142b979",
+    "tools/environment/licenses/packages/libdrm-amdgpu1-copyright.txt": "512c9a57fd8b449aa157351da9df07bf8e19f767e496a72205a4020268ddb2e0",
+    "tools/environment/licenses/packages/libdrm-common-copyright.txt": "512c9a57fd8b449aa157351da9df07bf8e19f767e496a72205a4020268ddb2e0",
+    "tools/environment/licenses/packages/libdrm-intel1-copyright.txt": "512c9a57fd8b449aa157351da9df07bf8e19f767e496a72205a4020268ddb2e0",
+    "tools/environment/licenses/packages/libdrm2-copyright.txt": "512c9a57fd8b449aa157351da9df07bf8e19f767e496a72205a4020268ddb2e0",
+    "tools/environment/licenses/packages/libedit2-copyright.txt": "2b53671050f6319be6fcdcafa434e8ccb8af629359b4afc83185867204f3927d",
+    "tools/environment/licenses/packages/libelf1t64-copyright.txt": "657e078ed1e718b57ca839cdc38bb93196a0009488bea43cd0f429e7531530fa",
+    "tools/environment/licenses/packages/libexpat1-copyright.txt": "60919fe1a156395ff14511bb6ff79756c50ade2fff59ac60c9bae1d8a7fe6292",
+    "tools/environment/licenses/packages/libffi8-copyright.txt": "737ff68f0eb104d3b0d96b291c3a8f40a775a3ec2b53f9b2e4bcfe3188bde118",
+    "tools/environment/licenses/packages/libflac-dev-copyright.txt": "b09e581d4a200e49d0c5e032777a3f9c5cfd164b3dfc90f5071f285df9543f18",
+    "tools/environment/licenses/packages/libflac12t64-copyright.txt": "b09e581d4a200e49d0c5e032777a3f9c5cfd164b3dfc90f5071f285df9543f18",
+    "tools/environment/licenses/packages/libfontenc1-copyright.txt": "a7cb43c56c51407bc6539032a47c5351cd03962ed6a30b4f52dec6ed7db54383",
+    "tools/environment/licenses/packages/libfreetype6-copyright.txt": "ce6d766883ea111e7f47acc09e9d49be8827daa6a03f2c2707243a425d41f0e9",
+    "tools/environment/licenses/packages/libgbm1-copyright.txt": "cbf3d2eb38998daf390f52d49969d1be5607a6aee138351e161c12a6976ba49e",
+    "tools/environment/licenses/packages/libgcc-13-dev-m68k-cross-copyright.txt": "08c6f3dee4c19aa1e57eb7d4ad45829b2e99656313bd07fa0922e2553f500be5",
+    "tools/environment/licenses/packages/libgcrypt20-copyright.txt": "40162167dff80843a4b24aa8d0a4ffc50be5338d004ebe38f86ae3397ba9de3e",
+    "tools/environment/licenses/packages/libgl1-copyright.txt": "37920f219f60efa2fde5d003c51be0608b2159cc74c5eb6d70d630907db2d9a3",
+    "tools/environment/licenses/packages/libgl1-mesa-dri-copyright.txt": "cbf3d2eb38998daf390f52d49969d1be5607a6aee138351e161c12a6976ba49e",
+    "tools/environment/licenses/packages/libglvnd0-copyright.txt": "37920f219f60efa2fde5d003c51be0608b2159cc74c5eb6d70d630907db2d9a3",
+    "tools/environment/licenses/packages/libglx-mesa0-copyright.txt": "cbf3d2eb38998daf390f52d49969d1be5607a6aee138351e161c12a6976ba49e",
+    "tools/environment/licenses/packages/libglx0-copyright.txt": "37920f219f60efa2fde5d003c51be0608b2159cc74c5eb6d70d630907db2d9a3",
+    "tools/environment/licenses/packages/libgpg-error0-copyright.txt": "0250e9e7cbf6c68c2bd05b6db1ea684988f91cd95da69f2936064cf302729fe5",
+    "tools/environment/licenses/packages/libice6-copyright.txt": "fc16500a74acc2d0a7bb2fa1005956a52551abdce2afe0642a9a8dc2b6af53c6",
+    "tools/environment/licenses/packages/libicu74-copyright.txt": "5bbff5f646ce750ac0a347e7f91793279b7422a1119820b5f75d98879c201c68",
+    "tools/environment/licenses/packages/libisl23-copyright.txt": "fb1ea085945df53c756939eecf5d9bf4072316538bc3b314a5408350b679a637",
+    "tools/environment/licenses/packages/libisoburn1t64-copyright.txt": "6a0d5bcd8280fa0b5da982b8619cee268e33c8b2f9b5440273705d587c637606",
+    "tools/environment/licenses/packages/libisofs6t64-copyright.txt": "d96250cfa3515754af9e5ff079b5de14871c60a00cb7f02fc688318dfca0996f",
+    "tools/environment/licenses/packages/libllvm20-copyright.txt": "4c22cf66ddd6dfae2ac4e034342f93a9c96581d5e88c7bb700a125a71cf66cd7",
+    "tools/environment/licenses/packages/liblz4-1-copyright.txt": "d3be0f43fe14da244f97c451bbae789c0acf868612598a69f5f22a289abeca40",
+    "tools/environment/licenses/packages/liblzma5-copyright.txt": "a2dc8fac0f496e1c58aff67018cf0c6b88336316afa5642f9335b71642e28aa8",
+    "tools/environment/licenses/packages/libmd0-copyright.txt": "4365ef6255ad553fce69dd4bc0e093472c5d0e41b8ea493a545cc926ce171aa6",
+    "tools/environment/licenses/packages/libmp3lame0-copyright.txt": "f0e4c5098ffedad31473eec38810c26409223858fb8d63dd7685bf225f96bc5d",
+    "tools/environment/licenses/packages/libmpg123-0t64-copyright.txt": "ba3657ec83ab9af9070bacccc6c9735d1856c8a5adab275708ba3d4c9e41b5f8",
+    "tools/environment/licenses/packages/libogg-dev-copyright.txt": "36bb02bf6a764f4fac0ca9d38d2563932513df6015d98bd162624b18feaf096c",
+    "tools/environment/licenses/packages/libogg0-copyright.txt": "36bb02bf6a764f4fac0ca9d38d2563932513df6015d98bd162624b18feaf096c",
+    "tools/environment/licenses/packages/libopus0-copyright.txt": "893be2dfc7b9d827675d69c43e1f172a89ef10d3745ffd15a48514c08470cace",
+    "tools/environment/licenses/packages/libpciaccess0-copyright.txt": "59f90c1ad1face5bd0a516feb8a71e005075d532c522b64ff06b2bfeebde8fe8",
+    "tools/environment/licenses/packages/libpcre2-8-0-copyright.txt": "030511beb4d9d620ad09914c369c36ec0528dcf301d1923cc643c948ee7c6a38",
+    "tools/environment/licenses/packages/libpixman-1-0-copyright.txt": "1b3fb5690861e15ca4fd6640fd4def4b2576617942eec04b6fcb7d8bc6c4c9da",
+    "tools/environment/licenses/packages/libpkgconf3-copyright.txt": "676c75e54ff7e3b9892940fbf1b31763cb6f2a6527a5607a3640ac59a2441fba",
+    "tools/environment/licenses/packages/libpng16-16t64-copyright.txt": "4620d402b97601a910946acccbbe2e15bdffac11615bf9046520990d3b00f2b9",
+    "tools/environment/licenses/packages/libpulse0-copyright.txt": "aff3f1d729168de06e34d940dc493cc305a6e4a6278f1ac38ee52ec0f69e342c",
+    "tools/environment/licenses/packages/libsamplerate0-copyright.txt": "870b641e1bbc7459889f632a691d410e8be634cdd1d33e187b27bcbb2290ea73",
+    "tools/environment/licenses/packages/libsdl2-2.0-0-copyright.txt": "33a0564f6eca16eb8234f17cb0ef51004dfa0755c55624a673cc5574a4e22cf4",
+    "tools/environment/licenses/packages/libsdl2-dev-copyright.txt": "33a0564f6eca16eb8234f17cb0ef51004dfa0755c55624a673cc5574a4e22cf4",
+    "tools/environment/licenses/packages/libselinux1-copyright.txt": "864f1bb189f609075d580b8c4aada16d85a44546884f1687989e1cacc8c56751",
+    "tools/environment/licenses/packages/libsensors-config-copyright.txt": "36df1f6d732ef306eba85489352b2afe329f7b54c6850c3e2094f7c5df1bc46b",
+    "tools/environment/licenses/packages/libsensors5-copyright.txt": "36df1f6d732ef306eba85489352b2afe329f7b54c6850c3e2094f7c5df1bc46b",
+    "tools/environment/licenses/packages/libsframe1-copyright.txt": "a81bdd422c2c015deca84bf6ad249bf0d7d19885fc01d1894463291b0b7313e1",
+    "tools/environment/licenses/packages/libsm6-copyright.txt": "333d829128c80619625f7e43a0ff0e79f36812b2b7ba12696eec9b4b42ce729b",
+    "tools/environment/licenses/packages/libsndfile1-copyright.txt": "56bc3dae5803b8b2d59adf72fcd526eef2f4ac929d2442562d12248867222335",
+    "tools/environment/licenses/packages/libsystemd0-copyright.txt": "a7d06854714a1ca99f6dbd1a1641dde5bcf28635be149f6554449618f8f427f3",
+    "tools/environment/licenses/packages/libtinfo6-copyright.txt": "7c9d2c8dbee48b6f4bbbffb1f370cc5858de11cc4f5a70c5c622c274917e1c65",
+    "tools/environment/licenses/packages/libunwind8-copyright.txt": "977d981f5677652884b09cccef6b62f992aa9c74b7a748bfe9863a703f5aed58",
+    "tools/environment/licenses/packages/libuuid1-copyright.txt": "3492fb92cb56cf517d9a899828b4f989038421a38736e49e5525ffbd33196eab",
+    "tools/environment/licenses/packages/libvorbis0a-copyright.txt": "47badad9f7f750f92cd12f44db08b6937e5b4d47935ba1cc60de0ea3a2adff9b",
+    "tools/environment/licenses/packages/libvorbisenc2-copyright.txt": "47badad9f7f750f92cd12f44db08b6937e5b4d47935ba1cc60de0ea3a2adff9b",
+    "tools/environment/licenses/packages/libvulkan1-copyright.txt": "c579213e28f67944a7e407816b8a8e1d2d2406b3d820e420aa923807c450dc07",
+    "tools/environment/licenses/packages/libwayland-client0-copyright.txt": "736bf54141fa9808939ffff2691b817888ea53197484c2099e8d03b954b83e3b",
+    "tools/environment/licenses/packages/libwayland-cursor0-copyright.txt": "736bf54141fa9808939ffff2691b817888ea53197484c2099e8d03b954b83e3b",
+    "tools/environment/licenses/packages/libwayland-egl1-copyright.txt": "736bf54141fa9808939ffff2691b817888ea53197484c2099e8d03b954b83e3b",
+    "tools/environment/licenses/packages/libx11-6-copyright.txt": "0b380a7fd5b2228f26e9585e56f14812efd3350f3df307507d2bc055dfd8de3e",
+    "tools/environment/licenses/packages/libx11-data-copyright.txt": "0b380a7fd5b2228f26e9585e56f14812efd3350f3df307507d2bc055dfd8de3e",
+    "tools/environment/licenses/packages/libx11-xcb1-copyright.txt": "0b380a7fd5b2228f26e9585e56f14812efd3350f3df307507d2bc055dfd8de3e",
+    "tools/environment/licenses/packages/libxau6-copyright.txt": "118dd263a7b91c8f21c489f949bf13281dff9e766deea92b829dac4dce66601a",
+    "tools/environment/licenses/packages/libxaw7-copyright.txt": "b04f7dd56d0e88bf2dd5aafd138bb4b3631401898480c46c94ee7fbf865ffde5",
+    "tools/environment/licenses/packages/libxcb-dri3-0-copyright.txt": "4f7cb9db6bf6542f5417e3d674c780d3a5fd12291a54d63054fb576ee0cfae80",
+    "tools/environment/licenses/packages/libxcb-glx0-copyright.txt": "4f7cb9db6bf6542f5417e3d674c780d3a5fd12291a54d63054fb576ee0cfae80",
+    "tools/environment/licenses/packages/libxcb-present0-copyright.txt": "4f7cb9db6bf6542f5417e3d674c780d3a5fd12291a54d63054fb576ee0cfae80",
+    "tools/environment/licenses/packages/libxcb-randr0-copyright.txt": "4f7cb9db6bf6542f5417e3d674c780d3a5fd12291a54d63054fb576ee0cfae80",
+    "tools/environment/licenses/packages/libxcb-shm0-copyright.txt": "4f7cb9db6bf6542f5417e3d674c780d3a5fd12291a54d63054fb576ee0cfae80",
+    "tools/environment/licenses/packages/libxcb-sync1-copyright.txt": "4f7cb9db6bf6542f5417e3d674c780d3a5fd12291a54d63054fb576ee0cfae80",
+    "tools/environment/licenses/packages/libxcb-xfixes0-copyright.txt": "4f7cb9db6bf6542f5417e3d674c780d3a5fd12291a54d63054fb576ee0cfae80",
+    "tools/environment/licenses/packages/libxcb1-copyright.txt": "4f7cb9db6bf6542f5417e3d674c780d3a5fd12291a54d63054fb576ee0cfae80",
+    "tools/environment/licenses/packages/libxcursor1-copyright.txt": "817abc0ccc9e2591057be256b0f6d80edb134221ced29dd545a9eafaf40b423c",
+    "tools/environment/licenses/packages/libxdmcp6-copyright.txt": "1bcbb50f8603fe8b86d330bfa460b772ea04fbd3c70e4499f0768b5340b9fd6e",
+    "tools/environment/licenses/packages/libxdo3-copyright.txt": "7022c27d07a4777ff1e23a83274f6351d634d83053b46a7f5582a2c988ab4572",
+    "tools/environment/licenses/packages/libxext6-copyright.txt": "bc57e445ca1d9fe082c8d54189dd411ff26caa8552c9c63d44ea06a982f32124",
+    "tools/environment/licenses/packages/libxfixes3-copyright.txt": "051ffe073ab38244c504bb379903b4ecda6081fb3d97d0d3dce44bc11712eef2",
+    "tools/environment/licenses/packages/libxfont2-copyright.txt": "c0ec1767e5a927bdf17f8ca2af231263f973c06e5f30efa1b4867e93614dd061",
+    "tools/environment/licenses/packages/libxi6-copyright.txt": "c812f9c54513ae593aab9580b54a4b18219648df7068d49ca1daa47f522ba3fa",
+    "tools/environment/licenses/packages/libxinerama1-copyright.txt": "e49d9732f261b3ffcb50c40914bd9d144de5557dad9b2ae20dbe8e3c5b3d17fb",
+    "tools/environment/licenses/packages/libxkbcommon0-copyright.txt": "5eeaeb1b6e029a0274e1573765bb0bae2926ef96a3679203faa4fd00fdaeaa88",
+    "tools/environment/licenses/packages/libxkbfile1-copyright.txt": "41044d815bd99a5d1267fdabc79b5041fa83c7134639bb81e84f367cefe68316",
+    "tools/environment/licenses/packages/libxml2-copyright.txt": "ee746b96cfa5be73c3ea3e4cfb1285e9b315d4c9267f99b2ee9c5d911d9fe3f4",
+    "tools/environment/licenses/packages/libxmu6-copyright.txt": "15a3a4d6627af76c0649067260debca0eb66248b96e5fda4f564aac38593e06f",
+    "tools/environment/licenses/packages/libxmuu1-copyright.txt": "15a3a4d6627af76c0649067260debca0eb66248b96e5fda4f564aac38593e06f",
+    "tools/environment/licenses/packages/libxpm4-copyright.txt": "60ff44bf6ae8fdc03aa67f4ebbc6e4bba30ac96938e55bc84b1777387a58992c",
+    "tools/environment/licenses/packages/libxrandr2-copyright.txt": "6d8e6239cfe9dd25bbeef06dcf0610d802ebbdc8968db87cf5adf00ff98927d4",
+    "tools/environment/licenses/packages/libxrender1-copyright.txt": "ed2a78123a5076b4f11da38cb1ffb85b5cb9fdc26b5746c517b1d7e7a9029704",
+    "tools/environment/licenses/packages/libxshmfence1-copyright.txt": "6a76b32c9174c0cb9e3d94c323a14d33d6a42bd2a61579b189cbc5addeb94abe",
+    "tools/environment/licenses/packages/libxss1-copyright.txt": "3ebbe713ac6980aefc18dcf407c94f51bbf02852463294bbb6dc1ee1f9fad9c3",
+    "tools/environment/licenses/packages/libxt6t64-copyright.txt": "294382fd73d07b7b086c4829366bad834fc25cdf094400ec6ca4ff3b9ab73665",
+    "tools/environment/licenses/packages/libxtst6-copyright.txt": "304f78731e1e0e78132fbba4e1909c8642878a3b8c4837b36cb2d38891bf2204",
+    "tools/environment/licenses/packages/libxxf86vm1-copyright.txt": "8a18884e1be08a37bf1b8fc9a14eba800e65a98d6ea19bb5d8b0ccf35f9bbcc4",
+    "tools/environment/licenses/packages/libzstd1-copyright.txt": "35e85e8e9bbb71492c5f5dddf39ed65b68775a02ad8d710c25d097b497f06c49",
+    "tools/environment/licenses/packages/licenses.json": "b0c6d0fda8ffe55343de76874e38a99a6c962372ad889d69ae48fddd844f9a7f",
+    "tools/environment/licenses/packages/mesa-libgallium-copyright.txt": "cbf3d2eb38998daf390f52d49969d1be5607a6aee138351e161c12a6976ba49e",
+    "tools/environment/licenses/packages/pkgconf-bin-copyright.txt": "676c75e54ff7e3b9892940fbf1b31763cb6f2a6527a5607a3640ac59a2441fba",
+    "tools/environment/licenses/packages/pkgconf-copyright.txt": "676c75e54ff7e3b9892940fbf1b31763cb6f2a6527a5607a3640ac59a2441fba",
+    "tools/environment/licenses/packages/x11-common-copyright.txt": "2badb73e6e70d0bd2e0b85d39ce18d3c66cfebc3e301720374fa20e6539c947d",
+    "tools/environment/licenses/packages/x11-xkb-utils-copyright.txt": "bf23f1dfd52e0f7526b83496effacba1e3f29a38adaf119091efad060f8836b1",
+    "tools/environment/licenses/packages/xauth-copyright.txt": "35f7f9792a4d64ef293878893d5cf07e09d2e5eb87fd17a4c0f47d66d4735c0c",
+    "tools/environment/licenses/packages/xdotool-copyright.txt": "7022c27d07a4777ff1e23a83274f6351d634d83053b46a7f5582a2c988ab4572",
+    "tools/environment/licenses/packages/xkb-data-copyright.txt": "648621d1a2180678818eb393565849bbc8b332cc521c21e009d948ea5541b3c3",
+    "tools/environment/licenses/packages/xorriso-copyright.txt": "6a0d5bcd8280fa0b5da982b8619cee268e33c8b2f9b5440273705d587c637606",
+    "tools/environment/licenses/packages/xserver-common-copyright.txt": "4cc0447a22635c7b2f1a93fec4aa94f1970fadeb72a063de006b51cf4963a06f",
+    "tools/environment/licenses/packages/xvfb-copyright.txt": "4cc0447a22635c7b2f1a93fec4aa94f1970fadeb72a063de006b51cf4963a06f",
+    "tools/environment/licenses/packages/zlib1g-copyright.txt": "9e5b96d63773a5d177ba264254390f792be07e41748ebd94730981c6cac31cc6",
+    "tools/environment/licenses/packages/zlib1g-dev-copyright.txt": "9e5b96d63773a5d177ba264254390f792be07e41748ebd94730981c6cac31cc6",
+    "tools/environment/manifests/packages.json": "e0e4fd4c8f5dc297056b7158f22b5086d06b9db7cb73ed2613947f2c8a4117ce",
+    "tools/environment/manifests/sources.json": "16911b3ad08cf5f21fbcbfbd8cdf49d68d7f6917c5b41e4f81ea4cfc599a4bd9",
+    "tools/environment/restore_environment.py": "e8463bb5802e877a0cab86e973cca119659901deea6c51d588893548f9ccc806",
+    "tools/environment/src/sfx-layout.c": "f4451bd31dbd75b99b579b50925eff8143fb7fa0646b18b6e1e54a39d9bce0ac",
+    "tools/environment/src/xvfb-relocate.c": "1e81188c94f2de0465aa39927ff91af0cd431122f8ea51d6ac7dadf2fcd6ccf2",
+    "tools/environment/templates/bin/Xvfb": "bff869e9738393b4daf0c367baf0309a6ae209fdfd60275dbe32edbb56427538",
+    "tools/environment/templates/bin/mednafen": "9f726b6870674b6b68319a78893c52eeacea0b9b2e164e7378b229903520a629",
+    "tools/environment/templates/build-mednafen.sh": "9570b198e3450df8820e5d65f99cad07d1d7119bce6cd57051ed4e13e763bf2d",
+    "tools/environment/templates/env.sh": "ba56323fcad79d2eb91c142f9f573986c2946f560f954d4b3c676d3b00bed7de",
+    "tools/environment/verification-m68k-runtime.json": "ac08cec42c20db116b13ed13db1218278eca124672a0ffad6538f93f95ad3471",
+    "tools/environment/verification.json": "d00726c27faddc8142e2d53856165cec1b6e8865b86887fc79a5061f24b12ec4",
+    "tools/environment-manifest.json": "2665d4cc410f5753db2d16a223ebdff3d0550ee8a1e3e1863438a6e621174daf",
+    "tools/generate_resources.py": "6efb41a27129c33eb39433f4fb8704d3b15f96ba8e0692958105bff040d63a06",
+    "tools/generate_ym_envelopes.py": "8f128581d67c1f4d3fdee65766e738d928a53a99083a2b46794f103c01bfa5bd",
+    "tools/generate_ym_tables.py": "2ad06b7befd4e965ddf5d82847b41235e29d13d950fe64f29213e2e68334c7c9",
+    "tools/package_comparisons.py": "0cdec3d9fe28aae82bc401c2fcdcc3a447f71c7b29103e56791ff680123455c5",
+    "tools/package_mix_comparison.py": "5c3ad6f36d03c4e4ab9fd5411fcc594c528daa953f7f623a8ee41497f1186e94",
+    "tools/package_validation_artifacts.py": "3839a18678f45eed3477ffa5c4239aa348f2b67106ca2a61797ffcc69f2ef6e4",
+    "tools/reference/README.md": "1e0ae25ff10617a57b9015f8df067c4fa8e4d642acd0a952e471d48ae949e23a",
+    "tools/reference/analyze_full_board_channel_structure.py": "5bbeb213c73b18068c7a0ac07c524ddb130a2a298395d41e3c1bac649add1841",
+    "tools/reference/analyze_full_board_music_structure.py": "646994b531dd2ac9fa404d7c23c3ea9f09767c172fc9eaa5dd10f77f474ecf7e",
+    "tools/reference/analyze_music_structure.py": "93987e9dcf5e74027f69f2d400caa484ddd8eb6a440b72d0ab258cdd2d4ebcf3",
+    "tools/reference/analyze_original_feedback.py": "4dcc7b2304169148b50d95a6de4aea9de75b319981f7379d534b5ba33e104248",
+    "tools/reference/audit_active_banks.py": "a01fd874988763a9a5f3bf0787e45806d7912a07352e5b8ba18a083ff8c2d9b3",
+    "tools/reference/audit_oki_storage.py": "7552a062bdb6c603f6143258167fd453ac17be2754b43cd893c0d54d96f3541d",
+    "tools/reference/audit_ym_usage.py": "75ee90cfeabe1a644d28ed9ef776783375e123ee8f6d2e0a31737ae7b28517cd",
+    "tools/reference/bank-source-manifest.json": "1482752db9c40c1bd3f2a040379795c8ba6c181faa47302557a1c3d0ba0f9482",
+    "tools/reference/calibrate_native_envelopes.py": "e55ea59e834cbde061392c6856d9100048bb54000a547a04a0ea7b836371f242",
+    "tools/reference/capture_board_replay.c": "b2b0bc868f8e846a2eb580e3f5d18034a52f6c83d46c170271e259952f0e9dc4",
+    "tools/reference/capture_original_replay.c": "a47f3daea998216bf3094b12dfd8d8b34d23f4f54715b3dc9b8a74186c748103",
+    "tools/reference/clock-source-manifest.json": "ab807c829b9ecd24639c4ec2662b56e4ddef42e25ea7f58613608535b927db6d",
+    "tools/reference/evidence/active-oki-bank-audit.json": "acf1f6a1ed3d587fda03c405dfc8726ea146a5dd0b368d8546cb1fcf15ae3da9",
+    "tools/reference/evidence/dsp-zoh-causal.json": "044e1efef3c6335a004f69083d5c61f0f197eaf109a1d73f7d8498ed482d8b5d",
+    "tools/reference/evidence/dsp-zoh-program-arithmetic.json": "838845aea9d099cad7ce0f4cb1aa3441caaa372a5d6d121c0acfa06b3c218c20",
+    "tools/reference/evidence/f1-native-red-green.json": "a677fbb01decc9d0ad337c71b44d64edc93cf54901e85b14a53391482c12f136",
+    "tools/reference/evidence/full-board-complete-music-structure.json": "acf2df54aa24a9c558c4861259931396108224373eff4b367eabd9c6e10ade8e",
+    "tools/reference/evidence/full-board-mmio-causal-audit.json": "a7ba896cf7d046ad5252b8e47e6266472c8ffc44b98ef8c5e30daee82cb48e20",
+    "tools/reference/evidence/full-board-music-reference.json": "62aa5ad3ea9a39b201aa2dc36e0cf20dc3798ba67c4f7b78c14564df92f144a7",
+    "tools/reference/evidence/full-board-observed-mix-summary.json": "4387d35e16a7cae8481e2793963048cc655a30b03857a89a7ca3ab489f37a727",
+    "tools/reference/evidence/full-board-sfx-reference.json": "7fa9289a91f9050d647a69cd7fe23d1e2357026c7b540ad7cdb966174a4fb797",
+    "tools/reference/evidence/full-board-sfx-validation-summary.json": "ea9c41fec80d7ed94bd5bb2038dc760bdf7379cd3dd774712dcb7f6a09cb8bd1",
+    "tools/reference/evidence/full-board-vs-native621.json": "bdd81c15846e5e8e77cfc63ed6253e4fc4dce50514298d0d5637df5f106503a9",
+    "tools/reference/evidence/full-board-ym-register-usage-summary.json": "879214a403110664ba7bcf6141adf639caaf02f215ad3db00edb187d3ce0efbd",
+    "tools/reference/evidence/native-music-board-clock-intermediate.json": "6bb4f3a7c8930072b4ee50a8186696c1c0cd5e364d3c38e4b8e6f9a7299e2a75",
+    "tools/reference/evidence/native-replay-empty-row-regression.json": "9d1d7a79c8df86e3ec0f4f2b8662320c585ed64a481055ac91a293df694993b6",
+    "tools/reference/evidence/oki-storage-feasibility.json": "fd4dc0b6dc5c15a44042d318cba2122a4129a1b6447b0b93b8d1027b61b0cbdd",
+    "tools/reference/evidence/original-feedback-interval-experiment.json": "d94a65a37a08b53cb895c0ec2f7fb036207ef1f2459ac55ef7cc1b8d1ed64e52",
+    "tools/reference/evidence/original-music-structure-600.json": "559702bac97bfbcac25d084ec9faa70688a537d26e86125060c25b558d941b10",
+    "tools/reference/evidence/original-operator-isolation.json": "7318086987515d4a1b2ff34dd5ea3010bb1364818b849512fd084cc8d2122cb4",
+    "tools/reference/evidence/reference-output-guard-validation.json": "6916653dadb8145d024a4ce15465700e3139929f53ce5a668b2c1e4e92fb3649",
+    "tools/reference/export_full_board_sfx.py": "728ab65fae458827d4eb0554d4a12ebcaa5e1405c6cf9dd376cb29bd81d6d1ed",
+    "tools/reference/measure_opm_envelopes.c": "d06a858b562ec35fef0f0e4ec569a45200e7c2c66e8af95004457f76bfb36541",
+    "tools/reference/oracle-input-sha256.json": "6a1487b61e465d0b8780299858b135c41a8030361357e90b1529b2d14c86f34d",
+    "tools/reference/oracle_a53/evidence/A53-EXACT-12S-RENDER-METRICS.csv": "0549ec3f531c1550ca260b5a14ed02c7f96452ee3c778ce2591b0ef6efa2b7b7",
+    "tools/reference/oracle_a53/tools/capture_full_audio_a50.c": "c344d7a207c05d2e66593b8907c73be79161727596e99d811df012b07c8047e0",
+    "tools/reference/oracle_a53/tools/render_combined_a50.c": "2c43a0c1b147842988937601f07938a991140ad157967ecb0a8cae098350e800",
+    "tools/reference/oracle_sfx/ROM_OKI_MANIFEST.csv": "3392aa3d172ed23d54942f8c62df847e8fc679c384e3a4c69c171eeabece5a65",
+    "tools/reference/oracle_sfx/WF_OKI_AUDIT.json": "43fd70e707bf0fb99340a97767d9fd6be367d3bb16133735e5405805031ca564",
+    "tools/reference/oracle_sfx/wf_audio_sfx.c.in": "4e722ce8135c2662a4a6889d57563b80ace08761614173f4e1104419073aa06c",
+    "tools/reference/oracle_sfx/wf_audio_sfx.h": "3365d89f48631d2e4f7b519f95441f33eb67cad85fe329877503d199318e35ed",
+    "tools/reference/prepare_dsp_zoh_probe.py": "fc3fc6c198f830c22049683ffc709b2375277c0b69861bc35a102d40a67852a5",
+    "tools/reference/prepare_reference_inputs.py": "95d12e2c2529a83894e04d94bf11a202054ad74a6b5976b51abd0a7269fee2a6",
+    "tools/reference/probe_full_board_music_state.c": "c013199067a8b31711d08dfef1346d40f2c6894ea81220fbd565991bb07cc72f",
+    "tools/reference/probe_music_state.c": "3a82c8ed756f6ff87f996a0ee6f287631b10c4f691119a729d4bdff63dc6a7bd",
+    "tools/reference/probe_oki_address_replay.py": "e1ced0d8c2df093b5d406786d676111d1898d84bdcd4531780f1df8cf14db779",
+    "tools/reference/profile_original_fade.c": "6e86a4601249025735de6cab511c90c2c4231e2fa756f1a4c8bb02abc10d19ca",
+    "tools/reference/profile_original_fade.py": "7316169fa6f54a8fc62e8763c264f4f029f999e8df138df6cfc630db52d3f2f7",
+    "tools/reference/reference_oki.h": "481fc10ce9d1446de5290e47146bb732be4d11390456dffeca3f87a32dfd839d",
+    "tools/reference/render_reference.py": "2d92d9f156bdaa0f2c51f937104e4ff673913a6ca0690daf52d519005672f895",
+    "tools/reference/render_sfx_reference.c": "29770b90408ddddf8148759972740e7c8c6eeba4e3da560417c6d69419685b31",
+    "tools/reference/render_sfx_reference.py": "03811a4657fd7b9b4cd23e78f54f36d0c2eda11654331cb4889d0f1af8ec7b1b",
+    "tools/reference/reproduce_all_references.py": "97fbbe2f42da4c59143a809c82edd32249f88f18906084628db26d0a921979bc",
+    "tools/reference/reproduce_board_clock_references.py": "f84e4fcab35b5fb5fafdd12c58a6710e54edb119fb3fcb1329bb23ec8c99e158",
+    "tools/reference/reproduce_full_board_references.py": "5908545abf7c319ceb696a44f4c10ab22ee0b5b77352951e3bbc02767a21a8bb",
+    "tools/reference/reproduce_mix_reference.py": "1d6e5c87502ee151b16aca68e7846f0a5da090cb6c67fafd348f3888085d28cd",
+    "tools/reference/run_dsp_zoh_probe.py": "82f2368af2f35e2ed4a0bb7b9156b3bc2204bddf56053c7c55ef763ead5a4b3f",
+    "tools/reference/trace_original_feedback.c": "c74f156ce75045fe8b75d091ec67db41f0ca5cc5b70625223b8b1875fa2a76ca",
+    "tools/reference/verify_full_board_sfx.py": "5eb0306f0c64b13369dae991fd4f47c9b64b82b2390fddea26c305060363ee7b",
+    "tools/reference/verify_sfx_native.py": "6bc8133c651af19cbf46d4b9ab580acfbc3c80893838bed76bbfbba98f458c12",
+    "tools/reference/verify_ym_and_seq.py": "9da65195a96fb96fdf9e8e2899e8112e89a6908e091c645f1bb4dec780b07247",
+    "tools/reproduce_sh2_checkpoint.py": "da189a5b41b3f10868b8096d0327f09a920b58b2c1de9e4afdec142897395a78",
+    "tools/run_host_tests.py": "03c0b872bc39fe75c4a8d4ab6322a0bb28328352c99b3ccbc100fce7345815a3",
+    "tools/run_lifecycle_test.py": "fbb4d78b3dc3d8c0dc1a9f20de9cc18e629d329203731140b5ffe646b327a7f3",
+    "tools/run_music_matrix.py": "9fa08981bc2ad649d20a8196fec1277396103a2c0c24527f49e3dae194d0a6d9",
+    "tools/run_native_test.py": "30e354e024f7c5ec3d546b5579cf0733a444616a8ca4292621f448e0f1e854e2",
+    "tools/run_sfx_matrix.py": "564e96e9bf4f7a05c3359c80b8da4798bc9384b51289a77745475aa67c369565",
+    "tools/source_snapshot.py": "77483c82d1a882fe690cb746eababaa6c2c5ddf44c39afdc42f2bfcca3e1e216",
+    "tools/test_native_load_failures.py": "ec731806a58806991c88bb4d046675be774f48b197547cf54f2bbacba65882fd",
+    "tools/verify_sh2_fade_lifts.py": "f928c9699409b3f453b6425d6ea3e5c6bb045a978e0eb0b577e449ad2fbff83e",
+    "tools/verify_sh2_scalar_admissions.py": "8a6b425dcec6a0e8238e68ab8182250d290126d8e0148c6290b951297bebb243",
+    "tools/verify_sh2_tl_writes.py": "a10d50ae29bbb24afa7aea6b3acacce45ff37ff01e53a2729b319974a100ba86"
+  },
+  "matrix_input_sha256": {
+    "bios.bin": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f",
+    "firmware/SCSP.ELF": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+    "firmware/symbols.json": "0c4099e78596225dc76dea624778b4c081e5459549efae99c523db3fbe99e34a",
+    "reference/ARCADE-REFERENCIA-01.wav": "4e913d7e7ed425bde04fdc4eaf23120c98f7e9daaa9fe8f21a3943d1dc1bad7f",
+    "reference/ARCADE-REFERENCIA-02.wav": "76526b61ac6a372868d724e3b38d4c03d77648ac9ec779b3d3b633e34c0c625f",
+    "reference/ARCADE-REFERENCIA-03.wav": "e11b23cf8592167bc15edf35afe6e8a003d5a22dab951c20e0cef7d2e033567d",
+    "reference/ARCADE-REFERENCIA-04.wav": "f05fb9c93c02ed7b339dbafdb634e14ab9742829a580688d2a18b8715d63682a",
+    "reference/ARCADE-REFERENCIA-05.wav": "4505ae66af2a887769129267a19d05ac1adf5a1382ae0b5897b5ca16d4889dd1",
+    "reference/ARCADE-REFERENCIA-06.wav": "fb5f66f151160b09d760400448fc07990a761edefedb2e1f3b8cb15d20b5ad1a",
+    "reference/ARCADE-REFERENCIA-07.wav": "cfc56bf9c4fd92340bc7251e48a42490886b203f2795517d356d7665435e2ad0",
+    "reference/ARCADE-REFERENCIA-08.wav": "431f832516bc4968de7754d653fbbf36a2b22a64869beb516d1ba215cdb45711",
+    "reference/ARCADE-REFERENCIA-09.wav": "18acb926284e374da344678b3560acb2cd7f48e96ac6441d1f6be1e270f7b06c",
+    "reference/ARCADE-REFERENCIA-10.wav": "11ec9e3222ee7f9efb5f01d6cea640c778e8c0d7d6a211b76125c1d5b2130fe2",
+    "reference/ARCADE-REFERENCIA-11.wav": "f49c1d78b668e94d0f8a37173a89284069b6a249855b0df4b6b1cdd7260de1de",
+    "reference/ARCADE-REFERENCIA-12.wav": "e6a71113a2aa3a79c851ab1fe22f9001872a8e9cc69c75687ecfeb1b57fff3c6",
+    "reference/ARCADE-REFERENCIA-13.wav": "6dbda202fd284ee2bbabee82928c0cc5bcb30d9fce3aeec6cd3f5a2639bb18cb",
+    "reference/ARCADE-REFERENCIA-14.wav": "fdb7a766b87e4bfbcfe29063692edff83dd83339879ec308ed3e19662a26e53d",
+    "reference/ARCADE-REFERENCIA-15.wav": "d6d5e29ede8af336eb68f3e2d8bb8ba106297db540b8c74f0483be1b7ce91b06",
+    "reference/ARCADE-REFERENCIA-16.wav": "1902e0906b17650cc30ee1a6de29f5dbc328670865ac8be9cc6e1913a63deeb6",
+    "reference/ARCADE-REFERENCIA-17.wav": "0274132f24fed0efa492d7d59f8d73c437153cc695722f2ab3c8f1b90739a849",
+    "reference/ARCADE-REFERENCIA-18.wav": "b8207b0ab532237148a2d998d9c763599756f738badeb7334914ec644227796f",
+    "reference-report.json": "a4a9a9969aa26b9c9dc348c3ea0ac3bc3f861f329fd7dbf956b252eb18196412",
+    "replays/command-01.json": "4ef81c7fb486cf21209877bd6913c2c0573b5cad05fb5f227cd69aea088aa10b",
+    "replays/command-02.json": "c1ad7c12d3aac1444090a5fd28dffe696cb5a95732bc734541da77d5f611781e",
+    "replays/command-03.json": "755758ff884056d822d61a8bf46f60900e61008bec712c25ce4fb4998b439eae",
+    "replays/command-04.json": "e396d017021a4ebbf26b0aa8d4e209a7bf9f6f31e037c0f9a11499ce32ddfbde",
+    "replays/command-05.json": "2a464f517842aa251dc4ff6a6fa72afdf108cf68570ce4952f528fb1308f3ccd",
+    "replays/command-06.json": "fe119b07b658308855d8e346339c0289f06c08387e34d42c44b4fc0cd9a957ff",
+    "replays/command-07.json": "fac2c7a6344982f9bc80eb1ec2f29ac808d5740574637a47cb826cf169fc0b76",
+    "replays/command-08.json": "0c33469c11b10f6153bee375d289928e92fd786e0688fc41d3d6e7aae37044e1",
+    "replays/command-09.json": "ecacb81d173ed91a1737c218982bf71a0fad8504f359cca502f34f2b2557aba3",
+    "replays/command-0A.json": "6fbbb0a8cc6134ddae5570cfa10038f021a9de66e3da780b88512084752f378a",
+    "replays/command-0B.json": "eafd15aba324ad3294a0c30f792b4e0e8669fb0c4a58916a37db3d3e55b9b8ea",
+    "replays/command-0C.json": "b555e7c385d9f2e191b1f788f89eca996b24764206606460ac780eee90673cb5",
+    "replays/command-0D.json": "4d11aa4f616ba6962baa7a5108fdc92c559a3efe8d00cd29d44aea74c486fa24",
+    "replays/command-0E.json": "839266eaea98f123985a37755b8b842d54417e409a82aa80c19d46b8139843d0",
+    "replays/command-0F.json": "4e5dc2cb46194d35f8d91503083723b0ce99261af01c5f8abdba3d8b94cb4b92",
+    "replays/command-10.json": "ca8de8b6440713b2f468a74839f77244b44920996387672f84b27771fe2cc30d",
+    "replays/command-11.json": "fc374ae3ef45063150e862e18777fe52a0248b1f5acc0958a7b57975d8641567",
+    "replays/command-12.json": "5839c754bb120a86562c03317c1fcd3ca30a2420efd011186027b74e6d26bb38",
+    "replays/transitions.json": "617d67b4f715cfeac79e503bbf9107e23ae5f63a900214be01a6baa8b305df1d",
+    "resources/SFX.DAT": "dbe749cf4ce13f333ff7318a74a64e30fa2b9af05d953688a0813311cbabd216",
+    "resources/SOUND.ROM": "f89e7782e7535576b2ebf8c5daea61c5fa2ecefff0b8b3280dea09efa57c25f7"
+  },
+  "reference_identity": {
+    "report_sha256": "00ead34e1ef1c042506cb5b442aef9204d77a8342fdebe1a753454d49bddb7e3",
+    "executable_sha256": "b7c8beb5afc1f129ecb3f8457c3137daa883edba688b94bffe6f42b954690207",
+    "opm_commit": "f209e6ed3712032b641d53ce8fb24824eae6adc3",
+    "external_clock_hz": 3579545,
+    "timers": "Coupled Timer A+B, busy/status/IRQ",
+    "OKI": "Original ROM-addressed decoder",
+    "input_sha256": {
+      "SOUND.ROM": "f89e7782e7535576b2ebf8c5daea61c5fa2ecefff0b8b3280dea09efa57c25f7",
+      "SAMPLES.ROM": "e4cbe71f079e2cb95b3463115557fa1d99e18ea975f2d3354827b01994fc4615"
+    },
+    "source_sha256": {
+      "tools/reference/reproduce_full_board_references.py": "5908545abf7c319ceb696a44f4c10ab22ee0b5b77352951e3bbc02767a21a8bb",
+      "tools/reference/capture_board_replay.c": "b2b0bc868f8e846a2eb580e3f5d18034a52f6c83d46c170271e259952f0e9dc4",
+      "tools/reference/reference_oki.h": "481fc10ce9d1446de5290e47146bb732be4d11390456dffeca3f87a32dfd839d",
+      "tools/reference/oracle_a53/tools/capture_full_audio_a50.c": "c344d7a207c05d2e66593b8907c73be79161727596e99d811df012b07c8047e0",
+      "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+      "src/reference_driver/z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+      "deps/opm.c": "983beecc471aebd8884fcc3aa48c50b1a26d4280ddbf1025b5196b540cf24188",
+      "deps/opm.h": "186e042d1cd80c8fdf2e1a07d7c123bbe9a0d42e39518c50889db140a9ec4c39",
+      "tests/test_reference_oki.c": "b0ffd341cd194c4a158056279c1ee647ef14c01245fbbaa17257ff2cadfa7c25"
+    }
+  },
+  "runtime_inventory": [
+    {
+      "id": "command-01",
+      "command": 1,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-02",
+      "command": 2,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-03",
+      "command": 3,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-04",
+      "command": 4,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-05",
+      "command": 5,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-06",
+      "command": 6,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-07",
+      "command": 7,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-08",
+      "command": 8,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-09",
+      "command": 9,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-0A",
+      "command": 10,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-0B",
+      "command": 11,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-0C",
+      "command": 12,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-0D",
+      "command": 13,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-0E",
+      "command": 14,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-0F",
+      "command": 15,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-10",
+      "command": 16,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-11",
+      "command": 17,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "command-12",
+      "command": 18,
+      "kind": "music",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    },
+    {
+      "id": "transitions",
+      "command": 1,
+      "kind": "transitions",
+      "runtime_status": "PASS",
+      "failed_gates": [],
+      "audio_availability_does_not_override_runtime": true
+    }
+  ],
+  "pairs": [
+    {
+      "id": "command-01",
+      "command": 1,
+      "hex": "0x01",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "e936f37b60517405a8987ed83e42afc18a866f59cbdb00906d4108559de13bab",
+      "native_capture_report_sha256": "1ce8fd2b0d31e744579318ec74ab963edbeaa7a038d45ea557b0ef39cecca3ea",
+      "reference_schedule_sha256": "d79ee7a7a891fd934618e94a54e479ca665b7e60dd30544ec354ca128a556356",
+      "native_gate_report_sha256": "a900894167c222159a452f31fcbbe4431b404461768845ffb25d1653a8cc2b80",
+      "native_f5_sha256": "e4cdd120e3aa50e27627f96ff247b73f4d3d1317481e78879cdbf022527e48c6",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 1
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 1
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 1,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747135,
+          "reference_latch_read_cycle": 2147747229,
+          "reference_instruction_boundary_delay_cycles": 5
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 27657,
+        "diagnostic_clock_skew_frames": 1,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-01.wav",
+        "sha256": "de3de731a0ed7a477aca6abbf6250f351ddbf603068f3b480d9b0fbd47801fc4",
+        "pcm_sha256": "4cfd95b37dc01f23fcadb00e6aba5ea48c5cb534065f8179c2cb740d300c2891",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-01.wav",
+        "sha256": "dbc26ecbe8bbab832cc36d7a75c04dd381f19500efd2f5b29489f1a29415d949",
+        "pcm_sha256": "2ae53c1f3e2ca26c31a8bc3707cb64c92544475e08db9d678c52c5c6e1faf2be",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "1b5d6b41cf9631262aaf9ead2795618b505e4f559bd9296028663e2f9649c537",
+        "AUDIO2.map": "41f16a857dc382722f1d6230833c4205814ad0fab7fb6123276d15779b79e1d7",
+        "AUDIO2.bin": "ac2dedfc0eaff797058f098f95a0e29a87a3337f174e7b92ec54513f81bd1ad9",
+        "AUDIO2.iso": "7c7d7a40727e9be058ede8c4bdee5d77564820aa159f094650bcc250c4bb34e7",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "127b47afd2c159ebcdd4e691c4f609d188af3e3ca1513cab3fd1e46e6aad2915",
+        "pcm": "99a55c288fb4dc56f4cf579d1962da52e991af5c2821cba426890322f3dd37c4",
+        "report": "b7df3ae8e8747f4dcff2d725f5726eb8b6ce6be2f3e645fd4e5e29391e05f2ed",
+        "deliveries": "509bbbf2b7fbeec505f985a9e8efdb719937902f22a69c4222d765bdaf260737"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 178458,
+          "trailing_exact_zero_frames": 174093,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 153746,
+          "trailing_exact_zero_frames": 198805,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 59.77714988916189,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-02",
+      "command": 2,
+      "hex": "0x02",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "2f7dfa4382710044acd4da3c610e70ee329e1df6c83230a327b6b6c33d4c77c7",
+      "native_capture_report_sha256": "e5ae1f43ac571f548f279874d508d7d5c77e982bf640d3ba43cd3b6aa66e77d3",
+      "reference_schedule_sha256": "7d7665299bd06a2ebf21cd92c41efd2474123658a416d1a43fac598a43ff5667",
+      "native_gate_report_sha256": "6f071489b73e20b644c62b6e829c998242b2499bedb21cb40dee95e3932744d8",
+      "native_f5_sha256": "1424a6af6302802eb1111711958c6a5642b929a85153c842ca1111204cb463ff",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 2
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 2
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 2,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747131,
+          "reference_latch_read_cycle": 2147747235,
+          "reference_instruction_boundary_delay_cycles": 1
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 29131,
+        "diagnostic_clock_skew_frames": 1,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-02.wav",
+        "sha256": "a8b21e4163df0a88f3631493cb5b55a9e4c9a91a447d136337809dd0d5029961",
+        "pcm_sha256": "5dba0c6fd3ac2d7723b339c89959ffee69d146adb77cacc01085b86a46d9ea17",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-02.wav",
+        "sha256": "c1532eb4090191e84d01bd900864e2ce00dc6f5180b344c1d436366a3ec7519b",
+        "pcm_sha256": "0e030138d977649e77126c81bfb2993b00f297f92c3535b71e1e9332890fc58a",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "ad854ffe5aec6cbfcbd14413077d6c2318cbd204f6dac2c4d85635edaf93b547",
+        "AUDIO2.map": "83f78d0190ebbb9a9b226221955acb562315d25a98ee547291b27d3a0f6c66fd",
+        "AUDIO2.bin": "7da82a37007a4833790cface8a7e9abe80276931c7f848150d9938d914d79d70",
+        "AUDIO2.iso": "7a23be93ff09c1a7186f7f46946eb6ead81eab21b83d24936a040527cf70275e",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "af70b06d70f620be7d4dd2e4145295921bfe9a43cec0f369ff0d805d57e4dbb5",
+        "pcm": "f40c5edf46624f65c74d77522bb37272c911d0b121a7f163cb0605a7c5916d1b",
+        "report": "fb5215004d19bebbcbe2c2b2cbb2aee39fde689f1354f64ed11068431286791e",
+        "deliveries": "c7dc814ff996a82336262f121a3ad85a21b3f9c42673a9700aeba90e3ef543b8"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 236380,
+          "trailing_exact_zero_frames": 116171,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 228403,
+          "trailing_exact_zero_frames": 124148,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 42.18270059462865,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-03",
+      "command": 3,
+      "hex": "0x03",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "888572a3ceaa5ba0cfd4e19cb36120e26605940bbd772ee15ab638dc1d55e4e1",
+      "native_capture_report_sha256": "e3b26dbe0375eb08d1b74a2a52587822f5bbc65775b5adf7001a96a516c454e0",
+      "reference_schedule_sha256": "6ce0a09669ca78b1fcfaef6dad3161eb73fdf6565bb7ed4513643142606708c2",
+      "native_gate_report_sha256": "bf085660592208f832d460e94a5a53fa343b269dba9d39208ad5ad3c6041c3d1",
+      "native_f5_sha256": "72b9f114c58ee74bc083ecab903373ce2a77aa82f49027c9653c25b53b4ddcce",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 3
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 3
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 3,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747141,
+          "reference_latch_read_cycle": 2147747241,
+          "reference_instruction_boundary_delay_cycles": 11
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 27656,
+        "diagnostic_clock_skew_frames": 1,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-03.wav",
+        "sha256": "9305703f8e02377fb354d8e4dfe9c1207558c0a0eeabb20e514cb7295edcac82",
+        "pcm_sha256": "65bcfa39ab7f1ec8a4a6ffebb065b4d2f39619373e401b62eaf84c48ae925277",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-03.wav",
+        "sha256": "9f1a70b4bc4d45d39839d72902a50ad827e3278b9c4dc382c4d0da4426e72451",
+        "pcm_sha256": "fbe7d2e71478b2bd8f2961e350ef8eb55ae380ebe75b675c7c076860ad77052c",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "19db1421bf97c5dd8f7a3600766048b2ce41a42f5792a76f61814e605785cb74",
+        "AUDIO2.map": "4c45a1d4f46473245754e49b43e1ff66b590c316c1f4bbd49411a6acc93e1079",
+        "AUDIO2.bin": "1a86f4f20c846f5df12dcf9357f0bfd3afb47b26d3b028d171f807a00061227a",
+        "AUDIO2.iso": "5b437b1b2774675755b076674adf2d84d21b273001c36774c0f8bda324c2f567",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "f252c33e29e642c95d4bea41c750f67fbcaf6d3f85ecaaeff83dd21f3d26c487",
+        "pcm": "5410f52b08b24fa210bfe49380bf3c478cdb8a17fa6cb748e6ff5ee69bf8b9cc",
+        "report": "fdf865217757bf922efdf3802b5ea01c863b54b213a54f40b033dfe3f50fd205",
+        "deliveries": "4e8d16f4498b304705def1fecdddca89d3697f76bc3abd4b09b32dd58886ad40"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 197636,
+          "trailing_exact_zero_frames": 154915,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 164016,
+          "trailing_exact_zero_frames": 188535,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 35.59164474814536,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-04",
+      "command": 4,
+      "hex": "0x04",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "372ee5c9eddba79c7395f6708663122ff0be93db39087fe796d219ce349fb19d",
+      "native_capture_report_sha256": "ad3cb1b2c438ec454bd4939b3a6f63d5e70025b401f9e68a8660086ecfbda44c",
+      "reference_schedule_sha256": "08d030c64b2e717ba55ba6e849433aca25f4a77442dc96330a2f7d0db501429f",
+      "native_gate_report_sha256": "bf703e4a5ea41fc514f8052b33885754c24ba6a13630be8a7aa90ee1a8ace0fa",
+      "native_f5_sha256": "51fb3e077918d8bd8afe9a8822cc9afafc2e214d45ae28c7d2f9caf96ae98741",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 4
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 4
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 4,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747131,
+          "reference_latch_read_cycle": 2147747222,
+          "reference_instruction_boundary_delay_cycles": 1
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 27657,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-04.wav",
+        "sha256": "81761ef45df3701603c5f265a295dc60c09855f7aaf90e8342163c32164b6698",
+        "pcm_sha256": "efd5aab27f8d27d29cdb11c56dca26bd30f706e3fdfbb8cdda6d4cbcc0818069",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-04.wav",
+        "sha256": "c6003fc7d19d3d0dc0038df06a222ec97ffa80a5c03c0709468245c5668a1a4c",
+        "pcm_sha256": "f5e853d11a01a58f2ea869fd9b4735fecee6e826dbd80ac13774317a1a99a617",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "c254e401e3d953f2c91a6244c803a3f690948dd06103037a1a257f13f1d6934c",
+        "AUDIO2.map": "4c89634eadc2b8565086b853e0d96003529e3cef08e79abefb2f3d80f917dbdf",
+        "AUDIO2.bin": "c7fdc5705f2dc4f13df5fd0aacabd13c50a9acfb56c6498644416fea59eb13ca",
+        "AUDIO2.iso": "f9712d3f99141d28beb0e8947917eaeb7e0deebc5bf36a8efbf04af3f2f9dec0",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "06c78dd4a868fa5866b0528d761776b4fc399dd983d0609baca037cb1c9a6d7a",
+        "pcm": "94b05aa03fafdb2075e3ac49952b2cfb83589ec669bd520af4ae380da5c147be",
+        "report": "60a6135903178b4843f392fc2646cdd11951c5546d50fb9a94a230cf528c2572",
+        "deliveries": "311fb7ba599bfcae3eb9bf19e2eb5a3d9f12392c65dfa2915979aa3b11562790"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 115355,
+          "trailing_exact_zero_frames": 237196,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 85376,
+          "trailing_exact_zero_frames": 267175,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 166.97326196485866,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-05",
+      "command": 5,
+      "hex": "0x05",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "1ea691be6a6bf73fb310850680fa36c64a3045c7166bdb9d7f14f093fb906aa5",
+      "native_capture_report_sha256": "04f31e28422e8bbad3eba7e45933e5fa061aa9c210e3accd90984561e41b9393",
+      "reference_schedule_sha256": "94c5020dd50b27378a648c4b7f03d804923e91b6ecf14c74765fbbef86f444db",
+      "native_gate_report_sha256": "337fc5e0cc0ae5a8265a3fd3208bf43c43cb80c92f8df9d14111e05f862b823a",
+      "native_f5_sha256": "5464cb3ccf33a23750b36aecb45f40ded2a927bab06f65a628d22af78ab9d429",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 5
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 5
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 5,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747145,
+          "reference_latch_read_cycle": 2147747245,
+          "reference_instruction_boundary_delay_cycles": 15
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 29131,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-05.wav",
+        "sha256": "898d4a3cbd423c15d6112ee787aefe64651a8e00d14fd0b9394fe176248be55a",
+        "pcm_sha256": "fe1c27dba16516721343e9ea6f16a05479ee73a5df34a3aa2168b2f76c01c511",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-05.wav",
+        "sha256": "eaf2e73e3adc02bf6b45570f56de9a72db197cd9fde24a8de404a0d3cb01ff50",
+        "pcm_sha256": "c32fe3e44fed5a3e46863c9bf7f45581f3a88f11a24af3d764bffd84ae8dd58a",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "19b865a8d49cda7dae571a3086ba360d2e4bf7dc8ad1287bf54122cd9339c0ca",
+        "AUDIO2.map": "20e413a8f4f2968340b997730c48545d027807742281668e266466c26b340aeb",
+        "AUDIO2.bin": "ac8dcd1b76ffafe541f049137d61362da838f3047c8fcaa9346ad1ea23fc7cc0",
+        "AUDIO2.iso": "5bbeefbeb630afada41f133386e9caed5e5f3d3cc99924c30467321814b55151",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "f1d71041b92685c8a60cc07860e214ff2ddceb06d66df35a07a7e0bc608499fa",
+        "pcm": "82355a52906a354ba651adcbf06de267481e1526d14f6e45c540460ebce51529",
+        "report": "145227acb0dc3a0561e776c13cd3e306daafe574da7d029538918d93b953a14b",
+        "deliveries": "f89e5d793fa75c91061227bcc994554e7c5bd87f2ce4d6614cd1a9ac4a1ae1da"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": null,
+          "trailing_exact_zero_frames": 352552,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": null,
+          "trailing_exact_zero_frames": 352552,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "ORIGINAL_GLOBAL_END_HANDLER_OBSERVED",
+        "global_observation": "ORIGINAL_GLOBAL_END_HANDLER_OBSERVED",
+        "natural_FB_entry_seconds": 2.351460590661662,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-06",
+      "command": 6,
+      "hex": "0x06",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "03e81bd15bc0407a44c52a53b525feb95ed9cb04c771c1247ff653e728f270a4",
+      "native_capture_report_sha256": "e08c6c73a73c5b516647d9d08a4149912589014b188cc143b56f3a9d65037737",
+      "reference_schedule_sha256": "21b81cb0e105f7a006237f3ddd45db131a897fa5671e09f99519d6c2231d98db",
+      "native_gate_report_sha256": "6d731e1827af2c2b9b9687e35cd592987e99c8059cee0a5b91882708889a919b",
+      "native_f5_sha256": "4a80a09de481b59c8cb528d9389ff8815a236249fd3004aab359d38d3200967a",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 6
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 6
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 6,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747139,
+          "reference_latch_read_cycle": 2147747237,
+          "reference_instruction_boundary_delay_cycles": 9
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 27656,
+        "diagnostic_clock_skew_frames": 1,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-06.wav",
+        "sha256": "27a5fc9cd54d3407eae8313935c74f5616f7ef2de89ae04a35586b12bd57484d",
+        "pcm_sha256": "8cc11da32628eb8d6bd7fc5037f3bdfae9db9087957f77bc61736108da4c4fd5",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-06.wav",
+        "sha256": "20655b4934d7a4ea18fc7cde2e5adbbfe49a8ed5dc3fedfba8437ba620a06548",
+        "pcm_sha256": "69f5a29f65d1683b2aac096da46c5284744b0d128ddd7ae00a680867ee2cbc2c",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "57509f8e80f683305e44e2fd6e838876f102a6fdbbcfef562ba065044a9ad9ea",
+        "AUDIO2.map": "89e7ae323ee57ef149e82d80b03397df968fc54e82640d7f939cfc1719425fc4",
+        "AUDIO2.bin": "1881fdca221d55e8bd7ad6dc7ad3957d6e02f70c470c74bb7d1d64f4e51ab3a9",
+        "AUDIO2.iso": "eb6401b1e02df3bad6c3e67d0eb00071547b1cd6e09c2849d257fc2e5ac806cf",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "73a6a3e86a79546f74a4f8e7f3291182d549c2e35080e0d22ea3847b9d26e587",
+        "pcm": "9d97e9d470513ea8de2c9db472fce8b7bc7b250f6306bf824c5fc7d8b7aede29",
+        "report": "6762d5bae2a88d88fa16f58d78098b245b1c38b7bae282ea583663ecead9d229",
+        "deliveries": "0d9f54c2c9e92ea906ccdb0a5d03581fd5ec5f92e2cb5519f2f264611f2c5d21"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 160026,
+          "trailing_exact_zero_frames": 192525,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 121815,
+          "trailing_exact_zero_frames": 230736,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 49.21316647786241,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-07",
+      "command": 7,
+      "hex": "0x07",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "0ccc7681ee325ae9aa018802188afbaaa11f077a856229d398e00ad972e4a1fc",
+      "native_capture_report_sha256": "1026182d91d9823ee9fc975a47d56534b00ffdc3b3354dffac16aec56af4e84a",
+      "reference_schedule_sha256": "d867a94114ff38a2adbbc1243631a0f40e7c853bd23a0fafe17f8e24abfc054a",
+      "native_gate_report_sha256": "6bf0502f2551a71eebf03e807eb1bf04fcbcb6059cba1bab361fcb310eae1abd",
+      "native_f5_sha256": "cf4f33e14e7a530c924404cd756d632875bbefc9879dc903143ca3d2cb5687ad",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 7
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 7
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 7,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747136,
+          "reference_latch_read_cycle": 2147747227,
+          "reference_instruction_boundary_delay_cycles": 6
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 27657,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-07.wav",
+        "sha256": "a7f2964d96a1cd20abd35d056a76478d7f5bfeacb1562977bf794c773de3fea3",
+        "pcm_sha256": "7900ff35993ec0f9074cafad8c891e1deb1786f3a0e7b611f43b229e97930f63",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-07.wav",
+        "sha256": "dd99ed934dd64241750e0109c33ded332a1af0ea231775d1540cbc3fbdb31cbe",
+        "pcm_sha256": "5b0298520e1004de1a1feac6ba05f787d8022acf3589df36f56500eff045fa2b",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "09243a05b5e40dd2791bd60fbbfc6a9632bea733fdf607a9b69137696ba7439b",
+        "AUDIO2.map": "f87d90e93793b8bd57b502f6431c4adc95e0fbbbf6ee5affcf88525eb6c340f2",
+        "AUDIO2.bin": "c6c5830516302f95f2db23f81184f794bb3b26c036648427dad34dfe06787c8f",
+        "AUDIO2.iso": "2f97d90411c98e1edced2cbd11a4a398df9787fb5c2b85801e727d3625ab441d",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "70fa6daf88b595df65681190862ef355b33cca0c3b06fad1095e3e9492fc501d",
+        "pcm": "c43547be4474f5c3adc8fd54790258ef94192d0655cea433b3c5c020e8d73cf2",
+        "report": "a6ab46982ee7565ddd4e61d43e328a8a33e7343dc7c5dbb6f285e487d37a8f26",
+        "deliveries": "a5f6b48b999f33304bb256ced5d77807cf5b9c24446ed802b756668f75a59231"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 163226,
+          "trailing_exact_zero_frames": 189325,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 129187,
+          "trailing_exact_zero_frames": 223364,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 31.637067560262548,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-08",
+      "command": 8,
+      "hex": "0x08",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "6c89a7a45f7cb00ca15e8afd3b35271f89d8bd27c55b22acd7fbbc7346a38b13",
+      "native_capture_report_sha256": "0e1a900c4e63cb28701c71175f6996354bac905bc58b9e5b8508f7473d317187",
+      "reference_schedule_sha256": "e081b58ed40465020dd8a5a47029d884c2d491d8e14ba8af11e14f6f0bfddcab",
+      "native_gate_report_sha256": "b90b08f11c4aede931534d3a69fd05990558b6142285b144f3d1d40d754b97d1",
+      "native_f5_sha256": "5ae2b6731da491d96f75e786d11a7858aa7b0bf8eca1a042fd3176c2dc94de58",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 8
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 8
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 8,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747133,
+          "reference_latch_read_cycle": 2147747232,
+          "reference_instruction_boundary_delay_cycles": 3
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 27657,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-08.wav",
+        "sha256": "759a82feb41b0068787cda84f2bf809877475fee69520c92b5d1d2e26d95ef41",
+        "pcm_sha256": "3628a8fc6f626ff9c8f4b9ba35ee5bdffa138d6c331b3d135786043e8f06bfa7",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-08.wav",
+        "sha256": "6e9a145671cb8db8b4383a808bb1aeaa62be7cb0bf844d93171e4fb7e92e3e04",
+        "pcm_sha256": "8a5fcd9530a3fb10da50a1a82701f4d74fadc93a81b94971b6e5a2b52a9cbe81",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "ebf51d4666e7a718f22f6656484af910c69297a75ca057135ab86398c12e8b92",
+        "AUDIO2.map": "dd4764e654a761a239fc213a97008db1dab95a28261ba58e4e30ac5d34b03f6d",
+        "AUDIO2.bin": "a740993760711d86fb8c7950f0350741027990e59ad26f8947621ba5be901345",
+        "AUDIO2.iso": "e753d3c8339492c58e59eb4e255622e51e2db67c54c1afd4ca4ac260c115284f",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "ea9622c406f17396bc9d74c1abcf2c6c4b50a23c5ad88047b0fa80c5c5de7bd9",
+        "pcm": "c3e720972960a8626f1f4a5078a5b9a4bb4cfb669a7079fe2a5041b07027fa6b",
+        "report": "d642f33ec5c314cbf50a184473f8144a9c85a07ff5793fa35d43533c247ad95e",
+        "deliveries": "8f02e556ba77326029b708bd27cbcff646a8d9f46a9d3f59c9b2c656a20db4fc"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": null,
+          "trailing_exact_zero_frames": 352552,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": null,
+          "trailing_exact_zero_frames": 352552,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "ORIGINAL_GLOBAL_END_HANDLER_OBSERVED",
+        "global_observation": "ORIGINAL_GLOBAL_END_HANDLER_OBSERVED",
+        "natural_FB_entry_seconds": 1.7835291915592624,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-09",
+      "command": 9,
+      "hex": "0x09",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "6346195b5ca6fcc57ecb1c3a0e3e8929683f616c8a334659515f7b60f27059c8",
+      "native_capture_report_sha256": "f037223be49f440d80dcc8868467db2279790177ef83e224b36625d0cdfcde25",
+      "reference_schedule_sha256": "08636824fd6400319f229123c102fd8a47ccff22254cadbfbca95a8009686837",
+      "native_gate_report_sha256": "5eee0ab93b03a8fffc8c219fc05bba37dc7aa6ace41cbf603a2571dbe17bcba4",
+      "native_f5_sha256": "120e1ebcaff41e597ad4280914414c7a3bb03afc1fb90c7d2fff6bde8647f38a",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 9
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 9
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 9,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747141,
+          "reference_latch_read_cycle": 2147747232,
+          "reference_instruction_boundary_delay_cycles": 11
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 29868,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-09.wav",
+        "sha256": "28db05da41a253011be4326cadac28d6264737ad27bcf2ea5329ca1f89020f1b",
+        "pcm_sha256": "9e46510b57070413304e36fbfa89a7f2d9ec2af0febf0090cef752df6cc49852",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-09.wav",
+        "sha256": "bb91f6079f7055aa2f2dd4699232d4c6e062c40265a1cb2a20a79e79f6f2d648",
+        "pcm_sha256": "2b4f479dcca73e67ffd2448f4cbf32521e3fc3761a8450edfdb275ac95c04347",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "770c7234e04b4c70335a161aa5b0b77af37b1524439ba78b5289a718b66f6001",
+        "AUDIO2.map": "ca06cb1446afe55d053b04d8ed9d6b2bc5e45e1636a58e55e4c3bf3dceae1389",
+        "AUDIO2.bin": "a35a32651396b7b754dbc800e9c9ebaad659d15ddda1516581a8ed73d7d51bcd",
+        "AUDIO2.iso": "82d19dacb3aabe5da234dcff06e3d9139a66b0176267656eef307b473357cb4d",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "4312098e6eb7f589ab6cca89548621d911a7800d984c998c5d41aadd15462304",
+        "pcm": "03b2ea523db8fe327a69083902c515f0581d3e86089df251e6b15dba6974804b",
+        "report": "bf7e6e650cec826a05fb4b729a9f0046d857e984ddf1def57311e9ad8ba44692",
+        "deliveries": "d3ea43ed448cd464e35a98bc0d8c05f371a81c651357b1dc51d760e4fe15ea59"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": null,
+          "trailing_exact_zero_frames": 352552,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": null,
+          "trailing_exact_zero_frames": 352552,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "ORIGINAL_GLOBAL_END_HANDLER_OBSERVED",
+        "global_observation": "ORIGINAL_GLOBAL_END_HANDLER_OBSERVED",
+        "natural_FB_entry_seconds": 6.607803226387711,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-0A",
+      "command": 10,
+      "hex": "0x0A",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "e8ee398f30fcebb2222ae186e2fcfe071b6392192ca642598114a2836a889850",
+      "native_capture_report_sha256": "72da9232b79bf69eda1e8d0b03b06ecd798c49015d595a66751fa90bf818ce6d",
+      "reference_schedule_sha256": "1e65aee49954041d2d126d72b702fecb8324edea2abc3d70878f564816bf803c",
+      "native_gate_report_sha256": "095d13c8a71d6708c9e916535c090000d8b84d0b67fda784a645a0c6ad478338",
+      "native_f5_sha256": "26976d6b980259dcc945aa6a1b3fa629ed78335039cdfd03045a02834fc287a1",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 10
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 10
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 10,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747131,
+          "reference_latch_read_cycle": 2147747222,
+          "reference_instruction_boundary_delay_cycles": 1
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 58,
+        "elapsed_clock16": 27657,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-10.wav",
+        "sha256": "18721b6ca8dbc40f3f87f3d8250fdd50b8be11e6b9daef2cf674a619a809b7a4",
+        "pcm_sha256": "4c957be0822602138ec648bc9c3fa3ce70240366b0d99de11c2e1f54051b714d",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-10.wav",
+        "sha256": "91b5ba5a8737d21a371266e99106ead9d24f1f4679b3c39ac526eaa84b1daf39",
+        "pcm_sha256": "e74e4345d34f81398aee0b929edbbac56ec594a90e8c9bdfd5b03f3c8f75f529",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "ba35b89afcfbc4e546dee901e79176262ccc0a390f79221e28f082b37e84d026",
+        "AUDIO2.map": "d555e8e073bf8d2ad233e9a18453061fcde8232b54b8d2e2b3c2de6012c54102",
+        "AUDIO2.bin": "7004924a7668439ed6b4896a643514d3a16b6c246d4d8e2597bf3bba0e4db1a8",
+        "AUDIO2.iso": "ad32d7b9b7a5fe64bf61f72d648a609048ef5da5225b1ed0007ab5f94f49c214",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "f11df533dbce1eea70c5e64f9e03010806fff25d80f4e6619e3a924ccc22e613",
+        "pcm": "06a8cd30ea48293cc5ee33a110b9f849ed223ae80a701526e6a9cec2f1448d34",
+        "report": "c9d36094e652c453ae4a1c71b553e85c75d91c451e23b36f1a9ad3ab11b02152",
+        "deliveries": "311fb7ba599bfcae3eb9bf19e2eb5a3d9f12392c65dfa2915979aa3b11562790"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 158626,
+          "trailing_exact_zero_frames": 193925,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 141343,
+          "trailing_exact_zero_frames": 211208,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 56.24365024046352,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-0B",
+      "command": 11,
+      "hex": "0x0B",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "3ade84eb6ed516ce99d2d2e480ee0d0fc884cfaf5af5dd0c6d5d0c249b3e4903",
+      "native_capture_report_sha256": "fc1e25b8cb6793ba632d1992ebc5da3f8652c5a49ae98705e0887fc40951c4cd",
+      "reference_schedule_sha256": "9577b113716c04e3b662420deda240e960e493a34a0b8217ad235b2419ddae74",
+      "native_gate_report_sha256": "277b8f8c20341fb215a2f0fc3086c3f5e663e1c09cc505cbeb029e7adbf89948",
+      "native_f5_sha256": "27cc067dd56fa2523ac38bdf39c860a78fdf37483e05032ec69b0e6fc04a2dc6",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 11
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 11
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 11,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747130,
+          "reference_latch_read_cycle": 2147747221,
+          "reference_instruction_boundary_delay_cycles": 0
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 58,
+        "elapsed_clock16": 27657,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-11.wav",
+        "sha256": "b091de63dd5525fbf39c4bb182b0a71e34fa0bec9838be9f6d5be0bbcf463482",
+        "pcm_sha256": "b270c6c4120901ade41156e9d3dcb204647e384b6340bc0a979eb75130591245",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-11.wav",
+        "sha256": "494f77f8693a71019221863d7a23ce3314f7c12fc4dacfd7c0448f5c6b393780",
+        "pcm_sha256": "14bd59ff581b8ae77ba4099200e539dc51cfa274ea1152c9d15d3dc9bc439cbc",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "2df0f6045ccf21a1149f8fb82eb23130cc322519f5d01bed713c2d9ab691efe4",
+        "AUDIO2.map": "9a4ecff9e5b41fca2f60a11c86ba0eb4ee07732f554235ba2775902910b8771e",
+        "AUDIO2.bin": "9e3ef7a154e6d6e86b63f6a9481a9a1f4b70489fcec5ba7d2f48199d066c95c3",
+        "AUDIO2.iso": "c40cea7f2627407fed3457c48e934a4b53d4e631686c8e1ff8991aad14b64a48",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "f3dadfc8f3130bd3b0307c03338aa155fb5b5b477d71bb6cfd99d63dcc72c5a2",
+        "pcm": "5e4ad85e34d311a54a91ac9def899171ac15457c41cd311983f40a99f1507c9f",
+        "report": "8a83915a91c0f11ed04002dc2546dd0fef56244c511530805aa46c6d245cddbe",
+        "deliveries": "e06b874e7432f139abec8e3a9dea44be3a692331c6c3c137741ccef7aaf7c449"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 197898,
+          "trailing_exact_zero_frames": 154653,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 171414,
+          "trailing_exact_zero_frames": 181137,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "PER_CHANNEL_SCORE_CYCLES_OBSERVED",
+        "global_observation": "POINTER_RECURRENCE_ONLY",
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-0C",
+      "command": 12,
+      "hex": "0x0C",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "82a26313e6484724c0d99e7b308dfd0abf25a9e22b1650b0851483241db8e798",
+      "native_capture_report_sha256": "f33bb01647bcd6ab21e840a0c1cb9a063b8428c92895d308eb96d7d188b18f43",
+      "reference_schedule_sha256": "67f8eddf70e05d2c23aa9f87fa72efd417692291c49457dff8ed2a86e45ca71a",
+      "native_gate_report_sha256": "a8e9f2f6b1b6151ef34db59cbf3688a29ad8cd54701500ba9f0140a1cb367fed",
+      "native_f5_sha256": "ec83e08560d95626edb96ad88afcf7ab6359a7cead35636206d3f78ca81283e2",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 12
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 12
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 12,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747134,
+          "reference_latch_read_cycle": 2147747225,
+          "reference_instruction_boundary_delay_cycles": 4
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 29131,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-12.wav",
+        "sha256": "3cde9428e4deed7266e00e59ee9384ac2140e9fbbd4ccf1b7c8e12b8fa535269",
+        "pcm_sha256": "095e94c1f2e1dc258f27da5364857264a1517f23b00597fd88a7d185c709033e",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-12.wav",
+        "sha256": "e5a9588739762f0c3c0c9836ade9a5c4afd887058e9e4cb9a163349065cdadea",
+        "pcm_sha256": "8507e8a2fdf2f3ffbab704ea9770bd70c11160b6b2005b9fa05f27113d230675",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "c3c97902702b824be6c221c20ae47490398d12702fc40fc2014282912cc18784",
+        "AUDIO2.map": "cd7ff1f4e6d85f1cbe6f784c9de578a3822d4c8d13f10a4119822094c49b7f25",
+        "AUDIO2.bin": "7cd2478c776d30cadb08f5c71df4ffb2560ee4223966731582f36c1e3f18c3bf",
+        "AUDIO2.iso": "da8c9d0dfa890a50bb8fe8d2afba606e4de0e8a2c731a3837327e4b0a529e643",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "4963cd5250d717d69228150b5ade446b1428a3a6cc905de87eb2defd738bed01",
+        "pcm": "969232844f6f09495d0d4fba09b5f740d06f4b19289f6cbb05fc58cbc61fba6c",
+        "report": "f01767f704e3779e56932372ba700958ebe77d7fff74162192209a48e793e05a",
+        "deliveries": "55e25999dd591867d103dd43514339e70ba1a558144f847d82fa6777e96430ab"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 236250,
+          "trailing_exact_zero_frames": 116301,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 207483,
+          "trailing_exact_zero_frames": 145068,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "PER_CHANNEL_SCORE_CYCLES_OBSERVED",
+        "global_observation": "POINTER_RECURRENCE_ONLY",
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-0D",
+      "command": 13,
+      "hex": "0x0D",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "84103c5a2cade3b7789a912bb4f940c15446386b07141c7c822e06cecf2d29ab",
+      "native_capture_report_sha256": "1b260bdde538a9006e859bb807acab6110ddae7b888ecc5bdd38df4add2aca09",
+      "reference_schedule_sha256": "6fcdf02cc04adedff9a47aa99efa9a86d2e7cca67e31fe7929514819abc96d82",
+      "native_gate_report_sha256": "2f0d4587692fabce79d2ee312e804f6c12a923d62361dd6335695a372b93d396",
+      "native_f5_sha256": "098f5d412ca0ecc33045dd31d2fee64e5a1ab988dffbc1cb06face898cea6826",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 13
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 13
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 13,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747141,
+          "reference_latch_read_cycle": 2147747232,
+          "reference_instruction_boundary_delay_cycles": 11
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 28394,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-13.wav",
+        "sha256": "97fdfdd9775ad298c36574fd9e066b99482cb4206b651d0ac7df7285de8d0235",
+        "pcm_sha256": "a05914870ee1f9f566bca80c31384ad6d8cef4d50d21079cb1bbc3aa6734d200",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-13.wav",
+        "sha256": "a8c01c57496be482c1942522bbef90335c0f2ad9ebd8d25e3b12f4d4a16dc20d",
+        "pcm_sha256": "90750a14af7fd0a374d8036f187270e265371b87d27ea885e152596d8370260c",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "f5aeb266b3848eceee6343f92cd8122a3ae158b30842c0d11cfd899ec845623b",
+        "AUDIO2.map": "a9006a5514072d7c0ed7b1aa4bc52b6535a566a12e520dc684da082e9e5763e1",
+        "AUDIO2.bin": "9c141bdec80f5567e3e1bc993d9d7063448dfe785804fedf824512f9622ac59d",
+        "AUDIO2.iso": "86386294eb06b09f118c6e1f16da6fefb5f44d706561f7dda2597fcb4f116b1a",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "e2a529fec3ae22a6a33f806b1b880cf34f7dc2ebd6c9c243aefcb33c083b11aa",
+        "pcm": "019a02d35951eaa43a270ee2101775b976e03f60ed0699b9bdcbfc3e9f85e2c5",
+        "report": "029ef77e772022856c30739f8c517df77a62a196dad54bee832825dd37bc730b",
+        "deliveries": "d3ea43ed448cd464e35a98bc0d8c05f371a81c651357b1dc51d760e4fe15ea59"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 254810,
+          "trailing_exact_zero_frames": 97741,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 231746,
+          "trailing_exact_zero_frames": 120805,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 21.09136244969682,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-0E",
+      "command": 14,
+      "hex": "0x0E",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "5b2ef41a3fd459585bdc6ca6668f70eb88b680c4da4bac6541bc028cab06378e",
+      "native_capture_report_sha256": "9e2c767c205cd41a8a8270e3f0c4efa52abf14c16f716c458bfa698292044e34",
+      "reference_schedule_sha256": "508a2d463aa8b9f0d270fbce8404cfd0e99055854a7b5627b00f8f77e4de0f68",
+      "native_gate_report_sha256": "9ba79ab28e01a9e7b6c4074292617a7835bd01906a9e2a4335c13050395a3404",
+      "native_f5_sha256": "92beeb7b68b3eb46a0415ac7b2792ca59a2a2bbee6ab7987accad27082d3d8d3",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 14
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 14
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 14,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747139,
+          "reference_latch_read_cycle": 2147747233,
+          "reference_instruction_boundary_delay_cycles": 9
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 35028,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-14.wav",
+        "sha256": "eef33ce13d1daf59efa3bd7d4e280177fc9d29b3664266d457ca68203ac04a3b",
+        "pcm_sha256": "7c0524e583b4dd33b7b3bd1aa5314a79b8286eb70b46a03e37eb840fb7c390c9",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-14.wav",
+        "sha256": "32a23b8ccce6ceb60cad07dd907226439822c64fa161a6410c30b9565763a052",
+        "pcm_sha256": "5834463cc6a5d6c0b6195297ed9f893437496a9553dc4e078acca2fe11b86b10",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "94f02895c1d2bb24068269312a004d108fcc91681e873d15ffdee0e6aee7540c",
+        "AUDIO2.map": "1f1b8fffac6aaaa0007c400963235eedb4f7ad060d56de6499d08b37c76e0bda",
+        "AUDIO2.bin": "02771f6a23126de1aba273a22435c2157bf23f478077fbee453bba3550d7fb73",
+        "AUDIO2.iso": "f7c5ed0eec1ec0c5088259122e0a9ddff2dd07b7b1333a753f87d3eef0f7d1e7",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "c8b6d6d2f43dcb4e6f3cf2db1b067c51d3cd0fb8c9d3a17aeb53a2ea9d3b46d4",
+        "pcm": "dd6f7c0e151b8fa9933083ab4cf38487df4e5fcdf3dbf4d0852cf56786edf976",
+        "report": "7b9350fb3b4f7234af841b70b0e9303c3e91d75ffa91c566c39897feab957b92",
+        "deliveries": "40e5e125ae8a348829dcc4d09505f91bfa2d42ad395ca92d5113b161e4e226bc"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 178058,
+          "trailing_exact_zero_frames": 174493,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 155123,
+          "trailing_exact_zero_frames": 197428,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 28.121811850388806,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-0F",
+      "command": 15,
+      "hex": "0x0F",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "783e97578a64a3d3f88f1f8a14813f4b3d01e118f4b53f39a3233ff97759aef7",
+      "native_capture_report_sha256": "432f171c702f93688edad12c6f4dd5d9586224a1bdbc077dba650fd15151a9ac",
+      "reference_schedule_sha256": "eb65f82ef007f88c482541a8c934247732581870b3beb2502b36aea57161b741",
+      "native_gate_report_sha256": "84da827d4dada850e0496ffcf656ca6f4b72346b5cad94d0dfeffd584838d020",
+      "native_f5_sha256": "5a105f23a5732dbce7f9bd8a61d81911ba38491b1e0b5bf4e0e964091cb8d704",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 15
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 15
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 15,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747130,
+          "reference_latch_read_cycle": 2147747227,
+          "reference_instruction_boundary_delay_cycles": 0
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 28394,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-15.wav",
+        "sha256": "f28d185796a03fc19595d6ffa5465ab89b46ef5522dde5abd26ce423af7248ad",
+        "pcm_sha256": "943b807f98b8db36df693e05ce912f65768fba2937c6fca1423e5dc89507c923",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-15.wav",
+        "sha256": "6ebb721dfe36381a27e6fedc38cd0813e02a34364462bf3c9e5bb8072c766e44",
+        "pcm_sha256": "be1b5aa4ac29e9be1659bc5df633609b9029e5a9c12aed314292f25c32bb0618",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "6efb6bfb93feb1442af52d34481970e2c8972cfbbe1be1eaa69e5f0fd242d4b2",
+        "AUDIO2.map": "4f52212e1bf26086a62f9b52a166574de6bbcd242217f9ef1cbc5ee4c466bf1e",
+        "AUDIO2.bin": "5b10e0b23c5535abdf0a326eab4526ea6250615e7997954709bb34a88529449a",
+        "AUDIO2.iso": "c666b36eaeee1527747a9d5214f73e471f182bd620be606aba3df075d6b08d4d",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "4f446ff5ac04c9a18cca9f180688db8c9b63a35aa91336c6712fbf74ad71a34a",
+        "pcm": "c59f2dcf60facfef528e45912ae7ee3a8e89686d2f3f5c1197f5bd575bae60b0",
+        "report": "4d15a06121278cb7ba0133aae4dd34fa22ff4c47906af563579e6f4429e7ddc2",
+        "deliveries": "8e22840c376bafcb6e5f06cc19d4b78c976fd1ca6f4d6de6251ed41ed31ff5b2"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 290441,
+          "trailing_exact_zero_frames": 62110,
+          "final_window_frames": 88200,
+          "final_window_peak": 1,
+          "final_window_all_channels_exact_zero": false,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 193744,
+          "trailing_exact_zero_frames": 158807,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 75.5773853939537,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-10",
+      "command": 16,
+      "hex": "0x10",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "ee594e72bdd12928f62b83e451a0e2c6e993187199e636b9dab944eb56211ea1",
+      "native_capture_report_sha256": "83d70beb39fa30dd96c3536f73557c9e86a33d41ac67919ec9f900e7d848f76f",
+      "reference_schedule_sha256": "1d85b9c590bd07cf5460ca4214c308a74727961dbb4200d51ede2e0e4de4f234",
+      "native_gate_report_sha256": "1faa48eaf05abbe5164aff33da1411580422ba3a012f64ccaada0304272540ad",
+      "native_f5_sha256": "bad67462464da900d5d60d2b8ced548e7900492c3101deb5f9c1f7110164cc6b",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 16
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 16
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 16,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747137,
+          "reference_latch_read_cycle": 2147747228,
+          "reference_instruction_boundary_delay_cycles": 7
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 28394,
+        "diagnostic_clock_skew_frames": 0,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-16.wav",
+        "sha256": "1aed25ec68c44fbb221279b13cb404380e454a09ed16ddcda5c9cf4514dab1b9",
+        "pcm_sha256": "6effdbca307856c087c9b4020624b87ec7d7124ce7a7e8d6cb27dc43033c572b",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-16.wav",
+        "sha256": "a96104537b21ce9a171c520ba5a01cbec344344b5b27d6422df5132606518c51",
+        "pcm_sha256": "01a05b85421302094d82b96625ee1cd25dc483ee8a5181e3a00c6698a600339c",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "56bac3d340d96e11b779da9a43b94e1c3379d68821da53f182c8ac8c4d8e6d7b",
+        "AUDIO2.map": "3eafee4a39c510480b445e9c5418905e85eece1a8518a2059d0cb18816fd0ad4",
+        "AUDIO2.bin": "c15639ff220fee161b5a725ed7085cc8b36640edb6efaad72409e1f776ce3d30",
+        "AUDIO2.iso": "f69a10d864cdef81d1d0b711c5c9b03bfca12f00f27771302047b3167c71bef8",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "d0298c7a22a53ed8e7d1469261836dfc0fafba559bb81daf16f2b78ce20e3960",
+        "pcm": "a788fbdc51806e0d8711ea43b19d89dcd95b95dd4122aa609f3407d24d607f8e",
+        "report": "c43e2ca64ff1a1d45978479f1bc98c56e4407a2ef6bc1bc42553d77698d5c458",
+        "deliveries": "ad0bc8d6bb76db99ff2edd356ec704221f91a05b0cfba9db9d971a7f2fac0254"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 217009,
+          "trailing_exact_zero_frames": 135542,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 172569,
+          "trailing_exact_zero_frames": 179982,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 6.591049421085641,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-11",
+      "command": 17,
+      "hex": "0x11",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "9a226590f7950668c307c469ff891af7b685358559809d16cab5bfd78345eeed",
+      "native_capture_report_sha256": "7a9f0e3f156d910bd5818a3b35f43b098afe83b302a52d9b162d0a46b418dc7f",
+      "reference_schedule_sha256": "7de7dfca0852db47cc4c37d2c79f3575fa49c8daf7ec633928810909387ade9e",
+      "native_gate_report_sha256": "2f9d0ec4acf2ffc6cd0f2118f5998cf08e39de57f798f48b209b710e076455b6",
+      "native_f5_sha256": "b512eb855a0d134a64dd5d36b214b4dd085187617305d8e1b530ea3fecac623a",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 17
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 17
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 17,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747141,
+          "reference_latch_read_cycle": 2147747241,
+          "reference_instruction_boundary_delay_cycles": 11
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 60,
+        "elapsed_clock16": 27656,
+        "diagnostic_clock_skew_frames": 1,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-17.wav",
+        "sha256": "9123431648cc95c9981b3121a3ea35d0a1259d3251045aeded0b9f6d3b27a501",
+        "pcm_sha256": "5e878d1f4d2076b4644ec775b6b59db0be1dc43bdc74fc0c238853d923e892f3",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-17.wav",
+        "sha256": "a4f39fb0057dd35c8d4af189c000425e6f4c14e93f2a9d42b2cf3951c9a86814",
+        "pcm_sha256": "398d833fc82bfe3aa1e367a34837949723e4c8fddb2a568610a2ba9da358d47f",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "096b7bdda623325778aee904360b03e62d6a8b6bdd25b5e5b9ac0788275d4614",
+        "AUDIO2.map": "5087272a17c790c70add7720787d6b1ba5e1ba029e69785552941842dd590ab0",
+        "AUDIO2.bin": "dc4dd61a4a7aab9120ac4bb156093b63112ee136da312a923257001adcfcae96",
+        "AUDIO2.iso": "c74edcd0b7ef81cbfdcfac4774207e039008f69794fecb138b75e3aabfbcba41",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "493f929ff86ffd3039f5967273187d896374d6063a81b4ac251dc77bab0c9b5c",
+        "pcm": "8cf653513e68da87b07efde327d88141977e37f470e10e3b1d450c72ac1f394e",
+        "report": "c00de22ee66a36636bde41b0e8ef4a8abbc634187f6b70613bb577444f15fb21",
+        "deliveries": "4e8d16f4498b304705def1fecdddca89d3697f76bc3abd4b09b32dd58886ad40"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 158170,
+          "trailing_exact_zero_frames": 194381,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 133705,
+          "trailing_exact_zero_frames": 218846,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "PER_CHANNEL_SCORE_CYCLES_OBSERVED",
+        "global_observation": "POINTER_RECURRENCE_ONLY",
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "command-12",
+      "command": 18,
+      "hex": "0x12",
+      "kind": "music",
+      "seconds": 608,
+      "frames": 26812800,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "18984846803af998aaa747817859c74aebdbef53ac9cd7a6608fe61966ccd195",
+      "native_capture_report_sha256": "1e51ae1c15e8a35816bb325f888bb142f00bf5cba0dda769e6d62da515608bab",
+      "reference_schedule_sha256": "b3d69544960ec9610d501d9ef808fad2eca09ad5cb6def1b4b00516186f8f2e5",
+      "native_gate_report_sha256": "6a0436b2663d77ccb0088bf763b249fda77e289db07c22f1772bd4057a42f5b2",
+      "native_f5_sha256": "eeafce012cc1c6c61ef9bdafe40f3dff4687a31405b0287db09a2f227121fdad",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": false,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 18
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 18
+        },
+        {
+          "sample": 26460248,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 18,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 26460248,
+          "reference_target_cycle": 2147747130,
+          "reference_delivery_cycle": 2147747142,
+          "reference_latch_read_cycle": 2147747233,
+          "reference_instruction_boundary_delay_cycles": 12
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 27474687,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 26919,
+        "diagnostic_clock_skew_frames": 1,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-18.wav",
+        "sha256": "1f192f3749aa3f370d39a711f75766d0e559a0186319271a9c4ad6903af570bd",
+        "pcm_sha256": "3bc0d1b457522e2d46eb1e2f56d42131cd932dc28cc9a4afe15b91d92783ef48",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 608.0,
+        "bytes": 107251244,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-18.wav",
+        "sha256": "f0c7992619b14cdbd897f71bc5679b6cc546eab0f89fa300bb68ca0f5ed63136",
+        "pcm_sha256": "b24423aa807bcbb1ab277ea98533e79c4252c6cc4d7bdb29a4891ceb0a882a7e",
+        "frames": 26812800,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 608.0,
+        "bytes": 53625644,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "e4791446d6a7778699553261252e4403885b1e514f62db46da495f7803cd548b",
+        "AUDIO2.map": "60d6eeb6b8af7c0ac6bd05c97f3304436b4970577b9e18af0a4e4880f4fdac0e",
+        "AUDIO2.bin": "e3e76a59eea5cb51eb9e4c7ff12e684b57b49683ba4fcf1bd34e9b008eb46074",
+        "AUDIO2.iso": "b22b4958f890163ed0f9c102d946ec97d52bd7360f3b74f6b45aa3921feb3f56",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "7067b93d4bed6e51693f51a73df6fa2f459c4574e3079386bf8b7cefb39ce513",
+        "pcm": "7dc2a6bf4758fa51aa3b15e95dd0031160ccf3e35e948737fdaff6d3c30448c1",
+        "report": "1f3b3f318e5c1f6b0fdb8eb0a80df707eb60ffc37bb396d8a4890792a32f8636",
+        "deliveries": "20831429996abbd51a2b7ebd62329060e9d986b8b5afd14b7296f4ad3c14e5f6"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 155104,
+          "trailing_exact_zero_frames": 197447,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 26460248,
+          "captured_after_fade_frames": 352552,
+          "last_nonzero_after_fade_frame": 122350,
+          "trailing_exact_zero_frames": 230201,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": {
+        "classification": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "global_observation": "VISIBLE_SCORE_STATE_RECURRENCE",
+        "visible_state_interval_seconds": 38.64003832889376,
+        "original_fade_control_clear_observed": true,
+        "evidence_applies_to": "Separate verified original score-control observations",
+        "native_loop_verified": false,
+        "exact_PCM_period_proven": false
+      }
+    },
+    {
+      "id": "transitions",
+      "command": 1,
+      "hex": "0x01",
+      "kind": "transitions",
+      "seconds": 32,
+      "frames": 1411200,
+      "runtime_status": "PASS",
+      "raw_native_wav_sha256": "3ed77ac79729c605c5a5104eadfcec0c739d6e230bc0625bc3b7f5ef23410686",
+      "native_capture_report_sha256": "48988e4879d7e63ac176eb39fa127578d8b11d291d3263863d69d3e49d916edc",
+      "reference_schedule_sha256": "19875e1afed221521ef98eeb2bd61717bd1b342e401aacb34f1e152c693b19b4",
+      "native_gate_report_sha256": "8c76985963fa77fd79c551fbfaf0bf05abb1cfd723a3d05716f1fae72bda4d37",
+      "native_f5_sha256": "6ae2e8152d3f386413db33d888ce2509b69a0fa5b67306296710fa9c4f53589f",
+      "native_audit_revalidated": true,
+      "transition_schedule_replayed": true,
+      "native_loop_verified": false,
+      "fidelity_approved": false,
+      "complete_recorded_window": true,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 1
+        },
+        {
+          "sample": 132300,
+          "word": 6
+        },
+        {
+          "sample": 264600,
+          "word": 18
+        },
+        {
+          "sample": 396900,
+          "word": 31
+        },
+        {
+          "sample": 529200,
+          "word": 3
+        },
+        {
+          "sample": 661500,
+          "word": 31
+        },
+        {
+          "sample": 793800,
+          "word": 2
+        },
+        {
+          "sample": 926100,
+          "word": 1
+        },
+        {
+          "sample": 1058400,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "sample": 0,
+          "word": 1
+        },
+        {
+          "sample": 132684,
+          "word": 6
+        },
+        {
+          "sample": 264632,
+          "word": 18
+        },
+        {
+          "sample": 397316,
+          "word": 31
+        },
+        {
+          "sample": 529264,
+          "word": 3
+        },
+        {
+          "sample": 661949,
+          "word": 31
+        },
+        {
+          "sample": 793895,
+          "word": 2
+        },
+        {
+          "sample": 926580,
+          "word": 1
+        },
+        {
+          "sample": 1058528,
+          "word": 31
+        }
+      ],
+      "reference_command_deliveries": [
+        {
+          "word": 1,
+          "admitted_native_sample": 0,
+          "reference_target_cycle": 0,
+          "reference_delivery_cycle": 0,
+          "reference_latch_read_cycle": 91,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 6,
+          "admitted_native_sample": 132684,
+          "reference_target_cycle": 10769804,
+          "reference_delivery_cycle": 10769815,
+          "reference_latch_read_cycle": 10769906,
+          "reference_instruction_boundary_delay_cycles": 11
+        },
+        {
+          "word": 18,
+          "admitted_native_sample": 264632,
+          "reference_target_cycle": 21479868,
+          "reference_delivery_cycle": 21479868,
+          "reference_latch_read_cycle": 21479960,
+          "reference_instruction_boundary_delay_cycles": 0
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 397316,
+          "reference_target_cycle": 32249672,
+          "reference_delivery_cycle": 32249684,
+          "reference_latch_read_cycle": 32249775,
+          "reference_instruction_boundary_delay_cycles": 12
+        },
+        {
+          "word": 3,
+          "admitted_native_sample": 529264,
+          "reference_target_cycle": 42959735,
+          "reference_delivery_cycle": 42959742,
+          "reference_latch_read_cycle": 42959842,
+          "reference_instruction_boundary_delay_cycles": 7
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 661949,
+          "reference_target_cycle": 53729620,
+          "reference_delivery_cycle": 53729622,
+          "reference_latch_read_cycle": 53729713,
+          "reference_instruction_boundary_delay_cycles": 2
+        },
+        {
+          "word": 2,
+          "admitted_native_sample": 793895,
+          "reference_target_cycle": 64439522,
+          "reference_delivery_cycle": 64439534,
+          "reference_latch_read_cycle": 64439634,
+          "reference_instruction_boundary_delay_cycles": 12
+        },
+        {
+          "word": 1,
+          "admitted_native_sample": 926580,
+          "reference_target_cycle": 75209407,
+          "reference_delivery_cycle": 75209418,
+          "reference_latch_read_cycle": 75209509,
+          "reference_instruction_boundary_delay_cycles": 11
+        },
+        {
+          "word": 31,
+          "admitted_native_sample": 1058528,
+          "reference_target_cycle": 85919470,
+          "reference_delivery_cycle": 85919472,
+          "reference_latch_read_cycle": 85919572,
+          "reference_instruction_boundary_delay_cycles": 2
+        }
+      ],
+      "native_window": {
+        "start_frame": 661887,
+        "end_frame_exclusive": 2073087,
+        "diagnostic_staleness_frames": 59,
+        "elapsed_clock16": 54642,
+        "diagnostic_clock_skew_frames": 1,
+        "method": "Final SCSP clock minus coherent elapsed from the observed pre-call API clock mark",
+        "admission_clock_resolution": "SCSP clock sampled before each accepted API call by the video-frame harness; not an exact call-instant measurement",
+        "native_music_lead_removed_frames": 0,
+        "documented_native_music_lead_preserved_frames": 4096,
+        "waveform_fitted_alignment": false,
+        "residual_DAC_alignment": "Not independently calibrated"
+      },
+      "native_wav": {
+        "file": "SATURN-MEDNAFEN-TRANSITIONS.wav",
+        "sha256": "d97940d733eeebbcbeefbc4e7c4d17625582eff1256dc109b53ca53d70d82ce7",
+        "pcm_sha256": "ce2ff99977a77f9733b0479984dd95b5e36e4b03604d23ce970edf9f90dce376",
+        "frames": 1411200,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 2,
+        "seconds": 32.0,
+        "bytes": 5644844,
+        "source_pcm_bytes_match": true
+      },
+      "original_host_wav": {
+        "file": "ORIGINAL-BOARD-HOST-TRANSITIONS.wav",
+        "sha256": "996590f417b076e4248ec26dae6e07a53de2ae7dcc0fee420e1194e55a828170",
+        "pcm_sha256": "9b40e04ca93953643a2a3d7c934c3182c320d53b0b3b8bc61eb1a1a7596ee787",
+        "frames": 1411200,
+        "sample_rate": 44100,
+        "bits": 16,
+        "channels": 1,
+        "seconds": 32.0,
+        "bytes": 2822444,
+        "source_pcm_bytes_match": true
+      },
+      "native_build_sha256": {
+        "AUDIO2.ELF": "2445a64336e3a27dd56b17d7c9253429c57242a929411fb998228f0cf986d62f",
+        "AUDIO2.map": "5805d4d68387a5dd0999eb444f908496a2fb8e0a3425b3149c7ee8449a5f0ffe",
+        "AUDIO2.bin": "0773012b02e0e303bcfa76b0c54ed6fbe64640e9ee4e3fc1058a321304ff60cd",
+        "AUDIO2.iso": "a12061db4c2dcc45acf38a3126daa7e01b4891cbf3afca5ca046c580f8151c41",
+        "AUDIO2.cue": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+      },
+      "reference_capture_sha256": {
+        "trace": "c8ca130b81df8348c83788a763a208c803939f3196d19f1e85c4b3c89e366f42",
+        "pcm": "c333cb6ba73feec0798c3a5301dbaf868e0462be81be6cc862a3b4231f7ad908",
+        "report": "486444179ac6bad3b24a864bd828fb48ea6796302eeb6cf49ca92b2775af81b4",
+        "deliveries": "39455033db912120a87542bd96f4be9f56671e46d918fdca0efdb08b6a76d3fb"
+      },
+      "fade": {
+        "native": {
+          "last_fade_admission_sample": 1058528,
+          "captured_after_fade_frames": 352672,
+          "last_nonzero_after_fade_frame": 178546,
+          "trailing_exact_zero_frames": 174125,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        },
+        "original_host": {
+          "last_fade_admission_sample": 1058528,
+          "captured_after_fade_frames": 352672,
+          "last_nonzero_after_fade_frame": 153704,
+          "trailing_exact_zero_frames": 198967,
+          "final_window_frames": 88200,
+          "final_window_peak": 0,
+          "final_window_all_channels_exact_zero": true,
+          "natural_end_or_loop_proven_by_silence": false
+        }
+      },
+      "original_structure": null
+    }
+  ],
+  "fidelity_approved": false,
+  "native_loop_verified": false,
+  "sample_exact_PCM_period_proven": false,
+  "owner_listening_approval": "PENDING",
+  "hardware_status": "HARDWARE PENDING",
+  "scope": "Complete recorded windows at observed API admissions; original structure evidence is separate from native waveform/loop acceptance"
+}

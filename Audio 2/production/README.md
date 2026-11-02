@@ -11,7 +11,7 @@ Esta carpeta consolida y corrige Audio 2 desde `audio-2` / `db18be40a1d79de20040
 3. Usar `tools/generate_resources.py` con el ZIP original del propietario. No hay ROM ni muestras incluidas.
 4. Reproducir `tools/run_host_tests.py`, la referencia actual `tools/reference/reproduce_full_board_references.py`, la comprobación de inicios `tools/reference/verify_full_board_sfx.py` y el diagnóstico nativo `tools/build_saturn.py` / `tools/run_native_test.py`. `reproduce_all_references.py` conserva los oráculos históricos, con su alcance documentado.
 5. Aplicar únicamente la frontera de audio al runtime. No sustituir gameplay, gráficos ni el bucle del juego por `tests/saturn_harness.c`.
-6. Para continuar el desarrollo pendiente, usar [NEXT-SESSION.md](NEXT-SESSION.md): candidato exacto, primer experimento de banco activo, reproducción del fallo de fade y regresión requerida.
+6. Para continuar el desarrollo pendiente, usar [NEXT-SESSION.md](NEXT-SESSION.md): candidato exacto, banco activo pendiente, capturas largas y regresión requerida.
 
 El motor sintetiza FM con los 32 slots SCSP. El 68000 sirve ADPCM y el DSP mezcla cuatro voces PCM sin consumir otros slots. El SH-2 slave ejecuta el controlador original y traduce sus registros; no enlaza Nuked-OPM. La referencia Nuked se utiliza solamente en el PC para comprobar la fidelidad.
 
@@ -31,7 +31,9 @@ Los ELF, mapas y discos de diagnóstico se generan fuera del repositorio. Contie
 
 La auditoría del controlador completo encontró reinicios adicionales en 17 comandos por una interpretación incorrecta de `F1`; la prueba de inicios físicos y su corrección están en [F1-ROM-SEQUENCE-AUDIT.md](docs/F1-ROM-SEQUENCE-AUDIT.md). Una segunda diferencia sigue pendiente: el OKI original aplica el banco global a las voces activas, mientras el motor conserva datos del banco de inicio. [ACTIVE-OKI-BANK-AUDIT.md](docs/ACTIVE-OKI-BANK-AUDIT.md) mide una diferencia de señal causada sólo por ese comportamiento.
 
-Además, los ensayos de fade, carga simultánea y combate conservan fallos documentados. La existencia de 18 músicas y 98 comandos ejecutables no equivale a fidelidad o rendimiento aprobados. No sustituir un criterio fallido por el resultado positivo de un perfil anterior.
+El candidato SH-2 `d9bd93a7` conserva el firmware `cddd` y corrige el coste del fade sin ampliar colas ni plazos. Ya pasan las 18 músicas de 30 s + 8 s, los nueve comandos de transición y los 14 grupos host con 600 s + 8 s por música. También pasa la matriz nativa de 18 × (600 s + 8 s) y la transición de nueve comandos: todos los contadores de error a cero. [Registro largo](docs/evidence/native-music-d9bd-complete600s.json). Véase [NATIVE-ZERO-DROP-MUSIC-D9BD.md](docs/NATIVE-ZERO-DROP-MUSIC-D9BD.md).
+
+Los fallos de carga simultánea y combate de `c408/scalar9` se conservan como evidencia histórica; no se atribuyen al ELF nuevo ni se convierten en aprobados. La integración en ROM Graphics Final queda a Codex, conforme al alcance confirmado por el propietario. La existencia de 18 músicas y 98 comandos ejecutables no equivale a fidelidad o rendimiento aprobados.
 
 ## Regla de aceptación
 

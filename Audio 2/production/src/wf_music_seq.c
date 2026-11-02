@@ -2,6 +2,7 @@
 #include <string.h>
 #ifdef WF_MUSIC_NATIVE_CONTROL
 extern unsigned wf_z80_control_batch(z80 *,unsigned,uint32_t);
+extern unsigned wf_z80_lift_quota(z80 *);
 extern bool wf_z80_native_compatible(const uint8_t *,size_t);
 #endif
 #ifdef WF_MUSIC_MODULE_TEST
@@ -117,6 +118,16 @@ int __attribute__((section(".wf_hotcode"))) wf_music_seq_run_serviced(wf_music_s
    unsigned taken=1;
 #ifdef WF_MUSIC_NATIVE_CONTROL
    if(v->optimized){
+    /* Private experiment: service before a whole lift when only its current
+     * 512-instruction grant is short. Never replenish the global budget. */
+    if(service&&service_steps>406u){
+     unsigned quota=wf_z80_lift_quota(&v->cpu);
+     if(service_steps+quota>512u&&budget+1u>=quota){
+      commit_cycles(v);
+      if(!service(service_user)){v->error=true;break;}
+      service_steps=0;
+     }
+    }
     uint32_t limit=end;
     if((v->ctl&2)&&(int32_t)(v->next_tb-limit)<0)limit=v->next_tb;
     unsigned grant=budget+1u;

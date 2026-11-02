@@ -11,7 +11,7 @@
   "api_version": 1,
   "native_mailbox_abi": 3,
   "game_dynamic_music_abi": 4,
-  "current_gate": "NATIVE_FIDELITY_AND_CONCURRENT_COMBAT_BLOCKED",
+  "current_gate": "ISOLATED_MIX_LATENESS_AND_NATIVE_FIDELITY_BLOCKED",
   "verified_historical_profile10": {
     "firmware_sha256": "b5ecee6e3e2a0efe7c13f1c6f4cb89bbc6b18cb96db23a57203b20e4a2b06b66",
     "music_captures": 18,
@@ -29,32 +29,22 @@
     "tag_logic_per_second_control": 57.901837,
     "fidelity_scope": "Historical doubled-pitch profile; not an absolute arcade reference"
   },
-  "active_work": [],
+  "active_work": [
+    "Reviewed full WAV pair exporter with bounded parallel original reference replay",
+    "Private complete music packaging",
+    "Causal isolated firmware-copy experiment for two mixed-replay lateness warnings"
+  ],
   "pending_gates": [
     "Correct active-global OKI bank behavior for all existing voices and already prepared samples",
-    "Resolve native1F FM deadline failures without skipping original work",
-    "Zero late, FM loss and PCM underrun in all required mixed/overload/long scenarios",
-    "Sustain TAG/Royal arcade logic cadence without mandatory expansion",
-    "Verify full compositions and exact loop/transition behavior beyond bounded recurrence observations",
+    "Complete reviewed full WAV export and private delivery",
+    "Resolve two native lateness warnings in current 64-command isolated replay",
+    "Zero late, FM loss and PCM underrun in pressure/recovery scenarios",
+    "Native waveform/tempo/loop comparison against full-board reference beyond host R01 exactness",
+    "Codex integration: repeat TAG/Royal equal-input performance without expansion",
     "Owner comparative listening approval",
     "Physical Saturn NTSC-U with Terraonion MODE"
   ],
-  "resume": "Start with NEXT-SESSION.md. Implement and test original-address/global-active-bank state handling before claiming fidelity; reproduce exact1F and combat failures. Keep source/input/ELF identities and all prior evidence.",
-  "current_candidate": {
-    "name": "cddd-scalar9-seqOs",
-    "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
-    "native_z80_source_sha256": "c408e4a8ad5d7b54a55706f4c96fd9f4d39271dcd0fb5e2de14331af138f4fad",
-    "accepted": false,
-    "isolated_tag_command_replay_seconds": 138,
-    "accepted_original_commands": 64,
-    "fm_discarded_events": 0,
-    "underruns": 0,
-    "transport_late": 2,
-    "initial_sfx_prefill_samples": 128,
-    "music_preparation_samples": 256,
-    "event_fifo_and_rings_unchanged": true,
-    "timing_tolerances_unchanged": true
-  },
+  "resume": "Read NEXT-SESSION.md; selected d9bd runtime already passes short native/long host music. Preserve all historical failures. Finish isolated full captures and bank/mix blockers; integration in ROM Graphics Final belongs to Codex.",
   "verified_board_clock_music_profile": {
     "firmware_sha256": "621b5dfcfe1b2a1841ff09e32de62b8198c63cd5d5c12d1f660d5c8426c06634",
     "native_commands": 18,
@@ -71,7 +61,7 @@
     "expected_rejections_passed": true,
     "report": "docs/evidence/native-load-failures-final-cddd.json"
   },
-  "previous_published_checkpoint": "45dd23771fe041ceb10ed6c47033e8500001c05d",
+  "previous_published_checkpoint": "2b1c6ecacb674e829553b6f46ab25d66b500888f",
   "f1_physical_starts": {
     "original_commands": 98,
     "incorrect_extra_starts_removed_in_commands": 17,
@@ -87,47 +77,6 @@
     "minimum_checkpoint_bytes_proposed": 528,
     "proposed_storage_is_not_runtime_solution": true,
     "report": "docs/ACTIVE-OKI-BANK-AUDIT.md"
-  },
-  "verified_final_host": {
-    "source_stable": true,
-    "groups_passed": 9,
-    "music_commands": 18,
-    "seconds_per_music": 600,
-    "tail_seconds": 8,
-    "checkpoints": 10962,
-    "report": "docs/evidence/final-host-cddd-scalar9.json",
-    "scope": "R01 CPU/RAM/timers/events and unit checks; not native waveform or full-board MMIO acceptance"
-  },
-  "final_tag": {
-    "logical_steps": 7372,
-    "original_commands": 64,
-    "accepted_commands": 64,
-    "state_actors_events_identical": true,
-    "original_game_files_unchanged": 345,
-    "fm_discarded_events": 0,
-    "underruns_32bit": 0,
-    "transport_late": 1,
-    "logic_hz_control": 57.9018365,
-    "logic_hz_audio": 55.3303586,
-    "video_frames_control": 7617,
-    "video_frames_audio": 7971,
-    "accepted": false,
-    "report": "evidence/tag7372-final-scalar9-cddd.v2.json"
-  },
-  "native_lifecycle_final": {
-    "original_sfx_accepted": 98,
-    "busy_retries": 97,
-    "quiescent_stops": 2,
-    "cold_recoveries": 1,
-    "api_lifecycle_passed": true,
-    "prior_fm_drops": 0,
-    "prior_underruns": 2,
-    "prior_transport_late": 4,
-    "after_recovery_fm_drops": 0,
-    "after_recovery_underruns": 0,
-    "after_recovery_transport_late": 0,
-    "zero_loss_passed": false,
-    "report": "docs/evidence/native-lifecycle-final-cddd-scalar9.json"
   },
   "final_sfx_catalogue": {
     "original_commands": 98,
@@ -202,7 +151,72 @@
     "scope": "new tooling regression only; separate 600-second runtime result retained"
   },
   "private_delivery_update": "Existing private music/SFX/mix downloads retained; automatic approval rejected replacing the private SFX ZIP; latest metadata/artifact publication requires explicit owner approval of destination",
-  "final_native_music_long": {
+  "session_state": "ISOLATED_AUDIO_CORRECTION_IN_PROGRESS",
+  "private_delivery_report": "docs/evidence/private-delivery-status.json",
+  "next_actions": [
+    "Generate, audit and package all 18 complete WAV pairs and the original transition/active-fade comparisons",
+    "Prepare private long WAV delivery; request explicit destination approval only after concrete archives are ready",
+    "Resolve active-bank and remaining mixed/pressure failures in isolated audio",
+    "Codex integrates after audio approval and repeats combat performance gates",
+    "Owner listening and physical hardware validation"
+  ],
+  "historical_c408_candidate": {
+    "name": "cddd-scalar9-seqOs",
+    "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+    "native_z80_source_sha256": "c408e4a8ad5d7b54a55706f4c96fd9f4d39271dcd0fb5e2de14331af138f4fad",
+    "accepted": false,
+    "isolated_tag_command_replay_seconds": 138,
+    "accepted_original_commands": 64,
+    "fm_discarded_events": 0,
+    "underruns": 0,
+    "transport_late": 2,
+    "initial_sfx_prefill_samples": 128,
+    "music_preparation_samples": 256,
+    "event_fifo_and_rings_unchanged": true,
+    "timing_tolerances_unchanged": true
+  },
+  "historical_c408_host": {
+    "source_stable": true,
+    "groups_passed": 9,
+    "music_commands": 18,
+    "seconds_per_music": 600,
+    "tail_seconds": 8,
+    "checkpoints": 10962,
+    "report": "docs/evidence/final-host-cddd-scalar9.json",
+    "scope": "R01 CPU/RAM/timers/events and unit checks; not native waveform or full-board MMIO acceptance"
+  },
+  "historical_c408_tag": {
+    "logical_steps": 7372,
+    "original_commands": 64,
+    "accepted_commands": 64,
+    "state_actors_events_identical": true,
+    "original_game_files_unchanged": 345,
+    "fm_discarded_events": 0,
+    "underruns_32bit": 0,
+    "transport_late": 1,
+    "logic_hz_control": 57.9018365,
+    "logic_hz_audio": 55.3303586,
+    "video_frames_control": 7617,
+    "video_frames_audio": 7971,
+    "accepted": false,
+    "report": "evidence/tag7372-final-scalar9-cddd.v2.json"
+  },
+  "historical_c408_lifecycle": {
+    "original_sfx_accepted": 98,
+    "busy_retries": 97,
+    "quiescent_stops": 2,
+    "cold_recoveries": 1,
+    "api_lifecycle_passed": true,
+    "prior_fm_drops": 0,
+    "prior_underruns": 2,
+    "prior_transport_late": 4,
+    "after_recovery_fm_drops": 0,
+    "after_recovery_underruns": 0,
+    "after_recovery_transport_late": 0,
+    "zero_loss_passed": false,
+    "report": "docs/evidence/native-lifecycle-final-cddd-scalar9.json"
+  },
+  "historical_c408_native_music_long": {
     "source_profile": "cddd-scalar9-seqOs",
     "music_commands": 18,
     "score_seconds_before_1F": 600,
@@ -237,15 +251,140 @@
     "report": "docs/evidence/native-long-final-cddd-scalar9.json",
     "catalogue_sha256": "9111da25b5ee740fe7935c68462e73d959c5570214b62287d9975b96f32c8902"
   },
-  "current_listening_metrics": "docs/evidence/listening-metrics-final-cddd-scalar9.json",
-  "session_state": "REPRODUCIBLE_SOURCE_HANDOFF_PREPARED_SOFTWARE_BLOCKED",
-  "private_delivery_report": "docs/evidence/private-delivery-status.json",
-  "next_actions": [
-    "Obtain explicit owner authorization of private delivery destination for four prepared ZIPs",
-    "Implement and verify original-address active-global OKI bank state handling",
-    "Resolve exact1F deadline failures with original work preserved",
-    "Resolve zero-loss/deadline and cadence failures under TAG and Royal base load",
-    "Complete full-board timing/composition/loop and owner listening acceptance",
-    "Perform physical Saturn NTSC-U/MODE validation with owner"
-  ]
+  "historical_c408_listening_metrics": "docs/evidence/listening-metrics-final-cddd-scalar9.json",
+  "current_candidate": {
+    "name": "cddd-exact-TL-return-timestamp-early08c1-d9bd93a7",
+    "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+    "native_z80_source_sha256": "d9bd93a7cfdf8e5dbb022bce6df1dc132e6caf7e9c3c05a18e75e2debd9602e0",
+    "sequence_source_sha256": "8d833f42349267376e0d29ff5b2c0db0fa31af5c544252e7306e87ec7bfd66bc",
+    "module_source_sha256": "4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69",
+    "accepted": false,
+    "hot_code_bytes": 15008,
+    "hot_state_bytes": 3220,
+    "hot_limit_bytes": 18432,
+    "hot_free_bytes": 204,
+    "event_fifo_and_rings_unchanged": true,
+    "timing_tolerances_unchanged": true,
+    "service_original_instructions_max": 512,
+    "global_instruction_budget": 4096,
+    "native_600s_status": "ALL_19_RUNTIME_CASES_PASS"
+  },
+  "verified_current_host": {
+    "source_stable": true,
+    "groups_passed": 14,
+    "music_commands": 18,
+    "seconds_per_music": 600,
+    "tail_seconds": 8,
+    "checkpoints": 10962,
+    "service_callbacks": 3200182,
+    "transitions_events": 89011,
+    "report": "docs/evidence/native-music-d9bd-short-and-host.json",
+    "scope": "R01 CPU/RAM/timers/events; exact lifts, timestamp/mapper/transport; not physical or waveform fidelity"
+  },
+  "verified_current_native_short": {
+    "music_commands": 18,
+    "score_seconds_before_1F": 30,
+    "tail_seconds": 8,
+    "transition_commands_accepted": 9,
+    "transition_commands_expected": 9,
+    "music_runtime_passes": 18,
+    "transition_passed": true,
+    "fm_discarded_events": 0,
+    "underruns_32bit": 0,
+    "transport_late": 0,
+    "input_and_source_stable": true,
+    "report": "docs/evidence/native-music-d9bd-short-and-host.json"
+  },
+  "verified_current_active_fades": {
+    "commands": [
+      "0x05",
+      "0x08",
+      "0x09"
+    ],
+    "score_seconds_before_1F": 1,
+    "tail_seconds": 9,
+    "all_runtime_gates_passed": true,
+    "original_music_active_before_1F": true,
+    "natural_end_after_1F_also_seen": [
+      "0x05",
+      "0x08"
+    ],
+    "report": "docs/evidence/native-active-fades-d9bd.json"
+  },
+  "current_native_mix": {
+    "source_profile": "cddd-exact-TL-return-timestamp-early08c1-d9bd93a7",
+    "seconds": 138,
+    "accepted_original_commands": 64,
+    "fm_discarded_events": 0,
+    "underruns_32bit": 0,
+    "transport_late": 2,
+    "passed": false,
+    "scope": "Isolated replay of observed original TAG command schedule; no gameplay execution or new producer",
+    "report": "docs/evidence/native-music-d9bd-short-and-host.json"
+  },
+  "original_complete_music_structure": {
+    "music_commands": 18,
+    "naturally_ending_commands": [
+      "0x05",
+      "0x08",
+      "0x09"
+    ],
+    "visible_state_and_event_recurrences": 12,
+    "independent_channel_cycle_commands": [
+      "0x0B",
+      "0x0C",
+      "0x11"
+    ],
+    "universal_pcm_period_proven": false,
+    "native_waveform_fidelity_proven": false,
+    "report": "tools/reference/evidence/full-board-complete-music-structure.json"
+  },
+  "owner_scope": {
+    "isolated_audio_correction_authorized": true,
+    "graphics_final_integration": "CODEX",
+    "gameplay_graphics_changes": false,
+    "combat_reexecuted_this_continuation": false,
+    "private_upload_destination_authorized": false
+  },
+  "verified_current_native_long": {
+    "music_commands": 18,
+    "score_seconds_before_1F": 600,
+    "tail_seconds_requested": 8,
+    "music_runtime_passes": 18,
+    "transition_commands_accepted": 9,
+    "transition_commands_expected": 9,
+    "transition_passed": true,
+    "all_error_counters_zero": true,
+    "capture_evidence_errors": 0,
+    "sources_and_inputs_stable": true,
+    "matrix_sha256": "1c5af394be92016cf959703326e521c48e22a19fc066934757e7c56969dc9975",
+    "report": "docs/evidence/native-music-d9bd-complete600s.json",
+    "full_waveform_fidelity_approved": false
+  },
+  "experimental_prepared_copy": {
+    "selected": false,
+    "source_sha256": "74578e6610677070e46ca4208f1b16abfef29b99060f8a4543118abe0d4a50e5",
+    "firmware_sha256": "3404eac10581871b4afe5ee30d1c58e415430db263845228c5c82ddec7647749",
+    "isolated_mix_64_commands_138s_passed": true,
+    "native_music_600s_status": "RUNNING",
+    "native_sfx98_status": "RUNNING",
+    "independent_review": "IN_PROGRESS",
+    "report": "experiments/prepared-copy-3404/evidence.json"
+  },
+  "complete_music_wav_export_cddd": {
+    "music_pairs": 18,
+    "transition_pairs": 1,
+    "wav_files": 38,
+    "seconds_each_music": 608,
+    "source_and_inputs_stable": true,
+    "native_F5_ELF_RAM_audit_repeated": true,
+    "native_PCM_bytes_preserved": true,
+    "observed_admissions_used_for_original_reference": true,
+    "normalized": false,
+    "manifest_sha256": "6bf2d9bcb639ac212fa1300d88d0f02780168f54a2b6f5bef531183de3778e79",
+    "report": "docs/evidence/complete-music-pairs-d9bd-cddd-v1_2.json",
+    "private_upload_completed": false,
+    "owner_listening_approval": "PENDING",
+    "candidate_firmware": "cddd"
+  }
 }
