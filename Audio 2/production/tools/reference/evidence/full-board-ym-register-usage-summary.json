@@ -1,0 +1,415 @@
+{
+  "kind": "ORIGINAL_ROM_REGISTER_OBSERVATION_NOT_NATIVE_AUDIO_VALIDATION",
+  "profile": "full-board",
+  "reference_report_sha256": "a4a9a9969aa26b9c9dc348c3ea0ac3bc3f861f329fd7dbf956b252eb18196412",
+  "command_identity_source": "Verified full-board manifest; this capture uses zero in the ORIGIN command field",
+  "tracks_count": 18,
+  "ym_writes": 1040424,
+  "unsupported_writes": 0,
+  "modulating_lfo_on_ever_keyed_channels": 0,
+  "complete_report_sha256": "6b192cf929943416173c28fd5b1c32dbab909fefc226f4764dac0e06b2a7b463",
+  "tracks": [
+    {
+      "command": 1,
+      "trace_sha256": "ebe8df63072f6320e29fc51a5d6a73f69843ea70b0399d067d25cb0121465466",
+      "observed_seconds": 30.0,
+      "ym_data_writes_including_boot": 66724,
+      "key_masks": {
+        "15": 591
+      },
+      "algorithms_at_keyon": {
+        "2": 273,
+        "4": 316,
+        "0": 2
+      },
+      "feedback_at_keyon": {
+        "7": 589,
+        "0": 2
+      },
+      "distinct_keyon_configs_excluding_TL": 4,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 2,
+      "trace_sha256": "10ce77cdb17833788b1c9294354f13e635119a4c9ae682dc5e90e1850e1b0f62",
+      "observed_seconds": 30.000004190476723,
+      "ym_data_writes_including_boot": 43727,
+      "key_masks": {
+        "1": 1,
+        "15": 560
+      },
+      "algorithms_at_keyon": {
+        "0": 1,
+        "3": 182,
+        "4": 378
+      },
+      "feedback_at_keyon": {
+        "0": 1,
+        "7": 560
+      },
+      "distinct_keyon_configs_excluding_TL": 3,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 3,
+      "trace_sha256": "75f52904497996de5a47801455b922c6ad525c338ab5aa8cebb1c1bbb0417793",
+      "observed_seconds": 30.000000279365114,
+      "ym_data_writes_including_boot": 54379,
+      "key_masks": {
+        "1": 2,
+        "15": 481
+      },
+      "algorithms_at_keyon": {
+        "0": 2,
+        "2": 135,
+        "4": 214,
+        "1": 132
+      },
+      "feedback_at_keyon": {
+        "0": 2,
+        "7": 349,
+        "5": 132
+      },
+      "distinct_keyon_configs_excluding_TL": 4,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 4,
+      "trace_sha256": "8baf3862425adf6c83477da20d3c04b0c436799fc0329cb12cfabd0be596d7ff",
+      "observed_seconds": 30.00000111746046,
+      "ym_data_writes_including_boot": 72037,
+      "key_masks": {
+        "1": 3,
+        "15": 726
+      },
+      "algorithms_at_keyon": {
+        "0": 3,
+        "2": 230,
+        "1": 496
+      },
+      "feedback_at_keyon": {
+        "0": 3,
+        "7": 230,
+        "5": 496
+      },
+      "distinct_keyon_configs_excluding_TL": 3,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 5,
+      "trace_sha256": "72d28af1b6321917b120dbf34280f2c937b3e390a9b0c1b44272288887472089",
+      "observed_seconds": 30.00000111746046,
+      "ym_data_writes_including_boot": 33813,
+      "key_masks": {
+        "1": 4,
+        "15": 84
+      },
+      "algorithms_at_keyon": {
+        "0": 4,
+        "4": 84
+      },
+      "feedback_at_keyon": {
+        "0": 4,
+        "7": 84
+      },
+      "distinct_keyon_configs_excluding_TL": 2,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 6,
+      "trace_sha256": "29afe27da62fad5ea272c434dcb8273144dbdcebb3e3588248dbe0924f48a713",
+      "observed_seconds": 30.000001396825574,
+      "ym_data_writes_including_boot": 76054,
+      "key_masks": {
+        "1": 5,
+        "15": 876
+      },
+      "algorithms_at_keyon": {
+        "0": 5,
+        "3": 478,
+        "1": 23,
+        "4": 375
+      },
+      "feedback_at_keyon": {
+        "0": 5,
+        "7": 853,
+        "5": 23
+      },
+      "distinct_keyon_configs_excluding_TL": 7,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 7,
+      "trace_sha256": "109e4667fcf0f5d7a454cbcdf5c7580caed6c0a507cad1b04dacb3032e1a6abd",
+      "observed_seconds": 30.0,
+      "ym_data_writes_including_boot": 85232,
+      "key_masks": {
+        "1": 6,
+        "15": 601
+      },
+      "algorithms_at_keyon": {
+        "0": 6,
+        "2": 125,
+        "4": 418,
+        "1": 58
+      },
+      "feedback_at_keyon": {
+        "0": 6,
+        "7": 543,
+        "5": 58
+      },
+      "distinct_keyon_configs_excluding_TL": 5,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 8,
+      "trace_sha256": "d7e6d58a038b6fb9234c04afd02745604ff5995273a37969d1f3007de76124e9",
+      "observed_seconds": 30.000000279365114,
+      "ym_data_writes_including_boot": 40494,
+      "key_masks": {
+        "1": 7,
+        "15": 64
+      },
+      "algorithms_at_keyon": {
+        "0": 7,
+        "4": 64
+      },
+      "feedback_at_keyon": {
+        "0": 7,
+        "7": 64
+      },
+      "distinct_keyon_configs_excluding_TL": 3,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 9,
+      "trace_sha256": "c071db2cfbcd55ad2760925af249cbe00f02cf30846536aa59f97e82b3b1163b",
+      "observed_seconds": 30.00000223492092,
+      "ym_data_writes_including_boot": 37688,
+      "key_masks": {
+        "1": 8,
+        "15": 68
+      },
+      "algorithms_at_keyon": {
+        "0": 8,
+        "4": 68
+      },
+      "feedback_at_keyon": {
+        "0": 8,
+        "7": 68
+      },
+      "distinct_keyon_configs_excluding_TL": 2,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 10,
+      "trace_sha256": "42d27801251ce2197d0bfe13e1c4ef7ed04892fa61515bcf8d6e7caa5d01d7db",
+      "observed_seconds": 30.00000391111161,
+      "ym_data_writes_including_boot": 59785,
+      "key_masks": {
+        "1": 7,
+        "2": 1,
+        "15": 481
+      },
+      "algorithms_at_keyon": {
+        "0": 8,
+        "1": 416,
+        "2": 65
+      },
+      "feedback_at_keyon": {
+        "0": 8,
+        "5": 416,
+        "7": 65
+      },
+      "distinct_keyon_configs_excluding_TL": 3,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 11,
+      "trace_sha256": "d4c3ac162d9a24dccf984b8c11acc1c59c20f2b3120d4fc6ebfd484543eea61b",
+      "observed_seconds": 30.00000055873023,
+      "ym_data_writes_including_boot": 60039,
+      "key_masks": {
+        "1": 6,
+        "2": 2,
+        "15": 453
+      },
+      "algorithms_at_keyon": {
+        "0": 8,
+        "2": 201,
+        "1": 162,
+        "4": 90
+      },
+      "feedback_at_keyon": {
+        "0": 8,
+        "7": 291,
+        "5": 162
+      },
+      "distinct_keyon_configs_excluding_TL": 4,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 12,
+      "trace_sha256": "11933c5f9751f0716877e2736d211d8cc1e0a6b3fcd07b0ba7ba2d679b4615cd",
+      "observed_seconds": 30.000000279365114,
+      "ym_data_writes_including_boot": 46402,
+      "key_masks": {
+        "1": 5,
+        "2": 3,
+        "15": 496
+      },
+      "algorithms_at_keyon": {
+        "0": 49,
+        "2": 107,
+        "1": 192,
+        "4": 156
+      },
+      "feedback_at_keyon": {
+        "0": 49,
+        "7": 263,
+        "5": 192
+      },
+      "distinct_keyon_configs_excluding_TL": 6,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 13,
+      "trace_sha256": "d88d584faf1a47c555273fdd71b11055aa9b84bf85a5ee20d1531725ccc193eb",
+      "observed_seconds": 30.00000111746046,
+      "ym_data_writes_including_boot": 47396,
+      "key_masks": {
+        "1": 4,
+        "2": 4,
+        "15": 354
+      },
+      "algorithms_at_keyon": {
+        "0": 11,
+        "2": 102,
+        "4": 249
+      },
+      "feedback_at_keyon": {
+        "0": 8,
+        "7": 354
+      },
+      "distinct_keyon_configs_excluding_TL": 5,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 14,
+      "trace_sha256": "90219f8a6a8ab66b7253d0e85bedd8eb3dd489eae04f21cf0284917f1e6e265d",
+      "observed_seconds": 30.000003352381377,
+      "ym_data_writes_including_boot": 53384,
+      "key_masks": {
+        "1": 3,
+        "2": 5,
+        "15": 542
+      },
+      "algorithms_at_keyon": {
+        "0": 8,
+        "2": 85,
+        "4": 167,
+        "3": 290
+      },
+      "feedback_at_keyon": {
+        "0": 8,
+        "7": 542
+      },
+      "distinct_keyon_configs_excluding_TL": 5,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 15,
+      "trace_sha256": "2e5246cd2d46ae280634a4196ab79d8da6abdd42bd08fa8f218ed9404a8cfcf6",
+      "observed_seconds": 30.00000223492092,
+      "ym_data_writes_including_boot": 52846,
+      "key_masks": {
+        "1": 2,
+        "2": 6,
+        "15": 716
+      },
+      "algorithms_at_keyon": {
+        "0": 8,
+        "2": 128,
+        "4": 334,
+        "3": 254
+      },
+      "feedback_at_keyon": {
+        "0": 97,
+        "7": 627
+      },
+      "distinct_keyon_configs_excluding_TL": 6,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 16,
+      "trace_sha256": "d6b30d82cc00f8fabc5f516d24a9a5c47dea33c4b0ea021575d70635a2efa089",
+      "observed_seconds": 30.000002514286034,
+      "ym_data_writes_including_boot": 39765,
+      "key_masks": {
+        "1": 1,
+        "2": 7,
+        "15": 434
+      },
+      "algorithms_at_keyon": {
+        "0": 186,
+        "1": 74,
+        "2": 182
+      },
+      "feedback_at_keyon": {
+        "0": 181,
+        "5": 74,
+        "7": 187
+      },
+      "distinct_keyon_configs_excluding_TL": 5,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 17,
+      "trace_sha256": "683308b9871b489c7cc91d4d082e4944f45c4475a85ccab11922655db073d721",
+      "observed_seconds": 30.000001396825574,
+      "ym_data_writes_including_boot": 74661,
+      "key_masks": {
+        "2": 8,
+        "15": 624
+      },
+      "algorithms_at_keyon": {
+        "0": 74,
+        "2": 146,
+        "1": 172,
+        "4": 160,
+        "3": 80
+      },
+      "feedback_at_keyon": {
+        "0": 74,
+        "7": 386,
+        "5": 172
+      },
+      "distinct_keyon_configs_excluding_TL": 6,
+      "modulating_lfo_on_ever_keyed_channels": []
+    },
+    {
+      "command": 18,
+      "trace_sha256": "00d528325ce65d68d9588a91b213e5fa8c9d7e33d65f576963fe8679e017b3d1",
+      "observed_seconds": 30.000002514286034,
+      "ym_data_writes_including_boot": 95998,
+      "key_masks": {
+        "2": 7,
+        "3": 1,
+        "15": 665
+      },
+      "algorithms_at_keyon": {
+        "0": 8,
+        "2": 172,
+        "4": 108,
+        "1": 385
+      },
+      "feedback_at_keyon": {
+        "0": 8,
+        "7": 280,
+        "5": 385
+      },
+      "distinct_keyon_configs_excluding_TL": 4,
+      "modulating_lfo_on_ever_keyed_channels": []
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+CORRECCIONES DE AUDIO Y RESULTADO DE RENDIMIENTO — 28/10/2026
+
+Estado: BLOQUEADO PARA ENTREGAR MÚSICA NATIVA COMPLETA.
+Hay correcciones de código verificadas de bloqueos, memoria y PCM. La música
+activa sigue sin cumplir sus plazos con caché completa en esta emulación.
+La protección puede silenciarla para que el port continúe. Ese modo degradado
+NO constituye una aprobación de audio completo ni de rendimiento con música.
+
+R04, el ZIP original de audio R02 y las imágenes anteriores no se han modificado.
+No se han creado archivos BIN/CUE/ISO. Las pruebas de disco emplean un sistema
+de archivos virtual en RAM sobre imágenes anteriores abiertas solo para lectura.
+
+CORRECCIONES INCORPORADAS A LAS FUENTES
+
+1. Bloqueos y aislamiento de fallos
+
+   Las colas llenas y los errores del transporte ya no se devuelven al gameplay
+   como WF_BAD_STATE. Las órdenes descartadas por saturación se contabilizan.
+   STOP conserva su orden; si no puede admitirse, se aplica mute persistente.
+   Un transporte con resultado desconocido permanece invalidado hasta reinicio.
+
+   Las esperas de generación, cola compartida y cola FM tienen un límite de
+   120 VBlank. El master vigila también progreso del trabajador y del DSP.
+   Los sellos son palabras de 16 bits, atómicas en el bus VDP1; comparan con
+   wrap y toleran que una interrupción adelante un sello respecto de la lectura.
+   Esto cambia la ABI del módulo musical a 3: los nuevos ejecutables forman
+   un conjunto; un módulo ABI2 se rechaza y el juego continúa con audio apagado.
+
+   Perder un plazo FM deja de vaciar silenciosamente la cola y continuar
+   saturando el procesador secundario: el módulo entra en FAULT y el master
+   detiene el audio. Su mute no puede deshacerse con escrituras tardías de slots.
+
+   Pruebas C de producción con /W4 /WX: pasan, después de reproducir el error.
+   También se han ejecutado dos pruebas sobre Saturn emulado desde arranque:
+   - Módulo incompatible: fallo de audio registrado; se alcanza combate.
+   - Plazo FM perdido real: un descarte, FAULT10 y audio desactivado;
+     se alcanza game_frame849 sin diagnóstico fatal del port.
+
+2. Propiedad de memoria
+
+   Se reserva una pila exclusiva de 8.192 bytes en el almacenamiento privado
+   del SDK. TLSF recibe solo los primeros 32 KiB de ese almacenamiento de40 KiB.
+   El control TLSF del usuario se aloja en el pool privado y el área del usuario
+   conserva 18.436 bytes útiles, por encima del mínimo de16 KiB.
+   La pila, el pool privado y el área del usuario no comparten propiedad.
+
+   El SDK se adapta sin modificar la instalación: su objeto nativo se prepara
+   para impedir que LTO resuelva internamente la llamada y omita el wrapper.
+   Los verificadores inspeccionan la llamada real del inicializador en el ELF,
+   los límites y el coste real de TLSF; no aceptan solo símbolos de linker.
+   El builder de audio usa ahora las fuentes y los gates del build canónico;
+   se elimina la configuración antigua de pila0x06001E00.
+
+   Dos rutas de compilación producen el mismo ELF53eaf24e... y pasan los gates.
+   Cinco regresiones del ELF y las pruebas de fallos del adaptador pasan.
+   La captura real del SDK en boot informa consistencia0/0, faults0,
+   private_free26096 y user_free18436. Es una captura, no una medición universal
+   del máximo uso de pila o memoria en todas las escenas y en hardware.
+
+3. PCM
+
+   MADRS de cada voz se centra en su anillo y la fase se sesga antes de ADRL,
+   respetando el índice SCSP de12 bits con signo. Se conservan los anillos de
+   4096 muestras, el vecino final, sus strides y los32 slots FM.
+   Nueva constante0xB016=0x8000; el writer68000 permite exactamente esa palabra.
+   El programa usa120 de128 pasos y12 accesos RAM por muestra, frente a108/11.
+
+   DSP independiente:144 casos y12 casos con avance/reloj pasan; se comprueban
+   las cuatro voces, ambos vecinos, fracciones,2047/2048 y4095->0.
+   Pasan además NOFL y carga entre stores. El DSP enlazado coincide con el
+   programa generado. La referencia MAME histórica queda intacta; su adaptación
+   de prueba NOFL8/ADRSsigned12 se genera y registra explícitamente.
+
+   Firmware68000 real +modeloDSP:18 fragmentos de3 segundos, con3 efectos
+   simultáneos, máscarasFM esperadas y0 underrunsPCM. No son18 canciones enteras
+   renderizadas en Saturn. La prueba de catálogo/control sí recorre600 segundos
+   por comando, fades y wrap; no sintetiza la forma de ondaFM física.
+
+COMPROBACIÓN GRÁFICA: RESULTADO Y LÍMITE
+
+La música activa anterior al fail-fast produce257 descartesFM a9600 cuadros
+emulados y no llega a combate; el controlSFX con el mismo master sí avanza.
+El estadoRUNNING/error0 no basta para considerar que la música funciona.
+
+La protección nueva evita que ese fallo continúe perjudicando el port. En una
+ventana estricta game_frame300..600, comparando el modo con audio silenciado por
+FAULT frente al controlSFX, ambos necesitan1004 VBlank; coinciden13 ventanas
+completas del estimador de render y su mediana17. El cociente es1 y la diferencia
+de medianas0. Hay9 diferencias puntuales de muestreo; no se afirma identidad de
+framebuffer ni igualdad bit a bit. Esta comparación acredita únicamente el
+fallback, que está silenciado. La puerta de audio completo sigue fallando.
+
+Se han descartado como reparaciones las variantes aisladas de KEYON apagado,
+prioridad de caché, FIFO más pequeña, compresión de código, ruta genérica,
+quantum64, datos calientes en HWRAM y fusión conservadora de bookkeeping.
+Ninguna se ha incorporado a producción. El perfil concentra75,85% de las
+muestras dePC del slave en native_step, que ocupa39.968 bytes. Es un muestreo,
+no un porcentaje de ciclos ni una medición de fallos de caché.
+
+El control LARGE-STUB mantiene el módulo de129.652 bytes, los segmentos,
+rodata/BSS y preparación; solo sustituye su funciónrun. Sin ejecutar el trabajo
+musical, llega a título y combate con comandos y texturas visibles. Esto separa
+el coste de ejecución de la simple presencia/carga del módulo en VRAM.
+Las causas microarquitectónicas concretas y el rendimiento físico no quedan
+demostrados. Queda reducir sustancialmente el coste del controlador musical.
+
+ARTEFACTOS Y REPRODUCCIÓN
+
+verify_repair.py regenera VERIFIED-RESULT.json comprobando evidencia, programa
+DSP enlazado, límites ELF, hashes y conservación de los originales.
+
+final/SCSP.ELF: b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c
+final/module/MUSIC.ELF: dae8c38a712561a40599f2d7145560c01beb7155d172ff206cf9ca4f356f66f8
+final/wrestlefest-runtime18.elf:
+53eaf24ee5d62152ca788c1de99cb9af5bb5bb98bf3dede23d272205bc4cced0
+
+Estos ELF son artefactos de verificación de las correcciones y del fallback.
+No son una entrega de música completa aprobada. Las copias experimentales
+ABI3 con workspace y los módulos diagnósticos no se usan como producto.
+
+Las fuentes gráficas están cambiando en paralelo: el master probado procede
+de un snapshot fijado. Los cambios posteriores ajenos de CDFS/metasprite-cache
+se han conservado; no se atribuye su validación a este ELF anterior.
+
+Informes específicos: pcm/PCM-REPAIR.json; pcm/firmware-tests/; memory/RESULT.txt;
+review/INFORME-REVISION.txt; review/ADDENDUM-FM-DEADLINE.txt; emulator/;
+perf-diagnostics/; perf-hotstate/; perf-bookkeeping/; perf-large-stub/.
+
+Conclusión de entrega: correcciones de componentes verificadas; integración de
+música activa y rendimiento gráfico NO APROBADOS. No se asigna un porcentaje.

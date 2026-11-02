@@ -1,0 +1,55 @@
+{
+  "mednafen_original_source_files_checked": 1859,
+  "mednafen_source_differences": [],
+  "artifacts": {
+    "sh2_gcc": {
+      "path": "/workspace/scratch/46cef04a9eee/tools-env/sh2eb-elf/bin/sh2eb-elf-gcc",
+      "sha256": "36b2264f60f480b6048228a9511fd6ddb7de300648cbf47ead09e75c51bbc883"
+    },
+    "sh2_as": {
+      "path": "/workspace/scratch/46cef04a9eee/tools-env/sh2eb-elf/bin/sh2eb-elf-as",
+      "sha256": "47f43697e13bb396ac5760350c395a50ad4ef51a3db29793450c65bfe1d86dfe"
+    },
+    "m68k_gcc": {
+      "path": "/workspace/scratch/46cef04a9eee/tools-env/host/usr/bin/m68k-linux-gnu-gcc",
+      "sha256": "6fc05274d190ea4b09ad5ff421ec4d73262cc5e889b03149a6ce5880eb56827a"
+    },
+    "m68k_as": {
+      "path": "/workspace/scratch/46cef04a9eee/tools-env/host/usr/bin/m68k-linux-gnu-as",
+      "sha256": "c52857325edf2697b7434a0c053c3952b31a8698f8d57f6bc6cd1dec7aa1c6d9"
+    },
+    "mednafen": {
+      "path": "/workspace/scratch/46cef04a9eee/tools-env/mednafen/bin/mednafen",
+      "sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689"
+    },
+    "xvfb_binary": {
+      "path": "/workspace/scratch/46cef04a9eee/tools-env/host/usr/bin/Xvfb",
+      "sha256": "0081b27338b510ec5e2068a93c6db31480872de9bb082f347f3747ef1648e794"
+    },
+    "xvfb_wrapper": {
+      "path": "/workspace/scratch/46cef04a9eee/tools-env/bin/Xvfb",
+      "sha256": "1721def9706ad00ac519b7d2e03c8446c789ed205a44c0c6f0f1eca786705c43"
+    },
+    "xorrisofs": {
+      "path": "/workspace/scratch/46cef04a9eee/tools-env/host/usr/bin/xorrisofs",
+      "sha256": "c66a5be11a674e97ed8983af520eae8fad900b47d104c92bc63e5cf254391922"
+    }
+  },
+  "mednafen_version": "1.32.1",
+  "sh2_gcc_version": "13.2.0",
+  "sh2_binutils_version": "2.40",
+  "m68k_gcc_version": "13.3.0",
+  "m68k_binutils_version": "2.42",
+  "sound_driver_for_capture": "dummy",
+  "frame_skip": false,
+  "native_smoke_report": "verification/mednafen-native-smoke/report.json",
+  "extended_audio_probe_report": "../audio2-build/captures/probe03-extended/report.json",
+  "scope": "Build and real native emulator tooling; no claim of physical Saturn validation or audio fidelity",
+  "reproduction": {
+    "installer": "environment/restore_environment.py",
+    "instructions": "environment/README.md",
+    "verification": "environment/verification.json",
+    "fresh_output_verified": true,
+    "fresh_native_executable_sha256": "3a279af7b8b70b0b9e2fad20de18fc086e8e7c43545fcb287a027473413735bc"
+  }
+}

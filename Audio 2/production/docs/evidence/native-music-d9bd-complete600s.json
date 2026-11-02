@@ -1,0 +1,2299 @@
+{
+  "schema_version": 1,
+  "kind": "NATIVE_D9BD_COMPLETE_MUSIC_ZERO_DROPS",
+  "matrix_sha256": "1c5af394be92016cf959703326e521c48e22a19fc066934757e7c56969dc9975",
+  "emulator": "standalone Mednafen1.32.1",
+  "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+  "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "profile_label": "cddd-exact-TL-return-timestamp-early08c1-d9bd93a7-complete600s",
+  "source_sha256": {
+    "include/wf_audio2.h": "e0b8deb70b9b76776e174c4a3b115b33f447fd926cacd23cc798d8750464cb83",
+    "include/wf_audio2_yaul.h": "ab5eaf0b09dddbdfa2bcaf246a09a6a00b5ad0447d954b1da3a41d32a721e771",
+    "src/generated/wf_ym_envelope.h": "5f2e75edb5de0d5f3c1979f9e86b5d51602106a5cdad67671abfce4b4ca9bcf8",
+    "src/generated/wf_ym_tables.h": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+    "src/reference_driver/LICENSE": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5",
+    "src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "src/reference_driver/z80-native.c": "d9bd93a7cfdf8e5dbb022bce6df1dc132e6caf7e9c3c05a18e75e2debd9602e0",
+    "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+    "src/reference_driver/z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+    "src/wf_audio2.c": "1849480ae2a54d16df44b200303426d7d8a87622d2ec7d718bd7619f82f998a9",
+    "src/wf_audio2_yaul.c": "205b831868ffc17886aa289ec3cecf31f72339f59b8ca3d35731c671abe0744f",
+    "src/wf_music_clock.h": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+    "src/wf_music_entry.S": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+    "src/wf_music_firmware.c": "81cee191220e30dfe1ba42aed0fccbe1232842a78b271bec50eea72c64a21e90",
+    "src/wf_music_m68k.ld": "414130549d44eb62dd7b78db32650cfcbed19e3905d6bd2f373ce7e7a0871d3f",
+    "src/wf_music_module.c": "4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69",
+    "src/wf_music_module.h": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c",
+    "src/wf_music_seq.c": "8d833f42349267376e0d29ff5b2c0db0fa31af5c544252e7306e87ec7bfd66bc",
+    "src/wf_music_seq.h": "b02489430f5fb5eb97712c2a56d1636a4159358930cdcbf6244df0cbadf92471",
+    "src/wf_music_time.h": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+    "src/wf_native_driver.h": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+    "src/wf_native_elf.c": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+    "src/wf_native_elf.h": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+    "src/wf_native_host.c": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+    "src/wf_native_host.h": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+    "src/wf_native_yaul.c": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+    "src/wf_native_yaul.h": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+    "src/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+    "src/wf_scsp_dsp.h": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+    "src/wf_scsp_sfx.c": "4745461ca0439802e0f4ffc4395e07ef89d7b09ff41e83868b3bc7dfefa7d05b",
+    "src/wf_scsp_sfx.h": "d089e10bc23083db14b29577767f36d0ac8582f73c3e0d2bd3a14fc6baa11695",
+    "src/wf_scsp_ym.c": "c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76",
+    "src/wf_scsp_ym.h": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+    "src/wf_sfx_decode.S": "64c8e4137aee642546dcd6c1f5bca1f0103b6b905faa683b3b7aaa093bd705ed",
+    "src/wf_sfx_memory.c": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+    "src/wf_sfx_start.S": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+    "src/wf_z80_control_batch.inc": "6775bdc1db5f94c73ed3dc2f35926fffa40fd21e6a2890a284ce6f0c7f6e2ee2",
+    "src/wf_z80_instrument_post.inc": "b9cd0af3069c405f2b63809c2e6d5157831a8cc84632868d8f3f6dec7fe31f53",
+    "src/wf_z80_instrument_pre.inc": "1353f99b38f72dfb7cc79858f14e16314cc6b90900a2cb8680557e9693197770",
+    "src/wf_z80_multiply.inc": "86dd0ae1b986a7c919f0074db6129833fe0b2ebdc946809d382c75f63d6a2642",
+    "src/wf_z80_startup_copy.inc": "67f4df15c8c115210f69779e8b5d937859002122332ff5bbecbf09ada86742e1",
+    "tests/saturn_harness.c": "49535de835bf9ff83353db8865ec6bf9356a3b3c6396ee475ea376fba4245f71"
+  },
+  "sources_and_inputs_stable": true,
+  "emulated_hardware_clock_change": false,
+  "presentation_speed_requested": 4,
+  "cartridge": "none",
+  "music_commands": 18,
+  "score_seconds_before_1F": 600,
+  "tail_seconds_requested": 8,
+  "transition_words": 9,
+  "total_native_emulated_seconds_requested": 10976,
+  "all_runtime_gates_passed": true,
+  "all_error_counters_zero": true,
+  "capture_evidence_errors": 0,
+  "cases": [
+    {
+      "id": "command-01",
+      "kind": "music",
+      "command": 1,
+      "hex": "0x01",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 1
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 1,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814811,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "1b5d6b41cf9631262aaf9ead2795618b505e4f559bd9296028663e2f9649c537"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "41f16a857dc382722f1d6230833c4205814ad0fab7fb6123276d15779b79e1d7"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "ac2dedfc0eaff797058f098f95a0e29a87a3337f174e7b92ec54513f81bd1ad9"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "7c7d7a40727e9be058ede8c4bdee5d77564820aa159f094650bcc250c4bb34e7"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "1ce8fd2b0d31e744579318ec74ab963edbeaa7a038d45ea557b0ef39cecca3ea",
+      "native_gates_sha256": "a900894167c222159a452f31fcbbe4431b404461768845ffb25d1653a8cc2b80",
+      "native_f5_sha256": "e4cdd120e3aa50e27627f96ff247b73f4d3d1317481e78879cdbf022527e48c6",
+      "raw_native_wav_sha256": "e936f37b60517405a8987ed83e42afc18a866f59cbdb00906d4108559de13bab"
+    },
+    {
+      "id": "command-02",
+      "kind": "music",
+      "command": 2,
+      "hex": "0x02",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 2
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 2,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26816285,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "ad854ffe5aec6cbfcbd14413077d6c2318cbd204f6dac2c4d85635edaf93b547"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "83f78d0190ebbb9a9b226221955acb562315d25a98ee547291b27d3a0f6c66fd"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "7da82a37007a4833790cface8a7e9abe80276931c7f848150d9938d914d79d70"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "7a23be93ff09c1a7186f7f46946eb6ead81eab21b83d24936a040527cf70275e"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "e5ae1f43ac571f548f279874d508d7d5c77e982bf640d3ba43cd3b6aa66e77d3",
+      "native_gates_sha256": "6f071489b73e20b644c62b6e829c998242b2499bedb21cb40dee95e3932744d8",
+      "native_f5_sha256": "1424a6af6302802eb1111711958c6a5642b929a85153c842ca1111204cb463ff",
+      "raw_native_wav_sha256": "2f7dfa4382710044acd4da3c610e70ee329e1df6c83230a327b6b6c33d4c77c7"
+    },
+    {
+      "id": "command-03",
+      "kind": "music",
+      "command": 3,
+      "hex": "0x03",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 3
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 3,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814810,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "19db1421bf97c5dd8f7a3600766048b2ce41a42f5792a76f61814e605785cb74"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "4c45a1d4f46473245754e49b43e1ff66b590c316c1f4bbd49411a6acc93e1079"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "1a86f4f20c846f5df12dcf9357f0bfd3afb47b26d3b028d171f807a00061227a"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "5b437b1b2774675755b076674adf2d84d21b273001c36774c0f8bda324c2f567"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "e3b26dbe0375eb08d1b74a2a52587822f5bbc65775b5adf7001a96a516c454e0",
+      "native_gates_sha256": "bf085660592208f832d460e94a5a53fa343b269dba9d39208ad5ad3c6041c3d1",
+      "native_f5_sha256": "72b9f114c58ee74bc083ecab903373ce2a77aa82f49027c9653c25b53b4ddcce",
+      "raw_native_wav_sha256": "888572a3ceaa5ba0cfd4e19cb36120e26605940bbd772ee15ab638dc1d55e4e1"
+    },
+    {
+      "id": "command-04",
+      "kind": "music",
+      "command": 4,
+      "hex": "0x04",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 4
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 4,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814811,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "c254e401e3d953f2c91a6244c803a3f690948dd06103037a1a257f13f1d6934c"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "4c89634eadc2b8565086b853e0d96003529e3cef08e79abefb2f3d80f917dbdf"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "c7fdc5705f2dc4f13df5fd0aacabd13c50a9acfb56c6498644416fea59eb13ca"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "f9712d3f99141d28beb0e8947917eaeb7e0deebc5bf36a8efbf04af3f2f9dec0"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "ad3cb1b2c438ec454bd4939b3a6f63d5e70025b401f9e68a8660086ecfbda44c",
+      "native_gates_sha256": "bf703e4a5ea41fc514f8052b33885754c24ba6a13630be8a7aa90ee1a8ace0fa",
+      "native_f5_sha256": "51fb3e077918d8bd8afe9a8822cc9afafc2e214d45ae28c7d2f9caf96ae98741",
+      "raw_native_wav_sha256": "372ee5c9eddba79c7395f6708663122ff0be93db39087fe796d219ce349fb19d"
+    },
+    {
+      "id": "command-05",
+      "kind": "music",
+      "command": 5,
+      "hex": "0x05",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 5
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 5,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26816285,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "19b865a8d49cda7dae571a3086ba360d2e4bf7dc8ad1287bf54122cd9339c0ca"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "20e413a8f4f2968340b997730c48545d027807742281668e266466c26b340aeb"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "ac8dcd1b76ffafe541f049137d61362da838f3047c8fcaa9346ad1ea23fc7cc0"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "5bbeefbeb630afada41f133386e9caed5e5f3d3cc99924c30467321814b55151"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "04f31e28422e8bbad3eba7e45933e5fa061aa9c210e3accd90984561e41b9393",
+      "native_gates_sha256": "337fc5e0cc0ae5a8265a3fd3208bf43c43cb80c92f8df9d14111e05f862b823a",
+      "native_f5_sha256": "5464cb3ccf33a23750b36aecb45f40ded2a927bab06f65a628d22af78ab9d429",
+      "raw_native_wav_sha256": "1ea691be6a6bf73fb310850680fa36c64a3045c7166bdb9d7f14f093fb906aa5"
+    },
+    {
+      "id": "command-06",
+      "kind": "music",
+      "command": 6,
+      "hex": "0x06",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 6
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 6,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814810,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "57509f8e80f683305e44e2fd6e838876f102a6fdbbcfef562ba065044a9ad9ea"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "89e7ae323ee57ef149e82d80b03397df968fc54e82640d7f939cfc1719425fc4"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "1881fdca221d55e8bd7ad6dc7ad3957d6e02f70c470c74bb7d1d64f4e51ab3a9"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "eb6401b1e02df3bad6c3e67d0eb00071547b1cd6e09c2849d257fc2e5ac806cf"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "e08c6c73a73c5b516647d9d08a4149912589014b188cc143b56f3a9d65037737",
+      "native_gates_sha256": "6d731e1827af2c2b9b9687e35cd592987e99c8059cee0a5b91882708889a919b",
+      "native_f5_sha256": "4a80a09de481b59c8cb528d9389ff8815a236249fd3004aab359d38d3200967a",
+      "raw_native_wav_sha256": "03e81bd15bc0407a44c52a53b525feb95ed9cb04c771c1247ff653e728f270a4"
+    },
+    {
+      "id": "command-07",
+      "kind": "music",
+      "command": 7,
+      "hex": "0x07",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 7
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 7,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814811,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "09243a05b5e40dd2791bd60fbbfc6a9632bea733fdf607a9b69137696ba7439b"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "f87d90e93793b8bd57b502f6431c4adc95e0fbbbf6ee5affcf88525eb6c340f2"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "c6c5830516302f95f2db23f81184f794bb3b26c036648427dad34dfe06787c8f"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "2f97d90411c98e1edced2cbd11a4a398df9787fb5c2b85801e727d3625ab441d"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "1026182d91d9823ee9fc975a47d56534b00ffdc3b3354dffac16aec56af4e84a",
+      "native_gates_sha256": "6bf0502f2551a71eebf03e807eb1bf04fcbcb6059cba1bab361fcb310eae1abd",
+      "native_f5_sha256": "cf4f33e14e7a530c924404cd756d632875bbefc9879dc903143ca3d2cb5687ad",
+      "raw_native_wav_sha256": "0ccc7681ee325ae9aa018802188afbaaa11f077a856229d398e00ad972e4a1fc"
+    },
+    {
+      "id": "command-08",
+      "kind": "music",
+      "command": 8,
+      "hex": "0x08",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 8
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 8,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814811,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "ebf51d4666e7a718f22f6656484af910c69297a75ca057135ab86398c12e8b92"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "dd4764e654a761a239fc213a97008db1dab95a28261ba58e4e30ac5d34b03f6d"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "a740993760711d86fb8c7950f0350741027990e59ad26f8947621ba5be901345"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "e753d3c8339492c58e59eb4e255622e51e2db67c54c1afd4ca4ac260c115284f"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "0e1a900c4e63cb28701c71175f6996354bac905bc58b9e5b8508f7473d317187",
+      "native_gates_sha256": "b90b08f11c4aede931534d3a69fd05990558b6142285b144f3d1d40d754b97d1",
+      "native_f5_sha256": "5ae2b6731da491d96f75e786d11a7858aa7b0bf8eca1a042fd3176c2dc94de58",
+      "raw_native_wav_sha256": "6c89a7a45f7cb00ca15e8afd3b35271f89d8bd27c55b22acd7fbbc7346a38b13"
+    },
+    {
+      "id": "command-09",
+      "kind": "music",
+      "command": 9,
+      "hex": "0x09",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 9
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 9,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26817022,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "770c7234e04b4c70335a161aa5b0b77af37b1524439ba78b5289a718b66f6001"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "ca06cb1446afe55d053b04d8ed9d6b2bc5e45e1636a58e55e4c3bf3dceae1389"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "a35a32651396b7b754dbc800e9c9ebaad659d15ddda1516581a8ed73d7d51bcd"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "82d19dacb3aabe5da234dcff06e3d9139a66b0176267656eef307b473357cb4d"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "f037223be49f440d80dcc8868467db2279790177ef83e224b36625d0cdfcde25",
+      "native_gates_sha256": "5eee0ab93b03a8fffc8c219fc05bba37dc7aa6ace41cbf603a2571dbe17bcba4",
+      "native_f5_sha256": "120e1ebcaff41e597ad4280914414c7a3bb03afc1fb90c7d2fff6bde8647f38a",
+      "raw_native_wav_sha256": "6346195b5ca6fcc57ecb1c3a0e3e8929683f616c8a334659515f7b60f27059c8"
+    },
+    {
+      "id": "command-0A",
+      "kind": "music",
+      "command": 10,
+      "hex": "0x0A",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 10
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 10,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814811,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "ba35b89afcfbc4e546dee901e79176262ccc0a390f79221e28f082b37e84d026"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "d555e8e073bf8d2ad233e9a18453061fcde8232b54b8d2e2b3c2de6012c54102"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "7004924a7668439ed6b4896a643514d3a16b6c246d4d8e2597bf3bba0e4db1a8"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "ad32d7b9b7a5fe64bf61f72d648a609048ef5da5225b1ed0007ab5f94f49c214"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "72da9232b79bf69eda1e8d0b03b06ecd798c49015d595a66751fa90bf818ce6d",
+      "native_gates_sha256": "095d13c8a71d6708c9e916535c090000d8b84d0b67fda784a645a0c6ad478338",
+      "native_f5_sha256": "26976d6b980259dcc945aa6a1b3fa629ed78335039cdfd03045a02834fc287a1",
+      "raw_native_wav_sha256": "e8ee398f30fcebb2222ae186e2fcfe071b6392192ca642598114a2836a889850"
+    },
+    {
+      "id": "command-0B",
+      "kind": "music",
+      "command": 11,
+      "hex": "0x0B",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 11
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 11,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814811,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "2df0f6045ccf21a1149f8fb82eb23130cc322519f5d01bed713c2d9ab691efe4"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "9a4ecff9e5b41fca2f60a11c86ba0eb4ee07732f554235ba2775902910b8771e"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "9e3ef7a154e6d6e86b63f6a9481a9a1f4b70489fcec5ba7d2f48199d066c95c3"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "c40cea7f2627407fed3457c48e934a4b53d4e631686c8e1ff8991aad14b64a48"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "fc1e25b8cb6793ba632d1992ebc5da3f8652c5a49ae98705e0887fc40951c4cd",
+      "native_gates_sha256": "277b8f8c20341fb215a2f0fc3086c3f5e663e1c09cc505cbeb029e7adbf89948",
+      "native_f5_sha256": "27cc067dd56fa2523ac38bdf39c860a78fdf37483e05032ec69b0e6fc04a2dc6",
+      "raw_native_wav_sha256": "3ade84eb6ed516ce99d2d2e480ee0d0fc884cfaf5af5dd0c6d5d0c249b3e4903"
+    },
+    {
+      "id": "command-0C",
+      "kind": "music",
+      "command": 12,
+      "hex": "0x0C",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 12
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 12,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26816285,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "c3c97902702b824be6c221c20ae47490398d12702fc40fc2014282912cc18784"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "cd7ff1f4e6d85f1cbe6f784c9de578a3822d4c8d13f10a4119822094c49b7f25"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "7cd2478c776d30cadb08f5c71df4ffb2560ee4223966731582f36c1e3f18c3bf"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "da8c9d0dfa890a50bb8fe8d2afba606e4de0e8a2c731a3837327e4b0a529e643"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "f33bb01647bcd6ab21e840a0c1cb9a063b8428c92895d308eb96d7d188b18f43",
+      "native_gates_sha256": "a8e9f2f6b1b6151ef34db59cbf3688a29ad8cd54701500ba9f0140a1cb367fed",
+      "native_f5_sha256": "ec83e08560d95626edb96ad88afcf7ab6359a7cead35636206d3f78ca81283e2",
+      "raw_native_wav_sha256": "82a26313e6484724c0d99e7b308dfd0abf25a9e22b1650b0851483241db8e798"
+    },
+    {
+      "id": "command-0D",
+      "kind": "music",
+      "command": 13,
+      "hex": "0x0D",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 13
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 13,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26815548,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "f5aeb266b3848eceee6343f92cd8122a3ae158b30842c0d11cfd899ec845623b"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "a9006a5514072d7c0ed7b1aa4bc52b6535a566a12e520dc684da082e9e5763e1"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "9c141bdec80f5567e3e1bc993d9d7063448dfe785804fedf824512f9622ac59d"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "86386294eb06b09f118c6e1f16da6fefb5f44d706561f7dda2597fcb4f116b1a"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "1b260bdde538a9006e859bb807acab6110ddae7b888ecc5bdd38df4add2aca09",
+      "native_gates_sha256": "2f0d4587692fabce79d2ee312e804f6c12a923d62361dd6335695a372b93d396",
+      "native_f5_sha256": "098f5d412ca0ecc33045dd31d2fee64e5a1ab988dffbc1cb06face898cea6826",
+      "raw_native_wav_sha256": "84103c5a2cade3b7789a912bb4f940c15446386b07141c7c822e06cecf2d29ab"
+    },
+    {
+      "id": "command-0E",
+      "kind": "music",
+      "command": 14,
+      "hex": "0x0E",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 14
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 14,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26822182,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "94f02895c1d2bb24068269312a004d108fcc91681e873d15ffdee0e6aee7540c"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "1f1b8fffac6aaaa0007c400963235eedb4f7ad060d56de6499d08b37c76e0bda"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "02771f6a23126de1aba273a22435c2157bf23f478077fbee453bba3550d7fb73"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "f7c5ed0eec1ec0c5088259122e0a9ddff2dd07b7b1333a753f87d3eef0f7d1e7"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "9e2c767c205cd41a8a8270e3f0c4efa52abf14c16f716c458bfa698292044e34",
+      "native_gates_sha256": "9ba79ab28e01a9e7b6c4074292617a7835bd01906a9e2a4335c13050395a3404",
+      "native_f5_sha256": "92beeb7b68b3eb46a0415ac7b2792ca59a2a2bbee6ab7987accad27082d3d8d3",
+      "raw_native_wav_sha256": "5b2ef41a3fd459585bdc6ca6668f70eb88b680c4da4bac6541bc028cab06378e"
+    },
+    {
+      "id": "command-0F",
+      "kind": "music",
+      "command": 15,
+      "hex": "0x0F",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 15
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 15,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26815548,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "6efb6bfb93feb1442af52d34481970e2c8972cfbbe1be1eaa69e5f0fd242d4b2"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "4f52212e1bf26086a62f9b52a166574de6bbcd242217f9ef1cbc5ee4c466bf1e"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "5b10e0b23c5535abdf0a326eab4526ea6250615e7997954709bb34a88529449a"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "c666b36eaeee1527747a9d5214f73e471f182bd620be606aba3df075d6b08d4d"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "432f171c702f93688edad12c6f4dd5d9586224a1bdbc077dba650fd15151a9ac",
+      "native_gates_sha256": "84da827d4dada850e0496ffcf656ca6f4b72346b5cad94d0dfeffd584838d020",
+      "native_f5_sha256": "5a105f23a5732dbce7f9bd8a61d81911ba38491b1e0b5bf4e0e964091cb8d704",
+      "raw_native_wav_sha256": "783e97578a64a3d3f88f1f8a14813f4b3d01e118f4b53f39a3233ff97759aef7"
+    },
+    {
+      "id": "command-10",
+      "kind": "music",
+      "command": 16,
+      "hex": "0x10",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 16
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 16,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26815548,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "56bac3d340d96e11b779da9a43b94e1c3379d68821da53f182c8ac8c4d8e6d7b"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "3eafee4a39c510480b445e9c5418905e85eece1a8518a2059d0cb18816fd0ad4"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "c15639ff220fee161b5a725ed7085cc8b36640edb6efaad72409e1f776ce3d30"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "f69a10d864cdef81d1d0b711c5c9b03bfca12f00f27771302047b3167c71bef8"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "83d70beb39fa30dd96c3536f73557c9e86a33d41ac67919ec9f900e7d848f76f",
+      "native_gates_sha256": "1faa48eaf05abbe5164aff33da1411580422ba3a012f64ccaada0304272540ad",
+      "native_f5_sha256": "bad67462464da900d5d60d2b8ced548e7900492c3101deb5f9c1f7110164cc6b",
+      "raw_native_wav_sha256": "ee594e72bdd12928f62b83e451a0e2c6e993187199e636b9dab944eb56211ea1"
+    },
+    {
+      "id": "command-11",
+      "kind": "music",
+      "command": 17,
+      "hex": "0x11",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 17
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 17,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814810,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "096b7bdda623325778aee904360b03e62d6a8b6bdd25b5e5b9ac0788275d4614"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "5087272a17c790c70add7720787d6b1ba5e1ba029e69785552941842dd590ab0"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "dc4dd61a4a7aab9120ac4bb156093b63112ee136da312a923257001adcfcae96"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "c74edcd0b7ef81cbfdcfac4774207e039008f69794fecb138b75e3aabfbcba41"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "7a9f0e3f156d910bd5818a3b35f43b098afe83b302a52d9b162d0a46b418dc7f",
+      "native_gates_sha256": "2f9d0ec4acf2ffc6cd0f2118f5998cf08e39de57f798f48b209b710e076455b6",
+      "native_f5_sha256": "b512eb855a0d134a64dd5d36b214b4dd085187617305d8e1b530ea3fecac623a",
+      "raw_native_wav_sha256": "9a226590f7950668c307c469ff891af7b685358559809d16cab5bfd78345eeed"
+    },
+    {
+      "id": "command-12",
+      "kind": "music",
+      "command": 18,
+      "hex": "0x12",
+      "seconds": 608,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 18
+        },
+        {
+          "sample": 26460000,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 18,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 26460248,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 2,
+      "replayExpected": 2,
+      "SCSPelapsed": 26814073,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1115900,
+            "sha256": "e4791446d6a7778699553261252e4403885b1e514f62db46da495f7803cd548b"
+          },
+          "AUDIO2.map": {
+            "bytes": 726888,
+            "sha256": "60d6eeb6b8af7c0ac6bd05c97f3304436b4970577b9e18af0a4e4880f4fdac0e"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691784,
+            "sha256": "e3e76a59eea5cb51eb9e4c7ff12e684b57b49683ba4fcf1bd34e9b008eb46074"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "b22b4958f890163ed0f9c102d946ec97d52bd7360f3b74f6b45aa3921feb3f56"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "1e51ae1c15e8a35816bb325f888bb142f00bf5cba0dda769e6d62da515608bab",
+      "native_gates_sha256": "6a0436b2663d77ccb0088bf763b249fda77e289db07c22f1772bd4057a42f5b2",
+      "native_f5_sha256": "eeafce012cc1c6c61ef9bdafe40f3dff4687a31405b0287db09a2f227121fdad",
+      "raw_native_wav_sha256": "18984846803af998aaa747817859c74aebdbef53ac9cd7a6608fe61966ccd195"
+    },
+    {
+      "id": "transitions",
+      "kind": "transitions",
+      "command": 1,
+      "hex": "0x01",
+      "seconds": 32,
+      "requested_events": [
+        {
+          "sample": 0,
+          "word": 1
+        },
+        {
+          "sample": 132300,
+          "word": 6
+        },
+        {
+          "sample": 264600,
+          "word": 18
+        },
+        {
+          "sample": 396900,
+          "word": 31
+        },
+        {
+          "sample": 529200,
+          "word": 3
+        },
+        {
+          "sample": 661500,
+          "word": 31
+        },
+        {
+          "sample": 793800,
+          "word": 2
+        },
+        {
+          "sample": 926100,
+          "word": 1
+        },
+        {
+          "sample": 1058400,
+          "word": 31
+        }
+      ],
+      "observed_events": [
+        {
+          "word": 1,
+          "sample": 0,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 6,
+          "sample": 132684,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 18,
+          "sample": 264632,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 397316,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 3,
+          "sample": 529264,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 661949,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 2,
+          "sample": 793895,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 1,
+          "sample": 926580,
+          "result": 0,
+          "recorded": true
+        },
+        {
+          "word": 31,
+          "sample": 1058528,
+          "result": 0,
+          "recorded": true
+        }
+      ],
+      "passed_runtime_gates": true,
+      "native_gates": {
+        "capture_subprocess_succeeded": true,
+        "emulator_exited_successfully": true,
+        "native_capture_method": true,
+        "normal_window_stop": true,
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true,
+        "api_still_running": true,
+        "requested_scsp_duration_reached": true,
+        "build_and_capture_identities_match": true,
+        "native_wav_finalized_and_unchanged": true,
+        "native_wav_covers_scsp_window": true,
+        "observed_history_has_no_errors": true,
+        "observed_clock_did_not_reset": true,
+        "native_f5_and_linked_elf_evidence_complete": true,
+        "embedded_firmware_matches_elf": true,
+        "all_loaded_firmware_bytes_match": true,
+        "all_linked_sh2_function_bytes_match": true,
+        "diagnostic_mirror_matches_f5_and_elf": true,
+        "no_actual_native_counter_errors": true,
+        "all_replay_words_accepted": true
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true,
+        "replay_words_results_and_admission_times": true
+      },
+      "counters": {
+        "error": 0,
+        "APIerror": 0,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "sfxUnderruns32": 0,
+        "lateB028": 0
+      },
+      "replayAccepted": 9,
+      "replayExpected": 9,
+      "SCSPelapsed": 1413827,
+      "source_build": {
+        "profile": "isolated-static-HWRAM",
+        "music_abi": "static link, not ABI3/ABI4 ELF interchange",
+        "hot_bytes": 15008,
+        "files": {
+          "AUDIO2.ELF": {
+            "bytes": 1116204,
+            "sha256": "2445a64336e3a27dd56b17d7c9253429c57242a929411fb998228f0cf986d62f"
+          },
+          "AUDIO2.map": {
+            "bytes": 727125,
+            "sha256": "5805d4d68387a5dd0999eb444f908496a2fb8e0a3425b3149c7ee8449a5f0ffe"
+          },
+          "AUDIO2.bin": {
+            "bytes": 691960,
+            "sha256": "0773012b02e0e303bcfa76b0c54ed6fbe64640e9ee4e3fc1058a321304ff60cd"
+          },
+          "AUDIO2.iso": {
+            "bytes": 1073152,
+            "sha256": "a12061db4c2dcc45acf38a3126daa7e01b4891cbf3afca5ca046c580f8151c41"
+          },
+          "AUDIO2.cue": {
+            "bytes": 69,
+            "sha256": "fdb5b361fbd86e404b12ea9d3ca63e4abbb10b79b46ad3cdd00366302209dc4f"
+          }
+        }
+      },
+      "capture_report_sha256": "48988e4879d7e63ac176eb39fa127578d8b11d291d3263863d69d3e49d916edc",
+      "native_gates_sha256": "8c76985963fa77fd79c551fbfaf0bf05abb1cfd723a3d05716f1fae72bda4d37",
+      "native_f5_sha256": "6ae2e8152d3f386413db33d888ce2509b69a0fa5b67306296710fa9c4f53589f",
+      "raw_native_wav_sha256": "3ed77ac79729c605c5a5104eadfcec0c739d6e230bc0625bc3b7f5ef23410686"
+    }
+  ],
+  "scope_limits": {
+    "isolated_harness_only": true,
+    "gameplay_or_graphics_integration": false,
+    "original_reference_structure_report": "tools/reference/evidence/full-board-complete-music-structure.json",
+    "host_control_exactness_is_not_waveform_equivalence": true,
+    "exact_PCM_period_proven": false,
+    "zero_warnings_is_not_zero_sample_jitter": true,
+    "full_pair_WAV_export_is_a_separate_step": true,
+    "existing_30s_matrix_previews_are_not_the_complete_delivery": true,
+    "mixed64_case_has_two_late_warnings": true,
+    "native_active_OKI_bank_still_incorrect": true
+  },
+  "production_ready": false,
+  "owner_listening_approval": "PENDING",
+  "hardware_status": "HARDWARE PENDING"
+}

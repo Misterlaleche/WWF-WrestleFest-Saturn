@@ -1,0 +1,1109 @@
+{
+  "scope": "frozen performance/integration evidence; no fidelity acceptance",
+  "input_tape_sha256": "2dcb67568e0dcace7f552cfbb96a64233c81b74dd5774b4b900a6da1cdc9f0dc",
+  "game_layout": {
+    "actors_offset": 384,
+    "actor_bytes": 268,
+    "actor_slots": 9,
+    "frame_offset": 24,
+    "mode_offset": 31,
+    "progression_offset": 32,
+    "runtime_bytes": 7648
+  },
+  "firmware_sha256": "b5ecee6e3e2a0efe7c13f1c6f4cb89bbc6b18cb96db23a57203b20e4a2b06b66",
+  "build": {
+    "scope": "isolated native TAG diagnostic, NOT AUDIO ACCEPTED",
+    "hot_start": 101621824,
+    "hot_end": 101640256,
+    "hot_code_const_bytes": 14660,
+    "hot_state_bytes": 3220,
+    "slave_stack_bottom": 101640256,
+    "slave_stack_top": 101648448,
+    "user_heap_start": 101648448,
+    "user_heap_bytes": 63424,
+    "module_bytes": 98088,
+    "control_elf_difference_bytes": 1,
+    "control_elf_difference_offset": 408016,
+    "control_change": "wf_audio2_enabled data word 1 to 0; all executable bytes identical",
+    "firmware_sha256": "b5ecee6e3e2a0efe7c13f1c6f4cb89bbc6b18cb96db23a57203b20e4a2b06b66",
+    "pairs": {
+      "audio2": {
+        "AUDIO2TAG.ELF": "9ddfa2596db55bcaaa10e35c8f1fa481c5f7bf61150c0d24e004929ebafe934d",
+        "AUDIO2TAG.bin": "9ec26d6652af4d12dff18ee70bd62cdfe0653e4142a410236c1f50eb3782049e",
+        "AUDIO2TAG.iso": "330f7b6f95b80741da82f29bee42a1f2e5192435f08dbd74ea55bdf57ef67220",
+        "AUDIO2TAG.cue": "89863d4735167256e0e32b5de219e6dbb0adcd0540210a49048114928299ed7c"
+      },
+      "control": {
+        "AUDIO2TAG.ELF": "ea5dc2b9b094ca749900ef737747ddfcdc71ada6782db9c254d5d57a830f1fa4",
+        "AUDIO2TAG.bin": "2b81905f0d44e5bb0eae3c8f1a48bc688422981eacddc358664abdd050e505fa",
+        "AUDIO2TAG.iso": "bd64be88fa2abbfc427629e8ee1e2d49c345d915957103b82ccf51a518e2b246",
+        "AUDIO2TAG.cue": "89863d4735167256e0e32b5de219e6dbb0adcd0540210a49048114928299ed7c"
+      }
+    },
+    "original_game_files_unchanged": 345,
+    "graphics_assets_unchanged": true
+  },
+  "profiles": {
+    "control": {
+      "profile": "control",
+      "game_frame": 7372,
+      "cadence": {
+        "initialized": 1,
+        "first_frame": 0,
+        "first_vblank": 738,
+        "last_frame": 7372,
+        "last_vblank": 8355,
+        "logical_steps": 7372,
+        "elapsed_vblanks": 7617,
+        "updates": 7372,
+        "unobserved_steps": 0,
+        "max_gap": 2,
+        "regressions": 0,
+        "gap_histogram_vblanks": {
+          "1": 7127,
+          "2": 245
+        },
+        "gap_percentile_vblanks": {
+          "50": 1,
+          "95": 1,
+          "99": 2,
+          "100": 2
+        },
+        "elapsed_seconds": 127.31893224489797,
+        "logical_steps_per_second": 57.90183651414825,
+        "gap_percentile_ms": {
+          "50": 16.715102040816326,
+          "95": 16.715102040816326,
+          "99": 33.43020408163265,
+          "100": 33.43020408163265
+        }
+      },
+      "recording_clock": {
+        "method": "last 1000 complete native video packet durations",
+        "time_base": "1/44100",
+        "duration_ticks": 737136,
+        "packet_count": 1000,
+        "video_hz": 59.82613791756202,
+        "duration_histogram_ticks": {
+          "737": 850,
+          "738": 143,
+          "736": 7
+        },
+        "timestamp_file_sha256": "e3ef63dacd4b69d35f600f68d296798d915abb7bda3bc3b2b6259f1ebaa881ea"
+      },
+      "runtime_sha256": "5a6c73b1c1362e82b9faf0eb1f268f2231e6331a2044b95e73a04f70bfc6b87b",
+      "actors_sha256": "4fafe5f3c6044dfe01da3499f6476e67a540b7dba6fd94d7b188d4562e3a33a2",
+      "actors": [
+        {
+          "slot": 0,
+          "active": 128,
+          "character": 0,
+          "role": 0,
+          "state": 32773
+        },
+        {
+          "slot": 1,
+          "active": 128,
+          "character": 0,
+          "role": 0,
+          "state": 32773
+        },
+        {
+          "slot": 2,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 3,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 4,
+          "active": 128,
+          "character": 0,
+          "role": 192,
+          "state": 32773
+        },
+        {
+          "slot": 5,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32773
+        },
+        {
+          "slot": 6,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 7,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 8,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        }
+      ],
+      "diagnostics": {
+        "enabled": 0,
+        "boot_stage": 9,
+        "api_state": 0,
+        "api_error": 0,
+        "worker_state": 0,
+        "worker_error": 0,
+        "accepted": 0,
+        "queue_used": 0,
+        "queue_completed": 0,
+        "queue_overflows": 0,
+        "unsupported": 0,
+        "skipped": 0,
+        "produced": 64,
+        "command_hash": 3024624743,
+        "first_audio_fault_vblank": 0,
+        "max_mail_latency_nominal_us": 0,
+        "reserved16": 0,
+        "reserved17": 0,
+        "queue_peak": 0,
+        "last_raw": 12666,
+        "boot_success": 0,
+        "pack_bytes": 0,
+        "module_bytes": 0,
+        "last_vblank": 8356
+      },
+      "producer_events": [
+        {
+          "frame": 0,
+          "raw_word": 12548,
+          "reserved": 0
+        },
+        {
+          "frame": 410,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 458,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 695,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 695,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1103,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1103,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1426,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 1460,
+          "raw_word": 12612,
+          "reserved": 0
+        },
+        {
+          "frame": 1468,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1468,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1614,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 1914,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1914,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2020,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 2471,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2471,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2526,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 2560,
+          "raw_word": 12611,
+          "reserved": 0
+        },
+        {
+          "frame": 2739,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 3133,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3133,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3192,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 3193,
+          "raw_word": 12671,
+          "reserved": 0
+        },
+        {
+          "frame": 3358,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3358,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3442,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 3476,
+          "raw_word": 12606,
+          "reserved": 0
+        },
+        {
+          "frame": 3736,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3736,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3845,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 3933,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 3935,
+          "raw_word": 12625,
+          "reserved": 0
+        },
+        {
+          "frame": 4543,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4543,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4600,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 4634,
+          "raw_word": 12611,
+          "reserved": 0
+        },
+        {
+          "frame": 4773,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 4861,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 4919,
+          "raw_word": 12625,
+          "reserved": 0
+        },
+        {
+          "frame": 5220,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5220,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5422,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5422,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5470,
+          "raw_word": 12601,
+          "reserved": 0
+        },
+        {
+          "frame": 5520,
+          "raw_word": 12611,
+          "reserved": 0
+        },
+        {
+          "frame": 5740,
+          "raw_word": 12601,
+          "reserved": 0
+        },
+        {
+          "frame": 5790,
+          "raw_word": 12649,
+          "reserved": 0
+        },
+        {
+          "frame": 6002,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 6036,
+          "raw_word": 12615,
+          "reserved": 0
+        },
+        {
+          "frame": 6316,
+          "raw_word": 12671,
+          "reserved": 0
+        },
+        {
+          "frame": 6509,
+          "raw_word": 12600,
+          "reserved": 0
+        },
+        {
+          "frame": 6578,
+          "raw_word": 12612,
+          "reserved": 0
+        },
+        {
+          "frame": 6755,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6755,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6804,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 6838,
+          "raw_word": 12611,
+          "reserved": 0
+        },
+        {
+          "frame": 6993,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 7081,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 7169,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 7268,
+          "raw_word": 12591,
+          "reserved": 0
+        },
+        {
+          "frame": 7278,
+          "raw_word": 12591,
+          "reserved": 0
+        },
+        {
+          "frame": 7288,
+          "raw_word": 12591,
+          "reserved": 0
+        },
+        {
+          "frame": 7298,
+          "raw_word": 12666,
+          "reserved": 0
+        }
+      ],
+      "capture_report_sha256": "e73bebd12afff7d9947bb5ea3b44e7e485186539b6b8e9048a67a1df6874d2c3",
+      "raw_wav_sha256": "095512ebf379592e5a0ac3ec274404a2e5ebeab043c3dde0bc21b7c348e77220",
+      "capture_final_watches": {
+        "started": 1,
+        "draws": 7372,
+        "vblanks": 7618,
+        "game_frame": 7372,
+        "fatal_owner": 0,
+        "fatal_dependency": 0,
+        "finished_frame": 7372,
+        "cadence_steps": 7372,
+        "cadence_vblanks": 7617,
+        "cadence_max_gap": 2,
+        "cadence_missed": 0,
+        "video_clock": 8356,
+        "enabled": 0,
+        "boot_stage": 9,
+        "api_state": 0,
+        "api_error": 0,
+        "worker_state": 0,
+        "worker_error": 0,
+        "accepted": 0,
+        "queued": 0,
+        "overflows": 0,
+        "unsupported": 0,
+        "skipped": 0,
+        "produced": 64,
+        "command_hash": 3024624743,
+        "audio_fault_frame": 0
+      },
+      "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+      "bios_sha256": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f"
+    },
+    "audio2": {
+      "profile": "audio2",
+      "game_frame": 7372,
+      "cadence": {
+        "initialized": 1,
+        "first_frame": 0,
+        "first_vblank": 1125,
+        "last_frame": 7372,
+        "last_vblank": 9095,
+        "logical_steps": 7372,
+        "elapsed_vblanks": 7970,
+        "updates": 7372,
+        "unobserved_steps": 0,
+        "max_gap": 3,
+        "regressions": 0,
+        "gap_histogram_vblanks": {
+          "1": 6780,
+          "2": 586,
+          "3": 6
+        },
+        "gap_percentile_vblanks": {
+          "50": 1,
+          "95": 2,
+          "99": 2,
+          "100": 3
+        },
+        "elapsed_seconds": 133.21936326530613,
+        "logical_steps_per_second": 55.33730096966966,
+        "gap_percentile_ms": {
+          "50": 16.715102040816326,
+          "95": 33.43020408163265,
+          "99": 33.43020408163265,
+          "100": 50.14530612244898
+        }
+      },
+      "recording_clock": {
+        "method": "last 1000 complete native video packet durations",
+        "time_base": "1/44100",
+        "duration_ticks": 737136,
+        "packet_count": 1000,
+        "video_hz": 59.82613791756202,
+        "duration_histogram_ticks": {
+          "737": 852,
+          "738": 142,
+          "736": 6
+        },
+        "timestamp_file_sha256": "17ee4af55ebdf85c771a74c953d578bbac14709b91c7ab77dce41b5291cd223e"
+      },
+      "runtime_sha256": "5a6c73b1c1362e82b9faf0eb1f268f2231e6331a2044b95e73a04f70bfc6b87b",
+      "actors_sha256": "4fafe5f3c6044dfe01da3499f6476e67a540b7dba6fd94d7b188d4562e3a33a2",
+      "actors": [
+        {
+          "slot": 0,
+          "active": 128,
+          "character": 0,
+          "role": 0,
+          "state": 32773
+        },
+        {
+          "slot": 1,
+          "active": 128,
+          "character": 0,
+          "role": 0,
+          "state": 32773
+        },
+        {
+          "slot": 2,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 3,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 4,
+          "active": 128,
+          "character": 0,
+          "role": 192,
+          "state": 32773
+        },
+        {
+          "slot": 5,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32773
+        },
+        {
+          "slot": 6,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 7,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 8,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        }
+      ],
+      "diagnostics": {
+        "enabled": 1,
+        "boot_stage": 5,
+        "api_state": 2,
+        "api_error": 0,
+        "worker_state": 2,
+        "worker_error": 0,
+        "accepted": 64,
+        "queue_used": 0,
+        "queue_completed": 64,
+        "queue_overflows": 0,
+        "unsupported": 0,
+        "skipped": 0,
+        "produced": 64,
+        "command_hash": 3024624743,
+        "first_audio_fault_vblank": 0,
+        "max_mail_latency_nominal_us": 33334,
+        "reserved16": 0,
+        "reserved17": 0,
+        "queue_peak": 1,
+        "last_raw": 12666,
+        "boot_success": 1,
+        "pack_bytes": 440710,
+        "module_bytes": 98088,
+        "last_vblank": 9095
+      },
+      "producer_events": [
+        {
+          "frame": 0,
+          "raw_word": 12548,
+          "reserved": 0
+        },
+        {
+          "frame": 410,
+          "raw_word": 12596,
+          "reserved": 0
+        },
+        {
+          "frame": 458,
+          "raw_word": 12607,
+          "reserved": 0
+        },
+        {
+          "frame": 695,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 695,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1103,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1103,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1426,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 1460,
+          "raw_word": 12612,
+          "reserved": 0
+        },
+        {
+          "frame": 1468,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1468,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1614,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 1914,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 1914,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2020,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 2471,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2471,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 2526,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 2560,
+          "raw_word": 12611,
+          "reserved": 0
+        },
+        {
+          "frame": 2739,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 3133,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3133,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3192,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 3193,
+          "raw_word": 12671,
+          "reserved": 0
+        },
+        {
+          "frame": 3358,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3358,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3442,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 3476,
+          "raw_word": 12606,
+          "reserved": 0
+        },
+        {
+          "frame": 3736,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3736,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 3845,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 3933,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 3935,
+          "raw_word": 12625,
+          "reserved": 0
+        },
+        {
+          "frame": 4543,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4543,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 4600,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 4634,
+          "raw_word": 12611,
+          "reserved": 0
+        },
+        {
+          "frame": 4773,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 4861,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 4919,
+          "raw_word": 12625,
+          "reserved": 0
+        },
+        {
+          "frame": 5220,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5220,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5422,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5422,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 5470,
+          "raw_word": 12601,
+          "reserved": 0
+        },
+        {
+          "frame": 5520,
+          "raw_word": 12611,
+          "reserved": 0
+        },
+        {
+          "frame": 5740,
+          "raw_word": 12601,
+          "reserved": 0
+        },
+        {
+          "frame": 5790,
+          "raw_word": 12649,
+          "reserved": 0
+        },
+        {
+          "frame": 6002,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 6036,
+          "raw_word": 12615,
+          "reserved": 0
+        },
+        {
+          "frame": 6316,
+          "raw_word": 12671,
+          "reserved": 0
+        },
+        {
+          "frame": 6509,
+          "raw_word": 12600,
+          "reserved": 0
+        },
+        {
+          "frame": 6578,
+          "raw_word": 12612,
+          "reserved": 0
+        },
+        {
+          "frame": 6755,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6755,
+          "raw_word": 44,
+          "reserved": 0
+        },
+        {
+          "frame": 6804,
+          "raw_word": 12597,
+          "reserved": 0
+        },
+        {
+          "frame": 6838,
+          "raw_word": 12611,
+          "reserved": 0
+        },
+        {
+          "frame": 6993,
+          "raw_word": 12642,
+          "reserved": 0
+        },
+        {
+          "frame": 7081,
+          "raw_word": 12643,
+          "reserved": 0
+        },
+        {
+          "frame": 7169,
+          "raw_word": 12644,
+          "reserved": 0
+        },
+        {
+          "frame": 7268,
+          "raw_word": 12591,
+          "reserved": 0
+        },
+        {
+          "frame": 7278,
+          "raw_word": 12591,
+          "reserved": 0
+        },
+        {
+          "frame": 7288,
+          "raw_word": 12591,
+          "reserved": 0
+        },
+        {
+          "frame": 7298,
+          "raw_word": 12666,
+          "reserved": 0
+        }
+      ],
+      "capture_report_sha256": "2cbd805c7d85913df3f89d374f1a08cdad6cf53f79264eadb79fb5cd5bc38f7d",
+      "raw_wav_sha256": "a98a72549fb62e19b701705364bf07f6f05402747b1f0594562e550319224d02",
+      "capture_final_watches": {
+        "started": 1,
+        "draws": 7372,
+        "vblanks": 7971,
+        "game_frame": 7372,
+        "fatal_owner": 0,
+        "fatal_dependency": 0,
+        "finished_frame": 7372,
+        "cadence_steps": 7372,
+        "cadence_vblanks": 7970,
+        "cadence_max_gap": 3,
+        "cadence_missed": 0,
+        "video_clock": 9095,
+        "enabled": 1,
+        "boot_stage": 5,
+        "api_state": 2,
+        "api_error": 0,
+        "worker_state": 2,
+        "worker_error": 0,
+        "accepted": 64,
+        "queued": 0,
+        "overflows": 0,
+        "unsupported": 0,
+        "skipped": 0,
+        "produced": 64,
+        "command_hash": 3024624743,
+        "audio_fault_frame": 0
+      },
+      "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+      "bios_sha256": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f",
+      "loaded_module_segments": [
+        {
+          "address": 96845824,
+          "bytes": 83172,
+          "sha256": "a436fe781f3fe268621a36462ca6a71ba045925073ba340f215e22da628dfd26",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 101621824,
+          "bytes": 14660,
+          "sha256": "972e887e558937e1d6f2ec6ffdd90248fefe32723526aef16cdba85d98936c8e",
+          "loaded_bytes_match": true
+        }
+      ],
+      "loaded_firmware_segments": [
+        {
+          "address": 0,
+          "bytes": 12002,
+          "sha256": "84a3342f234ee1a2c409e58455f2a110dd10261bdbf3263a7957a4915f7372f0",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 49408,
+          "bytes": 14076,
+          "sha256": "845bedbdc9baaed3ae9197451bc3c8264c26809bf34f37346c2af11d0ba36265",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 65536,
+          "bytes": 9216,
+          "sha256": "260012e22772b130d1d3e4f2af82a058b025fff941b901a22855991952dea9fb",
+          "loaded_bytes_match": true
+        }
+      ],
+      "native_audio_counters": {
+        "fm_discarded_events": 0,
+        "fm_discarded_batches": 0,
+        "fm_rejected_events": 0,
+        "ring_rejected_events": 0,
+        "sfx_underruns_32bit": 19,
+        "sfx_frames_32bit": 6428051,
+        "sfx_ticks_32bit": 32147,
+        "sfx_bound": 1,
+        "sfx_fault": 0,
+        "transport_late_16bit": 22,
+        "invalid_fm_batch_16bit": 0,
+        "last_poll_gap_over_512_fs": 546,
+        "playing_mask_at_last_long_poll": 7,
+        "mail_state": 2,
+        "music_shared_state": 2,
+        "music_shared_error": 0
+      },
+      "slave_stack_canary": {
+        "reserved_bytes": 8192,
+        "lowest_untouched_prefix_bytes": 7640,
+        "observed_modified_span_from_top": 552,
+        "note": "Observed high-water evidence only; canary is not a complete overflow proof."
+      }
+    }
+  },
+  "pair": {
+    "runtime_byte_identical": true,
+    "actors_byte_identical": true,
+    "producer_events_identical": true,
+    "emulator_identical": true,
+    "bios_identical": true,
+    "logical_endpoint_identical": true,
+    "additional_combat_vblanks": 353,
+    "additional_combat_time_percent": 4.6343704870683995,
+    "logical_throughput_change_percent": -4.429109159347555
+  },
+  "timing_note": "Combat window uses cadence first/last VBlank, excluding boot. API mail latency uses 16667 nominal microseconds per VBlank and is quantized, not precise jitter."
+}

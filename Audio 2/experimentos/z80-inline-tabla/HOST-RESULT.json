@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "baseline": "frozen compound fab67/static18k",
+  "scalar_API_exact_hits": 50376,
+  "scalar_API_immutable_declines": 1749624,
+  "fast_API_budget_limit_checks": 128000,
+  "fast_API_control_declines": 32000,
+  "batch_functional_checks": 586433,
+  "real_post_callback_mutants": 64000,
+  "independent_batch_matrix_reused": true,
+  "allopcases_per_entrypoint": 8192,
+  "private_body_tested_via_batch_budget_one": true,
+  "long": {
+    "quantum_fs": 512,
+    "budget": 4096,
+    "tracks": 18,
+    "score_s": 600,
+    "fade_s": 8,
+    "exact_frozen_R01_checkpoints": 10962
+  },
+  "runs": {
+    "scalar-api": {
+      "seconds": 4.589883700013161,
+      "output": "PASS scalar randomized: 50376 exact frozen-core CPU/RAM/callback-state/time one-instruction paths; 1749624 immutable unsupported/budget/limit/IRQ/NMI/iffdelay/halted/RAM-PC declines; wrap32+SPextremes\n"
+    },
+    "fast-api": {
+      "seconds": 0.12598779995460063,
+      "output": "dispatcher boundary review: 128000 budget/time checks (32000 exact successes, 96000 immutable declines), 32000 IRQ/NMI/delay/halt immutable declines, random and wrap32 CPU cycles PASS\n"
+    },
+    "control-batch": {
+      "seconds": 0.40227339998818934,
+      "output": "PASS post-callback control through real adapters: 64000 exact cases,20 scalar forms, NMI/IRQ modes0/1/2/iff_delay1/2/maskedIRQ/callbacktruefalse/32wrap\nPASS control-batch: 586433 functional-state checks, 1325 I/O barriers, 75309 immutable randomized declines; target/budget/timer32wrap/actualTBCTL/callbackfalse/IRQ/NMI/delay/halt/003A\n"
+    },
+    "independent-matrix": {
+      "seconds": 2.1616844000527635,
+      "output": "PASS independent batch: direct=74691 scheduler=294912 mutating=38400 immutable_guards=27041 callback_observations=373282 epoch_wraps=68449; full functional CPU/sequence/RAM/event state, all real adapters, timer TBCTL/deadlines/status, budgets0..4096, callbackfalse/NMI/IRQ/delay/halt, no post-I/O continuation, io_epoch0/FFFFFFFF/FFFFFFFE\n"
+    },
+    "control-irq": {
+      "seconds": 1.0677746000001207,
+      "output": "music sequence: all18, exact CPU/RAM/I-O with idle optimization, fade and chunking PASS\n"
+    },
+    "PRE-POST": {
+      "seconds": 0.1458746999851428,
+      "output": "PASS combined PRE/POST: 48000 full CPU/RAM/timer/callback-state+time checks; 24000 mandatory post-C801 I/O barriers; 3000 exact POST5 continuations; callbackfalse,NMI,IM2,delay,PC/return mutations,epoch/cycle wrap\n"
+    },
+    "all-opcodes-public": {
+      "seconds": 0.09830200002761558,
+      "output": "PASS all256 opcodes +CB/DD/FD x256 x8 modes: 170 exact R01 one-step paths,8022 immutable declines\n"
+    },
+    "all-opcodes-batch": {
+      "seconds": 0.09379030001582578,
+      "output": "PASS all256 opcodes +CB/DD/FD x256 x8 modes: 170 exact R01 one-step paths,8022 immutable declines\n"
+    },
+    "long512": {
+      "seconds": 33.0047122000251,
+      "output": "cmd01 PASS600s+8sfade checkpoints608 events=1260526 hash=d22b10795d181f69\ncmd02 PASS600s+8sfade checkpoints608 events=767438 hash=aff0163656cdb0e0\ncmd03 PASS600s+8sfade checkpoints608 events=1000991 hash=ab7f1c337671e155\ncmd04 PASS600s+8sfade checkpoints608 events=1413941 hash=4b9ded321dce24e7\ncmd05 PASS600s+8sfade checkpoints608 events=534747 hash=00fde199c347cce9\ncmd06 PASS600s+8sfade checkpoints608 events=1460559 hash=19b02042571d1961\ncmd07 PASS600s+8sfade checkpoints608 events=1648736 hash=3e2ae620496ad7af\ncmd08 PASS600s+8sfade checkpoints608 events=668414 hash=96af2958ff0facd3\ncmd09 PASS600s+8sfade checkpoints608 events=538618 hash=3fd84f0c259848e2\ncmd0a PASS600s+8sfade checkpoints608 events=1122672 hash=db2a6029e1e926f5\ncmd0b PASS600s+8sfade checkpoints608 events=1125666 hash=5da1037928701f12\ncmd0c PASS600s+8sfade checkpoints608 events=825771 hash=6d9f9818e6ab5729\ncmd0d PASS600s+8sfade checkpoints608 events=833286 hash=011125bd059c9dd2\ncmd0e PASS600s+8sfade checkpoints608 events=977318 hash=5661fb3b994f6cf1\ncmd0f PASS600s+8sfade checkpoints608 events=950926 hash=a3e8d05231064d58\ncmd10 PASS600s+8sfade checkpoints608 events=695299 hash=4e6b7af14004c363\ncmd11 PASS600s+8sfade checkpoints608 events=1426165 hash=fc3029a9bd7697db\ncmd12 PASS600s+8sfade checkpoints608 events=1880602 hash=d2c98b0c1a3c0d79\nPASS Q512/B4096:18x600s+8sfade, 10962 exact frozen-R01 CPU/RAM/timer/event checkpoints, candidate calls=956109 exhaustions=2613; globalFs512 grid preserved with common1s observation splits\n"
+    }
+  },
+  "generated_hot_sha256": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+  "frozen_sources_unchanged": true,
+  "production_modified": false,
+  "emulator_run": false,
+  "vm_run": false
+}

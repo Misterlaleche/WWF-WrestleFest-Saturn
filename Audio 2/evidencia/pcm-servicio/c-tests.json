@@ -1,0 +1,20 @@
+[
+  {
+    "name": "sfx",
+    "exit_code": 0,
+    "stdout": "wf_scsp_sfx.c\nwf_audio_sfx.c\ntest_sfx.c\nGenerando c\u00c3\u00b3digo...\n114 PCM exactos; 98 secuencias; prioridades mixtas; refills y starvation: OK\n",
+    "stderr": ""
+  },
+  {
+    "name": "upload",
+    "exit_code": 0,
+    "stdout": "wf_native_host.c\nwf_sfx_upload.c\ntest_upload.c\nGenerando c\u00c3\u00b3digo...\nuploader CRC, I/O failure, owner, profile and publish-last: OK\n",
+    "stderr": ""
+  },
+  {
+    "name": "queue",
+    "exit_code": 0,
+    "stdout": "wf_native_queue.c\ntest_queue.c\nGenerando c\u00c3\u00b3digo...\nqueue: raw words, FIFO, overflow, owner, unknown outcome and wrap PASS\n",
+    "stderr": ""
+  }
+]

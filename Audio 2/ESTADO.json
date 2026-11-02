@@ -1,0 +1,45 @@
+{
+  "nombre": "Audio 2",
+  "fecha_publicacion": "2026-11-01",
+  "estado": "DESARROLLO INCOMPLETO; NO INTEGRAR COMO AUDIO FINAL",
+  "issue": "https://github.com/Misterlaleche/WWF-WrestleFest-Saturn-Private/issues/2",
+  "base_remota": "aedca6827c7801a88dbb1eae280830cd4776b95f",
+  "r04_modificado": false,
+  "bin_cue_iso_generados": false,
+  "validacion_fisica_del_motor_nativo_actual": false,
+  "ultimo_modulo_z80_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+  "master_abi3_sha256": "e56b027b8a3e89f92ecbb0a419363c11eb2996334b8b819e87ab9137152d0221",
+  "firmware_usado_en_ensayo_z80_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+  "ensayo_largo": {
+    "frame": 9600,
+    "game_frame": 457,
+    "dropped_fm": 361,
+    "late_count": 1664,
+    "music_events": 6231,
+    "music_state": 2,
+    "music_error": 0
+  },
+  "gate_audio_observado": {
+    "software_audio_gate_passed": false,
+    "blockers": [
+      "firmware_dropped_fm"
+    ],
+    "diagnostic_samples": 8889,
+    "physical_audio_certified": false,
+    "scope": "No stability claim is permitted when disabled, reason, drops, ignored or music errors are observed. A passing gate alone is not complete audio or graphics validation."
+  },
+  "pcm_servicio_aislado_sha256": "024e4c6bb800c1d32f116ccee14a5420ad52a50478ff2db274170ed2809ff6ec",
+  "bloqueos": [
+    "El prototipo SH2 descarta FM durante combate, aunque RUNNING/error0 siga activo.",
+    "La correccion PCM nueva tiene medidas de simulacion 68000; falta integrarla y repetir emulacion bajo juego.",
+    "Faltan cobertura integrada de 18 musicas + 98 comandos, transiciones/fade y concurrencia completa.",
+    "Falta demostrar impacto total del audio frente a control sin audio en el mismo trabajo grafico.",
+    "ABI4 y optimizaciones ABI3 no son un par intercambiable; requieren relink y validacion conjunta.",
+    "Falta validacion final en Saturn real; no generar imagen antes de completar el catalogo."
+  ],
+  "pcm_servicio_avisos_pendientes": {
+    "0x07": 2,
+    "0x0E": 2,
+    "0x12": 2
+  }
+}

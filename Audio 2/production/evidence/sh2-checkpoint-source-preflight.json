@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "scope": "Source-only reconstruction of the archived native SH2 checkpoint fixture; no new native performance, continuity, cadence, fidelity or hardware acceptance claim",
+  "passed": true,
+  "native_emulator_started": false,
+  "archived_private_fixture_or_object_required": false,
+  "source_fixture": {
+    "path": "tests/benchmarks/sh2_checkpoint/",
+    "manifest_sha256": "32b5331caa580f6a5e127f7477f62c0165f05ee73b5fe4acf7edc62dd8c07754",
+    "files": 57,
+    "source_bytes": 335062,
+    "all_manifest_hashes_verified": true,
+    "contains_rom_bios_game_assets_firmware_binaries_or_objects": false
+  },
+  "supplied_inputs": [
+    "Original ROM ZIP",
+    "Restored SDK and pinned base68000 GCC helper source",
+    "Original WP1979 native source and archived runtime18-cd assets"
+  ],
+  "source_generator": {
+    "path": "audio2-build/sh2-cost-profile/source-only-fixture-preflight02/fixture.json",
+    "manifest_sha256": "5d255694a01e280c9969b42981e59e29111031dd162d21eda300a2c60d9e1c7c",
+    "built_from_sources": true,
+    "source_stable": true,
+    "original_game_files_unchanged": 345,
+    "input_tape_sha256": "2dcb67568e0dcace7f552cfbb96a64233c81b74dd5774b4b900a6da1cdc9f0dc",
+    "runtime_source_sha256": "851f082a547137b70dfe686764c9312aed489df0ff00d60e2dd6c6fe64d5ba00",
+    "commands_returned_zero": true
+  },
+  "checkpoint_reproducer": {
+    "path": "audio2-build/sh2-cost-profile/source-only-checkpoint-preflight/checkpoint.json",
+    "manifest_sha256": "0bae75bcceb7d64d050c2cd0ba7db95185e0aea0c692f4bd3ff864a6ef61ab65",
+    "native_capture_requested": false,
+    "variant_count": 2,
+    "all_commands_returned_zero": true
+  },
+  "artifacts": {
+    "firmware10": {
+      "path": "audio2-build/sh2-cost-profile/source-only-fixture-preflight02/firmware/SCSP.ELF",
+      "expected_sha256": "b5ecee6e3e2a0efe7c13f1c6f4cb89bbc6b18cb96db23a57203b20e4a2b06b66",
+      "actual_sha256": "b5ecee6e3e2a0efe7c13f1c6f4cb89bbc6b18cb96db23a57203b20e4a2b06b66",
+      "matches_archived_measured_identity": true
+    },
+    "original_master_flat_binary": {
+      "path": "audio2-build/sh2-cost-profile/source-only-fixture-preflight02/build/profiles/audio2/AUDIO2TAG.bin",
+      "expected_sha256": "7166824557ed333934556c1dcab7e1db27b110d8ac8d6ad7fb3f7aaf5474caa0",
+      "actual_sha256": "7166824557ed333934556c1dcab7e1db27b110d8ac8d6ad7fb3f7aaf5474caa0",
+      "matches_archived_measured_identity": true
+    },
+    "baseline_module": {
+      "path": "audio2-build/sh2-cost-profile/source-only-checkpoint-preflight/baseline/MUSIC4.ELF",
+      "expected_sha256": "2a2ae43dd9be511c746e9cb147e4eb7f464197b80916964d9d945da348e466b9",
+      "actual_sha256": "2a2ae43dd9be511c746e9cb147e4eb7f464197b80916964d9d945da348e466b9",
+      "matches_archived_measured_identity": true
+    },
+    "selected_module": {
+      "path": "audio2-build/sh2-cost-profile/source-only-checkpoint-preflight/scalar9-seq-os/MUSIC4.ELF",
+      "expected_sha256": "bc5a5e0314f4e8a3fd39238fad3a7288fb5393c2de327b79bb3ac16b5dce32b0",
+      "actual_sha256": "bc5a5e0314f4e8a3fd39238fad3a7288fb5393c2de327b79bb3ac16b5dce32b0",
+      "matches_archived_measured_identity": true
+    }
+  },
+  "tool_sha256": {
+    "tools/build_sh2_checkpoint_fixture.py": "6b24ea1f0ffbe232935f2d6a306a384236dc8151682915606a83f2f48f51d19b",
+    "tools/reproduce_sh2_checkpoint.py": "da189a5b41b3f10868b8096d0327f09a920b58b2c1de9e4afdec142897395a78"
+  },
+  "limits": [
+    "Legacy firmware10 is preserved deliberately and has known PCM/pitch failures.",
+    "This build preflight did not rerun the emulator.",
+    "ISO timestamps and ELF debug paths are not asserted byte-identical.",
+    "The older archived-directory preflight and initial failed source preflight remain preserved."
+  ],
+  "initial_failed_preflight": {
+    "path": "audio2-build/sh2-cost-profile/source-only-fixture-preflight/fixture.json",
+    "reason": "Firmware/module/master identities reproduced; capture-argument generation stopped on an incorrect master-observer symbol name. Corrected clean generation used the freshly linked _wf_master_cost_profile."
+  }
+}

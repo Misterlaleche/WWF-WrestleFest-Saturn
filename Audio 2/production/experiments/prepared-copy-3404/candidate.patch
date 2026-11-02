@@ -1,0 +1,20 @@
+--- a/src/wf_scsp_sfx.c
++++ b/src/wf_scsp_sfx.c
+@@ -170,10 +170,15 @@
+         base=WF_SFX_PCM_BASE+v*s->pcm_stride;
+ #ifdef WF_SFX_FAST_68000
+         volatile uint16_t *target=(volatile uint16_t *)(uintptr_t)base;
+-        const int16_t *sample=prepared->samples,*end=sample+256;
++        const int16_t *sample=prepared->samples;
+         *target++=(uint16_t)*sample++;
+         if(s->pcm_stride==8194)*(volatile uint16_t *)(uintptr_t)(base+8192u)=(uint16_t)prepared->samples[0];
+-        while(sample!=end)*target++=(uint16_t)*sample++;
++        /* Private experiment: exactly255 remaining 16-bit reads/stores,
++         * in the original ascending order.31*8+7; no lead/queue changes. */
++        unsigned blocks=30;
++        __asm__ volatile("1:\n\t.rept 8\n\tmove.w (%1)+,(%0)+\n\t.endr\n\t"
++                         "dbra %2,1b\n\t.rept 7\n\tmove.w (%1)+,(%0)+\n\t.endr"
++                         : "+&a"(target), "+&a"(sample), "+d"(blocks) : : "cc","memory");
+ #else
+         for(i=0;i<256;i++){
+             if(!put(s,base+i*2u,(uint16_t)prepared->samples[i]))return false;

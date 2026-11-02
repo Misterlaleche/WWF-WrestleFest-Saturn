@@ -1,0 +1,8 @@
+Prueba del COMPILADOR, no prueba de la musica.
+Dos arranques independientes SFX con SCSPlegacy, mismasfuentesmasterV4:
+GCC13O2LTO vs GCC9Os sinLTO. Se comparan avances de combate300..600 y
+ventanas de render mediante contadores de tiempo EMULADO, nunca hostFPS.
+Esta comparacion admite que el master difiera: no usarla para certificar
+audio, ni presentar V4como checkout grafico actual. El modulo MUSIC no se
+ejecuta porque el firmware identifica perfilSFX.
+R04/medios originales intactos. OverlayVFS enRAM; no BIN/CUE/ISO nuevos.

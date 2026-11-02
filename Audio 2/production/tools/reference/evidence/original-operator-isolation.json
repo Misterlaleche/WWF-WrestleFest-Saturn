@@ -1,0 +1,1465 @@
+{
+  "kind": "ACTUAL_ORIGINAL_OPERATOR_OUTPUT_ISOLATION",
+  "emulator": "standalone Mednafen1.32.1, unmodified",
+  "firmware_sha256": "044484de2418b145c05e068d6a0eaf2b442990d3b0cb1a66919c05c94e474f7c",
+  "YM_source_sha256": "c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76",
+  "scope": "Diagnostic mixer gates only. Original operator registers and sequence remain active; PCM output muted. Not final music acceptance.",
+  "taps": [
+    {
+      "tap": "ch1",
+      "report_sha256": "83938cceae20afe3d713fa17be253d31a7f68f8e1bc26a416c9cd44818e748ab",
+      "modified_output_gate_source_sha256": "da662016311b8d55ae5105ef8bb496c3459473c945407acd1069c8ce4b88404a",
+      "comparison": {
+        "command": "0x01",
+        "seconds": 8.0,
+        "reference_profile": "board-pcm16",
+        "reference_kind": "Original-ROM command 0x01 trace, pinned Nuked at board YM external-clock/64, diagnostic output-only ch1 tap, PCM muted; software reference, not physical arcade recording",
+        "saturn_kind": "Real standalone Mednafen 1.32.1 execution",
+        "alignment": {
+          "method": "native final SCSP clock minus elapsed since command, plus documented command lead",
+          "command_lead_frames": 4096,
+          "source_start_sample": 668194,
+          "source_end_sample_exclusive": 1020994,
+          "final_diagnostic_staleness_frames": 59,
+          "residual_DAC_alignment": "not independently calibrated"
+        },
+        "processing": {
+          "normalization": false,
+          "gain": 1,
+          "resampling": false,
+          "time_stretch": false,
+          "metric_mono": "arithmetic average only; delivered native WAV remains stereo"
+        },
+        "metrics": {
+          "reference_rms_dbfs": -37.68193677957978,
+          "saturn_rms_dbfs_analysis_mono": -37.969263874396624,
+          "saturn_minus_reference_rms_db": -0.28732709481684604,
+          "reference_peak": 1394,
+          "saturn_peak": 1234,
+          "raw_waveform_correlation": 0.0918087188178518,
+          "raw_waveform_error_rms": 0.017055252636403305,
+          "envelope_10ms_correlation": 0.8663667061138438,
+          "envelope_best_lag_ms_diagnostic_only": 0,
+          "spectral_centroid_reference_hz": 3190.242836708111,
+          "spectral_centroid_saturn_hz": 4256.3173074456745,
+          "spectral_log_power_rmse_db_40_to_16000hz": 4.7288329154615685,
+          "clipped_reference_samples": 0,
+          "clipped_saturn_samples": 0
+        },
+        "diagnostics": {
+          "magic": 1464222002,
+          "state": 4,
+          "videoFrames": 810,
+          "error": 0,
+          "commandStartFrame": 210,
+          "musicState": 2,
+          "musicEvents": 618,
+          "batchB03A": 0,
+          "lateB028": 0,
+          "sfxUnderruns32": 0,
+          "lastCommand": 1,
+          "DSPclock16": 2814,
+          "diagAddress": 638239260,
+          "mailState": 2,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "SCSPelapsed": 442282,
+          "APIstate": 2,
+          "APIerror": 0,
+          "commandDSPclock": 19284
+        },
+        "identities": {
+          "source_capture_wav": "470239a6ce2a2c0f9cef8bc68abca8afd5dbc42120357e3535970bc1e027a8ac",
+          "capture_report": "eca47d1e8ee924f9a820c88b1fee6104ae3594731ddbbc0befb4b3704940736f",
+          "reference_wav": "c8a33c2d08121e9d6c1f24c9ee78aefeaf7daf829f1d6d3cecfb84d9d12a5be1",
+          "saturn_wav": "200227c70d0c5a0c80e550fd5972fc096a38881620c62311e0dc47f8b1fdbb20",
+          "source_executable": "9337ebc32e1e68b99ae23b125a0475b556f8d0b980f7802790bf9326e45163f7",
+          "source_iso": "977d64d4513cfb0e6953a4d8adb97063c9b00bab185a125d023cd3d095e66bcd"
+        },
+        "analysis_dependencies": {
+          "numpy": "2.3.5",
+          "scipy": "1.17.0"
+        },
+        "acceptance": "PENDING; metrics cannot establish fidelity or owner approval",
+        "hardware_status": "HARDWARE PENDING",
+        "diagnostic_scope": "Only mixer output gates are changed; original operator register sequence, operator phase, feedback and envelope state remain active. No final-production trace changes."
+      }
+    },
+    {
+      "tap": "ch1-c1",
+      "report_sha256": "173b11c1c93e900c38f824ba8245c1d39f9737764e67c200edf274c9423ef8dd",
+      "modified_output_gate_source_sha256": "45c4aec24ac40e621fdaa4962ae181e9951435c3211c7e15b3d351601956927a",
+      "comparison": {
+        "command": "0x01",
+        "seconds": 8.0,
+        "reference_profile": "board-pcm16",
+        "reference_kind": "Original-ROM command 0x01 trace, pinned Nuked at board YM external-clock/64, diagnostic output-only ch1-c1 tap, PCM muted; software reference, not physical arcade recording",
+        "saturn_kind": "Real standalone Mednafen 1.32.1 execution",
+        "alignment": {
+          "method": "native final SCSP clock minus elapsed since command, plus documented command lead",
+          "command_lead_frames": 4096,
+          "source_start_sample": 668194,
+          "source_end_sample_exclusive": 1020994,
+          "final_diagnostic_staleness_frames": 59,
+          "residual_DAC_alignment": "not independently calibrated"
+        },
+        "processing": {
+          "normalization": false,
+          "gain": 1,
+          "resampling": false,
+          "time_stretch": false,
+          "metric_mono": "arithmetic average only; delivered native WAV remains stereo"
+        },
+        "metrics": {
+          "reference_rms_dbfs": -37.066008488990356,
+          "saturn_rms_dbfs_analysis_mono": -38.32976988878764,
+          "saturn_minus_reference_rms_db": -1.2637613997972812,
+          "reference_peak": 954,
+          "saturn_peak": 847,
+          "raw_waveform_correlation": 0.2460390515938735,
+          "raw_waveform_error_rms": 0.014951306167441487,
+          "envelope_10ms_correlation": 0.8392192595241852,
+          "envelope_best_lag_ms_diagnostic_only": 0,
+          "spectral_centroid_reference_hz": 3847.900743560817,
+          "spectral_centroid_saturn_hz": 5520.193541104981,
+          "spectral_log_power_rmse_db_40_to_16000hz": 4.8332755973419514,
+          "clipped_reference_samples": 0,
+          "clipped_saturn_samples": 0
+        },
+        "diagnostics": {
+          "magic": 1464222002,
+          "state": 4,
+          "videoFrames": 810,
+          "error": 0,
+          "commandStartFrame": 210,
+          "musicState": 2,
+          "musicEvents": 618,
+          "batchB03A": 0,
+          "lateB028": 0,
+          "sfxUnderruns32": 0,
+          "lastCommand": 1,
+          "DSPclock16": 2814,
+          "diagAddress": 638239260,
+          "mailState": 2,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "SCSPelapsed": 442282,
+          "APIstate": 2,
+          "APIerror": 0,
+          "commandDSPclock": 19284
+        },
+        "identities": {
+          "source_capture_wav": "2b7a884a981fff812c493469b2d1c3607411c264c303045e91cfb190d559fca9",
+          "capture_report": "666102c3c48e060b943815ccd67a87cd5ee6c68b71d1e9a64fd5e755aa713ea0",
+          "reference_wav": "57a3705059f99089d08e2604f8c20c66c5906403176bf8203f63deb622a93def",
+          "saturn_wav": "f07a12a57ca3a763b4ad8f4cdc36813775ad88e62541faab0db90e3160e896cd",
+          "source_executable": "89582df94eaea92b04c8602249914ee22be5aae2836d7dc39a2087a15dab1544",
+          "source_iso": "bb1981008718c7bbb6f1874767bc2dba618238a5e57df47a02e2ba9c2b31fc63"
+        },
+        "analysis_dependencies": {
+          "numpy": "2.3.5",
+          "scipy": "1.17.0"
+        },
+        "acceptance": "PENDING; metrics cannot establish fidelity or owner approval",
+        "hardware_status": "HARDWARE PENDING",
+        "diagnostic_scope": "Only mixer output gates are changed; original operator register sequence, operator phase, feedback and envelope state remain active. No final-production trace changes."
+      }
+    },
+    {
+      "tap": "ch1-c2",
+      "report_sha256": "f7b8da04f006a9aa60e33741b3facf3d7e7d8adfe5f73ccbe8aac672b4fb8f13",
+      "modified_output_gate_source_sha256": "906bde9124f5b1e4226f73e6e8adbda3650b3846bc9a1bde7358d913aff47493",
+      "comparison": {
+        "command": "0x01",
+        "seconds": 8.0,
+        "reference_profile": "board-pcm16",
+        "reference_kind": "Original-ROM command 0x01 trace, pinned Nuked at board YM external-clock/64, diagnostic output-only ch1-c2 tap, PCM muted; software reference, not physical arcade recording",
+        "saturn_kind": "Real standalone Mednafen 1.32.1 execution",
+        "alignment": {
+          "method": "native final SCSP clock minus elapsed since command, plus documented command lead",
+          "command_lead_frames": 4096,
+          "source_start_sample": 668195,
+          "source_end_sample_exclusive": 1020995,
+          "final_diagnostic_staleness_frames": 58,
+          "residual_DAC_alignment": "not independently calibrated"
+        },
+        "processing": {
+          "normalization": false,
+          "gain": 1,
+          "resampling": false,
+          "time_stretch": false,
+          "metric_mono": "arithmetic average only; delivered native WAV remains stereo"
+        },
+        "metrics": {
+          "reference_rms_dbfs": -42.28543498900491,
+          "saturn_rms_dbfs_analysis_mono": -42.91399939257144,
+          "saturn_minus_reference_rms_db": -0.6285644035665348,
+          "reference_peak": 437,
+          "saturn_peak": 388,
+          "raw_waveform_correlation": 0.19930261066036375,
+          "raw_waveform_error_rms": 0.008867678503970244,
+          "envelope_10ms_correlation": 0.9653554913668706,
+          "envelope_best_lag_ms_diagnostic_only": 10,
+          "spectral_centroid_reference_hz": 1260.5560515834661,
+          "spectral_centroid_saturn_hz": 1221.5288922523057,
+          "spectral_log_power_rmse_db_40_to_16000hz": 4.097978254383735,
+          "clipped_reference_samples": 0,
+          "clipped_saturn_samples": 0
+        },
+        "diagnostics": {
+          "magic": 1464222002,
+          "state": 4,
+          "videoFrames": 810,
+          "error": 0,
+          "commandStartFrame": 210,
+          "musicState": 2,
+          "musicEvents": 616,
+          "batchB03A": 0,
+          "lateB028": 0,
+          "sfxUnderruns32": 0,
+          "lastCommand": 1,
+          "DSPclock16": 2815,
+          "diagAddress": 638239260,
+          "mailState": 2,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "SCSPelapsed": 442282,
+          "APIstate": 2,
+          "APIerror": 0,
+          "commandDSPclock": 19284
+        },
+        "identities": {
+          "source_capture_wav": "0308b51cd61b49e7844228f0189e96dc6ace746445a06b5ec5d0c848ebd72fc1",
+          "capture_report": "67aa345fde177d56b7f795adaceac1f84d5efa1f274f6811113b4fd2c7da76b1",
+          "reference_wav": "1ba60d6acf838eaf5a89d5e8de6f5c6899028bffc9c291a31b2eb6e12c738293",
+          "saturn_wav": "3e879ac720e5a198fb4f674898456689a0c13349d39b260365495b7d3aa4e75d",
+          "source_executable": "d8220ff54515ff2600815265d3432f480d6c254b0b9f5697e4af8f11eadfcf01",
+          "source_iso": "edcaaefa6b5870bad307b0cb6455736e77c7df709c5e75d55d40e4192fd74d43"
+        },
+        "analysis_dependencies": {
+          "numpy": "2.3.5",
+          "scipy": "1.17.0"
+        },
+        "acceptance": "PENDING; metrics cannot establish fidelity or owner approval",
+        "hardware_status": "HARDWARE PENDING",
+        "diagnostic_scope": "Only mixer output gates are changed; original operator register sequence, operator phase, feedback and envelope state remain active. No final-production trace changes."
+      }
+    },
+    {
+      "tap": "ch1-m1",
+      "report_sha256": "6c4a267913846176878b477bb59b57566c254da1a01ca4a38a3d53d28b0174cb",
+      "modified_output_gate_source_sha256": "173e97363880585d9a37e99b089900aa03612e42711624087ec9489dc3993328",
+      "comparison": {
+        "command": "0x01",
+        "seconds": 8.0,
+        "reference_profile": "board-pcm16",
+        "reference_kind": "Original-ROM command0x01/channel1 M1 internal output, pinned Nuked at board YM external-clock/64, diagnostic output-only tap forced, PCM muted; software reference, not physical arcade recording",
+        "saturn_kind": "Real standalone Mednafen 1.32.1 execution",
+        "alignment": {
+          "method": "native final SCSP clock minus elapsed since command, plus documented command lead",
+          "command_lead_frames": 4096,
+          "source_start_sample": 668195,
+          "source_end_sample_exclusive": 1020995,
+          "final_diagnostic_staleness_frames": 58,
+          "residual_DAC_alignment": "not independently calibrated"
+        },
+        "processing": {
+          "normalization": false,
+          "gain": 1,
+          "resampling": false,
+          "time_stretch": false,
+          "metric_mono": "arithmetic average only; delivered native WAV remains stereo"
+        },
+        "metrics": {
+          "reference_rms_dbfs": -37.949471341755725,
+          "saturn_rms_dbfs_analysis_mono": -39.519104519399264,
+          "saturn_minus_reference_rms_db": -1.5696331776435368,
+          "reference_peak": 803,
+          "saturn_peak": 705,
+          "raw_waveform_correlation": -0.23602748431734188,
+          "raw_waveform_error_rms": 0.01692766308610403,
+          "envelope_10ms_correlation": 0.69464539191623,
+          "envelope_best_lag_ms_diagnostic_only": 20,
+          "spectral_centroid_reference_hz": 1100.676654142624,
+          "spectral_centroid_saturn_hz": 1216.2972817351379,
+          "spectral_log_power_rmse_db_40_to_16000hz": 4.669688312803533,
+          "clipped_reference_samples": 0,
+          "clipped_saturn_samples": 0
+        },
+        "diagnostics": {
+          "magic": 1464222002,
+          "state": 4,
+          "videoFrames": 810,
+          "error": 0,
+          "commandStartFrame": 210,
+          "musicState": 2,
+          "musicEvents": 617,
+          "batchB03A": 0,
+          "lateB028": 0,
+          "sfxUnderruns32": 0,
+          "lastCommand": 1,
+          "DSPclock16": 2815,
+          "diagAddress": 638239260,
+          "mailState": 2,
+          "FMdiscardEvents": 0,
+          "discardBatches": 0,
+          "rejectedFM": 0,
+          "ringRejected": 0,
+          "SCSPelapsed": 442282,
+          "APIstate": 2,
+          "APIerror": 0,
+          "commandDSPclock": 19284
+        },
+        "identities": {
+          "source_capture_wav": "26914a8bada477263fd90394741073a06a7bf1d8a8ae2d57a46b039b48054577",
+          "capture_report": "9181b7895f589b715d371f7626bdc9593dfc8d79e803e87a0b1f00abae2ec697",
+          "reference_wav": "a25d71e8d3619e336bb16ecd1c6b346989d6b10ed3565b6cebcca32be42dc39a",
+          "saturn_wav": "3c19db41398c2fef90ec5e389f52cdc77af2eb7f53825e427fb63feeaed29328",
+          "source_executable": "845f44932aa597f4495bf8e401d93d7b9acde1a57815ac95e848783ffbdb3e04",
+          "source_iso": "666502168180c540928252c0fdf19c1ed95ff183e313922904b67e4b9d652413"
+        },
+        "analysis_dependencies": {
+          "numpy": "2.3.5",
+          "scipy": "1.17.0"
+        },
+        "acceptance": "PENDING; metrics cannot establish fidelity or owner approval",
+        "hardware_status": "HARDWARE PENDING",
+        "diagnostic_scope": "Original operator registers, phases, feedback and envelopes are unchanged. Only the M1 mixer output tap is forced audible; final production music is unchanged."
+      }
+    }
+  ],
+  "host_carrier_sum_validation": {
+    "description": "Sum of two output-only pinned-core original carrier taps vs isolated complete original channel. Separate chip renders can differ by integer output rounding; core phase/envelope state otherwise unmodified.",
+    "frames": 352800,
+    "exact_samples": 146371,
+    "max_abs_sum_error": 4,
+    "rms_sum_error": 0.9818376149042245,
+    "sha256": {
+      "reference-ch1-c1.wav": "57a3705059f99089d08e2604f8c20c66c5906403176bf8203f63deb622a93def",
+      "reference-ch1-c2.wav": "1ba60d6acf838eaf5a89d5e8de6f5c6899028bffc9c291a31b2eb6e12c738293",
+      "ORIGINAL-TRACE-DIVIDER2-CH1.wav": "c8a33c2d08121e9d6c1f24c9ee78aefeaf7daf829f1d6d3cecfb84d9d12a5be1"
+    }
+  },
+  "first_note_analysis": [
+    {
+      "tap": "ch1",
+      "windows": [
+        {
+          "start_s": 0.04,
+          "end_s": 0.21,
+          "reference": {
+            "rms": 410.2227060196453,
+            "centroid": 3508.42498044496,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                4602.087988302038
+              ],
+              [
+                1396.966552734375,
+                2384.3536482464006
+              ],
+              [
+                2096.795654296875,
+                599.9678689844089
+              ],
+              [
+                2795.2789306640625,
+                323.0248519904309
+              ],
+              [
+                18153.836059570312,
+                222.41813682046438
+              ],
+              [
+                3492.4163818359375,
+                165.0828256827082
+              ]
+            ]
+          },
+          "native": {
+            "rms": 482.2501455480884,
+            "centroid": 5581.602254496443,
+            "peaks_hz": [
+              [
+                699.8291015625,
+                5240.456721515366
+              ],
+              [
+                1398.3123779296875,
+                1543.968804920025
+              ],
+              [
+                14672.186279296875,
+                1511.669147690014
+              ],
+              [
+                13972.357177734375,
+                1227.5919871475662
+              ],
+              [
+                2096.795654296875,
+                692.8990524100091
+              ],
+              [
+                2795.2789306640625,
+                441.850909096741
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.1,
+          "end_s": 0.2,
+          "reference": {
+            "rms": 387.2726043345013,
+            "centroid": 3849.022150063792,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                2578.3299906069506
+              ],
+              [
+                1396.966552734375,
+                2468.404856740122
+              ],
+              [
+                2096.795654296875,
+                550.3044269885069
+              ],
+              [
+                2795.2789306640625,
+                326.074850275174
+              ],
+              [
+                3492.4163818359375,
+                167.70153023329166
+              ],
+              [
+                4888.037109375,
+                129.2411754055684
+              ]
+            ]
+          },
+          "native": {
+            "rms": 460.60963103212083,
+            "centroid": 5327.905388911206,
+            "peaks_hz": [
+              [
+                699.8291015625,
+                3693.889577138102
+              ],
+              [
+                1398.3123779296875,
+                1419.7497936089708
+              ],
+              [
+                13972.357177734375,
+                840.8863050700011
+              ],
+              [
+                14672.186279296875,
+                762.2943853672019
+              ],
+              [
+                2096.795654296875,
+                690.3174253021997
+              ],
+              [
+                2795.2789306640625,
+                403.9619016753527
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.02,
+          "end_s": 0.08,
+          "reference": {
+            "rms": 542.7434742454108,
+            "centroid": 3071.6425484064457,
+            "peaks_hz": [
+              [
+                689.0625,
+                2815.038064103449
+              ],
+              [
+                1401.0040283203125,
+                1405.7067541571507
+              ],
+              [
+                2100.8331298828125,
+                328.34423026218406
+              ],
+              [
+                18151.144409179688,
+                118.3628336379522
+              ],
+              [
+                2802.008056640625,
+                104.53896749211985
+              ],
+              [
+                20.1873779296875,
+                81.20518594724369
+              ]
+            ]
+          },
+          "native": {
+            "rms": 524.3056849273767,
+            "centroid": 5271.737449915456,
+            "peaks_hz": [
+              [
+                685.0250244140625,
+                2575.196461444357
+              ],
+              [
+                710.595703125,
+                1635.6694642806835
+              ],
+              [
+                1402.349853515625,
+                1068.50418583832
+              ],
+              [
+                14668.148803710938,
+                568.035036315199
+              ],
+              [
+                2102.178955078125,
+                298.70479879020087
+              ],
+              [
+                13968.319702148438,
+                295.9044174199396
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.04,
+          "end_s": 0.3,
+          "reference": {
+            "rms": 417.31159914766937,
+            "centroid": 3849.110793054245,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                2691.193404305155
+              ],
+              [
+                1396.966552734375,
+                2296.7174995981504
+              ],
+              [
+                2096.795654296875,
+                539.5746157982674
+              ],
+              [
+                2795.2789306640625,
+                340.21466706880153
+              ],
+              [
+                3492.4163818359375,
+                175.53340213141917
+              ],
+              [
+                4189.5538330078125,
+                144.55214341475406
+              ]
+            ]
+          },
+          "native": {
+            "rms": 449.1056177803345,
+            "centroid": 5497.818377188053,
+            "peaks_hz": [
+              [
+                699.8291015625,
+                3618.984610420146
+              ],
+              [
+                1398.3123779296875,
+                1319.1108466095873
+              ],
+              [
+                14672.186279296875,
+                917.2752124385647
+              ],
+              [
+                13972.357177734375,
+                854.515316795281
+              ],
+              [
+                2096.795654296875,
+                673.1009570022503
+              ],
+              [
+                2795.2789306640625,
+                401.4592353421001
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "tap": "ch1-c1",
+      "windows": [
+        {
+          "start_s": 0.04,
+          "end_s": 0.21,
+          "reference": {
+            "rms": 381.05255930713173,
+            "centroid": 4374.493743779797,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                4294.535368487764
+              ],
+              [
+                1396.966552734375,
+                244.66261992859813
+              ],
+              [
+                18153.836059570312,
+                222.42051747923787
+              ],
+              [
+                17455.352783203125,
+                161.23396255876185
+              ],
+              [
+                16756.869506835938,
+                116.11076612230114
+              ],
+              [
+                4190.899658203125,
+                111.26306625406576
+              ]
+            ]
+          },
+          "native": {
+            "rms": 401.1871332844959,
+            "centroid": 6946.74069564412,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                4103.269748498735
+              ],
+              [
+                14672.186279296875,
+                1510.7836347904095
+              ],
+              [
+                13972.357177734375,
+                1227.6756857843072
+              ],
+              [
+                1398.3123779296875,
+                417.4193207677937
+              ],
+              [
+                13273.873901367188,
+                285.69732775035146
+              ],
+              [
+                12575.390625,
+                215.69463659109098
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.1,
+          "end_s": 0.2,
+          "reference": {
+            "rms": 385.8207360456561,
+            "centroid": 4394.804891678326,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                3629.4351562527654
+              ],
+              [
+                1396.966552734375,
+                145.14586848820002
+              ],
+              [
+                4190.899658203125,
+                131.31507572240196
+              ],
+              [
+                4888.037109375,
+                130.47041527982105
+              ],
+              [
+                3492.4163818359375,
+                125.78412440709528
+              ],
+              [
+                18153.836059570312,
+                122.70348242481055
+              ]
+            ]
+          },
+          "native": {
+            "rms": 381.702163931662,
+            "centroid": 6051.200043026483,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                3822.4935459518024
+              ],
+              [
+                13972.357177734375,
+                840.7031478427908
+              ],
+              [
+                14672.186279296875,
+                761.2187305460409
+              ],
+              [
+                1398.3123779296875,
+                392.1531765016547
+              ],
+              [
+                13273.873901367188,
+                322.40105995140107
+              ],
+              [
+                12576.736450195312,
+                217.06589290276258
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.02,
+          "end_s": 0.08,
+          "reference": {
+            "rms": 402.65325246836886,
+            "centroid": 4215.478890697545,
+            "peaks_hz": [
+              [
+                690.4083251953125,
+                1989.3796363997315
+              ],
+              [
+                1380.816650390625,
+                174.7330675600303
+              ],
+              [
+                18151.144409179688,
+                118.40047617261548
+              ],
+              [
+                1409.0789794921875,
+                92.35406485672556
+              ],
+              [
+                2077.9541015625,
+                71.93789717669031
+              ],
+              [
+                21.533203125,
+                69.40959626395413
+              ]
+            ]
+          },
+          "native": {
+            "rms": 417.3609503623658,
+            "centroid": 7047.249894131594,
+            "peaks_hz": [
+              [
+                686.370849609375,
+                1588.4606002884584
+              ],
+              [
+                14668.148803710938,
+                568.7872734994385
+              ],
+              [
+                13968.319702148438,
+                296.13183506695555
+              ],
+              [
+                1379.4708251953125,
+                226.70442346305973
+              ],
+              [
+                18.841552734375,
+                201.73731044742033
+              ],
+              [
+                2075.262451171875,
+                97.05401167992063
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.04,
+          "end_s": 0.3,
+          "reference": {
+            "rms": 440.7534572349247,
+            "centroid": 4476.083992828369,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                3438.1800482826375
+              ],
+              [
+                1396.966552734375,
+                147.96806709353717
+              ],
+              [
+                4189.5538330078125,
+                145.66591217281518
+              ],
+              [
+                3492.4163818359375,
+                142.96606348973006
+              ],
+              [
+                4888.037109375,
+                141.7225490705316
+              ],
+              [
+                18153.836059570312,
+                138.01141708082343
+              ]
+            ]
+          },
+          "native": {
+            "rms": 373.8415857321728,
+            "centroid": 6223.549915437468,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                3706.745494756356
+              ],
+              [
+                14672.186279296875,
+                916.990961462661
+              ],
+              [
+                13972.357177734375,
+                854.7722851370186
+              ],
+              [
+                1398.3123779296875,
+                384.06582039990576
+              ],
+              [
+                13273.873901367188,
+                281.3783397666956
+              ],
+              [
+                12575.390625,
+                207.3944333851059
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "tap": "ch1-c2",
+      "windows": [
+        {
+          "start_s": 0.04,
+          "end_s": 0.21,
+          "reference": {
+            "rms": 259.2840968843999,
+            "centroid": 1513.3396565764735,
+            "peaks_hz": [
+              [
+                1396.966552734375,
+                2793.54827202238
+              ],
+              [
+                2096.795654296875,
+                614.6677498498732
+              ],
+              [
+                701.1749267578125,
+                270.29529844830427
+              ],
+              [
+                2795.2789306640625,
+                109.10689648898247
+              ],
+              [
+                10.7666015625,
+                6.737791971326272
+              ],
+              [
+                3493.76220703125,
+                6.54776115958525
+              ]
+            ]
+          },
+          "native": {
+            "rms": 250.80386539729795,
+            "centroid": 1479.317938777526,
+            "peaks_hz": [
+              [
+                1398.3123779296875,
+                2141.517291993665
+              ],
+              [
+                2096.795654296875,
+                574.9564734290504
+              ],
+              [
+                701.1749267578125,
+                456.96334457753414
+              ],
+              [
+                2796.624755859375,
+                118.71884523511865
+              ],
+              [
+                10.7666015625,
+                12.33263930101515
+              ],
+              [
+                3495.1080322265625,
+                8.434570425568326
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.1,
+          "end_s": 0.2,
+          "reference": {
+            "rms": 257.49502383849534,
+            "centroid": 1490.2551340389418,
+            "peaks_hz": [
+              [
+                1396.966552734375,
+                2628.813553172471
+              ],
+              [
+                2096.795654296875,
+                552.495116524242
+              ],
+              [
+                701.1749267578125,
+                291.64037042741336
+              ],
+              [
+                2795.2789306640625,
+                78.55685679217679
+              ],
+              [
+                10.7666015625,
+                6.190049623421698
+              ],
+              [
+                3493.76220703125,
+                4.194795607733628
+              ]
+            ]
+          },
+          "native": {
+            "rms": 252.98585326083625,
+            "centroid": 1456.0960990400886,
+            "peaks_hz": [
+              [
+                1398.3123779296875,
+                1950.947752165087
+              ],
+              [
+                2096.795654296875,
+                542.8746562272886
+              ],
+              [
+                701.1749267578125,
+                480.7631132318333
+              ],
+              [
+                2795.2789306640625,
+                86.53497316656134
+              ],
+              [
+                10.7666015625,
+                11.237266032462722
+              ],
+              [
+                3495.1080322265625,
+                5.662158166636338
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.02,
+          "end_s": 0.08,
+          "reference": {
+            "rms": 258.68271232113113,
+            "centroid": 1494.139612457744,
+            "peaks_hz": [
+              [
+                1398.3123779296875,
+                1759.662069655943
+              ],
+              [
+                2096.795654296875,
+                370.0705572146467
+              ],
+              [
+                685.0250244140625,
+                166.6987814287622
+              ],
+              [
+                715.97900390625,
+                131.24253882451384
+              ],
+              [
+                2795.2789306640625,
+                77.05400673555904
+              ],
+              [
+                3493.76220703125,
+                5.088795352174926
+              ]
+            ]
+          },
+          "native": {
+            "rms": 225.68718359156009,
+            "centroid": 1452.220547670452,
+            "peaks_hz": [
+              [
+                1398.3123779296875,
+                1316.1300795048028
+              ],
+              [
+                2096.795654296875,
+                280.71778419978205
+              ],
+              [
+                685.0250244140625,
+                217.8091089933165
+              ],
+              [
+                717.3248291015625,
+                157.9221460334124
+              ],
+              [
+                2796.624755859375,
+                64.08643217429878
+              ],
+              [
+                3495.1080322265625,
+                4.48151320305203
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.04,
+          "end_s": 0.3,
+          "reference": {
+            "rms": 269.35872236701886,
+            "centroid": 1448.8288215462326,
+            "peaks_hz": [
+              [
+                1396.966552734375,
+                2564.5245216321473
+              ],
+              [
+                2096.795654296875,
+                535.4936369546582
+              ],
+              [
+                699.8291015625,
+                474.8483710356006
+              ],
+              [
+                2795.2789306640625,
+                79.15492215851506
+              ],
+              [
+                10.7666015625,
+                5.853428286803181
+              ],
+              [
+                3493.76220703125,
+                4.444027872785816
+              ]
+            ]
+          },
+          "native": {
+            "rms": 268.19032871421393,
+            "centroid": 1402.450033310733,
+            "peaks_hz": [
+              [
+                1398.3123779296875,
+                1889.1583147752046
+              ],
+              [
+                699.8291015625,
+                688.5643150707663
+              ],
+              [
+                2096.795654296875,
+                519.7145477281032
+              ],
+              [
+                2796.624755859375,
+                85.74350853702424
+              ],
+              [
+                10.7666015625,
+                9.738781199444333
+              ],
+              [
+                3495.1080322265625,
+                5.794003269525911
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "tap": "ch1-m1",
+      "windows": [
+        {
+          "start_s": 0.04,
+          "end_s": 0.21,
+          "reference": {
+            "rms": 463.44930852391525,
+            "centroid": 1214.0645160699025,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                7814.336912949975
+              ],
+              [
+                1396.966552734375,
+                1505.969381908647
+              ],
+              [
+                2094.10400390625,
+                553.4333682608897
+              ],
+              [
+                2792.5872802734375,
+                263.90891407541244
+              ],
+              [
+                3491.070556640625,
+                145.7292532271044
+              ],
+              [
+                4189.5538330078125,
+                88.28556841634506
+              ]
+            ]
+          },
+          "native": {
+            "rms": 402.86533853435066,
+            "centroid": 1466.1152307658758,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                5617.091133065395
+              ],
+              [
+                1396.966552734375,
+                1070.713510293252
+              ],
+              [
+                2095.4498291015625,
+                389.2800633690264
+              ],
+              [
+                2795.2789306640625,
+                184.9800279061185
+              ],
+              [
+                3493.76220703125,
+                102.69813440614678
+              ],
+              [
+                14672.186279296875,
+                70.77563817802204
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.1,
+          "end_s": 0.2,
+          "reference": {
+            "rms": 458.20123513810626,
+            "centroid": 1187.866070590253,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                7675.772931474661
+              ],
+              [
+                1396.966552734375,
+                1470.4314593851248
+              ],
+              [
+                2094.10400390625,
+                538.1458537545257
+              ],
+              [
+                2792.5872802734375,
+                255.2108604789832
+              ],
+              [
+                3491.070556640625,
+                140.23642714188418
+              ],
+              [
+                4189.5538330078125,
+                84.30669782782448
+              ]
+            ]
+          },
+          "native": {
+            "rms": 396.56919199085695,
+            "centroid": 1323.0723560748702,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                5478.259651851091
+              ],
+              [
+                1396.966552734375,
+                1034.3989750615278
+              ],
+              [
+                2095.4498291015625,
+                373.1536965051349
+              ],
+              [
+                2795.2789306640625,
+                176.34233824599738
+              ],
+              [
+                3493.76220703125,
+                97.26927593337565
+              ],
+              [
+                4192.2454833984375,
+                59.20112941770324
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.02,
+          "end_s": 0.08,
+          "reference": {
+            "rms": 412.7858335370276,
+            "centroid": 1214.2664822042898,
+            "peaks_hz": [
+              [
+                695.7916259765625,
+                4585.414859551837
+              ],
+              [
+                1392.9290771484375,
+                832.9018831334795
+              ],
+              [
+                2090.0665283203125,
+                288.08270241257566
+              ],
+              [
+                14.8040771484375,
+                174.94020289274
+              ],
+              [
+                2787.2039794921875,
+                128.6217330990091
+              ],
+              [
+                3484.3414306640625,
+                66.78502890956862
+              ]
+            ]
+          },
+          "native": {
+            "rms": 355.99827436798853,
+            "centroid": 1473.9386464046763,
+            "peaks_hz": [
+              [
+                695.7916259765625,
+                3119.8599860886825
+              ],
+              [
+                1391.583251953125,
+                543.4736836219345
+              ],
+              [
+                16.14990234375,
+                194.09535383992966
+              ],
+              [
+                2088.720703125,
+                179.64082099698118
+              ],
+              [
+                2784.5123291015625,
+                77.8435152546541
+              ],
+              [
+                3481.6497802734375,
+                39.04734331378876
+              ]
+            ]
+          }
+        },
+        {
+          "start_s": 0.04,
+          "end_s": 0.3,
+          "reference": {
+            "rms": 453.5530835704425,
+            "centroid": 1183.931947860305,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                7638.012106230558
+              ],
+              [
+                1396.966552734375,
+                1459.9699067192023
+              ],
+              [
+                2094.10400390625,
+                533.32658437022
+              ],
+              [
+                2792.5872802734375,
+                252.96798232694414
+              ],
+              [
+                3491.070556640625,
+                138.90139950944325
+              ],
+              [
+                4189.5538330078125,
+                83.64137697404624
+              ]
+            ]
+          },
+          "native": {
+            "rms": 389.6794540684393,
+            "centroid": 1343.9644974493017,
+            "peaks_hz": [
+              [
+                698.4832763671875,
+                5432.813305974765
+              ],
+              [
+                1396.966552734375,
+                1022.755294410747
+              ],
+              [
+                2095.4498291015625,
+                368.16408294657043
+              ],
+              [
+                2795.2789306640625,
+                173.42653316663998
+              ],
+              [
+                3493.76220703125,
+                95.41476684195706
+              ],
+              [
+                4192.2454833984375,
+                58.01745611993039
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "scalar_transfer": {
+    "scope": "Exact scalar amplitude transfer comparison; no synthesized audio. Native equation is selected unmodified Mednafen SCSP total attenuation transfer; OPM exponential table is pinned source.",
+    "opm_sha256": "983beecc471aebd8884fcc3aa48c50b1a26d4280ddbf1025b5196b540cf24188",
+    "native_source_sha256": "0a1e00647022c86c33edfa1601ae7a9fddde45884e34bf4a92015442e04f9906",
+    "native_sine_peak": 32767,
+    "examples": [
+      {
+        "original_TL": 0,
+        "native_TL": 0,
+        "opm_peak_times4": 32672,
+        "native_peak": 32511,
+        "native_relative_db": -0.042907846388111764,
+        "closest_peak_only_native_TL": 0,
+        "closest_peak_only_native_peak": 32511,
+        "caution": "A peak-only level fit does not preserve the whole native envelope curve; no production remapping has been applied."
+      },
+      {
+        "original_TL": 20,
+        "native_TL": 40,
+        "opm_peak_times4": 5776,
+        "native_peak": 6079,
+        "native_relative_db": 0.4440991764571669,
+        "closest_peak_only_native_TL": 41,
+        "closest_peak_only_native_peak": 5823,
+        "caution": "A peak-only level fit does not preserve the whole native envelope curve; no production remapping has been applied."
+      },
+      {
+        "original_TL": 22,
+        "native_TL": 44,
+        "opm_peak_times4": 4856,
+        "native_peak": 5055,
+        "native_relative_db": 0.34884963719637496,
+        "closest_peak_only_native_TL": 45,
+        "closest_peak_only_native_peak": 4799,
+        "caution": "A peak-only level fit does not preserve the whole native envelope curve; no production remapping has been applied."
+      },
+      {
+        "original_TL": 28,
+        "native_TL": 56,
+        "opm_peak_times4": 2888,
+        "native_peak": 3039,
+        "native_relative_db": 0.4426702236468278,
+        "closest_peak_only_native_TL": 57,
+        "closest_peak_only_native_peak": 2911,
+        "caution": "A peak-only level fit does not preserve the whole native envelope curve; no production remapping has been applied."
+      },
+      {
+        "original_TL": 29,
+        "native_TL": 58,
+        "opm_peak_times4": 2648,
+        "native_peak": 2783,
+        "native_relative_db": 0.4319045113276118,
+        "closest_peak_only_native_TL": 59,
+        "closest_peak_only_native_peak": 2655,
+        "caution": "A peak-only level fit does not preserve the whole native envelope curve; no production remapping has been applied."
+      }
+    ],
+    "minimum_relative_db_among_0_to_767": [
+      -1.159838939553735,
+      767,
+      8,
+      7
+    ],
+    "maximum_relative_db_among_0_to_767": [
+      3.5218251811136247,
+      734,
+      8,
+      12
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+ABI4: CARGADOR DIRECTO VERIFICADO EN COPIA AISLADA. AUDIO AUN NO ENTREGABLE.
+
+Objeto: sustituir la copia de transporte y direccion provisional por cuatro
+PT_LOAD cuyos destinos incluyen una ventana HWRAM propiedad real del master.
+El master suministra base/capacidad desde el linker, no desde el fichero ELF.
+
+RED previo: parser ABI3 rechaza la imagen de cuatro segmentos.
+GREEN: 351 ficheros malformados rechazados, copia y zero-fill exactos, objeto
+de salida inmutable en rechazo; todas las cargas se revalidan antes de stores.
+El compactador conserva entry, payload, direccion, memsz y flags de cuatro
+cargas directas; se verificaron truncamientos. Nueve escenarios del cuerpo
+exacto de music_boot pasan incl fallo de prepare, cambio de workspace y timeout.
+
+Master aislado: runtime/master-build/wrestlefest-runtime18-scsp.elf
+SHA256 87a5f061a1b73c7d46392d15c6b60ce951b244dc5eae755f03b8f0a31aca12cb.
+126 unidades C, compiladas localmente con GCC13/ZSTD; sin simbolos pendientes.
+Gates ELF: TLSF privado14KiB, hot18KiB, pila8KiB, userheap32732B >=16384B.
+HWRAM hot06088B30..0608D330; pila0608D330..0608F330.
+
+Modulo aislado V25 ABI4: module/build/MUSIC.ELF
+SHA256 0d8f36053f2ee6060d9b0f9998735d4ed1422396cedf03e7232956b5edebd9ae.
+95004B. ProgramaVDP81908B; BSS6320B; shared4096B; hot12840B+estado3220B.
+No AT/LMA de transporte para hot: fisica==virtual en las cuatro cargas.
+
+Cold4200 read-only VFS: cold-4200/report.json y capture.wav.
+ABI4 RUNNING2/error0; SCSP, VDP y HWRAM coinciden en sus muestras ejecutables.
+audit_saved_states.py verifico TODO el codigo hot12840B y programaVDP81908B
+en1800/3000/4200, callbacks/userdata, CCR1/cachedPC y SP dentro de pila8KiB.
+El walker TLSF real confirma privado libre>=4KiB/mayor>=4KiB sin fallos.
+Detalle: cold-4200/MEMORY-AND-COMBAT-READBACK.json.
+
+FALLO DE AUDIO CONSERVADO:4 descartes FM y game_frame0. Este ensayo valida
+carga/arranque, no combate ni reparacion de plazos. No es apto para entrega.
+No se ejecuta9600 adicional sobre este V25: su fallo de combate ya es conocido.
+
+Contrato de API: el descriptor toma prestado el ELF. El caller conserva su
+buffer vivo e inmutable hasta acabar copy (music_boot usa su staging LWRAM).
+Revalidar metadatos no sella el payload. El writer void debe completar stores;
+no existe rollback de un fallo fisico del bus. Rechazo previo sin escrituras
+no equivale a transaccion recuperable despues de comenzar una copia valida.
+
+Review independiente: sin P1 en propiedad/destinos/procedencia bajo contrato.
+Se documentaron lifetime/alcance de writer; se repusieron staticassert176/172
+en src/wf_music_module.h y se recompilo el HOST verde. Esos dos asserts nuevos
+no estan en los snapshots congelados del primer master/modulo ya medidos;
+la disposicion real176/172 se comprobo en compilacion/readback de esos binarios.
+
+R04, fuentes canonicas y medios originales intactos. Sin BIN/CUE/ISO nuevos.
+Fuentes congeladas y comandos completos en runtime/ y module/ con manifiestos.

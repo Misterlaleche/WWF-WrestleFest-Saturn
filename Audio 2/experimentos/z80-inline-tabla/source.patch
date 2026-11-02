@@ -1,0 +1,46 @@
+--- frozen-INLINE/z80-native.c
++++ factorial-INLINE-table/z80-native.c
+@@ -1033,6 +1033,25 @@
+ }
+ 
+ 
++static const uint8_t wf_scalar_admission[256] __attribute__((section(".wf_hotdata_const")))={
++ 1,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,
++ 1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
++ 1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,
++ 1,0,1,0,0,1,0,0,0,0,1,0,1,1,1,0,
++ 0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
++ 0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,
++ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
++ 0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,
++ 0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
++ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
++ 0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
++ 0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
++ 1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,
++ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
++ 0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
++ 0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,
++};
++
+  WF_SMALL unsigned wf_z80_scalar_step(z80*z,unsigned budget,uint32_t limit)
+  {
+   if(!budget||(int32_t)(limit-(uint32_t)z->cyc)<=0||
+@@ -1054,7 +1073,7 @@
+    }
+    wf_hot_process_tail(z);return 1;
+   }
+-  switch(op){case 0xcd:case 0x3a:case 0xc9:case 0xa7:case 0x08:case 0xc8:case 0xc3:case 0x20:case 0x32:case 0x00:case 0x3e:case 0xb8:case 0x09:case 0x21:case 0x10:case 0x06:case 0x4f:case 0x28:case 0x47:case 0xe6:case 0x87:case 0x5f:case 0x3d:case 0xf5:case 0xf1:case 0x30:case 0x7e:case 0xc0:case 0x16:case 0xca:case 0x23:case 0x77:case 0x11:case 0x05:case 0xaf:case 0x35:case 0x3c:case 0x57:case 0x5e:case 0x7a: break;default:return 0;}
++  if(!wf_scalar_admission[op])return 0;
+   z->pc=(uint16_t)(pc+1);z->cyc+=cyc_00[op];inc_r(z);
+   switch(op){
+   case 0x00: break;
+@@ -1158,7 +1177,7 @@
+    }
+    wf_hot_process_tail(z);return 1;
+   }
+-  switch(op){case 0xcd:case 0x3a:case 0xc9:case 0xa7:case 0x08:case 0xc8:case 0xc3:case 0x20:case 0x32:case 0x00:case 0x3e:case 0xb8:case 0x09:case 0x21:case 0x10:case 0x06:case 0x4f:case 0x28:case 0x47:case 0xe6:case 0x87:case 0x5f:case 0x3d:case 0xf5:case 0xf1:case 0x30:case 0x7e:case 0xc0:case 0x16:case 0xca:case 0x23:case 0x77:case 0x11:case 0x05:case 0xaf:case 0x35:case 0x3c:case 0x57:case 0x5e:case 0x7a: break;default:return 0;}
++  if(!wf_scalar_admission[op])return 0;
+   z->pc=(uint16_t)(pc+1);z->cyc+=cyc_00[op];inc_r(z);
+   switch(op){
+   case 0x00: break;

@@ -1,0 +1,85 @@
+{
+  "mixed_frames_different": 14680,
+  "mixed_squared_error_pcm_units": 26508187878,
+  "mixed_peak_difference_pcm_units": 5420,
+  "first_different_output_frame": 2451772,
+  "last_different_output_frame": 2466473,
+  "voices": [
+    {
+      "voice": 0,
+      "bank_mismatch_nibble_reads": 3561,
+      "changed_byte_reads": 0,
+      "changed_nibbles": 0,
+      "decoded_pcm_samples_different": 0,
+      "first_changed_relative_address": 0
+    },
+    {
+      "voice": 1,
+      "bank_mismatch_nibble_reads": 2667,
+      "changed_byte_reads": 2641,
+      "changed_nibbles": 2406,
+      "decoded_pcm_samples_different": 2663,
+      "first_changed_relative_address": 242098
+    },
+    {
+      "voice": 2,
+      "bank_mismatch_nibble_reads": 0,
+      "changed_byte_reads": 0,
+      "changed_nibbles": 0,
+      "decoded_pcm_samples_different": 0,
+      "first_changed_relative_address": 0
+    },
+    {
+      "voice": 3,
+      "bank_mismatch_nibble_reads": 0,
+      "changed_byte_reads": 0,
+      "changed_nibbles": 0,
+      "decoded_pcm_samples_different": 0,
+      "first_changed_relative_address": 0
+    }
+  ],
+  "kind": "ACTIVE_GLOBAL_BANK_VS_START_LATCHED_COUNTERFACTUAL",
+  "original_mixed_pcm_unchanged": true,
+  "original_trace_unchanged": true,
+  "original_reference_report_sha256": "de729e0b1c0d0e817d6e42d67114ef2a3890f588256831599e748f190b4a0166",
+  "source_sha256": {
+    "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference/reference_oki.h": "481fc10ce9d1446de5290e47146bb732be4d11390456dffeca3f87a32dfd839d",
+    "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference/capture_board_replay.c": "693212ee41b643955e502f3f89d8e263399242c66ea219363a0d63d9465bf466",
+    "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference/audit_active_banks.py": "a01fd874988763a9a5f3bf0787e45806d7912a07352e5b8ba18a083ff8c2d9b3"
+  },
+  "source_stable": true,
+  "instrumented_source_sha256": {
+    "reference_oki.h": "726c9e024a672ec7b70e0217a1f165d92f64fc3213104373405e510388359457",
+    "capture_board_replay.c": "0a5b2c28d99fc643a9df20b0e3de14a96c850eabdef8cb919bec4c65e10e0158"
+  },
+  "build_command": [
+    "cc",
+    "-O3",
+    "-std=c99",
+    "-I",
+    "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/tools/reference",
+    "-I",
+    "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/src/reference_driver",
+    "-I",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-mix-bf0/deps",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-active-bank-window/capture_board_replay.c",
+    "/workspace/scratch/46cef04a9eee/audio2-repo/Audio 2/production/src/reference_driver/z80.c",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-mix-bf0/deps/opm.c",
+    "-lm",
+    "-o",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-active-bank-window/capture_bank_audit"
+  ],
+  "run_command": [
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-active-bank-window/capture_bank_audit",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-mix-bf0/inputs/SOUND.ROM",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-mix-bf0/inputs/SAMPLES.ROM",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-mix-bf0/cases/observed-mix/schedule.csv",
+    "138",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-active-bank-window/trace.csv",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-active-bank-window/audio.pcm",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-active-bank-window/capture.json",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-active-bank-window/deliveries.csv",
+    "full"
+  ],
+  "scope": "Only the ROM bank-selection policy differs in parallel decoder histories; no native/DSP/analog inference is implied."
+}

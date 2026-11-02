@@ -1,0 +1,17 @@
+{
+  "structural_review_passed": true,
+  "one_variable": true,
+  "all_256_admissions_exact": true,
+  "source_reverts_to_baseline_LF": true,
+  "cold_bytes_unchanged": true,
+  "linked_table_bytes_exact": true,
+  "table_in_owned_HWRAM": true,
+  "hot_code_and_table_bytes": 13500,
+  "state_bytes": 3220,
+  "owned_window_bytes": 18432,
+  "spare_bytes": 1712,
+  "candidate_hot_LF_sha256": "6ad24b03f798e364123b77b1294b0c2fef589bbea947f38170b0896488b9b50c",
+  "HOST_required_before_emulation": true,
+  "emulator_run": false,
+  "media_created": false
+}

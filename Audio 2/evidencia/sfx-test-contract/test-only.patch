@@ -1,0 +1,16 @@
+--- test_sfx.before.c
++++ test_sfx.c
+@@ -70,9 +70,12 @@
+  }
+  assert(n==f->frames);assert(!s.underruns);
+  wf_scsp_sfx_stop_all(&s);assert(!s.pcm[0].playing);
++ assert(wf_scsp_sfx_oki_start(&s,1,1,20,3,false));
++ for(i=0;i<WF_SFX_RING_FRAMES/64;i++)wf_scsp_sfx_work(&s); /* buffered peer */
+  assert(wf_scsp_sfx_oki_start(&s,0,1,20,3,false));
+  for(i=0;i<50;i++)wf_scsp_sfx_advance(&s,32); /* intentionally starve producer */
+- assert(s.fault&&s.underruns==1&&!s.pcm[0].playing);
++ assert(!s.fault&&s.underruns==1&&!s.pcm[0].playing);
++ assert(s.pcm[1].playing&&s.pcm[1].played>0); /* contain failure to voice 0 */
+ }
+ static void levels_and_invalid_bind(void){
+  static const unsigned expected[16]={0,9,16,25,32,39,48,55,64,255,255,255,255,255,255,255};

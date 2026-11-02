@@ -1,0 +1,646 @@
+{
+  "scope": "HOST regression and original-ROM event logic; not emulated Saturn waveform or combat performance",
+  "source_sha256": {
+    "include/wf_audio2.h": "e0b8deb70b9b76776e174c4a3b115b33f447fd926cacd23cc798d8750464cb83",
+    "include/wf_audio2_yaul.h": "ab5eaf0b09dddbdfa2bcaf246a09a6a00b5ad0447d954b1da3a41d32a721e771",
+    "src/generated/wf_ym_envelope.h": "5f2e75edb5de0d5f3c1979f9e86b5d51602106a5cdad67671abfce4b4ca9bcf8",
+    "src/generated/wf_ym_tables.h": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+    "src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "src/reference_driver/z80-native.c": "c408e4a8ad5d7b54a55706f4c96fd9f4d39271dcd0fb5e2de14331af138f4fad",
+    "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+    "src/reference_driver/z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+    "src/wf_audio2.c": "1849480ae2a54d16df44b200303426d7d8a87622d2ec7d718bd7619f82f998a9",
+    "src/wf_audio2_yaul.c": "205b831868ffc17886aa289ec3cecf31f72339f59b8ca3d35731c671abe0744f",
+    "src/wf_music_clock.h": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+    "src/wf_music_entry.S": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+    "src/wf_music_firmware.c": "81cee191220e30dfe1ba42aed0fccbe1232842a78b271bec50eea72c64a21e90",
+    "src/wf_music_module.c": "f7fe65540e2d6604b9c038d82f4426ed75f204ac9c1ff4b025f48f01653f2850",
+    "src/wf_music_module.h": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c",
+    "src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+    "src/wf_music_seq.h": "b02489430f5fb5eb97712c2a56d1636a4159358930cdcbf6244df0cbadf92471",
+    "src/wf_music_time.h": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+    "src/wf_native_driver.h": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+    "src/wf_native_elf.c": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+    "src/wf_native_elf.h": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+    "src/wf_native_host.c": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+    "src/wf_native_host.h": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+    "src/wf_native_yaul.c": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+    "src/wf_native_yaul.h": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+    "src/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+    "src/wf_scsp_dsp.h": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+    "src/wf_scsp_sfx.c": "4745461ca0439802e0f4ffc4395e07ef89d7b09ff41e83868b3bc7dfefa7d05b",
+    "src/wf_scsp_sfx.h": "d089e10bc23083db14b29577767f36d0ac8582f73c3e0d2bd3a14fc6baa11695",
+    "src/wf_scsp_ym.c": "c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76",
+    "src/wf_scsp_ym.h": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+    "src/wf_sfx_decode.S": "64c8e4137aee642546dcd6c1f5bca1f0103b6b905faa683b3b7aaa093bd705ed",
+    "src/wf_sfx_memory.c": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+    "src/wf_sfx_start.S": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+    "src/wf_z80_control_batch.inc": "6775bdc1db5f94c73ed3dc2f35926fffa40fd21e6a2890a284ce6f0c7f6e2ee2",
+    "src/wf_z80_instrument_post.inc": "b9cd0af3069c405f2b63809c2e6d5157831a8cc84632868d8f3f6dec7fe31f53",
+    "src/wf_z80_instrument_pre.inc": "1353f99b38f72dfb7cc79858f14e16314cc6b90900a2cb8680557e9693197770",
+    "src/wf_z80_multiply.inc": "86dd0ae1b986a7c919f0074db6129833fe0b2ebdc946809d382c75f63d6a2642",
+    "src/wf_z80_startup_copy.inc": "67f4df15c8c115210f69779e8b5d937859002122332ff5bbecbf09ada86742e1",
+    "tests/decoder_native.c": "cdf1649f2a0bf4476d295d5099402a7381767cd6a353803506201de828e93303",
+    "tests/decoder_saturn.c": "a34c56015af861ef034ee95b691da946ba94a0be0014f8498c1d5997a47accd8",
+    "tests/decoder_stub.S": "9b6023705d8c5ca09ec77611c6d64ded14218df1ee491df043258a29a1249c1d",
+    "tests/oracle/wf_music_seq_r01.c": "5432de051afdae58f5cde12e866fa1bd7241dd98b07a588693a750fc50f10200",
+    "tests/oracle/z80_native_before_scalar9.c": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+    "tests/saturn_harness.c": "49535de835bf9ff83353db8865ec6bf9356a3b3c6396ee475ea376fba4245f71",
+    "tests/saturn_lifecycle.c": "e540d949be33ec42704f9cf524a26672b97a213babacc74987865077b2bff3fc",
+    "tests/test_audio2_api.c": "91c16b34124116de655b3cfe1f9b2f44d9adeef1bd5f5e8ff4a141a46ee38ab4",
+    "tests/test_build_safety.py": "8357e0f971fc25e5ed0d44bc396f47c45c5155db98688f5dfde903888304a720",
+    "tests/test_music_firmware_deadline.c": "4792c71ab17330945599163127367892f0a2063bdd6b617d66bc067728135da4",
+    "tests/test_music_matrix.py": "b9b32bddc77c14c8e4a126aec5c26eb73d12d1d1053f61b78c89c48ffc4d68e0",
+    "tests/test_music_module_deadline.c": "78538c26e26f3ef6ffdd280864337db8c097965950800f93d826aa6a08f1d1a6",
+    "tests/test_music_seq_service.c": "70a46d9d363f94049d825e9ef511a014648750badbb4b9581f52f99e48fc64a3",
+    "tests/test_music_state_probe.c": "73e8ba00d7fe2dd5e9de2801521efe4b44980c22c6d8b996293e3759de7bd7c9",
+    "tests/test_music_structure.py": "c0d32ee8b5e6602fce69e20f411e233312f86053ffb28a5d29e0ce1ecfbaffb6",
+    "tests/test_native_capture_gate.py": "d3cb533e27ca91fbc1c5f8a91b536fcbd85ba45f6f1c85359a8583fcabc8c161",
+    "tests/test_output_preservation.py": "15dbd37c79f2c6d21bd4bae30c646e4542683c61121daa6d171b35f17b1c186c",
+    "tests/test_reference_oki.c": "b0ffd341cd194c4a158056279c1ee647ef14c01245fbbaa17257ff2cadfa7c25",
+    "tests/test_reference_output_ownership.py": "863a1cbebbfccf1b1b3f658cf0d63a5a1fb95d42f9c61a4f319edefc3deb1ce4",
+    "tests/test_resources.py": "481931c2996437ba1ef95e9614a38d8b8112c07ca5ef5e9dbc089971eecdd67d",
+    "tests/test_seq_a53.c": "985c10817a4a119c92fb7c45289269ad0984f5b8df671dbdd1a3eea4eadd3932",
+    "tests/test_sfx_native.c": "b7e1685ec8d7b6764d600d9bbb93787771ba610308da7ac38f03c524103ec275",
+    "tests/test_sfx_original_starts.c": "ca9d89ecc1f6fda8cf5c7dd045fc8b873f6823ecef9de646c242d7443df36587",
+    "tests/test_sfx_refill_deadline.c": "7838c6480e15af1c61d6c42ca03caa3a08aa2844c59fb505f89fedf4244736e4",
+    "tests/test_sh2_scalar_admissions.c": "8dbdaf5dc17d0bc8d9a0464f2bdc6fb55a74a884eabb1e26395bbd5352d3b155",
+    "tests/test_source_snapshot.py": "e397e10bbc4536c63d78f23d4c59b15e8ff0f0fbd4eb0a1ff2e4132b596e6823",
+    "tests/test_ym_native.c": "6b6502d68c77b4805c76f29a648885bab3abc78cc90ebbef64c3e85d69f4d79f",
+    "tests/test_ym_usage.py": "d2ed84ee069c1dbdfe64741b14894f2b891499153e41ade4c5bb81746b866c98"
+  },
+  "inputs": {
+    "/workspace/scratch/46cef04a9eee/project_sources/01-wwfwfest.zip": "2a99ae04704941fe1e2a6362dbc4feb18554de4fc83baa0622487d84716127b8",
+    "/workspace/scratch/46cef04a9eee/audio2-build/resources/SOUND.ROM": "f89e7782e7535576b2ebf8c5daea61c5fa2ecefff0b8b3280dea09efa57c25f7",
+    "/workspace/scratch/46cef04a9eee/audio2-build/resources/SFX.DAT": "dbe749cf4ce13f333ff7318a74a64e30fa2b9af05d953688a0813311cbabd216",
+    "/workspace/scratch/46cef04a9eee/audio2-build/production-final-firmware/SCSP.ELF": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090"
+  },
+  "sequence_seconds_per_command": 1,
+  "tests": [
+    {
+      "name": "resource_identity_and_corruption",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_resources.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5852764939991175,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.526s\n\nOK\n"
+    },
+    {
+      "name": "build_input_aliases",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_build_safety.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05180842900153948,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "source_profile_snapshot",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_source_snapshot.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.10188237099646358,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.005s\n\nOK\n"
+    },
+    {
+      "name": "output_preservation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_output_preservation.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13351424199936446,
+      "stdout": "",
+      "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.026s\n\nOK\n"
+    },
+    {
+      "name": "native_capture_evidence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_native_capture_gate.py"
+      ],
+      "exit_code": 0,
+      "seconds": 8.25779512200097,
+      "stdout": "",
+      "stderr": "......................\n----------------------------------------------------------------------\nRan 22 tests in 8.144s\n\nOK\n"
+    },
+    {
+      "name": "api",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/api",
+        "/workspace/scratch/46cef04a9eee/audio2-build/production-final-firmware/SCSP.ELF",
+        "/workspace/scratch/46cef04a9eee/audio2-build/resources/SFX.DAT"
+      ],
+      "exit_code": 0,
+      "seconds": 0.02593832700222265,
+      "stdout": "audio2_api: payload corruption,18music,98SFX,1F,stop,backpressure,priority,timeout,recovery PASS\n",
+      "stderr": ""
+    },
+    {
+      "name": "module_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/module_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.00997530000313418,
+      "stdout": "scheduler: work=4096 Fs enqueue_due=-100 service_calls=8 max_gap=512 clock_reads=2 batches=0 delivered=1234 rc=0 flushed=1\nPASS starvation\nPASS deadline\nPASS fm-full\nPASS ring-full\nPASS rejected-current\nPASS late-key\nPASS flush-clock\nPASS recovery\nPASS workspace\nPASS lifecycle\n",
+      "stderr": ""
+    },
+    {
+      "name": "firmware_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/firmware_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.001061575996573083,
+      "stdout": "PASS real firmware hard deadline, one count, no stale replay, wrap and bounded prepare at nearest deadline\n",
+      "stderr": ""
+    },
+    {
+      "name": "firmware_deadlines_no_timing",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/firmware_deadlines_no_timing"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0012226370017742738,
+      "stdout": "PASS real firmware hard deadline, one count, no stale replay, wrap and bounded prepare at nearest deadline\n",
+      "stderr": ""
+    },
+    {
+      "name": "sfx_refill_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/sfx_refill_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.001065601005393546,
+      "stdout": "PASS urgent refill, equal-margin round robin, exact decoder/sample continuation and bounded end padding\n",
+      "stderr": ""
+    },
+    {
+      "name": "all18_full_z80_and_live_transitions",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/seq_oracle",
+        "/workspace/scratch/46cef04a9eee/audio2-build/resources/SOUND.ROM",
+        "1"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3753165360030835,
+      "stdout": "PASS cmd01 1s+8s fade CPU/RAM/timers/events=28439 hash=ebb2b274801e291c\nPASS cmd02 1s+8s fade CPU/RAM/timers/events=22495 hash=4edac71fc245aa43\nPASS cmd03 1s+8s fade CPU/RAM/timers/events=24753 hash=1659d2d62b1e2cf3\nPASS cmd04 1s+8s fade CPU/RAM/timers/events=27712 hash=fd3dcc93daaec9b2\nPASS cmd05 1s+8s fade CPU/RAM/timers/events=13809 hash=ea3c77f4bf043682\nPASS cmd06 1s+8s fade CPU/RAM/timers/events=30010 hash=6c0e21f017c6797f\nPASS cmd07 1s+8s fade CPU/RAM/timers/events=31272 hash=a2d39a19c672961a\nPASS cmd08 1s+8s fade CPU/RAM/timers/events=16794 hash=052ff0995261313e\nPASS cmd09 1s+8s fade CPU/RAM/timers/events=26231 hash=2c34b40d4b3e0228\nPASS cmd0a 1s+8s fade CPU/RAM/timers/events=25800 hash=9ce6c8b977fc1da8\nPASS cmd0b 1s+8s fade CPU/RAM/timers/events=27248 hash=032748e78ccc848c\nPASS cmd0c 1s+8s fade CPU/RAM/timers/events=22997 hash=0d478e848d220ca3\nPASS cmd0d 1s+8s fade CPU/RAM/timers/events=24645 hash=53a0a3651ec321f9\nPASS cmd0e 1s+8s fade CPU/RAM/timers/events=23203 hash=99ee9f410feaf0e8\nPASS cmd0f 1s+8s fade CPU/RAM/timers/events=25208 hash=69173315f75b7628\nPASS cmd10 1s+8s fade CPU/RAM/timers/events=18686 hash=de97dba94c643d8a\nPASS cmd11 1s+8s fade CPU/RAM/timers/events=29841 hash=3e01127970ec447e\nPASS cmd12 1s+8s fade CPU/RAM/timers/events=32831 hash=451ad41226d8dd1d\nPASS serviced R01 differential tracks=18 score_seconds=1 checkpoints=180 calls=15735 services=57925\nPASS live ROM command transitions1,6,12,1f,3,1f,2,1,1f events=89011 hash=e4e46eb2779d4f80 and00 rejection\n",
+      "stderr": ""
+    }
+  ],
+  "commands": [
+    {
+      "name": "resource_identity_and_corruption",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_resources.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5852764939991175,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.526s\n\nOK\n"
+    },
+    {
+      "name": "build_input_aliases",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_build_safety.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05180842900153948,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "source_profile_snapshot",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_source_snapshot.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.10188237099646358,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.005s\n\nOK\n"
+    },
+    {
+      "name": "output_preservation",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_output_preservation.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13351424199936446,
+      "stdout": "",
+      "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.026s\n\nOK\n"
+    },
+    {
+      "name": "native_capture_evidence",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_native_capture_gate.py"
+      ],
+      "exit_code": 0,
+      "seconds": 8.25779512200097,
+      "stdout": "",
+      "stderr": "......................\n----------------------------------------------------------------------\nRan 22 tests in 8.144s\n\nOK\n"
+    },
+    {
+      "name": "build_api",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "tests/test_audio2_api.c",
+        "src/wf_audio2.c",
+        "src/wf_native_host.c",
+        "src/wf_native_elf.c",
+        "src/wf_scsp_sfx.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/api"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5974353359997622,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "api",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/api",
+        "/workspace/scratch/46cef04a9eee/audio2-build/production-final-firmware/SCSP.ELF",
+        "/workspace/scratch/46cef04a9eee/audio2-build/resources/SFX.DAT"
+      ],
+      "exit_code": 0,
+      "seconds": 0.02593832700222265,
+      "stdout": "audio2_api: payload corruption,18music,98SFX,1F,stop,backpressure,priority,timeout,recovery PASS\n",
+      "stderr": ""
+    },
+    {
+      "name": "build_module_deadlines_sequence",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "-fno-pie",
+        "-no-pie",
+        "-c",
+        "src/wf_music_seq.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/module_deadlines-sequence.o"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0917507089980063,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "build_module_deadlines",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "-fno-pie",
+        "-no-pie",
+        "tests/test_music_module_deadline.c",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/module_deadlines-sequence.o",
+        "src/wf_scsp_ym.c",
+        "src/reference_driver/z80.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/module_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 1.191985596997256,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "module_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/module_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.00997530000313418,
+      "stdout": "scheduler: work=4096 Fs enqueue_due=-100 service_calls=8 max_gap=512 clock_reads=2 batches=0 delivered=1234 rc=0 flushed=1\nPASS starvation\nPASS deadline\nPASS fm-full\nPASS ring-full\nPASS rejected-current\nPASS late-key\nPASS flush-clock\nPASS recovery\nPASS workspace\nPASS lifecycle\n",
+      "stderr": ""
+    },
+    {
+      "name": "build_firmware_deadlines",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "tests/test_music_firmware_deadline.c",
+        "src/wf_scsp_sfx.c",
+        "src/wf_scsp_ym.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/firmware_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8176504700022633,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "firmware_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/firmware_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.001061575996573083,
+      "stdout": "PASS real firmware hard deadline, one count, no stale replay, wrap and bounded prepare at nearest deadline\n",
+      "stderr": ""
+    },
+    {
+      "name": "build_firmware_deadlines_no_timing",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "-DWF_MUSIC_TIMING=0",
+        "tests/test_music_firmware_deadline.c",
+        "src/wf_scsp_sfx.c",
+        "src/wf_scsp_ym.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/firmware_deadlines_no_timing"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6224949980023666,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "firmware_deadlines_no_timing",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/firmware_deadlines_no_timing"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0012226370017742738,
+      "stdout": "PASS real firmware hard deadline, one count, no stale replay, wrap and bounded prepare at nearest deadline\n",
+      "stderr": ""
+    },
+    {
+      "name": "build_sfx_refill_deadlines",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "tests/test_sfx_refill_deadline.c",
+        "src/wf_scsp_sfx.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/sfx_refill_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.29930561700166436,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "sfx_refill_deadlines",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/sfx_refill_deadlines"
+      ],
+      "exit_code": 0,
+      "seconds": 0.001065601005393546,
+      "stdout": "PASS urgent refill, equal-margin round robin, exact decoder/sample continuation and bounded end padding\n",
+      "stderr": ""
+    },
+    {
+      "name": "build_original_z80",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Dz80_init=wf_ref_z80_init",
+        "-Dz80_step=wf_ref_z80_step",
+        "-Dz80_gen_nmi=wf_ref_z80_gen_nmi",
+        "-Dz80_gen_int=wf_ref_z80_gen_int",
+        "-Dz80_debug_output=wf_ref_z80_debug_output",
+        "-c",
+        "src/reference_driver/z80.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/ref-z80.o"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9596761080028955,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "build_frozen_r01",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Dz80_init=wf_ref_z80_init",
+        "-Dz80_step=wf_ref_z80_step",
+        "-Dz80_gen_nmi=wf_ref_z80_gen_nmi",
+        "-Dz80_gen_int=wf_ref_z80_gen_int",
+        "-Dz80_debug_output=wf_ref_z80_debug_output",
+        "-Dwf_music_seq_init=wf_ref_init",
+        "-Dwf_music_seq_send=wf_ref_send",
+        "-Dwf_music_seq_run=wf_ref_run",
+        "-c",
+        "tests/oracle/wf_music_seq_r01.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/ref-seq.o"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0770851489942288,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "build_native_sequence_Os",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "-DWF_MUSIC_NATIVE_CONTROL=1",
+        "-c",
+        "src/wf_music_seq.c",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/candidate-sequence.o"
+      ],
+      "exit_code": 0,
+      "seconds": 0.08199958399927709,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "build_serviced_native_oracle",
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Iinclude",
+        "-Isrc",
+        "-Isrc/reference_driver",
+        "-Werror",
+        "-Wno-unused-const-variable",
+        "-Wno-unused-function",
+        "-Wno-misleading-indentation",
+        "-DWF_MUSIC_NATIVE_CONTROL=1",
+        "tests/test_music_seq_service.c",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/candidate-sequence.o",
+        "src/reference_driver/z80-native.c",
+        "src/reference_driver/z80-cold.c",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/ref-z80.o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/ref-seq.o",
+        "-o",
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/seq_oracle"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0412041210001917,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "all18_full_z80_and_live_transitions",
+      "command": [
+        "/workspace/scratch/46cef04a9eee/audio2-build/final-tooling-host-smoke/seq_oracle",
+        "/workspace/scratch/46cef04a9eee/audio2-build/resources/SOUND.ROM",
+        "1"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3753165360030835,
+      "stdout": "PASS cmd01 1s+8s fade CPU/RAM/timers/events=28439 hash=ebb2b274801e291c\nPASS cmd02 1s+8s fade CPU/RAM/timers/events=22495 hash=4edac71fc245aa43\nPASS cmd03 1s+8s fade CPU/RAM/timers/events=24753 hash=1659d2d62b1e2cf3\nPASS cmd04 1s+8s fade CPU/RAM/timers/events=27712 hash=fd3dcc93daaec9b2\nPASS cmd05 1s+8s fade CPU/RAM/timers/events=13809 hash=ea3c77f4bf043682\nPASS cmd06 1s+8s fade CPU/RAM/timers/events=30010 hash=6c0e21f017c6797f\nPASS cmd07 1s+8s fade CPU/RAM/timers/events=31272 hash=a2d39a19c672961a\nPASS cmd08 1s+8s fade CPU/RAM/timers/events=16794 hash=052ff0995261313e\nPASS cmd09 1s+8s fade CPU/RAM/timers/events=26231 hash=2c34b40d4b3e0228\nPASS cmd0a 1s+8s fade CPU/RAM/timers/events=25800 hash=9ce6c8b977fc1da8\nPASS cmd0b 1s+8s fade CPU/RAM/timers/events=27248 hash=032748e78ccc848c\nPASS cmd0c 1s+8s fade CPU/RAM/timers/events=22997 hash=0d478e848d220ca3\nPASS cmd0d 1s+8s fade CPU/RAM/timers/events=24645 hash=53a0a3651ec321f9\nPASS cmd0e 1s+8s fade CPU/RAM/timers/events=23203 hash=99ee9f410feaf0e8\nPASS cmd0f 1s+8s fade CPU/RAM/timers/events=25208 hash=69173315f75b7628\nPASS cmd10 1s+8s fade CPU/RAM/timers/events=18686 hash=de97dba94c643d8a\nPASS cmd11 1s+8s fade CPU/RAM/timers/events=29841 hash=3e01127970ec447e\nPASS cmd12 1s+8s fade CPU/RAM/timers/events=32831 hash=451ad41226d8dd1d\nPASS serviced R01 differential tracks=18 score_seconds=1 checkpoints=180 calls=15735 services=57925\nPASS live ROM command transitions1,6,12,1f,3,1f,2,1,1f events=89011 hash=e4e46eb2779d4f80 and00 rejection\n",
+      "stderr": ""
+    }
+  ],
+  "source_stable_during_tests": true,
+  "passed": true,
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "repository": "mamedev/mame",
+    "ref": "5c60f61d321dd7869f6cc2e7a6f78191a16b4d84",
+    "path": "src/devices/sound/okim6295.h",
+    "git_blob_sha": "11a42f84aa15a084d175121fdd678fe6946544a9",
+    "sha256": "c2c75718818b24864911fc714c8cf61a278266c93f565d97831a81303c6db2a1",
+    "bytes": 2753,
+    "blob_verified": true,
+    "url": "https://github.com/mamedev/mame/blob/5c60f61d321dd7869f6cc2e7a6f78191a16b4d84/src/devices/sound/okim6295.h"
+  },
+  {
+    "repository": "mamedev/mame",
+    "ref": "5c60f61d321dd7869f6cc2e7a6f78191a16b4d84",
+    "path": "src/emu/dirom.h",
+    "git_blob_sha": "40c31050e1caa72d49566a1bd231b321db8c90a6",
+    "sha256": "3c2390ecb74fba46b4807813001fcbc76948dbb523e3c39f902562e0593f5da9",
+    "bytes": 2075,
+    "blob_verified": true,
+    "url": "https://github.com/mamedev/mame/blob/5c60f61d321dd7869f6cc2e7a6f78191a16b4d84/src/emu/dirom.h"
+  },
+  {
+    "repository": "mamedev/mame",
+    "ref": "5c60f61d321dd7869f6cc2e7a6f78191a16b4d84",
+    "path": "src/emu/dirom.ipp",
+    "git_blob_sha": "d41da70a618bb4f2bbee14b74437435326d1cecc",
+    "sha256": "ceb68eca47bcca7e291a9daae40b9b38a48c2d73c06ac7d432031dec3b969694",
+    "bytes": 5264,
+    "blob_verified": true,
+    "url": "https://github.com/mamedev/mame/blob/5c60f61d321dd7869f6cc2e7a6f78191a16b4d84/src/emu/dirom.ipp"
+  }
+]

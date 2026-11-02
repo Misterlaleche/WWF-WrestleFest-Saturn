@@ -1,0 +1,6234 @@
+{
+  "scope": "Read-only libretro VFS RAM filesystem overlay; cold boot; no state loads or guest memory edits. Infrastructure run does not certify repairs.",
+  "physical_validation": false,
+  "disc_images_created": false,
+  "state_loads": 0,
+  "guest_memory_edits": false,
+  "existing_media_sha256": "55baf7c5a9f61a7dd9ff6e230d744e03d371c050d61f45895be98f7bcdb5f126",
+  "overlay_sectors": 586,
+  "replacements": [
+    {
+      "name": "A.BIN",
+      "bytes": 999132,
+      "old_sha256": "c9083578d310a70d6eb87e3be5d1ff228e0952299ca6b3a3b673904140543b23",
+      "new_sha256": "322e2821425050c81df9f2cff504e34713591066f1d637fef3ebe8b40e9dd2e2",
+      "lba": 33,
+      "relocated_in_ram": false
+    },
+    {
+      "name": "MUSIC.ELF",
+      "bytes": 96196,
+      "old_sha256": "519355010b844b1bc62098707567c5c84059846c0ff2655ecf30d8c8b11a4b7f",
+      "new_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+      "lba": 1249,
+      "relocated_in_ram": false
+    },
+    {
+      "name": "SCSP.ELF",
+      "bytes": 54416,
+      "old_sha256": "e65dd9c1924bbd410730c9985dbc4d0a59262458eeaf61996c30fafd61d50a1e",
+      "new_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+      "lba": 5099,
+      "relocated_in_ram": false
+    }
+  ],
+  "boot_header_changes": [
+    {
+      "field": "master_stack",
+      "offset": 228,
+      "before": 100679680,
+      "after": 100679680
+    },
+    {
+      "field": "slave_stack",
+      "offset": 236,
+      "before": 101707776,
+      "after": 101249488
+    },
+    {
+      "field": "boot_address",
+      "offset": 240,
+      "before": 100679680,
+      "after": 100679680
+    },
+    {
+      "field": "boot_size",
+      "offset": 244,
+      "before": 1008116,
+      "after": 999132
+    }
+  ],
+  "boot_area_sha256": "bdfaa3a5e3beec141a523cf9cb8367ac90d6e507e1a5de80b4fbac6950755900",
+  "files": {
+    "A.BIN": {
+      "lba": 33,
+      "size": 999132,
+      "record_lba": 18,
+      "record_off": 68
+    },
+    "ABS.TXT": {
+      "lba": 526,
+      "size": 62,
+      "record_lba": 18,
+      "record_off": 108
+    },
+    "BIB.TXT": {
+      "lba": 527,
+      "size": 49,
+      "record_lba": 18,
+      "record_off": 150
+    },
+    "CPY.TXT": {
+      "lba": 528,
+      "size": 57,
+      "record_lba": 18,
+      "record_off": 192
+    },
+    "FONT8.BIN": {
+      "lba": 529,
+      "size": 131072,
+      "record_lba": 18,
+      "record_off": 234
+    },
+    "FRONTSPR.BIN": {
+      "lba": 593,
+      "size": 573264,
+      "record_lba": 18,
+      "record_off": 278
+    },
+    "HOTSPR.BIN": {
+      "lba": 873,
+      "size": 769024,
+      "record_lba": 18,
+      "record_off": 326
+    },
+    "MUSIC.ELF": {
+      "lba": 1249,
+      "size": 96196,
+      "record_lba": 18,
+      "record_off": 372
+    },
+    "POSTSPR.BIN": {
+      "lba": 1313,
+      "size": 508424,
+      "record_lba": 18,
+      "record_off": 416
+    },
+    "R18MAP1.BIN": {
+      "lba": 1562,
+      "size": 127138,
+      "record_lba": 18,
+      "record_off": 462
+    },
+    "R18MAP2.BIN": {
+      "lba": 1625,
+      "size": 95978,
+      "record_lba": 18,
+      "record_off": 508
+    },
+    "R18MAP4.BIN": {
+      "lba": 1672,
+      "size": 129998,
+      "record_lba": 18,
+      "record_off": 554
+    },
+    "R18MAP5.BIN": {
+      "lba": 1736,
+      "size": 115568,
+      "record_lba": 18,
+      "record_off": 600
+    },
+    "R18MENU.BIN": {
+      "lba": 1793,
+      "size": 124938,
+      "record_lba": 18,
+      "record_off": 646
+    },
+    "R18POSE.BIN": {
+      "lba": 1855,
+      "size": 5171504,
+      "record_lba": 18,
+      "record_off": 692
+    },
+    "R18POSE.IDX": {
+      "lba": 4381,
+      "size": 58648,
+      "record_lba": 18,
+      "record_off": 738
+    },
+    "R18RING.BIN": {
+      "lba": 4410,
+      "size": 114918,
+      "record_lba": 18,
+      "record_off": 784
+    },
+    "ROM68K.BIN": {
+      "lba": 4467,
+      "size": 524288,
+      "record_lba": 18,
+      "record_off": 830
+    },
+    "ROYSPR.BIN": {
+      "lba": 4723,
+      "size": 769012,
+      "record_lba": 18,
+      "record_off": 876
+    },
+    "SCSP.ELF": {
+      "lba": 5099,
+      "size": 54416,
+      "record_lba": 18,
+      "record_off": 922
+    },
+    "SFX.DAT": {
+      "lba": 5126,
+      "size": 440710,
+      "record_lba": 18,
+      "record_off": 966
+    },
+    "SPRITES.PAK": {
+      "lba": 5342,
+      "size": 8388608,
+      "record_lba": 18,
+      "record_off": 1008
+    }
+  },
+  "manifest": {
+    "A.BIN": {
+      "bytes": 999132,
+      "sha256": "322e2821425050c81df9f2cff504e34713591066f1d637fef3ebe8b40e9dd2e2"
+    },
+    "ABS.TXT": {
+      "bytes": 62,
+      "sha256": "f8ed99759f85661006454d52e59ccc2c1b2d880da8fa13f06179e2758dae3c1b"
+    },
+    "BIB.TXT": {
+      "bytes": 49,
+      "sha256": "10147c83e3ec8ce264b07113121fc36a6bab3adcd79d043ce319102f3ccb02d2"
+    },
+    "CPY.TXT": {
+      "bytes": 57,
+      "sha256": "1c9f9136f407e464163b605b3159043c5be6507f047f2d0a1b11e3aabd12024a"
+    },
+    "FONT8.BIN": {
+      "bytes": 131072,
+      "sha256": "a3045c6193d23c334c6af592cc1dfee029dc12eec810d3e2ce353df69580391a"
+    },
+    "FRONTSPR.BIN": {
+      "bytes": 573264,
+      "sha256": "54f76cda1abfa985dd018b1c476c38ad0f02c762cbce0724fbe19e1783e15e4f"
+    },
+    "HOTSPR.BIN": {
+      "bytes": 769024,
+      "sha256": "ee7fbbb45ccc70ba0fa31045b168f47daed73be09fdb8973a43dadd17b3247e6"
+    },
+    "MUSIC.ELF": {
+      "bytes": 96196,
+      "sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df"
+    },
+    "POSTSPR.BIN": {
+      "bytes": 508424,
+      "sha256": "d06616b3706cf15dd8f6626d7d99d2ccfaeda0ba8331d77d184796f1bd57c9d9"
+    },
+    "R18MAP1.BIN": {
+      "bytes": 127138,
+      "sha256": "75f0e4bb5cc7b90974e4276a274b62144488997c5b4f6f6819070d1bec213359"
+    },
+    "R18MAP2.BIN": {
+      "bytes": 95978,
+      "sha256": "979b622c418307f90b1ce98524db7bade230adf399bd13e6fc3fe4adc699acf0"
+    },
+    "R18MAP4.BIN": {
+      "bytes": 129998,
+      "sha256": "402cd878b92e3373a2a1a14608a4d833d4a359282c39b875d0901c4f41746f91"
+    },
+    "R18MAP5.BIN": {
+      "bytes": 115568,
+      "sha256": "40cccfee8e2cc1509234b023f06754eefe9ba8c71725b7a145cdc050847e8c86"
+    },
+    "R18MENU.BIN": {
+      "bytes": 124938,
+      "sha256": "3d45bca1bd3115ca657d1ccf1a344eb4b0ee5c7c09b9129d9f122c8fd9779ad4"
+    },
+    "R18POSE.BIN": {
+      "bytes": 5171504,
+      "sha256": "0207657317a4eb5426978670f7a703e95c32bfc264d3d1a5d19a6938ed610d19"
+    },
+    "R18POSE.IDX": {
+      "bytes": 58648,
+      "sha256": "008f56cfa1bfcefeaf622c2f73461c6c9bc9dc64c062ca2b068578110d337ed8"
+    },
+    "R18RING.BIN": {
+      "bytes": 114918,
+      "sha256": "774fbc5d9d0b404d1b3fdd825581efb5de892ab15504ecb257190dfa6b30191c"
+    },
+    "ROM68K.BIN": {
+      "bytes": 524288,
+      "sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306"
+    },
+    "ROYSPR.BIN": {
+      "bytes": 769012,
+      "sha256": "a408fb7ecc1ddd2902b02128cf704a4d6121c231a8fc868d0f1a4a0c730700d7"
+    },
+    "SCSP.ELF": {
+      "bytes": 54416,
+      "sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c"
+    },
+    "SFX.DAT": {
+      "bytes": 440710,
+      "sha256": "dbe749cf4ce13f333ff7318a74a64e30fa2b9af05d953688a0813311cbabd216"
+    },
+    "SPRITES.PAK": {
+      "bytes": 8388608,
+      "sha256": "130ac19d5ab3646f2d51c9d2ce52cd42f53f60b125fd18d674ee8de722c55d31"
+    }
+  },
+  "changed_files": [
+    "A.BIN",
+    "MUSIC.ELF",
+    "SCSP.ELF"
+  ],
+  "core_sha256": "88b459ccb216746ced3b0e09c6598725ccfd6e91df9f43a078309975edf685d5",
+  "observations": [
+    {
+      "dsp_clock": 0,
+      "music_state": 43690,
+      "music_error": 2863289685,
+      "music_events": 2863289685,
+      "late_count": 0,
+      "dropped_fm": 0,
+      "mcu_state": 0,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 0,
+      "native_profile_name": "unknown_or_booting",
+      "music_heartbeat_required": false,
+      "music_shared_abi": null,
+      "frame": 300,
+      "video_changes": 105,
+      "video_crc": 3443771848,
+      "elapsed_seconds": 1.03,
+      "runtime_signature_found": false,
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "ff70feafecbc78b0aae79346e08101310f7a6105aaf4c3a3b2041136dbc8f2a7",
+              "matches": false
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+              "matches": false
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "a559f3acda5a83af169c5aae945b477942f0873c4b47e2853f94790077f92723",
+              "matches": false
+            }
+          ]
+        }
+      },
+      "audio_peak": 7143,
+      "audio_rms": 835.7627655506363
+    },
+    {
+      "dsp_clock": 0,
+      "music_state": 43690,
+      "music_error": 2863289685,
+      "music_events": 2863289685,
+      "late_count": 0,
+      "dropped_fm": 0,
+      "mcu_state": 0,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 0,
+      "native_profile_name": "unknown_or_booting",
+      "music_heartbeat_required": false,
+      "music_shared_abi": null,
+      "frame": 600,
+      "video_changes": 220,
+      "video_crc": 1129421590,
+      "elapsed_seconds": 1.98,
+      "runtime_signature_found": true,
+      "video_clock": 0,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 0,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scsp_timing": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scsp_io": [
+        0,
+        0
+      ],
+      "frontend_observed": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 0,
+        "useful_private_bytes": 0,
+        "raw_user_bytes": 0,
+        "useful_user_bytes": 0,
+        "tlsf_control_bytes": 0,
+        "pool_overhead_bytes": 0,
+        "private_handle": 0,
+        "user_handle": 0,
+        "user_control_address": 0,
+        "user_control_block_bytes": 0,
+        "allocation_overhead_bytes": 0,
+        "user_pool_address": 0
+      },
+      "allocator_live_stats": {
+        "captures": 0,
+        "faults": 0,
+        "private_used": 0,
+        "private_free": 0,
+        "private_largest_free": 0,
+        "private_used_blocks": 0,
+        "private_free_blocks": 0,
+        "user_used": 0,
+        "user_free": 0,
+        "user_largest_free": 0,
+        "user_used_blocks": 0,
+        "user_free_blocks": 0,
+        "private_reported_size": 0,
+        "user_reported_size": 0,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "ff70feafecbc78b0aae79346e08101310f7a6105aaf4c3a3b2041136dbc8f2a7",
+              "matches": false
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+              "matches": false
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "23c4996a765014c4b9531fb217ab8a6329d5b6cfa15825fe4a9a452cda22d6ca",
+              "matches": false
+            }
+          ]
+        }
+      },
+      "audio_peak": 13087,
+      "audio_rms": 1211.4807954832906
+    },
+    {
+      "dsp_clock": 0,
+      "music_state": 0,
+      "music_error": 0,
+      "music_events": 0,
+      "late_count": 0,
+      "dropped_fm": 0,
+      "mcu_state": 0,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 0,
+      "native_profile_name": "unknown_or_booting",
+      "music_heartbeat_required": false,
+      "music_shared_abi": null,
+      "frame": 900,
+      "video_changes": 221,
+      "video_crc": 915313931,
+      "elapsed_seconds": 3.17,
+      "runtime_signature_found": true,
+      "video_clock": 189,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 167,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        0,
+        0,
+        0,
+        108,
+        112,
+        112,
+        0
+      ],
+      "scsp_timing": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scsp_io": [
+        0,
+        0
+      ],
+      "frontend_observed": [
+        1,
+        157554,
+        167,
+        0,
+        2147483648,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 0,
+        "faults": 0,
+        "private_used": 0,
+        "private_free": 0,
+        "private_largest_free": 0,
+        "private_used_blocks": 0,
+        "private_free_blocks": 0,
+        "user_used": 0,
+        "user_free": 0,
+        "user_largest_free": 0,
+        "user_used_blocks": 0,
+        "user_free_blocks": 0,
+        "private_reported_size": 0,
+        "user_reported_size": 0,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "ff70feafecbc78b0aae79346e08101310f7a6105aaf4c3a3b2041136dbc8f2a7",
+              "matches": false
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+              "matches": false
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+              "matches": false
+            }
+          ]
+        }
+      },
+      "audio_peak": 0,
+      "audio_rms": 0.0
+    },
+    {
+      "dsp_clock": 22086,
+      "music_state": 0,
+      "music_error": 0,
+      "music_events": 0,
+      "late_count": 0,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": null,
+      "frame": 1200,
+      "video_changes": 235,
+      "video_crc": 834906433,
+      "elapsed_seconds": 4.56,
+      "runtime_signature_found": true,
+      "video_clock": 489,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 413,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        0,
+        0,
+        108,
+        112,
+        112,
+        0
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scsp_io": [
+        26,
+        4
+      ],
+      "frontend_observed": [
+        1,
+        157764,
+        413,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 0,
+        "faults": 0,
+        "private_used": 0,
+        "private_free": 0,
+        "private_largest_free": 0,
+        "private_used_blocks": 0,
+        "private_free_blocks": 0,
+        "user_used": 0,
+        "user_free": 0,
+        "user_largest_free": 0,
+        "user_used_blocks": 0,
+        "user_free_blocks": 0,
+        "private_reported_size": 0,
+        "user_reported_size": 0,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+              "matches": false
+            }
+          ]
+        }
+      },
+      "audio_peak": 0,
+      "audio_rms": 0.0
+    },
+    {
+      "dsp_clock": 46619,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 0,
+      "late_count": 0,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 789,
+      "worker_frame": 789,
+      "dsp_progress_frame": 789,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 1500,
+      "video_changes": 235,
+      "video_crc": 834906433,
+      "elapsed_seconds": 5.84,
+      "runtime_signature_found": true,
+      "video_clock": 789,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 413,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        0
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        1,
+        157764,
+        413,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 0,
+      "audio_rms": 0.0
+    },
+    {
+      "dsp_clock": 5616,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 0,
+      "late_count": 0,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 1089,
+      "worker_frame": 1089,
+      "dsp_progress_frame": 1089,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 1800,
+      "video_changes": 235,
+      "video_crc": 834906433,
+      "elapsed_seconds": 7.36,
+      "runtime_signature_found": true,
+      "video_clock": 1089,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 1089,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        1,
+        7804,
+        1089,
+        0,
+        2147483649,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 0,
+      "audio_rms": 0.0
+    },
+    {
+      "dsp_clock": 30149,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 0,
+      "late_count": 0,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 1389,
+      "worker_frame": 1389,
+      "dsp_progress_frame": 1389,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 2100,
+      "video_changes": 263,
+      "video_crc": 3543236185,
+      "elapsed_seconds": 9.25,
+      "runtime_signature_found": true,
+      "video_clock": 1389,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 1389,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        1,
+        7804,
+        1389,
+        0,
+        2147483649,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 0,
+      "audio_rms": 0.0
+    },
+    {
+      "dsp_clock": 54682,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 7,
+      "late_count": 4,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 1,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 1689,
+      "worker_frame": 1689,
+      "dsp_progress_frame": 1689,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 2400,
+      "video_changes": 305,
+      "video_crc": 915313931,
+      "elapsed_seconds": 11.16,
+      "runtime_signature_found": true,
+      "video_clock": 1689,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 1680,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        1,
+        156898,
+        1679,
+        0,
+        3,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 5037,
+      "audio_rms": 97.36454044389973
+    },
+    {
+      "dsp_clock": 13678,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 284,
+      "late_count": 64,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 19,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 1989,
+      "worker_frame": 1989,
+      "dsp_progress_frame": 1989,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 2700,
+      "video_changes": 438,
+      "video_crc": 3104527732,
+      "elapsed_seconds": 13.56,
+      "runtime_signature_found": true,
+      "video_clock": 1989,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 1978,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        2,
+        33538,
+        1978,
+        0,
+        2147483665,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 1920,
+      "texture_transfers": 3,
+      "texture_reused": 15,
+      "emitted_commands": 12,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 5954,
+      "audio_rms": 1480.7741673689538
+    },
+    {
+      "dsp_clock": 38211,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 782,
+      "late_count": 126,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 127,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 2289,
+      "worker_frame": 2289,
+      "dsp_progress_frame": 2289,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 3000,
+      "video_changes": 494,
+      "video_crc": 1695661397,
+      "elapsed_seconds": 15.8,
+      "runtime_signature_found": true,
+      "video_clock": 2289,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 2289,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        2,
+        33538,
+        2289,
+        0,
+        2147483665,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 14976,
+      "texture_transfers": 15,
+      "texture_reused": 1107,
+      "emitted_commands": 40,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 8278,
+      "audio_rms": 1852.2639897911329
+    },
+    {
+      "dsp_clock": 62744,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 1107,
+      "late_count": 186,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 127,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 2589,
+      "worker_frame": 2589,
+      "dsp_progress_frame": 2589,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 3300,
+      "video_changes": 570,
+      "video_crc": 1742855962,
+      "elapsed_seconds": 18.17,
+      "runtime_signature_found": true,
+      "video_clock": 2589,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 2582,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        2,
+        33538,
+        2588,
+        0,
+        2147483665,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 30976,
+      "texture_transfers": 34,
+      "texture_reused": 5633,
+      "emitted_commands": 101,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 10017,
+      "audio_rms": 2282.633486906022
+    },
+    {
+      "dsp_clock": 21741,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 1389,
+      "late_count": 246,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 127,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 2889,
+      "worker_frame": 2889,
+      "dsp_progress_frame": 2889,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 3600,
+      "video_changes": 640,
+      "video_crc": 1727116468,
+      "elapsed_seconds": 20.5,
+      "runtime_signature_found": true,
+      "video_clock": 2889,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 2889,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        2,
+        33538,
+        2889,
+        0,
+        2147483665,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 48640,
+      "texture_transfers": 50,
+      "texture_reused": 13046,
+      "emitted_commands": 156,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 10310,
+      "audio_rms": 2332.7531074425356
+    },
+    {
+      "dsp_clock": 46274,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 1723,
+      "late_count": 308,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 127,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 3189,
+      "worker_frame": 3189,
+      "dsp_progress_frame": 3189,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 3900,
+      "video_changes": 826,
+      "video_crc": 1952009766,
+      "elapsed_seconds": 22.97,
+      "runtime_signature_found": true,
+      "video_clock": 3189,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 3189,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        2,
+        33700,
+        3189,
+        0,
+        2147483665,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60160,
+      "texture_transfers": 60,
+      "texture_reused": 20120,
+      "emitted_commands": 196,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 10335,
+      "audio_rms": 2459.7294552974104
+    },
+    {
+      "dsp_clock": 5271,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 2038,
+      "late_count": 368,
+      "dropped_fm": 0,
+      "mcu_state": 2,
+      "fm_active_mask": 127,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 3489,
+      "worker_frame": 3489,
+      "dsp_progress_frame": 3489,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 4200,
+      "video_changes": 1126,
+      "video_crc": 3232223696,
+      "elapsed_seconds": 25.42,
+      "runtime_signature_found": true,
+      "video_clock": 3489,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 3489,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        2,
+        33700,
+        3489,
+        0,
+        2147483665,
+        0,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60160,
+      "texture_transfers": 60,
+      "texture_reused": 20120,
+      "emitted_commands": 196,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 10530,
+      "audio_rms": 2482.1601039419033
+    },
+    {
+      "dsp_clock": 29804,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 2310,
+      "late_count": 428,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 31,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 3789,
+      "worker_frame": 3789,
+      "dsp_progress_frame": 3789,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 4500,
+      "video_changes": 1299,
+      "video_crc": 3168591771,
+      "elapsed_seconds": 27.98,
+      "runtime_signature_found": true,
+      "video_clock": 3789,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 3789,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        4,
+        21428,
+        3789,
+        0,
+        2147483648,
+        1,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60160,
+      "texture_transfers": 60,
+      "texture_reused": 20120,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 10119,
+      "audio_rms": 1952.2738896358828
+    },
+    {
+      "dsp_clock": 54337,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 2576,
+      "late_count": 482,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 30,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 4089,
+      "worker_frame": 4089,
+      "dsp_progress_frame": 4089,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 4800,
+      "video_changes": 1371,
+      "video_crc": 3168591771,
+      "elapsed_seconds": 30.38,
+      "runtime_signature_found": true,
+      "video_clock": 4089,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 4089,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        4,
+        21428,
+        4089,
+        0,
+        2147483648,
+        1,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60160,
+      "texture_transfers": 60,
+      "texture_reused": 20120,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 6429,
+      "audio_rms": 1241.0003351837731
+    },
+    {
+      "dsp_clock": 13334,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 2846,
+      "late_count": 534,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 30,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 4389,
+      "worker_frame": 4389,
+      "dsp_progress_frame": 4389,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 5100,
+      "video_changes": 1479,
+      "video_crc": 839170070,
+      "elapsed_seconds": 32.75,
+      "runtime_signature_found": true,
+      "video_clock": 4389,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 4389,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        5,
+        23838,
+        4389,
+        0,
+        2147483649,
+        1,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60800,
+      "texture_transfers": 61,
+      "texture_reused": 20540,
+      "emitted_commands": 25,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 6164,
+      "audio_rms": 1221.2715853375578
+    },
+    {
+      "dsp_clock": 37867,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 3101,
+      "late_count": 588,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 62,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 4689,
+      "worker_frame": 4689,
+      "dsp_progress_frame": 4689,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 5400,
+      "video_changes": 1479,
+      "video_crc": 839170070,
+      "elapsed_seconds": 35.19,
+      "runtime_signature_found": true,
+      "video_clock": 4689,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 4689,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        5,
+        23838,
+        4689,
+        0,
+        2147483649,
+        1,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60800,
+      "texture_transfers": 61,
+      "texture_reused": 22040,
+      "emitted_commands": 25,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 6613,
+      "audio_rms": 1205.7606608785877
+    },
+    {
+      "dsp_clock": 62400,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 3351,
+      "late_count": 644,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 31,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 4989,
+      "worker_frame": 4989,
+      "dsp_progress_frame": 4989,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 5700,
+      "video_changes": 1479,
+      "video_crc": 839170070,
+      "elapsed_seconds": 37.83,
+      "runtime_signature_found": true,
+      "video_clock": 4989,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 4989,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        5,
+        23838,
+        4989,
+        0,
+        2147483649,
+        1,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60800,
+      "texture_transfers": 61,
+      "texture_reused": 23540,
+      "emitted_commands": 25,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 6484,
+      "audio_rms": 1232.7616837448466
+    },
+    {
+      "dsp_clock": 21397,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 3697,
+      "late_count": 678,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 127,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 5289,
+      "worker_frame": 5289,
+      "dsp_progress_frame": 5289,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 6000,
+      "video_changes": 1479,
+      "video_crc": 839170070,
+      "elapsed_seconds": 40.69,
+      "runtime_signature_found": true,
+      "video_clock": 5289,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 5289,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        5,
+        23838,
+        5289,
+        0,
+        2147483649,
+        1,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60800,
+      "texture_transfers": 61,
+      "texture_reused": 25040,
+      "emitted_commands": 25,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 6958,
+      "audio_rms": 1326.0382885323418
+    },
+    {
+      "dsp_clock": 45930,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 4049,
+      "late_count": 704,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 127,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 5589,
+      "worker_frame": 5589,
+      "dsp_progress_frame": 5589,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 6300,
+      "video_changes": 1690,
+      "video_crc": 202056997,
+      "elapsed_seconds": 43.28,
+      "runtime_signature_found": true,
+      "video_clock": 5589,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 5589,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        5,
+        23838,
+        5589,
+        0,
+        2147483649,
+        1,
+        0,
+        2
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60800,
+      "texture_transfers": 61,
+      "texture_reused": 26045,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 6958,
+      "audio_rms": 1348.616875036492
+    },
+    {
+      "dsp_clock": 4926,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 4303,
+      "late_count": 734,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 29,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 5889,
+      "worker_frame": 5889,
+      "dsp_progress_frame": 5889,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 6600,
+      "video_changes": 1706,
+      "video_crc": 2604803243,
+      "elapsed_seconds": 45.7,
+      "runtime_signature_found": true,
+      "video_clock": 5889,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 5889,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        36882,
+        5889,
+        0,
+        2147483649,
+        1,
+        0,
+        3
+      ],
+      "game_frame": 0,
+      "texture_bytes": 60800,
+      "texture_transfers": 61,
+      "texture_reused": 26045,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 12279,
+      "audio_rms": 2798.78952976074
+    },
+    {
+      "dsp_clock": 29459,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 4545,
+      "late_count": 758,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 159,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 6189,
+      "worker_frame": 6189,
+      "dsp_progress_frame": 6189,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 6900,
+      "video_changes": 1784,
+      "video_crc": 2459071312,
+      "elapsed_seconds": 48.14,
+      "runtime_signature_found": true,
+      "video_clock": 6189,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 6189,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        31966,
+        6189,
+        0,
+        2147483649,
+        1,
+        0,
+        3
+      ],
+      "game_frame": 0,
+      "texture_bytes": 116736,
+      "texture_transfers": 96,
+      "texture_reused": 30336,
+      "emitted_commands": 44,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 13006,
+      "audio_rms": 3185.6318416630584
+    },
+    {
+      "dsp_clock": 53992,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 4781,
+      "late_count": 780,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 159,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 6489,
+      "worker_frame": 6489,
+      "dsp_progress_frame": 6489,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 7200,
+      "video_changes": 1879,
+      "video_crc": 2730949059,
+      "elapsed_seconds": 50.73,
+      "runtime_signature_found": true,
+      "video_clock": 6489,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 6489,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        31966,
+        6489,
+        0,
+        2147483649,
+        1,
+        0,
+        3
+      ],
+      "game_frame": 0,
+      "texture_bytes": 164736,
+      "texture_transfers": 126,
+      "texture_reused": 34317,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 11950,
+      "audio_rms": 3200.183134839093
+    },
+    {
+      "dsp_clock": 12989,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 5034,
+      "late_count": 803,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 30,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 6789,
+      "worker_frame": 6787,
+      "dsp_progress_frame": 6787,
+      "worker_lag_frames": 2,
+      "dsp_progress_lag_frames": 2,
+      "frame": 7500,
+      "video_changes": 1904,
+      "video_crc": 915313931,
+      "elapsed_seconds": 53.0,
+      "runtime_signature_found": true,
+      "video_clock": 6789,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 6753,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        10762,
+        6788,
+        0,
+        2147483651,
+        1,
+        0,
+        3
+      ],
+      "game_frame": 0,
+      "texture_bytes": 164736,
+      "texture_transfers": 126,
+      "texture_reused": 34317,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 13114,
+      "audio_rms": 3129.958283020872
+    },
+    {
+      "dsp_clock": 37522,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 5270,
+      "late_count": 827,
+      "dropped_fm": 1,
+      "mcu_state": 2,
+      "fm_active_mask": 131,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 0,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 7089,
+      "worker_frame": 7088,
+      "dsp_progress_frame": 7088,
+      "worker_lag_frames": 1,
+      "dsp_progress_lag_frames": 1,
+      "frame": 7800,
+      "video_changes": 1906,
+      "video_crc": 3091525381,
+      "elapsed_seconds": 55.98,
+      "runtime_signature_found": true,
+      "video_clock": 7089,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 7089,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        42792,
+        7089,
+        0,
+        2147483649,
+        1,
+        0,
+        3
+      ],
+      "game_frame": 0,
+      "texture_bytes": 179584,
+      "texture_transfers": 127,
+      "texture_reused": 48585,
+      "emitted_commands": 116,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 12736,
+      "audio_rms": 3151.587549312252
+    },
+    {
+      "dsp_clock": 62055,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 5466,
+      "late_count": 889,
+      "dropped_fm": 8,
+      "mcu_state": 2,
+      "fm_active_mask": 1,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 6,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 7389,
+      "worker_frame": 7389,
+      "dsp_progress_frame": 7389,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 8100,
+      "video_changes": 1921,
+      "video_crc": 2951144206,
+      "elapsed_seconds": 58.88,
+      "runtime_signature_found": true,
+      "video_clock": 7389,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 7308,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        10888,
+        7308,
+        0,
+        2147483651,
+        1,
+        0,
+        4
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 13009,
+      "audio_rms": 2802.449948355597
+    },
+    {
+      "dsp_clock": 21052,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 5591,
+      "late_count": 1041,
+      "dropped_fm": 30,
+      "mcu_state": 2,
+      "fm_active_mask": 1,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 29,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 7689,
+      "worker_frame": 7688,
+      "dsp_progress_frame": 7688,
+      "worker_lag_frames": 1,
+      "dsp_progress_lag_frames": 1,
+      "frame": 8400,
+      "video_changes": 1921,
+      "video_crc": 2951144206,
+      "elapsed_seconds": 60.97,
+      "runtime_signature_found": true,
+      "video_clock": 7689,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 0,
+      "frontend_serviced_clock": 7308,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 0,
+      "rate_ready": 0,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        10888,
+        7308,
+        0,
+        2147483651,
+        1,
+        0,
+        4
+      ],
+      "game_frame": 0,
+      "texture_bytes": 0,
+      "texture_transfers": 0,
+      "texture_reused": 0,
+      "emitted_commands": 0,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 4407,
+      "audio_rms": 501.6916658531134
+    },
+    {
+      "dsp_clock": 45585,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 5744,
+      "late_count": 1142,
+      "dropped_fm": 40,
+      "mcu_state": 2,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 38,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 7989,
+      "worker_frame": 7989,
+      "dsp_progress_frame": 7989,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 8700,
+      "video_changes": 1924,
+      "video_crc": 3337341292,
+      "elapsed_seconds": 63.08,
+      "runtime_signature_found": true,
+      "video_clock": 7989,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 0,
+      "rate_start_clock": 7989,
+      "frontend_serviced_clock": 7308,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 2,
+      "rate_ready": 1,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        10888,
+        7308,
+        0,
+        2147483651,
+        1,
+        0,
+        5
+      ],
+      "game_frame": 1,
+      "texture_bytes": 22144,
+      "texture_transfers": 3,
+      "texture_reused": 38,
+      "emitted_commands": 107,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 5060,
+      "audio_rms": 824.8033850013179
+    },
+    {
+      "dsp_clock": 4582,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 5864,
+      "late_count": 1382,
+      "dropped_fm": 78,
+      "mcu_state": 2,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 76,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 8289,
+      "worker_frame": 8289,
+      "dsp_progress_frame": 8289,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 9000,
+      "video_changes": 2058,
+      "video_crc": 4266114364,
+      "elapsed_seconds": 65.41,
+      "runtime_signature_found": true,
+      "video_clock": 8289,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 34,
+      "rate_start_clock": 8249,
+      "frontend_serviced_clock": 7308,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 45,
+      "rate_ready": 1,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        10888,
+        7308,
+        0,
+        2147483651,
+        1,
+        0,
+        5
+      ],
+      "game_frame": 161,
+      "texture_bytes": 126592,
+      "texture_transfers": 86,
+      "texture_reused": 15195,
+      "emitted_commands": 100,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 3815,
+      "audio_rms": 408.1342563159448
+    },
+    {
+      "dsp_clock": 29115,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 5969,
+      "late_count": 1592,
+      "dropped_fm": 296,
+      "mcu_state": 2,
+      "fm_active_mask": 0,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 147,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 8589,
+      "worker_frame": 8589,
+      "dsp_progress_frame": 8589,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 9300,
+      "video_changes": 2138,
+      "video_crc": 1230613351,
+      "elapsed_seconds": 67.73,
+      "runtime_signature_found": true,
+      "video_clock": 8589,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 5,
+      "rate_start_clock": 8584,
+      "frontend_serviced_clock": 7308,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 15,
+      "rate_ready": 1,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        10888,
+        7308,
+        0,
+        2147483651,
+        1,
+        0,
+        5
+      ],
+      "game_frame": 327,
+      "texture_bytes": 196480,
+      "texture_transfers": 148,
+      "texture_reused": 31249,
+      "emitted_commands": 96,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 4801,
+      "audio_rms": 507.9824436700061
+    },
+    {
+      "dsp_clock": 53648,
+      "music_state": 2,
+      "music_error": 0,
+      "music_events": 6231,
+      "late_count": 1664,
+      "dropped_fm": 361,
+      "mcu_state": 2,
+      "fm_active_mask": 7,
+      "pcm_underruns_mail": 0,
+      "late_key_events": 167,
+      "dsp_jump_count": 0,
+      "native_profile": 19782,
+      "native_profile_name": "MUSIC",
+      "music_heartbeat_required": true,
+      "music_shared_abi": 3,
+      "master_frame": 8889,
+      "worker_frame": 8889,
+      "dsp_progress_frame": 8889,
+      "worker_lag_frames": 0,
+      "dsp_progress_lag_frames": 0,
+      "frame": 9600,
+      "video_changes": 2268,
+      "video_crc": 1113630883,
+      "elapsed_seconds": 70.03,
+      "runtime_signature_found": true,
+      "video_clock": 8889,
+      "fatal_owner": 0,
+      "fatal_dependency": 0,
+      "fatal_frame": 0,
+      "finished_frame": 0,
+      "rate_draws": 34,
+      "rate_start_clock": 8839,
+      "frontend_serviced_clock": 7308,
+      "boot_seed_observed": 0,
+      "attract_exit_frame": 0,
+      "rate_value": 31,
+      "rate_ready": 1,
+      "boot_timing": [
+        15,
+        446,
+        781,
+        0,
+        108,
+        112,
+        112,
+        1046
+      ],
+      "scsp_timing": [
+        446,
+        460,
+        460,
+        677,
+        677,
+        727,
+        738,
+        781
+      ],
+      "scsp_io": [
+        179,
+        16
+      ],
+      "frontend_observed": [
+        6,
+        10888,
+        7308,
+        0,
+        2147483651,
+        1,
+        0,
+        5
+      ],
+      "game_frame": 457,
+      "texture_bytes": 274304,
+      "texture_transfers": 245,
+      "texture_reused": 43167,
+      "emitted_commands": 91,
+      "audio_diagnostics": {
+        "reason": 0,
+        "dropped_sfx": 0,
+        "dropped_music": 0,
+        "ignored": 0,
+        "disabled": false
+      },
+      "allocator_partition_raw": [
+        14336,
+        11140,
+        33060,
+        33052,
+        3188,
+        8,
+        101208528,
+        101211720,
+        101211720,
+        3188,
+        4,
+        101678812
+      ],
+      "allocator_partition": {
+        "raw_private_bytes": 14336,
+        "useful_private_bytes": 11140,
+        "raw_user_bytes": 33060,
+        "useful_user_bytes": 33052,
+        "tlsf_control_bytes": 3188,
+        "pool_overhead_bytes": 8,
+        "private_handle": 101208528,
+        "user_handle": 101211720,
+        "user_control_address": 101211720,
+        "user_control_block_bytes": 3188,
+        "allocation_overhead_bytes": 4,
+        "user_pool_address": 101678812
+      },
+      "allocator_live_stats": {
+        "captures": 1,
+        "faults": 0,
+        "private_used": 5504,
+        "private_free": 5612,
+        "private_largest_free": 5568,
+        "private_used_blocks": 5,
+        "private_free_blocks": 2,
+        "user_used": 0,
+        "user_free": 33052,
+        "user_largest_free": 33052,
+        "user_used_blocks": 0,
+        "user_free_blocks": 1,
+        "private_reported_size": 40960,
+        "user_reported_size": 33060,
+        "private_consistency": 0,
+        "user_consistency": 0
+      },
+      "loaded_audio_code": {
+        "SCSP.ELF": {
+          "elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x400",
+              "bytes": 256,
+              "expected_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "observed_sha256": "81f51cc926c975a9956ef10d4a7a29fa645c80bec7a467b5657a24f9abde384d",
+              "matches": true
+            },
+            {
+              "segment": 1,
+              "address": "0xc100",
+              "bytes": 256,
+              "expected_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "observed_sha256": "2e4b9cb9e495d6bd12420b24d7c65812deee506d0ce43c2b2dad376edd4b4f4f",
+              "matches": true
+            }
+          ]
+        },
+        "MUSIC.ELF": {
+          "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+          "executable_samples": [
+            {
+              "segment": 0,
+              "address": "0x5c5c000",
+              "bytes": 256,
+              "expected_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "observed_sha256": "0cd4f8fd3055e07c382364c74559526bb9ea1a1b2c49a5bbfeae44d9df0b7b92",
+              "matches": true
+            }
+          ]
+        }
+      },
+      "audio_peak": 5046,
+      "audio_rms": 905.1864219417315
+    }
+  ],
+  "full_cache": true,
+  "exact_interleave": true,
+  "jit_disabled": true,
+  "virtual_bytes": 22550976,
+  "original_bytes": 22550976,
+  "elf": {
+    "path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\audio-repair\\control-fix\\saturn-real-v25\\master\\wrestlefest-runtime18-scsp.elf",
+    "sha256": "e56b027b8a3e89f92ecbb0a419363c11eb2996334b8b819e87ab9137152d0221",
+    "flat_sha256": "322e2821425050c81df9f2cff504e34713591066f1d637fef3ebe8b40e9dd2e2",
+    "flat_bytes": 999132,
+    "format": "ELF32BE SHF_ALLOC sections with LMA derived from containing PT_LOAD; no ELF header is executed",
+    "symbols": {
+      "_fatal_owner": {
+        "address": 101589520,
+        "bytes": 4
+      },
+      "_fatal_dependency": {
+        "address": 101589516,
+        "bytes": 4
+      },
+      "_fatal_frame": {
+        "address": 101581864,
+        "bytes": 4
+      },
+      "_wf_saturn_allocator_partition": {
+        "address": 101249568,
+        "bytes": 48
+      },
+      "_wf_r18_scsp_diagnostics": {
+        "address": 101589756,
+        "bytes": 20
+      },
+      "_rate_start_clock": {
+        "address": 101656832,
+        "bytes": 4
+      },
+      "_rt": {
+        "address": 101581868,
+        "bytes": 7648
+      },
+      "_backend": {
+        "address": 101327688,
+        "bytes": 1684
+      },
+      "_video_clock": {
+        "address": 101589528,
+        "bytes": 4
+      },
+      "_rate_value": {
+        "address": 101656830,
+        "bytes": 1
+      },
+      "_rate_draws": {
+        "address": 101656836,
+        "bytes": 4
+      }
+    }
+  },
+  "load_success": true,
+  "vfs": {
+    "request_versions": [
+      5,
+      4,
+      3
+    ],
+    "calls": {
+      "open": 5,
+      "close": 3,
+      "size": 2,
+      "read": 6357,
+      "seek": 6356
+    },
+    "opened": [
+      {
+        "path": "overlay://session/disc.toc",
+        "mode": 1,
+        "hints": 0
+      },
+      {
+        "path": "overlay://session/disc.cue",
+        "mode": 1,
+        "hints": 1
+      },
+      {
+        "path": "overlay://session/disc.cue",
+        "mode": 1,
+        "hints": 2
+      },
+      {
+        "path": "overlay://session\\disc.bin",
+        "mode": 1,
+        "hints": 1
+      },
+      {
+        "path": "overlay://session\\disc.sbi",
+        "mode": 1,
+        "hints": 0
+      }
+    ],
+    "errors": []
+  },
+  "environment_commands": [
+    3,
+    8,
+    9,
+    10,
+    11,
+    13,
+    15,
+    16,
+    27,
+    28,
+    31,
+    35,
+    52,
+    55,
+    57,
+    87,
+    65581,
+    65582,
+    65587
+  ],
+  "option_requests": [
+    "beetle_saturn_cdimagecache",
+    "beetle_saturn_jit_scu",
+    "beetle_saturn_cpucache_emumode",
+    "beetle_saturn_sh2_interleave",
+    "beetle_saturn_sh2_jit",
+    "beetle_saturn_jit_scsp",
+    "beetle_saturn_shared_int",
+    "beetle_saturn_shared_ext",
+    "beetle_saturn_backup_memory_size",
+    "beetle_saturn_save_method",
+    "beetle_saturn_region",
+    "beetle_saturn_cart",
+    "beetle_saturn_multitap_port1",
+    "beetle_saturn_multitap_port2",
+    "beetle_saturn_opposite_directions",
+    "beetle_saturn_midsync",
+    "beetle_saturn_mpeg_card",
+    "beetle_saturn_autortc",
+    "beetle_saturn_autortc_lang",
+    "beetle_saturn_horizontal_overscan",
+    "beetle_saturn_initial_scanline",
+    "beetle_saturn_last_scanline",
+    "beetle_saturn_initial_scanline_pal",
+    "beetle_saturn_last_scanline_pal",
+    "beetle_saturn_horizontal_blend",
+    "beetle_saturn_deinterlacer",
+    "beetle_saturn_mesh_transparency",
+    "beetle_saturn_analog_stick_deadzone",
+    "beetle_saturn_trigger_deadzone",
+    "beetle_saturn_mouse_sensitivity",
+    "beetle_saturn_virtuagun_input",
+    "beetle_saturn_virtuagun_crosshair",
+    "beetle_saturn_crosshair_color_p1",
+    "beetle_saturn_crosshair_color_p2"
+  ],
+  "wav_capture": {
+    "sample_rate": 44100,
+    "channels": 2,
+    "bits": 16,
+    "frames": 7076507,
+    "fps": 59.82650314089141,
+    "guest_audio_modified": false,
+    "path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\audio-repair\\control-fix\\scalar-inline-admission-table\\cold-9600-tag\\audio.wav"
+  },
+  "runtime_lto_aliases": {
+    "_valid": "_valid.lto_priv.5",
+    "__slave_iti_handler": "__slave_iti_handler.lto_priv.0",
+    "_selected": "_selected.lto_priv.0",
+    "__vdp1_mode_auto_vblank_out": "__vdp1_mode_auto_vblank_out.lto_priv.0",
+    "_plan_tile_epoch": "_plan_tile_epoch.lto_priv.0",
+    "_booting": "_booting.lto_priv.0",
+    "_window_misses": "_window_misses.lto_priv.0",
+    "_base.13": "_base.13.lto_priv.0",
+    "_state0_latched_1c390": "_state0_latched_1c390.lto_priv.0",
+    "_tag_cleanup_213a6": "_tag_cleanup_213a6.lto_priv.0",
+    "_state4_1b1d0": "_state4_1b1d0.lto_priv.0",
+    "_ptr": "_ptr.lto_priv.0",
+    "_held_tick_125c0": "_held_tick_125c0.lto_priv.0",
+    "_controls": "_controls.lto_priv.0",
+    "_base.17": "_base.17.lto_priv.0",
+    "_main_twelve_124fa": "_main_twelve_124fa.lto_priv.0",
+    "_hot_chunk_bytes": "_hot_chunk_bytes.lto_priv.0",
+    "_world_288f0": "_world_288f0.lto_priv.0",
+    "_primary": "_primary.lto_priv.0",
+    "__vdp1_mode_auto_vblank_in": "__vdp1_mode_auto_vblank_in.lto_priv.0",
+    "_world": "_world.lto_priv.0",
+    "__vdp1_dma_level_end_handler": "__vdp1_dma_level_end_handler.lto_priv.0",
+    "_rom_age": "_rom_age.lto_priv.0",
+    "_state1_weighted_24cc": "_state1_weighted_24cc.lto_priv.0",
+    "_wf_fault_glyph": "_wf_fault_glyph.lto_priv.0",
+    "_rom_caches_reset": "_rom_caches_reset.lto_priv.0",
+    "_SPEED_11D4A": "_SPEED_11D4A.lto_priv.0",
+    "_boot_us": "_boot_us.lto_priv.0",
+    "__vblank_out_handler": "__vblank_out_handler.lto_priv.0",
+    "__default_env": "__default_env.lto_priv.0",
+    "_rate_start_clock": "_rate_start_clock.lto_priv.0",
+    "_action22_partner_215b6": "_action22_partner_215b6.lto_priv.0",
+    "__vblank_in_callback": "__vblank_in_callback.lto_priv.0",
+    "_rt": "_rt.lto_priv.0",
+    "_video_cell": "_video_cell.lto_priv.0",
+    "_fallback": "_fallback.lto_priv.0",
+    "_bound": "_bound.lto_priv.0",
+    "_magnitude.17": "_magnitude.17.lto_priv.0",
+    "_title_effect": "_title_effect.lto_priv.0",
+    "_tag_timer_21978": "_tag_timer_21978.lto_priv.0",
+    "_escape_position_10b9a": "_escape_position_10b9a.lto_priv.0",
+    "_speed.5": "_speed.5.lto_priv.0",
+    "__collection_complete": "__collection_complete.lto_priv.0",
+    "_timer.1": "_timer.1.lto_priv.0",
+    "_scsp_boot_complete": "_scsp_boot_complete.lto_priv.0",
+    "_display": "_display.lto_priv.0",
+    "_wf_participant_972c": "_wf_participant_972c.lto_priv.0",
+    "_animated": "_animated.lto_priv.0",
+    "_interrupt_audio_24900": "_interrupt_audio_24900.lto_priv.0",
+    "_desc_load_frame": "_desc_load_frame.lto_priv.0",
+    "_ring_exit_arrived": "_ring_exit_arrived.lto_priv.0",
+    "__scu_dma_level0_handler": "__scu_dma_level0_handler.lto_priv.0",
+    "_active_file_class": "_active_file_class.lto_priv.0",
+    "__rxi_ihr_handler": "__rxi_ihr_handler.lto_priv.0",
+    "_palette_5eae": "_palette_5eae.lto_priv.0",
+    "_frontend_bus_store": "_frontend_bus_store.lto_priv.0",
+    "_world_26b68": "_world_26b68.lto_priv.0",
+    "_window_clock": "_window_clock.lto_priv.0",
+    "_wait_level": "_wait_level.lto_priv.0",
+    "_royal_partner_candidate": "_royal_partner_candidate.lto_priv.0",
+    "_choose_1dea6": "_choose_1dea6.lto_priv.0",
+    "__vdp1_mode_auto_sprite_end": "__vdp1_mode_auto_sprite_end.lto_priv.0",
+    "_frontend_scroll_ports": "_frontend_scroll_ports.lto_priv.0",
+    "_frontend_back_color": "_frontend_back_color.lto_priv.0",
+    "_bonus.0": "_bonus.0.lto_priv.0",
+    "_frontend_wait_level": "_frontend_wait_level.lto_priv.0",
+    "__vblank_out_callback": "__vblank_out_callback.lto_priv.0",
+    "_now": "_now.lto_priv.0",
+    "_cram_color": "_cram_color.lto_priv.0",
+    "_refill": "_refill.lto_priv.0",
+    "_right.0": "_right.0.lto_priv.0",
+    "__slave_ihr_table": "__slave_ihr_table.lto_priv.0",
+    "_table_0dee.10": "_table_0dee.10.lto_priv.0",
+    "_object_from_ptr": "_object_from_ptr.lto_priv.0",
+    "_hot_count": "_hot_count.lto_priv.0",
+    "_table_989a": "_table_989a.lto_priv.0",
+    "_backup_workspace_leased": "_backup_workspace_leased.lto_priv.0",
+    "_chance.39": "_chance.39.lto_priv.0",
+    "_state4_1b478": "_state4_1b478.lto_priv.0",
+    "_pin_candidate": "_pin_candidate.lto_priv.0",
+    "_rom.lto_priv.1": "_rom.lto_priv.1.lto_priv.0",
+    "_worker": "_worker.lto_priv.0",
+    "_state1_sub0": "_state1_sub0.lto_priv.0",
+    "__dsp_end_handler": "__dsp_end_handler.lto_priv.0",
+    "_pin_helpers": "_pin_helpers.lto_priv.0",
+    "_mode_effect": "_mode_effect.lto_priv.0",
+    "_raw5f": "_raw5f.lto_priv.0",
+    "_frontend": "_frontend.lto_priv.0",
+    "_gameplay": "_gameplay.lto_priv.0",
+    "_palette_reset": "_palette_reset.lto_priv.0",
+    "__peripheral_alloc": "__peripheral_alloc.lto_priv.0",
+    "_window_data": "_window_data.lto_priv.0",
+    "__level_state": "__level_state.lto_priv.0",
+    "_word": "_word.lto_priv.0",
+    "_window_sectors": "_window_sectors.lto_priv.0",
+    "_human.4": "_human.4.lto_priv.0",
+    "_last_record_count": "_last_record_count.lto_priv.0",
+    "_saved_image": "_saved_image.lto_priv.0",
+    "_video": "_video.lto_priv.0",
+    "_barrier": "_barrier.lto_priv.0",
+    "_control_effect": "_control_effect.lto_priv.0",
+    "_gather_204fa": "_gather_204fa.lto_priv.0",
+    "_frontend_scene_gate": "_frontend_scene_gate.lto_priv.0",
+    "__scu_dma_level2_handler": "__scu_dma_level2_handler.lto_priv.0",
+    "_reset_to_title_requested": "_reset_to_title_requested.lto_priv.0",
+    "_scsp_timing": "_scsp_timing.lto_priv.0",
+    "_saturn_controllers_sample.part.0": "_saturn_controllers_sample.part.0.lto_priv.0",
+    "_roster_effect": "_roster_effect.lto_priv.0",
+    "_D_1603A": "_D_1603A.lto_priv.0",
+    "_helper_10bd0": "_helper_10bd0.lto_priv.0",
+    "_overlay": "_overlay.lto_priv.0",
+    "_wf_participant_9578.part.0": "_wf_participant_9578.part.0.lto_priv.0",
+    "_ringside_team_result": "_ringside_team_result.lto_priv.0",
+    "_state4_1b7a2": "_state4_1b7a2.lto_priv.0",
+    "_action_offset_10b62": "_action_offset_10b62.lto_priv.0",
+    "_hot_dictionary_offset": "_hot_dictionary_offset.lto_priv.0",
+    "_approach": "_approach.lto_priv.0",
+    "_frontend_world_bind": "_frontend_world_bind.lto_priv.0",
+    "_rom_page": "_rom_page.lto_priv.0",
+    "_overlay_valid": "_overlay_valid.lto_priv.0",
+    "_cancel_1f9e0": "_cancel_1f9e0.lto_priv.0",
+    "_state4_1bd0e": "_state4_1bd0e.lto_priv.0",
+    "_abort_frame": "_abort_frame.lto_priv.0",
+    "_difference": "_difference.lto_priv.0",
+    "_f4c2_audio_emit": "_f4c2_audio_emit.lto_priv.0",
+    "_interrupt_cleanup_212a0": "_interrupt_cleanup_212a0.lto_priv.0",
+    "_roster_rom": "_roster_rom.lto_priv.0",
+    "_buffer.0": "_buffer.0.lto_priv.0",
+    "_credit": "_credit.lto_priv.0",
+    "__master_ihr_table": "__master_ihr_table.lto_priv.0",
+    "_frontend_combat_cache": "_frontend_combat_cache.lto_priv.0",
+    "_frontend_pending": "_frontend_pending.lto_priv.0",
+    "_frontend_observed": "_frontend_observed.lto_priv.0",
+    "__master_iti_handler": "__master_iti_handler.lto_priv.0",
+    "_submit_records": "_submit_records.lto_priv.0",
+    "_wait_21e6": "_wait_21e6.lto_priv.0",
+    "__peripherals_memb": "__peripherals_memb.lto_priv.0",
+    "_table_10830": "_table_10830.lto_priv.0",
+    "_f12e_link": "_f12e_link.lto_priv.0",
+    "__current_env": "__current_env.lto_priv.0",
+    "_idle": "_idle.lto_priv.0",
+    "_push_clearance_10b62": "_push_clearance_10b62.lto_priv.0",
+    "_wf_be32": "_wf_be32.lto_priv.1",
+    "_file_bulk_sectors": "_file_bulk_sectors.lto_priv.0",
+    "_cleanup_212a0_safe": "_cleanup_212a0_safe.lto_priv.0",
+    "__vdp1_dma_handle": "__vdp1_dma_handle.lto_priv.0",
+    "_throw2f_offset": "_throw2f_offset.lto_priv.0",
+    "_main_eight_12078": "_main_eight_12078.lto_priv.0",
+    "__vdp1_mode_auto_sync_render": "__vdp1_mode_auto_sync_render.lto_priv.0",
+    "_ranking_store": "_ranking_store.lto_priv.0",
+    "_rom_slot": "_rom_slot.lto_priv.0",
+    "_frontend_control_ports": "_frontend_control_ports.lto_priv.0",
+    "_weights.3": "_weights.3.lto_priv.0",
+    "_text_owner": "_text_owner.lto_priv.0",
+    "_backend": "_backend.lto_priv.0",
+    "_pin_random": "_pin_random.lto_priv.0",
+    "_ring_update": "_ring_update.lto_priv.0",
+    "_one_object": "_one_object.lto_priv.0",
+    "_cpu_data": "_cpu_data.lto_priv.0",
+    "_scsp_io": "_scsp_io.lto_priv.0",
+    "_movement_tag_1d526": "_movement_tag_1d526.lto_priv.0",
+    "_emit_sprite": "_emit_sprite.lto_priv.0",
+    "_raw75_edge_10fc6": "_raw75_edge_10fc6.lto_priv.0",
+    "_hot_id_offset": "_hot_id_offset.lto_priv.0",
+    "_delay.20": "_delay.20.lto_priv.0",
+    "__vdp1_mode_fixed_sync_render": "__vdp1_mode_fixed_sync_render.lto_priv.0",
+    "_map_26e66": "_map_26e66.lto_priv.1",
+    "_rom_tables": "_rom_tables.lto_priv.0",
+    "_upload_palette": "_upload_palette.lto_priv.0",
+    "_readrom": "_readrom.lto_priv.0",
+    "_at.32": "_at.32.lto_priv.0",
+    "_e958_carry": "_e958_carry.lto_priv.0",
+    "_transition": "_transition.lto_priv.0",
+    "_main_two_11c82": "_main_two_11c82.lto_priv.0",
+    "_bonus.37": "_bonus.37.lto_priv.0",
+    "_entry_effect": "_entry_effect.lto_priv.0",
+    "_wf_set_be32": "_wf_set_be32.lto_priv.1",
+    "_io": "_io.lto_priv.0",
+    "_state4_1bde8": "_state4_1bde8.lto_priv.0",
+    "_wf_participant_96c6": "_wf_participant_96c6.lto_priv.0",
+    "_recovery.4": "_recovery.4.lto_priv.0",
+    "_ops_valid": "_ops_valid.lto_priv.0",
+    "_rom_read_bytes": "_rom_read_bytes.lto_priv.0",
+    "_base.8": "_base.8.lto_priv.0",
+    "_state0_ringside_prefix": "_state0_ringside_prefix.lto_priv.0",
+    "_file_refills": "_file_refills.lto_priv.0",
+    "_TAB_176BA": "_TAB_176BA.lto_priv.0",
+    "__vdp1_mode_fixed_dma": "__vdp1_mode_fixed_dma.lto_priv.0",
+    "_frontend_scene_clear": "_frontend_scene_clear.lto_priv.0",
+    "_magnitude.7": "_magnitude.7.lto_priv.0",
+    "_magnitude.10": "_magnitude.10.lto_priv.0",
+    "_actor_from_ptr": "_actor_from_ptr.lto_priv.0",
+    "_live_actor_59d2": "_live_actor_59d2.lto_priv.0",
+    "_wf_fault_text": "_wf_fault_text.lto_priv.0",
+    "_rate_palette": "_rate_palette.lto_priv.0",
+    "_cpu_pointer": "_cpu_pointer.lto_priv.0",
+    "_frontend_match": "_frontend_match.lto_priv.0",
+    "_movement_magnitude": "_movement_magnitude.lto_priv.0",
+    "_rom_clock": "_rom_clock.lto_priv.0",
+    "_panel": "_panel.lto_priv.0",
+    "__slave_ici_handler": "__slave_ici_handler.lto_priv.0",
+    "__tei_ihr_handler": "__tei_ihr_handler.lto_priv.0",
+    "__vdp1_mode_variable_vblank_in": "__vdp1_mode_variable_vblank_in.lto_priv.0",
+    "_save_status": "_save_status.lto_priv.0",
+    "_windows": "_windows.lto_priv.0",
+    "_pin_outcome": "_pin_outcome.lto_priv.0",
+    "_write16": "_write16.lto_priv.0",
+    "_CSWTCH.33": "_CSWTCH.33.lto_priv.0",
+    "_frontend_file_read": "_frontend_file_read.lto_priv.0",
+    "_read_value": "_read_value.lto_priv.0",
+    "_D_125C0": "_D_125C0.lto_priv.0",
+    "_delay.24": "_delay.24.lto_priv.0",
+    "_recovery.18": "_recovery.18.lto_priv.0",
+    "_volume_sectors": "_volume_sectors.lto_priv.0",
+    "_end_frame": "_end_frame.lto_priv.0",
+    "_assignment_lower": "_assignment_lower.lto_priv.0",
+    "_state1_sub1": "_state1_sub1.lto_priv.0",
+    "_D_115F2": "_D_115F2.lto_priv.0",
+    "_video_frames": "_video_frames.lto_priv.0",
+    "_saturn_port_pads": "_saturn_port_pads.lto_priv.0",
+    "_wf_fault_hex": "_wf_fault_hex.lto_priv.0",
+    "_fetch": "_fetch.lto_priv.0",
+    "_mash.12": "_mash.12.lto_priv.0",
+    "_video_clock": "_video_clock.lto_priv.0",
+    "_render": "_render.lto_priv.0",
+    "_D_11DCA": "_D_11DCA.lto_priv.0",
+    "_window_count": "_window_count.lto_priv.0",
+    "_frontend_commit": "_frontend_commit.lto_priv.0",
+    "_emit_row": "_emit_row.lto_priv.0",
+    "_records": "_records.lto_priv.0",
+    "_bup_open": "_bup_open.lto_priv.0",
+    "__master_entry": "__master_entry.lto_priv.0",
+    "_clock_frames": "_clock_frames.lto_priv.0",
+    "_interrupt_position": "_interrupt_position.lto_priv.0",
+    "_raw5f_prepare_21732": "_raw5f_prepare_21732.lto_priv.0",
+    "__scu_dma_level1_handler": "__scu_dma_level1_handler.lto_priv.0",
+    "_choose": "_choose.lto_priv.0",
+    "_rate_value": "_rate_value.lto_priv.0",
+    "_tile_slots": "_tile_slots.lto_priv.0",
+    "_tag_prepare_211ec": "_tag_prepare_211ec.lto_priv.0",
+    "_table_77d0": "_table_77d0.lto_priv.0",
+    "_human.1": "_human.1.lto_priv.0",
+    "_delay": "_delay.lto_priv.0",
+    "__dma_callback_list": "__dma_callback_list.lto_priv.0",
+    "_state4_1b8ca": "_state4_1b8ca.lto_priv.0",
+    "_rate_ready": "_rate_ready.lto_priv.0",
+    "__dma_handle": "__dma_handle.lto_priv.0",
+    "_wf_participant_96a0.part.0": "_wf_participant_96a0.part.0.lto_priv.0",
+    "_reset_combo": "_reset_combo.lto_priv.0",
+    "__vdp1_render_callback": "__vdp1_render_callback.lto_priv.0",
+    "_frontend_controls": "_frontend_controls.lto_priv.0",
+    "_hot_payload_bytes": "_hot_payload_bytes.lto_priv.0",
+    "_portrait_divisor": "_portrait_divisor.lto_priv.0",
+    "_state0_tail": "_state0_tail.lto_priv.0",
+    "_tiles": "_tiles.lto_priv.0",
+    "_fraction": "_fraction.lto_priv.0",
+    "__vdp1_mode_variable_dma": "__vdp1_mode_variable_dma.lto_priv.0",
+    "__state": "__state.lto_priv.0",
+    "_fatal_snapshot": "_fatal_snapshot.lto_priv.0",
+    "_rom_slots": "_rom_slots.lto_priv.0",
+    "_wf_participant_95ae": "_wf_participant_95ae.lto_priv.0",
+    "_music_boot": "_music_boot.lto_priv.0",
+    "_frontend_resume_combat_scene": "_frontend_resume_combat_scene.lto_priv.0",
+    "_last_frt": "_last_frt.lto_priv.0",
+    "_release": "_release.lto_priv.0",
+    "_plan_tile_index": "_plan_tile_index.lto_priv.0",
+    "_tag_exchange_188bc": "_tag_exchange_188bc.lto_priv.0",
+    "_tile_6d76": "_tile_6d76.lto_priv.0",
+    "_add_corr_xy": "_add_corr_xy.lto_priv.0",
+    "__ppaf_state": "__ppaf_state.lto_priv.0",
+    "_movement_heal": "_movement_heal.lto_priv.0",
+    "__vdp1_transfer_over_callback": "__vdp1_transfer_over_callback.lto_priv.0",
+    "_transport": "_transport.lto_priv.0",
+    "__txi_ihr_handler": "__txi_ihr_handler.lto_priv.0",
+    "_action22_result_111c8": "_action22_result_111c8.lto_priv.0",
+    "__ihr_tables": "__ihr_tables.lto_priv.0",
+    "_sounds.0": "_sounds.0.lto_priv.0",
+    "_ring_walk_descriptor": "_ring_walk_descriptor.lto_priv.0",
+    "_get": "_get.lto_priv.0",
+    "__vdp1_put_callback": "__vdp1_put_callback.lto_priv.0",
+    "_palette": "_palette.lto_priv.0",
+    "_raw0e": "_raw0e.lto_priv.0",
+    "_decision_1f084": "_decision_1f084.lto_priv.0",
+    "_cpu_data_219b4": "_cpu_data_219b4.lto_priv.0",
+    "_saved_valid": "_saved_valid.lto_priv.0",
+    "_frontend_serviced_clock": "_frontend_serviced_clock.lto_priv.0",
+    "_tile_valid": "_tile_valid.lto_priv.0",
+    "_eece": "_eece.lto_priv.0",
+    "_collision_24900": "_collision_24900.lto_priv.0",
+    "_recovery.34": "_recovery.34.lto_priv.0",
+    "_cache_valid": "_cache_valid.lto_priv.0",
+    "_edge_reaction_10fc6": "_edge_reaction_10fc6.lto_priv.0",
+    "__vdp1_mode_variable_vblank_out": "__vdp1_mode_variable_vblank_out.lto_priv.0",
+    "_assignment_upper": "_assignment_upper.lto_priv.0",
+    "_scroll_ba48": "_scroll_ba48.lto_priv.0",
+    "_frontend_submit": "_frontend_submit.lto_priv.0",
+    "_input_word": "_input_word.lto_priv.0",
+    "_controllers_sample_clock": "_controllers_sample_clock.lto_priv.0",
+    "_D_13D26": "_D_13D26.lto_priv.0",
+    "_frontend_to_gameplay": "_frontend_to_gameplay.lto_priv.0",
+    "_rom_extra_slot": "_rom_extra_slot.lto_priv.0",
+    "__vdp1_mode_variable_sprite_end": "__vdp1_mode_variable_sprite_end.lto_priv.0",
+    "_window_span": "_window_span.lto_priv.0",
+    "_post_rom": "_post_rom.lto_priv.0",
+    "__master_ici_handler": "__master_ici_handler.lto_priv.0",
+    "_state4_1b134": "_state4_1b134.lto_priv.0",
+    "_owner": "_owner.lto_priv.0",
+    "__eri_ihr_handler": "__eri_ihr_handler.lto_priv.0",
+    "_state1_tag_request_1c5fa": "_state1_tag_request_1c5fa.lto_priv.0",
+    "_timer.3": "_timer.3.lto_priv.0",
+    "_tag_partition": "_tag_partition.lto_priv.0",
+    "_take": "_take.lto_priv.0",
+    "_fail": "_fail.lto_priv.0",
+    "__default_handler": "__default_handler.lto_priv.0",
+    "_random_shift": "_random_shift.lto_priv.0",
+    "_filename": "_filename.lto_priv.0",
+    "_rom_words": "_rom_words.lto_priv.0",
+    "_action22_cleanup_21358": "_action22_cleanup_21358.lto_priv.0",
+    "_tick_descriptor": "_tick_descriptor.lto_priv.0",
+    "_native_music": "_native_music.lto_priv.0",
+    "_D_19530": "_D_19530.lto_priv.0",
+    "_speed.38": "_speed.38.lto_priv.0",
+    "_begin_frame": "_begin_frame.lto_priv.0",
+    "_target": "_target.lto_priv.0",
+    "_sound_enable": "_sound_enable.lto_priv.0",
+    "_f178_link": "_f178_link.lto_priv.0",
+    "_save_data": "_save_data.lto_priv.0",
+    "_palette_and_ring": "_palette_and_ring.lto_priv.0",
+    "_pad": "_pad.lto_priv.0",
+    "_table_7814": "_table_7814.lto_priv.0",
+    "_referee_10718": "_referee_10718.lto_priv.0",
+    "_boot_seed_observed": "_boot_seed_observed.lto_priv.0",
+    "_speech_divisor": "_speech_divisor.lto_priv.0",
+    "_host": "_host.lto_priv.0",
+    "_metasprite_cache": "_metasprite_cache.lto_priv.0",
+    "_first_free": "_first_free.lto_priv.0",
+    "_wf_participant_94ca": "_wf_participant_94ca.lto_priv.0",
+    "_rom_data": "_rom_data.lto_priv.0",
+    "__default_entry": "__default_entry.lto_priv.0",
+    "_choice_b9a8": "_choice_b9a8.lto_priv.0",
+    "_royal_result_commit": "_royal_result_commit.lto_priv.0",
+    "_table_970c": "_table_970c.lto_priv.0",
+    "__vdp1_mode_fixed_vblank_out": "__vdp1_mode_fixed_vblank_out.lto_priv.0",
+    "_frontend_reset_ready": "_frontend_reset_ready.lto_priv.0",
+    "_ports": "_ports.lto_priv.0",
+    "_decision_1de66": "_decision_1de66.lto_priv.0",
+    "_frontend_bound_world": "_frontend_bound_world.lto_priv.0",
+    "__dsp_end_ihr": "__dsp_end_ihr.lto_priv.0",
+    "__slave_entry": "__slave_entry.lto_priv.0",
+    "_chance.10": "_chance.10.lto_priv.0",
+    "__system_manager_handler": "__system_manager_handler.lto_priv.0",
+    "_branchb_26a60": "_branchb_26a60.lto_priv.0",
+    "_file_count": "_file_count.lto_priv.0",
+    "_read_file": "_read_file.lto_priv.0",
+    "_post7_call_word_preserve_regs": "_post7_call_word_preserve_regs.lto_priv.0",
+    "_post7_royal_activate": "_post7_royal_activate.lto_priv.0",
+    "_cpu_face_10be8": "_cpu_face_10be8.lto_priv.0",
+    "_tile_data": "_tile_data.lto_priv.0",
+    "_state4_1b318": "_state4_1b318.lto_priv.0",
+    "_magnitude.31": "_magnitude.31.lto_priv.0",
+    "_dma_stage": "_dma_stage.lto_priv.0",
+    "_upload_tile": "_upload_tile.lto_priv.0",
+    "_defender_1c7ec": "_defender_1c7ec.lto_priv.0",
+    "_frames_7874": "_frames_7874.lto_priv.0",
+    "_roster_palette": "_roster_palette.lto_priv.0",
+    "_raw7a_magnitude": "_raw7a_magnitude.lto_priv.0",
+    "_read_sfx": "_read_sfx.lto_priv.0",
+    "_f4c2_partner_215b6": "_f4c2_partner_215b6.lto_priv.0",
+    "__vdp1_mode_auto_dma": "__vdp1_mode_auto_dma.lto_priv.0",
+    "_hold_offset_10b62": "_hold_offset_10b62.lto_priv.0",
+    "__vblank_in_handler": "__vblank_in_handler.lto_priv.0",
+    "_frontend_bus_read": "_frontend_bus_read.lto_priv.0",
+    "__vdp1_mode_fixed_vblank_in": "__vdp1_mode_fixed_vblank_in.lto_priv.0",
+    "_jump_hit_11192": "_jump_hit_11192.lto_priv.0",
+    "_wf_fault_name": "_wf_fault_name.lto_priv.0",
+    "_state2_weighted_1d8c2": "_state2_weighted_1d8c2.lto_priv.0",
+    "_rom_word_tag": "_rom_word_tag.lto_priv.0",
+    "_relocate": "_relocate.lto_priv.0",
+    "_joins_60a2": "_joins_60a2.lto_priv.0",
+    "_wf_fault_reset": "_wf_fault_reset.lto_priv.0",
+    "_hot_map_spill": "_hot_map_spill.lto_priv.0",
+    "_records_a4d4": "_records_a4d4.lto_priv.0",
+    "_defender_fallback_1c880": "_defender_fallback_1c880.lto_priv.0",
+    "_speed.13": "_speed.13.lto_priv.0",
+    "_escape_cleanup_21282": "_escape_cleanup_21282.lto_priv.0",
+    "_wf_actor_rom_base": "_wf_actor_rom_base.lto_priv.0",
+    "_cram_valid": "_cram_valid.lto_priv.0",
+    "_body": "_body.lto_priv.0",
+    "_timer.33": "_timer.33.lto_priv.0",
+    "_landing_1108c": "_landing_1108c.lto_priv.0",
+    "_defender_relation_1c228": "_defender_relation_1c228.lto_priv.0",
+    "_frontend_wait_vblank": "_frontend_wait_vblank.lto_priv.0",
+    "__vdp1_mode_variable_sync_render": "__vdp1_mode_variable_sync_render.lto_priv.0",
+    "_image": "_image.lto_priv.0",
+    "_activate_5f28": "_activate_5f28.lto_priv.0",
+    "_rom_preloaded": "_rom_preloaded.lto_priv.0",
+    "_hot_slots": "_hot_slots.lto_priv.0",
+    "_frontend_post_owner": "_frontend_post_owner.lto_priv.0",
+    "_title_loading_hidden": "_title_loading_hidden.lto_priv.0",
+    "_table_76a2": "_table_76a2.lto_priv.0",
+    "_files": "_files.lto_priv.0",
+    "_hot_header_bytes": "_hot_header_bytes.lto_priv.0",
+    "_message": "_message.lto_priv.0",
+    "_primary5": "_primary5.lto_priv.0",
+    "_g": "_g.lto_priv.0",
+    "_write_value": "_write_value.lto_priv.0",
+    "_swap": "_swap.lto_priv.0",
+    "_rate_draws": "_rate_draws.lto_priv.0",
+    "_boot": "_boot.lto_priv.0",
+    "__vdp1_mode_fixed_sprite_end": "__vdp1_mode_fixed_sprite_end.lto_priv.0",
+    "_left.1": "_left.1.lto_priv.0",
+    "_raw8e_script": "_raw8e_script.lto_priv.0",
+    "_bindings": "_bindings.lto_priv.0",
+    "_frontend_bus_read.part.0": "_frontend_bus_read.part.0.lto_priv.0"
+  },
+  "existing_media_unchanged": true,
+  "input_events": [
+    [
+      4200,
+      4230,
+      11
+    ],
+    [
+      4350,
+      4380,
+      3
+    ],
+    [
+      5000,
+      5030,
+      0
+    ],
+    [
+      5500,
+      5530,
+      0
+    ],
+    [
+      6000,
+      6030,
+      0
+    ],
+    [
+      6500,
+      6530,
+      0
+    ],
+    [
+      7000,
+      7030,
+      0
+    ],
+    [
+      7500,
+      7530,
+      0
+    ],
+    [
+      8000,
+      8030,
+      0
+    ],
+    [
+      8500,
+      8530,
+      0
+    ]
+  ],
+  "accepted_options": {
+    "beetle_saturn_jit_scu": "disabled",
+    "beetle_saturn_cpucache_emumode": "full",
+    "beetle_saturn_sh2_interleave": "exact",
+    "beetle_saturn_sh2_jit": "disabled",
+    "beetle_saturn_jit_scsp": "disabled",
+    "beetle_saturn_region": "North America",
+    "beetle_saturn_cart": "None"
+  },
+  "counter_trace_samples": 9000,
+  "audio_gate": {
+    "software_audio_gate_passed": false,
+    "blockers": [
+      "firmware_dropped_fm"
+    ],
+    "diagnostic_samples": 8889,
+    "physical_audio_certified": false,
+    "scope": "No stability claim is permitted when disabled, reason, drops, ignored or music errors are observed. A passing gate alone is not complete audio or graphics validation."
+  },
+  "audio_trace_sampling": "HWRAM diagnostics every frame after signature; VDP1 ABI3 heartbeats at serialized checkpoints (300 frames and final)."
+}

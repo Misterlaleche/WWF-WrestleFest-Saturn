@@ -1,0 +1,307 @@
+{
+  "label": "INTEGRATION AUDIO DIAGNOSTIC - OBSERVED GATE PASSED",
+  "delivery_authorized": false,
+  "master_sha256": "e56b027b8a3e89f92ecbb0a419363c11eb2996334b8b819e87ab9137152d0221",
+  "music_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+  "run": "cold-4200-tag",
+  "checks": [
+    {
+      "frame": 1800,
+      "game_frame": 0,
+      "hot_window_bytes": 18432,
+      "whole_window_sha256": "88bab1e32f45034fa89b6444074038b31bcef4bc739141d8d93c0cfe7b57c704",
+      "resident_code_bytes": 13992,
+      "resident_code_matches": true,
+      "vdp_transport_bytes": 95940,
+      "vdp_transport_matches": true,
+      "userdata_and_callbacks_valid": true,
+      "unused_tail_zero": true,
+      "live_private": {
+        "used": 5504,
+        "free": 5612,
+        "largest": 5568,
+        "blocks": [
+          {
+            "address": "0x6085e48",
+            "bytes": 3188,
+            "free": false
+          },
+          {
+            "address": "0x6086ac0",
+            "bytes": 12,
+            "free": false
+          },
+          {
+            "address": "0x6086ad0",
+            "bytes": 44,
+            "free": true
+          },
+          {
+            "address": "0x6086b00",
+            "bytes": 128,
+            "free": false
+          },
+          {
+            "address": "0x6086b84",
+            "bytes": 128,
+            "free": false
+          },
+          {
+            "address": "0x6086c08",
+            "bytes": 2048,
+            "free": false
+          },
+          {
+            "address": "0x608740c",
+            "bytes": 5568,
+            "free": true
+          }
+        ]
+      },
+      "live_user": {
+        "used": 0,
+        "free": 33052,
+        "largest": 33052,
+        "blocks": [
+          {
+            "address": "0x60f7ee0",
+            "bytes": 33052,
+            "free": true
+          }
+        ]
+      },
+      "boot_stats_captures": 1,
+      "cpu": {
+        "SH2-M": {
+          "pc": "0x6052c8e",
+          "sp": "0x6003d60",
+          "ccr": 1
+        },
+        "SH2-S": {
+          "pc": "0x5c5c1b2",
+          "sp": "0x608f19c",
+          "ccr": 1
+        }
+      },
+      "synth_writes": 481,
+      "synth_key": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fm_active_mask": 0,
+      "audio_rms": 0.0
+    },
+    {
+      "frame": 3000,
+      "game_frame": 0,
+      "hot_window_bytes": 18432,
+      "whole_window_sha256": "af1229430e17e5ebae053a268c368f86a5fe246c9bb4f3185c06208f523e51f6",
+      "resident_code_bytes": 13992,
+      "resident_code_matches": true,
+      "vdp_transport_bytes": 95940,
+      "vdp_transport_matches": true,
+      "userdata_and_callbacks_valid": true,
+      "unused_tail_zero": true,
+      "live_private": {
+        "used": 5504,
+        "free": 5612,
+        "largest": 5568,
+        "blocks": [
+          {
+            "address": "0x6085e48",
+            "bytes": 3188,
+            "free": false
+          },
+          {
+            "address": "0x6086ac0",
+            "bytes": 12,
+            "free": false
+          },
+          {
+            "address": "0x6086ad0",
+            "bytes": 44,
+            "free": true
+          },
+          {
+            "address": "0x6086b00",
+            "bytes": 128,
+            "free": false
+          },
+          {
+            "address": "0x6086b84",
+            "bytes": 128,
+            "free": false
+          },
+          {
+            "address": "0x6086c08",
+            "bytes": 2048,
+            "free": false
+          },
+          {
+            "address": "0x608740c",
+            "bytes": 5568,
+            "free": true
+          }
+        ]
+      },
+      "live_user": {
+        "used": 0,
+        "free": 33052,
+        "largest": 33052,
+        "blocks": [
+          {
+            "address": "0x60f7ee0",
+            "bytes": 33052,
+            "free": true
+          }
+        ]
+      },
+      "boot_stats_captures": 1,
+      "cpu": {
+        "SH2-M": {
+          "pc": "0x60577cc",
+          "sp": "0x60032e4",
+          "ccr": 1
+        },
+        "SH2-S": {
+          "pc": "0x6088b0a",
+          "sp": "0x608f0d4",
+          "ccr": 1
+        }
+      },
+      "synth_writes": 3139,
+      "synth_key": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        0
+      ],
+      "fm_active_mask": 127,
+      "audio_rms": 1852.2639897911329
+    },
+    {
+      "frame": 4200,
+      "game_frame": 0,
+      "hot_window_bytes": 18432,
+      "whole_window_sha256": "f39f437eaaae32b2944789e7352e0b1a82fa386fdc2c901954963ce4782eb863",
+      "resident_code_bytes": 13992,
+      "resident_code_matches": true,
+      "vdp_transport_bytes": 95940,
+      "vdp_transport_matches": true,
+      "userdata_and_callbacks_valid": true,
+      "unused_tail_zero": true,
+      "live_private": {
+        "used": 5504,
+        "free": 5612,
+        "largest": 5568,
+        "blocks": [
+          {
+            "address": "0x6085e48",
+            "bytes": 3188,
+            "free": false
+          },
+          {
+            "address": "0x6086ac0",
+            "bytes": 12,
+            "free": false
+          },
+          {
+            "address": "0x6086ad0",
+            "bytes": 44,
+            "free": true
+          },
+          {
+            "address": "0x6086b00",
+            "bytes": 128,
+            "free": false
+          },
+          {
+            "address": "0x6086b84",
+            "bytes": 128,
+            "free": false
+          },
+          {
+            "address": "0x6086c08",
+            "bytes": 2048,
+            "free": false
+          },
+          {
+            "address": "0x608740c",
+            "bytes": 5568,
+            "free": true
+          }
+        ]
+      },
+      "live_user": {
+        "used": 0,
+        "free": 33052,
+        "largest": 33052,
+        "blocks": [
+          {
+            "address": "0x60f7ee0",
+            "bytes": 33052,
+            "free": true
+          }
+        ]
+      },
+      "boot_stats_captures": 1,
+      "cpu": {
+        "SH2-M": {
+          "pc": "0x607509a",
+          "sp": "0x6003c10",
+          "ccr": 1
+        },
+        "SH2-S": {
+          "pc": "0x6088f3a",
+          "sp": "0x608f15c",
+          "ccr": 1
+        }
+      },
+      "synth_writes": 6941,
+      "synth_key": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        0
+      ],
+      "fm_active_mask": 127,
+      "audio_rms": 2482.1601039419033
+    }
+  ],
+  "game_frame_max": 0,
+  "combat_rows": 0,
+  "active_music_combat_rows": 0,
+  "combat_active_examples": [],
+  "audio_gate": {
+    "software_audio_gate_passed": true,
+    "blockers": [],
+    "diagnostic_samples": 3489,
+    "physical_audio_certified": false,
+    "scope": "No stability claim is permitted when disabled, reason, drops, ignored or music errors are observed. A passing gate alone is not complete audio or graphics validation."
+  },
+  "wav": {
+    "sample_rate": 44100,
+    "channels": 2,
+    "bits": 16,
+    "frames": 3095970,
+    "fps": 59.82650314089141,
+    "guest_audio_modified": false,
+    "path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\audio-repair\\control-fix\\scalar-inline-admission-table\\cold-4200-tag\\audio.wav"
+  },
+  "media_created": false,
+  "disposition": "Full catalogue and performance remain required; see audio_gate. A failed cold4200 prohibits9600 continuation and any image. Await cycle profile if failed."
+}

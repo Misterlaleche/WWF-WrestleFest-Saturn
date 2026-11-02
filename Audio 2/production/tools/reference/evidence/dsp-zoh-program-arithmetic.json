@@ -1,0 +1,51 @@
+{
+  "kind": "DSP_INTERPOLATION_INTEGER_ARITHMETIC_CHECK",
+  "preparation_report_sha256": "5ec47a36d9a8edb330e3a696e5eca05c568a97ec4c734a235b0bd22c5756e38d",
+  "tool_sha256": "fc3fc6c198f830c22049683ffc709b2375277c0b69861bc35a102d40a67852a5",
+  "arithmetic": {
+    "cases": 327680,
+    "all_4096_fractions": true,
+    "distinct_nonzero_volume_levels": 9,
+    "silent_volume_level": true,
+    "linear_integer_equation_matches": true,
+    "zoh_integer_equation_matches": true,
+    "baseline_fails_zoh_equality_cases": 257964,
+    "scope": "All interpolation fractions and original volume coefficients for eight signed boundary pairs; exact integer equations include coefficient truncation and saturation. Native capture is a separate gate."
+  },
+  "changed_source_files": [
+    "tools/build_dsp_mixer.py"
+  ],
+  "changed_dsp_steps": [
+    25,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    47,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    69,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    91,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99
+  ],
+  "linear_ram_accesses": 12,
+  "zoh_ram_accesses": 8,
+  "production_changed": false
+}

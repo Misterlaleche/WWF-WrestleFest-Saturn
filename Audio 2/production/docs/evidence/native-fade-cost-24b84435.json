@@ -1,0 +1,886 @@
+{
+  "schema_version": 1,
+  "kind": "HISTORICAL_NATIVE_FADE_COST_CHECKPOINT_STILL_FAILING",
+  "checkpoint": {
+    "label": "24b84435",
+    "date": "2026-11-02",
+    "status": "BEST_VERIFIED_SELECTED_CORRECTION_AT_THIS_CHECKPOINT_STILL_FAILING",
+    "historical_record": true,
+    "later_candidates_must_use_separate_evidence": true,
+    "native_600_second_acceptance_for_this_checkpoint": false,
+    "Graphics_Final_integration_performed": false,
+    "physical_hardware_acceptance": false,
+    "fidelity_approved": false
+  },
+  "source_sha256": {
+    "src/reference_driver/z80-native.c": "24b844357544e12cfa7b1a09f7d368d895a918b00c129815438827102b1ea0fa",
+    "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+    "src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+    "src/wf_music_module.c": "f7fe65540e2d6604b9c038d82f4426ed75f204ac9c1ff4b025f48f01653f2850",
+    "src/wf_music_clock.h": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+    "src/wf_music_time.h": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+    "src/wf_scsp_ym.c": "c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76",
+    "src/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+    "src/wf_music_firmware.c": "81cee191220e30dfe1ba42aed0fccbe1232842a78b271bec50eea72c64a21e90",
+    "tests/test_sh2_fade_lifts.c": "1f0c5209d627ccac549fcab25ef5ab642918ef4623e83609bc1efcf20de29695",
+    "tests/test_sh2_tl_writes.c": "3110d6611830e1b9ce0e68e9eedef3af91b7f6afbe61eb91fa4b5feb95ed9aff",
+    "tests/test_music_seq_service.c": "70a46d9d363f94049d825e9ef511a014648750badbb4b9581f52f99e48fc64a3",
+    "tools/run_host_tests.py": "03c0b872bc39fe75c4a8d4ab6322a0bb28328352c99b3ccbc100fce7345815a3",
+    "tools/run_music_matrix.py": "9fa08981bc2ad649d20a8196fec1277396103a2c0c24527f49e3dae194d0a6d9",
+    "tools/verify_sh2_fade_lifts.py": "f928c9699409b3f453b6425d6ea3e5c6bb045a978e0eb0b577e449ad2fbff83e",
+    "tools/verify_sh2_tl_writes.py": "a10d50ae29bbb24afa7aea6b3acacce45ff37ff01e53a2729b319974a100ba86"
+  },
+  "frozen_matrix_source_inventory_sha256": "6ec27d4e52baf1aa5d3fdf8f9f624a9e57be7019c6159aa21fa91d8158716ba3",
+  "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "emulator": "standalone Mednafen1.32.1",
+  "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+  "input_identity_sha256": {
+    "SOUND.ROM": "f89e7782e7535576b2ebf8c5daea61c5fa2ecefff0b8b3280dea09efa57c25f7",
+    "SFX.DAT": "dbe749cf4ce13f333ff7318a74a64e30fa2b9af05d953688a0813311cbabd216",
+    "ROM_archive": "2a99ae04704941fe1e2a6362dbc4feb18554de4fc83baa0622487d84716127b8"
+  },
+  "selected_change_boundary": {
+    "baseline_public_evidence_sha256": "f63633dba3687d378fd837de58976c3843f849d5067e7e45ad510edce82901af",
+    "baseline_native_core_sha256": "c408e4a8ad5d7b54a55706f4c96fd9f4d39271dcd0fb5e2de14331af138f4fad",
+    "changed_common_runtime_files": [
+      "src/reference_driver/z80-native.c"
+    ],
+    "verified_unchanged_runtime_sha256": {
+      "include/wf_audio2.h": "e0b8deb70b9b76776e174c4a3b115b33f447fd926cacd23cc798d8750464cb83",
+      "include/wf_audio2_yaul.h": "ab5eaf0b09dddbdfa2bcaf246a09a6a00b5ad0447d954b1da3a41d32a721e771",
+      "src/generated/wf_ym_envelope.h": "5f2e75edb5de0d5f3c1979f9e86b5d51602106a5cdad67671abfce4b4ca9bcf8",
+      "src/generated/wf_ym_tables.h": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+      "src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+      "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+      "src/reference_driver/z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+      "src/wf_audio2.c": "1849480ae2a54d16df44b200303426d7d8a87622d2ec7d718bd7619f82f998a9",
+      "src/wf_audio2_yaul.c": "205b831868ffc17886aa289ec3cecf31f72339f59b8ca3d35731c671abe0744f",
+      "src/wf_music_clock.h": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+      "src/wf_music_entry.S": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+      "src/wf_music_firmware.c": "81cee191220e30dfe1ba42aed0fccbe1232842a78b271bec50eea72c64a21e90",
+      "src/wf_music_module.c": "f7fe65540e2d6604b9c038d82f4426ed75f204ac9c1ff4b025f48f01653f2850",
+      "src/wf_music_module.h": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c",
+      "src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+      "src/wf_music_seq.h": "b02489430f5fb5eb97712c2a56d1636a4159358930cdcbf6244df0cbadf92471",
+      "src/wf_music_time.h": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+      "src/wf_native_driver.h": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+      "src/wf_native_elf.c": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+      "src/wf_native_elf.h": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+      "src/wf_native_host.c": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+      "src/wf_native_host.h": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+      "src/wf_native_yaul.c": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+      "src/wf_native_yaul.h": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+      "src/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+      "src/wf_scsp_dsp.h": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+      "src/wf_scsp_sfx.c": "4745461ca0439802e0f4ffc4395e07ef89d7b09ff41e83868b3bc7dfefa7d05b",
+      "src/wf_scsp_sfx.h": "d089e10bc23083db14b29577767f36d0ac8582f73c3e0d2bd3a14fc6baa11695",
+      "src/wf_scsp_ym.c": "c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76",
+      "src/wf_scsp_ym.h": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+      "src/wf_sfx_decode.S": "64c8e4137aee642546dcd6c1f5bca1f0103b6b905faa683b3b7aaa093bd705ed",
+      "src/wf_sfx_memory.c": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+      "src/wf_sfx_start.S": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+      "src/wf_z80_control_batch.inc": "6775bdc1db5f94c73ed3dc2f35926fffa40fd21e6a2890a284ce6f0c7f6e2ee2",
+      "src/wf_z80_instrument_post.inc": "b9cd0af3069c405f2b63809c2e6d5157831a8cc84632868d8f3f6dec7fe31f53",
+      "src/wf_z80_instrument_pre.inc": "1353f99b38f72dfb7cc79858f14e16314cc6b90900a2cb8680557e9693197770",
+      "src/wf_z80_multiply.inc": "86dd0ae1b986a7c919f0074db6129833fe0b2ebdc946809d382c75f63d6a2642",
+      "src/wf_z80_startup_copy.inc": "67f4df15c8c115210f69779e8b5d937859002122332ff5bbecbf09ada86742e1"
+    },
+    "buffers_or_lead_enlarged": false,
+    "clock_ratios_changed": false,
+    "scheduler_timing_altered": false,
+    "unchanged_native_hot_and_state_limit_bytes": 18432,
+    "selected_hot_bytes": 15196,
+    "selected_state_bytes": 3220
+  },
+  "evidence_identity_sha256": {
+    "host_report": "f58d69d9984d5431f6a081c24cd6cf0c1910776288e7850455806b26dd08d105",
+    "native_screen_matrix": "cdd5baaabf67ec5dea61fb983f204ef763217114b348a1fdfde5e7dea6591a30",
+    "exact_return_red": "b68c9299d6b8dbbb3ca02cb43a8909add8329f1c7e3c8693621ce20ba15b656b",
+    "exact_fade_reproducer": "d4712b35e0e7817432b00817a466399d282f5e0a314aa25ae1b015707bf6dc78",
+    "causal_native_observer_metadata": "b253fc05234ee6b58561a37d36c4a94bc66af5202946be0163fd7b71e0403545",
+    "causal_native_observer_capture": "941b672c0f892208483fc71448c786967e8522c08e1f8a0b9f976441c780e583",
+    "original_scalar_profile_report": "31e56b5773f523bea947c2ce4fba90a3c637b8dee845df8b01d26344f9092310",
+    "carrier_host_green": "08f51cf3af0aa980de2c01c22d464dec64d616eed12553ecc617224575b41ebd",
+    "early_service_report": "bd0e56095be1adb2267a21fc05eeb96f3255341563feb666fb7d09a0c8dc6598"
+  },
+  "host_regression": {
+    "passed": true,
+    "group_count": 13,
+    "source_stable": true,
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "score_seconds_per_command": 600,
+    "tail_seconds": 8,
+    "music_commands": 18,
+    "live_transition_sequence_passed": true,
+    "serviced_checkpoints": 10962,
+    "sequence_calls": 956109,
+    "service_callbacks": 3151318,
+    "exact_fade_cases": 1507643,
+    "exact_TL_cases": 793344,
+    "exact_TL_accepted_cases": 790920,
+    "exact_TL_rejected_cases": 2424,
+    "TL_write_callback_snapshots_per_engine": 1581840,
+    "scope": "CPU/RAM/flags/stack/cycles/refresh and adapter-event semantics; no native throughput or waveform acceptance",
+    "groups": [
+      {
+        "name": "resource_identity_and_corruption",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "build_input_aliases",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "source_profile_snapshot",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "output_preservation",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "native_capture_evidence",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "api",
+        "exit_code": 0,
+        "stdout_sha256": "637abcc063eee68d9b6935e2eef9d42989bf8f932d35112bdd7583dd807b9f95"
+      },
+      {
+        "name": "module_deadlines",
+        "exit_code": 0,
+        "stdout_sha256": "e4331d31da3dceba65c8f2396a0f0966922e737f2b1817b2c39a6a397fdd24ba"
+      },
+      {
+        "name": "firmware_deadlines",
+        "exit_code": 0,
+        "stdout_sha256": "aa7a28f606ab1f579251b27db1a5fc2587c6ed6c50a6d6984648fd4d5d0f5af4"
+      },
+      {
+        "name": "firmware_deadlines_no_timing",
+        "exit_code": 0,
+        "stdout_sha256": "aa7a28f606ab1f579251b27db1a5fc2587c6ed6c50a6d6984648fd4d5d0f5af4"
+      },
+      {
+        "name": "sfx_refill_deadlines",
+        "exit_code": 0,
+        "stdout_sha256": "ef36881cf06bce7dd85652d3bae8d0a166b471e88c7e80d014d001e58d571cd2"
+      },
+      {
+        "name": "exact_fade_lifts",
+        "exit_code": 0,
+        "stdout_sha256": "141760b5dc3f0fb5eab7cb0fe9d94e08d2a3defa804cdc5154b511804a72f4f3"
+      },
+      {
+        "name": "exact_tl_writes",
+        "exit_code": 0,
+        "stdout_sha256": "d2a82a8ca3eb7d336877883d8eb75096d5f900026e8ff86fad2e371bdd9004d0"
+      },
+      {
+        "name": "all18_full_z80_and_live_transitions",
+        "exit_code": 0,
+        "stdout_sha256": "775d88d2ba7508150ad90ddea95682db916936d91057b925d4ab0e5e489d6ac4"
+      }
+    ]
+  },
+  "causal_command02": {
+    "scope": "Private instrumented diagnostic before the selected correction; no runtime timing policy changed by the observer",
+    "command": 2,
+    "score_seconds_before_1F": 6,
+    "tail_seconds": 8,
+    "original_scalar_counts": {
+      "last_pre_fade_second": {
+        "scalar_steps": 94791,
+        "scalar_z80_cycles": 767340,
+        "ym_writes": 1176,
+        "non_timer14_ym_writes": 1103,
+        "tl_writes": 0
+      },
+      "first_fade_second": {
+        "scalar_steps": 239857,
+        "scalar_z80_cycles": 1971551,
+        "ym_writes": 3114,
+        "non_timer14_ym_writes": 3041,
+        "tl_writes": 1944
+      }
+    },
+    "profile_counts_are_not_native_SH2_time": true,
+    "native_observed_interval": {
+      "phase": "fade processing up to observed fault",
+      "original_Z80_cycles": 3548551,
+      "SCSP_samples": 49481,
+      "original_clock_hz": 3579545,
+      "SCSP_rate_hz": 44100,
+      "original_seconds": 0.9913413576306486,
+      "SCSP_seconds": 1.122018140589569,
+      "SCSP_seconds_per_original_second": 1.1318181491703767,
+      "original_cycle_backlog_at_last_observed_target": 444138,
+      "final_error": 15
+    },
+    "inference": "The original fade workload and observed loss of native processing progress identify a CPU-cost/deadline problem; these bounded observations do not assign all time to one helper or predict every command"
+  },
+  "native_screen": {
+    "profile_label": "cddd-scalar9-exact-fade-prefix-TL-return-24b84435-30s-screen",
+    "complete_capture_campaign": true,
+    "source_stable": true,
+    "inputs_stable": true,
+    "emulator_stable": true,
+    "music_score_seconds": 30,
+    "music_window_seconds": 38,
+    "requested_fade_tail_seconds": 8,
+    "music_passed": 14,
+    "music_failed": 4,
+    "failed_commands": [
+      4,
+      6,
+      7,
+      18
+    ],
+    "transitions_status": "FAIL",
+    "transitions_requested": 9,
+    "transitions_admitted": 4,
+    "all_native_runtime_gates_passed": false,
+    "presentation_speed_requested": 4,
+    "emulated_hardware_clock_changed": false,
+    "cases": [
+      {
+        "id": "command-01",
+        "command": 1,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "e41c3c97001d4c0140380f2a9b4d85e9d8e7e16effbfb95ba767047479715955",
+        "native_gates_sha256": "2aefddf8be77fa40958b678b3f5e26aa2b374cf10ef6db924e61fbbe01f7b5af",
+        "native_executable_sha256": "3cf7b71217f7a907caa51f86fafcc01c658254f673e70064f7656ed0e921aae9"
+      },
+      {
+        "id": "command-02",
+        "command": 2,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "fa77fe9e665b485cc305b1c6c592bc647eedb5e21f5ea85d685e834ddcd1caac",
+        "native_gates_sha256": "5ba2e5037cd5b533c81ed31e167446f9eba802338d0fbc926d56f3ac4c31ba4f",
+        "native_executable_sha256": "858573fb547f48a453eae7f3a440409286a5c93c4351dcca0c596468280e4500"
+      },
+      {
+        "id": "command-03",
+        "command": 3,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "bf0e367f0c12bb5690e027aef6f81290f24333e489f6b2e7b9a7e8bf41b083d9",
+        "native_gates_sha256": "6e3f0edc94f1146074f89ed35b7acf91b0f1ed4e734605515694a6886ee98a68",
+        "native_executable_sha256": "b72d1caf496978bd98107e39635caeb6b30d4bb50bacaa23dae57319cb536ff2"
+      },
+      {
+        "id": "command-04",
+        "command": 4,
+        "kind": "music",
+        "runtime_status": "FAIL",
+        "failed_gates": [
+          "no_reported_worker_error",
+          "no_reported_api_error",
+          "no_reported_fm_discard",
+          "no_reported_transport_lateness",
+          "worker_still_running",
+          "api_still_running",
+          "observed_history_has_no_errors",
+          "no_actual_native_counter_errors"
+        ],
+        "final_counters": {
+          "error": 15,
+          "lateB028": 28,
+          "FMdiscardEvents": 4,
+          "APIerror": 5,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "541b5d21566caa0ee8b4f4bb84929164e52decac5105e05c5062b150298e08aa",
+        "native_gates_sha256": "e6870cef2c8cac70d462a35680c35ef0df91c7ae5b5cd4ab12e2b18601e3c294",
+        "native_executable_sha256": "7b70e3f8fb2ee151fbebf9545b16713987135dc009350e1bc36e15982771de70"
+      },
+      {
+        "id": "command-05",
+        "command": 5,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "eebdfa8b6e8c1d1b1b201623645c49d0e10c5b256a3746b6e413aa4cf903a20a",
+        "native_gates_sha256": "8fa9a7cdb68574e17a36780296f8cf9ac72304878c9d6c5999e0bd650edfd802",
+        "native_executable_sha256": "213602ec3755d59d2c48d502410ddb10aab0f82d30da20667af8be0b577e2e65"
+      },
+      {
+        "id": "command-06",
+        "command": 6,
+        "kind": "music",
+        "runtime_status": "FAIL",
+        "failed_gates": [
+          "no_reported_worker_error",
+          "no_reported_api_error",
+          "no_reported_fm_discard",
+          "no_reported_transport_lateness",
+          "worker_still_running",
+          "api_still_running",
+          "observed_history_has_no_errors",
+          "no_actual_native_counter_errors"
+        ],
+        "final_counters": {
+          "error": 15,
+          "lateB028": 46,
+          "FMdiscardEvents": 5,
+          "APIerror": 5,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "138176129e867acf65633be63635bebbb3405a1924ac6a6858ef975fd4872a9b",
+        "native_gates_sha256": "eea231936bf99d4d0e56f85eae825477c77921a221244c8a5bf41d34b04b8cf2",
+        "native_executable_sha256": "63bb514edd2bd0fb283b842e4a3e5fa116414377672ba9c2c71fd2570b1b6209"
+      },
+      {
+        "id": "command-07",
+        "command": 7,
+        "kind": "music",
+        "runtime_status": "FAIL",
+        "failed_gates": [
+          "no_reported_worker_error",
+          "no_reported_api_error",
+          "no_reported_fm_discard",
+          "no_reported_transport_lateness",
+          "worker_still_running",
+          "api_still_running",
+          "observed_history_has_no_errors",
+          "no_actual_native_counter_errors"
+        ],
+        "final_counters": {
+          "error": 15,
+          "lateB028": 31,
+          "FMdiscardEvents": 9,
+          "APIerror": 5,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "0aa7b272a53281f10419bc0d2df73e1a71718045e225bf692ff858d7b1725b56",
+        "native_gates_sha256": "4014eaba2c335a2c0d3482976bcea7a5c66439d86bda85fa2185bee26824bec3",
+        "native_executable_sha256": "f91cf8f7ec57bc3185032d786e66926cc7ccdb3ba79905d9ab53eb5e15be14e6"
+      },
+      {
+        "id": "command-08",
+        "command": 8,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "8dad2cd2d3304dbc39e67e434f8ef23208884881b30b95eedaaf33f83e874a7f",
+        "native_gates_sha256": "fecb52c4d43b410beea1373c75ae0b00c95ad0d767bb2f8869cb619abcef3296",
+        "native_executable_sha256": "f2e9b9f24f21a39047e1893450a949dd2a0b97c3964be0b6b1138ae5d04dcda2"
+      },
+      {
+        "id": "command-09",
+        "command": 9,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "db1f4697e8a52cec33e53a5e35eedd6850f7ee497e8d912680bd2deb790c043d",
+        "native_gates_sha256": "8549f0ee3423a278bad9c080de7b8c482f5d98441e07e0fca3421d4a199c30d9",
+        "native_executable_sha256": "f07d7b2fd5ae5ddfb1c36c04e4733048a27c6f9fa6fab00f3f61a6a33f9ae1f2"
+      },
+      {
+        "id": "command-0A",
+        "command": 10,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "0424681c7f6a6a83c6a0d800d7b2a527b142a794e086e35a04d9195e94a5f30f",
+        "native_gates_sha256": "fe33de3053f6ceb1eecb6403183b50b3e025ebe0454c22bb29967a761ece603e",
+        "native_executable_sha256": "856f48d1bc210decda401bb8e2c140c7bdd75f61d7dc5d9188da2f8cce7e69b9"
+      },
+      {
+        "id": "command-0B",
+        "command": 11,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "55e959bec4ab8664b24a271c6a745a059d12e16951c8dd6ff366267412fff404",
+        "native_gates_sha256": "caf131e4b0a2871d18d9237547364ab50b662c12c926446941e12a13dc3f07b1",
+        "native_executable_sha256": "f0e19e63d34114b5ef217b345b3eb75ba8cbb4780252370058a0afca9d553d57"
+      },
+      {
+        "id": "command-0C",
+        "command": 12,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "81e542378f5c0020e6e1c08539df9109e315abe7c36792f3f3166f8456d0ac2f",
+        "native_gates_sha256": "b8a559849791848f32764024a0414a0a84d7096ff6b334c2e543cc765dd3423d",
+        "native_executable_sha256": "f2085d8e353fae284c12c2164f6b288d81ea5b93413222ff53fe3c93467d228c"
+      },
+      {
+        "id": "command-0D",
+        "command": 13,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "a4bde53baeca24cd3e336e0bb12896b67843d467bd08bcef6c29695dcc40b1b7",
+        "native_gates_sha256": "bef5d7b9bc47250495493860cfa319974760666764debd4b721c3121c3c3ac58",
+        "native_executable_sha256": "830820dd9d7a7bb912d90701c75af36dd0aeda2f38bb585306db4bc7b5cd7836"
+      },
+      {
+        "id": "command-0E",
+        "command": 14,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "5a76c5ace8728a07d1e21075ef95a7d5460f61c4962a1758357963e0528da570",
+        "native_gates_sha256": "abf5b89048a3d763814dcd00418b8365b7d079e36ea951de36078b6e900f520f",
+        "native_executable_sha256": "be539fd952fd55ba479211b8778e5a7b89a9ae2ecd350c237f590a070a617b10"
+      },
+      {
+        "id": "command-0F",
+        "command": 15,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 1,
+        "final_tail_exact_zero": false,
+        "capture_report_sha256": "ff08d0a6395b5038021eae3296aff64bf8c82605a9a25fa1e136c35bc8d53f82",
+        "native_gates_sha256": "847a06e5e20465cf725b6cda073dbc03149289b00b8ad6c423099a978edf9b81",
+        "native_executable_sha256": "94ae235885acb6180f8ac8f3a731f7f8b567dca47bb3559fc705a208896f18df"
+      },
+      {
+        "id": "command-10",
+        "command": 16,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "7541a4bbd9557554fa6a4c93b662ec1879ec8ff8d39f29b6b92090a09e58edb5",
+        "native_gates_sha256": "371d42294197cef8a82efa7f5461edfe527eda389f530bd695dff8af0ee80691",
+        "native_executable_sha256": "9821cf3b1a944fca8101f9943c288fa1a959e6b93a7ae3dff784090683b59311"
+      },
+      {
+        "id": "command-11",
+        "command": 17,
+        "kind": "music",
+        "runtime_status": "PASS",
+        "failed_gates": [],
+        "final_counters": {
+          "error": 0,
+          "lateB028": 0,
+          "FMdiscardEvents": 0,
+          "APIerror": 0,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "3c7f51b8811762780216b22102baaaae57f676b40e6024525bb451a038422b6b",
+        "native_gates_sha256": "402c5e755468fb935e52c4c2b46a77e5a5ea84e5fbd6fc0ee8f14be910bcda0a",
+        "native_executable_sha256": "947fc31f1cd3683a3fe3deae841bc94c20aa8c9acad6d51074c180f232e37ec7"
+      },
+      {
+        "id": "command-12",
+        "command": 18,
+        "kind": "music",
+        "runtime_status": "FAIL",
+        "failed_gates": [
+          "no_reported_worker_error",
+          "no_reported_api_error",
+          "no_reported_fm_discard",
+          "no_reported_transport_lateness",
+          "worker_still_running",
+          "api_still_running",
+          "observed_history_has_no_errors",
+          "no_actual_native_counter_errors"
+        ],
+        "final_counters": {
+          "error": 15,
+          "lateB028": 31,
+          "FMdiscardEvents": 1,
+          "APIerror": 5,
+          "replayAccepted": 2,
+          "replayExpected": 2
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "2682b3aa8106d9ebe9a138d32fe119ee3657031ecca20c966212ba02d531a021",
+        "native_gates_sha256": "26c03d8613f3ecaef786a34c222f3d2ab58adc0785b9bcfa02746eae5ade739f",
+        "native_executable_sha256": "4317b0fccbefb165057abc9bf176896149dc421d3bf7510a0b0d70819dd9aae8"
+      },
+      {
+        "id": "transitions",
+        "command": 1,
+        "kind": "transitions",
+        "runtime_status": "FAIL",
+        "failed_gates": [
+          "no_reported_worker_error",
+          "no_reported_api_error",
+          "no_reported_fm_discard",
+          "no_reported_transport_lateness",
+          "worker_still_running",
+          "api_still_running",
+          "observed_history_has_no_errors",
+          "no_actual_native_counter_errors",
+          "all_replay_words_accepted"
+        ],
+        "final_counters": {
+          "error": 15,
+          "lateB028": 26,
+          "FMdiscardEvents": 21,
+          "APIerror": 5,
+          "replayAccepted": 4,
+          "replayExpected": 9
+        },
+        "final_tail_peak_pcm_units": 0,
+        "final_tail_exact_zero": true,
+        "capture_report_sha256": "60060a632d5e0323c75382d323ba8efc1381a52b84024a46f33a0340956bd2e4",
+        "native_gates_sha256": "0ff50d5fc0a9726bdb5c415ea8717ac8d21ee959c6ba2ad5858702e03424c971",
+        "native_executable_sha256": "299d56359ce03ae6b4d18078c5394ca1c937a84b6d44f134580132dc2353d593"
+      }
+    ],
+    "limits": [
+      "38-second screening is not a complete-composition native delivery",
+      "Available WAVs or a silent tail do not override runtime FAIL",
+      "Command0F retains final-window peak1; measured separately from runtime gates"
+    ]
+  },
+  "unselected_private_subcuts": [
+    {
+      "id": "timestamp_elision",
+      "description": "Timestamp conversion elision with placement-matched control",
+      "selected": false,
+      "command": 4,
+      "native_window_seconds": 38,
+      "native_status": "FAIL",
+      "source_sha256": {
+        "src/reference_driver/z80-native.c": "ef334ba0e4239fa7d59f3c58eacd577bc46632d60e1703796acc3201e74573d6",
+        "src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+        "src/wf_music_module.c": "4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69"
+      },
+      "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+      "native_gates_sha256": "6c2cb64dd3c92114a69a75aba4ed4b7cf082ebd9acca68e7643c665ab36b9e90",
+      "capture_report_sha256": "8b990dfcca81cdee236d12f7eaed49ae65ec1b00fc70e3f6bab24c188bb5679a",
+      "final_counters": {
+        "error": 0,
+        "lateB028": 38,
+        "FMdiscardEvents": 0,
+        "APIerror": 6,
+        "replayAccepted": 2,
+        "replayExpected": 2
+      },
+      "limitations": [
+        "One bounded native case; no passing 18-command native campaign",
+        "Final counters span different failing intervals and are not comparable throughput rates",
+        "No physical-Saturn performance claim"
+      ],
+      "host_scope": "Synthetic clock/queue algebra; does not prove native deadline acceptance",
+      "placement_limit": "Both timestamp A/B variants relocate startup-copy out of the hot section; compare with their matched control, not as a pure code-placement comparison with the selected matrix"
+    },
+    {
+      "id": "carrier_lift",
+      "description": "Additional carrier operation lift",
+      "selected": false,
+      "command": 4,
+      "native_window_seconds": 38,
+      "native_status": "FAIL",
+      "source_sha256": {
+        "src/reference_driver/z80-native.c": "974210422d6669df17c62d12d01bdc95741615f0041326ab5adab46e8578f2e2",
+        "src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+        "src/wf_music_module.c": "f7fe65540e2d6604b9c038d82f4426ed75f204ac9c1ff4b025f48f01653f2850"
+      },
+      "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+      "native_gates_sha256": "ece34437f358e81536434db258029b389a730722d2bb4eb5267ec125bbe9ca39",
+      "capture_report_sha256": "d65b1c2703ed1e7da6a8ac74a6ba155af7dcd2dc6d4e1d73ee7dde076d75dfc3",
+      "final_counters": {
+        "error": 15,
+        "lateB028": 35,
+        "FMdiscardEvents": 4,
+        "APIerror": 5,
+        "replayAccepted": 2,
+        "replayExpected": 2
+      },
+      "limitations": [
+        "One bounded native case; no passing 18-command native campaign",
+        "Final counters span different failing intervals and are not comparable throughput rates",
+        "No physical-Saturn performance claim"
+      ],
+      "exact_host_state_cases": 393276,
+      "host_scope": "Additional private carrier-state differential only; not the selected 600-second host campaign"
+    },
+    {
+      "id": "early_service",
+      "description": "Early service on TL-prefix/return baseline",
+      "selected": false,
+      "command": 4,
+      "native_window_seconds": 38,
+      "native_status": "FAIL",
+      "source_sha256": {
+        "src/reference_driver/z80-native.c": "07dccfb7234f0021ead6d6ea8d8a2829946451484421005a366c72b89aca2f3f",
+        "src/wf_music_seq.c": "a5b16a8e9487b1e7362d0bcc3d4ba9f593ca7d1c322dad3b82af7354c53d1740",
+        "src/wf_music_module.c": "f7fe65540e2d6604b9c038d82f4426ed75f204ac9c1ff4b025f48f01653f2850"
+      },
+      "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+      "native_gates_sha256": "b9e372c1a180355498955a5294d9b51cdd5a33487bf4df152960848e12dcbdd0",
+      "capture_report_sha256": "fc373493fc34b27140dd288c247799ea277f396aed2936a3655ee709b58efdbb",
+      "final_counters": {
+        "error": 15,
+        "lateB028": 35,
+        "FMdiscardEvents": 4,
+        "APIerror": 5,
+        "replayAccepted": 2,
+        "replayExpected": 2
+      },
+      "limitations": [
+        "One bounded native case; no passing 18-command native campaign",
+        "Final counters span different failing intervals and are not comparable throughput rates",
+        "No physical-Saturn performance claim"
+      ],
+      "fragmented_grant_cases": 44,
+      "all18_host_score_seconds": 15,
+      "host_tail_seconds": 8,
+      "all18_host_checkpoints": 432,
+      "maximum_original_instructions_between_callbacks": 512,
+      "placement_limit": "Startup-copy placement changed to fit the unchanged 18432-byte limit"
+    },
+    {
+      "id": "early_service_and_timestamp",
+      "description": "Early service plus timestamp conversion elision",
+      "selected": false,
+      "command": 4,
+      "native_window_seconds": 38,
+      "native_status": "FAIL",
+      "source_sha256": {
+        "src/reference_driver/z80-native.c": "07dccfb7234f0021ead6d6ea8d8a2829946451484421005a366c72b89aca2f3f",
+        "src/wf_music_seq.c": "a5b16a8e9487b1e7362d0bcc3d4ba9f593ca7d1c322dad3b82af7354c53d1740",
+        "src/wf_music_module.c": "4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69"
+      },
+      "firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+      "native_gates_sha256": "dbaf1f06e005f4da2c906b1fe4e3b8a665fa2f8647f6d87263bb98b54ed1ca46",
+      "capture_report_sha256": "7e742a6d233db7f09d9e57765a502eab6a2f4b33b750342ead4aefd80d2b04c5",
+      "final_counters": {
+        "error": 15,
+        "lateB028": 49,
+        "FMdiscardEvents": 10,
+        "APIerror": 5,
+        "replayAccepted": 2,
+        "replayExpected": 2
+      },
+      "limitations": [
+        "One bounded native case; no passing 18-command native campaign",
+        "Final counters span different failing intervals and are not comparable throughput rates",
+        "No physical-Saturn performance claim"
+      ],
+      "fragmented_grant_cases": 44,
+      "all18_host_score_seconds": 15,
+      "host_tail_seconds": 8,
+      "all18_host_checkpoints": 432,
+      "maximum_original_instructions_between_callbacks": 512,
+      "synthetic_clock_trace_identical_sha256": "003a537ee75ce0bb27dfba2e868436af141fa8e1700a98de3bdb7ad3b96cd844",
+      "synthetic_time_advances_before": 10103,
+      "synthetic_time_advances_after": 4579
+    }
+  ],
+  "pending_work_excluded": {
+    "08C1_extension": "No acceptance claim in this checkpoint; separate work after this boundary",
+    "native_long_campaign": "Must be tied to the exact source and firmware that actually pass it",
+    "Graphics_Final": "Integration remains separate; this checkpoint does not modify the game"
+  },
+  "original_music_structure": {
+    "public_evidence": "tools/reference/evidence/full-board-complete-music-structure.json",
+    "sha256": "acf2df54aa24a9c558c4861259931396108224373eff4b367eabd9c6e10ade8e",
+    "classifications": {
+      "ORIGINAL_GLOBAL_END_HANDLER_OBSERVED": [
+        5,
+        8,
+        9
+      ],
+      "VISIBLE_SCORE_STATE_RECURRENCE": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        18
+      ],
+      "PER_CHANNEL_SCORE_CYCLES_OBSERVED": [
+        11,
+        12,
+        17
+      ]
+    },
+    "independent_active_FM_channels_verified": 23,
+    "independent_PCM_score_channels_verified": 3,
+    "native_loop_acceptance_inferred": false,
+    "sample_exact_PCM_period_proven": false,
+    "scope": "Separate coupled original-board observations: three natural FB ends, twelve complete visible-state recurrences and three sets of channel cycles"
+  },
+  "complete_audio_generator": {
+    "version": "1.0.1",
+    "source_sha256": "f0090b9de1931c1251e01878880941ee96fc05401b80046014294b02bfefadfc",
+    "test_sha256": "9cb94e46713bb53c9766524849465f7737a89596e1d3a819ed3f19245b05fdc3",
+    "diagnostic_public_evidence": "tools/reference/evidence/native-audio-pairs-command01-38s-diagnostic.json",
+    "diagnostic_manifest_sha256": "0e895e66d5064cec9e84345667ea717173f4f1415ba7cbd4a4ab8fc7a56b312e",
+    "diagnostic_command": 1,
+    "diagnostic_seconds": 38,
+    "synthetic_regressions_passed": 9,
+    "complete_python_suite_passed": 83,
+    "native_PCM_preserved": true,
+    "native_music_lead_preserved_samples": 4096,
+    "normalization": false,
+    "full_export_requires_all18_and_transitions_pass_at_600_seconds": true,
+    "full_collection_generated_for_this_checkpoint": false
+  },
+  "publication_scope": {
+    "contains_ROM_content": false,
+    "contains_WAV_or_PCM": false,
+    "contains_raw_samples_or_state_arrays": false,
+    "contains_chip_event_traces": false,
+    "contains_private_paths": false,
+    "allowed_content": "Aggregate results, original-command IDs, bounded diagnostic counters and source/report/input SHA-256 identities"
+  }
+}

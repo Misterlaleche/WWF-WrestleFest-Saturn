@@ -1,0 +1,390 @@
+{
+  "kind": "PRESERVED_621_NATIVE_VS_FULL_BOARD_REFERENCE",
+  "firmware_sha256": "621b5dfcfe1b2a1841ff09e32de62b8198c63cd5d5c12d1f660d5c8426c06634",
+  "native_matrix_sha256": "e523149700925bcee9309d2571eb214e063934f354a023224b7c8e81d6235fac",
+  "reference_report_sha256": "62aa5ad3ea9a39b201aa2dc36e0cf20dc3798ba67c4f7b78c14564df92f144a7",
+  "compare_source_sha256": "9e870bf985254c164c40236c0463493c889404b9168d3f170af0c949a60543a0",
+  "scope": "Same previously captured621native PCM; only the independently modeled reference changes. No new firmware runtime or fidelity approval.",
+  "tracks": [
+    {
+      "command": 1,
+      "comparison_sha256": "47d4409c41e703650c056faea9fe32355b7c7c7863f71456546f489e883284c1",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -24.177189058664666,
+        "saturn_rms_dbfs_analysis_mono": -25.301598624392128,
+        "saturn_minus_reference_rms_db": -1.124409565727465,
+        "reference_peak": 7875,
+        "saturn_peak": 6948,
+        "raw_waveform_correlation": 0.21220968040632865,
+        "raw_waveform_error_rms": 0.07246738394271375,
+        "envelope_10ms_correlation": 0.4959252796526566,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 372.34867409676986,
+        "spectral_centroid_saturn_hz": 505.04943968341394,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.4867121978157876,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 2,
+      "comparison_sha256": "f588d254424ce5518cbcbef22dcd9f491e914b87833a94f8c8f1e49eb30b7b20",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -21.64300156393754,
+        "saturn_rms_dbfs_analysis_mono": -23.127242154613093,
+        "saturn_minus_reference_rms_db": -1.4842405906755565,
+        "reference_peak": 13106,
+        "saturn_peak": 11109,
+        "raw_waveform_correlation": 0.17798685202399853,
+        "raw_waveform_error_rms": 0.09801968126388558,
+        "envelope_10ms_correlation": 0.7891112444602965,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1156.1470708186005,
+        "spectral_centroid_saturn_hz": 1639.8558686277952,
+        "spectral_log_power_rmse_db_40_to_16000hz": 5.27858706385668,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 3,
+      "comparison_sha256": "4cdeff0a5ebcd968bed392893e0c874068003e393425cd4d9911d22459505c96",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -26.243599593346435,
+        "saturn_rms_dbfs_analysis_mono": -27.31757159449267,
+        "saturn_minus_reference_rms_db": -1.0739720011462401,
+        "reference_peak": 7992,
+        "saturn_peak": 6919,
+        "raw_waveform_correlation": 0.09682929561404595,
+        "raw_waveform_error_rms": 0.059017103542894245,
+        "envelope_10ms_correlation": 0.6179421128677707,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1839.7789491041126,
+        "spectral_centroid_saturn_hz": 2393.289312262811,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.813907966211897,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 4,
+      "comparison_sha256": "7a1960bb1e32ae1f4f94cbeca73b45e3431a35471e42e24cd2fa2f985e8e503a",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -27.383993567624945,
+        "saturn_rms_dbfs_analysis_mono": -28.83964717616335,
+        "saturn_minus_reference_rms_db": -1.4556536085384062,
+        "reference_peak": 6915,
+        "saturn_peak": 5795,
+        "raw_waveform_correlation": -0.003886847869974287,
+        "raw_waveform_error_rms": 0.056033153027032115,
+        "envelope_10ms_correlation": 0.7074887809494247,
+        "envelope_best_lag_ms_diagnostic_only": 10,
+        "spectral_centroid_reference_hz": 650.7979291980259,
+        "spectral_centroid_saturn_hz": 552.6266507633093,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.7354449243014707,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 5,
+      "comparison_sha256": "45668aa6207bf05fdd7f7d1fdb3830e80ae06081c1eefcaa101e42ef604a6612",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -32.20741360846451,
+        "saturn_rms_dbfs_analysis_mono": -33.40408081490322,
+        "saturn_minus_reference_rms_db": -1.1966672064387056,
+        "reference_peak": 13453,
+        "saturn_peak": 10691,
+        "raw_waveform_correlation": 0.16001358106041663,
+        "raw_waveform_error_rms": 0.029597156379357014,
+        "envelope_10ms_correlation": 0.9785173049582139,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1244.7227335162906,
+        "spectral_centroid_saturn_hz": 1421.1810185920917,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.822468488263966,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 6,
+      "comparison_sha256": "570fcbff0abd53c0d9fd7a81a4fd76acd323d450dc3db3a3d3b599b2ab72cec7",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -29.453373362954963,
+        "saturn_rms_dbfs_analysis_mono": -30.914659292891965,
+        "saturn_minus_reference_rms_db": -1.4612859299370058,
+        "reference_peak": 6961,
+        "saturn_peak": 5483,
+        "raw_waveform_correlation": 0.00837962370633469,
+        "raw_waveform_error_rms": 0.04004618333110708,
+        "envelope_10ms_correlation": 0.5105971320949139,
+        "envelope_best_lag_ms_diagnostic_only": 10,
+        "spectral_centroid_reference_hz": 1431.91239047878,
+        "spectral_centroid_saturn_hz": 1725.3343783134465,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.8168567967867024,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 7,
+      "comparison_sha256": "844da82ea68ea05b7f727c4ef288fcdf150b1c733ae0816b6f6053552957e1bb",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -27.346130362576883,
+        "saturn_rms_dbfs_analysis_mono": -28.860718968587044,
+        "saturn_minus_reference_rms_db": -1.514588606010163,
+        "reference_peak": 7159,
+        "saturn_peak": 6089,
+        "raw_waveform_correlation": 0.06709952456902085,
+        "raw_waveform_error_rms": 0.052212318436158756,
+        "envelope_10ms_correlation": 0.7219970869660427,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 822.8640268167401,
+        "spectral_centroid_saturn_hz": 775.5260402449793,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.572409513093465,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 8,
+      "comparison_sha256": "e6ff722c0b67519f94ffc6bc451dc820e47b83e0e940c8ce8a249b61c29ae3a1",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -31.477147708989364,
+        "saturn_rms_dbfs_analysis_mono": -32.7804378516027,
+        "saturn_minus_reference_rms_db": -1.3032901426133354,
+        "reference_peak": 17197,
+        "saturn_peak": 10782,
+        "raw_waveform_correlation": 0.49334326868405487,
+        "raw_waveform_error_rms": 0.025053288509036983,
+        "envelope_10ms_correlation": 0.9875309988016765,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 976.349984315451,
+        "spectral_centroid_saturn_hz": 1044.0231957946005,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.806511899356718,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 9,
+      "comparison_sha256": "7beb85f74097d258fe7cdcfcfde9387f79e65f4a9354630dc58cb7a274843a4f",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -26.826724288205437,
+        "saturn_rms_dbfs_analysis_mono": -28.136770504969412,
+        "saturn_minus_reference_rms_db": -1.3100462167639755,
+        "reference_peak": 9293,
+        "saturn_peak": 8765,
+        "raw_waveform_correlation": 0.8004735717452478,
+        "raw_waveform_error_rms": 0.02570422961353606,
+        "envelope_10ms_correlation": 0.9828889375054652,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1366.1800239980466,
+        "spectral_centroid_saturn_hz": 1719.9657768081292,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.73805964712804,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 10,
+      "comparison_sha256": "aa321857c09aee33d3b10a139119ba48c13171383b7de7e31d4f655ba40b8d12",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -29.165446173922113,
+        "saturn_rms_dbfs_analysis_mono": -30.416741156643955,
+        "saturn_minus_reference_rms_db": -1.25129498272184,
+        "reference_peak": 6885,
+        "saturn_peak": 6326,
+        "raw_waveform_correlation": -0.2097511445968351,
+        "raw_waveform_error_rms": 0.05060038602213366,
+        "envelope_10ms_correlation": 0.955639966711568,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 630.7415726815152,
+        "spectral_centroid_saturn_hz": 540.6704481799355,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.0669708016435835,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 11,
+      "comparison_sha256": "a93a63da9670b81beb2ea34622d7f62dafaecaf4476034c30d7f22078b1aedbd",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -26.671164569601796,
+        "saturn_rms_dbfs_analysis_mono": -27.651889044377313,
+        "saturn_minus_reference_rms_db": -0.980724474775515,
+        "reference_peak": 9417,
+        "saturn_peak": 7989,
+        "raw_waveform_correlation": -0.07432340442285033,
+        "raw_waveform_error_rms": 0.06193909382557739,
+        "envelope_10ms_correlation": 0.8226069242664601,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 847.1523619381605,
+        "spectral_centroid_saturn_hz": 781.5279974966022,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.9590043711814276,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 12,
+      "comparison_sha256": "62a2ee1920bc9e0bec0e5a97af098be105f480f16fda2f0c9927b71a87b26ce7",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -27.451022774791795,
+        "saturn_rms_dbfs_analysis_mono": -28.425151130313694,
+        "saturn_minus_reference_rms_db": -0.9741283555219017,
+        "reference_peak": 8490,
+        "saturn_peak": 6720,
+        "raw_waveform_correlation": -0.1975958462654916,
+        "raw_waveform_error_rms": 0.06204118279158052,
+        "envelope_10ms_correlation": 0.9039039727231011,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 349.0049904673219,
+        "spectral_centroid_saturn_hz": 318.3434674281011,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.5129196287160194,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 13,
+      "comparison_sha256": "3113e54459847ed02d6c2ce5b6b0685175f26f0fff630b31c0e0bd73ee87cfdf",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -22.189869732961082,
+        "saturn_rms_dbfs_analysis_mono": -23.128119143321577,
+        "saturn_minus_reference_rms_db": -0.9382494103604919,
+        "reference_peak": 14325,
+        "saturn_peak": 12603,
+        "raw_waveform_correlation": 0.1420375096786871,
+        "raw_waveform_error_rms": 0.09670104369765942,
+        "envelope_10ms_correlation": 0.9410934075045847,
+        "envelope_best_lag_ms_diagnostic_only": 10,
+        "spectral_centroid_reference_hz": 629.5399625314449,
+        "spectral_centroid_saturn_hz": 865.552889082077,
+        "spectral_log_power_rmse_db_40_to_16000hz": 1.3454442875422892,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 14,
+      "comparison_sha256": "6e2a939b39c033a39197372807118dfa2fdb9e08d47891453cab5a47572e4545",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -18.618318089483246,
+        "saturn_rms_dbfs_analysis_mono": -19.696201295923807,
+        "saturn_minus_reference_rms_db": -1.0778832064405597,
+        "reference_peak": 13998,
+        "saturn_peak": 13457,
+        "raw_waveform_correlation": -0.07612703555411411,
+        "raw_waveform_error_rms": 0.15289866381105519,
+        "envelope_10ms_correlation": 0.6440608610320314,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 304.99881059418425,
+        "spectral_centroid_saturn_hz": 344.8384799655419,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.89539194329414,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 15,
+      "comparison_sha256": "61ad7aa2fc3a93976eae70f75c02faea1098cf20f1eb71a7729b3017ab31f88c",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -26.83732790012279,
+        "saturn_rms_dbfs_analysis_mono": -28.262585758783345,
+        "saturn_minus_reference_rms_db": -1.4252578586605518,
+        "reference_peak": 11573,
+        "saturn_peak": 9054,
+        "raw_waveform_correlation": -0.15183344217979977,
+        "raw_waveform_error_rms": 0.06272284060030131,
+        "envelope_10ms_correlation": 0.7249944628388497,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 437.44607755729163,
+        "spectral_centroid_saturn_hz": 441.49944848485086,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.485688130406995,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 16,
+      "comparison_sha256": "49b0d072652b2eb83479f159e7c25934a2817894e1c4b1a876eec3672cb463f5",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -30.84422794632786,
+        "saturn_rms_dbfs_analysis_mono": -31.660129942552743,
+        "saturn_minus_reference_rms_db": -0.815901996224885,
+        "reference_peak": 7320,
+        "saturn_peak": 6497,
+        "raw_waveform_correlation": -0.22232164773580515,
+        "raw_waveform_error_rms": 0.04276671063596595,
+        "envelope_10ms_correlation": 0.6597386049106864,
+        "envelope_best_lag_ms_diagnostic_only": 10,
+        "spectral_centroid_reference_hz": 653.3634746557548,
+        "spectral_centroid_saturn_hz": 602.5910529907353,
+        "spectral_log_power_rmse_db_40_to_16000hz": 1.9722719800550705,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 17,
+      "comparison_sha256": "17c784a3aed3714589c31a0c92ac584ba8edb4c963863baf2cb39722c75c2fd4",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -24.116878429727464,
+        "saturn_rms_dbfs_analysis_mono": -25.276796558238566,
+        "saturn_minus_reference_rms_db": -1.1599181285111002,
+        "reference_peak": 13532,
+        "saturn_peak": 11273,
+        "raw_waveform_correlation": -0.2323891966366502,
+        "raw_waveform_error_rms": 0.09098054563788072,
+        "envelope_10ms_correlation": 0.717874917866182,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1000.0910223451249,
+        "spectral_centroid_saturn_hz": 1055.4148455305774,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.462972756887707,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    },
+    {
+      "command": 18,
+      "comparison_sha256": "4db51a871b6b9b00cac9ff6ffbd6e4d41affd332122318150533dfff494b10a6",
+      "native_wav_unchanged": true,
+      "metrics": {
+        "reference_rms_dbfs": -25.027198023035528,
+        "saturn_rms_dbfs_analysis_mono": -26.511699801539006,
+        "saturn_minus_reference_rms_db": -1.4845017785034795,
+        "reference_peak": 9857,
+        "saturn_peak": 8343,
+        "raw_waveform_correlation": 0.1316418280459622,
+        "raw_waveform_error_rms": 0.06291022848765884,
+        "envelope_10ms_correlation": 0.7853659403574386,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 554.2390543754796,
+        "spectral_centroid_saturn_hz": 563.938914264747,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.876727120090396,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      }
+    }
+  ],
+  "complete": true,
+  "compare_source_stable": true
+}

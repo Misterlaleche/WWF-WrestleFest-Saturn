@@ -1,0 +1,35 @@
+{
+  "frozen_table_archive_sha256": "9baacdfdf6da672843043c74961dcb77f725e58f151973866a10090d2b0356bc",
+  "common_ELF_sha256": "fab67aa14504b7eea7379879f368775eb0d1de445a7b0d1db8fd04ae8e93cf90",
+  "inline_single_hot_LF_sha256": "e0a4b06bc29f18346aaa00ba154ccaaed2b5139f1ff125b6a4966b5885b5ed7a",
+  "table_single_hot_LF_sha256": "6ad24b03f798e364123b77b1294b0c2fef589bbea947f38170b0896488b9b50c",
+  "changes_from_inline": [
+    "tools/audio/native_probe/generate_z80_control.py"
+  ],
+  "added": [
+    "tools/audio/native_probe/generate_z80_inline_frozen.py",
+    "snapshot/z80-table-factor.c"
+  ],
+  "candidate_hot_LF_sha256": "5106e159eb65a0247e2c024058110e019c4ce0ec376e69d72bd93a00fc834aed",
+  "candidate_cold_LF_sha256": "454e19fddbb9682b493a80d3566b686cba114f313b48b3a08033d5a97d04f38c",
+  "files": {
+    "music-hot/z80-native.c": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+    "music-hot/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "music-hot/MUSIC.ELF": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+    "music-hot/MUSIC.DEBUG.ELF": "5c9ea6b51c7bc90f426f9e78ce53a4feb4726a69b2874adbe96086b4c241c5c0",
+    "repo/tools/audio/native_probe/generate_z80_control.py": "5af87afea4b4f8a3f5ad20d1a0e64fdf1dafbea9bf8eacb6f2a661abd2850123",
+    "repo/tools/audio/native_probe/generate_z80_inline_frozen.py": "20884f867e261def3cd8ba9315a79922a7c49d10aff1212acfb942ba69d10287",
+    "repo/snapshot/z80-table-factor.c": "6ad24b03f798e364123b77b1294b0c2fef589bbea947f38170b0896488b9b50c",
+    "repo/src/audio/native/wf_music_seq.c": "6b9c209edc03b3b34ccf608f43fe8f8b20c7ba8ab42c93cd5c6f5db78906df90",
+    "repo/src/audio/native/wf_music_module.c": "ceab714d6999efd39b7dc94d19a8d78b82f0d0e5e34ae508889f9a2c80ba2dc6",
+    "run_host.py": "0d722e5cd1632724eb834bc919ab242beed6cf341c3ba89d613fd270cb18b283",
+    "test_interactions.c": "f1303b7285ca8d1208700aec48f605ee8864b31936c7e85fe83397b7e758d432",
+    "check_factorial.py": "9f00c1d896fcda29baae4c0c8a7cdc3cb58fcd8c3be2ef8909106692545d4d5a",
+    "generate.py": "95e26797ff306c48263c05326ce1a6ae7a159e4a030d8ea131c644c62b4591b4",
+    "build_sh2.py": "26edc8c28b4ddd17d7f56c07d6955a61e49be10f068ead8ab36dd5e790099a93",
+    "readback_cold.py": "c123343b9f6c9a616e41bb184a90bb627d5d8845a92fb58d55b8c08bbd2271ee"
+  },
+  "scope": "factorial composition of two independently measured singles: exact guarded scalar private always_inline Os body and shared256 admission table in both public/private bodies",
+  "canonical_or_R04_changed": false,
+  "media_created": false
+}

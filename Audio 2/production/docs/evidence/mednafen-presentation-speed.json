@@ -1,0 +1,201 @@
+{
+  "normal": {
+    "wall_seconds": 51.343955,
+    "samples": 2208458,
+    "first": 668194,
+    "residual": 59,
+    "diagnostics": {
+      "magic": 1464222002,
+      "state": 4,
+      "videoFrames": 2305,
+      "error": 0,
+      "commandStartFrame": 210,
+      "musicState": 2,
+      "musicEvents": 2153,
+      "batchB03A": 0,
+      "lateB028": 0,
+      "sfxUnderruns32": 0,
+      "lastCommand": 1,
+      "DSPclock16": 56273,
+      "diagAddress": 638239068,
+      "mailState": 2,
+      "FMdiscardEvents": 0,
+      "discardBatches": 0,
+      "rejectedFM": 0,
+      "ringRejected": 0,
+      "SCSPelapsed": 1544301,
+      "APIstate": 2,
+      "APIerror": 0,
+      "commandDSPclock": 19300
+    },
+    "sha": "7a82cd79bd46ff555b09883cd16cfa3b682e7a8fd8b991ed39768c5e38e8c870",
+    "command": [
+      "/workspace/scratch/46cef04a9eee/tools-env/mednafen/bin/mednafen",
+      "-video.driver",
+      "softfb",
+      "-video.frameskip",
+      "0",
+      "-sound.driver",
+      "dummy",
+      "-sound",
+      "1",
+      "-sound.rate",
+      "44100",
+      "-ss.bios_na_eu",
+      "/workspace/scratch/46cef04a9eee/validation-inputs/Audio saturn/mpr-17933.bin",
+      "-ss.region_autodetect",
+      "0",
+      "-ss.region_default",
+      "na",
+      "-ss.bios_sanity",
+      "1",
+      "-ss.cart",
+      "none",
+      "-ss.correct_aspect",
+      "0",
+      "-ss.xscale",
+      "2",
+      "-ss.yscale",
+      "2",
+      "-filesys.state_comp_level",
+      "0",
+      "-qtrecord.w_double_threshold",
+      "0",
+      "-qtrecord.h_double_threshold",
+      "0",
+      "-soundrecord",
+      "/workspace/scratch/46cef04a9eee/audio2-build/music-matrix/command-01/capture/native.wav",
+      "/workspace/scratch/46cef04a9eee/audio2-build/music-matrix/command-01/build/AUDIO2.cue"
+    ],
+    "toggle_wall": null
+  },
+  "fast": {
+    "wall_seconds": 31.83463,
+    "samples": 2209195,
+    "first": 668194,
+    "residual": 59,
+    "diagnostics": {
+      "magic": 1464222002,
+      "state": 4,
+      "videoFrames": 2306,
+      "error": 0,
+      "commandStartFrame": 210,
+      "musicState": 2,
+      "musicEvents": 2153,
+      "batchB03A": 0,
+      "lateB028": 0,
+      "sfxUnderruns32": 0,
+      "lastCommand": 1,
+      "DSPclock16": 57010,
+      "diagAddress": 638239068,
+      "mailState": 2,
+      "FMdiscardEvents": 0,
+      "discardBatches": 0,
+      "rejectedFM": 0,
+      "ringRejected": 0,
+      "SCSPelapsed": 1545038,
+      "APIstate": 2,
+      "APIerror": 0,
+      "commandDSPclock": 19300,
+      "replayAccepted": 0,
+      "replayExpected": 0
+    },
+    "sha": "fae3ed93840578fef2889c74688698f6413f451d833054ded7610c6c4e36d76f",
+    "command": [
+      "/workspace/scratch/46cef04a9eee/tools-env/mednafen/bin/mednafen",
+      "-video.driver",
+      "softfb",
+      "-video.frameskip",
+      "0",
+      "-sound.driver",
+      "dummy",
+      "-sound",
+      "1",
+      "-sound.rate",
+      "44100",
+      "-fftoggle",
+      "1",
+      "-ffspeed",
+      "4",
+      "-ss.bios_na_eu",
+      "/workspace/scratch/46cef04a9eee/validation-inputs/Audio saturn/mpr-17933.bin",
+      "-ss.region_autodetect",
+      "0",
+      "-ss.region_default",
+      "na",
+      "-ss.bios_sanity",
+      "1",
+      "-ss.cart",
+      "none",
+      "-ss.correct_aspect",
+      "0",
+      "-ss.xscale",
+      "2",
+      "-ss.yscale",
+      "2",
+      "-filesys.state_comp_level",
+      "0",
+      "-qtrecord.w_double_threshold",
+      "0",
+      "-qtrecord.h_double_threshold",
+      "0",
+      "-soundrecord",
+      "/workspace/scratch/46cef04a9eee/audio2-build/fast-forward-probe/capture/native.wav",
+      "/workspace/scratch/46cef04a9eee/audio2-build/music-matrix/command-01/build/AUDIO2.cue"
+    ],
+    "toggle_wall": 11.861511889997928
+  },
+  "equal_30s": true,
+  "differing_samples": 0,
+  "max_sample_difference": 0,
+  "rms_difference": 0.0,
+  "lag_search": [
+    {
+      "lag": -5,
+      "rms": 968.632903009843
+    },
+    {
+      "lag": -4,
+      "rms": 881.1946034470221
+    },
+    {
+      "lag": -3,
+      "rms": 673.7487456783778
+    },
+    {
+      "lag": -2,
+      "rms": 748.8019191743603
+    },
+    {
+      "lag": -1,
+      "rms": 622.1877387158164
+    },
+    {
+      "lag": 0,
+      "rms": 0.0
+    },
+    {
+      "lag": 1,
+      "rms": 622.1877387158164
+    },
+    {
+      "lag": 2,
+      "rms": 748.8019191743603
+    },
+    {
+      "lag": 3,
+      "rms": 673.7487456783778
+    },
+    {
+      "lag": 4,
+      "rms": 881.1946034470221
+    },
+    {
+      "lag": 5,
+      "rms": 968.632903009843
+    }
+  ],
+  "source_report_sha256": "2b20bf94e0a0f9fe51bded5f737bc4f525c018d4b3a48b9cae583c371737cfdb",
+  "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+  "scope": "Native presentation throttle comparison only. Hardware clocks, source ELF and soundrecord PCM unchanged. One30s interval bit-identical; not a general fidelity or gameplay acceptance."
+}

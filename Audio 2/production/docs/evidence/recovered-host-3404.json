@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "kind": "RECOVERED_3404_HOST_AND_BUILD_EVIDENCE",
+  "status": "PASS_HOST_LOGIC_ONLY",
+  "source_stable": true,
+  "all_485_source_files_unchanged_after_tests": true,
+  "base_source_package_unchanged": true,
+  "host_report_sha256": "5a1640da05c65a46cf97aee329ac5e16b1a8d11a627c4ad02b5fa3d6dd35b72a",
+  "sequence_seconds_per_command": 600,
+  "host_test_groups": 14,
+  "host_compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "tests": [
+    {
+      "name": "resource_identity_and_corruption",
+      "exit_code": 0,
+      "seconds": 1.7022804690000157,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "build_input_aliases",
+      "exit_code": 0,
+      "seconds": 0.11436631600008695,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source_profile_snapshot",
+      "exit_code": 0,
+      "seconds": 0.23905017099968973,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "output_preservation",
+      "exit_code": 0,
+      "seconds": 0.31898264800020115,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "native_capture_evidence",
+      "exit_code": 0,
+      "seconds": 18.423768212999676,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "api",
+      "exit_code": 0,
+      "seconds": 0.04603856099993209,
+      "stdout_sha256": "637abcc063eee68d9b6935e2eef9d42989bf8f932d35112bdd7583dd807b9f95"
+    },
+    {
+      "name": "module_deadlines",
+      "exit_code": 0,
+      "seconds": 0.019259510999745544,
+      "stdout_sha256": "e4331d31da3dceba65c8f2396a0f0966922e737f2b1817b2c39a6a397fdd24ba"
+    },
+    {
+      "name": "timestamp_elision",
+      "exit_code": 0,
+      "seconds": 0.049876154999765276,
+      "stdout_sha256": "a7100fe7c8c8d42c3a75b5abfaa72b6e2bcc9ee86bab8b7c3adf93896fa53cb7"
+    },
+    {
+      "name": "firmware_deadlines",
+      "exit_code": 0,
+      "seconds": 0.006813554000018485,
+      "stdout_sha256": "aa7a28f606ab1f579251b27db1a5fc2587c6ed6c50a6d6984648fd4d5d0f5af4"
+    },
+    {
+      "name": "firmware_deadlines_no_timing",
+      "exit_code": 0,
+      "seconds": 0.01133119899986923,
+      "stdout_sha256": "aa7a28f606ab1f579251b27db1a5fc2587c6ed6c50a6d6984648fd4d5d0f5af4"
+    },
+    {
+      "name": "sfx_refill_deadlines",
+      "exit_code": 0,
+      "seconds": 0.02101513299976432,
+      "stdout_sha256": "ef36881cf06bce7dd85652d3bae8d0a166b471e88c7e80d014d001e58d571cd2"
+    },
+    {
+      "name": "exact_fade_lifts",
+      "exit_code": 0,
+      "seconds": 3.2541753670002436,
+      "stdout_sha256": "141760b5dc3f0fb5eab7cb0fe9d94e08d2a3defa804cdc5154b511804a72f4f3"
+    },
+    {
+      "name": "exact_tl_writes",
+      "exit_code": 0,
+      "seconds": 2.441714456000227,
+      "stdout_sha256": "d2a82a8ca3eb7d336877883d8eb75096d5f900026e8ff86fad2e371bdd9004d0"
+    },
+    {
+      "name": "all18_full_z80_and_live_transitions",
+      "exit_code": 0,
+      "seconds": 157.42322006099994,
+      "stdout_sha256": "1027f3068201be671454031e0370c1a470c1f9bf48cc73f1d55c09d0b8c2709b"
+    }
+  ],
+  "runtime_source_sha256": {
+    "src/reference_driver/z80-native.c": "d9bd93a7cfdf8e5dbb022bce6df1dc132e6caf7e9c3c05a18e75e2debd9602e0",
+    "src/wf_music_seq.c": "8d833f42349267376e0d29ff5b2c0db0fa31af5c544252e7306e87ec7bfd66bc",
+    "src/wf_music_module.c": "4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69",
+    "src/wf_scsp_sfx.c": "74578e6610677070e46ca4208f1b16abfef29b99060f8a4543118abe0d4a50e5"
+  },
+  "firmware_sha256": "3404eac10581871b4afe5ee30d1c58e415430db263845228c5c82ddec7647749",
+  "reconstructed_control_firmware_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+  "contract_report_sha256": "a814e27f2aefde633e851302b17a2e21adde3cf7243c45f97598bab1c33f1f9a",
+  "contract_cases": 14592,
+  "contract_negative_off_by_one_rejected": true,
+  "source_freeze_manifest_sha256": "3b8d9a506d70d815fdfecc8dc7344b82f398c48eb1ffacad5906518f965b9342",
+  "firmware_memory_verification_sha256": "7b9bed328db8dae6cafbc14fb6ce4a9fb03a6cc5347a6a56dcfa79afc3dd5bbe",
+  "scope": "Fresh reconstruction and host/portable contract verification after infrastructure loss. Previous private native capture files were lost; new native acceptance must come from newly completed captures. No acoustic, hardware or combat approval.",
+  "native_full_matrix_status": "RUNNING_SEPARATELY",
+  "previous_native_files_restored": false
+}

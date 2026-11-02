@@ -1,0 +1,30 @@
+{
+  "kind": "NATIVE_REPLAY_EMPTY_ROW_REGRESSION",
+  "source_before_sha256": "64c8aa19ed4413b7a5bb16945572d8684fa9b5480a998844f11d9641a5cc46c3",
+  "source_after_sha256": "9fa08981bc2ad649d20a8196fec1277396103a2c0c24527f49e3dae194d0a6d9",
+  "red_missing_row_was_marked_present_and_accepted": true,
+  "green_five_control_tests_passed": true,
+  "original_transition_passed": false,
+  "updated_transition_passed": false,
+  "observed_records": 4,
+  "expected_records": 9,
+  "gates_before": {
+    "all_rows_present": true,
+    "exact_original_words": false,
+    "all_results_accepted": true,
+    "first_admission_is_epoch": true,
+    "no_early_admission": false,
+    "monotonic_admission": false,
+    "within_declared_admission_tolerance": false
+  },
+  "gates_after": {
+    "all_rows_present": false,
+    "exact_original_words": false,
+    "all_results_accepted": false,
+    "first_admission_is_epoch": true,
+    "no_early_admission": false,
+    "monotonic_admission": false,
+    "within_declared_admission_tolerance": false
+  },
+  "scope": "Analysis-only label correction; frozen source, captured RAM and original report preserved. Both old and new overall results reject the transition."
+}

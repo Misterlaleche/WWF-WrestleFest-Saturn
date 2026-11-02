@@ -1,0 +1,7 @@
+RED reproducido con el test canonico original: assert s.fault&&underruns==1 falla, porque la politica actual contiene un agotamiento sin marcar fault.
+
+Unico cambio autorizado: test_sfx.c. Primero abastece el anillo de voz1, luego inicia voz0 con su prefill normal y deja de producir. Exige nofault, underruns==1, voz0 parada y voz1 viva con muestras consumidas. No altera motor, decoder, firmware, prioridades, colas, tiempos o tolerancias.
+
+GREEN verify_sfx.py/MSVC O2 W4 WX completo:114 PCM contra golden auditado, 98comandosx2400ticks,30000ticksmezcla, refill/suppression, limites, uploader CRC/fallos/owner/publish-last y FIFO/overflow/unknownoutcome/wrap. El golden se valida por SHA45a22577841fc0ca9bdf84f6ec8acf72f2c87602c9a50eb42fce395a57131bee.
+
+Esto prueba contencion y rutas HOST. Cualquier underrun sigue siendo fallo de entrega audible y el assessor exige ambos contadores cero. No sustituye mezclas representativas largas en la ruta runtime/SCSP ni certifica audio.

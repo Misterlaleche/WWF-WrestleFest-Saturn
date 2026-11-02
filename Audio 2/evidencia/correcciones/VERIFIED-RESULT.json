@@ -1,0 +1,126 @@
+{
+  "release_status": "BLOCKED_NATIVE_MUSIC_PERFORMANCE",
+  "component_repairs_verified": true,
+  "full_native_music_ready": false,
+  "active_music_no_graphics_regression_verified": false,
+  "physical_validation": false,
+  "bin_cue_iso_created": false,
+  "r04_and_previous_deliveries_edited": false,
+  "containment": {
+    "host_tests": true,
+    "full_cold_boot_failure_game_continues": true,
+    "missed_fm_deadline_faults_stream": true,
+    "muted_fallback_is_not_audio_approval": true
+  },
+  "pcm": {
+    "independent_cases": 144,
+    "moving_cases": 12,
+    "failures": 0,
+    "linked_dsp_matches_assembler": true,
+    "dsp_steps": 120,
+    "dsp_ram_accesses": 12,
+    "m68k_music_windows": 18,
+    "seconds_per_window": 3,
+    "concurrent_effects": 3,
+    "pcm_underruns": 0,
+    "fm_waveform_hardware_certified": false
+  },
+  "memory": {
+    "linked_end": "0x60fb7f4",
+    "private_pool_start": "0x6086e20",
+    "private_pool_bytes": 32768,
+    "private_pool_useful": 29572,
+    "private_pool_useful_after_user_control": 26380,
+    "slave_stack_bottom": "0x608ee20",
+    "slave_stack_top": "0x6090e20",
+    "slave_stack_bytes": 8192,
+    "heap_available": 18436,
+    "heap_raw_bytes": 18444,
+    "tlsf_control_bytes": 3188,
+    "tlsf_pool_overhead": 8,
+    "tlsf_user_control_in_private_heap": true,
+    "allocator_initializer_uses_adapter": true
+  },
+  "observed_boot_allocator": {
+    "captures": 1,
+    "faults": 0,
+    "private_used": 3456,
+    "private_free": 26096,
+    "private_largest_free": 26008,
+    "private_used_blocks": 4,
+    "private_free_blocks": 2,
+    "user_used": 0,
+    "user_free": 18436,
+    "user_largest_free": 18436,
+    "user_used_blocks": 0,
+    "user_free_blocks": 1,
+    "private_reported_size": 40960,
+    "user_reported_size": 18444,
+    "private_consistency": 0,
+    "user_consistency": 0
+  },
+  "muted_fallback_graphics": {
+    "game_window": [
+      300,
+      600
+    ],
+    "vblank_ratio": 1.0,
+    "median_render_estimate_delta": 0,
+    "samples_are_not_bit_identical": true,
+    "active_music_certification": false
+  },
+  "unresolved": {
+    "control_musical_deadlines": true,
+    "active_baseline_dropped_fm": 257,
+    "active_baseline_game_frame_at_9600": 0,
+    "reason": "Full cache integration fails; performance experiments were not promoted"
+  },
+  "files": {
+    "final\\wrestlefest-runtime18.elf": {
+      "bytes": 2348956,
+      "sha256": "53eaf24ee5d62152ca788c1de99cb9af5bb5bb98bf3dede23d272205bc4cced0"
+    },
+    "final\\SCSP.ELF": {
+      "bytes": 54416,
+      "sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c"
+    },
+    "final\\module\\MUSIC.ELF": {
+      "bytes": 129644,
+      "sha256": "dae8c38a712561a40599f2d7145560c01beb7155d172ff206cf9ca4f356f66f8"
+    }
+  },
+  "source_hashes_at_verification": {
+    "src/audio/native/wf_music_module.c": "39a85bf38cf6bda2d1ef2e31e471d41f7382cf390b4b03a84380f9a6a5b196ba",
+    "src/audio/native/wf_music_module.h": "e2e0b412d3d137ccc562a70bb29aab9cae8e0777690dc0a0f01f70430eb3c387",
+    "src/audio/native/wf_music_firmware.c": "800d755ef32eb60d1994b0bca453c593f3a68069275c7387c1aa2e8c465d28b6",
+    "src/audio/native/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+    "src/runtime/src/wf_r18_scsp.c": "ac11427c0d644d8a808140a6ad34c83ce4e7d1ac202e561da576ddda36cb0ad1",
+    "src/runtime/src/wf_r18_scsp_runtime.c": "bde8f0aeda3d70e7c99e3ba6e6acd15e9f78553e683e6923157f99672e3b86b4",
+    "src/runtime/include/wf_r18_scsp.h": "deb08d9bffbc69e0306dce85b23130fef2608074dffca05eb407eabcb30f0420",
+    "src/runtime/include/wf_r18_scsp_runtime.h": "ea6b5ac490e20603a8b9c6b02d86c6cf771d40261ac977cf39054f6dc7a8d9bd",
+    "src/runtime/src/wf_saturn_entry.c": "aa1469eeee7811731d0e84cbbe623bb871e902edf9c1ce4fd9ab7ff471100aee",
+    "src/runtime/src/wf_saturn_frontend.inc": "2871696237527cfe5a0b1e620824f04e6f97deba6f354624fc3a8341e82a2521",
+    "src/runtime/src/wf_saturn_allocator_partition.c": "6c058e54b7d541c58d4296b86dc924dcd63b26d56713b506770d171090916ff6",
+    "src/runtime/ldscripts/wf_memory.x": "1ead01b9cefd01711fee4ac262795624af881290f4c9a55c2e962afc839e7a01",
+    "src/runtime/ldscripts/wf_memory.mk": "58fbd76db52e26389f529d777c0e0b3fe02046c353d155094fc27264b8c7460e",
+    "src/runtime/ldscripts/wf_memory.specs": "f63b55a669d076e7edd419ec7691edfc4bf0ab89138f35e93d09ac30c3be3279",
+    "src/runtime/Makefile.saturn-link": "944ef873ef2e032de450b36e386b5219e967751c641e9da14f91adb36a7db288",
+    "src/runtime/Makefile.saturn-disc": "e8c3c1f9e03996a4f867799da33ae46cee4e553b409aed2e87e41ef4ec305764",
+    "validation/verify_saturn_stack_layout.py": "d09452873a967e786285b1c8232b830f1d67d23c52c0bf6210b1a2e2b96f9060",
+    "validation/verify-hwram-budget.py": "1de8dcb1f81858135853ff747f9b1eb46b33b44211a2b4c9a73178e80a8110f8",
+    "tools/audio/native_probe/build_runtime18.py": "1dbba02dea81cb4f0329d36fc8022359faf2957a4cacd5d9316e2f8934d70af7",
+    "tools/audio/native_probe/prepare_allocator_sdk.py": "595f4a94569f45a69565f3d51fd05b1b2cdb911567edd8254b6aa4663309cb81",
+    "tools/audio/native_probe/build_music_module.py": "a930423240de6c24b037b6c8ad113140bb68f27fb74396e561c28842f47b2136",
+    "tools/audio/native_probe/build_music_driver.py": "48a943a9a407f0bc45eda5bcbbee1eac2db491f666444aff2f031b1a70d17872",
+    "tools/audio/native_probe/build_dsp_mixer.py": "7cb9c74727fa8443620749a86fee33e24f87fef5b8e47d0316c858dfcbbf9ac0",
+    "tools/audio/native_probe/build_music_host.py": "3a30f5219edfe8a35c6510de3ac026c124a28494782a24a98de947e7366f5d0b",
+    "tools/audio/native_probe/adapt_dsp_oracle.py": "7f1d791f10803f81ffe1555f3e0064051820fb9d4468b17446ed360b4a9743dd",
+    "tests/audio/native-probe/test_runtime_containment.c": "94efb80eb3aa0c1ebdeee86f073a209e5156587a9bdbd6ffd0ba3429a39779f3",
+    "tests/audio/native-probe/test_music_waits.c": "c049e021991d79b5288d1502ca65bbf77c28cb557edbe3c723890656acb81bb0",
+    "tests/audio/native-probe/test_pcm_signed_address_beetle.py": "6c1b92c7caa0c1ac7ed25c69534b1c3de6d205fa28ff2b141e62327cb74a7ad8",
+    "tests/audio/native-driver/test_dsp_mixer.py": "31051e332c291238cc1e80f723322738d8a281eb83537e4c8330730e84e879c2"
+  },
+  "source_scope": "Audio hunks and allocator/build only. Concurrent CDFS/metasprite-cache changes remain untouched. Tested master uses pinned graphical snapshot, not every later checkout edit.",
+  "original_audio_r02_zip_unchanged": true,
+  "original_image_unchanged": true
+}

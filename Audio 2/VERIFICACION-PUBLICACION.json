@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-01",
+  "kind": "publication verification, not audio acceptance",
+  "package_hash_check": true,
+  "python_syntax_files": 76,
+  "valid_json_files_before_this_record": 57,
+  "validation_identity_LTO_tests": 6,
+  "validation_PCM_counter_tests": 15,
+  "fresh_test_failures": 0,
+  "native_audio_acceptance": false,
+  "native_audio_failure_evidence": "evidencia/z80-inline-tabla/cold-9600-tag/report.json",
+  "no_new_disc_image": true
+}

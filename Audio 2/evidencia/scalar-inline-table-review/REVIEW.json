@@ -1,0 +1,18 @@
+{
+  "structural_review_passed": true,
+  "table_candidate_plus_exact_inline_only": true,
+  "public_private_bodies_exact": true,
+  "source_reverts_to_verified_table_baseline": true,
+  "cold_unchanged": true,
+  "linked_256_byte_table_identical": true,
+  "scalar_effectively_inlined": true,
+  "hot_bytes": 13992,
+  "state_bytes": 3220,
+  "owned_window_bytes": 18432,
+  "spare_bytes": 1220,
+  "elf_sha256": "bee32079c629bdefed274bbcb90a9f7960872dddda0550d405119c9d6a9af0df",
+  "candidate_hot_LF_sha256": "5106e159eb65a0247e2c024058110e019c4ce0ec376e69d72bd93a00fc834aed",
+  "HOST_required_before_emulation": true,
+  "emulator_run": false,
+  "media_created": false
+}

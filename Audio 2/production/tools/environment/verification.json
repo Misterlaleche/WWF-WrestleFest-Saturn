@@ -1,0 +1,110 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 4644,
+      "sha256": "d09bfa1b077bba067cec99ab67bc07158849f68ead2da63ebd00f8ccd3e62e72"
+    },
+    "verification-m68k-runtime.json": {
+      "bytes": 1212,
+      "sha256": "ac08cec42c20db116b13ed13db1218278eca124672a0ffad6538f93f95ad3471"
+    },
+    "restore_environment.py": {
+      "bytes": 8125,
+      "sha256": "e8463bb5802e877a0cab86e973cca119659901deea6c51d588893548f9ccc806"
+    },
+    "licenses/GCC-COPYING.RUNTIME": {
+      "bytes": 3324,
+      "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74"
+    },
+    "licenses/GCC-COPYING3": {
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    "templates/env.sh": {
+      "bytes": 1030,
+      "sha256": "ba56323fcad79d2eb91c142f9f573986c2946f560f954d4b3c676d3b00bed7de"
+    },
+    "templates/build-mednafen.sh": {
+      "bytes": 2121,
+      "sha256": "9570b198e3450df8820e5d65f99cad07d1d7119bce6cd57051ed4e13e763bf2d"
+    },
+    "src/sfx-layout.c": {
+      "bytes": 440,
+      "sha256": "f4451bd31dbd75b99b579b50925eff8143fb7fa0646b18b6e1e54a39d9bce0ac"
+    },
+    "src/xvfb-relocate.c": {
+      "bytes": 402,
+      "sha256": "1e81188c94f2de0465aa39927ff91af0cd431122f8ea51d6ac7dadf2fcd6ccf2"
+    },
+    "manifests/sources.json": {
+      "bytes": 456,
+      "sha256": "16911b3ad08cf5f21fbcbfbd8cdf49d68d7f6917c5b41e4f81ea4cfc599a4bd9"
+    },
+    "manifests/packages.json": {
+      "bytes": 32871,
+      "sha256": "e0e4fd4c8f5dc297056b7158f22b5086d06b9db7cb73ed2613947f2c8a4117ce"
+    },
+    "templates/bin/Xvfb": {
+      "bytes": 404,
+      "sha256": "bff869e9738393b4daf0c367baf0309a6ae209fdfd60275dbe32edbb56427538"
+    },
+    "templates/bin/mednafen": {
+      "bytes": 367,
+      "sha256": "9f726b6870674b6b68319a78893c52eeacea0b9b2e164e7378b229903520a629"
+    }
+  },
+  "contains_binary_or_game_payload": false,
+  "fresh_restore_output": "/tmp/audio2-environment-reproduction",
+  "fresh_offline_restore": {
+    "sdk_archive_sha256": "8a30d927a869c22f711e0fc1f37fb22106da7561e4d54968077cff77bb90487d",
+    "public_packages_verified": 127,
+    "public_sources": [
+      {
+        "filename": "mednafen-1.32.1.tar.xz",
+        "url": "https://mednafen.github.io/releases/files/mednafen-1.32.1.tar.xz",
+        "sha256": "de7eb94ab66212ae7758376524368a8ab208234b33796625ca630547dbc83832"
+      },
+      {
+        "filename": "gcc-13.3.0-lb1sf68.S",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-13.3.0/libgcc/config/m68k/lb1sf68.S",
+        "sha256": "851f082a547137b70dfe686764c9312aed489df0ff00d60e2dd6c6fe64d5ba00"
+      }
+    ],
+    "versions": {
+      "sh2_gcc": "sh2eb-elf-gcc (GCC) 13.2.0",
+      "m68k_gcc": "m68k-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "xorrisofs": "mkisofs 2.01-Emulation Copyright (C) 2019 see libburnia-project.org xorriso"
+    },
+    "cross_compilation_probes": "passed",
+    "mednafen_built": true,
+    "bios_and_rom_downloaded": false,
+    "mednafen_sha256": "3a279af7b8b70b0b9e2fad20de18fc086e8e7c43545fcb287a027473413735bc"
+  },
+  "fresh_xvfb_test": {
+    "running": true,
+    "geometry_returncode": 0,
+    "geometry": "800 600",
+    "stderr": ""
+  },
+  "fresh_native_build_exit_code": 0,
+  "fresh_native_capture_exit_code": 0,
+  "fresh_native_capture_state": {
+    "path": "/workspace/scratch/46cef04a9eee/tools-env/verification/reproduced-environment-capture/mednafen-home/mcs/wrestlefest-saturn-test01a.b723c66e81e84822504e0716ec2d5d1a.mc0",
+    "version_numeric": 1061377,
+    "bytes": 5525841,
+    "data_byte_order": "little",
+    "preview": {
+      "width": 352,
+      "height": 240
+    },
+    "file_sha256": "8e227e597252795b50e5f8866f4740bb4cd270318e4927b29c6c11957b46770c",
+    "scsp_ram_bytes": 524288,
+    "program_counters": {
+      "SH2-M": 100729286,
+      "SH2-S": 0,
+      "M68K": 17714
+    }
+  },
+  "original_validated_emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+  "fresh_emulator_sha256": "3a279af7b8b70b0b9e2fad20de18fc086e8e7c43545fcb287a027473413735bc"
+}

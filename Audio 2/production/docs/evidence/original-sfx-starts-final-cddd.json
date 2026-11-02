@@ -1,0 +1,32 @@
+{
+  "scope": "98 physical start values/counts against privately generated full original Z80 fixture; not timing, active-bank or waveform acceptance",
+  "source_and_input_sha256": {
+    "/workspace/scratch/46cef04a9eee/audio2-build/native-sfx-final-cddd-scalar9/source/src/wf_scsp_sfx.c": "4745461ca0439802e0f4ffc4395e07ef89d7b09ff41e83868b3bc7dfefa7d05b",
+    "/workspace/scratch/46cef04a9eee/audio2-build/native-sfx-final-cddd-scalar9/source/src/wf_scsp_sfx.h": "d089e10bc23083db14b29577767f36d0ac8582f73c3e0d2bd3a14fc6baa11695",
+    "/workspace/scratch/46cef04a9eee/audio2-build/native-sfx-final-cddd-scalar9/source/tests/test_sfx_original_starts.c": "ca9d89ecc1f6fda8cf5c7dd045fc8b873f6823ecef9de646c242d7443df36587",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-sfx-validation-frozen/sfx_original_fixture.h": "aa4064b0913f018b6f7fb002d18e73a7fd2000ff5e2c84da8f47063e16de9bc8",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-sfx-validation-frozen/inputs/SFX.DAT": "dbe749cf4ce13f333ff7318a74a64e30fa2b9af05d953688a0813311cbabd216"
+  },
+  "build_command": [
+    "cc",
+    "-O2",
+    "-std=c99",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "/workspace/scratch/46cef04a9eee/audio2-build/native-sfx-final-cddd-scalar9/source/src",
+    "-I",
+    "/workspace/scratch/46cef04a9eee/audio2-build/full-board-sfx-validation-frozen",
+    "/workspace/scratch/46cef04a9eee/audio2-build/native-sfx-final-cddd-scalar9/source/tests/test_sfx_original_starts.c",
+    "/workspace/scratch/46cef04a9eee/audio2-build/native-sfx-final-cddd-scalar9/source/src/wf_scsp_sfx.c",
+    "-o",
+    "/workspace/scratch/46cef04a9eee/audio2-build/final-sfx-host-cddd/test_original_starts"
+  ],
+  "returncode": 0,
+  "stdout": "PASS:98 original full-board start identity/count cases, 0 failures\n",
+  "stderr": "",
+  "source_stable": true,
+  "passed": true,
+  "original_report_sha256": "c00ca1268e30c6834eaf168325d9d5c75a21d183292e40b693d82d096bf32a76"
+}

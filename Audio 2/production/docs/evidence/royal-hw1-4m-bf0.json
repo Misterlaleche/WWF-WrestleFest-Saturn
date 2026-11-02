@@ -1,0 +1,494 @@
+{
+  "scope": "frozen performance/integration evidence; no fidelity acceptance",
+  "input_tape_sha256": null,
+  "input_policy_sha256": "b30ec4abd28e14557a2d8a445109644881c047e434b68369b97f509a7e3d47f1",
+  "input_evidence": "Same original state-dependent Royal policy and released physical controls. Complete per-call input bytes were not recorded; endpoint/event equality is checked separately.",
+  "game_layout": {
+    "actors_offset": 384,
+    "actor_bytes": 268,
+    "actor_slots": 9,
+    "frame_offset": 24,
+    "mode_offset": 31,
+    "progression_offset": 32,
+    "runtime_bytes": 7648
+  },
+  "firmware_sha256": "bf0a38041589e56003b3719899652d2431c28ead429e927b787a78062bec84bd",
+  "build": {
+    "scope": "isolated native ROYAL diagnostic, NOT AUDIO ACCEPTED",
+    "scenario": "royal",
+    "artifact_basename": "AUDIO2ROYAL4M",
+    "music_memory_profile": {
+      "name": "royal-vdp2-bank1",
+      "base": 98721792,
+      "state": 98807808,
+      "shared": 98820096,
+      "end": 98824192
+    },
+    "game_input_scope": "Unchanged HW1 ordinary-input policy and ROM F94 initial state",
+    "expected_gameplay_endpoint": 8474,
+    "expansion_ram_required": true,
+    "emulator_cartridge": "extram4",
+    "hot_start": 101664096,
+    "hot_end": 101682528,
+    "hot_code_const_bytes": 14776,
+    "hot_state_bytes": 3220,
+    "slave_stack_bottom": 101682528,
+    "slave_stack_top": 101690720,
+    "user_heap_start": 101690720,
+    "user_heap_bytes": 21152,
+    "module_bytes": 98204,
+    "control_elf_difference_bytes": 1,
+    "control_elf_difference_offset": 408224,
+    "control_change": "wf_audio2_enabled data word 1 to 0; all executable bytes identical",
+    "firmware_sha256": "bf0a38041589e56003b3719899652d2431c28ead429e927b787a78062bec84bd",
+    "pairs": {
+      "audio2": {
+        "AUDIO2ROYAL4M.ELF": "018a1dd063506c7d9106ba6f53f080c0f88181fe1bd89b330ab967cfd7dca342",
+        "AUDIO2ROYAL4M.bin": "512d62869a7c37968ef848dd1e74e7e92642649707f2336982444ddaa278643e",
+        "AUDIO2ROYAL4M.iso": "ca0c8b6f3973b86f92d23c4f6ad3def33695acde2e644c4d8089e32b45cca46f",
+        "AUDIO2ROYAL4M.cue": "b94073fffc1aeeaf32f7f094fa33a86044118f80a3d4c6396ef7dbd4f500f502"
+      },
+      "control": {
+        "AUDIO2ROYAL4M.ELF": "eca779cb673447c4dce8e14e310c8c602204f26a8ecbfcc5a3cf34b8ee163ebd",
+        "AUDIO2ROYAL4M.bin": "566091f4e2d0dadb265067d8cf414983bc40289c03cac0ade3565fc87ffa801d",
+        "AUDIO2ROYAL4M.iso": "389684a275468ac034be01db00add03a8f8b4c932bd9dd65d425daf47396f7d9",
+        "AUDIO2ROYAL4M.cue": "b94073fffc1aeeaf32f7f094fa33a86044118f80a3d4c6396ef7dbd4f500f502"
+      }
+    },
+    "original_game_files_unchanged": 305,
+    "graphics_assets_unchanged": true
+  },
+  "profiles": {
+    "control": {
+      "profile": "control",
+      "game_frame": 8474,
+      "cadence": {
+        "initialized": 1,
+        "first_frame": 0,
+        "first_vblank": 1657,
+        "last_frame": 8474,
+        "last_vblank": 10176,
+        "logical_steps": 8474,
+        "elapsed_vblanks": 8519,
+        "updates": 8474,
+        "unobserved_steps": 0,
+        "max_gap": 2,
+        "regressions": 0,
+        "gap_histogram_vblanks": {
+          "1": 8429,
+          "2": 45
+        },
+        "gap_percentile_vblanks": {
+          "50": 1,
+          "95": 1,
+          "99": 1,
+          "100": 2
+        },
+        "elapsed_seconds": 142.39614746031745,
+        "logical_steps_per_second": 59.51003697176225,
+        "gap_percentile_ms": {
+          "50": 16.715124716553287,
+          "95": 16.715124716553287,
+          "99": 16.715124716553287,
+          "100": 33.430249433106574
+        }
+      },
+      "recording_clock": {
+        "method": "last 1000 complete native video packet durations",
+        "time_base": "1/44100",
+        "duration_ticks": 737137,
+        "packet_count": 1000,
+        "video_hz": 59.82605675742772,
+        "duration_histogram_ticks": {
+          "738": 144,
+          "737": 849,
+          "736": 7
+        },
+        "timestamp_file_sha256": "2e6a48f5b56203745e33507da1f3e07ff0e95aa5cb6ff0494945557e2b3184fa"
+      },
+      "runtime_sha256": "16ca26715dc47033b53130faee5813a77f8673ed94e4b82274dd74139d752613",
+      "actors_sha256": "656f7934c1c1b1cbac5afef25e4d17c8503c050c011effc734a0e00e1fb6f884",
+      "actors": [
+        {
+          "slot": 0,
+          "active": 128,
+          "character": 0,
+          "role": 0,
+          "state": 32773
+        },
+        {
+          "slot": 1,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 2,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 3,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 4,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32779
+        },
+        {
+          "slot": 5,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32768
+        },
+        {
+          "slot": 6,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 7,
+          "active": 128,
+          "character": 0,
+          "role": 160,
+          "state": 32779
+        },
+        {
+          "slot": 8,
+          "active": 128,
+          "character": 0,
+          "role": 224,
+          "state": 32769
+        }
+      ],
+      "diagnostics": {
+        "enabled": 0,
+        "boot_stage": 9,
+        "api_state": 0,
+        "api_error": 0,
+        "worker_state": 0,
+        "worker_error": 0,
+        "accepted": 0,
+        "queue_used": 0,
+        "queue_completed": 0,
+        "queue_overflows": 0,
+        "unsupported": 0,
+        "skipped": 0,
+        "produced": 133,
+        "command_hash": 3706974640,
+        "first_audio_fault_vblank": 0,
+        "max_mail_latency_nominal_us": 0,
+        "reserved16": 0,
+        "reserved17": 0,
+        "queue_peak": 0,
+        "last_raw": 12624,
+        "boot_success": 0,
+        "pack_bytes": 0,
+        "module_bytes": 0,
+        "last_vblank": 10274
+      },
+      "capture_report_sha256": "91d89a37471a63180915a7790df4477ffa636711a06ef6a1e664b4d68039e198",
+      "raw_wav_sha256": "4b1b7423ca10c637a26686b375231ffd7c994f69d7752722cab49763985a7ec1",
+      "capture_final_watches": {
+        "started": 1,
+        "draws": 8474,
+        "vblanks": 8520,
+        "fatal_owner": 0,
+        "fatal_dependency": 0,
+        "finished_frame": 8474,
+        "video_clock": 10274,
+        "finished_presentation": 2,
+        "game_frame": 8474,
+        "cadence_steps": 8474,
+        "cadence_vblanks": 8519,
+        "cadence_max_gap": 2,
+        "cadence_missed": 0,
+        "enabled": 0,
+        "boot_stage": 9,
+        "api_state": 0,
+        "api_error": 0,
+        "worker_state": 0,
+        "worker_error": 0,
+        "accepted": 0,
+        "queued": 0,
+        "overflows": 0,
+        "unsupported": 0,
+        "skipped": 0,
+        "produced": 133,
+        "command_hash": 3706974640,
+        "audio_fault_frame": 0
+      },
+      "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+      "bios_sha256": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f",
+      "producer_event_count": 133,
+      "producer_events_canonical_sha256": "f602c501700fbdb271ee62f0ae9ca4a58b4b5d3c17f2a5bf101da9a57b1acada"
+    },
+    "audio2": {
+      "profile": "audio2",
+      "game_frame": 8474,
+      "cadence": {
+        "initialized": 1,
+        "first_frame": 0,
+        "first_vblank": 2045,
+        "last_frame": 8474,
+        "last_vblank": 10638,
+        "logical_steps": 8474,
+        "elapsed_vblanks": 8593,
+        "updates": 8474,
+        "unobserved_steps": 0,
+        "max_gap": 3,
+        "regressions": 0,
+        "gap_histogram_vblanks": {
+          "1": 8356,
+          "2": 117,
+          "3": 1
+        },
+        "gap_percentile_vblanks": {
+          "50": 1,
+          "95": 1,
+          "99": 2,
+          "100": 3
+        },
+        "elapsed_seconds": 143.6328718367347,
+        "logical_steps_per_second": 58.997636764042895,
+        "gap_percentile_ms": {
+          "50": 16.715102040816326,
+          "95": 16.715102040816326,
+          "99": 33.43020408163265,
+          "100": 50.14530612244898
+        }
+      },
+      "recording_clock": {
+        "method": "last 1000 complete native video packet durations",
+        "time_base": "1/44100",
+        "duration_ticks": 737136,
+        "packet_count": 1000,
+        "video_hz": 59.82613791756202,
+        "duration_histogram_ticks": {
+          "737": 864,
+          "738": 136
+        },
+        "timestamp_file_sha256": "7fcd5c9411976ebea6a53e78aa337dca5c22e44bed27419272f8267341301192"
+      },
+      "runtime_sha256": "16ca26715dc47033b53130faee5813a77f8673ed94e4b82274dd74139d752613",
+      "actors_sha256": "656f7934c1c1b1cbac5afef25e4d17c8503c050c011effc734a0e00e1fb6f884",
+      "actors": [
+        {
+          "slot": 0,
+          "active": 128,
+          "character": 0,
+          "role": 0,
+          "state": 32773
+        },
+        {
+          "slot": 1,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 2,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 3,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 4,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32779
+        },
+        {
+          "slot": 5,
+          "active": 128,
+          "character": 0,
+          "role": 128,
+          "state": 32768
+        },
+        {
+          "slot": 6,
+          "active": 0,
+          "character": 0,
+          "role": 0,
+          "state": 0
+        },
+        {
+          "slot": 7,
+          "active": 128,
+          "character": 0,
+          "role": 160,
+          "state": 32779
+        },
+        {
+          "slot": 8,
+          "active": 128,
+          "character": 0,
+          "role": 224,
+          "state": 32769
+        }
+      ],
+      "diagnostics": {
+        "enabled": 1,
+        "boot_stage": 5,
+        "api_state": 5,
+        "api_error": 6,
+        "worker_state": 3,
+        "worker_error": 15,
+        "accepted": 53,
+        "queue_used": 0,
+        "queue_completed": 53,
+        "queue_overflows": 0,
+        "unsupported": 0,
+        "skipped": 80,
+        "produced": 133,
+        "command_hash": 3706974640,
+        "first_audio_fault_vblank": 5740,
+        "max_mail_latency_nominal_us": 33334,
+        "reserved16": 0,
+        "reserved17": 0,
+        "queue_peak": 1,
+        "last_raw": 12624,
+        "boot_success": 1,
+        "pack_bytes": 440710,
+        "module_bytes": 98204,
+        "last_vblank": 10737
+      },
+      "capture_report_sha256": "2b099a431f0656f0feda52ea200d596d17793274afe1db876c3439047377f14b",
+      "raw_wav_sha256": "5274ddf5b0fba4a39bdbe08390331c2c34edb202bf6b1bbc9224c533a860181b",
+      "capture_final_watches": {
+        "started": 1,
+        "draws": 8474,
+        "vblanks": 8594,
+        "fatal_owner": 0,
+        "fatal_dependency": 0,
+        "finished_frame": 8474,
+        "video_clock": 10737,
+        "finished_presentation": 2,
+        "game_frame": 8474,
+        "cadence_steps": 8474,
+        "cadence_vblanks": 8593,
+        "cadence_max_gap": 3,
+        "cadence_missed": 0,
+        "enabled": 1,
+        "boot_stage": 5,
+        "api_state": 5,
+        "api_error": 6,
+        "worker_state": 3,
+        "worker_error": 15,
+        "accepted": 53,
+        "queued": 0,
+        "overflows": 0,
+        "unsupported": 0,
+        "skipped": 80,
+        "produced": 133,
+        "command_hash": 3706974640,
+        "audio_fault_frame": 5740
+      },
+      "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+      "bios_sha256": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f",
+      "loaded_module_segments": [
+        {
+          "address": 98721792,
+          "bytes": 83172,
+          "sha256": "07ebbd676ac597b15a3da02ca9d39fe4921237bc6036eee13d02bb3597c7751b",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 101664096,
+          "bytes": 14776,
+          "sha256": "c5ab6e35bd393c7fce3f9c9469195fed2e6ebe822a3df5c28ede62b4934015bc",
+          "loaded_bytes_match": true
+        }
+      ],
+      "loaded_firmware_segments": [
+        {
+          "address": 0,
+          "bytes": 12258,
+          "sha256": "a0505bda2254635f8c8f09e5852522d60bbc2ba2dd6e1fa2ef24c4c8af4b7b29",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 49408,
+          "bytes": 13792,
+          "sha256": "782a2df730f3e273461b80714ee8272674f50cc334d0bb0a0041415faec58c8f",
+          "loaded_bytes_match": true
+        },
+        {
+          "address": 65536,
+          "bytes": 9216,
+          "sha256": "260012e22772b130d1d3e4f2af82a058b025fff941b901a22855991952dea9fb",
+          "loaded_bytes_match": true
+        }
+      ],
+      "native_audio_counters": {
+        "fm_discarded_events": 16,
+        "fm_discarded_batches": 1,
+        "fm_rejected_events": 0,
+        "ring_rejected_events": 0,
+        "sfx_underruns_32bit": 1,
+        "sfx_frames_32bit": 3883960,
+        "sfx_ticks_32bit": 19400,
+        "sfx_bound": 1,
+        "sfx_fault": 0,
+        "transport_late_16bit": 428,
+        "invalid_fm_batch_16bit": 1,
+        "last_poll_gap_over_512_fs": 0,
+        "playing_mask_at_last_long_poll": 0,
+        "mail_state": 3,
+        "music_shared_state": 3,
+        "music_shared_error": 15
+      },
+      "royal_memory_observation": {
+        "vdp2_gap_after_module_sha256": "e17d6df0e76041e8af7795d47f51a3158cc8bfe8459c55d07fc286ad3735d917",
+        "vdp2_back_color_word": 32768,
+        "vdp1_unused_tail_after_hot_sha256": "1191d952c78fcc3a712b56b73a63c36c0c53ca36dc42e5eda46832a432a99e7a",
+        "note": "End-state observation; no fabricated canary or before/after overwrite proof."
+      },
+      "slave_stack_canary": {
+        "reserved_bytes": 8192,
+        "lowest_untouched_prefix_bytes": 7640,
+        "observed_modified_span_from_top": 552,
+        "note": "Observed high-water evidence only; canary is not a complete overflow proof."
+      },
+      "producer_event_count": 133,
+      "producer_events_canonical_sha256": "f602c501700fbdb271ee62f0ae9ca4a58b4b5d3c17f2a5bf101da9a57b1acada"
+    }
+  },
+  "pair": {
+    "runtime_byte_identical": true,
+    "audio_remained_operational": false,
+    "full_match_audio_cost_comparable": false,
+    "actors_byte_identical": true,
+    "producer_events_identical": true,
+    "emulator_identical": true,
+    "bios_identical": true,
+    "logical_endpoint_identical": true,
+    "additional_combat_vblanks": 74,
+    "additional_combat_time_percent": 0.8686465547599483,
+    "logical_throughput_change_percent": -0.8611660654020747
+  },
+  "timing_note": "Combat window uses cadence first/last VBlank, excluding boot. If audio_remained_operational is false, throughput includes time after audio failed and cannot certify the cost of sustained audio. API mail latency uses16667 nominal microseconds per VBlank and is quantized, not precise jitter.",
+  "source_result_sha256": "89f63ee9bdd2a1be560beb38e58451a45b8c5ff47a9a7c2ee7f8dad5b9aede3d"
+}

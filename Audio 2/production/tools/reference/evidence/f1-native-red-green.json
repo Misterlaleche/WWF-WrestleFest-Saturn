@@ -1,0 +1,59 @@
+{
+  "kind": "ORIGINAL_ROM_F1_NATIVE_RED_GREEN",
+  "original_sound_rom_sha256": "f89e7782e7535576b2ebf8c5daea61c5fa2ecefff0b8b3280dea09efa57c25f7",
+  "original_sample_rom_sha256": "e4cbe71f079e2cb95b3463115557fa1d99e18ea975f2d3354827b01994fc4615",
+  "original_fixture_sha256": "aa4064b0913f018b6f7fb002d18e73a7fd2000ff5e2c84da8f47063e16de9bc8",
+  "private_full_board_validation_sha256": "52fdfe6443cc380d81510cdb81715ff74bcd938cd9a38e85202edc2de4bf9d59",
+  "affected_commands": [
+    56,
+    65,
+    67,
+    70,
+    73,
+    76,
+    81,
+    92,
+    97,
+    105,
+    106,
+    107,
+    110,
+    111,
+    112,
+    117,
+    123
+  ],
+  "original_total_starts": 100,
+  "legacy_A15_total_starts": 117,
+  "stream_events": 165,
+  "F1_continuations": 65,
+  "flag_encoding_mismatches": 0,
+  "branch": {
+    "pc": 1151,
+    "target": 1315,
+    "guard": "NZ from original RAMC049+logicalvoice; independent of OKIbusy",
+    "observed_command": 56,
+    "relative_cycle": 4137125,
+    "suppression_latch": 1,
+    "observer_pcm_bit_exact": true
+  },
+  "source_after_sha256": {
+    "src/wf_scsp_sfx.c": "0d4de5d48bb9f3c0fffdbca3cf52df00d6d448a8535cb3dd5e2c7b857af87127",
+    "tests/test_sfx_original_starts.c": "ca9d89ecc1f6fda8cf5c7dd045fc8b873f6823ecef9de646c242d7443df36587"
+  },
+  "tests": [
+    {
+      "stage": "red",
+      "executable_sha256": "ac2537fef1c7975bd6d86bee06e003bd91f9fc8b048b28a29a7f3569409d40da",
+      "exit_code": 1,
+      "output": "FAIL:98 original full-board start identity/count cases, 17 failures\nFAIL command38 actualstarts2 original1 mismatches1\nFAIL command41 actualstarts2 original1 mismatches1\nFAIL command43 actualstarts2 original1 mismatches1\nFAIL command46 actualstarts2 original1 mismatches1\nFAIL command49 actualstarts2 original1 mismatches1\nFAIL command4C actualstarts2 original1 mismatches1\nFAIL command51 actualstarts2 original1 mismatches1\nFAIL command5C actualstarts2 original1 mismatches1\nFAIL command61 actualstarts2 original1 mismatches1\nFAIL command69 actualstarts2 original1 mismatches1\nFAIL command6A actualstarts2 original1 mismatches1\nFAIL command6B actualstarts2 original1 mismatches1\nFAIL command6E actualstarts2 original1 mismatches1\nFAIL command6F actualstarts2 original1 mismatches1\nFAIL command70 actualstarts2 original1 mismatches1\nFAIL command75 actualstarts2 original1 mismatches1\nFAIL command7B actualstarts2 original1 mismatches1\n"
+    },
+    {
+      "stage": "green",
+      "executable_sha256": "fd119bdbb38430c2b809ff63dacc52942b389c93a116add5d62535a8b38a41d0",
+      "exit_code": 0,
+      "output": "PASS:98 original full-board start identity/count cases, 0 failures\n"
+    }
+  ],
+  "scope": "Host complete original-start identity/count gate; no native firmware/hardware certification and no claim that all mixing/priority/timing behavior is closed"
+}

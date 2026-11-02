@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "state_path": "C:\\Users\\VersusPC\\OneDrive - Lydia Puerto Vadillo\\Documentos\\ChatGPT\\Wrestlefest Saturn\\runtime18\\validation\\local-20261028\\audio-repair\\control-fix\\saturn-real-v25\\cold-9600-tag\\frame-9600.state",
+  "state_sha256": "cdd7ebb3a49efd589d88067ba3327bdacc1133aaf70afeb082dab22c6516f1b3",
+  "real_state_observation": {
+    "pcm_engine_underruns": 0,
+    "pcm_underruns_mail": 0,
+    "pcm_engine_observation": {
+      "validated": true,
+      "counter_bytes": 4,
+      "engine_address": 64068,
+      "engine_bytes": 262,
+      "counter_address": 64100,
+      "engine_symbol": "wf_sfx_engine",
+      "layout_sha256": "d58be0ac6d432f5c6ec626dd054de267c41528182f78f1c6e7e6b76208e38c63",
+      "debug_elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+      "release_elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+      "load_segments_sha256": "50c792e0263dfcd1d4fd4753dec6fe8c21bcbee52a9f105f88ae2f35215e59bc",
+      "compiler_id": "m68k-elf-gcc (GCC) 9.3.1 20200508"
+    }
+  },
+  "private_bytearray_negative_fixture": {
+    "pcm_engine_underruns": 65536,
+    "pcm_underruns_mail": 0,
+    "pcm_engine_observation": {
+      "validated": true,
+      "counter_bytes": 4,
+      "engine_address": 64068,
+      "engine_bytes": 262,
+      "counter_address": 64100,
+      "engine_symbol": "wf_sfx_engine",
+      "layout_sha256": "d58be0ac6d432f5c6ec626dd054de267c41528182f78f1c6e7e6b76208e38c63",
+      "debug_elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+      "release_elf_sha256": "b882bec5cc5e3a1148ae8ae72cb05820d01cd5f8f125bf24ea2dd2edb8e5bb9c",
+      "load_segments_sha256": "50c792e0263dfcd1d4fd4753dec6fe8c21bcbee52a9f105f88ae2f35215e59bc",
+      "compiler_id": "m68k-elf-gcc (GCC) 9.3.1 20200508"
+    }
+  },
+  "negative_gate": {
+    "passed": false,
+    "blockers": [
+      "pcm_engine_underruns"
+    ],
+    "real_counter_bits": 32,
+    "checkpoints": 1,
+    "maximum_engine_underruns": 65536,
+    "maximum_mailbox_underruns": 0,
+    "containment_policy": "PCM starvation remains nonfatal to gameplay; any underrun is an audio-delivery failure."
+  },
+  "real_guest_edited": false,
+  "state_loaded": false,
+  "emulator_invoked": false,
+  "original_state_unchanged": true,
+  "note": "A zero PCM counter in this existing state does not override its284 FM discards."
+}

@@ -1,0 +1,33 @@
+{
+  "firmware_sha256": "9f3d1d368ee63b4cabce7bd5598c836b9ffc2bf28c0bdf3c838daa2524c684cf",
+  "source_sha256": "851f082a547137b70dfe686764c9312aed489df0ff00d60e2dd6c6fe64d5ba00",
+  "source_identical_to_official_gcc_13_3_0": true,
+  "source_url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-13.3.0/libgcc/config/m68k/lb1sf68.S",
+  "flags": [
+    "-m68000",
+    "-msoft-float",
+    "-fno-pic",
+    "-fno-pie"
+  ],
+  "helpers": {
+    "__mulsi3": {
+      "reference_object_sha256": "4bc08e68e690f7de1e5eb561808127c898a91f6dcfa236be89d8586cb37ef7e5",
+      "reference_text_bytes": 34,
+      "linked_symbol_present": true,
+      "linked_address": 1268,
+      "byte_identical_to_baseline_source_object": true
+    },
+    "__udivsi3": {
+      "reference_object_sha256": "74e17d9f1eeb14b87ff1f0ceb8047d75a40ba452b0a2b2170491d5e37bd58831",
+      "reference_text_bytes": 92,
+      "linked_symbol_present": true,
+      "linked_address": 1304,
+      "byte_identical_to_baseline_source_object": true
+    },
+    "__divsi3": {
+      "reference_object_sha256": "bc19a7315bc3741ba25b2e9ceb1360a405aad8923fab80ced0ccc0193665752e",
+      "reference_text_bytes": 46,
+      "linked_symbol_present": false
+    }
+  }
+}

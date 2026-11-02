@@ -1,0 +1,1471 @@
+{
+  "kind": "COLD_BOOT_NATIVE_MUSIC_MATRIX_BOARD_CLOCK",
+  "profile_label": "boardclock-eg-instant-c12ebda-partial-finish-no-timing-621b5dfc",
+  "emulator": "standalone Mednafen1.32.1",
+  "emulator_sha256": "a12628d798edf9ad1ec7497cec666ee64b583a09fc48a0c650702c8aeb3a7689",
+  "firmware_sha256": "621b5dfcfe1b2a1841ff09e32de62b8198c63cd5d5c12d1f660d5c8426c06634",
+  "reference_profile": "board-pcm16",
+  "native_window_seconds": 35,
+  "reference_window_seconds": 30.0,
+  "output_naming": "WAV suffixes are decimal01..18; command directories are hexadecimal01..12",
+  "capture_mode": "Actual soundrecord/native state; ss.cart none; no memory writes or emulator modifications",
+  "scope": "One frozen isolated public-API profile; no gameplay integration or waveform fidelity certification",
+  "hardware_status": "HARDWARE PENDING",
+  "listening_approval": "PENDING",
+  "source_stable": true,
+  "inputs_stable": true,
+  "emulator_stable": true,
+  "complete": true,
+  "all_runtime_gates_passed": true,
+  "all_pairs_available": true,
+  "private_complete_report_sha256": "e523149700925bcee9309d2571eb214e063934f354a023224b7c8e81d6235fac",
+  "source_files": {
+    "include/wf_audio2.h": "e0b8deb70b9b76776e174c4a3b115b33f447fd926cacd23cc798d8750464cb83",
+    "include/wf_audio2_yaul.h": "ab5eaf0b09dddbdfa2bcaf246a09a6a00b5ad0447d954b1da3a41d32a721e771",
+    "src/generated/wf_ym_envelope.h": "5f2e75edb5de0d5f3c1979f9e86b5d51602106a5cdad67671abfce4b4ca9bcf8",
+    "src/generated/wf_ym_tables.h": "7ac19ea7ce1c8894ab1206f18d465d1944e06a4ef370f9edcbf9d5854eeb85e8",
+    "src/reference_driver/LICENSE": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5",
+    "src/reference_driver/z80-cold.c": "a03ba08502f60da762e712ae7eb52df6e401b09e781fbf64f7bec930b16c24fe",
+    "src/reference_driver/z80-native.c": "983bde9378737eeb6bdcf0ed9ff15a5b535ad55ed61ea87a84516b1613b04939",
+    "src/reference_driver/z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
+    "src/reference_driver/z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
+    "src/wf_audio2.c": "1849480ae2a54d16df44b200303426d7d8a87622d2ec7d718bd7619f82f998a9",
+    "src/wf_audio2_yaul.c": "205b831868ffc17886aa289ec3cecf31f72339f59b8ca3d35731c671abe0744f",
+    "src/wf_music_clock.h": "a38767302ea8a429a72c537e692096b95aafe8a5e936eb782af6aa60df7a7a41",
+    "src/wf_music_entry.S": "50a9841598c63362bda2c6031e21aaa36b42dd0cb0713add4cda9b5fe6df19cf",
+    "src/wf_music_firmware.c": "ce38aab82e96d6c2ffae55a38973728b7665916f48bc9164ea91e66446b30a2e",
+    "src/wf_music_m68k.ld": "414130549d44eb62dd7b78db32650cfcbed19e3905d6bd2f373ce7e7a0871d3f",
+    "src/wf_music_module.c": "c37928978cb38df5e9c891c4cd524b535948200dad0cdfd86b18746af0c9f790",
+    "src/wf_music_module.h": "07f202e820e734014beeb654dd3e2b352252fdb792a36b0e17bede0bbc8b327c",
+    "src/wf_music_seq.c": "bdcff61e26282376c6b2e3b2f7921ba389a6b938534e461e197995afef4876a7",
+    "src/wf_music_seq.h": "b02489430f5fb5eb97712c2a56d1636a4159358930cdcbf6244df0cbadf92471",
+    "src/wf_music_time.h": "5c3a5cccc72eee693fe2bb106cedb84cad1c81b0aa5e4ca4c2e5f00e95e5ef35",
+    "src/wf_native_driver.h": "b1da404b32f91bd4712ce73fcdcae01625b35516216ee264296545444435a4a0",
+    "src/wf_native_elf.c": "ea008822b7b0b11e2a868cf491d251e6e13910765e09caa35244a09e4235cf47",
+    "src/wf_native_elf.h": "f07f3e9b3f191f9e8b7870c0309369b1cc85adf13d38b27fea908c4662532c6e",
+    "src/wf_native_host.c": "27ef1f71d1e73e462d3ec3540189241140b4a11a5d431980b2c5c123616a7e48",
+    "src/wf_native_host.h": "e241729e56fd7afc2792911aaa582d7e6c01c307b809374e0de668849103f642",
+    "src/wf_native_yaul.c": "3969ce72255d525abc99982adb5f8cb25f05aad08eccdda8ba6520068001398e",
+    "src/wf_native_yaul.h": "5cb5f74695bbe1e6e7ed2b3547eae756280aea27f8978170026191ec5715e169",
+    "src/wf_scsp_dsp.c": "458e967bff7a77d9b16330e81b3c21062a5205ae53c233105d68fc4fffc9026c",
+    "src/wf_scsp_dsp.h": "27500764444a6856950ccf198fbd474cdf01512fdf2efbc4d34e55057e3e9d98",
+    "src/wf_scsp_sfx.c": "affe62d9865b6fc644733c80ad71b11463efdea57f64736140aee4aed7f53ad3",
+    "src/wf_scsp_sfx.h": "0150aeeb3c75e4aaa4ff0fcb49d2a6971d132d02b385f42f09b22f830034efa1",
+    "src/wf_scsp_ym.c": "c12ebda831820dcdf04b0be98830f52fda0843179e378385bd92638dfbfb3c76",
+    "src/wf_scsp_ym.h": "4ce9da4167d0f62b5e14d6b9231d9377ddc8333932a435eaa25bc9252fab0d72",
+    "src/wf_sfx_decode.S": "5e97ad36a59fd374886bf3aad571e231a302a2b5ba413a53cc1d72d7cb04bf48",
+    "src/wf_sfx_memory.c": "8e8731780facde86610b5d87c6b8c13c0c4fe24db82187a0c4e339832c560d6d",
+    "src/wf_sfx_start.S": "48773676b1df1f9c91ddd33c6426dd9317fa1561efd67f774ee991e864fe5fd8",
+    "src/wf_z80_control_batch.inc": "6775bdc1db5f94c73ed3dc2f35926fffa40fd21e6a2890a284ce6f0c7f6e2ee2",
+    "src/wf_z80_instrument_post.inc": "b9cd0af3069c405f2b63809c2e6d5157831a8cc84632868d8f3f6dec7fe31f53",
+    "src/wf_z80_instrument_pre.inc": "1353f99b38f72dfb7cc79858f14e16314cc6b90900a2cb8680557e9693197770",
+    "src/wf_z80_multiply.inc": "86dd0ae1b986a7c919f0074db6129833fe0b2ebdc946809d382c75f63d6a2642",
+    "src/wf_z80_startup_copy.inc": "67f4df15c8c115210f69779e8b5d937859002122332ff5bbecbf09ada86742e1"
+  },
+  "commands": [
+    {
+      "command": 1,
+      "hex": "0x01",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -24.178139017256747,
+        "saturn_rms_dbfs_analysis_mono": -25.301598624392128,
+        "saturn_minus_reference_rms_db": -1.1234596071353826,
+        "reference_peak": 7881,
+        "saturn_peak": 6948,
+        "raw_waveform_correlation": 0.22208527385616275,
+        "raw_waveform_error_rms": 0.07201333234940815,
+        "envelope_10ms_correlation": 0.5056991262197842,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 373.26627760306377,
+        "spectral_centroid_saturn_hz": 505.04943968341394,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.4947723173839957,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "98c5361696e835c5d30748e7f066d2fd8c06bf4f9005f4d44db8882bac7f5adb",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2153,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 1,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-01.wav": {
+          "bytes": 2646044,
+          "sha256": "43014d2a9ec3f9d8ffa15a7d95c5cc1a3b7e66e826ecf701eb74654a2c39b4a1"
+        },
+        "SATURN-AUDIO2-01.wav": {
+          "bytes": 5292044,
+          "sha256": "dcb41580b991ba0a3544fc7fd2aa270ffdb5a040a35f8cf2ad9e014560b43adc"
+        }
+      }
+    },
+    {
+      "command": 2,
+      "hex": "0x02",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -21.642943805865613,
+        "saturn_rms_dbfs_analysis_mono": -23.127242154613093,
+        "saturn_minus_reference_rms_db": -1.4842983487474828,
+        "reference_peak": 13034,
+        "saturn_peak": 11109,
+        "raw_waveform_correlation": 0.17839409952540444,
+        "raw_waveform_error_rms": 0.09799775936639668,
+        "envelope_10ms_correlation": 0.7893160740722873,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1150.52418675986,
+        "spectral_centroid_saturn_hz": 1639.8558686277952,
+        "spectral_log_power_rmse_db_40_to_16000hz": 5.315456093138279,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "208a3662188ee6fc3fa93f643b57523c0d2d77a835976291841cd53c8df1aaa0",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2289,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 2,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-02.wav": {
+          "bytes": 2646044,
+          "sha256": "a23a359a8fbb96f8619f8af46a3c5f9a71736bde93d34ba2a5d2908e9d20a087"
+        },
+        "SATURN-AUDIO2-02.wav": {
+          "bytes": 5292044,
+          "sha256": "c1450d52e612acc7c11a3f38128918fcb410c54cad61bee4e0a192925e5e7dba"
+        }
+      }
+    },
+    {
+      "command": 3,
+      "hex": "0x03",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -26.249217692795867,
+        "saturn_rms_dbfs_analysis_mono": -27.31757159449267,
+        "saturn_minus_reference_rms_db": -1.0683539016968053,
+        "reference_peak": 7992,
+        "saturn_peak": 6919,
+        "raw_waveform_correlation": 0.1026902872064666,
+        "raw_waveform_error_rms": 0.05879594952417597,
+        "envelope_10ms_correlation": 0.6209738914808417,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1840.4072923203694,
+        "spectral_centroid_saturn_hz": 2393.289312262811,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.819501488520276,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "42285491a05b3a3cd141121930f8f4674d6784b959c3d6096a1bfdabba2d9d74",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2035,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 3,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-03.wav": {
+          "bytes": 2646044,
+          "sha256": "1aeead7ad3ef6938c47ba585b1ad9996fb2e2f3bd7e474c54f69760ddeede152"
+        },
+        "SATURN-AUDIO2-03.wav": {
+          "bytes": 5292044,
+          "sha256": "1fe9d940fa22f8481df02613ab28be5fcad6ecb73df8a7b751386ee1ef6fdb37"
+        }
+      }
+    },
+    {
+      "command": 4,
+      "hex": "0x04",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -27.384491051253885,
+        "saturn_rms_dbfs_analysis_mono": -28.83964717616335,
+        "saturn_minus_reference_rms_db": -1.4551561249094669,
+        "reference_peak": 7432,
+        "saturn_peak": 5795,
+        "raw_waveform_correlation": 0.001757920688787725,
+        "raw_waveform_error_rms": 0.055875675355183826,
+        "envelope_10ms_correlation": 0.709781192419688,
+        "envelope_best_lag_ms_diagnostic_only": 10,
+        "spectral_centroid_reference_hz": 651.2103343129636,
+        "spectral_centroid_saturn_hz": 552.6266507633093,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.737883447703331,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "dcbeb741af6c863d3e8e38787bcbfa7efcad403e775dfcade9597b1706a85654",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2614,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 4,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-04.wav": {
+          "bytes": 2646044,
+          "sha256": "56bf44204d0fabcd7a24141d040e58916f7313976f9bb5eb044921ff24993a5d"
+        },
+        "SATURN-AUDIO2-04.wav": {
+          "bytes": 5292044,
+          "sha256": "62c60d16984aa5e8ec10ab1e24246690d9426460b6109a54ac17e23f12fca916"
+        }
+      }
+    },
+    {
+      "command": 5,
+      "hex": "0x05",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -32.19844754410953,
+        "saturn_rms_dbfs_analysis_mono": -33.40408081490322,
+        "saturn_minus_reference_rms_db": -1.2056332707936879,
+        "reference_peak": 13728,
+        "saturn_peak": 10691,
+        "raw_waveform_correlation": 0.15908233572514582,
+        "raw_waveform_error_rms": 0.029629986915005752,
+        "envelope_10ms_correlation": 0.9789087858343666,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1245.268481444747,
+        "spectral_centroid_saturn_hz": 1421.1810185920917,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.820114336815535,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "3cc4bab39aee186019f3f7cf44971fbbc6782d14edca79ca0ba1099b8a3dd8f8",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 176,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 5,
+        "DSPclock16": 56268,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-05.wav": {
+          "bytes": 2646044,
+          "sha256": "1ab90104c0572f6de50c3351f4c558059e4753889951f2eed9ef83665fdffe3b"
+        },
+        "SATURN-AUDIO2-05.wav": {
+          "bytes": 5292044,
+          "sha256": "3675457ad56f1bd4736377d86322cfc033cfd3486e86578c7d49c91f552bf914"
+        }
+      }
+    },
+    {
+      "command": 6,
+      "hex": "0x06",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -29.43038758308337,
+        "saturn_rms_dbfs_analysis_mono": -30.914659292891965,
+        "saturn_minus_reference_rms_db": -1.484271709808593,
+        "reference_peak": 7228,
+        "saturn_peak": 5483,
+        "raw_waveform_correlation": 0.00875748576956669,
+        "raw_waveform_error_rms": 0.04005216320121921,
+        "envelope_10ms_correlation": 0.512224152540517,
+        "envelope_best_lag_ms_diagnostic_only": 10,
+        "spectral_centroid_reference_hz": 1431.0642352207856,
+        "spectral_centroid_saturn_hz": 1725.3343783134465,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.82318226517569,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "b6610df6c70ba006b77dd616ab769fcd4b792743c9c816a46dd5b5d808792fee",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2721,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 6,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-06.wav": {
+          "bytes": 2646044,
+          "sha256": "94d683debe64fb72df30ce7de3c6db3ffd5812ed75c6f6f2233cf98788759320"
+        },
+        "SATURN-AUDIO2-06.wav": {
+          "bytes": 5292044,
+          "sha256": "b7d4884707583ffb3380a0d65588044bd5aeeeb3eab056e35af94452d8194f26"
+        }
+      }
+    },
+    {
+      "command": 7,
+      "hex": "0x07",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -27.348884899525782,
+        "saturn_rms_dbfs_analysis_mono": -28.860718968587044,
+        "saturn_minus_reference_rms_db": -1.5118340690612628,
+        "reference_peak": 7164,
+        "saturn_peak": 6089,
+        "raw_waveform_correlation": 0.073771752140092,
+        "raw_waveform_error_rms": 0.05205127120856327,
+        "envelope_10ms_correlation": 0.7235061114329768,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 821.9286022901952,
+        "spectral_centroid_saturn_hz": 775.5260402449793,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.5691737179505885,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "e01f83948cefcf2454653c635042e82dbe1c157b8c6e0543009ecea07db8c56c",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2081,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 7,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-07.wav": {
+          "bytes": 2646044,
+          "sha256": "10afc8f3b73d67a8888d69d80b8bf347a4dfee45236fbfeb3774a5d09b4fa8ff"
+        },
+        "SATURN-AUDIO2-07.wav": {
+          "bytes": 5292044,
+          "sha256": "330d62f95b7d092aea4cafbbe1a3c489ce47180f0ce0799058dcdb0e37a6efb9"
+        }
+      }
+    },
+    {
+      "command": 8,
+      "hex": "0x08",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -31.476991822392378,
+        "saturn_rms_dbfs_analysis_mono": -32.7804378516027,
+        "saturn_minus_reference_rms_db": -1.3034460292103254,
+        "reference_peak": 17260,
+        "saturn_peak": 10782,
+        "raw_waveform_correlation": 0.4821810529861172,
+        "raw_waveform_error_rms": 0.025322100031133454,
+        "envelope_10ms_correlation": 0.9875079075029027,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 983.0518384023713,
+        "spectral_centroid_saturn_hz": 1044.0231957946005,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.810457765857298,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "09393223e08e162dc01af3e4a602342668841b9d89027d5af5394b3148639c92",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2306,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 197,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 8,
+        "DSPclock16": 57005,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1545038,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-08.wav": {
+          "bytes": 2646044,
+          "sha256": "abac0c54b5c53b54eae8db79a04bffcbb90df4d638a6ce7c11ffb91ec6f3da41"
+        },
+        "SATURN-AUDIO2-08.wav": {
+          "bytes": 5292044,
+          "sha256": "b955365304d6088b7ac013c6cf0f8d6bd6cc29a5f8ca5f38d1b030ed336eff10"
+        }
+      }
+    },
+    {
+      "command": 9,
+      "hex": "0x09",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -26.822350157265326,
+        "saturn_rms_dbfs_analysis_mono": -28.136770504969412,
+        "saturn_minus_reference_rms_db": -1.3144203477040879,
+        "reference_peak": 9261,
+        "saturn_peak": 8765,
+        "raw_waveform_correlation": 0.8039937590556004,
+        "raw_waveform_error_rms": 0.025501890204700724,
+        "envelope_10ms_correlation": 0.9828769580277308,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1359.5336641351403,
+        "spectral_centroid_saturn_hz": 1719.9657768081292,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.750580697749996,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "71bfb5f0ad3d100072c6b5d39efa8f0e5794be43c80f50130a4054fdfaad4e2c",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2306,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 152,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 9,
+        "DSPclock16": 57004,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1545038,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-09.wav": {
+          "bytes": 2646044,
+          "sha256": "e2115d40652bb0e3b34a73bab03f74f261bc1a8ca939e2445a740ecfacb6f6ee"
+        },
+        "SATURN-AUDIO2-09.wav": {
+          "bytes": 5292044,
+          "sha256": "829e992aeee908a99d431c9814ec4033f0f003580d7ebebdece9f1ab98c045d7"
+        }
+      }
+    },
+    {
+      "command": 10,
+      "hex": "0x0A",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -29.167734296617155,
+        "saturn_rms_dbfs_analysis_mono": -30.416741156643955,
+        "saturn_minus_reference_rms_db": -1.2490068600267958,
+        "reference_peak": 6916,
+        "saturn_peak": 6326,
+        "raw_waveform_correlation": -0.20545723928160214,
+        "raw_waveform_error_rms": 0.05050384069327079,
+        "envelope_10ms_correlation": 0.9559754062074158,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 631.085603576757,
+        "spectral_centroid_saturn_hz": 540.6704481799355,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.0797288636076248,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "4a44fccd540daf8501297fa90c123489d3ce78269793e1c81c81ae0b87038955",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 1437,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 10,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-10.wav": {
+          "bytes": 2646044,
+          "sha256": "546f19bff352d36ac6882d9bee476e5cf6c9003356ce1d0f36f66cf23fe8245f"
+        },
+        "SATURN-AUDIO2-10.wav": {
+          "bytes": 5292044,
+          "sha256": "e41cede25395d9da6acab089a3cac1e96722618ed85202e2bdc9bdf7e54a716d"
+        }
+      }
+    },
+    {
+      "command": 11,
+      "hex": "0x0B",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -26.67105050664292,
+        "saturn_rms_dbfs_analysis_mono": -27.651889044377313,
+        "saturn_minus_reference_rms_db": -0.9808385377343884,
+        "reference_peak": 9238,
+        "saturn_peak": 7989,
+        "raw_waveform_correlation": -0.07314430166480483,
+        "raw_waveform_error_rms": 0.06190305145079248,
+        "envelope_10ms_correlation": 0.8240069940809235,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 846.9862747165232,
+        "spectral_centroid_saturn_hz": 781.5279974966022,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.9524048578843356,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "97960907d5af70b053236ec56db530cddd068ac0cf1a40dbdf2f66831e4dd0fa",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 1998,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 11,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-11.wav": {
+          "bytes": 2646044,
+          "sha256": "45bd80e5fe05c114359b5fbfb0c5724970202da2d956848cdb960f573e5f8072"
+        },
+        "SATURN-AUDIO2-11.wav": {
+          "bytes": 5292044,
+          "sha256": "3bb3835fae79ba2f13f1ed7c7cb6eb3fc5dc0546f40d2ef53cd176c8463116c1"
+        }
+      }
+    },
+    {
+      "command": 12,
+      "hex": "0x0C",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -27.44947733423671,
+        "saturn_rms_dbfs_analysis_mono": -28.425151130313694,
+        "saturn_minus_reference_rms_db": -0.9756737960769846,
+        "reference_peak": 8574,
+        "saturn_peak": 6720,
+        "raw_waveform_correlation": -0.19297575035622372,
+        "raw_waveform_error_rms": 0.06192797666744876,
+        "envelope_10ms_correlation": 0.9043767434414217,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 349.2587113392304,
+        "spectral_centroid_saturn_hz": 318.3434674281011,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.507561598472129,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "97c296b7b8fb81445245b6bacc2a6bc2b0c878a6d5923ef3f2033a6a4b11bc65",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 1973,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 12,
+        "DSPclock16": 56268,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-12.wav": {
+          "bytes": 2646044,
+          "sha256": "acb76e688a48897c92b649d2ac5b27c13a68d97ea73c5d1f527045346dd4494d"
+        },
+        "SATURN-AUDIO2-12.wav": {
+          "bytes": 5292044,
+          "sha256": "9f9b84df8e8f6fbc455c50f20ecee4d9f8a6ecf4179c674c022e5e80fa99ea95"
+        }
+      }
+    },
+    {
+      "command": 13,
+      "hex": "0x0D",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -22.188830477094612,
+        "saturn_rms_dbfs_analysis_mono": -23.128119143321577,
+        "saturn_minus_reference_rms_db": -0.939288666226965,
+        "reference_peak": 13974,
+        "saturn_peak": 12603,
+        "raw_waveform_correlation": 0.15356897742344155,
+        "raw_waveform_error_rms": 0.0960603860616441,
+        "envelope_10ms_correlation": 0.9418336848464485,
+        "envelope_best_lag_ms_diagnostic_only": 10,
+        "spectral_centroid_reference_hz": 633.8105772424176,
+        "spectral_centroid_saturn_hz": 865.552889082077,
+        "spectral_log_power_rmse_db_40_to_16000hz": 1.3198717599797871,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "4ec8ff2102248582e32a8345e9752d8c2594ca8bc724907691fd5b64601d3d6e",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 1028,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 13,
+        "DSPclock16": 56268,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-13.wav": {
+          "bytes": 2646044,
+          "sha256": "166d0a6f7717f8a9133a73026a4002ba63a900f971d4a48e5f8bcca09ce084cb"
+        },
+        "SATURN-AUDIO2-13.wav": {
+          "bytes": 5292044,
+          "sha256": "43a2dc3b7ca45697deef66c8b63686c2f5ee1433c3965d23934e69e757f64f28"
+        }
+      }
+    },
+    {
+      "command": 14,
+      "hex": "0x0E",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -18.617796436633707,
+        "saturn_rms_dbfs_analysis_mono": -19.696201295923807,
+        "saturn_minus_reference_rms_db": -1.0784048592901008,
+        "reference_peak": 14019,
+        "saturn_peak": 13457,
+        "raw_waveform_correlation": -0.06989562365769461,
+        "raw_waveform_error_rms": 0.15244739350494016,
+        "envelope_10ms_correlation": 0.6493504643281278,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 304.9396261752952,
+        "spectral_centroid_saturn_hz": 344.8384799655419,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.904250823525861,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "13e9fd324eb7dc770c24e7d9a2a1cacdff726cfbc7b7ff537a1462679b065387",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 1668,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 14,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-14.wav": {
+          "bytes": 2646044,
+          "sha256": "537b7c56ef7709b930ea52b92c334d850c3a8feb03ff18dbf0e4a529b9fb3107"
+        },
+        "SATURN-AUDIO2-14.wav": {
+          "bytes": 5292044,
+          "sha256": "53cd6c9f9cf2f7b37f99c4d6463820f30d771b55dad66f0d7a366ddcb970e3d7"
+        }
+      }
+    },
+    {
+      "command": 15,
+      "hex": "0x0F",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -26.83624257767688,
+        "saturn_rms_dbfs_analysis_mono": -28.262585758783345,
+        "saturn_minus_reference_rms_db": -1.4263431811064642,
+        "reference_peak": 11885,
+        "saturn_peak": 9054,
+        "raw_waveform_correlation": -0.16091291791801549,
+        "raw_waveform_error_rms": 0.06296816337335162,
+        "envelope_10ms_correlation": 0.7281064514414811,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 437.6965855716419,
+        "spectral_centroid_saturn_hz": 441.49944848485086,
+        "spectral_log_power_rmse_db_40_to_16000hz": 3.4792056708723305,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "57efa0748d3e2ad97b9f2c2b1f5c8407cfec8361dedc5408eea4fe77d315441f",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2306,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2083,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 15,
+        "DSPclock16": 57005,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1545038,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-15.wav": {
+          "bytes": 2646044,
+          "sha256": "fc2270b1181b1958b6ee15d624342877442eb2c55f17e62b7326c32e8455ad0f"
+        },
+        "SATURN-AUDIO2-15.wav": {
+          "bytes": 5292044,
+          "sha256": "5ad1702cc6c99a6758b063ed76a27ae5b232eea54ae9437e614010d8186b554d"
+        }
+      }
+    },
+    {
+      "command": 16,
+      "hex": "0x10",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -30.84555984537262,
+        "saturn_rms_dbfs_analysis_mono": -31.660129942552743,
+        "saturn_minus_reference_rms_db": -0.8145700971801235,
+        "reference_peak": 7444,
+        "saturn_peak": 6497,
+        "raw_waveform_correlation": -0.22705425232293439,
+        "raw_waveform_error_rms": 0.04284559108944905,
+        "envelope_10ms_correlation": 0.6633137021540209,
+        "envelope_best_lag_ms_diagnostic_only": 10,
+        "spectral_centroid_reference_hz": 653.319645650184,
+        "spectral_centroid_saturn_hz": 602.5910529907353,
+        "spectral_log_power_rmse_db_40_to_16000hz": 1.9636618103947718,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "e45f5dba7c96d6ad19a96b0ac7d1bfa7d9fc12d5f7339592f5a250d59ba11f87",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 1819,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 16,
+        "DSPclock16": 56267,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-16.wav": {
+          "bytes": 2646044,
+          "sha256": "a6e77ec244da0ceef1fa2f6fc3518b632f1b5a98a42f8eab69630749552be603"
+        },
+        "SATURN-AUDIO2-16.wav": {
+          "bytes": 5292044,
+          "sha256": "4c1212ac1126da9ff2f15428ef0b43f04604e0ef3cefcba2ec91401d3f427f6f"
+        }
+      }
+    },
+    {
+      "command": 17,
+      "hex": "0x11",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -24.112322978646276,
+        "saturn_rms_dbfs_analysis_mono": -25.276796558238566,
+        "saturn_minus_reference_rms_db": -1.16447357959229,
+        "reference_peak": 11082,
+        "saturn_peak": 11273,
+        "raw_waveform_correlation": -0.23167899024118427,
+        "raw_waveform_error_rms": 0.0909753856115846,
+        "envelope_10ms_correlation": 0.7212554085377434,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 1002.2494204763937,
+        "spectral_centroid_saturn_hz": 1055.4148455305774,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.484308076441211,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "978edd5e615e10f990688a922d3032d7c1b191fe358d73c7000ce0f337e132d2",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2306,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2367,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 17,
+        "DSPclock16": 57005,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1545038,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-17.wav": {
+          "bytes": 2646044,
+          "sha256": "dd96b101f9e758404c112c150b995f2c88156af0f3f72eb811102ff5eb30deeb"
+        },
+        "SATURN-AUDIO2-17.wav": {
+          "bytes": 5292044,
+          "sha256": "cab1c74949f36807163fc21f85796856a83271336016f80156bf3016a6c0071d"
+        }
+      }
+    },
+    {
+      "command": 18,
+      "hex": "0x12",
+      "status": "complete",
+      "passed_runtime_gates": true,
+      "pair_available": true,
+      "metrics": {
+        "reference_rms_dbfs": -25.022574845682723,
+        "saturn_rms_dbfs_analysis_mono": -26.511699801539006,
+        "saturn_minus_reference_rms_db": -1.4891249558562822,
+        "reference_peak": 10311,
+        "saturn_peak": 8343,
+        "raw_waveform_correlation": 0.1296566690845293,
+        "raw_waveform_error_rms": 0.06299360059892939,
+        "envelope_10ms_correlation": 0.787110075342834,
+        "envelope_best_lag_ms_diagnostic_only": 0,
+        "spectral_centroid_reference_hz": 554.5414114368684,
+        "spectral_centroid_saturn_hz": 563.938914264747,
+        "spectral_log_power_rmse_db_40_to_16000hz": 2.8792207110755186,
+        "clipped_reference_samples": 0,
+        "clipped_saturn_samples": 0
+      },
+      "comparison_sha256": "10a8fa2c2889b913411a19fd6b1af8eb33df9316b989723c2f43c29d10348733",
+      "native_gates": {
+        "real_module_entered": true,
+        "requested_window_completed": true,
+        "no_reported_worker_error": true,
+        "no_reported_api_error": true,
+        "no_reported_fm_discard": true,
+        "no_reported_rejected_events": true,
+        "no_reported_pcm_underrun": true,
+        "no_reported_transport_lateness": true,
+        "worker_still_running": true,
+        "native_still_ready": true
+      },
+      "diagnostics": {
+        "magic": 1464222002,
+        "state": 4,
+        "videoFrames": 2305,
+        "error": 0,
+        "commandStartFrame": 210,
+        "musicState": 2,
+        "musicEvents": 2380,
+        "batchB03A": 0,
+        "lateB028": 0,
+        "sfxUnderruns32": 0,
+        "lastCommand": 18,
+        "DSPclock16": 56268,
+        "diagAddress": 638239260,
+        "mailState": 2,
+        "FMdiscardEvents": 0,
+        "discardBatches": 0,
+        "rejectedFM": 0,
+        "ringRejected": 0,
+        "SCSPelapsed": 1544301,
+        "APIstate": 2,
+        "APIerror": 0,
+        "commandDSPclock": 19294,
+        "replayAccepted": 0,
+        "replayExpected": 0
+      },
+      "additional_gates": {
+        "firmware_first512_matches": true,
+        "native_wav_finalized": true,
+        "selected_emulator_identity": true,
+        "no_expansion_cartridge": true
+      },
+      "artifacts": {
+        "ARCADE-REFERENCIA-18.wav": {
+          "bytes": 2646044,
+          "sha256": "3a4bd3070cb5a77ed7287243927be5f9e41b9b9dc7086c5db52099dd3fa18c9a"
+        },
+        "SATURN-AUDIO2-18.wav": {
+          "bytes": 5292044,
+          "sha256": "6aee387d0ace3a9699b749254381930d626790e0bfd82cd291c792715509399a"
+        }
+      }
+    }
+  ]
+}
