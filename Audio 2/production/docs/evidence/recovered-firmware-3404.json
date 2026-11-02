@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "recovery_builds_exact": true,
+  "source_stable": true,
+  "base_source_unchanged": true,
+  "source_files": 485,
+  "source_sha256": {
+    "src/wf_scsp_sfx.c": "74578e6610677070e46ca4208f1b16abfef29b99060f8a4543118abe0d4a50e5",
+    "src/reference_driver/z80-native.c": "d9bd93a7cfdf8e5dbb022bce6df1dc132e6caf7e9c3c05a18e75e2debd9602e0",
+    "src/wf_music_seq.c": "8d833f42349267376e0d29ff5b2c0db0fa31af5c544252e7306e87ec7bfd66bc",
+    "src/wf_music_module.c": "4514091b2ce9019b6ba7ed62ea8fcf65d9c658a6a857bae498a6a2fbc0052b69"
+  },
+  "firmwares": {
+    "cddd": {
+      "elf_sha256": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+      "firmware_report_sha256": "f4d2ae21b5d1596f9b3b1aa851d9d92ec777eef865bf53cf6806ebb504d6aac4",
+      "map_sha256": "e855625ae570541ba8605582f865776d2aabfd3b2bf6a2b63bc8d59ae8480c1e",
+      "load_spans": [
+        [
+          0,
+          12200
+        ],
+        [
+          49408,
+          65344
+        ],
+        [
+          65536,
+          74752
+        ]
+      ],
+      "expected_loaded_soundram_sha256": "2d97f88c8147b5c8edd451093006e51dcf3da1bf58eb0bdce72f05f6e2d5fead",
+      "bss_zero": true,
+      "pcm_rings_zero_before_runtime": true,
+      "stack_zero_before_runtime": true,
+      "low_segment_headroom_bytes": 88,
+      "bss_headroom_bytes": 192,
+      "start_stack_usage": [
+        "96",
+        "dynamic,bounded"
+      ],
+      "stack_usage": {
+        "be32": [
+          "4",
+          "static"
+        ],
+        "put": [
+          "16",
+          "dynamic,bounded"
+        ],
+        "fill": [
+          "44",
+          "dynamic,bounded"
+        ],
+        "work_count": [
+          "40",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_configure_pcm": [
+          "8",
+          "static"
+        ],
+        "wf_scsp_sfx_decode": [
+          "20",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_pack_valid": [
+          "36",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_init": [
+          "0",
+          "static"
+        ],
+        "wf_scsp_sfx_stop": [
+          "36",
+          "dynamic,bounded"
+        ],
+        "start": [
+          "96",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_stop_all": [
+          "20",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_bind": [
+          "24",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_prepare_step": [
+          "44",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_prepare": [
+          "28",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_oki_start": [
+          "28",
+          "dynamic,bounded"
+        ],
+        "fire": [
+          "40",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_oki_start_prepared": [
+          "12",
+          "static"
+        ],
+        "wf_scsp_sfx_command": [
+          "32",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_advance": [
+          "36",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_work": [
+          "8",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_work_budget": [
+          "0",
+          "static"
+        ]
+      }
+    },
+    "3404": {
+      "elf_sha256": "3404eac10581871b4afe5ee30d1c58e415430db263845228c5c82ddec7647749",
+      "firmware_report_sha256": "0c9507a7cb18e2886e50effdfa2f3158be6d8e7decf2a306d54ca9de924e2bff",
+      "map_sha256": "729f3bf5d08cceff8c157da1e58eec3c204af7c211fdf84195e26857bd8dbfa0",
+      "load_spans": [
+        [
+          0,
+          12218
+        ],
+        [
+          49408,
+          65344
+        ],
+        [
+          65536,
+          74752
+        ]
+      ],
+      "expected_loaded_soundram_sha256": "6a02d66c5347e03181c94bdb8ea3d25fa36a4e637c727b0e3099d81735935c6b",
+      "bss_zero": true,
+      "pcm_rings_zero_before_runtime": true,
+      "stack_zero_before_runtime": true,
+      "low_segment_headroom_bytes": 70,
+      "bss_headroom_bytes": 192,
+      "start_stack_usage": [
+        "96",
+        "dynamic,bounded"
+      ],
+      "stack_usage": {
+        "be32": [
+          "4",
+          "static"
+        ],
+        "put": [
+          "16",
+          "dynamic,bounded"
+        ],
+        "fill": [
+          "44",
+          "dynamic,bounded"
+        ],
+        "work_count": [
+          "40",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_configure_pcm": [
+          "8",
+          "static"
+        ],
+        "wf_scsp_sfx_decode": [
+          "20",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_pack_valid": [
+          "36",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_init": [
+          "0",
+          "static"
+        ],
+        "wf_scsp_sfx_stop": [
+          "36",
+          "dynamic,bounded"
+        ],
+        "start": [
+          "96",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_stop_all": [
+          "20",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_bind": [
+          "24",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_prepare_step": [
+          "44",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_prepare": [
+          "28",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_oki_start": [
+          "28",
+          "dynamic,bounded"
+        ],
+        "fire": [
+          "40",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_oki_start_prepared": [
+          "12",
+          "static"
+        ],
+        "wf_scsp_sfx_command": [
+          "32",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_advance": [
+          "36",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_work": [
+          "8",
+          "dynamic,bounded"
+        ],
+        "wf_scsp_sfx_work_budget": [
+          "0",
+          "static"
+        ]
+      }
+    }
+  },
+  "scope": "Bit-identical recreated ELF files, checked segment bounds and a zero-initialized 512KiB projection of ELF load segments only. Unspecified RAM gaps are zero for analysis, not observed hardware/Mednafen state. Actual loaded Sound RAM and lost native captures must be measured again.",
+  "real_loaded_sound_ram_verified": false,
+  "projection_zero_initialization_is_an_analysis_assumption": true,
+  "previous_native_capture_files_restored": false
+}

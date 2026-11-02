@@ -1,5 +1,7 @@
 # WWF WrestleFest — Audio 2 — entrega independiente
 
+> **Disponibilidad de capturas, 2026-11-02:** se perdieron archivos privados recientes y se están regenerando. Los resultados históricos conservados no significan que sus WAV sigan disponibles. El ZIP musical antiguo contiene fragmentos de 30 s. Véase [recuperación y nuevas pruebas](docs/RECOVERY-2026-11-02.md).
+
 **Estado: desarrollo verificable; NO PRODUCTION READY. HARDWARE PENDING.**
 
 Esta carpeta consolida y corrige Audio 2 desde `audio-2` / `db18be40a1d79de200408207573e9f45bf73bf2c`. El nombre de la rama `audio-2-production-ready` identifica la rama de entrega solicitada; no certifica su estado. R04 y las implementaciones históricas permanecen intactos.

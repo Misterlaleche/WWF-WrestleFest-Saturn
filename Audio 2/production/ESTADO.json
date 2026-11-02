@@ -151,7 +151,7 @@
     "scope": "new tooling regression only; separate 600-second runtime result retained"
   },
   "private_delivery_update": "Existing private music/SFX/mix downloads retained; automatic approval rejected replacing the private SFX ZIP; latest metadata/artifact publication requires explicit owner approval of destination",
-  "session_state": "ISOLATED_AUDIO_CORRECTION_IN_PROGRESS",
+  "session_state": "REGENERATING_PRIVATE_COMPLETE_CAPTURES",
   "private_delivery_report": "docs/evidence/private-delivery-status.json",
   "next_actions": [
     "Generate, audit and package all 18 complete WAV pairs and the original transition/active-fade comparisons",
@@ -386,5 +386,22 @@
     "private_upload_completed": false,
     "owner_listening_approval": "PENDING",
     "candidate_firmware": "cddd"
+  },
+  "recovery_2026_11_02": {
+    "source_checkpoint": "ef18d341c63e848ea813faa60c1a0da4b9a22e73",
+    "source_files_exactly_restored": 485,
+    "previous_raw_recent_wavs_available": false,
+    "previous_long_3404_final_report_verified": false,
+    "recovered_control_elf": "cddd1b01a4e277a8d8f82f16445dbc81dd8e50ab5a13c133fdeb25ef8353c090",
+    "recovered_candidate_elf": "3404eac10581871b4afe5ee30d1c58e415430db263845228c5c82ddec7647749",
+    "fresh_host_groups_passed": 14,
+    "fresh_active_fades_passed": [
+      5,
+      8,
+      9
+    ],
+    "fresh_long_native_status": "IN_PROGRESS",
+    "old_private_music_zip_seconds_per_pair": 30,
+    "report": "docs/RECOVERY-2026-11-02.md"
   }
 }

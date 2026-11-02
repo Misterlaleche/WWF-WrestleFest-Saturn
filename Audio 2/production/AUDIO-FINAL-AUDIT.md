@@ -1,5 +1,7 @@
 # Audio 2 — auditoría de entrega
 
+> **Disponibilidad de capturas, 2026-11-02:** se perdieron archivos privados recientes y se están regenerando. Los resultados históricos conservados no significan que sus WAV sigan disponibles. El ZIP musical antiguo contiene fragmentos de 30 s. Véase [recuperación y nuevas pruebas](docs/RECOVERY-2026-11-02.md).
+
 **Estado: NOT PRODUCTION READY. HARDWARE PENDING.**
 
 El nombre de la rama `audio-2-production-ready` identifica el encargo, no una certificación. Esta entrega conserva un motor nativo ejecutable, herramientas de regeneración y evidencia positiva y negativa. Los criterios pendientes o fallidos no se convierten en aprobados por disponer de una API, un ELF o un estado `RUNNING`.
