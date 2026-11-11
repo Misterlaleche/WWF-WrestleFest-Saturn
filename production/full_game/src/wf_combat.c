@@ -1,7 +1,48 @@
 #include "wf_combat.h"
 #include "wf_r18_referee.h"
 #include "wf_r18_match_result.h"
+#include "wf_r18_present.h"
+#include "wf_r18_rom_hot_pages.h"
+#include "wp1980_royal_rom_pages.h"
 #include <string.h>
+wf_status_t wf_combat_preload_pages(unsigned royal){
+ if(!royal){
+  wf_status_t st=wf_r18_rom_pages_preload(wf_r18_rom_hot_pages,sizeof wf_r18_rom_hot_pages/2);
+#ifdef WF_COMBAT_TAG_TRANSPORT
+  /* Original14 pinned pages plus the9 demands observed through the
+   * integrated match's real finish. Keep all original LWRAM pages. */
+  static const uint16_t pages[]={48,129,156,162,163,165,227,231,241,243,249,261,283,285,286,287,289,292,294,352,376,418,419};
+  return st==WF_OK?wf_r18_rom_extra_pages_preload(pages,sizeof pages/2):st;
+#else
+  return st==WF_OK?wf_r18_rom_extra_pages_preload(wf_r18_rom_tag_extra_pages,sizeof wf_r18_rom_tag_extra_pages/2):st;
+#endif
+ }
+#ifdef WF_COMBAT_BASE_ROYAL
+ /* Keep all198 original main pages and39 fast pages. The integrated
+  * lineup adds16 pinned pages; its smaller atlas frees their HWRAM. */
+ static const uint16_t added[]={129,318,323,324,325,326,327,328,329,330,331,332,334,335,337,338};
+ _Static_assert(sizeof wp1980_rom_fast_pages/2+sizeof added/2<=55,"Royal fast ROM lease");
+ uint16_t pages[55];unsigned i=0,j=0,n=0;
+ while(i<sizeof wp1980_rom_fast_pages/2||j<sizeof added/2){
+  if(j==sizeof added/2||(i<sizeof wp1980_rom_fast_pages/2&&wp1980_rom_fast_pages[i]<added[j]))pages[n++]=wp1980_rom_fast_pages[i++];
+  else pages[n++]=added[j++];
+ }
+ wf_status_t st=wf_r18_rom_pages_preload(wp1980_rom_main_pages,sizeof wp1980_rom_main_pages/2);
+ return st==WF_OK?wf_r18_rom_extra_pages_preload(pages,n):st;
+#else
+ /* Preserve HW1's entire237-page Royal set. The universal lease has209
+  * LWRAM slots: move the last11 of39 fast pages there, leaving28 in HWRAM.
+  * Only immutable residency changes; misses outside the set still stream. */
+ _Static_assert(sizeof wp1980_rom_main_pages/2==198&&sizeof wp1980_rom_fast_pages/2==39,"locked HW1 Royal page sets");
+ uint16_t pages[209];unsigned i=0,j=28,n=0;
+ while(i<198||j<39){
+  if(j==39||(i<198&&wp1980_rom_main_pages[i]<wp1980_rom_fast_pages[j]))pages[n++]=wp1980_rom_main_pages[i++];
+  else pages[n++]=wp1980_rom_fast_pages[j++];
+ }
+ wf_status_t st=wf_r18_rom_pages_preload(pages,n);
+ return st==WF_OK?wf_r18_rom_extra_pages_preload(wp1980_rom_fast_pages,28):st;
+#endif
+}
 static uint32_t read32(const uint8_t*p){return (uint32_t)p[0]<<24|(uint32_t)p[1]<<16|p[2]<<8|p[3];}
 wf_status_t wf_combat_read_ram(wf_runtime_t*r,uint32_t at,uint16_t*v,void*u){
  if(!r||!v)return WF_BAD_STATE;

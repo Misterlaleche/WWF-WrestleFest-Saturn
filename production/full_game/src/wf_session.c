@@ -56,11 +56,15 @@ wf_status_t wf_session_step(wf_session_t *s){
  if(result==WF_R18_DRIVER_HANDOFF)s->phase=WF_SESSION_MATCH_READY;
  return WF_OK;
 }
+wf_status_t wf_session_bind_match(wf_session_t *s){
+ if(!s||!s->initialized||s->frontend.phase!=WF_R18_DRIVER_AC0)return WF_BAD_STATE;
+ return wf_r18_match_driver_init(&s->match,&s->frontend,extension,s);
+}
 wf_status_t wf_session_prepare_match(wf_session_t *s){
  if(!s||!s->initialized)return WF_BAD_STATE;
  if(s->phase==WF_SESSION_FATAL)return WF_BLOCKED;
  if(s->phase!=WF_SESSION_MATCH_READY)return WF_BAD_STATE;
- if(wf_r18_match_driver_init(&s->match,&s->frontend,extension,s)!=WF_OK)
+ if(wf_session_bind_match(s)!=WF_OK)
   return fail(s,0xac0u,s->frontend.pc);
  wf_status_t status=wf_r18_match_driver_run(&s->match);
  if(s->match.generation!=s->frontend.generation&&

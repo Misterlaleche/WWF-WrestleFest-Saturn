@@ -1,0 +1,9 @@
+#ifndef WF_SATURN_FRONT_RESOURCE_PACK_H
+#define WF_SATURN_FRONT_RESOURCE_PACK_H
+#include "wf_assets.h"
+extern const wf_asset_io_t wf_front_asset_io;
+extern volatile uint32_t wf_front_pack_reads,wf_front_pack_sectors,wf_front_pack_decoded_bytes,
+ wf_front_pack_decode_calls,wf_front_pack_cache_hits,wf_front_pack_partial_reads,
+ wf_front_pack_read_fields,wf_front_pack_decode_fields,wf_front_pack_error;
+void wf_front_resource_pack_invalidate(void);
+#endif

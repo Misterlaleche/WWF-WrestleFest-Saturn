@@ -3,7 +3,7 @@
 import argparse,hashlib,importlib.util,json
 from pathlib import Path
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('iso',type=Path);p.add_argument('output',type=Path)
-p.add_argument('--asset',choices=['SELPAL.BIN','FRONT.TEX'],default='SELPAL.BIN');a=p.parse_args()
+p.add_argument('--asset',choices=['SELPAL.BIN','FRONT.TEX','ENTRY.TEX'],default='SELPAL.BIN');a=p.parse_args()
 a.output.mkdir(parents=True,exist_ok=False)
 data=bytearray(a.iso.read_bytes());pvd=data[16*2048:17*2048]
 assert pvd[1:6]==b'CD001'

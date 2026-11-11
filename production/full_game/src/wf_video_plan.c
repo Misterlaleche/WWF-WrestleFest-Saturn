@@ -6,13 +6,19 @@ bool wf_video_plan_map(wf_video_plan_t*p,unsigned layer,const uint8_t*raw,bool(*
  if(!p||layer>1||!raw||!upload)return false;
  memset(p->needed,0,sizeof p->needed);
  for(unsigned i=0;i<1024;i++){unsigned code=rw(raw+(layer?i*4+2:i*2))&4095;p->needed[code]=1;}
- unsigned hand=0;
+ unsigned hand=0,free_hand=0;
  for(unsigned i=0;i<1024;i++){
   unsigned attr=rw(raw+(layer?i*4:i*2)),code=(layer?rw(raw+i*4+2):attr)&4095;
   unsigned slot=p->code_slot[layer][code];
   if(slot==65535){
-   while(hand<1024&&p->slot_code[layer][hand]!=65535&&p->needed[p->slot_code[layer][hand]])hand++;
-   if(hand==1024)return false;slot=hand++;
+   /* The previous map is still displayed until this one is uploaded. Use
+    * empty slots first so a small animation does not overwrite its tiles. */
+   while(free_hand<1024&&p->slot_code[layer][free_hand]!=65535)free_hand++;
+   if(free_hand<1024)slot=free_hand++;
+   else{
+    while(hand<1024&&p->slot_code[layer][hand]!=65535&&p->needed[p->slot_code[layer][hand]])hand++;
+    if(hand==1024)return false;slot=hand++;
+   }
    if(!upload(u,layer,slot,code))return false;
    unsigned old=p->slot_code[layer][slot];if(old!=65535)p->code_slot[layer][old]=65535;
    p->slot_code[layer][slot]=(uint16_t)code;p->code_slot[layer][code]=(uint16_t)slot;

@@ -3,10 +3,40 @@
 #include "wf_live_video.h"
 #include "wf_video_plan.h"
 #include "wf_cd.h"
+#ifdef WF_FRONT_RESOURCE_PACK
+#include "wf_front_resource_pack.h"
+#define video_io wf_front_asset_io
+#else
+#define video_io wf_cd_asset_io
+#endif
 #include "wf_assets.h"
 #include "assets.h"
 #include "wf_workspace.h"
+#include "wf_startup_notice.h"
+#include "wf_platform.h"
+#include "wf_post_atlas.h"
+#ifdef WF_FINALE_SPRITE_COUNT
+#include "wf_finale_atlas.h"
+#endif
 #define COMMANDS 1028
+#ifdef WF_POST_SPRITE_BYTES
+#define TEXTURE_BYTES (WF_POST_ATLAS_MAX_TILES*128u)
+_Static_assert(WF_POST_SPRITE_BYTES==WF_POST_ATLAS_STATIC_MAX*128u,"Canonical POST atlas size");
+_Static_assert(WF_FRONT_SPRITE_BYTES<=TEXTURE_BYTES,"Frontend atlas fits the shared texture lease");
+static wf_post_atlas_t post_atlas;
+#ifdef WF_POST_DEDUP
+_Static_assert(WF_POST_DEDUP_PHYSICAL_SLOTS==WF_POST_ATLAS_STATIC_MAX,"POST physical base unchanged");
+_Static_assert(WF_POST_DEDUP_LOGICAL_COUNT==sizeof wf_post_sprite_ids/sizeof *wf_post_sprite_ids,"POST logical count");
+_Static_assert(sizeof wf_post_sprite_slots==sizeof wf_post_sprite_ids,"POST parallel mapping");
+#define POST_MAPPING wf_post_sprite_slots
+#define POST_MAPPING_COUNT WF_POST_DEDUP_LOGICAL_COUNT
+#else
+#define POST_MAPPING NULL
+#define POST_MAPPING_COUNT 0u
+#endif
+#else
+#define TEXTURE_BYTES WF_FRONT_SPRITE_BYTES
+#endif
 #define plan (wf_workspace.front.plan)
 #define previous_bg (wf_workspace.front.previous_bg)
 #define previous_text (wf_workspace.front.previous_text)
@@ -15,16 +45,24 @@
 #define tile_stage (wf_workspace.front.tile_stage)
 #define stage (wf_workspace.front.stage)
 #define commands (wf_workspace.front.commands)
-static bool valid_maps,map_ready[2];
+static bool valid_maps,map_ready[2],map_dirty[2];
 static vdp1_vram_partitions_t partitions;
 static bool submitted,hidden=true;
 volatile uint32_t wf_render_work,wf_render_wait;
 volatile uint32_t wf_video_error,wf_video_commits,wf_video_sprites,wf_video_tile,wf_video_atlas;
-static const struct {const char*name;const uint16_t*ids;unsigned count,bytes;uint32_t crc;} atlases[]={
- {"FRONT.TEX",wf_front_sprite_ids,sizeof wf_front_sprite_ids/2,WF_FRONT_SPRITE_BYTES,WF_FRONT_CRC},
- {"ENTRY.TEX",wf_entry_sprite_ids,sizeof wf_entry_sprite_ids/2,WF_ENTRY_SPRITE_BYTES,WF_ENTRY_CRC},
- {"RING.TEX",wf_ring_sprite_ids,sizeof wf_ring_sprite_ids/2,WF_RING_SPRITE_BYTES,WF_RING_CRC}};
+static const struct {const char*name;const uint16_t*ids;unsigned count,bytes,file_bytes;uint32_t crc;} atlases[]={
+ {"FRONT.TEX",wf_front_sprite_ids,sizeof wf_front_sprite_ids/2,WF_FRONT_SPRITE_BYTES,WF_FRONT_SPRITE_BYTES,WF_FRONT_CRC},
+ {"ENTRY.TEX",wf_entry_sprite_ids,sizeof wf_entry_sprite_ids/2,WF_ENTRY_SPRITE_BYTES,WF_ENTRY_SPRITE_BYTES,WF_ENTRY_CRC},
+ {"RING.TEX",wf_ring_sprite_ids,sizeof wf_ring_sprite_ids/2,WF_RING_SPRITE_BYTES,WF_RING_SPRITE_BYTES,WF_RING_CRC}
+#ifdef WF_POST_SPRITE_BYTES
+ ,{"POST.TEX",wf_post_sprite_ids,sizeof wf_post_sprite_ids/2,WF_POST_SPRITE_BYTES,WF_POST_FILE_BYTES,WF_POST_TEXTURE_CRC}
+#endif
+ };
 static bool atlas_loaded;
+#if defined(WF_FIXED_ATTRACT) && WF_FIXED_ATTRACT
+static bool program_valid;
+bool wf_live_video_program_load(void);
+#endif
 static const vdp2_scrn_t screens[3]={VDP2_SCRN_NBG0,VDP2_SCRN_NBG1,VDP2_SCRN_NBG2};
 static const uintptr_t maps[3]={0x25e60000,0x25e62000,0x25e64000};
 static unsigned rw(const uint8_t*p){return (p[0]<<8)|p[1];}
@@ -39,7 +77,7 @@ static bool equal(const void*a,const void*b,unsigned n){
 }
 static void transfer(void*dst,const void*src,unsigned n){scu_dma_transfer(0,dst,src,n);scu_dma_transfer_wait(0);}
 static bool file(const char*name,void*dst,unsigned n,uint32_t crc){
- uint32_t size;if(wf_cd_asset_io.size(NULL,name,&size)||size!=n||wf_cd_asset_io.read(NULL,name,0,dst,n))return false;
+ uint32_t size;if(video_io.size(NULL,name,&size)||size!=n||video_io.read(NULL,name,0,dst,n))return false;
  return wf_assets_crc32(dst,n)==crc;
 }
 static bool upload(void*u __unused,unsigned layer,unsigned slot,unsigned code){
@@ -51,11 +89,11 @@ static bool upload(void*u __unused,unsigned layer,unsigned slot,unsigned code){
 void wf_live_video_reveal(void){hidden=false;}
 void wf_live_video_hide(void){hidden=true;vdp2_tvmd_display_clear();vdp2_sync();vdp2_sync_wait();}
 void wf_live_video_finish(void){wf_live_video_hide();if(submitted){vdp1_sync_wait();submitted=false;}scu_dma_transfer_wait(0);}
-bool wf_live_video_init(void){
+static bool live_video_init(bool startup){
  wf_live_video_hide();wf_video_plan_init(&plan);
  vdp2_tvmd_display_res_set(VDP2_TVMD_INTERLACE_NONE,VDP2_TVMD_HORZ_NORMAL_A,VDP2_TVMD_VERT_240);vdp2_cram_mode_set(2);
  const vdp1_env_t env={.bpp=VDP1_ENV_BPP_16,.rotation=VDP1_ENV_ROTATION_0,.color_mode=VDP1_ENV_COLOR_MODE_PALETTE,.sprite_type=0,.erase_color=RGB1555_INITIALIZER(0,0,0,0),.erase_points={INT16_VEC2_INITIALIZER(0,0),INT16_VEC2_INITIALIZER(319,239)}};
- vdp1_env_set(&env);vdp1_vram_partitions_set(COMMANDS,WF_FRONT_SPRITE_BYTES,0,0);vdp1_vram_partitions_get(&partitions);
+ vdp1_env_set(&env);vdp1_vram_partitions_set(COMMANDS,TEXTURE_BYTES,0,0);vdp1_vram_partitions_get(&partitions);
  vdp1_sync_interval_set(-1);vdp1_sync_mode_set(VDP1_SYNC_MODE_CHANGE_ONLY);vdp2_sprite_priority_set(0,3);
  vdp2_scrn_back_color_set(VDP2_VRAM_ADDR(3,0x1fffe),RGB1555(1,0,0,0));
  for(unsigned i=0;i<3;i++){
@@ -64,43 +102,129 @@ bool wf_live_video_init(void){
   vdp2_scrn_cell_format_set(&fmt,&map);vdp2_scrn_scroll_x_set(screens[i],0);vdp2_scrn_scroll_y_set(screens[i],FIX16(8));vdp2_scrn_priority_set(screens[i],i==2?5:i+1);
  }
  vdp2_vram_cycp_t cycles;cycles.pt[0].raw=0x4FEEEEEE;cycles.pt[1].raw=0x5FEEEEEE;cycles.pt[2].raw=0x6FFFEEEE;cycles.pt[3].raw=0x012FEEEE;vdp2_vram_cycp_set(&cycles);
- if(!file("PROGRAM.BIN",(void*)0x00200000,0x80000,WF_PROGRAM_CRC)||!file("BACK.TEX",(void*)0x00280000,0x80000,WF_BACK_CRC)){wf_video_error=1;return false;}
+ if(startup&&wf_cart_valid)wf_startup_notice_begin(wf_cart_id,wf_cart_bytes);
+ #if defined(WF_FIXED_ATTRACT) && WF_FIXED_ATTRACT
+ if(!wf_live_video_program_load()||!file("BACK.TEX",(void*)0x00280000,0x80000,WF_BACK_CRC))
+#else
+ if(!file("PROGRAM.BIN",(void*)0x00200000,0x80000,WF_PROGRAM_CRC)||!file("BACK.TEX",(void*)0x00280000,0x80000,WF_BACK_CRC))
+#endif
+ {wf_video_error=1;return false;}
  uint32_t font_crc=0xffffffffu,size;
- if(wf_cd_asset_io.size(NULL,"FONT.TEX",&size)||size!=0x20000){wf_video_error=1;return false;}
- for(unsigned at=0;at<size;at+=sizeof stage){
-  if(wf_cd_asset_io.read(NULL,"FONT.TEX",at,stage,sizeof stage)){wf_video_error=1;return false;}
-  for(unsigned i=0;i<sizeof stage;i++){font_crc^=stage[i];for(unsigned bit=0;bit<8;bit++)font_crc=(font_crc>>1)^((font_crc&1)?0xedb88320u:0);}
-  transfer((void*)VDP2_VRAM_ADDR(2,at),stage,sizeof stage);
+ if(video_io.size(NULL,"FONT.TEX",&size)||size!=0x20000){wf_video_error=1;return false;}
+ for(unsigned at=0;at<size;){unsigned n=size-at;if(n>sizeof stage)n=sizeof stage;
+  if(video_io.read(NULL,"FONT.TEX",at,stage,n)){wf_video_error=1;return false;}
+  font_crc=wf_assets_crc32_update(font_crc,stage,n);
+  transfer((void*)VDP2_VRAM_ADDR(2,at),stage,n);at+=n;
  }
  if((font_crc^0xffffffffu)!=WF_FONT_CRC){wf_video_error=1;return false;}
- return wf_live_video_atlas(0);
+ if(startup&&!wf_live_video_atlas(0))return false;
+ if(startup)wf_startup_notice_end();return true;
 }
+bool wf_live_video_init(void){return live_video_init(true);}
+bool wf_live_video_init_return(void){return live_video_init(false);}
 bool wf_live_video_atlas(unsigned which){
  if(which>=sizeof atlases/sizeof atlases[0])return false;
  if(atlas_loaded&&wf_video_atlas==which)return true;
- wf_live_video_hide();if(submitted){vdp1_sync_wait();submitted=false;}
+ if(!wf_startup_notice_active)wf_live_video_hide();
+ if(submitted){vdp1_sync_wait();submitted=false;}
  const char*name=atlases[which].name;uint32_t size;
- if(wf_cd_asset_io.size(NULL,name,&size)||size!=atlases[which].bytes||size>WF_FRONT_SPRITE_BYTES){wf_video_error=2;return false;}
+ if(video_io.size(NULL,name,&size)||size!=atlases[which].file_bytes||atlases[which].bytes>TEXTURE_BYTES){wf_video_error=2;return false;}
+#ifdef WF_POST_DEDUP
+ if(which==WF_LIVE_VIDEO_POST_ATLAS&&
+    (!wf_post_atlas_mapping_valid(wf_post_sprite_ids,WF_POST_DEDUP_LOGICAL_COUNT,POST_MAPPING,POST_MAPPING_COUNT)||
+     wf_post_atlas_table_crc(wf_post_sprite_ids,WF_POST_DEDUP_LOGICAL_COUNT)!=WF_POST_IDS_CRC||
+     wf_post_atlas_table_crc(POST_MAPPING,POST_MAPPING_COUNT)!=WF_POST_MAPPING_CRC)){
+  wf_video_error=2;return false;
+ }
+#endif
+ size=atlases[which].bytes; /* A POST checksum tail is never a VDP1 texture. */
+#ifdef WF_POST_SPRITE_BYTES
+ memset(&post_atlas,0,sizeof post_atlas);
+#endif
  uint32_t crc=0xffffffffu;
  for(unsigned at=0;at<size;){unsigned n=size-at;if(n>sizeof stage)n=sizeof stage;
-  if(wf_cd_asset_io.read(NULL,name,at,stage,n)){wf_video_error=3;return false;}
-  for(unsigned i=0;i<n;i++){crc^=stage[i];for(unsigned b=0;b<8;b++)crc=(crc>>1)^((crc&1)?0xedb88320u:0);}
+  if(video_io.read(NULL,name,at,stage,n)){wf_video_error=3;return false;}
+  crc=wf_assets_crc32_update(crc,stage,n);
   transfer((void*)((uintptr_t)partitions.texture_base+at),stage,n);at+=n;
  }
  if((crc^0xffffffffu)!=atlases[which].crc){wf_video_error=4;return false;}
  wf_video_atlas=which;atlas_loaded=true;return true;
 }
 static int sprite_slot(unsigned code){
+#ifdef WF_POST_SPRITE_BYTES
+ if(wf_video_atlas==WF_LIVE_VIDEO_POST_ATLAS){
+  if(post_atlas.fixed)return wf_post_atlas_slot_mapped(&post_atlas,code,POST_MAPPING,POST_MAPPING_COUNT);
+  return wf_post_atlas_fixed_slot(wf_post_sprite_ids,sizeof wf_post_sprite_ids/2,
+   code,POST_MAPPING,POST_MAPPING_COUNT);
+ }
+#endif
  const uint16_t*ids=atlases[wf_video_atlas].ids;unsigned count=atlases[wf_video_atlas].count,lo=0,hi=count;
  while(lo<hi){unsigned mid=(lo+hi)/2;if(ids[mid]<code)lo=mid+1;else hi=mid;}
  return lo<count&&ids[lo]==code?(int)lo:-1;
 }
+#ifdef WF_POST_SPRITE_BYTES
+static bool return_upload(void*u __unused,unsigned slot,const uint8_t*data){
+ if(slot>=WF_POST_ATLAS_MAX_TILES)return false;
+ transfer((void*)((uintptr_t)partitions.texture_base+slot*128u),data,128u);return true;
+}
+#endif
+bool wf_live_video_return_prepare(wf_session_t*s,const wf_board_t*b){
+#ifdef WF_POST_SPRITE_BYTES
+ if(!s||!b||wf_video_error){if(!wf_video_error)wf_video_error=10;return false;}
+ wf_live_video_hide();
+ if(!wf_live_video_atlas(WF_LIVE_VIDEO_POST_ATLAS))return false;
+ const uint8_t*records=s->video.fg0+0x2000;unsigned count=rw(s->ram+0x19b2),n;
+ if(!wf_video_plan_sprites(records,count,pieces,1024,&n)||
+    !wf_post_atlas_plan_mapped(&post_atlas,wf_post_sprite_ids,sizeof wf_post_sprite_ids/2,
+     POST_MAPPING,POST_MAPPING_COUNT,pieces,n)){
+  wf_video_error=10;return false;
+ }
+ wf_asset_error_t error=wf_post_atlas_load_mapped(&post_atlas,&video_io,"POST.TEX",
+  WF_POST_SPRITE_BYTES,WF_POST_TILE_CRC,stage,sizeof stage,return_upload,NULL,POST_MAPPING,POST_MAPPING_COUNT);
+ if(error!=WF_ASSET_OK){wf_video_error=10u+(unsigned)error;return false;}
+ /* These acknowledgements describe old hardware residency, not arcade
+  * colors. The returned raw palettes must all reach the fresh CRAM. */
+ memset(s->video.palette_committed,0,sizeof s->video.palette_committed);
+ if(!wf_live_video_commit(s,b,records,count))return false;
+ if(submitted){vdp1_sync_wait();submitted=false;}
+ vdp2_sync_wait();scu_dma_transfer_wait(0);return true;
+#else
+ (void)s;(void)b;wf_video_error=10;return false;
+#endif
+}
+bool wf_live_video_finale_prepare(wf_session_t*s){
+#ifdef WF_FINALE_SPRITE_COUNT
+ if(!s||wf_video_error){if(!wf_video_error)wf_video_error=10;return false;}
+ /* Drain the previous picture before replacing its supplement or borrowing
+  * the shared CD stage for the resource-only decoder. Original1FDE already
+  * discarded its latched sprites; arcade RAM/registers remain untouched. */
+ wf_live_video_finish();
+ if(!wf_live_video_atlas(WF_LIVE_VIDEO_POST_ATLAS))return false;
+ wf_r18_frontend_platform_t*p=&s->frontend.platform;
+ _Static_assert(sizeof stage>=512u*sizeof(wf_r18_sprite_record_t),"Finale scratch fits shared lease");
+ if(!wf_finale_atlas_plan_mapped(&post_atlas,wf_post_sprite_ids,sizeof wf_post_sprite_ids/2,
+    POST_MAPPING,POST_MAPPING_COUNT,
+    wf_finale_sprite_ids,WF_FINALE_SPRITE_COUNT,s->ram,sizeof s->ram,
+    p->read_rom,p->user,(wf_r18_sprite_record_t*)stage,512u)){
+  wf_video_error=10;return false;
+ }
+ wf_asset_error_t error=wf_post_atlas_load_mapped(&post_atlas,&video_io,"POST.TEX",
+  WF_POST_SPRITE_BYTES,WF_POST_TILE_CRC,stage,sizeof stage,return_upload,NULL,POST_MAPPING,POST_MAPPING_COUNT);
+ if(error!=WF_ASSET_OK){wf_video_error=10u+(unsigned)error;return false;}
+ return true;
+#else
+ (void)s;wf_video_error=10;return false;
+#endif
+}
 bool wf_live_video_prepare(wf_session_t*s){
+ /* The previous commit borrows plan's maps, text and palette until VBlank.
+  * Transport can call prepare outside commit, so fence their reuse here. */
+ vdp2_sync_wait();
  for(unsigned i=0;i<2;i++){
   const uint8_t*raw=s->video.background+(i?0:0x2000);unsigned bytes=i?4096:2048;
   if(!map_ready[i]||!equal(previous_bg[i],raw,bytes)){
    if(!wf_video_plan_map(&plan,i,raw,upload,NULL)){if(!wf_video_error)wf_video_error=6;return false;}
-   memcpy(previous_bg[i],raw,bytes);transfer((void*)maps[i],plan.maps[i],sizeof plan.maps[i]);map_ready[i]=true;
+   memcpy(previous_bg[i],raw,bytes);map_dirty[i]=true;map_ready[i]=true;
   }
  }return true;
 }
@@ -138,10 +262,13 @@ bool wf_live_video_commit(wf_session_t*s,const wf_board_t*b,const uint8_t*record
  unsigned display=VDP2_SCRN_DISPTP_NBG2;
  if(priority==0x78){display|=VDP2_SCRN_DISP_NBG0|VDP2_SCRN_DISPTP_NBG1;vdp2_scrn_priority_set(screens[0],1);vdp2_scrn_priority_set(screens[1],2);}
  else if(priority==0x7b||priority==0x7c){display|=VDP2_SCRN_DISPTP_NBG0|VDP2_SCRN_DISP_NBG1;vdp2_scrn_priority_set(screens[0],priority==0x7c?4:2);vdp2_scrn_priority_set(screens[1],1);}
- if(dirty_text)transfer((void*)maps[2],plan.text,sizeof plan.text);
+ /* Publish complete maps in VBlank, as in Entrada R02. Immediate DMA here
+  * can mix two crowd poses (or two text rows) within one scanned field. */
+ for(unsigned i=0;i<2;i++)if(map_dirty[i]){vdp_dma_enqueue((void*)maps[i],plan.maps[i],sizeof plan.maps[i]);map_dirty[i]=false;}
+ if(dirty_text)vdp_dma_enqueue((void*)maps[2],plan.text,sizeof plan.text);
  unsigned first=1024,last=0;
  for(unsigned i=0;i<1024;i++)if(!valid_maps||previous_palette[i]!=plan.palette[i]){if(first==1024)first=i;last=i+1;previous_palette[i]=plan.palette[i];}
- if(first<last)transfer((void*)(0x25f00000+first*4),plan.palette+first,(last-first)*4);
+ if(first<last)vdp_dma_enqueue((void*)(0x25f00000+first*4),plan.palette+first,(last-first)*4);
  for(unsigned i=0;i<4;i++)wf_r18_video_palette_ack(&s->video,roles[i],pending[i]);
  valid_maps=true;
  vdp2_scrn_display_set((vdp2_scrn_disp_t)display);
@@ -149,3 +276,20 @@ bool wf_live_video_commit(wf_session_t*s,const wf_board_t*b,const uint8_t*record
  wf_render_work=(uint16_t)(cpu_frt_count_get()-begin);
  wf_video_sprites=n;wf_video_commits++;return true;
 }
+
+#if defined(WF_FIXED_ATTRACT) && WF_FIXED_ATTRACT
+bool wf_live_video_program_load(void){
+ if(program_valid)return true;
+ program_valid=file("PROGRAM.BIN",(void*)0x00200000,0x80000,WF_PROGRAM_CRC);
+ return program_valid;
+}
+bool wf_live_video_restore_attract(wf_session_t*s){
+ atlas_loaded=false;valid_maps=false;submitted=false;
+ memset(map_ready,0,sizeof map_ready);memset(map_dirty,0,sizeof map_dirty);
+ memset(s->video.palette_committed,0,sizeof s->video.palette_committed);
+ /* SCRCTL: R05 set NBG0/NBG1 line-scroll; ordinary cell formats do not reset it. */
+ vdp2_regs_get()->scrctl=0;
+ if(!live_video_init(false))return false;
+ return wf_live_video_atlas(0);
+}
+#endif

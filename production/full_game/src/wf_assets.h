@@ -17,4 +17,7 @@ typedef struct {wf_asset_error_t error;uint32_t index,used;} wf_asset_result_t;
  * CRC checks accidental disc corruption; build provenance uses SHA256. */
 bool wf_assets_load(const wf_asset_t*,unsigned,void*,uint32_t,void**,const wf_asset_io_t*,wf_asset_result_t*);
 uint32_t wf_assets_crc32(const void*,size_t);
+/* Raw incremental state: begin with 0xffffffffu and complement after the
+ * final chunk. A zero-byte chunk preserves its incoming state. */
+uint32_t wf_assets_crc32_update(uint32_t,const void*,size_t);
 #endif

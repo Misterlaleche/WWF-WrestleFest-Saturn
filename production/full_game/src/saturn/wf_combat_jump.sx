@@ -1,0 +1,37 @@
+/* Copied verbatim to LWRAM. No stack, old code, external literals or IRQs.
+ * r4=uncached staged bytes; r5=main words; r6=tail address; r7=tail words.
+ * BSS has no bytes in the file: the new CRT clears that gap. */
+    .section .text.wf_combat_jump,"ax"
+    .align 2
+    .global _wf_combat_jump
+    .global _wf_combat_jump_end
+_wf_combat_jump:
+    mov.l .Ldestination,r1
+.Lcopy:
+    mov.l @r4+,r0
+    mov.l r0,@r1
+    dt r5
+    bf/s .Lcopy
+    add #4,r1
+    tst r7,r7
+    bt .Lcopied
+.Ltail:
+    mov.l @r4+,r0
+    mov.l r0,@r6
+    dt r7
+    bf/s .Ltail
+    add #4,r6
+.Lcopied:
+    mov.l .Lccr,r1
+    mov #16,r0
+    mov.b r0,@r1
+    nop
+    nop
+    mov.l .Lentry,r1
+    jmp @r1
+    nop
+    .align 2
+.Ldestination: .long 0x26004000
+.Lccr: .long 0xfffffe92
+.Lentry: .long 0x06004000
+_wf_combat_jump_end:

@@ -3,7 +3,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 /* Boot-only test, before any cart allocation. SDK detection runs first.
- * Bus operations must be uncached volatile accesses on Saturn. */
+ * Bus operations must be uncached volatile accesses on Saturn. A valid1MiB
+ * cartridge has two noncontiguous banks; true does not imply4MiB capacity. */
 typedef struct {
  uint32_t (*read)(void *,uint32_t);
  void (*write)(void *,uint32_t,uint32_t);

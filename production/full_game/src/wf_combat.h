@@ -18,4 +18,6 @@ typedef struct {
 } wf_combat_t;
 wf_status_t wf_combat_join(wf_combat_t *,wf_session_t *,const wf_combat_io_t *);
 wf_status_t wf_combat_read_ram(wf_runtime_t *,uint32_t,uint16_t *,void *);
+/* After present_init:209 LWRAM pages plus at least28 pinned HWRAM pages. */
+wf_status_t wf_combat_preload_pages(unsigned royal);
 #endif

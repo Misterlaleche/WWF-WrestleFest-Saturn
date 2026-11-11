@@ -4,7 +4,7 @@
 
 typedef enum {
  WF_SESSION_FRONTEND, WF_SESSION_MATCH_READY, WF_SESSION_GAMEPLAY,
- WF_SESSION_FATAL
+ WF_SESSION_FATAL, WF_SESSION_POSTMATCH
 } wf_session_phase_t;
 typedef struct {
  uint8_t ram[0x4000];
@@ -36,4 +36,7 @@ wf_status_t wf_session_step(wf_session_t *);
  * return OK with FRONTEND phase and the new generation intact. On failure,
  * retain a terminal FATAL state; callers must not replay partial effects. */
 wf_status_t wf_session_prepare_match(wf_session_t *);
+/* Bind existing match/leaf owners to restored frontend metadata without
+ * executing AC0. Used before the original post-combat owner is resumed. */
+wf_status_t wf_session_bind_match(wf_session_t *);
 #endif
