@@ -14,6 +14,7 @@ def main():
  p.add_argument('--missing',type=Path,help='Additional exact resource demands from the complete native route')
  p.add_argument('--prefer-observed',action='store_true',help='Prioritize observed demand in the uncompressed primary lease; all other catalog poses remain secondary')
  p.add_argument('--geometry',choices=tuple(GEOMETRIES),default='legacy16384',help='Exact secondary count and primary memory lease of the target TAG module')
+ p.add_argument('--secondary-swaps',type=int,default=0,help='Bounded exact-tile swaps to reduce secondary payload without decreasing original pose frequency')
  a=p.parse_args()
  tiles,block_count,resident,workspace,input_bytes,primary_bytes=GEOMETRIES[a.geometry]
  codec=module(a.tools/'build_secondary_asset.py','tag_codec');crop=module(a.tools/'build_crop_asset.py','tag_crop')
@@ -53,6 +54,24 @@ def main():
    if len(primary)==6474:break
    primary.add(tile)
  assert len(primary)==6474
+ swaps=[];estimated_secondary_saving=0
+ if a.secondary_swaps:
+  assert a.geometry=='tag18432' and 0<a.secondary_swaps<=2048
+  comp={i:len(zlib.compress(sprites[i*128:(i+1)*128],9)) for i in all_ids}
+  cost={i:(lambda d:(d&255)*(4 if d&0x2000 else 8))(crop.metadata(sprites[i*128:(i+1)*128])) for i in all_ids}
+  used=sum(cost[i] for i in primary);limit=primary_bytes-8192-128
+  protected=set(trace['tiles']) if a.missing and a.prefer_observed else set()
+  incoming=sorted(all_ids-primary,key=lambda i:(-comp[i],-frequency[i],i))
+  outgoing=sorted(primary-protected,key=lambda i:(comp[i],frequency[i],i))
+  removed=set()
+  for inc in incoming:
+   for out in outgoing:
+    if out in removed or comp[inc]-comp[out]<8 or frequency[inc]<frequency[out]:continue
+    delta=cost[inc]-cost[out]
+    if used+delta<=limit:
+     used+=delta;removed.add(out);swaps.append((out,inc));estimated_secondary_saving+=comp[inc]-comp[out];break
+   if len(swaps)>=a.secondary_swaps:break
+  for out,inc in swaps:primary.remove(out);primary.add(inc)
  ids=sorted(primary);index=bytearray();payload=bytearray();descriptors=[]
  for tile in ids:
   raw=sprites[tile*128:(tile+1)*128];descriptor=crop.metadata(raw);descriptors.append(descriptor)
@@ -106,5 +125,6 @@ def main():
  if a.missing:report['source_sha256'][str(a.missing)]=codec.sha256(a.missing.read_bytes())
  report['observed_primary_tiles']=len(primary&set(trace['tiles'])) if a.missing else None
  report['prefer_observed']=a.prefer_observed
+ report['secondary_swaps']=len(swaps);report['secondary_saving_estimate_bytes']=estimated_secondary_saving
  (a.out/'resident.json').write_text(json.dumps(report,indent=2)+'\n');print({k:report[k] for k in ('fighters','catalog_tiles','primary_payload_bytes','secondary_payload_bytes','all_tiles_byte_verified')})
 if __name__=='__main__':main()
