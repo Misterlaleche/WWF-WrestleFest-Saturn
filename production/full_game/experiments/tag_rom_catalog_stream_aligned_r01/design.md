@@ -1,0 +1,9 @@
+# TAG ROM catalog, isolated candidate
+
+This candidate keeps the original 512 KiB ROM bytes and arcade logic. It builds 127 legal TAG R18Q/R18K resource profiles into one indexed `TAGROM.BIN`. Each R18K pack starts on a 32 KiB boundary required by the Saturn startup CD stream. The catalog file is verified by SHA-256 before packaging; each embedded pack retains its original lossless data and pack validation. The native reader maps logical `TxxxP.BIN` and `TxxxR.BIN` to verified offsets. It uses the existing ROM page and load-window code. No combat clock, RNG, controls, sprites, or game rules change.
+
+The first 2 KiB-aligned version S292 failed native load (`wf_error=36`); S294 corrects this alignment. The initial S292 ISO patch writer also overwrote the PVD; its script was corrected and only the internal test ISO was regenerated. Neither failure is hidden.
+
+The isolated TAG module ends at `0x060fff44`, 124 bytes below the `0x060fffc0` image limit. Size optimization is limited to the scene and startup reader translation units; no hot cache capacity is reduced. The ISO is internal test media only. No BIN/CUE is prepared for delivery.
+
+Mednafen evidence so far: no-cart first bounded TAG `290 updates / 296 fields`, pending −5 and combat CD0; no-cart natural third cage T0C9 `285 updates / 288 fields`, pending −9 and combat CD0; 1 MB first bounded TAG `290 updates / 296 fields`, pending −6 and combat CD0. A combined internal image with the separate S288 Royal 4 MB raw path preserves Royal first `889 updates / 902 fields`, pending −23 and combat CD0, plus first TAG 4 MB `289 updates / 290 fields`, pending −11 and combat CD0. These are route-specific emulator measurements, not universal or physical certification. TAG 4 MB third, later Royal entrants, outcomes, all TAG bouts and ring transitions remain pending.
