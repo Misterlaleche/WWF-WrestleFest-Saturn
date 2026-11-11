@@ -25,6 +25,7 @@ def main():
     p.add_argument('--sanitize',action='store_true')
     p.add_argument('--postmatch',action='store_true',help='Original post owners and metadata-only frontend return binding')
     p.add_argument('--sh2',action='store_true')
+    p.add_argument('--memory-override',type=Path,help='Force one Saturn memory layout header into every shared-session object')
     p.add_argument('--combat-only',action='store_true',help='Separate native combat module, O2 and original HW1 framebuffer transport')
     p.add_argument('--base-royal',action='store_true',help='Restore HW1 base Royal cache budgets; requires --combat-only')
     p.add_argument('--tag-transport',action='store_true',help='Recovered TAG resident transport and generation pipeline; requires --combat-only')
@@ -45,6 +46,8 @@ def main():
     p.add_argument('--entry',action='append',default=[],help='Additional native public root, without underscore')
     args=p.parse_args()
     if args.combat_only and not args.sh2:p.error('--combat-only requires --sh2')
+    if args.memory_override and (not args.sh2 or not args.memory_override.is_file()):
+        p.error('--memory-override requires --sh2 and an existing header')
     if args.base_royal and not args.combat_only:p.error('--base-royal requires --combat-only')
     if args.tag_transport and (not args.combat_only or args.base_royal):p.error('--tag-transport requires --combat-only and excludes --base-royal')
     if args.tag_secondary_batch2 and not args.tag_transport:p.error('--tag-secondary-batch2 requires --tag-transport')
@@ -113,6 +116,7 @@ wf_status_t wf_saturn_yaul_display_begin(void);
     flags=['-std=c11','-Wall','-Wextra','-Werror','-O2','-I'+str(native/'include'),
            '-I'+str(root/'src'),'-DWF_R18_ROM_EXTRA_CAPACITY='+('55u' if args.base_royal else '28u'),
            '-DWF_SATURN_HWRAM_HOT_INDEX_BYTES='+(('0x21000u' if args.hw1_banked else '0x25000u' if args.hw1_variable else '0x27000u') if args.base_royal else '0x14000u')]
+    if args.memory_override:flags+=['-include',str(args.memory_override.resolve())]
     cc=os.environ.get('CC','cc')
     if args.sh2:
         if args.probe or args.sanitize:p.error('--sh2 builds a core archive, without host probes/sanitizers')
