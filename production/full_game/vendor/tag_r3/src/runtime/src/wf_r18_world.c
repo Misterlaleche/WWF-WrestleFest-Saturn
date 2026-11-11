@@ -40,6 +40,49 @@ wf_status_t wf_r18_world_26b68(wf_runtime_t *rt,uint8_t side,uint16_t direction,
  }
  memcpy(c->cache[side],cache,sizeof cache);return WF_OK;
 }
+#ifdef WF_R18_WORLD_DIAG
+volatile uint32_t wf_r18_world_error_info;
+volatile uint32_t wf_r18_world_error_address;
+#define WORLD_BLOCK(code,layer,index,address,value) do { \
+ wf_r18_world_error_info=((code)<<24)|((layer)<<16)|(index); \
+ wf_r18_world_error_address=(address);return WF_BLOCKED; \
+} while(0)
+
+wf_status_t wf_r18_world_commit(wf_runtime_t *rt,wf_r18_world_ctx_t*c){
+#ifdef WF_R18_WORLD_DIAG
+ wf_r18_world_error_info=0;
+#endif
+ if(!rt||!c||rt->g.global_007e>=7)WORLD_BLOCK(1,0,0,0,0);
+ for(unsigned layer=0;layer<2;layer++){
+  unsigned flag=layer?0x4000:0x8000;
+  if(rt->g.global_16d2&flag){
+   for(unsigned i=0;i<16;i++){
+    uint32_t off=c->cache[layer][i].destination-(layer?0x82000:0x80000);unsigned cell=off/(layer?2:4);
+    if(cell+33>=1024)WORLD_BLOCK(2,layer,i,c->cache[layer][i].destination,cell);
+    wf_r18_ring_tile_restore(layer,cell);wf_r18_ring_tile_restore(layer,cell+1);wf_r18_ring_tile_restore(layer,cell+32);wf_r18_ring_tile_restore(layer,cell+33);
+   }
+   rt->g.global_16d2=(uint16_t)(rt->g.global_16d2&~flag);
+  }
+ }
+ for(unsigned layer=0;layer<2;layer++){
+  if(!c->animation_count[layer])continue;
+  uint32_t destinations,source,table=(layer?0x295dc:0x295a4)+rt->g.global_007e*8;
+  if(ptr(c,table,&destinations)!=WF_OK)WORLD_BLOCK(3,layer,0,table,0);
+  if(ptr(c,table+4,&source)!=WF_OK)WORLD_BLOCK(4,layer,0,table+4,0);
+  for(unsigned i=0;i<c->animation_count[layer];i++){
+   unsigned frame=c->animation_queue[layer][i];uint8_t address[2],pixels[64];
+   uint32_t destination_address=destinations+frame*2;
+   uint32_t pixel_address=source+frame*(layer?32:64);
+   if(read(c,destination_address,address,2)!=WF_OK)WORLD_BLOCK(5,layer,i,destination_address,frame);
+   if(read(c,pixel_address,pixels,layer?32:64)!=WF_OK)WORLD_BLOCK(6,layer,i,pixel_address,frame);
+   unsigned first=be16(address)/(layer?2:4);
+   if(wf_r18_ring_tile_block_write(layer,first,pixels))WORLD_BLOCK(7,layer,i,destination_address,first);
+  }
+  c->animation_count[layer]=0;
+ }
+ return WF_OK;
+}
+#else
 wf_status_t wf_r18_world_commit(wf_runtime_t *rt,wf_r18_world_ctx_t*c){
  if(!rt||!c||rt->g.global_007e>=7)return WF_BLOCKED;
  for(unsigned layer=0;layer<2;layer++){
@@ -67,3 +110,4 @@ wf_status_t wf_r18_world_commit(wf_runtime_t *rt,wf_r18_world_ctx_t*c){
  }
  return WF_OK;
 }
+#endif

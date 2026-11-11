@@ -11,4 +11,11 @@ wf_status_t wf_r18_world_288f0(wf_runtime_t *,uint8_t record[4],uint8_t bank,voi
 wf_status_t wf_r18_world_26b68(wf_runtime_t *,uint8_t side,uint16_t direction,void *world_ctx);
 /* $26DAC and $2946A semantic VRAM transport, after both producers finish. */
 wf_status_t wf_r18_world_commit(wf_runtime_t *,wf_r18_world_ctx_t *);
+#ifdef WF_R18_WORLD_DIAG
+/* Fatal-only probe: reason 1=scene, 2=restore, 3/4=table reads,
+ * 5/6=frame reads, 7=tile write. Disabled in release builds. */
+/* Packed reason: bits31..24=reason, bits23..16=layer, bits15..0=index. */
+extern volatile uint32_t wf_r18_world_error_info;
+extern volatile uint32_t wf_r18_world_error_address;
+#endif
 #endif
