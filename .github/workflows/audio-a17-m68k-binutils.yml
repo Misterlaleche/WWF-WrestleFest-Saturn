@@ -1,0 +1,28 @@
+name: Audio A17 m68k binutils tool
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install m68k binutils
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y binutils-m68k-linux-gnu
+          mkdir -p out/bin out/lib
+          cp /usr/bin/m68k-linux-gnu-objdump out/bin/
+          cp /usr/bin/m68k-linux-gnu-objcopy out/bin/
+          ldd /usr/bin/m68k-linux-gnu-objdump | awk '/=> \/|^\// {for(i=1;i<=NF;i++) if($i ~ /^\//) print $i}' | sort -u > out/LIBS.txt
+          while read lib; do cp -L "$lib" out/lib/; done < out/LIBS.txt
+          (cd out && sha256sum bin/* lib/* > SHA256SUMS.txt)
+          /usr/bin/m68k-linux-gnu-objdump --version > out/VERSION.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audio-a17-m68k-binutils
+          path: out/
