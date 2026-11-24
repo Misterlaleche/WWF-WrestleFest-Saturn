@@ -1,0 +1,83 @@
+{
+  "scope": "R03 initial-load optimization; original larger arcade completion objective remains open",
+  "image_sha256": "991ed0c8bfe97d1a436fa237406fffc538c4434c70e4767b1936953b2603686a",
+  "files": {
+    "build.json": {
+      "sha256": "26ddfa2ff60c05f52fd0084313f6f984a4007db5c4ee1578b17b79fd5afcd4c1",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/target-build.json",
+      "bytes": 45677
+    },
+    "package.json": {
+      "sha256": "860c521e8132913c60c834107e0f93c1a87f25eca77212cb7f9a254d12eb97b3",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/package-identities.json",
+      "bytes": 3572
+    },
+    "sectors.json": {
+      "sha256": "329a5a0a26425f677c8abdad59d55176be2a5ec801d1dc0eee6eca4f08dab1b8",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/raw-validation.json",
+      "bytes": 313
+    },
+    "boot-comparison.json": {
+      "sha256": "21175a0ccfe45e846b440e32c0942dd9d0179f265458c60db6635624e2f89e5c",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/independent-boot-comparison.json",
+      "bytes": 46674
+    },
+    "cd-read-statistics.json": {
+      "sha256": "413331e4a72ec6f95e394ccac59196902470a467ef8eac897dd22aa18349f48b",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/offline-legacy-cd-stats.json",
+      "bytes": 2776
+    },
+    "prepared-music.json": {
+      "sha256": "603e19e9a99255ac39e1d89bb75ddc4d268a4788946d544b01de5f291e8bdbb2",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/music-prepared-snapshot-check/comparison.json",
+      "bytes": 3840
+    },
+    "tag-manual.json": {
+      "sha256": "681e1f60075b6a7f54f79e3ac8109cc542282927a161499361a33b5541d7e461",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/tag-manual-acceptance.json",
+      "bytes": 5584
+    },
+    "royal-pal-manual.json": {
+      "sha256": "11e14a7b2b86cc901a342722b81183413cdd7f45d5d0d771bcfe46ddccfea7ba",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/royal-pal-manual-acceptance.json",
+      "bytes": 4715
+    },
+    "host-suite.json": {
+      "sha256": "c8d32b80e92ece27ba1e7e00e5b2ac2f340e640abca9753a43548f91c9b56f2c",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/test-integration/combined-suite/report.json",
+      "bytes": 86479
+    },
+    "test-integration.json": {
+      "sha256": "7c90533ed9dc41a31aadd736955621d3db9a19e281fe46f47f28c70e7a425aa1",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/test-integration/receipt.json",
+      "bytes": 5432
+    },
+    "integration-review.json": {
+      "sha256": "c0c749662bd7434511bc603a0beee358ca4d9fcc4c8eace2bef9d3bcf7308329",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/integration-audio-independent-review.json",
+      "bytes": 3048
+    },
+    "package-review.json": {
+      "sha256": "7da3434054f0bf3ecc9841e5a1ec996cb6ca423b16643d31d186096c6644f6bf",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/independent-package-review/review.json",
+      "bytes": 7590
+    },
+    "header-review.json": {
+      "sha256": "5bc7be7902dd3c8be81fabda313611847f33868b5d5f6a27aac5f41632d04c57",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/wrestlefest/build/music-header-review/final-review.json",
+      "bytes": 4191
+    },
+    "cd-diagnostic-review.json": {
+      "sha256": "c3c3ca32958c7a74bb5c9929c2cd080ad43fd89cb39691a8023e72878cbaefbc",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/wrestlefest/build/cd-diagnostic-review/report.json",
+      "bytes": 6335
+    },
+    "source-promotion.json": {
+      "sha256": "8cdb4bb68cd3f3ea95e136937c01bd142fde8e70c9617dab47fdc8beda8907c3",
+      "source": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/source-promotion.json",
+      "bytes": 7570
+    }
+  },
+  "hardware_verified": false,
+  "user_physical_report": "Only R01 tested; R02 not tested at confirmation"
+}

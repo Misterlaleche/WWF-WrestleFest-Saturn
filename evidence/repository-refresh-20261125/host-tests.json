@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "scope": "Selected asset-independent host regression tests for repository refresh; no Saturn build, game-route replay, emulator or physical-hardware acceptance.",
+  "started_utc": "2026-11-24T23:25:39.767946+00:00",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "environment": {
+    "ASAN_OPTIONS": "detect_leaks=0",
+    "UBSAN_OPTIONS": "halt_on_error=1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "baseline_reproduction": {
+    "name": "controls-before",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "tests/test_jo_controls.py",
+      "--sanitize"
+    ],
+    "returncode": 1,
+    "expected_result": "compile failure: missing current asset interface",
+    "log": "evidence/repository-refresh-20261125/controls-before.log",
+    "log_sha256": "5bd153d1d8299588d6af698a453df1d7c013aefdd62373fdd4b31ae5219c150e"
+  },
+  "runs": [
+    {
+      "name": "controls",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_jo_controls.py",
+            "--sanitize"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.921,
+      "log": "evidence/repository-refresh-20261125/controls.log",
+      "log_sha256": "41030dbb3fb9562854594e85fd4b54ef9d7ff89718f5ce0664e75b16797eb31e"
+    },
+    {
+      "name": "boot-asset-policy",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_boot_asset_build_policy.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.032,
+      "log": "evidence/repository-refresh-20261125/boot-asset-policy.log",
+      "log_sha256": "ebb05677d11ecdf8fb0632a47d66e7186de727545d531737b769cbea5e7e09f2"
+    },
+    {
+      "name": "zlib-bits",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_zlib_bits.py",
+            "--build-dir",
+            "/tmp/wf-repo-refresh-vmnjatw9/zlib-bits",
+            "--sanitize"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.164,
+      "log": "evidence/repository-refresh-20261125/zlib-bits.log",
+      "log_sha256": "26b190cb77008421edd435c67ea23a24e8bcd56e3a84c4d602f4b2c606b5c1cc"
+    },
+    {
+      "name": "audio-bandlimit",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_audio_bandlimited_resample.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.472,
+      "log": "evidence/repository-refresh-20261125/audio-bandlimit.log",
+      "log_sha256": "d5e11940018d6eb313ff2098bd1964f5e2e550597975808c7fb7ba416692c8a1"
+    },
+    {
+      "name": "music-stream",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_music_stream.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.218,
+      "log": "evidence/repository-refresh-20261125/music-stream.log",
+      "log_sha256": "3c3cd6c4622a2923d24c76d7c6dfcbe124089fbecefe1961c3e72bc94b5d631d"
+    },
+    {
+      "name": "music-deadline",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_music_deadline.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.115,
+      "log": "evidence/repository-refresh-20261125/music-deadline.log",
+      "log_sha256": "c975f98efeba2aaf44d79289eca4321cfee2d6b5b3466cf4eb64e79e5f62e9de"
+    },
+    {
+      "name": "boot-load-progress",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_boot_load_progress.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 3.025,
+      "log": "evidence/repository-refresh-20261125/boot-load-progress.log",
+      "log_sha256": "a62ba1ed8538198428e2d74d550ae55a5154ca1b2a1455394a3fcd3e6730c099"
+    },
+    {
+      "name": "save-format",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_save.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.115,
+      "log": "evidence/repository-refresh-20261125/save-format.log",
+      "log_sha256": "e4154c304d1652aa55c4686147e81d1dea88346eebab07d9763b30c73e7892e4"
+    },
+    {
+      "name": "save-adapter",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_save_adapter.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.415,
+      "log": "evidence/repository-refresh-20261125/save-adapter.log",
+      "log_sha256": "93d3acd1d1639fca5996b9ae83c2485adabe977aa4a765e0a34f9f7c10f3d883"
+    },
+    {
+      "name": "video-pixels",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "cc",
+            "-std=c11",
+            "-O1",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-fsanitize=address,undefined",
+            "-Icore/include",
+            "-Iport",
+            "tests/test_jo_video.c",
+            "port/wf_jo_video.c",
+            "-o",
+            "/tmp/wf-repo-refresh-vmnjatw9/video-pixels"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/tmp/wf-repo-refresh-vmnjatw9/video-pixels"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.523,
+      "log": "evidence/repository-refresh-20261125/video-pixels.log",
+      "log_sha256": "adea036f31621ba4e2dbb270ef5530fd78e75512acb523baf1a045719db589cb"
+    },
+    {
+      "name": "video-pipeline",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "cc",
+            "-std=c11",
+            "-O1",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-fsanitize=address,undefined",
+            "-Wno-int-to-pointer-cast",
+            "-DWF_PLATFORM_SATURN=1",
+            "-DWF_JO_ENGINE=1",
+            "-DWF_JO_VIDEO_TEST=1",
+            "-Icore/include",
+            "-Iport",
+            "-Itests",
+            "tests/test_jo_pipeline.c",
+            "port/wf_jo_video.c",
+            "core/src/wf_saturn_memory.c",
+            "-o",
+            "/tmp/wf-repo-refresh-vmnjatw9/video-pipeline"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/tmp/wf-repo-refresh-vmnjatw9/video-pipeline"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.925,
+      "log": "evidence/repository-refresh-20261125/video-pipeline.log",
+      "log_sha256": "c17eff566ff27d789ba8b575109c9d52f636818fdfc9873cdda4ad5b137a7336"
+    },
+    {
+      "name": "clock",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "cc",
+            "-std=c11",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-fsanitize=address,undefined",
+            "-Iport",
+            "tests/test_clock.c",
+            "port/wf_jo_clock.c",
+            "-o",
+            "/tmp/wf-repo-refresh-vmnjatw9/clock"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/tmp/wf-repo-refresh-vmnjatw9/clock"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.172,
+      "log": "evidence/repository-refresh-20261125/clock.log",
+      "log_sha256": "9d0e6bdacf9c2c9546dad76cbf782d0107b4a94e859bcdc9103b5d50dde59178"
+    },
+    {
+      "name": "gfx1-world",
+      "status": "PASS",
+      "expected": "all commands succeed",
+      "commands": [
+        {
+          "argv": [
+            "cc",
+            "-std=c11",
+            "-O1",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-fsanitize=address,undefined",
+            "-Icore/include",
+            "tests/test_gfx1_world_commit.c",
+            "core/src/wf_r18_world.c",
+            "-o",
+            "/tmp/wf-repo-refresh-vmnjatw9/gfx1-world"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/tmp/wf-repo-refresh-vmnjatw9/gfx1-world"
+          ],
+          "returncode": 0
+        }
+      ],
+      "seconds": 0.376,
+      "log": "evidence/repository-refresh-20261125/gfx1-world.log",
+      "log_sha256": "ad550a05402d1daae2483555997583e78218dec4fc16c31d453bdc1e1fe1e9e3"
+    }
+  ],
+  "negative_controls": [
+    {
+      "name": "controls-negative-endian",
+      "status": "PASS",
+      "expected": "runtime assertion rejects changed production function",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_jo_controls.py",
+            "--sanitize",
+            "--main-source",
+            "/tmp/wf-repo-refresh-vmnjatw9/controls-negative-endian.c"
+          ],
+          "returncode": 1
+        }
+      ],
+      "seconds": 1.019,
+      "log": "evidence/repository-refresh-20261125/controls-negative-endian.log",
+      "log_sha256": "903bdb2fec258db28ff53ce159ae1b5a291c2258e242b54252b9a723c52fab63",
+      "temporary_source_mutation": {
+        "original": "port/main.c",
+        "replace_once": "*out=(uint16_t)(((uint16_t)bytes[0]<<8)|bytes[1]);",
+        "replacement": "*out=(uint16_t)(((uint16_t)bytes[1]<<8)|bytes[0]);",
+        "production_file_modified": false
+      }
+    },
+    {
+      "name": "controls-negative-rom-bound",
+      "status": "PASS",
+      "expected": "runtime assertion rejects changed production function",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_jo_controls.py",
+            "--sanitize",
+            "--main-source",
+            "/tmp/wf-repo-refresh-vmnjatw9/controls-negative-rom-bound.c"
+          ],
+          "returncode": 1
+        }
+      ],
+      "seconds": 1.018,
+      "log": "evidence/repository-refresh-20261125/controls-negative-rom-bound.log",
+      "log_sha256": "8a36290470209a5a5b25ddea7e8b5e5d31c12e245eca37b70f6def9975d699ef",
+      "temporary_source_mutation": {
+        "original": "port/main.c",
+        "replace_once": "if(addr<=WF_JO_ROM_BYTES-2u){",
+        "replacement": "if(addr<=WF_JO_ROM_BYTES){",
+        "production_file_modified": false
+      }
+    },
+    {
+      "name": "controls-negative-rom-failure",
+      "status": "PASS",
+      "expected": "runtime assertion rejects changed production function",
+      "commands": [
+        {
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "tests/test_jo_controls.py",
+            "--sanitize",
+            "--main-source",
+            "/tmp/wf-repo-refresh-vmnjatw9/controls-negative-rom-failure.c"
+          ],
+          "returncode": 1
+        }
+      ],
+      "seconds": 1.022,
+      "log": "evidence/repository-refresh-20261125/controls-negative-rom-failure.log",
+      "log_sha256": "1ba43a478cf0c31bfd56af30894ed3134e683bb5c1736488854af975c5904e0e",
+      "temporary_source_mutation": {
+        "original": "port/main.c",
+        "replace_once": "if(wf_jo_assets_rom_read(addr,bytes,sizeof bytes))return WF_BLOCKED;",
+        "replacement": "if(wf_jo_assets_rom_read(addr,bytes,sizeof bytes))return WF_BAD_STATE;",
+        "production_file_modified": false
+      }
+    }
+  ],
+  "not_run": [
+    {
+      "tests": "tests/run_initial_load_tests.py and asset-dependent gameplay/frontend/audio/ROM-oracle suites",
+      "reason": "Current matching cd assets, original ROM inputs and optional machine68k are not supplied in this repository refresh."
+    },
+    {
+      "tests": "Full tests/run_jo_video_tests.sh",
+      "reason": "The complete runner also needs cd/ROM68K.BIN and cd/FONT8.BIN; its independent pixel and pipeline commands are run separately below."
+    },
+    {
+      "tests": "SH-2 build, sh2-memory-margin, emulator and physical Saturn",
+      "reason": "Outside this source-only refresh verification; current full toolchain/assets and target execution are not used."
+    }
+  ],
+  "runtime_integrity": {
+    "directories": [
+      "core",
+      "port",
+      "sdk"
+    ],
+    "file_count_before": 439,
+    "file_count_after": 439,
+    "before_manifest_sha256": "0c7be47c97284571ad52b4db937135848cd754e252959dcdc365b9ed90cba7ba",
+    "after_manifest_sha256": "0c7be47c97284571ad52b4db937135848cd754e252959dcdc365b9ed90cba7ba",
+    "changed_files": []
+  },
+  "test_harness": {
+    "path": "tests/test_jo_controls.py",
+    "before_sha256": "8bbb50d3105af3580c2ad068260b5cf4221eaeb358b750f5fbd506124d1876ff",
+    "after_sha256": "7722fa821e87233dfcfcb489e999ea5bdbfb5a962395a38d34499e6c056b4716"
+  },
+  "source_sha256": {
+    "makefile": "08419b784364daaeea47bda3de2d2974ff6f6e815cad2c3de01215c4def855c4",
+    "core_sources.mk": "30a88ae6256afdd04adc88bb198682427b6108d39efb083d4959e65028cac265",
+    "port/main.c": "e0b9f5db36ae5c778abd2572175dfff92c5f61622e793a9888ef6bbc5cb5fd67",
+    "port/wf_jo_assets.h": "b394bd1b96f2081e24db0a3caa8dd68a978aa62c08dff00e7a6abc08463f5a41",
+    "tests/run_jo_video_tests.sh": "bd3fea5bf02f7c91269fa962238ac66b557ebe2f0efeac0f1149e363984b35f6",
+    "tests/test_jo_controls.py": "7722fa821e87233dfcfcb489e999ea5bdbfb5a962395a38d34499e6c056b4716",
+    "tests/test_boot_asset_build_policy.py": "e87aeac1f44180bb3f52691fb78e8e3939bb1f0471a2962e3f055e3ed9a70799",
+    "tests/test_zlib_bits.py": "494e81b41e7197d4dd977d97ab34641c592ff429d4e3abfb3933da967f7d2b82",
+    "tests/test_audio_bandlimited_resample.py": "dee0e0fcb5d625202db9c9e0da84d882f6441cbac54d648a6311c3e959eddb6e",
+    "tests/test_music_stream.py": "c7f85fc3e2cfc88c68b5bd3ff30dd82f959604fbd8f050f25bb121fc2e252642",
+    "tests/test_music_deadline.py": "00f0a5abb3f63d6609ac81f7cb70b1965096526839954b117c99a96e96ce916f",
+    "tests/test_boot_load_progress.py": "a8549cc28828a9741d7a60095af232e82a18d4f201e2bad03cb752affad2ca30",
+    "tests/test_save.py": "1beaf5ac2dbd88d4ca4cf5cf6c67c541a57e2304bab0cffc0f553fe1e1445237",
+    "tests/test_save_adapter.py": "67a7391ab26b2dbcd96caeeb42411183b30d9da1c5b0e236498d51df13bb6abe",
+    "tests/test_jo_video.c": "f620fb0884dbeb5c53d7f0b7a91d4bae01a6f81a41e17fff076ad7c6f2e47649",
+    "tests/test_jo_pipeline.c": "2aede28a3bfd02a3d096afd49622721c59e01874aec420a6377b636f2aee2b20",
+    "tests/test_clock.c": "b9b517a03ee1476d6ddd86bc20b6f41167450385351f96140296e825768755a7",
+    "tests/test_gfx1_world_commit.c": "a3340cb80cf2fb07feffb0dc00cca1d76a6dfdedd963c11fa84d33ce0849a9ca"
+  },
+  "finished_utc": "2026-11-24T23:25:50.356863+00:00",
+  "status": "PASS",
+  "passed_tests": 13,
+  "total_tests": 13,
+  "rejected_negative_controls": 3,
+  "working_directory": "repository root",
+  "compiler": "cc (Debian 14.2.0-19) 14.2.0"
+}

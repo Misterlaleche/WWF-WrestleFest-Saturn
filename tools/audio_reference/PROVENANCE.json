@@ -1,0 +1,39 @@
+{
+  "audio2_commit": "6d6a5705c87e9042529116415770f4bc74c0e2e8",
+  "nuked_opm_commit": "f209e6ed3712032b641d53ce8fb24824eae6adc3",
+  "host_only": true,
+  "files": {
+    "generate_resources.py": {
+      "source": "tools/generate_resources.py",
+      "sha256": "9470349ba06410e402e4515d98536f8f6a4953dfd884e46bd1acc867da6c7552"
+    },
+    "capture_board_replay.c": {
+      "source": "tools/reference/capture_board_replay.c",
+      "sha256": "72de9a3bf626c27d81ac53346fa831f1b7ac09255fea7b6562d431668ec206ae"
+    },
+    "reference_oki.h": {
+      "source": "tools/reference/reference_oki.h",
+      "sha256": "cb572f9f3e185cb929b99b73c4c5a514fc99049d89ebe3fe1549c72329ffefb5"
+    },
+    "oracle_a53/tools/capture_full_audio_a50.c": {
+      "source": "tools/reference/oracle_a53/tools/capture_full_audio_a50.c",
+      "sha256": "c344d7a207c05d2e66593b8907c73be79161727596e99d811df012b07c8047e0"
+    },
+    "z80.c": {
+      "source": "src/reference_driver/z80.c",
+      "sha256": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698"
+    },
+    "z80.h": {
+      "source": "src/reference_driver/z80.h",
+      "sha256": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa"
+    },
+    "opm.c": {
+      "source": "deps/opm.c",
+      "sha256": "983beecc471aebd8884fcc3aa48c50b1a26d4280ddbf1025b5196b540cf24188"
+    },
+    "opm.h": {
+      "source": "deps/opm.h",
+      "sha256": "186e042d1cd80c8fdf2e1a07d7c123bbe9a0d42e39518c50889db140a9ec4c39"
+    }
+  }
+}

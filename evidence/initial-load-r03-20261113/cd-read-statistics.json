@@ -1,0 +1,82 @@
+{
+  "baseline": {
+    "values": {
+      "live": {
+        "jo_fs_stat_bytes": 4749312,
+        "jo_fs_stat_files": 31,
+        "jo_fs_stat_vblanks": 1245
+      },
+      "state": {
+        "jo_fs_stat_bytes": 4749312,
+        "jo_fs_stat_files": 31,
+        "jo_fs_stat_vblanks": 1245
+      }
+    },
+    "symbols": {
+      "jo_fs_stat_bytes": 101359860,
+      "jo_fs_stat_files": 101359864,
+      "jo_fs_stat_vblanks": 101359848
+    },
+    "raw_be_words": {
+      "live": {
+        "jo_fs_stat_bytes": "00487800",
+        "jo_fs_stat_files": "0000001f",
+        "jo_fs_stat_vblanks": "000004dd"
+      },
+      "state": {
+        "jo_fs_stat_bytes": "00487800",
+        "jo_fs_stat_files": "0000001f",
+        "jo_fs_stat_vblanks": "000004dd"
+      }
+    },
+    "report_sha256": "043a5bb5b74807313352881ecc5192b02dc0c597e7cbe4630a4cfcc8ad8c2ca3",
+    "state_sha256": "8159cc1857cc472bd333e1af67e19aae7154a461c121e1428297ea14baa13a7d",
+    "live_sha256": "dd876f14afae1133c682986ce61ee74c68295c4a636c3db9682297611c978472"
+  },
+  "candidate": {
+    "values": {
+      "live": {
+        "jo_fs_stat_bytes": 4577280,
+        "jo_fs_stat_files": 25,
+        "jo_fs_stat_vblanks": 887
+      },
+      "state": {
+        "jo_fs_stat_bytes": 4577280,
+        "jo_fs_stat_files": 25,
+        "jo_fs_stat_vblanks": 887
+      }
+    },
+    "symbols": {
+      "jo_fs_stat_bytes": 101366420,
+      "jo_fs_stat_files": 101366424,
+      "jo_fs_stat_vblanks": 101366408
+    },
+    "raw_be_words": {
+      "live": {
+        "jo_fs_stat_bytes": "0045d800",
+        "jo_fs_stat_files": "00000019",
+        "jo_fs_stat_vblanks": "00000377"
+      },
+      "state": {
+        "jo_fs_stat_bytes": "0045d800",
+        "jo_fs_stat_files": "00000019",
+        "jo_fs_stat_vblanks": "00000377"
+      }
+    },
+    "report_sha256": "ccd287306304e43129c1b79b773c92d32d0539a22d80492dec90bd2e93a61f4b",
+    "state_sha256": "756d20ab987f36e81ab674f4e92026ecd9b0faf3c273d1ac7f24b9498ef8d8f4",
+    "live_sha256": "e2059834e9216d84b0c52813d717e1132a4ad8ecfeacced30c27e6dbf159063d"
+  },
+  "difference": {
+    "jo_fs_stat_vblanks": 358,
+    "jo_fs_stat_bytes": 172032,
+    "jo_fs_stat_files": 6
+  },
+  "scope": [
+    "Counters are from final saved/live RAM, which agree; they are not additional samples at the exact ready boundary.",
+    "SDK byte counter counts requested synchronous sectors including mount and skip/retry reads; it is not a physical servo or total read-ahead byte measurement.",
+    "Prepared music asynchronous streaming uses a separate path; no profiler reset is enabled in these manual builds.",
+    "The 172032-byte reduction exactly equals six removed size-query preloads plus eighteen removed header sectors.",
+    "All measurements are stock-emulator execution; no physical R03 result."
+  ]
+}

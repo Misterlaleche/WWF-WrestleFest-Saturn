@@ -1,0 +1,181 @@
+{
+  "status": "PASS_IDENTITIES_PAYLOADS_LAYOUT",
+  "assets": {
+    "format": "mode1-2352",
+    "files": 34,
+    "bytes": 632644966,
+    "verify_only": true
+  },
+  "program_sha256": "869c1903ae731652376b682e7ef701d182c70f0a31b7783b978e8d3a3d51faab",
+  "files": {
+    "0.BIN": {
+      "lba": 24,
+      "bytes": 536224
+    },
+    "ABS.TXT": {
+      "lba": 2463,
+      "bytes": 89
+    },
+    "BIB.TXT": {
+      "lba": 2464,
+      "bytes": 89
+    },
+    "CPY.TXT": {
+      "lba": 2465,
+      "bytes": 89
+    },
+    "FONT8.BIN": {
+      "lba": 2399,
+      "bytes": 131072
+    },
+    "MU01.WAV": {
+      "lba": 2466,
+      "bytes": 52920044
+    },
+    "MU02.WAV": {
+      "lba": 28306,
+      "bytes": 52920044
+    },
+    "MU03.WAV": {
+      "lba": 54146,
+      "bytes": 52920044
+    },
+    "MU04.WAV": {
+      "lba": 79986,
+      "bytes": 52920044
+    },
+    "MU05.WAV": {
+      "lba": 105826,
+      "bytes": 1058444
+    },
+    "MU06.WAV": {
+      "lba": 106343,
+      "bytes": 52920044
+    },
+    "MU07.WAV": {
+      "lba": 132183,
+      "bytes": 52920044
+    },
+    "MU08.WAV": {
+      "lba": 158023,
+      "bytes": 705644
+    },
+    "MU09.WAV": {
+      "lba": 158368,
+      "bytes": 1058444
+    },
+    "MU0A.WAV": {
+      "lba": 158885,
+      "bytes": 52920044
+    },
+    "MU0B.WAV": {
+      "lba": 184725,
+      "bytes": 52920044
+    },
+    "MU0C.WAV": {
+      "lba": 210565,
+      "bytes": 52920044
+    },
+    "MU0D.WAV": {
+      "lba": 236405,
+      "bytes": 10584044
+    },
+    "MU0E.WAV": {
+      "lba": 241573,
+      "bytes": 52920044
+    },
+    "MU0F.WAV": {
+      "lba": 267413,
+      "bytes": 52920044
+    },
+    "MU10.WAV": {
+      "lba": 293253,
+      "bytes": 10584044
+    },
+    "MU11.WAV": {
+      "lba": 298421,
+      "bytes": 10584044
+    },
+    "MU12.WAV": {
+      "lba": 303589,
+      "bytes": 10584044
+    },
+    "R18MAP1.BIN": {
+      "lba": 308757,
+      "bytes": 127138
+    },
+    "R18MAP2.BIN": {
+      "lba": 308820,
+      "bytes": 95978
+    },
+    "R18MAP4.BIN": {
+      "lba": 308867,
+      "bytes": 129998
+    },
+    "R18MAP5.BIN": {
+      "lba": 308931,
+      "bytes": 115568
+    },
+    "R18MAP6.BIN": {
+      "lba": 308988,
+      "bytes": 95198
+    },
+    "R18MENU.BIN": {
+      "lba": 309035,
+      "bytes": 124938
+    },
+    "R18RING.BIN": {
+      "lba": 309097,
+      "bytes": 114918
+    },
+    "ROM68K.BIN": {
+      "lba": 286,
+      "bytes": 524288
+    },
+    "ROYINIT.BIN": {
+      "lba": 309154,
+      "bytes": 106664
+    },
+    "SCENES.WFP": {
+      "lba": 2060,
+      "bytes": 250985
+    },
+    "SFX.DAT": {
+      "lba": 2183,
+      "bytes": 440710
+    },
+    "SPRITES.WFP": {
+      "lba": 542,
+      "bytes": 3108052
+    }
+  },
+  "artifacts": {
+    "game.bin": {
+      "bytes": 727607664,
+      "sha256": "991ed0c8bfe97d1a436fa237406fffc538c4434c70e4767b1936953b2603686a"
+    },
+    "game.cue": {
+      "bytes": 67,
+      "sha256": "36f5037c75d2a4255af8109a376f1778feecfdcc4680c4cde2c39aab0ad7b88c"
+    },
+    "game.iso": {
+      "bytes": 633563136,
+      "sha256": "aca4b9c79794e95bbdd8a6c794c076900554315b1584e06c747b8cc23b9f048d"
+    },
+    "game.elf": {
+      "bytes": 639188,
+      "sha256": "2f7b846d07e5004141ffdff4141b43d46c8506cd2e9e48aa6662cee624b513ec"
+    },
+    "game.raw": {
+      "bytes": 536224,
+      "sha256": "869c1903ae731652376b682e7ef701d182c70f0a31b7783b978e8d3a3d51faab"
+    },
+    "game.ip.bin": {
+      "bytes": 6144,
+      "sha256": "23be5a7a43eda60222e529acde34e5d7458400987a5036325023f1fe1e20b7cc"
+    }
+  },
+  "sorted_boot": true,
+  "all_iso_payload_sectors_match_bin": true,
+  "hardware_verified": false
+}

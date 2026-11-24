@@ -1,0 +1,88 @@
+{
+  "status": "PASS_MANUAL_CREDITED_ROUTE_AND_RECORDS",
+  "mode": "royal",
+  "pal": true,
+  "attract_first": false,
+  "route": {
+    "entry_tick": 18,
+    "complete_tick": 322,
+    "advanced_ticks": 304,
+    "start_field": 2871,
+    "entry_wall_seconds": 86.939205,
+    "complete_wall_seconds": 97.352778,
+    "last_trace_tick": 364,
+    "attract": null,
+    "observed_key_pairs": 29
+  },
+  "final_snapshot": {
+    "running": 1,
+    "failed": 0,
+    "runtime_tick": 366,
+    "runtime_credited": 32768,
+    "runtime_mode": 1,
+    "runtime_world": 0,
+    "runtime_round": 0,
+    "frontend_ram": 3129344,
+    "frontend_credited_start": 1,
+    "frontend_generation": 1,
+    "frontend_handed_off": 1,
+    "frontend_phase": 6
+  },
+  "records": {
+    "status": 1,
+    "cached_payload_bytes": 148,
+    "payload_sha256": "a6577938bb26282fe6ab922bafe2fac567a6ce149efd75ceb9dfa73cccc1be54",
+    "first_ready_wall_seconds": 38.318794,
+    "later_live_rankings_equal_cached": true,
+    "later_live_rankings_sha256": "d5d4fde7af1d17eb8d811b88f025cd0db1a245c3472a3ce324291ff0f08b54e0"
+  },
+  "symbols": {
+    "rt": {
+      "name": "_rt.lto_priv.393",
+      "address": 101273052,
+      "size": 7660
+    },
+    "frontend": {
+      "name": "_frontend.lto_priv.392",
+      "address": 101217792,
+      "size": 664
+    },
+    "records_save": {
+      "name": "_records_save.lto_priv.404",
+      "address": 101217628,
+      "size": 164
+    },
+    "running": {
+      "name": "_running.lto_priv.453",
+      "address": 101410720,
+      "size": 4
+    },
+    "failed": {
+      "name": "_failed.lto_priv.452",
+      "address": 101410728,
+      "size": 4
+    }
+  },
+  "identities": {
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-royal-r03-pal/job.json": "752748f87a15b963aebdd92bb82ee7f5b9e89da54d1ee6cf0aff95db38bd2683",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-royal-r03-pal/report.json": "5b18f3add72bf7da399c916a38a7f25f8b02ac9d21fc0a9cf065b99b5ad863ed",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-royal-r03-pal/normal-pad-events.json": "04c9257a4eecc212c038210b5e6254ad1e2d0432939ccadad6c507ace48d6475",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/run_r03_pal_x11.py": "bfe324a2f2cc9d63a5f2ba9776b7f6ddf88a1857ea2466d0b0c0ef3cff4a9183",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r02_normal_pad.py": "442bbacedb35deeb17df351a01aced4795a607ef3e343106ec496dc61c93a799",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/game.elf": "2f7b846d07e5004141ffdff4141b43d46c8506cd2e9e48aa6662cee624b513ec",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/game.raw": "869c1903ae731652376b682e7ef701d182c70f0a31b7783b978e8d3a3d51faab",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/package-identities.json": "860c521e8132913c60c834107e0f93c1a87f25eca77212cb7f9a254d12eb97b3",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-royal-r03-pal/WorkRAMH-live.bin": "6891a8f795f2ffd16f3447483a3035e3b4638280ae4a9e9eb76c2d2f218eaff7",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-royal-r03-pal/records-context.bin": "23f057f6313c75accd20ca2bbb965cd3a3f97020a0b23c07048d1c30ff29600a",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/layout.json": "80ccf7f72336289ffc037a1f7e31bb18a1ee0f2e241040a92e6ae892c669f13b",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/layout.s": "da41479fb8cc3974eeec32792d4cebcdc56111161fe03881763f0b68d463174b",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/layout.c": "68dc47975cf0080271d1755f1e1758e4b73868b85bf2fae3a2f339c5a76f67d7",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/verify_manual.py": "11c0fc1bdd60a25033f4d5142b22fe8558de437cac2bba872a67d88784f7d494",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-royal-r03-pal/WorkRAML-state.bin": "dfa5e52c33477b1917faf0de57865abca10858ec28473222b3abed2aa20f9a88"
+  },
+  "limits": [
+    "Normal SDL/X11 key route on stock emulator, not physical Saturn validation.",
+    "Only at least 300 credited gameplay ticks are accepted; no complete match/campaign or continuous graphical acceptance.",
+    "Cached BIOS payload is evaluated separately from later live rankings; a later score difference is not a failed reload."
+  ]
+}

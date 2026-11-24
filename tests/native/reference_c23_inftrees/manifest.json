@@ -1,0 +1,36 @@
+{
+  "commit": "1ab945cf6f107c63ca4749055d9fba4ee5648bb6",
+  "scope": "Independent inflate_table implementation copied byte-for-byte from the accepted C22 base; headers are required to remain byte-identical to their pinned git blobs.",
+  "files": {
+    "port/zlib/inftrees.c": {
+      "sha256": "1402d46f971ea81032b020aea64dec36268d90ac92832122dbf809dcb80202bf",
+      "git_blob": "bc15e2fe2442e5c4ea1fc70e3cb89f29b3e7734b",
+      "bytes": 13199
+    },
+    "port/zlib/inftrees.h": {
+      "sha256": "710a5dbf3db966d7d9017bc863d2ebf0784c152a0578d8fb98e776b974eff21b",
+      "git_blob": "f708754a1e0b085e81b5be4ad6688b860495e320",
+      "bytes": 3562
+    },
+    "port/zlib/zutil.h": {
+      "sha256": "9a63f6690fac1620aa3cecee5752af618806da438a256b4a047fbcd289cac159",
+      "git_blob": "b079ea6a80f5abd23a6b2451d6eaee50ceda969b",
+      "bytes": 7127
+    },
+    "port/zlib/zlib.h": {
+      "sha256": "4ddc82b4af931ab55f44d977bde81bfbc4151b5dcdccc03142831a301b5ec3c8",
+      "git_blob": "f09cdaf1e0543de911d8220befdb51fa8632a9e6",
+      "bytes": 96239
+    },
+    "port/zlib/zconf.h": {
+      "sha256": "9c0087f31cd45fe4bfa0ca79b51df2c69d67c44f2fbb2223d7cf9ab8d971c360",
+      "git_blob": "5e1d68a004e9744cb35f9d5a2fe94fd4dbcb7f76",
+      "bytes": 16298
+    },
+    "port/zlib/wf_sh2_bits.h": {
+      "sha256": "603bc3efc8c5e676ea77896c18cf97a3dc6e405a3a3664bcbc6e0ead62fd23b6",
+      "git_blob": "e940616f73616bd7b29996242b37309a95c36c93",
+      "bytes": 1120
+    }
+  }
+}

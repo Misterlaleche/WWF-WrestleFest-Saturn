@@ -1,0 +1,25 @@
+{
+  "baseline": "805483a",
+  "scope": "Unmodified transitive source/header subset for the reconstructed CPU gates only. Never linked into the game.",
+  "files": {
+    "core/include/wf_actor.h": "504e907ec33169eba389ad0c55daf5e2c36ec305099686ab5e9ec238257177a1",
+    "core/include/wf_payment.h": "825e7739f81e3f02b4966b8de236799ff1c8a18af81ad5a5ef83c687d08405b4",
+    "core/include/wf_physics.h": "2dc23f0f9f21c38f3a69edf4df1076fae0dd87c81cd393f330581e1b6eecacbb",
+    "core/include/wf_r17_actions_r11.h": "299f25ac3ff15a0bb6aac7779e884d501155e99da2c625a104f22e4f2cc77bd9",
+    "core/include/wf_r17_contract.h": "a857811c8f6bc2f41d5869e23a9caa42de304982a56145d1b72702a0b16789b8",
+    "core/include/wf_r17_m68k_shadow.h": "2a834626525e3e7abe10265872cca71d23a5e4f65a6d78df91717373d4b80a43",
+    "core/include/wf_r17_participant_helpers.h": "a267dc1f9ae9dc78f559564b0eb9b6fc1bcf86dd36f86fd0220af70c45fca6c6",
+    "core/include/wf_r17_participant_io.h": "a1735d083d7a18c7865c6d7c620456155cc9946b0509b561bdebc69cd06c4544",
+    "core/include/wf_r17_post7a00.h": "55893b4d5484be8c5fb4cab8be828edbd1ab27d5e95f5ffa6d32be7c12908762",
+    "core/include/wf_r17_raw23.h": "4f23aea68778f7f62fe311d007f230d4fbdaf2d6ce71682bcf6632cfea96250f",
+    "core/include/wf_r17_royal_9132.h": "71e422e379fbad83e5b006022f5a0b67b0c53cb858e4ed1f44218a147f4c4638",
+    "core/include/wf_r17_tag_6e34.h": "9e92eead243cdacbcd1b0521685478f0c00b34e344e34c34919240092b5785c2",
+    "core/include/wf_runtime.h": "3b94c5379ed29fd968d771f535c4e6d2f4d67e7ca3f03dbc67934c19262066ba",
+    "core/src/wf_physics.c": "0284b649377c2937a4a8a8aa9fab149d54dbb450002d63459c54831c149eb976",
+    "core/src/wf_r17_m68k_shadow.c": "2092b95e5afbf990fe8ecc714d80543b54fdf870101938da1748916d6cd5e499",
+    "core/src/wf_r17_post7a00.c": "a58e1eeeceba726a5111a818b986241ff8b0c0870b2732619eed94cdbae619c8",
+    "core/src/wf_r17_render_contract.c": "92f7d4f3317fed81c2975f69b4f1437a683a55379aaedb74b7bedcae0684fe61",
+    "port/wf_jo_clock.c": "ecd9278437f83833d7708d0e9a7eaba54aa67f9bf7fd6b7f018eae49cebf1c8d",
+    "port/wf_jo_clock.h": "015ce8919611133ed3a22ddb2f4f8abea0b9ad7b93de7f3868ecab01d7b6b257"
+  }
+}

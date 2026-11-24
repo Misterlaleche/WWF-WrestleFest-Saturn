@@ -1,0 +1,1293 @@
+Archive member included to satisfy reference by file (symbol)
+
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+                              core/src/wf_saturn_memory.o (symbol from plugin) (memcmp)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcpy.o)
+                              core/src/wf_r17_actions_r11.o (symbol from plugin) (memcpy)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+                              core/src/wf_r18_runtime_handoff.o (symbol from plugin) (memmove)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memset.o)
+                              core/src/wf_r18_present.o (symbol from plugin) (memset)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strcmp.o)
+                              port/wf_jo_assets.o (symbol from plugin) (strcmp)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strlen.o)
+                              port/wf_jo_scene_prepare.o (symbol from plugin) (strlen)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+                              port/main.o (symbol from plugin) (strncpy)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftrt.o)
+                              /tmp/ccP1Ic9C.ltrans7.ltrans.o (__ashiftrt_r4_8)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftrt_n.o)
+                              /tmp/ccP1Ic9C.ltrans0.ltrans.o (__ashrsi3)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftlt.o)
+                              /tmp/ccP1Ic9C.ltrans0.ltrans.o (__ashlsi3_r0)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_lshiftrt.o)
+                              /tmp/ccP1Ic9C.ltrans1.ltrans.o (__lshrsi3_r0)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_movmem.o)
+                              /tmp/ccP1Ic9C.ltrans0.ltrans.o (__movmem)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_sdivsi3.o)
+                              /tmp/ccP1Ic9C.ltrans12.ltrans.o (__sdivsi3)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivsi3.o)
+                              /tmp/ccP1Ic9C.ltrans0.ltrans.o (__udivsi3)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+                              /tmp/ccP1Ic9C.ltrans2.ltrans.o (__divdi3)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+                              /tmp/ccP1Ic9C.ltrans2.ltrans.o (__moddi3)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+                              /tmp/ccP1Ic9C.ltrans1.ltrans.o (__udivdi3)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+                              /tmp/ccP1Ic9C.ltrans1.ltrans.o (__umoddi3)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udiv_qrnnd_16.o)
+                              /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o) (__udiv_qrnnd_16)
+/mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+                              /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o) (__clz_tab)
+
+Discarded input sections
+
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans0.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans1.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans2.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans3.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans4.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans5.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans6.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans7.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans8.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans9.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans10.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans11.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans12.ltrans.o
+ .comment       0x0000000000000000       0x12 /tmp/ccP1Ic9C.ltrans13.ltrans.o
+ .comment       0x0000000000000000       0x12 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .comment       0x0000000000000000       0x12 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .comment       0x0000000000000000       0x12 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+ .comment       0x0000000000000000       0x12 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .eh_frame      0x0000000000000000       0x74 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .comment       0x0000000000000000       0x12 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .eh_frame      0x0000000000000000       0x78 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .comment       0x0000000000000000       0x12 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .eh_frame      0x0000000000000000       0xa8 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .comment       0x0000000000000000       0x12 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+ .eh_frame      0x0000000000000000       0xdc /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+ .comment       0x0000000000000000       0x12 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+JO_START        0x0000000006004000       0x58
+                0x0000000006004000                ___Start = .
+ *(JO_START)
+ JO_START       0x0000000006004000       0x58 sdk/jo_engine/start.o
+                0x0000000006004000                jo_start
+
+.text           0x0000000006004060    0x74d3c
+ *(.text)
+ .text          0x0000000006004060        0x0 sdk/jo_engine/start.o
+ .text          0x0000000006004060     0xa474 /tmp/ccP1Ic9C.ltrans0.ltrans.o
+                0x0000000006004060                __jo_core_user_break_handler
+                0x000000000600409c                __jo_vdp1_radix_count
+                0x00000000060040c0                __jo_vdp1_radix_scatter_low
+                0x00000000060040e4                __jo_vdp1_radix_scatter_high
+                0x000000000600410c                __jo_vdp1_build_dma
+                0x0000000006005934                inflateInit2_.constprop.233
+                0x00000000060059bc                wf_saturn_yaul_upload_rom_tile.constprop.225
+                0x0000000006005d34                wf_cpu_decide_1f084.part.11.constprop.201
+                0x0000000006005da8                wf_r17_action_partner_215b6.constprop.198
+                0x0000000006005de4                action22_result_111c8.constprop.194
+                0x0000000006005fd0                wf_r17_action_cleanup_212a0.constprop.191
+                0x0000000006006018                wf_r17_effects_7a00.constprop.188
+                0x00000000060064e4                branchb_emit_76e8.constprop.187
+                0x0000000006006548                branchb_emit_76aa.constprop.186
+                0x00000000060065e0                post7_c172_build_clear.constprop.182
+                0x00000000060066c8                wf_runtime_frame.constprop.167
+                0x0000000006006884                wf_r18_attract_timeout.constprop.161
+                0x00000000060068d0                jo_vsnprintf.constprop.146
+                0x0000000006006de8                jo_snprintf.constprop.145
+                0x0000000006006e10                __jo_dma_read_port32.constprop.142
+                0x0000000006006e84                __jo_vdp2_set_priority.constprop.138
+                0x0000000006006f20                delta.part.0.constprop.129
+                0x0000000006006f78                wf_r18_display_init.constprop.127
+                0x0000000006007018                ptr.constprop.125
+                0x000000000600705c                wf_r18_frontend_driver_resume_boot.constprop.73
+                0x00000000060070cc                wf_r18_match_hud_call.constprop.65
+                0x00000000060076cc                wf_r18_match_support_call.constprop.58
+                0x0000000006007d4c                wf_jo_save_store.part.7.constprop.48
+                0x0000000006007e68                ready.constprop.46
+                0x0000000006007ea0                wf_jo_save_needs_store.constprop.45
+                0x0000000006007ef8                wf_jo_save_load.part.5.constprop.43
+                0x0000000006008084                wf_jo_assets_borrow_sprite_cache_tail.constprop.41
+                0x0000000006008148                inflateEnd.constprop.40
+                0x000000000600818c                wf_jo_frontend_combat_coins.constprop.38
+                0x00000000060082c8                post_owner.constprop.17
+                0x00000000060085a0                jo_list_foreach.constprop.9
+                0x00000000060085d0                jo_smpc_gun_set_port.lto_priv.424
+                0x0000000006008754                wf_smpc_beam.lto_priv.421
+                0x0000000006008888                __jo_smpc_command
+                0x00000000060088e8                __jo_smpc_set_reset_button
+                0x0000000006008920                __jo_time_update_ticks.lto_priv.423
+                0x00000000060089f4                jo_get_ticks
+                0x0000000006008a1c                jo_vdp2_update_map_registers.part.2.lto_priv.519
+                0x0000000006008b64                jo_wf_vdp2_cycles.lto_priv.520
+                0x0000000006008c4c                jo_vdp2_move_nbg1
+                0x0000000006008cb8                jo_vdp2_move_nbg0
+                0x0000000006008d40                jo_set_default_background_color
+                0x0000000006008db8                __jo_vdp2_print
+                0x0000000006008dfc                loading_cd_summary.constprop.39
+                0x0000000006008ef8                jo_vdp2_update_cycle_patterns.lto_priv.528
+                0x0000000006009330                jo_vdp2_set_displayed_screens.lto_priv.420
+                0x0000000006009374                jo_vdp2_update_character_registers.lto_priv.531
+                0x00000000060094d4                jo_vdp2_update_rotation_map_registers.lto_priv.529
+                0x0000000006009600                jo_vdp2_set_plane_size.constprop.36
+                0x0000000006009660                jo_vdp2_update_pattern_register.lto_priv.530
+                0x00000000060096ec                jo_init_nbg0_printf
+                0x000000000600985c                jo_vdp2_commit.lto_priv.422
+                0x00000000060098b4                jo_wf_vdp2_blank
+                0x00000000060098fc                jo_dma_wait
+                0x000000000600990c                jo_vdp1_send_frame.lto_priv.365
+                0x000000000600a08c                jo_memcpy
+                0x000000000600a32e                decode_block.constprop.235
+                0x000000000600a38c                jo_dma_copy
+                0x000000000600a3f4                wf_r18_hud_bind.part.2.constprop.133
+                0x000000000600a4d8                jo_getdate
+                0x000000000600a684                jo_clear_screen
+                0x000000000600a6b8                jo_malloc_with_behaviour
+                0x000000000600a7ac                jo_list_add
+                0x000000000600a810                wf_r18_frontend_start_0978.constprop.104
+                0x000000000600cbac                wf_jo_frontend_run.constprop.18
+ .text          0x000000000600e4d4     0x8d84 /tmp/ccP1Ic9C.ltrans1.ltrans.o
+                0x000000000600e4d4                __jo_call_event.lto_priv.336
+                0x000000000600e4dc                jo_core_slave_bootstrap.lto_priv.450
+                0x000000000600e4fc                jo_core_vblank_out_handler.lto_priv.267
+                0x000000000600e540                jo_get_inputs_vblank
+                0x000000000600e62c                jo_slave_main.lto_priv.265
+                0x000000000600f6bc                bios_verify.lto_priv.518
+                0x000000000600f6e4                bios_read.lto_priv.516
+                0x000000000600f740                scene_ram.lto_priv.463
+                0x000000000600f778                reset_ready.lto_priv.474
+                0x000000000600f79c                jo_core_vblank_in_handler.lto_priv.266
+                0x000000000600ffbc                wf_r18_scsp_audio
+                0x0000000006010ab8                bios_write.lto_priv.517
+                0x0000000006010bc4                bios_find.lto_priv.515
+                0x0000000006010c28                bios_close.lto_priv.514
+                0x0000000006010c34                bios_open.lto_priv.513
+                0x0000000006010d08                support_palette.lto_priv.254
+                0x0000000006010d38                extension.lto_priv.255
+                0x00000000060112a4                support_rom.lto_priv.253
+                0x00000000060112c0                rom_read.lto_priv.262
+                0x00000000060112dc                commit.lto_priv.471
+                0x0000000006011404                stage_records.lto_priv.473
+                0x0000000006011454                scene_clear.lto_priv.475
+                0x00000000060114bc                jo_core_wait_for_slave
+                0x0000000006011574                jo_goto_boot_menu
+                0x000000000601158c                __jo_core_add_slave_job.part.2
+                0x0000000006012590                __jo_core_synch
+                0x00000000060125a4                __jo_fs_get_file_id.part.5
+                0x00000000060125fc                jo_fs_close
+                0x0000000006012720                __jo_fs_open
+                0x0000000006012784                jo_cd_init.lto_priv.337
+                0x0000000006012880                jo_cd_read_sectors.lto_priv.338
+                0x0000000006012c5c                __jo_fs_read_sectors
+                0x0000000006012d30                jo_core_run
+                0x0000000006013258                jo_fs_open
+                0x00000000060137d8                jo_fs_read_next_bytes
+                0x00000000060138a4                jo_fs_seek_forward
+                0x0000000006013c30                jo_audio_is_music_playing
+                0x0000000006013c4c                jo_audio_stop_music
+                0x0000000006013df0                jo_audio_music_update.lto_priv.524
+                0x00000000060140e0                jo_audio_is_music_ready
+                0x000000000601412c                jo_audio_stage_music
+                0x00000000060142b4                jo_audio_stop_channels_in.lto_priv.527
+                0x000000000601431c                jo_audio_reserve_resident.part.13
+                0x00000000060143c0                adler32_z
+                0x000000000601467c                inflateStateCheck.lto_priv.269
+                0x00000000060146ac                inflate
+                0x00000000060155dc                inflateReset
+                0x000000000601565c                wf_jo_scene_prepare_cancel
+                0x00000000060156cc                wf_jo_scene_prepare_step
+                0x0000000006015850                wf_jo_scene_prepare_begin
+                0x0000000006015970                wf_jo_frontend_flush
+                0x0000000006015a4c                controls.lto_priv.322
+                0x0000000006015bfc                input_word.lto_priv.466
+                0x0000000006015c98                fault.lto_priv.323
+                0x0000000006015cb2                bind_world.lto_priv.472
+                0x0000000006015f24                bus_read.lto_priv.335
+                0x0000000006015f88                overlaps.lto_priv.523
+                0x0000000006015f88                overlap.lto_priv.509
+                0x0000000006015faa                credits_rl.lto_priv.554
+                0x0000000006015faa                r32.lto_priv.283.lto_priv.333
+                0x0000000006015faa                r32.lto_priv.282.lto_priv.341
+                0x0000000006015faa                read32.lto_priv.324
+                0x0000000006015faa                r32.lto_priv.417.lto_priv.600
+                0x0000000006015faa                r32.lto_priv.418.lto_priv.596
+                0x0000000006015faa                r32.lto_priv.419.lto_priv.579
+                0x0000000006015faa                r32.lto_priv.416.lto_priv.658
+                0x0000000006015fca                observe.lto_priv.522
+                0x0000000006016018                prefix_available.lto_priv.525
+                0x0000000006016084                decode_to.lto_priv.526
+                0x000000000601622c                wf_r18_scsp_service
+                0x0000000006016b48                wf_jo_audio_service_cooperate
+                0x0000000006016bf4                start_drain_service.lto_priv.462
+                0x000000000601709c                wait_vblank.lto_priv.329
+                0x00000000060170b0                wait_level.lto_priv.327
+                0x0000000006017150                bus_store.lto_priv.334
+ .text          0x0000000006017258     0x9b80 /tmp/ccP1Ic9C.ltrans2.ltrans.o
+                0x00000000060174a4                emit_sprite.lto_priv.868
+                0x0000000006018208                upload_palette.lto_priv.867
+                0x00000000060186e0                abort_frame.lto_priv.870
+                0x0000000006018700                begin_frame.lto_priv.865
+                0x0000000006018ec8                end_frame.lto_priv.869
+                0x0000000006019ac8                loading_progress.lto_priv.263
+                0x0000000006019bd0                decoder_start.lto_priv.430
+                0x0000000006019c24                wf_jo_clock_advance
+                0x0000000006019cf0                wf_jo_video_texture_resolve.part.23
+                0x000000000601a14c                wf_jo_video_layers
+                0x000000000601a198                wf_jo_video_ring_priority
+                0x000000000601a218                wf_jo_video_scroll
+                0x000000000601a26c                wf_jo_video_frame_queued
+                0x000000000601a2a4                wf_jo_video_drain_overlap_fields
+                0x000000000601a508                wf_jo_video_gate
+                0x000000000601ad40                wf_jo_video_commit
+                0x000000000601af90                stage_tile.lto_priv.270
+                0x000000000601b290                upload_tile.lto_priv.866
+                0x000000000601b328                wf_jo_assets_demand_end
+                0x000000000601b43c                wf_jo_assets_ready
+                0x000000000601b468                wf_jo_assets_file_size
+                0x000000000601b544                wf_jo_assets_rom_read
+                0x000000000601b648                wf_jo_assets_scenes_ready
+                0x000000000601b66c                be32.lto_priv.454.lto_priv.661
+                0x000000000601b66c                be32.lto_priv.455.lto_priv.660
+                0x000000000601b68c                wf_jo_assets_scene_block_view.part.6
+                0x000000000601b784                inflate_private.lto_priv.268
+                0x000000000601b848                cache_reconcile.lto_priv.321
+                0x000000000601b8e8                cache_policy_enabled.lto_priv.881
+                0x000000000601b960                sprite_block.lto_priv.882
+                0x000000000601be08                wf_jo_assets_file_read
+                0x000000000601c09c                invalidate_cache_slots.lto_priv.320
+                0x000000000601c110                wf_jo_assets_return_sprite_cache_tail
+                0x000000000601ea74                game_frame.lto_priv.264
+                0x0000000006020644                frames_7874.lto_priv.589
+                0x0000000006020990                records_a4d4.lto_priv.588
+ .text          0x0000000006020dd8     0x2518 /tmp/ccP1Ic9C.ltrans3.ltrans.o
+                0x0000000006020eb4                write_bus.lto_priv.591
+                0x0000000006020ef8                putword.lto_priv.592
+                0x0000000006020ef8                dw.lto_priv.537.lto_priv.594
+                0x0000000006020ef8                dw.lto_priv.535.lto_priv.555
+                0x0000000006020ef8                dw.lto_priv.299.lto_priv.340
+                0x0000000006020ef8                dw.lto_priv.533.lto_priv.586
+                0x0000000006020ef8                dw.lto_priv.534.lto_priv.578
+                0x0000000006020ef8                dw.lto_priv.532.lto_priv.598
+                0x0000000006020ef8                dw.lto_priv.300.lto_priv.318
+                0x0000000006020ef8                dw.lto_priv.536.lto_priv.552
+                0x0000000006020f1c                tile_6d76.lto_priv.590
+                0x0000000006020f84                write_value.lto_priv.593
+                0x0000000006020ff8                db.lto_priv.538.lto_priv.584
+                0x0000000006021012                wf_r18_ranking_step.part.4
+                0x00000000060232cc                valid.lto_priv.540.lto_priv.553
+                0x00000000060232cc                valid.lto_priv.541.lto_priv.595
+ .text          0x00000000060232f0     0x865c /tmp/ccP1Ic9C.ltrans4.ltrans.o
+                0x0000000006023718                wf_r18_post_tag_complete
+                0x00000000060237a8                w32.lto_priv.286.lto_priv.296
+                0x00000000060237a8                w32.lto_priv.542.lto_priv.659
+                0x00000000060237a8                w32.lto_priv.285.lto_priv.289
+                0x00000000060237a8                w32.lto_priv.287.lto_priv.302
+                0x00000000060237a8                w32.lto_priv.544.lto_priv.597
+                0x00000000060237a8                w32.lto_priv.543.lto_priv.657
+                0x00000000060237a8                w32.lto_priv.545.lto_priv.580
+                0x00000000060237a8                w32.lto_priv.288.lto_priv.332
+                0x00000000060237c0                wf_r18_post_tag_step
+                0x000000000602a670                wf_r18_attract_setup_step.part.4
+                0x000000000602aeb0                valid.lto_priv.247.lto_priv.317
+                0x000000000602aeb0                valid.lto_priv.548.lto_priv.581
+                0x000000000602aeb0                valid.lto_priv.246.lto_priv.339
+                0x000000000602aeb0                valid.lto_priv.549.lto_priv.587
+                0x000000000602aed0                difference.lto_priv.425
+                0x000000000602aff8                read.lto_priv.426
+                0x000000000602b058                descriptor.lto_priv.427
+                0x000000000602b0ec                wf_r18_scene_resume
+ .text          0x000000000602b94c     0xa24c /tmp/ccP1Ic9C.ltrans5.ltrans.o
+                0x000000000602b984                rom.lto_priv.249
+                0x000000000602bbd0                read_rom.lto_priv.477
+                0x000000000602bbe4                roster_rom.lto_priv.258
+                0x000000000602bc68                read_ram.lto_priv.469.lto_priv.479
+                0x000000000602c248                palette.lto_priv.250
+                0x000000000602c410                roster_palette.lto_priv.260
+                0x000000000602c6c0                read.lto_priv.312.lto_priv.314
+                0x000000000602c6c0                read.lto_priv.313.lto_priv.319
+                0x000000000602c728                failed.part.0.lto_priv.316
+                0x000000000602c824                tile_76e8.lto_priv.310
+                0x000000000602c89c                bar_76aa.lto_priv.315
+                0x000000000602c9b4                base_7680.lto_priv.311
+                0x000000000602ca54                portrait_782c.lto_priv.309
+                0x000000000602ccb4                call.isra.0.lto_priv.331
+                0x000000000602ccf0                emit.isra.0.lto_priv.294.lto_priv.330
+                0x000000000602cd26                wf_r18_frontend_irq_step
+                0x000000000602d2b8                wf_r18_frontend_driver_on_raster
+                0x000000000602d738                ports.lto_priv.325
+                0x000000000602d7a8                wait_vblank.lto_priv.328
+                0x000000000602d80c                wait_level.lto_priv.326
+                0x000000000602fc08                title_effect.lto_priv.256
+                0x000000000602fca8                mode_effect.lto_priv.257
+                0x000000000602fd38                roster_effect.lto_priv.259
+                0x000000000602fd88                control_effect.lto_priv.476
+                0x000000000603141c                wf_r18_match_setup_d1c
+                0x0000000006032a00                wf_r18_match_driver_owner
+                0x0000000006035b8c                effect.lto_priv.261
+ .text          0x0000000006035b98     0x9d64 /tmp/ccP1Ic9C.ltrans6.ltrans.o
+                0x0000000006035b98                wf_r18_frontend_leaf_clear
+                0x0000000006035e0c                wf_r18_palette_2b58
+                0x0000000006035f7c                wf_r18_video_peek
+                0x000000000603691c                wf_r18_tag_bonus_90d6
+                0x0000000006036974                wf_r18_referee_direction_20c8
+                0x0000000006036bec                wf_r18_palette_2aea
+                0x0000000006036e88                wf_r18_video_commit
+                0x0000000006036fb4                wf_r18_strip_9aca
+                0x0000000006037178                wf_r18_text_2503c
+                0x0000000006037584                wf_r18_video_batch
+                0x00000000060375a0                wf_r18_referee_clear_206fe
+                0x000000000603760c                wf_r18_referee_number_2067c
+                0x000000000603777c                wf_r18_referee_display_2067c
+                0x0000000006037dd4                anchor.lto_priv.561
+                0x0000000006037e30                dq.lto_priv.577
+                0x0000000006037e40                first_free.lto_priv.599
+                0x0000000006037e6c                rw.isra.0.lto_priv.614.lto_priv.615
+                0x0000000006037e6c                rw.isra.0.lto_priv.613.lto_priv.625
+                0x0000000006037e7e                ww.lto_priv.610.lto_priv.624
+                0x0000000006037e7e                ww.lto_priv.611.lto_priv.612
+                0x0000000006037e92                wl.lto_priv.617.lto_priv.618
+                0x0000000006037e92                wl.lto_priv.616.lto_priv.626
+                0x0000000006037ec4                rl.lto_priv.619.lto_priv.631
+                0x0000000006037ec4                rl.lto_priv.620.lto_priv.621
+                0x0000000006037ef8                boundary.lto_priv.630
+                0x0000000006037f9c                store.lto_priv.570
+                0x0000000006037fba                scroll.part.3.lto_priv.623
+                0x0000000006038058                read.lto_priv.628
+                0x00000000060380b0                transfer.lto_priv.622
+                0x00000000060381a8                cell.lto_priv.627
+                0x000000000603829c                select_side.lto_priv.629
+                0x000000000603832c                dw.lto_priv.606
+                0x0000000006038348                credit_to_ram.lto_priv.601
+                0x000000000603836a                credit_fg.lto_priv.575
+                0x000000000603839c                credit_text.lto_priv.574
+                0x00000000060383cc                palette_from_ram.lto_priv.603
+                0x0000000006038410                fill.lto_priv.602
+                0x0000000006038488                effect.lto_priv.585
+                0x00000000060384aa                scene_call.isra.2.lto_priv.582
+                0x00000000060384d4                inc.lto_priv.583
+                0x00000000060384ee                actor_at.lto_priv.304
+                0x0000000006038518                r32.lto_priv.280.lto_priv.284
+                0x0000000006038518                r32.lto_priv.281.lto_priv.301
+                0x0000000006038538                emit.lto_priv.291
+                0x000000000603856e                occupancy.lto_priv.307
+                0x0000000006038594                rom.lto_priv.248
+                0x00000000060385f4                dq.lto_priv.297
+                0x0000000006038604                dw.lto_priv.298
+                0x0000000006038620                db.lto_priv.306
+                0x000000000603863a                geometry_5cd0.lto_priv.305
+                0x0000000006038728                activate_5f28.lto_priv.303
+                0x00000000060389b0                valid.lto_priv.243
+                0x00000000060389d6                emit.isra.0.lto_priv.293.lto_priv.295
+                0x0000000006038af8                wf_r18_title_step
+                0x0000000006039368                valid.lto_priv.242
+                0x0000000006039394                wf_r18_frontend_credit_055a
+                0x00000000060393dc                wf_r18_frontend_clear_1f52
+                0x0000000006039410                wf_r18_frontend_clear_1f38
+                0x0000000006039444                dw.lto_priv.605
+                0x0000000006039460                target.lto_priv.609
+                0x0000000006039540                emit.lto_priv.290
+                0x000000000603956a                panel.lto_priv.292
+                0x00000000060395b4                transform.lto_priv.607
+                0x00000000060396bc                block.lto_priv.608
+                0x0000000006039714                wf_r18_frontend_input_64e0
+                0x000000000603985c                wf_r18_palettes_commit
+                0x0000000006039950                wf_r18_hud_commit
+                0x0000000006039a44                wf_r18_number_26122
+                0x0000000006039cec                wf_r18_ring_tile_restore
+                0x0000000006039d58                source_tile_index.lto_priv.521
+                0x0000000006039e64                video_cell.lto_priv.413
+                0x000000000603a160                ring_update.lto_priv.428
+                0x000000000603a854                wf_r18_ring_bind
+                0x000000000603ae2c                wf_r18_transition_barrier
+                0x000000000603b61c                wf_r18_transition_reset
+                0x000000000603b708                wf_r18_metasprite_emit
+                0x000000000603beaa                wf_r18_frontend_leaf_emit
+                0x000000000603c018                dw.lto_priv.604
+                0x000000000603c040                wf_r17_tag_palettes_c1ea.part.6
+                0x000000000603c148                tag_partition.lto_priv.822
+                0x000000000603c200                wf_participant_write
+                0x000000000603c4f0                message.lto_priv.825
+                0x000000000603c5a4                choose.lto_priv.826
+                0x000000000603c8e0                wf_participant_read
+                0x000000000603cab4                reserve_busy.lto_priv.827
+                0x000000000603cfe4                refill.lto_priv.828
+                0x000000000603d15c                selected_refill.lto_priv.823
+                0x000000000603d768                relocate.lto_priv.824
+                0x000000000603dac0                wf_participant_9556.part.4.lto_priv.831
+                0x000000000603dbc8                wf_participant_9578.part.0.lto_priv.829
+                0x000000000603dd10                wf_participant_9398.lto_priv.830
+                0x000000000603ef90                draw.lto_priv.566
+                0x000000000603f080                wf_r18_prematch_tag_step_a68a
+                0x000000000603f7b0                input_64e0.lto_priv.308
+ .text          0x000000000603f8fc     0x8f04 /tmp/ccP1Ic9C.ltrans7.ltrans.o
+                0x000000000603fca0                wf_r17_visibility_2188_exact
+                0x0000000006040558                wf_participant_workspace_release
+                0x0000000006040580                wf_r17_owner_298ec.part.15
+                0x00000000060407d8                wf_be32.lto_priv.663.lto_priv.847
+                0x00000000060407d8                wf_be32.lto_priv.664.lto_priv.808
+                0x00000000060407d8                wf_be32.lto_priv.662.lto_priv.677
+                0x00000000060407d8                wf_be32.lto_priv.665.lto_priv.846
+                0x00000000060407d8                wf_be32.lto_priv.668.lto_priv.838
+                0x00000000060407d8                wf_be32.lto_priv.666.lto_priv.871
+                0x000000000604081c                wf_r17_owner_88a2.part.12
+                0x0000000006040a84                wf_r17_owner_c710.part.11
+                0x00000000060410fc                wf_r17_owner_c04a.part.10
+                0x0000000006041348                wf_r17_owner_899c.part.8
+                0x0000000006041640                wf_r17_owner_8ecc.part.6
+                0x00000000060417fc                post7_call_word_preserve_regs.part.3.lto_priv.833
+                0x0000000006041864                wf_r17_owner_2836
+                0x0000000006041aa0                post7_royal_activate.lto_priv.832
+                0x0000000006041bf8                wf_r17_owner_7548
+                0x0000000006042094                branchb_26a60.lto_priv.834
+                0x000000000604223c                emit_audio.lto_priv.879
+                0x0000000006042270                clear_common.lto_priv.880
+                0x00000000060422b0                wf_r17_transition_reset_ram
+                0x0000000006042354                wf_r17_follow_10e86
+                0x0000000006042470                add_corr.lto_priv.836
+                0x0000000006042480                count_target_flags.lto_priv.839
+                0x00000000060424d4                ringside_team_result.lto_priv.840
+                0x0000000006042528                wf_r17_ref_acquire_20556
+                0x0000000006042600                gather_204fa.lto_priv.841
+                0x0000000006042750                primary5.lto_priv.843
+                0x00000000060428bc                linked.lto_priv.837
+                0x0000000006042900                cancel_1f9e0.lto_priv.842
+                0x0000000006042978                wf_r17_queue_27b8
+                0x0000000006042a18                wf_r17_owner_8cf8.part.14
+                0x000000000604301c                wf_r17_owner_7366
+                0x00000000060434cc                wf_r17_world_to_screen_247c
+                0x000000000604350c                wf_r17_owner_8710.part.13
+                0x00000000060439e0                rng21b4.lto_priv.278
+                0x0000000006043a50                random_shift.lto_priv.279
+                0x0000000006043acc                wf_r17_fixed_four_10120.part.1
+                0x0000000006043df8                wf_r17_collision_24062.part.5
+                0x00000000060451b4                divs32_16.lto_priv.669.lto_priv.798
+                0x0000000006045228                wf_r17_resolver_280dc
+                0x0000000006045704                one_object.lto_priv.835
+                0x0000000006045a4c                wf_r17_resolver_280dc_hook
+                0x0000000006045ae0                wf_r17_dispatch_1c03e_bounded.part.15
+ .text          0x0000000006048800     0x92b0 /tmp/ccP1Ic9C.ltrans8.ltrans.o
+                0x000000000604a974                state4_1bd0e.lto_priv.675
+                0x000000000604aac8                tick_descriptor.lto_priv.674
+                0x000000000604ab70                main_one_11652.lto_priv.676
+                0x000000000604b568                sound_1110e.isra.17.lto_priv.782
+                0x000000000604d654                wf_r17_dispatch_1c03e_r11
+ .text          0x0000000006051ab0     0x77fc /tmp/ccP1Ic9C.ltrans9.ltrans.o
+                0x0000000006051bd4                raw13.lto_priv.748
+                0x0000000006051eb0                raw1f.lto_priv.739
+                0x0000000006052104                raw7a.lto_priv.741
+                0x00000000060524cc                raw34.lto_priv.738
+                0x00000000060527c4                raw8a.lto_priv.719
+                0x0000000006052928                raw75_edge_10fc6.lto_priv.752
+                0x00000000060529e0                raw01_45.lto_priv.743
+                0x0000000006052c48                raw41.lto_priv.720
+                0x0000000006052d78                raw8d.lto_priv.698
+                0x0000000006052eec                raw67.lto_priv.734
+                0x0000000006053068                raw58.lto_priv.732
+                0x0000000006053220                raw57.lto_priv.733
+                0x0000000006053330                raw1d.lto_priv.728
+                0x0000000006053850                raw1c.lto_priv.729
+                0x0000000006053c30                raw89.lto_priv.707
+                0x0000000006053d88                raw5a_5b.lto_priv.685
+                0x0000000006053f40                raw56.lto_priv.686
+                0x00000000060540b4                raw55.lto_priv.687
+                0x00000000060541c8                raw_reversal.lto_priv.726
+                0x00000000060542d4                throw2f_offset.lto_priv.763
+                0x0000000006054360                raw25.lto_priv.717
+                0x00000000060545d8                raw18.lto_priv.724
+                0x0000000006054764                raw03.lto_priv.723
+                0x000000000605494c                raw53.lto_priv.730
+                0x0000000006054cdc                raw52.lto_priv.731
+                0x000000000605505c                raw5f_prepare_21732.lto_priv.760
+                0x00000000060551f8                raw5f.lto_priv.722
+                0x00000000060553c4                raw60.lto_priv.718
+                0x000000000605563c                raw84.lto_priv.711
+                0x000000000605577c                raw83.lto_priv.710
+                0x00000000060558c0                landing_1108c.lto_priv.762
+                0x000000000605597c                raw2e.lto_priv.746
+                0x0000000006055d48                raw05.lto_priv.740
+                0x0000000006055f8c                raw04.lto_priv.742
+                0x00000000060565bc                raw19.lto_priv.745
+                0x0000000006056adc                raw02.lto_priv.744
+                0x0000000006056d70                raw44.lto_priv.736
+                0x0000000006057008                raw43.lto_priv.715
+                0x00000000060573dc                raw28.lto_priv.716
+                0x0000000006057734                raw2f.lto_priv.727
+                0x0000000006057b20                raw33.lto_priv.712
+                0x0000000006057ffc                raw51.lto_priv.713
+                0x00000000060581e8                raw0e.lto_priv.714
+                0x00000000060587a8                raw35.lto_priv.737
+                0x0000000006058b62                raw0f.lto_priv.747
+                0x0000000006058efc                raw10.lto_priv.691
+ .text          0x00000000060592ac     0x7a98 /tmp/ccP1Ic9C.ltrans10.ltrans.o
+                0x00000000060593ea                wf_phase_damage
+                0x00000000060596c0                action22_message_2503c.lto_priv.275
+                0x0000000006059810                ring_walk_descriptor.lto_priv.757
+                0x0000000006059850                object_from_ptr.lto_priv.753
+                0x0000000006059878                actor_from_ptr.lto_priv.274
+                0x0000000006059884                wf_actor_rom_base.lto_priv.761
+                0x00000000060598a0                wf_set_be32.lto_priv.754
+                0x00000000060598b0                wf_be32.lto_priv.240
+                0x00000000060598c0                action22_cleanup_21358.lto_priv.276
+                0x00000000060599a0                wf_r17_action_cleanup_21358
+                0x00000000060599dc                tag_cleanup_213a6.lto_priv.786
+                0x0000000006059b20                pin_outcome.lto_priv.755
+                0x0000000006059cd4                interrupt_cleanup_212a0.lto_priv.277
+                0x0000000006059d60                escape_cleanup_21282.lto_priv.784
+                0x0000000006059e48                wf_set_be16.lto_priv.765
+                0x0000000006059e60                wf_be16.lto_priv.273
+                0x0000000006059e68                jump_hit_11192.lto_priv.764
+                0x0000000006059f04                action22_partner_215b6.lto_priv.272
+                0x000000000605a104                interrupt_position.lto_priv.751
+                0x000000000605a19c                raw37.lto_priv.684
+                0x000000000605a530                raw69.lto_priv.706
+                0x000000000605a6e0                ring_exit_arrived.lto_priv.756
+                0x000000000605a828                raw3c.lto_priv.725
+                0x000000000605a978                action_offset_10b62.lto_priv.783
+                0x000000000605aa04                wf_r17_action_idle_114b2
+                0x000000000605ac44                raw4b.lto_priv.699
+                0x000000000605adf4                raw4a.lto_priv.700
+                0x000000000605b0c4                pin_candidate.lto_priv.785
+                0x000000000605b21c                raw61.lto_priv.683
+                0x000000000605b460                entry_effect.lto_priv.758
+                0x000000000605b6a8                raw71.lto_priv.680
+                0x000000000605b884                wf_r17_action_effect_10d3a
+                0x000000000605b8a4                raw66.lto_priv.692
+                0x000000000605bbd0                raw17.lto_priv.694
+                0x000000000605bda0                raw16.lto_priv.695
+                0x000000000605bf44                desc_load_frame.lto_priv.749
+                0x000000000605bf90                helper_10bd0.lto_priv.750
+                0x000000000605bfe4                raw85.lto_priv.708
+                0x000000000605c158                raw15.lto_priv.696
+                0x000000000605c294                wf_r17_helper_11412_carry
+                0x000000000605c2a8                raw08.lto_priv.703
+                0x000000000605c4f8                wf_r17_helper_11152_carry
+                0x000000000605c56e                wf_r17_dispatch_1c03e_raw23
+                0x000000000605d320                wf_r17_trajectory_26ae
+                0x000000000605d334                raw49.lto_priv.701
+                0x000000000605d634                e958_carry.part.4.lto_priv.876
+                0x000000000605d6b0                ef9a_filter.lto_priv.872
+                0x000000000605d7e0                e830_remap.lto_priv.873
+                0x000000000605d894                f178_link.lto_priv.875
+                0x000000000605d8f8                f12e_link.lto_priv.874
+                0x000000000605d998                ef6a.part.3.lto_priv.878
+                0x000000000605d9d0                eece.lto_priv.877
+                0x000000000605da54                wf_r17_1129e
+                0x000000000605de14                wf_r17_1129e_live
+                0x000000000605de84                wf_r17_rng21b4_live
+                0x000000000605df38                raw4c.lto_priv.681
+                0x000000000605e3c0                pin_helpers.lto_priv.766
+                0x000000000605e640                raw48.lto_priv.702
+                0x000000000605e878                wf_saturn_cram_write.part.0
+                0x000000000605e978                wf_saturn_cram_write_bank
+                0x000000000605ea1c                wf_physics_integrate_common
+                0x000000000605eb30                copy_profile_damage.lto_priv.671
+                0x000000000605eb64                collision_24900.lto_priv.672
+                0x000000000605ebc8                cleanup_212a0_safe.lto_priv.673
+                0x000000000605eca8                wf_collision_axis0e_overlap
+                0x000000000605ecee                wf_collision_axis06_overlap
+                0x000000000605ed5e                wf_collision_normalize_receiver
+                0x000000000605ed94                wf_runtime_emit_audio
+                0x000000000605ee30                raw0c.lto_priv.688
+                0x000000000605f068                raw0b.lto_priv.689
+                0x000000000605f34c                raw09.lto_priv.735
+                0x000000000605f5a8                raw22.lto_priv.721
+                0x000000000605f7fc                raw0a.lto_priv.690
+                0x000000000605fcf8                raw59.lto_priv.682
+                0x000000000605fe3c                raw26.lto_priv.709
+                0x0000000006060224                raw24.lto_priv.704
+                0x00000000060603d4                raw4d.lto_priv.693
+                0x000000000606058c                raw0d.lto_priv.697
+                0x0000000006060aa0                sound_1112e.lto_priv.759
+                0x0000000006060ae4                raw68.lto_priv.705
+ .text          0x0000000006060d44     0x8e44 /tmp/ccP1Ic9C.ltrans11.ltrans.o
+                0x0000000006060d44                wf_phase_transient_reset_10e6a
+                0x0000000006060d7c                wf_phase_camera_2983c
+                0x0000000006060ea8                wf_phase_postack_2017a
+                0x0000000006061300                wf_phase_post7_9052
+                0x0000000006061554                wf_phase_post7_262d2
+                0x0000000006061d40                wf_phase_branchb_285da
+                0x0000000006062128                wf_phase_post7_298ec
+                0x00000000060621b0                wf_phase_post7_18c4
+                0x00000000060648ac                wf_phase_post7_2836
+                0x0000000006064918                wf_phase_post7_8ecc
+                0x0000000006064984                wf_phase_post7_899c
+                0x0000000006064a0c                wf_phase_post7_8cf8
+                0x0000000006064a98                wf_phase_post7_7366
+                0x0000000006064b04                wf_phase_post7_bb14
+                0x0000000006064f2c                wf_phase_post7_8710
+                0x0000000006064fb8                wf_phase_post7_88a2
+                0x0000000006065040                wf_phase_branchb_c710
+                0x00000000060650e8                wf_phase_branchb_c04a
+                0x0000000006065170                wf_phase_branchb_bcfe
+                0x00000000060655e0                wf_phase_branchb_7548
+                0x000000000606564c                wf_phase_branchb_26a42
+                0x00000000060657d8                wf_phase_effects_7a00
+                0x0000000006065860                wf_phase_fixed_four_10120
+                0x0000000006065ae4                wf_phase_ringside_fdee
+                0x0000000006065bd4                wf_phase_collision_24062
+                0x0000000006065c80                wf_phase_wrestlers_f4c2
+                0x0000000006065fac                wf_phase_cpu_real
+                0x000000000606836c                wf_phase_referee_1f914
+ .text          0x0000000006069b88     0x7564 /tmp/ccP1Ic9C.ltrans12.ltrans.o
+                0x0000000006069b88                wf_phase_camera_26936
+                0x0000000006069eb4                wf_phase_input_real
+                0x000000000606a08c                f4c2_postqueue_2208.lto_priv.804
+                0x000000000606a130                f4c2_dispatch_hook.lto_priv.803
+                0x000000000606a450                state11_wait.isra.9.lto_priv.821
+                0x000000000606a514                defender_relation_1c228.lto_priv.805
+                0x000000000606a630                cpu_data.lto_priv.819
+                0x000000000606a6b0                cpu_pointer.lto_priv.820
+                0x000000000606a6f4                cpu_face_10be8.lto_priv.809
+                0x000000000606a768                wf_cpu_arrived_1f15c
+                0x000000000606a8e0                state1_weighted_24cc.lto_priv.817
+                0x000000000606a9ac                state2_weighted_1d8c2.lto_priv.818
+                0x000000000606ab1c                defender_fallback_1c880.lto_priv.810
+                0x000000000606ac1c                wf_phase_refill_8b3a
+                0x000000000606aed8                state1_tag_request_1c5fa.part.7.lto_priv.816
+                0x000000000606afe4                state0_latched_1c390.lto_priv.812
+                0x000000000606b1e8                defender_1c7ec.lto_priv.811
+                0x000000000606b510                wf_r17_candidate_2187e.part.6
+                0x000000000606ba60                wf_state5_execute
+                0x000000000606dd68                wf_cpu_pursuit_1d5a2
+                0x000000000606e1e8                choose_1dea6.lto_priv.814
+                0x000000000606e550                state0_tail.lto_priv.807
+                0x000000000606ee9c                decision_1de66.lto_priv.815
+                0x000000000606ef94                state4.lto_priv.806
+                0x000000000606f93c                decision_1f084.lto_priv.271
+                0x000000000606fc50                state1_sub0.lto_priv.813
+ .text          0x00000000060710ec     0x53b8 /tmp/ccP1Ic9C.ltrans13.ltrans.o
+                0x00000000060712b4                wf_phase_spatial_2088e
+                0x00000000060713b8                wf_r18_tile_read
+                0x000000000607149c                wf_r18_rom_read
+                0x00000000060714b8                wf_payment_consume_055a
+                0x0000000006071574                wf_actor_unlink_115d2
+                0x0000000006071664                wf_actor_from_rom_ptr
+                0x0000000006071664                wf_actor_from_rom_ptr_const
+                0x00000000060717c8                wf_phase_actor_prepass_f18a
+                0x0000000006073ac8                wf_phase_pair_relation_f560
+                0x00000000060748c4                wf_phase_target_relation_20958
+                0x0000000006075160                submit_records.lto_priv.429
+ .text          0x00000000060764a4       0x1e /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+                0x00000000060764a4                memcmp
+ *fill*         0x00000000060764c2        0x2 
+ .text          0x00000000060764c4       0x94 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcpy.o)
+                0x00000000060764c4                memcpy
+ .text          0x0000000006076558       0x3c /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+                0x0000000006076558                memmove
+ .text          0x0000000006076594       0x40 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memset.o)
+                0x0000000006076594                memset
+ .text          0x00000000060765d4       0x38 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strcmp.o)
+                0x00000000060765d4                strcmp
+ .text          0x000000000607660c       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strlen.o)
+                0x000000000607660c                strlen
+ .text          0x000000000607662c       0x32 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+                0x000000000607662c                strncpy
+ .text          0x000000000607665e       0x52 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftrt.o)
+                0x000000000607665e                __ashiftrt_r4_31
+                0x000000000607665e                __ashiftrt_r4_32
+                0x0000000006076664                __ashiftrt_r4_30
+                0x0000000006076666                __ashiftrt_r4_29
+                0x0000000006076668                __ashiftrt_r4_28
+                0x000000000607666a                __ashiftrt_r4_27
+                0x000000000607666c                __ashiftrt_r4_26
+                0x000000000607666e                __ashiftrt_r4_25
+                0x0000000006076670                __ashiftrt_r4_24
+                0x0000000006076678                __ashiftrt_r4_23
+                0x000000000607667a                __ashiftrt_r4_22
+                0x000000000607667c                __ashiftrt_r4_21
+                0x000000000607667e                __ashiftrt_r4_20
+                0x0000000006076680                __ashiftrt_r4_19
+                0x0000000006076682                __ashiftrt_r4_18
+                0x0000000006076684                __ashiftrt_r4_17
+                0x0000000006076686                __ashiftrt_r4_16
+                0x000000000607668c                __ashiftrt_r4_15
+                0x000000000607668e                __ashiftrt_r4_14
+                0x0000000006076690                __ashiftrt_r4_13
+                0x0000000006076692                __ashiftrt_r4_12
+                0x0000000006076694                __ashiftrt_r4_11
+                0x0000000006076696                __ashiftrt_r4_10
+                0x0000000006076698                __ashiftrt_r4_9
+                0x000000000607669a                __ashiftrt_r4_8
+                0x000000000607669c                __ashiftrt_r4_7
+                0x000000000607669e                __ashiftrt_r4_6
+                0x00000000060766a0                __ashiftrt_r4_5
+                0x00000000060766a2                __ashiftrt_r4_4
+                0x00000000060766a4                __ashiftrt_r4_3
+                0x00000000060766a6                __ashiftrt_r4_2
+                0x00000000060766a8                __ashiftrt_r4_1
+                0x00000000060766ac                __ashiftrt_r4_0
+ .text          0x00000000060766b0       0x80 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftrt_n.o)
+                0x00000000060766b0                __ashrsi3
+ .text          0x0000000006076730       0xbc /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftlt.o)
+                0x0000000006076730                __ashlsi3
+                0x0000000006076734                __ashlsi3_r0
+ .text          0x00000000060767ec       0xbc /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_lshiftrt.o)
+                0x00000000060767ec                __lshrsi3
+                0x00000000060767f0                __lshrsi3_r0
+ .text          0x00000000060768a8       0x78 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_movmem.o)
+                0x00000000060768a8                __movstr
+                0x00000000060768a8                __movmem
+                0x00000000060768dc                __movmemSI64
+                0x00000000060768dc                __movstrSI64
+                0x00000000060768e0                __movstrSI60
+                0x00000000060768e0                __movmemSI60
+                0x00000000060768e4                __movmemSI56
+                0x00000000060768e4                __movstrSI56
+                0x00000000060768e8                __movstrSI52
+                0x00000000060768e8                __movmemSI52
+                0x00000000060768ec                __movstrSI48
+                0x00000000060768ec                __movmemSI48
+                0x00000000060768f0                __movstrSI44
+                0x00000000060768f0                __movmemSI44
+                0x00000000060768f4                __movstrSI40
+                0x00000000060768f4                __movmemSI40
+                0x00000000060768f8                __movstrSI36
+                0x00000000060768f8                __movmemSI36
+                0x00000000060768fc                __movmemSI32
+                0x00000000060768fc                __movstrSI32
+                0x0000000006076900                __movmemSI28
+                0x0000000006076900                __movstrSI28
+                0x0000000006076904                __movstrSI24
+                0x0000000006076904                __movmemSI24
+                0x0000000006076908                __movmemSI20
+                0x0000000006076908                __movstrSI20
+                0x000000000607690c                __movstrSI16
+                0x000000000607690c                __movmemSI16
+                0x0000000006076910                __movmemSI12
+                0x0000000006076910                __movstrSI12
+                0x0000000006076914                __movmemSI8
+                0x0000000006076914                __movstrSI8
+                0x0000000006076918                __movmemSI4
+                0x0000000006076918                __movstrSI4
+ .text          0x0000000006076920       0xa0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_sdivsi3.o)
+                0x0000000006076920                __sdivsi3
+ .text          0x00000000060769c0       0x6c /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivsi3.o)
+                0x00000000060769e2                __udivsi3
+ .text          0x0000000006076a2c      0x268 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+                0x0000000006076a2c                __divdi3
+ .text          0x0000000006076c94      0x2a8 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+                0x0000000006076c94                __moddi3
+ .text          0x0000000006076f3c      0x258 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+                0x0000000006076f3c                __udivdi3
+ .text          0x0000000006077194      0x2bc /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+                0x0000000006077194                __umoddi3
+ .text          0x0000000006077450       0x60 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udiv_qrnnd_16.o)
+                0x0000000006077450                __udiv_qrnnd_16
+ .text          0x00000000060774b0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+ *(.text.*)
+ .text.unlikely
+                0x00000000060774b0      0x3fc /tmp/ccP1Ic9C.ltrans0.ltrans.o
+                0x0000000006077644                jo_dma_fill32.constprop.151
+                0x0000000006077690                __jo_vdp2_reserve_nbg1_bitmap
+ .text.startup  0x00000000060778ac     0x1218 /tmp/ccP1Ic9C.ltrans0.ltrans.o
+                0x00000000060778ac                main
+ .text.unlikely
+                0x0000000006078ac4      0x2d8 /tmp/ccP1Ic9C.ltrans1.ltrans.o
+                0x0000000006078ac4                __jo_core_errorf
+ *(.strings)
+                0x0000000006078d9c                __etext = .
+
+.rodata         0x0000000006078da0     0xc524
+ *(.rodata)
+ .rodata        0x0000000006078da0      0x9ec /tmp/ccP1Ic9C.ltrans0.ltrans.o
+                0x0000000006078da0                table_0dee.2278.lto_priv.801
+                0x0000000006078db4                right.2139.lto_priv.655
+                0x0000000006078dc4                left.2138.lto_priv.654
+                0x0000000006078dfa                __jo_vdp1_system_clip_bottom
+                0x0000000006078dfc                __jo_vdp1_system_clip_right
+                0x00000000060792ac                __jo_screen
+                0x00000000060792bc                fixed_at.2257.lto_priv.551
+                0x00000000060792bc                fixed_at.2285.lto_priv.550
+                0x000000000607977c                bonus.1398.lto_priv.653
+                0x000000000607977c                bonus.3037.lto_priv.656
+                0x0000000006079784                masks.1964.lto_priv.434
+                0x0000000006079784                bits.2439.lto_priv.442
+ .rodata        0x000000000607978c      0xb3c /tmp/ccP1Ic9C.ltrans1.ltrans.o
+                0x0000000006079794                worlds.1970.lto_priv.560
+                0x000000000607a2c0                __FUNCTION__.2242.lto_priv.486
+ .rodata        0x000000000607a2c8     0x1fb8 /tmp/ccP1Ic9C.ltrans2.ltrans.o
+ .rodata        0x000000000607c280       0x6c /tmp/ccP1Ic9C.ltrans4.ltrans.o
+ .rodata        0x000000000607c2ec      0x338 /tmp/ccP1Ic9C.ltrans5.ltrans.o
+                0x000000000607c4a8                wf_qy
+                0x000000000607c52a                wf_qx
+ .rodata        0x000000000607c624      0x67c /tmp/ccP1Ic9C.ltrans6.ltrans.o
+                0x000000000607c6c0                base.2721.lto_priv.790
+                0x000000000607c6c0                base.2107.lto_priv.679
+                0x000000000607c6c0                base.1808.lto_priv.678
+                0x000000000607c6c4                weights.2719.lto_priv.802
+ .rodata        0x000000000607cca0     0x100b /tmp/ccP1Ic9C.ltrans7.ltrans.o
+                0x000000000607cca0                speed.3163.lto_priv.777
+                0x000000000607cca0                speed.3170.lto_priv.778
+                0x000000000607cca0                SPEED_11D4A.lto_priv.781
+                0x000000000607ccac                at.3776.lto_priv.769
+                0x000000000607da68                wf_collision_profiles
+ *fill*         0x000000000607dcab        0x1 
+ .rodata        0x000000000607dcac     0x1778 /tmp/ccP1Ic9C.ltrans8.ltrans.o
+                0x000000000607de38                magnitude.2711.lto_priv.791
+                0x000000000607de38                magnitude.3757.lto_priv.770
+                0x000000000607de38                speed.2322.lto_priv.793
+                0x000000000607de38                magnitude.2736.lto_priv.789
+                0x000000000607dec8                D_11DCA.lto_priv.767
+                0x000000000607def4                D_1603A.lto_priv.792
+                0x000000000607e15c                D_125C0.lto_priv.776
+                0x000000000607e27c                timer.4330.lto_priv.779
+                0x000000000607e27c                delay.3293.lto_priv.774
+                0x000000000607e27c                timer.3257.lto_priv.775
+                0x000000000607e27c                delay.3668.lto_priv.772
+                0x000000000607e282                recovery.3670.lto_priv.773
+                0x000000000607e282                recovery.4340.lto_priv.780
+                0x000000000607e288                D_19530.lto_priv.771
+                0x000000000607e7c0                D_115F2.lto_priv.768
+ .rodata        0x000000000607f424      0x9fc /tmp/ccP1Ic9C.ltrans9.ltrans.o
+                0x000000000607f424                TAB_176BA.lto_priv.794
+                0x000000000607f430                chance.2790.lto_priv.788
+                0x000000000607f448                timer.2893.lto_priv.787
+ .rodata        0x000000000607fe20      0x8a0 /tmp/ccP1Ic9C.ltrans10.ltrans.o
+ .rodata        0x00000000060806c0     0x2bb8 /tmp/ccP1Ic9C.ltrans11.ltrans.o
+                0x000000000608091c                cpu_data_219b4.lto_priv.844
+                0x000000000608302c                rom_zero.1891.lto_priv.845
+ .rodata        0x0000000006083278      0xcb2 /tmp/ccP1Ic9C.ltrans12.ltrans.o
+ *fill*         0x0000000006083f2a        0x2 
+ .rodata        0x0000000006083f2c      0x9ce /tmp/ccP1Ic9C.ltrans13.ltrans.o
+ *fill*         0x00000000060848fa        0x2 
+ .rodata        0x00000000060848fc      0x100 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+                0x00000000060848fc                __clz_tab
+ *(.rodata.*)
+ .rodata.str1.4
+                0x00000000060849fc      0x2a4 /tmp/ccP1Ic9C.ltrans0.ltrans.o
+                                        0x2b4 (size before relaxing)
+ .rodata.str1.4
+                0x0000000006084ca0      0x3e8 /tmp/ccP1Ic9C.ltrans1.ltrans.o
+                                        0x40c (size before relaxing)
+ .rodata.str1.4
+                0x0000000006085088      0x231 /tmp/ccP1Ic9C.ltrans2.ltrans.o
+                                        0x2e4 (size before relaxing)
+ *fill*         0x00000000060852b9        0x3 
+ .rodata.str1.4
+                0x00000000060852bc        0x8 /tmp/ccP1Ic9C.ltrans6.ltrans.o
+                                         0x44 (size before relaxing)
+
+.rela.dyn       0x00000000060852c4        0x0
+ .relaJO_START  0x00000000060852c4        0x0 sdk/jo_engine/start.o
+ .rela.text.startup
+                0x00000000060852c4        0x0 sdk/jo_engine/start.o
+
+.tors           0x00000000060852d0        0x0
+                0x00000000060852d0                ___ctors = .
+ *(.ctors)
+                0x00000000060852d0                ___ctors_end = .
+                0x00000000060852d0                ___dtors = .
+ *(.dtors)
+                0x00000000060852d0                ___dtors_end = .
+
+.data           0x00000000060852d0      0x190
+ *(.data)
+ .data          0x00000000060852d0        0x0 sdk/jo_engine/start.o
+ .data          0x00000000060852d0       0x88 /tmp/ccP1Ic9C.ltrans0.ltrans.o
+                0x00000000060852d0                __jo_sprite_id.lto_priv.355
+                0x00000000060852d4                __jo_audio_resident_start.lto_priv.400
+                0x00000000060852d8                __jo_audio_alloc_next.lto_priv.402
+                0x00000000060852dc                __jo_vdp1_frame.lto_priv.363
+                0x00000000060852e0                wf_jo_diagnostic
+                0x000000000608534c                jo_core_scu_mask.lto_priv.369
+                0x0000000006085354                preparation_hits.lto_priv.443
+ .data          0x0000000006085358       0x88 /tmp/ccP1Ic9C.ltrans1.ltrans.o
+                0x0000000006085358                revision.lto_priv.435
+                0x000000000608535c                last_bank.lto_priv.438
+                0x0000000006085360                __jo_audio_music.lto_priv.485
+                0x00000000060853dc                __jo_fs_read_buffer_size.lto_priv.507
+ .data          0x00000000060853e0       0x79 /tmp/ccP1Ic9C.ltrans2.ltrans.o
+                0x00000000060853e0                speech_divisor.lto_priv.632
+                0x00000000060853e4                portrait_divisor.lto_priv.633
+                0x0000000006085444                map_version.lto_priv.644
+                0x0000000006085450                palette_version.lto_priv.797
+ .data          0x0000000006085459        0x0 /tmp/ccP1Ic9C.ltrans3.ltrans.o
+ .data          0x0000000006085459        0x0 /tmp/ccP1Ic9C.ltrans4.ltrans.o
+ .data          0x0000000006085459        0x0 /tmp/ccP1Ic9C.ltrans5.ltrans.o
+ *fill*         0x0000000006085459        0x3 
+ .data          0x000000000608545c        0x4 /tmp/ccP1Ic9C.ltrans6.ltrans.o
+ .data          0x0000000006085460        0x0 /tmp/ccP1Ic9C.ltrans7.ltrans.o
+ .data          0x0000000006085460        0x0 /tmp/ccP1Ic9C.ltrans8.ltrans.o
+ .data          0x0000000006085460        0x0 /tmp/ccP1Ic9C.ltrans9.ltrans.o
+ .data          0x0000000006085460        0x0 /tmp/ccP1Ic9C.ltrans10.ltrans.o
+ .data          0x0000000006085460        0x0 /tmp/ccP1Ic9C.ltrans11.ltrans.o
+ .data          0x0000000006085460        0x0 /tmp/ccP1Ic9C.ltrans12.ltrans.o
+ .data          0x0000000006085460        0x0 /tmp/ccP1Ic9C.ltrans13.ltrans.o
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcpy.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memset.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strcmp.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strlen.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftrt.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftrt_n.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftlt.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_lshiftrt.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_movmem.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_sdivsi3.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivsi3.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udiv_qrnnd_16.o)
+ .data          0x0000000006085460        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+ *(.data.*)
+                0x0000000006085460                __edata = .
+
+.bss            0x0000000006085460    0x54b90
+                0x0000000006085460                __bstart = .
+ *(.bss)
+ .bss           0x0000000006085460        0x0 sdk/jo_engine/start.o
+ .bss           0x0000000006085460    0x222c4 /tmp/ccP1Ic9C.ltrans0.ltrans.o
+                0x0000000006085460                __jo_sprite_pic
+                0x00000000060854e0                __jo_sprite_def
+                0x0000000006085560                __jo_fs_data_end_fad.lto_priv.396
+                0x0000000006085564                __jo_cd_sector_buffer.lto_priv.398
+                0x0000000006085d64                __jo_fs_dir_count.lto_priv.394
+                0x0000000006085d68                __jo_cd_initialized.lto_priv.399
+                0x0000000006085d6c                __jo_fs_handles.lto_priv.397
+                0x0000000006085d80                __jo_fs_background_job_count
+                0x0000000006085d84                __jo_fs_background_jobs.lto_priv.352
+                0x0000000006085da0                __jo_fs_dir.lto_priv.393
+                0x00000000060871a0                __jo_audio_effect_mix.lto_priv.408
+                0x00000000060871a4                __jo_audio_direct_mix.lto_priv.407
+                0x00000000060871a8                __jo_audio_music_sound_ram.lto_priv.405
+                0x00000000060871ac                __jo_audio_pending_count.lto_priv.409
+                0x00000000060871b0                __jo_audio_cache_next.lto_priv.406
+                0x00000000060871b4                __jo_audio_channels.lto_priv.403
+                0x0000000006087304                __jo_audio_cache.lto_priv.401
+                0x0000000006087604                __jo_audio_emergency_muted.lto_priv.404
+                0x0000000006087608                __jo_vdp1_erase_measure_field.lto_priv.359
+                0x000000000608760c                __jo_vdp1_erase_measure.lto_priv.343
+                0x0000000006087610                __jo_vdp1_current_window
+                0x0000000006087614                __jo_vdp1_windows
+                0x000000000608765c                __jo_vdp1_frames_sent.lto_priv.361
+                0x0000000006087660                __jo_vdp1_next_shown_field.lto_priv.381
+                0x0000000006087664                __jo_vdp1_shown_field.lto_priv.383
+                0x0000000006087668                __jo_vdp1_shown_tag.lto_priv.382
+                0x000000000608766c                __jo_vdp1_taken_tag.lto_priv.384
+                0x0000000006087670                __jo_vdp1_building_tag.lto_priv.364
+                0x0000000006087674                __jo_core_last_synch_vblank.lto_priv.357
+                0x0000000006087678                __jo_slave_idle_time.lto_priv.351
+                0x000000000608767c                __jo_slave_last_idle_ticks.lto_priv.350
+                0x0000000006087680                __jo_slave_user_added.lto_priv.348
+                0x0000000006087684                __jo_slave_master_waiting.lto_priv.346
+                0x0000000006087688                __jo_slave_idle_ticks.lto_priv.349
+                0x000000000608768c                __jo_slave_user_done.lto_priv.347
+                0x0000000006087690                __jo_slave_queue_tail.lto_priv.392
+                0x0000000006087694                __jo_slave_queue_head.lto_priv.391
+                0x0000000006087698                __jo_slave_running.lto_priv.344
+                0x000000000608769c                __slave_callbacks
+                0x00000000060876b0                __vblank_callbacks.lto_priv.370
+                0x00000000060876c4                __jo_last_error
+                0x0000000006087704                loading_observer.lto_priv.452
+                0x0000000006087708                __callbacks.lto_priv.342
+                0x000000000608771c                load_requested.lto_priv.456
+                0x0000000006087720                loading_text_visible.lto_priv.467
+                0x0000000006087724                __jo_memory_zone_index.lto_priv.356
+                0x0000000006087728                memory_zones.lto_priv.345
+                0x00000000060877b8                __jo_vdp2_displayed_screens.lto_priv.354
+                0x00000000060877bc                __jo_vdp2_printf_palette
+                0x00000000060877c0                screen_flags.lto_priv.353
+                0x00000000060877c4                __jo_vdp2_tvmd.lto_priv.378
+                0x00000000060877c8                __jo_vdp1_frames_done.lto_priv.360
+                0x00000000060877cc                __jo_vdp1_pending_tag.lto_priv.366
+                0x00000000060877d0                __jo_vdp1_pending_clear_full.lto_priv.388
+                0x00000000060877d2                __jo_vdp1_pending_clear_top.lto_priv.387
+                0x00000000060877d4                __jo_vdp1_pending_clear.lto_priv.386
+                0x00000000060877d8                __jo_vdp1_erase_lines.lto_priv.368
+                0x00000000060877dc                __jo_vdp1_vblank_fields.lto_priv.358
+                0x00000000060877e0                __jo_vdp1_flip_field.lto_priv.385
+                0x00000000060877e4                __jo_vdp1_pending_table.lto_priv.362
+                0x00000000060877e8                __jo_smpc_timing_fault
+                0x00000000060877ec                __jo_smpc_gun_found.lto_priv.389
+                0x00000000060877ed                __jo_smpc_intback_gun_ports.lto_priv.377
+                0x00000000060877ee                __jo_smpc_intback_continue.lto_priv.375
+                0x00000000060877f0                __jo_smpc_intback_length.lto_priv.372
+                0x00000000060877f4                __jo_smpc_status_irq_pending.lto_priv.374
+                0x00000000060877f6                __jo_smpc_previous_pressed.lto_priv.390
+                0x0000000006087832                __jo_smpc_gun_ports.lto_priv.376
+                0x0000000006087834                __jo_smpc_peripherals
+                0x0000000006087b04                __jo_smpc_intback_busy.lto_priv.371
+                0x0000000006087b05                __jo_smpc_command_pending.lto_priv.373
+                0x0000000006087b08                __jo_vdp2_screens.lto_priv.440
+                0x0000000006087be4                sampled_controls_owner.lto_priv.415
+                0x0000000006087be8                sampled_controls.lto_priv.414
+                0x0000000006087bec                __jo_core_vblank_count
+                0x0000000006087bf0                __jo_fs_cd_diag.lto_priv.395
+                0x0000000006087c30                preparing.lto_priv.412
+                0x0000000006087ca4                cache_data.lto_priv.446
+                0x0000000006087ca8                cache_slots.lto_priv.447
+                0x0000000006087cac                cache_max_slots.lto_priv.448
+                0x0000000006087cb0                cache_bytes_used.lto_priv.453
+                0x0000000006087cb4                sprite_block_bytes.lto_priv.444
+                0x0000000006087cb8                cache_loan.lto_priv.451
+                0x0000000006087cbc                servicing.lto_priv.449
+                0x0000000006087cc0                records_save.lto_priv.468
+                0x0000000006087d64                frontend.lto_priv.457
+                0x0000000006087ffc                world.lto_priv.460
+                0x0000000006088168                display.lto_priv.459
+                0x0000000006088198                video.lto_priv.461
+                0x00000000060953cc                __jo_vdp2_dirty.lto_priv.380
+                0x00000000060953e0                __jo_vdp2_shadow.lto_priv.379
+                0x0000000006095500                __jo_sprintf_buf
+                0x0000000006095540                rt.lto_priv.458
+                0x000000000609732c                texture_cache.lto_priv.433
+                0x00000000060a2c64                backend.lto_priv.506
+                0x00000000060a32f8                active_backend.lto_priv.441
+                0x00000000060a32fc                stats.lto_priv.445
+                0x00000000060a3320                master_decoder.lto_priv.508
+ *fill*         0x00000000060a7724       0x1c 
+ .bss           0x00000000060a7740     0xab31 /tmp/ccP1Ic9C.ltrans1.ltrans.o
+                0x00000000060a7740                index_lut.lto_priv.504
+                0x00000000060a78c8                delta_lut.lto_priv.503
+                0x00000000060a7ee8                sample_offset.lto_priv.432
+                0x00000000060a7eec                residents.lto_priv.490
+                0x00000000060a80e4                resident_map.lto_priv.491
+                0x00000000060a8158                event_offset.lto_priv.489
+                0x00000000060a815c                timer_phase.lto_priv.497
+                0x00000000060a8164                bank.lto_priv.494
+                0x00000000060a8168                command_offset.lto_priv.488
+                0x00000000060a816c                pack.lto_priv.431
+                0x00000000060a8170                music.lto_priv.481
+                0x00000000060a84d0                music_fade_level.lto_priv.502
+                0x00000000060a84d4                music_fade_started_ms.lto_priv.501
+                0x00000000060a84d8                music_fade_active.lto_priv.500
+                0x00000000060a84da                sequence.lto_priv.493
+                0x00000000060a84ec                pcm.lto_priv.492
+                0x00000000060a860c                emergency_stopped.lto_priv.487
+                0x00000000060a8610                music_was_playing.lto_priv.498
+                0x00000000060a8614                music_command.lto_priv.499
+                0x00000000060a8618                last_ms.lto_priv.482
+                0x00000000060a861c                queue_write.lto_priv.495
+                0x00000000060a8620                queue_read.lto_priv.496
+                0x00000000060a8624                wf_jo_audio_diagnostic
+                0x00000000060a870c                initialized.lto_priv.480
+                0x00000000060a8710                busy.lto_priv.510
+                0x00000000060a8720                banks.lto_priv.439
+                0x00000000060ac820                video_running.lto_priv.437
+                0x00000000060ac824                records.lto_priv.464
+                0x00000000060ae824                __jo_audio_music_reserved_buffer.lto_priv.505
+                0x00000000060ae828                __jo_audio_music_pending.lto_priv.484
+                0x00000000060ae829                __jo_audio_music_ready.lto_priv.511
+                0x00000000060ae82a                __jo_audio_music_autostart.lto_priv.512
+                0x00000000060ae82b                __jo_audio_music_priming.lto_priv.483
+                0x00000000060ae82c                __jo_fs_stream_service
+                0x00000000060ae830                __jo_core_music_vblank
+                0x00000000060ae834                jo_inputs
+                0x00000000060ae954                __jo_core_null_access
+                0x00000000060ae960                __jo_core_frame_overlap.lto_priv.436
+                0x00000000060ae964                __jo_core_music_update
+ *fill*         0x00000000060b2271        0xf 
+ .bss           0x00000000060b2280    0x1636c /tmp/ccP1Ic9C.ltrans2.ltrans.o
+                0x00000000060b2280                wf_saturn_cram_writes
+                0x00000000060b2284                cram_valid.lto_priv.795
+                0x00000000060b2304                tile_slots.lto_priv.849
+                0x00000000060b3210                preparation_complete.lto_priv.848
+                0x00000000060b3214                bound.lto_priv.636
+                0x00000000060b3218                last_record_count.lto_priv.850
+                0x00000000060b321c                last.lto_priv.649
+                0x00000000060b3230                dirty_cells.lto_priv.648
+                0x00000000060b4230                dirty_count.lto_priv.647
+                0x00000000060b4234                overlay_dirty.lto_priv.646
+                0x00000000060b4a34                overlay.lto_priv.650
+                0x00000000060b6a34                overlay_valid.lto_priv.645
+                0x00000000060b7234                preparation_generation_exhausted.lto_priv.861
+                0x00000000060b7238                demand_count.lto_priv.855
+                0x00000000060b723c                sprite_tile_shift.lto_priv.863
+                0x00000000060b7240                demand_tiles.lto_priv.856
+                0x00000000060b7440                demand_cursor.lto_priv.864
+                0x00000000060b7444                demand_active.lto_priv.857
+                0x00000000060b7448                cache_batch_epoch.lto_priv.853
+                0x00000000060b744c                binding_generation.lto_priv.862
+                0x00000000060b7450                slot_age.lto_priv.854
+                0x00000000060b7850                preparation_generation.lto_priv.860
+                0x00000000060b7854                commands.lto_priv.851
+                0x00000000060b7858                preparation_owner.lto_priv.858
+                0x00000000060b785c                command_count.lto_priv.852
+                0x00000000060b7860                pending_count.lto_priv.859
+                0x00000000060b7880                bg_names.lto_priv.642
+                0x00000000060b8080                fg_names.lto_priv.641
+                0x00000000060b8880                hud_names.lto_priv.643
+                0x00000000060ba880                colors.lto_priv.796
+                0x00000000060bb880                resume_valid.lto_priv.638
+                0x00000000060bb884                blank_pending.lto_priv.637
+ .bss           0x00000000060c85ec        0x0 /tmp/ccP1Ic9C.ltrans3.ltrans.o
+ .bss           0x00000000060c85ec        0x0 /tmp/ccP1Ic9C.ltrans4.ltrans.o
+ .bss           0x00000000060c85ec        0x4 /tmp/ccP1Ic9C.ltrans5.ltrans.o
+ .bss           0x00000000060c85f0      0xee0 /tmp/ccP1Ic9C.ltrans6.ltrans.o
+ .bss           0x00000000060c94d0     0xde78 /tmp/ccP1Ic9C.ltrans7.ltrans.o
+                0x00000000060c94d0                participant_workspace_owner.lto_priv.799
+                0x00000000060c94d4                participant_workspace.lto_priv.800
+ .bss           0x00000000060d7348        0x0 /tmp/ccP1Ic9C.ltrans8.ltrans.o
+ .bss           0x00000000060d7348        0x0 /tmp/ccP1Ic9C.ltrans9.ltrans.o
+ .bss           0x00000000060d7348      0x800 /tmp/ccP1Ic9C.ltrans10.ltrans.o
+ .bss           0x00000000060d7b48        0x0 /tmp/ccP1Ic9C.ltrans11.ltrans.o
+ .bss           0x00000000060d7b48        0x0 /tmp/ccP1Ic9C.ltrans12.ltrans.o
+ .bss           0x00000000060d7b48     0x24a8 /tmp/ccP1Ic9C.ltrans13.ltrans.o
+                0x00000000060d7b48                __jo_sprite_end_codes
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcpy.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memset.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strcmp.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strlen.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftrt.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftrt_n.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_ashiftlt.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_lshiftrt.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_movmem.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_sdivsi3.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivsi3.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udiv_qrnnd_16.o)
+ .bss           0x00000000060d9ff0        0x0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+ *(.bss.*)
+ *(COMMON)
+                0x00000000060d9ff0                . = ALIGN (0x4)
+                0x00000000060d9ff0                __bend = .
+                0x00000000060d9ff0                _end = .
+
+JO_WORK         0x00000000060dc000     0xd580
+                0x00000000060dc000                __jo_work_start = .
+ *(JO_WORK_ALIGNED)
+ JO_WORK_ALIGNED
+                0x00000000060dc000     0x3018 /tmp/ccP1Ic9C.ltrans0.ltrans.o
+ *(SORT_BY_ALIGNMENT(JO_WORK))
+ *fill*         0x00000000060df018        0x8 
+ JO_WORK        0x00000000060df020     0xa560 /tmp/ccP1Ic9C.ltrans0.ltrans.o
+                0x00000000060df020                __jo_vdp1_frames.lto_priv.367
+                0x00000000060e9580                . = ALIGN (0x4)
+                0x00000000060e9580                __jo_work_end = .
+
+/DISCARD/
+ *(.comment)
+ *(.eh_frame)
+ *(.eh_frame_hdr)
+                0x0000000000000001                ASSERT ((__jo_work_end <= 0x60fbc00), Program too big: the program and the engine work area overlap the stack at 0x060FBC00)
+LOAD sdk/jo_engine/start.o
+LOAD /tmp/ccP1Ic9C.ltrans0.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans1.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans2.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans3.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans4.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans5.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans6.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans7.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans8.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans9.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans10.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans11.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans12.ltrans.o
+LOAD /tmp/ccP1Ic9C.ltrans13.ltrans.o
+LOAD /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a
+LOAD /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a
+LOAD /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc-Os-4-200.a
+LOAD /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a
+LOAD /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a
+LOAD /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc-Os-4-200.a
+OUTPUT(game.elf elf32-sh)
+
+.debug_info     0x0000000000000000     0x42d5
+ .debug_info    0x0000000000000000      0x982 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .debug_info    0x0000000000000982      0xede /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_info    0x0000000000001860      0x985 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_info    0x00000000000021e5      0x779 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .debug_info    0x000000000000295e      0x77d /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .debug_info    0x00000000000030db      0x73b /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .debug_info    0x0000000000003816      0x74e /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+ .debug_info    0x0000000000003f64      0x371 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+
+.debug_abbrev   0x0000000000000000      0xf33
+ .debug_abbrev  0x0000000000000000      0x1e7 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .debug_abbrev  0x00000000000001e7      0x200 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_abbrev  0x00000000000003e7      0x1f8 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_abbrev  0x00000000000005df      0x220 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .debug_abbrev  0x00000000000007ff      0x222 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .debug_abbrev  0x0000000000000a21      0x218 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .debug_abbrev  0x0000000000000c39      0x22b /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+ .debug_abbrev  0x0000000000000e64       0xcf /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+
+.debug_loc      0x0000000000000000     0x2024
+ .debug_loc     0x0000000000000000       0xde /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .debug_loc     0x00000000000000de      0x137 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_loc     0x0000000000000215       0xa2 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_loc     0x00000000000002b7      0x696 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .debug_loc     0x000000000000094d      0x71e /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .debug_loc     0x000000000000106b      0x824 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .debug_loc     0x000000000000188f      0x795 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+
+.debug_aranges  0x0000000000000000       0xf8
+ .debug_aranges
+                0x0000000000000000       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .debug_aranges
+                0x0000000000000020       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_aranges
+                0x0000000000000040       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_aranges
+                0x0000000000000060       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .debug_aranges
+                0x0000000000000080       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .debug_aranges
+                0x00000000000000a0       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .debug_aranges
+                0x00000000000000c0       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+ .debug_aranges
+                0x00000000000000e0       0x18 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+
+.debug_line     0x0000000000000000     0x11ce
+ .debug_line    0x0000000000000000      0x182 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .debug_line    0x0000000000000182      0x218 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_line    0x000000000000039a      0x19a /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_line    0x0000000000000534      0x2d0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .debug_line    0x0000000000000804      0x333 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .debug_line    0x0000000000000b37      0x29e /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .debug_line    0x0000000000000dd5      0x305 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+ .debug_line    0x00000000000010da       0xf4 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+
+.debug_str      0x0000000000000000      0xd3f
+ .debug_str     0x0000000000000000      0x4c9 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+                                        0x529 (size before relaxing)
+ .debug_str     0x00000000000004c9      0x2d6 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+                                        0x859 (size before relaxing)
+ .debug_str     0x000000000000079f       0x5e /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+                                        0x547 (size before relaxing)
+ .debug_str     0x00000000000007fd      0x4c7 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+                                        0x58f (size before relaxing)
+ .debug_str     0x0000000000000cc4        0x9 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+                                        0x58f (size before relaxing)
+ .debug_str     0x0000000000000ccd        0xa /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+                                        0x590 (size before relaxing)
+ .debug_str     0x0000000000000cd7        0xa /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)
+                                        0x590 (size before relaxing)
+ .debug_str     0x0000000000000ce1       0x5e /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_clz.o)
+                                        0x50d (size before relaxing)
+
+.debug_frame    0x0000000000000000       0x60
+ .debug_frame   0x0000000000000000       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memcmp.o)
+ .debug_frame   0x0000000000000020       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_frame   0x0000000000000040       0x20 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/../../../../sh-none-elf/lib/libc.a(lib_a-strncpy.o)
+
+.debug_ranges   0x0000000000000000      0x2a8
+ .debug_ranges  0x0000000000000000       0x90 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_divdi3.o)
+ .debug_ranges  0x0000000000000090       0xa0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_moddi3.o)
+ .debug_ranges  0x0000000000000130       0xb8 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_udivdi3.o)
+ .debug_ranges  0x00000000000001e8       0xc0 /mnt/data/wf_debug_boot/src/source/sdk/Compiler/LINUX/bin/../lib/gcc/sh-none-elf/8.2.0/libgcc.a(_umoddi3.o)

@@ -1,0 +1,97 @@
+{
+  "status": "PASS_MANUAL_CREDITED_ROUTE_AND_RECORDS",
+  "mode": "tag",
+  "pal": false,
+  "attract_first": true,
+  "route": {
+    "entry_tick": 14,
+    "complete_tick": 318,
+    "advanced_ticks": 304,
+    "start_field": 13970,
+    "entry_wall_seconds": 379.950849,
+    "complete_wall_seconds": 388.727929,
+    "last_trace_tick": 363,
+    "attract": {
+      "combat_wall_seconds": 109.392356,
+      "return_wall_seconds": 330.048978
+    },
+    "observed_key_pairs": 60
+  },
+  "final_snapshot": {
+    "running": 1,
+    "failed": 0,
+    "runtime_tick": 380,
+    "runtime_credited": 32768,
+    "runtime_mode": 0,
+    "runtime_world": 0,
+    "runtime_round": 0,
+    "frontend_ram": 3129344,
+    "frontend_credited_start": 1,
+    "frontend_generation": 1,
+    "frontend_handed_off": 1,
+    "frontend_phase": 6
+  },
+  "records": {
+    "status": 2,
+    "cached_payload_bytes": 148,
+    "payload_sha256": "e4fef6acd17fd4d28eba0be19fef8a6c76c0460fb017117353bb8ceb8f2e346a",
+    "first_ready_wall_seconds": 40.440106,
+    "source_payload_equal": true,
+    "battery_unchanged": true,
+    "battery_sha256": "3c9c625183799acc7b94c4a075f93b24d9b85aaa04a90987e37f2c4654258967",
+    "later_live_rankings_equal_cached": true,
+    "later_live_rankings_sha256": "575a602e789c3167982ea5bfb2a9057ff7db4752253ace761465ad34b3387f67"
+  },
+  "symbols": {
+    "rt": {
+      "name": "_rt.lto_priv.393",
+      "address": 101273052,
+      "size": 7660
+    },
+    "frontend": {
+      "name": "_frontend.lto_priv.392",
+      "address": 101217792,
+      "size": 664
+    },
+    "records_save": {
+      "name": "_records_save.lto_priv.404",
+      "address": 101217628,
+      "size": 164
+    },
+    "running": {
+      "name": "_running.lto_priv.453",
+      "address": 101410720,
+      "size": 4
+    },
+    "failed": {
+      "name": "_failed.lto_priv.452",
+      "address": 101410728,
+      "size": 4
+    }
+  },
+  "identities": {
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-tag-attract-r03/job.json": "a235e7d7e7e048b347e751d0191a28308c3650164670833d7fa56f038aa2902a",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-tag-attract-r03/report.json": "5e084d00b7181b44ae1dac1503b89e74c4c1dc1b2e3f5b639e6f85c2f18f79d1",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-tag-attract-r03/normal-pad-events.json": "6e4c5c0b8c50a6beee33b9671bb00f4579c68e32e2cf4f9a98952f0ca97e73b5",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/run_r03_x11.py": "1127091a704c2975070d1627524bd64ebb8db7b2b300e747a68219e9bc30a05c",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r02_normal_pad.py": "442bbacedb35deeb17df351a01aced4795a607ef3e343106ec496dc61c93a799",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/game.elf": "2f7b846d07e5004141ffdff4141b43d46c8506cd2e9e48aa6662cee624b513ec",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/game.raw": "869c1903ae731652376b682e7ef701d182c70f0a31b7783b978e8d3a3d51faab",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/package-identities.json": "860c521e8132913c60c834107e0f93c1a87f25eca77212cb7f9a254d12eb97b3",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-tag-attract-r03/WorkRAMH-live.bin": "6810be83ae4317319d07d631bc78a60f5a3fc5697abfc748991c101c8f1933c1",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-tag-attract-r03/records-context.bin": "209afb6ca27a56a5199085b19ab58a54a4d4b17cc97579552f2be0d7b1b5a38f",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/layout.json": "80ccf7f72336289ffc037a1f7e31bb18a1ee0f2e241040a92e6ae892c669f13b",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/layout.s": "da41479fb8cc3974eeec32792d4cebcdc56111161fe03881763f0b68d463174b",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/layout.c": "68dc47975cf0080271d1755f1e1758e4b73868b85bf2fae3a2f339c5a76f67d7",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/r03-manual-review/verify_manual.py": "11c0fc1bdd60a25033f4d5142b22fe8558de437cac2bba872a67d88784f7d494",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/saturn-tag-input-r02c/capture-full-route/profile/sav/game.0173678e278a99abb06b1b508701a660.bkr": "3c9c625183799acc7b94c4a075f93b24d9b85aaa04a90987e37f2c4654258967",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-tag-attract-r03/profile/sav/game.bkr": "3c9c625183799acc7b94c4a075f93b24d9b85aaa04a90987e37f2c4654258967",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/saturn-tag-input-r02c/capture-full-route/records-context.bin": "7d92bd8b2d00964f87dc9cb334997d0ebcc60309d7fea7fdf41f03dffec9fbc3",
+    "/Users/alejandro/Documents/Codex/2026-11-13/d/work/initial-load-integration/candidate/capture-manual-tag-attract-r03/WorkRAML-state.bin": "6c79ff9d3113b7431c4b7e422d3122ac02cf8b22bc973ef2c52f7e2e360b6d8f"
+  },
+  "limits": [
+    "Normal SDL/X11 key route on stock emulator, not physical Saturn validation.",
+    "Only at least 300 credited gameplay ticks are accepted; no complete match/campaign or continuous graphical acceptance.",
+    "Cached BIOS payload is evaluated separately from later live rankings; a later score difference is not a failed reload."
+  ]
+}

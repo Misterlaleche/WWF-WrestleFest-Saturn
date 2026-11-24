@@ -1,0 +1,23 @@
+{
+  "scope": "Observer before real $514E at naturally won Royal tick13716; no runtime writes.",
+  "binary_sha256": "c8e5fd06f6f238cb40948da5142f80993b81bfb407ab2d614ad5c24f8fcb662c",
+  "sources": {
+    "/work/wrestlefest/port/main.c": "a0d54ae6e65cbbdc84e9ba8b3b5f43530e1dd9f99fea0eeba59e2ba0c97d558f",
+    "/work/wrestlefest/tests/test_tag_campaign_main.c": "1dd3ae9b955564c8232a81fc9e612a075957fe273879d561c6ed4fa5ef51c711",
+    "/work/wrestlefest/tests/test_royal_input_bus.c": "3ee85c0860a9c17d510058fae83a42b785dfd8cc5eed5c815419ed81d423f69d",
+    "/work/wrestlefest/tests/policies/royal_closer.h": "f09285e05828be11fafb606d507ff59fc8ed2e201c7fc2101731310b5a468a2f"
+  },
+  "runtime_manifest_sha256": "2d9377e1f0d96d6264444f96066b6d7b831566bb7d588101685496195018502c",
+  "environment": {
+    "WF_POLICY_SWITCH_AT": "12000",
+    "WF_POLICY_PERIOD": "4",
+    "WF_POLICY_SPACING": "16",
+    "WF_POLICY_VARIANT": "22",
+    "WF_POLICY_PIN_HEALTH": "24"
+  },
+  "files": {
+    "arcade-ram.bin": "74c039be875efd22194cb12f6e78f23589dea1cbe1386087806ba1ac2455d87f",
+    "state.json": "d5f59a63da2697154a25d070eba9028ddae9bfb24fff47945e6994051712e7ab",
+    "observer-source.c": "3ee85c0860a9c17d510058fae83a42b785dfd8cc5eed5c815419ed81d423f69d"
+  }
+}

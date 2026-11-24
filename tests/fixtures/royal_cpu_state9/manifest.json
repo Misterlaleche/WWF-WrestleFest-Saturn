@@ -1,0 +1,7 @@
+{
+  "origin": "Actual uninterrupted Royal policy grid1 trial039 tick8151; normal physical inputs only. Snapshot after state9 incremented BD and chose its low selector, before the missing24CC branch.",
+  "files": {
+    "state.json": "74a47d17508e8fcd3b3e09c7237e97db5ac21a1bf1aca56a8038a64f9c23d1de",
+    "arcade-ram.bin": "8a7ca5281d9f3ba855edc989d3e1db96208fd5b0254b17d3382ad2dfe7dbf4c7"
+  }
+}

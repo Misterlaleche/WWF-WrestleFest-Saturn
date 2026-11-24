@@ -1,0 +1,70 @@
+{
+  "status": "PASS_HOST_INTEGRATION_REVIEW",
+  "reviewer": "evidence_status",
+  "preparation_sha256": "be126696b9d327b02ea69b9bcf6782e7747b03d7811f8de1b67a9773ddebe840",
+  "runtime_count": 415,
+  "existing_runtime_deltas": [
+    "port/main.c",
+    "port/wf_jo_assets.c",
+    "port/wf_jo_audio.c",
+    "sdk/jo_engine/audio.c",
+    "sdk/jo_engine/fs.c",
+    "sdk/jo_engine/jo/audio.h",
+    "sdk/jo_engine/jo/fs.h"
+  ],
+  "added": [
+    "port/wf_jo_music_headers.h"
+  ],
+  "unchanged_assets": 34,
+  "reviewed_make_changes": [
+    "raw asset flag/gate, header gate order-only on object/ELF/ISO",
+    "cd.sort normal prerequisite, six priorities 0.BIN/ROM68K/SPRITES/SCENES/SFX/FONT",
+    "Version V1.005/date 20261113; all other compiler/reservation settings and cold Os owners preserved"
+  ],
+  "main_equivalence": "Reviewed CD diagnostic main plus R02\u2192R03 and title label substitutions only",
+  "tests": {
+    "sdk_header_api": {
+      "cases": 2826,
+      "receipt": "work/music-header-prototype/combined-api/receipt.json",
+      "sha256": "020825986cb9ee71b2c90d13381801c18085dc007d78b55f841fb05f3bf4e5b9"
+    },
+    "adapter_order": {
+      "cases": 3,
+      "receipt": "work/music-header-prototype/combined-order/receipt.json",
+      "sha256": "47c49552549f1fda76a71ed8eed4410749d64c6b32c53b3f504217ae0c20c517"
+    },
+    "adapter_pcm_service": {
+      "cases": 32830,
+      "samples": 12061722,
+      "commands": 98,
+      "starts": 100,
+      "receipt": "work/music-header-prototype/combined-adapter/report.json",
+      "sha256": "f78c2bc83e8eece7d76a9457c2e448cb448e3e381834ff0e6f1d37e676fff415"
+    },
+    "generator_and_make": {
+      "tests": 11,
+      "log_sha256": "57aa755ca9d71c6676d85f7c301cfa28aff5e6fadffe4fe29102049d090a80e4",
+      "private_wrapper_tests_excluded": 3
+    },
+    "actual_combined_raw_and_header_gate": "PASS"
+  },
+  "shared_build_dependencies": {
+    "common_make_sha256": "16200f0b6db9257b7d6b0b2ea5a8080e29b3a76c88000176dcade10610b34629",
+    "linker_sha256": "c2505a94b005ce5178e6a8b1a9f96d560e8617afedb7fa7b81889f79a08b5274",
+    "linker": "/work/wrestlefest/sdk/Compiler/COMMON/jo.linker",
+    "assertions": [
+      "** ...        - 0x060FBC00 : free (given to jo_malloc(), see jo_init_memory())",
+      "** 0x060FBC00 - 0x060FFC00 : master CPU stack",
+      "ASSERT(__jo_work_end <= 0x060FBC00, \"Program too big: the program and the engine work area overlap the stack at 0x060FBC00\")",
+      "ASSERT(_end <= 0x060DC000, \"Program too big: dual-CPU work area would consume the music allocation\")"
+    ]
+  },
+  "findings": [],
+  "source_files_changed_by_review": [],
+  "limits": [
+    "No SH2 build or size acceptance performed by reviewer.",
+    "No emulator or physical CD timing acceptance; only R01 has user physical test.",
+    "FS merged differential belongs to review_records; this review covers integration identities, audio behavior, gates and layout configuration.",
+    "ISO LBAs require package verification after the build; configuration alone does not prove final physical layout."
+  ]
+}

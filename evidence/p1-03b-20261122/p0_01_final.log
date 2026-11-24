@@ -1,0 +1,12 @@
+emergency-audio PASS
+frontend-fault PASS
+emergency-negative-controls PASS
+normal-music-stream PASS
+music-deadline-model PASS
+startup-synthetic-pcm PASS
+cd-diagnostics PASS
+cd-ui PASS
+cd-negative-controls PASS
+boot-progress PASS
+main-host-syntax PASS
+sdk-host-syntax PASS

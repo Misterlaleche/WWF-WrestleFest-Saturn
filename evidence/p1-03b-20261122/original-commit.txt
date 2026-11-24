@@ -1,0 +1,4 @@
+branch=wrestlefest/p1-03-boot-asset-fix
+commit=467148a7afec20d6d0cf10427af4ce74022cf686
+base=1aff90fed3b4e0dd306b0768eea9fe70ccdcbbe6
+game_raw_sha256=92ae0c34b4c55983914e209710574327c9e77e58dc4df78919d931149138064e

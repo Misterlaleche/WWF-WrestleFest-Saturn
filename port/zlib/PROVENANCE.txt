@@ -1,0 +1,3 @@
+Unmodified inflater-only subset of zlib1.2.11, Mark Adler and Jean-loup Gailly.
+Source: user-supplied39-wp1979-fuentes-pruebas.zip, member wp1979/tooling/yabause-libretro.tar.gz, directory yabause-master/yabause/src/libchdr/deps/zlib-1.2.11/
+Built with Z_SOLO and NO_GZIP. No emulator source or Z80/68000 interpreter is linked.

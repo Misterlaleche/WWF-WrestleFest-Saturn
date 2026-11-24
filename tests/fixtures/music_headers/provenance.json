@@ -1,0 +1,12 @@
+{
+  "origin": "sdk/jo_engine/audio.c, promoted E02 before WAV-header optimization",
+  "source_sha256": "14b2a14118a1f277762942d051dd5cd5eea09bebc29883d93fe1f21e4563d299",
+  "functions": [
+    "jo_audio_wav_value",
+    "jo_audio_wav_format",
+    "jo_audio_music_header",
+    "jo_audio_prepare_music"
+  ],
+  "change": "Only function names prefixed for side-by-side execution; music state and FS boundary shared, reset before each call.",
+  "fixture_sha256": "4e6e4ee9844dd38896c5c3877618163017b29ab522cd7a4f404f9bba3ae3281f"
+}

@@ -1,0 +1,7 @@
+Jo video lifetime, bounds, crops and flip pixels: PASS
+Jo command batches: identical order, palettes, flips, cropped pixels and checked bounds: PASS
+Jo metasprite alignment: 23616 cases / 172271 records, exact bytes, clipping and D6/D7: PASS
+Jo tile slots: late references, inactive residency, full frames, aborts, hash deletion and epoch wrap: PASS
+Jo pipeline: asynchronous fences, exact snapshots, sparse transfers, repeats and failure rollback: PASS
+Jo ring: seven scene packs, aligned/unaligned tiles, quadrant pixels, dirty names and flips: PASS
+Demolition logo: 8 TAG placements, 304 exact tiles, original palette/RGB, 10 ordinary logo routes: PASS

@@ -1,0 +1,2 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_boot_asset_build_policy.py"]
+PASS: Adler-32 is excluded from the -Os cold-object list

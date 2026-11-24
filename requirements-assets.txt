@@ -1,0 +1,2 @@
+# Pinned for byte-identical sprite streams and D03/E01 scene streams (15 iterations).
+zopfli==0.4.3

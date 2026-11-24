@@ -1,0 +1,17 @@
+/tmp/wf-jo-controls-v11vg3r5/test.c: In function ‘input_word’:
+/tmp/wf-jo-controls-v11vg3r5/test.c:58:14: error: ‘WF_JO_ROM_BYTES’ undeclared (first use in this function); did you mean ‘WF_ACTOR_BYTES’?
+   58 |     if(addr<=WF_JO_ROM_BYTES-2u){
+      |              ^~~~~~~~~~~~~~~
+      |              WF_ACTOR_BYTES
+/tmp/wf-jo-controls-v11vg3r5/test.c:58:14: note: each undeclared identifier is reported only once for each function it appears in
+/tmp/wf-jo-controls-v11vg3r5/test.c:60:12: error: implicit declaration of function ‘wf_jo_assets_rom_read’ [-Wimplicit-function-declaration]
+   60 |         if(wf_jo_assets_rom_read(addr,bytes,sizeof bytes))return WF_BLOCKED;
+      |            ^~~~~~~~~~~~~~~~~~~~~
+Traceback (most recent call last):
+  File "/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/tests/test_jo_controls.py", line 194, in <module>
+    main()
+  File "/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/tests/test_jo_controls.py", line 187, in main
+    subprocess.run([os.environ.get("CC", "cc"), *flags,
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['cc', '-std=c11', '-fms-extensions', '-O2', '-Wall', '-Wextra', '-Werror', '-fsanitize=address,undefined', '-fno-omit-frame-pointer', '-I/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/sdk/jo_engine', '-I/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/include', '/tmp/wf-jo-controls-v11vg3r5/test.c', '/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/src/wf_input.c', '/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/src/wf_physics.c', '/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/src/wf_r17_render_contract.c', '/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/src/wf_r17_m68k_shadow.c', '/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/src/wp1979_input.c', '/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/src/wp1980_input.c', '/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/generated/wf_action_matrix.c', '/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/core/generated/wf_physics_tables.c', '-o', '/tmp/wf-jo-controls-v11vg3r5/test']' returned non-zero exit status 1.

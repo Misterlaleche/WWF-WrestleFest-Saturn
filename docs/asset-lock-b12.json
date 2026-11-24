@@ -1,0 +1,143 @@
+{
+  "format": "wf-disc-asset-lock",
+  "version": 1,
+  "total_bytes": 632662337,
+  "files": {
+    "ABS.TXT": {
+      "bytes": 89,
+      "sha256": "ef4939b408cdde0ae754b80abcc9a365a83efdc33770eed024d997d75cd9579e"
+    },
+    "BIB.TXT": {
+      "bytes": 89,
+      "sha256": "ef4939b408cdde0ae754b80abcc9a365a83efdc33770eed024d997d75cd9579e"
+    },
+    "CPY.TXT": {
+      "bytes": 89,
+      "sha256": "ef4939b408cdde0ae754b80abcc9a365a83efdc33770eed024d997d75cd9579e"
+    },
+    "FONT8.BIN": {
+      "bytes": 131072,
+      "sha256": "a3045c6193d23c334c6af592cc1dfee029dc12eec810d3e2ce353df69580391a"
+    },
+    "MU01.WAV": {
+      "bytes": 52920044,
+      "sha256": "a38dffec218d3786080b4dbfd54d651b0e6dbd789b9f0fa32e619139ac1e06c5"
+    },
+    "MU02.WAV": {
+      "bytes": 52920044,
+      "sha256": "139ccb57b8fe8828059d418b55cb0ff9417beda92bfdc163d7a297ced5cd3213"
+    },
+    "MU03.WAV": {
+      "bytes": 52920044,
+      "sha256": "2e8f41ec53b28f8bf84be6cc89500ed5a33a4f338bee4ec996160c1ca941ef6d"
+    },
+    "MU04.WAV": {
+      "bytes": 52920044,
+      "sha256": "81e7bf724e6af0aa6ef64926ccf8d3fd824f488d87f43883e3d513120bc3f0d9"
+    },
+    "MU05.WAV": {
+      "bytes": 1058444,
+      "sha256": "fb0816b5c0ed7edfb5a52a7ee8b180f711343b8f31e00eaafba48a57ffec1b0b"
+    },
+    "MU06.WAV": {
+      "bytes": 52920044,
+      "sha256": "7c3558a4b469c2780999d559c527153693ca5e9d469ed8c13175f598d66367f9"
+    },
+    "MU07.WAV": {
+      "bytes": 52920044,
+      "sha256": "30a66cb3e867d171297fb31d0ee3bea1858f1096fb2789ca847bf144b832de6a"
+    },
+    "MU08.WAV": {
+      "bytes": 705644,
+      "sha256": "a0beda46d5ea26ed092b68c7239b2a6cfe712a35b6086cc890548317073e0328"
+    },
+    "MU09.WAV": {
+      "bytes": 1058444,
+      "sha256": "4870ef524a00a8700c7dcf95fae70a65232ea63eab8e606f8286855ee8e064bb"
+    },
+    "MU0A.WAV": {
+      "bytes": 52920044,
+      "sha256": "51fb7f18ca30c664a5ee70ce3e7123e2eefef12ac20003505b9d5e170b48560e"
+    },
+    "MU0B.WAV": {
+      "bytes": 52920044,
+      "sha256": "d09141a099c3012f8fca251c0d900b1697dbb089104287576cac81af1c902bbd"
+    },
+    "MU0C.WAV": {
+      "bytes": 52920044,
+      "sha256": "ac59da607ee5317b13ce9d70b52efc990b0dc4bd29b30726f4d6b26fbeed02d0"
+    },
+    "MU0D.WAV": {
+      "bytes": 10584044,
+      "sha256": "0d8ba64352f1232f7ad87f08a4b42ddfbdf3d3d137d900cbfdf9c7a28aa0d247"
+    },
+    "MU0E.WAV": {
+      "bytes": 52920044,
+      "sha256": "1ad99caef3893b856230a1dd22a74afe8d4e0452714aaf1865802eb47f9b979a"
+    },
+    "MU0F.WAV": {
+      "bytes": 52920044,
+      "sha256": "481ceb2c2ca48e0fdd6ea12175f67111313eddc1de11fcec12ccd00f65e574e4"
+    },
+    "MU10.WAV": {
+      "bytes": 10584044,
+      "sha256": "7e83ab7bd84edeb5b7012b6c6ada5fade7e2ed5dcebab4a77b88867e5877a945"
+    },
+    "MU11.WAV": {
+      "bytes": 10584044,
+      "sha256": "5d0c25255a3a770687467dbc85c7f0b85927c41153bbdec9b4fad586af3d404f"
+    },
+    "MU12.WAV": {
+      "bytes": 10584044,
+      "sha256": "4374141a4c54366a810a127c878285615ad3b6dbc0863907e9d3005fae85a689"
+    },
+    "R18MAP1.BIN": {
+      "bytes": 127138,
+      "sha256": "75f0e4bb5cc7b90974e4276a274b62144488997c5b4f6f6819070d1bec213359"
+    },
+    "R18MAP2.BIN": {
+      "bytes": 95978,
+      "sha256": "979b622c418307f90b1ce98524db7bade230adf399bd13e6fc3fe4adc699acf0"
+    },
+    "R18MAP4.BIN": {
+      "bytes": 129998,
+      "sha256": "402cd878b92e3373a2a1a14608a4d833d4a359282c39b875d0901c4f41746f91"
+    },
+    "R18MAP5.BIN": {
+      "bytes": 115568,
+      "sha256": "40cccfee8e2cc1509234b023f06754eefe9ba8c71725b7a145cdc050847e8c86"
+    },
+    "R18MAP6.BIN": {
+      "bytes": 95198,
+      "sha256": "a3a891c954a72a5131acc2453fd15fd7c68e893a5add99386496739ce37dbeb5"
+    },
+    "R18MENU.BIN": {
+      "bytes": 124938,
+      "sha256": "3d45bca1bd3115ca657d1ccf1a344eb4b0ee5c7c09b9129d9f122c8fd9779ad4"
+    },
+    "R18RING.BIN": {
+      "bytes": 114918,
+      "sha256": "774fbc5d9d0b404d1b3fdd825581efb5de892ab15504ecb257190dfa6b30191c"
+    },
+    "ROM68K.BIN": {
+      "bytes": 524288,
+      "sha256": "265ac89deeb7e708ac6fda724356bfd6af1c9012928a4e551e6e2faa424c2306"
+    },
+    "ROYINIT.BIN": {
+      "bytes": 106664,
+      "sha256": "40c53836ca6591f9bdc3cfcc879fda054ffc43f0d168ac02733b93d0d83cefbb"
+    },
+    "SCENES.WFP": {
+      "bytes": 268356,
+      "sha256": "f217d8e9781045afc25ec0ec86938607102ddff7fd040aeb8173b6c7fc5343e2"
+    },
+    "SFX.DAT": {
+      "bytes": 440710,
+      "sha256": "dbe749cf4ce13f333ff7318a74a64e30fa2b9af05d953688a0813311cbabd216"
+    },
+    "SPRITES.WFP": {
+      "bytes": 3108052,
+      "sha256": "569e32c22d9aeaa7e77a97e2562944a0b6f2a797ccc8da1b2b21de0801475558"
+    }
+  }
+}

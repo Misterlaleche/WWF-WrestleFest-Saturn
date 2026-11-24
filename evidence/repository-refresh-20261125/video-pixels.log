@@ -1,0 +1,3 @@
+COMMAND ["cc", "-std=c11", "-O1", "-g", "-Wall", "-Wextra", "-Werror", "-fsanitize=address,undefined", "-Icore/include", "-Iport", "tests/test_jo_video.c", "port/wf_jo_video.c", "-o", "/tmp/wf-repo-refresh-vmnjatw9/video-pixels"]
+COMMAND ["/tmp/wf-repo-refresh-vmnjatw9/video-pixels"]
+Jo video lifetime, bounds, crops and flip pixels: PASS

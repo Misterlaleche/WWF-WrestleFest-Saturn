@@ -1,0 +1,8 @@
+{
+  "origin": "Read-only pre-prepass snapshot after facing fix, natural Royal trial020 frame7213, royal_pressure period4 spacing48 variant0 pin_health24. Captured before wf_phase_actor_prepass_f18a; baseline then blocksEA42.",
+  "replay": "work/royal-human/replay",
+  "files": {
+    "state.json": "8aa47b780becb0e4d03eb54ed6cbeea5d3f5df03c2933bb1c121d257456f4718",
+    "arcade-ram.bin": "6e00bdcddc92b923536e287b463c34437b329a3982d387be03349fbd3a46590e"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "files": {
+    "port/wf_jo_assets.c": "626358aae85401a178e78d48995d442309c2f06084ad9b70f0fca6ae7a287c0c",
+    "port/wf_jo_assets.h": "36101a98b709afbf375f337ad6eacadde4b549c67d2e2f26c077310c774d17b2",
+    "port/zlib/LICENSE.txt": "82ec534ff0422763750dc7962ce1054e7d74bea9ce37339c4b182039d21c101d",
+    "port/zlib/PROVENANCE.txt": "b552d9747f35996d62d3e731813b9a8e21cde4a6a6c2b4169a15615e74ec85f1",
+    "port/zlib/adler32.c": "d7f1b6e44fee20ab41cef1d650776a039a2348935eb96bcbd294a4096139be3a",
+    "port/zlib/inffast.c": "07c89c7126e5e4b887ad07e99a3d94e0a1e612fdad60f1484a108cd499433a66",
+    "port/zlib/inffast.h": "7d8c1c873ce9bc346ad6005bb9d75cce5c6352aaf7395385be216a9452a34908",
+    "port/zlib/inffixed.h": "237ba710f090e432b62ebf963bee8b302867e9691406b2d3f8ee89ee7bfef9b0",
+    "port/zlib/inflate.c": "8b6c599c3563c14c447c47db0d7dc9a16e8c246a078ec95a169ddcebaaebd811",
+    "port/zlib/inflate.h": "8ec9ac297790276f7e46a961d4c6f9f944fb1dec92401339ec2666973cc5983c",
+    "port/zlib/inftrees.c": "1960ca67384376f65b6ce8c08fdb501f8eb33923e11ef5f61a855708c6cb0a8a",
+    "port/zlib/inftrees.h": "c510b36402784b1f898be3b049b923469aa92701de2d9195aed19f6b65c0dce2",
+    "port/zlib/zconf.h": "9c0087f31cd45fe4bfa0ca79b51df2c69d67c44f2fbb2223d7cf9ab8d971c360",
+    "port/zlib/zlib.h": "4ddc82b4af931ab55f44d977bde81bfbc4151b5dcdccc03142831a301b5ec3c8",
+    "port/zlib/zutil.c": "f7fdc9ef326a2683eb33c794face54e83c751ec17f3d1ba581847a62af36ddcd",
+    "port/zlib/zutil.h": "9a63f6690fac1620aa3cecee5752af618806da438a256b4a047fbcd289cac159"
+  },
+  "provenance": "Unmodified B12 v3 restored as805483a; independent source fixture, never runtime code"
+}

@@ -1,0 +1,8 @@
+{
+  "origin": "Actual uninterrupted main using physical-pad policy tag_pressure.h period6 spacing16 variant0 pinhealth24. Natural stage0 win; TAG stage1/world6 frame1954. Snapshot is after collision blockage, not pre-frame. Native scan reproduced first tested pair source1/target5, profiles18/0E, callbacks5/5, accepted_pairs0, with pair restored after failure.",
+  "source": "build/tag-policy-search/campaign-winning-stage1/trial000",
+  "files": {
+    "state.json": "b97e91469cf720406f1a08aa133427caf203aa8ab5d2ca1d0f5089973e103bae",
+    "arcade-ram.bin": "267741e307eb9b610083b5ace75c57cc6a91c07495b220a58b86bb8b45b5018e"
+  }
+}

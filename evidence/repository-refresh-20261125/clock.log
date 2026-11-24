@@ -1,0 +1,3 @@
+COMMAND ["cc", "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror", "-fsanitize=address,undefined", "-Iport", "tests/test_clock.c", "port/wf_jo_clock.c", "-o", "/tmp/wf-repo-refresh-vmnjatw9/clock"]
+COMMAND ["/tmp/wf-repo-refresh-vmnjatw9/clock"]
+clock: exact rational cadence, retained debt, wrap and overflow PASS

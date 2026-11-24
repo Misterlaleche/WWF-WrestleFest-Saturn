@@ -1,0 +1,10 @@
+{
+  "origin": "Read-only pre-callback observer: physical Royal trial020, period4 spacing48 variant0 pin_health24, actor4 frame7213. Includes fixed facing/EA42; unchanged raw4A then blocked180EC.",
+  "replay": "work/royal-pin-target/replay",
+  "observer_sha256": "f4122803b9bcd82a67b8edf5146d93fc7b9ae3747b67f4f60e20c534c4140d68",
+  "binary_sha256": "106a813e05ff9ae73b59041fd87f7d8adf6dfe02c04edd63099ac2fc7a43ebe1",
+  "files": {
+    "arcade-ram.bin": "a3f50cfd84fbd818d1ff0d494d246644dd98293fb1811f32fc25b689ce752fb3",
+    "state.json": "2cad13a550fb796d10cbb847910dd61399124c8c1a53da37fc504dda39b79afe"
+  }
+}

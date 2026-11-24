@@ -1,1 +1,0 @@
-cc -std=c11 -I/workspace/scratch/e1d72d5a13f7/wp1980/work/hwfix01/native/include -DWP1980_HOT_HEADER_BYTES=6144u -c /workspace/scratch/e1d72d5a13f7/wp1980/work/hwfix01/native/src/wf_r18_present.c -o /workspace/scratch/e1d72d5a13f7/wp1980/research/hardware-result-01/header-size-guard/unsafe6144-red.o

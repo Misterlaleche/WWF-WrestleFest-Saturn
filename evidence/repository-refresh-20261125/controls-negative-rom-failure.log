@@ -1,0 +1,10 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_jo_controls.py", "--sanitize", "--main-source", "/tmp/wf-repo-refresh-vmnjatw9/controls-negative-rom-failure.c"]
+test: /tmp/wf-jo-controls-x25bbcp7/test.c:244: rom_input_words: Assertion `input_word(&rt,0u,&value,NULL)==WF_BLOCKED' failed.
+Traceback (most recent call last):
+  File "/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/tests/test_jo_controls.py", line 254, in <module>
+    main()
+  File "/workspace/scratch/e0dbd9d1ed5e/wrestlefest-saturn/tests/test_jo_controls.py", line 250, in main
+    subprocess.run([str(binary)], check=True)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/tmp/wf-jo-controls-x25bbcp7/test']' died with <Signals.SIGABRT: 6>.

@@ -1,0 +1,4 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_music_deadline.py"]
+PASS:32KiB prefix, first new data300ms -> 2 underruns, first at200ms
+PASS:64KiB prefix, first new data550ms -> zero underruns or inserted silence
+PASS:64KiB remains finite: first new data650ms -> starvation at566ms

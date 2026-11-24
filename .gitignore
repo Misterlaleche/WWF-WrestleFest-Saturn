@@ -1,0 +1,26 @@
+/build/
+/cd/
+/sdk/Compiler/LINUX/
+/sdk/Compiler/WINDOWS/
+*.o
+*.d
+__pycache__/
+/game.elf
+/game.raw
+/game.map
+/game.iso
+/game.bin
+/game.cue
+/game.ip.bin
+/game.ip.o
+
+.worktrees/
+/source_assets/
+/sdk/Compiler/MAC/
+/sdk/Compiler/MACOS/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# COMMON contains the project's adapted linker, build rules and boot template.
+# It is required source and must remain tracked.

@@ -1,0 +1,207 @@
+{
+  "status": "PROMOTED_EXACT_VALIDATED_SOURCES",
+  "files": [
+    {
+      "path": "cd.sort",
+      "before": null,
+      "after": "0589e995a901a82e4b4238b2632d4a06b3c8cde2a7ce5450d0412d004f2413f5"
+    },
+    {
+      "path": "makefile",
+      "before": "84bb3b55f9fc7d9a3189786163d72275958e4751a6e950388180930e13ad30fa",
+      "after": "121118ca3687744ab02a6fa501c69b9dabb0d90dfd4db8c8e0c6e413fc2834e9"
+    },
+    {
+      "path": "port/main.c",
+      "before": "36a82e69ce81fd75e79de8ee262eb3308c720f4162825e82c82a3c1308612b39",
+      "after": "d2972801bcf982218f8feb94d01e7593f0823d65bf03a7bf8d66911754a40ad1"
+    },
+    {
+      "path": "port/wf_jo_assets.c",
+      "before": "a8e259b1a9d242fddeb2e911ba904a19fc98fafc7bf606e6fd0258085991df85",
+      "after": "be06de436be6602384512670daaa364799c1fe9043f61bb9f55d33d81307f272"
+    },
+    {
+      "path": "port/wf_jo_audio.c",
+      "before": "27c1c8a5a8b00c5097a16378816067c7ed889a7517c36d8cc61e24d59a7ff245",
+      "after": "8b8aa76569b89ff4d0d90a35baee9960183322e9839e9c04cc7ad63c2087f557"
+    },
+    {
+      "path": "port/wf_jo_music_headers.h",
+      "before": null,
+      "after": "536a400f4eaf7f1ddff5d6d88d00c63fcac42b02f09f97ce9085bc4e4869d767"
+    },
+    {
+      "path": "sdk/jo_engine/audio.c",
+      "before": "14b2a14118a1f277762942d051dd5cd5eea09bebc29883d93fe1f21e4563d299",
+      "after": "c916ef26fcd12f88f2e86f53765d89847873e3099c33b257a2e296ad0524b169"
+    },
+    {
+      "path": "sdk/jo_engine/fs.c",
+      "before": "c72f531904154c5dee6270679f5d4ee89b89de2b473a144a4295276959b7d25f",
+      "after": "a28e1f395de3530cfa3cff287fe5b375ee70007fcf3174e11fadd58efa5d9dac"
+    },
+    {
+      "path": "sdk/jo_engine/jo/audio.h",
+      "before": "8c51e7f34b97262ab0c672baeed2520d62d57e038e2004bfa6fb71db287cd74a",
+      "after": "6cc487d737cd837bacad88ff52d5f4e15b48a7bbdee342aac8c15c96899bdcdd"
+    },
+    {
+      "path": "sdk/jo_engine/jo/fs.h",
+      "before": "02bdfe27a25d884a59e7f19931b4b7cb272353463e2b50f9c2d0643ea4e2ba2f",
+      "after": "748620f5909601762ab23622eab21c5ca6c6abdcc4d86268b9e84c738658f088"
+    },
+    {
+      "path": "tests/README_initial_load.md",
+      "before": null,
+      "after": "067e57c5efcbc35e2742c78afc4cc944b2b8b52378aa630bbc652e9b617a1dc4"
+    },
+    {
+      "path": "tests/audio_header_stub.h",
+      "before": null,
+      "after": "d836f65437c9a477c7a9dacc7cbb0d7fc7aa5509a7436e97bb34bb81390780d0"
+    },
+    {
+      "path": "tests/cd_diagnostics.cpp.in",
+      "before": null,
+      "after": "b1a373ec5ad69a44bb2998529f562968a45ae8167ef32325f40fb5dd3c73e2fd"
+    },
+    {
+      "path": "tests/cd_loading_ui.c.in",
+      "before": null,
+      "after": "4a22f865929e435e7eaa8db27103ae68e0112c6a153a2cd2413b4853f58e3b25"
+    },
+    {
+      "path": "tests/fixtures/cd_diagnostics/README.md",
+      "before": null,
+      "after": "5d9aa0909d027811bf0ee4828e7695826a0eb07f615b777727379283a2bca2ec"
+    },
+    {
+      "path": "tests/fixtures/cd_diagnostics/reference-behavior.json",
+      "before": null,
+      "after": "94546dd142b0a0235963de5470aebfa1e3083ddb26c3da5d68d564b8b60c3e78"
+    },
+    {
+      "path": "tests/fixtures/music_headers/README.md",
+      "before": null,
+      "after": "852e5679e5bd8271d1decf6203fc2a495ca1ca5c7067b9794ec516326cf98add"
+    },
+    {
+      "path": "tests/fixtures/music_headers/original_prepare.c",
+      "before": null,
+      "after": "4e6e4ee9844dd38896c5c3877618163017b29ab522cd7a4f404f9bba3ae3281f"
+    },
+    {
+      "path": "tests/fixtures/music_headers/provenance.json",
+      "before": null,
+      "after": "8a90fa588c498303fa0514f4375d003b1e745d94f518afac5f7bd8192e5a919a"
+    },
+    {
+      "path": "tests/native/jo_host/jo/jo.h",
+      "before": "e47161587bbf1060a3f3262550a99a8665ec44d02ca04e88f72a57ed89a83cf3",
+      "after": "ad3cce791ed22d197cf022ea92589c4f1cd642467905aaa54d66e20d3af666ba"
+    },
+    {
+      "path": "tests/raw_disc_metadata.c.in",
+      "before": null,
+      "after": "551e4beacc7fa72562f51647ee94fef7a1620591855226c867c8c89871930404"
+    },
+    {
+      "path": "tests/run_initial_load_tests.py",
+      "before": null,
+      "after": "7d95471e793eef4349d709212e71c1e07cfb5424c7c9a713856a6302f683252f"
+    },
+    {
+      "path": "tests/test_audio.c",
+      "before": "3f6ba38b0f23d901064c89534723d22d7007e97e39fcc34feac16f76c4dd6029",
+      "after": "0792cc258012f031f486de04a108b5937eac7bb028d34b08a34e9146345c2f73"
+    },
+    {
+      "path": "tests/test_audio.py",
+      "before": "20be2719c6fab26abd37954999ebf9a2a97d6eb23385495bc5200f168e17824c",
+      "after": "2e9bc2062bb9b069b2411ca55e634d96f535d99fcea8d2e33553d259262b5a6b"
+    },
+    {
+      "path": "tests/test_audio_decoder.py",
+      "before": "0a18daff963008dcf9ff533cc8035cc2d9b5506303b0ebc7a339ef554db11ac2",
+      "after": "519d0c118b84ac4c73fa4de547d91c1ce6f15a926ca0ba665f8a1b2b086c3271"
+    },
+    {
+      "path": "tests/test_cd_diagnostic_mutants.py",
+      "before": null,
+      "after": "b9077d60330e1191dc39ec40c86ab8b20f3da56628109d529b024cd597168136"
+    },
+    {
+      "path": "tests/test_cd_diagnostics.py",
+      "before": null,
+      "after": "de45e81751e16c64f5838d1fe9ed81f5e38a73bc738f341dcc614247a7038e3c"
+    },
+    {
+      "path": "tests/test_cd_loading_ui.py",
+      "before": null,
+      "after": "60a899d827413739cfb9cd49e539d1d23554a0b732983595fab5bd59f5495e28"
+    },
+    {
+      "path": "tests/test_combat_audio.c",
+      "before": "8578db616ef3c76fdbf792e9804301feeaff24ddfacac7df411bf9089cde7ce4",
+      "after": "ff94c1095723e9f90cb9f254ae079113d530bf341ec602974c706cc918bae67f"
+    },
+    {
+      "path": "tests/test_combat_audio.py",
+      "before": "112e00abb5d98284aeac39547a8074d7d4ab26dd8d823813669ffa2bcd6b37cd",
+      "after": "870a9139d913a1e7d47ff75a474d15307cb0adc7aea0a9b6822556dc6933526f"
+    },
+    {
+      "path": "tests/test_main_frontend_fault.py",
+      "before": "240c192103fd98056f0fa4af4b41ba3668c504662f9c4023811e4c2d414e3029",
+      "after": "1bed2fd729528b5550ae4d56274a3bd4e48e574be5cf4b0facd61bcb04d706f8"
+    },
+    {
+      "path": "tests/test_music_headers_api.c",
+      "before": null,
+      "after": "b4b551548c5ec9f1239efb26d29e42e633a06838d6520feb460a15eb318999f0"
+    },
+    {
+      "path": "tests/test_music_headers_api.py",
+      "before": null,
+      "after": "e864a4946fb860abb1e962d9d6818e03492b25c4725804beaaabe3f72cb07780"
+    },
+    {
+      "path": "tests/test_music_headers_generation.py",
+      "before": null,
+      "after": "447dea20329a9f2ec475f4a408ff0a096da6a02f9d221396110a44a0f6657ac1"
+    },
+    {
+      "path": "tests/test_music_headers_order.py",
+      "before": null,
+      "after": "d7d51662bba54218fd9f7dbe14a6c9db1aace1dafc1e1b0228ac9d3ea6c221e1"
+    },
+    {
+      "path": "tests/test_raw_disc_metadata.py",
+      "before": null,
+      "after": "f4a23dbdafed5868b316a41f2bc17b14bdc52aa78e4275503a21e2520ff565b6"
+    },
+    {
+      "path": "tests/test_raw_disc_packaging.py",
+      "before": null,
+      "after": "90c2abc38779e808b1b9a33a51dacb7665ea74057f7961379e99b72d71edc3c3"
+    },
+    {
+      "path": "tools/check_raw_disc_assets.py",
+      "before": null,
+      "after": "d3dcbda822136b372c3fd1a7ab0b5229cbe807741558c1536034dd0329e210f2"
+    },
+    {
+      "path": "tools/generate_music_headers.py",
+      "before": null,
+      "after": "a38aa2ffaae225315179ffad039c0dfdbcf83c7902e44baebad3b11f48d355c6"
+    },
+    {
+      "path": "tools/music-headers.json",
+      "before": null,
+      "after": "0995db9fbd58c7f0e8ad0e7bdea75b3884a2c11cbd9a8e5e8d49491250f2413e"
+    }
+  ],
+  "runtime_inputs_verified": 415,
+  "other_changes_preserved": true
+}

@@ -1,0 +1,2 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_boot_load_progress.py"]
+PASS: size/read observers precede blocking open; chunked read is exact; observer detaches; failures retain last position

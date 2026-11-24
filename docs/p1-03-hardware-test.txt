@@ -1,0 +1,14 @@
+WWF WRESTLEFEST SATURN — P1-03 AUDIO — PRUEBA MODE
+
+1. Arranca la CUE con cartucho de 4 MB.
+2. En el título, escucha 30-60 segundos con volumen moderado:
+   - claridad y definición frente a FIX2R;
+   - ausencia de sonido apagado, aliasing o distorsión.
+3. Juega hasta el primer combate contra Legion of Doom:
+   - comprueba que no aparece el pitido/ruido agresivo;
+   - confirma que no hay cortes ni silencios inesperados.
+4. Observa dos cambios de escena o tema y cualquier fundido disponible.
+5. Sal al exterior del ring en los combates 2, 4 y 5 para confirmar GFX1.
+6. Anota cualquier pantalla de diagnóstico completa (owner, dato y tick).
+
+Esta imagen es CANDIDATE. No grabar aún en CD-R.

@@ -1,0 +1,141 @@
+#include <assert.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <limits.h>
+#include "wf_jo_assets.h"
+#define JO_NULL NULL
+#define JO_ZERO(x) ((x)=0)
+#define JO_MIN(a,b) ((a)<(b)?(a):(b))
+#define JO_MAX(a,b) ((a)>(b)?(a):(b))
+#define JO_OPEN_MAX 1
+#define JO_SECTOR_SIZE 2048
+#define JO_FS_FILENAME_LENGTH 12
+#define JO_FS_DIRECTORY_FAD_FLAG 0x80000000u
+#define JO_FS_ENTRY_FAD(e) ((e)->fad&~JO_FS_DIRECTORY_FAD_FLAG)
+#define JO_MALLOC_TRY_REUSE_BLOCK 0
+@READ_CONSTANTS@
+#define JO_FS_LZ_MAGIC 0x4A4F4C5Au
+#define JO_FS_LZ_HEADER 8
+#define JO_FS_LZ_WINDOW 4096
+#define __jo_force_inline inline
+#define jo_memcpy memcpy
+#define jo_free free
+static void *jo_malloc_with_behaviour(size_t bytes,int mode){(void)mode;return malloc(bytes);}
+static unsigned spins;
+static void jo_spin_wait(int n){spins+=(unsigned)n;}
+@TYPES@
+#define JO_COMPILE_WITH_FS_SUPPORT 1
+#include "jo/fs.h"
+static jo_fs_dir_entry __jo_fs_dir[16];
+static int __jo_fs_dir_count;
+static jo_fs_handle __jo_fs_handles[JO_OPEN_MAX];
+static unsigned __jo_fs_data_end_fad=0x70000,__jo_fs_stat_files;
+static int __jo_fs_read_buffer_size=JO_SECTOR_SIZE;
+static void (*loading_observer)(const char *,size_t,size_t);
+static wf_jo_asset_stats_t stats;
+static unsigned char *contents[16];
+static unsigned read_calls,sector_bytes,fail_remaining;
+static int jo_cd_read_sectors(unsigned fad,unsigned count,unsigned char *out,unsigned bytes,unsigned end)
+{
+    (void)end;++read_calls;sector_bytes+=count*JO_SECTOR_SIZE;
+    if(fail_remaining){--fail_remaining;return -1;}
+    for(int i=0;i<__jo_fs_dir_count;i++){
+        unsigned start=JO_FS_ENTRY_FAD(&__jo_fs_dir[i]);
+        unsigned n=(__jo_fs_dir[i].size+2047)/2048;
+        if(fad>=start&&fad<start+n){
+            unsigned at=(fad-start)*2048;assert(at+bytes<=__jo_fs_dir[i].size);
+            memcpy(out,contents[i]+at,bytes);return 0;
+        }
+    }
+    assert(!"unknown sector read");return -1;
+}
+@PROTOTYPES@
+@FUNCTIONS@
+
+static void add(const char *name,unsigned char *data,unsigned bytes)
+{
+    int i=__jo_fs_dir_count++;assert(i<16&&strlen(name)<=12);
+    memcpy(__jo_fs_dir[i].name,name,strlen(name));
+    __jo_fs_dir[i].size=bytes;__jo_fs_dir[i].fad=100u+10000u*(unsigned)i;
+    contents[i]=data;
+}
+static void counters(void){read_calls=sector_bytes=spins=__jo_fs_stat_files=0;}
+static void query_sequence(void)
+{
+    const char *names[]={"SPRITES.WFP","SFX.DAT","ROM68K.BIN","SPRITES.WFP","SCENES.WFP","SFX.DAT"};
+    for(unsigned i=0;i<6;i++){
+        if(i==2)jo_fs_set_read_sector_count(16);
+        uint32_t size=0;assert(disc_size(names[i],&size)==0);
+        assert(size==__jo_fs_dir[__jo_fs_get_file_id(names[i])].size);
+    }
+#if WF_JO_RAW_DISC_ASSETS
+    if(read_calls||__jo_fs_stat_files){fprintf(stderr,"RED raw query issued %u CD reads (%u bytes), %u opens\n",read_calls,sector_bytes,__jo_fs_stat_files);abort();}
+#else
+    assert(read_calls==6&&sector_bytes==135168&&__jo_fs_stat_files==6);
+#endif
+}
+int main(int argc,char **argv)
+{
+    assert(argc==2);const char *names[]={"ROM68K.BIN","SPRITES.WFP","SCENES.WFP","SFX.DAT"};
+    for(unsigned i=0;i<4;i++){
+        char path[1024];snprintf(path,sizeof path,"%s/%s",argv[1],names[i]);
+        FILE *f=fopen(path,"rb");assert(f);assert(!fseek(f,0,SEEK_END));long n=ftell(f);assert(n>32768);
+        rewind(f);unsigned char *data=malloc((size_t)n);assert(data&&fread(data,1,(size_t)n,f)==(size_t)n);fclose(f);
+        add(names[i],data,(unsigned)n);
+    }
+    counters();query_sequence();unsigned query_bytes=sector_bytes;
+#ifndef BASELINE
+    counters();assert(jo_fs_get_raw_file_size(NULL)==-1);assert(jo_fs_get_raw_file_size("MISSING.BIN")==-1);
+    int mounted_entries=__jo_fs_dir_count;__jo_fs_dir_count=0;
+    assert(jo_fs_get_raw_file_size("ROM68K.BIN")==-1&&read_calls==0&&__jo_fs_stat_files==0);
+    __jo_fs_dir_count=mounted_entries;
+    add("EMPTY.BIN",NULL,0);assert(jo_fs_get_raw_file_size("EMPTY.BIN")==0);
+    add("NEGATIVE.BIN",NULL,UINT_MAX);assert(jo_fs_get_raw_file_size("NEGATIVE.BIN")==-1);
+    add("DIRECTORY",NULL,32);__jo_fs_dir[__jo_fs_dir_count-1].fad|=JO_FS_DIRECTORY_FAD_FLAG;
+    assert(jo_fs_get_raw_file_size("DIRECTORY")==-1);
+    assert(read_calls==0&&__jo_fs_stat_files==0);
+    /* Failed raw lookup must leave the caller's output untouched. */
+    unsigned saved_size=__jo_fs_dir[3].size;__jo_fs_dir[3].size=UINT_MAX;
+    uint32_t invalid_size=0x13579bdf;
+    assert(disc_size("SFX.DAT",&invalid_size)==WF_JO_ASSET_IO&&invalid_size==0x13579bdf);
+    __jo_fs_dir[3].size=saved_size;__jo_fs_dir[3].name[0]='X';
+    assert(disc_size("SFX.DAT",&invalid_size)==WF_JO_ASSET_IO&&invalid_size==0x13579bdf);
+    __jo_fs_dir[3].name[0]='S';
+#endif
+    uint32_t untouched=0x12345678;assert(disc_size(NULL,&untouched)==WF_JO_ASSET_ARGUMENT);
+    assert(disc_size("ROM68K.BIN",NULL)==WF_JO_ASSET_ARGUMENT);
+    assert(disc_size("MISSING.BIN",&untouched)==WF_JO_ASSET_IO&&untouched==0x12345678);
+    /* Unknown names preserve the original generic JoLZ behavior even opted in. */
+    unsigned char compressed[]={0x4a,0x4f,0x4c,0x5a,0,0,0,3,0xe0,'A','B','C'};
+    add("TEST.BIN",compressed,sizeof compressed);
+    uint32_t logical;assert(disc_size("TEST.BIN",&logical)==0&&logical==3);
+    char decoded[3];assert(disc_read("TEST.BIN",0,decoded,3)==0&&!memcmp(decoded,"ABC",3));
+#if !WF_JO_RAW_DISC_ASSETS
+    unsigned char *native=contents[3];unsigned native_bytes=__jo_fs_dir[3].size;
+    contents[3]=compressed;__jo_fs_dir[3].size=sizeof compressed;
+    assert(disc_size("SFX.DAT",&logical)==0&&logical==3);
+    assert(disc_read("SFX.DAT",0,decoded,3)==0&&!memcmp(decoded,"ABC",3));
+    contents[3]=native;__jo_fs_dir[3].size=native_bytes;
+#endif
+    for(unsigned i=0;i<4;i++){
+        unsigned n=__jo_fs_dir[i].size;unsigned offsets[]={0,3,2047,32768,n-17};
+        for(unsigned j=0;j<5;j++){
+            unsigned char buf[17];memset(buf,0xa5,sizeof buf);
+            assert(!disc_read(names[i],offsets[j],buf,sizeof buf));
+            assert(!memcmp(buf,contents[i]+offsets[j],sizeof buf));
+        }
+        unsigned char byte=0xa5;assert(disc_read(names[i],n,&byte,1)==WF_JO_ASSET_IO&&byte==0xa5);
+    }
+    counters();fail_remaining=10;unsigned char first[32];
+    assert(!disc_read("ROM68K.BIN",0,first,sizeof first));
+    assert(read_calls==11&&spins==160&&!memcmp(first,contents[0],sizeof first));
+    counters();fail_remaining=11;memset(first,0xa5,sizeof first);
+    assert(disc_read("ROM68K.BIN",0,first,sizeof first)==WF_JO_ASSET_IO);
+    assert(read_calls==11&&spins==160&&first[0]==0xa5);
+    for(unsigned i=0;i<4;i++)free(contents[i]);
+    printf("PASS metadata raw=%u query_cd_bytes=%u offsets=20 JoLZ=fallback retries=11\n",WF_JO_RAW_DISC_ASSETS,query_bytes);
+    return 0;
+}

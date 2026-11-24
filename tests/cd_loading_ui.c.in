@@ -1,0 +1,66 @@
+#include <assert.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define JO_KEY_START 1
+#define WF_OK 0
+#define JO_MIN(a,b) ((a)<(b)?(a):(b))
+@TYPE@
+static jo_fs_cd_diagnostics cd;
+static unsigned gets,draws,diagnostic_video,clear_count,field=600,mute_calls;
+static char lines[32][120];
+static unsigned loading_text_visible,loaded,failed,running,loading_start_field;
+static char loading_file[16];
+static uint32_t wf_jo_load_diagnostic[3];
+static struct{unsigned fault_owner,fault_dependency,ticks,rng,stage;}wf_jo_diagnostic;
+static struct{struct{unsigned frame_counter,rng_state;}g;}rt;
+static void jo_fs_get_cd_diagnostics(jo_fs_cd_diagnostics *out){++gets;*out=cd;}
+static unsigned jo_core_get_vblank_count(void){return field;}
+static unsigned jo_core_get_refresh_rate(void){return 60;}
+static void jo_printf(unsigned x,unsigned y,const char *fmt,...){
+ assert(x==3 && y<32);assert(loading_text_visible||diagnostic_video);
+ va_list args;va_start(args,fmt);vsnprintf(lines[y],sizeof lines[y],fmt,args);va_end(args);++draws;
+}
+/* SCSP effects are exercised by test_emergency_audio; here record the UI boundary. */
+static void wf_jo_audio_emergency_stop(void){++mute_calls;}
+static void wf_jo_assets_set_loading_observer(void *p){assert(!p);}
+static int wf_jo_video_drain_overlap(void *a,void *b){assert(!a&&!b);return WF_OK;}
+static int jo_is_pad1_key_down(int key){(void)key;return 0;}
+static void jo_goto_boot_menu(void){}
+static void __jo_core_pause(void){}
+static void wf_jo_video_diagnostics(void){diagnostic_video=1;}
+static void jo_clear_screen(void){assert(diagnostic_video);memset(lines,0,sizeof lines);++clear_count;}
+@BODY@
+int main(int argc,char **argv){
+ assert(argc==2);const char *name=argv[1];
+ cd.start_read_attempts=123;cd.sector_wait_timeouts=2;cd.fill_read_retries=4;cd.command_failures=5;
+ cd.max_read_fields=300;cd.failure_fad=0x12345;cd.failure_command=0x5100;cd.failure_status=0xff00;
+ cd.failure_reason=4;cd.max_read_fad=0x23456;
+ jo_fs_cd_diagnostics original=cd;
+ loading_start_field=60;wf_jo_diagnostic.stage=4;rt.g.frame_counter=1234;rt.g.rng_state=0xabcd;
+ if(!strcmp(name,"visible")){
+  loading_text_visible=1;loading_progress("SPRITES.WFP",2048,4096);
+  assert(strstr(lines[14],"SPRITES.WFP"));assert(strstr(lines[16],"2048 / 4096"));assert(strstr(lines[18],"9 s"));
+  assert(strncmp(lines[20],"CD ",3)==0 && gets==1);assert(strlen(lines[20])<=37);
+ }else if(!strcmp(name,"hidden")){
+  loading_progress("MU02.WAV",100,1000);
+  assert(draws==0 && gets==0 && wf_jo_load_diagnostic[0]==100 && wf_jo_load_diagnostic[2]==field);
+ }else if(!strcmp(name,"fail")){
+  strcpy(loading_file,"MU02.WAV");wf_jo_load_diagnostic[0]=120;wf_jo_load_diagnostic[1]=240;
+  fail(0x2052,0x68003);
+  assert(failed==1 && running==0 && clear_count==1 && diagnostic_video && mute_calls==1);
+  assert(strstr(lines[10],"00002052") && strstr(lines[12],"00068003"));
+  assert(strncmp(lines[20],"CD ",3)==0 && gets==1);
+  assert(strstr(lines[21],"00012345") && strstr(lines[21],"5100") && strstr(lines[21],"0000FF00"));
+  assert(strstr(lines[22],"4") && strstr(lines[22],"00023456"));
+  assert(strstr(lines[23],"Fotografia") && strstr(lines[24],"START"));
+ }else if(!strcmp(name,"wide")){
+  memset(&cd,0xff,sizeof cd);original=cd;
+  loading_text_visible=1;loading_progress("SPRITES.WFP",0,1);
+  assert(strncmp(lines[20],"CD ",3)==0 && gets==1 && strlen(lines[20])<=37);
+ }else return 2;
+ assert(!memcmp(&cd,&original,sizeof cd));
+ printf("PASS %s\n",name);return 0;
+}

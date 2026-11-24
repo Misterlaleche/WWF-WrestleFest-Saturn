@@ -1,0 +1,10 @@
+{
+  "origin": "Read-only pre-prepass snapshot: physical Royal trial020, period4 spacing48 variant0 pin_health24, frame7217. Includes facing/EA42 idle/raw4A fixes; unchanged state5 path then blocksEA42.",
+  "replay": "work/royal-human-active/replay",
+  "observer_sha256": "2f0e8b7cd26ba128772277a9b745d9d13430a6328d7f9496ae1caf862feaec2e",
+  "binary_sha256": "22210741cb3a3a81681ff61bca7aff3188139ebb5d3ba5d885857030c7033c06",
+  "files": {
+    "arcade-ram.bin": "5f1bec8838a5aa448d70d548812b53fa9fcdb1251635fe58a7ed68d15c6007cd",
+    "state.json": "280739058fc033e648ecaca3e8c91d64a534e814b6a941bdd0387e183bfc8b50"
+  }
+}

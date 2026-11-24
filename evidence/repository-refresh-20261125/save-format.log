@@ -1,0 +1,2 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_save.py"]
+PASS WFS1: independent wire image/CRC, round trip, 1280 corruptions, defaults/null safety

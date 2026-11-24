@@ -1,0 +1,85 @@
+{
+  "status": "STATIC_AND_INDEPENDENT_HOST_PASS",
+  "candidate_patch_sha256": "4938e4265a2b9569f9acbcf3483d45f3ff828de4cb37d2a7fc8bc8a0e843d2f6",
+  "source_sha256": {
+    "candidate/sdk/jo_engine/audio.c": "c916ef26fcd12f88f2e86f53765d89847873e3099c33b257a2e296ad0524b169",
+    "candidate/sdk/jo_engine/jo/audio.h": "6cc487d737cd837bacad88ff52d5f4e15b48a7bbdee342aac8c15c96899bdcdd",
+    "candidate/port/wf_jo_audio.c": "8b8aa76569b89ff4d0d90a35baee9960183322e9839e9c04cc7ad63c2087f557",
+    "candidate/makefile": "c8d0b90f356dd37742d9c012430c91d91781767741326734f3918a4f4b3d5aea",
+    "candidate/port/wf_jo_music_headers.h": "536a400f4eaf7f1ddff5d6d88d00c63fcac42b02f09f97ce9085bc4e4869d767",
+    "candidate/tools/generate_music_headers.py": "a38aa2ffaae225315179ffad039c0dfdbcf83c7902e44baebad3b11f48d355c6",
+    "candidate/tools/music-headers.json": "0995db9fbd58c7f0e8ad0e7bdea75b3884a2c11cbd9a8e5e8d49491250f2413e",
+    "candidate.patch": "4938e4265a2b9569f9acbcf3483d45f3ff828de4cb37d2a7fc8bc8a0e843d2f6",
+    "readiness.json": "b59e09cd42135f59dba1e238d1a0f49bc49a01888c64d9b62991f73339e4afde",
+    "run_prepare_tests.py": "dc01c1702760096de9bd335adc3b338cf874a67ac0370e2cede51951be781f0d",
+    "test_prepare.c": "b4b551548c5ec9f1239efb26d29e42e633a06838d6520feb460a15eb318999f0",
+    "test_adapter_order.py": "c31773350cbc64b3307014af993381d841dd8b575afe984d7db30b33c4cce872",
+    "test_generation.py": "3796f9786106a8565b4fcec0113d28497ec5da774f4e8408fc24ab772ef63a11"
+  },
+  "independent_runs": {
+    "api": {
+      "path": "final-api/receipt.json",
+      "sha256": "8730c5d3c41a655a0299d79e62613b4a7a01746374271d9edc40a9481e7d0be5",
+      "cases": 2826,
+      "ordinary_reads": 18,
+      "supplied_reads": 0
+    },
+    "order": {
+      "path": "final-order/receipt.json",
+      "sha256": "47c49552549f1fda76a71ed8eed4410749d64c6b32c53b3f504217ae0c20c517",
+      "normal_prepared_mask": "0x7fffe",
+      "mismatched_or_invalid_id_mask": "0x6"
+    },
+    "generation": {
+      "command": [
+        "docker",
+        "exec",
+        "wf-codex-20261113",
+        "nice",
+        "-n",
+        "19",
+        "python3",
+        "/work/music-header-prototype/test_generation.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests": 14,
+      "elapsed_seconds": 7.968
+    },
+    "frozen_table_full_wav_verify": {
+      "command": [
+        "docker",
+        "exec",
+        "wf-codex-20261113",
+        "nice",
+        "-n",
+        "19",
+        "python3",
+        "/work/music-header-prototype/candidate/tools/generate_music_headers.py",
+        "--verify",
+        "--cd",
+        "/work/wrestlefest/cd"
+      ],
+      "exit_code": 0,
+      "files": 18,
+      "runtime_table_bytes": 864,
+      "header_sha256": "536a400f4eaf7f1ddff5d6d88d00c63fcac42b02f09f97ce9085bc4e4869d767"
+    }
+  },
+  "findings": [],
+  "resolved_previous_condition": "Actual make now gates the audio object, TARGET and TARGET2; -MMD/-MP dependency files already included by make preserve generated-header rebuild dependency. Private wrapper is not required for production.",
+  "reviewed_properties": [
+    "Low-level resident ISO metadata operations do not read CD or mount an uninitialized directory.",
+    "Supplied-header API shares actual parser and output validation; old ordinary API remains unchanged for tested valid/malformed/short headers.",
+    "No mutation of caller prepared on failure; existing private parser state is not claimed transactional.",
+    "Count assertion and ID-order guard precede filename indexing and bit shifts.",
+    "Full-file hashes and exact generated C/header metadata are checked before object/link/package recipes; same-size PCM changes are rejected.",
+    "One shared phony order-only gate runs without forcing unchanged objects/images to rebuild."
+  ],
+  "limits": [
+    "Host FS edge is instrumented; zero physical I/O assumes the resident ISO directory was already mounted.",
+    "No SH2 size, linked ASM, emulator or physical load timing acceptance from this review.",
+    "Runtime checks ISO size and parser; same-size content identity depends on mandatory build gate and frozen packaged assets.",
+    "The six-minute physical report concerns R01 only."
+  ]
+}

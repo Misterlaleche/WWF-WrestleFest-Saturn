@@ -1,0 +1,19 @@
+{
+  "template": "/mnt/data/wf_debug_boot/disc/WrestleFest_Saturn_P1_03_AUDIO.bin",
+  "template_format": "mode1-2352",
+  "output": "/mnt/data/wf_debug_boot/bootfix_out/WrestleFest_Saturn_P1_03B_BOOTFIX.iso",
+  "output_sha256": "5193bb934824c15af74ebdcd1c04f1b9c909083fb63bbd83119d931b3b1d17ab",
+  "image_blocks": 309380,
+  "volume_blocks": 309380,
+  "files": 1,
+  "replacements": [
+    {
+      "name": "0.BIN",
+      "old_bytes": 529024,
+      "bytes": 529504,
+      "extent": 24,
+      "sectors": 259,
+      "sha256": "92ae0c34b4c55983914e209710574327c9e77e58dc4df78919d931149138064e"
+    }
+  ]
+}

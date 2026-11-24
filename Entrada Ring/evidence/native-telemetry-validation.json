@@ -1,9 +1,0 @@
-{
-  "status": "PASS",
-  "running_frames": 1322,
-  "loops": 4,
-  "max_audio_handler_ticks": 96,
-  "max_dispatch_lateness_ticks": 31,
-  "max_work_ticks": 3555,
-  "missed_vblanks": 0
-}

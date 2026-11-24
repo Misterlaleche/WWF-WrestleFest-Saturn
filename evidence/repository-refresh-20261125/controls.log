@@ -1,0 +1,4 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_jo_controls.py", "--sanitize"]
+PASS 96 movement cases: eight visible directions, four players, both input pipelines; P1 TAG/Royal takeover
+PASS A/B/C/START decoding, idle/disconnected pads and physical second-port routing
+PASS ROM words: big-endian reads, 24-bit aliases, bounds and failed-read output preservation

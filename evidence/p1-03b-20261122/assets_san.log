@@ -1,0 +1,7 @@
+PASS: 65536 exact native tiles, 8192 eviction reads, cross-block reads, bounds/corruption and cache guards
+PASS: checked loading, cartridge tail, seven exact compressed scenes, partial reads, corruption/guards and zero subsequent backing-store reads
+PASS: all resident scene block views, final lengths, index/name/null bounds and no decode/disc activity
+PASS: shared scene index rejects version, directory, range, partial aliases, gaps and checksum corruption
+PASS: cache-tail loan, retained hits, evictions, guards, scene scratch, return and rebind lifetime
+PASS: minimum8 KiB scratch, all borrowed scene slots, service publication/failure and256-slot cache cap
+PASS: independent Python zlib decoded all 65536 tiles; pack=3108052 bytes

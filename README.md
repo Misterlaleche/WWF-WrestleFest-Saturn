@@ -1,136 +1,106 @@
-# WWF WrestleFest arcade -> Sega Saturn
+# WWF WrestleFest for Sega Saturn
 
-Private development repository for a native Sega Saturn reimplementation of Technos WWF WrestleFest (1991).
+**English** · [Español](README.es.md)
 
-## ABSOLUTE AUTHORITY HIERARCHY
+A native Sega Saturn port of Technos' **WWF WrestleFest**. The aim is to preserve the arcade game's graphics, rules, input response, timing and sound on Saturn hardware. This is an active development project; arcade-perfect equivalence remains the acceptance target.
 
-1. **SUPREME AUTHORITY: original arcade ROM set `wwfwfest.zip`.**
-   - If code, notes, a previous build, a workpack or any other document disagrees with the original ROM, **the ROM wins**.
-   - Main 68000 program authority used by the audited research: SHA1 `a726c46f350723ea73158bc78055d17d418b14e2`.
-2. **Audited FINAL ROM-EXACT research / decompilation packages stored in the ChatGPT project sources.**
-   - The umbrella archive is `zips finales.zip`.
-   - The ChatGPT project also contains specialist FINAL packages for audio, presentation/frontend, attract/bio, records/rankings, animations, CPU, victim +$65, CLEAN-R01 and Saturn technical authority.
-   - These are high-authority secondary evidence and should be reused aggressively, but they never overrule the original ROM.
-3. **Saturn/Yaul technical authority.**
-   - Determines how proven arcade behavior is transported to SH-2 / VDP1 / VDP2 / SCSP / SMPC / CDFS.
-4. **Current Saturn code and test builds.**
-   - Working code never overrules evidence.
+**Current source: P1-03B BOOTFIX CANDIDATE, 22 November 2026.** The repository was refreshed on **25 November 2026** from the latest source package recovered and verified for this update. The boot correction still needs confirmation on a physical Saturn. This repository update does not certify a finished game or a new hardware-tested release.
 
-## FAIL-CLOSED IMPLEMENTATION RULE
+[Build instructions](docs/BUILDING.md) · [Current status and testing](docs/STATUS.md) · [Source provenance](docs/PROVENANCE.md) · [Project history](docs/HISTORY.md) · [Third-party notices](docs/THIRD-PARTY.md)
 
-Do not invent provisional gameplay, timings, state transitions, input behavior, RNG, collision rules, frontend logic, animation, graphics behavior, audio behavior or loops merely to make a build appear complete.
+## What is here
 
-If a behavior is not demonstrated, leave it OPEN / incomplete until evidence exists.
+The repository now contains one integrated source tree: the native gameplay core, Saturn platform code, the project's adapted Jo Engine, asset tools, regression tests and compact development evidence. Earlier independent scene, TAG, Royal and audio snapshots remain accessible through [Git history](docs/HISTORY.md).
 
-Examples of forbidden shortcuts:
-- guessed timings;
-- synthetic RNG or fixed seeds;
-- modernized autorepeat/input behavior;
-- approximate collision/state behavior;
-- fake frontend transitions;
-- invented music loops;
-- placeholder music presented as exact;
-- CDDA used as a silent replacement for unresolved arcade synthesis;
-- host/emulator success presented as real Saturn validation.
+| Component | Current implementation |
+| --- | --- |
+| Target | NTSC Sega Saturn, **4 MB RAM expansion**, Terraonion MODE as the primary hardware test setup |
+| SDK | **Jo Engine 2026.3**, with project-specific changes retained in this tree |
+| Video mode | **320 × 240** |
+| Game logic | Native C reconstruction of the arcade's 68000 behavior, with original state and register semantics where required |
+| Rendering | VDP1 sprites and command submission; VDP2 backgrounds, ring and scene layers |
+| CPU work | Master SH-2 gameplay and frame preparation; slave SH-2 work through Jo's command and asset-decode queues |
+| Audio | SCSP PCM playback: 18 music cues streamed from data files, plus decoded effects and voices |
+| Build output | `game.bin` and `game.cue`, with intermediate ELF, raw executable and ISO files |
 
-## BLOCK WORKFLOW
+The current target build uses Jo Engine. Earlier Yaul work is part of the project's history and some retained reference code; it is not the SDK linked by the current `makefile`. The 4 MB expansion is required by this revision, even though some earlier work targeted an unexpanded Saturn.
 
-Development is split into isolated hardware-testable BLOCKs. A BLOCK may have its own BIN/CUE harness for diagnosis, but final integration is performed from source modules and shared Saturn infrastructure. **BIN/CUE images are never concatenated.**
+## Latest work included
 
-A BLOCK becomes integration-eligible only after:
-- traceability to ROM/audited evidence;
-- host/build checks where applicable;
-- real NTSC-U Saturn + MODE validation for hardware-dependent behavior.
+P1-03B includes the preceding P0-01–P0-06 gameplay/diagnostic work, GFX1, and the P1 updates. The dated reports under [`docs/`](docs/) explain their scope and evidence.
 
-Current frontend direction:
-- BOOT: previously validated on real Saturn;
-- **MODE + ROSTER combined checkpoint TEST03: HARDWARE-PASS on real Saturn NTSC-U + Terraonion MODE (2026-09-11).**
-- MODE -> ROSTER handoff now blanks/synchronizes display before ROSTER CRAM/VRAM reconfiguration, eliminating the observed yellow/orange palette flash.
-- ROSTER background/layer composition is hardware-validated: transparent NBG0 moving foreground over fixed NBG2 background.
-- Wrestler confirmation is hardware-validated: cyan -> bright-green confirmation with cursor preserved and no full-screen/foreground-disappearance flash.
-- TAG / ROYAL mode choice is carried into the corresponding ROSTER navigation table in the combined executable.
-- This validates the combined isolated frontend block; the master/runtime import and its next-state handoff still require integration/revalidation without replacing CLEAN-R01 ownership.
-- rankings / attract presentation / demo: not yet integrated into the master;
-- gameplay continues under its separate canonical owner; do not substitute historical WIP bases.
+- **Boot diagnosis and correction candidate.** A physical test of the preceding build stopped after the complete `SPRITES.WFP` read, reporting owner `0018CD10`. P1-03B returns the SH-2 Adler-32 routine to the project's normal `-O2` compilation and adds detailed failure phases to the asset diagnostic. The suspected cause is documented; successful boot of this candidate remains unconfirmed.
+- **Music preparation.** All 18 music cues were regenerated from the reference sound implementation with band-limited conversion from 176.4 kHz to 44.1 kHz. This addresses the aliasing introduced by the preceding simple decimation.
+- **Music fade.** Command `0x1F` now applies a five-second SCSP volume fade and then stops the voice. This is an implemented approximation; exact equivalence to the arcade driver's envelope is still open.
+- **Memory budget.** Selected cold code uses size optimization while active paths retain their required compilation policy. The recovered P1-03B map records **8,208 bytes** before the reserved `0x060DC000` boundary, against an 8,192-byte minimum. This is the original build's recorded margin, not a new measurement of console performance.
+- **TAG progression evidence.** The recovered regression reaches the second match using ordinary test-driver button inputs. That result does not close the complete TAG or Royal campaign acceptance work.
 
-## CHATGPT PROJECT-SOURCE EVIDENCE LIBRARY
+See the [BOOTFIX report](docs/p1-03b-bootfix-20261122.md), [P1-03 audio report](docs/p1-03-audio-bandlimit-and-fade-20261121.md), and [TAG progression correction](docs/p1-01-tag-progression-correction-20261121.md).
 
-The working ChatGPT project contains the original ROM plus audited FINAL ZIPs. Important names include:
-- `wwfwfest.zip` — SUPREME authority;
-- `zips finales.zip` — umbrella audited collection;
-- `WWF-Saturn-Audio-FINAL-DEFINITIVE-ROM-EXACT-HANDOFF(1).zip`;
-- `WWF-Saturn-Audio-Complete-Integration(1).zip`;
-- `WWF-WrestleFest-Saturn-CPU-FINAL-ROM-EXACT-bridge-AUDITED(1).zip`;
-- `WWF-WrestleFest-Saturn-Presentation-ROM-EXACT-FINAL-AUDITED(1).zip`;
-- `WWF-WrestleFest-Saturn-Attract-Bio-ROM-EXACT-FINAL-AUDITED(1).zip`;
-- `WWF-animaciones WrestleFest-Saturn-Animation-ROM-EXACT-FINAL-package.zip`;
-- `WWF-WrestleFest-Saturn-Records-ROM-EXACT-FINAL-package(1).zip`;
-- `WWF-WrestleFest-Saturn-victim65-ROM-EXACT-FINAL-package.zip`;
-- `WF-CLEAN-R01-MASTER-WORKPACK(1).zip`;
-- `WF-CLEAN-R01-ADDON-30-34-MASTER-WORKPACK(1).zip`;
-- `SATURN-TECH-AUTHORITY-R01(1).zip`.
+## Why this port takes more than translating graphics
 
-These evidence ZIPs do not all need to be duplicated into GitHub. GitHub should store canonical state, integration code, selected source modules, tests/manifests and provenance references. If a future worker cannot access a required ChatGPT project ZIP, they must stop and request it rather than silently replacing its conclusions with assumptions.
+The arcade's original behavior has to survive a change from its 68000-based board to Saturn's SH-2 processors and separate graphics and sound memories. Actor ordering, collision and input rules, random-number state, scene transitions and sound commands all have to agree with the original game. The original ROM and audited traces are the behavioral reference; a convenient approximation is not evidence of equivalence.
 
-## AUDIO — CANONICAL CURRENT STATE
+On Saturn, the same work also has to fit the frame and memory budgets. Sprite data is packed and cached, command buffers must remain valid until VDP1 has consumed them, and music streaming has to be serviced while gameplay and asset decoding continue. Host tests, differential checks and Mednafen help expose errors. Physical Saturn testing remains necessary for boot, disc access, sustained cadence, audio continuity and final image behavior.
 
-Detailed evidence and chronology: [docs/AUDIO-HARDWARE-VALIDATION.md](docs/AUDIO-HARDWARE-VALIDATION.md).
+## Build your own copy
 
-The audited FINAL audio authority establishes:
-- arcade audio research/model: CLOSED;
-- production music is combined **YM2151 + OKIM6295**;
-- music commands `0x01..0x12` are the demonstrated production range;
-- `0x13..0x1E` are registered but no main-CPU producer is demonstrated;
-- `0x1F` is a special original fade lifecycle, not an ordinary music cue;
-- complete SFX/voice command range is `0x20..0x81`;
-- audited Saturn stream format is 44.1 kHz, mono, signed PCM16, **big-endian**;
-- a finite repeated PCM segment is not ROM-EXACT continuous arcade synthesis.
+Start with the [English build guide](docs/BUILDING.md) or [Spanish build guide](docs/BUILDING.es.md). The documented toolchain is GNU/Linux x86-64, GNU Make, Python 3 and the pinned SH-2 GCC 8.2 supplied with Jo Engine 2026.3.
 
-### Real Saturn + MODE hardware status — 2026-09-11
+You must provide two external inputs:
 
-**HARDWARE-PASS:**
-- SCSP / poneSound path;
-- audible authentic PCM playback;
-- master volume 0..15;
-- SFX command playback;
-- bank-1 material including ring-announcer / presenter voices;
-- WP24 music transport on physical SCSP slot 31;
-- 64 KiB music ring at sound RAM `0x60000..0x6FFFF`;
-- double-buffer refill using the SCSP current-address monitor;
-- long continuous PCM16BE playback without skips or premature cuts in AUDIO COMPLETE TEST 05.
+1. The exact Jo Engine SDK archive accepted by [`tools/setup_compiler.py`](tools/setup_compiler.py).
+2. A matching P1-03/P1-03B disc or prepared assets that satisfy [`asset-lock.json`](asset-lock.json).
 
-**ROM-EXACT validation:**
-- the canonical A53 validation pack is **18 x 12-second validation renders**, not final production tracks;
-- A53 `MUSIC.PAK` SHA256:
-  `8e1c038b00f9800753d3d21eca47f2cace9a04d04c07280d7d4b9110b0fd27bf`;
-- the checkpoint renderer preserves YM2151 + OKI state across render segments;
-- TEST-05 long renders for commands `01,02,04,06,07,0A,0B,0E` revalidate their first 12 seconds exactly against canonical A53 hashes;
-- real Saturn playback of those long renders was reported clean, without the prior cuts or scheduler-induced skipping.
+The current lock describes **34 files totalling 632,644,966 bytes**. ROMs, graphics/audio payloads, BIOS files, disc images and compiler executables are not supplied here. Owning an arbitrary `wwfwfest.zip` alone does not make this checkout a complete one-command asset-generation pipeline: some original generation inputs are external. The documented build route restores the verified prepared assets from a matching disc.
 
-**Still OPEN:**
-- final production lifetime/termination semantics for every music cue;
-- game-state dispatch of music/SFX/voices;
-- exact `0x1F` fade lifecycle in the integrated runtime;
-- production packaging/generation strategy for continuous music;
-- final integrated gameplay audio validation.
+The adapted [`sdk/Compiler/COMMON/`](sdk/Compiler/COMMON/) is included. It was missing from the recent source ZIPs and has been restored from the verified inherited R03 configuration. Do not overwrite it, or [`sdk/jo_engine/`](sdk/jo_engine/), with an unmodified SDK.
 
-Do **not** relabel the A53 12-second validation pack or TEST-05 long diagnostic captures as final production loop assets.
+## Controls
 
-Reusable WP24 transport source now lives under:
-- [src/audio/wp24/](src/audio/wp24/)
+For the original frontend build (`WF_FRONTEND=1`):
 
-The TEST-05 hardware audit manifest is stored under:
-- [tests/audio/complete-test-05/](tests/audio/complete-test-05/)
+| Saturn input | Action |
+| --- | --- |
+| D-pad | Movement and menu selection |
+| A | Original A input / punch |
+| B | Original B input / kick |
+| C | Insert a credit; press and release |
+| START | Start or join when the current game state and credits permit |
 
-No ROM, `AUDPCM.PAK`, `LONGMUS.PAK`, generated PCM or protected audio payload is committed to this repository.
+The input adapter also contains multiplayer routing and tests. Their presence does not certify every multiplayer route on physical hardware. The diagnostic selector compiled without `WF_FRONTEND=1` is a different entry point; use the documented frontend flags for normal play.
 
-## MANDATORY CROSS-CHAT HANDOFF
+## What still needs work
 
-Before changing the port, read:
-- [PROJECT-STATE.md](PROJECT-STATE.md)
-- [HANDOFF.md](HANDOFF.md)
-- [docs/SATURN-PIPELINE.md](docs/SATURN-PIPELINE.md)
-- [docs/MODE-ROSTER-HARDWARE-VALIDATION.md](docs/MODE-ROSTER-HARDWARE-VALIDATION.md)
-- [docs/AUDIO-HARDWARE-VALIDATION.md](docs/AUDIO-HARDWARE-VALIDATION.md)
+- Confirm that P1-03B passes the asset-loading stage and reaches the title on real Saturn.
+- Finish full TAG and Royal route acceptance, including all interactions, transitions and end states. Records, initials, credits and save code are present, but their complete physical validation remains open.
+- Bring sustained combat cadence and frame pacing to the arcade target, especially under Royal's heavier load. Older emulator percentages are historical measurements, not guarantees for this candidate or a real console.
+- Finish image, animation, priority and timing comparisons across the full game.
+- Validate the revised music on hardware, eliminate remaining audio interruptions and resolve exact musical loops and lifecycle behavior. Long music tracks are still finite **600-second captures**.
 
-These files define the current block status, graphics/input/audio pipeline rules, hardware validation gate, and integration contracts so parallel chats do not reintroduce superseded diagnostic implementations.
+The [status document](docs/STATUS.md) separates recovered build evidence, checks run for this repository refresh, and hardware work still pending. A passing host test is not a hardware pass.
+
+## Repository map
+
+| Path | Purpose |
+| --- | --- |
+| [`core/`](core/) | Native gameplay/state logic, runtime tables and reference-compatible contracts |
+| [`port/`](port/) | Saturn entry point, graphics, assets, audio, input and save adapters |
+| [`sdk/jo_engine/`](sdk/jo_engine/) | Adapted Jo Engine sources |
+| [`sdk/Compiler/COMMON/`](sdk/Compiler/COMMON/) | Adapted build rules, linker and Jo boot template |
+| [`tools/`](tools/) | Asset restoration/generation, capture analysis and packaging tools |
+| [`tests/`](tests/) | Host regressions, intentional frozen reference implementations and RAM fixtures |
+| [`docs/`](docs/) | Build guides, technical records, status, provenance and history |
+| [`evidence/`](evidence/) | Compact, revision-labelled reports and logs |
+
+## Contributing and reporting hardware results
+
+Useful contributions include small reproducible fixes, performance measurements with a clear methodology, ROM-backed behavior comparisons, and precise hardware reports. Include the source commit or disc hash, console region, RAM cartridge, MODE or CD-R/loader path, the steps taken, and the complete diagnostic screen if one appears. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Keep gameplay changes tied to evidence. Preserve the current build workarounds, memory reservations and third-party notices. Do not replace missing behavior with a guessed rule and label it arcade-exact.
+
+## Credits and rights
+
+This is an independent development project and is not affiliated with or endorsed by the original game's rights holders or Sega. Original names, characters, graphics and sound remain the property of their respective rights holders. No license to those materials is granted by this repository.
+
+Jo Engine, zlib, the Z80 reference and Nuked-OPM retain their own notices and licensing terms. See [third-party notices](docs/THIRD-PARTY.md). The repository does not apply a new blanket license to all imported code or original game materials.

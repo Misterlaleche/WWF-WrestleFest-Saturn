@@ -1,0 +1,3 @@
+COMMAND ["cc", "-std=c11", "-O1", "-g", "-Wall", "-Wextra", "-Werror", "-fsanitize=address,undefined", "-Icore/include", "tests/test_gfx1_world_commit.c", "core/src/wf_r18_world.c", "-o", "/tmp/wf-repo-refresh-vmnjatw9/gfx1-world"]
+COMMAND ["/tmp/wf-repo-refresh-vmnjatw9/gfx1-world"]
+PASS GFX1 world commit ordering

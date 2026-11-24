@@ -1,0 +1,3 @@
+COMMAND ["cc", "-std=c11", "-O1", "-g", "-Wall", "-Wextra", "-Werror", "-fsanitize=address,undefined", "-Wno-int-to-pointer-cast", "-DWF_PLATFORM_SATURN=1", "-DWF_JO_ENGINE=1", "-DWF_JO_VIDEO_TEST=1", "-Icore/include", "-Iport", "-Itests", "tests/test_jo_pipeline.c", "port/wf_jo_video.c", "core/src/wf_saturn_memory.c", "-o", "/tmp/wf-repo-refresh-vmnjatw9/video-pipeline"]
+COMMAND ["/tmp/wf-repo-refresh-vmnjatw9/video-pipeline"]
+Jo pipeline: asynchronous fences, exact snapshots, sparse transfers, repeats and failure rollback: PASS

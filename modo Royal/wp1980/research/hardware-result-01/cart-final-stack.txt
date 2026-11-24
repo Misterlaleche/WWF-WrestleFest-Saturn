@@ -1,1 +1,0 @@
-Saturn stacks OK: master=0x06004000, slave=0x060ff000, .bss=0x06066b60..0x060f2420, slave headroom=52192 bytes

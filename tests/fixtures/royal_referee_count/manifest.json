@@ -1,0 +1,8 @@
+{
+  "origin": "Read-only pre-referee snapshot from exact natural Royal trial128 replay, frame6995. Original royal_pressure period12 spacing16 variant4 pin_health24. Captured before wf_r17_referee_logic_1f914; baseline then blocks200EC.",
+  "replay": "work/royal-referee/replay",
+  "files": {
+    "state.json": "9e12dca5612198dd824cd8d88807a74cb862a6a17e75657f58a72573c36b964c",
+    "arcade-ram.bin": "9e2f295674c19456380e8aba87300310f47745db22a781ae9e2fa1d28f522003"
+  }
+}

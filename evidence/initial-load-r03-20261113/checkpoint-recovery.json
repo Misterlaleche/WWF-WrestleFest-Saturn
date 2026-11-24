@@ -1,0 +1,222 @@
+{
+  "status": "PASS_RECOVERY_WITHOUT_SH2_BUILD",
+  "source_verified": {
+    "status": "PASS_SOURCE_IDENTITIES",
+    "files": 819,
+    "commit": "fb0dd67665149ee3ed5305684bab7e09f09adb0f",
+    "scope": "Frozen files only; restored cd/compiler/build outputs are outside this manifest. No rebuild or hardware claim."
+  },
+  "compiler_zip_sha256": "341209b0216f2e2247f26946a192cfe295d69a38df99c6639c86ee524eed5383",
+  "compiler_files_compared_to_zip": {
+    "LINUX": 42,
+    "WINDOWS": 177
+  },
+  "compiler_bytes_compared": 171908758,
+  "assets_verified": 34,
+  "asset_bytes": 632644966,
+  "asset_lock_sha256": "0da89eb5337fac777e7a8b8cb7e07c98f1b4ab7b2370678122023c04e6105157",
+  "asset_extraction_source": "outputs/WrestleFest_Saturn_R03.bin",
+  "asset_extraction_bin_sha256": "991ed0c8bfe97d1a436fa237406fffc538c4434c70e4767b1936953b2603686a",
+  "recovery_commands": [
+    {
+      "name": "raw-assets",
+      "command": [
+        "/work/venv/bin/python",
+        "tools/check_raw_disc_assets.py",
+        "--cd",
+        "cd",
+        "--manifest",
+        "asset-lock.json"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "music-headers",
+      "command": [
+        "/work/venv/bin/python",
+        "tools/generate_music_headers.py",
+        "--verify",
+        "--cd",
+        "cd"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "make-dryrun",
+      "command": [
+        "make",
+        "-n",
+        "-j2",
+        "WF_FRONTEND=1",
+        "WF_AUTORUN=",
+        "WF_CAPTURE=0",
+        "WF_PROFILE=0",
+        "MKISOFS=genisoimage"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "source-after-restore",
+      "command": [
+        "/work/venv/bin/python",
+        "tools/verify_checkpoint.py"
+      ],
+      "returncode": 0
+    }
+  ],
+  "dryrun_compile_recipes": 155,
+  "four_cold_os_owners": [
+    "wf_r18_post_tag",
+    "wf_r18_ranking",
+    "wf_r18_card_scene",
+    "wf_r18_roster_select"
+  ],
+  "source_verifier_negative_controls": [
+    {
+      "case": "same-size-change",
+      "rejected": "Source identity differs: probe"
+    },
+    {
+      "case": "truncated",
+      "rejected": "Source identity differs: probe"
+    },
+    {
+      "case": "missing",
+      "rejected": "Missing/nonregular source: probe"
+    },
+    {
+      "case": "wrong-format",
+      "rejected": "Unknown checkpoint manifest"
+    },
+    {
+      "case": "path-traversal",
+      "rejected": "Unsafe manifest path"
+    },
+    {
+      "case": "symlink",
+      "rejected": "Missing/nonregular source: probe"
+    }
+  ],
+  "host_suite": {
+    "status": "PASS",
+    "cases": 19,
+    "source_drift": [],
+    "report_sha256": "bb2847a6f004b41d7bd9f4d219012abb8433a0b566930b284111b6097116200e",
+    "runs": [
+      {
+        "name": "raw-metadata",
+        "returncode": 0,
+        "log_sha256": "b012546f5c06822fa26d95c7d056d0705ad634189031e7ae915ea715ff6348b7"
+      },
+      {
+        "name": "raw-size-negative",
+        "returncode": 0,
+        "log_sha256": "a26846dbfb3a6217972db95e71fce6e3dab4b568cbb0aad773814acd9da271fe"
+      },
+      {
+        "name": "raw-allowlist-negative",
+        "returncode": 0,
+        "log_sha256": "a26846dbfb3a6217972db95e71fce6e3dab4b568cbb0aad773814acd9da271fe"
+      },
+      {
+        "name": "raw-packaging",
+        "returncode": 0,
+        "log_sha256": "37d20e20535f207e67b01c25202f3413036aee083cfcd52c6e0d22c4e63c8f6e"
+      },
+      {
+        "name": "music-api",
+        "returncode": 0,
+        "log_sha256": "d60b82c8a6a2e26cd38c10611b5cf9e24fa401fd9b07eb56894cf77cf7ba5304"
+      },
+      {
+        "name": "music-generation",
+        "returncode": 0,
+        "log_sha256": "f2731882ce831ff5806b89c5c4e5e8977d4836cbc2b3b2fee8c3abe8b8a5c459"
+      },
+      {
+        "name": "music-order",
+        "returncode": 0,
+        "log_sha256": "62cc0b783d109c4500ea10d9f871290e71fb8c9ea42a99edcf84061a9e37b872"
+      },
+      {
+        "name": "cd-diagnostics",
+        "returncode": 0,
+        "log_sha256": "8cbd8a2c0f620286b53735859d3cb21b88309f4189de9dab92cd20cc214ed294"
+      },
+      {
+        "name": "cd-ui",
+        "returncode": 0,
+        "log_sha256": "28ac5c93c3d99104c9526a08213b0de392a6676aa5650a1553dd678d6b0f618e"
+      },
+      {
+        "name": "cd-negatives",
+        "returncode": 0,
+        "log_sha256": "42492bcce24fcbe7df1c4276e2fcee00c7537ae184e2b42b88f3a8f31990b49d"
+      },
+      {
+        "name": "cd-protocol",
+        "returncode": 0,
+        "log_sha256": "7f47099117aaa90facd3f41a4a88e3d97901e91cc38a2ed37eed89936a863085"
+      },
+      {
+        "name": "boot-progress",
+        "returncode": 0,
+        "log_sha256": "66152ae6db01c187bc17e9d3f31e9e8a406a9a39fd97578856b9aa2f30d3f13f"
+      },
+      {
+        "name": "audio-service",
+        "returncode": 0,
+        "log_sha256": "c8e9c34a3ea7b28ba75c4622de465488bf4ca18049b551f18495cabd2044adf3"
+      },
+      {
+        "name": "audio-decoder",
+        "returncode": 0,
+        "log_sha256": "1459bf2a3e57ef8830097ebadf6e791a35d7c71b7974977fa5f6cb6113b28ac4"
+      },
+      {
+        "name": "combat-audio",
+        "returncode": 0,
+        "log_sha256": "18dd808bdf338f2691e3e1d5f0a9772c7ccc240ddae0fa5b82c15f97579b17d7"
+      },
+      {
+        "name": "music-stream",
+        "returncode": 0,
+        "log_sha256": "86bb6a87371546ce63717b00ed111cc4fd6ecd7353dce18116fcddcb7bcf17ed"
+      },
+      {
+        "name": "music-deadline",
+        "returncode": 0,
+        "log_sha256": "c7e727c09cd50d3f1cd31accc17d6ce04ccc741b0586a862c6782113c3295c44"
+      },
+      {
+        "name": "frontend-fault",
+        "returncode": 0,
+        "log_sha256": "401c11c978adf83f38ae7ad2080e800e0a56382cdade8495715e541cf2d461d3"
+      },
+      {
+        "name": "native-main-compile",
+        "returncode": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "logs": {
+    "assets-verify.log": "44439143dc0e745e1a6b2eb4a083f5585f05e6b8e61ba2bbbd835b4c49d5aecb",
+    "source-after-restore.log": "53e2c2f2816051f6324531bf2c2d2b6401eaa0af3795a4d40c1e684239c75449",
+    "make-dryrun.log": "fd7a3b51738d7623941d59c7c2b137e8a7f8b6957e143191647b1f9315f72147",
+    "music-headers.log": "e43f352f7736c10a54423245bd4dd88d51a582d771686544f2bfbb715e0dc27e",
+    "raw-assets.log": "24c1367d7f88534bffe30c9c82299aa7fa38fb2902a987ed9cccade3996ffa3c"
+  },
+  "verifier_sha256": "9ca0528a97300fc97eab4775dd39f6f767b19cf919a02284fa61d0443a1cc471",
+  "validation_script_sha256": "3c8e9d3ec28ec7e45b2d87b9a5c7740e9c73f4a052e167d54727e5b82964b03c",
+  "restore_sh2_build_performed": false,
+  "emulator_launched": false,
+  "limits": [
+    "Compiler and assets were extracted into a fresh copy and rehashed. No SH2 executable was rebuilt.",
+    "Make ran with -n: recipes and dependencies were resolved, not compiled or linked.",
+    "Host suite does not certify physical Saturn or CD-R load duration.",
+    "The historical original build evidence is not a new restoration build."
+  ],
+  "verification_phase": "Fresh restored copy before adding this compact recovery receipt to the source-only package.",
+  "source_manifest_at_restore": "87301cbc7d4d483613bc2b47c717ac8a7dbe1ff5aa7a34bc99ff1ac6cc6f0d5f"
+}

@@ -1,8 +1,0 @@
-{
-  "origin": "User-supplied pinned z80 dependency from the unchanged R04 reference. Sequencing only; no OPM synthesis in the native backend.",
-  "files": {
-    "z80.c": "d82e99d025b4ec0d0d0dac29ef83e4bb41c7d2fc15592e13be4057bbf17f0698",
-    "z80.h": "d27e46daf7d3c661ace78918fe5315632bc82c79e351126709c541b80e01f5aa",
-    "LICENSE": "e1fe7a1f2c90220ad9eff4bdcd3b4059f3897101bcd924c208bfcbe8c38ca6d5"
-  }
-}

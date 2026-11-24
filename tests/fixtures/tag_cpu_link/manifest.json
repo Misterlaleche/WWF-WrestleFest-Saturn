@@ -1,0 +1,8 @@
+{
+  "origin": "Actual uninterrupted production main with read-only tests/policies/tag_adaptive.h defaults, trial000; frame1816, stage0, world2. Captured immediately after the blocked state4 read; B9.bit1 clear is idempotent.",
+  "source": "build/tag-policy-search/trial000",
+  "files": {
+    "state.json": "8b9313525758e1e4f6130fc1b5e9ea31dd780b3268566af6235cffb26b7a88a5",
+    "arcade-ram.bin": "f994e27c0b37ef2735570e5294ddbfb6822b408e18172161d4015aeeab3b17da"
+  }
+}

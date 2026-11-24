@@ -1,0 +1,83 @@
+{
+  "source": "Pre-diagnostic E02 SDK; real SDK functions with W0C MMIO/DMA boundary model, not a retry replica.",
+  "baseline_source_sha256": {
+    "fs.c": "c72f531904154c5dee6270679f5d4ee89b89de2b473a144a4295276959b7d25f",
+    "fs.h": "02bdfe27a25d884a59e7f19931b4b7cb272353463e2b50f9c2d0643ea4e2ba2f",
+    "types.h": "00b2899fd41d0e7f18461fcb85417e37f6ef8d8420fb20cfe2eb4c9eab6a599d",
+    "cd_stream_async.h": "968f2b78e8723ed4962cbd9f01c1c0bc58f2cf53aa69592f2e087f799c0b8880"
+  },
+  "cases": [
+    {
+      "name": "success",
+      "behavior": "PASS success mmio=409cc9ccc4ac9c44 fields=0 services=0 spins=0 hirq=21 fifo=8192 position=4"
+    },
+    {
+      "name": "retry_success",
+      "behavior": "PASS retry_success mmio=7b38f3ab223b538c fields=0 services=0 spins=32 hirq=25 fifo=2048 position=1"
+    },
+    {
+      "name": "retry_exhaustion",
+      "behavior": "PASS retry_exhaustion mmio=7b2d826a2444ff7c fields=0 services=0 spins=160 hirq=36 fifo=0 position=0"
+    },
+    {
+      "name": "max_after_success",
+      "behavior": "PASS max_after_success mmio=12fa6a08f3bfd58f fields=330 services=0 spins=0 hirq=82 fifo=2048 position=1"
+    },
+    {
+      "name": "field_timeout",
+      "behavior": "PASS field_timeout mmio=49868598e529e91e fields=330 services=21 spins=0 hirq=61 fifo=0 position=0"
+    },
+    {
+      "name": "clockless_timeout",
+      "behavior": "PASS clockless_timeout mmio=e9cb1ddf1f0dd26e fields=0 services=129 spins=0 hirq=149 fifo=0 position=0"
+    },
+    {
+      "name": "quiet_poll_timeout",
+      "behavior": "PASS quiet_poll_timeout mmio=e9cb1ddf1f0dd26e fields=0 services=0 spins=0 hirq=149 fifo=0 position=0"
+    },
+    {
+      "name": "wrapped_timeout",
+      "behavior": "PASS wrapped_timeout mmio=49868598e529e91e fields=202 services=21 spins=0 hirq=61 fifo=0 position=0"
+    },
+    {
+      "name": "wait",
+      "behavior": "PASS wait mmio=616a20df1f9edb7d fields=0 services=0 spins=0 hirq=2 fifo=0 position=0"
+    },
+    {
+      "name": "reject",
+      "behavior": "PASS reject mmio=d9256f725f06ed7d fields=0 services=0 spins=0 hirq=2 fifo=0 position=0"
+    },
+    {
+      "name": "initial_cmok_timeout",
+      "behavior": "PASS initial_cmok_timeout mmio=aaaf5a4e3736b2d3 fields=0 services=0 spins=0 hirq=66 fifo=0 position=0"
+    },
+    {
+      "name": "cmok_timeout",
+      "behavior": "PASS cmok_timeout mmio=f011c681beaae0f6 fields=0 services=0 spins=0 hirq=67 fifo=0 position=0"
+    },
+    {
+      "name": "selector_timeout",
+      "behavior": "PASS selector_timeout mmio=5ccdb90255a32d55 fields=67 services=0 spins=0 hirq=68 fifo=0 position=0"
+    },
+    {
+      "name": "async_flush_failure",
+      "behavior": "PASS async_flush_failure mmio=fdd6d224ab0b4a71 fields=0 services=0 spins=0 hirq=1 fifo=0 position=0"
+    },
+    {
+      "name": "latched_failure",
+      "behavior": "PASS latched_failure mmio=e1d9e454120c1b10 fields=0 services=0 spins=0 hirq=5 fifo=0 position=0"
+    },
+    {
+      "name": "sequential",
+      "behavior": "PASS sequential mmio=3c72985c4e28db69 fields=0 services=0 spins=0 hirq=28 fifo=4096 position=2"
+    },
+    {
+      "name": "skip_range",
+      "behavior": "PASS skip_range mmio=72d21dfe4340f8b0 fields=0 services=0 spins=0 hirq=35 fifo=6144 position=3"
+    },
+    {
+      "name": "zero_read",
+      "behavior": "PASS zero_read mmio=14650fb0739d0383 fields=0 services=0 spins=0 hirq=0 fifo=0 position=0"
+    }
+  ]
+}

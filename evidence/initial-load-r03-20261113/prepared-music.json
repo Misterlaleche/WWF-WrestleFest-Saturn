@@ -1,0 +1,132 @@
+{
+  "status": "PASS_18_TARGET_BINDINGS_AND_2_PREFIX_PAYLOADS_BOTH_BUILDS",
+  "rows": [
+    {
+      "file": "MU01.WAV",
+      "baseline_fad": 503,
+      "candidate_fad": 2616,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU02.WAV",
+      "baseline_fad": 26343,
+      "candidate_fad": 28456,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU03.WAV",
+      "baseline_fad": 52183,
+      "candidate_fad": 54296,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU04.WAV",
+      "baseline_fad": 78023,
+      "candidate_fad": 80136,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU05.WAV",
+      "baseline_fad": 103863,
+      "candidate_fad": 105976,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU06.WAV",
+      "baseline_fad": 104380,
+      "candidate_fad": 106493,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU07.WAV",
+      "baseline_fad": 130220,
+      "candidate_fad": 132333,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU08.WAV",
+      "baseline_fad": 156060,
+      "candidate_fad": 158173,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU09.WAV",
+      "baseline_fad": 156405,
+      "candidate_fad": 158518,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU0A.WAV",
+      "baseline_fad": 156922,
+      "candidate_fad": 159035,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU0B.WAV",
+      "baseline_fad": 182762,
+      "candidate_fad": 184875,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU0C.WAV",
+      "baseline_fad": 208602,
+      "candidate_fad": 210715,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU0D.WAV",
+      "baseline_fad": 234442,
+      "candidate_fad": 236555,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU0E.WAV",
+      "baseline_fad": 239610,
+      "candidate_fad": 241723,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU0F.WAV",
+      "baseline_fad": 265450,
+      "candidate_fad": 267563,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU10.WAV",
+      "baseline_fad": 291290,
+      "candidate_fad": 293403,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU11.WAV",
+      "baseline_fad": 296458,
+      "candidate_fad": 298571,
+      "other_prepared_fields_identical": true
+    },
+    {
+      "file": "MU12.WAV",
+      "baseline_fad": 301626,
+      "candidate_fad": 303739,
+      "other_prepared_fields_identical": true
+    }
+  ],
+  "prefix_payload_bytes": 114688,
+  "cart_mapping_source": {
+    "path": "/Users/alejandro/Documents/Codex/2026-11-13/d/work/smpc-timing-screen/source/mednafen/src/ss/cart/extram.cpp",
+    "sha256": "2de99c2db83ca146f450f29888dafc3af1cd65feb02fe7aaef48cf4273af76fa",
+    "mapping": "0x02400000..0x025fffff -> LO; 0x02600000..0x027fffff -> HI; SFPTR16N words follow state endianness"
+  },
+  "identities": {
+    "baseline-prepared.json": "ae1a43b52ccf6295ef312f48fe7bc44ca7be92438eec69b49816079bb03881e0",
+    "candidate-prepared.json": "8770bb4b761609d925cd7124b3b41e88bc84d9ac6a1297b8a0b941c38d689b8e",
+    "abi-baseline/abi.json": "075b71381b65551798a5d97cad619eb76a855508f66a3b5190221aa962d26f07",
+    "verify_prepared.py": "3a5b5109495b4dc1da3ab3a6531d1dd1dad8d5355dbb10e2b1db36da5a8a4a67",
+    "build_abi.py": "e35447e359410998c06f9db90b9a43f503a66842f81c169d6c0f46669c8dbcc0",
+    "tests.json": "706286a3352c106bb8390f269451abbc64c7a95182ccb8d9b27e1ba5b67e6bc9"
+  },
+  "limits": [
+    "Not all 18 tracks were played or heard.",
+    "No physical Saturn/CD-R timing or sound acceptance is claimed."
+  ],
+  "negative_cases": 20
+}

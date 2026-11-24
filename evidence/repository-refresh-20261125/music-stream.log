@@ -1,0 +1,6 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_music_stream.py"]
+PASS: one continuous CD read, 1764000 exact PCM bytes, RAM wraps and EOF
+PASS: prime retains the reader, fills ring plus main buffer, and key-on causes no seek
+PASS: prepared stop returns before CD acknowledgement; normal updates retire the request
+PASS: 32768-byte prefix, seek-free key-on, exact CD handoff and one continuous read
+PASS: 65536-byte prefix, seek-free key-on, exact CD handoff and one continuous read

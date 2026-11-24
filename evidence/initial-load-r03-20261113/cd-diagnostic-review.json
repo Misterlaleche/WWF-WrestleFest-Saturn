@@ -1,0 +1,182 @@
+{
+  "status": "PASS",
+  "source_sha256": {
+    "/work/cd-diagnostics-prototype/sdk/jo_engine/fs.c": "413a176dd027be116ae1bc8b0afba2aad4eaa07c9e55c281c069f567e1275655",
+    "/work/cd-diagnostics-prototype/sdk/jo_engine/jo/fs.h": "08a86c56fc26d3a3d83ec5b823557ffac0add37ac4c8ab888877cb353887f623",
+    "/work/cd-diagnostics-prototype/port/main.c": "e209a6d9fc93646ce5593aae840d3e62145b6f278968761e0b7a133804cb3274",
+    "/work/cd-diagnostics-prototype/diagnostic-only.patch": "946e9cb79bd00a0534097c0a6e1b8f726ea14a06b0ad372f190be428a7600a46"
+  },
+  "runs": [
+    {
+      "kind": "protocol",
+      "case": "success",
+      "returncode": 0,
+      "output": "PASS success mmio=409cc9ccc4ac9c44 fields=0 services=0 spins=0 hirq=21 fifo=8192 position=4"
+    },
+    {
+      "kind": "protocol",
+      "case": "retry_success",
+      "returncode": 0,
+      "output": "PASS retry_success mmio=7b38f3ab223b538c fields=0 services=0 spins=32 hirq=25 fifo=2048 position=1"
+    },
+    {
+      "kind": "protocol",
+      "case": "retry_exhaustion",
+      "returncode": 0,
+      "output": "PASS retry_exhaustion mmio=7b2d826a2444ff7c fields=0 services=0 spins=160 hirq=36 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "max_after_success",
+      "returncode": 0,
+      "output": "PASS max_after_success mmio=12fa6a08f3bfd58f fields=330 services=0 spins=0 hirq=82 fifo=2048 position=1"
+    },
+    {
+      "kind": "protocol",
+      "case": "field_timeout",
+      "returncode": 0,
+      "output": "PASS field_timeout mmio=49868598e529e91e fields=330 services=21 spins=0 hirq=61 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "clockless_timeout",
+      "returncode": 0,
+      "output": "PASS clockless_timeout mmio=e9cb1ddf1f0dd26e fields=0 services=129 spins=0 hirq=149 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "quiet_poll_timeout",
+      "returncode": 0,
+      "output": "PASS quiet_poll_timeout mmio=e9cb1ddf1f0dd26e fields=0 services=0 spins=0 hirq=149 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "wrapped_timeout",
+      "returncode": 0,
+      "output": "PASS wrapped_timeout mmio=49868598e529e91e fields=202 services=21 spins=0 hirq=61 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "wait",
+      "returncode": 0,
+      "output": "PASS wait mmio=616a20df1f9edb7d fields=0 services=0 spins=0 hirq=2 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "reject",
+      "returncode": 0,
+      "output": "PASS reject mmio=d9256f725f06ed7d fields=0 services=0 spins=0 hirq=2 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "initial_cmok_timeout",
+      "returncode": 0,
+      "output": "PASS initial_cmok_timeout mmio=aaaf5a4e3736b2d3 fields=0 services=0 spins=0 hirq=66 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "cmok_timeout",
+      "returncode": 0,
+      "output": "PASS cmok_timeout mmio=f011c681beaae0f6 fields=0 services=0 spins=0 hirq=67 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "selector_timeout",
+      "returncode": 0,
+      "output": "PASS selector_timeout mmio=5ccdb90255a32d55 fields=67 services=0 spins=0 hirq=68 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "async_flush_failure",
+      "returncode": 0,
+      "output": "PASS async_flush_failure mmio=fdd6d224ab0b4a71 fields=0 services=0 spins=0 hirq=1 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "latched_failure",
+      "returncode": 0,
+      "output": "PASS latched_failure mmio=e1d9e454120c1b10 fields=0 services=0 spins=0 hirq=5 fifo=0 position=0"
+    },
+    {
+      "kind": "protocol",
+      "case": "sequential",
+      "returncode": 0,
+      "output": "PASS sequential mmio=3c72985c4e28db69 fields=0 services=0 spins=0 hirq=28 fifo=4096 position=2"
+    },
+    {
+      "kind": "protocol",
+      "case": "skip_range",
+      "returncode": 0,
+      "output": "PASS skip_range mmio=72d21dfe4340f8b0 fields=0 services=0 spins=0 hirq=35 fifo=6144 position=3"
+    },
+    {
+      "kind": "protocol",
+      "case": "zero_read",
+      "returncode": 0,
+      "output": "PASS zero_read mmio=14650fb0739d0383 fields=0 services=0 spins=0 hirq=0 fifo=0 position=0"
+    },
+    {
+      "kind": "ui",
+      "case": "visible",
+      "returncode": 0,
+      "output": "PASS visible"
+    },
+    {
+      "kind": "ui",
+      "case": "hidden",
+      "returncode": 0,
+      "output": "PASS hidden"
+    },
+    {
+      "kind": "ui",
+      "case": "fail",
+      "returncode": 0,
+      "output": "PASS fail"
+    },
+    {
+      "kind": "ui",
+      "case": "wide",
+      "returncode": 0,
+      "output": "PASS wide"
+    },
+    {
+      "kind": "mutant",
+      "case": "missing-retry",
+      "returncode": 1,
+      "output": "FAIL retry_success line 703: d.fill_read_retries==retries"
+    },
+    {
+      "kind": "mutant",
+      "case": "reset-getter",
+      "returncode": 1,
+      "output": "FAIL retry_success line 704: d.fill_read_retries==retries"
+    },
+    {
+      "kind": "mutant",
+      "case": "clear-latch",
+      "returncode": 1,
+      "output": "FAIL latched_failure line 705: d.failure_reason==reason"
+    },
+    {
+      "kind": "mutant",
+      "case": "per-poll-store",
+      "returncode": 1,
+      "output": "FAIL quiet_poll_timeout line 702: diag_fad_writes==3"
+    },
+    {
+      "kind": "mutant",
+      "case": "forget-max",
+      "returncode": 1,
+      "output": "FAIL max_after_success line 653: x.max_read_fields==expected_max && x.max_read_fad==1000 && x.last_read_fields==0"
+    }
+  ],
+  "findings": [],
+  "scope": "Independent source review and rerun of 18 protocol cases against baseline transcript, 4 UI cases, 5 negative mutants. Frozen binaries/source hashes verified.",
+  "memory": "64-byte static volatile record checked by _Static_assert; getter uses caller-owned stack output; no reset/new heap allocation.",
+  "limits": [
+    "No SH2 size/link or target/physical timing acceptance.",
+    "Maximum fields may undercount waits with IRQ masked.",
+    "No added last_fad store in empty polling without service hook; after a cooperative hook the current range is restored.",
+    "Getter is a field copy, not a multi-thread atomic snapshot; the audited WF call sites and writers are foreground."
+  ]
+}

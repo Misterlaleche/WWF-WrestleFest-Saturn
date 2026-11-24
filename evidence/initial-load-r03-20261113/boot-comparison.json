@@ -1,0 +1,2411 @@
+{
+  "status": "COMPLETE_OFFLINE_COMPARISON",
+  "baseline": {
+    "callback_field": 18,
+    "ready_field": 1504,
+    "elapsed_fields": 1486,
+    "stages": [
+      {
+        "stage": 1,
+        "label": "file queries",
+        "samples": 20,
+        "entry_field_bounds": [
+          18,
+          20
+        ],
+        "first_last_observed_field": [
+          20,
+          73
+        ],
+        "exit_field_bounds": [
+          73,
+          76
+        ],
+        "duration_fields_bounds": [
+          53,
+          58
+        ]
+      },
+      {
+        "stage": 2,
+        "label": "ROM and sprites",
+        "samples": 270,
+        "entry_field_bounds": [
+          73,
+          76
+        ],
+        "first_last_observed_field": [
+          76,
+          825
+        ],
+        "exit_field_bounds": [
+          825,
+          827
+        ],
+        "duration_fields_bounds": [
+          749,
+          754
+        ]
+      },
+      {
+        "stage": 3,
+        "label": "scenes",
+        "samples": 25,
+        "entry_field_bounds": [
+          825,
+          827
+        ],
+        "first_last_observed_field": [
+          827,
+          894
+        ],
+        "exit_field_bounds": [
+          894,
+          896
+        ],
+        "duration_fields_bounds": [
+          67,
+          71
+        ]
+      },
+      {
+        "stage": 4,
+        "label": "SFX",
+        "samples": 36,
+        "entry_field_bounds": [
+          894,
+          896
+        ],
+        "first_last_observed_field": [
+          896,
+          993
+        ],
+        "exit_field_bounds": [
+          993,
+          996
+        ],
+        "duration_fields_bounds": [
+          97,
+          102
+        ]
+      },
+      {
+        "stage": 5,
+        "label": "video initialization",
+        "samples": 34,
+        "entry_field_bounds": [
+          993,
+          996
+        ],
+        "first_last_observed_field": [
+          996,
+          1090
+        ],
+        "exit_field_bounds": [
+          1090,
+          1093
+        ],
+        "duration_fields_bounds": [
+          94,
+          100
+        ]
+      },
+      {
+        "stage": 6,
+        "label": "platform ready",
+        "status": "NOT_SAMPLED"
+      },
+      {
+        "stage": 7,
+        "label": "audio preparation and prefixes",
+        "samples": 143,
+        "entry_field_bounds": [
+          1090,
+          1093
+        ],
+        "first_last_observed_field": [
+          1093,
+          1503
+        ],
+        "exit_field_bounds": [
+          1503,
+          1504
+        ],
+        "duration_fields_bounds": [
+          410,
+          414
+        ]
+      },
+      {
+        "stage": 8,
+        "label": "frontend ready",
+        "samples": 1,
+        "entry_field_bounds": [
+          1503,
+          1504
+        ],
+        "first_last_observed_field": [
+          1504,
+          1504
+        ]
+      }
+    ],
+    "payload_positions": [
+      {
+        "total": 250985,
+        "bytes": 0,
+        "field": 838
+      },
+      {
+        "total": 250985,
+        "bytes": 32768,
+        "field": 852
+      },
+      {
+        "total": 250985,
+        "bytes": 65536,
+        "field": 858
+      },
+      {
+        "total": 250985,
+        "bytes": 98304,
+        "field": 865
+      },
+      {
+        "total": 250985,
+        "bytes": 131072,
+        "field": 871
+      },
+      {
+        "total": 250985,
+        "bytes": 163840,
+        "field": 877
+      },
+      {
+        "total": 250985,
+        "bytes": 196608,
+        "field": 884
+      },
+      {
+        "total": 250985,
+        "bytes": 229376,
+        "field": 890
+      },
+      {
+        "total": 440710,
+        "bytes": 0,
+        "field": 901
+      },
+      {
+        "total": 440710,
+        "bytes": 32768,
+        "field": 914
+      },
+      {
+        "total": 440710,
+        "bytes": 65536,
+        "field": 921
+      },
+      {
+        "total": 440710,
+        "bytes": 98304,
+        "field": 927
+      },
+      {
+        "total": 440710,
+        "bytes": 131072,
+        "field": 934
+      },
+      {
+        "total": 440710,
+        "bytes": 163840,
+        "field": 940
+      },
+      {
+        "total": 440710,
+        "bytes": 196608,
+        "field": 946
+      },
+      {
+        "total": 440710,
+        "bytes": 229376,
+        "field": 953
+      },
+      {
+        "total": 440710,
+        "bytes": 262144,
+        "field": 959
+      },
+      {
+        "total": 440710,
+        "bytes": 294912,
+        "field": 965
+      },
+      {
+        "total": 440710,
+        "bytes": 327680,
+        "field": 972
+      },
+      {
+        "total": 440710,
+        "bytes": 360448,
+        "field": 978
+      },
+      {
+        "total": 440710,
+        "bytes": 393216,
+        "field": 985
+      },
+      {
+        "total": 440710,
+        "bytes": 425984,
+        "field": 991
+      },
+      {
+        "total": 440710,
+        "bytes": 440710,
+        "field": 994
+      },
+      {
+        "total": 524288,
+        "bytes": 0,
+        "field": 102
+      },
+      {
+        "total": 524288,
+        "bytes": 32768,
+        "field": 116
+      },
+      {
+        "total": 524288,
+        "bytes": 65536,
+        "field": 122
+      },
+      {
+        "total": 524288,
+        "bytes": 98304,
+        "field": 128
+      },
+      {
+        "total": 524288,
+        "bytes": 131072,
+        "field": 135
+      },
+      {
+        "total": 524288,
+        "bytes": 163840,
+        "field": 141
+      },
+      {
+        "total": 524288,
+        "bytes": 196608,
+        "field": 148
+      },
+      {
+        "total": 524288,
+        "bytes": 229376,
+        "field": 154
+      },
+      {
+        "total": 524288,
+        "bytes": 262144,
+        "field": 160
+      },
+      {
+        "total": 524288,
+        "bytes": 294912,
+        "field": 167
+      },
+      {
+        "total": 524288,
+        "bytes": 327680,
+        "field": 173
+      },
+      {
+        "total": 524288,
+        "bytes": 360448,
+        "field": 180
+      },
+      {
+        "total": 524288,
+        "bytes": 393216,
+        "field": 186
+      },
+      {
+        "total": 524288,
+        "bytes": 425984,
+        "field": 192
+      },
+      {
+        "total": 524288,
+        "bytes": 458752,
+        "field": 199
+      },
+      {
+        "total": 524288,
+        "bytes": 491520,
+        "field": 205
+      },
+      {
+        "total": 3108052,
+        "bytes": 0,
+        "field": 211
+      },
+      {
+        "total": 3108052,
+        "bytes": 32768,
+        "field": 225
+      },
+      {
+        "total": 3108052,
+        "bytes": 65536,
+        "field": 232
+      },
+      {
+        "total": 3108052,
+        "bytes": 98304,
+        "field": 238
+      },
+      {
+        "total": 3108052,
+        "bytes": 131072,
+        "field": 244
+      },
+      {
+        "total": 3108052,
+        "bytes": 163840,
+        "field": 251
+      },
+      {
+        "total": 3108052,
+        "bytes": 196608,
+        "field": 257
+      },
+      {
+        "total": 3108052,
+        "bytes": 229376,
+        "field": 263
+      },
+      {
+        "total": 3108052,
+        "bytes": 262144,
+        "field": 270
+      },
+      {
+        "total": 3108052,
+        "bytes": 294912,
+        "field": 276
+      },
+      {
+        "total": 3108052,
+        "bytes": 327680,
+        "field": 283
+      },
+      {
+        "total": 3108052,
+        "bytes": 360448,
+        "field": 289
+      },
+      {
+        "total": 3108052,
+        "bytes": 393216,
+        "field": 295
+      },
+      {
+        "total": 3108052,
+        "bytes": 425984,
+        "field": 302
+      },
+      {
+        "total": 3108052,
+        "bytes": 458752,
+        "field": 308
+      },
+      {
+        "total": 3108052,
+        "bytes": 491520,
+        "field": 315
+      },
+      {
+        "total": 3108052,
+        "bytes": 524288,
+        "field": 321
+      },
+      {
+        "total": 3108052,
+        "bytes": 557056,
+        "field": 327
+      },
+      {
+        "total": 3108052,
+        "bytes": 589824,
+        "field": 334
+      },
+      {
+        "total": 3108052,
+        "bytes": 622592,
+        "field": 340
+      },
+      {
+        "total": 3108052,
+        "bytes": 655360,
+        "field": 346
+      },
+      {
+        "total": 3108052,
+        "bytes": 688128,
+        "field": 353
+      },
+      {
+        "total": 3108052,
+        "bytes": 720896,
+        "field": 359
+      },
+      {
+        "total": 3108052,
+        "bytes": 753664,
+        "field": 366
+      },
+      {
+        "total": 3108052,
+        "bytes": 786432,
+        "field": 372
+      },
+      {
+        "total": 3108052,
+        "bytes": 819200,
+        "field": 378
+      },
+      {
+        "total": 3108052,
+        "bytes": 851968,
+        "field": 385
+      },
+      {
+        "total": 3108052,
+        "bytes": 884736,
+        "field": 391
+      },
+      {
+        "total": 3108052,
+        "bytes": 917504,
+        "field": 398
+      },
+      {
+        "total": 3108052,
+        "bytes": 950272,
+        "field": 404
+      },
+      {
+        "total": 3108052,
+        "bytes": 983040,
+        "field": 410
+      },
+      {
+        "total": 3108052,
+        "bytes": 1015808,
+        "field": 417
+      },
+      {
+        "total": 3108052,
+        "bytes": 1048576,
+        "field": 423
+      },
+      {
+        "total": 3108052,
+        "bytes": 1081344,
+        "field": 429
+      },
+      {
+        "total": 3108052,
+        "bytes": 1114112,
+        "field": 436
+      },
+      {
+        "total": 3108052,
+        "bytes": 1146880,
+        "field": 442
+      },
+      {
+        "total": 3108052,
+        "bytes": 1179648,
+        "field": 449
+      },
+      {
+        "total": 3108052,
+        "bytes": 1212416,
+        "field": 455
+      },
+      {
+        "total": 3108052,
+        "bytes": 1245184,
+        "field": 461
+      },
+      {
+        "total": 3108052,
+        "bytes": 1277952,
+        "field": 468
+      },
+      {
+        "total": 3108052,
+        "bytes": 1310720,
+        "field": 474
+      },
+      {
+        "total": 3108052,
+        "bytes": 1343488,
+        "field": 480
+      },
+      {
+        "total": 3108052,
+        "bytes": 1376256,
+        "field": 487
+      },
+      {
+        "total": 3108052,
+        "bytes": 1409024,
+        "field": 493
+      },
+      {
+        "total": 3108052,
+        "bytes": 1441792,
+        "field": 500
+      },
+      {
+        "total": 3108052,
+        "bytes": 1474560,
+        "field": 506
+      },
+      {
+        "total": 3108052,
+        "bytes": 1507328,
+        "field": 512
+      },
+      {
+        "total": 3108052,
+        "bytes": 1540096,
+        "field": 519
+      },
+      {
+        "total": 3108052,
+        "bytes": 1572864,
+        "field": 525
+      },
+      {
+        "total": 3108052,
+        "bytes": 1605632,
+        "field": 532
+      },
+      {
+        "total": 3108052,
+        "bytes": 1638400,
+        "field": 538
+      },
+      {
+        "total": 3108052,
+        "bytes": 1671168,
+        "field": 544
+      },
+      {
+        "total": 3108052,
+        "bytes": 1703936,
+        "field": 551
+      },
+      {
+        "total": 3108052,
+        "bytes": 1736704,
+        "field": 557
+      },
+      {
+        "total": 3108052,
+        "bytes": 1769472,
+        "field": 563
+      },
+      {
+        "total": 3108052,
+        "bytes": 1802240,
+        "field": 570
+      },
+      {
+        "total": 3108052,
+        "bytes": 1835008,
+        "field": 576
+      },
+      {
+        "total": 3108052,
+        "bytes": 1867776,
+        "field": 583
+      },
+      {
+        "total": 3108052,
+        "bytes": 1900544,
+        "field": 589
+      },
+      {
+        "total": 3108052,
+        "bytes": 1933312,
+        "field": 595
+      },
+      {
+        "total": 3108052,
+        "bytes": 1966080,
+        "field": 602
+      },
+      {
+        "total": 3108052,
+        "bytes": 1998848,
+        "field": 608
+      },
+      {
+        "total": 3108052,
+        "bytes": 2031616,
+        "field": 614
+      },
+      {
+        "total": 3108052,
+        "bytes": 2064384,
+        "field": 621
+      },
+      {
+        "total": 3108052,
+        "bytes": 2097152,
+        "field": 627
+      },
+      {
+        "total": 3108052,
+        "bytes": 2129920,
+        "field": 634
+      },
+      {
+        "total": 3108052,
+        "bytes": 2162688,
+        "field": 640
+      },
+      {
+        "total": 3108052,
+        "bytes": 2195456,
+        "field": 646
+      },
+      {
+        "total": 3108052,
+        "bytes": 2228224,
+        "field": 653
+      },
+      {
+        "total": 3108052,
+        "bytes": 2260992,
+        "field": 659
+      },
+      {
+        "total": 3108052,
+        "bytes": 2293760,
+        "field": 666
+      },
+      {
+        "total": 3108052,
+        "bytes": 2326528,
+        "field": 672
+      },
+      {
+        "total": 3108052,
+        "bytes": 2359296,
+        "field": 678
+      },
+      {
+        "total": 3108052,
+        "bytes": 2392064,
+        "field": 685
+      },
+      {
+        "total": 3108052,
+        "bytes": 2424832,
+        "field": 691
+      },
+      {
+        "total": 3108052,
+        "bytes": 2457600,
+        "field": 697
+      },
+      {
+        "total": 3108052,
+        "bytes": 2490368,
+        "field": 704
+      },
+      {
+        "total": 3108052,
+        "bytes": 2523136,
+        "field": 710
+      },
+      {
+        "total": 3108052,
+        "bytes": 2555904,
+        "field": 717
+      },
+      {
+        "total": 3108052,
+        "bytes": 2588672,
+        "field": 723
+      },
+      {
+        "total": 3108052,
+        "bytes": 2621440,
+        "field": 729
+      },
+      {
+        "total": 3108052,
+        "bytes": 2654208,
+        "field": 736
+      },
+      {
+        "total": 3108052,
+        "bytes": 2686976,
+        "field": 742
+      },
+      {
+        "total": 3108052,
+        "bytes": 2719744,
+        "field": 748
+      },
+      {
+        "total": 3108052,
+        "bytes": 2752512,
+        "field": 755
+      },
+      {
+        "total": 3108052,
+        "bytes": 2785280,
+        "field": 761
+      },
+      {
+        "total": 3108052,
+        "bytes": 2818048,
+        "field": 768
+      },
+      {
+        "total": 3108052,
+        "bytes": 2850816,
+        "field": 774
+      },
+      {
+        "total": 3108052,
+        "bytes": 2883584,
+        "field": 780
+      },
+      {
+        "total": 3108052,
+        "bytes": 2916352,
+        "field": 787
+      },
+      {
+        "total": 3108052,
+        "bytes": 2949120,
+        "field": 793
+      },
+      {
+        "total": 3108052,
+        "bytes": 2981888,
+        "field": 800
+      },
+      {
+        "total": 3108052,
+        "bytes": 3014656,
+        "field": 806
+      },
+      {
+        "total": 3108052,
+        "bytes": 3047424,
+        "field": 812
+      },
+      {
+        "total": 3108052,
+        "bytes": 3080192,
+        "field": 819
+      },
+      {
+        "total": 3108052,
+        "bytes": 3108052,
+        "field": 824
+      }
+    ],
+    "max_observed_boot_poll_gap_fields": 4,
+    "cd": {
+      "available": false
+    },
+    "audio_ready": {
+      "initialized": 1,
+      "music_prepared_mask": 524286,
+      "music_missing_mask": 0,
+      "music_prefetch_bytes": 114688,
+      "music_prepare_max_ms": 719
+    },
+    "contiguous_title_runs": [
+      {
+        "fields": 28,
+        "arcade_ticks": 27
+      }
+    ],
+    "title_visual_acceptance": "NOT_EVALUATED_BY_THIS_SCRIPT",
+    "report_sha256": "043a5bb5b74807313352881ecc5192b02dc0c597e7cbe4630a4cfcc8ad8c2ca3",
+    "artifacts_sha256": {
+      "game.bin": "a1b729e1a1e7aaca310f4cfccaea32cf6af4c15660c65d582efd913428968813",
+      "game.elf": "9ef1b70eb88832f00ed37b3d52a28ee2a04319ce49ed4411884fcc70bf2eee5b",
+      "game.raw": "f63a54493c94f4078681967f12cf183eb0e0dd43a08a55fc401270e76f2deb3a",
+      "game.cue": "36f5037c75d2a4255af8109a376f1778feecfdcc4680c4cde2c39aab0ad7b88c"
+    },
+    "emulator_sha256": "b3ade88029adbccdb449259a95b236ec6af9e9b37df0df14664f936c15739672",
+    "bios_sha256": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f"
+  },
+  "candidate": {
+    "callback_field": 18,
+    "ready_field": 1145,
+    "elapsed_fields": 1127,
+    "stages": [
+      {
+        "stage": 1,
+        "label": "file queries",
+        "status": "NOT_SAMPLED"
+      },
+      {
+        "stage": 2,
+        "label": "ROM and sprites",
+        "samples": 261,
+        "entry_field_bounds": [
+          18,
+          19
+        ],
+        "first_last_observed_field": [
+          19,
+          733
+        ],
+        "exit_field_bounds": [
+          733,
+          735
+        ],
+        "duration_fields_bounds": [
+          714,
+          717
+        ]
+      },
+      {
+        "stage": 3,
+        "label": "scenes",
+        "samples": 17,
+        "entry_field_bounds": [
+          733,
+          735
+        ],
+        "first_last_observed_field": [
+          735,
+          781
+        ],
+        "exit_field_bounds": [
+          781,
+          783
+        ],
+        "duration_fields_bounds": [
+          46,
+          50
+        ]
+      },
+      {
+        "stage": 4,
+        "label": "SFX",
+        "samples": 31,
+        "entry_field_bounds": [
+          781,
+          783
+        ],
+        "first_last_observed_field": [
+          783,
+          866
+        ],
+        "exit_field_bounds": [
+          866,
+          869
+        ],
+        "duration_fields_bounds": [
+          83,
+          88
+        ]
+      },
+      {
+        "stage": 5,
+        "label": "video initialization",
+        "samples": 10,
+        "entry_field_bounds": [
+          866,
+          869
+        ],
+        "first_last_observed_field": [
+          869,
+          892
+        ],
+        "exit_field_bounds": [
+          892,
+          894
+        ],
+        "duration_fields_bounds": [
+          23,
+          28
+        ]
+      },
+      {
+        "stage": 6,
+        "label": "platform ready",
+        "status": "NOT_SAMPLED"
+      },
+      {
+        "stage": 7,
+        "label": "audio preparation and prefixes",
+        "samples": 90,
+        "entry_field_bounds": [
+          892,
+          894
+        ],
+        "first_last_observed_field": [
+          894,
+          1143
+        ],
+        "exit_field_bounds": [
+          1143,
+          1145
+        ],
+        "duration_fields_bounds": [
+          249,
+          253
+        ]
+      },
+      {
+        "stage": 8,
+        "label": "frontend ready",
+        "samples": 1,
+        "entry_field_bounds": [
+          1143,
+          1145
+        ],
+        "first_last_observed_field": [
+          1145,
+          1145
+        ]
+      }
+    ],
+    "payload_positions": [
+      {
+        "total": 250985,
+        "bytes": 0,
+        "field": 733
+      },
+      {
+        "total": 250985,
+        "bytes": 32768,
+        "field": 739
+      },
+      {
+        "total": 250985,
+        "bytes": 65536,
+        "field": 745
+      },
+      {
+        "total": 250985,
+        "bytes": 98304,
+        "field": 752
+      },
+      {
+        "total": 250985,
+        "bytes": 131072,
+        "field": 758
+      },
+      {
+        "total": 250985,
+        "bytes": 163840,
+        "field": 765
+      },
+      {
+        "total": 250985,
+        "bytes": 196608,
+        "field": 771
+      },
+      {
+        "total": 250985,
+        "bytes": 229376,
+        "field": 777
+      },
+      {
+        "total": 440710,
+        "bytes": 0,
+        "field": 782
+      },
+      {
+        "total": 440710,
+        "bytes": 32768,
+        "field": 788
+      },
+      {
+        "total": 440710,
+        "bytes": 65536,
+        "field": 795
+      },
+      {
+        "total": 440710,
+        "bytes": 98304,
+        "field": 801
+      },
+      {
+        "total": 440710,
+        "bytes": 131072,
+        "field": 807
+      },
+      {
+        "total": 440710,
+        "bytes": 163840,
+        "field": 814
+      },
+      {
+        "total": 440710,
+        "bytes": 196608,
+        "field": 820
+      },
+      {
+        "total": 440710,
+        "bytes": 229376,
+        "field": 826
+      },
+      {
+        "total": 440710,
+        "bytes": 262144,
+        "field": 833
+      },
+      {
+        "total": 440710,
+        "bytes": 294912,
+        "field": 839
+      },
+      {
+        "total": 440710,
+        "bytes": 327680,
+        "field": 846
+      },
+      {
+        "total": 440710,
+        "bytes": 360448,
+        "field": 852
+      },
+      {
+        "total": 440710,
+        "bytes": 393216,
+        "field": 858
+      },
+      {
+        "total": 440710,
+        "bytes": 425984,
+        "field": 865
+      },
+      {
+        "total": 440710,
+        "bytes": 440710,
+        "field": 868
+      },
+      {
+        "total": 524288,
+        "bytes": 0,
+        "field": 18
+      },
+      {
+        "total": 524288,
+        "bytes": 32768,
+        "field": 32
+      },
+      {
+        "total": 524288,
+        "bytes": 65536,
+        "field": 38
+      },
+      {
+        "total": 524288,
+        "bytes": 98304,
+        "field": 44
+      },
+      {
+        "total": 524288,
+        "bytes": 131072,
+        "field": 51
+      },
+      {
+        "total": 524288,
+        "bytes": 163840,
+        "field": 57
+      },
+      {
+        "total": 524288,
+        "bytes": 196608,
+        "field": 63
+      },
+      {
+        "total": 524288,
+        "bytes": 229376,
+        "field": 70
+      },
+      {
+        "total": 524288,
+        "bytes": 262144,
+        "field": 76
+      },
+      {
+        "total": 524288,
+        "bytes": 294912,
+        "field": 83
+      },
+      {
+        "total": 524288,
+        "bytes": 327680,
+        "field": 89
+      },
+      {
+        "total": 524288,
+        "bytes": 360448,
+        "field": 95
+      },
+      {
+        "total": 524288,
+        "bytes": 393216,
+        "field": 102
+      },
+      {
+        "total": 524288,
+        "bytes": 425984,
+        "field": 108
+      },
+      {
+        "total": 524288,
+        "bytes": 458752,
+        "field": 115
+      },
+      {
+        "total": 524288,
+        "bytes": 491520,
+        "field": 121
+      },
+      {
+        "total": 3108052,
+        "bytes": 0,
+        "field": 127
+      },
+      {
+        "total": 3108052,
+        "bytes": 32768,
+        "field": 134
+      },
+      {
+        "total": 3108052,
+        "bytes": 65536,
+        "field": 140
+      },
+      {
+        "total": 3108052,
+        "bytes": 98304,
+        "field": 146
+      },
+      {
+        "total": 3108052,
+        "bytes": 131072,
+        "field": 153
+      },
+      {
+        "total": 3108052,
+        "bytes": 163840,
+        "field": 159
+      },
+      {
+        "total": 3108052,
+        "bytes": 196608,
+        "field": 166
+      },
+      {
+        "total": 3108052,
+        "bytes": 229376,
+        "field": 172
+      },
+      {
+        "total": 3108052,
+        "bytes": 262144,
+        "field": 178
+      },
+      {
+        "total": 3108052,
+        "bytes": 294912,
+        "field": 185
+      },
+      {
+        "total": 3108052,
+        "bytes": 327680,
+        "field": 191
+      },
+      {
+        "total": 3108052,
+        "bytes": 360448,
+        "field": 197
+      },
+      {
+        "total": 3108052,
+        "bytes": 393216,
+        "field": 204
+      },
+      {
+        "total": 3108052,
+        "bytes": 425984,
+        "field": 210
+      },
+      {
+        "total": 3108052,
+        "bytes": 458752,
+        "field": 217
+      },
+      {
+        "total": 3108052,
+        "bytes": 491520,
+        "field": 223
+      },
+      {
+        "total": 3108052,
+        "bytes": 524288,
+        "field": 229
+      },
+      {
+        "total": 3108052,
+        "bytes": 557056,
+        "field": 236
+      },
+      {
+        "total": 3108052,
+        "bytes": 589824,
+        "field": 242
+      },
+      {
+        "total": 3108052,
+        "bytes": 622592,
+        "field": 249
+      },
+      {
+        "total": 3108052,
+        "bytes": 655360,
+        "field": 255
+      },
+      {
+        "total": 3108052,
+        "bytes": 688128,
+        "field": 261
+      },
+      {
+        "total": 3108052,
+        "bytes": 720896,
+        "field": 268
+      },
+      {
+        "total": 3108052,
+        "bytes": 753664,
+        "field": 274
+      },
+      {
+        "total": 3108052,
+        "bytes": 786432,
+        "field": 280
+      },
+      {
+        "total": 3108052,
+        "bytes": 819200,
+        "field": 287
+      },
+      {
+        "total": 3108052,
+        "bytes": 851968,
+        "field": 293
+      },
+      {
+        "total": 3108052,
+        "bytes": 884736,
+        "field": 300
+      },
+      {
+        "total": 3108052,
+        "bytes": 917504,
+        "field": 306
+      },
+      {
+        "total": 3108052,
+        "bytes": 950272,
+        "field": 312
+      },
+      {
+        "total": 3108052,
+        "bytes": 983040,
+        "field": 319
+      },
+      {
+        "total": 3108052,
+        "bytes": 1015808,
+        "field": 325
+      },
+      {
+        "total": 3108052,
+        "bytes": 1048576,
+        "field": 331
+      },
+      {
+        "total": 3108052,
+        "bytes": 1081344,
+        "field": 338
+      },
+      {
+        "total": 3108052,
+        "bytes": 1114112,
+        "field": 344
+      },
+      {
+        "total": 3108052,
+        "bytes": 1146880,
+        "field": 351
+      },
+      {
+        "total": 3108052,
+        "bytes": 1179648,
+        "field": 357
+      },
+      {
+        "total": 3108052,
+        "bytes": 1212416,
+        "field": 363
+      },
+      {
+        "total": 3108052,
+        "bytes": 1245184,
+        "field": 370
+      },
+      {
+        "total": 3108052,
+        "bytes": 1277952,
+        "field": 376
+      },
+      {
+        "total": 3108052,
+        "bytes": 1310720,
+        "field": 383
+      },
+      {
+        "total": 3108052,
+        "bytes": 1343488,
+        "field": 389
+      },
+      {
+        "total": 3108052,
+        "bytes": 1376256,
+        "field": 395
+      },
+      {
+        "total": 3108052,
+        "bytes": 1409024,
+        "field": 402
+      },
+      {
+        "total": 3108052,
+        "bytes": 1441792,
+        "field": 408
+      },
+      {
+        "total": 3108052,
+        "bytes": 1474560,
+        "field": 414
+      },
+      {
+        "total": 3108052,
+        "bytes": 1507328,
+        "field": 421
+      },
+      {
+        "total": 3108052,
+        "bytes": 1540096,
+        "field": 427
+      },
+      {
+        "total": 3108052,
+        "bytes": 1572864,
+        "field": 434
+      },
+      {
+        "total": 3108052,
+        "bytes": 1605632,
+        "field": 440
+      },
+      {
+        "total": 3108052,
+        "bytes": 1638400,
+        "field": 446
+      },
+      {
+        "total": 3108052,
+        "bytes": 1671168,
+        "field": 453
+      },
+      {
+        "total": 3108052,
+        "bytes": 1703936,
+        "field": 459
+      },
+      {
+        "total": 3108052,
+        "bytes": 1736704,
+        "field": 465
+      },
+      {
+        "total": 3108052,
+        "bytes": 1769472,
+        "field": 472
+      },
+      {
+        "total": 3108052,
+        "bytes": 1802240,
+        "field": 478
+      },
+      {
+        "total": 3108052,
+        "bytes": 1835008,
+        "field": 485
+      },
+      {
+        "total": 3108052,
+        "bytes": 1867776,
+        "field": 491
+      },
+      {
+        "total": 3108052,
+        "bytes": 1900544,
+        "field": 497
+      },
+      {
+        "total": 3108052,
+        "bytes": 1933312,
+        "field": 504
+      },
+      {
+        "total": 3108052,
+        "bytes": 1966080,
+        "field": 510
+      },
+      {
+        "total": 3108052,
+        "bytes": 1998848,
+        "field": 517
+      },
+      {
+        "total": 3108052,
+        "bytes": 2031616,
+        "field": 523
+      },
+      {
+        "total": 3108052,
+        "bytes": 2064384,
+        "field": 529
+      },
+      {
+        "total": 3108052,
+        "bytes": 2097152,
+        "field": 536
+      },
+      {
+        "total": 3108052,
+        "bytes": 2129920,
+        "field": 542
+      },
+      {
+        "total": 3108052,
+        "bytes": 2162688,
+        "field": 548
+      },
+      {
+        "total": 3108052,
+        "bytes": 2195456,
+        "field": 555
+      },
+      {
+        "total": 3108052,
+        "bytes": 2228224,
+        "field": 561
+      },
+      {
+        "total": 3108052,
+        "bytes": 2260992,
+        "field": 568
+      },
+      {
+        "total": 3108052,
+        "bytes": 2293760,
+        "field": 574
+      },
+      {
+        "total": 3108052,
+        "bytes": 2326528,
+        "field": 580
+      },
+      {
+        "total": 3108052,
+        "bytes": 2359296,
+        "field": 587
+      },
+      {
+        "total": 3108052,
+        "bytes": 2392064,
+        "field": 593
+      },
+      {
+        "total": 3108052,
+        "bytes": 2424832,
+        "field": 599
+      },
+      {
+        "total": 3108052,
+        "bytes": 2457600,
+        "field": 606
+      },
+      {
+        "total": 3108052,
+        "bytes": 2490368,
+        "field": 612
+      },
+      {
+        "total": 3108052,
+        "bytes": 2523136,
+        "field": 619
+      },
+      {
+        "total": 3108052,
+        "bytes": 2555904,
+        "field": 625
+      },
+      {
+        "total": 3108052,
+        "bytes": 2588672,
+        "field": 631
+      },
+      {
+        "total": 3108052,
+        "bytes": 2621440,
+        "field": 638
+      },
+      {
+        "total": 3108052,
+        "bytes": 2654208,
+        "field": 644
+      },
+      {
+        "total": 3108052,
+        "bytes": 2686976,
+        "field": 651
+      },
+      {
+        "total": 3108052,
+        "bytes": 2719744,
+        "field": 657
+      },
+      {
+        "total": 3108052,
+        "bytes": 2752512,
+        "field": 663
+      },
+      {
+        "total": 3108052,
+        "bytes": 2785280,
+        "field": 670
+      },
+      {
+        "total": 3108052,
+        "bytes": 2818048,
+        "field": 676
+      },
+      {
+        "total": 3108052,
+        "bytes": 2850816,
+        "field": 682
+      },
+      {
+        "total": 3108052,
+        "bytes": 2883584,
+        "field": 689
+      },
+      {
+        "total": 3108052,
+        "bytes": 2916352,
+        "field": 695
+      },
+      {
+        "total": 3108052,
+        "bytes": 2949120,
+        "field": 702
+      },
+      {
+        "total": 3108052,
+        "bytes": 2981888,
+        "field": 708
+      },
+      {
+        "total": 3108052,
+        "bytes": 3014656,
+        "field": 714
+      },
+      {
+        "total": 3108052,
+        "bytes": 3047424,
+        "field": 721
+      },
+      {
+        "total": 3108052,
+        "bytes": 3080192,
+        "field": 727
+      }
+    ],
+    "max_observed_boot_poll_gap_fields": 5,
+    "cd": {
+      "available": true,
+      "ready_snapshot": {
+        "read_attempts": 139,
+        "start_read_attempts": 5,
+        "sector_wait_timeouts": 0,
+        "fill_read_retries": 0,
+        "command_failures": 0,
+        "last_fad": 158197,
+        "last_command": 1536,
+        "last_status": 768,
+        "failure_fad": 0,
+        "failure_command": 0,
+        "failure_status": 0,
+        "failure_reason": 0,
+        "read_start_field": 1048,
+        "max_read_fields": 45,
+        "max_read_fad": 184875,
+        "last_read_fields": 21
+      },
+      "first_observed_snapshot": {
+        "read_attempts": 0,
+        "start_read_attempts": 1,
+        "sector_wait_timeouts": 0,
+        "fill_read_retries": 0,
+        "command_failures": 0,
+        "last_fad": 166,
+        "last_command": 20736,
+        "last_status": 0,
+        "failure_fad": 0,
+        "failure_command": 0,
+        "failure_status": 0,
+        "failure_reason": 0,
+        "read_start_field": 0,
+        "max_read_fields": 0,
+        "max_read_fad": 0,
+        "last_read_fields": 0
+      },
+      "errors_observed": false
+    },
+    "audio_ready": {
+      "initialized": 1,
+      "music_prepared_mask": 524286,
+      "music_missing_mask": 0,
+      "music_prefetch_bytes": 114688,
+      "music_prepare_max_ms": 749
+    },
+    "contiguous_title_runs": [
+      {
+        "fields": 289,
+        "arcade_ticks": 281
+      }
+    ],
+    "title_visual_acceptance": "NOT_EVALUATED_BY_THIS_SCRIPT",
+    "report_sha256": "ccd287306304e43129c1b79b773c92d32d0539a22d80492dec90bd2e93a61f4b",
+    "artifacts_sha256": {
+      "game.bin": "991ed0c8bfe97d1a436fa237406fffc538c4434c70e4767b1936953b2603686a",
+      "game.elf": "2f7b846d07e5004141ffdff4141b43d46c8506cd2e9e48aa6662cee624b513ec",
+      "game.raw": "869c1903ae731652376b682e7ef701d182c70f0a31b7783b978e8d3a3d51faab",
+      "game.cue": "36f5037c75d2a4255af8109a376f1778feecfdcc4680c4cde2c39aab0ad7b88c"
+    },
+    "emulator_sha256": "b3ade88029adbccdb449259a95b236ec6af9e9b37df0df14664f936c15739672",
+    "bios_sha256": "96e106f740ab448cf89f0dd49dfbac7fe5391cb6bd6e14ad5e3061c13330266f"
+  },
+  "elapsed_fields_saved": 359,
+  "common_payload_field_deltas": [
+    {
+      "total": 250985,
+      "bytes": 0,
+      "candidate_minus_baseline": -105
+    },
+    {
+      "total": 250985,
+      "bytes": 32768,
+      "candidate_minus_baseline": -113
+    },
+    {
+      "total": 250985,
+      "bytes": 65536,
+      "candidate_minus_baseline": -113
+    },
+    {
+      "total": 250985,
+      "bytes": 98304,
+      "candidate_minus_baseline": -113
+    },
+    {
+      "total": 250985,
+      "bytes": 131072,
+      "candidate_minus_baseline": -113
+    },
+    {
+      "total": 250985,
+      "bytes": 163840,
+      "candidate_minus_baseline": -112
+    },
+    {
+      "total": 250985,
+      "bytes": 196608,
+      "candidate_minus_baseline": -113
+    },
+    {
+      "total": 250985,
+      "bytes": 229376,
+      "candidate_minus_baseline": -113
+    },
+    {
+      "total": 440710,
+      "bytes": 0,
+      "candidate_minus_baseline": -119
+    },
+    {
+      "total": 440710,
+      "bytes": 32768,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 65536,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 98304,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 131072,
+      "candidate_minus_baseline": -127
+    },
+    {
+      "total": 440710,
+      "bytes": 163840,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 196608,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 229376,
+      "candidate_minus_baseline": -127
+    },
+    {
+      "total": 440710,
+      "bytes": 262144,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 294912,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 327680,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 360448,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 393216,
+      "candidate_minus_baseline": -127
+    },
+    {
+      "total": 440710,
+      "bytes": 425984,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 440710,
+      "bytes": 440710,
+      "candidate_minus_baseline": -126
+    },
+    {
+      "total": 524288,
+      "bytes": 0,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 32768,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 65536,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 98304,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 131072,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 163840,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 196608,
+      "candidate_minus_baseline": -85
+    },
+    {
+      "total": 524288,
+      "bytes": 229376,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 262144,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 294912,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 327680,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 360448,
+      "candidate_minus_baseline": -85
+    },
+    {
+      "total": 524288,
+      "bytes": 393216,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 425984,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 458752,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 524288,
+      "bytes": 491520,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 3108052,
+      "bytes": 0,
+      "candidate_minus_baseline": -84
+    },
+    {
+      "total": 3108052,
+      "bytes": 32768,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 65536,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 98304,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 131072,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 163840,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 196608,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 229376,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 262144,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 294912,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 327680,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 360448,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 393216,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 425984,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 458752,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 491520,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 524288,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 557056,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 589824,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 622592,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 655360,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 688128,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 720896,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 753664,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 786432,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 819200,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 851968,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 884736,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 917504,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 950272,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 983040,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1015808,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1048576,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1081344,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1114112,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1146880,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1179648,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1212416,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1245184,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1277952,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1310720,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1343488,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1376256,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1409024,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1441792,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1474560,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1507328,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1540096,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1572864,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1605632,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1638400,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1671168,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1703936,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1736704,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1769472,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1802240,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1835008,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1867776,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1900544,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1933312,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 1966080,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 1998848,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2031616,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2064384,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2097152,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2129920,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2162688,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2195456,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2228224,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2260992,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2293760,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2326528,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2359296,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2392064,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2424832,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2457600,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2490368,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2523136,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2555904,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2588672,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2621440,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2654208,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2686976,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2719744,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2752512,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2785280,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2818048,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2850816,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2883584,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2916352,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 2949120,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 2981888,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 3014656,
+      "candidate_minus_baseline": -92
+    },
+    {
+      "total": 3108052,
+      "bytes": 3047424,
+      "candidate_minus_baseline": -91
+    },
+    {
+      "total": 3108052,
+      "bytes": 3080192,
+      "candidate_minus_baseline": -92
+    }
+  ],
+  "limits": [
+    "Fields are emulated Saturn VBlanks, not host seconds or a physical-console benchmark.",
+    "Stage boundaries are bounded by read-only polls; skipped stages and maximum polling gap are explicit.",
+    "CD fields are sampled non-atomically. Start counts are range-start attempts, not measured mechanical seeks.",
+    "CD command/start counters include mount. Public read durations exclude mount raw-internal reads. Asynchronous music commands use their separate diagnostic.",
+    "The baseline lacks the new CD ABI; missing counters are unavailable, never zero.",
+    "music_prepare_max_ms includes cached-prefix preparation as well as header preparation; it is not an isolated header timing.",
+    "Only R01 was tested physically by the user; R02/R03 physical loading has not been verified."
+  ]
+}

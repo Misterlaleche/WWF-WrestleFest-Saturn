@@ -1,0 +1,7 @@
+SNAPSHOT match01-stage0-f8c mode=0 frame=0 rng=ce95c33c owner=0 fields=4697
+SNAPSHOT prepared mode=0 frame=0 rng=ce95c33c owner=0 fields=4697
+SNAPSHOT match01-terminal mode=0 frame=11636 rng=38bcc2a9 owner=11b6 fields=16817
+SNAPSHOT match02-stage1-f8c mode=0 frame=0 rng=ab43dde2 owner=11b6 fields=17428
+CAMPAIGN entries=2 credited_entries=2 results=1 stages=003 scenes=39 failed=0 game_over=0 fields=17428
+JO_ASSETS slots=138 block_bytes=4096 cache_bytes=565248 actual_cache_slots=138 frames=1 block_hits=11202 block_misses=628 max_misses_per_frame=15 max_frame=11636 decode_failures=0 combat_backing_reads=0 combat_backing_bytes=0
+

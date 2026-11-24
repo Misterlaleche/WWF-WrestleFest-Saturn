@@ -1,0 +1,2 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_save_adapter.py"]
+PASS Jo save: reboot, unchanged writes, options, unavailable/full/write/verify, corrupt preservation

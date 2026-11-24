@@ -1,0 +1,2 @@
+COMMAND ["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "tests/test_zlib_bits.py", "--build-dir", "/tmp/wf-repo-refresh-vmnjatw9/zlib-bits", "--sanitize"]
+PASS: 8403456 independent bit-operation comparisons
